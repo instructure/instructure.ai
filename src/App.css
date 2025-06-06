@@ -9,13 +9,17 @@ body {
 	display: grid;
 }
 
-.logo {
-	height: 15em;
-	width: 15em;
+.logoWrapper {
 	padding: 1.5em;
 	border-image-source: var(--ai-gradient);
 	border-image-slice: 1;
 	border-image-width: 1em;
 	border-image-outset: 0;
-	margin: auto;
+}
+
+
+.logo {
+	font-size: 10em;
+	padding: 0.25em;
+	fill: #fff !important;
 }

@@ -1,4 +1,4 @@
-import InstructureBug from "./assets/instructureBug.svg";
+import { IconInstructureLogoLine } from "@instructure/ui-icons";
 import "./App.css";
 
 function App() {
@@ -6,7 +6,9 @@ function App() {
 		<>
 			<div>
 				<a href="https://www.instructure.com">
-					<img src={InstructureBug} className="logo" alt="Instructure logo" />
+					<div className="logoWrapper">
+						<IconInstructureLogoLine className="logo" title="Instructure" />
+					</div>
 				</a>
 			</div>
 		</>
