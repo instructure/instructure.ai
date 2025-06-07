@@ -5,6 +5,17 @@ import { browserslistToTargets } from "lightningcss";
 import { defineConfig } from "vite";
 
 export default defineConfig({
+	build: {
+		cssMinify: "lightningcss",
+		minify: "terser",
+		target: "esnext",
+	},
+	css: {
+		lightningcss: {
+			targets: browserslistToTargets(browsersList),
+		},
+		transformer: "lightningcss",
+	},
 	plugins: [
 		react({
 			babel: {
@@ -12,24 +23,13 @@ export default defineConfig({
 			},
 		}),
 	],
-	css: {
-		transformer: "lightningcss",
-		lightningcss: {
-			targets: browserslistToTargets(browsersList),
-		},
-	},
-	build: {
-		target: "esnext",
-		minify: "terser",
-		cssMinify: "lightningcss",
-	},
 	test: {
 		coverage: {
 			enabled: true,
+			exclude: ["src/**/*.test.{ts,tsx}", "src/**/*.d.ts"],
+			include: ["src/**/*.{ts,tsx}"],
 			provider: "v8",
 			reporter: ["default", "html"],
-			include: ["src/**/*.{ts,tsx}"],
-			exclude: ["src/**/*.test.{ts,tsx}", "src/**/*.d.ts"],
 		},
 	},
 });
