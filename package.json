@@ -3,7 +3,17 @@
 		"extends @instructure/browserslist-config-instui"
 	],
 	"dependencies": {
+		"@googleapis/forms": "^3.0.1",
+		"@instructure/ui-buttons": "^10.19.1",
+		"@instructure/ui-flex": "^10.19.1",
+		"@instructure/ui-heading": "^10.19.1",
 		"@instructure/ui-icons": "^10.19.1",
+		"@instructure/ui-link": "^10.19.1",
+		"@instructure/ui-modal": "^10.19.1",
+		"@instructure/ui-text": "^10.19.1",
+		"@instructure/ui-text-input": "^10.19.1",
+		"@instructure/ui-truncate-text": "^10.19.1",
+		"@instructure/ui-view": "^10.19.1",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0"
 	},
