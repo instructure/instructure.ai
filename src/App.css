@@ -20,3 +20,8 @@ body {
 #signupForm {
 	background: var(--ai-gradient);
 }
+
+/* INSTUI-4590 */
+#signupForm>div:first-child {
+	flex: 1 1 auto;
+}

@@ -44,6 +44,7 @@ const SignupModal = (): React.ReactElement => {
 				onDismiss={handleButtonClick}
 				onSubmit={() => handleFormSubmit}
 				open={isOpen}
+				overflow="fit"
 				shouldCloseOnDocumentClick
 				size="fullscreen"
 				variant="inverse"
@@ -80,6 +81,7 @@ const SignupModal = (): React.ReactElement => {
 						as="div"
 						background="primary"
 						borderRadius="medium"
+						height="inherit"
 						id="formContainer"
 						margin="auto"
 						maxWidth="59.25rem"
