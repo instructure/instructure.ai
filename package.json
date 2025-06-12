@@ -3,12 +3,14 @@
 		"extends @instructure/browserslist-config-instui"
 	],
 	"dependencies": {
+		"@instructure/emotion": "^10.19.1",
 		"@instructure/ui-buttons": "^10.19.1",
 		"@instructure/ui-flex": "^10.19.1",
 		"@instructure/ui-heading": "^10.19.1",
 		"@instructure/ui-icons": "^10.19.1",
 		"@instructure/ui-link": "^10.19.1",
 		"@instructure/ui-modal": "^10.19.1",
+		"@instructure/ui-svg-images": "^10.19.1",
 		"@instructure/ui-text": "^10.19.1",
 		"@instructure/ui-text-input": "^10.19.1",
 		"@instructure/ui-truncate-text": "^10.19.1",

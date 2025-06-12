@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@instructure/emotion':
+        specifier: ^10.19.1
+        version: 10.19.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-buttons':
         specifier: ^10.19.1
         version: 10.19.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -24,6 +27,9 @@ importers:
         specifier: ^10.19.1
         version: 10.19.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-modal':
+        specifier: ^10.19.1
+        version: 10.19.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-svg-images':
         specifier: ^10.19.1
         version: 10.19.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-text':
