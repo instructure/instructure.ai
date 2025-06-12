@@ -3,7 +3,6 @@
 		"extends @instructure/browserslist-config-instui"
 	],
 	"dependencies": {
-		"@googleapis/forms": "^3.0.1",
 		"@instructure/ui-buttons": "^10.19.1",
 		"@instructure/ui-flex": "^10.19.1",
 		"@instructure/ui-heading": "^10.19.1",
@@ -18,23 +17,24 @@
 		"react-dom": "^19.1.0"
 	},
 	"devDependencies": {
+		"@babel/plugin-syntax-import-attributes": "^7.27.1",
 		"@biomejs/biome": "2.0.0-beta.6",
-		"@eslint/js": "^9.25.0",
+		"@eslint/js": "^9.28.0",
 		"@instructure/browserslist-config-instui": "^10.19.1",
-		"@types/react": "^19.1.2",
-		"@types/react-dom": "^19.1.2",
-		"@vitejs/plugin-react": "^4.4.1",
+		"@types/react": "^19.1.8",
+		"@types/react-dom": "^19.1.6",
+		"@vitejs/plugin-react": "^4.5.2",
 		"babel-plugin-react-compiler": "19.1.0-rc.2",
-		"eslint": "^9.25.0",
+		"eslint": "^9.28.0",
 		"eslint-plugin-react-hooks": "^5.2.0",
-		"eslint-plugin-react-refresh": "^0.4.19",
-		"globals": "^16.0.0",
+		"eslint-plugin-react-refresh": "^0.4.20",
+		"globals": "^16.2.0",
 		"lightningcss": "^1.30.1",
-		"terser": "^5.41.0",
+		"terser": "^5.42.0",
 		"typescript": "~5.8.3",
-		"typescript-eslint": "^8.30.1",
+		"typescript-eslint": "^8.34.0",
 		"vite": "^6.3.5",
-		"vitest": "^3.2.2"
+		"vitest": "^3.2.3"
 	},
 	"name": "instructure.ai",
 	"packageManager": "pnpm@10.11.1",
