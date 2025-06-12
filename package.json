@@ -6,6 +6,7 @@
 		"@instructure/emotion": "^10.19.1",
 		"@instructure/ui-buttons": "^10.19.1",
 		"@instructure/ui-flex": "^10.19.1",
+		"@instructure/ui-form-field": "^10.19.1",
 		"@instructure/ui-heading": "^10.19.1",
 		"@instructure/ui-icons": "^10.19.1",
 		"@instructure/ui-link": "^10.19.1",

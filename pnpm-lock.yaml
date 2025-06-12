@@ -17,6 +17,9 @@ importers:
       '@instructure/ui-flex':
         specifier: ^10.19.1
         version: 10.19.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-form-field':
+        specifier: ^10.19.1
+        version: 10.19.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-heading':
         specifier: ^10.19.1
         version: 10.19.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)

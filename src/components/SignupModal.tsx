@@ -3,10 +3,9 @@ import { Flex } from "@instructure/ui-flex";
 import { Heading } from "@instructure/ui-heading";
 import { IconAddLine, IconAiSolid, IconXSolid } from "@instructure/ui-icons";
 import { Modal } from "@instructure/ui-modal";
-import { Text } from "@instructure/ui-text";
-import { TextInput } from "@instructure/ui-text-input";
 import { View } from "@instructure/ui-view";
 import { useState, useTransition } from "react";
+import SignupForm from "./SignupForm";
 
 const SignupModal = (): React.ReactElement => {
 	const [isPending, startTransition] = useTransition();
@@ -88,11 +87,7 @@ const SignupModal = (): React.ReactElement => {
 						padding="medium"
 						shadow="topmost"
 					>
-						<TextInput
-							placeholder="if you hit enter here, it should submit the form"
-							renderLabel="Example"
-						/>
-						<Text lineHeight="double">This is text.</Text>
+						<SignupForm />
 					</View>
 				</Modal.Body>
 				<Modal.Footer
