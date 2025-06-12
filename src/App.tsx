@@ -1,6 +1,7 @@
 import { View } from "@instructure/ui-view";
 import "./App.css";
 import Banner from "./components/Banner";
+import SignupModal from "./components/SignupModal";
 
 function App() {
 	return (
@@ -16,7 +17,7 @@ function App() {
 				padding="medium"
 				position="fixed"
 			>
-				{/* <SignupModal /> */}
+				<SignupModal />
 			</View>
 		</View>
 	);
