@@ -2,19 +2,10 @@ import { Alert } from "@instructure/ui-alerts";
 import { IconEducatorsLine } from "@instructure/ui-icons";
 import { Select } from "@instructure/ui-select";
 import { type FocusEvent, type SyntheticEvent, useRef, useState } from "react";
-import Roles from "../assets/roles.json" with { type: "json" };
+import Roles, { type Role, type RolesType } from "../assets/Roles";
 
-interface RoleOption {
-	id: string;
-	label: string;
-}
-
-type RolesMap = Record<string, RoleOption[]>;
-
-type RoleSelectProps = Record<string, never>;
-
-const RoleSelect: React.FC<RoleSelectProps> = () => {
-	const sortRoles = (roles: RolesMap): RolesMap =>
+const RoleSelect = () => {
+	const sortRoles = (roles: RolesType) =>
 		Object.fromEntries(
 			Object.entries(roles)
 				.filter(([_, arr]) => Array.isArray(arr) && arr.length > 0)
@@ -25,7 +16,7 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 				]),
 		);
 
-	const options: RolesMap = sortRoles(Roles as RolesMap);
+	const options = sortRoles(Roles);
 
 	const [inputValue, setInputValue] = useState<string>("");
 	const [isShowingOptions, setIsShowingOptions] = useState<boolean>(false);
@@ -34,7 +25,7 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 	);
 	const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
 	const [announcement, setAnnouncement] = useState<string | null>(null);
-	const [filteredOptions, setFilteredOptions] = useState<RolesMap>(options);
+	const [filteredOptions, setFilteredOptions] = useState<RolesType>(options);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	const focusInput = (): void => {
@@ -44,7 +35,7 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 		}
 	};
 
-	const getOptionById = (id: string): RoleOption | undefined => {
+	const getOptionById = (id: string): Role | undefined => {
 		return Object.values(options)
 			.flat()
 			.find((o) => o?.id === id);
@@ -54,7 +45,7 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 		event: React.ChangeEvent<HTMLInputElement>,
 	): void => {
 		const value = event.target.value;
-		const newOptions = filterOptions(value, Roles as RolesMap);
+		const newOptions = filterOptions(value, Roles as RolesType);
 		setInputValue(value);
 		setFilteredOptions(newOptions);
 		const firstKey = Object.keys(newOptions)[0];
@@ -64,8 +55,8 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 		setSelectedOptionId(value === "" ? null : selectedOptionId);
 	};
 
-	const filterOptions = (value: string, options: RolesMap): RolesMap => {
-		const filteredOptions: RolesMap = {};
+	const filterOptions = (value: string, options: RolesType): RolesType => {
+		const filteredOptions: RolesType = {};
 		Object.keys(options).forEach((key) => {
 			filteredOptions[key] = options[key]?.filter((option) =>
 				option.label.toLowerCase().includes(value.toLowerCase()),
@@ -73,7 +64,7 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 		});
 		const optionsWithoutEmptyKeys = Object.keys(filteredOptions)
 			.filter((k) => filteredOptions[k].length > 0)
-			.reduce<RolesMap>((acc, k) => {
+			.reduce<RolesType>((acc, k) => {
 				acc[k] = filteredOptions[k];
 				return acc;
 			}, {});

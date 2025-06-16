@@ -1,6 +1,7 @@
 import { InlineSVG } from "@instructure/ui-svg-images";
+import type { FC } from "react";
 
-const InstructureBug = () => (
+const InstructureBug: FC = () => (
 	<InlineSVG height="100%" title="Logo" viewBox="0 0 100 100" width="100%">
 		<svg viewBox="0 0 53.42 53.42" xmlns="http://www.w3.org/2000/svg">
 			<title>Instructure Logo</title>
@@ -16,7 +17,7 @@ const InstructureBug = () => (
 	</InlineSVG>
 );
 
-const InstructureLogo = () => (
+const InstructureLogo: FC = () => (
 	<InlineSVG height="100%" title="Logo" viewBox="0 0 374.89 52.08" width="80%">
 		<svg
 			data-name="Layer 2"

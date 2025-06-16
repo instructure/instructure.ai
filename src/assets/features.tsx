@@ -1,6 +1,14 @@
 import { IconAiSolid, IconCanvasLogoSolid } from "@instructure/ui-icons";
+import type { SVGIconProps } from "@instructure/ui-svg-images";
+import type { ComponentType } from "react";
 
-const Features = [
+export interface Feature {
+	icon: ComponentType<SVGIconProps>;
+	id: string;
+	label: string;
+}
+
+const Features: Feature[] = [
 	{
 		icon: IconAiSolid,
 		id: "ignite",
