@@ -1,4 +1,5 @@
 import { Alert } from "@instructure/ui-alerts";
+import type { FormMessage } from "@instructure/ui-form-field";
 import { IconEducatorsLine } from "@instructure/ui-icons";
 import { Select } from "@instructure/ui-select";
 import { type FocusEvent, type SyntheticEvent, useRef, useState } from "react";
@@ -9,9 +10,6 @@ type RoleSelectProps = {
 };
 
 const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
-	const [showError, setShowError] = useState(false);
-	const [messages, setMessages] = useState([]);
-
 	const sortRoles = (roles: RolesType) =>
 		Object.fromEntries(
 			Object.entries(roles)
@@ -25,6 +23,7 @@ const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
 
 	const options = sortRoles(Roles);
 
+	const [messages, setMessages] = useState<FormMessage[]>([]);
 	const [inputValue, setInputValue] = useState<string>("");
 	const [isShowingOptions, setIsShowingOptions] = useState<boolean>(false);
 	const [highlightedOptionId, setHighlightedOptionId] = useState<string | null>(
@@ -34,6 +33,13 @@ const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
 	const [announcement, setAnnouncement] = useState<string | null>(null);
 	const [filteredOptions, setFilteredOptions] = useState<RolesType>(options);
 	const inputRef = useRef<HTMLInputElement | null>(null);
+
+	const isValidRole = (role: string): boolean => {
+		const allLabels = Object.values(options)
+			.flat()
+			.map((role) => role.label.toLowerCase());
+		return allLabels.includes(role.toLowerCase());
+	};
 
 	const focusInput = (): void => {
 		if (inputRef.current) {
@@ -60,6 +66,7 @@ const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
 		setHighlightedOptionId(firstOption ? firstOption.id : null);
 		setIsShowingOptions(true);
 		setSelectedOptionId(value === "" ? null : selectedOptionId);
+		setMessages([]);
 	};
 
 	const filterOptions = (value: string, options: RolesType): RolesType => {
@@ -80,6 +87,7 @@ const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
 
 	const handleShowOptions = (_e: SyntheticEvent): void => {
 		setIsShowingOptions(true);
+		setMessages([]);
 	};
 
 	const handleHideOptions = (_e: SyntheticEvent): void => {
@@ -91,6 +99,15 @@ const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
 
 	const handleBlur = (_e: FocusEvent): void => {
 		setHighlightedOptionId(null);
+		console.log(inputValue);
+		if (inputValue === "") {
+			setMessages([
+				{
+					text: "Please select a valid role from the list.",
+					type: "error",
+				},
+			]);
+		}
 	};
 
 	const handleHighlightOption = (
@@ -153,7 +170,7 @@ const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
 				inputValue={inputValue}
 				isRequired={true}
 				isShowingOptions={isShowingOptions}
-				messages={showError ? messages : []}
+				messages={messages}
 				onBlur={handleBlur}
 				onInputChange={handleInputChange}
 				onRequestHideOptions={handleHideOptions}
