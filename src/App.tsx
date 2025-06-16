@@ -8,7 +8,7 @@ function App() {
 	return (
 		<InstUISettingsProvider>
 			<View as="section">
-				<Banner href="https://www.instructure.com/instructurecon/spokane" />
+				<Banner />
 			</View>
 			<View
 				as="aside"
