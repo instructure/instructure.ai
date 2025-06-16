@@ -1,7 +1,11 @@
 import { Button, IconButton } from "@instructure/ui-buttons";
 import { Flex } from "@instructure/ui-flex";
 import { Heading } from "@instructure/ui-heading";
-import { IconAddLine, IconAiSolid, IconXSolid } from "@instructure/ui-icons";
+import {
+	IconAddSolid,
+	IconPublishSolid,
+	IconXSolid,
+} from "@instructure/ui-icons";
 import { Modal } from "@instructure/ui-modal";
 import { View } from "@instructure/ui-view";
 import { useState, useTransition } from "react";
@@ -15,7 +19,6 @@ const SignupModal = (): React.ReactElement => {
 		startTransition(() => {
 			setOpen((state) => !state);
 		});
-		console.log("button clicked");
 	};
 
 	const handleFormSubmit = (e: Event) => {
@@ -31,7 +34,7 @@ const SignupModal = (): React.ReactElement => {
 				disabled={isPending}
 				margin="small"
 				onClick={handleButtonClick}
-				renderIcon={<IconAddLine />}
+				renderIcon={<IconAddSolid />}
 				withBackground={false}
 			>
 				Sign up
@@ -56,7 +59,7 @@ const SignupModal = (): React.ReactElement => {
 				>
 					<Flex>
 						<Flex.Item shouldGrow shouldShrink>
-							<Heading level="h1">Oops, there's nothing here (yet)</Heading>
+							<Heading level="h1">Sign up</Heading>
 						</Flex.Item>
 						<Flex.Item>
 							<IconButton
@@ -101,7 +104,7 @@ const SignupModal = (): React.ReactElement => {
 						disabled={isPending}
 						margin="small"
 						onClick={handleButtonClick}
-						renderIcon={<IconAiSolid />}
+						renderIcon={<IconPublishSolid />}
 						withBackground={false}
 					>
 						Submit

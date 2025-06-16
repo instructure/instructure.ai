@@ -1,0 +1,38 @@
+{
+  "Corporate": [],
+  "Government": [],
+  "Higher Education": [
+    {
+      "id": "instructor",
+      "label": "Faculty / Instructor"
+    }
+  ],
+  "K-12": [
+    {
+      "id": "teacher",
+      "label": "Teacher"
+    },
+    {
+      "id": "tech_coach",
+      "label": "Technology Coach"
+    },
+    {
+      "id": "principal",
+      "label": "Principal"
+    },
+    {
+      "id": "superintendent",
+      "label": "Superintendent"
+    },
+    {
+      "id": "school_board",
+      "label": "School Board Member"
+    }
+  ],
+  "Other": [
+    {
+      "id": "other",
+      "label": "Other"
+    }
+  ]
+}

@@ -7,20 +7,17 @@ import SignupModal from "./components/SignupModal";
 function App() {
 	return (
 		<InstUISettingsProvider>
-			<View as="div">
-				<View as="section">
-					<Banner href="https://www.instructure.com/instructurecon/spokane" />
-				</View>
-
-				<View
-					as="aside"
-					insetBlockEnd="0"
-					insetInlineEnd="0"
-					padding="medium"
-					position="fixed"
-				>
-					<SignupModal />
-				</View>
+			<View as="section">
+				<Banner href="https://www.instructure.com/instructurecon/spokane" />
+			</View>
+			<View
+				as="aside"
+				insetBlockEnd="0"
+				insetInlineEnd="0"
+				padding="medium"
+				position="fixed"
+			>
+				<SignupModal />
 			</View>
 		</InstUISettingsProvider>
 	);
