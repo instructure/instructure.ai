@@ -15,12 +15,12 @@ interface RoleOption {
 	label: string;
 }
 
-interface RoleSelectProps {
-	options: RoleOption[];
-}
+type RolesMap = Record<string, RoleOption[]>;
+
+type RoleSelectProps = {};
 
 const RoleSelect: React.FC<RoleSelectProps> = () => {
-	const sortRoles = (roles) =>
+	const sortRoles = (roles: RolesMap): RolesMap =>
 		Object.fromEntries(
 			Object.entries(roles)
 				.sort(([a], [b]) => a.localeCompare(b))
@@ -29,7 +29,8 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 					arr.slice().sort((a, b) => a.label.localeCompare(b.label)),
 				]),
 		);
-	const options = sortRoles(Roles);
+
+	const options: RolesMap = sortRoles(Roles as RolesMap);
 
 	const [inputValue, setInputValue] = useState<string>("");
 	const [isShowingOptions, setIsShowingOptions] = useState<boolean>(false);
@@ -39,34 +40,38 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 	const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
 	const [announcement, setAnnouncement] = useState<string | null>(null);
 	const [isPending, startTransition] = useTransition();
-	const [filteredOptions, setFilteredOptions] = useState(options);
+	const [filteredOptions, setFilteredOptions] = useState<RolesMap>(options);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
-	const focusInput = () => {
+	const focusInput = (): void => {
 		if (inputRef.current) {
 			inputRef.current.blur();
 			inputRef.current.focus();
 		}
 	};
 
-	const getOptionById = (id) => {
+	const getOptionById = (id: string): RoleOption | undefined => {
 		return Object.values(options)
 			.flat()
 			.find((o) => o?.id === id);
 	};
 
-	const handleInputChange = (event) => {
+	const handleInputChange = (
+		event: React.ChangeEvent<HTMLInputElement>,
+	): void => {
 		const value = event.target.value;
-		const newOptions = filterOptions(value, Roles);
+		const newOptions = filterOptions(value, Roles as RolesMap);
 		setInputValue(value);
 		setFilteredOptions(newOptions);
-		setHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null);
+		const firstKey = Object.keys(newOptions)[0];
+		const firstOption = firstKey ? newOptions[firstKey][0] : null;
+		setHighlightedOptionId(firstOption ? firstOption.id : null);
 		setIsShowingOptions(true);
 		setSelectedOptionId(value === "" ? null : selectedOptionId);
 	};
 
-	const filterOptions = (value, options) => {
-		const filteredOptions = {};
+	const filterOptions = (value: string, options: RolesMap): RolesMap => {
+		const filteredOptions: RolesMap = {};
 		Object.keys(options).forEach((key) => {
 			filteredOptions[key] = options[key]?.filter((option) =>
 				option.label.toLowerCase().includes(value.toLowerCase()),
@@ -74,45 +79,48 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 		});
 		const optionsWithoutEmptyKeys = Object.keys(filteredOptions)
 			.filter((k) => filteredOptions[k].length > 0)
-			.reduce((acc, k) => {
+			.reduce<RolesMap>((acc, k) => {
 				acc[k] = filteredOptions[k];
 				return acc;
 			}, {});
 		return optionsWithoutEmptyKeys;
 	};
 
-	const handleShowOptions = (_e: SyntheticEvent) => {
+	const handleShowOptions = (_e: SyntheticEvent): void => {
 		setIsShowingOptions(true);
 	};
 
-	const handleHideOptions = (_e: SyntheticEvent) => {
+	const handleHideOptions = (_e: SyntheticEvent): void => {
 		setIsShowingOptions(false);
 		setHighlightedOptionId(null);
 		setSelectedOptionId(selectedOptionId ? selectedOptionId : "");
 		setAnnouncement("List collapsed.");
 	};
 
-	const handleBlur = (_e: FocusEvent) => {
+	const handleBlur = (_e: FocusEvent): void => {
 		setHighlightedOptionId(null);
 	};
 
 	const handleHighlightOption = (
 		event: SyntheticEvent & { type: string; persist: () => void },
 		{ id }: { id: string },
-	) => {
+	): void => {
 		event.persist();
-		const optionsAvailable = `${options.length} options available.`;
+		const optionsAvailable = `${Object.values(options).flat().length} options available.`;
 		const nowOpen = !isShowingOptions
 			? `List expanded. ${optionsAvailable}`
 			: "";
-		const option = getOptionById(id).label;
+		const option = getOptionById(id)?.label ?? "";
 		setHighlightedOptionId(id);
 		setInputValue(event.type === "keydown" ? option : inputValue);
 		setAnnouncement(`${option} ${nowOpen}`);
 	};
 
-	const handleSelectOption = (_e: SyntheticEvent, { id }: { id: string }) => {
-		const option = getOptionById(id).label;
+	const handleSelectOption = (
+		_e: SyntheticEvent,
+		{ id }: { id: string },
+	): void => {
+		const option = getOptionById(id)?.label ?? "";
 		focusInput();
 		setSelectedOptionId(id);
 		setInputValue(option);
@@ -120,7 +128,7 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 		setAnnouncement(`"${option}" selected. List collapsed.`);
 	};
 
-	const renderGroup = () => {
+	const renderGroup = (): React.ReactNode => {
 		return Object.keys(filteredOptions).map((key) => {
 			return (
 				<Select.Group key={key} renderLabel={key}>
@@ -144,7 +152,7 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 		<>
 			<Select
 				assistiveText="Use arrow keys to navigate options."
-				inputRef={(el) => {
+				inputRef={(el: HTMLInputElement | null) => {
 					inputRef.current = el;
 				}}
 				inputValue={inputValue}
