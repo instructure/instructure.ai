@@ -3,21 +3,36 @@ import { Alert } from "@instructure/ui-alerts";
 import { IconLaunchLine } from "@instructure/ui-icons";
 import { Select } from "@instructure/ui-select";
 import { Tag } from "@instructure/ui-tag";
-import { useRef, useState } from "react";
+import {
+	type ChangeEvent,
+	type FocusEvent,
+	type KeyboardEvent,
+	useRef,
+	useState,
+} from "react";
 import Features from "../assets/features";
 
-const FeatureSelect = () => {
-	const sortFeatures = (features) =>
-		features.slice().sort((a, b) => a.label.localeCompare(b.label));
-	const options = sortFeatures(Features);
+type FeatureOption = {
+	id: string;
+	label: string;
+	icon?: React.ElementType;
+};
 
-	const [inputValue, setInputValue] = useState("");
-	const [isShowingOptions, setIsShowingOptions] = useState(false);
-	const [highlightedOptionId, setHighlightedOptionId] = useState(null);
-	const [selectedOptionId, setSelectedOptionId] = useState([]);
-	const [filteredOptions, setFilteredOptions] = useState(options);
-	const [announcement, setAnnouncement] = useState(null);
-	const inputRef = useRef();
+const FeatureSelect = () => {
+	const sortFeatures = (features: FeatureOption[]): FeatureOption[] =>
+		features.slice().sort((a, b) => a.label.localeCompare(b.label));
+	const options: FeatureOption[] = sortFeatures(Features);
+
+	const [inputValue, setInputValue] = useState<string>("");
+	const [isShowingOptions, setIsShowingOptions] = useState<boolean>(false);
+	const [highlightedOptionId, setHighlightedOptionId] = useState<string | null>(
+		null,
+	);
+	const [selectedOptionId, setSelectedOptionId] = useState<string[]>([]);
+	const [filteredOptions, setFilteredOptions] =
+		useState<FeatureOption[]>(options);
+	const [announcement, setAnnouncement] = useState<string | null>(null);
+	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	const focusInput = () => {
 		if (inputRef.current) {
@@ -26,25 +41,29 @@ const FeatureSelect = () => {
 		}
 	};
 
-	const getOptionById = (queryId) => {
+	const getOptionById = (queryId: string): FeatureOption | undefined => {
 		return options.find(({ id }) => id === queryId);
 	};
 
-	const getOptionsChangedMessage = (newOptions) => {
+	const getOptionsChangedMessage = (
+		newOptions: FeatureOption[],
+	): string | null => {
 		let message =
 			newOptions.length !== filteredOptions.length
 				? `${newOptions.length} options available.`
 				: null;
 		if (message && newOptions.length > 0) {
 			if (highlightedOptionId !== newOptions[0].id) {
-				const option = getOptionById(newOptions[0].id).label;
-				message = `${option}. ${message}`;
+				const option = getOptionById(newOptions[0].id)?.label;
+				if (option) {
+					message = `${option}. ${message}`;
+				}
 			}
 		}
 		return message;
 	};
 
-	const filterOptions = (value) => {
+	const filterOptions = (value: string): FeatureOption[] => {
 		return options.filter((option) =>
 			option.label.toLowerCase().startsWith(value.toLowerCase()),
 		);
@@ -59,28 +78,32 @@ const FeatureSelect = () => {
 				setFilteredOptions(filterOptions(""));
 			}
 		} else if (highlightedOptionId) {
-			if (inputValue === getOptionById(highlightedOptionId).label) {
+			const highlightedOption = getOptionById(highlightedOptionId);
+			if (highlightedOption && inputValue === highlightedOption.label) {
 				setInputValue("");
 				setFilteredOptions(filterOptions(""));
 			}
 		}
 	};
 
-	const handleShowOptions = (_e) => {
+	const handleShowOptions = (_e: React.SyntheticEvent) => {
 		setIsShowingOptions(true);
 	};
 
-	const handleHideOptions = (_e) => {
+	const handleHideOptions = (_e: React.SyntheticEvent) => {
 		setIsShowingOptions(false);
 		matchValue();
 	};
 
-	const handleBlur = (_e) => {
+	const handleBlur = (_e: FocusEvent<HTMLInputElement>) => {
 		setHighlightedOptionId(null);
 	};
 
-	const handleHighlightOption = (event, { id }) => {
-		event.persist();
+	const handleHighlightOption = (
+		event: React.SyntheticEvent,
+		{ id }: { id: string },
+	) => {
+		(event as any).persist();
 		const option = getOptionById(id);
 		if (!option) return;
 		setHighlightedOptionId(id);
@@ -88,7 +111,10 @@ const FeatureSelect = () => {
 		setAnnouncement(option.label);
 	};
 
-	const handleSelectOption = (_e, { id }) => {
+	const handleSelectOption = (
+		_e: React.SyntheticEvent,
+		{ id }: { id: string },
+	) => {
 		const option = getOptionById(id);
 		if (!option) return;
 		focusInput();
@@ -100,17 +126,17 @@ const FeatureSelect = () => {
 		setAnnouncement(`${option.label} selected. List collapsed.`);
 	};
 
-	const handleInputChange = (event) => {
+	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
 		const newOptions = filterOptions(value);
 		setInputValue(value);
 		setFilteredOptions(newOptions);
-		sethHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null);
+		setHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null);
 		setIsShowingOptions(true);
 		setAnnouncement(getOptionsChangedMessage(newOptions));
 	};
 
-	const handleKeyDown = (event) => {
+	const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
 		if (event.keyCode === 8) {
 			if (inputValue === "" && selectedOptionId.length > 0) {
 				setHighlightedOptionId(null);
@@ -119,7 +145,7 @@ const FeatureSelect = () => {
 		}
 	};
 
-	const dismissTag = (e, tag) => {
+	const dismissTag = (e: React.MouseEvent, tag: string) => {
 		e.stopPropagation();
 		e.preventDefault();
 
@@ -127,14 +153,18 @@ const FeatureSelect = () => {
 
 		setSelectedOptionId(newSelection);
 		setHighlightedOptionId(null);
-		setAnnouncement(`${getOptionById(tag).label} removed`);
+		const option = getOptionById(tag);
+		if (option) {
+			setAnnouncement(`${option.label} removed`);
+		}
 
-		inputRef.current.focus();
+		inputRef.current?.focus();
 	};
 
 	const renderTags = () => {
 		return selectedOptionId.map((id, index) => {
 			const option = getOptionById(id);
+			if (!option) return null;
 			return (
 				<Tag
 					dismissible
@@ -157,7 +187,7 @@ const FeatureSelect = () => {
 		<div>
 			<Select
 				assistiveText="Type or use arrow keys to navigate options. Multiple selections allowed."
-				inputRef={(el) => {
+				inputRef={(el: HTMLInputElement | null) => {
 					inputRef.current = el;
 				}}
 				inputValue={inputValue}
@@ -190,6 +220,7 @@ const FeatureSelect = () => {
 								</Select.Option>
 							);
 						}
+						return null;
 					})
 				) : (
 					<Select.Option id="empty-option" key="empty-option">
@@ -198,7 +229,7 @@ const FeatureSelect = () => {
 				)}
 			</Select>
 			<Alert
-				liveRegion={() => document.getElementById("flash-messages")}
+				liveRegion={() => document.getElementById("flash-messages")!}
 				liveRegionPoliteness="assertive"
 				screenReaderOnly
 			>
