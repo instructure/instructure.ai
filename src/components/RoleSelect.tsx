@@ -17,7 +17,7 @@ interface RoleOption {
 
 type RolesMap = Record<string, RoleOption[]>;
 
-type RoleSelectProps = {};
+type RoleSelectProps = Record<string, never>;
 
 const RoleSelect: React.FC<RoleSelectProps> = () => {
 	const sortRoles = (roles: RolesMap): RolesMap =>
