@@ -15,7 +15,7 @@ const SignupForm = () => {
 	return (
 		<FormFieldGroup
 			description={
-				<Heading variant="titleCardRegular">
+				<Heading as="h2" level="h3">
 					Early Adopter Program Signup
 				</Heading>
 			}
