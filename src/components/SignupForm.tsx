@@ -10,7 +10,7 @@ import FeatureSelect from "./FeatureSelect";
 import RoleSelect from "./RoleSelect";
 
 const SignupForm = () => {
-	const [showError, setShowError] = useState(true);
+	const [showError, setShowError] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(false);
 
 	return (

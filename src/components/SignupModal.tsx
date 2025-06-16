@@ -90,6 +90,8 @@ const SignupModal = (): React.ReactElement => {
 						id="formContainer"
 						margin="auto"
 						maxWidth="59.25rem"
+						overflowX="hidden"
+						overflowY="auto"
 						padding="medium"
 						shadow="topmost"
 					>
