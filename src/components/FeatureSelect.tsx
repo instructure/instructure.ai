@@ -101,9 +101,11 @@ const FeatureSelect = () => {
 
 	const handleHighlightOption = (
 		event: React.SyntheticEvent,
-		{ id }: { id: string },
+		data: { id?: string; direction?: 1 | -1 },
 	) => {
 		(event as any).persist();
+		const { id } = data;
+		if (!id) return;
 		const option = getOptionById(id);
 		if (!option) return;
 		setHighlightedOptionId(id);
@@ -113,8 +115,10 @@ const FeatureSelect = () => {
 
 	const handleSelectOption = (
 		_e: React.SyntheticEvent,
-		{ id }: { id: string },
+		data: { id?: string },
 	) => {
+		const { id } = data;
+		if (!id) return;
 		const option = getOptionById(id);
 		if (!option) return;
 		focusInput();
@@ -136,12 +140,14 @@ const FeatureSelect = () => {
 		setAnnouncement(getOptionsChangedMessage(newOptions));
 	};
 
-	const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-		if (event.keyCode === 8) {
-			if (inputValue === "" && selectedOptionId.length > 0) {
-				setHighlightedOptionId(null);
-				setSelectedOptionId(selectedOptionId.slice(0, -1));
-			}
+	const handleKeyDown = (event: KeyboardEvent<Element>) => {
+		if (
+			(event.key === "Backspace" || event.key === "Delete") &&
+			inputValue === "" &&
+			selectedOptionId.length > 0
+		) {
+			setHighlightedOptionId(null);
+			setSelectedOptionId(selectedOptionId.slice(0, -1));
 		}
 	};
 
@@ -214,7 +220,11 @@ const FeatureSelect = () => {
 									id={option.id}
 									isHighlighted={option.id === highlightedOptionId}
 									key={option.id}
-									renderBeforeLabel={option.icon ? option.icon : null}
+									renderBeforeLabel={
+										option.icon
+											? () => option.icon && <option.icon />
+											: undefined
+									}
 								>
 									{option.label}
 								</Select.Option>
@@ -229,7 +239,13 @@ const FeatureSelect = () => {
 				)}
 			</Select>
 			<Alert
-				liveRegion={() => document.getElementById("flash-messages")!}
+				liveRegion={() => {
+					const el = document.getElementById("flash-messages");
+					if (!el) {
+						throw new Error("flash-messages element not found");
+					}
+					return el;
+				}}
 				liveRegionPoliteness="assertive"
 				screenReaderOnly
 			>
