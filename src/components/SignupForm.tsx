@@ -11,7 +11,7 @@ import RoleSelect from "./RoleSelect";
 const SignupForm = () => {
 	return (
 		<>
-			<FormFieldGroup description="Sign up form">
+			<FormFieldGroup description="Early Adopter Program Signup">
 				<TextInput
 					isRequired={true}
 					placeholder="Bart Simpson"

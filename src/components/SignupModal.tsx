@@ -9,6 +9,7 @@ import {
 import { Modal } from "@instructure/ui-modal";
 import { View } from "@instructure/ui-view";
 import { useState, useTransition } from "react";
+import { InstructureLogo } from "../assets/Logos";
 import SignupForm from "./SignupForm";
 
 const SignupModal = (): React.ReactElement => {
@@ -59,7 +60,9 @@ const SignupModal = (): React.ReactElement => {
 				>
 					<Flex>
 						<Flex.Item shouldGrow shouldShrink>
-							<Heading level="h1">Sign up</Heading>
+							<Heading level="h1">
+								<InstructureLogo />
+							</Heading>
 						</Flex.Item>
 						<Flex.Item>
 							<IconButton

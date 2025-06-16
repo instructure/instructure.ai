@@ -5,6 +5,10 @@
     {
       "id": "instructor",
       "label": "Faculty / Instructor"
+    },
+    {
+      "id": "instructional_designer",
+      "label": "Instructional Designer"
     }
   ],
   "K-12": [
@@ -27,6 +31,10 @@
     {
       "id": "school_board",
       "label": "School Board Member"
+    },
+    {
+      "id": "librarian",
+      "label": "Librarian"
     }
   ],
   "Other": [

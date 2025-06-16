@@ -10,7 +10,7 @@ import {
 	useRef,
 	useState,
 } from "react";
-import Features from "../assets/features";
+import Features from "../assets/Features";
 
 type FeatureOption = {
 	id: string;
