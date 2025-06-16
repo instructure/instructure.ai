@@ -23,6 +23,7 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 	const sortRoles = (roles: RolesMap): RolesMap =>
 		Object.fromEntries(
 			Object.entries(roles)
+				.filter(([_, arr]) => Array.isArray(arr) && arr.length > 0)
 				.sort(([a], [b]) => a.localeCompare(b))
 				.map(([key, arr]) => [
 					key,
