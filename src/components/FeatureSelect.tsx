@@ -18,7 +18,15 @@ type FeatureOption = {
 	icon?: React.ElementType;
 };
 
-const FeatureSelect = () => {
+type FeatureSelectProps = {
+	isDisabled: boolean;
+	showError: boolean;
+};
+
+const FeatureSelect: React.FC<FeatureSelectProps> = ({
+	isDisabled,
+	showError,
+}) => {
 	const sortFeatures = (features: FeatureOption[]): FeatureOption[] =>
 		features.slice().sort((a, b) => a.label.localeCompare(b.label));
 	const options: FeatureOption[] = sortFeatures(Features);
@@ -193,12 +201,16 @@ const FeatureSelect = () => {
 		<div>
 			<Select
 				assistiveText="Type or use arrow keys to navigate options. Multiple selections allowed."
+				disabled={isDisabled}
 				inputRef={(el: HTMLInputElement | null) => {
 					inputRef.current = el;
 				}}
 				inputValue={inputValue}
 				isRequired={false}
 				isShowingOptions={isShowingOptions}
+				messages={
+					showError ? [{ text: "Short error message", type: "newError" }] : []
+				}
 				onBlur={handleBlur}
 				onInputChange={handleInputChange}
 				onKeyDown={handleKeyDown}

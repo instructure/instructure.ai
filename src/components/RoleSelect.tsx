@@ -4,7 +4,12 @@ import { Select } from "@instructure/ui-select";
 import { type FocusEvent, type SyntheticEvent, useRef, useState } from "react";
 import Roles, { type Role, type RolesType } from "../assets/Roles";
 
-const RoleSelect = () => {
+type RoleSelectProps = {
+	isDisabled: boolean;
+	showError: boolean;
+};
+
+const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled, showError }) => {
 	const sortRoles = (roles: RolesType) =>
 		Object.fromEntries(
 			Object.entries(roles)
@@ -139,12 +144,16 @@ const RoleSelect = () => {
 		<>
 			<Select
 				assistiveText="Use arrow keys to navigate options."
+				disabled={isDisabled}
 				inputRef={(el: HTMLInputElement | null) => {
 					inputRef.current = el;
 				}}
 				inputValue={inputValue}
 				isRequired={true}
 				isShowingOptions={isShowingOptions}
+				messages={
+					showError ? [{ text: "Short error message", type: "newError" }] : []
+				}
 				onBlur={handleBlur}
 				onInputChange={handleInputChange}
 				onRequestHideOptions={handleHideOptions}
