@@ -55,7 +55,8 @@ const SignupModal = (): React.ReactElement => {
 				<Modal.Header
 					themeOverride={{
 						inverseBackground: "transparent",
-						inverseBorderColor: "#ffffff",
+						inverseBorderColor: "#fff",
+						padding: "1rem 1.5rem 0.5rem",
 					}}
 				>
 					<Flex>

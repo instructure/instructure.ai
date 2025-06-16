@@ -1,3 +1,4 @@
+import { Heading } from "@instructure/ui-heading";
 import { Link } from "@instructure/ui-link";
 import { View } from "@instructure/ui-view";
 import { InstructureBug } from "../assets/Logos";
@@ -12,7 +13,9 @@ const Banner = ({ href }: BannerProps): React.ReactElement => {
 			<View as="div" className="logoWrapper" padding="medium">
 				{href ? (
 					<Link href={href}>
-						<InstructureBug />
+						<Heading as="h1" level="h1">
+							<InstructureBug />
+						</Heading>
 					</Link>
 				) : (
 					<InstructureBug />

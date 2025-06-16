@@ -1,4 +1,5 @@
 import { FormFieldGroup } from "@instructure/ui-form-field";
+import { Heading } from "@instructure/ui-heading";
 import { useState } from "react";
 import EmailInput from "./EmailInput";
 import FeatureSelect from "./FeatureSelect";
@@ -13,7 +14,11 @@ const SignupForm = () => {
 
 	return (
 		<FormFieldGroup
-			description="Early Adopter Program Signup"
+			description={
+				<Heading variant="titleCardRegular">
+					Early Adopter Program Signup
+				</Heading>
+			}
 			disabled={isDisabled}
 			messages={showError ? messages : []}
 		>

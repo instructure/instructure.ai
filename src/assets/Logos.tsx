@@ -18,7 +18,12 @@ const InstructureBug: FC = () => (
 );
 
 const InstructureLogo: FC = () => (
-	<InlineSVG height="100%" title="Logo" viewBox="0 0 374.89 52.08" width="80%">
+	<InlineSVG
+		height="100%"
+		title="Logo"
+		viewBox="0 0 374.89 52.08"
+		width="300px"
+	>
 		<svg
 			data-name="Layer 2"
 			id="Layer_2"
