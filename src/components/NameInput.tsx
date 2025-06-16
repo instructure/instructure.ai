@@ -1,23 +1,54 @@
+import type { FormMessage } from "@instructure/ui-form-field";
 import { IconUserLine } from "@instructure/ui-icons";
 import { TextInput } from "@instructure/ui-text-input";
-import { useState } from "react";
+import React, { type SyntheticEvent, useState } from "react";
 
 type NameInputProps = {
 	isDisabled?: boolean;
 };
 
 const NameInput: React.FC<NameInputProps> = ({ isDisabled }) => {
-	const [messages, setMessages] = useState([]);
-	const [showError, setShowError] = useState(false);
+	const [messages, setMessages] = useState<FormMessage[]>([]);
+	const [value, setValue] = useState<string>("");
+
+	const isInvalidName = (name: string): boolean => {
+		const namePattern = /^[\p{L}\p{M}'’\-. ]+$/u;
+		const spacePattern = /^[ \t]+$/;
+		return !namePattern.test(name) || spacePattern.test(name);
+	};
+
+	const handleChange = (
+		_e: SyntheticEvent<Element, Event>,
+		value: string,
+	): void => {
+		setMessages([]);
+		setValue(value);
+	};
+
+	const handleBlur = (_e: SyntheticEvent<Element, Event>): void => {
+		let m: null | string = null;
+		if (value === "") {
+			m = "Name is required.";
+		} else if (isInvalidName(value)) {
+			m = "Please input full name.";
+		}
+		if (m) {
+			setMessages([{ text: m, type: "error" }]);
+		}
+	};
 
 	return (
 		<TextInput
 			disabled={isDisabled}
 			isRequired={true}
-			messages={showError ? messages : []}
+			messages={messages}
+			onBlur={handleBlur}
+			onChange={handleChange}
 			placeholder="Bart Simpson"
 			renderBeforeInput={IconUserLine}
 			renderLabel="Name"
+			type="text"
+			value={value}
 		/>
 	);
 };
