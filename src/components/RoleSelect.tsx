@@ -103,26 +103,28 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 
 	const handleHighlightOption = (
 		event: SyntheticEvent & { type: string; persist: () => void },
-		{ id }: { id: string },
+		data: { id?: string; direction?: 1 | -1 },
 	): void => {
 		event.persist();
+		const { id } = data;
 		const optionsAvailable = `${Object.values(options).flat().length} options available.`;
 		const nowOpen = !isShowingOptions
 			? `List expanded. ${optionsAvailable}`
 			: "";
-		const option = getOptionById(id)?.label ?? "";
-		setHighlightedOptionId(id);
-		setInputValue(event.type === "keydown" ? option : inputValue);
+		const option = id ? (getOptionById(id)?.label ?? "") : "";
+		setHighlightedOptionId(id ?? null);
+		setInputValue(event.type === "keydown" && option ? option : inputValue);
 		setAnnouncement(`${option} ${nowOpen}`);
 	};
 
 	const handleSelectOption = (
 		_e: SyntheticEvent,
-		{ id }: { id: string },
+		data: { id?: string },
 	): void => {
-		const option = getOptionById(id)?.label ?? "";
+		const { id } = data;
+		const option = id ? (getOptionById(id)?.label ?? "") : "";
 		focusInput();
-		setSelectedOptionId(id);
+		setSelectedOptionId(id ?? null);
 		setInputValue(option);
 		setIsShowingOptions(false);
 		setAnnouncement(`"${option}" selected. List collapsed.`);
@@ -170,9 +172,13 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 				{renderGroup()}
 			</Select>
 			<Alert
-				liveRegion={() => document.getElementById("flash-messages")}
+				liveRegion={() => {
+					const el = document.getElementById("flash-messages");
+					if (!el)
+						throw new Error('Element with id "flash-messages" not found');
+					return el;
+				}}
 				liveRegionPoliteness="assertive"
-				role="alert"
 				screenReaderOnly
 			>
 				{announcement}
