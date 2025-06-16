@@ -161,6 +161,7 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 				isRequired={true}
 				isShowingOptions={isShowingOptions}
 				onBlur={handleBlur}
+				onInputChange={handleInputChange}
 				onRequestHideOptions={handleHideOptions}
 				onRequestHighlightOption={handleHighlightOption}
 				onRequestSelectOption={handleSelectOption}
