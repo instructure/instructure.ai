@@ -1,16 +1,39 @@
 import { FormFieldGroup } from "@instructure/ui-form-field";
-import { Text } from "@instructure/ui-text";
+import {
+	IconEmailLine,
+	IconHomeLine,
+	IconUserLine,
+} from "@instructure/ui-icons";
 import { TextInput } from "@instructure/ui-text-input";
+import FeatureSelect from "./FeatureSelect";
+import RoleSelect from "./RoleSelect";
 
 const SignupForm = () => {
 	return (
-		<FormFieldGroup description="Sign up form">
-			<TextInput
-				placeholder="if you hit enter here, it should submit the form"
-				renderLabel="Example"
-			/>
-			<Text lineHeight="double">This is text.</Text>
-		</FormFieldGroup>
+		<>
+			<FormFieldGroup description="Sign up form">
+				<TextInput
+					isRequired={true}
+					placeholder="Bart Simpson"
+					renderBeforeInput={IconUserLine}
+					renderLabel="Name"
+				/>
+				<TextInput
+					isRequired={true}
+					placeholder="bsimpson@springfield-elementary.edu"
+					renderBeforeInput={IconEmailLine}
+					renderLabel="Email Address"
+				/>
+				<RoleSelect />
+				<TextInput
+					isRequired={true}
+					placeholder="Springfield Elementary"
+					renderBeforeInput={IconHomeLine}
+					renderLabel="Institution"
+				/>
+				<FeatureSelect />
+			</FormFieldGroup>
+		</>
 	);
 };
 
