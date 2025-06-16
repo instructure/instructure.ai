@@ -1,13 +1,8 @@
 :root {
 	--instructure: #0E1721;
 	--ai-gradient: linear-gradient(to bottom, #00828e, #9e58bd);
-
 	background-color: var(--instructure);
-	color: #fff;
-}
-
-body {
-	display: grid;
+	justify-content: center;
 }
 
 .logoWrapper {
