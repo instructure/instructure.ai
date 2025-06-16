@@ -1,13 +1,7 @@
 import { Alert } from "@instructure/ui-alerts";
 import { IconEducatorsLine } from "@instructure/ui-icons";
 import { Select } from "@instructure/ui-select";
-import {
-	type FocusEvent,
-	type SyntheticEvent,
-	useRef,
-	useState,
-	useTransition,
-} from "react";
+import { type FocusEvent, type SyntheticEvent, useRef, useState } from "react";
 import Roles from "../assets/roles.json" with { type: "json" };
 
 interface RoleOption {
@@ -40,7 +34,6 @@ const RoleSelect: React.FC<RoleSelectProps> = () => {
 	);
 	const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
 	const [announcement, setAnnouncement] = useState<string | null>(null);
-	const [isPending, startTransition] = useTransition();
 	const [filteredOptions, setFilteredOptions] = useState<RolesMap>(options);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
