@@ -6,10 +6,12 @@ import Roles, { type Role, type RolesType } from "../assets/Roles";
 
 type RoleSelectProps = {
 	isDisabled: boolean;
-	showError: boolean;
 };
 
-const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled, showError }) => {
+const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
+	const [showError, setShowError] = useState(false);
+	const [messages, setMessages] = useState([]);
+
 	const sortRoles = (roles: RolesType) =>
 		Object.fromEntries(
 			Object.entries(roles)
@@ -151,9 +153,7 @@ const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled, showError }) => {
 				inputValue={inputValue}
 				isRequired={true}
 				isShowingOptions={isShowingOptions}
-				messages={
-					showError ? [{ text: "Short error message", type: "newError" }] : []
-				}
+				messages={showError ? messages : []}
 				onBlur={handleBlur}
 				onInputChange={handleInputChange}
 				onRequestHideOptions={handleHideOptions}

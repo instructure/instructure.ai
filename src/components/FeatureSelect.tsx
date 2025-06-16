@@ -20,17 +20,15 @@ type FeatureOption = {
 
 type FeatureSelectProps = {
 	isDisabled: boolean;
-	showError: boolean;
 };
 
-const FeatureSelect: React.FC<FeatureSelectProps> = ({
-	isDisabled,
-	showError,
-}) => {
+const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 	const sortFeatures = (features: FeatureOption[]): FeatureOption[] =>
 		features.slice().sort((a, b) => a.label.localeCompare(b.label));
 	const options: FeatureOption[] = sortFeatures(Features);
 
+	const [showError, setShowError] = useState(false);
+	const [messages, setMessages] = useState([]);
 	const [inputValue, setInputValue] = useState<string>("");
 	const [isShowingOptions, setIsShowingOptions] = useState<boolean>(false);
 	const [highlightedOptionId, setHighlightedOptionId] = useState<string | null>(
@@ -208,9 +206,7 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({
 				inputValue={inputValue}
 				isRequired={false}
 				isShowingOptions={isShowingOptions}
-				messages={
-					showError ? [{ text: "Short error message", type: "newError" }] : []
-				}
+				messages={showError ? messages : []}
 				onBlur={handleBlur}
 				onInputChange={handleInputChange}
 				onKeyDown={handleKeyDown}
