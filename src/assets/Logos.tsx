@@ -19,7 +19,7 @@ const ParchmentBug: FC = () => (
 );
 
 const InstructureBug: FC = () => (
-	<InlineSVG height="100%" title="Logo" viewBox="0 0 100 100" width="100%">
+	<InlineSVG height="100%" title="Logo" viewBox="0 0 100 100">
 		<svg viewBox="0 0 53.42 53.42" xmlns="http://www.w3.org/2000/svg">
 			<title>Instructure Logo</title>
 			<g data-name="Layer 1" id="Layer_1-2">
