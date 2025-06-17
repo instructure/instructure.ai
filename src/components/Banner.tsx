@@ -1,7 +1,7 @@
 import { Heading } from "@instructure/ui-heading";
 import { Link } from "@instructure/ui-link";
 import { View } from "@instructure/ui-view";
-import { InstructureBug } from "../assets/Logos";
+import { InstructureBugColor } from "../assets/Logos";
 
 interface BannerProps {
 	href?: string;
@@ -14,11 +14,11 @@ const Banner = ({ href }: BannerProps): React.ReactElement => {
 				{href ? (
 					<Link href={href}>
 						<Heading as="h1" level="h1">
-							<InstructureBug />
+							<InstructureBugColor />
 						</Heading>
 					</Link>
 				) : (
-					<InstructureBug />
+					<InstructureBugColor />
 				)}{" "}
 			</View>
 		</View>
