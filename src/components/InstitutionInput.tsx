@@ -31,6 +31,8 @@ const InstitutionInput: React.FC<InstitutionInputProps> = ({ isDisabled }) => {
 			m = "Institution is required.";
 		} else if (isInvalidInstitution(value)) {
 			m = "Please input full institution name.";
+		} else if (value.length < 3) {
+			m = "Please input full institution name.";
 		}
 		if (m) {
 			setMessages([{ text: m, type: "error" }]);
