@@ -3,29 +3,23 @@ import { Alert } from "@instructure/ui-alerts";
 import { IconLaunchLine } from "@instructure/ui-icons";
 import { Select } from "@instructure/ui-select";
 import { Tag } from "@instructure/ui-tag";
-import {
+import React, {
 	type ChangeEvent,
 	type FocusEvent,
 	type KeyboardEvent,
 	useRef,
 	useState,
 } from "react";
-import Features from "../assets/Features";
-
-type FeatureOption = {
-	id: string;
-	label: string;
-	icon?: React.ElementType;
-};
+import Features, { type FeatureInterface } from "../assets/Features";
 
 type FeatureSelectProps = {
 	isDisabled: boolean;
 };
 
 const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
-	const sortFeatures = (features: FeatureOption[]): FeatureOption[] =>
+	const sortFeatures = (features: FeatureInterface[]): FeatureInterface[] =>
 		features.slice().sort((a, b) => a.label.localeCompare(b.label));
-	const options: FeatureOption[] = sortFeatures(Features);
+	const options: FeatureInterface[] = sortFeatures(Features);
 
 	const [showError, setShowError] = useState(false);
 	const [messages, setMessages] = useState([]);
@@ -36,7 +30,7 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 	);
 	const [selectedOptionId, setSelectedOptionId] = useState<string[]>([]);
 	const [filteredOptions, setFilteredOptions] =
-		useState<FeatureOption[]>(options);
+		useState<FeatureInterface[]>(options);
 	const [announcement, setAnnouncement] = useState<string | null>(null);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -47,12 +41,12 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 		}
 	};
 
-	const getOptionById = (queryId: string): FeatureOption | undefined => {
+	const getOptionById = (queryId: string): FeatureInterface | undefined => {
 		return options.find(({ id }) => id === queryId);
 	};
 
 	const getOptionsChangedMessage = (
-		newOptions: FeatureOption[],
+		newOptions: FeatureInterface[],
 	): string | null => {
 		let message =
 			newOptions.length !== filteredOptions.length
@@ -69,7 +63,7 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 		return message;
 	};
 
-	const filterOptions = (value: string): FeatureOption[] => {
+	const filterOptions = (value: string): FeatureInterface[] => {
 		return options.filter((option) =>
 			option.label.toLowerCase().startsWith(value.toLowerCase()),
 		);
@@ -109,7 +103,7 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 		event: React.SyntheticEvent,
 		data: { id?: string; direction?: 1 | -1 },
 	) => {
-		(event as any).persist();
+		event.persist();
 		const { id } = data;
 		if (!id) return;
 		const option = getOptionById(id);
@@ -173,26 +167,28 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 		inputRef.current?.focus();
 	};
 
-	const renderTags = () => {
-		return selectedOptionId.map((id, index) => {
-			const option = getOptionById(id);
-			if (!option) return null;
-			return (
-				<Tag
-					dismissible
-					key={id}
-					margin={
-						index > 0 ? "xxx-small xx-small xxx-small 0" : "0 xx-small 0 0"
-					}
-					onClick={(e) => dismissTag(e, id)}
-					text={
-						<AccessibleContent alt={`Remove ${option.label}`}>
-							{option.icon && <option.icon />} {option.label}
-						</AccessibleContent>
-					}
-				/>
-			);
-		});
+	const renderTags = (): (React.JSX.Element | null)[] => {
+		return selectedOptionId.map(
+			(id: string, index: number): React.JSX.Element | null => {
+				const option = getOptionById(id);
+				if (!option) return null;
+				return (
+					<Tag
+						dismissible
+						key={id}
+						margin={
+							index > 0 ? "xxx-small xx-small xxx-small 0" : "0 xx-small 0 0"
+						}
+						onClick={(e: React.MouseEvent) => dismissTag(e, id)}
+						text={
+							<AccessibleContent alt={`Remove ${option.label}`}>
+								{option.icon && <option.icon />} {option.label}
+							</AccessibleContent>
+						}
+					/>
+				);
+			},
+		);
 	};
 
 	return (
@@ -214,7 +210,7 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 				onRequestHighlightOption={handleHighlightOption}
 				onRequestSelectOption={handleSelectOption}
 				onRequestShowOptions={handleShowOptions}
-				placeholder={selectedOptionId.length > 0 ? "" : "Ignite AI"}
+				placeholder={selectedOptionId.length > 0 ? "" : "Ignite Agent"}
 				renderBeforeInput={
 					selectedOptionId.length > 0 ? renderTags() : IconLaunchLine
 				}
