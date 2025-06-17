@@ -42,6 +42,7 @@ const NameInput: React.FC<NameInputProps> = ({ isDisabled }) => {
 			disabled={isDisabled}
 			isRequired={true}
 			messages={messages}
+			name="name"
 			onBlur={handleBlur}
 			onChange={handleChange}
 			placeholder="Bart Simpson"

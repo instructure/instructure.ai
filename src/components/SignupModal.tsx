@@ -8,13 +8,16 @@ import {
 } from "@instructure/ui-icons";
 import { Modal } from "@instructure/ui-modal";
 import { View } from "@instructure/ui-view";
+import type { FormEvent } from "react";
 import { useState, useTransition } from "react";
 import { InstructureLogo } from "../assets/Logos";
+import useSubmitCallback from "../hooks/useSubmitCallback";
 import SignupForm from "./SignupForm";
 
 const SignupModal = (): React.ReactElement => {
 	const [isPending, startTransition] = useTransition();
 	const [isOpen, setOpen] = useState(false);
+	const submitCallback = useSubmitCallback();
 
 	const handleButtonClick = () => {
 		startTransition(() => {
@@ -22,10 +25,11 @@ const SignupModal = (): React.ReactElement => {
 		});
 	};
 
-	const handleFormSubmit = (e: Event) => {
+	const handleFormSubmit = (e: FormEvent) => {
 		e.preventDefault();
-		console.log("form submitted");
-		setOpen(false);
+		submitCallback(new FormData(e.target as HTMLFormElement));
+		console.log("Form submitted");
+		// setOpen(false);
 	};
 
 	return (
@@ -43,9 +47,9 @@ const SignupModal = (): React.ReactElement => {
 			<Modal
 				as="form"
 				id="signupForm"
-				label="Hello World"
+				label="Signup Form"
 				onDismiss={handleButtonClick}
-				onSubmit={() => handleFormSubmit}
+				onSubmit={(e) => handleFormSubmit(e)}
 				open={isOpen}
 				overflow="fit"
 				shouldCloseOnDocumentClick
@@ -109,8 +113,8 @@ const SignupModal = (): React.ReactElement => {
 						color="primary-inverse"
 						disabled={isPending}
 						margin="small"
-						onClick={handleButtonClick}
 						renderIcon={<IconPublishSolid />}
+						type="submit"
 						withBackground={false}
 					>
 						Submit

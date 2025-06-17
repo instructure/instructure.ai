@@ -50,6 +50,7 @@ const EmailInput: React.FC<EmailInputProps> = ({ isDisabled }) => {
 			disabled={isDisabled}
 			isRequired={true}
 			messages={messages}
+			name="email"
 			onBlur={handleBlur}
 			onChange={handleChange}
 			placeholder="bsimpson@springfield-elementary.edu"

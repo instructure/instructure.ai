@@ -12,7 +12,7 @@ const InstitutionInput: React.FC<InstitutionInputProps> = ({ isDisabled }) => {
 	const [value, setValue] = useState<string>("");
 
 	const isInvalidInstitution = (name: string): boolean => {
-		const namePattern = /^[\p{L}\p{M}'’\-. ]+$/u;
+		const namePattern = /^[\p{L}\p{M}'’\-.\s&]+$/u;
 		const spacePattern = /^[ \t]+$/;
 		return !namePattern.test(name) || spacePattern.test(name);
 	};
@@ -44,6 +44,7 @@ const InstitutionInput: React.FC<InstitutionInputProps> = ({ isDisabled }) => {
 			disabled={isDisabled}
 			isRequired={true}
 			messages={messages}
+			name="institution"
 			onBlur={handleBlur}
 			onChange={handleChange}
 			placeholder="Springfield Elementary"

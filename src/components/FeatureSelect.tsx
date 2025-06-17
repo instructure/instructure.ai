@@ -203,6 +203,7 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 				isRequired={false}
 				isShowingOptions={isShowingOptions}
 				messages={showError ? messages : []}
+				name="features"
 				onBlur={handleBlur}
 				onInputChange={handleInputChange}
 				onKeyDown={handleKeyDown}
@@ -214,7 +215,7 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 				renderBeforeInput={
 					selectedOptionId.length > 0 ? renderTags() : IconLaunchLine
 				}
-				renderLabel="Feature(s)"
+				renderLabel="Features"
 			>
 				{filteredOptions.length > 0 ? (
 					filteredOptions.map((option) => {
