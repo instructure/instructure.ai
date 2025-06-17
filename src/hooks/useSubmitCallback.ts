@@ -33,7 +33,7 @@ const useSubmitCallback = (): SubmitCallback => {
 			});
 
 			const formURL =
-				"https: * docs.google.com/forms/d/e/1FAIpQLSfnORpEEhEYb6if1mPKU_OEQvznxy8-nq8SG9r9XZvYEssvEQ/formResponse?";
+				"https://docs.google.com/forms/d/e/1FAIpQLSfnORpEEhEYb6if1mPKU_OEQvznxy8-nq8SG9r9XZvYEssvEQ/formResponse?";
 
 			const url = `${formURL}${params}`;
 
