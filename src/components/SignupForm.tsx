@@ -11,10 +11,10 @@ import NameInput from "./NameInput";
 import RoleSelect from "./RoleSelect";
 import SignupProgress from "./SignupProgress";
 
-export type SignupFormFieldProps<T extends string | string[]> = {
+export type SignupFormFieldProps = {
 	isDisabled: boolean;
-	value: T;
-	setValue: (value: T) => void;
+	value: string;
+	setValue: (value: string) => void;
 	messages: FormMessage[];
 	setMessages: (messages: FormMessage[]) => void;
 };
@@ -26,7 +26,7 @@ const SignupForm = () => {
 	const [emailValue, setEmailValue] = useState("");
 	const [roleValue, setRoleValue] = useState("");
 	const [institutionValue, setInstitutionValue] = useState<string>("");
-	const [featureValue, setFeatureValue] = useState<string[]>([]);
+	const [featureValue, setFeatureValue] = useState<string>("");
 	const [nameMessages, setNameMessages] = useState<FormMessage[]>([]);
 	const [emailMessages, setEmailMessages] = useState<FormMessage[]>([]);
 	const [roleMessages, setRoleMessages] = useState<FormMessage[]>([]);
@@ -82,15 +82,34 @@ const SignupForm = () => {
 	const formFieldCount = formFieldGroupChildren.length;
 
 	const validFormFieldCount = (): number => {
-		const count = 0;
-
+		let count = 0;
+		const fields = [
+			{ messages: nameMessages, value: nameValue },
+			{ messages: emailMessages, value: emailValue },
+			{ messages: roleMessages, value: roleValue },
+			{ messages: institutionMessages, value: institutionValue },
+			{ messages: featureMessages, value: featureValue },
+		];
+		fields.forEach(({ messages, value }) => {
+			if (messages.length === 0 && value.trim() !== "") {
+				count++;
+			}
+		});
 		return count;
+	};
+
+	const updateProgress = (): void => {
+		const validCount = validFormFieldCount();
+		if (validCount === formFieldCount) {
+			setProgress(100);
+		} else {
+			setProgress((validCount / formFieldCount) * 100);
+		}
 	};
 
 	const handleChange = (e: React.FocusEvent<Element>) => {
 		e.preventDefault();
-		//console.log("formFieldCount", formFieldCount);
-		console.log("validFormFieldCount", validFormFieldCount());
+		updateProgress();
 	};
 
 	const Header = (
