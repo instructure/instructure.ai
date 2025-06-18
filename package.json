@@ -19,6 +19,7 @@
 		"@instructure/ui-tag": "^10.20.1",
 		"@instructure/ui-text": "^10.20.1",
 		"@instructure/ui-text-input": "^10.20.1",
+		"@instructure/ui-themes": "^10.20.1",
 		"@instructure/ui-truncate-text": "^10.20.1",
 		"@instructure/ui-view": "^10.20.1",
 		"react": "^19.1.0",
