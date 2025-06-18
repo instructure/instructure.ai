@@ -111,7 +111,7 @@ const SignupModal = (): React.ReactElement => {
 				>
 					<Button
 						color="primary-inverse"
-						disabled={isPending}
+						disabled={isPending || progress < 100}
 						margin="small"
 						renderIcon={<IconPublishSolid />}
 						type="submit"
