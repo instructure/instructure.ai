@@ -1,18 +1,32 @@
 import { View } from "@instructure/ui-view";
 import "./App.css";
 import { InstUISettingsProvider } from "@instructure/emotion";
+import { canvas } from "@instructure/ui-themes";
 import Banner from "./components/Banner";
 import SignupModal from "./components/SignupModal";
 
 function App() {
+	const themeOverrides = {
+		canvas: {
+			componentOverrides: {
+				ProgressCircle: {
+					meterColorBrand: canvas.colors?.primitives?.violet45,
+					meterColorSuccess: canvas.colors?.primitives?.sea45,
+				},
+				TextInput: {
+					focusOutlineColor: canvas.colors?.primitives?.violet45,
+				},
+			},
+			typography: {
+				fontFamily: "'Poppins', sans-serif",
+			},
+		},
+	};
+
 	return (
 		<InstUISettingsProvider
 			theme={{
-				themeOverrides: {
-					typography: {
-						fontFamily: "'Poppins', sans-serif",
-					},
-				},
+				themeOverrides: themeOverrides,
 			}}
 		>
 			<View as="section">
