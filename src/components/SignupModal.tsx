@@ -18,6 +18,7 @@ const SignupModal = (): React.ReactElement => {
 	const [isPending, startTransition] = useTransition();
 	const [isOpen, setOpen] = useState(false);
 	const submitCallback = useSubmitCallback();
+	const [progress, setProgress] = useState<number>(0);
 
 	const handleButtonClick = () => {
 		startTransition(() => {
@@ -99,7 +100,7 @@ const SignupModal = (): React.ReactElement => {
 						padding="medium"
 						shadow="topmost"
 					>
-						<SignupForm />
+						<SignupForm progress={progress} setProgress={setProgress} />
 					</View>
 				</Modal.Body>
 				<Modal.Footer

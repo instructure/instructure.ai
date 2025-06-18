@@ -19,9 +19,13 @@ export type SignupFormFieldProps = {
 	setMessages: (messages: FormMessage[]) => void;
 };
 
-const SignupForm = () => {
+type SignupFormProps = {
+	progress: number;
+	setProgress: (progress: number) => void;
+};
+
+const SignupForm: React.FC<SignupFormProps> = ({ progress, setProgress }) => {
 	const [isDisabled, setIsDisabled] = useState<boolean>(false);
-	const [progress, setProgress] = useState<number>(0);
 	const [nameValue, setNameValue] = useState<string>("");
 	const [emailValue, setEmailValue] = useState("");
 	const [roleValue, setRoleValue] = useState("");
