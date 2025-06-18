@@ -34,6 +34,13 @@ const FeatureSelect: React.FC<SignupFormFieldProps> = ({
 	const [announcement, setAnnouncement] = useState<string | null>(null);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
+	const isValidFeature = (feature: string): boolean => {
+		const allLabels = Object.values(options)
+			.flat()
+			.map((feature) => feature.label.toLowerCase());
+		return allLabels.includes(feature.toLowerCase());
+	};
+
 	const focusInput = () => {
 		if (inputRef.current) {
 			inputRef.current.blur();
