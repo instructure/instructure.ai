@@ -6,7 +6,15 @@ import SignupModal from "./components/SignupModal";
 
 function App() {
 	return (
-		<InstUISettingsProvider>
+		<InstUISettingsProvider
+			theme={{
+				themeOverrides: {
+					typography: {
+						fontFamily: "'Poppins', sans-serif",
+					},
+				},
+			}}
+		>
 			<View as="section">
 				<Banner />
 			</View>
