@@ -3,7 +3,7 @@ import type { FormMessage } from "@instructure/ui-form-field";
 import { FormFieldGroup } from "@instructure/ui-form-field";
 import { Heading } from "@instructure/ui-heading";
 import type React from "react";
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import EmailInput from "./EmailInput";
 import FeatureSelect from "./FeatureSelect";
 import InstitutionInput from "./InstitutionInput";
@@ -85,8 +85,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ progress, setProgress }) => {
 	];
 	const formFieldCount = formFieldGroupChildren.length;
 
-	const validFormFieldCount = (): number => {
-		let count = 0;
+	const updateProgress = useCallback(() => {
 		const fields = [
 			{ messages: nameMessages, value: nameValue },
 			{ messages: emailMessages, value: emailValue },
@@ -94,27 +93,29 @@ const SignupForm: React.FC<SignupFormProps> = ({ progress, setProgress }) => {
 			{ messages: institutionMessages, value: institutionValue },
 			{ messages: featureMessages, value: featureValue },
 		];
-		fields.forEach(({ messages, value }) => {
-			if (messages.length === 0 && value.trim() !== "") {
-				count++;
-			}
-		});
-		return count;
-	};
+		const validFormFieldCount = fields.filter(
+			(field) => field.value.trim() !== "" && field.messages.length === 0,
+		).length;
+		const currentProgress = (validFormFieldCount / formFieldCount) * 100;
+		setProgress(currentProgress);
+	}, [
+		nameValue,
+		emailValue,
+		roleValue,
+		institutionValue,
+		featureValue,
+		nameMessages,
+		emailMessages,
+		roleMessages,
+		institutionMessages,
+		featureMessages,
+		setProgress,
+		formFieldCount,
+	]);
 
-	const updateProgress = (): void => {
-		const validCount = validFormFieldCount();
-		if (validCount === formFieldCount) {
-			setProgress(100);
-		} else {
-			setProgress((validCount / formFieldCount) * 100);
-		}
-	};
-
-	const handleChange = (e: React.FocusEvent<Element>) => {
-		e.preventDefault();
+	useEffect(() => {
 		updateProgress();
-	};
+	}, [updateProgress]);
 
 	const Header = (
 		<Flex>
@@ -133,7 +134,6 @@ const SignupForm: React.FC<SignupFormProps> = ({ progress, setProgress }) => {
 		<FormFieldGroup
 			description={Header}
 			disabled={isDisabled}
-			onBlur={handleChange}
 			ref={formFieldGroupRef}
 		>
 			{formFieldGroupChildren}
