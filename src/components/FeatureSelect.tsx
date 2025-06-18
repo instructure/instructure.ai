@@ -11,19 +11,19 @@ import React, {
 	useState,
 } from "react";
 import Features, { type FeatureInterface } from "../assets/Features";
+import type { SignupFormFieldProps } from "./SignupForm";
 
-type FeatureSelectProps = {
-	isDisabled: boolean;
-};
-
-const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
+const FeatureSelect: React.FC<SignupFormFieldProps> = ({
+	isDisabled,
+	value,
+	setValue,
+	messages,
+	setMessages,
+}) => {
 	const sortFeatures = (features: FeatureInterface[]): FeatureInterface[] =>
 		features.slice().sort((a, b) => a.label.localeCompare(b.label));
 	const options: FeatureInterface[] = sortFeatures(Features);
 
-	const [showError, setShowError] = useState(false);
-	const [messages, setMessages] = useState([]);
-	const [inputValue, setInputValue] = useState<string>("");
 	const [isShowingOptions, setIsShowingOptions] = useState<boolean>(false);
 	const [highlightedOptionId, setHighlightedOptionId] = useState<string | null>(
 		null,
@@ -72,15 +72,15 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 	const matchValue = () => {
 		if (filteredOptions.length === 1) {
 			const onlyOption = filteredOptions[0];
-			if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
-				setInputValue("");
+			if (onlyOption.label.toLowerCase() === value.toLowerCase()) {
+				setValue("");
 				setSelectedOptionId([...selectedOptionId, onlyOption.id]);
 				setFilteredOptions(filterOptions(""));
 			}
 		} else if (highlightedOptionId) {
 			const highlightedOption = getOptionById(highlightedOptionId);
-			if (highlightedOption && inputValue === highlightedOption.label) {
-				setInputValue("");
+			if (highlightedOption && value === highlightedOption.label) {
+				setValue("");
 				setFilteredOptions(filterOptions(""));
 			}
 		}
@@ -109,7 +109,7 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 		const option = getOptionById(id);
 		if (!option) return;
 		setHighlightedOptionId(id);
-		setInputValue(event.type === "keydown" ? option.label : inputValue);
+		setValue(event.type === "keydown" ? option.label : value);
 		setAnnouncement(option.label);
 	};
 
@@ -125,7 +125,7 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 		setSelectedOptionId([...selectedOptionId, id]);
 		setHighlightedOptionId(null);
 		setFilteredOptions(filterOptions(""));
-		setInputValue("");
+		setValue("");
 		setIsShowingOptions(false);
 		setAnnouncement(`${option.label} selected. List collapsed.`);
 	};
@@ -133,7 +133,7 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
 		const newOptions = filterOptions(value);
-		setInputValue(value);
+		setValue(value);
 		setFilteredOptions(newOptions);
 		setHighlightedOptionId(newOptions.length > 0 ? newOptions[0].id : null);
 		setIsShowingOptions(true);
@@ -143,7 +143,7 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 	const handleKeyDown = (event: KeyboardEvent<Element>) => {
 		if (
 			(event.key === "Backspace" || event.key === "Delete") &&
-			inputValue === "" &&
+			value === "" &&
 			selectedOptionId.length > 0
 		) {
 			setHighlightedOptionId(null);
@@ -199,10 +199,10 @@ const FeatureSelect: React.FC<FeatureSelectProps> = ({ isDisabled }) => {
 				inputRef={(el: HTMLInputElement | null) => {
 					inputRef.current = el;
 				}}
-				inputValue={inputValue}
+				inputValue={value}
 				isRequired={false}
 				isShowingOptions={isShowingOptions}
-				messages={showError ? messages : []}
+				messages={messages}
 				name="features"
 				onBlur={handleBlur}
 				onInputChange={handleInputChange}

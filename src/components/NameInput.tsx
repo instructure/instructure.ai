@@ -1,16 +1,16 @@
-import type { FormMessage } from "@instructure/ui-form-field";
 import { IconUserLine } from "@instructure/ui-icons";
 import { TextInput } from "@instructure/ui-text-input";
-import React, { type SyntheticEvent, useState } from "react";
+import type React from "react";
+import type { SyntheticEvent } from "react";
+import type { SignupFormFieldProps } from "./SignupForm";
 
-type NameInputProps = {
-	isDisabled?: boolean;
-};
-
-const NameInput: React.FC<NameInputProps> = ({ isDisabled }) => {
-	const [messages, setMessages] = useState<FormMessage[]>([]);
-	const [value, setValue] = useState<string>("");
-
+const NameInput: React.FC<SignupFormFieldProps> = ({
+	isDisabled,
+	value,
+	setValue,
+	messages,
+	setMessages,
+}) => {
 	const isInvalidName = (name: string): boolean => {
 		const namePattern = /^[\p{L}\p{M}'’\-. ]+$/u;
 		const spacePattern = /^[ \t]+$/;

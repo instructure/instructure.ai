@@ -28,8 +28,7 @@ const SignupModal = (): React.ReactElement => {
 	const handleFormSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		submitCallback(new FormData(e.target as HTMLFormElement));
-		console.log("Form submitted");
-		// setOpen(false);
+		setOpen(false);
 	};
 
 	return (

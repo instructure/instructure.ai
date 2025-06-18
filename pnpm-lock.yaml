@@ -38,6 +38,9 @@ importers:
       '@instructure/ui-modal':
         specifier: ^10.20.0
         version: 10.20.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-progress':
+        specifier: ^10.20.1
+        version: 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-select':
         specifier: ^10.20.0
         version: 10.20.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -456,11 +459,24 @@ packages:
     peerDependencies:
       react: '>=16.14 <=18'
 
+  '@instructure/console@10.20.1':
+    resolution: {integrity: sha512-WvpzHotRX6lP3LFhQU1qq2qG/UVGPvNfavqlPQD3ZYmhhyk9OA2X5LeAyikJ4dhC2A4q/QpMu0dpBefljGeZtg==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+
   '@instructure/debounce@10.20.0':
     resolution: {integrity: sha512-GwzYmdb8pAVGFNOrLAw4DNapDtKgJQhxxgLoDX7OcPukitgLY8blRUdATOVDnxL/8/3w8E6mcfmUiCShjriO5w==}
 
+  '@instructure/debounce@10.20.1':
+    resolution: {integrity: sha512-v2TrtiEjjWRANbXPeacyhmW6lyICUoxIlojMb/LhillsfFjZuxmrapneXrSsWxaGrPdDAmH/LLbTouVCUShyDQ==}
+
   '@instructure/emotion@10.20.0':
     resolution: {integrity: sha512-+jc+NSmWAAAVKadz6OB/FcCSL5r5eoNP4bHzeUtbKT3wPMns/hxXjlaGIi6JEfKbbNkAI9/imgaV5cmlAePwbQ==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+
+  '@instructure/emotion@10.20.1':
+    resolution: {integrity: sha512-lf8JyzmFo6/GJmKezWhIzB1NuzkKcXz6j/+BRQTRif+x5DnXp0G1LUlOtJJudzbHVJigw5hawib+sqvfqk8Edg==}
     peerDependencies:
       react: '>=16.14 <=18'
 
@@ -469,11 +485,24 @@ packages:
     peerDependencies:
       react: '>=16.14 <=18'
 
+  '@instructure/shared-types@10.20.1':
+    resolution: {integrity: sha512-ec+o0robMofO2Y/OPFN6IX6IqSUJuoTBWUS3SO9qYR5l+PuKniKyco7Dr4sLtdzpmWiN3e2YHs8Js7SOGZpXOQ==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+
   '@instructure/theme-registry@10.20.0':
     resolution: {integrity: sha512-CSvzKSoeI4vwuU/O1J+LVagsX90Tr2dtCNrmCj2x3XfVmisPybEzvmYBLBAWF9vOY29/bIk8qhuiIQ6fEHjPig==}
 
+  '@instructure/theme-registry@10.20.1':
+    resolution: {integrity: sha512-pJBO+TLQp4SUTLFM82Vu2VSlIK2SHmh6KDtzCDDHPa9B3YmMr1VwCG3lSykSZ2Spm29FcqnqkC549LUxK4EtYw==}
+
   '@instructure/ui-a11y-content@10.20.0':
     resolution: {integrity: sha512-rhuGF+N8FbFPyiQ6k/WBnvBp77UyfPi0roHk9iC2jvybHLZnWT3F/yc7iITwWo6xufAyQhIiIBSU6OgyWCI0JA==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+
+  '@instructure/ui-a11y-content@10.20.1':
+    resolution: {integrity: sha512-WKm7um3ly7JaFXNmAllJiC+Hq1Z5CTcrf6INT+hcr/uhVwQwaJh2iQxuo5JmbBylWRY1wNo0l+aXsyRk3YRbVQ==}
     peerDependencies:
       react: '>=16.14 <=18'
 
@@ -496,8 +525,14 @@ packages:
   '@instructure/ui-color-utils@10.20.0':
     resolution: {integrity: sha512-U3BFL/0SZTGtHT/SSKm4uEtZ9XotyFtUWjuD+SqL25jg0Axx9rGS5lU9mIa4WrkSjmV3EYq7yQvpYWPxA2poHQ==}
 
+  '@instructure/ui-color-utils@10.20.1':
+    resolution: {integrity: sha512-zpwsQvPgVkk6bOqeBEhmDa4KR+AOCMXDBGgkQNHRTld4Gzte6uFDcVnuTfjWgdPtXHmpayQicL2DfJn6g+SPBw==}
+
   '@instructure/ui-decorator@10.20.0':
     resolution: {integrity: sha512-f1G69mAfFxn3ru8fEDRRHIEHXxTAJ2DxluB45lUyWsNdw6dUh2JlSXPa0ohcB0VgesJrfOpzdyI017d4MJsWWg==}
+
+  '@instructure/ui-decorator@10.20.1':
+    resolution: {integrity: sha512-kiQidxR28MkNZrvxr8ShUfAG9nljA5kdDcGYy1Sw0Zhw3/fBsAMb82EsenCFfElDnAP4NE7CXxoQDUKAsMkHoA==}
 
   '@instructure/ui-dialog@10.20.0':
     resolution: {integrity: sha512-bzxA6a+9vb9k8PWJbVxzvXmMz5F9fQd/0oXh+E4TQnZdAjn0h3yqQbOAVgsRl3jtwKjhcpfRd1nsqtCX0+gspg==}
@@ -506,6 +541,12 @@ packages:
 
   '@instructure/ui-dom-utils@10.20.0':
     resolution: {integrity: sha512-nmun6iZmevjI5bRM+ImCrn89ct2wHj928J3BAmUrGo1MB7UvoPLA8pRs8TUeLjyxclLP0G9WRkIDY8w49cMiyA==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+      react-dom: '>=16.14 <=18'
+
+  '@instructure/ui-dom-utils@10.20.1':
+    resolution: {integrity: sha512-95NflaNUT3wVrpBR9A/0Q6ciBzvkFDr5GEm5ZIJ9J2tPpmJ/oeHFDcrULAV1vm9r5TCGe9Y40OaKNqEQyvNVgw==}
     peerDependencies:
       react: '>=16.14 <=18'
       react-dom: '>=16.14 <=18'
@@ -537,6 +578,11 @@ packages:
 
   '@instructure/ui-i18n@10.20.0':
     resolution: {integrity: sha512-AP30o5u2qTVTH2q8c72IM/+dEO6pDdYL6H6tkCxGy5e0yoMShEMUrAOTIjslQQ4PIJatbMdos+ot7amcVtvShw==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+
+  '@instructure/ui-i18n@10.20.1':
+    resolution: {integrity: sha512-FUfzDa+RlYWcloE9sM/RiMlSvbpgt7FMt3gFNyu9hcJnRlXQXo4q8lAqiWZjphgrWYN1jlu6MzesyV7N+nxmcw==}
     peerDependencies:
       react: '>=16.14 <=18'
 
@@ -581,8 +627,24 @@ packages:
       react: '>=16.14 <=18'
       react-dom: '>=16.14 <=18'
 
+  '@instructure/ui-portal@10.20.1':
+    resolution: {integrity: sha512-B7prIMi3AuP6VGSMjSBemuLpJLxmCkqE0c2Z6ftc1rsEzpN57qP0xQTY2XEj2owSbtdayEJ6omFKDesZRo8yiw==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+      react-dom: '>=16.14 <=18'
+
   '@instructure/ui-position@10.20.0':
     resolution: {integrity: sha512-tUiHPBe1EvvNV54UlQ4kRXmqiAZgM5F73HptN0cQYnD2xNDd1NRFsRHvL2nxEAOanqpVHpfX0Y9dB2CN7pO2GQ==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+
+  '@instructure/ui-position@10.20.1':
+    resolution: {integrity: sha512-L1WeJJXgueGVT9U7mwUFYWlPtBaTuxCWNUDE5cjw8HsiW+X5/t4pe3lXJxHDfwpnqnr6rW2AKS9ADfgld/j7CQ==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+
+  '@instructure/ui-progress@10.20.1':
+    resolution: {integrity: sha512-ekMNSjuggFxZwPgEaA+EZ1ibxy+hhi6A4xfVWJvsJDSkm2Xxx4cMv7cJhTCyKOincyTkz1xwrKWuye1hBR0tKA==}
     peerDependencies:
       react: '>=16.14 <=18'
 
@@ -591,8 +653,19 @@ packages:
     peerDependencies:
       react: '>=16.14 <=18'
 
+  '@instructure/ui-prop-types@10.20.1':
+    resolution: {integrity: sha512-cOQoS1vqS73Pus8bGhh0uNDuuXc0xEQZr0ExsN/UbRfnofx2QfJ9A2Nha8icKeHYy14BFml30GEX4MSMYYyDpg==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+
   '@instructure/ui-react-utils@10.20.0':
     resolution: {integrity: sha512-39mLYTkWR21ySA8OdDVKH3uOBHLdwetVka0qgi7d7yui3fEAu+H5B3gXjhsf3PohharRGL5Yhij+e0WdqktBow==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+      react-dom: '>=16.14 <=18'
+
+  '@instructure/ui-react-utils@10.20.1':
+    resolution: {integrity: sha512-24SLMsQV2wKU/PCrdBMpdoK67jVJalYLUgyJcRNPpQBKUi/HV644lXsz2Q9qi59vobFObVRz6Om+xBxVTZj53g==}
     peerDependencies:
       react: '>=16.14 <=18'
       react-dom: '>=16.14 <=18'
@@ -623,6 +696,12 @@ packages:
       react: '>=16.14 <=18'
       react-dom: '>=16.14 <=18'
 
+  '@instructure/ui-testable@10.20.1':
+    resolution: {integrity: sha512-YQSQsBKQJw24okqEsCf12tCjhl2fqa+9O9iOY7VldVd8ap/THiDOEmUvvywBisFiIiJL6TasLNiF/H4xRjjQhw==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+      react-dom: '>=16.14 <=18'
+
   '@instructure/ui-text-input@10.20.0':
     resolution: {integrity: sha512-9myCCVrZhr57JCBSmlGwUsIgv2kfc7Ch6BWT6dTYxHtaO0ApTMhA+u+Ef7RTXSXfoDDihoQMgpDxWUNxWc1FXA==}
     peerDependencies:
@@ -635,6 +714,9 @@ packages:
 
   '@instructure/ui-themes@10.20.0':
     resolution: {integrity: sha512-eRbUgI+w2nhs3hNZNYMbRpsLkGSs8gm2KLzlRxWqHNNyza25zH8WK8tUXGUz6jx4G5hI99d6zViiXRCZTOWAWA==}
+
+  '@instructure/ui-themes@10.20.1':
+    resolution: {integrity: sha512-hBgFs9/8QVUYhYgH0FIw83StYDH/9Oan8Y0XHApskz3lLx9iPBZJ3kWD+KE+8Zx2bOLoEqnkxHPjeTgo4pbn3A==}
 
   '@instructure/ui-tooltip@10.20.0':
     resolution: {integrity: sha512-re0B/VAbbJcoRBMrEvui+NImzJTVj8LkSPCJnlzYH07mq7C6X0sRdgggY662PJe+2ToIljDOHld0J6cDX8ggyQ==}
@@ -652,13 +734,27 @@ packages:
       react: '>=16.14 <=18'
       react-dom: '>=16.14 <=18'
 
+  '@instructure/ui-utils@10.20.1':
+    resolution: {integrity: sha512-Qg7GNGzZSnfuECxApNh4H/w1Y0FHB/6d2RJzCg64EJTSvcNZ9uASUrv2pkUIXo8W0aKNIoczx9I4becSr8kdLw==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+      react-dom: '>=16.14 <=18'
+
   '@instructure/ui-view@10.20.0':
     resolution: {integrity: sha512-gzPd0qoGh/XB2PTKHBDqz9zfVrpUcahSbtb1Zm1OiYQLuKEegRjJwmLJwBRQ7qk/8HTtTZ7jBHStBln/BpiDqA==}
     peerDependencies:
       react: '>=16.14 <=18'
 
+  '@instructure/ui-view@10.20.1':
+    resolution: {integrity: sha512-OA+95Nd78dKh5QM2i8giTD2COxmJ0oA76QDKyoRDED3xntf80dVf8jlgMhUPaU6B8iXY8xet3kLe/GDdo+43Mw==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+
   '@instructure/uid@10.20.0':
     resolution: {integrity: sha512-f3dAIyMLKsArWxa2UGH1jucskOfefTVW+i10Hpp7/7bdN7zzJfALhrJf+DFw7q18XXOEzdFvjITHUkI8ipyHFQ==}
+
+  '@instructure/uid@10.20.1':
+    resolution: {integrity: sha512-gRwQ8geDqnZqoC3e0G8VHTuiLWW5c8yeKHTgh5sjxPjrDina/cRY8Bfvplb8G7fhTlnNL6fX7UXDSn7MR3+dmg==}
 
   '@jridgewell/gen-mapping@0.3.8':
     resolution: {integrity: sha512-imAbBGkb+ebQyxKgzv5Hu2nmROxoDOXHh80evxdoXNOrvAnVx7zimzc1Oo5h9RlfV4vPXaE2iM5pOFbvOCClWA==}
@@ -1761,7 +1857,15 @@ snapshots:
     dependencies:
       react: 19.1.0
 
+  '@instructure/console@10.20.1(react@19.1.0)':
+    dependencies:
+      react: 19.1.0
+
   '@instructure/debounce@10.20.0':
+    dependencies:
+      '@babel/runtime': 7.27.6
+
+  '@instructure/debounce@10.20.1':
     dependencies:
       '@babel/runtime': 7.27.6
 
@@ -1785,7 +1889,32 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/emotion@10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@emotion/react': 11.14.0(@types/react@19.1.8)(react@19.1.0)
+      '@instructure/console': 10.20.1(react@19.1.0)
+      '@instructure/shared-types': 10.20.1(react@19.1.0)
+      '@instructure/theme-registry': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-decorator': 10.20.1
+      '@instructure/ui-i18n': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-react-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-themes': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      hoist-non-react-statics: 3.3.2
+      prop-types: 15.8.1
+      react: 19.1.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/shared-types@10.20.0(react@19.1.0)':
+    dependencies:
+      prop-types: 15.8.1
+      react: 19.1.0
+
+  '@instructure/shared-types@10.20.1(react@19.1.0)':
     dependencies:
       prop-types: 15.8.1
       react: 19.1.0
@@ -1800,12 +1929,35 @@ snapshots:
       - react
       - react-dom
 
+  '@instructure/theme-registry@10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/console': 10.20.1(react@19.1.0)
+      '@instructure/shared-types': 10.20.1(react@19.1.0)
+      '@instructure/ui-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+    transitivePeerDependencies:
+      - react
+      - react-dom
+
   '@instructure/ui-a11y-content@10.20.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@babel/runtime': 7.27.6
       '@instructure/emotion': 10.20.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/shared-types': 10.20.0(react@19.1.0)
       '@instructure/ui-react-utils': 10.20.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      prop-types: 15.8.1
+      react: 19.1.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-a11y-content@10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/emotion': 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/shared-types': 10.20.1(react@19.1.0)
+      '@instructure/ui-react-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       prop-types: 15.8.1
       react: 19.1.0
     transitivePeerDependencies:
@@ -1881,7 +2033,16 @@ snapshots:
       '@babel/runtime': 7.27.6
       tinycolor2: 1.6.0
 
+  '@instructure/ui-color-utils@10.20.1':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      tinycolor2: 1.6.0
+
   '@instructure/ui-decorator@10.20.0':
+    dependencies:
+      '@babel/runtime': 7.27.6
+
+  '@instructure/ui-decorator@10.20.1':
     dependencies:
       '@babel/runtime': 7.27.6
 
@@ -1905,6 +2066,14 @@ snapshots:
       '@babel/runtime': 7.27.6
       '@instructure/console': 10.20.0(react@19.1.0)
       '@instructure/shared-types': 10.20.0(react@19.1.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
+  '@instructure/ui-dom-utils@10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/console': 10.20.1(react@19.1.0)
+      '@instructure/shared-types': 10.20.1(react@19.1.0)
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
@@ -2003,6 +2172,22 @@ snapshots:
       '@instructure/ui-prop-types': 10.20.0(react@19.1.0)
       '@instructure/ui-react-utils': 10.20.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-utils': 10.20.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      hoist-non-react-statics: 3.3.2
+      moment-timezone: 0.6.0
+      prop-types: 15.8.1
+      react: 19.1.0
+    transitivePeerDependencies:
+      - react-dom
+
+  '@instructure/ui-i18n@10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/shared-types': 10.20.1(react@19.1.0)
+      '@instructure/ui-decorator': 10.20.1
+      '@instructure/ui-dom-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-prop-types': 10.20.1(react@19.1.0)
+      '@instructure/ui-react-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       hoist-non-react-statics: 3.3.2
       moment-timezone: 0.6.0
       prop-types: 15.8.1
@@ -2167,6 +2352,18 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
+  '@instructure/ui-portal@10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/shared-types': 10.20.1(react@19.1.0)
+      '@instructure/ui-dom-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-i18n': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-prop-types': 10.20.1(react@19.1.0)
+      '@instructure/ui-react-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      prop-types: 15.8.1
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
   '@instructure/ui-position@10.20.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@babel/runtime': 7.27.6
@@ -2187,7 +2384,51 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-position@10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/debounce': 10.20.1
+      '@instructure/emotion': 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/shared-types': 10.20.1(react@19.1.0)
+      '@instructure/ui-dom-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-portal': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-prop-types': 10.20.1(react@19.1.0)
+      '@instructure/ui-react-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-testable': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/uid': 10.20.1
+      prop-types: 15.8.1
+      react: 19.1.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-progress@10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/console': 10.20.1(react@19.1.0)
+      '@instructure/emotion': 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/shared-types': 10.20.1(react@19.1.0)
+      '@instructure/ui-a11y-content': 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-color-utils': 10.20.1
+      '@instructure/ui-react-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-testable': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-view': 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      prop-types: 15.8.1
+      react: 19.1.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-prop-types@10.20.0(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      prop-types: 15.8.1
+      react: 19.1.0
+
+  '@instructure/ui-prop-types@10.20.1(react@19.1.0)':
     dependencies:
       '@babel/runtime': 7.27.6
       prop-types: 15.8.1
@@ -2202,6 +2443,20 @@ snapshots:
       '@instructure/ui-decorator': 10.20.0
       '@instructure/ui-dom-utils': 10.20.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-utils': 10.20.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      hoist-non-react-statics: 3.3.2
+      prop-types: 15.8.1
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
+  '@instructure/ui-react-utils@10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@emotion/is-prop-valid': 1.3.1
+      '@instructure/console': 10.20.1(react@19.1.0)
+      '@instructure/shared-types': 10.20.1(react@19.1.0)
+      '@instructure/ui-decorator': 10.20.1
+      '@instructure/ui-dom-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       hoist-non-react-statics: 3.3.2
       prop-types: 15.8.1
       react: 19.1.0
@@ -2291,6 +2546,14 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
+  '@instructure/ui-testable@10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/ui-decorator': 10.20.1
+      '@instructure/ui-dom-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
   '@instructure/ui-text-input@10.20.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@babel/runtime': 7.27.6
@@ -2329,6 +2592,14 @@ snapshots:
     dependencies:
       '@instructure/shared-types': 10.20.0(react@19.1.0)
       '@instructure/theme-registry': 10.20.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+    transitivePeerDependencies:
+      - react
+      - react-dom
+
+  '@instructure/ui-themes@10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@instructure/shared-types': 10.20.1(react@19.1.0)
+      '@instructure/theme-registry': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
     transitivePeerDependencies:
       - react
       - react-dom
@@ -2383,6 +2654,19 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
       ua-parser-js: 1.0.40
 
+  '@instructure/ui-utils@10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/console': 10.20.1(react@19.1.0)
+      '@instructure/shared-types': 10.20.1(react@19.1.0)
+      '@instructure/ui-dom-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@types/ua-parser-js': 0.7.39
+      fast-deep-equal: 3.1.3
+      json-stable-stringify: 1.3.0
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+      ua-parser-js: 1.0.40
+
   '@instructure/ui-view@10.20.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@babel/runtime': 7.27.6
@@ -2402,7 +2686,30 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-view@10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/console': 10.20.1(react@19.1.0)
+      '@instructure/emotion': 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/shared-types': 10.20.1(react@19.1.0)
+      '@instructure/ui-color-utils': 10.20.1
+      '@instructure/ui-dom-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-i18n': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-position': 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-prop-types': 10.20.1(react@19.1.0)
+      '@instructure/ui-react-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      prop-types: 15.8.1
+      react: 19.1.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/uid@10.20.0':
+    dependencies:
+      '@babel/runtime': 7.27.6
+
+  '@instructure/uid@10.20.1':
     dependencies:
       '@babel/runtime': 7.27.6
 

@@ -1,16 +1,16 @@
-import type { FormMessage } from "@instructure/ui-form-field";
 import { IconEmailLine } from "@instructure/ui-icons";
 import { TextInput } from "@instructure/ui-text-input";
-import React, { type SyntheticEvent, useState } from "react";
+import type React from "react";
+import type { SyntheticEvent } from "react";
+import type { SignupFormFieldProps } from "./SignupForm";
 
-type EmailInputProps = {
-	isDisabled?: boolean;
-};
-
-const EmailInput: React.FC<EmailInputProps> = ({ isDisabled }) => {
-	const [messages, setMessages] = useState<FormMessage[]>([]);
-	const [value, setValue] = useState<string>("");
-
+const EmailInput: React.FC<SignupFormFieldProps> = ({
+	isDisabled,
+	value,
+	setValue,
+	messages,
+	setMessages,
+}) => {
 	const isInvalidEmail = (email: string): boolean => {
 		const emailPattern =
 			/^[\w.!#$%&'*+/=?^`{|}~-]+@[a-z\d](?:[a-z\d-]{0,61}[a-z\d])?(?:\.[a-z\d](?:[a-z\d-]{0,61}[a-z\d])?)*$/i;

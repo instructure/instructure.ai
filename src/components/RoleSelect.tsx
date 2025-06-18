@@ -1,15 +1,17 @@
 import { Alert } from "@instructure/ui-alerts";
-import type { FormMessage } from "@instructure/ui-form-field";
 import { IconEducatorsLine } from "@instructure/ui-icons";
 import { Select } from "@instructure/ui-select";
 import { type FocusEvent, type SyntheticEvent, useRef, useState } from "react";
 import Roles, { type Role, type RolesType } from "../assets/Roles";
+import type { SignupFormFieldProps } from "./SignupForm";
 
-type RoleSelectProps = {
-	isDisabled: boolean;
-};
-
-const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
+const RoleSelect: React.FC<SignupFormFieldProps> = ({
+	isDisabled,
+	value,
+	setValue,
+	messages,
+	setMessages,
+}) => {
 	const sortRoles = (roles: RolesType) =>
 		Object.fromEntries(
 			Object.entries(roles)
@@ -23,8 +25,6 @@ const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
 
 	const options = sortRoles(Roles);
 
-	const [messages, setMessages] = useState<FormMessage[]>([]);
-	const [inputValue, setInputValue] = useState<string>("");
 	const [isShowingOptions, setIsShowingOptions] = useState<boolean>(false);
 	const [highlightedOptionId, setHighlightedOptionId] = useState<string | null>(
 		null,
@@ -59,7 +59,7 @@ const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
 	): void => {
 		const value = event.target.value;
 		const newOptions = filterOptions(value, Roles as RolesType);
-		setInputValue(value);
+		setValue(value);
 		setFilteredOptions(newOptions);
 		const firstKey = Object.keys(newOptions)[0];
 		const firstOption = firstKey ? newOptions[firstKey][0] : null;
@@ -99,8 +99,7 @@ const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
 
 	const handleBlur = (_e: FocusEvent): void => {
 		setHighlightedOptionId(null);
-		console.log(inputValue);
-		if (inputValue === "") {
+		if (value === "") {
 			setMessages([
 				{
 					text: "Please select a valid role from the list.",
@@ -122,7 +121,7 @@ const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
 			: "";
 		const option = id ? (getOptionById(id)?.label ?? "") : "";
 		setHighlightedOptionId(id ?? null);
-		setInputValue(event.type === "keydown" && option ? option : inputValue);
+		setValue(event.type === "keydown" && option ? option : value);
 		setAnnouncement(`${option} ${nowOpen}`);
 	};
 
@@ -134,7 +133,7 @@ const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
 		const option = id ? (getOptionById(id)?.label ?? "") : "";
 		focusInput();
 		setSelectedOptionId(id ?? null);
-		setInputValue(option);
+		setValue(option);
 		setIsShowingOptions(false);
 		setAnnouncement(`"${option}" selected. List collapsed.`);
 	};
@@ -167,7 +166,7 @@ const RoleSelect: React.FC<RoleSelectProps> = ({ isDisabled }) => {
 				inputRef={(el: HTMLInputElement | null) => {
 					inputRef.current = el;
 				}}
-				inputValue={inputValue}
+				inputValue={value}
 				isRequired={true}
 				isShowingOptions={isShowingOptions}
 				messages={messages}

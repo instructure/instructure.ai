@@ -13,6 +13,7 @@
 		"@instructure/ui-icons": "^10.20.0",
 		"@instructure/ui-link": "^10.20.0",
 		"@instructure/ui-modal": "^10.20.0",
+		"@instructure/ui-progress": "^10.20.1",
 		"@instructure/ui-select": "^10.20.0",
 		"@instructure/ui-svg-images": "^10.20.0",
 		"@instructure/ui-tag": "^10.20.0",
