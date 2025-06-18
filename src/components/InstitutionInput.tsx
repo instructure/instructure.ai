@@ -2,7 +2,7 @@ import type { FormMessage } from "@instructure/ui-form-field";
 import { IconHomeLine } from "@instructure/ui-icons";
 import { TextInput } from "@instructure/ui-text-input";
 import React, { type SyntheticEvent, useState } from "react";
-import { NamePattern, SpacePattern } from "../utils/regex";
+import { NamePattern, SpacePattern } from "../utils/RegEx";
 import type { SignupFormFieldProps } from "./SignupForm";
 
 const InstitutionInput: React.FC<SignupFormFieldProps> = ({

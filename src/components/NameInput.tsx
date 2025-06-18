@@ -2,7 +2,7 @@ import { IconUserLine } from "@instructure/ui-icons";
 import { TextInput } from "@instructure/ui-text-input";
 import type React from "react";
 import type { SyntheticEvent } from "react";
-import { NamePattern, SpacePattern } from "../utils/regex";
+import { NamePattern, SpacePattern } from "../utils/RegEx";
 import type { SignupFormFieldProps } from "./SignupForm";
 
 const NameInput: React.FC<SignupFormFieldProps> = ({
