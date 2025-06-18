@@ -2,6 +2,7 @@ import { IconEmailLine } from "@instructure/ui-icons";
 import { TextInput } from "@instructure/ui-text-input";
 import type React from "react";
 import type { SyntheticEvent } from "react";
+import { EmailAddressPattern, PersonalEmailPattern } from "../utils/regex";
 import type { SignupFormFieldProps } from "./SignupForm";
 
 const EmailInput: React.FC<SignupFormFieldProps> = ({
@@ -12,15 +13,11 @@ const EmailInput: React.FC<SignupFormFieldProps> = ({
 	setMessages,
 }) => {
 	const isInvalidEmail = (email: string): boolean => {
-		const emailPattern =
-			/^[\w.!#$%&'*+/=?^`{|}~-]+@[a-z\d](?:[a-z\d-]{0,61}[a-z\d])?(?:\.[a-z\d](?:[a-z\d-]{0,61}[a-z\d])?)*$/i;
-		return !emailPattern.test(email);
+		return !EmailAddressPattern.test(email);
 	};
 
 	const isPersonalEmail = (email: string): boolean => {
-		const emailPattern =
-			/@(gmail|yahoo|outlook|hotmail|aol|icloud|mail|protonmail|zoho|yandex)\.com$/i;
-		return emailPattern.test(email);
+		return PersonalEmailPattern.test(email);
 	};
 
 	const handleChange = (

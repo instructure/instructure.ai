@@ -2,6 +2,7 @@ import type { FormMessage } from "@instructure/ui-form-field";
 import { IconHomeLine } from "@instructure/ui-icons";
 import { TextInput } from "@instructure/ui-text-input";
 import React, { type SyntheticEvent, useState } from "react";
+import { NamePattern, SpacePattern } from "../utils/regex";
 import type { SignupFormFieldProps } from "./SignupForm";
 
 const InstitutionInput: React.FC<SignupFormFieldProps> = ({
@@ -12,9 +13,7 @@ const InstitutionInput: React.FC<SignupFormFieldProps> = ({
 	const [messages, setMessages] = useState<FormMessage[]>([]);
 
 	const isInvalidInstitution = (name: string): boolean => {
-		const namePattern = /^[\p{L}\p{M}'’\-.\s&]+$/u;
-		const spacePattern = /^[ \t]+$/;
-		return !namePattern.test(name) || spacePattern.test(name);
+		return !NamePattern.test(name) || SpacePattern.test(name);
 	};
 
 	const handleChange = (
