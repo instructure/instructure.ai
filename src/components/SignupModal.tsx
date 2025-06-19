@@ -1,12 +1,16 @@
 import { Button, IconButton } from "@instructure/ui-buttons";
+import { alpha } from "@instructure/ui-color-utils";
 import { Flex } from "@instructure/ui-flex";
 import { Heading } from "@instructure/ui-heading";
 import {
 	IconAddSolid,
+	IconPublishLine,
 	IconPublishSolid,
 	IconXSolid,
 } from "@instructure/ui-icons";
 import { Modal } from "@instructure/ui-modal";
+import { Spinner } from "@instructure/ui-spinner";
+import { canvas } from "@instructure/ui-themes";
 import { View } from "@instructure/ui-view";
 import type { FormEvent } from "react";
 import { useState, useTransition } from "react";
@@ -16,7 +20,9 @@ import SignupForm from "./SignupForm";
 
 const SignupModal = (): React.ReactElement => {
 	const [isPending, startTransition] = useTransition();
-	const [isOpen, setOpen] = useState(false);
+	const [isOpen, setOpen] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
 	const submitCallback = useSubmitCallback();
 	const [progress, setProgress] = useState<number>(0);
 
@@ -28,8 +34,15 @@ const SignupModal = (): React.ReactElement => {
 
 	const handleFormSubmit = (e: FormEvent) => {
 		e.preventDefault();
-		submitCallback(new FormData(e.target as HTMLFormElement));
-		setOpen(false);
+		setIsLoading(true);
+		try {
+			submitCallback(new FormData(e.target as HTMLFormElement));
+			setOpen(false);
+		} finally {
+			(e.target as HTMLFormElement).reset();
+			setIsLoading(false);
+			setProgress(0);
+		}
 	};
 
 	return (
@@ -111,9 +124,24 @@ const SignupModal = (): React.ReactElement => {
 				>
 					<Button
 						color="primary-inverse"
-						disabled={isPending || progress < 100}
+						disabled={isLoading || isPending || progress < 100}
 						margin="small"
-						renderIcon={<IconPublishSolid />}
+						renderIcon={
+							isLoading ? (
+								<Spinner
+									renderTitle="Submitting"
+									size="x-small"
+									themeOverride={{
+										color: canvas.colors.primitives.white,
+										trackColor: alpha(canvas.colors.primitives.white, 50),
+									}}
+								/>
+							) : progress < 100 ? (
+								<IconPublishLine />
+							) : (
+								<IconPublishSolid />
+							)
+						}
 						type="submit"
 						withBackground={false}
 					>

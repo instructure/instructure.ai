@@ -20,6 +20,9 @@ importers:
       '@instructure/ui-buttons':
         specifier: ^10.20.1
         version: 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-color-utils':
+        specifier: ^10.20.1
+        version: 10.20.1
       '@instructure/ui-flex':
         specifier: ^10.20.1
         version: 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -42,6 +45,9 @@ importers:
         specifier: ^10.20.1
         version: 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-select':
+        specifier: ^10.20.1
+        version: 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-spinner':
         specifier: ^10.20.1
         version: 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-svg-images':
@@ -615,6 +621,11 @@ packages:
 
   '@instructure/ui-selectable@10.20.1':
     resolution: {integrity: sha512-Jqr5t+2D3Imc0Wb2XYEPxE45vnh9bOKs6mA5HwkEeVpkhM+/Q8Nq+d20v/QvDBVCUp0IsRe3p6FFEFQHMlLNOQ==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+
+  '@instructure/ui-spinner@10.20.1':
+    resolution: {integrity: sha512-Krt13BqDmvcRhSndt1vmBFt0LZNGKwYkdr3Pf1n5Vi+X5ZsTjVq1uHwD3sTilrk8Zg8N32hSBGS6otWHIyVlBg==}
     peerDependencies:
       react: '>=16.14 <=18'
 
@@ -2276,6 +2287,25 @@ snapshots:
       react: 19.1.0
     transitivePeerDependencies:
       - react-dom
+
+  '@instructure/ui-spinner@10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/console': 10.20.1(react@19.1.0)
+      '@instructure/emotion': 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/shared-types': 10.20.1(react@19.1.0)
+      '@instructure/ui-color-utils': 10.20.1
+      '@instructure/ui-react-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-testable': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-utils': 10.20.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-view': 10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/uid': 10.20.1
+      prop-types: 15.8.1
+      react: 19.1.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
 
   '@instructure/ui-svg-images@10.20.1(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
