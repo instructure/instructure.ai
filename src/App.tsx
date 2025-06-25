@@ -10,13 +10,10 @@ function App() {
 		canvas: {
 			componentOverrides: {
 				ProgressCircle: {
-					meterColorBrand: canvas.colors?.primitives?.violet45,
 					meterColorSuccess: canvas.colors?.primitives?.sea45,
 				},
-				TextInput: {
-					focusOutlineColor: canvas.colors?.primitives?.violet45,
-				},
 			},
+			"ic-brand-primary": canvas.colors?.primitives?.violet45,
 			typography: {
 				fontFamily: "'Poppins', sans-serif",
 			},
