@@ -11,6 +11,7 @@ import React, {
 	useState,
 } from "react";
 import Features, { type FeatureInterface } from "../assets/Features";
+import FeatureSelectPopover from "./FeatureSelectPopover";
 import type { SignupFormMultiSelectProps } from "./SignupForm";
 
 const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
@@ -207,7 +208,7 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 					inputRef.current = el;
 				}}
 				inputValue={value}
-				isRequired={false}
+				isRequired={true}
 				isShowingOptions={isShowingOptions}
 				messages={messages}
 				name="features"
@@ -222,7 +223,11 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 				renderBeforeInput={
 					selectedOptionId.length > 0 ? renderTags() : IconLaunchLine
 				}
-				renderLabel="Features"
+				renderLabel={
+					<>
+						Features <FeatureSelectPopover />
+					</>
+				}
 			>
 				{filteredOptions.length > 0 ? (
 					filteredOptions.map((option) => {

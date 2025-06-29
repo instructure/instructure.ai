@@ -41,6 +41,9 @@ importers:
       '@instructure/ui-modal':
         specifier: ^10.21.0
         version: 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-popover':
+        specifier: ^10.21.0
+        version: 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-progress':
         specifier: ^10.21.0
         version: 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
