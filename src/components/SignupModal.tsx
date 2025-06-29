@@ -36,11 +36,13 @@ const SignupModal = (): React.ReactElement => {
 	const handleFormSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		setIsLoading(true);
+		setIsDisabled(true);
 		try {
 			submitCallback(new FormData(e.target as HTMLFormElement));
 			setOpen(false);
 		} finally {
 			(e.target as HTMLFormElement).reset();
+			setIsDisabled(false);
 			setIsLoading(false);
 			setProgress(0);
 		}
@@ -50,7 +52,7 @@ const SignupModal = (): React.ReactElement => {
 		<>
 			<Button
 				color="primary-inverse"
-				disabled={isPending}
+				disabled={isDisabled}
 				margin="small"
 				onClick={handleButtonClick}
 				renderIcon={<IconAddSolid />}
@@ -130,7 +132,7 @@ const SignupModal = (): React.ReactElement => {
 				>
 					<Button
 						color="primary-inverse"
-						disabled={isLoading || isPending || progress < 100}
+						disabled={isLoading || isDisabled || isPending || progress < 100}
 						margin="small"
 						renderIcon={
 							isLoading ? (
