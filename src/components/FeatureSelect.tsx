@@ -11,9 +11,9 @@ import React, {
 	useState,
 } from "react";
 import Features, { type FeatureInterface } from "../assets/Features";
-import type { SignupFormFieldProps } from "./SignupForm";
+import type { SignupFormMultiSelectProps } from "./SignupForm";
 
-const FeatureSelect: React.FC<SignupFormFieldProps> = ({
+const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 	isDisabled,
 	value,
 	setValue,

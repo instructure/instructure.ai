@@ -11,12 +11,22 @@ import NameInput from "./NameInput";
 import RoleSelect from "./RoleSelect";
 import SignupProgress from "./SignupProgress";
 
-export type SignupFormFieldProps = {
+export type SignupFormInputProps = {
 	isDisabled: boolean;
 	value: string;
 	setValue: (value: string) => void;
 	messages: FormMessage[];
 	setMessages: (messages: FormMessage[]) => void;
+};
+
+export type SignupFormSelectProps = SignupFormInputProps & {
+	selectedOptionId: string | null;
+	setSelectedOptionId: (selectedOptionId: string | null) => void;
+};
+
+export type SignupFormMultiSelectProps = SignupFormInputProps & {
+	selectedOptionIds: string[];
+	setSelectedOptionIds: (selectedOptionIds: string[]) => void;
 };
 
 type SignupFormProps = {
@@ -34,6 +44,12 @@ const SignupForm: React.FC<SignupFormProps> = ({ progress, setProgress }) => {
 	const [nameMessages, setNameMessages] = useState<FormMessage[]>([]);
 	const [emailMessages, setEmailMessages] = useState<FormMessage[]>([]);
 	const [roleMessages, setRoleMessages] = useState<FormMessage[]>([]);
+	const [roleValueOptionID, setRoleValueOptionID] = useState<string | null>(
+		null,
+	);
+	const [featureValueOptionIDs, setFeatureValueOptionIDs] = useState<string[]>(
+		[],
+	);
 	const [institutionMessages, setInstitutionMessages] = useState<FormMessage[]>(
 		[],
 	);
@@ -62,7 +78,9 @@ const SignupForm: React.FC<SignupFormProps> = ({ progress, setProgress }) => {
 			isDisabled={isDisabled}
 			key="roleSelect"
 			messages={roleMessages}
+			selectedOptionId={roleValueOptionID}
 			setMessages={setRoleMessages}
+			setSelectedOptionId={setRoleValueOptionID}
 			setValue={setRoleValue}
 			value={roleValue}
 		/>,
@@ -78,7 +96,9 @@ const SignupForm: React.FC<SignupFormProps> = ({ progress, setProgress }) => {
 			isDisabled={isDisabled}
 			key="featureSelect"
 			messages={featureMessages}
+			selectedOptionIds={featureValueOptionIDs}
 			setMessages={setFeatureMessages}
+			setSelectedOptionIds={setFeatureValueOptionIDs}
 			setValue={setFeatureValue}
 			value={featureValue}
 		/>,

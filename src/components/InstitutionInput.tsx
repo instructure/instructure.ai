@@ -3,9 +3,9 @@ import { IconHomeLine } from "@instructure/ui-icons";
 import { TextInput } from "@instructure/ui-text-input";
 import React, { type SyntheticEvent, useState } from "react";
 import { NamePattern, SpacePattern } from "../utils/RegEx";
-import type { SignupFormFieldProps } from "./SignupForm";
+import type { SignupFormInputProps } from "./SignupForm";
 
-const InstitutionInput: React.FC<SignupFormFieldProps> = ({
+const InstitutionInput: React.FC<SignupFormInputProps> = ({
 	isDisabled,
 	value,
 	setValue,

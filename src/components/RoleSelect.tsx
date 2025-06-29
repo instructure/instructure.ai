@@ -3,14 +3,16 @@ import { IconEducatorsLine } from "@instructure/ui-icons";
 import { Select } from "@instructure/ui-select";
 import { type FocusEvent, type SyntheticEvent, useRef, useState } from "react";
 import Roles, { type Role, type RolesType } from "../assets/Roles";
-import type { SignupFormFieldProps } from "./SignupForm";
+import type { SignupFormSelectProps } from "./SignupForm";
 
-const RoleSelect: React.FC<SignupFormFieldProps> = ({
+const RoleSelect: React.FC<SignupFormSelectProps> = ({
 	isDisabled,
 	value,
 	setValue,
 	messages,
 	setMessages,
+	selectedOptionId,
+	setSelectedOptionId,
 }) => {
 	const sortRoles = (roles: RolesType) =>
 		Object.fromEntries(
@@ -29,7 +31,6 @@ const RoleSelect: React.FC<SignupFormFieldProps> = ({
 	const [highlightedOptionId, setHighlightedOptionId] = useState<string | null>(
 		null,
 	);
-	const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
 	const [announcement, setAnnouncement] = useState<string | null>(null);
 	const [filteredOptions, setFilteredOptions] = useState<RolesType>(options);
 	const inputRef = useRef<HTMLInputElement | null>(null);

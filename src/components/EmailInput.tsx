@@ -3,9 +3,9 @@ import { TextInput } from "@instructure/ui-text-input";
 import type React from "react";
 import type { SyntheticEvent } from "react";
 import { EmailAddressPattern, PersonalEmailPattern } from "../utils/RegEx";
-import type { SignupFormFieldProps } from "./SignupForm";
+import type { SignupFormInputProps } from "./SignupForm";
 
-const EmailInput: React.FC<SignupFormFieldProps> = ({
+const EmailInput: React.FC<SignupFormInputProps> = ({
 	isDisabled,
 	value,
 	setValue,
