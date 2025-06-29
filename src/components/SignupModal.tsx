@@ -22,6 +22,7 @@ const SignupModal = (): React.ReactElement => {
 	const [isPending, startTransition] = useTransition();
 	const [isOpen, setOpen] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
 	const submitCallback = useSubmitCallback();
 	const [progress, setProgress] = useState<number>(0);
@@ -113,7 +114,12 @@ const SignupModal = (): React.ReactElement => {
 						padding="medium"
 						shadow="topmost"
 					>
-						<SignupForm progress={progress} setProgress={setProgress} />
+						<SignupForm
+							isDisabled={isDisabled}
+							progress={progress}
+							setIsDisabled={setIsDisabled}
+							setProgress={setProgress}
+						/>
 					</View>
 				</Modal.Body>
 				<Modal.Footer
