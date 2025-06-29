@@ -38,7 +38,12 @@ const SignupModal = (): React.ReactElement => {
 		setIsLoading(true);
 		setIsDisabled(true);
 		try {
-			submitCallback(new FormData(e.target as HTMLFormElement));
+			const start = Date.now();
+			await submitCallback(new FormData(e.target as HTMLFormElement));
+			const elapsed = Date.now() - start;
+			if (elapsed < 2000) {
+				await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
+			}
 			setOpen(false);
 		} finally {
 			(e.target as HTMLFormElement).reset();
