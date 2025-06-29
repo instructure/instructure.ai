@@ -33,14 +33,13 @@ type SignupFormProps = {
 	progress: number;
 	setProgress: (progress: number) => void;
 	isDisabled: boolean;
-	setIsDisabled: (isDisabled: boolean) => void;
+	setIsDisabled?: (isDisabled: boolean) => void;
 };
 
 const SignupForm: React.FC<SignupFormProps> = ({
 	progress,
 	setProgress,
 	isDisabled,
-	setIsDisabled,
 }) => {
 	const [nameValue, setNameValue] = useState<string>("");
 	const [emailValue, setEmailValue] = useState("");

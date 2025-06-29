@@ -124,7 +124,6 @@ const SignupModal = (): React.ReactElement => {
 						<SignupForm
 							isDisabled={isDisabled}
 							progress={progress}
-							setIsDisabled={setIsDisabled}
 							setProgress={setProgress}
 						/>
 					</View>
