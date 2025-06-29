@@ -33,7 +33,7 @@ const SignupModal = (): React.ReactElement => {
 		});
 	};
 
-	const handleFormSubmit = (e: FormEvent) => {
+	const handleFormSubmit = async (e: FormEvent) => {
 		e.preventDefault();
 		setIsLoading(true);
 		setIsDisabled(true);
