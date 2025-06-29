@@ -82,12 +82,6 @@ const RawFeatures: RawFeatureInterface[] = [
 		label: "Canvas Studio Enhanced Captioning",
 	},
 	{
-		color: brands.canvas.color,
-		icon: brands.canvas.icon,
-		id: "canvas_translations",
-		label: "Canvas Translations",
-	},
-	{
 		color: brands.ignite.color,
 		icon: brands.ignite.icon,
 		id: "accessibility_remediation",
