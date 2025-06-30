@@ -1,7 +1,11 @@
+import { ScreenReaderContent } from "@instructure/ui-a11y-content";
 import { Flex } from "@instructure/ui-flex";
 import type { FormMessage } from "@instructure/ui-form-field";
 import { FormFieldGroup } from "@instructure/ui-form-field";
 import { Heading } from "@instructure/ui-heading";
+import { IconInfoLine } from "@instructure/ui-icons";
+import { Link } from "@instructure/ui-link";
+import { Text } from "@instructure/ui-text";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import EmailInput from "./EmailInput";
@@ -34,12 +38,14 @@ type SignupFormProps = {
 	setProgress: (progress: number) => void;
 	isDisabled: boolean;
 	setIsDisabled?: (isDisabled: boolean) => void;
+	setIsTrayOpen?: (open: boolean) => void;
 };
 
 const SignupForm: React.FC<SignupFormProps> = ({
 	progress,
 	setProgress,
 	isDisabled,
+	setIsTrayOpen,
 }) => {
 	const [nameValue, setNameValue] = useState<string>("");
 	const [emailValue, setEmailValue] = useState("");
@@ -142,11 +148,18 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		updateProgress();
 	}, [updateProgress]);
 
+	const handleInfoClick = () => setIsTrayOpen?.(true);
+
 	const Header = (
 		<Flex>
 			<Flex.Item shouldGrow shouldShrink>
 				<Heading as="h2" level="h3">
-					Early Adopter Program Signup
+					AI Feature Signup{" "}
+					<Text size="medium" weight="weightRegular">
+						<Link onClick={handleInfoClick} renderIcon={IconInfoLine}>
+							<ScreenReaderContent>Form help</ScreenReaderContent>
+						</Link>
+					</Text>
 				</Heading>
 			</Flex.Item>
 			<Flex.Item>

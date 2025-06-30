@@ -18,7 +18,11 @@ import { InstructureLogo } from "../assets/Logos";
 import useSubmitCallback from "../hooks/useSubmitCallback";
 import SignupForm from "./SignupForm";
 
-const SignupModal = (): React.ReactElement => {
+export type SignupModalProps = {
+	setIsTrayOpen?: (open: boolean) => void;
+};
+
+const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 	const [isPending, startTransition] = useTransition();
 	const [isOpen, setOpen] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -124,6 +128,7 @@ const SignupModal = (): React.ReactElement => {
 						<SignupForm
 							isDisabled={isDisabled}
 							progress={progress}
+							setIsTrayOpen={setIsTrayOpen}
 							setProgress={setProgress}
 						/>
 					</View>
