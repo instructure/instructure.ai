@@ -17,6 +17,9 @@ importers:
       '@instructure/ui-alerts':
         specifier: ^10.21.0
         version: 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-badge':
+        specifier: ^10.21.0
+        version: 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-buttons':
         specifier: ^10.21.0
         version: 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -44,6 +47,9 @@ importers:
       '@instructure/ui-modal':
         specifier: ^10.21.0
         version: 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-popover':
+        specifier: ^10.21.0
+        version: 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-progress':
         specifier: ^10.21.0
         version: 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -68,6 +74,9 @@ importers:
       '@instructure/ui-themes':
         specifier: ^10.21.0
         version: 10.21.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-toggle-details':
+        specifier: ^10.21.0
+        version: 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-tray':
         specifier: ^10.21.0
         version: 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -88,8 +97,8 @@ importers:
         specifier: ^7.27.1
         version: 7.27.1(@babel/core@7.27.7)
       '@biomejs/biome':
-        specifier: 2.0.0-beta.6
-        version: 2.0.0-beta.6
+        specifier: 2.0.6
+        version: 2.0.6
       '@instructure/browserslist-config-instui':
         specifier: ^10.21.0
         version: 10.21.0
@@ -219,55 +228,55 @@ packages:
     resolution: {integrity: sha512-8OLQgDScAOHXnAz2cV+RfzzNMipuLVBz2biuAJFMV9bfkNf393je3VM8CLkjQodW5+iWsSJdSgSWT6rsZoXHPw==}
     engines: {node: '>=6.9.0'}
 
-  '@biomejs/biome@2.0.0-beta.6':
-    resolution: {integrity: sha512-14vw9b5QJxrcP7WLkCeRiB/fft9wNZwx6yEiikBDxFbN7IAp39Xtvt/gJPq4ifhZ5IS25CnQEAkLLwfBIDMjsA==}
+  '@biomejs/biome@2.0.6':
+    resolution: {integrity: sha512-RRP+9cdh5qwe2t0gORwXaa27oTOiQRQvrFf49x2PA1tnpsyU7FIHX4ZOFMtBC4QNtyWsN7Dqkf5EDbg4X+9iqA==}
     engines: {node: '>=14.21.3'}
     hasBin: true
 
-  '@biomejs/cli-darwin-arm64@2.0.0-beta.6':
-    resolution: {integrity: sha512-L7PBLJlGTz5anougOMJQvEbzgG9sT1wKIXvgjFhu0dIsDZ/px2caWFCnv7Q9L2K0+yF08EYRTTZVvoVO5D//sQ==}
+  '@biomejs/cli-darwin-arm64@2.0.6':
+    resolution: {integrity: sha512-AzdiNNjNzsE6LfqWyBvcL29uWoIuZUkndu+wwlXW13EKcBHbbKjNQEZIJKYDc6IL+p7bmWGx3v9ZtcRyIoIz5A==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [darwin]
 
-  '@biomejs/cli-darwin-x64@2.0.0-beta.6':
-    resolution: {integrity: sha512-ekhOOyhcVJ1ZRqHjq+eUOv8/3XMRKQ9Qf0URuO/PvHgopejv+PEoix0RIyxholYELKc049M4J3IJgsX4q2pZzw==}
+  '@biomejs/cli-darwin-x64@2.0.6':
+    resolution: {integrity: sha512-wJjjP4E7bO4WJmiQaLnsdXMa516dbtC6542qeRkyJg0MqMXP0fvs4gdsHhZ7p9XWTAmGIjZHFKXdsjBvKGIJJQ==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [darwin]
 
-  '@biomejs/cli-linux-arm64-musl@2.0.0-beta.6':
-    resolution: {integrity: sha512-70WOWJI1/vZ97OUAt6r9HpiP5+vlL7yAdIoVQzVLjQy1TArfltN38KKqp9fnhgX173liUh0gry//MrWkKHYrIQ==}
+  '@biomejs/cli-linux-arm64-musl@2.0.6':
+    resolution: {integrity: sha512-CVPEMlin3bW49sBqLBg2x016Pws7eUXA27XYDFlEtponD0luYjg2zQaMJ2nOqlkKG9fqzzkamdYxHdMDc2gZFw==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [linux]
 
-  '@biomejs/cli-linux-arm64@2.0.0-beta.6':
-    resolution: {integrity: sha512-pu+rCLI36ziPtwnJY53HRr154711uVeCt1i2KNXehvwNZZMK141wwg4yPkXkBdBvw7H7sez0HE/rCQR2fByJnQ==}
+  '@biomejs/cli-linux-arm64@2.0.6':
+    resolution: {integrity: sha512-ZSVf6TYo5rNMUHIW1tww+rs/krol7U5A1Is/yzWyHVZguuB0lBnIodqyFuwCNqG9aJGyk7xIMS8HG0qGUPz0SA==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [linux]
 
-  '@biomejs/cli-linux-x64-musl@2.0.0-beta.6':
-    resolution: {integrity: sha512-G9ZIoaNs6q9+mOoMURoXvNRfCOs28jrS4R8+3/y0h9ttOXpd4VALPOAfjzBGPpMd/4RoEMHXw/1Ts4dKvrv9zw==}
+  '@biomejs/cli-linux-x64-musl@2.0.6':
+    resolution: {integrity: sha512-mKHE/e954hR/hSnAcJSjkf4xGqZc/53Kh39HVW1EgO5iFi0JutTN07TSjEMg616julRtfSNJi0KNyxvc30Y4rQ==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [linux]
 
-  '@biomejs/cli-linux-x64@2.0.0-beta.6':
-    resolution: {integrity: sha512-emqZAuAyRw4Ug4B+CTgozIxVg1QLol28oZyIWuIjWEDr7eOo6Ek9zSZGeusmbwIEPu6r6qon8JAV6OdukxEwIg==}
+  '@biomejs/cli-linux-x64@2.0.6':
+    resolution: {integrity: sha512-geM1MkHTV1Kh2Cs/Xzot9BOF3WBacihw6bkEmxkz4nSga8B9/hWy5BDiOG3gHDGIBa8WxT0nzsJs2f/hPqQIQw==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [linux]
 
-  '@biomejs/cli-win32-arm64@2.0.0-beta.6':
-    resolution: {integrity: sha512-JijYVZC6R5qq94yLaElowLLzbZ4xR2qDiOVPQV8H1+ru3IqVOjQu5f/lIt4uuea1iRFbxS+mOaxOZM9tUl1pTQ==}
+  '@biomejs/cli-win32-arm64@2.0.6':
+    resolution: {integrity: sha512-290V4oSFoKaprKE1zkYVsDfAdn0An5DowZ+GIABgjoq1ndhvNxkJcpxPsiYtT7slbVe3xmlT0ncdfOsN7KruzA==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [win32]
 
-  '@biomejs/cli-win32-x64@2.0.0-beta.6':
-    resolution: {integrity: sha512-zs29t/nxon11dKV+ckQB1yUOmhYx17e2+cHGK8PCVamqVGSMbjrd5evjtlfbnVJXP0ar7nNKhcg4ZWYGJ6aR1w==}
+  '@biomejs/cli-win32-x64@2.0.6':
+    resolution: {integrity: sha512-bfM1Bce0d69Ao7pjTjUS+AWSZ02+5UHdiAP85Th8e9yV5xzw6JrHXbL5YWlcEKQ84FIZMdDc7ncuti1wd2sdbw==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [win32]
@@ -506,6 +515,11 @@ packages:
       react: '>=16.14 <=18'
       react-dom: '>=16.14 <=18'
 
+  '@instructure/ui-badge@10.21.0':
+    resolution: {integrity: sha512-iT8sajkAuvkV85+ruakIVJiCj2y3+BqTdyOGi5+9SYnKgc6enAEG5RFcZscekr1xfvkxODB29nGFNH1FkzPPJA==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+
   '@instructure/ui-buttons@10.21.0':
     resolution: {integrity: sha512-BzPyAxLXN1UwB/7oHQEjZZugRQGMm1/5Ho22Mhl6CuM663FmuqQq04fBl6SlqXuANLpfa+RI8KJR7DIWQ3SQAw==}
     peerDependencies:
@@ -527,6 +541,11 @@ packages:
     peerDependencies:
       react: '>=16.14 <=18'
       react-dom: '>=16.14 <=18'
+
+  '@instructure/ui-expandable@10.21.0':
+    resolution: {integrity: sha512-ZDpuRSAIt5D7VnoiTt8mbqsi9y2zfC5lf+Qa8ihaQcvs/IS/BrgQelgbEzk2Yn0ouQcqKXt4c52x7uVNt8s95Q==}
+    peerDependencies:
+      react: '>=16.14 <=18'
 
   '@instructure/ui-flex@10.21.0':
     resolution: {integrity: sha512-MBd7VL0gWMS4F+JfNGUlMam7TMMQVzj2HdvNnSXJjKknEmG5Z1Gtg4ILoG99JS04MFDEuMJOJH3HUVM6QGZibA==}
@@ -668,6 +687,11 @@ packages:
 
   '@instructure/ui-themes@10.21.0':
     resolution: {integrity: sha512-IDAc7t7esCikMgUOA5T3XiwxLGNKxQbWZSdbz+w/JoyzST7VCgynP3LkHr8aAUs7S7lYjnE/zm1NnQAhfGlIyw==}
+
+  '@instructure/ui-toggle-details@10.21.0':
+    resolution: {integrity: sha512-kZQBOP2l6TN8UMdius0NlB86eqz8y5Oz6wdp/OubcJGFsr3JP10BJiVLKnvGSbVE9RlG0YsIncPJ5kwnH8jWOQ==}
+    peerDependencies:
+      react: '>=16.14 <=18'
 
   '@instructure/ui-tooltip@10.21.0':
     resolution: {integrity: sha512-Y8lSsDKvwlQe76oj8d/oHBuCm9Hq72eoviSD3/kZh8O+6n3j3qJu7Df0Stygox16HHRYV2g6D9FTSy8HSasMUQ==}
@@ -1612,39 +1636,39 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.27.1
 
-  '@biomejs/biome@2.0.0-beta.6':
+  '@biomejs/biome@2.0.6':
     optionalDependencies:
-      '@biomejs/cli-darwin-arm64': 2.0.0-beta.6
-      '@biomejs/cli-darwin-x64': 2.0.0-beta.6
-      '@biomejs/cli-linux-arm64': 2.0.0-beta.6
-      '@biomejs/cli-linux-arm64-musl': 2.0.0-beta.6
-      '@biomejs/cli-linux-x64': 2.0.0-beta.6
-      '@biomejs/cli-linux-x64-musl': 2.0.0-beta.6
-      '@biomejs/cli-win32-arm64': 2.0.0-beta.6
-      '@biomejs/cli-win32-x64': 2.0.0-beta.6
+      '@biomejs/cli-darwin-arm64': 2.0.6
+      '@biomejs/cli-darwin-x64': 2.0.6
+      '@biomejs/cli-linux-arm64': 2.0.6
+      '@biomejs/cli-linux-arm64-musl': 2.0.6
+      '@biomejs/cli-linux-x64': 2.0.6
+      '@biomejs/cli-linux-x64-musl': 2.0.6
+      '@biomejs/cli-win32-arm64': 2.0.6
+      '@biomejs/cli-win32-x64': 2.0.6
 
-  '@biomejs/cli-darwin-arm64@2.0.0-beta.6':
+  '@biomejs/cli-darwin-arm64@2.0.6':
     optional: true
 
-  '@biomejs/cli-darwin-x64@2.0.0-beta.6':
+  '@biomejs/cli-darwin-x64@2.0.6':
     optional: true
 
-  '@biomejs/cli-linux-arm64-musl@2.0.0-beta.6':
+  '@biomejs/cli-linux-arm64-musl@2.0.6':
     optional: true
 
-  '@biomejs/cli-linux-arm64@2.0.0-beta.6':
+  '@biomejs/cli-linux-arm64@2.0.6':
     optional: true
 
-  '@biomejs/cli-linux-x64-musl@2.0.0-beta.6':
+  '@biomejs/cli-linux-x64-musl@2.0.6':
     optional: true
 
-  '@biomejs/cli-linux-x64@2.0.0-beta.6':
+  '@biomejs/cli-linux-x64@2.0.6':
     optional: true
 
-  '@biomejs/cli-win32-arm64@2.0.0-beta.6':
+  '@biomejs/cli-win32-arm64@2.0.6':
     optional: true
 
-  '@biomejs/cli-win32-x64@2.0.0-beta.6':
+  '@biomejs/cli-win32-x64@2.0.6':
     optional: true
 
   '@emotion/babel-plugin@11.13.5':
@@ -1885,6 +1909,23 @@ snapshots:
       - '@types/react'
       - supports-color
 
+  '@instructure/ui-badge@10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/emotion': 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/shared-types': 10.21.0(react@19.1.0)
+      '@instructure/ui-color-utils': 10.21.0
+      '@instructure/ui-position': 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-react-utils': 10.21.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-testable': 10.21.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-view': 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      prop-types: 15.8.1
+      react: 19.1.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-buttons@10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@babel/runtime': 7.27.6
@@ -1942,6 +1983,20 @@ snapshots:
       '@instructure/shared-types': 10.21.0(react@19.1.0)
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
+
+  '@instructure/ui-expandable@10.21.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/shared-types': 10.21.0(react@19.1.0)
+      '@instructure/ui-prop-types': 10.21.0(react@19.1.0)
+      '@instructure/ui-react-utils': 10.21.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-testable': 10.21.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-utils': 10.21.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/uid': 10.21.0
+      prop-types: 15.8.1
+      react: 19.1.0
+    transitivePeerDependencies:
+      - react-dom
 
   '@instructure/ui-flex@10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
@@ -2421,6 +2476,30 @@ snapshots:
     transitivePeerDependencies:
       - react
       - react-dom
+
+  '@instructure/ui-toggle-details@10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/emotion': 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/shared-types': 10.21.0(react@19.1.0)
+      '@instructure/ui-buttons': 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-dom-utils': 10.21.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-expandable': 10.21.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-flex': 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-icons': 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-motion': 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-prop-types': 10.21.0(react@19.1.0)
+      '@instructure/ui-react-utils': 10.21.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-testable': 10.21.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-utils': 10.21.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-view': 10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/uid': 10.21.0
+      prop-types: 15.8.1
+      react: 19.1.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
 
   '@instructure/ui-tooltip@10.21.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
