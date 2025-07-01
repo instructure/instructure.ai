@@ -8,6 +8,7 @@ import {
 	ParchmentBug,
 	StudioBug,
 } from "./Logos";
+import Stages, { type StageName } from "./Stages";
 
 interface RawFeatureInterface {
 	color?: string;
@@ -22,6 +23,10 @@ export interface FeatureInterface {
 	id: string;
 	label: string;
 }
+export type FeatureCategory = StageName;
+
+export type FeaturesType = Record<FeatureCategory, FeatureInterface[]>;
+type RawFeaturesType = Record<FeatureCategory, RawFeatureInterface[]>;
 
 type BrandKey =
 	| "canvas"
@@ -36,7 +41,7 @@ interface BrandInfo {
 	icon: ComponentType<SVGIconProps>;
 }
 
-const brands: Record<Exclude<BrandKey, "studio">, BrandInfo> & {
+export const brands: Record<Exclude<BrandKey, "studio">, BrandInfo> & {
 	studio: { readonly color: string; icon: ComponentType<SVGIconProps> };
 } = {
 	canvas: { color: "#D24E21", icon: CanvasBug },
@@ -52,47 +57,62 @@ const brands: Record<Exclude<BrandKey, "studio">, BrandInfo> & {
 	},
 };
 
-const RawFeatures: RawFeatureInterface[] = [
-	{
-		id: "ignite",
-		label: "Ignite Agent",
-	},
-	{
-		color: brands.canvas.color,
-		icon: brands.canvas.icon,
-		id: "canvas_career",
-		label: "Canvas Career",
-	},
-	{
-		id: "rubric_generator",
-		label: "Rubric Generator",
-	},
-	{
-		id: "quiz_generator",
-		label: "Quiz Item Generator",
-	},
-	{
-		id: "grading_assistance",
-		label: "Grading Assistance",
-	},
-	{
-		color: brands.studio.color,
-		icon: brands.studio.icon,
-		id: "studio_captioning",
-		label: "Canvas Studio Enhanced Captioning",
-	},
-	{
-		color: brands.ignite.color,
-		icon: brands.ignite.icon,
-		id: "accessibility_remediation",
-		label: "Content Accessibility Remediation",
-	},
-];
+const RawFeatures: RawFeaturesType = {
+	Discovery: [],
+	"Early Access Program": [
+		{
+			id: "rubric_generator",
+			label: "Rubric Generator",
+		},
+		{
+			id: "grading_assistance",
+			label: "Grading Assistance",
+		},
+		{
+			color: brands.studio.color,
+			icon: brands.studio.icon,
+			id: "studio_captioning",
+			label: "Canvas Studio Enhanced Captioning",
+		},
+	],
+	Experimentation: [
+		{
+			id: "quiz_generator",
+			label: "Quiz Item Generator",
+		},
+		{
+			color: brands.ignite.color,
+			icon: brands.ignite.icon,
+			id: "accessibility_remediation",
+			label: "Content Accessibility Remediation",
+		},
+	],
+	"Feature Preview": [
+		{
+			id: "ignite",
+			label: "Ignite Agent",
+		},
+		{
+			color: brands.canvas.color,
+			icon: brands.canvas.icon,
+			id: "canvas_career",
+			label: "Canvas Career",
+		},
+	],
+	"General Availability": [],
+} as const;
 
-const Features: FeatureInterface[] = RawFeatures.map((feature) => ({
-	...feature,
-	color: feature.color ?? brands.ignite.color,
-	icon: feature.icon ?? brands.ignite.icon,
-}));
+const Features: FeaturesType = Object.fromEntries(
+	Stages.map(({ name }) => [
+		name,
+		[...(RawFeatures[name] ?? [])]
+			.sort((a, b) => a.label.localeCompare(b.label))
+			.map((feature) => ({
+				...feature,
+				color: feature.color ?? brands.ignite.color,
+				icon: feature.icon ?? brands.ignite.icon,
+			})),
+	]),
+);
 
 export default Features;

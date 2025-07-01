@@ -3,24 +3,28 @@ import "./App.css";
 import { InstUISettingsProvider } from "@instructure/emotion";
 import { darken } from "@instructure/ui-color-utils";
 import { canvas } from "@instructure/ui-themes";
-import { useState } from "react";
+import { type FC, useState } from "react";
+import { brands } from "./assets/Features";
 import Banner from "./components/Banner";
 import HelpTray from "./components/HelpTray";
 import SignupModal from "./components/SignupModal";
 
-function App() {
+const App: FC = () => {
+	const { primitives: colors } = canvas.colors;
+
 	const themeOverrides = {
 		canvas: {
 			componentOverrides: {
 				Link: {
-					color: canvas.colors?.primitives?.violet57,
-					hoverColor: darken(canvas.colors?.primitives?.violet57, 10),
+					color: colors.violet57,
+					hoverColor: darken(colors.violet57, 10),
 				},
 				ProgressCircle: {
-					meterColorSuccess: canvas.colors?.primitives?.sea45,
+					meterColorSuccess: colors.sea45,
 				},
 			},
-			"ic-brand-primary": canvas.colors?.primitives?.violet45,
+			"ic-brand-font-color-dark": brands.instructure.color,
+			"ic-brand-primary": colors.violet45,
 			typography: {
 				fontFamily: "'Poppins', sans-serif",
 				fontWeightBold: 500,
@@ -28,7 +32,7 @@ function App() {
 		},
 	};
 
-	const [isTrayOpen, setIsTrayOpen] = useState(false);
+	const [isTrayOpen, setIsTrayOpen] = useState<boolean>(false);
 
 	return (
 		<InstUISettingsProvider
@@ -53,5 +57,6 @@ function App() {
 			</View>
 		</InstUISettingsProvider>
 	);
-}
+};
+
 export default App;
