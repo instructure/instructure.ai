@@ -1,11 +1,3 @@
-:root {
-	--instructure: #0E1721;
-	--ai-gradient: linear-gradient(to bottom, #00828E, #9E58BD);
-	background-color: var(--instructure);
-	display: flex;
-	justify-content: center;
-}
-
 .logoWrapper {
 	border-image-source: var(--ai-gradient);
 	border-image-slice: 1;
