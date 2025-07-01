@@ -1,50 +1,57 @@
-import { List } from "@instructure/ui-list";
-import { Text } from "@instructure/ui-text";
+import { IconButton } from "@instructure/ui-buttons";
+import { Flex } from "@instructure/ui-flex";
+import { Heading } from "@instructure/ui-heading";
+import { IconInfoLine, IconXSolid } from "@instructure/ui-icons";
 import { Tray } from "@instructure/ui-tray";
 import { View } from "@instructure/ui-view";
+import type React from "react";
+import HelpTraySectionStages from "./HelpTraySectionStages";
 
-const HelpTray = ({ isTrayOpen, setIsTrayOpen }) => {
+type HelpTrayProps = {
+	isTrayOpen: boolean;
+	setIsTrayOpen: (open: boolean) => void;
+};
+
+const HelpTray: React.FC<HelpTrayProps> = ({ isTrayOpen, setIsTrayOpen }) => {
+	const hideTray = () => {
+		setIsTrayOpen(false);
+	};
+
+	const TrayHeader = (
+		<Flex>
+			<Flex.Item padding="small" shouldGrow shouldShrink>
+				<Heading as="h2" color="primary" level="h3">
+					<IconInfoLine /> Info
+				</Heading>
+			</Flex.Item>
+			<Flex.Item align="start">
+				<IconButton
+					onClick={hideTray}
+					renderIcon={IconXSolid}
+					screenReaderLabel="Close"
+					size="small"
+					withBackground={false}
+					withBorder={false}
+				/>
+			</Flex.Item>
+		</Flex>
+	);
 	return (
 		<Tray
+			cellPadding="small"
+			enableMask
 			label="Tray Example"
-			onDismiss={() => setIsTrayOpen(false)}
+			onDismiss={hideTray}
 			open={isTrayOpen}
-			placement="start"
+			placement="end"
+			shouldCloseOnDocumentClick
 			size="small"
 		>
 			<View as="div" padding="small">
-				<List delimiter="solid" isUnstyled margin="0" size="small">
-					<List.Item>
-						<Text size="small" weight="weightImportant">
-							Discovery:
-						</Text>{" "}
-						lorem ipsum
-					</List.Item>
-					<List.Item>
-						<Text size="small" weight="weightImportant">
-							Experimentation:
-						</Text>{" "}
-						lorem ipsum
-					</List.Item>
-					<List.Item>
-						<Text size="small" weight="weightImportant">
-							Early Access:
-						</Text>{" "}
-						lorem ipsum
-					</List.Item>
-					<List.Item>
-						<Text size="small" weight="weightImportant">
-							Feature Preview:
-						</Text>{" "}
-						lorem ipsum
-					</List.Item>
-					<List.Item>
-						<Text size="small" weight="weightImportant">
-							General Access:
-						</Text>{" "}
-						lorem ipsum
-					</List.Item>
-				</List>
+				{TrayHeader}
+				<Flex direction="column" padding="small">
+					<HelpTraySectionStages />
+				</Flex>
 			</View>
 		</Tray>
 	);
