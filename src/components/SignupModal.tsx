@@ -40,6 +40,7 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 	const handleButtonClick = () => {
 		startTransition(() => {
 			setOpen((state) => !state);
+			window.location.hash = isOpen ? "" : "#/signup";
 		});
 	};
 
@@ -55,6 +56,7 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 				await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
 			}
 			setOpen(false);
+			window.location.hash = "";
 		} finally {
 			(e.target as HTMLFormElement).reset();
 			setIsDisabled(false);
