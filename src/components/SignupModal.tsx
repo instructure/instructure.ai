@@ -76,16 +76,18 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 
 	return (
 		<>
-			<Button
-				color="primary-inverse"
-				disabled={isDisabled}
-				margin="small"
-				onClick={handleButtonClick}
-				renderIcon={<IconAddSolid />}
-				withBackground={false}
-			>
-				Sign up
-			</Button>
+			{window.location.hash === "#/test" && (
+				<Button
+					color="primary-inverse"
+					disabled={isDisabled}
+					margin="small"
+					onClick={handleButtonClick}
+					renderIcon={<IconAddSolid />}
+					withBackground={false}
+				>
+					Sign up
+				</Button>
+			)}
 			<Modal
 				as="form"
 				id="signupForm"
