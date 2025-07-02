@@ -1,7 +1,13 @@
 import { Alert } from "@instructure/ui-alerts";
 import { IconEducatorsLine } from "@instructure/ui-icons";
 import { Select } from "@instructure/ui-select";
-import { type FocusEvent, type SyntheticEvent, useRef, useState } from "react";
+import {
+	type FocusEvent,
+	type SyntheticEvent,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
 import Roles, { type Role, type RolesType } from "../assets/Roles";
 import type { SignupFormSelectProps } from "./SignupForm";
 
@@ -26,6 +32,19 @@ const RoleSelect: React.FC<SignupFormSelectProps> = ({
 		);
 
 	const options = sortRoles(Roles);
+
+	useEffect(() => {
+		if (selectedOptionId === "") {
+			setMessages([
+				{
+					text: "Role is required.",
+					type: "error",
+				},
+			]);
+		} else {
+			setMessages([]);
+		}
+	}, [selectedOptionId, setMessages]);
 
 	const [isShowingOptions, setIsShowingOptions] = useState<boolean>(false);
 	const [highlightedOptionId, setHighlightedOptionId] = useState<string | null>(
@@ -100,14 +119,13 @@ const RoleSelect: React.FC<SignupFormSelectProps> = ({
 
 	const handleBlur = (_e: FocusEvent): void => {
 		setHighlightedOptionId(null);
-		if (value === "") {
+		!isValidRole(value) &&
 			setMessages([
 				{
-					text: "Please select a valid role from the list.",
+					text: "Select a valid role.",
 					type: "error",
 				},
 			]);
-		}
 	};
 
 	const handleHighlightOption = (
