@@ -5,7 +5,7 @@ const ParchmentBug: FC = () => (
 	<InlineSVG height="100%" title="Logo" viewBox="0 0 70.82 53.92" width="100%">
 		<svg viewBox="0 0 70.82 53.92" xmlns="http://www.w3.org/2000/svg">
 			<title>Parchment Logo</title>
-			<g data-name="Layer 1" id="Layer_1-2">
+			<g>
 				<g>
 					<path d="M63.35,43.25c0,2.06-1.67,3.74-3.74,3.74H10.67c-2.06,0-3.74-1.67-3.74-3.74V11.21c0-2.06,1.67-3.74,3.74-3.74h35.72V.54H9.25C4.14.54,0,4.68,0,9.78v34.89c0,5.11,4.14,9.25,9.25,9.25h51.8c5.11,0,9.25-4.14,9.25-9.25v-20.24h-6.93v18.81Z" />
 					<path d="M66.82,8.01c2.21,0,4-1.79,4-4s-1.79-4-4-4-4,1.79-4,4,1.79,4,4,4Z" />
@@ -69,12 +69,7 @@ const InstructureBugClassic: FC = () => (
 
 const InstructureLogo: FC = () => (
 	<InlineSVG height="100%" viewBox="0 0 374.89 52.08" width="300px">
-		<svg
-			data-name="Layer 2"
-			id="Layer_2"
-			viewBox="0 0 374.89 52.08"
-			xmlns="http://www.w3.org/2000/svg"
-		>
+		<svg viewBox="0 0 374.89 52.08" xmlns="http://www.w3.org/2000/svg">
 			<title>Instructure Logo</title>
 			<g>
 				<rect
@@ -108,8 +103,7 @@ const MasteryBug: FC = () => (
 	<InlineSVG height="100%" title="Logo" viewBox="0 0 70.37 41.32">
 		<svg viewBox="0 0 70.37 41.32" xmlns="http://www.w3.org/2000/svg">
 			<title>Mastery Logo</title>
-
-			<g data-name="Layer 1" id="Layer_1-2">
+			<g>
 				<g>
 					<path d="M8.51,24.3c-4.7,0-8.51,3.81-8.51,8.51h0c0,4.7,3.81,8.51,8.51,8.51s8.51-3.81,8.51-8.51h0c0-4.7-3.81-8.51-8.51-8.51Z" />
 					<path d="M35.19,24.3c-1.03,0-2,.19-2.91.52l-5.25-9.57c2.03-1.56,3.34-3.99,3.34-6.75,0-4.7-3.81-8.51-8.51-8.51h0c-4.7,0-8.51,3.81-8.51,8.51s3.81,8.51,8.51,8.51h0c1.03,0,2-.19,2.91-.52l5.25,9.57c-2.03,1.56-3.34,3.99-3.34,6.75h0c0,4.7,3.81,8.51,8.51,8.51s8.51-3.81,8.51-8.51h0c0-4.7-3.81-8.51-8.51-8.51Z" />
@@ -124,9 +118,9 @@ const CanvasBug: FC = () => (
 	<InlineSVG height="100%" title="Logo" viewBox="0 0 59.68 59.7">
 		<svg viewBox="0 0 59.68 59.7" xmlns="http://www.w3.org/2000/svg">
 			<title>Canvas Logo</title>
-			<g data-name="Layer 1" id="Layer_1-2">
-				<g data-name="Layer 2" id="Layer_2-2">
-					<g data-name="Layer 1-2" id="Layer_1-2">
+			<g>
+				<g>
+					<g>
 						<path d="M8.66,29.79c0-4.36-3.25-8.03-7.57-8.56-1.45,5.61-1.45,11.5,0,17.12,4.32-.53,7.57-4.2,7.57-8.56" />
 						<path d="M13.67,27.08c-1.5,0-2.71,1.21-2.71,2.71s1.21,2.71,2.71,2.71,2.71-1.21,2.71-2.71h0c0-1.5-1.21-2.71-2.71-2.71h0" />
 						<path d="M51.03,29.79c0,4.36,3.25,8.03,7.57,8.56,1.45-5.61,1.45-11.5,0-17.12-4.32.53-7.57,4.21-7.57,8.56" />
