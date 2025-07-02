@@ -13,7 +13,7 @@ import { Spinner } from "@instructure/ui-spinner";
 import { canvas } from "@instructure/ui-themes";
 import { View } from "@instructure/ui-view";
 import type { FormEvent } from "react";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { InstructureLogo } from "../assets/Logos";
 import useSubmitCallback from "../hooks/useSubmitCallback";
 import SignupForm from "./SignupForm";
@@ -30,6 +30,12 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 
 	const submitCallback = useSubmitCallback();
 	const [progress, setProgress] = useState<number>(0);
+
+	useEffect(() => {
+		if (window.location.hash === "#/signup") {
+			setOpen(true);
+		}
+	}, []);
 
 	const handleButtonClick = () => {
 		startTransition(() => {
