@@ -18,13 +18,7 @@ const useSubmitCallback = (): SubmitCallback => {
 
 			const url = `${formURL}${params}`;
 
-			/*await fetch(url, {
-				headers: { "Content-Type": "application/x-www-form-urlencoded" },
-				method: "POST",
-				mode: "no-cors",
-			});*/
-			console.log("Form submitted successfully:", url);
-			console.log("Form data:", Object.fromEntries(formData.entries()));
+			await fetch(url);
 		} catch (e: unknown) {
 			if (e instanceof Error) {
 				console.error(e.message);
