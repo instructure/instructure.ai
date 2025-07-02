@@ -41,7 +41,7 @@ const App: FC = () => {
 			}}
 		>
 			<View as="section">
-				<Banner />
+				<Banner href="https://www.instructure.com/instructurecon/spokane" />
 			</View>
 			<View
 				as="main"
