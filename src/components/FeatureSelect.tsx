@@ -9,6 +9,7 @@ import React, {
 	type FocusEvent,
 	type KeyboardEvent,
 	type SyntheticEvent,
+	useEffect,
 	useRef,
 	useState,
 } from "react";
@@ -37,6 +38,16 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 	const [announcement, setAnnouncement] = useState<string | null>(null);
 	const [filteredOptions, setFilteredOptions] = useState<FeaturesType>(options);
 	const inputRef = useRef<HTMLInputElement | null>(null);
+
+	const isValidFeature = (feature: string): boolean => {
+		if (feature === "") return true;
+		const allLabels = Object.values(Features)
+			.flat()
+			.map((feature) => feature.label.toLowerCase());
+		console.log("allLabels:", allLabels);
+		console.log("isvalid:", allLabels.includes(feature.toLowerCase()));
+		return allLabels.includes(feature.toLowerCase());
+	};
 
 	const focusInput = (): void => {
 		if (inputRef.current) {
@@ -85,6 +96,7 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 			});
 		}
 
+		setMessages([]);
 		setValue("");
 		setIsShowingOptions(false);
 		setAnnouncement(`"${option}" selected. List collapsed.`);
@@ -92,6 +104,23 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 
 	const handleBlur = (_e: FocusEvent<HTMLInputElement>): void => {
 		setHighlightedOptionId(null);
+		if (selectedOptionIds.length === 0) {
+			setMessages([
+				{
+					text: "Feature is required.",
+					type: "error",
+				},
+			]);
+		} else if (!isValidFeature(value)) {
+			setMessages([
+				{
+					text: "Select a valid feature.",
+					type: "error",
+				},
+			]);
+		} else {
+			setMessages([]);
+		}
 	};
 
 	const getOptionById = (id: string): FeatureInterface | undefined => {
