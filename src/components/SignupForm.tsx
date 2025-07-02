@@ -118,14 +118,14 @@ const SignupForm: React.FC<SignupFormProps> = ({
 
 	const updateProgress = useCallback(() => {
 		const fields = [
-			{ messages: nameMessages, value: nameValue },
-			{ messages: emailMessages, value: emailValue },
-			{ messages: roleMessages, value: roleValue },
-			{ messages: institutionMessages, value: institutionValue },
-			{ messages: featureMessages, value: featureValue },
+			{ messages: nameMessages, value: nameValue.trim() !== "" },
+			{ messages: emailMessages, value: emailValue.trim() !== "" },
+			{ messages: roleMessages, value: roleValue.trim() !== "" },
+			{ messages: institutionMessages, value: institutionValue.trim() !== "" },
+			{ messages: featureMessages, value: featureValueOptionIDs.length !== 0 },
 		];
 		const validFormFieldCount = fields.filter(
-			(field) => field.value.trim() !== "" && field.messages.length === 0,
+			(field) => field.value && field.messages.length === 0,
 		).length;
 		const currentProgress = (validFormFieldCount / formFieldCount) * 100;
 		setProgress(currentProgress);
@@ -134,7 +134,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		emailValue,
 		roleValue,
 		institutionValue,
-		featureValue,
+		featureValueOptionIDs,
 		nameMessages,
 		emailMessages,
 		roleMessages,
