@@ -41,7 +41,7 @@ interface BrandInfo {
 	icon: ComponentType<SVGIconProps>;
 }
 
-export const brands: Record<Exclude<BrandKey, "studio">, BrandInfo> & {
+export const Brands: Record<Exclude<BrandKey, "studio">, BrandInfo> & {
 	studio: { readonly color: string; icon: ComponentType<SVGIconProps> };
 } = {
 	canvas: { color: "#D24E21", icon: CanvasBug },
@@ -51,7 +51,7 @@ export const brands: Record<Exclude<BrandKey, "studio">, BrandInfo> & {
 	parchment: { color: "#4279B6", icon: ParchmentBug },
 	studio: {
 		get color() {
-			return brands.canvas.color;
+			return Brands.canvas.color;
 		},
 		icon: StudioBug,
 	},
@@ -69,8 +69,8 @@ const RawFeatures: RawFeaturesType = {
 			label: "Grading Assistance",
 		},
 		{
-			color: brands.studio.color,
-			icon: brands.studio.icon,
+			color: Brands.studio.color,
+			icon: Brands.studio.icon,
 			id: "studio_captioning",
 			label: "Canvas Studio Enhanced Captioning",
 		},
@@ -81,8 +81,8 @@ const RawFeatures: RawFeaturesType = {
 			label: "Quiz Item Generator",
 		},
 		{
-			color: brands.ignite.color,
-			icon: brands.ignite.icon,
+			color: Brands.ignite.color,
+			icon: Brands.ignite.icon,
 			id: "accessibility_remediation",
 			label: "Content Accessibility Remediation",
 		},
@@ -93,8 +93,8 @@ const RawFeatures: RawFeaturesType = {
 			label: "Ignite Agent",
 		},
 		{
-			color: brands.canvas.color,
-			icon: brands.canvas.icon,
+			color: Brands.canvas.color,
+			icon: Brands.canvas.icon,
 			id: "canvas_career",
 			label: "Canvas Career",
 		},
@@ -109,8 +109,8 @@ const Features: FeaturesType = Object.fromEntries(
 			.sort((a, b) => a.label.localeCompare(b.label))
 			.map((feature) => ({
 				...feature,
-				color: feature.color ?? brands.ignite.color,
-				icon: feature.icon ?? brands.ignite.icon,
+				color: feature.color ?? Brands.ignite.color,
+				icon: feature.icon ?? Brands.ignite.icon,
 			})),
 	]),
 );
