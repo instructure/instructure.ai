@@ -22,7 +22,7 @@ const InstructureBug: FC = () => (
 	<InlineSVG height="100%" title="Logo" viewBox="0 0 100 100">
 		<svg viewBox="0 0 53.42 53.42" xmlns="http://www.w3.org/2000/svg">
 			<title>Instructure Logo</title>
-			<g data-name="Layer 1" id="Layer_1-2">
+			<g>
 				<rect
 					fill="none"
 					height="53.42"
@@ -41,13 +41,27 @@ const InstructureBugColor: FC = () => (
 	<InlineSVG height="100%" title="Logo" viewBox="0 0 100 100" width="100%">
 		<svg viewBox="0 0 53.42 53.42" xmlns="http://www.w3.org/2000/svg">
 			<title>Instructure Logo</title>
-			<g data-name="Layer 1" id="Layer_1-2">
+			<g>
 				<rect fill="#0b1722" height="53.42" width="53.42" />
 				<path
 					d="M30.24,37.26h0c0-2.05,1.66-3.71,3.71-3.71s3.71,1.66,3.71,3.71-1.66,3.71-3.71,3.71-3.71-1.66-3.71-3.71"
 					fill="#e7222a"
 				/>
 				<rect fill="#fff" height="28.52" width="6.18" x="19.28" y="12.45" />
+			</g>
+		</svg>
+	</InlineSVG>
+);
+
+const InstructureBugClassic: FC = () => (
+	<InlineSVG height="100%" title="Logo" viewBox="0 0 252 270" width="100%">
+		<svg viewBox="0 0 252 270" xmlns="http://www.w3.org/2000/svg">
+			<title>Instructure Logo</title>
+			<g fill="#fff">
+				<polygon points="65.38,166.52 126,200.65 186.62,166.52 126,132.38" />
+				<polygon points="158.64,119.24 186.62,103.48 158.63,87.72 130.64,103.48" />
+				<polygon points="153.99,85.11 125.99,69.35 98.01,85.1 126,100.86" />
+				<polygon points="121.35,103.48 93.36,87.72 65.38,103.48 93.37,119.24" />
 			</g>
 		</svg>
 	</InlineSVG>
@@ -62,7 +76,7 @@ const InstructureLogo: FC = () => (
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<title>Instructure Logo</title>
-			<g data-name="Layer 1" id="Layer_1-2">
+			<g>
 				<rect
 					height="12.73"
 					rx="6.37"
@@ -159,4 +173,5 @@ export {
 	CanvasBug,
 	InstructureBugColor,
 	StudioBug,
+	InstructureBugClassic,
 };

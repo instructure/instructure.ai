@@ -1,8 +1,7 @@
 import { Heading } from "@instructure/ui-heading";
-import { IconInstructureLogoLine } from "@instructure/ui-icons";
 import { Link } from "@instructure/ui-link";
 import { View } from "@instructure/ui-view";
-import { InstructureBugColor } from "../assets/Logos";
+import { InstructureBugClassic, InstructureBugColor } from "../assets/Logos";
 
 interface BannerProps {
 	href?: string;
@@ -13,7 +12,7 @@ const Banner = ({ href }: BannerProps): React.ReactElement => {
 		typeof window !== "undefined" && window.location.hash === "#/test";
 	const LogoComponent = isTestRoute
 		? InstructureBugColor
-		: IconInstructureLogoLine;
+		: InstructureBugClassic;
 
 	return (
 		<View as="div" borderRadius="medium" overflowX="hidden" overflowY="hidden">
