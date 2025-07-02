@@ -9,7 +9,6 @@ import React, {
 	type FocusEvent,
 	type KeyboardEvent,
 	type SyntheticEvent,
-	useEffect,
 	useRef,
 	useState,
 } from "react";
@@ -44,8 +43,6 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 		const allLabels = Object.values(Features)
 			.flat()
 			.map((feature) => feature.label.toLowerCase());
-		console.log("allLabels:", allLabels);
-		console.log("isvalid:", allLabels.includes(feature.toLowerCase()));
 		return allLabels.includes(feature.toLowerCase());
 	};
 
@@ -288,7 +285,6 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 					inputRef.current = el;
 				}}
 				inputValue={value}
-				isRequired={true}
 				isShowingOptions={isShowingOptions}
 				messages={messages}
 				name="features"

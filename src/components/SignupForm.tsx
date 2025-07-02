@@ -39,6 +39,8 @@ type SignupFormProps = {
 	isDisabled: boolean;
 	setIsDisabled?: (isDisabled: boolean) => void;
 	setIsTrayOpen?: (open: boolean) => void;
+	featureValueOptionIDs: string[];
+	setFeatureValueOptionIDs: (ids: string[]) => void;
 };
 
 const SignupForm: React.FC<SignupFormProps> = ({
@@ -46,6 +48,8 @@ const SignupForm: React.FC<SignupFormProps> = ({
 	setProgress,
 	isDisabled,
 	setIsTrayOpen,
+	featureValueOptionIDs,
+	setFeatureValueOptionIDs,
 }) => {
 	const [nameValue, setNameValue] = useState<string>("");
 	const [emailValue, setEmailValue] = useState("");
@@ -57,9 +61,6 @@ const SignupForm: React.FC<SignupFormProps> = ({
 	const [roleMessages, setRoleMessages] = useState<FormMessage[]>([]);
 	const [roleValueOptionID, setRoleValueOptionID] = useState<string | null>(
 		null,
-	);
-	const [featureValueOptionIDs, setFeatureValueOptionIDs] = useState<string[]>(
-		[],
 	);
 	const [institutionMessages, setInstitutionMessages] = useState<FormMessage[]>(
 		[],
@@ -118,14 +119,17 @@ const SignupForm: React.FC<SignupFormProps> = ({
 
 	const updateProgress = useCallback(() => {
 		const fields = [
-			{ messages: nameMessages, value: nameValue.trim() !== "" },
-			{ messages: emailMessages, value: emailValue.trim() !== "" },
-			{ messages: roleMessages, value: roleValue.trim() !== "" },
-			{ messages: institutionMessages, value: institutionValue.trim() !== "" },
-			{ messages: featureMessages, value: featureValueOptionIDs.length !== 0 },
+			{ messages: nameMessages, value: nameValue },
+			{ messages: emailMessages, value: emailValue },
+			{ messages: roleMessages, value: roleValue },
+			{ messages: institutionMessages, value: institutionValue },
+			{
+				messages: featureMessages,
+				value: featureValueOptionIDs.flat().toString(),
+			},
 		];
 		const validFormFieldCount = fields.filter(
-			(field) => field.value && field.messages.length === 0,
+			(field) => field.value.trim() !== "" && field.messages.length === 0,
 		).length;
 		const currentProgress = (validFormFieldCount / formFieldCount) * 100;
 		setProgress(currentProgress);
@@ -134,7 +138,6 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		emailValue,
 		roleValue,
 		institutionValue,
-		featureValueOptionIDs,
 		nameMessages,
 		emailMessages,
 		roleMessages,
@@ -142,6 +145,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		featureMessages,
 		setProgress,
 		formFieldCount,
+		featureValueOptionIDs,
 	]);
 
 	useEffect(() => {

@@ -28,6 +28,9 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
+	const [featureValueOptionIDs, setFeatureValueOptionIDs] = useState<string[]>(
+		[],
+	);
 	const submitCallback = useSubmitCallback();
 	const [progress, setProgress] = useState<number>(0);
 
@@ -50,7 +53,12 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 		setIsDisabled(true);
 		try {
 			const start = Date.now();
-			await submitCallback(new FormData(e.target as HTMLFormElement));
+			const form = e.target as HTMLFormElement;
+			const formData = new FormData(form);
+
+			formData.set("features", featureValueOptionIDs.join(","));
+
+			await submitCallback(formData);
 			const elapsed = Date.now() - start;
 			if (elapsed < 2000) {
 				await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
@@ -59,6 +67,7 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 			window.location.hash = "";
 		} finally {
 			(e.target as HTMLFormElement).reset();
+			setFeatureValueOptionIDs([]);
 			setIsDisabled(false);
 			setIsLoading(false);
 			setProgress(0);
@@ -134,8 +143,10 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 						shadow="topmost"
 					>
 						<SignupForm
+							featureValueOptionIDs={featureValueOptionIDs}
 							isDisabled={isDisabled}
 							progress={progress}
+							setFeatureValueOptionIDs={setFeatureValueOptionIDs}
 							setIsTrayOpen={setIsTrayOpen}
 							setProgress={setProgress}
 						/>
