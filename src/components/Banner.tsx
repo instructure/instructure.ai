@@ -8,21 +8,25 @@ interface BannerProps {
 }
 
 const Banner = ({ href }: BannerProps): React.ReactElement => {
-	const isTestRoute =
-		typeof window !== "undefined" && window.location.hash === "#/test";
-	const LogoComponent = isTestRoute
-		? InstructureBugColor
-		: InstructureBugClassic;
+	const LogoComponent =
+		window?.location?.hash === "#/test"
+			? InstructureBugColor
+			: InstructureBugClassic;
 
 	return (
-		<View as="div" borderRadius="medium" overflowX="hidden" overflowY="hidden">
-			<View as="div" className="logoWrapper" padding="medium">
+		<View as="div" borderRadius="medium">
+			<View
+				as="div"
+				className="logoWrapper"
+				overflowY="hidden"
+				padding="medium"
+			>
 				{href ? (
-					<Link href={href}>
-						<Heading as="h1" level="h1">
+					<Heading level="h1">
+						<Link href={href}>
 							<LogoComponent />
-						</Heading>
-					</Link>
+						</Link>
+					</Heading>
 				) : (
 					<LogoComponent />
 				)}
