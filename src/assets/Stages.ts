@@ -28,7 +28,7 @@ export const Stages: readonly Stage[] = [
 		abbreviation: "EAP",
 		color: colors.additionalPrimitives.honey45,
 		description: "is when we test with early adopters",
-		name: "Early Access Program",
+		name: "Early Adopter",
 	},
 	{
 		abbreviation: "Exp",
