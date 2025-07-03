@@ -13,22 +13,10 @@ const { colors } = canvas;
 
 export const Stages: readonly Stage[] = [
 	{
-		abbreviation: "Disco",
-		color: colors.primitives.red45,
-		description: "is when blah blah blah",
-		name: "Discovery",
-	},
-	{
-		abbreviation: "Exp",
-		color: colors.primitives.orange45,
-		description: "is when we explore ideas and concepts",
-		name: "Experimentation",
-	},
-	{
-		abbreviation: "EAP",
-		color: colors.additionalPrimitives.honey45,
-		description: "is when we test with early adopters",
-		name: "Early Access Program",
+		abbreviation: "GA",
+		color: colors.primitives.green45,
+		description: "is when the product is generally available to all users",
+		name: "General Availability",
 	},
 	{
 		abbreviation: "FP",
@@ -37,10 +25,22 @@ export const Stages: readonly Stage[] = [
 		name: "Feature Preview",
 	},
 	{
-		abbreviation: "GA",
-		color: colors.primitives.green45,
-		description: "is when the product is generally available to all users",
-		name: "General Availability",
+		abbreviation: "EAP",
+		color: colors.additionalPrimitives.honey45,
+		description: "is when we test with early adopters",
+		name: "Early Access Program",
+	},
+	{
+		abbreviation: "Exp",
+		color: colors.primitives.orange45,
+		description: "is when we explore ideas and concepts",
+		name: "Experimentation",
+	},
+	{
+		abbreviation: "Disco",
+		color: colors.primitives.red45,
+		description: "is when blah blah blah",
+		name: "Discovery",
 	},
 ] as const;
 
