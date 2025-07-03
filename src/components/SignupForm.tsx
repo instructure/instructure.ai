@@ -158,7 +158,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		<Flex>
 			<Flex.Item shouldGrow shouldShrink>
 				<Heading as="h2" level="h3">
-					AI Feature Interest{" "}
+					Feature Interest{" "}
 					<Text size="medium" weight="weightRegular">
 						<Link onClick={handleInfoClick} renderIcon={IconInfoLine}>
 							<ScreenReaderContent>Form help</ScreenReaderContent>
