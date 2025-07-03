@@ -1,8 +1,8 @@
 .logoWrapper {
+	aspect-ratio: 1 / 1;
 	border-image-source: var(--ai-gradient);
 	border-image-slice: 1;
 	border-image-width: 1em;
-	border-image-outset: 0;
 }
 
 #signupForm {
