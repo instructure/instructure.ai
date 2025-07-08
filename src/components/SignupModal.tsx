@@ -4,6 +4,7 @@ import { Flex } from "@instructure/ui-flex";
 import { Heading } from "@instructure/ui-heading";
 import {
 	IconAddSolid,
+	IconEditSolid,
 	IconPublishLine,
 	IconPublishSolid,
 	IconXSolid,
@@ -17,7 +18,7 @@ import { useEffect, useState, useTransition } from "react";
 import { InstructureLogo } from "../assets/Logos";
 import useLocalStorageCallback from "../hooks/useLocalStorageCallback";
 import useSubmitCallback from "../hooks/useSubmitCallback";
-import { readLocalStorageField } from "../utils/FormData";
+import { readLocalStorage, readLocalStorageField } from "../utils/FormData";
 import SignupForm from "./SignupForm";
 
 export type SignupModalProps = {
@@ -58,6 +59,8 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 		});
 	};
 
+	const hasFormData = !!readLocalStorage("formData");
+
 	const handleFormSubmit = async (e: FormEvent) => {
 		e.preventDefault();
 		setIsLoading(true);
@@ -92,10 +95,10 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 					disabled={isDisabled}
 					margin="small"
 					onClick={handleButtonClick}
-					renderIcon={<IconAddSolid />}
+					renderIcon={hasFormData ? <IconEditSolid /> : <IconAddSolid />}
 					withBackground={false}
 				>
-					Sign up
+					{hasFormData ? "Edit" : "Signup"}
 				</Button>
 			)}
 			<Modal
