@@ -57,44 +57,44 @@ export const Brands: Record<Exclude<BrandKey, "studio">, BrandInfo> & {
 	},
 };
 
+const { ignite, canvas, studio } = Brands;
+
 const RawFeatures: RawFeaturesType = {
 	Discovery: [],
-	"Early Access Program": [
+	"Early Adopter": [
 		{
 			id: "rubric_generator",
 			label: "Rubric Generator",
 		},
+		{ id: "Discussion Insights", label: "Discussion Insights" },
 		{
-			id: "grading_assistance",
-			label: "Grading Assistance",
-		},
-		{
-			color: Brands.studio.color,
-			icon: Brands.studio.icon,
+			color: studio.color,
+			icon: studio.icon,
 			id: "studio_captioning",
 			label: "Canvas Studio Enhanced Captioning",
 		},
-	],
-	Experimentation: [
 		{
 			id: "quiz_generator",
 			label: "Quiz Item Generator",
 		},
 		{
-			color: Brands.ignite.color,
-			icon: Brands.ignite.icon,
+			id: "ignite",
+			label: "Ignite Agent",
+		},
+	],
+	Excluded: [
+		{
+			color: Brands.canvas.color,
+			icon: Brands.canvas.icon,
 			id: "accessibility_remediation",
 			label: "Content Accessibility Remediation",
 		},
 	],
+	Experimentation: [],
 	"Feature Preview": [
 		{
-			id: "ignite",
-			label: "Ignite Agent",
-		},
-		{
-			color: Brands.canvas.color,
-			icon: Brands.canvas.icon,
+			color: canvas.color,
+			icon: canvas.icon,
 			id: "canvas_career",
 			label: "Canvas Career",
 		},
@@ -106,11 +106,15 @@ const Features: FeaturesType = Object.fromEntries(
 	Stages.map(({ name }) => [
 		name,
 		[...(RawFeatures[name] ?? [])]
+			.filter(
+				(feature) =>
+					!RawFeatures.Excluded.some((excluded) => excluded.id === feature.id),
+			)
 			.sort((a, b) => a.label.localeCompare(b.label))
 			.map((feature) => ({
 				...feature,
-				color: feature.color ?? Brands.ignite.color,
-				icon: feature.icon ?? Brands.ignite.icon,
+				color: feature.color ?? ignite.color,
+				icon: feature.icon ?? ignite.icon,
 			})),
 	]),
 );
