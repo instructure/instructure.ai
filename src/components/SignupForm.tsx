@@ -8,6 +8,8 @@ import { Link } from "@instructure/ui-link";
 import { Text } from "@instructure/ui-text";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import Roles from "../assets/Roles";
+import { readLocalStorageField } from "../utils/FormData";
 import EmailInput from "./EmailInput";
 import FeatureSelect from "./FeatureSelect";
 import InstitutionInput from "./InstitutionInput";
@@ -51,17 +53,31 @@ const SignupForm: React.FC<SignupFormProps> = ({
 	featureValueOptionIDs,
 	setFeatureValueOptionIDs,
 }) => {
-	const [nameValue, setNameValue] = useState<string>("");
-	const [emailValue, setEmailValue] = useState("");
-	const [roleValue, setRoleValue] = useState("");
-	const [institutionValue, setInstitutionValue] = useState<string>("");
+	const storedRole = (() => {
+		const stored = readLocalStorageField("role");
+		return typeof stored === "string" && stored !== "" ? stored : null;
+	})();
+
+	const hasStoredRole = typeof storedRole === "string" && storedRole !== "";
+
+	const [nameValue, setNameValue] = useState<string>(
+		readLocalStorageField("name"),
+	);
+	const [emailValue, setEmailValue] = useState(readLocalStorageField("email"));
+	const [roleValueOptionID, setRoleValueOptionID] = useState<string | null>(
+		hasStoredRole ? storedRole : null,
+	);
+	const [roleValue, setRoleValue] = useState<string>(
+		hasStoredRole ? storedRole.toString() : "",
+	);
+	const [institutionValue, setInstitutionValue] = useState<string>(
+		readLocalStorageField("institution"),
+	);
 	const [featureValue, setFeatureValue] = useState<string>("");
 	const [nameMessages, setNameMessages] = useState<FormMessage[]>([]);
 	const [emailMessages, setEmailMessages] = useState<FormMessage[]>([]);
 	const [roleMessages, setRoleMessages] = useState<FormMessage[]>([]);
-	const [roleValueOptionID, setRoleValueOptionID] = useState<string | null>(
-		null,
-	);
+
 	const [institutionMessages, setInstitutionMessages] = useState<FormMessage[]>(
 		[],
 	);
@@ -147,6 +163,15 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		formFieldCount,
 		featureValueOptionIDs,
 	]);
+
+	const getRoleLabelById = (id: string | null): string | undefined => {
+		if (!id) return undefined;
+		for (const category of Object.values(Roles)) {
+			const found = category.find((role) => role.id === id);
+			if (found) return found.label;
+		}
+		return undefined;
+	};
 
 	useEffect(() => {
 		updateProgress();

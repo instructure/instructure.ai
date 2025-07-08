@@ -15,7 +15,9 @@ import { View } from "@instructure/ui-view";
 import type { FormEvent } from "react";
 import { useEffect, useState, useTransition } from "react";
 import { InstructureLogo } from "../assets/Logos";
+import useLocalStorageCallback from "../hooks/useLocalStorageCallback";
 import useSubmitCallback from "../hooks/useSubmitCallback";
+import { readLocalStorageField } from "../utils/FormData";
 import SignupForm from "./SignupForm";
 
 export type SignupModalProps = {
@@ -23,15 +25,24 @@ export type SignupModalProps = {
 };
 
 const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
+	const initialFeatureValueOptionIDs = (() => {
+		const stored = readLocalStorageField("features");
+		if (typeof stored === "string") {
+			return stored.split(",").filter(Boolean);
+		}
+		return [];
+	})();
+
 	const [isPending, startTransition] = useTransition();
 	const [isOpen, setOpen] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
 	const [featureValueOptionIDs, setFeatureValueOptionIDs] = useState<string[]>(
-		[],
+		initialFeatureValueOptionIDs,
 	);
 	const submitCallback = useSubmitCallback();
+	const localStorageCallback = useLocalStorageCallback();
 	const [progress, setProgress] = useState<number>(0);
 
 	useEffect(() => {
@@ -55,9 +66,8 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 			const start = Date.now();
 			const form = e.target as HTMLFormElement;
 			const formData = new FormData(form);
-
 			formData.set("features", featureValueOptionIDs.join(","));
-
+			localStorageCallback(formData);
 			await submitCallback(formData);
 			const elapsed = Date.now() - start;
 			if (elapsed < 2000) {
