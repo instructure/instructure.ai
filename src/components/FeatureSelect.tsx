@@ -137,7 +137,6 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 			<Text>
 				<Badge
 					count={count}
-					countUntil={5}
 					margin="0 x-small xxx-small 0"
 					standalone
 					themeOverride={{ colorPrimary: color }}
