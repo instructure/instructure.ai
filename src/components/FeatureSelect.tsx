@@ -247,7 +247,7 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 		event: React.ChangeEvent<HTMLInputElement>,
 	): void => {
 		const value = event.target.value;
-		const newOptions = filterOptions(value, Features as FeaturesType);
+		const newOptions = filterOptions(value, options);
 		setValue(value);
 		setFilteredOptions(newOptions);
 		const firstKey = Object.keys(newOptions)[0];
