@@ -154,7 +154,9 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		const validFormFieldCount = fields.filter(
 			(field) => field.value.trim() !== "" && field.messages.length === 0,
 		).length;
-		const currentProgress = (validFormFieldCount / formFieldCount) * 100;
+		const currentProgress = Math.ceil(
+			(validFormFieldCount / formFieldCount) * 100,
+		);
 		setProgress(currentProgress);
 	}, [
 		nameValue,
