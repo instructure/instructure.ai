@@ -8,7 +8,6 @@ import { Link } from "@instructure/ui-link";
 import { Text } from "@instructure/ui-text";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import Roles from "../assets/Roles";
 import { readLocalStorageField } from "../utils/FormData";
 import EmailInput from "./EmailInput";
 import FeatureSelect from "./FeatureSelect";
