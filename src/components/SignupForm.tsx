@@ -79,7 +79,9 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		[],
 	);
 	const [featureMessages, setFeatureMessages] = useState<FormMessage[]>([]);
-	const [consentValue, setConsentValue] = useState<boolean>(false);
+	const [consentValue, setConsentValue] = useState<boolean>(
+		readLocalStorageField("consent") === "true",
+	);
 	const [consentMessages, setConsentMessages] = useState<FormMessage[]>([]);
 
 	const formFieldGroupRef = useRef<FormFieldGroup | null>(null);
