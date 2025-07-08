@@ -57,7 +57,7 @@ export const Brands: Record<Exclude<BrandKey, "studio">, BrandInfo> & {
 	},
 };
 
-const { ignite, canvas, studio } = Brands;
+const { ignite, canvas, studio, mastery } = Brands;
 
 const RawFeatures: RawFeaturesType = {
 	Discovery: [],
@@ -66,16 +66,29 @@ const RawFeatures: RawFeaturesType = {
 			id: "rubric_generator",
 			label: "Rubric Generator",
 		},
-		{ id: "Discussion Insights", label: "Discussion Insights" },
+		{
+			color: mastery.color,
+			icon: mastery.icon,
+			id: "mastery_item_generator",
+			label: "Mastery Connect Item Generator",
+		},
+		{
+			color: canvas.color,
+			icon: canvas.icon,
+			id: "Discussion Insights",
+			label: "Discussion Insights",
+		},
 		{
 			color: studio.color,
 			icon: studio.icon,
 			id: "studio_captioning",
-			label: "Canvas Studio Enhanced Captioning",
+			label: "Canvas Studio Caption Review",
 		},
 		{
-			id: "quiz_generator",
-			label: "Quiz Item Generator",
+			color: canvas.color,
+			icon: canvas.icon,
+			id: "canvas_quiz_generator",
+			label: "Canvas Quizzes Item Generator",
 		},
 		{
 			id: "ignite",
