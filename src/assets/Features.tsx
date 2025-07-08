@@ -102,6 +102,14 @@ const RawFeatures: RawFeaturesType = {
 			id: "accessibility_remediation",
 			label: "Content Accessibility Remediation",
 		},
+		{
+			id: "grading_assistance",
+			label: "Grading Assistance",
+		},
+		{
+			id: "translations",
+			label: "Translations",
+		},
 	],
 	Experimentation: [],
 	"Feature Preview": [
