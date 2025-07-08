@@ -23,6 +23,9 @@ importers:
       '@instructure/ui-buttons':
         specifier: ^10.22.0
         version: 10.22.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-checkbox':
+        specifier: ^10.22.0
+        version: 10.22.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-color-utils':
         specifier: ^10.22.0
         version: 10.22.0
@@ -532,6 +535,11 @@ packages:
 
   '@instructure/ui-buttons@10.22.0':
     resolution: {integrity: sha512-HYthUD4rStfzqNuj7cMh6JDLzy2i4Sw9o7jnRlgKauT2gxvNchOnMM6ZIVSkIati5ySfHk5jHsL/KfrETGo+Tw==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+
+  '@instructure/ui-checkbox@10.22.0':
+    resolution: {integrity: sha512-BzY08r80juuqlqvEoWb4Vq1C42Oyr3oxpqe72hVEFXaBb8H3pjYKkyGbQgCFT2Lka2e3NVJf6VU/mWim3T/OhA==}
     peerDependencies:
       react: '>=16.14 <=18'
 
@@ -1950,6 +1958,30 @@ snapshots:
       '@instructure/ui-tooltip': 10.22.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-utils': 10.22.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-view': 10.22.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      keycode: 2.2.1
+      prop-types: 15.8.1
+      react: 19.1.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-checkbox@10.22.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@instructure/console': 10.22.0(react@19.1.0)
+      '@instructure/emotion': 10.22.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/shared-types': 10.22.0(react@19.1.0)
+      '@instructure/ui-dom-utils': 10.22.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-form-field': 10.22.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-icons': 10.22.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-prop-types': 10.22.0(react@19.1.0)
+      '@instructure/ui-react-utils': 10.22.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-svg-images': 10.22.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-testable': 10.22.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-utils': 10.22.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-view': 10.22.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/uid': 10.22.0
       keycode: 2.2.1
       prop-types: 15.8.1
       react: 19.1.0

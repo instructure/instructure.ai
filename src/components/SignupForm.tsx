@@ -9,6 +9,7 @@ import { Text } from "@instructure/ui-text";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { readLocalStorageField } from "../utils/FormData";
+import ConsentCheck from "./ConsentCheck";
 import EmailInput from "./EmailInput";
 import FeatureSelect from "./FeatureSelect";
 import InstitutionInput from "./InstitutionInput";
@@ -56,9 +57,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		const stored = readLocalStorageField("role");
 		return typeof stored === "string" && stored !== "" ? stored : null;
 	})();
-
 	const hasStoredRole = typeof storedRole === "string" && storedRole !== "";
-
 	const [nameValue, setNameValue] = useState<string>(
 		readLocalStorageField("name"),
 	);
@@ -76,11 +75,12 @@ const SignupForm: React.FC<SignupFormProps> = ({
 	const [nameMessages, setNameMessages] = useState<FormMessage[]>([]);
 	const [emailMessages, setEmailMessages] = useState<FormMessage[]>([]);
 	const [roleMessages, setRoleMessages] = useState<FormMessage[]>([]);
-
 	const [institutionMessages, setInstitutionMessages] = useState<FormMessage[]>(
 		[],
 	);
 	const [featureMessages, setFeatureMessages] = useState<FormMessage[]>([]);
+	const [consentValue, setConsentValue] = useState<boolean>(false);
+	const [consentMessages, setConsentMessages] = useState<FormMessage[]>([]);
 
 	const formFieldGroupRef = useRef<FormFieldGroup | null>(null);
 
@@ -129,6 +129,13 @@ const SignupForm: React.FC<SignupFormProps> = ({
 			setValue={setFeatureValue}
 			value={featureValue}
 		/>,
+		<ConsentCheck
+			key="consentCheck"
+			messages={consentMessages}
+			setMessages={setConsentMessages}
+			setValue={setConsentValue}
+			value={consentValue}
+		/>,
 	];
 	const formFieldCount = formFieldGroupChildren.length;
 
@@ -142,6 +149,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
 				messages: featureMessages,
 				value: featureValueOptionIDs.flat().toString(),
 			},
+			{ messages: consentMessages, value: consentValue ? "true" : "" },
 		];
 		const validFormFieldCount = fields.filter(
 			(field) => field.value.trim() !== "" && field.messages.length === 0,
@@ -161,6 +169,8 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		setProgress,
 		formFieldCount,
 		featureValueOptionIDs,
+		consentValue,
+		consentMessages,
 	]);
 
 	useEffect(() => {

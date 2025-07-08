@@ -8,6 +8,7 @@
 		"@instructure/ui-alerts": "^10.22.0",
 		"@instructure/ui-badge": "^10.22.0",
 		"@instructure/ui-buttons": "^10.22.0",
+		"@instructure/ui-checkbox": "^10.22.0",
 		"@instructure/ui-color-utils": "^10.22.0",
 		"@instructure/ui-flex": "^10.22.0",
 		"@instructure/ui-form-field": "^10.22.0",
