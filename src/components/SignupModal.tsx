@@ -77,13 +77,10 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 				await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
 			}
 			setOpen(false);
-			window.location.hash = "";
+			window.location.hash = "#";
 		} finally {
-			(e.target as HTMLFormElement).reset();
-			setFeatureValueOptionIDs([]);
 			setIsDisabled(false);
 			setIsLoading(false);
-			setProgress(0);
 		}
 	};
 
