@@ -300,6 +300,7 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 					selectedOptionIds.length > 0 ? renderTags() : IconLaunchLine
 				}
 				renderLabel="Features"
+				shouldNotWrap={selectedOptionIds.length < 1}
 			>
 				{renderGroup()}
 			</Select>

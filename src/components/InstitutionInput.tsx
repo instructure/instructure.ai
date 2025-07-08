@@ -49,6 +49,7 @@ const InstitutionInput: React.FC<SignupFormInputProps> = ({
 			placeholder="Springfield Elementary"
 			renderBeforeInput={IconHomeLine}
 			renderLabel="Institution"
+			shouldNotWrap
 			type="text"
 			value={value}
 		/>

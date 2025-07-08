@@ -47,6 +47,7 @@ const NameInput: React.FC<SignupFormInputProps> = ({
 			placeholder="Bart Simpson"
 			renderBeforeInput={IconUserLine}
 			renderLabel="Name"
+			shouldNotWrap
 			type="text"
 			value={value}
 		/>

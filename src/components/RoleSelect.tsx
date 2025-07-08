@@ -199,6 +199,7 @@ const RoleSelect: React.FC<SignupFormSelectProps> = ({
 				placeholder="Student"
 				renderBeforeInput={IconEducatorsLine}
 				renderLabel="Role"
+				shouldNotWrap
 			>
 				{renderGroup()}
 			</Select>

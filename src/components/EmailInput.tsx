@@ -53,6 +53,7 @@ const EmailInput: React.FC<SignupFormInputProps> = ({
 			placeholder="bsimpson@springfield-elementary.edu"
 			renderBeforeInput={IconEmailLine}
 			renderLabel="Email Address"
+			shouldNotWrap
 			type="email"
 			value={value}
 		/>
