@@ -164,15 +164,6 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		featureValueOptionIDs,
 	]);
 
-	const getRoleLabelById = (id: string | null): string | undefined => {
-		if (!id) return undefined;
-		for (const category of Object.values(Roles)) {
-			const found = category.find((role) => role.id === id);
-			if (found) return found.label;
-		}
-		return undefined;
-	};
-
 	useEffect(() => {
 		updateProgress();
 	}, [updateProgress]);
