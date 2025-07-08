@@ -75,7 +75,7 @@ const RawFeatures: RawFeaturesType = {
 		{
 			color: canvas.color,
 			icon: canvas.icon,
-			id: "Discussion Insights",
+			id: "discussion_insights",
 			label: "Discussion Insights",
 		},
 		{
