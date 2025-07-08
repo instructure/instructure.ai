@@ -57,7 +57,7 @@ export const Brands: Record<Exclude<BrandKey, "studio">, BrandInfo> & {
 	},
 };
 
-const { ignite, canvas, studio, mastery } = Brands;
+const { ignite, canvas, studio, mastery, instructure } = Brands;
 
 const RawFeatures: RawFeaturesType = {
 	Discovery: [],
@@ -118,6 +118,12 @@ const RawFeatures: RawFeaturesType = {
 			icon: canvas.icon,
 			id: "canvas_career",
 			label: "Canvas Career",
+		},
+		{
+			color: instructure.color,
+			icon: instructure.icon,
+			id: "irn",
+			label: "Instructure Research Network",
 		},
 	],
 	"General Availability": [],
