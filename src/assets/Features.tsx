@@ -67,10 +67,34 @@ const RawFeatures: RawFeaturesType = {
 			label: "Rubric Generator",
 		},
 		{
+			color: canvas.color,
+			icon: canvas.icon,
+			id: "canvas_modules",
+			label: "Modules Redesign",
+		},
+		{
 			color: mastery.color,
 			icon: mastery.icon,
 			id: "mastery_item_generator",
 			label: "Mastery Connect Item Generator",
+		},
+		{
+			color: canvas.color,
+			icon: canvas.icon,
+			id: "canvas_apps",
+			label: "Canvas Apps",
+		},
+		{
+			color: canvas.color,
+			icon: canvas.icon,
+			id: "concurrent_grading",
+			label: "Concurrent Grading",
+		},
+		{
+			color: canvas.color,
+			icon: canvas.icon,
+			id: "canvas_analytics_pro",
+			label: "Canvas Analytics Pro",
 		},
 		{
 			color: canvas.color,
@@ -101,6 +125,12 @@ const RawFeatures: RawFeaturesType = {
 			icon: Brands.canvas.icon,
 			id: "accessibility_remediation",
 			label: "Content Accessibility Remediation",
+		},
+		{
+			color: Brands.canvas.color,
+			icon: Brands.canvas.icon,
+			id: "canvas_portfolio",
+			label: "Canvas Portfolios",
 		},
 		{
 			id: "grading_assistance",
