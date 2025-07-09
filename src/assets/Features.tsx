@@ -94,12 +94,6 @@ const RawFeatures: RawFeaturesType = {
 		{
 			color: canvas.color,
 			icon: canvas.icon,
-			id: "concurrent_grading",
-			label: "Concurrent Grading",
-		},
-		{
-			color: canvas.color,
-			icon: canvas.icon,
 			id: "discussion_insights",
 			label: "Discussion Insights",
 		},
@@ -122,14 +116,20 @@ const RawFeatures: RawFeaturesType = {
 	],
 	Excluded: [
 		{
-			color: Brands.canvas.color,
-			icon: Brands.canvas.icon,
+			color: canvas.color,
+			icon: canvas.icon,
+			id: "improved_lmgb",
+			label: "Improved Learning Mastery Gradebook",
+		},
+		{
+			color: canvas.color,
+			icon: canvas.icon,
 			id: "accessibility_remediation",
 			label: "Content Accessibility Remediation",
 		},
 		{
-			color: Brands.canvas.color,
-			icon: Brands.canvas.icon,
+			color: canvas.color,
+			icon: canvas.icon,
 			id: "canvas_portfolio",
 			label: "Canvas Portfolios",
 		},
@@ -146,6 +146,30 @@ const RawFeatures: RawFeaturesType = {
 			icon: canvas.icon,
 			id: "block_editor",
 			label: "Block Content Editor",
+		},
+		{
+			color: canvas.color,
+			icon: canvas.icon,
+			id: "peer_review",
+			label: "Updated Peer Review",
+		},
+		{
+			color: canvas.color,
+			icon: canvas.icon,
+			id: "canvas_quiz_generator",
+			label: "Canvas Quizzes Item Generator",
+		},
+		{
+			color: canvas.color,
+			icon: canvas.icon,
+			id: "concurrent_grading",
+			label: "Concurrent Grading",
+		},
+		{
+			color: studio.color,
+			icon: studio.icon,
+			id: "media_archiving",
+			label: "Studio Media Archive & Restore",
 		},
 	],
 	Experimentation: [],
