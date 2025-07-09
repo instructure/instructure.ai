@@ -46,7 +46,7 @@ const HelpTray: React.FC<HelpTrayProps> = ({ isTrayOpen, setIsTrayOpen }) => {
 			open={isTrayOpen}
 			placement="end"
 			shouldCloseOnDocumentClick
-			size="small"
+			size="medium"
 		>
 			<View as="div" padding="small">
 				{TrayHeader}
