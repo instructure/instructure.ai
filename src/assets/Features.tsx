@@ -1,12 +1,18 @@
-import { IconAiSolid } from "@instructure/ui-icons";
 import type { SVGIconProps } from "@instructure/ui-svg-images";
-import type { ComponentType } from "react";
+import type { ComponentType, JSX } from "react";
 import {
 	CanvasBug,
+	CanvasBugColor,
+	IgniteBug,
+	IgniteBugColor,
 	InstructureBug,
+	InstructureBugWhite,
 	MasteryBug,
+	MasteryBugColor,
 	ParchmentBug,
+	ParchmentBugColor,
 	StudioBug,
+	StudioBugColor,
 } from "./Logos";
 import Stages, { type StageName } from "./Stages";
 
@@ -15,7 +21,9 @@ interface RawFeatureInterface {
 	icon?: ComponentType<SVGIconProps>;
 	id: string;
 	label: string;
-	description?: string;
+	description?: string | JSX.Element;
+	colorIcon?: ComponentType<SVGIconProps>;
+	link?: string;
 }
 
 export interface FeatureInterface {
@@ -23,8 +31,10 @@ export interface FeatureInterface {
 	icon: ComponentType<SVGIconProps>;
 	id: string;
 	label: string;
-	description: string;
+	description: string | JSX.Element;
 	stage: StageName;
+	colorIcon: ComponentType<SVGIconProps>;
+	link?: string;
 }
 export type FeatureCategory = StageName;
 
@@ -42,20 +52,34 @@ type BrandKey =
 interface BrandInfo {
 	color: string;
 	icon: ComponentType<SVGIconProps>;
+	colorIcon: ComponentType<SVGIconProps>;
 }
 
 export const Brands: Record<Exclude<BrandKey, "studio">, BrandInfo> & {
-	studio: { readonly color: string; icon: ComponentType<SVGIconProps> };
+	studio: {
+		readonly color: string;
+		icon: ComponentType<SVGIconProps>;
+		colorIcon: ComponentType<SVGIconProps>;
+	};
 } = {
-	canvas: { color: "#D24E21", icon: CanvasBug },
-	ignite: { color: "#9E58BD", icon: IconAiSolid },
-	instructure: { color: "#0E1721", icon: InstructureBug },
-	mastery: { color: "#3C8645", icon: MasteryBug },
-	parchment: { color: "#4279B6", icon: ParchmentBug },
+	canvas: { color: "#D24E21", colorIcon: CanvasBugColor, icon: CanvasBug },
+	ignite: { color: "#9E58BD", colorIcon: IgniteBugColor, icon: IgniteBug },
+	instructure: {
+		color: "#0E1721",
+		colorIcon: InstructureBugWhite,
+		icon: InstructureBug,
+	},
+	mastery: { color: "#3C8645", colorIcon: MasteryBugColor, icon: MasteryBug },
+	parchment: {
+		color: "#4279B6",
+		colorIcon: ParchmentBugColor,
+		icon: ParchmentBug,
+	},
 	studio: {
 		get color() {
 			return Brands.canvas.color;
 		},
+		colorIcon: StudioBugColor,
 		icon: StudioBug,
 	},
 };
@@ -66,6 +90,7 @@ const RawFeatures: RawFeaturesType = {
 	Discovery: [
 		{
 			color: canvas.color,
+			colorIcon: canvas.colorIcon,
 			icon: canvas.icon,
 			id: "canvas_admin_experience",
 			label: "Canvas Admin Experience",
@@ -78,36 +103,50 @@ const RawFeatures: RawFeaturesType = {
 		},
 		{
 			color: canvas.color,
+			colorIcon: canvas.colorIcon,
 			icon: canvas.icon,
 			id: "canvas_modules",
 			label: "Modules Redesign",
 		},
 		{
 			color: mastery.color,
+			colorIcon: mastery.colorIcon,
 			icon: mastery.icon,
 			id: "mastery_item_generator",
 			label: "Mastery Connect Item Generator",
 		},
 		{
 			color: canvas.color,
+			colorIcon: canvas.colorIcon,
+			description: (
+				<>
+					Canvas Apps is the new tool for managing LTI tools in Canvas. It
+					allows greater flexibility in how tools are configured and used and is
+					powered by LearnPlatform.
+				</>
+			),
 			icon: canvas.icon,
 			id: "canvas_apps",
 			label: "Canvas Apps",
+			link: "https://www.instructure.com/k12/products/learnplatform",
 		},
 		{
 			color: canvas.color,
+			colorIcon: canvas.colorIcon,
 			icon: canvas.icon,
 			id: "discussion_insights",
 			label: "Discussion Insights",
 		},
 		{
 			color: studio.color,
+			colorIcon: studio.colorIcon,
 			icon: studio.icon,
 			id: "studio_captioning",
-			label: "Canvas Studio Caption Review",
+			label: "Studio Caption Review",
 		},
 		{
 			color: canvas.color,
+			colorIcon: canvas.colorIcon,
 			icon: canvas.icon,
 			id: "canvas_quiz_generator",
 			label: "Canvas Quizzes Item Generator",
@@ -117,33 +156,31 @@ const RawFeatures: RawFeaturesType = {
 			label: "Ignite Agent",
 		},
 		{
-			color: canvas.color,
-			icon: canvas.icon,
-			id: "canvas_quiz_generator",
-			label: "Canvas Quizzes Item Generator",
-		},
-		{
 			color: studio.color,
+			colorIcon: studio.colorIcon,
 			icon: studio.icon,
 			id: "media_archiving",
-			label: "Canvas Studio Media Archive & Restore",
+			label: "Studio Media Archive & Restore",
 		},
 	],
 	Excluded: [
 		{
 			color: canvas.color,
+			colorIcon: canvas.colorIcon,
 			icon: canvas.icon,
 			id: "improved_lmgb",
 			label: "Improved Learning Mastery Gradebook",
 		},
 		{
 			color: canvas.color,
+			colorIcon: canvas.colorIcon,
 			icon: canvas.icon,
 			id: "accessibility_remediation",
 			label: "Content Accessibility Remediation",
 		},
 		{
 			color: canvas.color,
+			colorIcon: canvas.colorIcon,
 			icon: canvas.icon,
 			id: "canvas_portfolio",
 			label: "Canvas Portfolios",
@@ -158,18 +195,21 @@ const RawFeatures: RawFeaturesType = {
 		},
 		{
 			color: canvas.color,
+			colorIcon: canvas.colorIcon,
 			icon: canvas.icon,
 			id: "block_editor",
 			label: "Block Content Editor",
 		},
 		{
 			color: canvas.color,
+			colorIcon: canvas.colorIcon,
 			icon: canvas.icon,
 			id: "peer_review",
 			label: "Updated Peer Review",
 		},
 		{
 			color: canvas.color,
+			colorIcon: canvas.colorIcon,
 			icon: canvas.icon,
 			id: "concurrent_grading",
 			label: "Concurrent Grading",
@@ -179,12 +219,14 @@ const RawFeatures: RawFeaturesType = {
 	"Feature Preview": [
 		{
 			color: canvas.color,
+			colorIcon: canvas.colorIcon,
 			icon: canvas.icon,
 			id: "canvas_career",
 			label: "Canvas Career",
 		},
 		{
 			color: instructure.color,
+			colorIcon: instructure.colorIcon,
 			icon: instructure.icon,
 			id: "irn",
 			label: "Instructure Research Network",
@@ -205,6 +247,7 @@ const Features: FeaturesType = Object.fromEntries(
 			.map((feature) => ({
 				...feature,
 				color: feature.color ?? ignite.color,
+				colorIcon: feature.colorIcon ?? ignite.colorIcon,
 				description: feature.description ?? "",
 				icon: feature.icon ?? ignite.icon,
 				stage: name,

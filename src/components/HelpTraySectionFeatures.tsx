@@ -1,3 +1,4 @@
+import { AccessibleContent } from "@instructure/ui-a11y-content";
 import { Badge } from "@instructure/ui-badge";
 import { Flex } from "@instructure/ui-flex";
 import { Heading } from "@instructure/ui-heading";
@@ -21,14 +22,19 @@ const HelpTraySectionFeatures: FC = () => {
 	);
 
 	const toggleSubHeader = (feature: FeatureInterface) => (
-		<Text as="dfn" size="small">
-			{feature.label}
-		</Text>
+		<View display="inline-flex" style={{ alignItems: "center" }}>
+			<View margin="0 xx-small 0 0">
+				<feature.colorIcon style={{ verticalAlign: "middle" }} />
+			</View>
+			<Text size="small" transform="capitalize" weight="bold">
+				{feature.label}
+			</Text>
+		</View>
 	);
 
 	const renderFeatureDescription = (feature: FeatureInterface) => {
 		const stage = Stages.find((stage) => stage.name === feature.stage);
-		const badgeColor = stage?.color ?? Stages[0].color;
+		const badgeColor = stage?.color ?? Stages[2].color;
 
 		if (!stage) return null;
 		return (
@@ -36,7 +42,7 @@ const HelpTraySectionFeatures: FC = () => {
 				<Popover
 					placement="top end"
 					renderTrigger={
-						<Link aria-describedby={stage.name} as="abbr">
+						<Link aria-describedby={stage.abbreviation} as="abbr">
 							<Badge
 								margin="0 x-small xxx-small 0"
 								standalone
@@ -51,12 +57,21 @@ const HelpTraySectionFeatures: FC = () => {
 					withArrow
 				>
 					<View padding="x-small">
-						<Text id={stage.name} size="small">
-							{stage.name}
+						<Text id={stage.abbreviation} size="small">
+							{stage.abbreviation}
 						</Text>
 					</View>
-				</Popover>{" "}
+				</Popover>
 				<Text size="small">{feature.description}</Text>
+				{feature.link && (
+					<Text as="p" size="small">
+						<Link href={feature.link} target="_blank">
+							<AccessibleContent alt="Learn more">
+								Learn more {"\u29C9"}
+							</AccessibleContent>
+						</Link>
+					</Text>
+				)}
 			</View>
 		);
 	};
