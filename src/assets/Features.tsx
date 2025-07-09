@@ -116,6 +116,12 @@ const RawFeatures: RawFeaturesType = {
 			label: "Ignite Agent",
 		},
 		{
+			color: canvas.color,
+			icon: canvas.icon,
+			id: "canvas_quiz_generator",
+			label: "Canvas Quizzes Item Generator",
+		},
+		{
 			color: studio.color,
 			icon: studio.icon,
 			id: "media_archiving",
@@ -160,12 +166,6 @@ const RawFeatures: RawFeaturesType = {
 			icon: canvas.icon,
 			id: "peer_review",
 			label: "Updated Peer Review",
-		},
-		{
-			color: canvas.color,
-			icon: canvas.icon,
-			id: "canvas_quiz_generator",
-			label: "Canvas Quizzes Item Generator",
 		},
 		{
 			color: canvas.color,
