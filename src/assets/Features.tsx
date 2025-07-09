@@ -15,6 +15,7 @@ interface RawFeatureInterface {
 	icon?: ComponentType<SVGIconProps>;
 	id: string;
 	label: string;
+	description?: string;
 }
 
 export interface FeatureInterface {
@@ -22,6 +23,7 @@ export interface FeatureInterface {
 	icon: ComponentType<SVGIconProps>;
 	id: string;
 	label: string;
+	description: string;
 }
 export type FeatureCategory = StageName;
 
@@ -202,6 +204,7 @@ const Features: FeaturesType = Object.fromEntries(
 			.map((feature) => ({
 				...feature,
 				color: feature.color ?? ignite.color,
+				description: feature.description ?? "",
 				icon: feature.icon ?? ignite.icon,
 			})),
 	]),
