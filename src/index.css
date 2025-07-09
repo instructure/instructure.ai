@@ -30,7 +30,5 @@ body {
 }
 
 dfn {
-  font-weight: 500;
   font-style: normal;
-  text-transform: capitalize;
 }

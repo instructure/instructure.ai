@@ -27,7 +27,7 @@ const HelpTraySectionStages: FC = () => {
 				themeOverride={{ colorPrimary: stage.color }}
 				type="notification"
 			/>
-			<Text as="dfn" size="small">
+			<Text as="dfn" size="small" transform="capitalize" weight="bold">
 				{stage.name}
 			</Text>
 		</>
@@ -38,7 +38,7 @@ const HelpTraySectionStages: FC = () => {
 			<Popover
 				placement="top end"
 				renderTrigger={
-					<Link aria-describedby={stage.name} as="abbr">
+					<Link aria-describedby={stage.abbreviation} as="abbr">
 						{stage.abbreviation}
 					</Link>
 				}
@@ -48,7 +48,7 @@ const HelpTraySectionStages: FC = () => {
 				withArrow
 			>
 				<View padding="x-small">
-					<Text id={stage.name} size="small">
+					<Text id={stage.abbreviation} size="small">
 						{stage.name}
 					</Text>
 				</View>
