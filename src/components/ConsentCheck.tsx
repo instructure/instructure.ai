@@ -1,3 +1,4 @@
+import { AccessibleContent } from "@instructure/ui-a11y-content";
 import { Checkbox } from "@instructure/ui-checkbox";
 import { Link } from "@instructure/ui-link";
 import { Text } from "@instructure/ui-text";
@@ -7,8 +8,13 @@ const consentNotice = (
 	<Text size="small">
 		I consent to receive marketing communications from Instructure in accordance
 		with the{" "}
-		<Link href="https://www.instructure.com/policies/marketing-privacy">
-			privacy policy
+		<Link
+			href="https://www.instructure.com/policies/marketing-privacy"
+			target="_blank"
+		>
+			<AccessibleContent alt="Privacy policy">
+				Privacy policy {"\u29C9"}
+			</AccessibleContent>
 		</Link>
 		.
 	</Text>
