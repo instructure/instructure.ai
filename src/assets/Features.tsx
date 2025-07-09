@@ -113,6 +113,12 @@ const RawFeatures: RawFeaturesType = {
 			id: "ignite",
 			label: "Ignite Agent",
 		},
+		{
+			color: studio.color,
+			icon: studio.icon,
+			id: "media_archiving",
+			label: "Canvas Studio Media Archive & Restore",
+		},
 	],
 	Excluded: [
 		{
@@ -164,12 +170,6 @@ const RawFeatures: RawFeaturesType = {
 			icon: canvas.icon,
 			id: "concurrent_grading",
 			label: "Concurrent Grading",
-		},
-		{
-			color: studio.color,
-			icon: studio.icon,
-			id: "media_archiving",
-			label: "Studio Media Archive & Restore",
 		},
 	],
 	Experimentation: [],
