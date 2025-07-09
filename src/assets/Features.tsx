@@ -141,6 +141,12 @@ const RawFeatures: RawFeaturesType = {
 			id: "translations",
 			label: "Translations",
 		},
+		{
+			color: canvas.color,
+			icon: canvas.icon,
+			id: "block_editor",
+			label: "Block Content Editor",
+		},
 	],
 	Experimentation: [],
 	"Feature Preview": [
