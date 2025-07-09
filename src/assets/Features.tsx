@@ -100,12 +100,6 @@ const RawFeatures: RawFeaturesType = {
 		{
 			color: canvas.color,
 			icon: canvas.icon,
-			id: "canvas_analytics_pro",
-			label: "Canvas Analytics Pro",
-		},
-		{
-			color: canvas.color,
-			icon: canvas.icon,
 			id: "discussion_insights",
 			label: "Discussion Insights",
 		},
