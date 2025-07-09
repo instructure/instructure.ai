@@ -7,9 +7,12 @@ import { Text } from "@instructure/ui-text";
 import { ToggleDetails, ToggleGroup } from "@instructure/ui-toggle-details";
 import { View } from "@instructure/ui-view";
 import type { FC } from "react";
+import { useState } from "react";
 import Stages, { type Stage } from "../assets/Stages";
 
 const HelpTraySectionStages: FC = () => {
+	const [expandedKey, setExpandedKey] = useState<string | null>(null);
+
 	const toggleHeader = (
 		<Heading as="h3" level="h4">
 			Product Stages
@@ -54,29 +57,36 @@ const HelpTraySectionStages: FC = () => {
 		</View>
 	);
 
+	const handleToggle = (key: string, expanded: boolean) =>
+		setExpandedKey(expanded ? key : null);
+
 	return (
 		<Flex.Item>
 			<ToggleGroup
 				border={false}
-				defaultExpanded={true}
 				size="small"
 				summary={toggleHeader}
 				toggleLabel="Product development definitions"
 			>
 				<View as="div" padding="small 0">
-					{Stages.map((stage: Stage) => (
-						<View as="div" key={stage.name} padding="0 0 small">
-							<ToggleDetails
-								fluidWidth
-								key={stage.name}
-								size="medium"
-								summary={toggleSubHeader(stage)}
-								variant="filled"
-							>
-								{renderStageDescription(stage)}
-							</ToggleDetails>
-						</View>
-					))}
+					{Stages.map((stage: Stage, idx) => {
+						const key = `${stage}_${stage.abbreviation}_${idx}`;
+						return (
+							<View as="div" key={stage.name} padding="0 0 small">
+								<ToggleDetails
+									expanded={expandedKey === key}
+									fluidWidth
+									key={key}
+									onToggle={(_, expanded) => handleToggle(key, expanded)}
+									size="medium"
+									summary={toggleSubHeader(stage)}
+									variant="filled"
+								>
+									{renderStageDescription(stage)}
+								</ToggleDetails>
+							</View>
+						);
+					})}
 				</View>
 			</ToggleGroup>
 		</Flex.Item>

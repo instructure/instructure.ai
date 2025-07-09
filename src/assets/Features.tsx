@@ -24,6 +24,7 @@ export interface FeatureInterface {
 	id: string;
 	label: string;
 	description: string;
+	stage: StageName;
 }
 export type FeatureCategory = StageName;
 
@@ -206,6 +207,7 @@ const Features: FeaturesType = Object.fromEntries(
 				color: feature.color ?? ignite.color,
 				description: feature.description ?? "",
 				icon: feature.icon ?? ignite.icon,
+				stage: name,
 			})),
 	]),
 );

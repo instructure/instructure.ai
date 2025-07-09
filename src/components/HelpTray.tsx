@@ -5,6 +5,7 @@ import { IconInfoLine, IconXSolid } from "@instructure/ui-icons";
 import { Tray } from "@instructure/ui-tray";
 import { View } from "@instructure/ui-view";
 import type React from "react";
+import HelpTraySectionFeatures from "./HelpTraySectionFeatures";
 import HelpTraySectionStages from "./HelpTraySectionStages";
 
 type HelpTrayProps = {
@@ -51,6 +52,7 @@ const HelpTray: React.FC<HelpTrayProps> = ({ isTrayOpen, setIsTrayOpen }) => {
 				{TrayHeader}
 				<Flex direction="column" padding="small">
 					<HelpTraySectionStages />
+					<HelpTraySectionFeatures />
 				</Flex>
 			</View>
 		</Tray>
