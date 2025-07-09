@@ -104,7 +104,7 @@ const Parchment: SVGInfo = {
 };
 
 const Instructure: SVGInfo = {
-	color: "0E1721",
+	color: "#0E1721",
 	SVG: (
 		<>
 			<rect
