@@ -65,6 +65,9 @@ importers:
       '@instructure/ui-spinner':
         specifier: ^10.23.0
         version: 10.23.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@instructure/ui-svg-images':
+        specifier: ^10.23.0
+        version: 10.23.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@instructure/ui-tag':
         specifier: ^10.23.0
         version: 10.23.0(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
