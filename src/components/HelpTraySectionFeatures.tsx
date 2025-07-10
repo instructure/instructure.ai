@@ -81,12 +81,7 @@ const HelpTraySectionFeatures: FC = () => {
 
 	return (
 		<Flex.Item>
-			<ToggleGroup
-				border={false}
-				size="small"
-				summary={toggleHeader}
-				toggleLabel="Feature descriptions"
-			>
+			<ToggleDetails fluidWidth size="large" summary={toggleHeader}>
 				<View as="div" padding="small 0">
 					{Object.entries(Features).map(([stage, features]) =>
 						features.map((feature, idx) => {
@@ -109,7 +104,7 @@ const HelpTraySectionFeatures: FC = () => {
 						}),
 					)}
 				</View>
-			</ToggleGroup>
+			</ToggleDetails>
 		</Flex.Item>
 	);
 };

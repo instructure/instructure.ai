@@ -50,7 +50,7 @@ const HelpTray: React.FC<HelpTrayProps> = ({ isTrayOpen, setIsTrayOpen }) => {
 		>
 			<View as="div" padding="small">
 				{TrayHeader}
-				<Flex direction="column" padding="small">
+				<Flex direction="column" gap="small" padding="small">
 					<HelpTraySectionStages />
 					<HelpTraySectionFeatures />
 				</Flex>

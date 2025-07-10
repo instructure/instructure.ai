@@ -62,12 +62,7 @@ const HelpTraySectionStages: FC = () => {
 
 	return (
 		<Flex.Item>
-			<ToggleGroup
-				border={false}
-				size="small"
-				summary={toggleHeader}
-				toggleLabel="Product development definitions"
-			>
+			<ToggleDetails fluidWidth size="large" summary={toggleHeader}>
 				<View as="div" padding="small 0">
 					{Stages.map((stage: Stage, idx) => {
 						const key = `${stage}_${stage.abbreviation}_${idx}`;
@@ -88,7 +83,7 @@ const HelpTraySectionStages: FC = () => {
 						);
 					})}
 				</View>
-			</ToggleGroup>
+			</ToggleDetails>
 		</Flex.Item>
 	);
 };
