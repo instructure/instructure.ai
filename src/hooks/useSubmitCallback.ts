@@ -25,7 +25,6 @@ const useSubmitCallback = (): SubmitCallback => {
 				const url = `${formURL}${params}`;
 				await fetch(url);
 				setSuccess(true);
-				console.log("success!");
 			} catch (e: unknown) {
 				const msg =
 					e instanceof Error ? e.message : "An unknown error occurred";

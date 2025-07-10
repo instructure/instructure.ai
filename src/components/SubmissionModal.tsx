@@ -109,8 +109,6 @@ const SubmissionModal = ({
 		);
 	};
 
-	console.log("hasError", hasError);
-
 	return (
 		<Modal
 			label="Submission Status"
