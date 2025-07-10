@@ -134,6 +134,20 @@ const RawFeatures: RawFeaturesType = {
 			color: canvas.color,
 			colorIcon: canvas.colorIcon,
 			icon: canvas.icon,
+			id: "accessibility_remediation",
+			label: "Content Accessibility Remediation",
+		},
+		{
+			color: instructure.color,
+			colorIcon: instructure.colorIcon,
+			icon: instructure.icon,
+			id: "irn",
+			label: "Instructure Research Network",
+		},
+		{
+			color: canvas.color,
+			colorIcon: canvas.colorIcon,
+			icon: canvas.icon,
 			id: "discussion_insights",
 			label: "Discussion Insights",
 		},
@@ -175,13 +189,6 @@ const RawFeatures: RawFeaturesType = {
 			color: canvas.color,
 			colorIcon: canvas.colorIcon,
 			icon: canvas.icon,
-			id: "accessibility_remediation",
-			label: "Content Accessibility Remediation",
-		},
-		{
-			color: canvas.color,
-			colorIcon: canvas.colorIcon,
-			icon: canvas.icon,
 			id: "canvas_portfolio",
 			label: "Canvas Portfolios",
 		},
@@ -216,23 +223,23 @@ const RawFeatures: RawFeaturesType = {
 		},
 	],
 	Experimentation: [],
-	"Feature Preview": [
+	"General Availability": [],
+	"Product Preview": [
 		{
 			color: canvas.color,
 			colorIcon: canvas.colorIcon,
+			description: (
+				<>
+					Canvas Career is a a new skills-first LMS designed to help businesses,
+					governments, and continuing education organizations deliver flexible,
+					industry aligned learning programs that drive business impact
+				</>
+			),
 			icon: canvas.icon,
 			id: "canvas_career",
 			label: "Canvas Career",
 		},
-		{
-			color: instructure.color,
-			colorIcon: instructure.colorIcon,
-			icon: instructure.icon,
-			id: "irn",
-			label: "Instructure Research Network",
-		},
 	],
-	"General Availability": [],
 } as const;
 
 const Features: FeaturesType = Object.fromEntries(
