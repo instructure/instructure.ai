@@ -5,7 +5,7 @@ const serializeFormData = (formData: FormData): string => {
 	formData.forEach((value, key) => {
 		obj[key] = value.toString();
 	});
-	return JSON.stringify(obj);
+	return JSON.stringify(obj, null, 2);
 };
 
 const deserializeFormData = (data: string): FormData => {
@@ -44,4 +44,9 @@ const writeLocalStorage = (
 	localStorage.setItem(key, serializedData);
 };
 
-export { readLocalStorage, writeLocalStorage, readLocalStorageField };
+export {
+	readLocalStorage,
+	writeLocalStorage,
+	readLocalStorageField,
+	serializeFormData,
+};

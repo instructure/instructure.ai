@@ -22,10 +22,18 @@ import { readLocalStorage, readLocalStorageField } from "../utils/FormData";
 import SignupForm from "./SignupForm";
 
 export type SignupModalProps = {
-	setIsTrayOpen?: (open: boolean) => void;
+	setIsTrayOpen?: (isOpen: boolean) => void;
+	setError: (hasError: string | null) => void;
+	setSuccess: (hasSuccess: boolean) => void;
+	setIsSubmissionModalOpen: (isOpen: boolean) => void;
 };
 
-const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
+const SignupModal = ({
+	setIsTrayOpen,
+	setError,
+	setSuccess,
+	setIsSubmissionModalOpen,
+}: SignupModalProps): React.ReactElement => {
 	const initialFeatureValueOptionIDs = (() => {
 		const stored = readLocalStorageField("features");
 		if (typeof stored === "string") {
@@ -38,6 +46,7 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 	const [isOpen, setOpen] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isDisabled, setIsDisabled] = useState<boolean>(false);
+	const [shouldCleanup, setShouldCleanup] = useState(false);
 
 	const [featureValueOptionIDs, setFeatureValueOptionIDs] = useState<string[]>(
 		initialFeatureValueOptionIDs,
@@ -71,7 +80,11 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 			const formData = new FormData(form);
 			formData.set("features", featureValueOptionIDs.join(","));
 			localStorageCallback(formData);
-			await submitCallback(formData);
+			await new Promise<void>((resolve) => {
+				startTransition(() => {
+					submitCallback(formData, { setError, setSuccess }).then(resolve);
+				});
+			});
 			const elapsed = Date.now() - start;
 			if (elapsed < 2000) {
 				await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
@@ -79,10 +92,18 @@ const SignupModal = ({ setIsTrayOpen }): React.ReactElement => {
 			setOpen(false);
 			window.location.hash = "#";
 		} finally {
-			setIsDisabled(false);
-			setIsLoading(false);
+			setShouldCleanup(true);
 		}
 	};
+
+	useEffect(() => {
+		if (shouldCleanup && !isPending) {
+			setIsDisabled(false);
+			setIsLoading(false);
+			setShouldCleanup(false);
+			setIsSubmissionModalOpen(true);
+		}
+	}, [shouldCleanup, isPending, setIsSubmissionModalOpen]);
 
 	return (
 		<>

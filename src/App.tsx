@@ -8,6 +8,7 @@ import { Brands } from "./assets/Features";
 import Banner from "./components/Banner";
 import HelpTray from "./components/HelpTray";
 import SignupModal from "./components/SignupModal";
+import SubmissionModal from "./components/SubmissionModal";
 
 const App: FC = () => {
 	const { primitives: colors } = canvas.colors;
@@ -15,12 +16,18 @@ const App: FC = () => {
 	const themeOverrides = {
 		canvas: {
 			componentOverrides: {
+				IconStarSolid: {
+					colorWarning: colors.violet57,
+				},
 				Link: {
 					color: colors.violet57,
 					hoverColor: darken(colors.violet57, 10),
 				},
 				ProgressCircle: {
 					meterColorSuccess: colors.sea45,
+				},
+				SourceCodeEditor: {
+					focusBorderColor: colors.violet57,
 				},
 			},
 			"ic-brand-font-color-dark": Brands.instructure.color,
@@ -33,6 +40,10 @@ const App: FC = () => {
 	};
 
 	const [isTrayOpen, setIsTrayOpen] = useState<boolean>(false);
+	const [hasSuccess, setSuccess] = useState<boolean>(true);
+	const [hasError, setError] = useState<string | null>(null);
+	const [isSubmissionModalOpen, setIsSubmissionModalOpen] =
+		useState<boolean>(false);
 
 	return (
 		<InstUISettingsProvider
@@ -50,10 +61,23 @@ const App: FC = () => {
 				padding="medium"
 				position="fixed"
 			>
-				<SignupModal setIsTrayOpen={setIsTrayOpen} />
+				<SignupModal
+					setError={setError}
+					setIsSubmissionModalOpen={setIsSubmissionModalOpen}
+					setIsTrayOpen={setIsTrayOpen}
+					setSuccess={setSuccess}
+				/>
 			</View>
 			<View as="aside">
 				<HelpTray isTrayOpen={isTrayOpen} setIsTrayOpen={setIsTrayOpen} />
+			</View>
+			<View as="aside">
+				<SubmissionModal
+					hasError={hasError}
+					hasSuccess={hasSuccess}
+					isOpen={isSubmissionModalOpen}
+					setIsOpen={setIsSubmissionModalOpen}
+				/>
 			</View>
 		</InstUISettingsProvider>
 	);
