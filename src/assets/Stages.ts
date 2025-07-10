@@ -19,10 +19,10 @@ export const Stages: readonly Stage[] = [
 		name: "General Availability",
 	},
 	{
-		abbreviation: "FP",
+		abbreviation: "PP",
 		color: colors.primitives.blue45,
 		description: "is when we finalize the product for release",
-		name: "Feature Preview",
+		name: "Product Preview",
 	},
 	{
 		abbreviation: "EAP",
