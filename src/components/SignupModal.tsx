@@ -1,3 +1,4 @@
+import { debounce } from "@instructure/debounce";
 import { Button, IconButton } from "@instructure/ui-buttons";
 import { alpha } from "@instructure/ui-color-utils";
 import { Flex } from "@instructure/ui-flex";
@@ -70,12 +71,20 @@ const SignupModal = ({
 
 	const hasFormData = !!readLocalStorage("formData");
 
+	const closeModalDebounced = debounce(
+		() => {
+			setOpen(false);
+			window.location.hash = "#";
+		},
+		2000,
+		{ leading: false, trailing: true },
+	);
+
 	const handleFormSubmit = async (e: FormEvent) => {
 		e.preventDefault();
 		setIsLoading(true);
 		setIsDisabled(true);
 		try {
-			const start = Date.now();
 			const form = e.target as HTMLFormElement;
 			const formData = new FormData(form);
 			formData.set("features", featureValueOptionIDs.join(","));
@@ -85,12 +94,7 @@ const SignupModal = ({
 					submitCallback(formData, { setError, setSuccess }).then(resolve);
 				});
 			});
-			const elapsed = Date.now() - start;
-			if (elapsed < 2000) {
-				await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
-			}
-			setOpen(false);
-			window.location.hash = "#";
+			closeModalDebounced();
 		} finally {
 			setShouldCleanup(true);
 		}
