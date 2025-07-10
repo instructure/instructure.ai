@@ -3,7 +3,7 @@ import "./App.css";
 import { InstUISettingsProvider } from "@instructure/emotion";
 import { darken } from "@instructure/ui-color-utils";
 import { canvas } from "@instructure/ui-themes";
-import { type FC, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import { Brands } from "./assets/Features";
 import Banner from "./components/Banner";
 import HelpTray from "./components/HelpTray";
@@ -38,6 +38,13 @@ const App: FC = () => {
 			},
 		},
 	};
+
+	useEffect(() => {
+		console.info(
+			"Hey, what are you doing here? 👋\n",
+			"https://www.instructure.com/careers",
+		);
+	}, []);
 
 	const [isTrayOpen, setIsTrayOpen] = useState<boolean>(false);
 	const [hasSuccess, setSuccess] = useState<boolean>(true);
