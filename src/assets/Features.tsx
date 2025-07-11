@@ -88,15 +88,7 @@ export const Brands: Record<Exclude<BrandKey, "studio">, BrandInfo> & {
 const { ignite, canvas, studio, mastery, instructure } = Brands;
 
 const RawFeatures: RawFeaturesType = {
-	Discovery: [
-		{
-			color: canvas.color,
-			colorIcon: canvas.colorIcon,
-			icon: canvas.icon,
-			id: "canvas_admin_experience",
-			label: "Canvas Admin Experience",
-		},
-	],
+	Discovery: [],
 	"Early Adopter": [
 		{
 			description: (
@@ -201,6 +193,13 @@ const RawFeatures: RawFeaturesType = {
 		},
 	],
 	Excluded: [
+		{
+			color: canvas.color,
+			colorIcon: canvas.colorIcon,
+			icon: canvas.icon,
+			id: "canvas_admin_experience",
+			label: "Canvas Admin Experience",
+		},
 		{
 			color: canvas.color,
 			colorIcon: canvas.colorIcon,
