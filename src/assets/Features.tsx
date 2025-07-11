@@ -1,5 +1,6 @@
 import type { SVGIconProps } from "@instructure/ui-svg-images";
 import type { ComponentType, JSX } from "react";
+import React from "react";
 import {
 	CanvasBug,
 	CanvasBugColor,
@@ -21,7 +22,7 @@ interface RawFeatureInterface {
 	icon?: ComponentType<SVGIconProps>;
 	id: string;
 	label: string;
-	description?: string | JSX.Element;
+	description?: JSX.Element;
 	colorIcon?: ComponentType<SVGIconProps>;
 	link?: string;
 }
@@ -31,7 +32,7 @@ export interface FeatureInterface {
 	icon: ComponentType<SVGIconProps>;
 	id: string;
 	label: string;
-	description: string | JSX.Element;
+	description: JSX.Element;
 	stage: StageName;
 	colorIcon: ComponentType<SVGIconProps>;
 	link?: string;
@@ -98,12 +99,26 @@ const RawFeatures: RawFeaturesType = {
 	],
 	"Early Adopter": [
 		{
+			description: (
+				<>
+					AI generated rubrics to streamline rubric creation for educators
+					saving them time while promoting fairness, completeness and better
+					coverage.
+				</>
+			),
 			id: "rubric_generator",
 			label: "Rubric Generator",
 		},
 		{
 			color: canvas.color,
 			colorIcon: canvas.colorIcon,
+			description: (
+				<>
+					Canvas Modules are central to how students interact with course
+					content, and we're implementing exciting changes to modernize the page
+					and add more value.
+				</>
+			),
 			icon: canvas.icon,
 			id: "canvas_modules",
 			label: "Modules Redesign",
@@ -147,6 +162,13 @@ const RawFeatures: RawFeaturesType = {
 		{
 			color: canvas.color,
 			colorIcon: canvas.colorIcon,
+			description: (
+				<>
+					Discussion Insights leverages AI to assess student contributions in
+					Canvas Discussions, helping instructors evaluate relevance and
+					engagement at a glance.
+				</>
+			),
 			icon: canvas.icon,
 			id: "discussion_insights",
 			label: "Discussion Insights",
@@ -168,6 +190,7 @@ const RawFeatures: RawFeaturesType = {
 		{
 			id: "ignite",
 			label: "Ignite Agent",
+			link: "http://instructure.com/ignite-ai",
 		},
 		{
 			color: studio.color,
@@ -238,6 +261,7 @@ const RawFeatures: RawFeaturesType = {
 			icon: canvas.icon,
 			id: "canvas_career",
 			label: "Canvas Career",
+			link: "https://instructure.com/canvas/canvas-career",
 		},
 	],
 } as const;
@@ -255,7 +279,7 @@ const Features: FeaturesType = Object.fromEntries(
 				...feature,
 				color: feature.color ?? ignite.color,
 				colorIcon: feature.colorIcon ?? ignite.colorIcon,
-				description: feature.description ?? "",
+				description: feature.description ?? <React.Fragment />,
 				icon: feature.icon ?? ignite.icon,
 				stage: name,
 			})),
