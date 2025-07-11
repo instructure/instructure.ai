@@ -232,7 +232,7 @@ const RawFeatures: RawFeaturesType = {
 				<>
 					Canvas Career is a a new skills-first LMS designed to help businesses,
 					governments, and continuing education organizations deliver flexible,
-					industry aligned learning programs that drive business impact
+					industry aligned learning programs that drive business impact.
 				</>
 			),
 			icon: canvas.icon,
