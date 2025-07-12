@@ -1,8 +1,6 @@
 import { View } from "@instructure/ui-view";
 import "./App.css";
 import { InstUISettingsProvider } from "@instructure/emotion";
-import { darken } from "@instructure/ui-color-utils";
-import { canvas } from "@instructure/ui-themes";
 import { type FC, useEffect, useState } from "react";
 import { Brands } from "./assets/Features";
 import Banner from "./components/Banner";
@@ -11,30 +9,26 @@ import SignupModal from "./components/SignupModal";
 import SubmissionModal from "./components/SubmissionModal";
 
 const App: FC = () => {
-	const { primitives: colors } = canvas.colors;
+	const { instructure, mastery } = Brands;
 
 	const themeOverrides = {
 		canvas: {
 			componentOverrides: {
-				IconStarSolid: {
-					colorWarning: colors.violet57,
-				},
 				Link: {
-					color: colors.violet57,
-					hoverColor: darken(colors.violet57, 10),
+					color: "#0E68B3",
+					hoverColor: "#0E35B3",
 				},
 				ProgressCircle: {
-					meterColorSuccess: colors.sea45,
+					meterColorSuccess: mastery.color,
 				},
 				SourceCodeEditor: {
-					focusBorderColor: colors.violet57,
+					focusBorderColor: "#0E68B3",
 				},
 			},
-			"ic-brand-font-color-dark": Brands.instructure.color,
-			"ic-brand-primary": colors.violet45,
+			"ic-brand-font-color-dark": instructure.color,
+			"ic-brand-primary": "#0E68B3",
 			typography: {
-				fontFamily: "'Poppins', sans-serif",
-				fontWeightBold: 500,
+				fontFamily: "circularxx, Arial, Helvetica, sans-serif",
 			},
 		},
 	};
@@ -58,34 +52,42 @@ const App: FC = () => {
 				themeOverrides: themeOverrides,
 			}}
 		>
-			<View as="section">
-				<Banner href="https://www.instructure.com/instructurecon/spokane" />
-			</View>
-			<View
-				as="main"
-				insetBlockEnd="0"
-				insetInlineEnd="0"
-				padding="medium"
-				position="fixed"
-			>
-				<SignupModal
-					setError={setError}
-					setIsSubmissionModalOpen={setIsSubmissionModalOpen}
-					setIsTrayOpen={setIsTrayOpen}
-					setSuccess={setSuccess}
-				/>
-			</View>
-			<View as="aside">
-				<HelpTray isTrayOpen={isTrayOpen} setIsTrayOpen={setIsTrayOpen} />
-			</View>
-			<View as="aside">
-				<SubmissionModal
-					hasError={hasError}
-					hasSuccess={hasSuccess}
-					isOpen={isSubmissionModalOpen}
-					setIsOpen={setIsSubmissionModalOpen}
-				/>
-			</View>
+			{window.location.hash === "#/test" ? (
+				<View as="div" id="App">
+					<View as="section">
+						<Banner variant="new" />
+					</View>
+					<View
+						as="main"
+						insetBlockEnd="0"
+						insetInlineEnd="0"
+						padding="medium"
+						position="fixed"
+					>
+						<SignupModal
+							setError={setError}
+							setIsSubmissionModalOpen={setIsSubmissionModalOpen}
+							setIsTrayOpen={setIsTrayOpen}
+							setSuccess={setSuccess}
+						/>
+					</View>
+					<View as="aside">
+						<HelpTray isTrayOpen={isTrayOpen} setIsTrayOpen={setIsTrayOpen} />
+					</View>
+					<View as="aside">
+						<SubmissionModal
+							hasError={hasError}
+							hasSuccess={hasSuccess}
+							isOpen={isSubmissionModalOpen}
+							setIsOpen={setIsSubmissionModalOpen}
+						/>
+					</View>
+				</View>
+			) : (
+				<View as="section">
+					<Banner href="https://www.instructure.com/instructurecon/spokane" />
+				</View>
+			)}
 		</InstUISettingsProvider>
 	);
 };
