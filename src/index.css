@@ -1,9 +1,5 @@
 :root {
-  --instructure: #0E1721;
-  --violet: #9E58BD;
-  --sea: #00828E;
-  --ai-gradient: linear-gradient(to bottom, var(--sea), var(--violet));
-  background-color: var(--instructure);
+  background-color: #061c30;
   display: flex;
   justify-content: center;
   font-synthesis: none;
@@ -16,10 +12,15 @@ abbr {
   text-decoration-line: underline;
   text-decoration-style: solid;
   text-decoration-thickness: 0.15em;
-  text-decoration-color: var(--violet);
+  text-decoration-color: "#0E68B3";
   text-transform: uppercase
 }
 
+abbr:hover,
+abbr:focus,
+abbr:active {
+  text-decoration-color: "#0E35B3";
+}
 
 body {
   margin: 0;
@@ -31,4 +32,20 @@ body {
 
 dfn {
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'circularxx';
+  src: url('/CircularXX-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'circularxx';
+  src: url('/CircularXX-Regular.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
