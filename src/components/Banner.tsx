@@ -5,21 +5,28 @@ import { InstructureBugClassic, InstructureBugColor } from "../assets/Logos";
 
 interface BannerProps {
 	href?: string;
+	variant?: "default" | "new";
 }
 
-const Banner = ({ href }: BannerProps): React.ReactElement => {
+const Banner = ({
+	href,
+	variant = "default",
+}: BannerProps): React.ReactElement => {
 	const LogoComponent =
-		window?.location?.hash === "#/test"
-			? InstructureBugColor
-			: InstructureBugClassic;
+		variant === "new" ? InstructureBugColor : InstructureBugClassic;
 
 	return (
-		<View as="div" borderRadius="medium">
+		<View as="div" borderRadius="medium" maxHeight="300px" maxWidth="300px">
 			<View
 				as="div"
 				className="logoWrapper"
+				height="300px"
+				overflowX="hidden"
 				overflowY="hidden"
 				padding="medium"
+				position="relative"
+				style={{ aspectRatio: "1 / 1" }}
+				width="300px"
 			>
 				{href ? (
 					<Heading level="h1">
