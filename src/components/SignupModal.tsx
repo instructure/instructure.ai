@@ -77,6 +77,9 @@ const SignupModal = ({
 		() => {
 			setOpen(false);
 			window.location.hash = "#";
+			setIsSubmissionModalOpen(true);
+			setIsDisabled(false);
+			setIsLoading(false);
 		},
 		2000,
 		{ leading: false, trailing: true },
@@ -104,12 +107,9 @@ const SignupModal = ({
 
 	useEffect(() => {
 		if (shouldCleanup && !isPending) {
-			setIsDisabled(false);
-			setIsLoading(false);
 			setShouldCleanup(false);
-			setIsSubmissionModalOpen(true);
 		}
-	}, [shouldCleanup, isPending, setIsSubmissionModalOpen]);
+	}, [shouldCleanup, isPending]);
 
 	return (
 		<>
@@ -196,7 +196,6 @@ const SignupModal = ({
 							isDisabled={isDisabled}
 							progress={progress}
 							setFeatureValueOptionIDs={setFeatureValueOptionIDs}
-							setIsTrayOpen={setIsTrayOpen}
 							setProgress={setProgress}
 						/>
 					</View>
