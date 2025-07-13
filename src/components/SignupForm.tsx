@@ -36,7 +36,6 @@ type SignupFormProps = {
 	setProgress: (progress: number) => void;
 	isDisabled: boolean;
 	setIsDisabled?: (isDisabled: boolean) => void;
-	setIsTrayOpen?: (open: boolean) => void;
 	featureValueOptionIDs: string[];
 	setFeatureValueOptionIDs: (ids: string[]) => void;
 };
@@ -45,7 +44,6 @@ const SignupForm: React.FC<SignupFormProps> = ({
 	progress,
 	setProgress,
 	isDisabled,
-	setIsTrayOpen,
 	featureValueOptionIDs,
 	setFeatureValueOptionIDs,
 }) => {

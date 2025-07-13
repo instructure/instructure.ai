@@ -27,7 +27,15 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 	selectedOptionIds,
 	setSelectedOptionIds,
 }) => {
-	const [options, setOptions] = useState<FeaturesType>(Features);
+	const [options, setOptions] = useState<FeaturesType>(() => {
+		const filtered: FeaturesType = {};
+		for (const key of Object.keys(Features)) {
+			filtered[key] = Features[key].filter(
+				(opt: FeatureInterface) => !selectedOptionIds.includes(opt.id),
+			);
+		}
+		return filtered;
+	});
 
 	const [isShowingOptions, setIsShowingOptions] = useState<boolean>(false);
 	const [highlightedOptionId, setHighlightedOptionId] = useState<string | null>(
@@ -86,7 +94,9 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 			setOptions((prev) => {
 				const updated: FeaturesType = {};
 				for (const key of Object.keys(prev)) {
-					updated[key] = prev[key].filter((opt) => opt.id !== id);
+					updated[key] = prev[key].filter(
+						(opt: FeatureInterface) => opt.id !== id,
+					);
 				}
 				return updated;
 			});
@@ -186,12 +196,12 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 			(id: string, index: number): React.JSX.Element | null => {
 				const option = getOptionById(id);
 				if (!option) return null;
-				const groupKey = Object.keys(filteredOptions).find((key) =>
-					filteredOptions[key].some((opt: FeatureInterface) => opt.id === id),
+				const groupKey = Object.keys(Features).find((key) =>
+					Features[key].some((opt: FeatureInterface) => opt.id === id),
 				);
 				const BrandIcon =
-					groupKey && filteredOptions[groupKey][0]?.colorIcon
-						? filteredOptions[groupKey][0].colorIcon
+					groupKey && Features[groupKey][0]?.colorIcon
+						? Features[groupKey][0].colorIcon
 						: null;
 				return (
 					<Tag
