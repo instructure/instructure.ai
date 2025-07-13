@@ -158,7 +158,6 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 							id={option.id}
 							isHighlighted={option.id === highlightedOptionId}
 							key={option.id}
-							// renderBeforeLabel={option.icon ? <option.icon /> : null}
 							value={option.label}
 						>
 							<View margin="0 0 0 medium">{option.label}</View>
@@ -180,11 +179,25 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 				.flat()
 				.some((o) => o.id === option.id);
 			if (!exists && typeof setOptions === "function") {
-				const groupKey = Object.keys(options)[0];
-				setOptions({
-					...options,
-					[groupKey]: [...options[groupKey], option],
-				});
+				const groupKey = Object.keys(Features).find((key) =>
+					Features[key].some((opt: FeatureInterface) => opt.id === option.id),
+				);
+				if (groupKey) {
+					const originalGroup = Features[groupKey];
+					const insertIndex = originalGroup.findIndex(
+						(opt: FeatureInterface) => opt.id === option.id,
+					);
+					const newGroup = [...options[groupKey]];
+					const alreadyIndex = newGroup.findIndex(
+						(opt) => opt.id === option.id,
+					);
+					if (alreadyIndex !== -1) newGroup.splice(alreadyIndex, 1);
+					newGroup.splice(insertIndex, 0, option);
+					setOptions({
+						...options,
+						[groupKey]: newGroup,
+					});
+				}
 			}
 		}
 
