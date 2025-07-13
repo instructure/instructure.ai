@@ -67,7 +67,13 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 			selectedOptionIds.length > 0
 		) {
 			setHighlightedOptionId(null);
-			setSelectedOptionIds(selectedOptionIds.slice(0, -1));
+			dismissTag(
+				{
+					preventDefault: () => {},
+					stopPropagation: () => {},
+				} as React.MouseEvent,
+				selectedOptionIds[selectedOptionIds.length - 1],
+			);
 		}
 	};
 
