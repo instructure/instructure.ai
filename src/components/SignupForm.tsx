@@ -1,11 +1,7 @@
-import { ScreenReaderContent } from "@instructure/ui-a11y-content";
 import { Flex } from "@instructure/ui-flex";
 import type { FormMessage } from "@instructure/ui-form-field";
 import { FormFieldGroup } from "@instructure/ui-form-field";
 import { Heading } from "@instructure/ui-heading";
-import { IconInfoLine } from "@instructure/ui-icons";
-import { Link } from "@instructure/ui-link";
-import { Text } from "@instructure/ui-text";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { readLocalStorageField } from "../utils/FormData";
@@ -181,18 +177,11 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		updateProgress();
 	}, [updateProgress]);
 
-	const handleInfoClick = () => setIsTrayOpen?.(true);
-
 	const Header = (
 		<Flex>
 			<Flex.Item shouldGrow shouldShrink>
 				<Heading as="h2" level="h3">
-					Feature Interest{" "}
-					<Text size="medium" weight="weightRegular">
-						<Link onClick={handleInfoClick} renderIcon={IconInfoLine}>
-							<ScreenReaderContent>Form help</ScreenReaderContent>
-						</Link>
-					</Text>
+					Feature Interest
 				</Heading>
 			</Flex.Item>
 			<Flex.Item>
