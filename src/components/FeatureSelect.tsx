@@ -294,6 +294,15 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 		return optionsWithoutEmptyKeys;
 	};
 
+	const selectLabel = (
+		<Text>
+			Features{" "}
+			<Text aria-hidden color={messages.length ? "danger" : "primary"}>
+				*
+			</Text>
+		</Text>
+	);
+
 	return (
 		<>
 			<Select
@@ -317,7 +326,7 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 				renderBeforeInput={
 					selectedOptionIds.length > 0 ? renderTags() : IconLaunchLine
 				}
-				renderLabel="Features"
+				renderLabel={selectLabel}
 				shouldNotWrap={selectedOptionIds.length < 1}
 			>
 				{renderGroup()}
