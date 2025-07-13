@@ -1,16 +1,13 @@
 import { AccessibleContent } from "@instructure/ui-a11y-content";
-import { Badge } from "@instructure/ui-badge";
 import { Flex } from "@instructure/ui-flex";
 import { Heading } from "@instructure/ui-heading";
 import { Link } from "@instructure/ui-link";
-import { Popover } from "@instructure/ui-popover";
 import { Text } from "@instructure/ui-text";
 import { ToggleDetails } from "@instructure/ui-toggle-details";
 import { View } from "@instructure/ui-view";
 import type { FC } from "react";
 import { useState } from "react";
 import Features, { type FeatureInterface } from "../assets/Features";
-import Stages from "../assets/Stages";
 
 const HelpTraySectionFeatures: FC = () => {
 	const [expandedKey, setExpandedKey] = useState<string | null>(null);
@@ -33,35 +30,8 @@ const HelpTraySectionFeatures: FC = () => {
 	);
 
 	const renderFeatureDescription = (feature: FeatureInterface) => {
-		const stage = Stages.find((stage) => stage.name === feature.stage);
-		const badgeColor = stage?.color ?? Stages[2].color;
-
-		if (!stage) return null;
 		return (
-			<View as="div" padding="0">
-				<Popover
-					placement="top end"
-					renderTrigger={
-						<Link aria-describedby={stage.abbreviation} as="abbr">
-							<Badge
-								margin="0 x-small xxx-small 0"
-								standalone
-								themeOverride={{ colorPrimary: badgeColor }}
-								type="notification"
-							/>
-						</Link>
-					}
-					shouldAlignArrow
-					shouldRenderOffscreen
-					shouldReturnFocus={false}
-					withArrow
-				>
-					<View padding="x-small">
-						<Text id={stage.abbreviation} size="small">
-							{stage.abbreviation}
-						</Text>
-					</View>
-				</Popover>
+			<View as="div" padding="0 medium">
 				<Text size="small">{feature.description}</Text>
 				{feature.link && (
 					<Text as="p" size="small">
@@ -81,7 +51,12 @@ const HelpTraySectionFeatures: FC = () => {
 
 	return (
 		<Flex.Item>
-			<ToggleDetails fluidWidth size="large" summary={toggleHeader}>
+			<ToggleDetails
+				defaultExpanded
+				fluidWidth
+				size="large"
+				summary={toggleHeader}
+			>
 				<View as="div" padding="small 0">
 					{Object.entries(Features).map(([stage, features]) =>
 						features.map((feature, idx) => {

@@ -1,10 +1,10 @@
 import { AccessibleContent } from "@instructure/ui-a11y-content";
 import { Alert } from "@instructure/ui-alerts";
-import { Badge } from "@instructure/ui-badge";
 import { IconLaunchLine } from "@instructure/ui-icons";
 import { Select } from "@instructure/ui-select";
 import { Tag } from "@instructure/ui-tag";
 import { Text } from "@instructure/ui-text";
+import { View } from "@instructure/ui-view";
 import React, {
 	type FocusEvent,
 	type KeyboardEvent,
@@ -16,7 +16,6 @@ import Features, {
 	type FeatureInterface,
 	type FeaturesType,
 } from "../assets/Features";
-import Stages from "../assets/Stages";
 import type { SignupFormMultiSelectProps } from "./SignupForm";
 
 const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
@@ -126,23 +125,16 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 			.find((o) => o?.id === id);
 	};
 
-	const stageColorMap = Stages.reduce<Record<string, string>>((acc, stage) => {
-		acc[stage.name] = stage.color;
-		return acc;
-	}, {});
-
-	const renderGroupLabel = (key: string, count: number) => {
-		const color = stageColorMap[key];
+	const renderGroupLabel = (key: string) => {
+		const group = filteredOptions[key];
+		const BrandIcon = group?.[0]?.colorIcon;
 		return (
-			<Text>
-				<Badge
-					count={count}
-					margin="0 x-small xxx-small 0"
-					standalone
-					themeOverride={{ colorPrimary: color }}
-				/>
-				{key}
-			</Text>
+			<>
+				{BrandIcon && <BrandIcon />}
+				<View margin="0 0 0 small">
+					<Text>{key}</Text>
+				</View>
+			</>
 		);
 	};
 
@@ -150,19 +142,16 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 		return Object.keys(filteredOptions)
 			.filter((key) => filteredOptions[key] && filteredOptions[key].length > 0)
 			.map((key) => (
-				<Select.Group
-					key={key}
-					renderLabel={renderGroupLabel(key, filteredOptions[key].length)}
-				>
-					{filteredOptions[key].map((option) => (
+				<Select.Group key={key} renderLabel={renderGroupLabel(key)}>
+					{filteredOptions[key].map((option: FeatureInterface) => (
 						<Select.Option
 							id={option.id}
 							isHighlighted={option.id === highlightedOptionId}
 							key={option.id}
-							renderBeforeLabel={option.icon ? <option.icon /> : null}
+							// renderBeforeLabel={option.icon ? <option.icon /> : null}
 							value={option.label}
 						>
-							{option.label}
+							<View margin="0 0 0 medium">{option.label}</View>
 						</Select.Option>
 					))}
 				</Select.Group>
@@ -197,6 +186,13 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 			(id: string, index: number): React.JSX.Element | null => {
 				const option = getOptionById(id);
 				if (!option) return null;
+				const groupKey = Object.keys(filteredOptions).find((key) =>
+					filteredOptions[key].some((opt: FeatureInterface) => opt.id === id),
+				);
+				const BrandIcon =
+					groupKey && filteredOptions[groupKey][0]?.colorIcon
+						? filteredOptions[groupKey][0].colorIcon
+						: null;
 				return (
 					<Tag
 						dismissible
@@ -207,7 +203,7 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 						onClick={(e: React.MouseEvent) => dismissTag(e, id)}
 						text={
 							<AccessibleContent alt={`Remove ${option.label}`}>
-								{option.icon && <option.icon />} {option.label}
+								{BrandIcon && <BrandIcon />} {option.label}
 							</AccessibleContent>
 						}
 					/>

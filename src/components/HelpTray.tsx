@@ -7,7 +7,6 @@ import { View } from "@instructure/ui-view";
 import type React from "react";
 import HelpTraySectionAbout from "./HelpTraySectionAbout";
 import HelpTraySectionFeatures from "./HelpTraySectionFeatures";
-import HelpTraySectionStages from "./HelpTraySectionStages";
 
 type HelpTrayProps = {
 	isTrayOpen: boolean;
@@ -47,13 +46,12 @@ const HelpTray: React.FC<HelpTrayProps> = ({ isTrayOpen, setIsTrayOpen }) => {
 			open={isTrayOpen}
 			placement="end"
 			shouldCloseOnDocumentClick
-			size="medium"
+			size="regular"
 		>
 			<View as="div" padding="small">
 				{TrayHeader}
 				<Flex direction="column" gap="small" padding="small">
 					<HelpTraySectionAbout />
-					<HelpTraySectionStages />
 					<HelpTraySectionFeatures />
 				</Flex>
 			</View>
