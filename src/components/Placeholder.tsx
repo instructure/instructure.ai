@@ -1,19 +1,18 @@
 import { Heading } from "@instructure/ui-heading";
 import { Link } from "@instructure/ui-link";
 import { View } from "@instructure/ui-view";
-import { InstructureBugColor } from "../assets/Logos";
+import { InstructureBugClassic } from "../assets/Logos";
 
 interface BannerProps {
 	href?: string;
 	variant?: "default" | "new";
 }
 
-const Banner = ({ href }: BannerProps): React.ReactElement => {
+const Placeholder = ({ href }: BannerProps): React.ReactElement => {
 	return (
 		<View as="div" borderRadius="medium" maxHeight="300px" maxWidth="300px">
 			<View
 				as="div"
-				className="logoWrapper"
 				height="300px"
 				overflowX="hidden"
 				overflowY="hidden"
@@ -25,14 +24,14 @@ const Banner = ({ href }: BannerProps): React.ReactElement => {
 				{href ? (
 					<Heading level="h1">
 						<Link href={href}>
-							<InstructureBugColor />
+							<InstructureBugClassic />
 						</Link>
 					</Heading>
 				) : (
-					<InstructureBugColor />
+					<InstructureBugClassic />
 				)}
 			</View>
 		</View>
 	);
 };
-export default Banner;
+export default Placeholder;

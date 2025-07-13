@@ -1,6 +1,5 @@
 :root {
   background-color: #061c30;
-  display: flex;
   justify-content: center;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,7 +24,8 @@ abbr:active {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
 }

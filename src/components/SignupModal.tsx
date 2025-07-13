@@ -6,12 +6,14 @@ import { Heading } from "@instructure/ui-heading";
 import {
 	IconAddSolid,
 	IconEditSolid,
+	IconInfoBorderlessLine,
 	IconPublishLine,
 	IconPublishSolid,
 	IconXSolid,
 } from "@instructure/ui-icons";
 import { Modal } from "@instructure/ui-modal";
 import { Spinner } from "@instructure/ui-spinner";
+import { Text } from "@instructure/ui-text";
 import { canvas } from "@instructure/ui-themes";
 import { View } from "@instructure/ui-view";
 import type { FormEvent } from "react";
@@ -111,18 +113,28 @@ const SignupModal = ({
 
 	return (
 		<>
-			{window.location.hash === "#/test" && (
+			<View as="div" className="cta">
 				<Button
+					color="primary-inverse"
+					margin="small"
+					onClick={() => {
+						setIsTrayOpen?.(true);
+					}}
+					renderIcon={<IconInfoBorderlessLine />}
+				>
+					<Text className="cta">Info</Text>
+				</Button>
+				<Button
+					className="cta"
 					color="primary-inverse"
 					disabled={isDisabled}
 					margin="small"
 					onClick={handleButtonClick}
 					renderIcon={hasFormData ? <IconEditSolid /> : <IconAddSolid />}
-					withBackground={false}
 				>
-					{hasFormData ? "Edit" : "Signup"}
+					{hasFormData ? "Edit" : "Sign up"}
 				</Button>
-			)}
+			</View>
 			<Modal
 				as="form"
 				id="signupForm"
@@ -137,7 +149,7 @@ const SignupModal = ({
 			>
 				<Modal.Header
 					themeOverride={{
-						inverseBackground: "transparent",
+						inverseBackground: "#0E68B3",
 						inverseBorderColor: "#fff",
 						padding: "1rem 1.5rem 0.5rem",
 					}}
@@ -163,7 +175,7 @@ const SignupModal = ({
 				</Modal.Header>
 				<Modal.Body
 					themeOverride={{
-						inverseBackground: "transparent",
+						inverseBackground: "#0E68B3",
 					}}
 				>
 					<View
@@ -191,35 +203,36 @@ const SignupModal = ({
 				</Modal.Body>
 				<Modal.Footer
 					themeOverride={{
-						inverseBackground: "transparent",
+						inverseBackground: "#0E68B3",
 						inverseBorderColor: "#ffffff",
 					}}
 				>
-					<Button
-						color="primary-inverse"
-						disabled={isLoading || isDisabled || isPending || progress < 100}
-						margin="small"
-						renderIcon={
-							isLoading ? (
-								<Spinner
-									renderTitle="Submitting"
-									size="x-small"
-									themeOverride={{
-										color: canvas.colors.primitives.white,
-										trackColor: alpha(canvas.colors.primitives.white, 50),
-									}}
-								/>
-							) : progress < 100 ? (
-								<IconPublishLine />
-							) : (
-								<IconPublishSolid />
-							)
-						}
-						type="submit"
-						withBackground={false}
-					>
-						Submit
-					</Button>
+					<View as="div" className="submit">
+						<Button
+							color="primary-inverse"
+							disabled={isLoading || isDisabled || isPending || progress < 100}
+							margin="small"
+							renderIcon={
+								isLoading ? (
+									<Spinner
+										renderTitle="Submitting"
+										size="x-small"
+										themeOverride={{
+											color: canvas.colors.primitives.white,
+											trackColor: alpha(canvas.colors.primitives.white, 50),
+										}}
+									/>
+								) : progress < 100 ? (
+									<IconPublishLine />
+								) : (
+									<IconPublishSolid />
+								)
+							}
+							type="submit"
+						>
+							Submit
+						</Button>
+					</View>
 				</Modal.Footer>
 			</Modal>
 		</>

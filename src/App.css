@@ -1,23 +1,48 @@
-#App .logoWrapper::after {
+.logoWrapper::after {
 	content: "";
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	width: 425px;
 	height: 425px;
-	background-image: url("/banner.jpg");
+	background-image: url("/banner.svg");
 	background-size: cover;
 	background-position: center;
 	z-index: -1;
 	transition: transform 0.3s;
 	transform: translate(-50%, -50%);
 	pointer-events: none;
-	animation: rotate-bg 30s linear infinite;
+	animation: rotate-bg 45s linear infinite;
+}
+
+.cta [class$="-baseButton__content"] {
+	background: linear-gradient(90deg, #fff, #fff 50%, #061c30 50%) 100% 100%/205% 100%;
+	transition: background-position .4s, color .3s, box-shadow .3s;
+}
+
+.cta button:hover:not(:disabled)>[class$="-baseButton__content"],
+.cta button:focus:not(:disabled)>[class$="-baseButton__content"],
+.cta button:active:not(:disabled)>[class$="-baseButton__content"] {
+	color: #061C30;
+	background: linear-gradient(90deg, #fff, #fff 50%, #061c30 50%) 1% 100%/205% 100%;
 
 }
 
+.submit [class$="-baseButton__content"] {
+	background: linear-gradient(90deg, #fff, #fff 50%, #0e68b3 50%) 100% 100%/205% 100%;
+	transition: background-position .4s, color .3s, box-shadow .3s;
+	color: #fff;
+}
+
+.submit button:hover:not(:disabled)>[class$="-baseButton__content"],
+.submit button:focus:not(:disabled)>[class$="-baseButton__content"],
+.submit button:active:not(:disabled)>[class$="-baseButton__content"] {
+	background: linear-gradient(90deg, #fff, #fff 50%, #0e68b3 50%) 1% 100%/205% 100%;
+	color: #0e68b3;
+}
+
 @media (prefers-reduced-motion: reduce) {
-	#App .logoWrapper::after {
+	.logoWrapper::after {
 		animation: none;
 		transition: none;
 	}

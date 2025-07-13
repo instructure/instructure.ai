@@ -153,7 +153,7 @@ const SubmissionModal = ({
 						</>
 					) : (
 						<Flex.Item>
-							<Button color="ai-secondary" onClick={handleButtonClick}>
+							<Button color="primary" onClick={handleButtonClick}>
 								Close
 							</Button>
 						</Flex.Item>
