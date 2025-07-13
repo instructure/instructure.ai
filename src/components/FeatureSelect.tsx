@@ -98,6 +98,8 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 						(opt: FeatureInterface) => opt.id !== id,
 					);
 				}
+				// Update filteredOptions immediately
+				setFilteredOptions(filterOptions(value, updated));
 				return updated;
 			});
 		}
@@ -193,10 +195,13 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 					);
 					if (alreadyIndex !== -1) newGroup.splice(alreadyIndex, 1);
 					newGroup.splice(insertIndex, 0, option);
-					setOptions({
+					const updatedOptions = {
 						...options,
 						[groupKey]: newGroup,
-					});
+					};
+					setOptions(updatedOptions);
+					// Update filteredOptions immediately
+					setFilteredOptions(filterOptions(value, updatedOptions));
 				}
 			}
 		}
