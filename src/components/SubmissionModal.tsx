@@ -105,9 +105,9 @@ const SubmissionModal = ({
 
 		const href = `mailto:${address}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.join("\n"))}`;
 		return (
-			<Button color="ai-secondary" href={href} onClick={handleButtonClick}>
+			<Button color="primary" href={href} onClick={handleButtonClick}>
 				<AccessibleContent alt="Send your submission to Danny">
-					<IconEmailLine color="secondary" /> Send
+					<IconEmailLine /> Send
 				</AccessibleContent>
 			</Button>
 		);

@@ -8,6 +8,12 @@ import SignupModal from "./components/SignupModal";
 import SubmissionModal from "./components/SubmissionModal";
 
 const App: FC = () => {
+	const [isTrayOpen, setIsTrayOpen] = useState<boolean>(false);
+	const [hasSuccess, setSuccess] = useState<boolean>(false);
+	const [hasError, setError] = useState<string | null>(null);
+	const [isSubmissionModalOpen, setIsSubmissionModalOpen] =
+		useState<boolean>(false);
+
 	const { Instructure, Mastery } = Brands;
 	const inst25 = "#0E68B3";
 	const inst25h = "#0E35B3";
@@ -33,6 +39,7 @@ const App: FC = () => {
 					meterColorSuccess: Mastery.color,
 				},
 				SourceCodeEditor: {
+					borderColor: "#fff",
 					focusBorderColor: inst25,
 				},
 			},
@@ -50,12 +57,6 @@ const App: FC = () => {
 			"https://www.instructure.com/careers",
 		);
 	}, []);
-
-	const [isTrayOpen, setIsTrayOpen] = useState<boolean>(false);
-	const [hasSuccess, setSuccess] = useState<boolean>(true);
-	const [hasError, setError] = useState<string | null>(null);
-	const [isSubmissionModalOpen, setIsSubmissionModalOpen] =
-		useState<boolean>(false);
 
 	return (
 		<InstUISettingsProvider
