@@ -1,4 +1,4 @@
-import { Alert, IconEducatorsLine, Select } from "@instructure/ui";
+import { Alert, IconEducatorsLine, Select, View } from "@instructure/ui";
 import {
 	type FocusEvent,
 	type SyntheticEvent,
@@ -167,7 +167,7 @@ const RoleSelect: React.FC<SignupFormSelectProps> = ({
 							key={option.id}
 							value={option.label}
 						>
-							{option.label}
+							<View margin="0 0 0 medium">{option.label}</View>
 						</Select.Option>
 					))}
 				</Select.Group>
