@@ -2,12 +2,11 @@ export interface Role {
 	id: string;
 	label: string;
 }
-export type RoleCategory = string;
 
-export type RolesType = Record<RoleCategory, Role[]>;
+export type RolesType = Record<string, Role[]>;
 
 const Roles: RolesType = {
-	Corporate: [],
+	Business: [],
 	Government: [],
 	"Higher Education": [
 		{
@@ -19,7 +18,7 @@ const Roles: RolesType = {
 			label: "Instructional Designer",
 		},
 	],
-	"K-12": [
+	"K-12 & Primary": [
 		{
 			id: "teacher",
 			label: "Teacher",
@@ -51,5 +50,6 @@ const Roles: RolesType = {
 			label: "Other",
 		},
 	],
+	"Technical & Vocational": [],
 };
 export default Roles;
