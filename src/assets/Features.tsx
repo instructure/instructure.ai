@@ -1,4 +1,4 @@
-import type { SVGIconProps } from "@instructure/ui-svg-images";
+import type { SVGIconProps } from "@instructure/ui";
 import type { ComponentType, JSX } from "react";
 import React from "react";
 import {

@@ -1,5 +1,4 @@
-import { IconUserLine } from "@instructure/ui-icons";
-import { TextInput } from "@instructure/ui-text-input";
+import { IconUserLine, TextInput } from "@instructure/ui";
 import type React from "react";
 import type { SyntheticEvent } from "react";
 import { NamePattern, SpacePattern } from "../utils/RegEx";

@@ -1,7 +1,9 @@
-import { Flex } from "@instructure/ui-flex";
-import type { FormMessage } from "@instructure/ui-form-field";
-import { FormFieldGroup } from "@instructure/ui-form-field";
-import { Heading } from "@instructure/ui-heading";
+import {
+	Flex,
+	FormFieldGroup,
+	type FormMessage,
+	Heading,
+} from "@instructure/ui";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { readLocalStorageField } from "../utils/FormData";

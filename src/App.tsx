@@ -1,6 +1,5 @@
-import { View } from "@instructure/ui-view";
+import { InstUISettingsProvider, View } from "@instructure/ui";
 import "./App.css";
-import { InstUISettingsProvider } from "@instructure/emotion";
 import { type FC, useEffect, useState } from "react";
 import { Brands } from "./assets/Features";
 import Banner from "./components/Banner";

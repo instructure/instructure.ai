@@ -1,5 +1,4 @@
-import { ProgressCircle } from "@instructure/ui-progress";
-import { Text } from "@instructure/ui-text";
+import { ProgressCircle, Text } from "@instructure/ui";
 
 type SignupProgressProps = {
 	status?: number | string;

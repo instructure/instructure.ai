@@ -1,10 +1,13 @@
-import { AccessibleContent } from "@instructure/ui-a11y-content";
-import { Alert } from "@instructure/ui-alerts";
-import { IconLaunchLine } from "@instructure/ui-icons";
-import { Select } from "@instructure/ui-select";
-import { Tag } from "@instructure/ui-tag";
-import { Text } from "@instructure/ui-text";
-import { View } from "@instructure/ui-view";
+import {
+	AccessibleContent,
+	Alert,
+	IconLaunchLine,
+	Select,
+	Tag,
+	Text,
+	View,
+} from "@instructure/ui";
+
 import React, {
 	type FocusEvent,
 	type KeyboardEvent,

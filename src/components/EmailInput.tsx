@@ -1,5 +1,4 @@
-import { IconEmailLine } from "@instructure/ui-icons";
-import { TextInput } from "@instructure/ui-text-input";
+import { IconEmailLine, TextInput } from "@instructure/ui";
 import type React from "react";
 import type { SyntheticEvent } from "react";
 import { EmailAddressPattern, PersonalEmailPattern } from "../utils/RegEx";

@@ -1,4 +1,4 @@
-import { InlineSVG } from "@instructure/ui-svg-images";
+import { InlineSVG } from "@instructure/ui";
 import type { FC, ReactNode } from "react";
 
 type ColorSVGProps = {

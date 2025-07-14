@@ -1,6 +1,4 @@
-import { AccessibleContent } from "@instructure/ui-a11y-content";
-import { IconExternalLinkLine } from "@instructure/ui-icons";
-import { Link } from "@instructure/ui-link";
+import { AccessibleContent, IconExternalLinkLine, Link } from "@instructure/ui";
 
 type ExternalLinkProps = Omit<React.ComponentProps<typeof Link>, "target">;
 

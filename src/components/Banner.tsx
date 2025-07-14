@@ -1,6 +1,4 @@
-import { Heading } from "@instructure/ui-heading";
-import { Link } from "@instructure/ui-link";
-import { View } from "@instructure/ui-view";
+import { Heading, Link, View } from "@instructure/ui";
 import { InstructureBugColor } from "../assets/Logos";
 
 interface BannerProps {

@@ -1,6 +1,4 @@
-import { Alert } from "@instructure/ui-alerts";
-import { IconEducatorsLine } from "@instructure/ui-icons";
-import { Select } from "@instructure/ui-select";
+import { Alert, IconEducatorsLine, Select } from "@instructure/ui";
 import {
 	type FocusEvent,
 	type SyntheticEvent,

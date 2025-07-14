@@ -1,5 +1,4 @@
-import { Checkbox } from "@instructure/ui-checkbox";
-import { Text } from "@instructure/ui-text";
+import { Checkbox, Text } from "@instructure/ui";
 import type { ChangeEvent, SyntheticEvent } from "react";
 import ExternalLink from "./ExternalLink";
 

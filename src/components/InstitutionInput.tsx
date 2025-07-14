@@ -1,6 +1,4 @@
-import type { FormMessage } from "@instructure/ui-form-field";
-import { IconHomeLine } from "@instructure/ui-icons";
-import { TextInput } from "@instructure/ui-text-input";
+import { type FormMessage, IconHomeLine, TextInput } from "@instructure/ui";
 import React, { type SyntheticEvent, useState } from "react";
 import { NamePattern, SpacePattern } from "../utils/RegEx";
 import type { SignupFormInputProps } from "./SignupForm";

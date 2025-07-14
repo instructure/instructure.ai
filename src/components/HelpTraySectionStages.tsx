@@ -1,11 +1,13 @@
-import { Badge } from "@instructure/ui-badge";
-import { Flex } from "@instructure/ui-flex";
-import { Heading } from "@instructure/ui-heading";
-import { Link } from "@instructure/ui-link";
-import { Popover } from "@instructure/ui-popover";
-import { Text } from "@instructure/ui-text";
-import { ToggleDetails } from "@instructure/ui-toggle-details";
-import { View } from "@instructure/ui-view";
+import {
+	Badge,
+	Flex,
+	Heading,
+	Link,
+	Popover,
+	Text,
+	ToggleDetails,
+	View,
+} from "@instructure/ui";
 import type { FC } from "react";
 import { useState } from "react";
 import Stages, { type Stage } from "../assets/Stages";

@@ -1,9 +1,12 @@
-import { IconButton } from "@instructure/ui-buttons";
-import { Flex } from "@instructure/ui-flex";
-import { Heading } from "@instructure/ui-heading";
-import { IconInfoLine, IconXSolid } from "@instructure/ui-icons";
-import { Tray } from "@instructure/ui-tray";
-import { View } from "@instructure/ui-view";
+import {
+	Flex,
+	Heading,
+	IconButton,
+	IconInfoLine,
+	IconXSolid,
+	Tray,
+	View,
+} from "@instructure/ui";
 import type React from "react";
 import HelpTraySectionAbout from "./HelpTraySectionAbout";
 import HelpTraySectionFeatures from "./HelpTraySectionFeatures";

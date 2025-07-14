@@ -1,13 +1,17 @@
-import { AccessibleContent } from "@instructure/ui-a11y-content";
-import { Button, IconButton } from "@instructure/ui-buttons";
-import { Flex } from "@instructure/ui-flex";
-import { Heading } from "@instructure/ui-heading";
-import { IconEmailLine, IconXSolid } from "@instructure/ui-icons";
-import { Modal } from "@instructure/ui-modal";
-import { SourceCodeEditor } from "@instructure/ui-source-code-editor";
-import { Text } from "@instructure/ui-text";
-import { ToggleDetails } from "@instructure/ui-toggle-details";
-import { View } from "@instructure/ui-view";
+import {
+	AccessibleContent,
+	Button,
+	Flex,
+	Heading,
+	IconButton,
+	IconEmailLine,
+	IconXSolid,
+	Modal,
+	SourceCodeEditor,
+	Text,
+	ToggleDetails,
+	View,
+} from "@instructure/ui";
 import { startTransition } from "react";
 import { GoldStar } from "../assets/Logos";
 import { readLocalStorage, serializeFormData } from "../utils/FormData";

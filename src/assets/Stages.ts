@@ -1,4 +1,4 @@
-import { canvas } from "@instructure/ui-themes";
+import { canvas } from "@instructure/ui";
 
 export type Stage = {
 	name: string;

@@ -1,21 +1,22 @@
 import { debounce } from "@instructure/debounce";
-import { Button, IconButton } from "@instructure/ui-buttons";
-import { alpha } from "@instructure/ui-color-utils";
-import { Flex } from "@instructure/ui-flex";
-import { Heading } from "@instructure/ui-heading";
 import {
+	Button,
+	canvas,
+	Flex,
+	Heading,
 	IconAddSolid,
+	IconButton,
 	IconEditSolid,
 	IconInfoBorderlessLine,
 	IconPublishLine,
 	IconPublishSolid,
 	IconXSolid,
-} from "@instructure/ui-icons";
-import { Modal } from "@instructure/ui-modal";
-import { Spinner } from "@instructure/ui-spinner";
-import { Text } from "@instructure/ui-text";
-import { canvas } from "@instructure/ui-themes";
-import { View } from "@instructure/ui-view";
+	Modal,
+	Spinner,
+	Text,
+	View,
+} from "@instructure/ui";
+import { alpha } from "@instructure/ui-color-utils";
 import type { FormEvent } from "react";
 import { useEffect, useState, useTransition } from "react";
 import { InstructureLogo } from "../assets/Logos";

@@ -1,8 +1,4 @@
-import { Flex } from "@instructure/ui-flex";
-import { Heading } from "@instructure/ui-heading";
-import { Text } from "@instructure/ui-text";
-import { ToggleDetails } from "@instructure/ui-toggle-details";
-import { View } from "@instructure/ui-view";
+import { Flex, Heading, Text, ToggleDetails, View } from "@instructure/ui";
 import type { FC } from "react";
 import { useState } from "react";
 import Features, { type FeatureInterface } from "../assets/Features";
