@@ -124,7 +124,7 @@ const RawFeatures: RawFeaturesType = {
 			),
 			icon: Canvas.icon,
 			id: "canvas_modules",
-			label: "Modules Redesign",
+			label: "Canvas Modules Redesign",
 		},
 	],
 	IgniteAI: [
@@ -143,25 +143,20 @@ const RawFeatures: RawFeaturesType = {
 				</>
 			),
 			id: "rubric_generator",
-			label: "Rubric Generator",
+			label: "Canvas Rubric Generator",
 		},
 		{
 			color: Mastery.color,
-			colorIcon: Mastery.colorIcon,
-			icon: Mastery.icon,
 			id: "mastery_item_generator",
 			label: "Mastery Connect Item Generator",
 		},
 		{
 			color: Canvas.color,
-			colorIcon: Canvas.colorIcon,
-			icon: Canvas.icon,
 			id: "accessibility_remediation",
 			label: "Content Accessibility Remediation",
 		},
 		{
 			color: Canvas.color,
-			colorIcon: Canvas.colorIcon,
 			description: (
 				<>
 					Discussion Insights leverages AI to assess student contributions in
@@ -169,21 +164,16 @@ const RawFeatures: RawFeaturesType = {
 					engagement at a glance.
 				</>
 			),
-			icon: Canvas.icon,
 			id: "discussion_insights",
-			label: "Discussion Insights",
+			label: "Canvas Discussion Insights",
 		},
 		{
 			color: Studio.color,
-			colorIcon: Studio.colorIcon,
-			icon: Studio.icon,
 			id: "studio_captioning",
 			label: "Studio Caption Review",
 		},
 		{
 			color: Canvas.color,
-			colorIcon: Canvas.colorIcon,
-			icon: Canvas.icon,
 			id: "canvas_quiz_generator",
 			label: "Canvas Quizzes Item Generator",
 		},
