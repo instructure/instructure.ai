@@ -59,6 +59,7 @@
 }
 
 /* INSTUI-4375: BaseButton focusring doesn't follow border radius themeOverride  */
-[class$="view--inlineBlock-baseButton"] {
+[class$="view--inlineBlock-baseButton"],
+[class$="view--block-baseButton"] {
 	border-radius: calc(2rem + (0.3125rem - 0.125rem)) !important;
 }
