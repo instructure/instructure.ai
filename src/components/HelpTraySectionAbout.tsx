@@ -1,11 +1,10 @@
-import { AccessibleContent } from "@instructure/ui-a11y-content";
 import { Flex } from "@instructure/ui-flex";
 import { Heading } from "@instructure/ui-heading";
-import { Link } from "@instructure/ui-link";
 import { Text } from "@instructure/ui-text";
 import { ToggleDetails } from "@instructure/ui-toggle-details";
 import { View } from "@instructure/ui-view";
 import type { FC } from "react";
+import ExternalLink from "./ExternalLink";
 
 const HelpTraySectionAbout: FC = () => {
 	const toggleHeader = (
@@ -26,11 +25,9 @@ const HelpTraySectionAbout: FC = () => {
 					<Text as="p" size="small">
 						Sign up to receive updates on the new features and products
 						announced at{" "}
-						<Link href="https://instructurecon.com" target="_blank">
-							<AccessibleContent alt="Instructurecon 2025">
-								Instructurecon 2025 {"\u29C9"}
-							</AccessibleContent>
-						</Link>
+						<ExternalLink href="https://instructurecon.com">
+							Instructurecon 2025
+						</ExternalLink>
 					</Text>
 					<Text as="p" size="small">
 						Please note that many of these features are in early stages of

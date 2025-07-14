@@ -1,13 +1,12 @@
-import { AccessibleContent } from "@instructure/ui-a11y-content";
 import { Flex } from "@instructure/ui-flex";
 import { Heading } from "@instructure/ui-heading";
-import { Link } from "@instructure/ui-link";
 import { Text } from "@instructure/ui-text";
 import { ToggleDetails } from "@instructure/ui-toggle-details";
 import { View } from "@instructure/ui-view";
 import type { FC } from "react";
 import { useState } from "react";
 import Features, { type FeatureInterface } from "../assets/Features";
+import ExternalLink from "./ExternalLink";
 
 const HelpTraySectionFeatures: FC = () => {
 	const [expandedKey, setExpandedKey] = useState<string | null>(null);
@@ -35,11 +34,7 @@ const HelpTraySectionFeatures: FC = () => {
 				<Text size="small">{feature.description}</Text>
 				{feature.link && (
 					<Text as="p" size="small">
-						<Link href={feature.link} target="_blank">
-							<AccessibleContent alt="Learn more">
-								Learn more {"\u29C9"}
-							</AccessibleContent>
-						</Link>
+						<ExternalLink href={feature.link}>Learn more</ExternalLink>
 					</Text>
 				)}
 			</View>
