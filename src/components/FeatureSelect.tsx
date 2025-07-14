@@ -107,7 +107,6 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 						(opt: FeatureInterface) => opt.id !== id,
 					);
 				}
-				// Update filteredOptions immediately
 				setFilteredOptions(filterOptions(value, updated));
 				return updated;
 			});
@@ -256,7 +255,6 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 		if (value === "") {
 			setFilteredOptions(options);
 		}
-		focusInput();
 	};
 
 	const handleHighlightOption = (
