@@ -36,7 +36,6 @@ const SubmissionModal = ({
 	};
 
 	const formData: string | FormData | null = readLocalStorage("formData");
-	console.log("formData:", formData);
 	const serializedFormData =
 		formData instanceof FormData
 			? serializeFormData(formData)
