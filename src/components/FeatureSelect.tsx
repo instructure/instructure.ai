@@ -208,7 +208,6 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 						[groupKey]: newGroup,
 					};
 					setOptions(updatedOptions);
-					// Update filteredOptions immediately
 					setFilteredOptions(filterOptions(value, updatedOptions));
 				}
 			}

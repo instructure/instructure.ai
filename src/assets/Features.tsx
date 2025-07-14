@@ -167,7 +167,7 @@ const RawFeatures: RawFeaturesType = {
 				</>
 			),
 			id: "accessibility_remediation",
-			label: "Canvas Content Accessibility Checker",
+			label: "Content Accessibility Checker",
 		},
 		{
 			color: Canvas.color,
@@ -244,7 +244,9 @@ const RawFeatures: RawFeaturesType = {
 	],
 	Mastery: [],
 	Parchment: [],
-	Studio: [
+	Studio: [],
+	/*
+	Excluded: [
 		{
 			color: Studio.color,
 			colorIcon: Studio.colorIcon,
@@ -259,9 +261,6 @@ const RawFeatures: RawFeaturesType = {
 			id: "media_archiving",
 			label: "Studio Archive & Restore",
 		},
-	],
-	/*
-	Excluded: [
 		{
 			color: Canvas.color,
 			colorIcon: Canvas.colorIcon,
