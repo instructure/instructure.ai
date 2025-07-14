@@ -36,6 +36,7 @@ const SubmissionModal = ({
 	};
 
 	const formData: string | FormData | null = readLocalStorage("formData");
+	console.log("formData:", formData);
 	const serializedFormData =
 		formData instanceof FormData
 			? serializeFormData(formData)
@@ -145,7 +146,13 @@ const SubmissionModal = ({
 			</Modal.Body>
 			<Modal.Footer>
 				<Flex>
-					{hasError !== null ? (
+					{hasSuccess ? (
+						<Flex.Item>
+							<Button color="primary" onClick={handleButtonClick}>
+								Close
+							</Button>
+						</Flex.Item>
+					) : (
 						<>
 							<Flex.Item shouldGrow shouldShrink>
 								<Text color="secondary" size="small">
@@ -153,14 +160,8 @@ const SubmissionModal = ({
 									directly.
 								</Text>
 							</Flex.Item>
-							<Flex.Item>{emailLink()}</Flex.Item>
+							<Flex.Item margin="0 0 0 x-small">{emailLink()}</Flex.Item>
 						</>
-					) : (
-						<Flex.Item>
-							<Button color="primary" onClick={handleButtonClick}>
-								Close
-							</Button>
-						</Flex.Item>
 					)}
 				</Flex>
 			</Modal.Footer>

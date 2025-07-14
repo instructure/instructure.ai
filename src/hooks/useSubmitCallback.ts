@@ -9,6 +9,10 @@ type SubmitCallback = (
 ) => Promise<void>;
 
 const useSubmitCallback = (): SubmitCallback => {
+	const SAFARI = "Load failed";
+	const CHROME = "Failed to fetch";
+	const FIREFOX = "NetworkError when attempting to fetch resource.";
+
 	return useCallback(
 		async (formData: FormData, { setSuccess, setError }): Promise<void> => {
 			try {
@@ -29,11 +33,7 @@ const useSubmitCallback = (): SubmitCallback => {
 				setSuccess(false);
 				const msg =
 					e instanceof Error ? e.message : "An unknown error occurred";
-				const hits = [
-					"NetworkError when attempting to fetch resource.",
-					"Failed to fetch",
-				];
-				console.log("hit:", hits.includes(msg));
+				const hits = [SAFARI, CHROME, FIREFOX];
 				hits.includes(msg) ? setSuccess(true) : setError(msg);
 			}
 		},
