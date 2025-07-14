@@ -1,24 +1,6 @@
 :root {
   background-color: #061c30;
-  justify-content: center;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-abbr {
-  text-decoration-line: underline;
-  text-decoration-style: solid;
-  text-decoration-thickness: 0.15em;
-  text-decoration-color: "#0E68B3";
-  text-transform: uppercase
-}
-
-abbr:hover,
-abbr:focus,
-abbr:active {
-  text-decoration-color: "#0E35B3";
+  text-rendering: optimizeSpeed;
 }
 
 body {
@@ -26,26 +8,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 320px;
+  min-width: 20rem;
   min-height: 100vh;
-}
-
-dfn {
-  font-style: normal;
 }
 
 @font-face {
   font-family: 'circularxx';
   src: url('/CircularXX-Regular.woff2') format('woff2');
   font-weight: normal;
-  font-style: normal;
-  font-display: swap;
 }
 
 @font-face {
   font-family: 'circularxx';
   src: url('/CircularXX-Bold.woff2') format('woff2');
   font-weight: bold;
-  font-style: normal;
-  font-display: swap;
 }
