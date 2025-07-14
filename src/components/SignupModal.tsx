@@ -207,31 +207,42 @@ const SignupModal = ({
 						inverseBorderColor: "#ffffff",
 					}}
 				>
-					<View as="div" className="submit">
-						<Button
-							color="primary-inverse"
-							disabled={isLoading || isDisabled || isPending || progress < 100}
-							margin="small"
-							renderIcon={
-								isLoading ? (
-									<Spinner
-										renderTitle="Submitting"
-										size="x-small"
-										themeOverride={{
-											color: canvas.colors.primitives.white,
-											trackColor: alpha(canvas.colors.primitives.white, 50),
-										}}
-									/>
-								) : progress < 100 ? (
-									<IconPublishLine />
-								) : (
-									<IconPublishSolid />
-								)
-							}
-							type="submit"
-						>
-							Submit
-						</Button>
+					<View as="div" margin="auto" maxWidth="59.25rem" width="100%">
+						<Flex justifyItems="end">
+							<Flex.Item>
+								<View as="div" className="submit">
+									<Button
+										color="primary-inverse"
+										disabled={
+											isLoading || isDisabled || isPending || progress < 100
+										}
+										margin="small"
+										renderIcon={
+											isLoading ? (
+												<Spinner
+													renderTitle="Submitting"
+													size="x-small"
+													themeOverride={{
+														color: canvas.colors.primitives.white,
+														trackColor: alpha(
+															canvas.colors.primitives.white,
+															50,
+														),
+													}}
+												/>
+											) : progress < 100 ? (
+												<IconPublishLine />
+											) : (
+												<IconPublishSolid />
+											)
+										}
+										type="submit"
+									>
+										Submit
+									</Button>
+								</View>
+							</Flex.Item>
+						</Flex>
 					</View>
 				</Modal.Footer>
 			</Modal>
