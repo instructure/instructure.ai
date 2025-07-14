@@ -36,7 +36,7 @@ dfn {
 
 @font-face {
   font-family: 'circularxx';
-  src: url('/CircularXX-Regular.otf') format('opentype');
+  src: url('/CircularXX-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -44,7 +44,7 @@ dfn {
 
 @font-face {
   font-family: 'circularxx';
-  src: url('/CircularXX-Bold.otf') format('opentype');
+  src: url('/CircularXX-Bold.woff2') format('woff2');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
