@@ -228,6 +228,15 @@ const RawFeatures: RawFeaturesType = {
 		{
 			color: Instructure.color,
 			colorIcon: Instructure.colorIcon,
+			description: (
+				<>
+					The Instructure Research Network (IRN) is a collaborative network of
+					K-12 districts and organizations interested in participating in and
+					learning from educational research. It's designed to bring education
+					leaders into the research process to inform, test, and improve
+					education tools and implementation practices.
+				</>
+			),
 			icon: Instructure.icon,
 			id: "irn",
 			label: "Instructure Research Network",
