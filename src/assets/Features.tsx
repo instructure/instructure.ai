@@ -1,4 +1,5 @@
 import type { SVGIconProps } from "@instructure/ui";
+import { List } from "@instructure/ui";
 import type { ComponentType, JSX } from "react";
 import React from "react";
 import {
@@ -147,13 +148,26 @@ const RawFeatures: RawFeaturesType = {
 		},
 		{
 			color: Mastery.color,
+			description: (
+				<>
+					Mastery Connect Item Generator uses AI to create quiz questions based
+					on provided content, streamlining the quiz creation process for
+					instructors and facilitating personalized assessments for students.
+				</>
+			),
 			id: "mastery_item_generator",
 			label: "Mastery Connect Item Generator",
 		},
 		{
 			color: Canvas.color,
+			description: (
+				<>
+					The Content Accessibility Checker provides on-demand accessibility
+					reports and automated remediation of issues in Canvas content.
+				</>
+			),
 			id: "accessibility_remediation",
-			label: "Content Accessibility Remediation",
+			label: "Canvas Content Accessibility Checker",
 		},
 		{
 			color: Canvas.color,
@@ -169,11 +183,43 @@ const RawFeatures: RawFeaturesType = {
 		},
 		{
 			color: Studio.color,
+			description: (
+				<>
+					Leveraging AI to proactive showing possible transcript inaccuracies to
+					content creators will substantially reduce the time required to review
+					videos for accessibility issues.
+				</>
+			),
 			id: "studio_captioning",
 			label: "Studio Caption Review",
 		},
 		{
+			color: Studio.color,
+			description: (
+				<>
+					Studio will use AI to automatically generate caption to and from the
+					following languages:
+					<List size="small">
+						<List.Item>English</List.Item>
+						<List.Item>Spanish</List.Item>
+						<List.Item>French</List.Item>
+						<List.Item>German</List.Item>
+						<List.Item>Dutch</List.Item>
+					</List>
+				</>
+			),
+			id: "studio_translation",
+			label: "Studio Caption Translation",
+		},
+		{
 			color: Canvas.color,
+			description: (
+				<>
+					Canvas Quizzes Item Generator uses AI to create quiz questions based
+					on provided content, streamlining the quiz creation process for
+					instructors and facilitating personalized assessments for students.
+				</>
+			),
 			id: "canvas_quiz_generator",
 			label: "Canvas Quizzes Item Generator",
 		},
@@ -193,9 +239,16 @@ const RawFeatures: RawFeaturesType = {
 		{
 			color: Studio.color,
 			colorIcon: Studio.colorIcon,
+			description: (
+				<>
+					Studio Archive & Restore will help content creators maintain a cleaner
+					video library, prevent unintended content deletion and support
+					institutions in complying with their storage policies.
+				</>
+			),
 			icon: Studio.icon,
 			id: "media_archiving",
-			label: "Studio Media Archive & Restore",
+			label: "Studio Archive & Restore",
 		},
 	],
 	/*
