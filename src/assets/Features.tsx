@@ -20,7 +20,6 @@ import {
 interface RawFeatureInterface {
 	color?: string;
 	icon?: ComponentType<SVGIconProps>;
-	id: string;
 	label: string;
 	description?: JSX.Element;
 	colorIcon?: ComponentType<SVGIconProps>;
@@ -30,11 +29,11 @@ interface RawFeatureInterface {
 export interface FeatureInterface {
 	color: string;
 	icon: ComponentType<SVGIconProps>;
-	id: string;
 	label: string;
 	description: JSX.Element;
 	colorIcon: ComponentType<SVGIconProps>;
 	link?: string;
+	id: string;
 }
 
 type BrandKey =
@@ -94,7 +93,6 @@ const RawFeatures: RawFeaturesType = {
 				</>
 			),
 			icon: Canvas.icon,
-			id: "canvas_career",
 			label: "Canvas Career",
 			link: "https://instructure.com/canvas/canvas-career",
 		},
@@ -109,7 +107,6 @@ const RawFeatures: RawFeaturesType = {
 				</>
 			),
 			icon: Canvas.icon,
-			id: "canvas_apps",
 			label: "Canvas Apps",
 			link: "https://www.instructure.com/k12/products/learnplatform",
 		},
@@ -124,13 +121,11 @@ const RawFeatures: RawFeaturesType = {
 				</>
 			),
 			icon: Canvas.icon,
-			id: "canvas_modules",
 			label: "Canvas Modules Redesign",
 		},
 	],
 	IgniteAI: [
 		{
-			id: "ignite",
 			label: "Ignite Agent",
 			link: "http://instructure.com/ignite-ai",
 		},
@@ -143,7 +138,6 @@ const RawFeatures: RawFeaturesType = {
 					coverage.
 				</>
 			),
-			id: "rubric_generator",
 			label: "Canvas Rubric Generator",
 		},
 		{
@@ -155,7 +149,6 @@ const RawFeatures: RawFeaturesType = {
 					instructors and facilitating personalized assessments for students.
 				</>
 			),
-			id: "mastery_item_generator",
 			label: "Mastery Connect Item Generator",
 		},
 		{
@@ -166,7 +159,6 @@ const RawFeatures: RawFeaturesType = {
 					reports and automated remediation of issues in Canvas content.
 				</>
 			),
-			id: "accessibility_remediation",
 			label: "Content Accessibility Checker",
 		},
 		{
@@ -178,7 +170,6 @@ const RawFeatures: RawFeaturesType = {
 					engagement at a glance.
 				</>
 			),
-			id: "discussion_insights",
 			label: "Canvas Discussion Insights",
 		},
 		{
@@ -190,7 +181,6 @@ const RawFeatures: RawFeaturesType = {
 					videos for accessibility issues.
 				</>
 			),
-			id: "studio_captioning",
 			label: "Studio Caption Review",
 		},
 		{
@@ -208,7 +198,6 @@ const RawFeatures: RawFeaturesType = {
 					</List>
 				</>
 			),
-			id: "studio_translation",
 			label: "Studio Caption Translation",
 		},
 		{
@@ -220,7 +209,6 @@ const RawFeatures: RawFeaturesType = {
 					instructors and facilitating personalized assessments for students.
 				</>
 			),
-			id: "canvas_quiz_generator",
 			label: "Canvas Quizzes Item Generator",
 		},
 	],
@@ -238,7 +226,6 @@ const RawFeatures: RawFeaturesType = {
 				</>
 			),
 			icon: Instructure.icon,
-			id: "irn",
 			label: "Instructure Research Network",
 		},
 	],
@@ -258,57 +245,48 @@ const RawFeatures: RawFeaturesType = {
 				</>
 			),
 			icon: Studio.icon,
-			id: "media_archiving",
 			label: "Studio Archive & Restore",
 		},
 		{
 			color: Canvas.color,
 			colorIcon: Canvas.colorIcon,
 			icon: Canvas.icon,
-			id: "canvas_admin_experience",
 			label: "Canvas Admin Experience",
 		},
 		{
 			color: Canvas.color,
 			colorIcon: Canvas.colorIcon,
 			icon: Canvas.icon,
-			id: "improved_lmgb",
 			label: "Improved Learning Mastery Gradebook",
 		},
 		{
 			color: Canvas.color,
 			colorIcon: Canvas.colorIcon,
 			icon: Canvas.icon,
-			id: "canvas_portfolio",
 			label: "Canvas Portfolios",
 		},
 		{
-			id: "grading_assistance",
 			label: "Grading Assistance",
 		},
 		{
-			id: "translations",
 			label: "Translations",
 		},
 		{
 			color: Canvas.color,
 			colorIcon: Canvas.colorIcon,
 			icon: Canvas.icon,
-			id: "block_editor",
 			label: "Block Content Editor",
 		},
 		{
 			color: Canvas.color,
 			colorIcon: Canvas.colorIcon,
 			icon: Canvas.icon,
-			id: "peer_review",
 			label: "Updated Peer Review",
 		},
 		{
 			color: Canvas.color,
 			colorIcon: Canvas.colorIcon,
 			icon: Canvas.icon,
-			id: "concurrent_grading",
 			label: "Concurrent Grading",
 		},
 	],
@@ -318,12 +296,13 @@ const RawFeatures: RawFeaturesType = {
 const Features = Object.fromEntries(
 	Object.entries(RawFeatures).map(([name, features]) => [
 		name,
-		[...features].map((feature) => ({
+		features.map((feature) => ({
 			...feature,
 			color: feature.color ?? IgniteAI.color,
 			colorIcon: feature.colorIcon ?? IgniteAI.colorIcon,
 			description: feature.description ?? <React.Fragment />,
 			icon: feature.icon ?? IgniteAI.icon,
+			id: `${name}_${feature.label}`.toLowerCase().replace(/[^a-z0-9]/g, "_"),
 			stage: name,
 		})),
 	]),
