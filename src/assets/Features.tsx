@@ -115,9 +115,9 @@ const RawFeatures: RawFeaturesType = {
 			colorIcon: Canvas.colorIcon,
 			description: (
 				<>
-					Canvas Modules are central to how students interact with course
-					content, and we're implementing exciting changes to modernize the page
-					and add more value.
+					Enhanced Course Progression for Learners are central to how students
+					interact with course content, and we're implementing exciting changes
+					to modernize the page and add more value.
 				</>
 			),
 			icon: Canvas.icon,
@@ -144,12 +144,12 @@ const RawFeatures: RawFeaturesType = {
 			color: Mastery.color,
 			description: (
 				<>
-					Mastery Connect Item Generator uses AI to create quiz questions based
-					on provided content, streamlining the quiz creation process for
+					Mastery Item Authoring Assistance uses AI to create quiz questions
+					based on provided content, streamlining the quiz creation process for
 					instructors and facilitating personalized assessments for students.
 				</>
 			),
-			label: "Mastery Connect Item Generator",
+			label: "Mastery Item Authoring Assistance",
 		},
 		{
 			color: Canvas.color,
@@ -187,12 +187,12 @@ const RawFeatures: RawFeaturesType = {
 			color: Canvas.color,
 			description: (
 				<>
-					Canvas Quizzes Item Generator uses AI to create quiz questions based
-					on provided content, streamlining the quiz creation process for
+					Canvas Item Authoring Assistance uses AI to create quiz questions
+					based on provided content, streamlining the quiz creation process for
 					instructors and facilitating personalized assessments for students.
 				</>
 			),
-			label: "Canvas Quizzes Item Generator",
+			label: "Canvas Item Authoring Assistance",
 		},
 	],
 	Instructure: [
