@@ -121,7 +121,7 @@ const RawFeatures: RawFeaturesType = {
 				</>
 			),
 			icon: Canvas.icon,
-			label: "Canvas Modules Redesign",
+			label: "Enhanced Course Progression for Learners",
 		},
 	],
 	IgniteAI: [
