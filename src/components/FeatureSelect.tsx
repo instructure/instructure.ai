@@ -170,7 +170,9 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 							key={option.id}
 							value={option.label}
 						>
-							<View margin="0 0 0 medium">{option.label}</View>
+							<View as="div" margin="0 0 0 medium">
+								{option.label}
+							</View>
 						</Select.Option>
 					))}
 				</Select.Group>
