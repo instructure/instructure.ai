@@ -28,7 +28,7 @@ const RolesRaw: RolesRawType = {
 		"Director of Customer Training",
 		"Other",
 	],
-	Government: [],
+	Government: ["other"],
 	"Higher Education": ["Faculty / Instructor", "Instructional Designer"],
 	"K-12 & Primary": [
 		"Teacher",
@@ -37,9 +37,10 @@ const RolesRaw: RolesRawType = {
 		"Superintendent",
 		"School Board Member",
 		"Librarian",
+		"Other",
 	],
 	Other: ["Other"],
-	"Technical & Vocational": [],
+	"Technical & Vocational": ["Other"],
 };
 
 const Roles: RolesType = Object.fromEntries(
