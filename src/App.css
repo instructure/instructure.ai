@@ -41,6 +41,11 @@
 	color: #0e68b3;
 }
 
+.truncated {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.logoWrapper::after {
 		animation: none;

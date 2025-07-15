@@ -170,7 +170,12 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 							key={option.id}
 							value={option.label}
 						>
-							<View as="div" margin="0 0 0 medium">
+							<View
+								className="truncated"
+								display="block"
+								margin="0 0 0 small"
+								overflowX="hidden"
+							>
 								{option.label}
 							</View>
 						</Select.Option>

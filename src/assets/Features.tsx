@@ -159,7 +159,7 @@ const RawFeatures: RawFeaturesType = {
 					reports and automated remediation of issues in Canvas content.
 				</>
 			),
-			label: "Content Accessibility Checker",
+			label: "Canvas Content Accessibility Checker",
 		},
 		{
 			color: Canvas.color,
