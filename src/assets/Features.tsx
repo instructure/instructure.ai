@@ -184,23 +184,6 @@ const RawFeatures: RawFeaturesType = {
 			label: "Studio Caption Review",
 		},
 		{
-			color: Studio.color,
-			description: (
-				<>
-					Studio will use AI to automatically generate caption to and from the
-					following languages:
-					<List size="small">
-						<List.Item>English</List.Item>
-						<List.Item>Spanish</List.Item>
-						<List.Item>French</List.Item>
-						<List.Item>German</List.Item>
-						<List.Item>Dutch</List.Item>
-					</List>
-				</>
-			),
-			label: "Studio Caption Translation",
-		},
-		{
 			color: Canvas.color,
 			description: (
 				<>
@@ -234,6 +217,23 @@ const RawFeatures: RawFeaturesType = {
 	Studio: [],
 	/*
 	Excluded: [
+		{
+			color: Studio.color,
+			description: (
+				<>
+					Studio will use AI to automatically generate caption to and from the
+					following languages:
+					<List size="small">
+						<List.Item>English</List.Item>
+						<List.Item>Spanish</List.Item>
+						<List.Item>French</List.Item>
+						<List.Item>German</List.Item>
+						<List.Item>Dutch</List.Item>
+					</List>
+				</>
+			),
+			label: "Studio Caption Translation",
+		},
 		{
 			color: Studio.color,
 			colorIcon: Studio.colorIcon,
