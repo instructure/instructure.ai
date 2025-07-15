@@ -30,7 +30,9 @@ const HelpTraySectionFeatures: FC = () => {
 				<Text size="small">{feature.description}</Text>
 				{feature.link && (
 					<Text as="p" size="small">
-						<ExternalLink href={feature.link}>Learn more</ExternalLink>
+						<ExternalLink href={feature.link}>
+							Learn more about {feature.label}
+						</ExternalLink>
 					</Text>
 				)}
 			</View>
