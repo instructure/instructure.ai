@@ -12,6 +12,7 @@ import EmailInput from "./EmailInput";
 import FeatureSelect from "./FeatureSelect";
 import InstitutionInput from "./InstitutionInput";
 import NameInput from "./NameInput";
+import RoleInput from "./RoleInput";
 import RoleSelect from "./RoleSelect";
 import SignupProgress from "./SignupProgress";
 
@@ -79,6 +80,10 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		readLocalStorageField("consent") === "true",
 	);
 	const [consentMessages, setConsentMessages] = useState<FormMessage[]>([]);
+	const [otherValue, setOtherValue] = useState<string>(
+		readLocalStorageField("other"),
+	);
+	const [otherMessages, setOtherMessages] = useState<FormMessage[]>([]);
 
 	const formFieldGroupRef = useRef<FormFieldGroup | null>(null);
 
@@ -109,6 +114,18 @@ const SignupForm: React.FC<SignupFormProps> = ({
 			setValue={setRoleValue}
 			value={roleValue}
 		/>,
+		...(roleValueOptionID?.includes("other")
+			? [
+					<RoleInput
+						isDisabled={isDisabled}
+						key="roleInput"
+						messages={otherMessages}
+						setMessages={setOtherMessages}
+						setValue={setOtherValue}
+						value={otherValue}
+					/>,
+				]
+			: []),
 		<InstitutionInput
 			isDisabled={isDisabled}
 			key="institutionInput"
@@ -148,6 +165,9 @@ const SignupForm: React.FC<SignupFormProps> = ({
 				value: featureValueOptionIDs.flat().toString(),
 			},
 			{ messages: consentMessages, value: consentValue ? "true" : "" },
+			...(roleValueOptionID?.includes("other")
+				? [{ messages: otherMessages, value: otherValue }]
+				: []),
 		];
 		const validFormFieldCount = fields.filter(
 			(field) => field.value.trim() !== "" && field.messages.length === 0,
@@ -171,6 +191,9 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		featureValueOptionIDs,
 		consentValue,
 		consentMessages,
+		otherValue,
+		otherMessages,
+		roleValueOptionID,
 	]);
 
 	useEffect(() => {
