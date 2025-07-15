@@ -18,18 +18,7 @@ const RoleSelect: React.FC<SignupFormSelectProps> = ({
 	selectedOptionId,
 	setSelectedOptionId,
 }) => {
-	const sortRoles = (roles: RolesType) =>
-		Object.fromEntries(
-			Object.entries(roles)
-				.filter(([_, arr]) => Array.isArray(arr) && arr.length > 0)
-				.sort(([a], [b]) => a.localeCompare(b))
-				.map(([key, arr]) => [
-					key,
-					arr.slice().sort((a, b) => a.label.localeCompare(b.label)),
-				]),
-		);
-
-	const options = sortRoles(Roles);
+	const options = Roles;
 
 	useEffect(() => {
 		if (selectedOptionId === "") {

@@ -9,9 +9,55 @@ type RolesRawType = {
 	[key: string]: string[];
 };
 
+// biome-ignore assist/source/useSortedKeys: RoleSelect order is static.
 const RolesRaw: RolesRawType = {
+	"Higher Education": [
+		"Faculty / Instructor",
+		"Instructional Designer",
+		"Academic Technologist",
+		"LMS Administrator",
+		"Director of Online Learning",
+		"Center for Teaching & Learning Director",
+		"Vice President of Teaching & Learning",
+		"Dean / Associate Dean",
+		"Learning Technologist",
+		"Department Chair",
+		"Academic Program Coordinator",
+		"Provost / Associate Provost",
+		"Online Learning Coordinator",
+		"Assessment Coordinator",
+		"Director of Digital Education",
+		"Registrar",
+		"Academic Advisor",
+		"IT Administrator",
+	],
+	"K-12 & Primary": [
+		"Teacher",
+		"Technology Coach",
+		"Instructional Coach",
+		"Principal / Assistant Principal",
+		"Curriculum Coordinator",
+		"Team Lead",
+		"IT Director",
+		"Superintendent",
+		"School Board Member",
+		"Librarian",
+		"Assessment Coordinator",
+		"Professional Development Coordinator",
+	],
+	"Technical & Vocational": [
+		"Instructional Technologist",
+		"LMS Administrator",
+		"Curriculum / Instructional Designer",
+		"Career & Technical Education Coordinator",
+		"IT Systems Specialist",
+		"Workforce Development Manager",
+		"Data & Learning Analytics Specialist",
+		"Training Coordinator",
+		"Program Manager",
+	],
 	Business: [
-		"Chief Product/Technology Officer",
+		"Chief Product / Technology Officer",
 		"Chief Learning Officer",
 		"Chief People Officer",
 		"Chief Customer Officer",
@@ -26,7 +72,6 @@ const RolesRaw: RolesRawType = {
 		"Instructional Designer",
 		"Director of Product Management",
 		"Director of Customer Training",
-		"Other",
 	],
 	Government: [
 		"Training & Development Manager",
@@ -36,57 +81,21 @@ const RolesRaw: RolesRawType = {
 		"Digital Services Officer",
 		"Departmental Training Coordinator",
 		"Enterprise Systems Trainer",
-		"Other",
 	],
-	"Higher Education": [
-		"Faculty / Instructor",
-		"Instructional Designer",
-		"Academic Technologist",
-		"LMS Administrator",
-		"Director of Online Learning",
-		"Center for Teaching & Learning Director",
-		"Department Chair",
-		"Academic Program Coordinator",
-		"Provost / Associate Provost",
-		"Assessment Coordinator",
-		"Registrar",
-		"IT Director",
-		"Other",
-	],
-	"K-12 & Primary": [
-		"Teacher",
-		"Technology Coach",
-		"Principal",
-		"Curriculum Coordinator",
-		"IT Director",
-		"Superintendent",
-		"School Board Member",
-		"Librarian",
-		"Professional Development Coordinator",
-		"Other",
-	],
-	Other: ["Other"],
-	"Technical & Vocational": [
-		"Instructional Technologist",
-		"LMS Administrator",
-		"Curriculum / Instructional Designer",
-		"Career & Technical Education Coordinator",
-		"IT Systems Specialist",
-		"Workforce Development Manager",
-		"Data & Learning Analytics Specialist",
-		"Training Coordinator",
-		"Program Manager",
-		"Other",
-	],
-};
+	Other: [],
+} as const;
 
 const Roles: RolesType = Object.fromEntries(
 	Object.entries(RolesRaw).map(([category, roles]) => [
 		category,
-		roles.map((role) => ({
-			id: `${category}_${role}`.toLowerCase().replace(/[^a-z0-9]/g, "_"),
-			label: role,
-		})),
+		roles
+			.slice()
+			.sort((a, b) => a.localeCompare(b))
+			.concat("Other")
+			.map((role) => ({
+				id: `${category}_${role}`.toLowerCase().replace(/[^a-z0-9]/g, "_"),
+				label: role,
+			})),
 	]),
 );
 
