@@ -1,4 +1,4 @@
-import { Heading, Link, View } from "@instructure/ui";
+import { Heading, Link, ScreenReaderContent, View } from "@instructure/ui";
 import { InstructureBugColor } from "../assets/Logos";
 
 interface BannerProps {
@@ -20,6 +20,9 @@ const Banner = ({ href }: BannerProps): React.ReactElement => {
 				width="300px"
 			>
 				<Heading level="h1">
+					<ScreenReaderContent>
+						Instructure feature interest sign up
+					</ScreenReaderContent>
 					{href ? (
 						<Link href={href}>
 							<InstructureBugColor />
