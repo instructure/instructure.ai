@@ -51,15 +51,14 @@ const HelpTraySectionFeatures: FC = () => {
 				summary={toggleHeader}
 			>
 				<View as="div" padding="small 0">
-					{Object.entries(Features).map(([stage, features]) =>
-						features.map((feature, idx) => {
+					{Object.entries(Features).flatMap(([stage, features]) =>
+						(features ?? []).map((feature, idx) => {
 							const key = `${stage}_${feature.id}_${idx}`;
 							return (
 								<View as="div" key={key} padding="0 0 small">
 									<ToggleDetails
 										expanded={expandedKey === key}
 										fluidWidth
-										key={key}
 										onToggle={(_, expanded) => handleToggle(key, expanded)}
 										size="medium"
 										summary={toggleSubHeader(feature)}
