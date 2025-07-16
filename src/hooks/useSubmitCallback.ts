@@ -21,7 +21,7 @@ const useSubmitCallback = (): SubmitCallback => {
 					"entry.458799281": formData.get("name") as string,
 					"entry.825096550": formData.get("features") as string,
 					"entry.1188554997": formData.get("consent") as string,
-					"entry.1209006275": formData.get("other") as string,
+					"entry.1209006275": (formData.get("other") as string) ?? "",
 					"entry.1289925100": formData.get("email") as string,
 					"entry.1874730912": formData.get("institution") as string,
 				});
