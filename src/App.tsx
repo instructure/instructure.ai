@@ -64,12 +64,11 @@ const App: FC = () => {
 				themeOverrides: themeOverrides,
 			}}
 		>
-			<View as="div" id="App">
+			<View as="main" id="App">
 				<View as="section">
 					<Banner />
 				</View>
 				<View
-					as="main"
 					insetBlockEnd="0"
 					insetInlineStart="0"
 					padding="medium"
@@ -82,10 +81,10 @@ const App: FC = () => {
 						setSuccess={setSuccess}
 					/>
 				</View>
-				<View as="aside">
+				<View>
 					<HelpTray isTrayOpen={isTrayOpen} setIsTrayOpen={setIsTrayOpen} />
 				</View>
-				<View as="aside">
+				<View>
 					<SubmissionModal
 						hasError={hasError}
 						hasSuccess={hasSuccess}
