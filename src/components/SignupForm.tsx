@@ -203,9 +203,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
 	const Header = (
 		<Flex>
 			<Flex.Item shouldGrow shouldShrink>
-				<Heading as="h2" level="h3">
-					Feature Interest
-				</Heading>
+				<Heading level="h3">Feature Interest</Heading>
 			</Flex.Item>
 			<Flex.Item>
 				<SignupProgress status={progress} />

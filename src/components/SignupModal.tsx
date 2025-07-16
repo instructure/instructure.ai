@@ -157,7 +157,7 @@ const SignupModal = ({
 				>
 					<Flex>
 						<Flex.Item shouldGrow shouldShrink>
-							<Heading level="h1">
+							<Heading as="h2" level="h1">
 								<InstructureLogo />
 							</Heading>
 						</Flex.Item>
