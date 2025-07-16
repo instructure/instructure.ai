@@ -19,15 +19,15 @@ const Banner = ({ href }: BannerProps): React.ReactElement => {
 				style={{ aspectRatio: "1 / 1" }}
 				width="300px"
 			>
-				{href ? (
-					<Heading level="h1">
+				<Heading level="h1">
+					{href ? (
 						<Link href={href}>
 							<InstructureBugColor />
 						</Link>
-					</Heading>
-				) : (
-					<InstructureBugColor />
-				)}
+					) : (
+						<InstructureBugColor />
+					)}
+				</Heading>
 			</View>
 		</View>
 	);
