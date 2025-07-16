@@ -9,7 +9,7 @@ const SignupProgress = ({ status }: SignupProgressProps) => {
 
 	return (
 		<ProgressCircle
-			formatScreenReaderValue={(percent) => `${percent} percent`}
+			formatScreenReaderValue={({ valueNow }) => `${valueNow} percent`}
 			id="formProgress"
 			renderValue={({ valueNow }) => (
 				<span>
