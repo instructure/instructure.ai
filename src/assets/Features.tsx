@@ -1,5 +1,4 @@
 import type { SVGIconProps } from "@instructure/ui";
-import { List } from "@instructure/ui";
 import type { ComponentType, JSX } from "react";
 import React from "react";
 import {
@@ -294,16 +293,16 @@ const RawFeatures: RawFeaturesType = {
 } as const;
 
 const Features = Object.fromEntries(
-	Object.entries(RawFeatures).map(([name, features]) => [
-		name,
+	Object.entries(RawFeatures).map(([brand, features]) => [
+		brand,
 		features.map((feature) => ({
 			...feature,
+			brand: brand as BrandKey,
 			color: feature.color ?? IgniteAI.color,
 			colorIcon: feature.colorIcon ?? IgniteAI.colorIcon,
 			description: feature.description ?? <React.Fragment />,
 			icon: feature.icon ?? IgniteAI.icon,
-			id: `${name}_${feature.label}`.toLowerCase().replace(/[^a-z0-9]/g, "_"),
-			stage: name,
+			id: `${brand}_${feature.label}`.toLowerCase().replace(/[^a-z0-9]/g, "_"),
 		})),
 	]),
 ) as FeaturesType;
