@@ -3,7 +3,6 @@ import { InstructureBugColor } from "../assets/Logos";
 
 interface BannerProps {
 	href?: string;
-	variant?: "default" | "new";
 }
 
 const Banner = ({ href }: BannerProps): React.ReactElement => {

@@ -66,7 +66,7 @@ const App: FC = () => {
 		>
 			<View as="div" id="App">
 				<View as="section">
-					<Banner variant="new" />
+					<Banner />
 				</View>
 				<View
 					as="main"
