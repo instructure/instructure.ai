@@ -6,6 +6,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
 	build: {
+		chunkSizeWarningLimit: 1024,
 		cssMinify: "lightningcss",
 		minify: "terser",
 		target: "esnext",
