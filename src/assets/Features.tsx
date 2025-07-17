@@ -122,6 +122,14 @@ const RawFeatures: RawFeaturesType = {
 	],
 	IgniteAI: [
 		{
+			description: (
+				<>
+					IgniteAgent brings AI-powered efficiency to Canvas with
+					always-accessible, context-aware assistance for educators—enabling
+					faster content creation, course management, and personalized actions
+					across 500+ APIs.
+				</>
+			),
 			label: "Ignite Agent",
 			link: "http://instructure.com/ignite-ai",
 		},
