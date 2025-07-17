@@ -1,18 +1,31 @@
-import { InstUISettingsProvider, View } from "@instructure/ui";
 import "./App.css";
-import { type FC, useEffect, useState } from "react";
+import {
+	Button,
+	IconAddSolid,
+	IconEditSolid,
+	IconInfoBorderlessLine,
+	InstUISettingsProvider,
+	Text,
+	View,
+} from "@instructure/ui";
+import { type FC, useEffect, useState, useTransition } from "react";
 import { Brands } from "./assets/Features";
 import Banner from "./components/Banner";
 import HelpTray from "./components/HelpTray";
 import SignupModal from "./components/SignupModal";
 import SubmissionModal from "./components/SubmissionModal";
+import { readLocalStorage } from "./utils/FormData";
 
 const App: FC = () => {
+	const [isPending, startTransition] = useTransition();
 	const [isTrayOpen, setIsTrayOpen] = useState<boolean>(false);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const [hasSuccess, setSuccess] = useState<boolean>(false);
 	const [hasError, setError] = useState<string | null>(null);
 	const [isSubmissionModalOpen, setIsSubmissionModalOpen] =
 		useState<boolean>(false);
+	const hasFormData = !!readLocalStorage("formData");
+	const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
 	const { Instructure, Mastery } = Brands;
 	const inst25 = "#0E68B3";
@@ -51,6 +64,13 @@ const App: FC = () => {
 		},
 	};
 
+	const handleButtonClick = () => {
+		startTransition(() => {
+			setIsModalOpen(!isModalOpen);
+			window.location.hash = isModalOpen ? "" : "#/signup";
+		});
+	};
+
 	useEffect(() => {
 		console.info(
 			"Hey, what are you doing here? 👋\n",
@@ -75,11 +95,39 @@ const App: FC = () => {
 					position="fixed"
 				>
 					<SignupModal
+						isDisabled={isDisabled}
+						isOpen={isModalOpen}
+						isPending={isPending}
 						setError={setError}
+						setIsDisabled={setIsDisabled}
+						setIsOpen={setIsModalOpen}
 						setIsSubmissionModalOpen={setIsSubmissionModalOpen}
 						setIsTrayOpen={setIsTrayOpen}
 						setSuccess={setSuccess}
+						startTransition={startTransition}
 					/>
+					<View as="div" className="cta">
+						<Button
+							color="primary-inverse"
+							margin="small"
+							onClick={() => {
+								setIsTrayOpen?.(true);
+							}}
+							renderIcon={<IconInfoBorderlessLine />}
+						>
+							<Text className="cta">Info</Text>
+						</Button>
+						<Button
+							className="cta"
+							color="primary-inverse"
+							disabled={isDisabled}
+							margin="small"
+							onClick={handleButtonClick}
+							renderIcon={hasFormData ? <IconEditSolid /> : <IconAddSolid />}
+						>
+							{hasFormData ? "Edit" : "Sign up"}
+						</Button>
+					</View>
 				</View>
 				<View>
 					<HelpTray isTrayOpen={isTrayOpen} setIsTrayOpen={setIsTrayOpen} />
