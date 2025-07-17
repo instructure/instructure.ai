@@ -11,6 +11,7 @@ import {
 import { type FC, useEffect, useState, useTransition } from "react";
 import { Brands } from "./assets/Features";
 import Banner from "./components/Banner";
+import CTAButtons from "./components/CTAButtons";
 import HelpTray from "./components/HelpTray";
 import SignupModal from "./components/SignupModal";
 import SubmissionModal from "./components/SubmissionModal";
@@ -64,10 +65,16 @@ const App: FC = () => {
 		},
 	};
 
-	const handleButtonClick = () => {
+	const handleModalButtonClick = () => {
 		startTransition(() => {
 			setIsModalOpen(!isModalOpen);
 			window.location.hash = isModalOpen ? "" : "#/signup";
+		});
+	};
+
+	const handleTrayButtonClick = () => {
+		startTransition(() => {
+			setIsTrayOpen(!isTrayOpen);
 		});
 	};
 
@@ -86,35 +93,12 @@ const App: FC = () => {
 		>
 			<View as="main" id="App">
 				<Banner />
-				<View
-					insetBlockEnd="0"
-					insetInlineStart="0"
-					padding="medium"
-					position="fixed"
-				>
-					<View as="div" className="cta">
-						<Button
-							color="primary-inverse"
-							margin="small"
-							onClick={() => {
-								setIsTrayOpen?.(true);
-							}}
-							renderIcon={<IconInfoBorderlessLine />}
-						>
-							<Text className="cta">Info</Text>
-						</Button>
-						<Button
-							className="cta"
-							color="primary-inverse"
-							disabled={isDisabled}
-							margin="small"
-							onClick={handleButtonClick}
-							renderIcon={hasFormData ? <IconEditSolid /> : <IconAddSolid />}
-						>
-							{hasFormData ? "Edit" : "Sign up"}
-						</Button>
-					</View>
-				</View>
+				<CTAButtons
+					handleModalButtonClick={handleModalButtonClick}
+					handleTrayButtonClick={handleTrayButtonClick}
+					hasFormData={hasFormData}
+					isDisabled={isDisabled}
+				/>
 				<SignupModal
 					isDisabled={isDisabled}
 					isOpen={isModalOpen}
