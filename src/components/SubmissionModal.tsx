@@ -99,7 +99,7 @@ const SubmissionModal = ({
 	);
 
 	const emailLink = () => {
-		const address = "danny@instructure.com";
+		const address = ["danny", "instructure.com"].join("@");
 		const subject = "Signup Submission Error";
 		const body = ["Error", hasError, "\n", "Form data", serializedFormData];
 
