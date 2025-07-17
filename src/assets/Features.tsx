@@ -107,6 +107,18 @@ const RawFeatures: RawFeaturesType = {
 			label: "Enhanced Course Progression for Learners",
 			title: "Canvas",
 		},
+		{
+			color: Canvas.color,
+			description: (
+				<>
+					The Content Accessibility Checker provides on-demand accessibility
+					reports and automated remediation of issues in Canvas content.
+				</>
+			),
+			icon: Canvas.icon,
+			label: "Content Accessibility Checker",
+			title: "Canvas",
+		},
 	],
 	IgniteAI: [
 		{
@@ -134,16 +146,6 @@ const RawFeatures: RawFeaturesType = {
 				</>
 			),
 			label: "Mastery Item Authoring Assistance",
-		},
-		{
-			color: Canvas.color,
-			description: (
-				<>
-					The Content Accessibility Checker provides on-demand accessibility
-					reports and automated remediation of issues in Canvas content.
-				</>
-			),
-			label: "Canvas Content Accessibility Checker",
 		},
 		{
 			color: Canvas.color,
@@ -198,82 +200,6 @@ const RawFeatures: RawFeaturesType = {
 	],
 	Mastery: [],
 	Studio: [],
-	/*
-	Excluded: [
-		{
-			color: Studio.color,
-			description: (
-				<>
-					Studio will use AI to automatically generate caption to and from the
-					following languages:
-					<List size="small">
-						<List.Item>English</List.Item>
-						<List.Item>Spanish</List.Item>
-						<List.Item>French</List.Item>
-						<List.Item>German</List.Item>
-						<List.Item>Dutch</List.Item>
-					</List>
-				</>
-			),
-			label: "Studio Caption Translation",
-		},
-		{
-			color: Studio.color,
-			colorIcon: Studio.colorIcon,
-			description: (
-				<>
-					Studio Archive & Restore will help content creators maintain a cleaner
-					video library, prevent unintended content deletion and support
-					institutions in complying with their storage policies.
-				</>
-			),
-			icon: Studio.icon,
-			label: "Studio Archive & Restore",
-		},
-		{
-			color: Canvas.color,
-			colorIcon: Canvas.colorIcon,
-			icon: Canvas.icon,
-			label: "Canvas Admin Experience",
-		},
-		{
-			color: Canvas.color,
-			colorIcon: Canvas.colorIcon,
-			icon: Canvas.icon,
-			label: "Improved Learning Mastery Gradebook",
-		},
-		{
-			color: Canvas.color,
-			colorIcon: Canvas.colorIcon,
-			icon: Canvas.icon,
-			label: "Canvas Portfolios",
-		},
-		{
-			label: "Grading Assistance",
-		},
-		{
-			label: "Translations",
-		},
-		{
-			color: Canvas.color,
-			colorIcon: Canvas.colorIcon,
-			icon: Canvas.icon,
-			label: "Block Content Editor",
-		},
-		{
-			color: Canvas.color,
-			colorIcon: Canvas.colorIcon,
-			icon: Canvas.icon,
-			label: "Updated Peer Review",
-		},
-		{
-			color: Canvas.color,
-			colorIcon: Canvas.colorIcon,
-			icon: Canvas.icon,
-			label: "Concurrent Grading",
-		},
-	],
-	*/
 } as const;
 
 const Features = Object.fromEntries(
