@@ -116,7 +116,7 @@ const RawFeatures: RawFeaturesType = {
 				</>
 			),
 			icon: Canvas.icon,
-			label: "Content Accessibility Checker",
+			label: "Course-level Content Accessibility Checker",
 			title: "Canvas",
 		},
 	],
