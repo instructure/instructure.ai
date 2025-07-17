@@ -29,7 +29,6 @@ const SVGWrapper: FC<SVGWrapperProps> = ({
 }) => (
 	<InlineSVG
 		height={height}
-		styles={{ inlineSVG: {} }}
 		title={title}
 		viewBox={viewBox}
 		width={width}
