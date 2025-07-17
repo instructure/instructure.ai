@@ -38,7 +38,7 @@ const RoleInput: React.FC<SignupFormInputProps> = ({
 			name="other"
 			onBlur={handleBlur}
 			onChange={handleChange}
-			placeholder="Chief Awesome Officer"
+			placeholder="Bartman"
 			renderBeforeInput={IconAnnotateLine}
 			renderLabel="Other Role"
 			shouldNotWrap
