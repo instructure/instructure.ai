@@ -19,7 +19,7 @@ import {
 import { alpha } from "@instructure/ui-color-utils";
 import type { FormEvent } from "react";
 import { useEffect, useState, useTransition } from "react";
-import { InstructureLogo } from "../assets/Logos";
+import { InstructureWordMark } from "../assets/Logos";
 import useLocalStorageCallback from "../hooks/useLocalStorageCallback";
 import useSubmitCallback from "../hooks/useSubmitCallback";
 import { readLocalStorage, readLocalStorageField } from "../utils/FormData";
@@ -158,7 +158,7 @@ const SignupModal = ({
 					<Flex>
 						<Flex.Item shouldGrow shouldShrink>
 							<Heading as="h2" level="h1">
-								<InstructureLogo />
+								<InstructureWordMark />
 							</Heading>
 						</Flex.Item>
 						<Flex.Item>

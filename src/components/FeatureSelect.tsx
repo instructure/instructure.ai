@@ -147,10 +147,12 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 
 	const renderGroupLabel = (key: string) => {
 		const group = filteredOptions[key];
-		const BrandIcon = group?.[0]?.colorIcon;
+		const BrandIcon = group?.[0].icon;
+		const brandIconColor = group?.[0].color || "currentColor";
+		console.log("BrandIcon", BrandIcon, "brandIconColor", brandIconColor);
 		return (
 			<>
-				{BrandIcon && <BrandIcon />}
+				{BrandIcon && <BrandIcon color={brandIconColor} />}
 				<View margin="0 0 0 small">
 					<Text>{key}</Text>
 				</View>
@@ -232,8 +234,8 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 					Features[key].some((opt: FeatureInterface) => opt.id === id),
 				);
 				const BrandIcon =
-					groupKey && Features[groupKey][0]?.colorIcon
-						? Features[groupKey][0].colorIcon
+					groupKey && Features[groupKey][0]?.icon
+						? Features[groupKey][0].icon
 						: null;
 				return (
 					<Tag
