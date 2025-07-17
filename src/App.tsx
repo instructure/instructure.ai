@@ -1,21 +1,22 @@
+import React, {
+	type FC,
+	Suspense,
+	useEffect,
+	useState,
+	useTransition,
+} from "react";
 import "./App.css";
-import {
-	Button,
-	IconAddSolid,
-	IconEditSolid,
-	IconInfoBorderlessLine,
-	InstUISettingsProvider,
-	Text,
-	View,
-} from "@instructure/ui";
-import { type FC, useEffect, useState, useTransition } from "react";
+import { InstUISettingsProvider, View } from "@instructure/ui";
 import { Brands } from "./assets/Features";
 import Banner from "./components/Banner";
 import CTAButtons from "./components/CTAButtons";
-import HelpTray from "./components/HelpTray";
-import SignupModal from "./components/SignupModal";
-import SubmissionModal from "./components/SubmissionModal";
 import { readLocalStorage } from "./utils/FormData";
+
+const SignupModal = React.lazy(() => import("./components/SignupModal"));
+const HelpTray = React.lazy(() => import("./components/HelpTray"));
+const SubmissionModal = React.lazy(
+	() => import("./components/SubmissionModal"),
+);
 
 const App: FC = () => {
 	const [isPending, startTransition] = useTransition();
@@ -99,25 +100,33 @@ const App: FC = () => {
 					hasFormData={hasFormData}
 					isDisabled={isDisabled}
 				/>
-				<SignupModal
-					isDisabled={isDisabled}
-					isOpen={isModalOpen}
-					isPending={isPending}
-					setError={setError}
-					setIsDisabled={setIsDisabled}
-					setIsOpen={setIsModalOpen}
-					setIsSubmissionModalOpen={setIsSubmissionModalOpen}
-					setIsTrayOpen={setIsTrayOpen}
-					setSuccess={setSuccess}
-					startTransition={startTransition}
-				/>
-				<HelpTray isTrayOpen={isTrayOpen} setIsTrayOpen={setIsTrayOpen} />
-				<SubmissionModal
-					hasError={hasError}
-					hasSuccess={hasSuccess}
-					isOpen={isSubmissionModalOpen}
-					setIsOpen={setIsSubmissionModalOpen}
-				/>
+				<Suspense fallback={null}>
+					{isModalOpen && (
+						<SignupModal
+							isDisabled={isDisabled}
+							isOpen={isModalOpen}
+							isPending={isPending}
+							setError={setError}
+							setIsDisabled={setIsDisabled}
+							setIsOpen={setIsModalOpen}
+							setIsSubmissionModalOpen={setIsSubmissionModalOpen}
+							setIsTrayOpen={setIsTrayOpen}
+							setSuccess={setSuccess}
+							startTransition={startTransition}
+						/>
+					)}
+					{isTrayOpen && (
+						<HelpTray isTrayOpen={isTrayOpen} setIsTrayOpen={setIsTrayOpen} />
+					)}
+					{isSubmissionModalOpen && (
+						<SubmissionModal
+							hasError={hasError}
+							hasSuccess={hasSuccess}
+							isOpen={isSubmissionModalOpen}
+							setIsOpen={setIsSubmissionModalOpen}
+						/>
+					)}
+				</Suspense>
 			</View>
 		</InstUISettingsProvider>
 	);
