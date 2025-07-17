@@ -85,27 +85,13 @@ const App: FC = () => {
 			}}
 		>
 			<View as="main" id="App">
-				<View as="section">
-					<Banner />
-				</View>
+				<Banner />
 				<View
 					insetBlockEnd="0"
 					insetInlineStart="0"
 					padding="medium"
 					position="fixed"
 				>
-					<SignupModal
-						isDisabled={isDisabled}
-						isOpen={isModalOpen}
-						isPending={isPending}
-						setError={setError}
-						setIsDisabled={setIsDisabled}
-						setIsOpen={setIsModalOpen}
-						setIsSubmissionModalOpen={setIsSubmissionModalOpen}
-						setIsTrayOpen={setIsTrayOpen}
-						setSuccess={setSuccess}
-						startTransition={startTransition}
-					/>
 					<View as="div" className="cta">
 						<Button
 							color="primary-inverse"
@@ -129,17 +115,25 @@ const App: FC = () => {
 						</Button>
 					</View>
 				</View>
-				<View>
-					<HelpTray isTrayOpen={isTrayOpen} setIsTrayOpen={setIsTrayOpen} />
-				</View>
-				<View>
-					<SubmissionModal
-						hasError={hasError}
-						hasSuccess={hasSuccess}
-						isOpen={isSubmissionModalOpen}
-						setIsOpen={setIsSubmissionModalOpen}
-					/>
-				</View>
+				<SignupModal
+					isDisabled={isDisabled}
+					isOpen={isModalOpen}
+					isPending={isPending}
+					setError={setError}
+					setIsDisabled={setIsDisabled}
+					setIsOpen={setIsModalOpen}
+					setIsSubmissionModalOpen={setIsSubmissionModalOpen}
+					setIsTrayOpen={setIsTrayOpen}
+					setSuccess={setSuccess}
+					startTransition={startTransition}
+				/>
+				<HelpTray isTrayOpen={isTrayOpen} setIsTrayOpen={setIsTrayOpen} />
+				<SubmissionModal
+					hasError={hasError}
+					hasSuccess={hasSuccess}
+					isOpen={isSubmissionModalOpen}
+					setIsOpen={setIsSubmissionModalOpen}
+				/>
 			</View>
 		</InstUISettingsProvider>
 	);
