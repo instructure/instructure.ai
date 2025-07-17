@@ -1,5 +1,5 @@
 import { Heading, Link, ScreenReaderContent, View } from "@instructure/ui";
-import { InstructureBugColor } from "../assets/Logos";
+import { InstructureBugNew } from "../assets/Logos";
 
 interface BannerProps {
 	href?: string;
@@ -25,10 +25,10 @@ const Banner = ({ href }: BannerProps): React.ReactElement => {
 					</ScreenReaderContent>
 					{href ? (
 						<Link href={href}>
-							<InstructureBugColor />
+							<InstructureBugNew />
 						</Link>
 					) : (
-						<InstructureBugColor />
+						<InstructureBugNew />
 					)}
 				</Heading>
 			</View>

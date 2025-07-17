@@ -1,47 +1,39 @@
-import type { SVGIconProps } from "@instructure/ui";
 import type { ComponentType, JSX } from "react";
 import React from "react";
 import {
 	CanvasBug,
-	CanvasBugColor,
+	CanvasLogo,
 	IgniteBug,
-	IgniteBugColor,
+	IgniteLogo,
 	InstructureBug,
-	InstructureBugWhite,
+	InstructureLogo,
 	MasteryBug,
-	MasteryBugColor,
-	ParchmentBug,
-	ParchmentBugColor,
+	MasteryLogo,
 	StudioBug,
-	StudioBugColor,
+	StudioLogo,
+	type SVGWrapperProps,
 } from "./Logos";
 
 interface RawFeatureInterface {
 	color?: string;
-	icon?: ComponentType<SVGIconProps>;
+	icon?: ComponentType<SVGWrapperProps>;
 	label: string;
 	description?: JSX.Element;
-	colorIcon?: ComponentType<SVGIconProps>;
 	link?: string;
+	title?: string;
 }
 
 export interface FeatureInterface {
 	color: string;
-	icon: ComponentType<SVGIconProps>;
+	icon: ComponentType<SVGWrapperProps>;
 	label: string;
 	description: JSX.Element;
-	colorIcon: ComponentType<SVGIconProps>;
-	link?: string;
+	link: string | undefined;
+	title: string | undefined;
 	id: string;
 }
 
-type BrandKey =
-	| "Canvas"
-	| "IgniteAI"
-	| "Instructure"
-	| "Mastery"
-	| "Parchment"
-	| "Studio";
+type BrandKey = "Canvas" | "IgniteAI" | "Instructure" | "Mastery" | "Studio";
 
 export type FeatureCategory = BrandKey;
 
@@ -50,29 +42,22 @@ type RawFeaturesType = Record<BrandKey, RawFeatureInterface[]>;
 
 interface BrandInfo {
 	color: string;
-	icon: ComponentType<SVGIconProps>;
-	colorIcon: ComponentType<SVGIconProps>;
+	icon: ComponentType<SVGWrapperProps>;
 }
 
 export const Brands: Record<BrandKey, BrandInfo> = {
-	Canvas: { color: "#D24E21", colorIcon: CanvasBugColor, icon: CanvasBug },
-	IgniteAI: { color: "#9E58BD", colorIcon: IgniteBugColor, icon: IgniteBug },
+	Canvas: {
+		color: CanvasLogo.color,
+		icon: CanvasBug,
+	},
+	IgniteAI: { color: IgniteLogo.color, icon: IgniteBug },
 	Instructure: {
-		color: "#0E1721",
-		colorIcon: InstructureBugWhite,
+		color: InstructureLogo.color,
 		icon: InstructureBug,
 	},
-	Mastery: { color: "#3C8645", colorIcon: MasteryBugColor, icon: MasteryBug },
-	Parchment: {
-		color: "#4279B6",
-		colorIcon: ParchmentBugColor,
-		icon: ParchmentBug,
-	},
+	Mastery: { color: MasteryLogo.color, icon: MasteryBug },
 	Studio: {
-		get color() {
-			return Brands.Canvas.color;
-		},
-		colorIcon: StudioBugColor,
+		color: StudioLogo.color,
 		icon: StudioBug,
 	},
 };
@@ -83,7 +68,6 @@ const RawFeatures: RawFeaturesType = {
 	Canvas: [
 		{
 			color: Canvas.color,
-			colorIcon: Canvas.colorIcon,
 			description: (
 				<>
 					Canvas Career is a a new skills-first LMS designed to help businesses,
@@ -94,10 +78,10 @@ const RawFeatures: RawFeaturesType = {
 			icon: Canvas.icon,
 			label: "Canvas Career",
 			link: "https://instructure.com/canvas/canvas-career",
+			title: "",
 		},
 		{
 			color: Canvas.color,
-			colorIcon: Canvas.colorIcon,
 			description: (
 				<>
 					Canvas Apps is the new tool for managing LTI tools in Canvas. It
@@ -108,10 +92,10 @@ const RawFeatures: RawFeaturesType = {
 			icon: Canvas.icon,
 			label: "Canvas Apps",
 			link: "https://www.instructure.com/k12/products/learnplatform",
+			title: "",
 		},
 		{
 			color: Canvas.color,
-			colorIcon: Canvas.colorIcon,
 			description: (
 				<>
 					Enhanced Course Progression for Learners are central to how students
@@ -121,6 +105,7 @@ const RawFeatures: RawFeaturesType = {
 			),
 			icon: Canvas.icon,
 			label: "Enhanced Course Progression for Learners",
+			title: "Canvas",
 		},
 	],
 	IgniteAI: [
@@ -197,7 +182,6 @@ const RawFeatures: RawFeaturesType = {
 	Instructure: [
 		{
 			color: Instructure.color,
-			colorIcon: Instructure.colorIcon,
 			description: (
 				<>
 					The Instructure Research Network (IRN) is a collaborative network of
@@ -209,10 +193,10 @@ const RawFeatures: RawFeaturesType = {
 			),
 			icon: Instructure.icon,
 			label: "Instructure Research Network",
+			title: "",
 		},
 	],
 	Mastery: [],
-	Parchment: [],
 	Studio: [],
 	/*
 	Excluded: [
@@ -299,10 +283,12 @@ const Features = Object.fromEntries(
 			...feature,
 			brand: brand as BrandKey,
 			color: feature.color ?? IgniteAI.color,
-			colorIcon: feature.colorIcon ?? IgniteAI.colorIcon,
 			description: feature.description ?? <React.Fragment />,
 			icon: feature.icon ?? IgniteAI.icon,
 			id: `${brand}_${feature.label}`.toLowerCase().replace(/[^a-z0-9]/g, "_"),
+			label: feature.label,
+			link: feature?.link,
+			title: feature?.title,
 		})),
 	]),
 ) as FeaturesType;

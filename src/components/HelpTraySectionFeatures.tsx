@@ -16,7 +16,11 @@ const HelpTraySectionFeatures: FC = () => {
 	const toggleSubHeader = (feature: FeatureInterface) => (
 		<View display="inline-flex" style={{ alignItems: "center" }}>
 			<View margin="0 xx-small 0 0">
-				<feature.colorIcon style={{ verticalAlign: "middle" }} />
+				<feature.icon
+					color={feature.color}
+					style={{ verticalAlign: "middle" }}
+					title={feature.title}
+				/>
 			</View>
 			<Text size="small" transform="capitalize" weight="bold">
 				{feature.label}
