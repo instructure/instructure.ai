@@ -149,7 +149,6 @@ const FeatureSelect: React.FC<SignupFormMultiSelectProps> = ({
 		const group = filteredOptions[key];
 		const BrandIcon = group?.[0].icon;
 		const brandIconColor = group?.[0].color || "currentColor";
-		console.log("BrandIcon", BrandIcon, "brandIconColor", brandIconColor);
 		return (
 			<>
 				{BrandIcon && <BrandIcon color={brandIconColor} />}
