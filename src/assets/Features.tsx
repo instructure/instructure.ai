@@ -33,7 +33,13 @@ export interface FeatureInterface {
 	id: string;
 }
 
-type BrandKey = "Canvas" | "IgniteAI" | "Instructure" | "Mastery" | "Studio";
+type BrandKey =
+	| "Canvas"
+	| "IgniteAI"
+	| "Instructure"
+	| "Mastery"
+	| "Studio"
+	| "Canvas Career";
 
 export type FeatureCategory = BrandKey;
 
@@ -47,6 +53,10 @@ interface BrandInfo {
 
 export const Brands: Record<BrandKey, BrandInfo> = {
 	Canvas: {
+		color: CanvasLogo.color,
+		icon: CanvasBug,
+	},
+	"Canvas Career": {
 		color: CanvasLogo.color,
 		icon: CanvasBug,
 	},
@@ -66,20 +76,6 @@ const { IgniteAI, Canvas, Studio, Mastery, Instructure } = Brands;
 
 const RawFeatures: RawFeaturesType = {
 	Canvas: [
-		{
-			color: Canvas.color,
-			description: (
-				<>
-					Canvas Career is a a new skills-first LMS designed to help businesses,
-					governments, and continuing education organizations deliver flexible,
-					industry aligned learning programs that drive business impact.
-				</>
-			),
-			icon: Canvas.icon,
-			label: "Canvas Career",
-			link: "https://instructure.com/canvas/canvas-career",
-			title: "",
-		},
 		{
 			color: Canvas.color,
 			description: (
@@ -118,6 +114,22 @@ const RawFeatures: RawFeaturesType = {
 			icon: Canvas.icon,
 			label: "Course-level Content Accessibility Checker",
 			title: "Canvas",
+		},
+	],
+	"Canvas Career": [
+		{
+			color: Canvas.color,
+			description: (
+				<>
+					Canvas Career is a a new skills-first LMS designed to help businesses,
+					governments, and continuing education organizations deliver flexible,
+					industry aligned learning programs that drive business impact.
+				</>
+			),
+			icon: Canvas.icon,
+			label: "Canvas Career",
+			link: "https://instructure.com/canvas/canvas-career",
+			title: "",
 		},
 	],
 	IgniteAI: [
