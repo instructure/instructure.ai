@@ -155,24 +155,26 @@ const SignupModal = ({
 						padding: "1rem 1.5rem 0.5rem",
 					}}
 				>
-					<Flex>
-						<Flex.Item shouldGrow shouldShrink>
-							<Heading as="h2" level="h1">
-								<InstructureWordMark />
-							</Heading>
-						</Flex.Item>
-						<Flex.Item>
-							<IconButton
-								color="primary-inverse"
-								margin="small"
-								onClick={handleButtonClick}
-								renderIcon={IconXSolid}
-								screenReaderLabel="Close"
-								withBackground={false}
-								withBorder={false}
-							/>
-						</Flex.Item>
-					</Flex>
+					<View as="div" margin="auto" maxWidth="59.25rem" width="100%">
+						<Flex>
+							<Flex.Item shouldGrow shouldShrink>
+								<Heading as="h2" level="h1">
+									<InstructureWordMark />
+								</Heading>
+							</Flex.Item>
+							<Flex.Item>
+								<IconButton
+									color="primary-inverse"
+									margin="small"
+									onClick={handleButtonClick}
+									renderIcon={IconXSolid}
+									screenReaderLabel="Close"
+									withBackground={false}
+									withBorder={false}
+								/>
+							</Flex.Item>
+						</Flex>
+					</View>
 				</Modal.Header>
 				<Modal.Body
 					themeOverride={{
