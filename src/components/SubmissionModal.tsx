@@ -99,14 +99,25 @@ const SubmissionModal = ({
 	);
 
 	const emailLink = () => {
-		const address = ["danny", "instructure.com"].join("@");
+		const addressParts = ["ZGFubnk=", "QA==", "aW5zdHJ1Y3R1cmUuY29t"];
+		const address = addressParts.map((part) => atob(part)).join("");
 		const subject = "Signup Submission Error";
-		const body = ["Error", hasError, "\n", "Form data", serializedFormData];
+		const body = [
+			"Error",
+			hasError,
+			"\n",
+			"Form data",
+			serializedFormData,
+		].join("\n");
 
-		const href = `mailto:${address}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.join("\n"))}`;
+		const href = `mailto:${address}?subject=${encodeURIComponent(
+			subject,
+		)}&body=${encodeURIComponent(body)}`;
 		return (
 			<Button color="primary" href={href} onClick={handleButtonClick}>
-				<AccessibleContent alt="Send your submission to Danny">
+				<AccessibleContent
+					alt={`Send your submission to ${atob(addressParts[0])}`}
+				>
 					<IconEmailLine /> Send
 				</AccessibleContent>
 			</Button>
