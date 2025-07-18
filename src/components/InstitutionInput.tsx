@@ -1,5 +1,6 @@
-import { type FormMessage, IconHomeLine, TextInput } from "@instructure/ui";
-import React, { type SyntheticEvent, useState } from "react";
+import { IconHomeLine, TextInput } from "@instructure/ui";
+import type React from "react";
+import type { SyntheticEvent } from "react";
 import { NamePattern, SpacePattern } from "../utils/RegEx";
 import type { SignupFormInputProps } from "./SignupForm";
 
@@ -7,9 +8,9 @@ const InstitutionInput: React.FC<SignupFormInputProps> = ({
 	isDisabled,
 	value,
 	setValue,
+	messages,
+	setMessages,
 }) => {
-	const [messages, setMessages] = useState<FormMessage[]>([]);
-
 	const isInvalidInstitution = (name: string): boolean => {
 		return !NamePattern.test(name) || SpacePattern.test(name);
 	};

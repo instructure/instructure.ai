@@ -152,7 +152,6 @@ const SignupForm: React.FC<SignupFormProps> = ({
 			value={consentValue}
 		/>,
 	];
-	const formFieldCount = formFieldGroupChildren.length;
 
 	const updateProgress = useCallback(() => {
 		const fields = [
@@ -173,7 +172,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
 			(field) => field.value.trim() !== "" && field.messages.length === 0,
 		).length;
 		const currentProgress = Math.ceil(
-			(validFormFieldCount / formFieldCount) * 100,
+			(validFormFieldCount / fields.length) * 100,
 		);
 		setProgress(currentProgress);
 	}, [
@@ -187,7 +186,6 @@ const SignupForm: React.FC<SignupFormProps> = ({
 		institutionMessages,
 		featureMessages,
 		setProgress,
-		formFieldCount,
 		featureValueOptionIDs,
 		consentValue,
 		consentMessages,
