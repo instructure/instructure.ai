@@ -93,7 +93,7 @@ const App: FC = () => {
 			}}
 		>
 			<View as="main" id="App">
-				<Banner />
+				<Banner handleButtonClick={handleModalButtonClick} />
 				<CTAButtons
 					handleModalButtonClick={handleModalButtonClick}
 					handleTrayButtonClick={handleTrayButtonClick}

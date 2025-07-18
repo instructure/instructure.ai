@@ -2,10 +2,10 @@ import { Heading, Link, ScreenReaderContent, View } from "@instructure/ui";
 import { InstructureBugNew } from "../assets/Logos";
 
 interface BannerProps {
-	href?: string;
+	handleButtonClick: () => void;
 }
 
-const Banner = ({ href }: BannerProps): React.ReactElement => {
+const Banner = ({ handleButtonClick }: BannerProps): React.ReactElement => {
 	return (
 		<View as="div" borderRadius="medium" maxHeight="300px" maxWidth="300px">
 			<View
@@ -19,18 +19,14 @@ const Banner = ({ href }: BannerProps): React.ReactElement => {
 				style={{ aspectRatio: "1 / 1" }}
 				width="300px"
 			>
-				<Heading level="h1">
-					<ScreenReaderContent>
-						Instructure feature interest sign up
-					</ScreenReaderContent>
-					{href ? (
-						<Link href={href}>
-							<InstructureBugNew />
-						</Link>
-					) : (
+				<Link as="button" onClick={handleButtonClick}>
+					<Heading level="h1">
+						<ScreenReaderContent>
+							Instructure feature interest sign up
+						</ScreenReaderContent>
 						<InstructureBugNew />
-					)}
-				</Heading>
+					</Heading>
+				</Link>
 			</View>
 		</View>
 	);
