@@ -35,7 +35,7 @@ const CTAButtons: React.FC<CTAButtonsProps> = ({
 				onClick={handleTrayButtonClick}
 				renderIcon={<IconInfoBorderlessLine />}
 			>
-				<Text className="cta">Info</Text>
+				<Text className="cta">Learn More</Text>
 			</Button>
 			<Button
 				className="cta"
