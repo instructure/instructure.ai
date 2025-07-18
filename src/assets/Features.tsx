@@ -80,20 +80,6 @@ const RawFeatures: RawFeaturesType = {
 			color: Canvas.color,
 			description: (
 				<>
-					Canvas Apps is the new tool for managing LTI tools in Canvas. It
-					allows greater flexibility in how tools are configured and used and is
-					powered by LearnPlatform.
-				</>
-			),
-			icon: Canvas.icon,
-			label: "Canvas Apps",
-			link: "https://www.instructure.com/k12/products/learnplatform",
-			title: "",
-		},
-		{
-			color: Canvas.color,
-			description: (
-				<>
 					Enhanced Course Progression for Learners are central to how students
 					interact with course content, and we're implementing exciting changes
 					to modernize the page and add more value.
