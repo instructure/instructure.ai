@@ -2,7 +2,6 @@ import { StrictMode } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
-import Placeholder from "./components/Placeholder.tsx";
 
 const root: HTMLElement =
 	document.getElementById("root") ||
@@ -14,10 +13,6 @@ const appRoot: Root = createRoot(root);
 
 appRoot.render(
 	<StrictMode>
-		{window.location.hash === "#/test" ? (
-			<App />
-		) : (
-			<Placeholder href="https://instructurecon.com" />
-		)}
+		<App />
 	</StrictMode>,
 );
