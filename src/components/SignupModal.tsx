@@ -63,12 +63,6 @@ const SignupModal = ({
 	const localStorageCallback = useLocalStorageCallback();
 	const [progress, setProgress] = useState<number>(0);
 
-	useEffect(() => {
-		if (window.location.hash === "#/signup") {
-			setIsOpen(true);
-		}
-	}, [setIsOpen]);
-
 	const handleButtonClick = () => {
 		startTransition(() => {
 			setIsOpen(!isOpen);

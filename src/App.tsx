@@ -80,6 +80,12 @@ const App: FC = () => {
 	};
 
 	useEffect(() => {
+		if (window.location.hash === "#/signup") {
+			setIsModalOpen(true);
+		}
+	}, []);
+
+	useEffect(() => {
 		console.info(
 			"Hey, what are you doing here? 👋\n",
 			"https://www.instructure.com/careers",
