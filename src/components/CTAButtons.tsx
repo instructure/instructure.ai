@@ -1,7 +1,6 @@
 import {
 	Button,
 	IconAddSolid,
-	IconEditSolid,
 	IconInfoBorderlessLine,
 	Text,
 	View,
@@ -10,7 +9,6 @@ import type React from "react";
 
 type CTAButtonsProps = {
 	isDisabled: boolean;
-	hasFormData: boolean;
 	setIsTrayOpen?: (isOpen: boolean) => void;
 	handleModalButtonClick: () => void;
 	handleTrayButtonClick?: () => void;
@@ -18,7 +16,6 @@ type CTAButtonsProps = {
 
 const CTAButtons: React.FC<CTAButtonsProps> = ({
 	isDisabled,
-	hasFormData,
 	handleModalButtonClick,
 	handleTrayButtonClick,
 }) => (
@@ -43,9 +40,9 @@ const CTAButtons: React.FC<CTAButtonsProps> = ({
 				disabled={isDisabled}
 				margin="small"
 				onClick={handleModalButtonClick}
-				renderIcon={hasFormData ? <IconEditSolid /> : <IconAddSolid />}
+				renderIcon={<IconAddSolid />}
 			>
-				{hasFormData ? "Edit" : "Sign up"}
+				Sign up
 			</Button>
 		</View>
 	</View>

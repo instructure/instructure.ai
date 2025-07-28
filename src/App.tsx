@@ -103,7 +103,6 @@ const App: FC = () => {
 				<CTAButtons
 					handleModalButtonClick={handleModalButtonClick}
 					handleTrayButtonClick={handleTrayButtonClick}
-					hasFormData={hasFormData}
 					isDisabled={isDisabled}
 				/>
 				<Suspense fallback={null}>
