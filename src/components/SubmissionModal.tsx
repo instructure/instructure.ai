@@ -54,10 +54,6 @@ const SubmissionModal = ({
 					We'll keep you informed on updates to these products over the coming
 					months.
 				</Text>
-				<Text as="p">
-					P.S. If you come across other features you're interested in, you can
-					always edit this form and resubmit.
-				</Text>
 			</Flex.Item>
 		</Flex>
 	);
