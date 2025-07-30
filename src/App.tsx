@@ -10,7 +10,6 @@ import { InstUISettingsProvider, View } from "@instructure/ui";
 import { Brands } from "./assets/Features";
 import Banner from "./components/Banner";
 import CTAButtons from "./components/CTAButtons";
-import { readLocalStorage } from "./utils/FormData";
 
 const SignupModal = React.lazy(() => import("./components/SignupModal"));
 const HelpTray = React.lazy(() => import("./components/HelpTray"));
@@ -26,7 +25,6 @@ const App: FC = () => {
 	const [hasError, setError] = useState<string | null>(null);
 	const [isSubmissionModalOpen, setIsSubmissionModalOpen] =
 		useState<boolean>(false);
-	const hasFormData = !!readLocalStorage("formData");
 	const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
 	const { Instructure, Mastery } = Brands;
