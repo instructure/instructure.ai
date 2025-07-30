@@ -44,6 +44,9 @@ const App: FC = () => {
 					primaryHoverBackground: inst25h,
 					primaryInverseColor: "#fff",
 				},
+				IconButton: {
+					borderRadius: "2rem",
+				},
 				Link: {
 					color: inst25,
 					hoverColor: inst25h,
