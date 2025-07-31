@@ -1,7 +1,7 @@
 import { IconUserLine, TextInput } from "@instructure/ui";
 import type React from "react";
 import type { SyntheticEvent } from "react";
-import { NamePattern, SpacePattern } from "../utils/RegEx";
+import { SpacePattern } from "../utils/RegEx";
 import type { SignupFormInputProps } from "./SignupForm";
 
 const NameInput: React.FC<SignupFormInputProps> = ({
@@ -12,7 +12,7 @@ const NameInput: React.FC<SignupFormInputProps> = ({
 	setMessages,
 }) => {
 	const isInvalidName = (name: string): boolean => {
-		return !NamePattern.test(name) || SpacePattern.test(name);
+		return SpacePattern.test(name);
 	};
 
 	const handleChange = (
