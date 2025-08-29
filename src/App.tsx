@@ -61,6 +61,7 @@ const App: FC = () => {
 								<NutritionFactsForm
 									layout={layout}
 									product={product}
+									setLayout={setLayout}
 									setProduct={setProduct}
 								/>
 							</View>

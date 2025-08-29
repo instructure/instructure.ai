@@ -1,4 +1,13 @@
-import { Flex, Heading, InlineSVG, Link, Text, View } from "@instructure/ui";
+import {
+	Flex,
+	Heading,
+	IconButton,
+	IconProgressLine,
+	InlineSVG,
+	Link,
+	Text,
+	View,
+} from "@instructure/ui";
 import type { Dispatch, FC, SetStateAction } from "react";
 import { Fragment } from "react";
 import Logo from "../assets/Logo.svg?raw";
@@ -8,15 +17,44 @@ import { EditableField } from "./EditableField";
 const NutritionFactsForm: FC<{
 	product: ProductNutritionFacts;
 	layout: PageLayout;
+	setLayout: Dispatch<SetStateAction<PageLayout>>;
 	setProduct: Dispatch<SetStateAction<ProductNutritionFacts>>;
-}> = ({ product, layout, setProduct }) => {
+}> = ({ product, layout, setProduct, setLayout }) => {
 	return (
 		<>
 			<Flex alignItems="start" direction="row">
 				<Flex.Item shouldGrow shouldShrink>
-					<Heading aiVariant={layout.header} as="h1" data-print="no-background">
-						Nutrition Facts
-					</Heading>
+					<Flex alignItems="start" direction="row" gap="medium">
+						<Flex.Item>
+							<Heading
+								aiVariant={layout.header}
+								as="h1"
+								data-print="no-background"
+							>
+								Nutrition Facts
+							</Heading>
+						</Flex.Item>
+						<Flex.Item align="center">
+							<IconButton
+								color="primary"
+								data-print="hidden"
+								onClick={() => {
+									const options: Array<"horizontal" | "iconOnly" | "stacked"> =
+										["horizontal", "iconOnly", "stacked"];
+									const currentHeader = layout.header ?? "horizontal";
+									const currentIndex = options.indexOf(currentHeader);
+									const nextIndex = (currentIndex + 1) % options.length;
+									setLayout({ ...layout, header: options[nextIndex] });
+								}}
+								screenReaderLabel="Change header layout"
+								size="medium"
+								withBackground={false}
+								withBorder={false}
+							>
+								<IconProgressLine />
+							</IconButton>
+						</Flex.Item>
+					</Flex>
 				</Flex.Item>
 				<Flex.Item>
 					{layout.icon && (
