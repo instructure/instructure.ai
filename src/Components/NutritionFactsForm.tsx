@@ -133,7 +133,8 @@ const NutritionFactsForm: FC<{
 													}
 													placeholder={segment.valueHint}
 													selectOptions={
-														segment.inputType === "select"
+														segment.inputType === "select" ||
+														segment.inputType === "multi-select"
 															? segment.inputOptions
 															: undefined
 													}

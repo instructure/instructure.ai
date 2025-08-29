@@ -159,6 +159,44 @@ const EditableField: FC<EditableFieldProps> = ({
 	const renderInput = () => {
 		const messages = handleMessages(inputType, safeValue);
 		switch (inputType) {
+			case "multi-select":
+				return (
+					<Select
+						assistiveText="Use arrow keys to navigate options."
+						inputRef={(el) => {
+							thisRef.current = el;
+						}}
+						inputValue={inputValue}
+						isShowingOptions={isShowingOptions}
+						onBlur={handleSelectBlur}
+						onFocus={() => {
+							focusInput();
+							setIsShowingOptions(true);
+						}}
+						onKeyDown={(e) => {
+							if (e.key === "Escape") {
+								handleSelectBlur();
+								handleBlur();
+							}
+						}}
+						onRequestHideOptions={handleHideOptions}
+						onRequestHighlightOption={handleHighlightOption}
+						onRequestSelectOption={handleSelectOption}
+						onRequestShowOptions={handleShowOptions}
+						renderLabel={<ScreenReaderContent>Data</ScreenReaderContent>}
+					>
+						{safeOptions.map((option) => (
+							<Select.Option
+								id={option.id}
+								isHighlighted={option.id === highlightedOptionId}
+								isSelected={option.id === selectedOptionId}
+								key={option.id}
+							>
+								{option.label}
+							</Select.Option>
+						))}
+					</Select>
+				);
 			case "checkbox":
 				return (
 					<Checkbox
@@ -218,9 +256,7 @@ const EditableField: FC<EditableFieldProps> = ({
 						onRequestHighlightOption={handleHighlightOption}
 						onRequestSelectOption={handleSelectOption}
 						onRequestShowOptions={handleShowOptions}
-						renderLabel={
-							<ScreenReaderContent>Single Select</ScreenReaderContent>
-						}
+						renderLabel={<ScreenReaderContent>Regions</ScreenReaderContent>}
 					>
 						{safeOptions.map((option) => (
 							<Select.Option
