@@ -20,7 +20,7 @@ const Control: FC<DarkState & ProductState> = ({ isDark, product }) => {
 		<ImageControl key="image" />,
 		<TextControl key="text" product={product} />,
 		<DownloadControl key="download" />,
-		<CodeControl key="code" />,
+		<CodeControl key="code" product={product} />,
 	];
 
 	return (
