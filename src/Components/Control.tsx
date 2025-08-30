@@ -2,6 +2,7 @@ import { Flex, View } from "@instructure/ui";
 import type { FC } from "react";
 import type { ProductNutritionFacts, StateProp } from "../types.ts";
 import { CodeControl } from "./Code.tsx";
+import { Divider } from "./Divider.tsx";
 import { DownloadControl } from "./Download.tsx";
 import { ImageControl } from "./Image.tsx";
 import { Preview } from "./Preview.tsx";
@@ -13,12 +14,13 @@ type ProductState = StateProp<ProductNutritionFacts, "product">;
 
 const Control: FC<DarkState & ProductState> = ({ isDark, product }) => {
 	const controls = [
+		<Preview key="preview" product={product} />,
+		<Divider key="divider" />,
 		<PrintControl key="print" />,
 		<ImageControl key="image" />,
 		<TextControl key="text" />,
 		<DownloadControl key="download" />,
 		<CodeControl key="code" />,
-		<Preview key="preview" product={product} />,
 	];
 
 	return (

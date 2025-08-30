@@ -3,6 +3,8 @@ import {
 	Heading,
 	IconButton,
 	IconProgressLine,
+	IconPublishLine,
+	IconUnpublishedLine,
 	InlineSVG,
 	Link,
 	Text,
@@ -57,15 +59,35 @@ const NutritionFactsForm: FC<{
 					</Flex>
 				</Flex.Item>
 				<Flex.Item>
-					{layout.icon && (
-						<InlineSVG
-							height="2.875rem"
-							inline={false}
-							src={Logo}
-							viewBox="0 0 53.42 53.42"
-							width="100%"
-						/>
-					)}
+					<Flex gap="small">
+						<Flex.Item>
+							<IconButton
+								color="primary"
+								data-print="hidden"
+								onClick={() => setLayout({ ...layout, icon: !layout.icon })}
+								screenReaderLabel={layout.icon ? "Hide logo" : "Show logo"}
+								size="small"
+								withBackground={false}
+								withBorder={false}
+							>
+								{layout.icon ? <IconUnpublishedLine /> : <IconPublishLine />}
+							</IconButton>
+						</Flex.Item>
+						<Flex.Item
+							align="center"
+							as="div"
+							data-print={layout.icon ? "" : "hidden"}
+						>
+							<InlineSVG
+								height="2.875rem"
+								inline={false}
+								src={Logo}
+								style={{ opacity: layout.icon ? 1 : 0.25 }}
+								viewBox="0 0 53.42 53.42"
+								width="100%"
+							/>
+						</Flex.Item>
+					</Flex>
 				</Flex.Item>
 			</Flex>
 			<Flex alignItems="start" direction="row">
@@ -258,19 +280,88 @@ const NutritionFactsForm: FC<{
 						maxWidth="66%"
 						textAlign="center"
 					>
-						{layout.disclaimer && (
-							<Text as="p" color="secondary" variant="contentSmall">
-								Instructure has developed nutrition fact labels for AI-enabled
-								products to increase transparency and improve decision making.
-							</Text>
-						)}
-						{layout.copyright && (
-							<Text color="secondary" variant="contentSmall">
-								©{new Date().getFullYear()}{" "}
-								<Link href="https://www.instructure.com/">Instructure</Link> All
-								rights reserved.
-							</Text>
-						)}
+						<Flex>
+							<Flex.Item>
+								<IconButton
+									color="primary"
+									data-print="hidden"
+									onClick={() =>
+										setLayout({ ...layout, disclaimer: !layout.disclaimer })
+									}
+									screenReaderLabel={
+										layout.disclaimer ? "Hide disclaimer" : "Show disclaimer"
+									}
+									size="small"
+									withBackground={false}
+									withBorder={false}
+								>
+									{layout.disclaimer ? (
+										<IconUnpublishedLine />
+									) : (
+										<IconPublishLine />
+									)}
+								</IconButton>
+							</Flex.Item>
+							<Flex.Item
+								data-print={layout.disclaimer ? "" : "hidden"}
+								shouldGrow
+								shouldShrink
+							>
+								<Text as="p" color="secondary" variant="contentSmall">
+									<span
+										style={{
+											opacity: layout.disclaimer ? "1" : "0.25",
+										}}
+									>
+										Instructure has developed nutrition fact labels for
+										AI-enabled products to increase transparency and improve
+										decision making.
+									</span>
+								</Text>
+							</Flex.Item>
+						</Flex>
+						<Flex>
+							<Flex.Item>
+								{" "}
+								<IconButton
+									color="primary"
+									data-print="hidden"
+									onClick={() =>
+										setLayout({ ...layout, copyright: !layout.copyright })
+									}
+									screenReaderLabel={
+										layout.copyright ? "Hide copyright" : "Show copyright"
+									}
+									size="small"
+									withBackground={false}
+									withBorder={false}
+								>
+									{layout.copyright ? (
+										<IconUnpublishedLine />
+									) : (
+										<IconPublishLine />
+									)}
+								</IconButton>
+							</Flex.Item>
+							<Flex.Item shouldGrow shouldShrink>
+								<Text
+									as="p"
+									color="secondary"
+									data-print={layout.copyright ? "" : "hidden"}
+									variant="contentSmall"
+								>
+									<span
+										style={{
+											opacity: layout.copyright ? "1" : "0.25",
+										}}
+									>
+										©{new Date().getFullYear()}{" "}
+										<Link href="https://www.instructure.com/">Instructure</Link>{" "}
+										All rights reserved.
+									</span>
+								</Text>
+							</Flex.Item>
+						</Flex>
 					</View>
 				</Flex.Item>
 			</Flex>

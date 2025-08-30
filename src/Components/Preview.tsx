@@ -43,6 +43,7 @@ const Preview: FC<{ product: ProductNutritionFacts }> = ({ product }) => {
 	return (
 		<View id="preview">
 			<ControlButton
+				background
 				Icon={IconEyeLine as React.ElementType<SVGIconProps>}
 				label="Preview JSX"
 				onClick={handleClick}

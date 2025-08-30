@@ -4,7 +4,6 @@ import { type FC, useEffect, useState } from "react";
 import { DefaultLayout } from "./assets/Layout.ts";
 import { Product } from "./assets/Products.ts";
 import Control from "./Components/Control.tsx";
-import { LayoutForm } from "./Components/LayoutForm.tsx";
 import { NutritionFactsForm } from "./Components/NutritionFactsForm.tsx";
 import type { ProductNutritionFacts } from "./types.ts";
 
@@ -35,7 +34,7 @@ const App: FC = () => {
 				padding="0"
 			>
 				<Flex direction="column" gap="small" justifyItems="center">
-					<Flex.Item as="main">
+					<Flex.Item as="main" shouldGrow shouldShrink>
 						<View
 							as="div"
 							borderRadius="large"
@@ -51,7 +50,7 @@ const App: FC = () => {
 								as="div"
 								background="primary"
 								data-print="no-margin, no-border, no-padding, max-height"
-								height="calc(98vh - 18rem)"
+								height="calc(98vh - 9rem)"
 								overflowX="hidden"
 								overflowY="auto"
 								padding="large"
@@ -64,16 +63,6 @@ const App: FC = () => {
 									setLayout={setLayout}
 									setProduct={setProduct}
 								/>
-							</View>
-							<View
-								as="div"
-								background={isDark ? "secondary" : "primary"}
-								borderColor="brand"
-								borderWidth={isDark ? "small 0 0" : "medium 0 0"}
-								data-print="hidden"
-								padding="large"
-							>
-								<LayoutForm layout={layout} setLayout={setLayout} />
 							</View>
 						</View>
 					</Flex.Item>
