@@ -286,6 +286,9 @@ const EditableField: FC<EditableFieldProps> = ({
 							}
 						}}
 						placeholder={safePlaceholder}
+						renderLabel={
+							<ScreenReaderContent>{safePlaceholder}</ScreenReaderContent>
+						}
 						value={safeValue}
 					/>
 				);
