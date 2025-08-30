@@ -345,7 +345,6 @@ const NutritionFactsForm: FC<{
 							</Flex.Item>
 							<Flex.Item shouldGrow shouldShrink>
 								<Text
-									as="p"
 									color="secondary"
 									data-print={layout.copyright ? "" : "hidden"}
 									variant="contentSmall"
