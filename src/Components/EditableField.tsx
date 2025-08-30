@@ -58,9 +58,7 @@ const EditableField: FC<EditableFieldProps> = ({
 		value: opt,
 	}));
 
-	const thisRef = useRef<
-		HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-	>(null);
+	const thisRef = useRef<HTMLTextAreaElement | HTMLInputElement | null>(null);
 	const [inputValue, setInputValue] = useState(safePlaceholder);
 	const [isShowingOptions, setIsShowingOptions] = useState(false);
 	const [highlightedOptionId, setHighlightedOptionId] = useState<string | null>(

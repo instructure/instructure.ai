@@ -1,4 +1,4 @@
-import { IconDownloadLine } from "@instructure/ui";
+import { IconDownloadLine, type SVGIconProps } from "@instructure/ui";
 import { ControlButton } from "./ControlButton.tsx";
 
 const Download = () => {
@@ -7,7 +7,7 @@ const Download = () => {
 
 const DownloadControl: React.FC = () => (
 	<ControlButton
-		Icon={IconDownloadLine}
+		Icon={IconDownloadLine as React.ElementType<SVGIconProps>}
 		label="Save as HTML"
 		onClick={Download}
 	/>

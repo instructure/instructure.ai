@@ -1,4 +1,4 @@
-import { IconTextLine } from "@instructure/ui";
+import { IconTextLine, type SVGIconProps } from "@instructure/ui";
 import { ControlButton } from "./ControlButton.tsx";
 
 const Text: () => void = () => {
@@ -7,7 +7,7 @@ const Text: () => void = () => {
 
 const TextControl: React.FC = () => (
 	<ControlButton
-		Icon={IconTextLine}
+		Icon={IconTextLine as React.ElementType<SVGIconProps>}
 		label="Save as plain text"
 		onClick={Text}
 	/>

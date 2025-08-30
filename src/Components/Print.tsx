@@ -1,4 +1,4 @@
-import { IconPrinterLine } from "@instructure/ui";
+import { IconPrinterLine, type SVGIconProps } from "@instructure/ui";
 import { useEffect } from "react";
 import { ControlButton } from "./ControlButton.tsx";
 
@@ -28,7 +28,13 @@ const PrintControl: React.FC = () => {
 		};
 	}, []);
 
-	return <ControlButton Icon={IconPrinterLine} label="Print" onClick={Print} />;
+	return (
+		<ControlButton
+			Icon={IconPrinterLine as React.ElementType<SVGIconProps>}
+			label="Print"
+			onClick={Print}
+		/>
+	);
 };
 
 export { PrintControl };

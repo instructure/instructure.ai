@@ -1,4 +1,4 @@
-import { IconImageLine } from "@instructure/ui";
+import { IconImageLine, type SVGIconProps } from "@instructure/ui";
 import { ControlButton } from "./ControlButton.tsx";
 
 const Image = () => {
@@ -6,7 +6,11 @@ const Image = () => {
 };
 
 const ImageControl: React.FC = () => (
-	<ControlButton Icon={IconImageLine} label="Save as image" onClick={Image} />
+	<ControlButton
+		Icon={IconImageLine as React.ElementType<SVGIconProps>}
+		label="Save as image"
+		onClick={Image}
+	/>
 );
 
 export { ImageControl };
