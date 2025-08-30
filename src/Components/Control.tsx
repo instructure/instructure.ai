@@ -18,7 +18,7 @@ const Control: FC<DarkState & ProductState> = ({ isDark, product }) => {
 		<Divider key="divider" />,
 		<PrintControl key="print" />,
 		<ImageControl key="image" />,
-		<TextControl key="text" />,
+		<TextControl key="text" product={product} />,
 		<DownloadControl key="download" />,
 		<CodeControl key="code" />,
 	];
