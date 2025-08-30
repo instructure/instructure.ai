@@ -8,6 +8,7 @@ import {
 	InlineSVG,
 	Link,
 	Text,
+	Tooltip,
 	View,
 } from "@instructure/ui";
 import type { Dispatch, FC, SetStateAction } from "react";
@@ -37,41 +38,70 @@ const NutritionFactsForm: FC<{
 							</Heading>
 						</Flex.Item>
 						<Flex.Item align="center">
-							<IconButton
-								color="primary"
+							<Tooltip
+								className="screen-only"
 								data-print="hidden"
-								onClick={() => {
+								offsetY={5}
+								renderTip={() => {
 									const options: Array<"horizontal" | "iconOnly" | "stacked"> =
 										["horizontal", "iconOnly", "stacked"];
 									const currentHeader = layout.header ?? "horizontal";
 									const currentIndex = options.indexOf(currentHeader);
 									const nextIndex = (currentIndex + 1) % options.length;
-									setLayout({ ...layout, header: options[nextIndex] });
+									const nextTitle =
+										options[nextIndex] === "horizontal"
+											? "Horizontal"
+											: options[nextIndex] === "iconOnly"
+												? "Icon Only"
+												: "Stacked";
+									return `Change to ${nextTitle}`;
 								}}
-								screenReaderLabel="Change header layout"
-								size="medium"
-								withBackground={false}
-								withBorder={false}
 							>
-								<IconProgressLine />
-							</IconButton>
+								<IconButton
+									color="primary"
+									data-print="hidden"
+									onClick={() => {
+										const options: Array<
+											"horizontal" | "iconOnly" | "stacked"
+										> = ["horizontal", "iconOnly", "stacked"];
+										const currentHeader = layout.header ?? "horizontal";
+										const currentIndex = options.indexOf(currentHeader);
+										const nextIndex = (currentIndex + 1) % options.length;
+										setLayout({ ...layout, header: options[nextIndex] });
+									}}
+									screenReaderLabel="Change header layout"
+									size="medium"
+									withBackground={false}
+									withBorder={false}
+								>
+									<IconProgressLine />
+								</IconButton>
+							</Tooltip>
 						</Flex.Item>
 					</Flex>
 				</Flex.Item>
 				<Flex.Item>
 					<Flex gap="small">
 						<Flex.Item>
-							<IconButton
-								color="primary"
+							<Tooltip
+								className="screen-only"
 								data-print="hidden"
-								onClick={() => setLayout({ ...layout, icon: !layout.icon })}
-								screenReaderLabel={layout.icon ? "Hide logo" : "Show logo"}
-								size="small"
-								withBackground={false}
-								withBorder={false}
+								offsetY={5}
+								placement="top"
+								renderTip={() => (layout.icon ? "Hide logo" : "Show logo")}
 							>
-								{layout.icon ? <IconUnpublishedLine /> : <IconPublishLine />}
-							</IconButton>
+								<IconButton
+									color="primary"
+									data-print="hidden"
+									onClick={() => setLayout({ ...layout, icon: !layout.icon })}
+									screenReaderLabel={layout.icon ? "Hide logo" : "Show logo"}
+									size="small"
+									withBackground={false}
+									withBorder={false}
+								>
+									{layout.icon ? <IconUnpublishedLine /> : <IconPublishLine />}
+								</IconButton>
+							</Tooltip>
 						</Flex.Item>
 						<Flex.Item
 							align="center"
@@ -282,25 +312,34 @@ const NutritionFactsForm: FC<{
 					>
 						<Flex>
 							<Flex.Item>
-								<IconButton
-									color="primary"
+								<Tooltip
+									className="screen-only"
 									data-print="hidden"
-									onClick={() =>
-										setLayout({ ...layout, disclaimer: !layout.disclaimer })
-									}
-									screenReaderLabel={
+									offsetY={5}
+									renderTip={() =>
 										layout.disclaimer ? "Hide disclaimer" : "Show disclaimer"
 									}
-									size="small"
-									withBackground={false}
-									withBorder={false}
 								>
-									{layout.disclaimer ? (
-										<IconUnpublishedLine />
-									) : (
-										<IconPublishLine />
-									)}
-								</IconButton>
+									<IconButton
+										color="primary"
+										data-print="hidden"
+										onClick={() =>
+											setLayout({ ...layout, disclaimer: !layout.disclaimer })
+										}
+										screenReaderLabel={
+											layout.disclaimer ? "Hide disclaimer" : "Show disclaimer"
+										}
+										size="small"
+										withBackground={false}
+										withBorder={false}
+									>
+										{layout.disclaimer ? (
+											<IconUnpublishedLine />
+										) : (
+											<IconPublishLine />
+										)}
+									</IconButton>
+								</Tooltip>
 							</Flex.Item>
 							<Flex.Item
 								data-print={layout.disclaimer ? "" : "hidden"}
@@ -322,26 +361,34 @@ const NutritionFactsForm: FC<{
 						</Flex>
 						<Flex>
 							<Flex.Item>
-								{" "}
-								<IconButton
-									color="primary"
+								<Tooltip
+									className="screen-only"
 									data-print="hidden"
-									onClick={() =>
-										setLayout({ ...layout, copyright: !layout.copyright })
-									}
-									screenReaderLabel={
+									offsetY={5}
+									renderTip={() =>
 										layout.copyright ? "Hide copyright" : "Show copyright"
 									}
-									size="small"
-									withBackground={false}
-									withBorder={false}
 								>
-									{layout.copyright ? (
-										<IconUnpublishedLine />
-									) : (
-										<IconPublishLine />
-									)}
-								</IconButton>
+									<IconButton
+										color="primary"
+										data-print="hidden"
+										onClick={() =>
+											setLayout({ ...layout, copyright: !layout.copyright })
+										}
+										screenReaderLabel={
+											layout.copyright ? "Hide copyright" : "Show copyright"
+										}
+										size="small"
+										withBackground={false}
+										withBorder={false}
+									>
+										{layout.copyright ? (
+											<IconUnpublishedLine />
+										) : (
+											<IconPublishLine />
+										)}
+									</IconButton>
+								</Tooltip>
 							</Flex.Item>
 							<Flex.Item shouldGrow shouldShrink>
 								<Text

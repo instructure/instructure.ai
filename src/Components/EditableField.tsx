@@ -12,6 +12,7 @@ import {
 	TextArea,
 	TextInput,
 	type TextProps,
+	Tooltip,
 	View,
 } from "@instructure/ui";
 import type { FC } from "react";
@@ -307,15 +308,30 @@ const EditableField: FC<EditableFieldProps> = ({
 							heading ? (
 								<Heading as="h2">
 									{safeValue}{" "}
-									<IconEditLine
-										color="brand"
+									<Tooltip
+										className="screen-only"
 										data-print="hidden"
-										size="x-small"
-									/>
+										offsetY={5}
+										renderTip="Edit"
+									>
+										<IconEditLine
+											color="brand"
+											data-print="hidden"
+											size="x-small"
+										/>
+									</Tooltip>
 								</Heading>
 							) : (
 								<Text>
-									{safeValue} <IconEditLine color="brand" data-print="hidden" />
+									{safeValue}{" "}
+									<Tooltip
+										className="screen-only"
+										data-print="hidden"
+										offsetY={5}
+										renderTip="Edit"
+									>
+										<IconEditLine color="brand" data-print="hidden" />
+									</Tooltip>
 								</Text>
 							)
 						) : heading ? (
@@ -324,14 +340,28 @@ const EditableField: FC<EditableFieldProps> = ({
 								color={getHeadingColor(safeColor)}
 								themeOverride={themeOverride}
 							>
-								<Text fontStyle={fontStyle} size={size}>
-									{safeHint || safePlaceholder} <IconEditLine />
-								</Text>
+								<Tooltip
+									className="screen-only"
+									data-print="hidden"
+									offsetY={5}
+									renderTip="Edit"
+								>
+									<Text fontStyle={fontStyle} size={size}>
+										{safeHint || safePlaceholder} <IconEditLine />
+									</Text>{" "}
+								</Tooltip>
 							</Heading>
 						) : (
-							<Text color={safeColor} fontStyle={fontStyle}>
-								{safeHint || safePlaceholder} <IconEditLine />
-							</Text>
+							<Tooltip
+								className="screen-only"
+								data-print="hidden"
+								offsetY={5}
+								renderTip="Edit"
+							>
+								<Text color={safeColor} fontStyle={fontStyle}>
+									{safeHint || safePlaceholder} <IconEditLine />
+								</Text>
+							</Tooltip>
 						)}
 					</View>
 				)
