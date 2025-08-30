@@ -78,7 +78,12 @@ const App: FC = () => {
 						</View>
 					</Flex.Item>
 					<Flex.Item data-print="hidden" id="control" textAlign="center">
-						<Control isDark={isDark} setIsDark={setIsDark} />
+						<Control
+							isDark={isDark}
+							product={product}
+							setIsDark={setIsDark}
+							setProduct={setProduct}
+						/>
 					</Flex.Item>
 				</Flex>
 			</View>

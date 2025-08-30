@@ -49,12 +49,12 @@ export type OutputsSegment = SegmentBase & {
 };
 
 export type NutritionFactBlock =
-	| { blockTitle: "Model & Data"; segmentData: readonly ModelAndDataSegment[] }
+	| { blockTitle: "Model & Data"; segmentData: ModelAndDataSegment[] }
 	| {
 			blockTitle: "Privacy & Compliance";
-			segmentData: readonly PrivacyComplianceSegment[];
+			segmentData: PrivacyComplianceSegment[];
 	  }
-	| { blockTitle: "Outputs"; segmentData: readonly OutputsSegment[] };
+	| { blockTitle: "Outputs"; segmentData: OutputsSegment[] };
 
 export type ProductNutritionFacts = Readonly<{
 	name: string;
