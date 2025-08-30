@@ -1,4 +1,3 @@
-/// <reference types="vitest/config" />
 import browsersList from "@instructure/browserslist-config-instui";
 import react from "@vitejs/plugin-react";
 import { browserslistToTargets } from "lightningcss";
@@ -17,11 +16,4 @@ export default defineConfig({
 		},
 		transformer: "lightningcss",
 	},
-	plugins: [
-		react({
-			babel: {
-				plugins: [["babel-plugin-react-compiler", { target: "19" }]],
-			},
-		}),
-	],
 });
