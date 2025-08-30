@@ -51,6 +51,7 @@ const App: FC = () => {
 								background="primary"
 								data-print="no-margin, no-border, no-padding, max-height"
 								height="calc(98vh - 9rem)"
+								id="page"
 								overflowX="hidden"
 								overflowY="auto"
 								padding="large"
