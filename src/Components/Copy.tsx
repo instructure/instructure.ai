@@ -39,7 +39,6 @@ const Copy = async (product: ProductNutritionFacts) => {
 	);
 	try {
 		await navigator.clipboard.writeText(safeProduct);
-		console.log(safeProduct);
 	} catch (error) {
 		let msg: string = "Failed to copy data to clipboard";
 		if (error instanceof Error) {
