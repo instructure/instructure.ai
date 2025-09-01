@@ -58,7 +58,7 @@ const TextControl: React.FC<{ product: ProductNutritionFacts }> = ({
 }) => (
 	<ControlButton
 		Icon={IconTextLine as React.ElementType<SVGIconProps>}
-		label="Save as plain text"
+		label="Save as markdown"
 		onClick={() => downloadText(product)}
 	/>
 );
