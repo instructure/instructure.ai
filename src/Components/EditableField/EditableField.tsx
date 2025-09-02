@@ -5,6 +5,8 @@ import {
 	Heading,
 	type HeadingProps,
 	IconEditLine,
+	IconPublishLine,
+	IconPublishSolid,
 	ScreenReaderContent,
 	Select,
 	type SelectOptionProps,
@@ -60,14 +62,15 @@ const EditableField: FC<EditableFieldProps> = ({
 	}));
 
 	const thisRef = useRef<HTMLTextAreaElement | HTMLInputElement | null>(null);
-	const [inputValue, setInputValue] = useState(safePlaceholder);
-	const [isShowingOptions, setIsShowingOptions] = useState(false);
+	const [inputValue, setInputValue] = useState<string>(safePlaceholder);
+	const [isShowingOptions, setIsShowingOptions] = useState<boolean>(false);
 	const [highlightedOptionId, setHighlightedOptionId] = useState<string | null>(
 		null,
 	);
-	const [selectedOptionId, setSelectedOptionId] = useState(
+	const [selectedOptionId, setSelectedOptionId] = useState<string>(
 		safeOptions[0]?.id ?? "",
 	);
+	const [selectedOptionIds, setselectedOptionIds] = useState<string[]>([]);
 
 	const safeColor: AllowedColor = color ?? "primary";
 
@@ -134,6 +137,22 @@ const EditableField: FC<EditableFieldProps> = ({
 		handleBlur();
 	};
 
+	const handleSelectOptions = (
+		_e: React.SyntheticEvent<Element, Event>,
+		data: { id?: string },
+	) => {
+		const option = data.id ? getOptionById(data.id) : undefined;
+		if (!option || !data.id) return;
+		let newSelected: string[];
+		if (selectedOptionIds.includes(data.id)) {
+			newSelected = selectedOptionIds.filter((id) => id !== data.id);
+		} else {
+			newSelected = [...selectedOptionIds, data.id];
+		}
+		setselectedOptionIds(newSelected);
+		onChange(newSelected.map((id) => getOptionById(id)?.value).join(", "));
+	};
+
 	const handleBlur = () => thisRef.current?.blur();
 
 	const getHeadingColor = (color: string | undefined): HeadingProps["color"] =>
@@ -168,11 +187,11 @@ const EditableField: FC<EditableFieldProps> = ({
 			case "multi-select":
 				return (
 					<Select
-						assistiveText="Use arrow keys to navigate options."
+						assistiveText="Type or use arrow keys to navigate options. Multiple selections allowed."
 						inputRef={(el) => {
 							thisRef.current = el;
 						}}
-						inputValue={inputValue}
+						inputValue=""
 						isShowingOptions={isShowingOptions}
 						onBlur={handleSelectBlur}
 						onFocus={() => {
@@ -187,20 +206,30 @@ const EditableField: FC<EditableFieldProps> = ({
 						}}
 						onRequestHideOptions={handleHideOptions}
 						onRequestHighlightOption={handleHighlightOption}
-						onRequestSelectOption={handleSelectOption}
+						onRequestSelectOption={handleSelectOptions}
 						onRequestShowOptions={handleShowOptions}
-						renderLabel={<ScreenReaderContent>Data</ScreenReaderContent>}
+						renderLabel={
+							<ScreenReaderContent>{safePlaceholder}</ScreenReaderContent>
+						}
 					>
-						{safeOptions.map((option) => (
-							<Select.Option
-								id={option.id}
-								isHighlighted={option.id === highlightedOptionId}
-								isSelected={option.id === selectedOptionId}
-								key={option.id}
-							>
-								{option.label}
-							</Select.Option>
-						))}
+						{safeOptions.map((option) => {
+							return (
+								<Select.Option
+									id={option.id}
+									isHighlighted={option.id === highlightedOptionId}
+									key={option.id}
+									renderBeforeLabel={
+										selectedOptionIds.includes(option.id) ? (
+											<IconPublishSolid />
+										) : (
+											<IconPublishLine />
+										)
+									}
+								>
+									{option.label}
+								</Select.Option>
+							);
+						})}
 					</Select>
 				);
 			case "checkbox":
@@ -262,7 +291,9 @@ const EditableField: FC<EditableFieldProps> = ({
 						onRequestHighlightOption={handleHighlightOption}
 						onRequestSelectOption={handleSelectOption}
 						onRequestShowOptions={handleShowOptions}
-						renderLabel={<ScreenReaderContent>Regions</ScreenReaderContent>}
+						renderLabel={
+							<ScreenReaderContent>{safePlaceholder}</ScreenReaderContent>
+						}
 					>
 						{safeOptions.map((option) => (
 							<Select.Option
