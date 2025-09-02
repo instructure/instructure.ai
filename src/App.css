@@ -1,8 +1,3 @@
-:root {
-  --brand: #2B7ABC;
-  --white: #fff;
-}
-
 html,
 body {
   margin: 0;
@@ -11,36 +6,8 @@ body {
   box-sizing: border-box;
 }
 
-::selection {
-  background: rgb(241, 230, 245);
-  color: rgb(146, 66, 180);
-}
-
 #root {
   height: 100%;
-}
-
-@supports (scrollbar-color: auto) {
-
-  html,
-  body,
-  * {
-    scrollbar-color: var(--brand) var(--white);
-    scrollbar-width: thin;
-  }
-}
-
-@supports selector(::-webkit-scrollbar) {
-  *::-webkit-scrollbar {
-    width: 0.75rem;
-    background: transparent;
-  }
-
-  *::-webkit-scrollbar-thumb {
-    background: var(--brand);
-    border-radius: 0.5rem;
-    border: 2px solid var(--white);
-  }
 }
 
 @media print {
@@ -83,7 +50,6 @@ body {
     height: auto !important;
     max-height: none !important;
     overflow: visible !important;
-    /* page-break-inside: auto !important; */
   }
 
   [contentEditable] {
