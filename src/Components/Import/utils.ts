@@ -196,7 +196,6 @@ export function getInitialProduct(): ProductNutritionFacts {
 		for (const candidate of candidates) {
 			try {
 				const imported = JSON.parse(candidate);
-				console.log("Parsed ?q successfully");
 				return mapImportedToProduct(imported);
 			} catch {
 				/* try next */
