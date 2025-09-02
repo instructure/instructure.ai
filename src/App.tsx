@@ -2,12 +2,14 @@ import "./App.css";
 import { Flex, InstUISettingsProvider, View } from "@instructure/ui";
 import { type FC, useEffect, useState } from "react";
 import { DefaultLayout } from "./assets/Layout.ts";
-import { Product } from "./assets/Products.ts";
+import { getInitialProduct } from "./Components/Import";
 import { Control, NutritionFactsForm } from "./Components/Layout";
 import type { ProductNutritionFacts } from "./types.ts";
 
 const App: FC = () => {
-	const [product, setProduct] = useState<ProductNutritionFacts>(Product);
+	const [product, setProduct] = useState<ProductNutritionFacts>(
+		getInitialProduct(),
+	);
 	const [layout, setLayout] = useState(DefaultLayout);
 	const [isDark, setIsDark] = useState(false);
 
