@@ -14,7 +14,7 @@
     "@instructure/browserslist-config-instui": "^10.24.2",
     "@types/react": "^18.3.24",
     "@types/react-dom": "^18.3.7",
-    "@typescript/native-preview": "7.0.0-dev.20250830.1",
+    "@typescript/native-preview": "7.0.0-dev.20250902.1",
     "@vitejs/plugin-react": "^5.0.2",
     "browserslist": "^4.25.4",
     "lightningcss": "^1.30.1",
