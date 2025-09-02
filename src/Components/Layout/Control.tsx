@@ -1,6 +1,6 @@
 import { Flex, View } from "@instructure/ui";
 import type { FC } from "react";
-import type { ProductNutritionFacts, StateProp } from "@/types";
+import type { ProductNutritionFacts, StateProp } from "../../types.ts";
 import {
 	CodeControl,
 	CopyControl,
@@ -22,7 +22,7 @@ const Control: FC<DarkState & ProductState> = ({ isDark, product }) => {
 		<PrintControl key="print" />,
 		<ImageControl key="image" product={product} />,
 		<TextControl key="text" product={product} />,
-		<DownloadControl key="download" />,
+		<DownloadControl key="download" product={product} />,
 		<CodeControl key="code" product={product} />,
 		<CopyControl key="copy" product={product} />,
 	];

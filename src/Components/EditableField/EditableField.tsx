@@ -17,7 +17,7 @@ import {
 } from "@instructure/ui";
 import type { FC } from "react";
 import { useRef, useState } from "react";
-import type { SegmentBase } from "../types.ts";
+import type { SegmentBase } from "../../types.ts";
 
 type AllowedColor = TextProps["color"];
 
@@ -347,7 +347,8 @@ const EditableField: FC<EditableFieldProps> = ({
 									renderTip="Edit"
 								>
 									<Text fontStyle={fontStyle} size={size}>
-										{safeHint || safePlaceholder} <IconEditLine />
+										{safeHint || safePlaceholder}{" "}
+										<IconEditLine data-print="hidden" />
 									</Text>{" "}
 								</Tooltip>
 							</Heading>
@@ -359,7 +360,8 @@ const EditableField: FC<EditableFieldProps> = ({
 								renderTip="Edit"
 							>
 								<Text color={safeColor} fontStyle={fontStyle}>
-									{safeHint || safePlaceholder} <IconEditLine />
+									{safeHint || safePlaceholder}{" "}
+									<IconEditLine data-print="hidden" />
 								</Text>
 							</Tooltip>
 						)}
