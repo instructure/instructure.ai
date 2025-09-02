@@ -28,7 +28,7 @@ const Product: ProductNutritionFacts = {
 					description:
 						"Indicates which training or operational content was given to the model.",
 					descriptionHint: "Describe the data shared",
-					inputOptions: ["None", "Student", "Faculty", "Course", "Other"],
+					inputOptions: ["None", "Course", "Faculty", "Student", "Other"],
 					inputType: "multi-select",
 					segmentTitle: "Data Shared with Model",
 					value: "",
@@ -61,7 +61,17 @@ const Product: ProductNutritionFacts = {
 					description:
 						"The locations where the AI model is officially available and supported.",
 					descriptionHint: "Describe the supported regions",
-					inputOptions: ["NORAM", "EMEA", "APAC", "LATAM"].sort(),
+					inputOptions: [
+						"Global",
+						"Virginia",
+						"Oregon",
+						"Montreal",
+						"Dublin",
+						"Frankfurt",
+						"Singapore",
+						"Sydney",
+						"Other",
+					],
 					inputType: "multi-select",
 					segmentTitle: "Regions Supported",
 					value: "",
