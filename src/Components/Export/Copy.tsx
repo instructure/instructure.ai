@@ -1,5 +1,5 @@
 import { IconCopyLine, type SVGIconProps } from "@instructure/ui";
-import type { NutritionFactBlock, ProductNutritionFacts } from "../types.ts";
+import type { NutritionFactBlock, ProductNutritionFacts } from "../../types.ts";
 import { ControlButton } from "./ControlButton.tsx";
 
 type BlockType = {

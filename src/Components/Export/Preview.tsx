@@ -6,7 +6,7 @@ import {
 	View,
 } from "@instructure/ui";
 import type { FC } from "react";
-import type { NutritionFactBlock, ProductNutritionFacts } from "../types.ts";
+import type { NutritionFactBlock, ProductNutritionFacts } from "../../types.ts";
 import { ControlButton } from "./ControlButton.tsx";
 
 type BlockType = {
@@ -38,7 +38,9 @@ const handleClick = () => {
 	}
 };
 
-const Preview: FC<{ product: ProductNutritionFacts }> = ({ product }) => {
+const PreviewControl: FC<{ product: ProductNutritionFacts }> = ({
+	product,
+}) => {
 	const data = product.data.map(toBlockType);
 	return (
 		<View id="preview">
@@ -63,4 +65,4 @@ const Preview: FC<{ product: ProductNutritionFacts }> = ({ product }) => {
 	);
 };
 
-export { Preview };
+export { PreviewControl };

@@ -1,21 +1,23 @@
 import { Flex, View } from "@instructure/ui";
 import type { FC } from "react";
-import type { ProductNutritionFacts, StateProp } from "../types.ts";
-import { CodeControl } from "./Code.tsx";
-import { CopyControl } from "./Copy.tsx";
+import type { ProductNutritionFacts, StateProp } from "@/types";
+import {
+	CodeControl,
+	CopyControl,
+	DownloadControl,
+	ImageControl,
+	PreviewControl,
+	PrintControl,
+	TextControl,
+} from "../Export";
 import { Divider } from "./Divider.tsx";
-import { DownloadControl } from "./Download.tsx";
-import { ImageControl } from "./Image.tsx";
-import { Preview } from "./Preview.tsx";
-import { PrintControl } from "./Print.tsx";
-import { TextControl } from "./Text.tsx";
 
 type DarkState = StateProp<boolean, "isDark">;
 type ProductState = StateProp<ProductNutritionFacts, "product">;
 
 const Control: FC<DarkState & ProductState> = ({ isDark, product }) => {
 	const controls = [
-		<Preview key="preview" product={product} />,
+		<PreviewControl key="preview" product={product} />,
 		<Divider key="divider" />,
 		<PrintControl key="print" />,
 		<ImageControl key="image" product={product} />,
@@ -47,4 +49,4 @@ const Control: FC<DarkState & ProductState> = ({ isDark, product }) => {
 		</View>
 	);
 };
-export default Control;
+export { Control };

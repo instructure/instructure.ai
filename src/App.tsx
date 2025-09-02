@@ -3,8 +3,7 @@ import { Flex, InstUISettingsProvider, View } from "@instructure/ui";
 import { type FC, useEffect, useState } from "react";
 import { DefaultLayout } from "./assets/Layout.ts";
 import { Product } from "./assets/Products.ts";
-import Control from "./Components/Control.tsx";
-import { NutritionFactsForm } from "./Components/NutritionFactsForm.tsx";
+import { Control, NutritionFactsForm } from "./Components/Layout";
 import type { ProductNutritionFacts } from "./types.ts";
 
 const App: FC = () => {

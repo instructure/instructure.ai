@@ -13,9 +13,9 @@ import {
 } from "@instructure/ui";
 import type { Dispatch, FC, SetStateAction } from "react";
 import { Fragment } from "react";
-import Logo from "../assets/Logo.svg?raw";
-import type { PageLayout, ProductNutritionFacts } from "../types.ts";
-import { EditableField } from "./EditableField";
+import Logo from "../../assets/Logo.svg?raw";
+import type { PageLayout, ProductNutritionFacts } from "../../types.ts";
+import { EditableField } from "../EditableField";
 
 const NutritionFactsForm: FC<{
 	product: ProductNutritionFacts;

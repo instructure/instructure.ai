@@ -1,5 +1,5 @@
 import { IconTextLine, type SVGIconProps } from "@instructure/ui";
-import type { ProductNutritionFacts } from "../types.ts";
+import type { ProductNutritionFacts } from "../../types.ts";
 import { ControlButton } from "./ControlButton.tsx";
 
 const productToMarkdown = (product: ProductNutritionFacts): string => {

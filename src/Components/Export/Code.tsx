@@ -1,5 +1,5 @@
 import { IconCodeLine, type SVGIconProps } from "@instructure/ui";
-import type { NutritionFactBlock, ProductNutritionFacts } from "../types.ts";
+import type { NutritionFactBlock, ProductNutritionFacts } from "../../types.ts";
 import { ControlButton } from "./ControlButton.tsx";
 
 type BlockType = {
@@ -15,14 +15,16 @@ type BlockType = {
 function toBlockType(block: NutritionFactBlock): BlockType {
 	return {
 		blockTitle: block.blockTitle,
-		segmentData: block.segmentData.map((segment) => ({
-			description: segment.description,
-			segmentTitle: segment.segmentTitle,
-			value: segment.value ?? "",
-			valueDescription: segment.valueDescription?.trim()
-				? segment.valueDescription
-				: undefined,
-		})),
+		segmentData: block.segmentData.map(
+			(segment: NutritionFactBlock["segmentData"][number]) => ({
+				description: segment.description,
+				segmentTitle: segment.segmentTitle,
+				value: segment.value ?? "",
+				valueDescription: segment.valueDescription?.trim()
+					? segment.valueDescription
+					: undefined,
+			}),
+		),
 	};
 }
 

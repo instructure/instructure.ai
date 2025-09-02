@@ -1,6 +1,6 @@
 import { IconImageLine, type SVGIconProps } from "@instructure/ui";
 import { snapdom } from "@zumer/snapdom";
-import type { ProductNutritionFacts } from "../types.ts";
+import type { ProductNutritionFacts } from "../../types.ts";
 import { ControlButton } from "./ControlButton.tsx";
 
 const Image = async ({ product }: { product: ProductNutritionFacts }) => {
