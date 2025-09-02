@@ -141,6 +141,8 @@ const EditableField: FC<EditableFieldProps> = ({
 			? (color as HeadingProps["color"])
 			: "primary";
 
+	let hasError: boolean;
+
 	const handleMessages = (
 		inputType: SegmentBase["inputType"],
 		safeValue: string,
@@ -148,15 +150,20 @@ const EditableField: FC<EditableFieldProps> = ({
 		const messages: FormMessage[] = [];
 		if (inputType === "textarea") {
 			let type: FormMessage["type"] = "hint";
-			if (safeValue.length > 250) type = "error";
+			if (safeValue.length > 250) {
+				type = "error";
+				hasError = true;
+			}
 			const text: FormMessage["text"] = `${safeValue.length} / 250`;
 			messages.push({ text, type });
 		}
+
 		return messages;
 	};
 
+	const messages = handleMessages(inputType, safeValue);
+
 	const renderInput = () => {
-		const messages = handleMessages(inputType, safeValue);
 		switch (inputType) {
 			case "multi-select":
 				return (
@@ -316,7 +323,7 @@ const EditableField: FC<EditableFieldProps> = ({
 											renderTip="Edit"
 										>
 											<IconEditLine
-												color="brand"
+												color={hasError ? "error" : "brand"}
 												data-print="hidden"
 												size="x-small"
 											/>
@@ -326,13 +333,11 @@ const EditableField: FC<EditableFieldProps> = ({
 							) : (
 								<Text>
 									{safeValue}{" "}
-									<Tooltip
-										className="screen-only"
-										data-print="hidden"
-										offsetY={5}
-										renderTip="Edit"
-									>
-										<IconEditLine color="brand" data-print="hidden" />
+									<Tooltip data-print="hidden" offsetY={5} renderTip="Edit">
+										<IconEditLine
+											color={hasError ? "error" : "brand"}
+											data-print="hidden"
+										/>
 									</Tooltip>
 								</Text>
 							)
@@ -342,28 +347,24 @@ const EditableField: FC<EditableFieldProps> = ({
 								color={getHeadingColor(safeColor)}
 								themeOverride={themeOverride}
 							>
-								<Tooltip
-									className="screen-only"
-									data-print="hidden"
-									offsetY={5}
-									renderTip="Edit"
-								>
+								<Tooltip data-print="hidden" offsetY={5} renderTip="Edit">
 									<Text fontStyle={fontStyle} size={size}>
 										{safeHint || safePlaceholder}{" "}
-										<IconEditLine data-print="hidden" />
+										<IconEditLine
+											color={hasError ? "error" : "brand"}
+											data-print="hidden"
+										/>
 									</Text>{" "}
 								</Tooltip>
 							</Heading>
 						) : (
-							<Tooltip
-								className="screen-only"
-								data-print="hidden"
-								offsetY={5}
-								renderTip="Edit"
-							>
+							<Tooltip data-print="hidden" offsetY={5} renderTip="Edit">
 								<Text color={safeColor} fontStyle={fontStyle}>
 									{safeHint || safePlaceholder}{" "}
-									<IconEditLine data-print="hidden" />
+									<IconEditLine
+										color={hasError ? "error" : "brand"}
+										data-print="hidden"
+									/>
 								</Text>
 							</Tooltip>
 						)}
