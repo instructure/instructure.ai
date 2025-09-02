@@ -306,21 +306,23 @@ const EditableField: FC<EditableFieldProps> = ({
 					>
 						{safeValue.length ? (
 							heading ? (
-								<Heading as="h2">
-									{safeValue}{" "}
-									<Tooltip
-										className="screen-only"
-										data-print="hidden"
-										offsetY={5}
-										renderTip="Edit"
-									>
-										<IconEditLine
-											color="brand"
+								<Text transform="capitalize">
+									<Heading as="h2">
+										{safeValue}{" "}
+										<Tooltip
+											className="screen-only"
 											data-print="hidden"
-											size="x-small"
-										/>
-									</Tooltip>
-								</Heading>
+											offsetY={5}
+											renderTip="Edit"
+										>
+											<IconEditLine
+												color="brand"
+												data-print="hidden"
+												size="x-small"
+											/>
+										</Tooltip>
+									</Heading>
+								</Text>
 							) : (
 								<Text>
 									{safeValue}{" "}
