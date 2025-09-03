@@ -10,9 +10,9 @@ import type {
  * Parses query parameters and maps them to a ProductNutritionFacts object.
  * Supports dot notation for nested fields and comma-separated values for arrays.
  */
-export function queryParamsToProduct(
-	search: string,
+export function getProductFromParams(
 	template: ProductNutritionFacts = Product,
+	search: string = window.location.search,
 ): ProductNutritionFacts {
 	const params = new URLSearchParams(
 		search.startsWith("?") ? search : `?${search}`,
