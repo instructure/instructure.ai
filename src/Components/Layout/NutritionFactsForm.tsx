@@ -315,6 +315,59 @@ const NutritionFactsForm: FC<{
 								</Text>
 							</Flex.Item>
 						</Flex>
+						<Flex>
+							<Flex.Item>
+								<Tooltip
+									className="screen-only"
+									data-print="hidden"
+									offsetY={5}
+									renderTip={() =>
+										layout.revision ? "Hide revision" : "Show revision"
+									}
+								>
+									<IconButton
+										color="primary"
+										data-print="hidden"
+										onClick={() =>
+											setLayout({ ...layout, revision: !layout.revision })
+										}
+										screenReaderLabel={
+											layout.revision ? "Hide revision" : "Show revision"
+										}
+										size="small"
+										withBackground={false}
+										withBorder={false}
+									>
+										{layout.revision ? (
+											<IconUnpublishedLine />
+										) : (
+											<IconPublishLine />
+										)}
+									</IconButton>
+								</Tooltip>
+							</Flex.Item>
+							<Flex.Item shouldGrow shouldShrink>
+								<Text
+									color="secondary"
+									data-print={layout.revision ? "" : "hidden"}
+									variant="contentSmall"
+								>
+									<span
+										style={{
+											opacity: layout.revision ? "1" : "0.25",
+										}}
+									>
+										Revision: {(() => {
+											const d = new Date();
+											const yyyy = d.getFullYear();
+											const mm = String(d.getMonth() + 1).padStart(2, "0");
+											const dd = String(d.getDate()).padStart(2, "0");
+											return `${yyyy}.${mm}.${dd}`;
+										})()}
+									</span>
+								</Text>
+							</Flex.Item>
+						</Flex>
 					</View>
 				</Flex.Item>
 			</Flex>
