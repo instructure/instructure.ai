@@ -387,7 +387,6 @@ const EditableField: FC<EditableFieldProps> = ({
 								padding="xx-small"
 								themeOverride={{ backgroundBrand: "rgba(34, 95, 146, 0.1)" }}
 							>
-								{" "}
 								{heading ? (
 									<Text fontStyle={fontStyle}>
 										<Heading
@@ -415,7 +414,7 @@ const EditableField: FC<EditableFieldProps> = ({
 											/>
 										</Text>
 									</Tooltip>
-								)}{" "}
+								)}
 							</View>
 						)}
 					</View>
