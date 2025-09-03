@@ -23,7 +23,8 @@ _${segment.description}_
 ${
 	segment.value && segment.valueDescription
 		? `**${segment.value}**
-(${segment.valueDescription})`
+		
+${segment.valueDescription}`
 		: segment.value
 			? `**${segment.value}**`
 			: segment.valueDescription
