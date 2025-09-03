@@ -13,7 +13,7 @@ An interactive web application for importing, generating, editing, and exporting
 
 ## Usage
 
-[#](View the tool on the web) and input your Nutrition Facts for your IgniteAI feature. You can:
+[View the tool on the web](https://instructure.github.io/nf-generator/) and input your Nutrition Facts for your IgniteAI feature. You can:
 
 * Preview the rendered Nutrition Facts for how they will display in-product
 * Export to PDF
