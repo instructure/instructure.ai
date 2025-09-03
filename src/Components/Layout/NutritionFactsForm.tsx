@@ -138,7 +138,6 @@ const NutritionFactsForm: FC<{
 								setProduct({ ...product, name: val.toString() })
 							}
 							placeholder={product.nameHint}
-							size="descriptionPage"
 							themeOverride={{ primaryColor: "#2B7ABC" }}
 							value={product.name}
 						/>

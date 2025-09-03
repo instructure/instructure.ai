@@ -32,7 +32,6 @@ type EditableFieldProps = {
 	color?: AllowedColor;
 	themeOverride?: object;
 	fontStyle?: TextProps["fontStyle"];
-	size?: TextProps["size"];
 	dataPrint?: string;
 	inputType?: SegmentBase["inputType"];
 	selectOptions?: string[];
@@ -47,7 +46,6 @@ const EditableField: FC<EditableFieldProps> = ({
 	color = "brand",
 	themeOverride,
 	fontStyle,
-	size,
 	dataPrint,
 	inputType = "text",
 	selectOptions,
@@ -373,21 +371,24 @@ const EditableField: FC<EditableFieldProps> = ({
 								</Text>
 							)
 						) : heading ? (
-							<Heading
-								as="h2"
-								color={getHeadingColor(safeColor)}
-								themeOverride={themeOverride}
-							>
-								<Tooltip data-print="hidden" offsetY={5} renderTip="Edit">
-									<Text fontStyle={fontStyle} size={size}>
-										{safeHint || safePlaceholder}{" "}
-										<IconEditLine
-											color={hasError ? "error" : "brand"}
-											data-print="hidden"
-										/>
-									</Text>{" "}
-								</Tooltip>
-							</Heading>
+							<View>
+								<Text fontStyle={fontStyle}>
+									<Heading
+										as="h2"
+										color={getHeadingColor(safeColor)}
+										themeOverride={themeOverride}
+									>
+										<Tooltip data-print="hidden" offsetY={5} renderTip="Edit">
+											{safeHint || safePlaceholder}{" "}
+											<IconEditLine
+												color={hasError ? "error" : "brand"}
+												data-print="hidden"
+												size="x-small"
+											/>
+										</Tooltip>
+									</Heading>
+								</Text>
+							</View>
 						) : (
 							<Tooltip data-print="hidden" offsetY={5} renderTip="Edit">
 								<Text color={safeColor} fontStyle={fontStyle}>
