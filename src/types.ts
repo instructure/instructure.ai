@@ -1,4 +1,3 @@
-import type { HeadingProps } from "@instructure/ui";
 import type { Dispatch, SetStateAction } from "react";
 
 export type StateProp<T, K extends string> = {
@@ -8,10 +7,10 @@ export type StateProp<T, K extends string> = {
 };
 
 export type PageLayout = {
-	header: HeadingProps["aiVariant"];
 	icon: boolean;
 	disclaimer: boolean;
 	copyright: boolean;
+	revision: boolean;
 };
 
 export type SegmentBase = Readonly<
