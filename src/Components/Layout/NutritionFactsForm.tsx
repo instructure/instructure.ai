@@ -74,6 +74,7 @@ const NutritionFactsForm: FC<{
 									as="div"
 									borderRadius="medium"
 									borderWidth="small"
+									data-print="no-break"
 									key={segment.segmentTitle}
 									margin="small 0"
 									padding="small"

@@ -51,4 +51,9 @@ body {
     max-height: none !important;
     overflow: visible !important;
   }
+
+  [data-print*="no-break"] {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
 }
