@@ -2,10 +2,8 @@ import {
 	Flex,
 	Heading,
 	IconButton,
-	IconProgressLine,
 	IconPublishLine,
 	IconUnpublishedLine,
-	InlineSVG,
 	Link,
 	Text,
 	Tooltip,
@@ -13,7 +11,6 @@ import {
 } from "@instructure/ui";
 import type { Dispatch, FC, SetStateAction } from "react";
 import { Fragment } from "react";
-import Logo from "../../assets/Logo.svg?raw";
 import type { PageLayout, ProductNutritionFacts } from "../../types.ts";
 import { EditableField } from "../EditableField";
 
@@ -27,108 +24,19 @@ const NutritionFactsForm: FC<{
 		<>
 			<Flex alignItems="start" direction="row">
 				<Flex.Item shouldGrow shouldShrink>
-					<Flex alignItems="start" direction="row" gap="medium">
-						<Flex.Item>
-							<Heading
-								aiVariant={layout.header}
-								as="h1"
-								data-print="no-background"
-							>
-								Nutrition Facts
-							</Heading>
-						</Flex.Item>
-						<Flex.Item align="center">
-							<Tooltip
-								className="screen-only"
-								data-print="hidden"
-								offsetY={5}
-								renderTip={() => {
-									const options: Array<"horizontal" | "iconOnly" | "stacked"> =
-										["horizontal", "iconOnly", "stacked"];
-									const currentHeader = layout.header ?? "horizontal";
-									const currentIndex = options.indexOf(currentHeader);
-									const nextIndex = (currentIndex + 1) % options.length;
-									const nextTitle =
-										options[nextIndex] === "horizontal"
-											? "Horizontal"
-											: options[nextIndex] === "iconOnly"
-												? "Icon Only"
-												: "Stacked";
-									return `Change to ${nextTitle}`;
-								}}
-							>
-								<IconButton
-									color="primary"
-									data-print="hidden"
-									onClick={() => {
-										const options: Array<
-											"horizontal" | "iconOnly" | "stacked"
-										> = ["horizontal", "iconOnly", "stacked"];
-										const currentHeader = layout.header ?? "horizontal";
-										const currentIndex = options.indexOf(currentHeader);
-										const nextIndex = (currentIndex + 1) % options.length;
-										setLayout({ ...layout, header: options[nextIndex] });
-									}}
-									screenReaderLabel="Change header layout"
-									size="medium"
-									withBackground={false}
-									withBorder={false}
-								>
-									<IconProgressLine />
-								</IconButton>
-							</Tooltip>
-						</Flex.Item>
-					</Flex>
-				</Flex.Item>
-				<Flex.Item>
-					<Flex gap="small">
-						<Flex.Item>
-							<Tooltip
-								className="screen-only"
-								data-print="hidden"
-								offsetY={5}
-								placement="top"
-								renderTip={() => (layout.icon ? "Hide logo" : "Show logo")}
-							>
-								<IconButton
-									color="primary"
-									data-print="hidden"
-									onClick={() => setLayout({ ...layout, icon: !layout.icon })}
-									screenReaderLabel={layout.icon ? "Hide logo" : "Show logo"}
-									size="small"
-									withBackground={false}
-									withBorder={false}
-								>
-									{layout.icon ? <IconUnpublishedLine /> : <IconPublishLine />}
-								</IconButton>
-							</Tooltip>
-						</Flex.Item>
-						<Flex.Item
-							align="center"
-							as="div"
-							data-print={layout.icon ? "" : "hidden"}
-						>
-							<InlineSVG
-								height="2.875rem"
-								inline={false}
-								src={Logo}
-								style={{ opacity: layout.icon ? 1 : 0.25 }}
-								viewBox="0 0 53.42 53.42"
-								width="100%"
-							/>
-						</Flex.Item>
-					</Flex>
+					<Heading
+						aiVariant="stacked"
+						as="h1"
+						data-print="no-background"
+						margin="0 0 small"
+					>
+						Nutrition Facts
+					</Heading>
 				</Flex.Item>
 			</Flex>
 			<Flex alignItems="start" direction="row">
 				<Flex.Item shouldGrow shouldShrink>
-					<View
-						as="div"
-						borderWidth="0 0 large 0"
-						padding={
-							layout.header !== "horizontal" ? "0 0 small" : "0 0 small large"
-						}
-					>
+					<View as="div" borderWidth="large 0 0 0" padding="medium 0 0">
 						<EditableField
 							dataPrint={product.name.length ? "" : "hidden"}
 							fontStyle="italic"
