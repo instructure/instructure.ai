@@ -16,6 +16,7 @@ import {
 	type TextProps,
 	Tooltip,
 	View,
+	type ViewProps,
 } from "@instructure/ui";
 import type { FC } from "react";
 import { useRef, useState } from "react";
@@ -69,6 +70,8 @@ const EditableField: FC<EditableFieldProps> = ({
 		safeOptions[0]?.id ?? "",
 	);
 	const [selectedOptionIds, setselectedOptionIds] = useState<string[]>([]);
+	const [bgColor, setBgColor] =
+		useState<ViewProps["background"]>("transparent");
 
 	const safeColor: AllowedColor = color ?? "primary";
 
@@ -370,35 +373,50 @@ const EditableField: FC<EditableFieldProps> = ({
 									</Tooltip>
 								</Text>
 							)
-						) : heading ? (
-							<View>
-								<Text fontStyle={fontStyle}>
-									<Heading
-										as="h2"
-										color={getHeadingColor(safeColor)}
-										themeOverride={themeOverride}
-									>
-										<Tooltip data-print="hidden" offsetY={5} renderTip="Edit">
+						) : (
+							<View
+								background={bgColor}
+								borderRadius="medium"
+								display="inline-block"
+								onMouseEnter={() => {
+									setBgColor("brand");
+								}}
+								onMouseLeave={() => {
+									setBgColor("transparent");
+								}}
+								padding="xx-small"
+								themeOverride={{ backgroundBrand: "rgba(34, 95, 146, 0.1)" }}
+							>
+								{" "}
+								{heading ? (
+									<Text fontStyle={fontStyle}>
+										<Heading
+											as="h2"
+											color={getHeadingColor(safeColor)}
+											themeOverride={themeOverride}
+										>
+											<Tooltip data-print="hidden" offsetY={5} renderTip="Edit">
+												{safeHint || safePlaceholder}{" "}
+												<IconEditLine
+													color={hasError ? "error" : "brand"}
+													data-print="hidden"
+													size="x-small"
+												/>
+											</Tooltip>
+										</Heading>
+									</Text>
+								) : (
+									<Tooltip data-print="hidden" offsetY={5} renderTip="Edit">
+										<Text color={safeColor} fontStyle={fontStyle}>
 											{safeHint || safePlaceholder}{" "}
 											<IconEditLine
 												color={hasError ? "error" : "brand"}
 												data-print="hidden"
-												size="x-small"
 											/>
-										</Tooltip>
-									</Heading>
-								</Text>
+										</Text>
+									</Tooltip>
+								)}{" "}
 							</View>
-						) : (
-							<Tooltip data-print="hidden" offsetY={5} renderTip="Edit">
-								<Text color={safeColor} fontStyle={fontStyle}>
-									{safeHint || safePlaceholder}{" "}
-									<IconEditLine
-										color={hasError ? "error" : "brand"}
-										data-print="hidden"
-									/>
-								</Text>
-							</Tooltip>
 						)}
 					</View>
 				)
