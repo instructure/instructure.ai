@@ -51,15 +51,4 @@ body {
     max-height: none !important;
     overflow: visible !important;
   }
-
-  [contentEditable] {
-    border: 0 none !important;
-    outline: none !important;
-    margin: inherit !important;
-    padding: inherit !important;
-    display: inherit !important;
-    min-width: unset !important;
-    font-style: normal !important;
-    color: inherit !important;
-  }
 }
