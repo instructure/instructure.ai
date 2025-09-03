@@ -1,4 +1,3 @@
-import { Product } from "../../assets/Products";
 import type { ProductNutritionFacts } from "../../types";
 
 export interface ImportedSegment {
@@ -19,10 +18,11 @@ export interface ImportedProduct {
 	name?: string;
 }
 
-export function mapImportedToProduct(
+function mapImportedToProduct(
 	imported: ImportedProduct,
+	template: ProductNutritionFacts,
 ): ProductNutritionFacts {
-	let merged: ProductNutritionFacts = { ...Product };
+	let merged: ProductNutritionFacts = { ...template };
 
 	if (imported.name) {
 		merged = { ...merged, name: imported.name };
@@ -179,7 +179,9 @@ function extractPossiblyBrokenJSONParam(
 	return result || null;
 }
 
-export function getInitialProduct(): ProductNutritionFacts {
+export function getProductFromObject(
+	Product: ProductNutritionFacts,
+): ProductNutritionFacts {
 	const rawQ = extractPossiblyBrokenJSONParam(window.location.search, "q");
 
 	if (rawQ && rawQ.trim() !== "") {
@@ -196,7 +198,7 @@ export function getInitialProduct(): ProductNutritionFacts {
 		for (const candidate of candidates) {
 			try {
 				const imported = JSON.parse(candidate);
-				return mapImportedToProduct(imported);
+				return mapImportedToProduct(imported, Product);
 			} catch {
 				/* try next */
 			}

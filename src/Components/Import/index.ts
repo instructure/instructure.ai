@@ -1,1 +1,1 @@
-export { getInitialProduct, mapImportedToProduct } from "./utils.ts";
+export { getProductFromObject } from "./getProductFromObject.ts";
