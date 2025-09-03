@@ -28,12 +28,63 @@ An interactive web application for importing, generating, editing, and exporting
 
 ### Importing
 
+Two import types are provided: object-based and named params. Object-based import values take precedence, meaning if you include both, the value in the object will be imported. `/?q={"name":"foo"}&name=bar` will result in `bar` being stored. `/?q={"description":"I am a foo."}&name=foo` will store both `name` and `description` values.
+
+#### Object-based Imports
+
 The site accepts the query param `q` and a value that is a subset of the `ProductNutritionFacts` object. This will be coerced into a `NutritionFacts` compatible object.  The basic structure is a bare object with `name`, `description`, and `data[]` keys.
 
 ```
 /?q={"name": "foo", "description: "bar"}
 ```
 try using the `Copy` export function and then pasting the clipboard to the query param to see it in action.
+
+#### Named Parameter Imports
+
+Parameters use dot notation for arrays and commas for values.
+
+```
+name=<string>
+description=<string>
+model.
+	base.
+		value=<string>
+		valueDescription=<string>
+	trained.
+		value=<boolean>
+	data.
+		value=<array["None", "Course", "Faculty", "Student", "Other"]>
+		valueDescription=<string>
+privacy.
+	retention.
+		valueDescription=<string>
+	logging.
+		value=<boolean>
+		valueDescription=<string>
+	regions.
+		value<array["Global", "Virginia", "Oregon", "Montreal", "Dublin", "Frankfurt", "Singapore", "Sydney", "Other"]>
+		valueDescription=<string>
+	pii.
+		value=<boolean>
+		valueDescription=<string>
+		outputs.
+outputs.
+	control.
+		value=<boolean>
+	human.
+		value=<boolean>
+		valueDescription=<string>
+	guardrails.
+		valueDescription=<string>
+	risks.
+		valueDescription=<string>
+	outcomes.
+		valueDescription=<string>
+```
+
+Example: Set regions as Virginia & Oregon:  `?privacy.regions.value="Virginia,Oregon"`
+			
+
 
 ## Getting Started
 

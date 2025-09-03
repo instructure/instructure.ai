@@ -27,14 +27,14 @@ export type SegmentBase = Readonly<
 	)
 >;
 
-type ModelAndDataSegment = SegmentBase & {
+export type ModelAndDataSegment = SegmentBase & {
 	segmentTitle:
 		| "Base Model"
 		| "Trained with User Data"
 		| "Data Shared with Model";
 };
 
-type PrivacyComplianceSegment = SegmentBase & {
+export type PrivacyComplianceSegment = SegmentBase & {
 	segmentTitle: "Data Retention" | "Data Logging" | "Regions Supported" | "PII";
 };
 
