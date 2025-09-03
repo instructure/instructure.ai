@@ -10,7 +10,6 @@ import {
 	View,
 } from "@instructure/ui";
 import type { Dispatch, FC, SetStateAction } from "react";
-import { Fragment } from "react";
 import type { PageLayout, ProductNutritionFacts } from "../../types.ts";
 import { EditableField } from "../EditableField";
 
@@ -36,7 +35,7 @@ const NutritionFactsForm: FC<{
 			</Flex>
 			<Flex alignItems="start" direction="row">
 				<Flex.Item shouldGrow shouldShrink>
-					<View as="div" borderWidth="large 0 0 0" padding="medium 0 0">
+					<View as="div" borderWidth="medium 0 0 0" padding="medium 0 0">
 						<EditableField
 							dataPrint={product.name.length ? "" : "hidden"}
 							fontStyle="italic"
@@ -66,17 +65,18 @@ const NutritionFactsForm: FC<{
 						value={product.description}
 					/>
 					{product.data.map((block) => (
-						<Fragment key={block.blockTitle}>
+						<View as="div" key={block.blockTitle}>
 							<Heading as="h3" margin="medium 0 0">
 								{block.blockTitle}
 							</Heading>
 							{block.segmentData.map((segment) => (
 								<View
 									as="div"
-									borderWidth="0 0 medium"
+									borderRadius="medium"
+									borderWidth="small"
 									key={segment.segmentTitle}
 									margin="small 0"
-									padding="0 0 x-small 0"
+									padding="small"
 								>
 									<Flex direction="row">
 										<Flex.Item shouldGrow shouldShrink>
@@ -209,7 +209,7 @@ const NutritionFactsForm: FC<{
 									)}
 								</View>
 							))}
-						</Fragment>
+						</View>
 					))}
 					<View
 						as="div"
