@@ -19,8 +19,6 @@ const Image = async ({ product }: { product: ProductNutritionFacts }) => {
 		await snapdom.download(el, {
 			exclude: ['[data-print*="hidden"]'],
 			filename: `${product.name}-nutrition-facts`,
-			scale: 0.5,
-			type: "jpg",
 		});
 	} catch (err) {
 		console.error("snapdom failed:", err);
