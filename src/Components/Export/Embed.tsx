@@ -60,7 +60,7 @@ const Embed = async (
 
 		const base = "https://instructure.github.io/nf-generator/";
 		const query = encodeURIComponent(safeProduct);
-		const embedCode = `<iframe width="100%" height="${height}px" allowfullscreen src="${base}?embed&q=${query}&copyright=${layout.copyright}&disclaimer=${layout.disclaimer}&revision=${layout.revision}"></iframe>
+		const embedCode = `<iframe width="100%" height="${height + 40}px" allowfullscreen src="${base}?embed&q=${query}&copyright=${layout.copyright}&disclaimer=${layout.disclaimer}&revision=${layout.revision}"></iframe>
 <div style="display:none;">
   ${plainText}</div>`;
 		try {
