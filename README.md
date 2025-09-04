@@ -21,6 +21,7 @@ An interactive web application for importing, generating, editing, and exporting
 * Save as a markdown file
 * Save as a self-contained HTML file (great for stand-alone embeds)
 * Download a pre-built JSX component
+* Copy an iFrame embed code to your clipboard
 * Copy the `data` object to your clipboard
 * Import a `NutritionFacts` object to pre-populate the form
 
