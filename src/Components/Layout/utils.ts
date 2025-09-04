@@ -14,8 +14,6 @@ export function getLayoutFromParams(defaultLayout: PageLayout) {
 		newLayout.revision = params.get("revision") !== "false";
 	}
 
-	console.log(newLayout);
-
 	const isPreview = params.has("embed") && params.get("embed") !== "false";
 
 	return { isPreview, layout: newLayout };

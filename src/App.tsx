@@ -16,11 +16,12 @@ import type { ProductNutritionFacts } from "./types.ts";
 
 const App: FC = () => {
 	const initialProduct = getProductFromObject(getProductFromParams(Product));
-	const { layout: initalLayout, isPreview } =
+	const { layout: initialLayout, isPreview: initialPreview } =
 		getLayoutFromParams(DefaultLayout);
 
+	const [isPreview, setIsPreview] = useState(initialPreview);
 	const [product, setProduct] = useState<ProductNutritionFacts>(initialProduct);
-	const [layout, setLayout] = useState(initalLayout);
+	const [layout, setLayout] = useState(initialLayout);
 	const [isDark, setIsDark] = useState(false);
 
 	useEffect(() => {
@@ -40,7 +41,7 @@ const App: FC = () => {
 					as="div"
 					background="primary"
 					data-print="no-margin, no-border, no-padding, max-height"
-					id="page"
+					id="embed"
 					overflowX="hidden"
 					overflowY="auto"
 					padding="large"
@@ -101,9 +102,11 @@ const App: FC = () => {
 						<Flex.Item data-print="hidden" id="control" textAlign="center">
 							<Control
 								isDark={isDark}
+								isPreview={isPreview}
 								layout={layout}
 								product={product}
 								setIsDark={setIsDark}
+								setIsPreview={setIsPreview}
 								setProduct={setProduct}
 							/>
 						</Flex.Item>

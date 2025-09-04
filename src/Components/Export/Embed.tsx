@@ -1,4 +1,5 @@
 import { IconExternalLinkLine, type SVGIconProps } from "@instructure/ui";
+import type { Dispatch, SetStateAction } from "react";
 import type {
 	NutritionFactBlock,
 	PageLayout,
@@ -30,7 +31,11 @@ function toBlockType(block: NutritionFactBlock): BlockType {
 	};
 }
 
-const Embed = async (product: ProductNutritionFacts, layout: PageLayout) => {
+const Embed = async (
+	product: ProductNutritionFacts,
+	layout: PageLayout,
+	setIsPreview: Dispatch<SetStateAction<boolean>>,
+) => {
 	// biome-ignore lint: biomelint/correctness/noUnusedVariables- removing properties from object
 	const { nameHint, descriptionHint, ...rest } = product;
 	const safeProduct = JSON.stringify({
@@ -38,33 +43,42 @@ const Embed = async (product: ProductNutritionFacts, layout: PageLayout) => {
 		data: product.data.map(toBlockType),
 	});
 
-	const base = "https://instructure.github.io/nf-generator/";
-	const query = encodeURIComponent(safeProduct);
-	const pageElement = document.getElementById("embed");
-	const height = pageElement ? pageElement.offsetHeight : 1800;
+	setIsPreview(true);
 
-	const embedCode = `<iframe width="100%" height="${height}px" allowfullscreen src="${base}?embed&q=${query}&copyright=${layout.copyright}&disclaimer=${layout.disclaimer}&revision=${layout.revision}"></iframe>`;
-	try {
-		await navigator.clipboard.writeText(embedCode);
-	} catch (error) {
-		let msg: string = "Failed to copy data to clipboard";
-		if (error instanceof Error) {
-			msg = error.message;
-		} else if (typeof error === "string") {
-			msg = error;
+	// Wait for the preview to render before measuring
+	setTimeout(async () => {
+		const pageElement = document.getElementById("embed");
+		console.log("Page Element:", pageElement);
+		const height = pageElement ? pageElement.offsetHeight : 1800;
+
+		const base = "https://instructure.github.io/nf-generator/";
+		const query = encodeURIComponent(safeProduct);
+		const embedCode = `<iframe width="100%" height="${height}px" allowfullscreen src="${base}?embed&q=${query}&copyright=${layout.copyright}&disclaimer=${layout.disclaimer}&revision=${layout.revision}"></iframe>`;
+		try {
+			await navigator.clipboard.writeText(embedCode);
+			setIsPreview(false); // Turn preview off after success
+		} catch (error) {
+			setIsPreview(false); // Also turn preview off on error
+			let msg: string = "Failed to copy data to clipboard";
+			if (error instanceof Error) {
+				msg = error.message;
+			} else if (typeof error === "string") {
+				msg = error;
+			}
+			console.error("oopsie!", msg);
 		}
-		console.error(msg);
-	}
+	}, 0);
 };
 
 const EmbedControl: React.FC<{
 	product: ProductNutritionFacts;
 	layout: PageLayout;
-}> = ({ product, layout }) => (
+	setIsPreview: Dispatch<SetStateAction<boolean>>;
+}> = ({ product, layout, setIsPreview }) => (
 	<ControlButton
 		Icon={IconExternalLinkLine as React.ElementType<SVGIconProps>}
 		label="Copy embed code"
-		onClick={() => Embed(product, layout)}
+		onClick={() => Embed(product, layout, setIsPreview)}
 	/>
 );
 
