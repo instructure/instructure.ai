@@ -40,8 +40,10 @@ const Embed = async (product: ProductNutritionFacts, layout: PageLayout) => {
 
 	const base = "https://instructure.github.io/nf-generator/";
 	const query = encodeURIComponent(safeProduct);
+	const pageElement = document.getElementById("embed");
+	const height = pageElement ? pageElement.offsetHeight : 1800;
 
-	const embedCode = `<iframe width="100%" height="1800px" allowfullscreen src="${base}?embed&q=${query}&copyright=${layout.copyright}&disclaimer=${layout.disclaimer}&revision=${layout.revision}"></iframe>`;
+	const embedCode = `<iframe width="100%" height="${height}px" allowfullscreen src="${base}?embed&q=${query}&copyright=${layout.copyright}&disclaimer=${layout.disclaimer}&revision=${layout.revision}"></iframe>`;
 	try {
 		await navigator.clipboard.writeText(embedCode);
 	} catch (error) {
