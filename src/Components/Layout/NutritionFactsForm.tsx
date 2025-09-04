@@ -65,7 +65,7 @@ const NutritionFactsForm: FC<{
 						Description
 					</Heading>
 					{isPreview ? (
-						<Text>{product.description}</Text>
+						<Text size="small">{product.description}</Text>
 					) : (
 						<EditableField
 							color="brand"
@@ -95,15 +95,22 @@ const NutritionFactsForm: FC<{
 									margin="small 0"
 									padding="small"
 								>
-									<Flex direction="row">
-										<Flex.Item shouldGrow shouldShrink>
+									<Flex direction="column">
+										<Flex.Item>
 											<Heading as="h4">{segment.segmentTitle}</Heading>
 										</Flex.Item>
-										{segment.valueHint && (
-											<Flex.Item>
-												{isPreview ? (
+										<Flex.Item margin="0 0 x-small">
+											<Text color="secondary" size="contentSmall">
+												{segment.description}
+											</Text>
+										</Flex.Item>
+										{segment.valueHint &&
+											(isPreview ? (
+												<Flex.Item>
 													<Text>{segment.value}</Text>
-												) : (
+												</Flex.Item>
+											) : (
+												<Flex.Item>
 													<EditableField
 														color="brand"
 														hint={segment.valueHint}
@@ -162,92 +169,97 @@ const NutritionFactsForm: FC<{
 														}
 														value={segment.value}
 													/>
+												</Flex.Item>
+											))}
+
+										{segment.descriptionHint && (
+											<Flex.Item>
+												{isPreview ? (
+													<Text size="small">{segment.valueDescription}</Text>
+												) : (
+													<EditableField
+														dataPrint={
+															segment.valueDescription?.length ? "" : "hidden"
+														}
+														fontStyle="italic"
+														hint={segment.descriptionHint}
+														inputType="textarea"
+														onChange={(val) =>
+															setProduct({
+																...product,
+																data: product.data.map((b) => {
+																	if (b.blockTitle === block.blockTitle) {
+																		if (b.blockTitle === "Model & Data") {
+																			return {
+																				...b,
+																				segmentData: b.segmentData.map((s) =>
+																					s.segmentTitle ===
+																					segment.segmentTitle
+																						? {
+																								...s,
+																								valueDescription:
+																									val.toString(),
+																							}
+																						: s,
+																				) as typeof b.segmentData,
+																			};
+																		}
+																		if (
+																			b.blockTitle === "Privacy & Compliance"
+																		) {
+																			return {
+																				...b,
+																				segmentData: b.segmentData.map((s) =>
+																					s.segmentTitle ===
+																					segment.segmentTitle
+																						? {
+																								...s,
+																								valueDescription:
+																									val.toString(),
+																							}
+																						: s,
+																				) as typeof b.segmentData,
+																			};
+																		}
+																		if (b.blockTitle === "Outputs") {
+																			return {
+																				...b,
+																				segmentData: b.segmentData.map((s) =>
+																					s.segmentTitle ===
+																					segment.segmentTitle
+																						? {
+																								...s,
+																								valueDescription:
+																									val.toString(),
+																							}
+																						: s,
+																				) as typeof b.segmentData,
+																			};
+																		}
+																	}
+																	return b;
+																}),
+															})
+														}
+														placeholder={segment.descriptionHint}
+														selectOptions={segment.inputOptions}
+														value={segment.valueDescription}
+													/>
 												)}
 											</Flex.Item>
 										)}
 									</Flex>
-									<Text color="secondary" size="contentSmall">
-										{segment.description}
-									</Text>
-									{segment.descriptionHint && (
-										<View as="div" margin="x-small 0 0">
-											{isPreview ? (
-												<Text>{segment.valueDescription}</Text>
-											) : (
-												<EditableField
-													dataPrint={
-														segment.valueDescription?.length ? "" : "hidden"
-													}
-													fontStyle="italic"
-													hint={segment.descriptionHint}
-													inputType="textarea"
-													onChange={(val) =>
-														setProduct({
-															...product,
-															data: product.data.map((b) => {
-																if (b.blockTitle === block.blockTitle) {
-																	if (b.blockTitle === "Model & Data") {
-																		return {
-																			...b,
-																			segmentData: b.segmentData.map((s) =>
-																				s.segmentTitle === segment.segmentTitle
-																					? {
-																							...s,
-																							valueDescription: val.toString(),
-																						}
-																					: s,
-																			) as typeof b.segmentData,
-																		};
-																	}
-																	if (b.blockTitle === "Privacy & Compliance") {
-																		return {
-																			...b,
-																			segmentData: b.segmentData.map((s) =>
-																				s.segmentTitle === segment.segmentTitle
-																					? {
-																							...s,
-																							valueDescription: val.toString(),
-																						}
-																					: s,
-																			) as typeof b.segmentData,
-																		};
-																	}
-																	if (b.blockTitle === "Outputs") {
-																		return {
-																			...b,
-																			segmentData: b.segmentData.map((s) =>
-																				s.segmentTitle === segment.segmentTitle
-																					? {
-																							...s,
-																							valueDescription: val.toString(),
-																						}
-																					: s,
-																			) as typeof b.segmentData,
-																		};
-																	}
-																}
-																return b;
-															}),
-														})
-													}
-													placeholder={segment.descriptionHint}
-													selectOptions={segment.inputOptions}
-													value={segment.valueDescription}
-												/>
-											)}
-										</View>
-									)}
 								</View>
 							))}
 						</View>
 					))}
 					<View
 						as="div"
-						margin="medium auto small"
+						margin="0 auto"
 						maxWidth={isPreview ? "100%" : "66%"}
 						textAlign="center"
 					>
-						<Flex>
+						<Flex margin="0 0 x-small">
 							{isPreview ? null : (
 								<Flex.Item>
 									<Tooltip
@@ -287,7 +299,7 @@ const NutritionFactsForm: FC<{
 								shouldGrow
 								shouldShrink
 							>
-								<Text as="p" color="secondary" variant="contentSmall">
+								<Text color="secondary" variant="contentSmall">
 									{isPreview ? (
 										layout.disclaimer &&
 										"Instructure has developed nutrition fact labels for AI-enabled products to increase transparency and improve decision making."
@@ -305,7 +317,7 @@ const NutritionFactsForm: FC<{
 								</Text>
 							</Flex.Item>
 						</Flex>
-						<Flex>
+						<Flex margin="x-small 0">
 							{isPreview ? null : (
 								<Flex.Item>
 									<Tooltip
@@ -370,7 +382,7 @@ const NutritionFactsForm: FC<{
 								</Text>
 							</Flex.Item>
 						</Flex>
-						<Flex>
+						<Flex margin="x-small 0 0">
 							{isPreview ? null : (
 								<Flex.Item>
 									<Tooltip
@@ -411,7 +423,7 @@ const NutritionFactsForm: FC<{
 									variant="contentSmall"
 								>
 									{isPreview ? (
-										layout.revision && getRevisionDate()
+										layout.revision && `Revision: ${getRevisionDate()}`
 									) : (
 										<span
 											style={{

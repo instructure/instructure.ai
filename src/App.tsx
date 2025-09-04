@@ -29,7 +29,6 @@ const App: FC = () => {
 				const csvProduct = await getProductFromCSV(Product, DefaultLayout, id);
 				if (csvProduct) {
 					setProduct(csvProduct.product);
-					setLayout(csvProduct.layout);
 				}
 			}
 		};
