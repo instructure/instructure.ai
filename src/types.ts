@@ -7,7 +7,6 @@ export type StateProp<T, K extends string> = {
 };
 
 export type PageLayout = {
-	icon: boolean;
 	disclaimer: boolean;
 	copyright: boolean;
 	revision: boolean;

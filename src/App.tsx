@@ -7,14 +7,20 @@ import {
 	getProductFromObject,
 	getProductFromParams,
 } from "./Components/Import";
-import { Control, NutritionFactsForm } from "./Components/Layout";
+import {
+	Control,
+	getLayoutFromParams,
+	NutritionFactsForm,
+} from "./Components/Layout";
 import type { ProductNutritionFacts } from "./types.ts";
 
 const App: FC = () => {
 	const initialProduct = getProductFromObject(getProductFromParams(Product));
+	const { layout: initalLayout, isPreview } =
+		getLayoutFromParams(DefaultLayout);
 
 	const [product, setProduct] = useState<ProductNutritionFacts>(initialProduct);
-	const [layout, setLayout] = useState(DefaultLayout);
+	const [layout, setLayout] = useState(initalLayout);
 	const [isDark, setIsDark] = useState(false);
 
 	useEffect(() => {
@@ -29,59 +35,80 @@ const App: FC = () => {
 
 	return (
 		<InstUISettingsProvider>
-			<View
-				as="div"
-				background={isDark ? "primary-inverse" : "secondary"}
-				data-print="no-background, max-height"
-				height="100vh"
-				margin="0"
-				overflowX="hidden"
-				padding="0"
-			>
-				<Flex direction="column" gap="small" justifyItems="center">
-					<Flex.Item as="main" shouldGrow shouldShrink>
-						<View
-							as="div"
-							borderRadius="large"
-							data-print="no-margin, no-border, no-padding, max-height"
-							margin="large auto small"
-							maxWidth="56rem"
-							minWidth="36rem"
-							overflowX="hidden"
-							overflowY="hidden"
-							shadow="above"
-						>
+			{isPreview ? (
+				<View
+					as="div"
+					background="primary"
+					data-print="no-margin, no-border, no-padding, max-height"
+					id="page"
+					overflowX="hidden"
+					overflowY="auto"
+					padding="large"
+					withFocusOutline={false}
+				>
+					<NutritionFactsForm
+						isPreview={isPreview}
+						layout={layout}
+						product={product}
+						setLayout={setLayout}
+						setProduct={setProduct}
+					/>
+				</View>
+			) : (
+				<View
+					as="div"
+					background={isDark ? "primary-inverse" : "secondary"}
+					data-print="no-background, max-height"
+					height="100vh"
+					margin="0"
+					overflowX="hidden"
+					padding="0"
+				>
+					<Flex direction="column" gap="small" justifyItems="center">
+						<Flex.Item as="main" shouldGrow shouldShrink>
 							<View
 								as="div"
-								background="primary"
+								borderRadius="large"
 								data-print="no-margin, no-border, no-padding, max-height"
-								height="calc(98vh - 9rem)"
-								id="page"
+								margin="large auto small"
+								maxWidth="56rem"
+								minWidth="36rem"
 								overflowX="hidden"
-								overflowY="auto"
-								padding="large"
-								style={{ scrollbarColor: "#2B7ABC #2B7ABC" }}
-								withFocusOutline={false}
+								overflowY="hidden"
+								shadow="above"
 							>
-								<NutritionFactsForm
-									layout={layout}
-									product={product}
-									setLayout={setLayout}
-									setProduct={setProduct}
-								/>
+								<View
+									as="div"
+									background="primary"
+									data-print="no-margin, no-border, no-padding, max-height"
+									height="calc(98vh - 9rem)"
+									id="page"
+									overflowX="hidden"
+									overflowY="auto"
+									padding="large"
+									withFocusOutline={false}
+								>
+									<NutritionFactsForm
+										isPreview={isPreview}
+										layout={layout}
+										product={product}
+										setLayout={setLayout}
+										setProduct={setProduct}
+									/>
+								</View>
 							</View>
-						</View>
-					</Flex.Item>
-					<Flex.Item data-print="hidden" id="control" textAlign="center">
-						<Control
-							isDark={isDark}
-							product={product}
-							setIsDark={setIsDark}
-							setProduct={setProduct}
-						/>
-					</Flex.Item>
-				</Flex>
-			</View>
+						</Flex.Item>
+						<Flex.Item data-print="hidden" id="control" textAlign="center">
+							<Control
+								isDark={isDark}
+								product={product}
+								setIsDark={setIsDark}
+								setProduct={setProduct}
+							/>
+						</Flex.Item>
+					</Flex>
+				</View>
+			)}
 		</InstUISettingsProvider>
 	);
 };

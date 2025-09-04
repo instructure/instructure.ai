@@ -64,10 +64,7 @@ function buildStandaloneHtml(
 </html>`;
 }
 
-async function Download(
-	_event?: React.MouseEvent,
-	product?: ProductNutritionFacts,
-) {
+async function Download(product?: ProductNutritionFacts) {
 	const filename = `${product?.name}-nutrition-facts.html`;
 	const pageEl = document.getElementById("page");
 	if (!pageEl) {
@@ -108,7 +105,7 @@ const DownloadControl: React.FC<{ product: ProductNutritionFacts }> = ({
 		Icon={IconDownloadLine as React.ElementType<SVGIconProps>}
 		label="Save as HTML"
 		onClick={() => {
-			void Download(undefined, product);
+			void Download(product);
 		}}
 	/>
 );

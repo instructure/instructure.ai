@@ -3,13 +3,11 @@ import type { PageLayout } from "../types.ts";
 class Layout implements PageLayout {
 	copyright: boolean;
 	disclaimer: boolean;
-	icon: boolean;
 	revision: boolean;
 
 	constructor(layout: PageLayout) {
 		this.copyright = layout.copyright;
 		this.disclaimer = layout.disclaimer;
-		this.icon = layout.icon;
 		this.revision = layout.revision;
 	}
 }
@@ -17,7 +15,6 @@ class Layout implements PageLayout {
 const DefaultLayout = new Layout({
 	copyright: true,
 	disclaimer: true,
-	icon: true,
 	revision: true,
 } as PageLayout);
 
