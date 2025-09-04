@@ -33,17 +33,18 @@ function toBlockType(block: NutritionFactBlock): BlockType {
 const Embed = async (product: ProductNutritionFacts, layout: PageLayout) => {
 	// biome-ignore lint: biomelint/correctness/noUnusedVariables- removing properties from object
 	const { nameHint, descriptionHint, ...rest } = product;
-	const safeProduct = JSON.stringify(
-		{
-			...rest,
-			data: product.data.map(toBlockType),
-		},
-		null,
-		2,
-	);
-	const embedCode = `<iframe style="width: 100%; height: 100vh; border: none;" allowfullscreen src="https://instructure.github.io/nf-generator/?embed&q=${encodeURIComponent(
-		safeProduct,
-	)}&copyright=${layout.copyright.toString()}&disclaimer=${layout.disclaimer.toString()}&revision=${layout.revision.toString()}"></iframe>`;
+	const safeProduct = JSON.stringify({
+		...rest,
+		data: product.data.map(toBlockType),
+	});
+
+	const base = "https://instructure.github.io/nf-generator/";
+	const query = encodeURIComponent(safeProduct);
+	const copyright = layout.copyright ? layout.copyright.toString() : "";
+	const disclaimer = layout.disclaimer ? layout.disclaimer.toString() : "";
+	const revision = layout.revision ? layout.revision.toString() : "";
+
+	const embedCode = `<iframe width="100%" height="1800px" allowfullscreen src="${base}?embed&q=${query}&copyright=${copyright}${disclaimer ? `&disclaimer=${disclaimer}` : ""}&revision=${revision}"></iframe>`;
 	try {
 		await navigator.clipboard.writeText(embedCode);
 	} catch (error) {
