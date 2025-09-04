@@ -418,7 +418,8 @@ const NutritionFactsForm: FC<{
 												opacity: layout.revision ? "1" : "0.25",
 											}}
 										>
-											Revision: {getRevisionDate()}
+											Revision:{" "}
+											{product.revision ? product.revision : getRevisionDate()}
 										</span>
 									)}
 								</Text>

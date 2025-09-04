@@ -4,6 +4,7 @@ import { type FC, useEffect, useState } from "react";
 import { DefaultLayout } from "./assets/Layout.ts";
 import { Product } from "./assets/Products.ts";
 import {
+	getProductFromCSV,
 	getProductFromObject,
 	getProductFromParams,
 } from "./Components/Import";
@@ -15,12 +16,30 @@ import {
 import type { ProductNutritionFacts } from "./types.ts";
 
 const App: FC = () => {
-	const initialProduct = getProductFromObject(getProductFromParams(Product));
+	const searchParams = new URLSearchParams(window.location.search);
+	const id = searchParams.get("id");
+
+	const [product, setProduct] = useState<ProductNutritionFacts>(() =>
+		getProductFromObject(getProductFromParams(Product)),
+	);
+
+	useEffect(() => {
+		const fetchProduct = async () => {
+			if (id) {
+				const csvProduct = await getProductFromCSV(Product, DefaultLayout, id);
+				if (csvProduct) {
+					setProduct(csvProduct.product);
+					setLayout(csvProduct.layout);
+				}
+			}
+		};
+		fetchProduct();
+	}, [id]);
+
 	const { layout: initialLayout, isPreview: initialPreview } =
 		getLayoutFromParams(DefaultLayout);
 
 	const [isPreview, setIsPreview] = useState(initialPreview);
-	const [product, setProduct] = useState<ProductNutritionFacts>(initialProduct);
 	const [layout, setLayout] = useState(initialLayout);
 	const [isDark, setIsDark] = useState(false);
 

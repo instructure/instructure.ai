@@ -11,6 +11,7 @@ const Product: ProductNutritionFacts = {
 					descriptionHint: "Describe the base model",
 					segmentTitle: "Base Model",
 					value: "",
+					valueDescription: "",
 					valueHint: "Input base model",
 				},
 				{
@@ -108,6 +109,7 @@ const Product: ProductNutritionFacts = {
 					inputOptions: ["Yes", "No"],
 					inputType: "select",
 					segmentTitle: "Human in the Loop",
+					value: "",
 					valueDescription: "",
 					valueHint: "Yes / No",
 				},
@@ -137,6 +139,7 @@ const Product: ProductNutritionFacts = {
 	descriptionHint: "Describe your feature",
 	name: "",
 	nameHint: "Feature Name",
+	revision: "",
 };
 
 export { Product };

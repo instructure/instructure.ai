@@ -73,7 +73,7 @@ const Embed = async (
 			} else if (typeof error === "string") {
 				msg = error;
 			}
-			console.error("oopsie!", msg);
+			console.error(msg);
 		}
 	}, 0);
 };

@@ -60,4 +60,7 @@ export type ProductNutritionFacts = Readonly<{
 	nameHint?: string;
 	descriptionHint?: string;
 	data: NutritionFactBlock[];
+	revision?: string;
 }>;
+
+export type Products = Record<string, ProductNutritionFacts>;
