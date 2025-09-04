@@ -1,10 +1,15 @@
 import { Flex, View } from "@instructure/ui";
 import type { FC } from "react";
-import type { ProductNutritionFacts, StateProp } from "../../types.ts";
+import type {
+	PageLayout,
+	ProductNutritionFacts,
+	StateProp,
+} from "../../types.ts";
 import {
 	CodeControl,
 	CopyControl,
 	DownloadControl,
+	EmbedControl,
 	ImageControl,
 	PreviewControl,
 	PrintControl,
@@ -14,8 +19,12 @@ import { Divider } from "./Divider.tsx";
 
 type DarkState = StateProp<boolean, "isDark">;
 type ProductState = StateProp<ProductNutritionFacts, "product">;
+type ControlProps = DarkState &
+	ProductState & {
+		layout: PageLayout;
+	};
 
-const Control: FC<DarkState & ProductState> = ({ isDark, product }) => {
+const Control: FC<ControlProps> = ({ isDark, product, layout }) => {
 	const controls = [
 		<PreviewControl key="preview" product={product} />,
 		<Divider key="divider" />,
@@ -24,6 +33,7 @@ const Control: FC<DarkState & ProductState> = ({ isDark, product }) => {
 		<TextControl key="text" product={product} />,
 		<DownloadControl key="download" product={product} />,
 		<CodeControl key="code" product={product} />,
+		<EmbedControl key="embed" layout={layout} product={product} />,
 		<CopyControl key="copy" product={product} />,
 	];
 
