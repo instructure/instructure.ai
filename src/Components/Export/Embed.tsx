@@ -49,7 +49,7 @@ const Embed = async (
 	setTimeout(async () => {
 		const pageElement = document.getElementById("embed");
 		console.log("Page Element:", pageElement);
-		const height = pageElement ? pageElement.offsetHeight : 1800;
+		const height = pageElement ? pageElement.offsetHeight + 40 : 1800;
 
 		const base = "https://instructure.github.io/nf-generator/";
 		const query = encodeURIComponent(safeProduct);
