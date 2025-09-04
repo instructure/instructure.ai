@@ -52,22 +52,21 @@ const Embed = async (
 
 	setIsPreview(true);
 
-	// Wait for the preview to render before measuring
 	setTimeout(async () => {
 		const pageElement = document.getElementById("embed");
-		const height = pageElement ? pageElement.offsetHeight + 40 : 1800;
+		const height = pageElement ? pageElement.offsetHeight : 1800;
 		const plainText = productToText(product);
 
 		const base = "https://instructure.github.io/nf-generator/";
 		const query = encodeURIComponent(safeProduct);
-		const embedCode = `<iframe width="100%" height="${height + 40}px" allowfullscreen src="${base}?embed&q=${query}&copyright=${layout.copyright}&disclaimer=${layout.disclaimer}&revision=${layout.revision}"></iframe>
-<div style="display:none;">
+		const embedCode = `<iframe width="670px" height="${height}px" allowfullscreen src="${base}?embed&q=${query}&copyright=${layout.copyright}&disclaimer=${layout.disclaimer}&revision=${layout.revision}"></iframe>
+<div class="hidden" id="ai-facts-hidden" style="display:none;">
   ${plainText}</div>`;
 		try {
 			await navigator.clipboard.writeText(embedCode);
-			setIsPreview(false); // Turn preview off after success
+			setIsPreview(false);
 		} catch (error) {
-			setIsPreview(false); // Also turn preview off on error
+			setIsPreview(false);
 			let msg: string = "Failed to copy data to clipboard";
 			if (error instanceof Error) {
 				msg = error.message;

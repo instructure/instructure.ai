@@ -244,7 +244,7 @@ const NutritionFactsForm: FC<{
 					<View
 						as="div"
 						margin="medium auto small"
-						maxWidth="66%"
+						maxWidth={isPreview ? "100%" : "66%"}
 						textAlign="center"
 					>
 						<Flex>

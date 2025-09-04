@@ -42,6 +42,8 @@ const App: FC = () => {
 					background="primary"
 					data-print="no-margin, no-border, no-padding, max-height"
 					id="embed"
+					margin="0 auto"
+					maxWidth="670px"
 					overflowX="hidden"
 					overflowY="auto"
 					padding="large"

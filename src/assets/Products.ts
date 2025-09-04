@@ -1,7 +1,5 @@
 import type { ProductNutritionFacts } from "../types.ts";
 
-const Products: ProductNutritionFacts[] = [];
-
 const Product: ProductNutritionFacts = {
 	data: [
 		{
@@ -141,4 +139,4 @@ const Product: ProductNutritionFacts = {
 	nameHint: "Feature Name",
 };
 
-export { Products, Product };
+export { Product };
