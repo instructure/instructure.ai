@@ -33,7 +33,7 @@ ${segment.valueDescription}`
 }
 `,
 	)
-	.join("\n")}
+	.join("")}
 
 `,
 	)

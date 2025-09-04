@@ -31,6 +31,13 @@ function toBlockType(block: NutritionFactBlock): BlockType {
 	};
 }
 
+const productToText = (product: ProductNutritionFacts): string => {
+	const { data } = product;
+	const text = `<h2>${product.name}</h2><p>${product.description}</p>${data.map((block) => `<h3>${block.blockTitle}</h3>${block.segmentData.map((segment) => `<h4>${segment.segmentTitle}</h4>${segment.value && segment.valueDescription ? `<p>${segment.value}</p><p>${segment.valueDescription}</p>` : segment.value ? `<p>${segment.value}</p>` : segment.valueDescription ? `<p>${segment.valueDescription}</p>` : ""}`).join("")}`).join("")}
+`;
+	return text;
+};
+
 const Embed = async (
 	product: ProductNutritionFacts,
 	layout: PageLayout,
@@ -48,12 +55,14 @@ const Embed = async (
 	// Wait for the preview to render before measuring
 	setTimeout(async () => {
 		const pageElement = document.getElementById("embed");
-		console.log("Page Element:", pageElement);
 		const height = pageElement ? pageElement.offsetHeight + 40 : 1800;
+		const plainText = productToText(product);
 
 		const base = "https://instructure.github.io/nf-generator/";
 		const query = encodeURIComponent(safeProduct);
-		const embedCode = `<iframe width="100%" height="${height}px" allowfullscreen src="${base}?embed&q=${query}&copyright=${layout.copyright}&disclaimer=${layout.disclaimer}&revision=${layout.revision}"></iframe>`;
+		const embedCode = `<iframe width="100%" height="${height}px" allowfullscreen src="${base}?embed&q=${query}&copyright=${layout.copyright}&disclaimer=${layout.disclaimer}&revision=${layout.revision}"></iframe>
+<div style="display:none;">
+  ${plainText}</div>`;
 		try {
 			await navigator.clipboard.writeText(embedCode);
 			setIsPreview(false); // Turn preview off after success
