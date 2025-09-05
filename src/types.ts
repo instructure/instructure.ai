@@ -61,6 +61,7 @@ export type ProductNutritionFacts = Readonly<{
 	descriptionHint?: string;
 	data: NutritionFactBlock[];
 	revision?: string;
+	id?: string;
 }>;
 
 export type Products = Record<string, ProductNutritionFacts>;

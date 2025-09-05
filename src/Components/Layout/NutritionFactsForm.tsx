@@ -12,6 +12,7 @@ import {
 import type { Dispatch, FC, SetStateAction } from "react";
 import type { PageLayout, ProductNutritionFacts } from "../../types.ts";
 import { EditableField } from "../EditableField";
+import { Presets } from "./Presets";
 
 const NutritionFactsForm: FC<{
 	product: ProductNutritionFacts;
@@ -27,6 +28,9 @@ const NutritionFactsForm: FC<{
 		const dd = String(d.getDate()).padStart(2, "0");
 		return `${yyyy}.${mm}.${dd}`;
 	};
+	const params = new URLSearchParams(window.location.search);
+	const noParams = params.size === 0;
+
 	return (
 		<>
 			<Flex alignItems="start" direction="row">
@@ -45,7 +49,9 @@ const NutritionFactsForm: FC<{
 				<Flex.Item shouldGrow shouldShrink>
 					<View as="div" borderWidth="medium 0 0 0" padding="medium 0 0">
 						{isPreview ? (
-							<Heading as="h2">{product.name}</Heading>
+							<Heading as="h2">
+								{noParams ? <Presets setProduct={setProduct} /> : product.name}
+							</Heading>
 						) : (
 							<EditableField
 								dataPrint={product.name.length ? "" : "hidden"}

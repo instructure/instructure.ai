@@ -6,17 +6,11 @@ import type {
 	Products,
 } from "../../types.ts";
 
-const getProductFromCSV = async (
-	Product: ProductNutritionFacts,
-	Layout: PageLayout,
-	preset: string,
-): Promise<
-	{ layout: PageLayout; product: ProductNutritionFacts } | undefined
-> => {
+// Helper function to fetch and parse products from CSV
+const fetchProductsFromCSV = async (): Promise<Products> => {
 	const response = await fetch(csvUrl);
 	const data = await response.text();
 	const products: Products = {};
-	const id = preset.toLowerCase();
 
 	const parsed = Papa.parse<string[]>(data, {
 		delimiter: ",",
@@ -164,12 +158,32 @@ const getProductFromCSV = async (
 			],
 			description: values[3],
 			descriptionHint: "Describe your feature",
+			id: values[0],
 			name: values[2],
 			nameHint: "Feature Name",
 			revision: values[1],
 		};
 		products[uid] = updatedProduct;
 	}
+
+	return products;
+};
+
+// Returns all products from CSV
+const getProductsFromCSV = async (): Promise<Products> => {
+	return await fetchProductsFromCSV();
+};
+
+// Returns a single product as before
+const getProductFromCSV = async (
+	Product: ProductNutritionFacts,
+	Layout: PageLayout,
+	preset: string,
+): Promise<
+	{ layout: PageLayout; product: ProductNutritionFacts } | undefined
+> => {
+	const products = await fetchProductsFromCSV();
+	const id = preset.toLowerCase();
 
 	if (products[id]) {
 		return { layout: Layout, product: products[id] };
@@ -178,4 +192,4 @@ const getProductFromCSV = async (
 	return { layout: Layout, product: Product };
 };
 
-export { getProductFromCSV };
+export { getProductFromCSV, getProductsFromCSV };

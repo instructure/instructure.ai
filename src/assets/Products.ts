@@ -137,6 +137,7 @@ const Product: ProductNutritionFacts = {
 	],
 	description: "",
 	descriptionHint: "Describe your feature",
+	id: "",
 	name: "",
 	nameHint: "Feature Name",
 	revision: "",

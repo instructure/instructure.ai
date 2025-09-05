@@ -84,7 +84,12 @@ const EditableField: FC<EditableFieldProps> = ({
 		"secondary-inverse",
 	];
 
-	const focusInput = () => thisRef.current?.focus();
+	const focusInput = () => {
+		if (thisRef.current) {
+			thisRef.current.blur();
+			thisRef.current.focus();
+		}
+	};
 
 	const getOptionById = (queryId: string) => {
 		return safeOptions.find(({ id }) => id === queryId);
