@@ -423,7 +423,7 @@ const NutritionFactsForm: FC<{
 									variant="contentSmall"
 								>
 									{isPreview ? (
-										layout.revision && `Revision: ${layout.revision}`
+										product.revision && `Revision: ${product.revision}`
 									) : (
 										<span
 											style={{
