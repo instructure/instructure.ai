@@ -12,6 +12,7 @@ import {
 	EmbedControl,
 	ImageControl,
 	LinkControl,
+	MenuControl,
 	PreviewControl,
 	PrintControl,
 	TableControl,
@@ -35,9 +36,11 @@ const Control: FC<ControlProps> = ({
 	layout,
 	setIsEditing,
 	id,
+	setProduct,
 }) => {
 	const controls = [
 		<PreviewControl key="preview" product={product} />,
+		<MenuControl key="menu" setProduct={setProduct} />,
 		<Divider key="dividerSave" />,
 		<PrintControl key="print" />,
 		<ImageControl key="image" product={product} />,
@@ -45,7 +48,7 @@ const Control: FC<ControlProps> = ({
 		<DownloadControl key="download" product={product} />,
 		<CodeControl key="code" product={product} />,
 		<Divider key="dividerCopy" />,
-		<LinkControl id={id} key="link" />,
+		<LinkControl key="link" product={product} />,
 		<EmbedControl
 			id={id}
 			key="embed"

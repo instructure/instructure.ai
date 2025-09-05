@@ -5,6 +5,7 @@ export { DownloadControl } from "./Download";
 export { EmbedControl } from "./Embed";
 export { ImageControl } from "./Image";
 export { LinkControl } from "./Link";
+export { MenuControl } from "./Menu";
 export { PreviewControl } from "./Preview";
 export { PrintControl } from "./Print";
 export { TableControl } from "./Table";

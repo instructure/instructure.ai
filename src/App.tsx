@@ -33,6 +33,12 @@ const App: FC = () => {
 	);
 
 	useEffect(() => {
+		if (product.id) {
+			document.title = `IgniteAI Nutrition Facts | ${product.name}`;
+		}
+	}, [product.id, product.name]);
+
+	useEffect(() => {
 		const fetchProduct = async () => {
 			if (id) {
 				const csvProduct = await getProductFromCSV(Product, DefaultLayout, id);
@@ -153,7 +159,6 @@ const App: FC = () => {
 								data-print="no-margin, no-border, no-padding, max-height"
 								margin="large auto small"
 								maxWidth="56rem"
-								minWidth="36rem"
 								overflowX="hidden"
 								overflowY="hidden"
 								shadow="above"

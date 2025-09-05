@@ -1,5 +1,6 @@
 import { IconLinkLine, type SVGIconProps } from "@instructure/ui";
 import { baseUrl } from "../../assets";
+import type { ProductNutritionFacts } from "../../types.ts";
 import { ControlButton } from "./ControlButton.tsx";
 
 const PermanentLink = async (id: string) => {
@@ -16,14 +17,18 @@ const PermanentLink = async (id: string) => {
 	}
 };
 
-const LinkControl = ({ id }: { id?: string }) => {
+const LinkControl = ({ product }: { product?: ProductNutritionFacts }) => {
 	return (
 		<ControlButton
-			disabled={!id}
+			disabled={!product?.id}
 			Icon={IconLinkLine as React.ElementType<SVGIconProps>}
 			key="link"
 			label="Copy permalink"
-			onClick={id ? () => PermanentLink(id) : () => {}}
+			onClick={() => {
+				if (product?.id) {
+					PermanentLink(product.id);
+				}
+			}}
 		/>
 	);
 };
