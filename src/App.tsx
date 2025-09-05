@@ -35,10 +35,10 @@ const App: FC = () => {
 		fetchProduct();
 	}, [id]);
 
-	const { layout: initialLayout, isPreview: initialPreview } =
+	const { layout: initialLayout, isEditing: initialEditing } =
 		getLayoutFromParams(DefaultLayout);
 
-	const [isPreview, setIsPreview] = useState(initialPreview);
+	const [isEditing, setIsEditing] = useState(initialEditing);
 	const [layout, setLayout] = useState(initialLayout);
 	const [isDark, setIsDark] = useState(false);
 
@@ -54,7 +54,7 @@ const App: FC = () => {
 
 	return (
 		<InstUISettingsProvider>
-			{isPreview ? (
+			{!isEditing ? (
 				<View
 					as="div"
 					background="primary"
@@ -68,7 +68,7 @@ const App: FC = () => {
 					withFocusOutline={false}
 				>
 					<NutritionFactsForm
-						isPreview={isPreview}
+						isPreview={!isEditing}
 						layout={layout}
 						product={product}
 						setLayout={setLayout}
@@ -110,7 +110,7 @@ const App: FC = () => {
 									withFocusOutline={false}
 								>
 									<NutritionFactsForm
-										isPreview={isPreview}
+										isPreview={!isEditing}
 										layout={layout}
 										product={product}
 										setLayout={setLayout}
@@ -123,11 +123,11 @@ const App: FC = () => {
 							<Control
 								id={id ?? undefined}
 								isDark={isDark}
-								isPreview={isPreview}
+								isPreview={!isEditing}
 								layout={layout}
 								product={product}
 								setIsDark={setIsDark}
-								setIsPreview={setIsPreview}
+								setIsPreview={setIsEditing}
 								setProduct={setProduct}
 							/>
 						</Flex.Item>

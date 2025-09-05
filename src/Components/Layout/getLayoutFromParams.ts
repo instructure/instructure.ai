@@ -14,7 +14,7 @@ export function getLayoutFromParams(defaultLayout: PageLayout) {
 		newLayout.revision = params.get("revision") !== "false";
 	}
 
-	const isPreview = params.has("embed") && params.get("embed") !== "false";
+	const isEditing = params.has("edit") && params.get("edit") !== "false";
 
-	return { isPreview, layout: newLayout };
+	return { isEditing, layout: newLayout };
 }
