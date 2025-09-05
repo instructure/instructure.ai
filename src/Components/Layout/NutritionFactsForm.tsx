@@ -19,8 +19,9 @@ const NutritionFactsForm: FC<{
 	layout: PageLayout;
 	setLayout: Dispatch<SetStateAction<PageLayout>>;
 	setProduct: Dispatch<SetStateAction<ProductNutritionFacts>>;
-	isPreview: boolean;
-}> = ({ product, layout, setProduct, setLayout, isPreview }) => {
+	isEditing: boolean;
+}> = ({ product, layout, setProduct, setLayout, isEditing }) => {
+	const isPreview = !isEditing;
 	const getRevisionDate = () => {
 		const d = new Date();
 		const yyyy = d.getFullYear();

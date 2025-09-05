@@ -126,7 +126,7 @@ const App: FC = () => {
 						withFocusOutline={false}
 					>
 						<NutritionFactsForm
-							isPreview={!isEditing}
+							isEditing={isEditing}
 							layout={layout}
 							product={product}
 							setLayout={setLayout}
