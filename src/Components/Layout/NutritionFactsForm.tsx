@@ -95,85 +95,75 @@ const NutritionFactsForm: FC<{
 									margin="small 0"
 									padding="small"
 								>
-									<Flex direction="column">
-										<Flex.Item>
-											<Heading as="h4">{segment.segmentTitle}</Heading>
-										</Flex.Item>
-										<Flex.Item margin="0 0 x-small">
-											<Text color="secondary" size="contentSmall">
-												{segment.description}
-											</Text>
-										</Flex.Item>
+									<Heading as="h4">{segment.segmentTitle}</Heading>
+									<View as="div" margin="0 0 x-small">
+										<Text color="secondary" size="contentSmall">
+											{segment.description}
+										</Text>
+									</View>
+									<View as="div">
 										{segment.valueHint &&
 											(isPreview ? (
-												<Flex.Item>
-													<Text>{segment.value}</Text>
-												</Flex.Item>
+												<Text>{segment.value}</Text>
 											) : (
-												<Flex.Item>
-													<EditableField
-														color="brand"
-														hint={segment.valueHint}
-														inputType={segment.inputType}
-														onChange={(val) =>
-															setProduct({
-																...product,
-																data: product.data.map((b) => {
-																	if (b.blockTitle === block.blockTitle) {
-																		if (b.blockTitle === "Model & Data") {
-																			return {
-																				...b,
-																				segmentData: b.segmentData.map((s) =>
-																					s.segmentTitle ===
-																					segment.segmentTitle
-																						? { ...s, value: val.toString() }
-																						: s,
-																				) as typeof b.segmentData,
-																			};
-																		}
-																		if (
-																			b.blockTitle === "Privacy & Compliance"
-																		) {
-																			return {
-																				...b,
-																				segmentData: b.segmentData.map((s) =>
-																					s.segmentTitle ===
-																					segment.segmentTitle
-																						? { ...s, value: val.toString() }
-																						: s,
-																				) as typeof b.segmentData,
-																			};
-																		}
-																		if (b.blockTitle === "Outputs") {
-																			return {
-																				...b,
-																				segmentData: b.segmentData.map((s) =>
-																					s.segmentTitle ===
-																					segment.segmentTitle
-																						? { ...s, value: val.toString() }
-																						: s,
-																				) as typeof b.segmentData,
-																			};
-																		}
+												<EditableField
+													color="brand"
+													hint={segment.valueHint}
+													inputType={segment.inputType}
+													onChange={(val) =>
+														setProduct({
+															...product,
+															data: product.data.map((b) => {
+																if (b.blockTitle === block.blockTitle) {
+																	if (b.blockTitle === "Model & Data") {
+																		return {
+																			...b,
+																			segmentData: b.segmentData.map((s) =>
+																				s.segmentTitle === segment.segmentTitle
+																					? { ...s, value: val.toString() }
+																					: s,
+																			) as typeof b.segmentData,
+																		};
 																	}
-																	return b;
-																}),
-															})
-														}
-														placeholder={segment.valueHint}
-														selectOptions={
-															segment.inputType === "select" ||
-															segment.inputType === "multi-select"
-																? segment.inputOptions
-																: undefined
-														}
-														value={segment.value}
-													/>
-												</Flex.Item>
+																	if (b.blockTitle === "Privacy & Compliance") {
+																		return {
+																			...b,
+																			segmentData: b.segmentData.map((s) =>
+																				s.segmentTitle === segment.segmentTitle
+																					? { ...s, value: val.toString() }
+																					: s,
+																			) as typeof b.segmentData,
+																		};
+																	}
+																	if (b.blockTitle === "Outputs") {
+																		return {
+																			...b,
+																			segmentData: b.segmentData.map((s) =>
+																				s.segmentTitle === segment.segmentTitle
+																					? { ...s, value: val.toString() }
+																					: s,
+																			) as typeof b.segmentData,
+																		};
+																	}
+																}
+																return b;
+															}),
+														})
+													}
+													placeholder={segment.valueHint}
+													selectOptions={
+														segment.inputType === "select" ||
+														segment.inputType === "multi-select"
+															? segment.inputOptions
+															: undefined
+													}
+													value={segment.value}
+												/>
 											))}
-
+									</View>
+									<View as="div">
 										{segment.descriptionHint && (
-											<Flex.Item>
+											<Flex.Item shouldGrow shouldShrink>
 												{isPreview ? (
 													<Text size="small">{segment.valueDescription}</Text>
 												) : (
@@ -248,7 +238,7 @@ const NutritionFactsForm: FC<{
 												)}
 											</Flex.Item>
 										)}
-									</Flex>
+									</View>
 								</View>
 							))}
 						</View>
@@ -415,7 +405,6 @@ const NutritionFactsForm: FC<{
 									</Tooltip>
 								</Flex.Item>
 							)}
-
 							<Flex.Item shouldGrow shouldShrink>
 								<Text
 									color="secondary"

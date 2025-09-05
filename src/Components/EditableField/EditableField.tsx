@@ -189,10 +189,12 @@ const EditableField: FC<EditableFieldProps> = ({
 				return (
 					<Select
 						assistiveText="Type or use arrow keys to navigate options. Multiple selections allowed."
+						htmlSize={20}
 						inputRef={(el) => {
 							thisRef.current = el;
 						}}
 						inputValue=""
+						isInline
 						isShowingOptions={isShowingOptions}
 						onBlur={handleSelectBlur}
 						onFocus={() => {
@@ -272,10 +274,12 @@ const EditableField: FC<EditableFieldProps> = ({
 				return (
 					<Select
 						assistiveText="Use arrow keys to navigate options."
+						htmlSize={20}
 						inputRef={(el) => {
 							thisRef.current = el;
 						}}
 						inputValue={inputValue}
+						isInline
 						isShowingOptions={isShowingOptions}
 						onBlur={handleSelectBlur}
 						onFocus={() => {
@@ -337,7 +341,9 @@ const EditableField: FC<EditableFieldProps> = ({
 		<Focusable>
 			{({ focused }) =>
 				focused ? (
-					renderInput()
+					<View as="div" margin="small 0">
+						{renderInput()}
+					</View>
 				) : (
 					<View
 						data-print={dataPrint ?? (safeValue.length ? "" : "hidden")}
