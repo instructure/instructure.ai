@@ -169,7 +169,7 @@ const App: FC = () => {
 									withFocusOutline={false}
 								>
 									<NutritionFactsForm
-										isPreview={!isEditing}
+										isEditing={isEditing}
 										layout={layout}
 										product={product}
 										setLayout={setLayout}
@@ -182,11 +182,11 @@ const App: FC = () => {
 							<Control
 								id={id ?? undefined}
 								isDark={isDark}
-								isPreview={!isEditing}
+								isEditing={isEditing}
 								layout={layout}
 								product={product}
 								setIsDark={setIsDark}
-								setIsPreview={setIsEditing}
+								setIsEditing={setIsEditing}
 								setProduct={setProduct}
 							/>
 						</Flex.Item>

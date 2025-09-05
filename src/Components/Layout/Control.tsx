@@ -11,18 +11,18 @@ import {
 	DownloadControl,
 	EmbedControl,
 	ImageControl,
+	LinkControl,
 	PreviewControl,
 	PrintControl,
 	TableControl,
 	TextControl,
-	LinkControl,
 } from "../Export";
 import { Divider } from "./Divider.tsx";
 
 type DarkState = StateProp<boolean, "isDark">;
 type ProductState = StateProp<ProductNutritionFacts, "product">;
-type PreviewState = StateProp<boolean, "isPreview">;
-type ControlProps = PreviewState &
+type EditingState = StateProp<boolean, "isEditing">;
+type ControlProps = EditingState &
 	DarkState &
 	ProductState & {
 		layout: PageLayout;
@@ -33,7 +33,7 @@ const Control: FC<ControlProps> = ({
 	isDark,
 	product,
 	layout,
-	setIsPreview,
+	setIsEditing,
 	id,
 }) => {
 	const controls = [
@@ -45,13 +45,13 @@ const Control: FC<ControlProps> = ({
 		<DownloadControl key="download" product={product} />,
 		<CodeControl key="code" product={product} />,
 		<Divider key="dividerCopy" />,
-		<LinkControl key="link" id={id} />,
+		<LinkControl id={id} key="link" />,
 		<EmbedControl
 			id={id}
 			key="embed"
 			layout={layout}
 			product={product}
-			setIsPreview={setIsPreview}
+			setIsEditing={setIsEditing}
 		/>,
 		<CopyControl key="copy" product={product} />,
 		<TableControl id={id} key="table" product={product} />,

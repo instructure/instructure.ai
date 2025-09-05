@@ -39,7 +39,7 @@ const productToText = (product: ProductNutritionFacts): string => {
 const Embed = async (
 	product: ProductNutritionFacts,
 	layout: PageLayout,
-	setIsPreview: Dispatch<SetStateAction<boolean>>,
+	setIsEditing: Dispatch<SetStateAction<boolean>>,
 	id?: string,
 ) => {
 	// biome-ignore lint: biomelint/correctness/noUnusedVariables- removing properties from object
@@ -49,7 +49,7 @@ const Embed = async (
 		data: product.data.map(toBlockType),
 	});
 
-	setIsPreview(true);
+	setIsEditing(false);
 
 	setTimeout(async () => {
 		const pageElement = document.getElementById("embed");
@@ -68,30 +68,29 @@ const Embed = async (
   ${plainText}</div>`;
 		try {
 			await navigator.clipboard.writeText(embedCode);
-			setIsPreview(false);
 		} catch (error) {
-			setIsPreview(false);
 			let msg: string = "Failed to copy data to clipboard";
 			if (error instanceof Error) {
-				msg = error.message;	
+				msg = error.message;
 			} else if (typeof error === "string") {
 				msg = error;
 			}
 			console.error(msg);
 		}
+		setIsEditing(true);
 	}, 0);
 };
 
 const EmbedControl: React.FC<{
 	product: ProductNutritionFacts;
 	layout: PageLayout;
-	setIsPreview: Dispatch<SetStateAction<boolean>>;
+	setIsEditing: Dispatch<SetStateAction<boolean>>;
 	id?: string;
-}> = ({ product, layout, setIsPreview, id }) => (
+}> = ({ product, layout, setIsEditing, id }) => (
 	<ControlButton
 		Icon={IconExternalLinkLine as React.ElementType<SVGIconProps>}
 		label="Copy embed code"
-		onClick={() => Embed(product, layout, setIsPreview, id)}
+		onClick={() => Embed(product, layout, setIsEditing, id)}
 	/>
 );
 
