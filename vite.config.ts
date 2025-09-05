@@ -4,7 +4,6 @@ import { browserslistToTargets } from "lightningcss";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-	base: "/nf-generator/",
 	build: {
 		chunkSizeWarningLimit: 1024,
 		cssMinify: "lightningcss",
