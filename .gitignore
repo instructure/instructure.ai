@@ -8,11 +8,11 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist-ssr
 dist
-coverage
+dist-ssr
 *.local
 
+# Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -22,4 +22,3 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-src/assets/Accounts.ts
