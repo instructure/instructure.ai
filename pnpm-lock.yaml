@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@instructure/debounce':
-        specifier: ^10.24.2
-        version: 10.24.2
       '@instructure/ui':
         specifier: ^10.24.2
         version: 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -31,8 +28,8 @@ importers:
         version: 5.44.0
     devDependencies:
       '@biomejs/biome':
-        specifier: ^2.2.2
-        version: 2.2.2
+        specifier: ^2.2.3
+        version: 2.2.3
       '@instructure/browserslist-config-instui':
         specifier: ^10.24.2
         version: 10.24.2
@@ -46,8 +43,8 @@ importers:
         specifier: ^18.3.7
         version: 18.3.7(@types/react@18.3.24)
       '@typescript/native-preview':
-        specifier: 7.0.0-dev.20250903.1
-        version: 7.0.0-dev.20250903.1
+        specifier: 7.0.0-dev.20250904.1
+        version: 7.0.0-dev.20250904.1
       '@vitejs/plugin-react':
         specifier: ^5.0.2
         version: 5.0.2(vite@7.1.4(@types/node@24.3.1)(lightningcss@1.30.1)(terser@5.44.0))
@@ -66,20 +63,16 @@ importers:
 
 packages:
 
-  '@ampproject/remapping@2.3.0':
-    resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
-    engines: {node: '>=6.0.0'}
-
   '@babel/code-frame@7.27.1':
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/compat-data@7.28.0':
-    resolution: {integrity: sha512-60X7qkglvrap8mn1lh2ebxXdZYtUcpd7gsmy9kLaBJ4i/WdY8PqTSdxyA8qraikqKQK5C1KRBKXqznrVapyNaw==}
+  '@babel/compat-data@7.28.4':
+    resolution: {integrity: sha512-YsmSKC29MJwf0gF8Rjjrg5LQCmyh+j/nD8/eP7f+BeoQTKYqs9RoWbjGOdy0+1Ekr68RJZMUOPVQaQisnIo4Rw==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/core@7.28.3':
-    resolution: {integrity: sha512-yDBHV9kQNcr2/sUr9jghVyz9C3Y5G2zUM2H2lo+9mKv4sFgbA8s8Z9t8D1jiTkGoO/NoIfKMyKWr4s6CN23ZwQ==}
+  '@babel/core@7.28.4':
+    resolution: {integrity: sha512-2BCOP7TN8M+gVDj7/ht3hsaO/B/n5oDbiAyyvnRlNOs+u1o+JWNYTQrmpuNp1/Wq2gcFrI01JAW+paEKDMx/CA==}
     engines: {node: '>=6.9.0'}
 
   '@babel/generator@7.28.3':
@@ -120,12 +113,12 @@ packages:
     resolution: {integrity: sha512-YvjJow9FxbhFFKDSuFnVCe2WxXk1zWc22fFePVNEaWJEu8IrZVlda6N0uHwzZrUM1il7NC9Mlp4MaJYbYd9JSg==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/helpers@7.28.3':
-    resolution: {integrity: sha512-PTNtvUQihsAsDHMOP5pfobP8C6CM4JWXmP8DrEIt46c3r2bf87Ua1zoqevsMo9g+tWDwgWrFP5EIxuBx5RudAw==}
+  '@babel/helpers@7.28.4':
+    resolution: {integrity: sha512-HFN59MmQXGHVyYadKLVumYsA9dBFun/ldYxipEjzA4196jpLZd8UjEEBLkbEkvfYreDqJhZxYAWFPtrfhNpj4w==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/parser@7.28.3':
-    resolution: {integrity: sha512-7+Ey1mAgYqFAx2h0RuoxcQT5+MlG3GTV0TQrgr7/ZliKsm/MNDxVVutlWaziMq7wJNAz8MTqz55XLpWvva6StA==}
+  '@babel/parser@7.28.4':
+    resolution: {integrity: sha512-yZbBqeM6TkpP9du/I2pUZnJsRMGGvOuIrhjzC1AwHwW+6he4mni6Bp/m8ijn0iOuZuPI2BfkCoSRunpyjnrQKg==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -141,71 +134,71 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
 
-  '@babel/runtime@7.28.3':
-    resolution: {integrity: sha512-9uIQ10o0WGdpP6GDhXcdOJPJuDgFtIDtN/9+ArJQ2NAfAmiuhTQdzkaTGR33v43GYS2UrSA0eX2pPPHoFVvpxA==}
+  '@babel/runtime@7.28.4':
+    resolution: {integrity: sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.27.2':
     resolution: {integrity: sha512-LPDZ85aEJyYSd18/DkjNh4/y1ntkE5KwUHWTiqgRxruuZL2F1yuHligVHLvcHY2vMHXttKFpJn6LwfI7cw7ODw==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/traverse@7.28.3':
-    resolution: {integrity: sha512-7w4kZYHneL3A6NP2nxzHvT3HCZ7puDZZjFMqDpBPECub79sTtSO5CGXDkKrTQq8ksAwfD/XI2MRFX23njdDaIQ==}
+  '@babel/traverse@7.28.4':
+    resolution: {integrity: sha512-YEzuboP2qvQavAcjgQNVgsvHIDv6ZpwXvcvjmyySP2DIMuByS/6ioU5G9pYrWHM6T2YDfc7xga9iNzYOs12CFQ==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/types@7.28.2':
-    resolution: {integrity: sha512-ruv7Ae4J5dUYULmeXw1gmb7rYRz57OWCPM57pHojnLq/3Z1CK2lNSLTCVjxVk1F/TZHwOZZrOWi0ur95BbLxNQ==}
+  '@babel/types@7.28.4':
+    resolution: {integrity: sha512-bkFqkLhh3pMBUQQkpVgWDWq/lqzc2678eUyDlTBhRqhCHFguYYGM0Efga7tYk4TogG/3x0EEl66/OQ+WGbWB/Q==}
     engines: {node: '>=6.9.0'}
 
-  '@biomejs/biome@2.2.2':
-    resolution: {integrity: sha512-j1omAiQWCkhuLgwpMKisNKnsM6W8Xtt1l0WZmqY/dFj8QPNkIoTvk4tSsi40FaAAkBE1PU0AFG2RWFBWenAn+w==}
+  '@biomejs/biome@2.2.3':
+    resolution: {integrity: sha512-9w0uMTvPrIdvUrxazZ42Ib7t8Y2yoGLKLdNne93RLICmaHw7mcLv4PPb5LvZLJF3141gQHiCColOh/v6VWlWmg==}
     engines: {node: '>=14.21.3'}
     hasBin: true
 
-  '@biomejs/cli-darwin-arm64@2.2.2':
-    resolution: {integrity: sha512-6ePfbCeCPryWu0CXlzsWNZgVz/kBEvHiPyNpmViSt6A2eoDf4kXs3YnwQPzGjy8oBgQulrHcLnJL0nkCh80mlQ==}
+  '@biomejs/cli-darwin-arm64@2.2.3':
+    resolution: {integrity: sha512-OrqQVBpadB5eqzinXN4+Q6honBz+tTlKVCsbEuEpljK8ASSItzIRZUA02mTikl3H/1nO2BMPFiJ0nkEZNy3B1w==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [darwin]
 
-  '@biomejs/cli-darwin-x64@2.2.2':
-    resolution: {integrity: sha512-Tn4JmVO+rXsbRslml7FvKaNrlgUeJot++FkvYIhl1OkslVCofAtS35MPlBMhXgKWF9RNr9cwHanrPTUUXcYGag==}
+  '@biomejs/cli-darwin-x64@2.2.3':
+    resolution: {integrity: sha512-OCdBpb1TmyfsTgBAM1kPMXyYKTohQ48WpiN9tkt9xvU6gKVKHY4oVwteBebiOqyfyzCNaSiuKIPjmHjUZ2ZNMg==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [darwin]
 
-  '@biomejs/cli-linux-arm64-musl@2.2.2':
-    resolution: {integrity: sha512-/MhYg+Bd6renn6i1ylGFL5snYUn/Ct7zoGVKhxnro3bwekiZYE8Kl39BSb0MeuqM+72sThkQv4TnNubU9njQRw==}
+  '@biomejs/cli-linux-arm64-musl@2.2.3':
+    resolution: {integrity: sha512-q3w9jJ6JFPZPeqyvwwPeaiS/6NEszZ+pXKF+IczNo8Xj6fsii45a4gEEicKyKIytalV+s829ACZujQlXAiVLBQ==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [linux]
 
-  '@biomejs/cli-linux-arm64@2.2.2':
-    resolution: {integrity: sha512-JfrK3gdmWWTh2J5tq/rcWCOsImVyzUnOS2fkjhiYKCQ+v8PqM+du5cfB7G1kXas+7KQeKSWALv18iQqdtIMvzw==}
+  '@biomejs/cli-linux-arm64@2.2.3':
+    resolution: {integrity: sha512-g/Uta2DqYpECxG+vUmTAmUKlVhnGEcY7DXWgKP8ruLRa8Si1QHsWknPY3B/wCo0KgYiFIOAZ9hjsHfNb9L85+g==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [linux]
 
-  '@biomejs/cli-linux-x64-musl@2.2.2':
-    resolution: {integrity: sha512-ZCLXcZvjZKSiRY/cFANKg+z6Fhsf9MHOzj+NrDQcM+LbqYRT97LyCLWy2AS+W2vP+i89RyRM+kbGpUzbRTYWig==}
+  '@biomejs/cli-linux-x64-musl@2.2.3':
+    resolution: {integrity: sha512-y76Dn4vkP1sMRGPFlNc+OTETBhGPJ90jY3il6jAfur8XWrYBQV3swZ1Jo0R2g+JpOeeoA0cOwM7mJG6svDz79w==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [linux]
 
-  '@biomejs/cli-linux-x64@2.2.2':
-    resolution: {integrity: sha512-Ogb+77edO5LEP/xbNicACOWVLt8mgC+E1wmpUakr+O4nKwLt9vXe74YNuT3T1dUBxC/SnrVmlzZFC7kQJEfquQ==}
+  '@biomejs/cli-linux-x64@2.2.3':
+    resolution: {integrity: sha512-LEtyYL1fJsvw35CxrbQ0gZoxOG3oZsAjzfRdvRBRHxOpQ91Q5doRVjvWW/wepgSdgk5hlaNzfeqpyGmfSD0Eyw==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [linux]
 
-  '@biomejs/cli-win32-arm64@2.2.2':
-    resolution: {integrity: sha512-wBe2wItayw1zvtXysmHJQoQqXlTzHSpQRyPpJKiNIR21HzH/CrZRDFic1C1jDdp+zAPtqhNExa0owKMbNwW9cQ==}
+  '@biomejs/cli-win32-arm64@2.2.3':
+    resolution: {integrity: sha512-Ms9zFYzjcJK7LV+AOMYnjN3pV3xL8Prxf9aWdDVL74onLn5kcvZ1ZMQswE5XHtnd/r/0bnUd928Rpbs14BzVmA==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [win32]
 
-  '@biomejs/cli-win32-x64@2.2.2':
-    resolution: {integrity: sha512-DAuHhHekGfiGb6lCcsT4UyxQmVwQiBCBUMwVra/dcOSs9q8OhfaZgey51MlekT3p8UwRqtXQfFuEJBhJNdLZwg==}
+  '@biomejs/cli-win32-x64@2.2.3':
+    resolution: {integrity: sha512-gvCpewE7mBwBIpqk1YrUqNR4mCiyJm6UI3YWQQXkedSSEwzRdodRpaKhbdbHw1/hmTWOVXQ+Eih5Qctf4TCVOQ==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [win32]
@@ -258,8 +251,8 @@ packages:
   '@emotion/hash@0.9.2':
     resolution: {integrity: sha512-MyqliTZGuOm3+5ZRSaaBGP3USLw6+EGykkwZns2EPC5g8jJ4z9OrdZY9apkl3+UP9+sdz76YYkwCKP5gh8iY3g==}
 
-  '@emotion/is-prop-valid@1.3.1':
-    resolution: {integrity: sha512-/ACwoqx7XQi9knQs/G0qKvv5teDMhD7bXYns9N/wM8ah8iNb8jZ2uNO0YOgiq2o2poIvVtJS2YALasQuMSQ7Kw==}
+  '@emotion/is-prop-valid@1.4.0':
+    resolution: {integrity: sha512-QgD4fyscGcbbKwJmqNvUMSE02OsHUa+lAWKdEUIJKgqe5IwRSKd7+KhibEWdaKwgjLj0DRSHA9biAIqGBk05lw==}
 
   '@emotion/memoize@0.9.0':
     resolution: {integrity: sha512-30FAj7/EoJ5mwVPOWhAyCX+FPfMDrVecJAM+Iw9NRoSl4BBAQeqj4cApHHUXOVvIPgLVDsCFoz/hGD+5QQD1GQ==}
@@ -892,6 +885,9 @@ packages:
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
 
+  '@jridgewell/remapping@2.3.5':
+    resolution: {integrity: sha512-LI9u/+laYG4Ds1TDKSJW2YPrIlcVYOwi2fUC6xB43lueCjgxV4lffOCZCtYFiH6TNOX+tQKXx97T4IKHbhyHEQ==}
+
   '@jridgewell/resolve-uri@3.1.2':
     resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
     engines: {node: '>=6.0.0'}
@@ -917,8 +913,8 @@ packages:
   '@lezer/html@1.3.10':
     resolution: {integrity: sha512-dqpT8nISx/p9Do3AchvYGV3qYc4/rKr3IBZxlHmpIKam56P47RSHkSF5f13Vu9hebS1jM0HmtJIwLbWz1VIY6w==}
 
-  '@lezer/javascript@1.5.1':
-    resolution: {integrity: sha512-ATOImjeVJuvgm3JQ/bpo2Tmv55HSScE2MTPnKRMRIPx2cLhHGyX2VnqpHhtIV1tVzIjZDbcWQm+NCTF40ggZVw==}
+  '@lezer/javascript@1.5.2':
+    resolution: {integrity: sha512-oJDMyptbtS/zhSi/uOszsqCm7/0l6QpbnvjoXBgNiFlk4NHrqoP/+psiVxYKYe9GHRr6K7jBSxwmIW61TrtZOQ==}
 
   '@lezer/json@1.0.3':
     resolution: {integrity: sha512-BP9KzdF9Y35PDpv04r0VeSTKDeox5vVr3efE7eBbx3r4s3oNLfunchejZhjArmeieBH+nVOpgIiBJpEAv8ilqQ==}
@@ -1078,50 +1074,50 @@ packages:
   '@types/ua-parser-js@0.7.39':
     resolution: {integrity: sha512-P/oDfpofrdtF5xw433SPALpdSchtJmY7nsJItf8h3KXqOslkbySh8zq4dSWXH2oTjRvJ5PczVEoCZPow6GicLg==}
 
-  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250903.1':
-    resolution: {integrity: sha512-acoMJ+HRAvuDsHqWIW2lIGG8cqBdkN8SdjB2z4QKMmIGkGkN0iJFFNXhsxZ7UbV2j1XEghTIxlVA4XrsUoS7EA==}
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250904.1':
+    resolution: {integrity: sha512-1rt4DhERW1VM4OwWYVIrCp1k1S4kpZAxzbCnprNinVJInhHexY2K0FFD9IGXKWSRANHg/OmJRQYTEoDKM6pqNw==}
     engines: {node: '>=20.6.0'}
     cpu: [arm64]
     os: [darwin]
 
-  '@typescript/native-preview-darwin-x64@7.0.0-dev.20250903.1':
-    resolution: {integrity: sha512-/+SFZCUARYmamR9VgCEdNaq6g09yd/5nhuD07W7WG5OtGYJYLn79k0/bRnJb8u2yPuuebzNjOc86QqaKsaGFcQ==}
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20250904.1':
+    resolution: {integrity: sha512-d2DMQnsXAkZDDk9bU/FhY/D74tbMAkboIGb+hq7kIIgOVcxOswhwLFZ/ajW/9NTesktz8Z14t40Ber+/Pny25A==}
     engines: {node: '>=20.6.0'}
     cpu: [x64]
     os: [darwin]
 
-  '@typescript/native-preview-linux-arm64@7.0.0-dev.20250903.1':
-    resolution: {integrity: sha512-DKtsfyk43YLtAS1/RdTOMOfQj/loQhFVHXuysIlVc56PDD7b7hwgQ3phkhNgJZpKPgTfpn/eM4CD5rgHLdIduQ==}
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20250904.1':
+    resolution: {integrity: sha512-+fv13RDSk+7wFYY846q5ig7X6G07JT7wbajk6p4rELXTIfS1c6gRHGhODETCfFVaPziP4IlvqyinNP8F8wc9uQ==}
     engines: {node: '>=20.6.0'}
     cpu: [arm64]
     os: [linux]
 
-  '@typescript/native-preview-linux-arm@7.0.0-dev.20250903.1':
-    resolution: {integrity: sha512-zqK6cJk2D+iE1prHwH16Ko5GsMsloKVJ+M0kiwyTrkjT2w6QcgpthEU8IMdOCBi9d9pXujURz1UufkXHAh02VA==}
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20250904.1':
+    resolution: {integrity: sha512-YyfTK1SGmfeDJv6G3vSmVxjM914Xio7O57NzRKOyEQnmBT5tdXTzeWgkjrUh1jE8wCUu0f0ZZ+xDTwgys+E2ug==}
     engines: {node: '>=20.6.0'}
     cpu: [arm]
     os: [linux]
 
-  '@typescript/native-preview-linux-x64@7.0.0-dev.20250903.1':
-    resolution: {integrity: sha512-USEhjORkiLKsgL1ogk09yn5XpK+FoKQqrqdNUQlc/zHhJPf/oHsaU0EmFTxLhPoBYcaxoZ0UBfQR5i/viGB1iQ==}
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20250904.1':
+    resolution: {integrity: sha512-BjWJI42cUUilIyQHZpQQeSjC/Ifj/UaIf4oj6lRHDcg5qgLHWe5bAUxuNjE6i7wi+TTN9YxUvBDkMAcm/hI8wg==}
     engines: {node: '>=20.6.0'}
     cpu: [x64]
     os: [linux]
 
-  '@typescript/native-preview-win32-arm64@7.0.0-dev.20250903.1':
-    resolution: {integrity: sha512-iiHE1yZeDBPrJrlRYs6geBdV/MDu0BZGK1Yh93A9ofBymQpr3DXYNysqb5kEBy6ei2KTPJUu4YNAVzu9UoMVfQ==}
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20250904.1':
+    resolution: {integrity: sha512-rPv/mVaneZTuFESk/zDg3dFiZjpdipVMcLaF10Ns1fIyWdZ0ja79Ufm1eCFbk8KFNEX2dEx+vFEvD9n4bhEneg==}
     engines: {node: '>=20.6.0'}
     cpu: [arm64]
     os: [win32]
 
-  '@typescript/native-preview-win32-x64@7.0.0-dev.20250903.1':
-    resolution: {integrity: sha512-2yf56TIhsPbjYZz0XT4+hOFz9jetqlADkFuIid0dpe/0HLAliIMOHRAMZj22PerYU5Qcg66llJ6xU+78evBZCw==}
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20250904.1':
+    resolution: {integrity: sha512-+twwqKYEv5UdZX5FRaBo0bDQgw/uPQjU3hqaqaO0Dhp1Ou8Ce4oi5hgwauB1j29JwBbvOi9/yoEcjsjT2Wsaxw==}
     engines: {node: '>=20.6.0'}
     cpu: [x64]
     os: [win32]
 
-  '@typescript/native-preview@7.0.0-dev.20250903.1':
-    resolution: {integrity: sha512-8EnxWQp7wUfk6mV3Bw7aGLQwKqDwi6+YLqm4Sev+KRpiUyepHZKWGej/YTLko3WMd0uGoGAlODuZjoPBQNJdag==}
+  '@typescript/native-preview@7.0.0-dev.20250904.1':
+    resolution: {integrity: sha512-IzPzhumNsWsIg4Kmt0y+0b2BBtsvD17rDmKj78yNeU3AsuA6xignQ5eDkFtRmLdGPVZwa8Yg5zPcJRFln98Ocw==}
     engines: {node: '>=20.6.0'}
     hasBin: true
 
@@ -1167,8 +1163,8 @@ packages:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
 
-  caniuse-lite@1.0.30001739:
-    resolution: {integrity: sha512-y+j60d6ulelrNSwpPyrHdl+9mJnQzHBr08xm48Qno0nSk4h3Qojh+ziv2qE6rXf4k3tadF4o1J/1tAbVm1NtnA==}
+  caniuse-lite@1.0.30001741:
+    resolution: {integrity: sha512-QGUGitqsc8ARjLdgAfxETDhRbJ0REsP6O3I96TAth/mVjh2cYzN2u+3AzPP3aVSm2FehEItaJw1xd+IGBXWeSw==}
 
   codemirror@5.65.16:
     resolution: {integrity: sha512-br21LjYmSlVL0vFCPWPfhzUCT34FM/pAdK7rRIZwa0rrtrIdotvP4Oh4GUHsu2E3IrQMCfRkL/fN3ytMNxVQvg==}
@@ -1213,8 +1209,8 @@ packages:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
     engines: {node: '>= 0.4'}
 
-  electron-to-chromium@1.5.213:
-    resolution: {integrity: sha512-xr9eRzSLNa4neDO0xVFrkXu3vyIzG4Ay08dApecw42Z1NbmCt+keEpXdvlYGVe0wtvY5dhW0Ay0lY0IOfsCg0Q==}
+  electron-to-chromium@1.5.214:
+    resolution: {integrity: sha512-TpvUNdha+X3ybfU78NoQatKvQEm1oq3lf2QbnmCEdw+Bd9RuIAY+hJTvq1avzHM0f7EJfnH3vbCnbzKzisc/9Q==}
 
   error-ex@1.3.2:
     resolution: {integrity: sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g==}
@@ -1435,8 +1431,8 @@ packages:
   no-scroll@2.1.1:
     resolution: {integrity: sha512-YTzGAJOo/B6hkodeT5SKKHpOhAzjMfkUCCXjLJwjWk2F4/InIg+HbdH9kmT7bKpleDuqLZDTRy2OdNtAj0IVyQ==}
 
-  node-releases@2.0.19:
-    resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
+  node-releases@2.0.20:
+    resolution: {integrity: sha512-7gK6zSXEH6neM212JgfYFXe+GmZQM+fia5SsusuBIUgnPheLFBmIPhtFoAQRj8/7wASYQnbDlHPVwY0BefoFgA==}
 
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
@@ -1626,31 +1622,26 @@ packages:
 
 snapshots:
 
-  '@ampproject/remapping@2.3.0':
-    dependencies:
-      '@jridgewell/gen-mapping': 0.3.13
-      '@jridgewell/trace-mapping': 0.3.30
-
   '@babel/code-frame@7.27.1':
     dependencies:
       '@babel/helper-validator-identifier': 7.27.1
       js-tokens: 4.0.0
       picocolors: 1.1.1
 
-  '@babel/compat-data@7.28.0': {}
+  '@babel/compat-data@7.28.4': {}
 
-  '@babel/core@7.28.3':
+  '@babel/core@7.28.4':
     dependencies:
-      '@ampproject/remapping': 2.3.0
       '@babel/code-frame': 7.27.1
       '@babel/generator': 7.28.3
       '@babel/helper-compilation-targets': 7.27.2
-      '@babel/helper-module-transforms': 7.28.3(@babel/core@7.28.3)
-      '@babel/helpers': 7.28.3
-      '@babel/parser': 7.28.3
+      '@babel/helper-module-transforms': 7.28.3(@babel/core@7.28.4)
+      '@babel/helpers': 7.28.4
+      '@babel/parser': 7.28.4
       '@babel/template': 7.27.2
-      '@babel/traverse': 7.28.3
-      '@babel/types': 7.28.2
+      '@babel/traverse': 7.28.4
+      '@babel/types': 7.28.4
+      '@jridgewell/remapping': 2.3.5
       convert-source-map: 2.0.0
       debug: 4.4.1
       gensync: 1.0.0-beta.2
@@ -1661,15 +1652,15 @@ snapshots:
 
   '@babel/generator@7.28.3':
     dependencies:
-      '@babel/parser': 7.28.3
-      '@babel/types': 7.28.2
+      '@babel/parser': 7.28.4
+      '@babel/types': 7.28.4
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.30
       jsesc: 3.1.0
 
   '@babel/helper-compilation-targets@7.27.2':
     dependencies:
-      '@babel/compat-data': 7.28.0
+      '@babel/compat-data': 7.28.4
       '@babel/helper-validator-option': 7.27.1
       browserslist: 4.25.4
       lru-cache: 5.1.1
@@ -1679,17 +1670,17 @@ snapshots:
 
   '@babel/helper-module-imports@7.27.1':
     dependencies:
-      '@babel/traverse': 7.28.3
-      '@babel/types': 7.28.2
+      '@babel/traverse': 7.28.4
+      '@babel/types': 7.28.4
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/helper-module-transforms@7.28.3(@babel/core@7.28.3)':
+  '@babel/helper-module-transforms@7.28.3(@babel/core@7.28.4)':
     dependencies:
-      '@babel/core': 7.28.3
+      '@babel/core': 7.28.4
       '@babel/helper-module-imports': 7.27.1
       '@babel/helper-validator-identifier': 7.27.1
-      '@babel/traverse': 7.28.3
+      '@babel/traverse': 7.28.4
     transitivePeerDependencies:
       - supports-color
 
@@ -1701,83 +1692,83 @@ snapshots:
 
   '@babel/helper-validator-option@7.27.1': {}
 
-  '@babel/helpers@7.28.3':
+  '@babel/helpers@7.28.4':
     dependencies:
       '@babel/template': 7.27.2
-      '@babel/types': 7.28.2
+      '@babel/types': 7.28.4
 
-  '@babel/parser@7.28.3':
+  '@babel/parser@7.28.4':
     dependencies:
-      '@babel/types': 7.28.2
+      '@babel/types': 7.28.4
 
-  '@babel/plugin-transform-react-jsx-self@7.27.1(@babel/core@7.28.3)':
+  '@babel/plugin-transform-react-jsx-self@7.27.1(@babel/core@7.28.4)':
     dependencies:
-      '@babel/core': 7.28.3
+      '@babel/core': 7.28.4
       '@babel/helper-plugin-utils': 7.27.1
 
-  '@babel/plugin-transform-react-jsx-source@7.27.1(@babel/core@7.28.3)':
+  '@babel/plugin-transform-react-jsx-source@7.27.1(@babel/core@7.28.4)':
     dependencies:
-      '@babel/core': 7.28.3
+      '@babel/core': 7.28.4
       '@babel/helper-plugin-utils': 7.27.1
 
-  '@babel/runtime@7.28.3': {}
+  '@babel/runtime@7.28.4': {}
 
   '@babel/template@7.27.2':
     dependencies:
       '@babel/code-frame': 7.27.1
-      '@babel/parser': 7.28.3
-      '@babel/types': 7.28.2
+      '@babel/parser': 7.28.4
+      '@babel/types': 7.28.4
 
-  '@babel/traverse@7.28.3':
+  '@babel/traverse@7.28.4':
     dependencies:
       '@babel/code-frame': 7.27.1
       '@babel/generator': 7.28.3
       '@babel/helper-globals': 7.28.0
-      '@babel/parser': 7.28.3
+      '@babel/parser': 7.28.4
       '@babel/template': 7.27.2
-      '@babel/types': 7.28.2
+      '@babel/types': 7.28.4
       debug: 4.4.1
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/types@7.28.2':
+  '@babel/types@7.28.4':
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.27.1
 
-  '@biomejs/biome@2.2.2':
+  '@biomejs/biome@2.2.3':
     optionalDependencies:
-      '@biomejs/cli-darwin-arm64': 2.2.2
-      '@biomejs/cli-darwin-x64': 2.2.2
-      '@biomejs/cli-linux-arm64': 2.2.2
-      '@biomejs/cli-linux-arm64-musl': 2.2.2
-      '@biomejs/cli-linux-x64': 2.2.2
-      '@biomejs/cli-linux-x64-musl': 2.2.2
-      '@biomejs/cli-win32-arm64': 2.2.2
-      '@biomejs/cli-win32-x64': 2.2.2
+      '@biomejs/cli-darwin-arm64': 2.2.3
+      '@biomejs/cli-darwin-x64': 2.2.3
+      '@biomejs/cli-linux-arm64': 2.2.3
+      '@biomejs/cli-linux-arm64-musl': 2.2.3
+      '@biomejs/cli-linux-x64': 2.2.3
+      '@biomejs/cli-linux-x64-musl': 2.2.3
+      '@biomejs/cli-win32-arm64': 2.2.3
+      '@biomejs/cli-win32-x64': 2.2.3
 
-  '@biomejs/cli-darwin-arm64@2.2.2':
+  '@biomejs/cli-darwin-arm64@2.2.3':
     optional: true
 
-  '@biomejs/cli-darwin-x64@2.2.2':
+  '@biomejs/cli-darwin-x64@2.2.3':
     optional: true
 
-  '@biomejs/cli-linux-arm64-musl@2.2.2':
+  '@biomejs/cli-linux-arm64-musl@2.2.3':
     optional: true
 
-  '@biomejs/cli-linux-arm64@2.2.2':
+  '@biomejs/cli-linux-arm64@2.2.3':
     optional: true
 
-  '@biomejs/cli-linux-x64-musl@2.2.2':
+  '@biomejs/cli-linux-x64-musl@2.2.3':
     optional: true
 
-  '@biomejs/cli-linux-x64@2.2.2':
+  '@biomejs/cli-linux-x64@2.2.3':
     optional: true
 
-  '@biomejs/cli-win32-arm64@2.2.2':
+  '@biomejs/cli-win32-arm64@2.2.3':
     optional: true
 
-  '@biomejs/cli-win32-x64@2.2.2':
+  '@biomejs/cli-win32-x64@2.2.3':
     optional: true
 
   '@codemirror/autocomplete@6.18.7':
@@ -1822,7 +1813,7 @@ snapshots:
       '@codemirror/state': 6.5.2
       '@codemirror/view': 6.38.2
       '@lezer/common': 1.2.3
-      '@lezer/javascript': 1.5.1
+      '@lezer/javascript': 1.5.2
 
   '@codemirror/lang-json@6.0.2':
     dependencies:
@@ -1878,7 +1869,7 @@ snapshots:
   '@emotion/babel-plugin@11.13.5':
     dependencies:
       '@babel/helper-module-imports': 7.27.1
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@emotion/hash': 0.9.2
       '@emotion/memoize': 0.9.0
       '@emotion/serialize': 1.3.3
@@ -1901,7 +1892,7 @@ snapshots:
 
   '@emotion/hash@0.9.2': {}
 
-  '@emotion/is-prop-valid@1.3.1':
+  '@emotion/is-prop-valid@1.4.0':
     dependencies:
       '@emotion/memoize': 0.9.0
 
@@ -1909,7 +1900,7 @@ snapshots:
 
   '@emotion/react@11.14.0(@types/react@18.3.24)(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@emotion/babel-plugin': 11.13.5
       '@emotion/cache': 11.14.0
       '@emotion/serialize': 1.3.3
@@ -2029,11 +2020,11 @@ snapshots:
 
   '@instructure/debounce@10.24.2':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
 
   '@instructure/emotion@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@emotion/react': 11.14.0(@types/react@18.3.24)(react@18.3.1)
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2058,7 +2049,7 @@ snapshots:
 
   '@instructure/theme-registry@10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2068,7 +2059,7 @@ snapshots:
 
   '@instructure/ui-a11y-content@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-react-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2081,7 +2072,7 @@ snapshots:
 
   '@instructure/ui-a11y-utils@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-a11y-content': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2097,7 +2088,7 @@ snapshots:
 
   '@instructure/ui-alerts@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2118,7 +2109,7 @@ snapshots:
 
   '@instructure/ui-avatar@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-icons': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2134,7 +2125,7 @@ snapshots:
 
   '@instructure/ui-badge@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-color-utils': 10.24.2
@@ -2151,7 +2142,7 @@ snapshots:
 
   '@instructure/ui-billboard@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-heading': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2167,7 +2158,7 @@ snapshots:
 
   '@instructure/ui-breadcrumb@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-icons': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2188,7 +2179,7 @@ snapshots:
 
   '@instructure/ui-buttons@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2214,7 +2205,7 @@ snapshots:
 
   '@instructure/ui-byline@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-react-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2229,7 +2220,7 @@ snapshots:
 
   '@instructure/ui-calendar@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2253,7 +2244,7 @@ snapshots:
 
   '@instructure/ui-checkbox@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2277,7 +2268,7 @@ snapshots:
 
   '@instructure/ui-code-editor@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-a11y-content': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2296,7 +2287,7 @@ snapshots:
 
   '@instructure/ui-color-picker@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2326,12 +2317,12 @@ snapshots:
 
   '@instructure/ui-color-utils@10.24.2':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       tinycolor2: 1.6.0
 
   '@instructure/ui-date-input@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-calendar': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2356,7 +2347,7 @@ snapshots:
 
   '@instructure/ui-date-time-input@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-a11y-content': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2380,11 +2371,11 @@ snapshots:
 
   '@instructure/ui-decorator@10.24.2':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
 
   '@instructure/ui-dialog@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-a11y-utils': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/ui-dom-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2399,7 +2390,7 @@ snapshots:
 
   '@instructure/ui-dom-utils@10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       react: 18.3.1
@@ -2407,7 +2398,7 @@ snapshots:
 
   '@instructure/ui-drawer-layout@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/debounce': 10.24.2
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2433,7 +2424,7 @@ snapshots:
 
   '@instructure/ui-drilldown@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2457,7 +2448,7 @@ snapshots:
 
   '@instructure/ui-editable@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2478,7 +2469,7 @@ snapshots:
 
   '@instructure/ui-expandable@10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-prop-types': 10.24.2(react@18.3.1)
       '@instructure/ui-react-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2492,7 +2483,7 @@ snapshots:
 
   '@instructure/ui-file-drop@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2513,7 +2504,7 @@ snapshots:
 
   '@instructure/ui-flex@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2528,7 +2519,7 @@ snapshots:
 
   '@instructure/ui-focusable@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-dom-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2544,7 +2535,7 @@ snapshots:
 
   '@instructure/ui-form-field@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2564,7 +2555,7 @@ snapshots:
 
   '@instructure/ui-grid@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2582,7 +2573,7 @@ snapshots:
 
   '@instructure/ui-heading@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2600,7 +2591,7 @@ snapshots:
 
   '@instructure/ui-i18n@10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-decorator': 10.24.2
       '@instructure/ui-dom-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2616,7 +2607,7 @@ snapshots:
 
   '@instructure/ui-icons@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/ui-svg-images': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       prop-types: 15.8.1
       react: 18.3.1
@@ -2627,7 +2618,7 @@ snapshots:
 
   '@instructure/ui-img@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2644,7 +2635,7 @@ snapshots:
 
   '@instructure/ui-instructure@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-heading': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2663,7 +2654,7 @@ snapshots:
 
   '@instructure/ui-link@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2684,7 +2675,7 @@ snapshots:
 
   '@instructure/ui-list@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2701,7 +2692,7 @@ snapshots:
 
   '@instructure/ui-menu@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2725,7 +2716,7 @@ snapshots:
 
   '@instructure/ui-metric@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2741,7 +2732,7 @@ snapshots:
 
   '@instructure/ui-modal@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2765,7 +2756,7 @@ snapshots:
 
   '@instructure/ui-motion@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-dom-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2781,7 +2772,7 @@ snapshots:
 
   '@instructure/ui-navigation@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/debounce': 10.24.2
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2809,7 +2800,7 @@ snapshots:
 
   '@instructure/ui-number-input@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-form-field': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2828,7 +2819,7 @@ snapshots:
 
   '@instructure/ui-options@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-icons': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2846,7 +2837,7 @@ snapshots:
 
   '@instructure/ui-overlays@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2876,7 +2867,7 @@ snapshots:
 
   '@instructure/ui-pages@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2894,7 +2885,7 @@ snapshots:
 
   '@instructure/ui-pagination@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-a11y-content': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2921,7 +2912,7 @@ snapshots:
 
   '@instructure/ui-pill@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2940,7 +2931,7 @@ snapshots:
 
   '@instructure/ui-popover@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2965,7 +2956,7 @@ snapshots:
 
   '@instructure/ui-portal@10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-dom-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/ui-i18n': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2977,7 +2968,7 @@ snapshots:
 
   '@instructure/ui-position@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/debounce': 10.24.2
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -2997,7 +2988,7 @@ snapshots:
 
   '@instructure/ui-progress@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -3015,13 +3006,13 @@ snapshots:
 
   '@instructure/ui-prop-types@10.24.2(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       prop-types: 15.8.1
       react: 18.3.1
 
   '@instructure/ui-radio-input@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-dom-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3038,7 +3029,7 @@ snapshots:
 
   '@instructure/ui-range-input@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -3061,7 +3052,7 @@ snapshots:
 
   '@instructure/ui-rating@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -3081,8 +3072,8 @@ snapshots:
 
   '@instructure/ui-react-utils@10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
-      '@emotion/is-prop-valid': 1.3.1
+      '@babel/runtime': 7.28.4
+      '@emotion/is-prop-valid': 1.4.0
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-decorator': 10.24.2
@@ -3095,7 +3086,7 @@ snapshots:
 
   '@instructure/ui-responsive@10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/debounce': 10.24.2
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -3110,7 +3101,7 @@ snapshots:
 
   '@instructure/ui-select@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-dom-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3136,7 +3127,7 @@ snapshots:
 
   '@instructure/ui-selectable@10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-dom-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3151,7 +3142,7 @@ snapshots:
 
   '@instructure/ui-side-nav-bar@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/debounce': 10.24.2
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -3172,7 +3163,7 @@ snapshots:
 
   '@instructure/ui-simple-select@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-form-field': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3190,7 +3181,7 @@ snapshots:
 
   '@instructure/ui-source-code-editor@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@codemirror/autocomplete': 6.18.7
       '@codemirror/commands': 6.8.1
       '@codemirror/lang-css': 6.3.1
@@ -3227,7 +3218,7 @@ snapshots:
 
   '@instructure/ui-spinner@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -3246,7 +3237,7 @@ snapshots:
 
   '@instructure/ui-svg-images@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-react-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3262,7 +3253,7 @@ snapshots:
 
   '@instructure/ui-table@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -3283,7 +3274,7 @@ snapshots:
 
   '@instructure/ui-tabs@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/debounce': 10.24.2
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3308,7 +3299,7 @@ snapshots:
 
   '@instructure/ui-tag@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -3327,7 +3318,7 @@ snapshots:
 
   '@instructure/ui-testable@10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/ui-decorator': 10.24.2
       '@instructure/ui-dom-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
@@ -3335,7 +3326,7 @@ snapshots:
 
   '@instructure/ui-text-area@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/debounce': 10.24.2
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -3355,7 +3346,7 @@ snapshots:
 
   '@instructure/ui-text-input@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-dom-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3374,7 +3365,7 @@ snapshots:
 
   '@instructure/ui-text@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -3397,7 +3388,7 @@ snapshots:
 
   '@instructure/ui-time-select@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-form-field': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/ui-i18n': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3416,7 +3407,7 @@ snapshots:
 
   '@instructure/ui-toggle-details@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-buttons': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3440,7 +3431,7 @@ snapshots:
 
   '@instructure/ui-tooltip@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-popover': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3458,7 +3449,7 @@ snapshots:
 
   '@instructure/ui-top-nav-bar@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -3490,7 +3481,7 @@ snapshots:
 
   '@instructure/ui-tray@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -3513,7 +3504,7 @@ snapshots:
 
   '@instructure/ui-tree-browser@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-icons': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3532,7 +3523,7 @@ snapshots:
 
   '@instructure/ui-truncate-list@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/debounce': 10.24.2
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3550,7 +3541,7 @@ snapshots:
 
   '@instructure/ui-truncate-text@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/debounce': 10.24.2
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3569,7 +3560,7 @@ snapshots:
 
   '@instructure/ui-utils@10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
       '@instructure/ui-dom-utils': 10.24.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3582,7 +3573,7 @@ snapshots:
 
   '@instructure/ui-view@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/console': 10.24.2(react@18.3.1)
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/shared-types': 10.24.2(react@18.3.1)
@@ -3601,7 +3592,7 @@ snapshots:
 
   '@instructure/ui@10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@instructure/emotion': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/ui-a11y-content': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@instructure/ui-alerts': 10.24.2(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3684,11 +3675,16 @@ snapshots:
 
   '@instructure/uid@10.24.2':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
+      '@jridgewell/trace-mapping': 0.3.30
+
+  '@jridgewell/remapping@2.3.5':
+    dependencies:
+      '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.30
 
   '@jridgewell/resolve-uri@3.1.2': {}
@@ -3723,7 +3719,7 @@ snapshots:
       '@lezer/highlight': 1.2.1
       '@lezer/lr': 1.4.2
 
-  '@lezer/javascript@1.5.1':
+  '@lezer/javascript@1.5.2':
     dependencies:
       '@lezer/common': 1.2.3
       '@lezer/highlight': 1.2.1
@@ -3813,24 +3809,24 @@ snapshots:
 
   '@types/babel__core@7.20.5':
     dependencies:
-      '@babel/parser': 7.28.3
-      '@babel/types': 7.28.2
+      '@babel/parser': 7.28.4
+      '@babel/types': 7.28.4
       '@types/babel__generator': 7.27.0
       '@types/babel__template': 7.4.4
       '@types/babel__traverse': 7.28.0
 
   '@types/babel__generator@7.27.0':
     dependencies:
-      '@babel/types': 7.28.2
+      '@babel/types': 7.28.4
 
   '@types/babel__template@7.4.4':
     dependencies:
-      '@babel/parser': 7.28.3
-      '@babel/types': 7.28.2
+      '@babel/parser': 7.28.4
+      '@babel/types': 7.28.4
 
   '@types/babel__traverse@7.28.0':
     dependencies:
-      '@babel/types': 7.28.2
+      '@babel/types': 7.28.4
 
   '@types/estree@1.0.8': {}
 
@@ -3857,42 +3853,42 @@ snapshots:
 
   '@types/ua-parser-js@0.7.39': {}
 
-  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250903.1':
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250904.1':
     optional: true
 
-  '@typescript/native-preview-darwin-x64@7.0.0-dev.20250903.1':
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20250904.1':
     optional: true
 
-  '@typescript/native-preview-linux-arm64@7.0.0-dev.20250903.1':
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20250904.1':
     optional: true
 
-  '@typescript/native-preview-linux-arm@7.0.0-dev.20250903.1':
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20250904.1':
     optional: true
 
-  '@typescript/native-preview-linux-x64@7.0.0-dev.20250903.1':
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20250904.1':
     optional: true
 
-  '@typescript/native-preview-win32-arm64@7.0.0-dev.20250903.1':
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20250904.1':
     optional: true
 
-  '@typescript/native-preview-win32-x64@7.0.0-dev.20250903.1':
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20250904.1':
     optional: true
 
-  '@typescript/native-preview@7.0.0-dev.20250903.1':
+  '@typescript/native-preview@7.0.0-dev.20250904.1':
     optionalDependencies:
-      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20250903.1
-      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20250903.1
-      '@typescript/native-preview-linux-arm': 7.0.0-dev.20250903.1
-      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20250903.1
-      '@typescript/native-preview-linux-x64': 7.0.0-dev.20250903.1
-      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20250903.1
-      '@typescript/native-preview-win32-x64': 7.0.0-dev.20250903.1
+      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20250904.1
+      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20250904.1
+      '@typescript/native-preview-linux-arm': 7.0.0-dev.20250904.1
+      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20250904.1
+      '@typescript/native-preview-linux-x64': 7.0.0-dev.20250904.1
+      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20250904.1
+      '@typescript/native-preview-win32-x64': 7.0.0-dev.20250904.1
 
   '@vitejs/plugin-react@5.0.2(vite@7.1.4(@types/node@24.3.1)(lightningcss@1.30.1)(terser@5.44.0))':
     dependencies:
-      '@babel/core': 7.28.3
-      '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.3)
-      '@babel/plugin-transform-react-jsx-source': 7.27.1(@babel/core@7.28.3)
+      '@babel/core': 7.28.4
+      '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.4)
+      '@babel/plugin-transform-react-jsx-source': 7.27.1(@babel/core@7.28.4)
       '@rolldown/pluginutils': 1.0.0-beta.34
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
@@ -3906,15 +3902,15 @@ snapshots:
 
   babel-plugin-macros@3.1.0:
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       cosmiconfig: 7.1.0
       resolve: 1.22.10
 
   browserslist@4.25.4:
     dependencies:
-      caniuse-lite: 1.0.30001739
-      electron-to-chromium: 1.5.213
-      node-releases: 2.0.19
+      caniuse-lite: 1.0.30001741
+      electron-to-chromium: 1.5.214
+      node-releases: 2.0.20
       update-browserslist-db: 1.1.3(browserslist@4.25.4)
 
   buffer-from@1.1.2: {}
@@ -3938,7 +3934,7 @@ snapshots:
 
   callsites@3.1.0: {}
 
-  caniuse-lite@1.0.30001739: {}
+  caniuse-lite@1.0.30001741: {}
 
   codemirror@5.65.16: {}
 
@@ -3978,7 +3974,7 @@ snapshots:
       es-errors: 1.3.0
       gopd: 1.2.0
 
-  electron-to-chromium@1.5.213: {}
+  electron-to-chromium@1.5.214: {}
 
   error-ex@1.3.2:
     dependencies:
@@ -4178,7 +4174,7 @@ snapshots:
 
   no-scroll@2.1.1: {}
 
-  node-releases@2.0.19: {}
+  node-releases@2.0.20: {}
 
   object-assign@4.1.1: {}
 

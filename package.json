@@ -3,7 +3,6 @@
     "extends @instructure/browserslist-config-instui"
   ],
   "dependencies": {
-    "@instructure/debounce": "^10.24.2",
     "@instructure/ui": "^10.24.2",
     "@zumer/snapdom": "^1.9.9",
     "papaparse": "^5.5.3",
@@ -12,12 +11,12 @@
     "terser": "^5.44.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.2",
+    "@biomejs/biome": "^2.2.3",
     "@instructure/browserslist-config-instui": "^10.24.2",
     "@types/papaparse": "^5.3.16",
     "@types/react": "^18.3.24",
     "@types/react-dom": "^18.3.7",
-    "@typescript/native-preview": "7.0.0-dev.20250903.1",
+    "@typescript/native-preview": "7.0.0-dev.20250904.1",
     "@vitejs/plugin-react": "^5.0.2",
     "browserslist": "^4.25.4",
     "lightningcss": "^1.30.1",
