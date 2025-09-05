@@ -5,4 +5,5 @@ export { EmbedControl } from "./Embed";
 export { ImageControl } from "./Image";
 export { PreviewControl } from "./Preview";
 export { PrintControl } from "./Print";
+export { TableControl } from "./Table";
 export { TextControl } from "./Text";

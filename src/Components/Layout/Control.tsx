@@ -13,6 +13,7 @@ import {
 	ImageControl,
 	PreviewControl,
 	PrintControl,
+	TableControl,
 	TextControl,
 } from "../Export";
 import { Divider } from "./Divider.tsx";
@@ -36,12 +37,13 @@ const Control: FC<ControlProps> = ({
 }) => {
 	const controls = [
 		<PreviewControl key="preview" product={product} />,
-		<Divider key="divider" />,
+		<Divider key="dividerSave" />,
 		<PrintControl key="print" />,
 		<ImageControl key="image" product={product} />,
 		<TextControl key="text" product={product} />,
 		<DownloadControl key="download" product={product} />,
 		<CodeControl key="code" product={product} />,
+		<Divider key="dividerCopy" />,
 		<EmbedControl
 			id={id}
 			key="embed"
@@ -50,6 +52,7 @@ const Control: FC<ControlProps> = ({
 			setIsPreview={setIsPreview}
 		/>,
 		<CopyControl key="copy" product={product} />,
+		<TableControl id={id} key="table" product={product} />,
 	];
 
 	return (
