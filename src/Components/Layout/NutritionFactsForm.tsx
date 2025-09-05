@@ -30,6 +30,17 @@ const NutritionFactsForm: FC<{
 	};
 	const params = new URLSearchParams(window.location.search);
 	const noParams = params.size === 0;
+	const disclaimer = (
+		<>
+			Instructure has developed nutrition fact labels for AI-enabled products to
+			increase transparency and improve decision making.{" "}
+			<Link href="https://www.instructure.com/ignite-ai" target="_blank">
+				Learn more
+			</Link>{" "}
+			about IgniteAI.
+		</>
+	);
+	const copyright = `©${new Date().getFullYear()} Instructure All rights reserved.`;
 
 	return (
 		<>
@@ -297,24 +308,14 @@ const NutritionFactsForm: FC<{
 							>
 								<Text color="secondary" variant="contentSmall">
 									{isPreview ? (
-										layout.disclaimer &&
-										"Instructure has developed nutrition fact labels for AI-enabled products to increase transparency and improve decision making."
+										layout.disclaimer && disclaimer
 									) : (
 										<span
 											style={{
 												opacity: layout.disclaimer ? "1" : "0.25",
 											}}
 										>
-											Instructure has developed nutrition fact labels for
-											AI-enabled products to increase transparency and improve
-											decision making.{" "}
-											<Link
-												href="https://www.instructure.com/ignite-ai"
-												target="_blank"
-											>
-												Learn more
-											</Link>{" "}
-											about IgniteAI.
+											{disclaimer}
 										</span>
 									)}
 								</Text>
@@ -360,26 +361,14 @@ const NutritionFactsForm: FC<{
 									variant="contentSmall"
 								>
 									{isPreview ? (
-										layout.copyright && (
-											<>
-												©{new Date().getFullYear()}{" "}
-												<Link href="https://www.instructure.com/">
-													Instructure
-												</Link>{" "}
-												All rights reserved.
-											</>
-										)
+										layout.copyright && copyright
 									) : (
 										<span
 											style={{
 												opacity: layout.copyright ? "1" : "0.25",
 											}}
 										>
-											©{new Date().getFullYear()}{" "}
-											<Link href="https://www.instructure.com/">
-												Instructure
-											</Link>{" "}
-											All rights reserved.
+											{copyright}
 										</span>
 									)}
 								</Text>

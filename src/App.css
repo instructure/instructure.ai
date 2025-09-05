@@ -6,10 +6,6 @@ body {
   box-sizing: border-box;
 }
 
-#root {
-  height: 100%;
-}
-
 @media print {
 
   [data-print*="hidden"],
