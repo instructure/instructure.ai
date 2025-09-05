@@ -5,6 +5,9 @@ type ControlButtonProps = {
 	Icon: React.ElementType<SVGIconProps>;
 	onClick: () => void;
 	background?: boolean;
+	disabled?: boolean;
+	color?: "primary" | "primary-inverse";
+	border?: boolean;
 };
 
 const ControlButton: React.FC<ControlButtonProps> = ({
@@ -12,6 +15,9 @@ const ControlButton: React.FC<ControlButtonProps> = ({
 	Icon,
 	onClick,
 	background = false,
+	disabled = false,
+	color = "primary",
+	border = true,
 }) => (
 	<Tooltip
 		className="screen-only"
@@ -21,10 +27,12 @@ const ControlButton: React.FC<ControlButtonProps> = ({
 		renderTip={label}
 	>
 		<IconButton
-			color="primary"
+			color={color}
+			disabled={disabled}
 			onClick={onClick}
 			screenReaderLabel={label}
 			withBackground={background}
+			withBorder={border}
 		>
 			<Icon />
 		</IconButton>

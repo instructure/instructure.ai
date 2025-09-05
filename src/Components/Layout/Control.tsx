@@ -15,6 +15,7 @@ import {
 	PrintControl,
 	TableControl,
 	TextControl,
+	LinkControl,
 } from "../Export";
 import { Divider } from "./Divider.tsx";
 
@@ -44,6 +45,7 @@ const Control: FC<ControlProps> = ({
 		<DownloadControl key="download" product={product} />,
 		<CodeControl key="code" product={product} />,
 		<Divider key="dividerCopy" />,
+		<LinkControl key="link" id={id} />,
 		<EmbedControl
 			id={id}
 			key="embed"

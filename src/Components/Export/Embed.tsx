@@ -73,7 +73,7 @@ const Embed = async (
 			setIsPreview(false);
 			let msg: string = "Failed to copy data to clipboard";
 			if (error instanceof Error) {
-				msg = error.message;
+				msg = error.message;	
 			} else if (typeof error === "string") {
 				msg = error;
 			}

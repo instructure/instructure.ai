@@ -1,8 +1,17 @@
 import "./App.css";
-import { Flex, InstUISettingsProvider, View } from "@instructure/ui";
+import {
+	Flex,
+	IconShareSolid,
+	InlineSVG,
+	InstUISettingsProvider,
+	type SVGIconProps,
+	View,
+} from "@instructure/ui";
 import { type FC, useEffect, useState } from "react";
+import { baseUrl, Logo, LogoDark } from "./assets";
 import { DefaultLayout } from "./assets/Layout.ts";
 import { Product } from "./assets/Products.ts";
+import { ControlButton } from "./Components/Export";
 import {
 	getProductFromCSV,
 	getProductFromObject,
@@ -41,6 +50,11 @@ const App: FC = () => {
 	const [isEditing, setIsEditing] = useState(initialEditing);
 	const [layout, setLayout] = useState(initialLayout);
 	const [isDark, setIsDark] = useState(false);
+	const [isInIframe, setIsInIframe] = useState(false);
+
+	useEffect(() => {
+		setIsInIframe(window.self !== window.top);
+	}, []);
 
 	useEffect(() => {
 		const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -57,23 +71,68 @@ const App: FC = () => {
 			{!isEditing ? (
 				<View
 					as="div"
-					background="primary"
-					data-print="no-margin, no-border, no-padding, max-height"
-					id="embed"
-					margin="0 auto"
-					maxWidth="670px"
-					overflowX="hidden"
-					overflowY="auto"
-					padding="large"
-					withFocusOutline={false}
+					background={isDark ? "brand" : "secondary"}
+					padding={isInIframe ? "0" : "large"}
+					themeOverride={{ backgroundBrand: "#061c30" }}
 				>
-					<NutritionFactsForm
-						isPreview={!isEditing}
-						layout={layout}
-						product={product}
-						setLayout={setLayout}
-						setProduct={setProduct}
-					/>
+					{!isInIframe && (
+						<View
+							as="div"
+							margin="0 auto"
+							maxWidth="670px"
+							padding="0 0 medium"
+						>
+							<Flex>
+								<Flex.Item shouldGrow shouldShrink>
+									<InlineSVG
+										height="2.5rem"
+										inline={false}
+										src={isDark ? LogoDark : Logo}
+										title="Instructure"
+										width="auto"
+									/>
+								</Flex.Item>
+								{product.id && product.id.length > 0 && (
+									<Flex.Item>
+										<ControlButton
+											background={false}
+											border={false}
+											color={isDark ? "primary-inverse" : "primary"}
+											Icon={IconShareSolid as React.ElementType<SVGIconProps>}
+											label="Copy permalink"
+											onClick={() => {
+												navigator.clipboard.writeText(
+													`${baseUrl}?id=${product.id}`,
+												);
+											}}
+										/>
+									</Flex.Item>
+								)}
+							</Flex>
+						</View>
+					)}
+					<View
+						as="div"
+						background="primary"
+						borderRadius={isInIframe ? "0" : "large"}
+						data-print="no-margin, no-border, no-padding, max-height"
+						id="embed"
+						margin="0 auto"
+						maxWidth="670px"
+						overflowX="hidden"
+						overflowY="auto"
+						padding="large"
+						shadow={isInIframe ? "none" : "above"}
+						withFocusOutline={false}
+					>
+						<NutritionFactsForm
+							isPreview={!isEditing}
+							layout={layout}
+							product={product}
+							setLayout={setLayout}
+							setProduct={setProduct}
+						/>
+					</View>
 				</View>
 			) : (
 				<View
