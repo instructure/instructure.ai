@@ -1,4 +1,4 @@
-export { baseUrl, csvUrl } from "./consts";
+export { baseUrl, colors, csvUrl } from "./consts";
 export { DefaultLayout } from "./Layout";
 export { Product } from "./Products";
 

@@ -8,7 +8,7 @@ import {
 	View,
 } from "@instructure/ui";
 import { type FC, useEffect, useState } from "react";
-import { baseUrl, Logo, LogoDark } from "./assets";
+import { baseUrl, colors, Logo, LogoDark } from "./assets";
 import { DefaultLayout } from "./assets/Layout.ts";
 import { Product } from "./assets/Products.ts";
 import { ControlButton } from "./Components/Export";
@@ -73,13 +73,13 @@ const App: FC = () => {
 					as="div"
 					background={isDark ? "brand" : "secondary"}
 					padding={isInIframe ? "0" : "large"}
-					themeOverride={{ backgroundBrand: "#061c30" }}
+					themeOverride={{ backgroundBrand: colors.instructure }}
 				>
 					{!isInIframe && (
 						<View
 							as="div"
 							margin="0 auto"
-							maxWidth="670px"
+							maxWidth={isInIframe ? "670px" : "56rem"}
 							padding="0 0 medium"
 						>
 							<Flex>
@@ -118,7 +118,7 @@ const App: FC = () => {
 						data-print="no-margin, no-border, no-padding, max-height"
 						id="embed"
 						margin="0 auto"
-						maxWidth="670px"
+						maxWidth={isInIframe ? "670px" : "56rem"}
 						overflowX="hidden"
 						overflowY="auto"
 						padding="large"
@@ -137,12 +137,13 @@ const App: FC = () => {
 			) : (
 				<View
 					as="div"
-					background={isDark ? "primary-inverse" : "secondary"}
+					background={isDark ? "brand" : "secondary"}
 					data-print="no-background, max-height"
 					height="100vh"
 					margin="0"
 					overflowX="hidden"
 					padding="0"
+					themeOverride={{ backgroundBrand: colors.instructure }}
 				>
 					<Flex direction="column" gap="small" justifyItems="center">
 						<Flex.Item as="main" shouldGrow shouldShrink>

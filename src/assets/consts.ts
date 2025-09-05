@@ -3,4 +3,11 @@ const csvUrl =
 
 const baseUrl = "https://instructure.ai/";
 
-export { csvUrl, baseUrl };
+const colors = {
+	canvas: "#D42E21",
+	instructure: "#0E1721",
+	mastery: "#3C8645",
+	parchment: "#4279B6",
+};
+
+export { csvUrl, baseUrl, colors };
