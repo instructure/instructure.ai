@@ -32,9 +32,7 @@ function toBlockType(block: NutritionFactBlock): BlockType {
 }
 
 const productToText = (product: ProductNutritionFacts): string => {
-	const { data } = product;
-	const text = `<h2>${product.name}</h2><p>${product.description}</p>${data.map((block) => `<h3>${block.blockTitle}</h3>${block.segmentData.map((segment) => `<h4>${segment.segmentTitle}</h4>${segment.value && segment.valueDescription ? `<p>${segment.value}</p><p>${segment.valueDescription}</p>` : segment.value ? `<p>${segment.value}</p>` : segment.valueDescription ? `<p>${segment.valueDescription}</p>` : ""}`).join("")}`).join("")}
-`;
+	const text = `<h2>${product.name}</h2><p>${product.description}</p>`;
 	return text;
 };
 
@@ -42,6 +40,7 @@ const Embed = async (
 	product: ProductNutritionFacts,
 	layout: PageLayout,
 	setIsPreview: Dispatch<SetStateAction<boolean>>,
+	id?: string,
 ) => {
 	// biome-ignore lint: biomelint/correctness/noUnusedVariables- removing properties from object
 	const { nameHint, descriptionHint, ...rest } = product;
@@ -58,8 +57,13 @@ const Embed = async (
 		const plainText = productToText(product);
 
 		const base = "https://instructure.github.io/nf-generator/";
-		const query = encodeURIComponent(safeProduct);
-		const embedCode = `<iframe width="670px" height="${height}px" allowfullscreen src="${base}?embed&q=${query}&copyright=${layout.copyright}&disclaimer=${layout.disclaimer}&revision=${layout.revision}"></iframe>
+		const paramKey = id && id.trim().length > 0 ? "id" : "q";
+		const paramValue =
+			paramKey === "id"
+				? encodeURIComponent(id ?? "")
+				: encodeURIComponent(safeProduct);
+
+		const embedCode = `<iframe width="670px" height="${height}px" allowfullscreen src="${base}?embed&${paramKey}=${paramValue}&copyright=${layout.copyright}&disclaimer=${layout.disclaimer}&revision=${layout.revision}"></iframe>
 <div class="hidden" id="ai-facts-hidden" style="display:none;">
   ${plainText}</div>`;
 		try {
@@ -82,11 +86,12 @@ const EmbedControl: React.FC<{
 	product: ProductNutritionFacts;
 	layout: PageLayout;
 	setIsPreview: Dispatch<SetStateAction<boolean>>;
-}> = ({ product, layout, setIsPreview }) => (
+	id?: string;
+}> = ({ product, layout, setIsPreview, id }) => (
 	<ControlButton
 		Icon={IconExternalLinkLine as React.ElementType<SVGIconProps>}
 		label="Copy embed code"
-		onClick={() => Embed(product, layout, setIsPreview)}
+		onClick={() => Embed(product, layout, setIsPreview, id)}
 	/>
 );
 

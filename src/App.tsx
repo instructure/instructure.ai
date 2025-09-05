@@ -121,6 +121,7 @@ const App: FC = () => {
 						</Flex.Item>
 						<Flex.Item data-print="hidden" id="control" textAlign="center">
 							<Control
+								id={id ?? undefined}
 								isDark={isDark}
 								isPreview={isPreview}
 								layout={layout}

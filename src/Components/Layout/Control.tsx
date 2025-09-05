@@ -24,6 +24,7 @@ type ControlProps = PreviewState &
 	DarkState &
 	ProductState & {
 		layout: PageLayout;
+		id?: string;
 	};
 
 const Control: FC<ControlProps> = ({
@@ -31,6 +32,7 @@ const Control: FC<ControlProps> = ({
 	product,
 	layout,
 	setIsPreview,
+	id,
 }) => {
 	const controls = [
 		<PreviewControl key="preview" product={product} />,
@@ -41,6 +43,7 @@ const Control: FC<ControlProps> = ({
 		<DownloadControl key="download" product={product} />,
 		<CodeControl key="code" product={product} />,
 		<EmbedControl
+			id={id}
 			key="embed"
 			layout={layout}
 			product={product}
