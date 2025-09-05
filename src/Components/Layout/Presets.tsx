@@ -11,7 +11,7 @@ import { getProductsFromCSV } from "../Import";
 type ProductRecords = Record<string, ProductNutritionFacts>;
 
 interface PresetsProps {
-	setProduct: (product: ProductNutritionFacts | null) => void;
+	setProduct: React.Dispatch<React.SetStateAction<ProductNutritionFacts>>;
 }
 
 const Presets = ({ setProduct }: PresetsProps) => {
@@ -104,7 +104,7 @@ const Presets = ({ setProduct }: PresetsProps) => {
 		setSelectedOptionId(id);
 		setInputValue(option.label);
 		setIsShowingOptions(false);
-		setProduct(id ? products[id] : null);
+		if (products[id]) setProduct(products[id]);
 		handleBlur();
 	};
 

@@ -307,7 +307,14 @@ const NutritionFactsForm: FC<{
 										>
 											Instructure has developed nutrition fact labels for
 											AI-enabled products to increase transparency and improve
-											decision making.
+											decision making.{" "}
+											<Link
+												href="https://www.instructure.com/ignite-ai"
+												target="_blank"
+											>
+												Learn more
+											</Link>{" "}
+											about IgniteAI.
 										</span>
 									)}
 								</Text>
