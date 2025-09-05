@@ -47,7 +47,7 @@ const PreviewControl: FC<{ product: ProductNutritionFacts }> = ({
 			<ControlButton
 				background
 				Icon={IconEyeLine as React.ElementType<SVGIconProps>}
-				label="Preview JSX"
+				label="Preview component"
 				onClick={handleClick}
 			/>
 			<ScreenReaderContent>
