@@ -9,7 +9,7 @@
 		"terser": "^5.43.1",
 		"vite": "^6.3.5"
 	},
-	"name": "instructure.ai",
+	"name": "@instructure.ai/site",
 	"overrides": {
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0"

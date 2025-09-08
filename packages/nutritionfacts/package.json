@@ -23,7 +23,7 @@
     "typescript": "^5.9.2",
     "vite": "^7.1.5"
   },
-  "name": "nutrition-facts",
+  "name": "@instructure.ai/nutritionfacts",
   "packageManager": "pnpm@10.15.1",
   "private": true,
   "scripts": {
