@@ -34,6 +34,7 @@ const Control: FC<ControlProps> = ({
 	isDark,
 	product,
 	layout,
+	isEditing,
 	setIsEditing,
 	id,
 	setProduct,
@@ -55,6 +56,7 @@ const Control: FC<ControlProps> = ({
 			layout={layout}
 			product={product}
 			setIsEditing={setIsEditing}
+			isEditing={isEditing}
 		/>,
 		<CopyControl key="copy" product={product} />,
 		<TableControl id={id} key="table" product={product} />,
