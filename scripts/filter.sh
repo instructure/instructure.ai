@@ -11,7 +11,7 @@ filter() {
 }
 
 copy_shared_files() {
-  cp -R ../public/* ../dist/
+  cp -R ./public/* ./dist/
 }
 
 list_packages() {
@@ -64,20 +64,40 @@ build() {
   fi
 }
 
+preview() {
+  if [ -z "$PACKAGE" ]; then
+    copy_shared_files
+    pnpm -r build
+    pnpm preview $ARGS
+  elif echo "$VALID_PACKAGES" | grep -qx "$PACKAGE"; then
+      copy_shared_files
+    pnpm --filter "@instructure.ai/$PACKAGE" build
+    filter
+  else
+    echo -e "Error: '$PACKAGE' is not a valid package." >&2
+    list_packages
+    exit 1
+  fi
+}
+
 help() {
-  echo "Usage: $0 {dev|build} <package-name> [additional-args]"
+  echo "Usage: $0 {dev|build|preview} <package-name> [additional-args]"
   echo "Commands:"
   echo "  dev <package-name>       Start development server for the specified package"
   echo "  build [package-name]     Build all packages or a specific package"
+  echo "  preview [package-name]   Preview the built package"
   list_packages
 }
 
-COMMANDS=("dev" "build")
+COMMANDS=("dev" "build", "preview")
 case "$COMMAND" in
   dev)
     $COMMAND
     ;;
   build)
+    $COMMAND
+    ;;
+  preview)
     $COMMAND
     ;;
   *)

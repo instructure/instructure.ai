@@ -25,7 +25,7 @@
     "lint": "pnpm -r lint",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
-    "preview": "pnpm build &&vite preview"
+    "preview": "bash ./scripts/filter.sh preview"
   },
   "exports": {
     "./biome": "./configs/biome.jsonc",
