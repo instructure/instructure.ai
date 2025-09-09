@@ -5,12 +5,12 @@ import { browserslistToTargets } from "lightningcss";
 import { defineConfig } from "vite";
 
 const PACKAGE_NAME = process.env.npm_package_name?.split("/").pop();
-const PACKAGE_VERSION = process.env.npm_package_version;
+const PACKAGE_VERSION = String(process.env.npm_package_version);
 
 export default defineConfig({
 	define: {
-		"import.meta.env.VITE_PACKAGE_NAME": PACKAGE_NAME,
-		"import.meta.env.VITE_PACKAGE_VERSION": PACKAGE_VERSION,
+		"import.meta.env.VITE_PACKAGE_NAME": JSON.stringify(PACKAGE_NAME),
+		"import.meta.env.VITE_PACKAGE_VERSION": JSON.stringify(PACKAGE_VERSION),
 	},
 	base: `/${PACKAGE_NAME === "site" ? "" : PACKAGE_NAME}`,
 	build: {
