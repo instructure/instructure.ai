@@ -6,10 +6,81 @@ ARGS="${@:3}"
 
 VALID_PACKAGES=$(ls ./packages)
 
-if echo "$VALID_PACKAGES" | grep -qx "$PACKAGE"; then
+filter() {
   pnpm --filter "@instructure.ai/$PACKAGE" "$COMMAND" $ARGS
-else
-  echo -e "Error: '$PACKAGE' is not a valid package. Valid package names are:" >&2
-  echo "$VALID_PACKAGES" | sed 's/^/ * /' >&2
-  exit 1
-fi
+}
+
+list_packages() {
+  echo "Valid package names are:"
+  ls ./packages | sed 's/^/ * /'
+  echo
+}
+
+list_commands() {
+  echo "Valid commands are:"
+  for cmd in "${COMMANDS[@]}"; do
+    echo " * $cmd"
+  done
+  echo
+}
+
+help() {
+  echo "Usage: $0 {dev|build} <package-name> [additional-args]"
+  echo "Commands:"
+  echo "  dev <package-name>       Start development server for the specified package"
+  echo "  build [package-name]     Build all packages or a specific package"
+  list_packages
+}
+
+dev() {
+    if [ -z "$PACKAGE" ]; then
+    echo "Error: No package name provided for 'dev'." >&2
+    list_packages
+    exit 1
+  fi
+  if echo "$VALID_PACKAGES" | grep -qx "$PACKAGE"; then
+    filter
+  else
+    echo -e "Error: '$PACKAGE' is not a valid package." >&2
+    list_packages
+    exit 1
+  fi
+}
+
+build() {
+  if [ -z "$PACKAGE" ]; then
+    pnpm -r build
+  elif echo "$VALID_PACKAGES" | grep -qx "$PACKAGE"; then
+    filter
+  else
+    echo -e "Error: '$PACKAGE' is not a valid package." >&2
+    list_packages
+    exit 1
+  fi
+}
+
+help() {
+  echo "Usage: $0 {dev|build} <package-name> [additional-args]"
+  echo "Commands:"
+  echo "  dev <package-name>       Start development server for the specified package"
+  echo "  build [package-name]     Build all packages or a specific package"
+  list_packages
+}
+
+COMMANDS=("dev" "build")
+case "$COMMAND" in
+  dev)
+    $COMMAND
+    ;;
+  build)
+    $COMMAND
+    ;;
+  *)
+    echo "Error: Unknown command '$COMMAND'." >&2
+    list_commands
+    help
+    exit 2
+    ;;
+esac
+
+exit 0

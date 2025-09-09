@@ -18,7 +18,7 @@
   "packageManager": "pnpm@10.15.1",
   "private": true,
   "scripts": {
-    "build": "pnpm -r build",
+    "build": "bash ./scripts/filter.sh build",
     "dev": "bash ./scripts/filter.sh dev",
     "init": "bash ./scripts/init.sh",
     "lint": "pnpm -r lint",
