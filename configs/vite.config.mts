@@ -17,6 +17,7 @@ export default defineConfig({
 		cssMinify: "lightningcss",
 		minify: "terser",
 		target: "esnext",
+		outDir: `../../dist/${PACKAGE_NAME === "site" ? "" : PACKAGE_NAME}`,
 	},
 	css: {
 		lightningcss: {

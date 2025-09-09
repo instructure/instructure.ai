@@ -24,10 +24,12 @@
     "new": "bash ./scripts/init.sh",
     "lint": "pnpm -r lint",
     "test": "pnpm -r test",
-    "typecheck": "pnpm -r typecheck"
+    "typecheck": "pnpm -r typecheck",
+    "preview": "pnpm build &&vite preview"
   },
   "exports": {
     "./biome": "./configs/biome.jsonc",
-    "./vite": "./configs/vite.config.mts"
+    "./vanilla": "./configs/vite.config.mts",
+    "./react": "./configs/vite.config-react.mts"
   }
 }

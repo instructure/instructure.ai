@@ -10,6 +10,10 @@ filter() {
   pnpm --filter "@instructure.ai/$PACKAGE" "$COMMAND" $ARGS
 }
 
+copy_shared_files() {
+  cp -R ../public/* ../dist/
+}
+
 list_packages() {
   echo "Valid package names are:"
   ls ./packages | sed 's/^/ * /'
@@ -49,6 +53,7 @@ dev() {
 
 build() {
   if [ -z "$PACKAGE" ]; then
+    copy_shared_files
     pnpm -r build
   elif echo "$VALID_PACKAGES" | grep -qx "$PACKAGE"; then
     filter
