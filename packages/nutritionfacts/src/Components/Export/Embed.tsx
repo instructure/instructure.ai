@@ -51,10 +51,20 @@ const Embed = async (
 		data: product.data.map(toBlockType),
 	});
 
+	const wasEditing = isEditing;
+
 	if (isEditing) setIsEditing(false);
 	setTimeout(async () => {
 		const pageElement = document.getElementById("embed");
-		const height = pageElement ? pageElement.offsetHeight : 1800;
+		let height = 1800;
+		let originalWidth: string | undefined;
+
+		if (pageElement) {
+			originalWidth = pageElement.style.width;
+			pageElement.style.width = "670px";
+			height = pageElement.offsetHeight;
+		}
+
 		const plainText = productToText(product);
 
 		const paramKey = id && id.trim().length > 0 ? "id" : "q";
@@ -63,7 +73,8 @@ const Embed = async (
 				? encodeURIComponent(id ?? "")
 				: encodeURIComponent(safeProduct);
 
-		const embedCode = `<iframe width="670px" height="${height + 20}px" allowfullscreen src="${baseUrl}?embed&${paramKey}=${paramValue}${layout.copyright ? "" : "&copyright=false"}${layout.disclaimer ? "" : "&disclaimer=false"}${layout.revision ? "" : "&revision=false"}"></iframe>
+		const separator = baseUrl.includes("?") ? "&" : "?";
+		const embedCode = `<iframe width="670px" height="${height}px" allowfullscreen src="${baseUrl}${separator}embed&${paramKey}=${paramValue}${layout.copyright ? "" : "&copyright=false"}${layout.disclaimer ? "" : "&disclaimer=false"}${layout.revision ? "" : "&revision=false"}"></iframe>
 <div class="hidden" id="ai-facts-hidden" style="display:none;">
   ${plainText}
 </div>`;
@@ -78,7 +89,12 @@ const Embed = async (
 			}
 			console.error(msg);
 		}
-		if (isEditing) setIsEditing(true);
+
+		if (pageElement && originalWidth !== undefined) {
+			pageElement.style.width = originalWidth;
+		}
+
+		if (wasEditing) setIsEditing(true);
 	}, 0);
 };
 
