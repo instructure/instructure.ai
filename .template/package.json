@@ -1,0 +1,14 @@
+{
+  "name": "@instructure.ai/template",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "type": "module",
+  "version": "0.0.0",
+  "devDependencies": {
+    "@instructure.ai/shared-configs": "workspace:shared-configs"
+  }
+}

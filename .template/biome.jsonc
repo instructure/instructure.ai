@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "@instructure.ai/shared-configs/biome"
+  ]
+}
