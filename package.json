@@ -21,7 +21,7 @@
   "scripts": {
     "build": "bash ./scripts/filter.sh build",
     "dev": "bash ./scripts/filter.sh dev",
-    "init": "bash ./scripts/init.sh",
+    "new": "bash ./scripts/init.sh",
     "lint": "pnpm -r lint",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck"
