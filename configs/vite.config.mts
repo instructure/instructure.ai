@@ -1,20 +1,19 @@
+/// <reference types="vitest/config" />
+
 import browsersList from "@instructure/browserslist-config-instui";
-import react from "@vitejs/plugin-react";
 import { browserslistToTargets } from "lightningcss";
 import { defineConfig } from "vite";
 
 export default defineConfig({
 	build: {
-		chunkSizeWarningLimit: 1024,
 		cssMinify: "lightningcss",
 		minify: "terser",
 		target: "esnext",
 	},
 	css: {
 		lightningcss: {
-			targets: browserslistToTargets(browsersList as string[]),
+			targets: browserslistToTargets(browsersList),
 		},
 		transformer: "lightningcss",
 	},
-	plugins: [react()],
 });

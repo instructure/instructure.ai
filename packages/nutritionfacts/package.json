@@ -7,29 +7,21 @@
     "@zumer/snapdom": "^1.9.9",
     "papaparse": "^5.5.3",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "terser": "^5.44.0"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.3",
-    "@instructure/browserslist-config-instui": "^10.24.2",
     "@types/papaparse": "^5.3.16",
-    "@types/react": "^18.3.24",
-    "@types/react-dom": "^18.3.7",
-    "@typescript/native-preview": "7.0.0-dev.20250904.1",
     "@vitejs/plugin-react": "^5.0.2",
-    "browserslist": "^4.25.4",
-    "lightningcss": "^1.30.1",
-    "typescript": "^5.9.2",
-    "vite": "^7.1.5"
+    "@instructure.ai/shared-configs": "workspace:shared-configs"
   },
   "name": "@instructure.ai/nutritionfacts",
   "packageManager": "pnpm@10.15.1",
   "private": true,
   "scripts": {
-    "build": "tsgo && vite build",
+    "build": "vite typecheck && vite build",
     "dev": "vite",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsgo --noEmit"
   },
   "type": "module",
   "version": "0.0.1"
