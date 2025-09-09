@@ -1,5 +1,6 @@
 import { IconExternalLinkLine, type SVGIconProps } from "@instructure/ui";
 import type { Dispatch, SetStateAction } from "react";
+import { baseUrl } from "../../assets/consts.ts";
 import type {
 	NutritionFactBlock,
 	PageLayout,
@@ -41,6 +42,7 @@ const Embed = async (
 	layout: PageLayout,
 	setIsEditing: Dispatch<SetStateAction<boolean>>,
 	id?: string,
+	isEditing?: boolean,
 ) => {
 	// biome-ignore lint: biomelint/correctness/noUnusedVariables- removing properties from object
 	const { nameHint, descriptionHint, ...rest } = product;
@@ -49,23 +51,22 @@ const Embed = async (
 		data: product.data.map(toBlockType),
 	});
 
-	setIsEditing(false);
-
+	if (isEditing) setIsEditing(false);
 	setTimeout(async () => {
 		const pageElement = document.getElementById("embed");
 		const height = pageElement ? pageElement.offsetHeight : 1800;
 		const plainText = productToText(product);
 
-		const base = "https://instructure.github.io/nf-generator/";
 		const paramKey = id && id.trim().length > 0 ? "id" : "q";
 		const paramValue =
 			paramKey === "id"
 				? encodeURIComponent(id ?? "")
 				: encodeURIComponent(safeProduct);
 
-		const embedCode = `<iframe width="670px" height="${height}px" allowfullscreen src="${base}?embed&${paramKey}=${paramValue}&copyright=${layout.copyright}&disclaimer=${layout.disclaimer}&revision=${layout.revision}"></iframe>
+		const embedCode = `<iframe width="670px" height="${height + 20}px" allowfullscreen src="${baseUrl}?embed&${paramKey}=${paramValue}${layout.copyright ? "" : "&copyright=false"}${layout.disclaimer ? "" : "&disclaimer=false"}${layout.revision ? "" : "&revision=false"}"></iframe>
 <div class="hidden" id="ai-facts-hidden" style="display:none;">
-  ${plainText}</div>`;
+  ${plainText}
+</div>`;
 		try {
 			await navigator.clipboard.writeText(embedCode);
 		} catch (error) {
@@ -77,7 +78,7 @@ const Embed = async (
 			}
 			console.error(msg);
 		}
-		setIsEditing(true);
+		if (isEditing) setIsEditing(true);
 	}, 0);
 };
 
@@ -85,12 +86,28 @@ const EmbedControl: React.FC<{
 	product: ProductNutritionFacts;
 	layout: PageLayout;
 	setIsEditing: Dispatch<SetStateAction<boolean>>;
+	isEditing: boolean;
 	id?: string;
-}> = ({ product, layout, setIsEditing, id }) => (
+	background?: boolean;
+	border?: boolean;
+	color?: "primary" | "primary-inverse";
+}> = ({
+	product,
+	layout,
+	setIsEditing,
+	id,
+	isEditing,
+	background,
+	border,
+	color,
+}) => (
 	<ControlButton
 		Icon={IconExternalLinkLine as React.ElementType<SVGIconProps>}
 		label="Copy embed code"
-		onClick={() => Embed(product, layout, setIsEditing, id)}
+		onClick={() => Embed(product, layout, setIsEditing, id, isEditing)}
+		background={background}
+		border={border}
+		color={color}
 	/>
 );
 

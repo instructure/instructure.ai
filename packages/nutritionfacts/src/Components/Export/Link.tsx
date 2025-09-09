@@ -17,7 +17,17 @@ const PermanentLink = async (id: string) => {
 	}
 };
 
-const LinkControl = ({ product }: { product?: ProductNutritionFacts }) => {
+const LinkControl = ({
+	product,
+	background,
+	border,
+	color,
+}: {
+	product?: ProductNutritionFacts;
+	background?: boolean;
+	border?: boolean;
+	color?: "primary" | "primary-inverse";
+}) => {
 	return (
 		<ControlButton
 			disabled={!product?.id}
@@ -29,6 +39,9 @@ const LinkControl = ({ product }: { product?: ProductNutritionFacts }) => {
 					PermanentLink(product.id);
 				}
 			}}
+			background={background}
+			border={border}
+			color={color}
 		/>
 	);
 };

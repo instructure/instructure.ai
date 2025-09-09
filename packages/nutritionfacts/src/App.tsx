@@ -1,17 +1,10 @@
 import "./App.css";
-import {
-	Flex,
-	IconShareSolid,
-	InlineSVG,
-	InstUISettingsProvider,
-	type SVGIconProps,
-	View,
-} from "@instructure/ui";
+import { Flex, InlineSVG, InstUISettingsProvider, View } from "@instructure/ui";
 import { type FC, useEffect, useState } from "react";
-import { baseUrl, colors, Logo, LogoDark } from "./assets";
+import { colors, Logo, LogoDark } from "./assets";
 import { DefaultLayout } from "./assets/Layout.ts";
 import { Product } from "./assets/Products.ts";
-import { ControlButton } from "./Components/Export";
+import { EmbedControl, LinkControl } from "./Components/Export";
 import {
 	getProductFromCSV,
 	getProductFromObject,
@@ -100,17 +93,23 @@ const App: FC = () => {
 								</Flex.Item>
 								{product.id && product.id.length > 0 && (
 									<Flex.Item>
-										<ControlButton
+										<View margin="0 x-small 0">
+											<EmbedControl
+												product={product}
+												layout={layout}
+												setIsEditing={setIsEditing}
+												id={product.id}
+												isEditing={isEditing}
+												background={false}
+												border={false}
+												color={isDark ? "primary-inverse" : "primary"}
+											/>
+										</View>
+										<LinkControl
+											product={product}
 											background={false}
 											border={false}
 											color={isDark ? "primary-inverse" : "primary"}
-											Icon={IconShareSolid as React.ElementType<SVGIconProps>}
-											label="Copy permalink"
-											onClick={() => {
-												navigator.clipboard.writeText(
-													`${baseUrl}?id=${product.id}`,
-												);
-											}}
 										/>
 									</Flex.Item>
 								)}
