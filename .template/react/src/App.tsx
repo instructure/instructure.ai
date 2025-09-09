@@ -1,3 +1,4 @@
+import "./App.css";
 import type { FC } from "react";
 
 const App: FC = () => {
