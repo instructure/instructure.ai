@@ -24,7 +24,11 @@ jobs:
           fi
 
           # Gather package folder names
-          mapfile -t PKGS < <(ls -1 ./packages | sed '/^$/d')
+          if [ -d ./packages ]; then
+            mapfile -t PKGS < <(ls -1 ./packages | sed '/^$/d')
+          else
+            PKGS=()
+          fi
           echo "Package branches: ${PKGS[@]}"
 
           # Check if HEAD is one of the packages
