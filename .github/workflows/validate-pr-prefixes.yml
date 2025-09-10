@@ -1,0 +1,56 @@
+name: validate-pr-prefixes
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Validate PR source branch prefix for package branches
+        shell: bash
+        run: |
+          BASE="${{ github.base_ref }}"
+          HEAD="${{ github.head_ref }}"
+          echo "Base: $BASE"
+          echo "Head: $HEAD"
+
+          # Gather package directory names (one level)
+          if [[ ! -d "./packages" ]]; then
+            echo "No ./packages directory; skipping."
+            exit 0
+          fi
+          mapfile -t PKGS < <(ls -1 ./packages | sed '/^$/d')
+
+          if [[ ${#PKGS[@]} -eq 0 ]]; then
+            echo "No packages found; skipping."
+            exit 0
+          fi
+
+          # Is the base branch one of the package names?
+          is_pkg_base="false"
+          for pkg in "${PKGS[@]}"; do
+            if [[ "$BASE" == "$pkg" ]]; then
+              is_pkg_base="true"
+              target_pkg="$pkg"
+              break
+            fi
+          done
+
+          if [[ "$is_pkg_base" != "true" ]]; then
+            echo "Base '$BASE' is not a package branch; skipping."
+            exit 0
+          fi
+
+          # Enforce prefix: HEAD must start with "<base>-"
+          required_prefix="${target_pkg}-"
+          if [[ "$HEAD" =~ ^${required_prefix} ]]; then
+            echo "✅ OK: head branch starts with '${required_prefix}'"
+            exit 0
+          fi
+
+          echo "❌ PRs into '${target_pkg}' must come from branches starting with '${required_prefix}'"
+          exit 1

@@ -1,0 +1,45 @@
+name: validate-pr-into-main
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Fail if source branch is not allowed
+        shell: bash
+        run: |
+          BASE="${{ github.base_ref }}"
+          HEAD="${{ github.head_ref }}"
+          echo "Base: $BASE"
+          echo "Head: $HEAD"
+
+          if [[ "$BASE" != "main" ]]; then
+            echo "Not targeting main; skip."
+            exit 0
+          fi
+
+          # Gather package folder names
+          mapfile -t PKGS < <(ls -1 ./packages | sed '/^$/d')
+          echo "Package branches: ${PKGS[@]}"
+
+          # Check if HEAD is one of the packages
+          for pkg in "${PKGS[@]}"; do
+            if [[ "$HEAD" == "$pkg" ]]; then
+              echo "✅ Allowed: PR from package branch '$HEAD'"
+              exit 0
+            fi
+          done
+
+          # Check if HEAD starts with main-
+          if [[ "$HEAD" =~ ^main- ]]; then
+            echo "✅ Allowed: PR from branch '$HEAD' (main- prefix)"
+            exit 0
+          fi
+
+          echo "❌ Only PRs from package branches (${PKGS[*]}) or branches starting with 'main-' may target main."
+          exit 1
