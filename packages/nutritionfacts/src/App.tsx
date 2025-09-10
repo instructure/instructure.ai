@@ -73,6 +73,7 @@ const App: FC = () => {
 					background={isDark ? "brand" : "secondary"}
 					padding={isInIframe ? "0" : "large"}
 					themeOverride={{ backgroundBrand: colors.instructure }}
+					data-print="no-padding, no-background"
 				>
 					{!isInIframe && (
 						<View
@@ -80,17 +81,17 @@ const App: FC = () => {
 							margin="0 auto"
 							maxWidth={isInIframe ? "670px" : "56rem"}
 							padding="0 0 medium"
+							data-print="no-background, max-height, no padding"
 						>
-							<Flex>
-								<Flex.Item shouldGrow shouldShrink >
-									<View minHeight="2.5rem" display="inline-flex" as="div" style={{alignContent: "center"}}>
+							<Flex data-print="hidden">
+								<Flex.Item shouldGrow shouldShrink>
 									<InlineSVG
-										height="auto"
+										height="2.5rem"
+										inline={false}
 										src={isDark ? LogoDark : Logo}
 										title="Instructure"
-										width="100%"
+										width="auto"
 									/>
-									</View>
 								</Flex.Item>
 								{product.id && product.id.length > 0 && (
 									<Flex.Item>
