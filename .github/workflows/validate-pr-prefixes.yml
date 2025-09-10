@@ -1,4 +1,6 @@
 name: validate-pr-prefixes
+permissions:
+  contents: read
 on:
   pull_request:
     types: [opened, synchronize, reopened]
