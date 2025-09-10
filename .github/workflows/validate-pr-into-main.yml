@@ -27,7 +27,7 @@ jobs:
 
           # Gather package folder names
           if [ -d ./packages ]; then
-            mapfile -t PKGS < <(ls -1d ./packages/*/ | xargs -n 1 basename)
+            mapfile -t PKGS < <(ls -1d ./packages/*/ 2>/dev/null | xargs -n 1 basename)
           else
             PKGS=()
           fi
