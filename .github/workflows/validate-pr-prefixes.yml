@@ -25,7 +25,7 @@ jobs:
             echo "No ./packages directory; skipping."
             exit 0
           else
-            mapfile -t PKGS < <(ls -1d ./packages/*/ 2>/dev/null | xargs -n 1 basename)
+            mapfile -t PKGS < <(find ./packages -mindepth 1 -maxdepth 1 -type d -printf '%f\n')
           fi
 
           if [[ ${#PKGS[@]} -eq 0 ]]; then
