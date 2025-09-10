@@ -73,6 +73,7 @@ const App: FC = () => {
 					background={isDark ? "brand" : "secondary"}
 					padding={isInIframe ? "0" : "large"}
 					themeOverride={{ backgroundBrand: colors.instructure }}
+					data-print="no-padding, no-background"
 				>
 					{!isInIframe && (
 						<View
@@ -80,8 +81,9 @@ const App: FC = () => {
 							margin="0 auto"
 							maxWidth={isInIframe ? "670px" : "56rem"}
 							padding="0 0 medium"
+							data-print="no-background, max-height, no padding"
 						>
-							<Flex>
+							<Flex data-print="hidden">
 								<Flex.Item shouldGrow shouldShrink>
 									<InlineSVG
 										height="2.5rem"

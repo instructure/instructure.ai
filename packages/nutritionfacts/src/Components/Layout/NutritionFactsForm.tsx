@@ -61,9 +61,11 @@ const NutritionFactsForm: FC<{
 				<Flex.Item shouldGrow shouldShrink>
 					<View as="div" borderWidth="medium 0 0 0" padding="medium 0 0">
 						{isPreview ? (
-							<Heading as="h2">
-								{noParams ? <Presets setProduct={setProduct} /> : product.name}
-							</Heading>
+							noParams ? (
+								<Presets setProduct={setProduct} />
+							) : (
+								<Heading as="h2">{product.name}</Heading>
+							)
 						) : (
 							<EditableField
 								dataPrint={product.name.length ? "" : "hidden"}

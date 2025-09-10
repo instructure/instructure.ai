@@ -6,6 +6,13 @@ body {
   box-sizing: border-box;
 }
 
+@media screen {
+  [data-print*="print-only"] {
+    display: none;
+    visibility: hidden;
+  }
+}
+
 @media print {
 
   [data-print*="hidden"],
@@ -51,5 +58,12 @@ body {
   [data-print*="no-break"] {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
+  }
+
+  [data-print*="print-only"] {
+    display: block !important;
+    visibility: visible !important;
+    width: auto !important;
+    height: auto !important;
   }
 }
