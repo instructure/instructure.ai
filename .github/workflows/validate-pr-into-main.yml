@@ -42,7 +42,7 @@ jobs:
           done
 
           # Check if HEAD starts with main-
-          if [[ "$HEAD" =~ '^main-' ]]; then
+          if [[ "$HEAD" =~ ^"main-" ]]; then
             echo "✅ Allowed: PR from branch '$HEAD' (main- prefix)"
             exit 0
           fi
