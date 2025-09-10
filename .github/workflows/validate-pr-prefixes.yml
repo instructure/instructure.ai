@@ -50,7 +50,7 @@ jobs:
 
           # Enforce prefix: HEAD must start with "<base>-"
           required_prefix="${target_pkg}-"
-          if [[ "$HEAD" =~ ^${required_prefix} ]]; then
+          if [[ "$HEAD" =~ ^"${required_prefix}" ]]; then
             echo "✅ OK: head branch starts with '${required_prefix}'"
             exit 0
           fi
