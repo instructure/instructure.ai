@@ -24,8 +24,9 @@ jobs:
           if [[ ! -d "./packages" ]]; then
             echo "No ./packages directory; skipping."
             exit 0
+          else
+            mapfile -t PKGS < <(ls -1 ./packages | sed '/^$/d')
           fi
-          mapfile -t PKGS < <(ls -1 ./packages | sed '/^$/d')
 
           if [[ ${#PKGS[@]} -eq 0 ]]; then
             echo "No packages found; skipping."
