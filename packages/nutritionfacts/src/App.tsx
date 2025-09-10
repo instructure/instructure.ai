@@ -83,7 +83,7 @@ const App: FC = () => {
 						>
 							<Flex>
 								<Flex.Item shouldGrow shouldShrink >
-									<View withVisualDebug minHeight="2.5rem" display="inline-flex" as="div" style={{alignContent: "center"}}>
+									<View minHeight="2.5rem" display="inline-flex" as="div" style={{alignContent: "center"}}>
 									<InlineSVG
 										height="auto"
 										src={isDark ? LogoDark : Logo}
