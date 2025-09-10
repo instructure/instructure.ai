@@ -1,8 +1,10 @@
 import {
+	Heading,
 	ScreenReaderContent,
 	type SelectOptionProps,
 	SimpleSelect,
 	Spinner,
+	View,
 } from "@instructure/ui";
 import { useState } from "react";
 import type { ProductNutritionFacts } from "../../types";
@@ -54,35 +56,46 @@ const Presets = ({ setProduct }: PresetsProps) => {
 		}
 	};
 	return (
-		<SimpleSelect
-			assistiveText="Use arrow keys to navigate options."
-			onChange={handleSelect}
-			onShowOptions={handleShowOptions}
-			placeholder="Select a product"
-			renderLabel={<ScreenReaderContent>Select a product</ScreenReaderContent>}
-			value={value}
-		>
-			{Object.keys(safeOptions).length === 0 ? (
-				<SimpleSelect.Option
-					id="loading"
-					isDisabled
-					renderBeforeLabel={<Spinner renderTitle="Loading" size="x-small" />}
-					value="loading"
+		<>
+			<View data-print="hidden">
+				<SimpleSelect
+					assistiveText="Use arrow keys to navigate options."
+					onChange={handleSelect}
+					onShowOptions={handleShowOptions}
+					placeholder="Select a product"
+					renderLabel={
+						<ScreenReaderContent>Select a product</ScreenReaderContent>
+					}
+					value={value}
 				>
-					Loading...
-				</SimpleSelect.Option>
-			) : (
-				safeOptions.map((option) => (
-					<SimpleSelect.Option
-						id={option.id}
-						key={option.id}
-						value={option.label ?? ""}
-					>
-						{option.label}
-					</SimpleSelect.Option>
-				))
-			)}
-		</SimpleSelect>
+					{Object.keys(safeOptions).length === 0 ? (
+						<SimpleSelect.Option
+							id="loading"
+							isDisabled
+							renderBeforeLabel={
+								<Spinner renderTitle="Loading" size="x-small" />
+							}
+							value="loading"
+						>
+							Loading...
+						</SimpleSelect.Option>
+					) : (
+						safeOptions.map((option) => (
+							<SimpleSelect.Option
+								id={option.id}
+								key={option.id}
+								value={option.label ?? ""}
+							>
+								{option.label}
+							</SimpleSelect.Option>
+						))
+					)}
+				</SimpleSelect>
+			</View>
+			<Heading as="h2" data-print="print-only">
+				{value}
+			</Heading>
+		</>
 	);
 };
 
