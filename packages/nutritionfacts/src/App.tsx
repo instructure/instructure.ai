@@ -70,7 +70,7 @@ const App: FC = () => {
 			{!isEditing ? (
 				<View
 					as="div"
-					background={isDark ? "brand" : "secondary"}
+					background={isDark && !isInIframe ? "brand" : "secondary"}
 					padding={isInIframe ? "0" : "large"}
 					themeOverride={{ backgroundBrand: colors.instructure }}
 					data-print="no-padding, no-background"
@@ -79,7 +79,7 @@ const App: FC = () => {
 						<View
 							as="div"
 							margin="0 auto"
-							maxWidth={isInIframe ? "670px" : "56rem"}
+							maxWidth="56rem"
 							padding="0 0 medium"
 							data-print="no-background, max-height, no padding"
 						>
@@ -124,7 +124,7 @@ const App: FC = () => {
 						borderRadius={isInIframe ? "0" : "large"}
 						data-print="no-margin, no-border, no-padding, max-height"
 						id="embed"
-						margin="0 auto"
+						margin={isInIframe ? "0" : "0 auto"}
 						maxWidth={isInIframe ? "670px" : "56rem"}
 						overflowX="hidden"
 						overflowY="auto"
