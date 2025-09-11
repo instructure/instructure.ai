@@ -124,7 +124,7 @@ const App: FC = () => {
 						borderRadius={isInIframe ? "0" : "large"}
 						data-print="no-margin, no-border, no-padding, max-height"
 						id="embed"
-						margin="0 auto"
+						margin={isInIframe ? "0" : "0 auto"}
 						maxWidth={isInIframe ? "670px" : "56rem"}
 						overflowX="hidden"
 						overflowY="auto"
