@@ -73,8 +73,15 @@ const Embed = async (
 				? encodeURIComponent(id ?? "")
 				: encodeURIComponent(safeProduct);
 
+		const helperClasses = [
+			"ui-helper-reset", // Removes iframe border in legacy Community platform.
+			"border-none", // tailwind
+			"outline-none", // tailwind
+			"border-0", // bootstrap
+		].join(" ");
+
 		const separator = baseUrl.includes("?") ? "&" : "?";
-		const embedCode = `<iframe width="670px" height="${height}px" allowfullscreen src="${baseUrl}${separator}embed&${paramKey}=${paramValue}${layout.copyright ? "" : "&copyright=false"}${layout.disclaimer ? "" : "&disclaimer=false"}${layout.revision ? "" : "&revision=false"}"></iframe>
+		const embedCode = `<iframe id="ai-facts" width="670px" height="${height}px" class="${helperClasses}" style="width:670px; outline: none; border:0 none;" allowfullscreen src="${baseUrl}${separator}embed&${paramKey}=${paramValue}${layout.copyright ? "" : "&copyright=false"}${layout.disclaimer ? "" : "&disclaimer=false"}${layout.revision ? "" : "&revision=false"}"></iframe>
 <div class="hidden" id="ai-facts-hidden" style="display:none;">
   ${plainText}
 </div>`;
