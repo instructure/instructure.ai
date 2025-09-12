@@ -1,5 +1,5 @@
 import Papa from "papaparse";
-import { Cache, csvUrl } from "../../assets/";
+import { Cache, csvUrl } from "../../assets";
 import type {
 	PageLayout,
 	ProductNutritionFacts,
