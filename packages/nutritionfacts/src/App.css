@@ -55,9 +55,26 @@ body {
     overflow: visible !important;
   }
 
+  [data-print*="max-width"] {
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
   [data-print*="no-break"] {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
+  }
+
+  [data-print*="color-primary"] {
+    color: #273540 !important;
+  }
+
+  [data-print*="color-secondary"] {
+    color: #586874 !important;
+  }
+
+  [data-print*="color-link"] {
+    color: #0E68B3 !important;
   }
 
   [data-print*="print-only"] {
