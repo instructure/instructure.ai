@@ -260,7 +260,7 @@ const NutritionFactsForm: FC<{
 					>
 						{layout.revision && (
 							<Text
-								data-print={layout.disclaimer ? "" : "hidden"}
+								data-print={layout.revision ? "" : "hidden"}
 								variant="contentSmall"
 								color="secondary"
 							>
