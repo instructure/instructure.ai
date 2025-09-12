@@ -1,3 +1,4 @@
+export { default as Cache } from "./cache.csv?raw";
 export { baseUrl, colors, csvUrl } from "./consts";
 export { DefaultLayout } from "./Layout";
 export { default as Logo } from "./logo.svg?raw";
