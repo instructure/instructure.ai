@@ -15,7 +15,11 @@ const fetchProductsFromCSV = async (): Promise<Products> => {
 		const response = await fetch(csvUrl);
 		data = await response.text();
 	} catch (error) {
-		console.error("Error fetching CSV data:", error);
+		console.error(
+			`Error fetching CSV data from URL "${csvUrl}":`,
+			error,
+			"Falling back to cached data."
+		);
 		data = Cache;
 	}
 
