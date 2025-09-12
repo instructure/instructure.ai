@@ -31,6 +31,6 @@ const disclaimer = (color: LinkProps["color"] = "link") => (
 	</>
 );
 
-const copyright = `©${new Date().getFullYear()} Instructure, inc. All rights reserved.`;
+const copyright = `©${new Date().getFullYear()} Instructure, Inc. All rights reserved.`;
 
 export { csvUrl, baseUrl, colors, disclaimer, copyright };
