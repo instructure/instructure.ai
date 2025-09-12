@@ -14,6 +14,9 @@ importers:
       '@dotenvx/dotenvx':
         specifier: ^1.49.0
         version: 1.49.0
+      '@instructure.ai/shared-configs':
+        specifier: workspace:^
+        version: 'link:'
       '@instructure/browserslist-config-instui':
         specifier: ^10.25.0
         version: 10.25.0
@@ -54,6 +57,17 @@ importers:
         specifier: ^3.2.4
         version: 3.2.4(@types/node@24.3.1)(lightningcss@1.30.1)(terser@5.44.0)(tsx@4.20.5)
 
+  packages/bar: {}
+
+  packages/foo:
+    dependencies:
+      react:
+        specifier: ^18.0.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.0.0
+        version: 18.3.1(react@18.3.1)
+
   packages/nutritionfacts:
     dependencies:
       '@instructure/ui':
@@ -72,9 +86,6 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
     devDependencies:
-      '@instructure.ai/shared-configs':
-        specifier: workspace:^
-        version: link:../..
       '@types/papaparse':
         specifier: ^5.3.16
         version: 5.3.16
@@ -82,11 +93,7 @@ importers:
         specifier: ^5.0.2
         version: 5.0.2(vite@7.1.5(@types/node@24.3.1)(lightningcss@1.30.1)(terser@5.44.0)(tsx@4.20.5))
 
-  packages/site:
-    devDependencies:
-      '@instructure.ai/shared-configs':
-        specifier: workspace:^
-        version: link:../..
+  packages/site: {}
 
 packages:
 

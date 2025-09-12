@@ -8,7 +8,5 @@
   },
   "type": "module",
   "version": "0.0.0",
-  "devDependencies": {
-    "@instructure.ai/shared-configs": "workspace:shared-configs"
-  }
+  "devDependencies": {}
 }

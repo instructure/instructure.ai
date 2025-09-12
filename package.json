@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@instructure.ai/shared-configs": "workspace:^",
     "@biomejs/biome": "^2.2.4",
     "@dotenvx/dotenvx": "^1.49.0",
     "@instructure/browserslist-config-instui": "^10.25.0",
