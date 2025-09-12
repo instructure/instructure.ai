@@ -8,9 +8,6 @@
   },
   "type": "module",
   "version": "0.0.0",
-  "devDependencies": {
-    "@instructure.ai/shared-configs": "workspace:shared-configs"
-  },
   "dependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
