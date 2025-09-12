@@ -152,6 +152,7 @@ const App: FC = () => {
 							maxWidth="56rem"
 							data-print="no-background, max-height, no padding"
 							textAlign="center"
+							margin="0 auto"
 						>
 							<View
 								as="div"
