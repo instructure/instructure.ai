@@ -4,6 +4,7 @@
     "../../configs/tsconfig.node.json"
   ],
   "include": [
+    "scripts",
     "src",
     "vite.config.mts"
   ]
