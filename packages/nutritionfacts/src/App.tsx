@@ -1,7 +1,13 @@
 import "./App.css";
-import { Flex, InlineSVG, InstUISettingsProvider, View } from "@instructure/ui";
+import {
+	Flex,
+	InlineSVG,
+	InstUISettingsProvider,
+	Text,
+	View,
+} from "@instructure/ui";
 import { type FC, useEffect, useState } from "react";
-import { colors, Logo, LogoDark } from "./assets";
+import { colors, copyright, disclaimer, Logo, LogoDark } from "./assets";
 import { DefaultLayout } from "./assets/Layout.ts";
 import { Product } from "./assets/Products.ts";
 import { EmbedControl, LinkControl } from "./Components/Export";
@@ -140,6 +146,37 @@ const App: FC = () => {
 							setProduct={setProduct}
 						/>
 					</View>
+					{!isInIframe && (
+						<View
+							as="div"
+							maxWidth="56rem"
+							data-print="no-background, max-height, no padding"
+							textAlign="center"
+						>
+							<View
+								as="div"
+								margin="0 auto"
+								maxWidth="66%"
+								data-print="max-width, color-secondary"
+							>
+								<Text
+									data-print={layout.disclaimer ? "" : "hidden"}
+									as="p"
+									variant="contentSmall"
+								>
+									{layout.disclaimer &&
+										disclaimer(isDark ? "link-inverse" : "link")}
+								</Text>
+								<Text
+									data-print={layout.copyright ? "" : "hidden"}
+									as="p"
+									variant="contentSmall"
+								>
+									{layout.copyright && copyright}
+								</Text>
+							</View>
+						</View>
+					)}
 				</View>
 			) : (
 				<View

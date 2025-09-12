@@ -4,12 +4,12 @@ import {
 	IconButton,
 	IconPublishLine,
 	IconUnpublishedLine,
-	Link,
 	Text,
 	Tooltip,
 	View,
 } from "@instructure/ui";
 import type { Dispatch, FC, SetStateAction } from "react";
+import { copyright, disclaimer } from "../../assets";
 import type { PageLayout, ProductNutritionFacts } from "../../types.ts";
 import { EditableField } from "../EditableField";
 import { Presets } from "./Presets";
@@ -31,17 +31,6 @@ const NutritionFactsForm: FC<{
 	};
 	const params = new URLSearchParams(window.location.search);
 	const noParams = params.size === 0;
-	const disclaimer = (
-		<>
-			Instructure has developed nutrition fact labels for AI-enabled products to
-			increase transparency and improve decision making.{" "}
-			<Link href="https://www.instructure.com/ignite-ai" target="_blank">
-				Learn more
-			</Link>{" "}
-			about IgniteAI.
-		</>
-	);
-	const copyright = `©${new Date().getFullYear()} Instructure All rights reserved.`;
 
 	return (
 		<>
@@ -269,168 +258,16 @@ const NutritionFactsForm: FC<{
 						maxWidth={isPreview ? "100%" : "66%"}
 						textAlign="center"
 					>
-						<Flex margin="0 0 x-small">
-							{isPreview ? null : (
-								<Flex.Item>
-									<Tooltip
-										className="screen-only"
-										data-print="hidden"
-										offsetY={5}
-										renderTip={() =>
-											layout.disclaimer ? "Hide disclaimer" : "Show disclaimer"
-										}
-									>
-										<IconButton
-											color="primary"
-											data-print="hidden"
-											onClick={() =>
-												setLayout({ ...layout, disclaimer: !layout.disclaimer })
-											}
-											screenReaderLabel={
-												layout.disclaimer
-													? "Hide disclaimer"
-													: "Show disclaimer"
-											}
-											size="small"
-											withBackground={false}
-											withBorder={false}
-										>
-											{layout.disclaimer ? (
-												<IconUnpublishedLine />
-											) : (
-												<IconPublishLine />
-											)}
-										</IconButton>
-									</Tooltip>
-								</Flex.Item>
-							)}
-							<Flex.Item
+						{layout.revision && (
+							<Text
 								data-print={layout.disclaimer ? "" : "hidden"}
-								shouldGrow
-								shouldShrink
+								variant="contentSmall"
+								color="secondary"
 							>
-								<Text color="secondary" variant="contentSmall">
-									{isPreview ? (
-										layout.disclaimer && disclaimer
-									) : (
-										<span
-											style={{
-												opacity: layout.disclaimer ? "1" : "0.25",
-											}}
-										>
-											{disclaimer}
-										</span>
-									)}
-								</Text>
-							</Flex.Item>
-						</Flex>
-						<Flex margin="x-small 0">
-							{isPreview ? null : (
-								<Flex.Item>
-									<Tooltip
-										className="screen-only"
-										data-print="hidden"
-										offsetY={5}
-										renderTip={() =>
-											layout.copyright ? "Hide copyright" : "Show copyright"
-										}
-									>
-										<IconButton
-											color="primary"
-											data-print="hidden"
-											onClick={() =>
-												setLayout({ ...layout, copyright: !layout.copyright })
-											}
-											screenReaderLabel={
-												layout.copyright ? "Hide copyright" : "Show copyright"
-											}
-											size="small"
-											withBackground={false}
-											withBorder={false}
-										>
-											{layout.copyright ? (
-												<IconUnpublishedLine />
-											) : (
-												<IconPublishLine />
-											)}
-										</IconButton>
-									</Tooltip>
-								</Flex.Item>
-							)}
-							<Flex.Item shouldGrow shouldShrink>
-								<Text
-									color="secondary"
-									data-print={layout.copyright ? "" : "hidden"}
-									variant="contentSmall"
-								>
-									{isPreview ? (
-										layout.copyright && copyright
-									) : (
-										<span
-											style={{
-												opacity: layout.copyright ? "1" : "0.25",
-											}}
-										>
-											{copyright}
-										</span>
-									)}
-								</Text>
-							</Flex.Item>
-						</Flex>
-						<Flex margin="x-small 0 0">
-							{isPreview ? null : (
-								<Flex.Item>
-									<Tooltip
-										className="screen-only"
-										data-print="hidden"
-										offsetY={5}
-										renderTip={() =>
-											layout.revision ? "Hide revision" : "Show revision"
-										}
-									>
-										<IconButton
-											color="primary"
-											data-print="hidden"
-											onClick={() =>
-												setLayout({ ...layout, revision: !layout.revision })
-											}
-											screenReaderLabel={
-												layout.revision ? "Hide revision" : "Show revision"
-											}
-											size="small"
-											withBackground={false}
-											withBorder={false}
-										>
-											{layout.revision ? (
-												<IconUnpublishedLine />
-											) : (
-												<IconPublishLine />
-											)}
-										</IconButton>
-									</Tooltip>
-								</Flex.Item>
-							)}
-							<Flex.Item shouldGrow shouldShrink>
-								<Text
-									color="secondary"
-									data-print={layout.revision ? "" : "hidden"}
-									variant="contentSmall"
-								>
-									{isPreview ? (
-										product.revision && `Revision: ${product.revision}`
-									) : (
-										<span
-											style={{
-												opacity: layout.revision ? "1" : "0.25",
-											}}
-										>
-											Revision:{" "}
-											{product.revision ? product.revision : getRevisionDate()}
-										</span>
-									)}
-								</Text>
-							</Flex.Item>
-						</Flex>
+								Revision:{" "}
+								{product.revision ? product.revision : getRevisionDate()}
+							</Text>
+						)}
 					</View>
 				</Flex.Item>
 			</Flex>
