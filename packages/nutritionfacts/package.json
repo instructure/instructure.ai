@@ -10,8 +10,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/papaparse": "^5.3.16",
-    "@vitejs/plugin-react": "^5.0.2"
+    "@types/papaparse": "^5.3.16"
   },
   "name": "@instructure.ai/nutritionfacts",
   "packageManager": "pnpm@10.15.1",
