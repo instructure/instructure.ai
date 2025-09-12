@@ -25,7 +25,7 @@ const localSha: string = sha(Cache);
 console.log(`Remote SHA256: ${remoteSha}`);
 console.log(`Local  SHA256: ${localSha}`);
 
-if (sha(remoteCsv) !== sha(Cache)) {
+if (remoteSha !== localSha) {
 	console.log("Writing new version to cache...");
 	await writeFile(cachePath, remoteCsv, "utf8");
 	console.log("Cache updated.");
