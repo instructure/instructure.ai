@@ -6,9 +6,8 @@ import { Presets } from "./Presets";
 const NutritionFactsForm: FC<{
 	product: ProductNutritionFacts;
 	layout: PageLayout;
-	setLayout: Dispatch<SetStateAction<PageLayout>>;
 	setProduct: Dispatch<SetStateAction<ProductNutritionFacts>>;
-}> = ({ product, layout, setLayout, setProduct }) => {
+}> = ({ product, layout, setProduct }) => {
 	const getRevisionDate = () => {
 		const d = new Date();
 		const yyyy = d.getFullYear();
@@ -18,6 +17,11 @@ const NutritionFactsForm: FC<{
 	};
 	const params = new URLSearchParams(window.location.search);
 	const noParams = params.size === 0;
+
+	const heading =
+		product.group && product.group !== "other"
+			? `${product.group} ${product.name}`
+			: (product.name ?? "No product selected");
 
 	return (
 		<>
@@ -39,7 +43,7 @@ const NutritionFactsForm: FC<{
 						{noParams ? (
 							<Presets setProduct={setProduct} />
 						) : (
-							<Heading as="h2">{product.name}</Heading>
+							<Heading as="h2">{heading}</Heading>
 						)}
 					</View>
 					<Heading as="h3" margin="medium 0 xx-small 0">

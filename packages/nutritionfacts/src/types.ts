@@ -62,6 +62,15 @@ export type ProductNutritionFacts = Readonly<{
 	data: NutritionFactBlock[];
 	revision?: string;
 	id?: string;
+	group?:
+		| "canvas"
+		| "mastery"
+		| "parchment"
+		| "igniteai"
+		| "intelligent insights"
+		| "other"
+		| "canvas career"
+		| undefined;
 }>;
 
 export type Products = Record<string, ProductNutritionFacts>;

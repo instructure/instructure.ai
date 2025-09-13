@@ -7,9 +7,15 @@ import {
 	View,
 } from "@instructure/ui";
 import { type FC, useEffect, useState } from "react";
-import { colors, copyright, disclaimer, Logo, LogoDark } from "./assets";
-import { DefaultLayout } from "./assets/Layout.ts";
-import { Product } from "./assets/Products.ts";
+import {
+	colors,
+	copyright,
+	DefaultLayout,
+	disclaimer,
+	Logo,
+	LogoDark,
+	Product,
+} from "./assets";
 import { EmbedControl, LinkControl } from "./Components/Export";
 import {
 	getProductFromCSV,
@@ -45,9 +51,8 @@ const App: FC = () => {
 		fetchProduct();
 	}, [id]);
 
-	const { layout: initialLayout } = getLayoutFromParams(DefaultLayout);
+	const { layout } = getLayoutFromParams(DefaultLayout);
 
-	const [layout, setLayout] = useState(initialLayout);
 	const [isDark, setIsDark] = useState(false);
 	const [isInIframe, setIsInIframe] = useState(false);
 
@@ -132,7 +137,6 @@ const App: FC = () => {
 					<NutritionFactsForm
 						layout={layout}
 						product={product}
-						setLayout={setLayout}
 						setProduct={setProduct}
 					/>
 				</View>

@@ -141,6 +141,7 @@ const Product: ProductNutritionFacts = {
 	name: "",
 	nameHint: "Feature Name",
 	revision: "",
+	group: "other",
 };
 
 export { Product };
