@@ -18,7 +18,7 @@ const fetchProductsFromCSV = async (): Promise<Products> => {
 		console.error(
 			`Error fetching CSV data from URL "${csvUrl}":`,
 			error,
-			"Falling back to cached data."
+			"Falling back to cached data.",
 		);
 		data = Cache;
 	}
@@ -28,8 +28,27 @@ const fetchProductsFromCSV = async (): Promise<Products> => {
 		skipEmptyLines: true,
 	});
 
+	const allowedGroups = [
+		"canvas",
+		"igniteai",
+		"mastery",
+		"other",
+		"parchment",
+		"intelligent insights",
+		undefined,
+	] as const;
+
+	type ProductGroup = (typeof allowedGroups)[number];
+
+	function toProductGroup(value: string): ProductGroup | undefined {
+		return allowedGroups.includes(value.toLowerCase() as ProductGroup)
+			? (value as ProductGroup)
+			: "other";
+	}
+
 	for (const values of parsed.data) {
 		const uid = values[0]?.toLowerCase();
+		const group: ProductGroup = toProductGroup(values[22]);
 		if (!uid) continue;
 		const updatedProduct: ProductNutritionFacts = {
 			data: [
@@ -173,6 +192,7 @@ const fetchProductsFromCSV = async (): Promise<Products> => {
 			name: values[2],
 			nameHint: "Feature Name",
 			revision: values[1],
+			group: group,
 		};
 		products[uid] = updatedProduct;
 	}
