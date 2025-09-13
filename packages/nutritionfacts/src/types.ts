@@ -69,6 +69,7 @@ export type ProductNutritionFacts = Readonly<{
 		| "igniteai"
 		| "intelligent insights"
 		| "other"
+		| "canvas career"
 		| undefined;
 }>;
 
