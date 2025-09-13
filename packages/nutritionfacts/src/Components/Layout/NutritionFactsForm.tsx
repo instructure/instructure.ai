@@ -8,7 +8,7 @@ const NutritionFactsForm: FC<{
 	layout: PageLayout;
 	setLayout: Dispatch<SetStateAction<PageLayout>>;
 	setProduct: Dispatch<SetStateAction<ProductNutritionFacts>>;
-}> = ({ product, layout, setProduct }) => {
+}> = ({ product, layout, setLayout, setProduct }) => {
 	const getRevisionDate = () => {
 		const d = new Date();
 		const yyyy = d.getFullYear();
