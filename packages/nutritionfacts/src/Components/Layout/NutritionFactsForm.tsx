@@ -6,9 +6,8 @@ import { Presets } from "./Presets";
 const NutritionFactsForm: FC<{
 	product: ProductNutritionFacts;
 	layout: PageLayout;
-	setLayout: Dispatch<SetStateAction<PageLayout>>;
 	setProduct: Dispatch<SetStateAction<ProductNutritionFacts>>;
-}> = ({ product, layout, setLayout, setProduct }) => {
+}> = ({ product, layout, setProduct }) => {
 	const getRevisionDate = () => {
 		const d = new Date();
 		const yyyy = d.getFullYear();
