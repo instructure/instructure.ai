@@ -40,9 +40,7 @@ const productToText = (product: ProductNutritionFacts): string => {
 const Embed = async (
 	product: ProductNutritionFacts,
 	layout: PageLayout,
-	setIsEditing: Dispatch<SetStateAction<boolean>>,
 	id?: string,
-	isEditing?: boolean,
 ) => {
 	// biome-ignore lint: biomelint/correctness/noUnusedVariables- removing properties from object
 	const { nameHint, descriptionHint, ...rest } = product;
@@ -51,9 +49,6 @@ const Embed = async (
 		data: product.data.map(toBlockType),
 	});
 
-	const wasEditing = isEditing;
-
-	if (isEditing) setIsEditing(false);
 	setTimeout(async () => {
 		const pageElement = document.getElementById("embed");
 		let height = 1800;
@@ -100,34 +95,21 @@ const Embed = async (
 		if (pageElement && originalWidth !== undefined) {
 			pageElement.style.width = originalWidth;
 		}
-
-		if (wasEditing) setIsEditing(true);
 	}, 0);
 };
 
 const EmbedControl: React.FC<{
 	product: ProductNutritionFacts;
 	layout: PageLayout;
-	setIsEditing: Dispatch<SetStateAction<boolean>>;
-	isEditing: boolean;
 	id?: string;
 	background?: boolean;
 	border?: boolean;
 	color?: "primary" | "primary-inverse";
-}> = ({
-	product,
-	layout,
-	setIsEditing,
-	id,
-	isEditing,
-	background,
-	border,
-	color,
-}) => (
+}> = ({ product, layout, id, background, border, color }) => (
 	<ControlButton
 		Icon={IconExternalLinkLine as React.ElementType<SVGIconProps>}
 		label="Copy embed code"
-		onClick={() => Embed(product, layout, setIsEditing, id, isEditing)}
+		onClick={() => Embed(product, layout, id)}
 		background={background}
 		border={border}
 		color={color}
