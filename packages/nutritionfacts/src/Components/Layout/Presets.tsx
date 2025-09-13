@@ -6,7 +6,7 @@ import {
 	Spinner,
 	View,
 } from "@instructure/ui";
-import { useState } from "react";
+import { useId, useState } from "react";
 import type { ProductNutritionFacts } from "../../types";
 import { getProductsFromCSV } from "../Import";
 
@@ -20,6 +20,7 @@ const Presets = ({ setProduct }: PresetsProps) => {
 	const [safeOptions, setSafeOptions] = useState<SelectOptionProps[]>([]);
 	const [products, setProducts] = useState<ProductRecords>({});
 	const [value, setValue] = useState<string>("Select a product");
+	const loadingId = useId();
 
 	const fetchProducts = async () => {
 		if (Object.keys(products).length === 0) {
@@ -70,7 +71,7 @@ const Presets = ({ setProduct }: PresetsProps) => {
 				>
 					{Object.keys(safeOptions).length === 0 ? (
 						<SimpleSelect.Option
-							id="loading"
+							id={loadingId}
 							isDisabled
 							renderBeforeLabel={
 								<Spinner renderTitle="Loading" size="x-small" />
