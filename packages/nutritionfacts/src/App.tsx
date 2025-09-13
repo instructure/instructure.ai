@@ -16,11 +16,7 @@ import {
 	getProductFromObject,
 	getProductFromParams,
 } from "./Components/Import";
-import {
-	Control,
-	getLayoutFromParams,
-	NutritionFactsForm,
-} from "./Components/Layout";
+import { getLayoutFromParams, NutritionFactsForm } from "./Components/Layout";
 import type { ProductNutritionFacts } from "./types.ts";
 
 const App: FC = () => {
@@ -73,171 +69,111 @@ const App: FC = () => {
 
 	return (
 		<InstUISettingsProvider>
-			{!isEditing ? (
-				<View
-					as="div"
-					background={isDark && !isInIframe ? "brand" : "secondary"}
-					padding={isInIframe ? "0" : "large"}
-					themeOverride={{ backgroundBrand: colors.instructure }}
-					data-print="no-padding, no-background"
-				>
-					{!isInIframe && (
-						<View
-							as="div"
-							margin="0 auto"
-							maxWidth="56rem"
-							padding="0 0 medium"
-							data-print="no-background, max-height, no padding"
-						>
-							<Flex data-print="hidden">
-								<Flex.Item shouldGrow shouldShrink>
-									<InlineSVG
-										height="2.5rem"
-										inline={false}
-										src={isDark ? LogoDark : Logo}
-										title="Instructure"
-										width="auto"
-									/>
-								</Flex.Item>
-								{product.id && product.id.length > 0 && (
-									<Flex.Item>
-										<View margin="0 x-small 0">
-											<EmbedControl
-												product={product}
-												layout={layout}
-												setIsEditing={setIsEditing}
-												id={product.id}
-												isEditing={isEditing}
-												background={false}
-												border={false}
-												color={isDark ? "primary-inverse" : "primary"}
-											/>
-										</View>
-										<LinkControl
+			<View
+				as="div"
+				background={isDark && !isInIframe ? "brand" : "secondary"}
+				padding={isInIframe ? "0" : "large"}
+				themeOverride={{ backgroundBrand: colors.instructure }}
+				data-print="no-padding, no-background"
+			>
+				{!isInIframe && (
+					<View
+						as="div"
+						margin="0 auto"
+						maxWidth="56rem"
+						padding="0 0 medium"
+						data-print="no-background, max-height, no padding"
+					>
+						<Flex data-print="hidden">
+							<Flex.Item shouldGrow shouldShrink>
+								<InlineSVG
+									height="2.5rem"
+									inline={false}
+									src={isDark ? LogoDark : Logo}
+									title="Instructure"
+									width="auto"
+								/>
+							</Flex.Item>
+							{product.id && product.id.length > 0 && (
+								<Flex.Item>
+									<View margin="0 x-small 0">
+										<EmbedControl
 											product={product}
+											layout={layout}
+											setIsEditing={setIsEditing}
+											id={product.id}
+											isEditing={isEditing}
 											background={false}
 											border={false}
 											color={isDark ? "primary-inverse" : "primary"}
 										/>
-									</Flex.Item>
-								)}
-							</Flex>
-						</View>
-					)}
-					<View
-						as="div"
-						background="primary"
-						borderRadius={isInIframe ? "0" : "large"}
-						data-print="no-margin, no-border, no-padding, max-height"
-						id="embed"
-						margin={isInIframe ? "0" : "0 auto"}
-						maxWidth={isInIframe ? "670px" : "56rem"}
-						overflowX="hidden"
-						overflowY="auto"
-						padding="large"
-						shadow={isInIframe ? "none" : "above"}
-						withFocusOutline={false}
-					>
-						<NutritionFactsForm
-							isEditing={isEditing}
-							layout={layout}
-							product={product}
-							setLayout={setLayout}
-							setProduct={setProduct}
-						/>
+									</View>
+									<LinkControl
+										product={product}
+										background={false}
+										border={false}
+										color={isDark ? "primary-inverse" : "primary"}
+									/>
+								</Flex.Item>
+							)}
+						</Flex>
 					</View>
-					{!isInIframe && (
-						<View
-							as="div"
-							maxWidth="56rem"
-							data-print="no-background, max-height, no padding"
-							textAlign="center"
-							margin="0 auto"
-						>
-							<View
-								as="div"
-								margin="0 auto"
-								maxWidth="66%"
-								data-print="max-width, color-secondary"
-							>
-								<Text
-									data-print={layout.disclaimer ? "" : "hidden"}
-									as="p"
-									variant="contentSmall"
-								>
-									{layout.disclaimer &&
-										disclaimer(isDark ? "link-inverse" : "link")}
-								</Text>
-								<Text
-									data-print={layout.copyright ? "" : "hidden"}
-									as="p"
-									variant="contentSmall"
-								>
-									{layout.copyright && copyright}
-								</Text>
-							</View>
-						</View>
-					)}
-				</View>
-			) : (
+				)}
 				<View
 					as="div"
-					background={isDark ? "brand" : "secondary"}
-					data-print="no-background, max-height"
-					height="100vh"
-					margin="0"
+					background="primary"
+					borderRadius={isInIframe ? "0" : "large"}
+					data-print="no-margin, no-border, no-padding, max-height"
+					id="embed"
+					margin={isInIframe ? "0" : "0 auto"}
+					maxWidth={isInIframe ? "670px" : "56rem"}
 					overflowX="hidden"
-					padding="0"
-					themeOverride={{ backgroundBrand: colors.instructure }}
+					overflowY="auto"
+					padding="large"
+					shadow={isInIframe ? "none" : "above"}
+					withFocusOutline={false}
 				>
-					<Flex direction="column" gap="small" justifyItems="center">
-						<Flex.Item as="main" shouldGrow shouldShrink>
-							<View
-								as="div"
-								borderRadius="large"
-								data-print="no-margin, no-border, no-padding, max-height"
-								margin="large auto small"
-								maxWidth="56rem"
-								overflowX="hidden"
-								overflowY="hidden"
-								shadow="above"
-							>
-								<View
-									as="div"
-									background="primary"
-									data-print="no-margin, no-border, no-padding, max-height"
-									height="calc(98vh - 9rem)"
-									id="page"
-									overflowX="hidden"
-									overflowY="auto"
-									padding="large"
-									withFocusOutline={false}
-								>
-									<NutritionFactsForm
-										isEditing={isEditing}
-										layout={layout}
-										product={product}
-										setLayout={setLayout}
-										setProduct={setProduct}
-									/>
-								</View>
-							</View>
-						</Flex.Item>
-						<Flex.Item data-print="hidden" id="control" textAlign="center">
-							<Control
-								id={id ?? undefined}
-								isDark={isDark}
-								isEditing={isEditing}
-								layout={layout}
-								product={product}
-								setIsDark={setIsDark}
-								setIsEditing={setIsEditing}
-								setProduct={setProduct}
-							/>
-						</Flex.Item>
-					</Flex>
+					<NutritionFactsForm
+						isEditing={isEditing}
+						layout={layout}
+						product={product}
+						setLayout={setLayout}
+						setProduct={setProduct}
+					/>
 				</View>
-			)}
+				{!isInIframe && (
+					<View
+						as="div"
+						maxWidth="56rem"
+						data-print="no-background, max-height, no padding"
+						textAlign="center"
+						margin="0 auto"
+					>
+						<View
+							as="div"
+							margin="0 auto"
+							maxWidth="66%"
+							data-print="max-width, color-secondary"
+						>
+							<Text
+								data-print={layout.disclaimer ? "" : "hidden"}
+								as="p"
+								variant="contentSmall"
+							>
+								{layout.disclaimer &&
+									disclaimer(isDark ? "link-inverse" : "link")}
+							</Text>
+							<Text
+								data-print={layout.copyright ? "" : "hidden"}
+								as="p"
+								variant="contentSmall"
+							>
+								{layout.copyright && copyright}
+							</Text>
+						</View>
+					</View>
+				)}
+			</View>
 		</InstUISettingsProvider>
 	);
 };
