@@ -45,10 +45,8 @@ const App: FC = () => {
 		fetchProduct();
 	}, [id]);
 
-	const { layout: initialLayout, isEditing: initialEditing } =
-		getLayoutFromParams(DefaultLayout);
+	const { layout: initialLayout } = getLayoutFromParams(DefaultLayout);
 
-	const [isEditing, setIsEditing] = useState(initialEditing);
 	const [layout, setLayout] = useState(initialLayout);
 	const [isDark, setIsDark] = useState(false);
 	const [isInIframe, setIsInIframe] = useState(false);
@@ -100,9 +98,7 @@ const App: FC = () => {
 										<EmbedControl
 											product={product}
 											layout={layout}
-											setIsEditing={setIsEditing}
 											id={product.id}
-											isEditing={isEditing}
 											background={false}
 											border={false}
 											color={isDark ? "primary-inverse" : "primary"}
@@ -134,7 +130,6 @@ const App: FC = () => {
 					withFocusOutline={false}
 				>
 					<NutritionFactsForm
-						isEditing={isEditing}
 						layout={layout}
 						product={product}
 						setLayout={setLayout}

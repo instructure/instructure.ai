@@ -14,7 +14,5 @@ export function getLayoutFromParams(defaultLayout: PageLayout) {
 		newLayout.revision = params.get("revision") !== "false";
 	}
 
-	const isEditing = params.has("edit") && params.get("edit") !== "false";
-
-	return { isEditing, layout: newLayout };
+	return { layout: newLayout };
 }

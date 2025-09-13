@@ -8,9 +8,7 @@ const NutritionFactsForm: FC<{
 	layout: PageLayout;
 	setLayout: Dispatch<SetStateAction<PageLayout>>;
 	setProduct: Dispatch<SetStateAction<ProductNutritionFacts>>;
-	isEditing: boolean;
-}> = ({ product, layout, setProduct, isEditing }) => {
-	const isPreview = !isEditing;
+}> = ({ product, layout, setProduct }) => {
 	const getRevisionDate = () => {
 		const d = new Date();
 		const yyyy = d.getFullYear();
@@ -85,12 +83,7 @@ const NutritionFactsForm: FC<{
 							))}
 						</View>
 					))}
-					<View
-						as="div"
-						margin="0 auto"
-						maxWidth={isPreview ? "100%" : "66%"}
-						textAlign="center"
-					>
+					<View as="div" margin="0 auto" maxWidth="66%" textAlign="center">
 						{layout.revision && (
 							<Text
 								data-print={layout.revision ? "" : "hidden"}
