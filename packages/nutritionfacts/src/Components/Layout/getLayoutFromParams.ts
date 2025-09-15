@@ -4,14 +4,16 @@ export function getLayoutFromParams(defaultLayout: PageLayout) {
 	const params = new URLSearchParams(window.location.search);
 	const newLayout = { ...defaultLayout };
 
-	if (params.has("copyright")) {
-		newLayout.copyright = params.get("copyright") !== "false";
-	}
-	if (params.has("disclaimer")) {
-		newLayout.disclaimer = params.get("disclaimer") !== "false";
-	}
-	if (params.has("revision")) {
-		newLayout.revision = params.get("revision") !== "false";
+	const keys: (keyof PageLayout)[] = [
+		"copyright",
+		"disclaimer",
+		"revision",
+		"permissions",
+	];
+	for (const key of keys) {
+		if (params.has(key)) {
+			newLayout[key] = params.get(key) !== "false";
+		}
 	}
 
 	return { layout: newLayout };

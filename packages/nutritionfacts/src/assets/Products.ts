@@ -142,6 +142,8 @@ const Product: ProductNutritionFacts = {
 	nameHint: "Feature Name",
 	revision: "",
 	group: "other",
+	// @ts-expect-error: Hidden level 0 to represent no selection
+	permissions: 0,
 };
 
 export { Product };

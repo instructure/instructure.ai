@@ -37,7 +37,6 @@ const fetchProductsFromCSV = async (): Promise<Products> => {
 		"intelligent insights",
 		undefined,
 	] as const;
-
 	type ProductGroup = (typeof allowedGroups)[number];
 
 	function toProductGroup(value: string): ProductGroup | undefined {
@@ -46,9 +45,22 @@ const fetchProductsFromCSV = async (): Promise<Products> => {
 			: "other";
 	}
 
+	const allowedPermissions = [1, 2, 3, 4];
+
+	function toPermissionsLevel(
+		value: string | undefined,
+	): ProductNutritionFacts["permissions"] {
+		const num = Number(value);
+		return allowedPermissions.includes(num)
+			? (num as ProductNutritionFacts["permissions"])
+			: undefined;
+	}
+
 	for (const values of parsed.data) {
 		const uid = values[0]?.toLowerCase();
 		const group: ProductGroup = toProductGroup(values[22]);
+		const permissions: ProductNutritionFacts["permissions"] =
+			toPermissionsLevel(values[23]);
 		if (!uid) continue;
 		const updatedProduct: ProductNutritionFacts = {
 			data: [
@@ -193,6 +205,7 @@ const fetchProductsFromCSV = async (): Promise<Products> => {
 			nameHint: "Feature Name",
 			revision: values[1],
 			group: group,
+			permissions: permissions,
 		};
 		products[uid] = updatedProduct;
 	}
