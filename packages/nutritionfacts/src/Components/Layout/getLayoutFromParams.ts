@@ -13,6 +13,9 @@ export function getLayoutFromParams(defaultLayout: PageLayout) {
 	if (params.has("revision")) {
 		newLayout.revision = params.get("revision") !== "false";
 	}
+	if (params.has("permissions")) {
+		newLayout.permissions = params.get("permissions") !== "false";
+	}
 
 	return { layout: newLayout };
 }

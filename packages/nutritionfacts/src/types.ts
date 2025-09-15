@@ -10,6 +10,7 @@ export type PageLayout = {
 	disclaimer: boolean;
 	copyright: boolean;
 	revision: boolean;
+	permissions: boolean;
 };
 
 export type SegmentBase = Readonly<
