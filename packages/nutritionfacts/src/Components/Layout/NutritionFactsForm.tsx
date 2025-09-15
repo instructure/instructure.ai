@@ -92,9 +92,7 @@ const NutritionFactsForm: FC<{
 									)}
 									<View as="div">
 										{segment.descriptionHint && (
-											<Flex.Item shouldGrow shouldShrink>
-												<Text size="small">{segment.valueDescription}</Text>
-											</Flex.Item>
+											<Text size="small">{segment.valueDescription}</Text>
 										)}
 									</View>
 								</View>
