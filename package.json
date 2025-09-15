@@ -1,15 +1,15 @@
 {
   "devDependencies": {
-    "@instructure.ai/shared-configs": "workspace:^",
     "@biomejs/biome": "^2.2.4",
     "@dotenvx/dotenvx": "^1.49.0",
+    "@instructure.ai/shared-configs": "workspace:^",
     "@instructure/browserslist-config-instui": "^10.25.0",
-    "@types/react": "^18.3.24",
-    "@types/react-dom": "^18.3.7",
-    "@typescript/native-preview": "7.0.0-dev.20250912.1",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@typescript/native-preview": "7.0.0-dev.20250915.1",
     "@vitejs/plugin-react": "^5.0.2",
     "babel-plugin-react-compiler": "19.1.0-rc.3",
-    "browserslist": "^4.25.4",
+    "browserslist": "^4.26.0",
     "lightningcss": "^1.30.1",
     "react-compiler-runtime": "19.1.0-rc.3",
     "terser": "^5.44.0",
@@ -18,7 +18,7 @@
     "vitest": "^3.2.4"
   },
   "name": "@instructure.ai/shared-configs",
-  "packageManager": "pnpm@10.16.0",
+  "packageManager": "pnpm@10.16.1",
   "private": true,
   "scripts": {
     "build": "bash ./scripts/filter.sh build",
