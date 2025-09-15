@@ -1,5 +1,6 @@
 import { Flex, Heading, Text, View } from "@instructure/ui";
 import type { Dispatch, FC, SetStateAction } from "react";
+import { Permissions } from "../../assets";
 import type { PageLayout, ProductNutritionFacts } from "../../types.ts";
 import { Presets } from "./Presets";
 
@@ -17,6 +18,19 @@ const NutritionFactsForm: FC<{
 	};
 	const params = new URLSearchParams(window.location.search);
 	const noParams = params.size === 0;
+
+	const productPermissions =
+		Permissions[product.permissions as keyof typeof Permissions];
+
+	const hasPermissions =
+		typeof productPermissions === "object" &&
+		productPermissions !== null &&
+		"name" in productPermissions &&
+		"title" in productPermissions &&
+		"description" in productPermissions &&
+		typeof productPermissions.name === "string" &&
+		typeof productPermissions.title === "string" &&
+		typeof productPermissions.description === "string";
 
 	const heading =
 		product.group && product.group !== "other"
@@ -87,6 +101,31 @@ const NutritionFactsForm: FC<{
 							))}
 						</View>
 					))}
+					{layout.permissions && hasPermissions && (
+						<>
+							<Heading as="h3" margin="medium 0 0">
+								Permission Level
+							</Heading>
+							<View
+								as="div"
+								borderRadius="medium"
+								borderWidth="small"
+								data-print="no-break"
+								margin="small 0"
+								padding="small"
+							>
+								<Heading as="h4">{productPermissions.name}</Heading>
+								{productPermissions.descriptionHint && (
+									<View as="div" margin="0 0 x-small">
+										<Text>{productPermissions.descriptionHint}</Text>
+									</View>
+								)}
+								<View as="div">
+									<Text size="small">{productPermissions.description}</Text>
+								</View>
+							</View>
+						</>
+					)}
 					<View as="div" margin="0 auto" maxWidth="66%" textAlign="center">
 						{layout.revision && (
 							<Text

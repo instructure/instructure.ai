@@ -2,6 +2,7 @@ type Permission = {
 	name: string;
 	title: string;
 	description: string;
+	descriptionHint?: string;
 };
 
 const Permissions: readonly Readonly<Permission>[] = [
