@@ -62,6 +62,7 @@ export type ProductNutritionFacts = Readonly<{
 	data: NutritionFactBlock[];
 	revision?: string;
 	id?: string;
+	permissions?: 1 | 2 | 3 | 4 | undefined;
 	group?:
 		| "canvas"
 		| "mastery"
