@@ -6,7 +6,7 @@ type Permission = {
 
 const Permissions: readonly Readonly<Permission>[] = [
 	{
-		name: "Permissions Level",
+		name: "",
 		title: "",
 		description: "",
 	},
