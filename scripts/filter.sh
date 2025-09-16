@@ -33,6 +33,8 @@ help() {
   echo "Commands:"
   echo "  dev <package-name>       Start development server for the specified package"
   echo "  build [package-name]     Build all packages or a specific package"
+  echo "  preview [package-name]   Preview all packages or a specific package"
+  echo "  typecheck [package-name]  Typecheck all packages or a specific package"
   list_packages
 }
 
@@ -80,16 +82,19 @@ preview() {
   fi
 }
 
-help() {
-  echo "Usage: $0 {dev|build|preview} <package-name> [additional-args]"
-  echo "Commands:"
-  echo "  dev <package-name>       Start development server for the specified package"
-  echo "  build [package-name]     Build all packages or a specific package"
-  echo "  preview [package-name]   Preview the built package"
-  list_packages
+typecheck() {
+  if [ -z "$PACKAGE" ]; then
+    pnpm -r typecheck
+  elif echo "$VALID_PACKAGES" | grep -qx "$PACKAGE"; then
+    filter
+  else
+    echo -e "Error: '$PACKAGE' is not a valid package." >&2
+    list_packages
+    exit 1
+  fi
 }
 
-COMMANDS=("dev" "build", "preview")
+COMMANDS=("dev" "build" "preview" "typecheck")
 case "$COMMAND" in
   dev)
     $COMMAND

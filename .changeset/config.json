@@ -4,6 +4,7 @@
   "commit": false,
   "fixed": [
     [
+      "@instructure.ai/shared-configs",
       "@instructure.ai/*"
     ]
   ],
