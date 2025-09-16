@@ -6,6 +6,7 @@
   "include": [
     "scripts",
     "src",
-    "vite.config.mts"
+    "vite.config.mts",
+    "../../global.d.ts"
   ]
 }
