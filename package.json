@@ -36,6 +36,7 @@
   "exports": {
     "./biome": "./configs/biome.jsonc",
     "./vanilla": "./configs/vite.config.mts",
-    "./react": "./configs/vite.config-react.mts"
+    "./react": "./configs/vite.config-react.mts",
+    ".": "./configs/types/index.d.ts"
   }
 }

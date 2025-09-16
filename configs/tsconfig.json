@@ -8,9 +8,8 @@
       "dom",
       "dom.iterable"
     ],
-    "typeRoots": [
-      "node_modules/@types",
-      "./types"
+    "types": [
+      "@instructure.ai/shared-configs"
     ],
     "skipLibCheck": true,
     "moduleResolution": "bundler",
