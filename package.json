@@ -29,7 +29,7 @@
     "new": "bash ./scripts/init.sh",
     "lint": "pnpm -r lint",
     "test": "pnpm -r test",
-    "typecheck": "pnpm -r typecheck",
+    "typecheck": "bash ./scripts/filter.sh typecheck",
     "preview": "bash ./scripts/filter.sh preview",
     "version": "0.1.0"
   },
