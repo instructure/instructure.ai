@@ -105,6 +105,9 @@ case "$COMMAND" in
   preview)
     $COMMAND
     ;;
+  typecheck)
+    $COMMAND
+    ;;
   *)
     echo "Error: Unknown command '$COMMAND'." >&2
     list_commands
