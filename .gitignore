@@ -20,4 +20,4 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-src/assets/Accounts.ts
+.turbo
