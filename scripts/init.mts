@@ -78,7 +78,7 @@ async function main() {
 			stdio: "inherit",
 			cwd,
 		});
-	} catch (e) {
+	} catch (_e) {
 		console.error("Error running pnpm install for the new package.");
 		process.exit(1);
 	}
