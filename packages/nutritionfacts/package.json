@@ -9,6 +9,7 @@
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
+    "@instructure.ai/shared-configs": "workspace:^",
     "@types/papaparse": "^5.3.16"
   },
   "name": "@instructure.ai/nutritionfacts",
