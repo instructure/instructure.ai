@@ -3,7 +3,7 @@
     "extends @instructure/browserslist-config-instui"
   ],
   "dependencies": {
-    "@instructure/ui": "^10.25.1-pr-snapshot-1757942390662",
+    "@instructure/ui": "10.25.1-pr-snapshot-1757942390662",
     "papaparse": "^5.5.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
