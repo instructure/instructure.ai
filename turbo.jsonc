@@ -10,15 +10,26 @@
       ],
       "outputs": [
         "dist/**"
-      ]
+      ],
+      "cache": true
     },
     "typecheck": {
       "dependsOn": [
         "^typecheck"
-      ]
+      ],
+      "cache": true
     },
     "dev": {
+      "dependsOn": [
+        "^dev"
+      ],
       "persistent": true,
+      "cache": false
+    },
+    "preview": {
+      "dependsOn": [
+        "^preview"
+      ],
       "cache": false
     }
   }
