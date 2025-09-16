@@ -2,5 +2,6 @@
   "recommendations": [
     "biomejs.biome",
     "ms-vscode.vscode-typescript-next",
+    "vercel.turbo-vsc"
   ]
 }
