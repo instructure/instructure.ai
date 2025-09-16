@@ -24,7 +24,7 @@
   "private": true,
   "scripts": {
     "build": "pnpm -r build",
-    "dev": "pnpm dev",
+    "dev": "vite dev",
     "new": "vite-node ./scripts/init.mts",
     "lint": "pnpm -r lint",
     "test": "pnpm -r test",

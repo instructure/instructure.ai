@@ -20,9 +20,6 @@
       "cache": true
     },
     "dev": {
-      "dependsOn": [
-        "^dev"
-      ],
       "persistent": true,
       "cache": false
     },
