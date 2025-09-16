@@ -3,6 +3,5 @@
   "include": [
     "src",
     "vite.config.mts",
-    "../../global.d.ts"
   ]
 }
