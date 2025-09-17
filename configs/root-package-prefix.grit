@@ -1,13 +1,11 @@
 language json;
 
-// Capture the prefix from the root package.json "name"
 `{
   "name": $rootName,
   $...
 }` where {
   $filename == "package.json",
 
-  // Extract the prefix (everything before the slash)
   let $prefix = regex_extract($rootName, r"^(@[^/]+/[^/]+/)", 1),
 
   save("packagePrefix", $prefix)
