@@ -20,7 +20,7 @@
     "dev": "vite",
     "preview": "vite preview",
     "typecheck": "tsgo --noEmit",
-    "lint": "pnpm biome check --config-path=biome.jsonc"
+    "lint": "pnpm biome check"
   },
   "type": "module",
   "version": "0.1.0"

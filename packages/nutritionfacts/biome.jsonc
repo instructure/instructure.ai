@@ -1,11 +1,4 @@
 {
   "root": false,
-  "extends": "//",
-  "files": {
-    "includes": [
-      "src/**/*",
-      "scripts/**",
-      "vite.config.mts"
-    ]
-  }
+  "extends": "//"
 }
