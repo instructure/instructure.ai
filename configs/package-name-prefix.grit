@@ -1,0 +1,20 @@
+language json;
+
+// Check that other packages in the monorepo follow the root prefix
+`{
+  "name": $pkgname,
+  $...
+}` where {
+  $filename <: r".*/(packages|apps)/[^/]+/package\.json$",
+
+  // Load the prefix from the saved value
+  let $prefix = load("packagePrefix"),
+
+  not $pkgname <: r"^" ++ $prefix ++ ".+",
+
+  register_diagnostic(
+    span = $pkgname,
+    severity = "error",
+    message = "Package name must start with \"" ++ $prefix ++ "\""
+  )
+}
