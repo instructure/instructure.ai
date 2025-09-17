@@ -1,0 +1,13 @@
+{
+	"extends": "//",
+	"files": {
+		"includes": [
+			"scripts/**",
+			"configs/**",
+			"public/**",
+			"!packages",
+			"!.template",
+			"!.changeset"
+		]
+	}
+}

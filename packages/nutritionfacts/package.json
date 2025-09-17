@@ -19,7 +19,8 @@
     "build": "pnpm update-cache && vite build",
     "dev": "vite",
     "preview": "vite preview",
-    "typecheck": "tsgo --noEmit"
+    "typecheck": "tsgo --noEmit",
+    "lint": "pnpm biome check --config-path=biome.jsonc"
   },
   "type": "module",
   "version": "0.1.0"

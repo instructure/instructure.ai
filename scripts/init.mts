@@ -75,8 +75,8 @@ async function main() {
 	console.log("Installing dependencies...");
 	try {
 		execSync(`pnpm --filter ${shellEscape(PACKAGENAME)} install`, {
-			stdio: "inherit",
 			cwd,
+			stdio: "inherit",
 		});
 	} catch (_e) {
 		console.error("Error running pnpm install for the new package.");

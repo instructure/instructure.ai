@@ -11,7 +11,7 @@
 		"enabled": true
 	},
 	"files": {
-		"ignoreUnknown": false
+		"ignoreUnknown": true
 	},
 	"formatter": {
 		"enabled": true,
@@ -32,6 +32,7 @@
 			"recommended": true
 		}
 	},
+	"root": false,
 	"vcs": {
 		"clientKind": "git",
 		"defaultBranch": "main",
