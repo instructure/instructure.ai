@@ -1,24 +1,41 @@
 import { execSync } from "node:child_process";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
+import {
+	exitWithError,
+	validCommand,
+	Workspace,
+} from "@instructure.ai/shared-configs/workspace";
 
-const packageName = process.argv[2];
+const { command, output } = Workspace();
 
-let command = "pnpm turbo run build";
+const buildCommands = ["all", "packages", "root", "package"];
 
-if (packageName) {
-	const fullPackageName = `@instructure.ai/${packageName}`;
-	const packagePath = join(__dirname, "../packages", packageName);
-	if (existsSync(packagePath)) {
-		command += ` --filter=${fullPackageName}`;
-	} else {
-		console.error(`Package "${packageName}" does not exist in ./packages`);
-		process.exit(1);
-	}
-}
+if (!validCommand(command, buildCommands))
+	exitWithError("Invalid build command.");
+
+const buildRoot = (pkg: string) => {
+	console.log(`Building root package: ${pkg}`);
+	execSync("pnpm build:root", { stdio: "inherit" });
+};
+
+const buildPackage = (pkg: string) => {
+	console.log(`Building package: ${pkg}`);
+	execSync(`pnpm -F ${pkg} build`, { stdio: "inherit" });
+};
+
+const buildPackages = (packages: string[]) => {
+	packages.forEach((pkg) => {
+		buildPackage(pkg);
+	});
+};
 
 try {
-	execSync(command, { stdio: "inherit" });
+	if (command === "root") buildRoot(output as string);
+	else if (command === "package") buildPackage(output as string);
+	else if (command === "packages") buildPackages(output as string[]);
+	else if (command === "all") {
+		buildRoot(output as string);
+		buildPackages(output as string[]);
+	}
 } catch (error) {
 	console.error("Build failed:", error);
 	process.exit(1);

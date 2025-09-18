@@ -1,5 +1,5 @@
 {
-  "name": "@instructure.ai/<<packagename>>",
+  "name": "<<packagename>>",
   "private": true,
   "scripts": {
     "build": "vite build",

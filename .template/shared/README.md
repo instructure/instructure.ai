@@ -3,5 +3,5 @@
 ## Installation
 
 ```shell
-pnpm add @instructure.ai/<<packagename>>
+pnpm add <<packagename>>
 ```

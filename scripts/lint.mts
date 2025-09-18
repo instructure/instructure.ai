@@ -1,25 +1,44 @@
 import { execSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
+import {
+	exitWithError,
+	validCommand,
+	Workspace,
+} from "@instructure.ai/shared-configs/workspace";
 
-const packageName = process.argv[2];
+const { command, output } = Workspace();
 
-let command = "pnpm turbo run lint";
+const lintCommands = ["all", "packages", "root", "package"];
 
-if (packageName) {
-	const fullPackageName = `@instructure.ai/${packageName}`;
-	const packagePath = join(__dirname, "../packages", packageName);
-	if (existsSync(packagePath)) {
-		command += ` --filter=${fullPackageName} -- --assist-enabled=true --config-path=${packagePath}/biome.jsonc`;
-	} else {
-		console.error(`Package "${packageName}" does not exist in ./packages`);
-		process.exit(1);
-	}
-}
+if (!validCommand(command, lintCommands))
+	exitWithError("Invalid lint command.");
+
+const lintRoot = (pkg: string) => {
+	console.log(`Linting root package: ${pkg}`);
+	execSync("pnpm lint:root", { stdio: "inherit" });
+};
+
+const lintPackage = (pkg: string) => {
+	console.log(`Building package: ${pkg}`);
+	execSync(`pnpm -F ${pkg} build`, { stdio: "inherit" });
+};
+
+const lintPackages = (packages: string[]) => {
+	packages.forEach((pkg) => {
+		lintPackage(pkg);
+	});
+};
 
 try {
-	execSync(command, { stdio: "inherit" });
+	if (command === "root") lintRoot(output as string);
+	else if (command === "package") lintPackage(output as string);
+	else if (command === "packages") lintPackages(output as string[]);
+	else if (command === "all") {
+		lintRoot(output as string);
+		lintPackages(output as string[]);
+	}
 } catch (error) {
-	console.error("Biome check failed:", error);
+	console.error("Lint failed:", error);
 	process.exit(1);
 }

@@ -19,25 +19,28 @@
     "vite-node": "^3.2.4",
     "vitest": "^3.2.4"
   },
+  "version": "0.1.0",
   "name": "@instructure.ai/shared-configs",
   "packageManager": "pnpm@10.17.0",
   "private": true,
   "scripts": {
-    "turbo:build": "vite-node ./scripts/build.mts",
-    "build": "pnpm -r build",
+    "build": "vite-node ./scripts/build.mts",
+    "build:root": "vite build",
     "dev": "vite dev",
-    "new": "vite-node ./scripts/init.mts",
+    "new": "vite-node ./scripts/new.mts",
     "lint": "pnpm -r lint",
     "turbo:lint": "vite-node ./scripts/lint.mts",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "preview": "pnpm preview",
-    "version": "0.1.0"
+    "turbo:turbo": "vite-node ./scripts/turbo.mts lint site",
+    "workspace": "vite-node ./scripts/info.mts"
   },
   "exports": {
     "./biome": "./configs/biome.jsonc",
     "./vanilla": "./configs/vite.config.mts",
     "./react": "./configs/vite.config-react.mts",
+    "./workspace": "./scripts/workspace.mts",
     ".": "./configs/types/index.d.ts"
   }
 }

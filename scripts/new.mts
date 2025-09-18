@@ -1,12 +1,19 @@
 import { execSync } from "node:child_process";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import {
+	exitWithError,
+	validPackage,
+	Workspace,
+} from "@instructure.ai/shared-configs/workspace";
 
 type Template = "vanilla" | "react";
 
-const USAGE = `Usage: vite-node init.mts <packagename> [--template "vanilla" | "react"]`;
+const USAGE = `new <packagename> [--template "vanilla" | "react"]`;
 
 async function main() {
+	const { output } = Workspace(["workspace"], "new");
+
 	const args = process.argv.slice(2);
 	if (args.length === 0) {
 		console.error(USAGE);
@@ -14,8 +21,25 @@ async function main() {
 	}
 
 	const PACKAGENAME = args[0] ? args[0].trim() : "";
+
+	if (!PACKAGENAME)
+		exitWithError("Error: Package name is required as the first argument.");
+
+	const workspaceName =
+		output && typeof output === "object" && "name" in output
+			? output.name
+			: undefined;
+
+	if (!workspaceName) exitWithError("No workspace name found in output.");
+
+	if (validPackage(PACKAGENAME))
+		exitWithError(
+			`Package '${PACKAGENAME}' already exists in workspace ${workspaceName}.`,
+		);
+
 	let TEMPLATE: Template = "vanilla";
 	const REPLACESTRING = "<<packagename>>";
+	const FULLPACKAGENAME = `${workspaceName}/${PACKAGENAME}`;
 
 	// Parse optional --template argument
 	const tIdx = args.indexOf("--template");
@@ -63,12 +87,12 @@ async function main() {
 	await replaceInFile(
 		path.join(pkgDir, "package.json"),
 		REPLACESTRING,
-		PACKAGENAME,
+		FULLPACKAGENAME,
 	);
 	await replaceInFile(
 		path.join(pkgDir, "README.md"),
 		REPLACESTRING,
-		PACKAGENAME,
+		FULLPACKAGENAME,
 	);
 
 	// Install dependencies for the new package (pnpm workspace)

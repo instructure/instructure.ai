@@ -91,6 +91,26 @@ importers:
         specifier: workspace:^
         version: link:../..
 
+  packages/site2: {}
+
+  packages/site3:
+    dependencies:
+      react:
+        specifier: ^19.1.1
+        version: 19.1.1
+      react-dom:
+        specifier: ^19.1.1
+        version: 19.1.1(react@19.1.1)
+
+  packages/site4:
+    dependencies:
+      react:
+        specifier: ^19.1.1
+        version: 19.1.1
+      react-dom:
+        specifier: ^19.1.1
+        version: 19.1.1(react@19.1.1)
+
 packages:
 
   '@babel/code-frame@7.27.1':
