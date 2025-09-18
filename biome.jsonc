@@ -1,9 +1,10 @@
 {
-	"extends": "//",
+	"root": true,
 	"files": {
 		"includes": [
 			"scripts/**",
 			"configs/**",
+			"!**/*.grit",
 			"public/**",
 			"!packages",
 			"!.template",

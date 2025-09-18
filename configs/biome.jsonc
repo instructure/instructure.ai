@@ -32,10 +32,6 @@
 			"recommended": true
 		}
 	},
-	/*"plugins": [
-		"./package-name-prefix.grit"
-		"./root-package-filter.grit"
-	],*/
 	"root": false,
 	"vcs": {
 		"clientKind": "git",
