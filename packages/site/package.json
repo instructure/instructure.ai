@@ -1,0 +1,15 @@
+{
+	"name": "@instructure.ai/site",
+	"private": true,
+	"scripts": {
+		"build": "vite build",
+		"dev": "vite",
+		"preview": "vite preview",
+		"typecheck": "tsgo --noEmit"
+	},
+	"devDependencies": {
+		"@instructure.ai/shared-configs": "workspace:^"
+	},
+	"type": "module",
+	"version": "0.1.0"
+}

@@ -28,7 +28,6 @@
     "dev": "vite dev",
     "new": "vite-node ./scripts/new.mts",
     "lint": "pnpm -r lint",
-    "turbo:lint": "vite-node ./scripts/lint.mts",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "preview": "pnpm preview",

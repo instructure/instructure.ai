@@ -1,0 +1,5 @@
+{
+	"root": false,
+	"extends": ["../../configs/tsconfig.node.json"],
+	"include": ["src", "vite.config.mts"]
+}
