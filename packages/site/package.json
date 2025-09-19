@@ -5,7 +5,8 @@
 		"build": "vite build",
 		"dev": "vite",
 		"preview": "vite preview",
-		"typecheck": "tsgo --noEmit"
+		"typecheck": "tsgo --noEmit",
+		"lint": "biome check"
 	},
 	"devDependencies": {
 		"@instructure.ai/shared-configs": "workspace:^"
