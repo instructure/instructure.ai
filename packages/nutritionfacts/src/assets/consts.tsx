@@ -27,39 +27,39 @@ const brands: Record<
 	}
 > = {
 	canvas: {
-		name: "Canvas",
 		color: colors.canvas,
 		icon: CanvasBug,
+		name: "Canvas",
 	},
 	"canvas career": {
-		name: "Canvas Career",
 		color: colors.canvas,
 		icon: CanvasBug,
+		name: "Canvas Career",
 	},
 	igniteai: {
-		name: "IgniteAI",
-		icon: IgniteBug,
 		color: colors.igniteai,
+		icon: IgniteBug,
+		name: "IgniteAI",
 	},
 	"intelligent insights": {
-		name: "Intelligent Insights",
-		icon: InstructureBug,
 		color: colors.instructure,
+		icon: InstructureBug,
+		name: "Intelligent Insights",
 	},
 	mastery: {
-		name: "Mastery",
 		color: colors.mastery,
 		icon: MasteryBug,
+		name: "Mastery",
 	},
 	other: {
-		name: "Other",
 		color: colors.instructure,
 		icon: InstructureBug,
+		name: "Other",
 	},
 	parchment: {
-		name: "Parchment",
 		color: colors.parchment,
 		icon: ParchmentBug,
+		name: "Parchment",
 	},
 };
 
@@ -68,8 +68,8 @@ const disclaimer = (color: LinkProps["color"] = "link") => (
 		Instructure has developed nutrition fact labels for AI-enabled products to
 		increase transparency and improve decision making.{" "}
 		<Link
-			data-print="color-link"
 			color={color}
+			data-print="color-link"
 			href="https://www.instructure.com/ignite-ai"
 			target="_blank"
 		>

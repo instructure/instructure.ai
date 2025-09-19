@@ -17,8 +17,8 @@ class Layout implements PageLayout {
 const DefaultLayout = new Layout({
 	copyright: true,
 	disclaimer: true,
-	revision: true,
 	permissions: true,
+	revision: true,
 } as PageLayout);
 
 export { DefaultLayout };

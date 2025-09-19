@@ -107,12 +107,12 @@ const EmbedControl: React.FC<{
 	color?: "primary" | "primary-inverse";
 }> = ({ product, layout, id, background, border, color }) => (
 	<ControlButton
-		Icon={IconExternalLinkLine as React.ElementType<SVGIconProps>}
-		label="Copy embed code"
-		onClick={() => Embed(product, layout, id)}
 		background={background}
 		border={border}
 		color={color}
+		Icon={IconExternalLinkLine as React.ElementType<SVGIconProps>}
+		label="Copy embed code"
+		onClick={() => Embed(product, layout, id)}
 	/>
 );
 

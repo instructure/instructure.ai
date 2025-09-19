@@ -44,12 +44,12 @@ const Presets = ({ setProduct }: PresetsProps) => {
 					const brand = brands[group as keyof typeof brands] ?? brands.other;
 					if (!grouped[brand.name]) {
 						grouped[brand.name] = {
+							options: [],
 							renderLabel: (
 								<>
 									<brand.icon color={brand.color} /> {brand.name}
 								</>
 							),
-							options: [],
 						};
 					}
 					grouped[brand.name].options.push({
@@ -126,8 +126,8 @@ const Presets = ({ setProduct }: PresetsProps) => {
 										<SimpleSelect.Option
 											id={option.id}
 											key={option.id}
-											value={option.label ? `${group} ${option.label}` : ""}
 											renderBeforeLabel=" "
+											value={option.label ? `${group} ${option.label}` : ""}
 										>
 											{option.label}
 										</SimpleSelect.Option>

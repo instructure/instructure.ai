@@ -31,13 +31,13 @@
     "lint:root": "biome check",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
-    "preview": "pnpm preview",
+    "preview": "vite preview",
     "turbo:turbo": "vite-node ./scripts/turbo.mts lint site",
     "workspace": "vite-node ./scripts/info.mts"
   },
   "exports": {
     "./vanilla": "./vite.config.mts",
-    "./react": "./vite.config-react.mts",
+    "./react": "./vite.config.react.mts",
     "./workspace": "./scripts/workspace.mts",
     "./types": "./types/index.d.ts",
     ".": "./types/index.d.ts"

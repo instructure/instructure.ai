@@ -1,15 +1,15 @@
 {
+	"devDependencies": {
+		"@instructure.ai/shared-configs": "workspace:^"
+	},
 	"name": "@instructure.ai/site",
 	"private": true,
 	"scripts": {
 		"build": "vite build",
 		"dev": "vite",
+		"lint": "biome check",
 		"preview": "vite preview",
-		"typecheck": "tsgo --noEmit",
-		"lint": "biome check"
-	},
-	"devDependencies": {
-		"@instructure.ai/shared-configs": "workspace:^"
+		"typecheck": "tsgo --noEmit"
 	},
 	"type": "module",
 	"version": "0.1.0"

@@ -30,6 +30,9 @@ const LinkControl = ({
 }) => {
 	return (
 		<ControlButton
+			background={background}
+			border={border}
+			color={color}
 			disabled={!product?.id}
 			Icon={IconLinkLine as React.ElementType<SVGIconProps>}
 			key="link"
@@ -39,9 +42,6 @@ const LinkControl = ({
 					PermanentLink(product.id);
 				}
 			}}
-			background={background}
-			border={border}
-			color={color}
 		/>
 	);
 };

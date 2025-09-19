@@ -127,9 +127,9 @@ const NutritionFactsForm: FC<{
 					<View as="div" margin="0 auto" maxWidth="66%" textAlign="center">
 						{layout.revision && (
 							<Text
+								color="secondary"
 								data-print={layout.revision ? "" : "hidden"}
 								variant="contentSmall"
-								color="secondary"
 							>
 								Revision:{" "}
 								{product.revision ? product.revision : getRevisionDate()}

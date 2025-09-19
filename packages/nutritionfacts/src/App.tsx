@@ -75,17 +75,17 @@ const App: FC = () => {
 			<View
 				as="div"
 				background={isDark && !isInIframe ? "brand" : "secondary"}
+				data-print="no-padding, no-background"
 				padding={isInIframe ? "0" : "large"}
 				themeOverride={{ backgroundBrand: colors.instructure }}
-				data-print="no-padding, no-background"
 			>
 				{!isInIframe && (
 					<View
 						as="div"
+						data-print="no-background, max-height, no padding"
 						margin="0 auto"
 						maxWidth="56rem"
 						padding="0 0 medium"
-						data-print="no-background, max-height, no padding"
 					>
 						<Flex data-print="hidden">
 							<Flex.Item shouldGrow shouldShrink>
@@ -101,19 +101,19 @@ const App: FC = () => {
 								<Flex.Item>
 									<View margin="0 x-small 0">
 										<EmbedControl
-											product={product}
-											layout={layout}
-											id={product.id}
 											background={false}
 											border={false}
 											color={isDark ? "primary-inverse" : "primary"}
+											id={product.id}
+											layout={layout}
+											product={product}
 										/>
 									</View>
 									<LinkControl
-										product={product}
 										background={false}
 										border={false}
 										color={isDark ? "primary-inverse" : "primary"}
+										product={product}
 									/>
 								</Flex.Item>
 							)}
@@ -143,28 +143,28 @@ const App: FC = () => {
 				{!isInIframe && (
 					<View
 						as="div"
-						maxWidth="56rem"
 						data-print="no-background, max-height, no padding"
-						textAlign="center"
 						margin="0 auto"
+						maxWidth="56rem"
+						textAlign="center"
 					>
 						<View
 							as="div"
+							data-print="max-width, color-secondary"
 							margin="0 auto"
 							maxWidth="66%"
-							data-print="max-width, color-secondary"
 						>
 							<Text
-								data-print={layout.disclaimer ? "" : "hidden"}
 								as="p"
+								data-print={layout.disclaimer ? "" : "hidden"}
 								variant="contentSmall"
 							>
 								{layout.disclaimer &&
 									disclaimer(isDark ? "link-inverse" : "link")}
 							</Text>
 							<Text
-								data-print={layout.copyright ? "" : "hidden"}
 								as="p"
+								data-print={layout.copyright ? "" : "hidden"}
 								variant="contentSmall"
 							>
 								{layout.copyright && copyright}

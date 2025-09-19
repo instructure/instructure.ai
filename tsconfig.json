@@ -2,6 +2,9 @@
 	"compilerOptions": {
 		"allowImportingTsExtensions": true,
 		"erasableSyntaxOnly": true,
+		"exclude": [
+			".template"
+		],
 		"include": [
 			"./types/**/*.d.ts"
 		],
