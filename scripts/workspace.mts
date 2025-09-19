@@ -1,9 +1,23 @@
+import { execSync } from "node:child_process";
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
 import { name } from "../package.json" with { type: "json" };
 
+// Regex to match valid NPM unscoped package names and scoped workspace names.
+const pn = /^[a-z0-9\-~][a-z0-9\-._~]*$/;
+const wn = /^@([a-z0-9\-~][a-z0-9\-._~]*)$/;
+const fn = new RegExp(`^${wn.source.slice(1, -1)}/${pn.source.slice(1, -1)}$`);
+
 const isValidFullPackageName = (pkg: string): pkg is FullPackageName => {
-	return /^@[a-zA-Z0-9._-]+\/[a-zA-Z0-9._-]+$/.test(pkg);
+	return fn.test(pkg);
+};
+
+const isValidPackageName = (pkg: string): pkg is PackageName => {
+	return pn.test(pkg);
+};
+
+const isValidWorkspaceName = (ws: string): ws is WorkspaceName => {
+	return wn.test(ws);
 };
 
 const getRootPackage = (): FullPackageName => {
@@ -24,6 +38,8 @@ const getWorkspace = (name: FullPackageName): WorkspaceName => {
 		);
 	}
 	const Workspace: WorkspaceName = name.split("/")[0] as WorkspaceName;
+	if (!isValidWorkspaceName(Workspace))
+		exitWithError("Error: Invalid workspace name.");
 
 	return Workspace;
 };
@@ -73,10 +89,18 @@ const getPackages = (): PackageName[] => {
 	return [getPackageName(getRootPackage()), ...packageNames];
 };
 
-export const exitWithError = (message: string) => {
+const exitWithError = (message: string, error?: Error | string | unknown) => {
 	console.error(message);
+	if (error instanceof Error) {
+		console.error(error.stack);
+	} else if (typeof error === "string") {
+		console.error(error);
+	}
 	process.exit(1);
 };
+
+const unknownError = (error?: Error | string | unknown) =>
+	exitWithError("An unknown error occurred.", error);
 
 class WorkspaceClass implements WorkspaceInfo {
 	private workspaceName: WorkspaceName;
@@ -151,7 +175,7 @@ Commands:
 }
 
 const Workspace = (
-	args: WorkspaceCommand["args"] = process.argv.slice(2),
+	args: WorkspaceCommand["args"] = process.argv.slice(2) ?? [],
 	script: WorkspaceCommand["script"] = process.env.SCRIPT,
 ): WorkspaceCommand => {
 	const workspace = new WorkspaceClass();
@@ -217,7 +241,7 @@ const Workspace = (
 	return exportObj;
 };
 
-const validCommand = (
+const isValidCommand = (
 	cmd: string,
 	cmds: WorkspaceCommand["command"][] = [],
 ): boolean => {
@@ -231,11 +255,51 @@ const validCommand = (
 	}
 };
 
-const validPackage = (
+const isValidPackage = (
 	pkg: PackageName,
 	pkgs: PackageName[] = getPackages(),
 ): boolean => {
-	return pkgs.includes(pkg);
+	return pkgs.includes(pkg) && isValidPackageName(pkg);
 };
 
-export { Workspace, validCommand, validPackage };
+const isAvailablePackage = (
+	pkg: PackageName,
+	pkgs: PackageName[] = getPackages(),
+): boolean => {
+	return !pkgs.includes(pkg) && isValidPackageName(pkg);
+};
+
+const exec = (
+	cmd: string | ((...args: unknown[]) => unknown),
+	options: Record<string, unknown> = { args: [] },
+) => {
+	try {
+		if (typeof cmd === "function") {
+			(cmd as (...args: unknown[]) => unknown)(
+				...((options.args as unknown[]) ?? []),
+			);
+		} else {
+			const { args, ...restOptions } = options as { args?: unknown[] };
+			const extraArgs =
+				args && Array.isArray(args) && args.length > 0
+					? ` ${args.map(String).join(" ")}`
+					: "";
+			execSync(`${cmd}${extraArgs}`, {
+				...restOptions,
+				stdio: "inherit",
+			});
+		}
+	} catch (e) {
+		exitWithError(`Error executing command: ${e}`);
+	}
+};
+
+export {
+	Workspace,
+	isValidCommand,
+	isValidPackage,
+	exec,
+	isAvailablePackage,
+	exitWithError,
+	unknownError,
+};

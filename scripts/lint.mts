@@ -1,44 +1,46 @@
-import { execSync } from "node:child_process";
 import {
+	exec,
 	exitWithError,
-	validCommand,
+	isValidCommand,
+	unknownError,
 	Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 
-const { command, output, args } = Workspace();
+const main = async () => {
+	const { command, output, args } = Workspace();
 
-console.log("args:", args);
+	const lintCommands = ["all", "packages", "root", "package"];
 
-const lintCommands = ["all", "packages", "root", "package"];
+	if (!isValidCommand(command, lintCommands))
+		exitWithError("Invalid lint command.");
 
-if (!validCommand(command, lintCommands))
-	exitWithError("Invalid lint command.");
+	const lintRoot = (pkg: PackageName, args: CommandExtraArgs) => {
+		console.log(`Linting root package: ${pkg}`);
+		exec("pnpm biome check", { args: args.slice(1) });
+	};
 
-const lintRoot = (pkg, args: string[]) => {
-	console.log(`Linting root package: ${pkg}`);
-	execSync("pnpm biome check .", { stdio: "inherit" });
-};
+	const lintPackage = (pkg: PackageName, args: CommandExtraArgs) => {
+		console.log(`Linting package: ${pkg}`);
+		exec(`pnpm -F ${pkg} lint`, { args: args.slice(2) });
+	};
 
-const lintPackage = (pkg, args: string[]) => {
-	console.log(`Linting package: ${pkg}`);
-	execSync(`pnpm -F ${pkg} lint`, { stdio: "inherit" });
-};
+	const lintPackages = (packages: string[], args: CommandExtraArgs) => {
+		packages.forEach((pkg) => {
+			lintPackage(pkg, args);
+		});
+	};
 
-const lintPackages = (packages: string[], args: string[]) => {
-	packages.forEach((pkg) => {
-		lintPackage(pkg, args);
-	});
-};
-
-try {
-	if (command === "root") lintRoot(output, args);
-	else if (command === "package") lintPackage(output, args);
-	else if (command === "packages") lintPackages(output, args);
-	else if (command === "all") {
-		lintRoot(output, args);
-		lintPackages(output, args);
+	try {
+		if (command === "root") lintRoot(output as string, args);
+		else if (command === "package") lintPackage(output as string, args);
+		else if (command === "packages") lintPackages(output as string[], args);
+		else if (command === "all") {
+			lintRoot(output as string, args);
+			lintPackages(output as string[], args);
+		}
+	} catch (error) {
+		exitWithError("Lint failed:", error);
 	}
-} catch (error) {
-	console.error("Lint failed:", error);
-	process.exit(1);
-}
+};
+
+main().catch((e) => unknownError(e));

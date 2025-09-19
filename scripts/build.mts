@@ -1,42 +1,46 @@
-import { execSync } from "node:child_process";
 import {
+	exec,
 	exitWithError,
-	validCommand,
+	isValidCommand,
+	unknownError,
 	Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 
-const { command, output } = Workspace();
+const main = async () => {
+	const { command, output, args } = Workspace();
 
-const buildCommands = ["all", "packages", "root", "package"];
+	const buildCommands = ["all", "packages", "root", "package"];
 
-if (!validCommand(command, buildCommands))
-	exitWithError("Invalid build command.");
+	if (!isValidCommand(command, buildCommands))
+		exitWithError("Invalid build command.");
 
-const buildRoot = (pkg: string) => {
-	console.log(`Building root package: ${pkg}`);
-	execSync("pnpm build:root", { stdio: "inherit" });
-};
+	const buildRoot = (pkg: string, args: CommandExtraArgs) => {
+		console.log(`Building root package: ${pkg}`);
+		exec("pnpm build:root", { args: args.slice(1) });
+	};
 
-const buildPackage = (pkg: string) => {
-	console.log(`Building package: ${pkg}`);
-	execSync(`pnpm -F ${pkg} build`, { stdio: "inherit" });
-};
+	const buildPackage = (pkg: string, args: CommandExtraArgs) => {
+		console.log(`Building package: ${pkg}`);
+		exec(`pnpm -F ${pkg} build`, { args: args.slice(2) });
+	};
 
-const buildPackages = (packages: string[]) => {
-	packages.forEach((pkg) => {
-		buildPackage(pkg);
-	});
-};
+	const buildPackages = (packages: string[], args: CommandExtraArgs) => {
+		packages.forEach((pkg) => {
+			buildPackage(pkg, args);
+		});
+	};
 
-try {
-	if (command === "root") buildRoot(output as string);
-	else if (command === "package") buildPackage(output as string);
-	else if (command === "packages") buildPackages(output as string[]);
-	else if (command === "all") {
-		buildRoot(output as string);
-		buildPackages(output as string[]);
+	try {
+		if (command === "root") buildRoot(output as string, args);
+		else if (command === "package") buildPackage(output as string, args);
+		else if (command === "packages") buildPackages(output as string[], args);
+		else if (command === "all") {
+			buildRoot(output as string, args);
+			buildPackages(output as string[], args);
+		}
+	} catch (error) {
+		exitWithError("Build failed:", error);
 	}
-} catch (error) {
-	console.error("Build failed:", error);
-	process.exit(1);
-}
+};
+
+main().catch((e) => unknownError(e));

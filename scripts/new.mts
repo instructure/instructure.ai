@@ -1,15 +1,15 @@
-import { execSync } from "node:child_process";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import {
+	exec,
 	exitWithError,
-	validPackage,
+	isAvailablePackage,
 	Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 
-type Template = "vanilla" | "react";
+const TEMPLATES = ["vanilla", "react", "instui"] as const;
 
-const USAGE = `new <packagename> [--template "vanilla" | "react"]`;
+const USAGE = `new <packagename> [--template ${TEMPLATES.join(" | ")}]`;
 
 async function main() {
 	const { output } = Workspace(["workspace"], "new");
@@ -32,33 +32,35 @@ async function main() {
 
 	if (!workspaceName) exitWithError("No workspace name found in output.");
 
-	if (validPackage(PACKAGENAME))
+	if (!isAvailablePackage(PACKAGENAME))
 		exitWithError(
 			`Package '${PACKAGENAME}' already exists in workspace ${workspaceName}.`,
 		);
 
-	let TEMPLATE: Template = "vanilla";
+	let TEMPLATE: WorkspaceTemplate = "vanilla";
 	const REPLACESTRING = "<<packagename>>";
 	const FULLPACKAGENAME = `${workspaceName}/${PACKAGENAME}`;
 
-	// Parse optional --template argument
 	const tIdx = args.indexOf("--template");
-	if (tIdx !== -1 && args[tIdx + 1]) {
-		const tArg = args[tIdx + 1];
+	const tShortIdx = args.indexOf("-T");
+	const templateIdx = tIdx !== -1 ? tIdx : tShortIdx;
+
+	if (templateIdx !== -1 && args[templateIdx + 1]) {
+		const tArg = args[templateIdx + 1];
 		if (typeof tArg === "string") {
-			const t = tArg.trim().toLowerCase();
-			if (t === "react" || t === "vanilla") TEMPLATE = t as Template;
+			const t: WorkspaceTemplate = tArg
+				.trim()
+				.toLowerCase() as WorkspaceTemplate;
+			if (TEMPLATES.includes(t)) TEMPLATE = t;
 		}
 	}
 
 	// Validate NPM package name (unscoped)
-	const validPkg = /^[a-z0-9][a-z0-9.-]*$/;
-	if (!validPkg.test(PACKAGENAME)) {
-		console.error(
+	console.log(`Creating package '${PACKAGENAME}'...`);
+	if (!isAvailablePackage(PACKAGENAME))
+		exitWithError(
 			"Error: Package name must be a valid NPM package name: lowercase letters, numbers, hyphens, periods, and start with a letter or number.",
 		);
-		process.exit(1);
-	}
 
 	const cwd = process.cwd();
 	const pkgDir = path.resolve(cwd, "packages", PACKAGENAME);
@@ -66,12 +68,10 @@ async function main() {
 	const chosenTplDir = path.resolve(cwd, ".template", TEMPLATE);
 
 	// Check if package already exists
-	if (await pathExists(pkgDir)) {
-		console.error(
+	if (await pathExists(pkgDir))
+		exitWithError(
 			`Error: Package '${PACKAGENAME}' already exists in ./packages.`,
 		);
-		process.exit(1);
-	}
 
 	console.log(`Initializing package: ${PACKAGENAME}`);
 	console.log(`Using template: ${TEMPLATE}`);
@@ -97,15 +97,7 @@ async function main() {
 
 	// Install dependencies for the new package (pnpm workspace)
 	console.log("Installing dependencies...");
-	try {
-		execSync(`pnpm --filter ${shellEscape(PACKAGENAME)} install`, {
-			cwd,
-			stdio: "inherit",
-		});
-	} catch (_e) {
-		console.error("Error running pnpm install for the new package.");
-		process.exit(1);
-	}
+	exec(`pnpm --filter ${PACKAGENAME} install`, { cwd });
 
 	console.log(`Package '${PACKAGENAME}' initialized successfully.`);
 	console.log(`\`pnpm dev ${PACKAGENAME}\` to run the development server.`);
@@ -154,14 +146,4 @@ async function replaceInFile(
 	}
 }
 
-// ultra-minimal shell escaping for a single arg (no spaces in your regex anyway, but safe)
-function shellEscape(s: string) {
-	if (/^[A-Za-z0-9._\-@/]+$/.test(s)) return s;
-	// fall back to single-quoting with escaping
-	return `'${s.replace(/'/g, `'\\''`)}'`;
-}
-
-main().catch((err) => {
-	console.error(err instanceof Error ? err.message : String(err));
-	process.exit(1);
-});
+main().catch((err) => exitWithError("Error running new script.", err));
