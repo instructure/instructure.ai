@@ -6,8 +6,8 @@ import {
 	Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 
-const main = async () => {
-	const { command, output, args } = Workspace();
+const main = async (): Promise<void> => {
+	const { command, output, args }: WorkspaceCommand = Workspace();
 
 	const lintCommands = ["all", "packages", "root", "package"];
 

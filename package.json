@@ -31,8 +31,8 @@
     "lint:root": "biome check",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
-    "preview": "vite preview",
-    "turbo:turbo": "vite-node ./scripts/turbo.mts lint site",
+    "preview": "vite-node ./scripts/preview.mts",
+    "preview:all": "vite-node ./plugins/multiPreview.mts",
     "workspace": "vite-node ./scripts/info.mts"
   },
   "exports": {
