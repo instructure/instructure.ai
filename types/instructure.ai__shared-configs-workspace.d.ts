@@ -23,7 +23,11 @@ interface CommandInfo {
 
 type WorkspaceCommand = {
 	command: string;
-	args?: string[];
+	args: string[];
 	script?: string;
 	output?: WorkspaceName | WorkspaceObj | FullPackageName | FullPackageName[];
 };
+
+type CommandExtraArgs = string[];
+
+type WorkspaceTemplate = "vanilla" | "react" | "instui";
