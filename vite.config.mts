@@ -6,13 +6,14 @@ import { defineConfig } from "vite";
 
 const PACKAGE_NAME = process.env.npm_package_name?.split("/").pop();
 const PACKAGE_VERSION = String(process.env.npm_package_version);
+const BASE = PACKAGE_NAME === "site" ? "" : PACKAGE_NAME;
 
 export default defineConfig({
-	base: `/${PACKAGE_NAME === "site" ? "" : PACKAGE_NAME}`,
+	base: `/${BASE}`,
 	build: {
 		cssMinify: "lightningcss",
 		minify: "terser",
-		outDir: `../../dist/${PACKAGE_NAME === "site" ? "" : PACKAGE_NAME}`,
+		outDir: `../../dist/${BASE}`,
 		target: "esnext",
 	},
 	css: {

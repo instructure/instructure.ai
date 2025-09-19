@@ -1,5 +1,5 @@
 import { execSync } from "node:child_process";
-import { readdirSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { name } from "../package.json" with { type: "json" };
 
@@ -65,22 +65,19 @@ const getPackages = (): PackageName[] => {
 
 	const packageNames = dirs
 		.map((dir) => {
-			try {
-				const pkgJsonPath = join(packagesDir, dir, "package.json");
-				const pkgJson = require(pkgJsonPath);
-				if (
-					isValidFullPackageName(pkgJson.name) &&
-					pkgJson.name.startsWith(workspaceName)
-				) {
-					return pkgJson.name.split("/")[1] as PackageName;
-				} else {
-					console.warn(
-						`Warning: Invalid package name '${pkgJson.name}' in ${dir}/package.json`,
-					);
-					return null;
-				}
-			} catch (_err) {
-				console.warn(`Warning: Could not read package.json for ${dir}`);
+			const pkgJsonPath = join(packagesDir, dir, "package.json");
+			const pkgJson = JSON.parse(
+				readFileSync(pkgJsonPath, { encoding: "utf-8" }),
+			);
+			if (
+				isValidFullPackageName(pkgJson.name) &&
+				pkgJson.name.startsWith(workspaceName)
+			) {
+				return pkgJson.name.split("/")[1] as PackageName;
+			} else {
+				console.warn(
+					`Warning: Invalid package name '${pkgJson.name}' in ${dir}/package.json`,
+				);
 				return null;
 			}
 		})
