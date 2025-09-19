@@ -9,15 +9,10 @@ import {
 const main = async () => {
 	const { command, output, args } = Workspace();
 
-	const buildCommands = ["all", "packages", "root", "package"];
+	const buildCommands = ["all", "packages", "package"];
 
 	if (!isValidCommand(command, buildCommands))
 		exitWithError("Invalid build command.");
-
-	const buildRoot = (pkg: string, args: CommandExtraArgs) => {
-		console.log(`Building root package: ${pkg}`);
-		exec("pnpm build:root", { args: args.slice(1) });
-	};
 
 	const buildPackage = (pkg: string, args: CommandExtraArgs) => {
 		console.log(`Building package: ${pkg}`);
@@ -31,13 +26,9 @@ const main = async () => {
 	};
 
 	try {
-		if (command === "root") buildRoot(output as string, args);
-		else if (command === "package") buildPackage(output as string, args);
-		else if (command === "packages") buildPackages(output as string[], args);
-		else if (command === "all") {
-			buildRoot(output as string, args);
+		if (command === "package") buildPackage(output as string, args);
+		else if (command === "packages" || command === "all")
 			buildPackages(output as string[], args);
-		}
 	} catch (error) {
 		exitWithError("Build failed:", error);
 	}
