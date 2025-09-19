@@ -14,11 +14,6 @@ const main = async () => {
 	if (!isValidCommand(command, buildCommands))
 		exitWithError("Invalid build command.");
 
-	const buildRoot = (pkg: string, args: CommandExtraArgs) => {
-		console.log(`Building root package: ${pkg}`);
-		exec("pnpm build:root", { args: args.slice(1) });
-	};
-
 	const buildPackage = (pkg: string, args: CommandExtraArgs) => {
 		console.log(`Building package: ${pkg}`);
 		exec(`pnpm -F ${pkg} build`, { args: args.slice(2) });
@@ -31,8 +26,7 @@ const main = async () => {
 	};
 
 	try {
-		if (command === "root") buildRoot(output as string, args);
-		else if (command === "package") buildPackage(output as string, args);
+		if (command === "package") buildPackage(output as string, args);
 		else if (command === "packages" || command === "all")
 			buildPackages(output as string[], args);
 	} catch (error) {
