@@ -137,13 +137,13 @@ const Product: ProductNutritionFacts = {
 	],
 	description: "",
 	descriptionHint: "Describe your feature",
+	group: "other",
 	id: "",
 	name: "",
 	nameHint: "Feature Name",
-	revision: "",
-	group: "other",
 	// @ts-expect-error: Hidden level 0 to represent no selection
 	permissions: 0,
+	revision: "",
 };
 
 export { Product };

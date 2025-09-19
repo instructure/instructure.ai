@@ -1,5 +1,5 @@
 {
-	"$schema": "../node_modules/@biomejs/biome/configuration_schema.json",
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
 	"assist": {
 		"actions": {
 			"source": {
@@ -11,7 +11,16 @@
 		"enabled": true
 	},
 	"files": {
-		"ignoreUnknown": false
+		"ignoreUnknown": true,
+		"includes": [
+			"scripts/**",
+			"configs/**",
+			"!**/*.grit",
+			"public/**",
+			"!packages",
+			"!.template",
+			"!.changeset"
+		]
 	},
 	"formatter": {
 		"enabled": true,
@@ -32,6 +41,7 @@
 			"recommended": true
 		}
 	},
+	"root": true,
 	"vcs": {
 		"clientKind": "git",
 		"defaultBranch": "main",

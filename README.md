@@ -1,7 +1,6 @@
 > [!WARNING]
 > Commits to `main` trigger builds & deploys to [instructure.ai](https://instructure.ai/). Use pull requests to update packages.
 
-
 # instructure.ai
 
 This is a monorepo of pages or micro-sites that are served on [instructure.ai](https://instructure.ai)
@@ -21,15 +20,17 @@ pnpm scripts allow specifying a package name, or omitting it (if available) to r
 ```shell
 pnpm build [<packagename>]
 pnpm dev <packagename>
+pnpm preview <packagename>
 ```
 
 What comes out of the box?
 
+* vite (vanilla-ts, react-ts)
+* vite-node
+* vitest
 * biomejs
 * typescript-native
-* vite (vanilla-ts, react-ts)
 * dotenvx
-* vitest
 * github publishing
 * vscode settings
 * shared public assets

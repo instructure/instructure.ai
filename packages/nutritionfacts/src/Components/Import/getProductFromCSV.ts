@@ -200,12 +200,12 @@ const fetchProductsFromCSV = async (): Promise<Products> => {
 			],
 			description: values[3],
 			descriptionHint: "Describe your feature",
+			group: group,
 			id: values[0],
 			name: values[2],
 			nameHint: "Feature Name",
-			revision: values[1],
-			group: group,
 			permissions: permissions,
+			revision: values[1],
 		};
 		products[uid] = updatedProduct;
 	}
