@@ -27,7 +27,8 @@
     "build:root": "vite build",
     "dev": "vite dev",
     "new": "vite-node ./scripts/new.mts",
-    "lint": "pnpm -r lint",
+    "lint": "vite-node ./scripts/lint.mts",
+    "lint:root": "biome check",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "preview": "pnpm preview",
@@ -35,10 +36,10 @@
     "workspace": "vite-node ./scripts/info.mts"
   },
   "exports": {
-    "./biome": "./configs/biome.jsonc",
-    "./vanilla": "./configs/vite.config.mts",
-    "./react": "./configs/vite.config-react.mts",
+    "./vanilla": "./vite.config.mts",
+    "./react": "./vite.config-react.mts",
     "./workspace": "./scripts/workspace.mts",
-    ".": "./configs/types/index.d.ts"
+    "./types": "./types/index.d.ts",
+    ".": "./types/index.d.ts"
   }
 }

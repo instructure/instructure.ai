@@ -2,14 +2,6 @@ import { readdirSync } from "node:fs";
 import { join } from "node:path";
 import { name } from "../package.json" with { type: "json" };
 
-type WorkspaceName = `@${string}`;
-type FullPackageName = `${WorkspaceName}/${string}`;
-type PackageName = string;
-type WorkspaceObj = {
-	name: WorkspaceName;
-	packages: PackageName[];
-};
-
 const isValidFullPackageName = (pkg: string): pkg is FullPackageName => {
 	return /^@[a-zA-Z0-9._-]+\/[a-zA-Z0-9._-]+$/.test(pkg);
 };
@@ -86,15 +78,6 @@ export const exitWithError = (message: string) => {
 	process.exit(1);
 };
 
-interface WorkspaceInfo {
-	name(): void;
-	fullPackageName(index: number): void;
-	rootPackage(): void;
-	allPackages(): void;
-	packages(): void;
-	info(): void;
-}
-
 class WorkspaceClass implements WorkspaceInfo {
 	private workspaceName: WorkspaceName;
 	private workspacePackages: PackageName[];
@@ -141,12 +124,6 @@ class WorkspaceClass implements WorkspaceInfo {
 	}
 }
 
-interface CommandInfo {
-	package?: PackageName | FullPackageName;
-	help(): void;
-	readonly command: string | undefined;
-}
-
 class CommandClass implements CommandInfo {
 	args: string[];
 	constructor(args: string[]) {
@@ -173,13 +150,6 @@ Commands:
 	}
 }
 
-type WorkspaceCommand = {
-	command: string;
-	args?: string[];
-	script?: string;
-	output?: WorkspaceName | WorkspaceObj | FullPackageName | FullPackageName[];
-};
-
 const Workspace = (
 	args: WorkspaceCommand["args"] = process.argv.slice(2),
 	script: WorkspaceCommand["script"] = process.env.SCRIPT,
@@ -188,9 +158,9 @@ const Workspace = (
 	const command = new CommandClass(args);
 
 	const exportObj: WorkspaceCommand = {
+		args: command.args,
 		command: command.command,
 		script: script,
-		args: command.args,
 	};
 
 	switch (command.command) {

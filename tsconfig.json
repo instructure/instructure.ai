@@ -2,7 +2,14 @@
 	"compilerOptions": {
 		"allowImportingTsExtensions": true,
 		"erasableSyntaxOnly": true,
-		"lib": ["esnext", "dom", "dom.iterable"],
+		"include": [
+			"./types/**/*.d.ts"
+		],
+		"lib": [
+			"esnext",
+			"dom",
+			"dom.iterable"
+		],
 		"module": "esnext",
 		"moduleDetection": "force",
 		"moduleResolution": "bundler",
@@ -14,7 +21,9 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"target": "esnext",
-		"types": ["@instructure.ai/shared-configs"],
+		"types": [
+			"@instructure.ai/shared-configs/types"
+		],
 		"useDefineForClassFields": true,
 		"verbatimModuleSyntax": true
 	}

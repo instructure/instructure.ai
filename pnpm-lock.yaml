@@ -60,6 +60,34 @@ importers:
         specifier: ^3.2.4
         version: 3.2.4(@types/node@24.5.0)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.44.0)
 
+  packages/nutritionfacts:
+    dependencies:
+      '@instructure/ui':
+        specifier: 10.25.1-pr-snapshot-1757942390662
+        version: 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      papaparse:
+        specifier: ^5.5.3
+        version: 5.5.3
+      react:
+        specifier: ^19.1.1
+        version: 19.1.1
+      react-dom:
+        specifier: ^19.1.1
+        version: 19.1.1(react@19.1.1)
+    devDependencies:
+      '@instructure.ai/shared-configs':
+        specifier: workspace:^
+        version: link:../..
+      '@types/papaparse':
+        specifier: ^5.3.16
+        version: 5.3.16
+
+  packages/site:
+    devDependencies:
+      '@instructure.ai/shared-configs':
+        specifier: workspace:^
+        version: link:../..
+
 packages:
 
   '@babel/code-frame@7.27.1':
@@ -263,6 +291,45 @@ packages:
   '@changesets/write@0.4.0':
     resolution: {integrity: sha512-CdTLvIOPiCNuH71pyDu3rA+Q0n65cmAbXnwWH84rKGiFumFzkmHNT8KHTMEchcxN+Kl8I54xGUhJ7l3E7X396Q==}
 
+  '@codemirror/autocomplete@6.18.7':
+    resolution: {integrity: sha512-8EzdeIoWPJDsMBwz3zdzwXnUpCzMiCyz5/A3FIPpriaclFCGDkAzK13sMcnsu5rowqiyeQN2Vs2TsOcoDPZirQ==}
+
+  '@codemirror/commands@6.8.1':
+    resolution: {integrity: sha512-KlGVYufHMQzxbdQONiLyGQDUW0itrLZwq3CcY7xpv9ZLRHqzkBSoteocBHtMCoY7/Ci4xhzSrToIeLg7FxHuaw==}
+
+  '@codemirror/lang-css@6.3.1':
+    resolution: {integrity: sha512-kr5fwBGiGtmz6l0LSJIbno9QrifNMUusivHbnA1H6Dmqy4HZFte3UAICix1VuKo0lMPKQr2rqB+0BkKi/S3Ejg==}
+
+  '@codemirror/lang-html@6.4.10':
+    resolution: {integrity: sha512-h/SceTVsN5r+WE+TVP2g3KDvNoSzbSrtZXCKo4vkKdbfT5t4otuVgngGdFukOO/rwRD2++pCxoh6xD4TEVMkQA==}
+
+  '@codemirror/lang-javascript@6.2.4':
+    resolution: {integrity: sha512-0WVmhp1QOqZ4Rt6GlVGwKJN3KW7Xh4H2q8ZZNGZaP6lRdxXJzmjm4FqvmOojVj6khWJHIb9sp7U/72W7xQgqAA==}
+
+  '@codemirror/lang-json@6.0.2':
+    resolution: {integrity: sha512-x2OtO+AvwEHrEwR0FyyPtfDUiloG3rnVTSZV1W8UteaLL8/MajQd8DpvUb2YVzC+/T18aSDv0H9mu+xw0EStoQ==}
+
+  '@codemirror/lang-markdown@6.3.4':
+    resolution: {integrity: sha512-fBm0BO03azXnTAsxhONDYHi/qWSI+uSEIpzKM7h/bkIc9fHnFp9y7KTMXKON0teNT97pFhc1a9DQTtWBYEZ7ug==}
+
+  '@codemirror/language@6.11.3':
+    resolution: {integrity: sha512-9HBM2XnwDj7fnu0551HkGdrUrrqmYq/WC5iv6nbY2WdicXdGbhR/gfbZOH73Aqj4351alY1+aoG9rCNfiwS1RA==}
+
+  '@codemirror/legacy-modes@6.5.1':
+    resolution: {integrity: sha512-DJYQQ00N1/KdESpZV7jg9hafof/iBNp9h7TYo1SLMk86TWl9uDsVdho2dzd81K+v4retmK6mdC7WpuOQDytQqw==}
+
+  '@codemirror/lint@6.8.5':
+    resolution: {integrity: sha512-s3n3KisH7dx3vsoeGMxsbRAgKe4O1vbrnKBClm99PU0fWxmxsx5rR2PfqQgIt+2MMJBHbiJ5rfIdLYfB9NNvsA==}
+
+  '@codemirror/search@6.5.11':
+    resolution: {integrity: sha512-KmWepDE6jUdL6n8cAAqIpRmLPBZ5ZKnicE8oGU/s3QrAVID+0VhLFrzUucVKHG5035/BSykhExDL/Xm7dHthiA==}
+
+  '@codemirror/state@6.5.2':
+    resolution: {integrity: sha512-FVqsPqtPWKVVL3dPSxy8wEF/ymIEuVzF1PK3VbUgrxXpJUSHQWWZz4JMToquRxnkw+36LTamCZG2iua2Ptq0fA==}
+
+  '@codemirror/view@6.38.2':
+    resolution: {integrity: sha512-bTWAJxL6EOFLPzTx+O5P5xAO3gTqpatQ2b/ARQ8itfU/v2LlpS3pH2fkL0A3E/Fx8Y2St2KES7ZEV0sHTsSW/A==}
+
   '@dotenvx/dotenvx@1.50.1':
     resolution: {integrity: sha512-0hymEluMsQwwukPcnF7IjhmgA6j2jaZtfOtFafOgeZi24BJHY1lHlqwD7dO46KF9WCfpBB3J5uAEwlgBOzAAxg==}
     hasBin: true
@@ -272,6 +339,50 @@ packages:
     engines: {bun: '>=1', deno: '>=2', node: '>=16'}
     peerDependencies:
       '@noble/ciphers': ^1.0.0
+
+  '@emotion/babel-plugin@11.13.5':
+    resolution: {integrity: sha512-pxHCpT2ex+0q+HH91/zsdHkw/lXd468DIN2zvfvLtPKLLMo6gQj7oLObq8PhkrxOZb/gGCq03S3Z7PDhS8pduQ==}
+
+  '@emotion/cache@11.14.0':
+    resolution: {integrity: sha512-L/B1lc/TViYk4DcpGxtAVbx0ZyiKM5ktoIyafGkH6zg/tj+mA+NE//aPYKG0k8kCHSHVJrpLpcAlOBEXQ3SavA==}
+
+  '@emotion/hash@0.9.2':
+    resolution: {integrity: sha512-MyqliTZGuOm3+5ZRSaaBGP3USLw6+EGykkwZns2EPC5g8jJ4z9OrdZY9apkl3+UP9+sdz76YYkwCKP5gh8iY3g==}
+
+  '@emotion/is-prop-valid@1.4.0':
+    resolution: {integrity: sha512-QgD4fyscGcbbKwJmqNvUMSE02OsHUa+lAWKdEUIJKgqe5IwRSKd7+KhibEWdaKwgjLj0DRSHA9biAIqGBk05lw==}
+
+  '@emotion/memoize@0.9.0':
+    resolution: {integrity: sha512-30FAj7/EoJ5mwVPOWhAyCX+FPfMDrVecJAM+Iw9NRoSl4BBAQeqj4cApHHUXOVvIPgLVDsCFoz/hGD+5QQD1GQ==}
+
+  '@emotion/react@11.14.0':
+    resolution: {integrity: sha512-O000MLDBDdk/EohJPFUqvnp4qnHeYkVP5B0xEG0D/L7cOKP9kefu2DXn8dj74cQfsEzUqh+sr1RzFqiL1o+PpA==}
+    peerDependencies:
+      '@types/react': '*'
+      react: '>=16.8.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  '@emotion/serialize@1.3.3':
+    resolution: {integrity: sha512-EISGqt7sSNWHGI76hC7x1CksiXPahbxEOrC5RjmFRJTqLyEK9/9hZvBbiYn70dw4wuwMKiEMCUlR6ZXTSWQqxA==}
+
+  '@emotion/sheet@1.4.0':
+    resolution: {integrity: sha512-fTBW9/8r2w3dXWYM4HCB1Rdp8NLibOw2+XELH5m5+AkWiL/KqYX6dc0kKYlaYyKjrQ6ds33MCdMPEwgs2z1rqg==}
+
+  '@emotion/unitless@0.10.0':
+    resolution: {integrity: sha512-dFoMUuQA20zvtVTuxZww6OHoJYgrzfKM1t52mVySDJnMSEa08ruEvdYQbhvyu6soU+NeLVd3yKfTfT0NeV6qGg==}
+
+  '@emotion/use-insertion-effect-with-fallbacks@1.2.0':
+    resolution: {integrity: sha512-yJMtVdH59sxi/aVJBpk9FQq+OR8ll5GT8oWd57UpeaKEVGab41JWaCFA7FRLoMLloOZF/c/wsPoe+bfGmRKgDg==}
+    peerDependencies:
+      react: '>=16.8.0'
+
+  '@emotion/utils@1.4.2':
+    resolution: {integrity: sha512-3vLclRofFziIa3J2wDh9jjbkUz9qk5Vi3IZ/FSTKViB0k+ef0fPV7dYrUIugbgupYDx7v9ud/SjrtEP8Y4xLoA==}
+
+  '@emotion/weak-memoize@0.4.0':
+    resolution: {integrity: sha512-snKqtPW01tN0ui7yu9rGv69aJXr/a/Ywvl11sUjNtEcRc+ng/mQriFL0wLXMef74iHa/EkftbDzU9F8iFbH+zg==}
 
   '@esbuild/aix-ppc64@0.25.10':
     resolution: {integrity: sha512-0NFWnA+7l41irNuaSVlLfgNT12caWJVLzp5eAVhZ0z1qpxbockccEt3s+149rE64VUI3Ml2zt8Nv5JVc4QXTsw==}
@@ -441,6 +552,449 @@ packages:
   '@instructure/browserslist-config-instui@10.25.0':
     resolution: {integrity: sha512-DyFmtyOtGdkS0uxsjzT91fmFhu6eGXXTZAfBZ0NdKEhmIlRLeTWMmWAfZo0DGLORzjAQtlbSfRYb/aXSYAjamQ==}
 
+  '@instructure/console@10.25.0':
+    resolution: {integrity: sha512-OnC/R9l84LKI1G/Rw0QaDItnoLW2imssbyitb3/xf7BTZVaz9HX9jm9mOYDuvXg0ofQ6pzNbs7HFScS2nDCriQ==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+
+  '@instructure/console@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-ZugadwBTIK8yVT70Ecv4PzuKXzn6tdOog1rFfqy7J/RxOUWDyoSvZIr1EdjOQzFmDw/6hr69CBpnnLMxTPDT1w==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/debounce@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-Jo6JyoBVL/Si0nRD9eD1STUYc+060gsPgbvtCW8hcE6m8xIzEMoD7D3NAW8UddVPVQZTOLrcrCLP3HBJsRFm3w==}
+
+  '@instructure/emotion@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-tt/GXCYs62xr2kfInow2I+Tzc+aaWumUXioZKdfMJatu/cZIy1Ud2eRGOtEme6j4NBjW33ZozBIdDbcK6aR1pQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/shared-types@10.25.0':
+    resolution: {integrity: sha512-Zj9jgEv5KbCHNi7x73Gj3Tn8HIOUboofNOtuofPTXtESvGwgSKkpL7AsFwuVsWDSRDl9KD0xaH8TjLVHsP1LWQ==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+
+  '@instructure/shared-types@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-FPlsSUH4mp6eVZTP/cOuUMlyJfd40uuKim61cb+BNGh4zE1t4xW69/2JEe5GVsr1u4lvwmwpq3dR+V+BxPsXnQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/theme-registry@10.25.0':
+    resolution: {integrity: sha512-J45roEysrQyEIa3jTcztBOG5xPciWt9C4ugylBCEl9u7z2tFeeZ774TFmUsOjQbNdznoRR2XQeWN/EdZEKClDw==}
+
+  '@instructure/ui-a11y-content@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-NuoBLCknmGuo8wahEJakYyd0n35ibZXVwRWp5tizg+daTsNEUqGDgpkllv9A4iQbaTcMykw6ClbqffYKQYcU/Q==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-a11y-utils@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-P+piDKKam7rtGvrvUslGaieOrnwM0TLLkKJP4BJ2PJVMT29VGfhYYws0OA+HfMby0d2SsCXmA0nZi1UbmnNSLQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-alerts@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-K8Oo8g356Ol+N+aLDhV3kzTWYWTpUvbqLojSIoC4QhTrMoJvL3nDXNG81akOicu9kQR8+xPpGSG0erc1RvcxPw==}
+    peerDependencies:
+      react: '>=18 <=19'
+      react-dom: '>=18 <=19'
+
+  '@instructure/ui-avatar@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-JXqL5OE4TX+QECj2M53lJ6sCeBC2QQWDwSNDDmx6RS3SwkPDMunGn4qEZhMIizltZ4G6KQ5aNhUyG9vWmEB4aw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-badge@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-sGMlRfwu2hKVCUveN019DwXwTBduQMYRFHuNIv6ISRKgCEp/uUyHqnAIxIbg6pG1dhqS+sOMxTM54Zv1BWqvWg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-billboard@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-fcCx9XAbW8cATIBCCRFJYk+jKfesmcdSlg7IW2Kx7vXLdwMWrZ2JZp4PVM29I+QiwlPjSazoFwpN/5RtISKnOQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-breadcrumb@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-rbaIHdJ4PFt3eZyKa+7+k4gpFB9/eDIR+7vUyOR6DsqAaSg6CM6sEgEyJ5aMMUVCCngS4wVOLvfKnj/2xfYc/w==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-buttons@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-G+6dC/db5jQltH+23XcvedxJqy4/FH5nWVf+kkSvEcx1poCCTiLfGtzOKT3vdIAdzeRp8tiVcFRnXZEBfR+Rvw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-byline@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-bwWWqC8srXvo367JLGi6rq6Hobj7dF1YvSLGHq29O326qA+XFcz5ckD30AkIAy2/x3lH/sbK/thHmAddS6/jAw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-calendar@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-fNpEiI7S4fLFocJeNsY8yIy3rza9dsudvhIKSgKm+v/Z7UG5DumwQ53ys2oQiwcKNU8pph5N2nb9JmlfvstA6Q==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-checkbox@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-Lc+BK0FY500LIogaLNvMCrVb1cOy9SkL7XNfecBLuMMExUgjZ8OAil5WsdM+NrPUlmI/oKBJqkRpoJ3gDN/yTg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-color-picker@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-xfSR74iGn2ep/F646vrIy1Avz6/6tddB93FA4UsT0OLeaF0Cs+nc+7KRYYzronSQa62mRv2ZbIYw+r3tA8AJaw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-color-utils@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-7P19scYn1o364ideXNcsFkSDhL923PuMxaHBI922YcEjQ5CRffb3slYVzelPB5sb+jnPPvivplm+x3cjoVP7Ng==}
+
+  '@instructure/ui-date-input@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-Yyf3roLWHaBID9irebPyL5hnoKmlFvEctoUeDXtNp4Twx1dKyvq4WNproFMr+5IK8F30yH5QpsPOeLJ39OMOmg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-date-time-input@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-ic8rCqyFNfj66HRpCr4zvbUNhKsozvdUpdsgZFeaw4j7QqU7ay1PgvDX96qQMQYfY+ydamnn4x4LuANdlpnAJg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-decorator@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-JG0iw93bXvqP3H7+4tFWriTVBKSRExSzM0LB7xy0wZSVxict08kk238NaiRQaIZGOCOeg25xXYdsINh8YN6z2g==}
+
+  '@instructure/ui-dialog@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-rmr3GZfIAOaZ8EVSstGB58Cu7BwIBHyGanP80GUXuIcCQ/Y7aqbSWUxFMS9EpmOC6B/ydzvxAC/y2SabqNhbhQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-dom-utils@10.25.0':
+    resolution: {integrity: sha512-OIkC6YSRpGPTJFpO3Msp3fn1ot2FPL4qlkBfaMXHEHVJHva6327e7WCZ3anJF7vVl5VE1l+sXhATzO1dJTZg9g==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+      react-dom: '>=16.14 <=18'
+
+  '@instructure/ui-dom-utils@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-yTyd2GuB4XkkJ/lliya3et9fE8zIXQPilBbQYNM1cz1EIDNLsXhWYo5kjCgUOilgDTSC+TmgXTn2FE4A4fGMhg==}
+    peerDependencies:
+      react: '>=18 <=19'
+      react-dom: '>=18 <=19'
+
+  '@instructure/ui-drawer-layout@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-CIdjd8J6UAz3bGFaJGrX05sHWjPfM8Rm9w9dq7MFgOp2zbGnBSTmMoXFEnHrUSpMT4tMZUve1LkbA3iVTtDp6Q==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-drilldown@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-JrTkWlKToty7Bz7uKxz3kHza+3ptnCXHtyR+Z60oYoWmE8O9ioRYEQokZtp1iy1e1pRdHkCbQWtpfMDjKOExcQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-editable@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-y3CQy60TpZS9qZkHIyl3yzqy2holTrP9zyz557+HZNHBGchnKdLaHxP/cPwSU8sWBuOZcaEFfY/V3C8XQLoiFw==}
+    peerDependencies:
+      react: '>=18 <=19'
+      react-dom: '>=18 <=19'
+
+  '@instructure/ui-expandable@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-OTQ+595I0S360I58D2IlrzGnAmEyNE82jzAeeGPyrqUREuyqYX45VwakZDjEaEx8i651ccPTlXqT/cHKsPasLQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-file-drop@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-9kFuBRlwwAfDvRryS122XAzAysx7YBHLKsYrNDNWrjnjmRgQlB+bol3i/ynDzDSwMJWMUfJEcWxLYDPjG9mpYw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-flex@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-ZBb1PlzWNgm1mmKUkfw3DhUZE1Jb1zEZByGb0/H5Z3YGq1Cc10cgayCjgyvutZDFFogvpOCJj8o/OGIWkwtzfw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-focusable@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-f6Lml1sIrEydz0/Ys+WjvWPvv+zyoTD66NWjphH5+SiAZcwGFugtmtJNQzbnXtTNPDQ3Zwg1bzpeHhoX0bhDDA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-form-field@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-KPPfXeLWqBVmO878KXGMK68wfk+PnoV0v0z0VqTnJN9Rq++QtR1J08gfS37q5OFHqtdNXsx+vEGtrivDm1lgMg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-grid@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-uTOPDhFZHJyzjiWMFdY7wnfQku9wsVDbmkknz/SuJ+6/ziBYW84MbVuwfDEVuSkbJV329nBh38nFyoJbuZH8rQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-heading@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-oyBXHuqk667tuUPpubpI0NHVkyF16vxeUbJWa6LwxTAZ7NLtQhTETD/a3bz2V+ATvjkS25lbsFakKIHjHzQUpw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-i18n@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-7LmXtLj2L5RLYJpHLqQvYRH5txa27Z3HlGMxMptD9fsdl4J6LgyWaXUq6ORq6+xEpxol3t9QFc9j2wUYRmaymw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-icons@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-opFGGtFTzFPYML9G9j2yA36j+8bk4DiJg9lrnldhKMquGB3toUr8CkR2XBj/poxv1frB7hpwx2gj7KUunVXe8Q==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-img@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-yj14H5gkOlDKREXfwv33ahVFxwStRshLdKnNshtULr+v68aHC0TNwpF040oeqKny3bC+YX8xPvrsL3FyJr4ONA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-instructure@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-XesGEHA/XpnW/l554WPGJmrOPa/SJVsbNqtU0J9XK6jGlywq4OiO6X/0ENG1pvSAPHcyUFd6dxk7avZ/sQbqsg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-link@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-N5xLZMWstun23sXXdRhCJJgLynku9vnCwSoMB8IfxOUrSkkaME46jT2ZMF3xwYRyYCKMJe048Z0P4YLFu2M4Tg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-list@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-N4VNeK1hdJ3JFpsCMYwh/mJAF4KU+J3ND7F+Ybr0CRys2ex+7OgT5PCr2Tq7IQeF6BKzwqb8Cjlk9z6a+b+qtw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-menu@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-Wh9kJ4aBtb8jmYI13KVLx4T9jLgmzQz4Eip0XfoL9cUsoJVkUwHjWFNTvumSZ300ocesnrhLKsJlu+vz47DXew==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-metric@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-Bg2MVeMHG8d8kwEq1lk/l+fmEhwnpo7iWw1irw840AKOnbGOWWgV3WGJFP22Yz3GK1kwTGjIzbDk/FYtiqZwaQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-modal@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-F07MMk+IVgPKFES/Xp2aC0K+eiOM04tmP1MYfTyuCfQFlV6UFQt8zC+etigfsA63jLfqs8OgawVte9ugDHsKaQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-motion@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-FBMvfUKjr4xk9gQh+naNy+38p/HZRx6LR5NIWz7M3jQhxztm7reW1UugN6ysbtsw2wdk/jjmpXXQFuCVZ9fcMA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-navigation@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-wr3ut1K9f6yfP/pghrQwuDS55fk6pVPCs6txWgub1mpmKFQYdXrQnF8ZV1jXPDBpjZqbFZMxLTLwUhS8TskLsQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-number-input@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-9rUpu22BfkLbI/5aUDWebKN+S54qb7syg665bLA1pWNTwN4B9qbLtb2LUx+IgMlWMeFRbPQ+uKHsUXvcHDcUjw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-options@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-kcwD9wFw9y51ecofvtgQ6YCp5ihI5zm58W+e5vSbgtvfw+yg7Xsng9Bd82aXlwODjissdHHLN0gxsns5GMKK+w==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-overlays@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-X2+q5bdP70O2QBsJg5XaHaOltRcWOCK8gbOFY5M5HNR0AkRFOd6yphzcqu+HXz8pjl3lOvbLYcLqIeAWgwZEdw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-pages@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-45AloD8RwujzIa+Jv4hj1APi9bW1r5hfgzhhKZDOGyNZ0tm3AuKIzpHRBuxcMhD/WM6bLf55z5nAntiG2L9MkA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-pagination@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-Ojr8HZl/dBn999RKEPPndLvQqAtOk6PMh79OPcHbJOtwAbLGFgsxbjP6TFEMfUtabSLfZiiEByCDJYCuOB3jUA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-pill@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-GqlxKFa4vzx/Kgh+29t3kC8uoCjspU+CcdlfaBSdGjehRibcyQAyaOvkUKInpLLFn2PCV1BeT4eYF607kOjNYQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-popover@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-Yy0cotSYDcXiCFtF8xy2IRm+bYpoD6WWaSfx7iNcymHPECRrWqcaUV7j7S6FZ2Koeiw47haTHFO1RAgCKUqMdQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-portal@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-A1yiepAyqIvAAUDgzBYanRpstZav9Jbz+717jOCwyTW1xh60HXFQNLHCNvBNs4Mu2c1gy8gbZNaRL6NDms3scQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+      react-dom: '>=18 <=19'
+
+  '@instructure/ui-position@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-aezmmMFK2oHwUj1WjJNUOYqABQgoie59Yi31CjodmW0Q5wn0VpL1w6rdV0D3zC6K2KD6XdOiDZfZH9ZUA3770g==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-progress@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-cIk+Uqp4a4/HN/6Zqm4Inro4ZdqMRMbBUmYnjRrOOCYt9sVnBtNqMmhHg25jeLBNz/+RXSZux+Qt+tD0xQ9eEw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-radio-input@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-Q7GmozwBqGiWXsmpn5YKfr/E1Dg5vh9gBiFhDd78oTJMA94f6IRxdv81u8329PUvYIL+q5Jj5ctMlr0Xh0yyiQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-range-input@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-GnxQ3w+tBqEW3F3IKuHrWbxk5rZOtzv4qaTq+luI1UrNx3lWRxdmOpKA3fsyyEIa4O+1hCSdBtCH0pe5xhQd3Q==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-rating@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-tYUICx3O7qqdVKgYezA64j+IBvltZg4rVs+GfWzbIMifgHtYNMwNLZARAwFWOjbldpxWJBM11ntGhP1CMzvqfg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-react-utils@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-Gti6vbOjS5KSKL/Suhb9Yuh+2wlWqAmCPhpBB5d5ftQ/uFWi4m4WQgGMYCTsU/XKXypzNjHr/9QXSkJViwDIgw==}
+    peerDependencies:
+      react: '>=18 <=19'
+      react-dom: '>=18 <=19'
+
+  '@instructure/ui-responsive@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-cYf42I9LhhTHDGQgD/Nt4DT2jrMLpLFM63GTKZCiwFgEuFC1c25vzEKYanKbbuF0I1jnxyxeZDewRs6yIpBAhA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-select@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-kgycgUADf/frZ7SD6JNF/B9794L5CAG648173CApo2FBBwdCb68rg5l0J4u9np1wgIHHIFjU/rknF1OHWZTsxw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-selectable@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-zqPwT5QXd5F8AsrC09UEvLAc7EomLxsK3Nv3BNIihC3bKq2vx1fsf+zJybL1HBwC0uV8BhFNytRwbc39uGH6gQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-side-nav-bar@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-R+C5tUhpxLyTvK2gO4rJRl3IZpEJWuZembsqmjsm1vxksroo6D8DDRlTYJejfFoEzHCwKu7Bde1i37s2Zuxuhw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-simple-select@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-eSfQJ4MMPZywejvjnyoPBYQEYBC1ArmfOxk6WKc5tFdZWnXC1InD6d/Mj5kmYjPXk4/mJi0y7wvecTVRqBR5dw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-source-code-editor@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-bfXE4yhk+k9KqxWZfM1gbYN07fbwRtCQpjexjZ/8/xbgZ8NszsM6DJ+fvA6bc8+0hlYh8zxQZyX3eLCuiVQ4mQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+      react-dom: '>=18 <=19'
+
+  '@instructure/ui-spinner@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-OxxDeBahd7qsadc7IVIQhUqaUevHaIXwfkpaajm4FW4gMBIu4bdgDZ1zC6a1z9DmWw/rHCmW3JVxv6UAxozdOw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-svg-images@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-9N/a7+bdvVifDhRnqR3tc+PPRKNVQod1F0P5YTW4m3uyFwanczdY/97napJb7RJciXbKxGvJGh2cip5aRKPm8Q==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-table@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-rvj9M0G4jl64GEOCWwaubjWSWJGZufRhWEvQDSLboblhPFqodLZTr0bevByzhsqwHlEnmT7ufVyJ3rI9L3OeaA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-tabs@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-hlU6/DIBDKUk8c5uJ3IwNM1rpfzu8oRWkEGuDMyTCxL/i0ym5OqPKQSJn3GaV6goYybAN4VSTwOyV9eRFgZS3g==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-tag@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-fpNbgCnUF3CcleepqyLoTCh7AVKG/+RfEfFSCcDFDxGaXakbM5cXaEHn391cOLPqBAvBRYadLzZu/eA7NOQK4Q==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-text-area@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-ST9hv3NUEdlQ1PBzvJlOOGhSke4WIcZzQYBR3+WEKN41LseTFdERlXqqp+hy07CN7Bra3yHvbDYhfmz+W0reNA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-text-input@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-HShyaM7X7z9EK1xev2Kyxi2Kh0I6OaHOM+/+iPXV8uRg6rVSpIBzwJzX1kut7h61Swl5T5ElDJA06Qcm+5dcQQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-text@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-16L5Y4apbhSfQNnlys5TfVLpZjkOxfa3vCrxlPNawF0XXRYhDGA6aX+t5Lc86k6N7sUn1QbAWKkVmofn2pb8vQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-themes@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-5sLTJ2ENkJmyFRS04pvp4XikDcB4ZDXKszGLWtRdWeY472+OFR8ORxUN9r8L/yCN5ziVqM4T/omuFvWSAoSZqQ==}
+
+  '@instructure/ui-time-select@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-C/pK7TrmNFydq2PjP496sFk6m1Psv7ZnyGjJkSDmX9k6lL1B812EkHNJwsBOfPBuWHvCb7i66AGMv3yfgkNmag==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-toggle-details@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-8uTzux42revOXVxT/rtmFC88fjZV4iNgrXWz9UcPsz2tZIFBTer0JXkzufmy9ADop+Wtv55nfBbmjGwcFjP/sA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-tooltip@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-HA6CStU2djpVn+V6Sm7EoYd2guOEWRV3UH0xP0hD0gHdBzPsT8Qj6xjnaD0JRHwNZc94cpJUiN87Y5Ui6nCsuw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-top-nav-bar@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-Rql1k0cdxUpQXULo7gYQ2QK3VKo71ofXO3YKNMn2i9fjDLzvZDEzsLwLdRnzNpqzI7/gy2WoOUK05tUx2QZsCw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-tray@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-/wlbhcbsgnM/v9VY6TDfwphs8EScrYU7B20eihf7cQMt3k/o2Z9Qw9W+OTpAu5U0T5UWKcxLipiSr0dSTLq9Fw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-tree-browser@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-TGo6X1LSOMeycyCQ1lPV4xVSCiX3LeDAktd3G4uCR5z5nmLWK6rxmqSmFoFQiRdGMIkC/lQPNOBXfhrMMdGjBg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-truncate-list@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-AsEM5afsCez7+hhl/7JsZ5Cod5eQZMS/WIU61tK3m/fRznItAN1TDlCWPmqwLe2zcBKXSNll/uhLOgZW3SwEWQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-truncate-text@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-1tl2p6qWGBeFeW216K+FmFhMYPdUMTKSFNOlxELUng/iV79vC9sSPG9J3WHQEKpofRKWukY4fsYHBECgFYlc6w==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-utils@10.25.0':
+    resolution: {integrity: sha512-IExmpoTupt/F3om5PrKZsspe9pPRxtrSa29qMYxxrj6ZZcjxUlSQPywSMPGSQwrjtdA83Kn4Fflb9Ht1uDVPUg==}
+    peerDependencies:
+      react: '>=16.14 <=18'
+      react-dom: '>=16.14 <=18'
+
+  '@instructure/ui-utils@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-N3oeb64Mjpug4uuifaUDEg6Zg5qW0WLWSlvbCQFCrs89gw9OELjny0gGO7dSO3TfU6UxTc44DU7g1YuEdNG39g==}
+    peerDependencies:
+      react: '>=18 <=19'
+      react-dom: '>=18 <=19'
+
+  '@instructure/ui-view@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-F9zGREvIdElybpUfCmKw6tNC2U2J7UvbJxXaDo5/b+ddVAtQpj56m4rIiPrL4fhFr7j8OQcR2WiaJD+FTdjN+A==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-K8X/ZsvrYbCQpSbo1c8y488gll3X9LFp9K4c2mLPkSwBBO4j/cgUk8E4E4ApqITq2wg5CKKOu4JWjI4gW3/Q+Q==}
+    peerDependencies:
+      react: '>= 18 <= 19'
+      react-dom: '>= 18 <= 19'
+
+  '@instructure/uid@10.25.1-pr-snapshot-1757942390662':
+    resolution: {integrity: sha512-8HTfM3kNY1HC3l4gKBatG/ywsfvV0AshA9XPr+h4YnepWPst9MorcmFMfZoeRl0jioNLNMXJ2KlJrrWQwLvQmQ==}
+
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
 
@@ -460,11 +1014,38 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
+  '@lezer/common@1.2.3':
+    resolution: {integrity: sha512-w7ojc8ejBqr2REPsWxJjrMFsA/ysDCFICn8zEOR9mrqzOu2amhITYuLD8ag6XZf0CFXDrhKqw7+tW8cX66NaDA==}
+
+  '@lezer/css@1.3.0':
+    resolution: {integrity: sha512-pBL7hup88KbI7hXnZV3PQsn43DHy6TWyzuyk2AO9UyoXcDltvIdqWKE1dLL/45JVZ+YZkHe1WVHqO6wugZZWcw==}
+
+  '@lezer/highlight@1.2.1':
+    resolution: {integrity: sha512-Z5duk4RN/3zuVO7Jq0pGLJ3qynpxUVsh7IbUbGj88+uV2ApSAn6kWg2au3iJb+0Zi7kKtqffIESgNcRXWZWmSA==}
+
+  '@lezer/html@1.3.10':
+    resolution: {integrity: sha512-dqpT8nISx/p9Do3AchvYGV3qYc4/rKr3IBZxlHmpIKam56P47RSHkSF5f13Vu9hebS1jM0HmtJIwLbWz1VIY6w==}
+
+  '@lezer/javascript@1.5.4':
+    resolution: {integrity: sha512-vvYx3MhWqeZtGPwDStM2dwgljd5smolYD2lR2UyFcHfxbBQebqx8yjmFmxtJ/E6nN6u1D9srOiVWm3Rb4tmcUA==}
+
+  '@lezer/json@1.0.3':
+    resolution: {integrity: sha512-BP9KzdF9Y35PDpv04r0VeSTKDeox5vVr3efE7eBbx3r4s3oNLfunchejZhjArmeieBH+nVOpgIiBJpEAv8ilqQ==}
+
+  '@lezer/lr@1.4.2':
+    resolution: {integrity: sha512-pu0K1jCIdnQ12aWNaAVU5bzi7Bd1w54J3ECgANPmYLtQKP0HBj2cE/5coBD66MT10xbtIuUr7tg0Shbsvk0mDA==}
+
+  '@lezer/markdown@1.4.3':
+    resolution: {integrity: sha512-kfw+2uMrQ/wy/+ONfrH83OkdFNM0ye5Xq96cLlaCy7h5UT9FO54DU4oRoIc0CSBh5NWmWuiIJA7NGLMJbQ+Oxg==}
+
   '@manypkg/find-root@1.1.0':
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
 
   '@manypkg/get-packages@1.1.3':
     resolution: {integrity: sha512-fo+QhuU3qE/2TQMQmbVMqaQ6EWbMhi4ABWP+O4AM1NqPBuy0OrApV5LO6BrrgnhtAHS2NH6RrVk9OL181tTi8A==}
+
+  '@marijn/find-cluster-break@1.0.2':
+    resolution: {integrity: sha512-l0h88YhZFyKdXIFNfSWpyjStDjGHwZ/U7iobcK1cQQD8sejsONdQtTVU+1wVN1PBw40PiiHB1vA5S7VTfQiP9g==}
 
   '@noble/ciphers@1.3.0':
     resolution: {integrity: sha512-2I0gnIVPtfnMw9ee9h1dJG7tp81+8Ob3OJb3Mv37rx5L40/b0i7djjCVvGOVqc9AEIQyvyu1i6ypKdFw8R8gQw==}
@@ -493,108 +1074,108 @@ packages:
   '@rolldown/pluginutils@1.0.0-beta.35':
     resolution: {integrity: sha512-slYrCpoxJUqzFDDNlvrOYRazQUNRvWPjXA17dAOISY3rDMxX6k8K4cj2H+hEYMHF81HO3uNd5rHVigAWRM5dSg==}
 
-  '@rollup/rollup-android-arm-eabi@4.50.2':
-    resolution: {integrity: sha512-uLN8NAiFVIRKX9ZQha8wy6UUs06UNSZ32xj6giK/rmMXAgKahwExvK6SsmgU5/brh4w/nSgj8e0k3c1HBQpa0A==}
+  '@rollup/rollup-android-arm-eabi@4.51.0':
+    resolution: {integrity: sha512-VyfldO8T/C5vAXBGIobrAnUE+VJNVLw5z9h4NgSDq/AJZWt/fXqdW+0PJbk+M74xz7yMDRiHtlsuDV7ew6K20w==}
     cpu: [arm]
     os: [android]
 
-  '@rollup/rollup-android-arm64@4.50.2':
-    resolution: {integrity: sha512-oEouqQk2/zxxj22PNcGSskya+3kV0ZKH+nQxuCCOGJ4oTXBdNTbv+f/E3c74cNLeMO1S5wVWacSws10TTSB77g==}
+  '@rollup/rollup-android-arm64@4.51.0':
+    resolution: {integrity: sha512-Z3ujzDZgsEVSokgIhmOAReh9SGT2qloJJX2Xo1Q3nPU1EhCXrV0PbpR3r7DWRgozqnjrPZQkLe5cgBPIYp70Vg==}
     cpu: [arm64]
     os: [android]
 
-  '@rollup/rollup-darwin-arm64@4.50.2':
-    resolution: {integrity: sha512-OZuTVTpj3CDSIxmPgGH8en/XtirV5nfljHZ3wrNwvgkT5DQLhIKAeuFSiwtbMto6oVexV0k1F1zqURPKf5rI1Q==}
+  '@rollup/rollup-darwin-arm64@4.51.0':
+    resolution: {integrity: sha512-T3gskHgArUdR6TCN69li5VELVAZK+iQ4iwMoSMNYixoj+56EC9lTj35rcxhXzIJt40YfBkvDy3GS+t5zh7zM6g==}
     cpu: [arm64]
     os: [darwin]
 
-  '@rollup/rollup-darwin-x64@4.50.2':
-    resolution: {integrity: sha512-Wa/Wn8RFkIkr1vy1k1PB//VYhLnlnn5eaJkfTQKivirOvzu5uVd2It01ukeQstMursuz7S1bU+8WW+1UPXpa8A==}
+  '@rollup/rollup-darwin-x64@4.51.0':
+    resolution: {integrity: sha512-Hh7n/fh0g5UjH6ATDF56Qdf5bzdLZKIbhp5KftjMYG546Ocjeyg15dxphCpH1FFY2PJ2G6MiOVL4jMq5VLTyrQ==}
     cpu: [x64]
     os: [darwin]
 
-  '@rollup/rollup-freebsd-arm64@4.50.2':
-    resolution: {integrity: sha512-QkzxvH3kYN9J1w7D1A+yIMdI1pPekD+pWx7G5rXgnIlQ1TVYVC6hLl7SOV9pi5q9uIDF9AuIGkuzcbF7+fAhow==}
+  '@rollup/rollup-freebsd-arm64@4.51.0':
+    resolution: {integrity: sha512-0EddADb6FBvfqYoxwVom3hAbAvpSVUbZqmR1wmjk0MSZ06hn/UxxGHKRqEQDMkts7XiZjejVB+TLF28cDTU+gA==}
     cpu: [arm64]
     os: [freebsd]
 
-  '@rollup/rollup-freebsd-x64@4.50.2':
-    resolution: {integrity: sha512-dkYXB0c2XAS3a3jmyDkX4Jk0m7gWLFzq1C3qUnJJ38AyxIF5G/dyS4N9B30nvFseCfgtCEdbYFhk0ChoCGxPog==}
+  '@rollup/rollup-freebsd-x64@4.51.0':
+    resolution: {integrity: sha512-MpqaEDLo3JuVPF+wWV4mK7V8akL76WCz8ndfz1aVB7RhvXFO3k7yT7eu8OEuog4VTSyNu5ibvN9n6lgjq/qLEQ==}
     cpu: [x64]
     os: [freebsd]
 
-  '@rollup/rollup-linux-arm-gnueabihf@4.50.2':
-    resolution: {integrity: sha512-9VlPY/BN3AgbukfVHAB8zNFWB/lKEuvzRo1NKev0Po8sYFKx0i+AQlCYftgEjcL43F2h9Ui1ZSdVBc4En/sP2w==}
+  '@rollup/rollup-linux-arm-gnueabihf@4.51.0':
+    resolution: {integrity: sha512-WEWAGFNFFpvSWAIT3MYvxTkYHv/cJl9yWKpjhheg7ONfB0hetZt/uwBnM3GZqSHrk5bXCDYTFXg3jQyk/j7eXQ==}
     cpu: [arm]
     os: [linux]
 
-  '@rollup/rollup-linux-arm-musleabihf@4.50.2':
-    resolution: {integrity: sha512-+GdKWOvsifaYNlIVf07QYan1J5F141+vGm5/Y8b9uCZnG/nxoGqgCmR24mv0koIWWuqvFYnbURRqw1lv7IBINw==}
+  '@rollup/rollup-linux-arm-musleabihf@4.51.0':
+    resolution: {integrity: sha512-9bxtxj8QoAp++LOq5PGDGkEEOpCDk9rOEHUcXadnijedDH8IXrBt6PnBa4Y6NblvGWdoxvXZYghZLaliTCmAng==}
     cpu: [arm]
     os: [linux]
 
-  '@rollup/rollup-linux-arm64-gnu@4.50.2':
-    resolution: {integrity: sha512-df0Eou14ojtUdLQdPFnymEQteENwSJAdLf5KCDrmZNsy1c3YaCNaJvYsEUHnrg+/DLBH612/R0xd3dD03uz2dg==}
+  '@rollup/rollup-linux-arm64-gnu@4.51.0':
+    resolution: {integrity: sha512-DdqA+fARqIsfqDYkKo2nrWMp0kvu/wPJ2G8lZ4DjYhn+8QhrjVuzmsh7tTkhULwjvHTN59nWVzAixmOi6rqjNA==}
     cpu: [arm64]
     os: [linux]
 
-  '@rollup/rollup-linux-arm64-musl@4.50.2':
-    resolution: {integrity: sha512-iPeouV0UIDtz8j1YFR4OJ/zf7evjauqv7jQ/EFs0ClIyL+by++hiaDAfFipjOgyz6y6xbDvJuiU4HwpVMpRFDQ==}
+  '@rollup/rollup-linux-arm64-musl@4.51.0':
+    resolution: {integrity: sha512-2XVRNzcUJE1UJua8P4a1GXS5jafFWE+pQ6zhUbZzptOu/70p1F6+0FTi6aGPd6jNtnJqGMjtBCXancC2dhYlWw==}
     cpu: [arm64]
     os: [linux]
 
-  '@rollup/rollup-linux-loong64-gnu@4.50.2':
-    resolution: {integrity: sha512-OL6KaNvBopLlj5fTa5D5bau4W82f+1TyTZRr2BdnfsrnQnmdxh4okMxR2DcDkJuh4KeoQZVuvHvzuD/lyLn2Kw==}
+  '@rollup/rollup-linux-loong64-gnu@4.51.0':
+    resolution: {integrity: sha512-R8QhY0kLIPCAVXWi2yftDSpn7Jtejey/WhMoBESSfwGec5SKdFVupjxFlKoQ7clVRuaDpiQf7wNx3EBZf4Ey6g==}
     cpu: [loong64]
     os: [linux]
 
-  '@rollup/rollup-linux-ppc64-gnu@4.50.2':
-    resolution: {integrity: sha512-I21VJl1w6z/K5OTRl6aS9DDsqezEZ/yKpbqlvfHbW0CEF5IL8ATBMuUx6/mp683rKTK8thjs/0BaNrZLXetLag==}
+  '@rollup/rollup-linux-ppc64-gnu@4.51.0':
+    resolution: {integrity: sha512-I498RPfxx9cMv1KTHQ9tg2Ku1utuQm+T5B+Xro+WNu3FzAFSKp4awKfgMoZwjoPgNbaFGINaOM25cQW6WuBhiQ==}
     cpu: [ppc64]
     os: [linux]
 
-  '@rollup/rollup-linux-riscv64-gnu@4.50.2':
-    resolution: {integrity: sha512-Hq6aQJT/qFFHrYMjS20nV+9SKrXL2lvFBENZoKfoTH2kKDOJqff5OSJr4x72ZaG/uUn+XmBnGhfr4lwMRrmqCQ==}
+  '@rollup/rollup-linux-riscv64-gnu@4.51.0':
+    resolution: {integrity: sha512-o8COudsb8lvtdm9ixg9aKjfX5aeoc2x9KGE7WjtrmQFquoCRZ9jtzGlonujE4WhvXFepTraWzT4RcwyDDeHXjA==}
     cpu: [riscv64]
     os: [linux]
 
-  '@rollup/rollup-linux-riscv64-musl@4.50.2':
-    resolution: {integrity: sha512-82rBSEXRv5qtKyr0xZ/YMF531oj2AIpLZkeNYxmKNN6I2sVE9PGegN99tYDLK2fYHJITL1P2Lgb4ZXnv0PjQvw==}
+  '@rollup/rollup-linux-riscv64-musl@4.51.0':
+    resolution: {integrity: sha512-0shJPgSXMdYzOQzpM5BJN2euXY1f8uV8mS6AnrbMcH2KrkNsbpMxWB1wp8UEdiJ1NtyBkCk3U/HfX5mEONBq6w==}
     cpu: [riscv64]
     os: [linux]
 
-  '@rollup/rollup-linux-s390x-gnu@4.50.2':
-    resolution: {integrity: sha512-4Q3S3Hy7pC6uaRo9gtXUTJ+EKo9AKs3BXKc2jYypEcMQ49gDPFU2P1ariX9SEtBzE5egIX6fSUmbmGazwBVF9w==}
+  '@rollup/rollup-linux-s390x-gnu@4.51.0':
+    resolution: {integrity: sha512-L7pV+ny7865jamSCQwyozBYjFRUKaTsPqDz7ClOtJCDu4paf2uAa0mrcHwSt4XxZP2ogFZS9uuitH3NXdeBEJA==}
     cpu: [s390x]
     os: [linux]
 
-  '@rollup/rollup-linux-x64-gnu@4.50.2':
-    resolution: {integrity: sha512-9Jie/At6qk70dNIcopcL4p+1UirusEtznpNtcq/u/C5cC4HBX7qSGsYIcG6bdxj15EYWhHiu02YvmdPzylIZlA==}
+  '@rollup/rollup-linux-x64-gnu@4.51.0':
+    resolution: {integrity: sha512-4YHhP+Rv3T3+H3TPbUvWOw5tuSwhrVhkHHZhk4hC9VXeAOKR26/IsUAT4FsB4mT+kfIdxxb1BezQDEg/voPO8A==}
     cpu: [x64]
     os: [linux]
 
-  '@rollup/rollup-linux-x64-musl@4.50.2':
-    resolution: {integrity: sha512-HPNJwxPL3EmhzeAnsWQCM3DcoqOz3/IC6de9rWfGR8ZCuEHETi9km66bH/wG3YH0V3nyzyFEGUZeL5PKyy4xvw==}
+  '@rollup/rollup-linux-x64-musl@4.51.0':
+    resolution: {integrity: sha512-P7U7U03+E5w7WgJtvSseNLOX1UhknVPmEaqgUENFWfNxNBa1OhExT6qYGmyF8gepcxWSaSfJsAV5UwhWrYefdQ==}
     cpu: [x64]
     os: [linux]
 
-  '@rollup/rollup-openharmony-arm64@4.50.2':
-    resolution: {integrity: sha512-nMKvq6FRHSzYfKLHZ+cChowlEkR2lj/V0jYj9JnGUVPL2/mIeFGmVM2mLaFeNa5Jev7W7TovXqXIG2d39y1KYA==}
+  '@rollup/rollup-openharmony-arm64@4.51.0':
+    resolution: {integrity: sha512-FuD8g3u9W6RPwdO1R45hZFORwa1g9YXEMesAKP/sOi7mDqxjbni8S3zAXJiDcRfGfGBqpRYVuH54Gu3FTuSoEw==}
     cpu: [arm64]
     os: [openharmony]
 
-  '@rollup/rollup-win32-arm64-msvc@4.50.2':
-    resolution: {integrity: sha512-eFUvvnTYEKeTyHEijQKz81bLrUQOXKZqECeiWH6tb8eXXbZk+CXSG2aFrig2BQ/pjiVRj36zysjgILkqarS2YA==}
+  '@rollup/rollup-win32-arm64-msvc@4.51.0':
+    resolution: {integrity: sha512-zST+FdMCX3QAYfmZX3dp/Fy8qLUetfE17QN5ZmmFGPrhl86qvRr+E9u2bk7fzkIXsfQR30Z7ZRS7WMryPPn4rQ==}
     cpu: [arm64]
     os: [win32]
 
-  '@rollup/rollup-win32-ia32-msvc@4.50.2':
-    resolution: {integrity: sha512-cBaWmXqyfRhH8zmUxK3d3sAhEWLrtMjWBRwdMMHJIXSjvjLKvv49adxiEz+FJ8AP90apSDDBx2Tyd/WylV6ikA==}
+  '@rollup/rollup-win32-ia32-msvc@4.51.0':
+    resolution: {integrity: sha512-U+qhoCVAZmTHCmUKxdQxw1jwAFNFXmOpMME7Npt5GTb1W/7itfgAgNluVOvyeuSeqW+dEQLFuNZF3YZPO8XkMg==}
     cpu: [ia32]
     os: [win32]
 
-  '@rollup/rollup-win32-x64-msvc@4.50.2':
-    resolution: {integrity: sha512-APwKy6YUhvZaEoHyM+9xqmTpviEI+9eL7LoCH+aLcvWYHJ663qG5zx7WzWZY+a9qkg5JtzcMyJ9z0WtQBMDmgA==}
+  '@rollup/rollup-win32-x64-msvc@4.51.0':
+    resolution: {integrity: sha512-z6UpFzMhXSD8NNUfCi2HO+pbpSzSWIIPgb1TZsEZjmZYtk6RUIC63JYjlFBwbBZS3jt3f1q6IGfkj3g+GnBt2Q==}
     cpu: [x64]
     os: [win32]
 
@@ -625,6 +1206,12 @@ packages:
   '@types/node@24.5.0':
     resolution: {integrity: sha512-y1dMvuvJspJiPSDZUQ+WMBvF7dpnEqN4x9DDC9ie5Fs/HUZJA3wFp7EhHoVaKX/iI0cRoECV8X2jL8zi0xrHCg==}
 
+  '@types/papaparse@5.3.16':
+    resolution: {integrity: sha512-T3VuKMC2H0lgsjI9buTB3uuKj3EMD2eap1MOuEQuBQ44EnDx/IkGhU6EwiTf9zG3za4SKlmwKAImdDKdNnCsXg==}
+
+  '@types/parse-json@4.0.2':
+    resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
+
   '@types/react-dom@19.1.9':
     resolution: {integrity: sha512-qXRuZaOsAdXKFyOhRBg6Lqqc0yay13vN7KrIg4L7N4aaHN68ma9OK3NE1BoDFgFOTfM7zg+3/8+2n8rLUH3OKQ==}
     peerDependencies:
@@ -632,6 +1219,9 @@ packages:
 
   '@types/react@19.1.13':
     resolution: {integrity: sha512-hHkbU/eoO3EG5/MZkuFSKmYqPbSVk5byPFa3e7y/8TybHiLMACgI8seVYlicwk7H5K/rI2px9xrQp/C+AUDTiQ==}
+
+  '@types/ua-parser-js@0.7.39':
+    resolution: {integrity: sha512-P/oDfpofrdtF5xw433SPALpdSchtJmY7nsJItf8h3KXqOslkbySh8zq4dSWXH2oTjRvJ5PczVEoCZPow6GicLg==}
 
   '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250918.1':
     resolution: {integrity: sha512-G2zQlFbeROhuSWSIXauM1dkUWdjIEuiKWRZsy1te7OgPikHPbyT9OFs55UNCd1vACXMzHeFGO7X5YR1uwQitbQ==}
@@ -731,6 +1321,10 @@ packages:
     resolution: {integrity: sha512-Izi8RQcffqCeNVgFigKli1ssklIbpHnCYc6AknXGYoB6grJqyeby7jv12JUQgmTAnIDnbck1uxksT4dzN3PWBA==}
     engines: {node: '>=12'}
 
+  babel-plugin-macros@3.1.0:
+    resolution: {integrity: sha512-Cg7TFGpIr01vOQNODXOOaGz2NpCU5gl8x1qJFbb6hbZxR7XrcE2vtbAsTAbJ7/xwJtUuJEw8K8Zr/AE0LHlesg==}
+    engines: {node: '>=10', npm: '>=6'}
+
   babel-plugin-react-compiler@19.1.0-rc.3:
     resolution: {integrity: sha512-mjRn69WuTz4adL0bXGx8Rsyk1086zFJeKmes6aK0xPuK3aaXmDJdLHqwKKMrpm6KAI1MCoUK72d2VeqQbu8YIA==}
 
@@ -758,6 +1352,22 @@ packages:
     resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
     engines: {node: '>=8'}
 
+  call-bind-apply-helpers@1.0.2:
+    resolution: {integrity: sha512-Sp1ablJ0ivDkSzjcaJdxEunN5/XvksFJ2sMBFfq6x0ryhQV/2b/KwFe21cMpmHtPOSij8K99/wSfoEuTObmuMQ==}
+    engines: {node: '>= 0.4'}
+
+  call-bind@1.0.8:
+    resolution: {integrity: sha512-oKlSFMcMwpUg2ednkhQ454wfWiU/ul3CkJe/PEHcTKuiX6RpbehUiFMXu13HalGZxfUwCQzZG747YXBn1im9ww==}
+    engines: {node: '>= 0.4'}
+
+  call-bound@1.0.4:
+    resolution: {integrity: sha512-+ys997U96po4Kx/ABpBCqhA9EuxJaQWDQg7295H4hBphv3IZg0boBKuwYpt4YXp6MZ5AmZQnU/tyMTlRpaSejg==}
+    engines: {node: '>= 0.4'}
+
+  callsites@3.1.0:
+    resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
+    engines: {node: '>=6'}
+
   caniuse-lite@1.0.30001743:
     resolution: {integrity: sha512-e6Ojr7RV14Un7dz6ASD0aZDmQPT/A+eZU+nuTNfjqmRrmkmQlnTNWH0SKmqagx9PeW87UVqapSurtAXifmtdmw==}
 
@@ -783,8 +1393,18 @@ packages:
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
 
+  convert-source-map@1.9.0:
+    resolution: {integrity: sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==}
+
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
+
+  cosmiconfig@7.1.0:
+    resolution: {integrity: sha512-AdmX6xUzdNASswsFtmwSt7Vj8po9IuqXm0UXz7QKPuEUmPB4XyjGfaAr2PSuELMwkRMVH1EpIkX5bTZGRB3eCA==}
+    engines: {node: '>=10'}
+
+  crelt@1.0.6:
+    resolution: {integrity: sha512-VQ2MBenTq1fWZUH9DJNGti7kKv6EeAuYr3cLwxUWhIu1baTaXh4Ib5W2CqHVqib4/MqbYGJqiL3Zb8GJZr3l4g==}
 
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
@@ -809,6 +1429,10 @@ packages:
     resolution: {integrity: sha512-h5k/5U50IJJFpzfL6nO9jaaumfjO/f2NjK/oYB2Djzm4p9L+3T9qWpZqZ2hAbLPuuYq9wrU08WQyBTL5GbPk5Q==}
     engines: {node: '>=6'}
 
+  define-data-property@1.1.4:
+    resolution: {integrity: sha512-rBMvIzlpA8v6E+SJZoo++HAYqsLrkg7MSfIinMPFhmkorw7X+dOXVJQs+QT69zGkzMyfDnIMN2Wid1+NbL3T+A==}
+    engines: {node: '>= 0.4'}
+
   detect-indent@6.1.0:
     resolution: {integrity: sha512-reYkTUJAZb9gUuZ2RvVCNhVHdg62RHnJ7WJl8ftMi4diZ6NWlciOzQN88pUhSELEwflJht4oQDv0F0BMlwaYtA==}
     engines: {node: '>=8'}
@@ -829,6 +1453,10 @@ packages:
     resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
     engines: {node: '>=10'}
 
+  dunder-proto@1.0.1:
+    resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
+    engines: {node: '>= 0.4'}
+
   eciesjs@0.4.15:
     resolution: {integrity: sha512-r6kEJXDKecVOCj2nLMuXK/FCPeurW33+3JRpfXVbjLja3XUYFfD9I/JBreH6sUyzcm3G/YQboBjMla6poKeSdA==}
     engines: {bun: '>=1', deno: '>=2', node: '>=16'}
@@ -840,8 +1468,23 @@ packages:
     resolution: {integrity: sha512-rRqJg/6gd538VHvR3PSrdRBb/1Vy2YfzHqzvbhGIQpDRKIa4FgV/54b5Q1xYSxOOwKvjXweS26E0Q+nAMwp2pQ==}
     engines: {node: '>=8.6'}
 
+  error-ex@1.3.4:
+    resolution: {integrity: sha512-sqQamAnR14VgCr1A618A3sGrygcpK+HEbenA/HiEAkkUwcZIIB/tgWqHFxWgOyDh4nB4JCRimh79dR5Ywc9MDQ==}
+
+  es-define-property@1.0.1:
+    resolution: {integrity: sha512-e3nRfgfUZ4rNGL232gUgX06QNyyez04KdjFrF+LTRoOXmrOgFKDg4BCdsjW8EnT69eqdYGmRpJwiPVYNrCaW3g==}
+    engines: {node: '>= 0.4'}
+
+  es-errors@1.3.0:
+    resolution: {integrity: sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==}
+    engines: {node: '>= 0.4'}
+
   es-module-lexer@1.7.0:
     resolution: {integrity: sha512-jEQoCwk8hyb2AZziIOLhDqpm5+2ww5uIE6lkO/6jcOCusfk6LhMHpXXfBLXTZ7Ydyt0j4VoUQv6uGNYbdW+kBA==}
+
+  es-object-atoms@1.1.1:
+    resolution: {integrity: sha512-FGgH2h8zKNim9ljj7dankFPcICIK9Cp5bm+c2gQSYePhpaG5+esrLODihIorn+Pe6FGJzWhXQotPv73jTaldXA==}
+    engines: {node: '>= 0.4'}
 
   esbuild@0.25.10:
     resolution: {integrity: sha512-9RiGKvCwaqxO2owP61uQ4BgNborAQskMR6QusfWzQqv7AZOg5oGehdY2pRJMTKuwxd1IDBP4rSbI5lHzU7SMsQ==}
@@ -851,6 +1494,13 @@ packages:
   escalade@3.2.0:
     resolution: {integrity: sha512-WUj2qlxaQtO4g6Pq5c29GTcWGDyd8itL8zTlipgECz3JesAiiOKotd8JU6otB3PACgG6xkJUyVhboMS+bje/jA==}
     engines: {node: '>=6'}
+
+  escape-html@1.0.3:
+    resolution: {integrity: sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==}
+
+  escape-string-regexp@4.0.0:
+    resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
+    engines: {node: '>=10'}
 
   esprima@4.0.1:
     resolution: {integrity: sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==}
@@ -870,6 +1520,9 @@ packages:
 
   extendable-error@0.1.7:
     resolution: {integrity: sha512-UOiS2in6/Q0FK0R0q6UY9vYpQ21mr/Qn1KOnte7vsACuNJf514WvCCUHSRCPcgjPT2bAhNIJdlE6bVap1GKmeg==}
+
+  fast-deep-equal@3.1.3:
+    resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
 
   fast-glob@3.3.3:
     resolution: {integrity: sha512-7MptL8U0cqcFdzIzwOTHoilX9x5BrNqye7Z/LuC7kCMRio1EMSyqRK3BEAUD7sXRq4iT4AzTVuZdhgQ2TCvYLg==}
@@ -891,6 +1544,9 @@ packages:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
     engines: {node: '>=8'}
 
+  find-root@1.1.0:
+    resolution: {integrity: sha512-NKfW6bec6GfKc0SGx1e07QZY9PE99u0Bft/0rzSD5k3sO/vwkVUpDUKVm5Gpp5Ue3YfShPFTX2070tDs5kB9Ng==}
+
   find-up@4.1.0:
     resolution: {integrity: sha512-PpOwAdQ/YlXQ2vj8a3h8IipDuYRi3wceVQQGYWxNINccq40Anw7BlsEXCMbt1Zt+OLA6Fq9suIpIWD0OsnISlw==}
     engines: {node: '>=8'}
@@ -908,9 +1564,20 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
+  function-bind@1.1.2:
+    resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
+
   gensync@1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
     engines: {node: '>=6.9.0'}
+
+  get-intrinsic@1.3.0:
+    resolution: {integrity: sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==}
+    engines: {node: '>= 0.4'}
+
+  get-proto@1.0.1:
+    resolution: {integrity: sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g==}
+    engines: {node: '>= 0.4'}
 
   get-stream@6.0.1:
     resolution: {integrity: sha512-ts6Wi+2j3jQjqi70w5AlN8DFnkSwC+MqmxEzdEALB2qXZYV3X/b1CTfgPLGJNMeAWxdPfU8FO1ms3NUfaHCPYg==}
@@ -924,8 +1591,26 @@ packages:
     resolution: {integrity: sha512-jhIXaOzy1sb8IyocaruWSn1TjmnBVs8Ayhcy83rmxNJ8q2uWKCAj3CnJY+KpGSXCueAPc0i05kVvVKtP1t9S3g==}
     engines: {node: '>=10'}
 
+  gopd@1.2.0:
+    resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
+    engines: {node: '>= 0.4'}
+
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
+
+  has-property-descriptors@1.0.2:
+    resolution: {integrity: sha512-55JNKuIW+vq4Ke1BjOTjM2YctQIvCT7GFzHwmfZPGo5wnrgkid0YQtnAleFSqumZm4az3n2BS+erby5ipJdgrg==}
+
+  has-symbols@1.1.0:
+    resolution: {integrity: sha512-1cDNdwJ2Jaohmb3sg4OmKaMBwuC48sYni5HUw2DvsC8LjGTLK9h+eb1X6RyuOHe4hT0ULCW68iomhjUoKUqlPQ==}
+    engines: {node: '>= 0.4'}
+
+  hasown@2.0.2:
+    resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
+    engines: {node: '>= 0.4'}
+
+  hoist-non-react-statics@3.3.2:
+    resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
 
   human-id@4.1.1:
     resolution: {integrity: sha512-3gKm/gCSUipeLsRYZbbdA1BD83lBoWUkZ7G9VFrhWPAU76KwYo5KR8V28bpoPm/ygy0x5/GCbpRQdY7VLYCoIg==}
@@ -942,6 +1627,17 @@ packages:
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
     engines: {node: '>= 4'}
+
+  import-fresh@3.3.1:
+    resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
+    engines: {node: '>=6'}
+
+  is-arrayish@0.2.1:
+    resolution: {integrity: sha512-zz06S8t0ozoDXMG+ube26zeCTNXcKIPJZJi8hBrF4idCLms4CG9QtK7qBl1boi5ODzFpjswb5JPmHCbMpjaYzg==}
+
+  is-core-module@2.16.1:
+    resolution: {integrity: sha512-UfoeMA6fIJ8wTYFEUjelnaGI67v6+N7qXJEvQuIGa99l4xsCruSYOVSQ0uPANn4dAzm8lkYPaKLrrijLq7x23w==}
+    engines: {node: '>= 0.4'}
 
   is-extglob@2.1.1:
     resolution: {integrity: sha512-SbKbANkN603Vi4jEZv49LeVJMn4yGwsbzZworEoyEiutsN3nJYdbO36zfhGJ6QEDpOZIFkDtnq5JRxmvl3jsoQ==}
@@ -966,6 +1662,9 @@ packages:
   is-windows@1.0.2:
     resolution: {integrity: sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==}
     engines: {node: '>=0.10.0'}
+
+  isarray@2.0.5:
+    resolution: {integrity: sha512-xHjhDr3cNBK0BzdUJSPXZntQUx/mwMS5Rw4A7lPJ90XGAO6ISP/ePDNuo0vhqOZU+UD5JoodwCAAoZQd3FeAKw==}
 
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
@@ -993,6 +1692,13 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
+  json-parse-even-better-errors@2.3.1:
+    resolution: {integrity: sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==}
+
+  json-stable-stringify@1.3.0:
+    resolution: {integrity: sha512-qtYiSSFlwot9XHtF9bD9c7rwKjr+RecWT//ZnPvSmEjpV5mmPOCN4j8UjY5hbjNkOwZ/jQv3J6R1/pL7RwgMsg==}
+    engines: {node: '>= 0.4'}
+
   json5@2.2.3:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
@@ -1000,6 +1706,12 @@ packages:
 
   jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
+
+  jsonify@0.0.1:
+    resolution: {integrity: sha512-2/Ki0GcmuqSrgFyelQq9M05y7PS0mEwuIzrf3f1fPqkVDVRvZrPZtVSMHxdgo8Aq0sxAOb/cr2aqqA3LeWHVPg==}
+
+  keycode@2.2.1:
+    resolution: {integrity: sha512-Rdgz9Hl9Iv4QKi8b0OlCRQEzp4AgVxyCtz5S/+VIHezDmrDhkp2N2TqBWOLz0/gbeREXOOiI9/4b8BY9uw2vFg==}
 
   lightningcss-darwin-arm64@1.30.1:
     resolution: {integrity: sha512-c8JK7hyE65X1MHMN+Viq9n11RRC7hgin3HhYKhrMyaXflk5GVplZ60IxyoVtzILeKr+xAJwg6zK6sjTBJ0FKYQ==}
@@ -1065,12 +1777,19 @@ packages:
     resolution: {integrity: sha512-xi6IyHML+c9+Q3W0S4fCQJOym42pyurFiJUHEcEyHS0CeKzia4yZDEsLlqOFykxOdHpNy0NmvVO31vcSqAxJCg==}
     engines: {node: '>= 12.0.0'}
 
+  lines-and-columns@1.2.4:
+    resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
+
   locate-path@5.0.0:
     resolution: {integrity: sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==}
     engines: {node: '>=8'}
 
   lodash.startcase@4.4.0:
     resolution: {integrity: sha512-+WKqsK294HMSc2jEbNgpHpd0JfIBhp7rEV4aqXWqFr6AlXov+SlcgB1Fv01y2kGe3Gc8nMW7VA0SrGuSkRfIEg==}
+
+  loose-envify@1.4.0:
+    resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
+    hasBin: true
 
   loupe@3.2.1:
     resolution: {integrity: sha512-CdzqowRJCeLU72bHvWqwRBBlLcMEtIvGrlvef74kMnV2AolS9Y8xUv1I0U/MNAWMhBlKIoyuEgoJ0t/bbwHbLQ==}
@@ -1080,6 +1799,10 @@ packages:
 
   magic-string@0.30.19:
     resolution: {integrity: sha512-2N21sPY9Ws53PZvsEpVtNuSW+ScYbQdp4b9qUaL+9QkHUrGFKo56Lg9Emg5s9V/qrtNBmiR01sYhUOwu3H+VOw==}
+
+  math-intrinsics@1.1.0:
+    resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
+    engines: {node: '>= 0.4'}
 
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
@@ -1096,6 +1819,12 @@ packages:
     resolution: {integrity: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==}
     engines: {node: '>=6'}
 
+  moment-timezone@0.6.0:
+    resolution: {integrity: sha512-ldA5lRNm3iJCWZcBCab4pnNL3HSZYXVb/3TYr75/1WCTWYuTqYUb5f/S384pncYjJ88lbO8Z4uPDvmoluHJc8Q==}
+
+  moment@2.30.1:
+    resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
+
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -1107,6 +1836,9 @@ packages:
     resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  no-scroll@2.1.1:
+    resolution: {integrity: sha512-YTzGAJOo/B6hkodeT5SKKHpOhAzjMfkUCCXjLJwjWk2F4/InIg+HbdH9kmT7bKpleDuqLZDTRy2OdNtAj0IVyQ==}
 
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
@@ -1123,6 +1855,14 @@ packages:
   npm-run-path@4.0.1:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}
     engines: {node: '>=8'}
+
+  object-assign@4.1.1:
+    resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
+    engines: {node: '>=0.10.0'}
+
+  object-keys@1.1.1:
+    resolution: {integrity: sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==}
+    engines: {node: '>= 0.4'}
 
   object-treeify@1.1.33:
     resolution: {integrity: sha512-EFVjAYfzWqWsBMRHPMAXLCDIJnpMhdWAqR7xG6M6a2cs6PMFpl/+Z20w9zDW4vkxOFfddegBKq9Rehd0bxWE7A==}
@@ -1158,6 +1898,17 @@ packages:
   package-manager-detector@0.2.11:
     resolution: {integrity: sha512-BEnLolu+yuz22S56CU1SUKq3XC3PkwD5wv4ikR4MfGvnRVcmzXR9DwSlW2fEamyTPyXHomBJRzgapeuBvRNzJQ==}
 
+  papaparse@5.5.3:
+    resolution: {integrity: sha512-5QvjGxYVjxO59MGU2lHVYpRWBBtKHnlIAcSe1uNFCkkptUh63NFRj0FJQm7nR67puEruUci/ZkjmEFrjCAyP4A==}
+
+  parent-module@1.0.1:
+    resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
+    engines: {node: '>=6'}
+
+  parse-json@5.2.0:
+    resolution: {integrity: sha512-ayCKvm/phCGxOkYRSCM82iDwct8/EonSEgCSxWxD7ve6jHggsFl4fZVQBPRNgQoKiuV/odhFrGzQXZwbifC8Rg==}
+    engines: {node: '>=8'}
+
   path-exists@4.0.0:
     resolution: {integrity: sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==}
     engines: {node: '>=8'}
@@ -1165,6 +1916,9 @@ packages:
   path-key@3.1.1:
     resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==}
     engines: {node: '>=8'}
+
+  path-parse@1.0.7:
+    resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
 
   path-type@4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
@@ -1201,6 +1955,9 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
 
+  prop-types@15.8.1:
+    resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
+
   quansync@0.2.11:
     resolution: {integrity: sha512-AifT7QEbW9Nri4tAwR5M/uzpBuqfZf+zwaEM/QkzEjj7NBuFD2rBuy0K3dE+8wltbezDV7JMA0WfnCPYRSYbXA==}
 
@@ -1211,6 +1968,14 @@ packages:
     resolution: {integrity: sha512-Cssogys2XZu6SqxRdX2xd8cQAf57BBvFbLEBlIa77161lninbKUn/EqbecCe7W3eqDQfg3rIoOwzExzgCh7h/g==}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
+
+  react-dom@19.1.1:
+    resolution: {integrity: sha512-Dlq/5LAZgF0Gaz6yiqZCf6VCcZs1ghAJyrsu84Q/GT0gV+mCxbfmKNoGRKBYMJ8IEdGPqu49YWXD02GCknEDkw==}
+    peerDependencies:
+      react: ^19.1.1
+
+  react-is@16.13.1:
+    resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
   react-refresh@0.17.0:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
@@ -1224,16 +1989,25 @@ packages:
     resolution: {integrity: sha512-VIMnQi/Z4HT2Fxuwg5KrY174U1VdUIASQVWXXyqtNRtxSr9IYkn1rsI6Tb6HsrHCmB7gVpNwX6JxPTHcH6IoTA==}
     engines: {node: '>=6'}
 
+  resolve-from@4.0.0:
+    resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
+    engines: {node: '>=4'}
+
   resolve-from@5.0.0:
     resolution: {integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==}
     engines: {node: '>=8'}
+
+  resolve@1.22.10:
+    resolution: {integrity: sha512-NPRy+/ncIMeDlTAsuqwKIiferiawhefFJtkNSW0qZJEqMEb+qBt/77B/jGeeek+F0uOeN05CDa6HXbbIgtVX4w==}
+    engines: {node: '>= 0.4'}
+    hasBin: true
 
   reusify@1.1.0:
     resolution: {integrity: sha512-g6QUff04oZpHs0eG5p83rFLhHeV00ug/Yf9nZM6fLeUrPguBTkTQOdpAWWspMh55TZfVQDPaN3NQJfbVRAxdIw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
 
-  rollup@4.50.2:
-    resolution: {integrity: sha512-BgLRGy7tNS9H66aIMASq1qSYbAAJV6Z6WR4QYTvj5FgF15rZ/ympT1uixHXwzbZUBDbkvqUI1KR0fH1FhMaQ9w==}
+  rollup@4.51.0:
+    resolution: {integrity: sha512-7cR0XWrdp/UAj2HMY/Y4QQEUjidn3l2AY1wSeZoFjMbD8aOMPoV9wgTFYbrJpPzzvejDEini1h3CiUP8wLzxQA==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
 
@@ -1243,6 +2017,9 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
+  scheduler@0.26.0:
+    resolution: {integrity: sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA==}
+
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
@@ -1251,6 +2028,10 @@ packages:
     resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
     engines: {node: '>=10'}
     hasBin: true
+
+  set-function-length@1.2.2:
+    resolution: {integrity: sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==}
+    engines: {node: '>= 0.4'}
 
   shebang-command@2.0.0:
     resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}
@@ -1280,6 +2061,10 @@ packages:
 
   source-map-support@0.5.21:
     resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
+
+  source-map@0.5.7:
+    resolution: {integrity: sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==}
+    engines: {node: '>=0.10.0'}
 
   source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
@@ -1312,6 +2097,16 @@ packages:
   strip-literal@3.0.0:
     resolution: {integrity: sha512-TcccoMhJOM3OebGhSBEmp3UZ2SfDMZUEBdRA/9ynfLi8yYajyWX3JiXArcJt4Umh4vISpspkQIY8ZZoCqjbviA==}
 
+  style-mod@4.1.2:
+    resolution: {integrity: sha512-wnD1HyVqpJUI2+eKZ+eo1UwghftP6yuFheBqqe+bWCotBjC2K1YnteJILRMs3SM4V/0dLEW1SC27MWP5y+mwmw==}
+
+  stylis@4.2.0:
+    resolution: {integrity: sha512-Orov6g6BB1sDfYgzWfTHDOxamtX1bE/zo104Dh9e6fqJ3PooipYyfJ0pUmrZO2wAvO8YbEyeFrkV91XTsGMSrw==}
+
+  supports-preserve-symlinks-flag@1.0.0:
+    resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
+    engines: {node: '>= 0.4'}
+
   term-size@2.2.1:
     resolution: {integrity: sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==}
     engines: {node: '>=8'}
@@ -1323,6 +2118,9 @@ packages:
 
   tinybench@2.9.0:
     resolution: {integrity: sha512-0+DUvqWMValLmha6lr4kD8iAMK1HzV0/aKnCtWb9v9641TnP/MFb7Pc2bxoxQjTXAErryXVgUOfv2YqNllqGeg==}
+
+  tinycolor2@1.6.0:
+    resolution: {integrity: sha512-XPaBkWQJdsf3pLKJV9p4qN/S+fm2Oj8AIPo1BTUhg5oxkvm9+SVEGFdhyOz7tTdUTfvxMiAs4sp6/eZO2Ew+pw==}
 
   tinyexec@0.3.2:
     resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==}
@@ -1349,6 +2147,10 @@ packages:
 
   tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
+
+  ua-parser-js@1.0.41:
+    resolution: {integrity: sha512-LbBDqdIC5s8iROCUjMbW1f5dJQTEFB1+KO9ogbvlb3nm9n4YHa5p4KTvFPWvh2Hs8gZMBuiB1/8+pdfe/tDPug==}
+    hasBin: true
 
   undici-types@7.12.0:
     resolution: {integrity: sha512-goOacqME2GYyOZZfb5Lgtu+1IDmAlAEu5xnD3+xTzS10hT0vzpf0SPjkXwAw9Jm+4n/mQGDP3LO8CPbYROeBfQ==}
@@ -1436,6 +2238,9 @@ packages:
       jsdom:
         optional: true
 
+  w3c-keyname@2.2.8:
+    resolution: {integrity: sha512-dpojBhNsCNN7T82Tm7k26A6G9ML3NkhDsnw9n/eoxSRlVBB4CEtIQ/KTCLI2Fwf3ataSXRhYFkQi3SlnFwPvPQ==}
+
   webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
 
@@ -1459,6 +2264,10 @@ packages:
 
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
+
+  yaml@1.10.2:
+    resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
+    engines: {node: '>= 6'}
 
 snapshots:
 
@@ -1770,6 +2579,101 @@ snapshots:
       human-id: 4.1.1
       prettier: 2.8.8
 
+  '@codemirror/autocomplete@6.18.7':
+    dependencies:
+      '@codemirror/language': 6.11.3
+      '@codemirror/state': 6.5.2
+      '@codemirror/view': 6.38.2
+      '@lezer/common': 1.2.3
+
+  '@codemirror/commands@6.8.1':
+    dependencies:
+      '@codemirror/language': 6.11.3
+      '@codemirror/state': 6.5.2
+      '@codemirror/view': 6.38.2
+      '@lezer/common': 1.2.3
+
+  '@codemirror/lang-css@6.3.1':
+    dependencies:
+      '@codemirror/autocomplete': 6.18.7
+      '@codemirror/language': 6.11.3
+      '@codemirror/state': 6.5.2
+      '@lezer/common': 1.2.3
+      '@lezer/css': 1.3.0
+
+  '@codemirror/lang-html@6.4.10':
+    dependencies:
+      '@codemirror/autocomplete': 6.18.7
+      '@codemirror/lang-css': 6.3.1
+      '@codemirror/lang-javascript': 6.2.4
+      '@codemirror/language': 6.11.3
+      '@codemirror/state': 6.5.2
+      '@codemirror/view': 6.38.2
+      '@lezer/common': 1.2.3
+      '@lezer/css': 1.3.0
+      '@lezer/html': 1.3.10
+
+  '@codemirror/lang-javascript@6.2.4':
+    dependencies:
+      '@codemirror/autocomplete': 6.18.7
+      '@codemirror/language': 6.11.3
+      '@codemirror/lint': 6.8.5
+      '@codemirror/state': 6.5.2
+      '@codemirror/view': 6.38.2
+      '@lezer/common': 1.2.3
+      '@lezer/javascript': 1.5.4
+
+  '@codemirror/lang-json@6.0.2':
+    dependencies:
+      '@codemirror/language': 6.11.3
+      '@lezer/json': 1.0.3
+
+  '@codemirror/lang-markdown@6.3.4':
+    dependencies:
+      '@codemirror/autocomplete': 6.18.7
+      '@codemirror/lang-html': 6.4.10
+      '@codemirror/language': 6.11.3
+      '@codemirror/state': 6.5.2
+      '@codemirror/view': 6.38.2
+      '@lezer/common': 1.2.3
+      '@lezer/markdown': 1.4.3
+
+  '@codemirror/language@6.11.3':
+    dependencies:
+      '@codemirror/state': 6.5.2
+      '@codemirror/view': 6.38.2
+      '@lezer/common': 1.2.3
+      '@lezer/highlight': 1.2.1
+      '@lezer/lr': 1.4.2
+      style-mod: 4.1.2
+
+  '@codemirror/legacy-modes@6.5.1':
+    dependencies:
+      '@codemirror/language': 6.11.3
+
+  '@codemirror/lint@6.8.5':
+    dependencies:
+      '@codemirror/state': 6.5.2
+      '@codemirror/view': 6.38.2
+      crelt: 1.0.6
+
+  '@codemirror/search@6.5.11':
+    dependencies:
+      '@codemirror/state': 6.5.2
+      '@codemirror/view': 6.38.2
+      crelt: 1.0.6
+
+  '@codemirror/state@6.5.2':
+    dependencies:
+      '@marijn/find-cluster-break': 1.0.2
+
+  '@codemirror/view@6.38.2':
+    dependencies:
+      '@codemirror/state': 6.5.2
+      crelt: 1.0.6
+      style-mod: 4.1.2
+      w3c-keyname: 2.2.8
+
   '@dotenvx/dotenvx@1.50.1':
     dependencies:
       commander: 11.1.0
@@ -1785,6 +2689,74 @@ snapshots:
   '@ecies/ciphers@0.2.4(@noble/ciphers@1.3.0)':
     dependencies:
       '@noble/ciphers': 1.3.0
+
+  '@emotion/babel-plugin@11.13.5':
+    dependencies:
+      '@babel/helper-module-imports': 7.27.1
+      '@babel/runtime': 7.28.4
+      '@emotion/hash': 0.9.2
+      '@emotion/memoize': 0.9.0
+      '@emotion/serialize': 1.3.3
+      babel-plugin-macros: 3.1.0
+      convert-source-map: 1.9.0
+      escape-string-regexp: 4.0.0
+      find-root: 1.1.0
+      source-map: 0.5.7
+      stylis: 4.2.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@emotion/cache@11.14.0':
+    dependencies:
+      '@emotion/memoize': 0.9.0
+      '@emotion/sheet': 1.4.0
+      '@emotion/utils': 1.4.2
+      '@emotion/weak-memoize': 0.4.0
+      stylis: 4.2.0
+
+  '@emotion/hash@0.9.2': {}
+
+  '@emotion/is-prop-valid@1.4.0':
+    dependencies:
+      '@emotion/memoize': 0.9.0
+
+  '@emotion/memoize@0.9.0': {}
+
+  '@emotion/react@11.14.0(@types/react@19.1.13)(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@emotion/babel-plugin': 11.13.5
+      '@emotion/cache': 11.14.0
+      '@emotion/serialize': 1.3.3
+      '@emotion/use-insertion-effect-with-fallbacks': 1.2.0(react@19.1.1)
+      '@emotion/utils': 1.4.2
+      '@emotion/weak-memoize': 0.4.0
+      hoist-non-react-statics: 3.3.2
+      react: 19.1.1
+    optionalDependencies:
+      '@types/react': 19.1.13
+    transitivePeerDependencies:
+      - supports-color
+
+  '@emotion/serialize@1.3.3':
+    dependencies:
+      '@emotion/hash': 0.9.2
+      '@emotion/memoize': 0.9.0
+      '@emotion/unitless': 0.10.0
+      '@emotion/utils': 1.4.2
+      csstype: 3.1.3
+
+  '@emotion/sheet@1.4.0': {}
+
+  '@emotion/unitless@0.10.0': {}
+
+  '@emotion/use-insertion-effect-with-fallbacks@1.2.0(react@19.1.1)':
+    dependencies:
+      react: 19.1.1
+
+  '@emotion/utils@1.4.2': {}
+
+  '@emotion/weak-memoize@0.4.0': {}
 
   '@esbuild/aix-ppc64@0.25.10':
     optional: true
@@ -1873,6 +2845,1491 @@ snapshots:
 
   '@instructure/browserslist-config-instui@10.25.0': {}
 
+  '@instructure/console@10.25.0(react@19.1.1)':
+    dependencies:
+      react: 19.1.1
+
+  '@instructure/console@10.25.1-pr-snapshot-1757942390662(react@19.1.1)':
+    dependencies:
+      react: 19.1.1
+
+  '@instructure/debounce@10.25.1-pr-snapshot-1757942390662':
+    dependencies:
+      '@babel/runtime': 7.28.4
+
+  '@instructure/emotion@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@emotion/react': 11.14.0(@types/react@19.1.13)(react@19.1.1)
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/theme-registry': 10.25.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-decorator': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-themes': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      hoist-non-react-statics: 3.3.2
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/shared-types@10.25.0(react@19.1.1)':
+    dependencies:
+      prop-types: 15.8.1
+      react: 19.1.1
+
+  '@instructure/shared-types@10.25.1-pr-snapshot-1757942390662(react@19.1.1)':
+    dependencies:
+      react: 19.1.1
+
+  '@instructure/theme-registry@10.25.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.0(react@19.1.1)
+      '@instructure/shared-types': 10.25.0(react@19.1.1)
+      '@instructure/ui-utils': 10.25.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+    transitivePeerDependencies:
+      - react
+      - react-dom
+
+  '@instructure/ui-a11y-content@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-a11y-utils@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-alerts@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-themes': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      keycode: 2.2.1
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - supports-color
+
+  '@instructure/ui-avatar@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-badge@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-billboard@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-heading': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-img': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-breadcrumb@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-link': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-truncate-text': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-buttons@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-byline@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-calendar@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-simple-select': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-checkbox@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-svg-images': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-color-picker@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-drilldown': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-pill': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text-input': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-themes': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-color-utils@10.25.1-pr-snapshot-1757942390662':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      tinycolor2: 1.6.0
+
+  '@instructure/ui-date-input@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-calendar': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-selectable': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text-input': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      moment-timezone: 0.6.0
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-date-time-input@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-calendar': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-date-input': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-time-select': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-decorator@10.25.1-pr-snapshot-1757942390662':
+    dependencies:
+      '@babel/runtime': 7.28.4
+
+  '@instructure/ui-dialog@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-dom-utils@10.25.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.0(react@19.1.1)
+      '@instructure/shared-types': 10.25.0(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
+  '@instructure/ui-dom-utils@10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
+  '@instructure/ui-drawer-layout@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/debounce': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dialog': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-portal': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-drilldown@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-options': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-selectable': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-editable@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-flex': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-focusable': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - supports-color
+
+  '@instructure/ui-expandable@10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      react: 19.1.1
+    transitivePeerDependencies:
+      - react-dom
+
+  '@instructure/ui-file-drop@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-flex@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-focusable@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-form-field@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-grid': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-grid@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-heading@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-i18n@10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-decorator': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      hoist-non-react-statics: 3.3.2
+      moment-timezone: 0.6.0
+      react: 19.1.1
+    transitivePeerDependencies:
+      - react-dom
+
+  '@instructure/ui-icons@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/ui-svg-images': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-img@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-instructure@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-heading': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-modal': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-link@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-list@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-menu@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-metric@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-modal@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dialog': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-overlays': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-portal': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-motion@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-navigation@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/debounce': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-badge': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-focusable': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-menu': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-truncate-list': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-number-input@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-options@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-overlays@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dialog': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-focusable': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-portal': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      no-scroll: 2.1.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-pages@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-pagination@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-number-input': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-portal': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-themes': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-pill@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-truncate-text': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-popover@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dialog': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-portal@10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
+  '@instructure/ui-position@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/debounce': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-portal': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-progress@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-radio-input@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-range-input@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-rating@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-react-utils@10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@emotion/is-prop-valid': 1.4.0
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-decorator': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      hoist-non-react-statics: 3.3.2
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
+  '@instructure/ui-responsive@10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/debounce': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - react-dom
+
+  '@instructure/ui-select@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-options': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-selectable': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text-input': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-selectable@10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - react-dom
+
+  '@instructure/ui-side-nav-bar@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/debounce': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-badge': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-simple-select@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-select': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-source-code-editor@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@codemirror/autocomplete': 6.18.7
+      '@codemirror/commands': 6.8.1
+      '@codemirror/lang-css': 6.3.1
+      '@codemirror/lang-html': 6.4.10
+      '@codemirror/lang-javascript': 6.2.4
+      '@codemirror/lang-json': 6.0.2
+      '@codemirror/lang-markdown': 6.3.4
+      '@codemirror/language': 6.11.3
+      '@codemirror/legacy-modes': 6.5.1
+      '@codemirror/lint': 6.8.5
+      '@codemirror/search': 6.5.11
+      '@codemirror/state': 6.5.2
+      '@codemirror/view': 6.38.2
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text-input': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-themes': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@lezer/highlight': 1.2.1
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - supports-color
+
+  '@instructure/ui-spinner@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-svg-images@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-table@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-simple-select': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-tabs@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/debounce': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-focusable': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-tag@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-text-area@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/debounce': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-text-input@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tag': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-text@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-themes@10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/theme-registry': 10.25.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+    transitivePeerDependencies:
+      - react
+      - react-dom
+
+  '@instructure/ui-time-select@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-select': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-toggle-details@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-expandable': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-flex': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1757942390662
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-tooltip@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-top-nav-bar@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-avatar': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-breadcrumb': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dialog': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-drilldown': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-link': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-responsive': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tray': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-truncate-list': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-tray@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dialog': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-overlays': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-portal': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-tree-browser@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-img': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-truncate-list@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/debounce': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-truncate-text@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/debounce': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      escape-html: 1.0.3
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-utils@10.25.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.0(react@19.1.1)
+      '@instructure/shared-types': 10.25.0(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@types/ua-parser-js': 0.7.39
+      fast-deep-equal: 3.1.3
+      json-stable-stringify: 1.3.0
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      ua-parser-js: 1.0.41
+
+  '@instructure/ui-utils@10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@types/ua-parser-js': 0.7.39
+      fast-deep-equal: 3.1.3
+      json-stable-stringify: 1.3.0
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      ua-parser-js: 1.0.41
+
+  '@instructure/ui-view@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1757942390662(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1757942390662
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui@10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-alerts': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-avatar': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-badge': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-billboard': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-breadcrumb': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-byline': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-calendar': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-checkbox': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-color-picker': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-date-input': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-date-time-input': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dialog': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-drawer-layout': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-drilldown': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-editable': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-expandable': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-file-drop': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-flex': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-focusable': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-grid': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-heading': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-img': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-instructure': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-link': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-list': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-menu': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-metric': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-modal': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-navigation': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-number-input': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-options': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-overlays': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-pages': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-pagination': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-pill': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-portal': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-progress': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-radio-input': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-range-input': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-rating': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-responsive': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-select': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-selectable': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-side-nav-bar': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-simple-select': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-source-code-editor': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-spinner': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-svg-images': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-table': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tabs': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tag': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text-area': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text-input': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-themes': 10.25.1-pr-snapshot-1757942390662(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-time-select': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-toggle-details': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-top-nav-bar': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tray': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tree-browser': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-truncate-list': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-truncate-text': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1757942390662(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - supports-color
+
+  '@instructure/uid@10.25.1-pr-snapshot-1757942390662':
+    dependencies:
+      '@babel/runtime': 7.28.4
+
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -1897,6 +4354,45 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
+  '@lezer/common@1.2.3': {}
+
+  '@lezer/css@1.3.0':
+    dependencies:
+      '@lezer/common': 1.2.3
+      '@lezer/highlight': 1.2.1
+      '@lezer/lr': 1.4.2
+
+  '@lezer/highlight@1.2.1':
+    dependencies:
+      '@lezer/common': 1.2.3
+
+  '@lezer/html@1.3.10':
+    dependencies:
+      '@lezer/common': 1.2.3
+      '@lezer/highlight': 1.2.1
+      '@lezer/lr': 1.4.2
+
+  '@lezer/javascript@1.5.4':
+    dependencies:
+      '@lezer/common': 1.2.3
+      '@lezer/highlight': 1.2.1
+      '@lezer/lr': 1.4.2
+
+  '@lezer/json@1.0.3':
+    dependencies:
+      '@lezer/common': 1.2.3
+      '@lezer/highlight': 1.2.1
+      '@lezer/lr': 1.4.2
+
+  '@lezer/lr@1.4.2':
+    dependencies:
+      '@lezer/common': 1.2.3
+
+  '@lezer/markdown@1.4.3':
+    dependencies:
+      '@lezer/common': 1.2.3
+      '@lezer/highlight': 1.2.1
+
   '@manypkg/find-root@1.1.0':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -1912,6 +4408,8 @@ snapshots:
       fs-extra: 8.1.0
       globby: 11.1.0
       read-yaml-file: 1.1.0
+
+  '@marijn/find-cluster-break@1.0.2': {}
 
   '@noble/ciphers@1.3.0': {}
 
@@ -1935,67 +4433,67 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.0-beta.35': {}
 
-  '@rollup/rollup-android-arm-eabi@4.50.2':
+  '@rollup/rollup-android-arm-eabi@4.51.0':
     optional: true
 
-  '@rollup/rollup-android-arm64@4.50.2':
+  '@rollup/rollup-android-arm64@4.51.0':
     optional: true
 
-  '@rollup/rollup-darwin-arm64@4.50.2':
+  '@rollup/rollup-darwin-arm64@4.51.0':
     optional: true
 
-  '@rollup/rollup-darwin-x64@4.50.2':
+  '@rollup/rollup-darwin-x64@4.51.0':
     optional: true
 
-  '@rollup/rollup-freebsd-arm64@4.50.2':
+  '@rollup/rollup-freebsd-arm64@4.51.0':
     optional: true
 
-  '@rollup/rollup-freebsd-x64@4.50.2':
+  '@rollup/rollup-freebsd-x64@4.51.0':
     optional: true
 
-  '@rollup/rollup-linux-arm-gnueabihf@4.50.2':
+  '@rollup/rollup-linux-arm-gnueabihf@4.51.0':
     optional: true
 
-  '@rollup/rollup-linux-arm-musleabihf@4.50.2':
+  '@rollup/rollup-linux-arm-musleabihf@4.51.0':
     optional: true
 
-  '@rollup/rollup-linux-arm64-gnu@4.50.2':
+  '@rollup/rollup-linux-arm64-gnu@4.51.0':
     optional: true
 
-  '@rollup/rollup-linux-arm64-musl@4.50.2':
+  '@rollup/rollup-linux-arm64-musl@4.51.0':
     optional: true
 
-  '@rollup/rollup-linux-loong64-gnu@4.50.2':
+  '@rollup/rollup-linux-loong64-gnu@4.51.0':
     optional: true
 
-  '@rollup/rollup-linux-ppc64-gnu@4.50.2':
+  '@rollup/rollup-linux-ppc64-gnu@4.51.0':
     optional: true
 
-  '@rollup/rollup-linux-riscv64-gnu@4.50.2':
+  '@rollup/rollup-linux-riscv64-gnu@4.51.0':
     optional: true
 
-  '@rollup/rollup-linux-riscv64-musl@4.50.2':
+  '@rollup/rollup-linux-riscv64-musl@4.51.0':
     optional: true
 
-  '@rollup/rollup-linux-s390x-gnu@4.50.2':
+  '@rollup/rollup-linux-s390x-gnu@4.51.0':
     optional: true
 
-  '@rollup/rollup-linux-x64-gnu@4.50.2':
+  '@rollup/rollup-linux-x64-gnu@4.51.0':
     optional: true
 
-  '@rollup/rollup-linux-x64-musl@4.50.2':
+  '@rollup/rollup-linux-x64-musl@4.51.0':
     optional: true
 
-  '@rollup/rollup-openharmony-arm64@4.50.2':
+  '@rollup/rollup-openharmony-arm64@4.51.0':
     optional: true
 
-  '@rollup/rollup-win32-arm64-msvc@4.50.2':
+  '@rollup/rollup-win32-arm64-msvc@4.51.0':
     optional: true
 
-  '@rollup/rollup-win32-ia32-msvc@4.50.2':
+  '@rollup/rollup-win32-ia32-msvc@4.51.0':
     optional: true
 
-  '@rollup/rollup-win32-x64-msvc@4.50.2':
+  '@rollup/rollup-win32-x64-msvc@4.51.0':
     optional: true
 
   '@types/babel__core@7.20.5':
@@ -2032,7 +4530,12 @@ snapshots:
   '@types/node@24.5.0':
     dependencies:
       undici-types: 7.12.0
-    optional: true
+
+  '@types/papaparse@5.3.16':
+    dependencies:
+      '@types/node': 24.5.0
+
+  '@types/parse-json@4.0.2': {}
 
   '@types/react-dom@19.1.9(@types/react@19.1.13)':
     dependencies:
@@ -2041,6 +4544,8 @@ snapshots:
   '@types/react@19.1.13':
     dependencies:
       csstype: 3.1.3
+
+  '@types/ua-parser-js@0.7.39': {}
 
   '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250918.1':
     optional: true
@@ -2141,6 +4646,12 @@ snapshots:
 
   assertion-error@2.0.1: {}
 
+  babel-plugin-macros@3.1.0:
+    dependencies:
+      '@babel/runtime': 7.28.4
+      cosmiconfig: 7.1.0
+      resolve: 1.22.10
+
   babel-plugin-react-compiler@19.1.0-rc.3:
     dependencies:
       '@babel/types': 7.28.4
@@ -2167,6 +4678,25 @@ snapshots:
 
   cac@6.7.14: {}
 
+  call-bind-apply-helpers@1.0.2:
+    dependencies:
+      es-errors: 1.3.0
+      function-bind: 1.1.2
+
+  call-bind@1.0.8:
+    dependencies:
+      call-bind-apply-helpers: 1.0.2
+      es-define-property: 1.0.1
+      get-intrinsic: 1.3.0
+      set-function-length: 1.2.2
+
+  call-bound@1.0.4:
+    dependencies:
+      call-bind-apply-helpers: 1.0.2
+      get-intrinsic: 1.3.0
+
+  callsites@3.1.0: {}
+
   caniuse-lite@1.0.30001743: {}
 
   chai@5.3.3:
@@ -2187,7 +4717,19 @@ snapshots:
 
   commander@2.20.3: {}
 
+  convert-source-map@1.9.0: {}
+
   convert-source-map@2.0.0: {}
+
+  cosmiconfig@7.1.0:
+    dependencies:
+      '@types/parse-json': 4.0.2
+      import-fresh: 3.3.1
+      parse-json: 5.2.0
+      path-type: 4.0.0
+      yaml: 1.10.2
+
+  crelt@1.0.6: {}
 
   cross-spawn@7.0.6:
     dependencies:
@@ -2205,6 +4747,12 @@ snapshots:
 
   deep-eql@5.0.2: {}
 
+  define-data-property@1.1.4:
+    dependencies:
+      es-define-property: 1.0.1
+      es-errors: 1.3.0
+      gopd: 1.2.0
+
   detect-indent@6.1.0: {}
 
   detect-libc@2.1.0: {}
@@ -2216,6 +4764,12 @@ snapshots:
   dotenv@17.2.2: {}
 
   dotenv@8.6.0: {}
+
+  dunder-proto@1.0.1:
+    dependencies:
+      call-bind-apply-helpers: 1.0.2
+      es-errors: 1.3.0
+      gopd: 1.2.0
 
   eciesjs@0.4.15:
     dependencies:
@@ -2231,7 +4785,19 @@ snapshots:
       ansi-colors: 4.1.3
       strip-ansi: 6.0.1
 
+  error-ex@1.3.4:
+    dependencies:
+      is-arrayish: 0.2.1
+
+  es-define-property@1.0.1: {}
+
+  es-errors@1.3.0: {}
+
   es-module-lexer@1.7.0: {}
+
+  es-object-atoms@1.1.1:
+    dependencies:
+      es-errors: 1.3.0
 
   esbuild@0.25.10:
     optionalDependencies:
@@ -2264,6 +4830,10 @@ snapshots:
 
   escalade@3.2.0: {}
 
+  escape-html@1.0.3: {}
+
+  escape-string-regexp@4.0.0: {}
+
   esprima@4.0.1: {}
 
   estree-walker@3.0.3:
@@ -2286,6 +4856,8 @@ snapshots:
 
   extendable-error@0.1.7: {}
 
+  fast-deep-equal@3.1.3: {}
+
   fast-glob@3.3.3:
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -2305,6 +4877,8 @@ snapshots:
   fill-range@7.1.1:
     dependencies:
       to-regex-range: 5.0.1
+
+  find-root@1.1.0: {}
 
   find-up@4.1.0:
     dependencies:
@@ -2326,7 +4900,27 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
+  function-bind@1.1.2: {}
+
   gensync@1.0.0-beta.2: {}
+
+  get-intrinsic@1.3.0:
+    dependencies:
+      call-bind-apply-helpers: 1.0.2
+      es-define-property: 1.0.1
+      es-errors: 1.3.0
+      es-object-atoms: 1.1.1
+      function-bind: 1.1.2
+      get-proto: 1.0.1
+      gopd: 1.2.0
+      has-symbols: 1.1.0
+      hasown: 2.0.2
+      math-intrinsics: 1.1.0
+
+  get-proto@1.0.1:
+    dependencies:
+      dunder-proto: 1.0.1
+      es-object-atoms: 1.1.1
 
   get-stream@6.0.1: {}
 
@@ -2343,7 +4937,23 @@ snapshots:
       merge2: 1.4.1
       slash: 3.0.0
 
+  gopd@1.2.0: {}
+
   graceful-fs@4.2.11: {}
+
+  has-property-descriptors@1.0.2:
+    dependencies:
+      es-define-property: 1.0.1
+
+  has-symbols@1.1.0: {}
+
+  hasown@2.0.2:
+    dependencies:
+      function-bind: 1.1.2
+
+  hoist-non-react-statics@3.3.2:
+    dependencies:
+      react-is: 16.13.1
 
   human-id@4.1.1: {}
 
@@ -2354,6 +4964,17 @@ snapshots:
       safer-buffer: 2.1.2
 
   ignore@5.3.2: {}
+
+  import-fresh@3.3.1:
+    dependencies:
+      parent-module: 1.0.1
+      resolve-from: 4.0.0
+
+  is-arrayish@0.2.1: {}
+
+  is-core-module@2.16.1:
+    dependencies:
+      hasown: 2.0.2
 
   is-extglob@2.1.1: {}
 
@@ -2370,6 +4991,8 @@ snapshots:
       better-path-resolve: 1.0.0
 
   is-windows@1.0.2: {}
+
+  isarray@2.0.5: {}
 
   isexe@2.0.0: {}
 
@@ -2389,11 +5012,25 @@ snapshots:
 
   jsesc@3.1.0: {}
 
+  json-parse-even-better-errors@2.3.1: {}
+
+  json-stable-stringify@1.3.0:
+    dependencies:
+      call-bind: 1.0.8
+      call-bound: 1.0.4
+      isarray: 2.0.5
+      jsonify: 0.0.1
+      object-keys: 1.1.1
+
   json5@2.2.3: {}
 
   jsonfile@4.0.0:
     optionalDependencies:
       graceful-fs: 4.2.11
+
+  jsonify@0.0.1: {}
+
+  keycode@2.2.1: {}
 
   lightningcss-darwin-arm64@1.30.1:
     optional: true
@@ -2440,11 +5077,17 @@ snapshots:
       lightningcss-win32-arm64-msvc: 1.30.1
       lightningcss-win32-x64-msvc: 1.30.1
 
+  lines-and-columns@1.2.4: {}
+
   locate-path@5.0.0:
     dependencies:
       p-locate: 4.1.0
 
   lodash.startcase@4.4.0: {}
+
+  loose-envify@1.4.0:
+    dependencies:
+      js-tokens: 4.0.0
 
   loupe@3.2.1: {}
 
@@ -2455,6 +5098,8 @@ snapshots:
   magic-string@0.30.19:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  math-intrinsics@1.1.0: {}
 
   merge-stream@2.0.0: {}
 
@@ -2467,11 +5112,19 @@ snapshots:
 
   mimic-fn@2.1.0: {}
 
+  moment-timezone@0.6.0:
+    dependencies:
+      moment: 2.30.1
+
+  moment@2.30.1: {}
+
   mri@1.2.0: {}
 
   ms@2.1.3: {}
 
   nanoid@3.3.11: {}
+
+  no-scroll@2.1.1: {}
 
   node-fetch@2.7.0:
     dependencies:
@@ -2482,6 +5135,10 @@ snapshots:
   npm-run-path@4.0.1:
     dependencies:
       path-key: 3.1.1
+
+  object-assign@4.1.1: {}
+
+  object-keys@1.1.1: {}
 
   object-treeify@1.1.33: {}
 
@@ -2511,9 +5168,24 @@ snapshots:
     dependencies:
       quansync: 0.2.11
 
+  papaparse@5.5.3: {}
+
+  parent-module@1.0.1:
+    dependencies:
+      callsites: 3.1.0
+
+  parse-json@5.2.0:
+    dependencies:
+      '@babel/code-frame': 7.27.1
+      error-ex: 1.3.4
+      json-parse-even-better-errors: 2.3.1
+      lines-and-columns: 1.2.4
+
   path-exists@4.0.0: {}
 
   path-key@3.1.1: {}
+
+  path-parse@1.0.7: {}
 
   path-type@4.0.0: {}
 
@@ -2537,6 +5209,12 @@ snapshots:
 
   prettier@2.8.8: {}
 
+  prop-types@15.8.1:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      react-is: 16.13.1
+
   quansync@0.2.11: {}
 
   queue-microtask@1.2.3: {}
@@ -2544,6 +5222,13 @@ snapshots:
   react-compiler-runtime@19.1.0-rc.3(react@19.1.1):
     dependencies:
       react: 19.1.1
+
+  react-dom@19.1.1(react@19.1.1):
+    dependencies:
+      react: 19.1.1
+      scheduler: 0.26.0
+
+  react-is@16.13.1: {}
 
   react-refresh@0.17.0: {}
 
@@ -2556,35 +5241,43 @@ snapshots:
       pify: 4.0.1
       strip-bom: 3.0.0
 
+  resolve-from@4.0.0: {}
+
   resolve-from@5.0.0: {}
+
+  resolve@1.22.10:
+    dependencies:
+      is-core-module: 2.16.1
+      path-parse: 1.0.7
+      supports-preserve-symlinks-flag: 1.0.0
 
   reusify@1.1.0: {}
 
-  rollup@4.50.2:
+  rollup@4.51.0:
     dependencies:
       '@types/estree': 1.0.8
     optionalDependencies:
-      '@rollup/rollup-android-arm-eabi': 4.50.2
-      '@rollup/rollup-android-arm64': 4.50.2
-      '@rollup/rollup-darwin-arm64': 4.50.2
-      '@rollup/rollup-darwin-x64': 4.50.2
-      '@rollup/rollup-freebsd-arm64': 4.50.2
-      '@rollup/rollup-freebsd-x64': 4.50.2
-      '@rollup/rollup-linux-arm-gnueabihf': 4.50.2
-      '@rollup/rollup-linux-arm-musleabihf': 4.50.2
-      '@rollup/rollup-linux-arm64-gnu': 4.50.2
-      '@rollup/rollup-linux-arm64-musl': 4.50.2
-      '@rollup/rollup-linux-loong64-gnu': 4.50.2
-      '@rollup/rollup-linux-ppc64-gnu': 4.50.2
-      '@rollup/rollup-linux-riscv64-gnu': 4.50.2
-      '@rollup/rollup-linux-riscv64-musl': 4.50.2
-      '@rollup/rollup-linux-s390x-gnu': 4.50.2
-      '@rollup/rollup-linux-x64-gnu': 4.50.2
-      '@rollup/rollup-linux-x64-musl': 4.50.2
-      '@rollup/rollup-openharmony-arm64': 4.50.2
-      '@rollup/rollup-win32-arm64-msvc': 4.50.2
-      '@rollup/rollup-win32-ia32-msvc': 4.50.2
-      '@rollup/rollup-win32-x64-msvc': 4.50.2
+      '@rollup/rollup-android-arm-eabi': 4.51.0
+      '@rollup/rollup-android-arm64': 4.51.0
+      '@rollup/rollup-darwin-arm64': 4.51.0
+      '@rollup/rollup-darwin-x64': 4.51.0
+      '@rollup/rollup-freebsd-arm64': 4.51.0
+      '@rollup/rollup-freebsd-x64': 4.51.0
+      '@rollup/rollup-linux-arm-gnueabihf': 4.51.0
+      '@rollup/rollup-linux-arm-musleabihf': 4.51.0
+      '@rollup/rollup-linux-arm64-gnu': 4.51.0
+      '@rollup/rollup-linux-arm64-musl': 4.51.0
+      '@rollup/rollup-linux-loong64-gnu': 4.51.0
+      '@rollup/rollup-linux-ppc64-gnu': 4.51.0
+      '@rollup/rollup-linux-riscv64-gnu': 4.51.0
+      '@rollup/rollup-linux-riscv64-musl': 4.51.0
+      '@rollup/rollup-linux-s390x-gnu': 4.51.0
+      '@rollup/rollup-linux-x64-gnu': 4.51.0
+      '@rollup/rollup-linux-x64-musl': 4.51.0
+      '@rollup/rollup-openharmony-arm64': 4.51.0
+      '@rollup/rollup-win32-arm64-msvc': 4.51.0
+      '@rollup/rollup-win32-ia32-msvc': 4.51.0
+      '@rollup/rollup-win32-x64-msvc': 4.51.0
       fsevents: 2.3.3
 
   run-parallel@1.2.0:
@@ -2593,9 +5286,20 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
+  scheduler@0.26.0: {}
+
   semver@6.3.1: {}
 
   semver@7.7.2: {}
+
+  set-function-length@1.2.2:
+    dependencies:
+      define-data-property: 1.1.4
+      es-errors: 1.3.0
+      function-bind: 1.1.2
+      get-intrinsic: 1.3.0
+      gopd: 1.2.0
+      has-property-descriptors: 1.0.2
 
   shebang-command@2.0.0:
     dependencies:
@@ -2617,6 +5321,8 @@ snapshots:
     dependencies:
       buffer-from: 1.1.2
       source-map: 0.6.1
+
+  source-map@0.5.7: {}
 
   source-map@0.6.1: {}
 
@@ -2643,6 +5349,12 @@ snapshots:
     dependencies:
       js-tokens: 9.0.1
 
+  style-mod@4.1.2: {}
+
+  stylis@4.2.0: {}
+
+  supports-preserve-symlinks-flag@1.0.0: {}
+
   term-size@2.2.1: {}
 
   terser@5.44.0:
@@ -2653,6 +5365,8 @@ snapshots:
       source-map-support: 0.5.21
 
   tinybench@2.9.0: {}
+
+  tinycolor2@1.6.0: {}
 
   tinyexec@0.3.2: {}
 
@@ -2673,8 +5387,9 @@ snapshots:
 
   tr46@0.0.3: {}
 
-  undici-types@7.12.0:
-    optional: true
+  ua-parser-js@1.0.41: {}
+
+  undici-types@7.12.0: {}
 
   universalify@0.1.2: {}
 
@@ -2711,7 +5426,7 @@ snapshots:
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
       postcss: 8.5.6
-      rollup: 4.50.2
+      rollup: 4.51.0
       tinyglobby: 0.2.15
     optionalDependencies:
       '@types/node': 24.5.0
@@ -2761,6 +5476,8 @@ snapshots:
       - tsx
       - yaml
 
+  w3c-keyname@2.2.8: {}
+
   webidl-conversions@3.0.1: {}
 
   whatwg-url@5.0.0:
@@ -2782,3 +5499,5 @@ snapshots:
       stackback: 0.0.2
 
   yallist@3.1.1: {}
+
+  yaml@1.10.2: {}
