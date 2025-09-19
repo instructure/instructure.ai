@@ -5,36 +5,38 @@ import {
 	Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 
-const { command, output } = Workspace();
+const { command, output, args } = Workspace();
+
+console.log("args:", args);
 
 const lintCommands = ["all", "packages", "root", "package"];
 
 if (!validCommand(command, lintCommands))
 	exitWithError("Invalid lint command.");
 
-const lintRoot = (pkg: string) => {
+const lintRoot = (pkg, args: string[]) => {
 	console.log(`Linting root package: ${pkg}`);
-	execSync("pnpm lint:root", { stdio: "inherit" });
+	execSync("pnpm biome check .", { stdio: "inherit" });
 };
 
-const lintPackage = (pkg: string) => {
-	console.log(`Building package: ${pkg}`);
-	execSync(`pnpm -F ${pkg} build`, { stdio: "inherit" });
+const lintPackage = (pkg, args: string[]) => {
+	console.log(`Linting package: ${pkg}`);
+	execSync(`pnpm -F ${pkg} lint`, { stdio: "inherit" });
 };
 
-const lintPackages = (packages: string[]) => {
+const lintPackages = (packages: string[], args: string[]) => {
 	packages.forEach((pkg) => {
-		lintPackage(pkg);
+		lintPackage(pkg, args);
 	});
 };
 
 try {
-	if (command === "root") lintRoot(output as string);
-	else if (command === "package") lintPackage(output as string);
-	else if (command === "packages") lintPackages(output as string[]);
+	if (command === "root") lintRoot(output, args);
+	else if (command === "package") lintPackage(output, args);
+	else if (command === "packages") lintPackages(output, args);
 	else if (command === "all") {
-		lintRoot(output as string);
-		lintPackages(output as string[]);
+		lintRoot(output, args);
+		lintPackages(output, args);
 	}
 } catch (error) {
 	console.error("Lint failed:", error);
