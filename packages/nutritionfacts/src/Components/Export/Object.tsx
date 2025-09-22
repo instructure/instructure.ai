@@ -2,6 +2,9 @@ import type {
 	StrictNutritionFacts,
 	ProductNutritionFacts,
 	SegmentBase,
+	ModelAndDataSegment,
+	PrivacyComplianceSegment,
+	OutputsSegment,
 } from "../../types.ts";
 
 const ExportJSON = (nf: ProductNutritionFacts): StrictNutritionFacts => {
@@ -33,17 +36,17 @@ const ExportJSON = (nf: ProductNutritionFacts): StrictNutritionFacts => {
 			case "Model & Data":
 				return {
 					blockTitle: block.blockTitle,
-					segmentData: block.segmentData.map(stripSegment),
+					segmentData: block.segmentData.map(stripSegment) as ModelAndDataSegment[],
 				};
 			case "Privacy & Compliance":
 				return {
 					blockTitle: block.blockTitle,
-					segmentData: block.segmentData.map(stripSegment),
+					segmentData: block.segmentData.map(stripSegment) as PrivacyComplianceSegment[],
 				};
 			case "Outputs":
 				return {
 					blockTitle: block.blockTitle,
-					segmentData: block.segmentData.map(stripSegment),
+					segmentData: block.segmentData.map(stripSegment) as OutputsSegment[],
 				};
 			default:
 				return block;
