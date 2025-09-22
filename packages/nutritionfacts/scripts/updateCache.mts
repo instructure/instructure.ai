@@ -47,15 +47,7 @@ if (remoteSha !== localSha) {
 		const id = values[0]?.trim();
 		if (!id) continue;
 		const newSha = sha(values.join(","));
-		if (!(id in cachedFeatures)) {
-			cachedFeatures[id] = {
-				sha256: newSha,
-				lastUpdated: newTimestamp,
-				nutritionFacts: getProductFromLine(values),
-			};
-		} else if (cachedFeatures[id].sha256 === newSha) {
-			continue;
-		} else {
+		if (!(id in cachedFeatures) || cachedFeatures[id].sha256 !== newSha) {
 			cachedFeatures[id] = {
 				sha256: newSha,
 				lastUpdated: newTimestamp,
