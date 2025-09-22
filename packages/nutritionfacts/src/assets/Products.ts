@@ -17,8 +17,6 @@ const Product: ProductNutritionFacts = {
 				{
 					description:
 						"Indicates the AI model has been given customer data in order to improve its results.",
-					inputOptions: ["Yes", "No"],
-					inputType: "select",
 					segmentTitle: "Trained with User Data",
 					value: "",
 					valueHint: "Yes / No",
@@ -27,8 +25,6 @@ const Product: ProductNutritionFacts = {
 					description:
 						"Indicates which training or operational content was given to the model.",
 					descriptionHint: "Describe the data shared",
-					inputOptions: ["None", "Course", "Faculty", "Student", "Other"],
-					inputType: "multi-select",
 					segmentTitle: "Data Shared with Model",
 					value: "",
 					valueDescription: "",
@@ -49,8 +45,6 @@ const Product: ProductNutritionFacts = {
 					description:
 						"Recording the AI's performance for auditing, analysis, and improvement.",
 					descriptionHint: "Describe the data logging practices",
-					inputOptions: ["Logs data", "Does not log data"],
-					inputType: "select",
 					segmentTitle: "Data Logging",
 					value: "",
 					valueDescription: "",
@@ -60,18 +54,7 @@ const Product: ProductNutritionFacts = {
 					description:
 						"The locations where the AI model is officially available and supported.",
 					descriptionHint: "Describe the supported regions",
-					inputOptions: [
-						"Global",
-						"Virginia",
-						"Oregon",
-						"Montreal",
-						"Dublin",
-						"Frankfurt",
-						"Singapore",
-						"Sydney",
-						"Other",
-					],
-					inputType: "multi-select",
+
 					segmentTitle: "Regions Supported",
 					value: "",
 					valueDescription: "",
@@ -81,8 +64,6 @@ const Product: ProductNutritionFacts = {
 					description:
 						"Sensitive data that can be used to identify an individual.",
 					descriptionHint: "Describe the handling of PII",
-					inputOptions: ["Exposed", "Not Exposed"],
-					inputType: "select",
 					segmentTitle: "PII",
 					value: "",
 					valueDescription: "",
@@ -96,8 +77,6 @@ const Product: ProductNutritionFacts = {
 				{
 					description:
 						"The ability to turn the AI on or off within the product.",
-					inputOptions: ["Yes", "No"],
-					inputType: "select",
 					segmentTitle: "AI Settings Control",
 					value: "",
 					valueHint: "Yes / No",
@@ -106,8 +85,6 @@ const Product: ProductNutritionFacts = {
 					description:
 						"Indicates if a human is involved in the AI's process or output.",
 					descriptionHint: "Describe the human involvement",
-					inputOptions: ["Yes", "No"],
-					inputType: "select",
 					segmentTitle: "Human in the Loop",
 					value: "",
 					valueDescription: "",

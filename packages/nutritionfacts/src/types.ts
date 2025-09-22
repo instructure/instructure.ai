@@ -13,14 +13,14 @@ export type PageLayout = {
 	permissions: boolean;
 };
 
+/* Destructured, but strict NutritionFacts */
+
 export type SegmentBase = Readonly<
 	{
 		description: string;
 		segmentTitle: string;
 		valueHint?: string;
 		descriptionHint?: string;
-		inputOptions?: string[];
-		inputType?: "text" | "textarea" | "select" | "checkbox" | "multi-select";
 	} & (
 		| { value: string; valueDescription?: string }
 		| { value?: string; valueDescription: string }
@@ -62,7 +62,7 @@ export type ProductNutritionFacts = Readonly<{
 	descriptionHint?: string;
 	data: NutritionFactBlock[];
 	revision?: string;
-	id?: string;
+	id: string;
 	permissions?: 1 | 2 | 3 | 4 | undefined;
 	group?:
 		| "canvas"
@@ -76,3 +76,49 @@ export type ProductNutritionFacts = Readonly<{
 }>;
 
 export type Products = Record<string, ProductNutritionFacts>;
+
+export type StrictNutritionFacts = Readonly<
+	Omit<
+		ProductNutritionFacts,
+		"revision" | "id" | "permissions" | "group" | "nameHint" | "descriptionHint"
+	> & {
+		data: ReadonlyArray<
+			| {
+					blockTitle: "Model & Data";
+					segmentData: ReadonlyArray<
+						Omit<ModelAndDataSegment, "valueHint" | "descriptionHint">
+					>;
+			  }
+			| {
+					blockTitle: "Privacy & Compliance";
+					segmentData: ReadonlyArray<
+						Omit<PrivacyComplianceSegment, "valueHint" | "descriptionHint">
+					>;
+			  }
+			| {
+					blockTitle: "Outputs";
+					segmentData: ReadonlyArray<
+						Omit<OutputsSegment, "valueHint" | "descriptionHint">
+					>;
+			  }
+		>;
+	}
+>;
+
+export type CacheMeta = {
+	sha256: string;
+	lastUpdated: string;
+	count: number;
+};
+
+export type ProductsMeta = {
+	cache: CacheMeta;
+	features: Record<
+		ProductNutritionFacts["id"],
+		{
+			sha256: string;
+			lastUpdated: string;
+			nutritionFacts: ProductNutritionFacts;
+		}
+	>;
+};
