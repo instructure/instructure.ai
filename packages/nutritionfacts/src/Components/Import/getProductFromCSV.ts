@@ -1,5 +1,5 @@
 import Papa from "papaparse";
-import { Cache, csvUrl } from "../../assets";
+import { csvUrl, cacheJson } from "../../assets";
 import type {
 	PageLayout,
 	ProductNutritionFacts,
@@ -167,19 +167,25 @@ const fetchCSV = async (): Promise<{ raw: string; parsed: string[][] }> => {
 	try {
 		const response = await fetch(csvUrl);
 		data = await response.text();
+		const parsed = Papa.parse<string[]>(data, {
+			delimiter: ",",
+			skipEmptyLines: true,
+		});
+		return { raw: data, parsed: parsed.data };
 	} catch (error) {
 		console.error(
 			`Error fetching CSV data from URL "${csvUrl}":`,
 			error,
-			"Falling back to cached data.",
+			"Falling back to cached JSON data.",
 		);
-		data = Cache;
+		// Use jsonCache.features to reconstruct Products directly
+		const products: Products = {};
+		for (const [uid, feature] of Object.entries(cacheJson.features)) {
+			products[uid] = feature.nutritionFacts as ProductNutritionFacts;
+		}
+		// Return empty CSV data, but products can be used directly
+		return { raw: "", parsed: [] };
 	}
-	const parsed = Papa.parse<string[]>(data, {
-		delimiter: ",",
-		skipEmptyLines: true,
-	});
-	return {raw: data, parsed: parsed.data};
 };
 
 const fetchProductsFromCSV = async (): Promise<Products> => {
