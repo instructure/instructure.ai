@@ -53,68 +53,95 @@ The "Copy embed code" generates an iFrame that is sized to fit the content witho
 > [!NOTE]
 > Only the iFrame content is rendered dynamically. The copy of the product name / description are not dynamically updated and will need to be manually updated if either change significantly from the time the embed code is generated.
 
+### JSON
+
+When viewing a Nutrition Facts page a "Copy JSON Object" helper is displayed in the header. This object is for use with @instructure/ui AI Components.
+
+```JSON
+{
+  "id": "askyourdata",
+  "sha256": "ce29be981e1f8fc6ee4b68f653223ffefc6ca7ca378cfe4d81fd427277ee1ee9",
+  "lastUpdated": "1758638262",
+	"nutritionFacts": "<StrictNutritionFacts>",
+	"dataPermissionsLevel": "<AiPermissions>",
+	"AiInformation": "<StrictAiInformation>"
+}
+```
+
+This makes outputting AI Components fairly simple, and standard.
+
+#### AiInformation
+
+```jsx
+const ai = {jsonObj}
+
+<AiInformation
+  trigger={<Button>AI information</Button>}
+
+  data={ai.AiInformation}
+  dataPermissionLevelsCurrentFeature={ai.name}
+  dataPermissionLevelsData={ai.dataPermissionsLevel}
+  nutritionFactsFeatureName={ai.name}
+  nutritionFactsData={ai.nutritionFacts.data}
+
+  title="Features"
+
+  dataPermissionLevelsTitle="Data Permission Levels"
+  dataPermissionLevelsCurrentFeatureText="Current Feature:"
+  dataPermissionLevelsCloseIconButtonScreenReaderLabel="Close"
+  dataPermissionLevelsCloseButtonText="Close"
+  dataPermissionLevelsModalLabel="This is a Data Permission Levels modal"
+  dataPermissionLevelsTriggerText="Data Permission Levels"
+
+  nutritionFactsModalLabel="This is a modal for AI facts"
+  nutritionFactsTitle="Nutrition Facts"
+  nutritionFactsCloseButtonText="Close"
+  nutritionFactsCloseIconButtonScreenReaderLabel="Close"
+  nutritionFactsTriggerText="Nutrition Facts"
+/>
+```
+
+#### NutritionFacts
+
+If you're just providing a `NutritionFacts` component, it can be destructured from the main JSON.
+
+```jsx
+const ai = {jsonObj}  // Direct reference
+const { nutritionFacts } = jsonObj  // Destructured
+
+<NutritionFacts
+  featureName={ai.name || nutritionFacts.name}
+	data={ai.nutritionFacts.data || nutritionFacts.data }
+
+  title="Nutrition Facts"
+  modalLabel="This is a modal for AI facts"
+  closeButtonText="Close"
+  closeIconButtonScreenReaderLabel="Close"
+  triggerText="Nutrition Facts"
+/>
+```
+
+#### DataPermissionLevels
+
+```jsx
+const ai = {jsonObj}
+
+ <DataPermissionLevels
+
+  currentFeature={ai.name}
+	data={ai.dataPermissionsLevel}
+
+  title="Data Permission Levels"
+  currentFeatureText="Current Feature:"
+  closeIconButtonScreenReaderLabel="Close"
+  closeButtonText="Close"
+  modalLabel="This is a Data Permission Levels modal"
+  triggerText="Data Permission Levels"
+```
+
 ### Importing
 
 You can import a Nutrition Facts object by referencing its unique id in the query parameter such as `?id=igniteAgent`. Parameter values are case insensitive.  If an invalid ID is provided the default product (an empty~ish object) is returned.
-
-> [!WARNING]
-> The following import methods are DEPRECATED. They may still work, but are no longer being supported, and may be removed in a future version.
-
-Two import types are provided: object-based and named params. Object-based import values take precedence, meaning if you include both, the value in the object will be imported. `/?q={"name":"foo"}&name=bar` will result in `bar` being stored. `/?q={"description":"I am a foo."}&name=foo` will store both `name` and `description` values.
-
-#### Object-based Imports
-
-The site accepts the query param `q` and a value that is a subset of the `ProductNutritionFacts` object. This will be coerced into a `NutritionFacts` compatible object.  The basic structure is a bare object with `name`, `description`, and `data[]` keys.
-
-```json
-/?q={"name": "foo", "description: "bar"}
-```
-try using the `Copy` export function and then pasting the clipboard to the query param to see it in action.
-
-#### Named Parameter Imports
-
-Parameters use dot notation for arrays and commas for values.
-
-```typescript
-name=<string>
-description=<string>
-model.
-	base.
-		value=<string>
-		valueDescription=<string>
-	trained.
-		value=<boolean>
-	data.
-		value=<array["None", "Course", "Faculty", "Student", "Other"]>
-		valueDescription=<string>
-privacy.
-	retention.
-		valueDescription=<string>
-	logging.
-		value=<boolean>
-		valueDescription=<string>
-	regions.
-		value<array["Global", "Virginia", "Oregon", "Montreal", "Dublin", "Frankfurt", "Singapore", "Sydney", "Other"]>
-		valueDescription=<string>
-	pii.
-		value=<boolean>
-		valueDescription=<string>
-		outputs.
-outputs.
-	control.
-		value=<boolean>
-	human.
-		value=<boolean>
-		valueDescription=<string>
-	guardrails.
-		valueDescription=<string>
-	risks.
-		valueDescription=<string>
-	outcomes.
-		valueDescription=<string>
-```
-
-Example: Set regions as Virginia & Oregon:  `?privacy.regions.value="Virginia,Oregon"`
 
 ## Getting Started
 
@@ -156,83 +183,6 @@ pnpm build nutritionfacts
 ### Cacheing
 
 The list of Nutrition Facts is fetched at every call. A fall-back cached version is included with the source and is updated on every build.
-
-## Data
-
-The main type for this project is the `ProductNutritionFacts` object which is a superset of the internal types provided by `@instructure/ui/NutritionFacts`. Inputs and outputs are coerced to/from `NutritionFacts` compatible types and formats.
-
-```typescript
-export type SegmentBase = Readonly<
-	{
-		description: string;
-		segmentTitle: string;
-		valueHint?: string;
-		descriptionHint?: string;
-		inputOptions?: string[];
-		inputType?: "text" | "textarea" | "select" | "checkbox" | "multi-select";
-	} & (
-		| { value: string; valueDescription?: string }
-		| { value?: string; valueDescription: string }
-	)
->;
-
-type ModelAndDataSegment = SegmentBase & {
-	segmentTitle:
-		| "Base Model"
-		| "Trained with User Data"
-		| "Data Shared with Model";
-};
-
-type PrivacyComplianceSegment = SegmentBase & {
-	segmentTitle: "Data Retention" | "Data Logging" | "Regions Supported" | "PII";
-};
-
-export type OutputsSegment = SegmentBase & {
-	segmentTitle:
-		| "AI Settings Control"
-		| "Human in the Loop"
-		| "Guardrails"
-		| "Expected Risks"
-		| "Intended Outcomes";
-};
-
-export type NutritionFactBlock =
-	| { blockTitle: "Model & Data"; segmentData: ModelAndDataSegment[] }
-	| {
-			blockTitle: "Privacy & Compliance";
-			segmentData: PrivacyComplianceSegment[];
-	  }
-	| { blockTitle: "Outputs"; segmentData: OutputsSegment[] };
-
-type Permission = {
-	name: string;
-	title: string;
-	description: string;
-	descriptionHint?: string;
-};
-
-type Permissions = Readonly<Permission>[]
-
-export type ProductNutritionFacts = Readonly<{
-	name: string;
-	description?: string;
-	nameHint?: string;
-	descriptionHint?: string;
-	data: NutritionFactBlock[];
-	revision?: string;
-	id?: string;
-	permissions?: 1 | 2 | 3 | 4 | undefined;
-	group?:
-		| "canvas"
-		| "mastery"
-		| "parchment"
-		| "igniteai"
-		| "intelligent insights"
-		| "other"
-		| "canvas career"
-		| undefined;
-}>;
-```
 
 ## Project Structure
 
