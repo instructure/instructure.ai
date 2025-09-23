@@ -20,8 +20,7 @@ const main = async () => {
 	const buildPackage = (pkg: PackageName, args: CommandExtraArgs) => {
 		console.log(`Building package: ${pkg}`);
 		exec(`pnpm -F ${pkg} build`, { args: args.slice(2) });
-		console.log("Copying public files...");
-		copyPublicToDist(pkg as FullPackageName);
+		// copyPublicToDist(pkg as FullPackageName);
 	};
 
 	const buildPackages = (packages: PackageName[], args: CommandExtraArgs) => {
