@@ -11,7 +11,7 @@ const isPendoAPIFeature = (obj: any): obj is PendoAPIFeature => {
     "name" in obj.product &&
     "area" in obj.product
   );
-}
+};
 
 const isPendoAPI = (obj: any): obj is PendoAPI => {
   return (
@@ -20,7 +20,7 @@ const isPendoAPI = (obj: any): obj is PendoAPI => {
     Array.isArray(obj.results) &&
     obj.results.every(isPendoAPIFeature)
   );
-}
+};
 
 const paramsToPendo = (params: string | null): RoadmapFeatures | null => {
   if (!params) return null;
