@@ -30,7 +30,7 @@
         "eval": {
           "appId": "if (len(appIds) > 0, appIds[0], \"\")",
           "productAreaId": "if (len(productAreaVocIds) > 0, productAreaVocIds[0], \"\")",
-          "matchedLabelIds": "filter(x, labelIds, x != \"KJQ_tBZ62XHylgXDnQEyaUwBE6U\" && x != \"k_A0z_ocO814fJE8VHJ107WtbhM\")",
+          "matchedLabelIds": "filter(x, labelIds, x != \"KJQ_tBZ62XHylgXDnQEyaUwBE6U\" && x != \"k_A0z_ocO814fJE8VHJ107WtbhM\" && x != \"F0SzCWfSjdT_ivTw_3MM5If4Dr4\")",
           "matchedLabelId": "if (contains(labelIds, \"KJQ_tBZ62XHylgXDnQEyaUwBE6U\"), \"KJQ_tBZ62XHylgXDnQEyaUwBE6U\", if (contains(labelIds, \"k_A0z_ocO814fJE8VHJ107WtbhM\"), \"k_A0z_ocO814fJE8VHJ107WtbhM\", \"\"))",
           "stage": "if (contains(labelIds, \"KJQ_tBZ62XHylgXDnQEyaUwBE6U\"), \"Active Development\", if (contains(labelIds, \"k_A0z_ocO814fJE8VHJ107WtbhM\"), \"Coming Soon\", if (contains(labelIds, \"F0SzCWfSjdT_ivTw_3MM5If4Dr4\"), \"Co-Labs\", if (contains(labelIds, \"faCkXE4yJxfGOrYdSGZoezExJlY\"), \"Built together\", if (contains(labelIds, \"qovdjyqsT57yMnYnvn6OvZXcJKc\"), \"Under Consideration\", \"\")))))"
         }
