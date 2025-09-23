@@ -72,7 +72,7 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 
 const CopyObject = async (id: string) => {
 	try {
-		const productObj: FeatureMeta = ExportJSON(id ? id : "")
+		const productObj: FeatureMeta = ExportJSON(id)
 		await navigator.clipboard.writeText(JSON.stringify(productObj, null, 2));
 	} catch (error) {
 		let msg: string = "Failed to copy data to clipboard";
