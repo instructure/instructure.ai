@@ -1,0 +1,21 @@
+{
+  "name": "@instructure.ai/roadmap",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview",
+    "typecheck": "tsgo --noEmit",
+    "lint": "pnpm biome check"
+  },
+  "type": "module",
+  "version": "0.0.0",
+  "devDependencies": {
+    "@instructure.ai/shared-configs": "workspace:^"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "@instructure/ui": "10.25.1-pr-snapshot-1758274491790"
+  }
+}
