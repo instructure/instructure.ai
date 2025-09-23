@@ -93,14 +93,10 @@
         "select": {
           "feature.title": "vocItemTitle",
           "feature.description": "vocItemDescription",
-          "labels.ids": "matchedLabelIds",
-          "labels.names": "labelNames",
+          "feature.labels": "labelNames",
           "feature.links": "linksData",
-          "product.id": "appId",
           "product.name": "appDisplayName",
-          "product.areaId": "productAreaId",
-          "product.areaName": "productAreaName",
-          "feature.stageId": "matchedLabelId",
+          "product.area": "productAreaName",
           "feature.stage": "stage"
         }
       }
