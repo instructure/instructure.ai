@@ -77,7 +77,9 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 		featureName: cachedFeature.nutritionFacts.name,
 		permissionLevel: `LEVEL ${level}`,
 		modelName: cachedFeature.nutritionFacts.data[0].segmentData[0].value,
-		description: strictPermissions[level -1].description
+		description: (level > 0 && level <= strictPermissions.length)
+			? strictPermissions[level - 1].description
+			: "",
 
 	};
 
