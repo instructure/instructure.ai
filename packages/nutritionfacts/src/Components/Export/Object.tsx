@@ -5,7 +5,7 @@ import type {
 	ModelAndDataSegment,
 	PrivacyComplianceSegment,
 	OutputsSegment,
-	ProductsMeta,
+	ProductsMeta, 
 } from "../../types.ts";
 import { cacheJson } from "../../assets";
 import { ControlButton } from "./";
@@ -65,21 +65,15 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 		lastUpdated: cachedFeature.lastUpdated,
 		nutritionFacts: {
 			...cachedFeature.nutritionFacts,
-			data: strictData,
-			...(cachedFeature.nutritionFacts.nameHint ? { nameHint: undefined } : {}),
-			...(cachedFeature.nutritionFacts.descriptionHint ? { descriptionHint: undefined } : {}),
-			...(cachedFeature.nutritionFacts.permissions ? { permissions: undefined } : {}),
-			...(cachedFeature.nutritionFacts.group ? { group: undefined } : {}),
-			...(cachedFeature.nutritionFacts.id ? { id: undefined } : {}),
-			...(cachedFeature.nutritionFacts.revision ? { revision: undefined } : {}),
+			data: strictData
 		},
 	};
 };
 
 const CopyObject = async (id: string) => {
 	try {
-		const productObj = JSON.stringify(ExportJSON(id ? id : ""), null, 2)
-		await navigator.clipboard.writeText(productObj);
+		const productObj: FeatureMeta = ExportJSON(id)
+		await navigator.clipboard.writeText(JSON.stringify(productObj, null, 2));
 	} catch (error) {
 		let msg: string = "Failed to copy data to clipboard";
 		if (error instanceof Error) {

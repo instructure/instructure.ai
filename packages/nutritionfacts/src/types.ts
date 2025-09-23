@@ -114,7 +114,7 @@ export type CacheMeta = {
 export type FeatureMeta = {
 	sha256: string;
 	lastUpdated: string;
-	nutritionFacts: ProductNutritionFacts;
+	nutritionFacts: StrictNutritionFacts;
 };
 
 export type ProductsMeta = {
