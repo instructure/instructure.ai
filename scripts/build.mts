@@ -3,6 +3,7 @@ import path from "node:path";
 import {
 	exec,
 	exitWithError,
+	getPackageName,
 	isValidCommand,
 	unknownError,
 	Workspace,
@@ -20,7 +21,7 @@ const main = async () => {
 		console.log(`Building package: ${pkg}`);
 		exec(`pnpm -F ${pkg} build`, { args: args.slice(2) });
 		console.log("Copying public files...");
-		copyPublicToDist(pkg);
+		copyPublicToDist(pkg as FullPackageName);
 	};
 
 	const buildPackages = (packages: PackageName[], args: CommandExtraArgs) => {
@@ -29,18 +30,20 @@ const main = async () => {
 		});
 	};
 
-	const copyPublicToDist = (pkg?: PackageName) => {
+	const copyPublicToDist = (pkg?: FullPackageName) => {
+		const pack = pkg ? getPackageName(pkg) : null;
+
 		const src = path.resolve(
 			__dirname,
-			`${pkg ? `../packages/${pkg}/public` : "../public"}`,
+			`${pkg ? `../packages/${pack}/public` : "../public"}`,
 		);
 		const dest = path.resolve(
 			__dirname,
-			`${pkg ? `../dist/${pkg}` : "../dist"}`,
+			`${pkg ? `../dist/${pack}` : "../dist"}`,
 		);
 
 		if (!fs.existsSync(src)) {
-			console.warn(`Source directory ${src} does not exist.`);
+			console.warn("Source directory does not exist", src);
 			return;
 		}
 
