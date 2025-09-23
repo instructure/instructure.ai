@@ -16,20 +16,28 @@ const main = async () => {
 	if (!isValidCommand(command, buildCommands))
 		exitWithError("Invalid build command.");
 
-	const buildPackage = (pkg: string, args: CommandExtraArgs) => {
+	const buildPackage = (pkg: PackageName, args: CommandExtraArgs) => {
 		console.log(`Building package: ${pkg}`);
 		exec(`pnpm -F ${pkg} build`, { args: args.slice(2) });
+		console.log("Copying public files...");
+		copyPublicToDist(pkg);
 	};
 
-	const buildPackages = (packages: string[], args: CommandExtraArgs) => {
+	const buildPackages = (packages: PackageName[], args: CommandExtraArgs) => {
 		packages.forEach((pkg) => {
 			buildPackage(pkg, args);
 		});
 	};
 
-	const copyPublicToDist = () => {
-		const src = path.resolve(__dirname, "../public");
-		const dest = path.resolve(__dirname, "../dist");
+	const copyPublicToDist = (pkg?: PackageName) => {
+		const src = path.resolve(
+			__dirname,
+			`${pkg ? `../packages/${pkg}/public` : "../public"}`,
+		);
+		const dest = path.resolve(
+			__dirname,
+			`${pkg ? `../dist/${pkg}` : "../dist"}`,
+		);
 
 		if (!fs.existsSync(src)) {
 			console.warn(`Source directory ${src} does not exist.`);
@@ -54,9 +62,9 @@ const main = async () => {
 	try {
 		copyPublicToDist();
 
-		if (command === "package") buildPackage(output as string, args);
+		if (command === "package") buildPackage(output as PackageName, args);
 		else if (command === "packages" || command === "all")
-			buildPackages(output as string[], args);
+			buildPackages(output as PackageName[], args);
 	} catch (error) {
 		exitWithError("Build failed:", error);
 	}
