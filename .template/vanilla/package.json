@@ -8,6 +8,9 @@
     "typecheck": "tsgo --noEmit",
     "lint": "pnpm biome check"
   },
+  "devDependencies": {
+    "@instructure.ai/shared-configs": "workspace:^"
+  },
   "type": "module",
   "version": "0.0.0"
 }
