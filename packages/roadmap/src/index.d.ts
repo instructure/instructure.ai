@@ -1,8 +1,8 @@
 type PendoAPI = {
-  results: PendoFeature[];
+  results: PendoAPIFeature[];
 }
 
-type PendoFeature = {
+type PendoAPIFeature = {
   feature: {
     description: string | null;
     labels: string[] | null;
@@ -18,3 +18,12 @@ type PendoFeature = {
     name: string | null;
   };
 }
+
+type RoadmapFeatures = {
+  stages: string[]
+  products: string[]
+  productAreas: string[]
+  labels: string[]
+  features: PendoAPIFeature[]
+}
+
