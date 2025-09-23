@@ -111,10 +111,9 @@ export type CacheMeta = {
 	count: number;
 };
 
-export type FeatureMeta = {
-	sha256: string;
-	lastUpdated: string;
-	nutritionFacts: StrictNutritionFacts;
+export type FeatureMeta = Omit<CacheMeta, "count"> & {
+    nutritionFacts: StrictNutritionFacts;
+		dataPermissionLevels: StrictAiPermissions;
 };
 
 export type ProductsMeta = {
