@@ -1,12 +1,12 @@
 const AiInformation = [
     {
-      featureName: "Feature name",
+      featureName: "",
       permissionLevelText: "Permission Level",
-      permissionLevel: "LEVEL 1",
-      description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
+      permissionLevel: "LEVEL 0",
+      description: "",
       permissionLevelsModalTriggerText: "Permission Levels",
       modelNameText: "Base Model",
-      modelName: "Claude 3 Haiku",
+      modelName: "",
       nutritionFactsModalTriggerText: "AI Nutrition Facts"
       }
   ]

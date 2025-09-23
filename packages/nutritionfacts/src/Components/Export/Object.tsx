@@ -9,8 +9,9 @@ import type {
 AiPermissions, 
 StrictAiPermissions, 
 StrictNutritionFacts, 
+StrictAiInformation, 
 } from "../../types.ts";
-import { cacheJson, Permissions } from "../../assets";
+import { cacheJson, Permissions, AiInformation } from "../../assets";
 import { ControlButton } from "./";
 import { IconCodeLine, type SVGIconProps } from "@instructure/ui";
 
@@ -38,6 +39,7 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 				id: "<id> not found",
 				name: "",
 				data: [],
+				permissions: 0,
 			} as ProductNutritionFacts
 		} as FeatureMeta
 	}
@@ -70,8 +72,17 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 		}
 	});
 
+	const strictAiInfo: StrictAiInformation = {
+		...AiInformation[0] as StrictAiInformation,
+		featureName: cachedFeature.nutritionFacts.name,
+		permissionLevel: `LEVEL ${level}`,
+		modelName: cachedFeature.nutritionFacts.data[0].segmentData[0].value,
+		description: strictPermissions[level -1].description
+
+	};
+
 	const strictReturn = {
-		id: id,
+		id: id.toLowerCase(),
 		sha256: cachedFeature.sha256,
 		lastUpdated: cachedFeature.lastUpdated,
 		nutritionFacts: {
@@ -79,7 +90,8 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 			description: cachedFeature.nutritionFacts.description,
 			data: strictNutritionFactsData
 		} as StrictNutritionFacts,
-		dataPermissionsLevel: strictPermissions
+		dataPermissionsLevel: strictPermissions,
+		AiInformation: strictAiInfo
 	} as FeatureMeta
 
 	return strictReturn

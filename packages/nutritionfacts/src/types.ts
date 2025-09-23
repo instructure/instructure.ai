@@ -63,7 +63,7 @@ export type ProductNutritionFacts = Readonly<{
 	data: NutritionFactBlock[];
 	revision?: string;
 	id: string;
-	permissions?: 1 | 2 | 3 | 4 | undefined;
+	permissions: 0 | 1 | 2 | 3 | 4;
 	group?:
 		| "canvas"
 		| "mastery"
@@ -133,3 +133,16 @@ export type AiPermissions = {
 };
 
 export type StrictAiPermissions = Readonly<Omit<AiPermissions, "descriptionHint">>;
+
+/* AI Information */
+
+export type StrictAiInformation = {
+	featureName: StrictNutritionFacts["name"];
+	permissionLevelText: "Permission Level";
+	permissionLevel: `LEVEL ${number}`;
+	description: AiPermissions["description"];
+	permissionLevelsModalTriggerText: "Permission Levels";
+	modelNameText: "Base Model";
+	modelName: StrictNutritionFacts["data"][0]["segmentData"][0]["value"];
+	nutritionFactsModalTriggerText: "AI Nutrition Facts";
+}	
