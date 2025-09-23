@@ -51,6 +51,7 @@ if (remoteSha !== localSha) {
 			cachedFeatures[id] = {
 				sha256: newSha,
 				lastUpdated: newTimestamp,
+				id: id,
 				nutritionFacts: getProductFromLine(values),
 			};
 		}

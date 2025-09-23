@@ -71,6 +71,7 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 	});
 
 	const strictReturn = {
+		id: id,
 		sha256: cachedFeature.sha256,
 		lastUpdated: cachedFeature.lastUpdated,
 		nutritionFacts: {
