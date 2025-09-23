@@ -19,6 +19,8 @@ const main = async () => {
 	const buildPackage = (pkg: string, args: CommandExtraArgs) => {
 		console.log(`Building package: ${pkg}`);
 		exec(`pnpm -F ${pkg} build`, { args: args.slice(2) });
+		console.log("Copying public files...");
+		copyPublicToDist(pkg);
 	};
 
 	const buildPackages = (packages: string[], args: CommandExtraArgs) => {
@@ -27,9 +29,15 @@ const main = async () => {
 		});
 	};
 
-	const copyPublicToDist = () => {
-		const src = path.resolve(__dirname, "../public");
-		const dest = path.resolve(__dirname, "../dist");
+	const copyPublicToDist = (pkg?: string) => {
+		const src = path.resolve(
+			__dirname,
+			`${pkg ? `../packages/${pkg}/public` : "../public"}`,
+		);
+		const dest = path.resolve(
+			__dirname,
+			`${pkg ? `../dist/${pkg}` : "../dist"}`,
+		);
 
 		if (!fs.existsSync(src)) {
 			console.warn(`Source directory ${src} does not exist.`);
