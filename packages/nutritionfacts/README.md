@@ -61,7 +61,7 @@ When viewing a Nutrition Facts page a "Copy JSON Object" helper is displayed in 
 {
   "id": "<uid>",
   "name": "<featureName>",
-  "sha256": "abc...xzy",
+  "sha256": "abc...xyz",
   "lastUpdated": "1234567890",
   "nutritionFacts": "<StrictNutritionFacts>",
   "dataPermissionsLevel": "<AiPermissions>",
