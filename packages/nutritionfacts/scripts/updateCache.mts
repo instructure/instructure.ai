@@ -52,6 +52,7 @@ if (remoteSha !== localSha) {
 				sha256: newSha,
 				lastUpdated: newTimestamp,
 				id: id,
+				name: getProductFromLine(values).name,
 				nutritionFacts: getProductFromLine(values),
 			};
 		}

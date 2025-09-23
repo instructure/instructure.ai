@@ -34,7 +34,7 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 		return {
 			sha256: "",
 			lastUpdated: "",
-			dataPermissionsLevel: [] as StrictAiPermissions[],
+			dataPermissionLevels: [] as StrictAiPermissions[],
 			nutritionFacts: {
 				id: "<id> not found",
 				name: "",
@@ -85,6 +85,7 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 
 	const strictReturn = {
 		id: id.toLowerCase(),
+		name: cachedFeature.nutritionFacts.name,
 		sha256: cachedFeature.sha256,
 		lastUpdated: cachedFeature.lastUpdated,
 		nutritionFacts: {
@@ -92,7 +93,7 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 			description: cachedFeature.nutritionFacts.description,
 			data: strictNutritionFactsData
 		} as StrictNutritionFacts,
-		dataPermissionsLevel: strictPermissions,
+		dataPermissionLevels: strictPermissions,
 		AiInformation: strictAiInfo
 	} as FeatureMeta
 
