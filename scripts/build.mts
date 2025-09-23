@@ -33,11 +33,11 @@ const main = async () => {
 
 		const src = path.resolve(
 			__dirname,
-			`${pkg ? `../packages/${pack}/public` : "../public"}`,
+			`${pack ? `../packages/${pack}/public` : "../public"}`,
 		);
 		const dest = path.resolve(
 			__dirname,
-			`${pkg ? `../dist/${pack}` : "../dist"}`,
+			`${pack ? `../dist/${pack}` : "../dist"}`,
 		);
 
 		if (!fs.existsSync(src)) {
