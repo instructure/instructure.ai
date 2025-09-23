@@ -1,5 +1,4 @@
 import { IconExternalLinkLine, type SVGIconProps } from "@instructure/ui";
-import type { Dispatch, SetStateAction } from "react";
 import { baseUrl } from "../../assets";
 import type {
 	NutritionFactBlock,
