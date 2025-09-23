@@ -302,4 +302,5 @@ export {
 	isAvailablePackage,
 	exitWithError,
 	unknownError,
+	getPackageName,
 };

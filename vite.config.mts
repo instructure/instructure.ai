@@ -9,7 +9,6 @@ const PACKAGE_VERSION = String(process.env.npm_package_version);
 
 export default defineConfig({
 	base: `/${PACKAGE_NAME === "site" ? "" : PACKAGE_NAME}`,
-	publicDir: "public",
 	build: {
 		cssMinify: "lightningcss",
 		minify: "terser",
