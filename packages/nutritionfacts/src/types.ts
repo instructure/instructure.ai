@@ -112,13 +112,13 @@ export type CacheMeta = {
 };
 
 export type FeatureMeta = Omit<CacheMeta, "count"> & {
-    nutritionFacts: StrictNutritionFacts;
-		dataPermissionLevels: StrictAiPermissions;
+    nutritionFacts: StrictNutritionFacts | ProductNutritionFacts;
+		dataPermissionsLevel: StrictAiPermissions[]
 };
 
 export type ProductsMeta = {
 	cache: CacheMeta;
-	features: Record<ProductNutritionFacts["id"], FeatureMeta>;
+	features: Record<ProductNutritionFacts["id"], Omit<FeatureMeta, "dataPermissionsLevel">>;
 };
 
 /* Permissions Levels */

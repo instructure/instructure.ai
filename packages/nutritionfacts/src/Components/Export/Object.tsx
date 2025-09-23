@@ -6,8 +6,11 @@ import type {
 	PrivacyComplianceSegment,
 	OutputsSegment,
 	ProductsMeta, 
+AiPermissions, 
+StrictAiPermissions, 
+StrictNutritionFacts, 
 } from "../../types.ts";
-import { cacheJson } from "../../assets";
+import { cacheJson, Permissions } from "../../assets";
 import { ControlButton } from "./";
 import { IconCodeLine, type SVGIconProps } from "@instructure/ui";
 
@@ -30,13 +33,20 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 		return {
 			sha256: "",
 			lastUpdated: "",
+			dataPermissionsLevel: [] as StrictAiPermissions[],
 			nutritionFacts: {
 				id: "<id> not found",
 				name: "",
 				data: [],
-			} as ProductNutritionFacts,
+			} as ProductNutritionFacts
 		} as FeatureMeta
 	}
+
+	const level: ProductNutritionFacts["permissions"] = (cachedFeature.nutritionFacts as ProductNutritionFacts).permissions
+
+		level ? Permissions[level + 1].highlighted = true : undefined
+
+	const strictPermissions: AiPermissions[] = Permissions.slice(1)
 
 	const strictData = cachedFeature.nutritionFacts.data.map((block) => {
 		switch (block.blockTitle) {
@@ -60,15 +70,18 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 		}
 	});
 
-	return {
+	const strictReturn = {
 		sha256: cachedFeature.sha256,
 		lastUpdated: cachedFeature.lastUpdated,
 		nutritionFacts: {
 			...cachedFeature.nutritionFacts,
 			data: strictData
-		},
-	};
-};
+		} as StrictNutritionFacts,
+		dataPermissionsLevel: strictPermissions
+	} as FeatureMeta
+
+	return strictReturn
+}
 
 const CopyObject = async (id: string) => {
 	try {
