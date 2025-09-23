@@ -12,7 +12,7 @@ const App: FC = () => {
       //window.location.href = "https://roadmap.instructure.com";
       console.log("Redirecting to https://roadmap.instructure.com");
     }
-  }, []);
+  }, [roadmap]);
 
   return (
     <InstUISettingsProvider>
