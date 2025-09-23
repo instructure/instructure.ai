@@ -6,8 +6,12 @@ import type {
 	PrivacyComplianceSegment,
 	OutputsSegment,
 	ProductsMeta, 
+AiPermissions, 
+StrictAiPermissions, 
+StrictNutritionFacts, 
+StrictAiInformation, 
 } from "../../types.ts";
-import { cacheJson } from "../../assets";
+import { cacheJson, Permissions, AiInformation } from "../../assets";
 import { ControlButton } from "./";
 import { IconCodeLine, type SVGIconProps } from "@instructure/ui";
 
@@ -30,15 +34,23 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 		return {
 			sha256: "",
 			lastUpdated: "",
+			dataPermissionsLevel: [] as StrictAiPermissions[],
 			nutritionFacts: {
 				id: "<id> not found",
 				name: "",
 				data: [],
-			} as ProductNutritionFacts,
+				permissions: 0,
+			} as ProductNutritionFacts
 		} as FeatureMeta
 	}
 
-	const strictData = cachedFeature.nutritionFacts.data.map((block) => {
+	const level: ProductNutritionFacts["permissions"] = (cachedFeature.nutritionFacts as ProductNutritionFacts).permissions
+
+		level ? Permissions[level].highlighted = true : undefined
+
+	const strictPermissions: AiPermissions[] = Permissions.slice(1)
+
+	const strictNutritionFactsData = cachedFeature.nutritionFacts.data.map((block) => {
 		switch (block.blockTitle) {
 			case "Model & Data":
 				return {
@@ -60,15 +72,32 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 		}
 	});
 
-	return {
+	const strictAiInfo: StrictAiInformation = {
+		...AiInformation[0] as StrictAiInformation,
+		featureName: cachedFeature.nutritionFacts.name,
+		permissionLevel: `LEVEL ${level}`,
+		modelName: cachedFeature.nutritionFacts.data[0].segmentData[0].value,
+		description: (level > 0 && level <= strictPermissions.length)
+			? strictPermissions[level - 1].description
+			: "",
+
+	};
+
+	const strictReturn = {
+		id: id.toLowerCase(),
 		sha256: cachedFeature.sha256,
 		lastUpdated: cachedFeature.lastUpdated,
 		nutritionFacts: {
-			...cachedFeature.nutritionFacts,
-			data: strictData
-		},
-	};
-};
+			name: cachedFeature.nutritionFacts.name,
+			description: cachedFeature.nutritionFacts.description,
+			data: strictNutritionFactsData
+		} as StrictNutritionFacts,
+		dataPermissionsLevel: strictPermissions,
+		AiInformation: strictAiInfo
+	} as FeatureMeta
+
+	return strictReturn
+}
 
 const CopyObject = async (id: string) => {
 	try {

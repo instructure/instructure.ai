@@ -13,7 +13,7 @@ export type PageLayout = {
 	permissions: boolean;
 };
 
-/* Destructured, but strict NutritionFacts */
+/* Nutritionfacts */
 
 export type SegmentBase = Readonly<
 	{
@@ -63,7 +63,7 @@ export type ProductNutritionFacts = Readonly<{
 	data: NutritionFactBlock[];
 	revision?: string;
 	id: string;
-	permissions?: 1 | 2 | 3 | 4 | undefined;
+	permissions: 0 | 1 | 2 | 3 | 4;
 	group?:
 		| "canvas"
 		| "mastery"
@@ -111,13 +111,38 @@ export type CacheMeta = {
 	count: number;
 };
 
-export type FeatureMeta = {
-	sha256: string;
-	lastUpdated: string;
-	nutritionFacts: StrictNutritionFacts;
+export type FeatureMeta = Omit<CacheMeta, "count"> & {
+		id: string;
+    nutritionFacts: StrictNutritionFacts | ProductNutritionFacts;
+		dataPermissionsLevel: StrictAiPermissions[]
 };
 
 export type ProductsMeta = {
 	cache: CacheMeta;
-	features: Record<ProductNutritionFacts["id"], FeatureMeta>;
+	features: Record<ProductNutritionFacts["id"], Omit<FeatureMeta, "dataPermissionsLevel">>;
 };
+
+/* Permissions Levels */
+
+export type AiPermissions = {
+	name: string;
+	title: string;
+	description: string;
+	descriptionHint?: string;
+	highlighted?: boolean;
+};
+
+export type StrictAiPermissions = Readonly<Omit<AiPermissions, "descriptionHint">>;
+
+/* AI Information */
+
+export type StrictAiInformation = {
+	featureName: StrictNutritionFacts["name"];
+	permissionLevelText: "Permission Level";
+	permissionLevel: `LEVEL ${number}`;
+	description: AiPermissions["description"];
+	permissionLevelsModalTriggerText: "Permission Levels";
+	modelNameText: "Base Model";
+	modelName: StrictNutritionFacts["data"][0]["segmentData"][0]["value"];
+	nutritionFactsModalTriggerText: "AI Nutrition Facts";
+};	

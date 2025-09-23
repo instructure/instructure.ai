@@ -1,11 +1,6 @@
-type Permission = {
-	name: string;
-	title: string;
-	description: string;
-	descriptionHint?: string;
-};
+import type { AiPermissions } from "../types";
 
-const Permissions: readonly Readonly<Permission>[] = [
+const Permissions: AiPermissions[] = [
 	{
 		description: "",
 		name: "",

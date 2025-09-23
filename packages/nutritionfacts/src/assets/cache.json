@@ -1,13 +1,14 @@
 {
   "cache": {
-    "sha256": "c6ecf6f6f31697e61c6e2512389ad3c5d0183fc2acf9fb475cb77ace85cb70a8",
-    "lastUpdated": "1758578894",
+    "sha256": "ab4dd4bef0792fd0e5d98e7985c93184423b3dd773e6cd305050dd7295ed3228",
+    "lastUpdated": "1758638262",
     "count": 9
   },
   "features": {
     "canvasinboxtranslation": {
-      "sha256": "7ec56d891f8ecd4edb6075a27d31bed542c40b90b4f2ac9be64b44a7422d9994",
-      "lastUpdated": "1758578544",
+      "sha256": "b825a74e6cc62f2139c82ed49d1202ae3308d7bc0968b66ecf9c6f5102f2a572",
+      "lastUpdated": "1758638262",
+      "id": "canvasinboxtranslation",
       "nutritionFacts": {
         "data": [
           {
@@ -116,12 +117,14 @@
         "id": "canvasInboxTranslation",
         "name": "Inbox Translation",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.10"
       }
     },
     "canvascoursetranslation": {
-      "sha256": "aece7e681f5e8cd79c53cc7821567fc8fdf6cef2183c4cae9467a151b75813fb",
-      "lastUpdated": "1758578544",
+      "sha256": "143a3113a933aa37629e07aa2b49abfedf938ab52d1f3ff9daa3ff00a26a9a09",
+      "lastUpdated": "1758638262",
+      "id": "canvascoursetranslation",
       "nutritionFacts": {
         "data": [
           {
@@ -230,12 +233,14 @@
         "id": "canvasCourseTranslation",
         "name": "Discussions Translation",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.10"
       }
     },
     "igniteagent": {
-      "sha256": "8485e1874e8e035fdb933a93b922ea98deb23c7d611a89502eedc6f28daa586f",
-      "lastUpdated": "1758578544",
+      "sha256": "2b18ed76caad3b15b846721dc3d900b8afb54202bd50b687a3dc518dcc952bb8",
+      "lastUpdated": "1758638262",
+      "id": "igniteagent",
       "nutritionFacts": {
         "data": [
           {
@@ -344,12 +349,14 @@
         "id": "IgniteAgent",
         "name": "Agent",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.10"
       }
     },
     "rubricgenerator": {
-      "sha256": "a7890280a479fb8db810c4047b61e2f6601fb263b2c91f4a33cc869f7fd74dd2",
-      "lastUpdated": "1758578544",
+      "sha256": "a8ee23afbb71c4693e8b64fb6761f078aac10ec3a965f5c6893eb2a801950e20",
+      "lastUpdated": "1758638262",
+      "id": "rubricgenerator",
       "nutritionFacts": {
         "data": [
           {
@@ -458,12 +465,14 @@
         "id": "rubricGenerator",
         "name": "Rubric Creator",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.10"
       }
     },
     "canvasgradingassistance": {
-      "sha256": "a26116e349eafcc6fc8f0358e64678c1d59d48e394508ec2b896a641d9a092af",
-      "lastUpdated": "1758578544",
+      "sha256": "7a0fa20339970551a2937573a855e9aa4c0dbab9b7bfe7921abb80ef967b8d61",
+      "lastUpdated": "1758638262",
+      "id": "canvasgradingassistance",
       "nutritionFacts": {
         "data": [
           {
@@ -572,12 +581,14 @@
         "id": "canvasGradingAssistance",
         "name": "Grading Assistance",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.10"
       }
     },
     "discussioninsights": {
-      "sha256": "613f93979940becf7af78331143711b34357ff3f33b41767374f903288457f2d",
-      "lastUpdated": "1758578544",
+      "sha256": "2340cc40bb84de62148b49451b0868b9c7bfe525b8fb36158694d7cacd9221e5",
+      "lastUpdated": "1758638262",
+      "id": "discussioninsights",
       "nutritionFacts": {
         "data": [
           {
@@ -686,12 +697,14 @@
         "id": "discussionInsights",
         "name": "Discussion Insights",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.12"
       }
     },
     "smartsearch": {
-      "sha256": "4b2b858b61bb4b46eab7913c3410099386c637809e6060114bc25ee19af56409",
-      "lastUpdated": "1758578544",
+      "sha256": "585661a3abf96350e18fee7cfe308adda40af6469fc325acfe9cfaecda1a901a",
+      "lastUpdated": "1758638262",
+      "id": "smartsearch",
       "nutritionFacts": {
         "data": [
           {
@@ -800,12 +813,14 @@
         "id": "smartSearch",
         "name": "Smart Search",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.12"
       }
     },
     "askyourdata": {
-      "sha256": "a5feab3debaa3a1f2e1b355dd7b2e3db60409209013b7150dde90159c115805a",
-      "lastUpdated": "1758578544",
+      "sha256": "ce29be981e1f8fc6ee4b68f653223ffefc6ca7ca378cfe4d81fd427277ee1ee9",
+      "lastUpdated": "1758638262",
+      "id": "askyourdata",
       "nutritionFacts": {
         "data": [
           {
@@ -914,12 +929,14 @@
         "id": "askyourdata",
         "name": "Ask Your Data",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.12"
       }
     },
     "canvasdiscussionsummaries": {
-      "sha256": "3c5898415ddb8547b1cde8b2c2f58ae5e80e73c7b11d023d1cb0c2b36760b6db",
-      "lastUpdated": "1758578544",
+      "sha256": "5042d16cccab94a6f118c66226b330dead1d48761334384671da144437ad732b",
+      "lastUpdated": "1758638262",
+      "id": "canvasdiscussionsummaries",
       "nutritionFacts": {
         "data": [
           {
@@ -1028,6 +1045,7 @@
         "id": "canvasDiscussionSummaries",
         "name": "Discussion Summaries",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.12"
       }
     }

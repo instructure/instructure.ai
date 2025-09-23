@@ -20,3 +20,4 @@ export { default as LogoDark } from "./logoDark.svg?raw";
 export { Permissions } from "./Permissions";
 export { Product } from "./Products";
 export { default as cacheJson } from "./cache.json";
+export { AiInformation } from "./AiInformation"

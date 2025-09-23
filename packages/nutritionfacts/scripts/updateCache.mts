@@ -44,13 +44,14 @@ if (remoteSha !== localSha) {
 	const cachedFeatures = Features || {};
 
 	for (const values of rows) {
-		const id = values[0]?.trim();
+		const id = values[0]?.trim().toLowerCase();
 		if (!id) continue;
 		const newSha = sha(values.join(","));
 		if (!(id in cachedFeatures) || cachedFeatures[id].sha256 !== newSha) {
 			cachedFeatures[id] = {
 				sha256: newSha,
 				lastUpdated: newTimestamp,
+				id: id,
 				nutritionFacts: getProductFromLine(values),
 			};
 		}
