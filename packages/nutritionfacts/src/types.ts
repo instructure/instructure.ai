@@ -114,7 +114,7 @@ export type CacheMeta = {
 export type FeatureMeta = Omit<CacheMeta, "count"> & {
 		id: string;
     nutritionFacts: StrictNutritionFacts | ProductNutritionFacts;
-		datapermissionLevels: StrictAiPermissions[];
+		dataPermissionLevels: StrictAiPermissions[];
 		name: StrictNutritionFacts["name"];
 
 };
