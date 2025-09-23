@@ -1,4 +1,3 @@
-// POST https://app.pendo.io/api/v1/aggregation
 {
   "response": {
     "mimeType": "application/json"
@@ -35,7 +34,6 @@
           "stage": "if (contains(labelIds, \"KJQ_tBZ62XHylgXDnQEyaUwBE6U\"), \"Active Development\", if (contains(labelIds, \"k_A0z_ocO814fJE8VHJ107WtbhM\"), \"Coming Soon\", if (contains(labelIds, \"F0SzCWfSjdT_ivTw_3MM5If4Dr4\"), \"Co-Labs\", if (contains(labelIds, \"faCkXE4yJxfGOrYdSGZoezExJlY\"), \"Built together\", if (contains(labelIds, \"qovdjyqsT57yMnYnvn6OvZXcJKc\"), \"Under Consideration\", \"\")))))"
         }
       },
-      /* --- fetch label names dynamically for matchedLabelIds --- */
       {
         "expandList": {
           "inputField": "matchedLabelIds",
@@ -49,7 +47,6 @@
           "labelNames": "map(label, matchedLabels, label.name)"
         }
       },
-      /* --- enrich with app and product area names --- */
       {
         "merge": {
           "fields": [
@@ -88,7 +85,6 @@
           ]
         }
       },
-      /* --- final projection --- */
       {
         "select": {
           "feature.title": "vocItemTitle",
