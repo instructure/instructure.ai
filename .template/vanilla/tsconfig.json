@@ -1,7 +1,7 @@
 {
-  "extends": "../../configs/tsconfig.json",
+  "extends": "../../tsconfig.json",
   "include": [
     "src",
-    "vite.config.mts",
+    "vite.config.mts"
   ]
 }
