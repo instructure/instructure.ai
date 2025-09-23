@@ -7,7 +7,7 @@ const AiInformation = [
       permissionLevelsModalTriggerText: "Permission Levels",
       modelNameText: "Base Model",
       modelName: "",
-      nutritionFactsModalTriggerText: "AI Nutrition Facts"
+      nutritionFactsModalTriggerText: "AI Nutrition Facts",
       }
   ]
 
