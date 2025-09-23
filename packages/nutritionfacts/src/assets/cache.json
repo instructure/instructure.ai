@@ -1,14 +1,15 @@
 {
   "cache": {
     "sha256": "ab4dd4bef0792fd0e5d98e7985c93184423b3dd773e6cd305050dd7295ed3228",
-    "lastUpdated": "1758638262",
+    "lastUpdated": "1758643492",
     "count": 9
   },
   "features": {
     "canvasinboxtranslation": {
       "sha256": "b825a74e6cc62f2139c82ed49d1202ae3308d7bc0968b66ecf9c6f5102f2a572",
-      "lastUpdated": "1758638262",
+      "lastUpdated": "1758643492",
       "id": "canvasinboxtranslation",
+      "name": "Inbox Translation",
       "nutritionFacts": {
         "data": [
           {
@@ -123,8 +124,9 @@
     },
     "canvascoursetranslation": {
       "sha256": "143a3113a933aa37629e07aa2b49abfedf938ab52d1f3ff9daa3ff00a26a9a09",
-      "lastUpdated": "1758638262",
+      "lastUpdated": "1758643492",
       "id": "canvascoursetranslation",
+      "name": "Discussions Translation",
       "nutritionFacts": {
         "data": [
           {
@@ -239,8 +241,9 @@
     },
     "igniteagent": {
       "sha256": "2b18ed76caad3b15b846721dc3d900b8afb54202bd50b687a3dc518dcc952bb8",
-      "lastUpdated": "1758638262",
+      "lastUpdated": "1758643492",
       "id": "igniteagent",
+      "name": "Agent",
       "nutritionFacts": {
         "data": [
           {
@@ -355,8 +358,9 @@
     },
     "rubricgenerator": {
       "sha256": "a8ee23afbb71c4693e8b64fb6761f078aac10ec3a965f5c6893eb2a801950e20",
-      "lastUpdated": "1758638262",
+      "lastUpdated": "1758643492",
       "id": "rubricgenerator",
+      "name": "Rubric Creator",
       "nutritionFacts": {
         "data": [
           {
@@ -471,8 +475,9 @@
     },
     "canvasgradingassistance": {
       "sha256": "7a0fa20339970551a2937573a855e9aa4c0dbab9b7bfe7921abb80ef967b8d61",
-      "lastUpdated": "1758638262",
+      "lastUpdated": "1758643492",
       "id": "canvasgradingassistance",
+      "name": "Grading Assistance",
       "nutritionFacts": {
         "data": [
           {
@@ -587,8 +592,9 @@
     },
     "discussioninsights": {
       "sha256": "2340cc40bb84de62148b49451b0868b9c7bfe525b8fb36158694d7cacd9221e5",
-      "lastUpdated": "1758638262",
+      "lastUpdated": "1758643492",
       "id": "discussioninsights",
+      "name": "Discussion Insights",
       "nutritionFacts": {
         "data": [
           {
@@ -703,8 +709,9 @@
     },
     "smartsearch": {
       "sha256": "585661a3abf96350e18fee7cfe308adda40af6469fc325acfe9cfaecda1a901a",
-      "lastUpdated": "1758638262",
+      "lastUpdated": "1758643492",
       "id": "smartsearch",
+      "name": "Smart Search",
       "nutritionFacts": {
         "data": [
           {
@@ -819,8 +826,9 @@
     },
     "askyourdata": {
       "sha256": "ce29be981e1f8fc6ee4b68f653223ffefc6ca7ca378cfe4d81fd427277ee1ee9",
-      "lastUpdated": "1758638262",
+      "lastUpdated": "1758643492",
       "id": "askyourdata",
+      "name": "Ask Your Data",
       "nutritionFacts": {
         "data": [
           {
@@ -935,8 +943,9 @@
     },
     "canvasdiscussionsummaries": {
       "sha256": "5042d16cccab94a6f118c66226b330dead1d48761334384671da144437ad732b",
-      "lastUpdated": "1758638262",
+      "lastUpdated": "1758643492",
       "id": "canvasdiscussionsummaries",
+      "name": "Discussion Summaries",
       "nutritionFacts": {
         "data": [
           {
