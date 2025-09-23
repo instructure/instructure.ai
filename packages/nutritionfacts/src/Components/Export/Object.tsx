@@ -27,7 +27,9 @@ function stripSegment<
 }
 
 const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
+	console.log(Cache.features)
 	const cachedFeature = Cache.features[id.toLocaleLowerCase()];
+	console.log("cachedFeature:", cachedFeature)
 
 	if (!cachedFeature) {
 		return {

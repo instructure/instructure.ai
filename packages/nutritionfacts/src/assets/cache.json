@@ -1,13 +1,13 @@
 {
   "cache": {
     "sha256": "ab4dd4bef0792fd0e5d98e7985c93184423b3dd773e6cd305050dd7295ed3228",
-    "lastUpdated": "1758635212",
+    "lastUpdated": "1758637119",
     "count": 9
   },
   "features": {
     "canvasinboxtranslation": {
-      "sha256": "7ec56d891f8ecd4edb6075a27d31bed542c40b90b4f2ac9be64b44a7422d9994",
-      "lastUpdated": "1758578544",
+      "sha256": "b825a74e6cc62f2139c82ed49d1202ae3308d7bc0968b66ecf9c6f5102f2a572",
+      "lastUpdated": "1758637119",
       "nutritionFacts": {
         "data": [
           {
@@ -116,12 +116,13 @@
         "id": "canvasInboxTranslation",
         "name": "Inbox Translation",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.10"
       }
     },
     "canvascoursetranslation": {
-      "sha256": "aece7e681f5e8cd79c53cc7821567fc8fdf6cef2183c4cae9467a151b75813fb",
-      "lastUpdated": "1758578544",
+      "sha256": "143a3113a933aa37629e07aa2b49abfedf938ab52d1f3ff9daa3ff00a26a9a09",
+      "lastUpdated": "1758637119",
       "nutritionFacts": {
         "data": [
           {
@@ -230,12 +231,13 @@
         "id": "canvasCourseTranslation",
         "name": "Discussions Translation",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.10"
       }
     },
     "igniteagent": {
-      "sha256": "8485e1874e8e035fdb933a93b922ea98deb23c7d611a89502eedc6f28daa586f",
-      "lastUpdated": "1758578544",
+      "sha256": "2b18ed76caad3b15b846721dc3d900b8afb54202bd50b687a3dc518dcc952bb8",
+      "lastUpdated": "1758637119",
       "nutritionFacts": {
         "data": [
           {
@@ -344,12 +346,13 @@
         "id": "IgniteAgent",
         "name": "Agent",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.10"
       }
     },
     "rubricgenerator": {
-      "sha256": "a7890280a479fb8db810c4047b61e2f6601fb263b2c91f4a33cc869f7fd74dd2",
-      "lastUpdated": "1758578544",
+      "sha256": "a8ee23afbb71c4693e8b64fb6761f078aac10ec3a965f5c6893eb2a801950e20",
+      "lastUpdated": "1758637119",
       "nutritionFacts": {
         "data": [
           {
@@ -458,12 +461,13 @@
         "id": "rubricGenerator",
         "name": "Rubric Creator",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.10"
       }
     },
     "canvasgradingassistance": {
-      "sha256": "a26116e349eafcc6fc8f0358e64678c1d59d48e394508ec2b896a641d9a092af",
-      "lastUpdated": "1758578544",
+      "sha256": "7a0fa20339970551a2937573a855e9aa4c0dbab9b7bfe7921abb80ef967b8d61",
+      "lastUpdated": "1758637119",
       "nutritionFacts": {
         "data": [
           {
@@ -572,12 +576,13 @@
         "id": "canvasGradingAssistance",
         "name": "Grading Assistance",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.10"
       }
     },
     "discussioninsights": {
-      "sha256": "613f93979940becf7af78331143711b34357ff3f33b41767374f903288457f2d",
-      "lastUpdated": "1758578544",
+      "sha256": "2340cc40bb84de62148b49451b0868b9c7bfe525b8fb36158694d7cacd9221e5",
+      "lastUpdated": "1758637119",
       "nutritionFacts": {
         "data": [
           {
@@ -686,12 +691,13 @@
         "id": "discussionInsights",
         "name": "Discussion Insights",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.12"
       }
     },
     "smartsearch": {
-      "sha256": "4b2b858b61bb4b46eab7913c3410099386c637809e6060114bc25ee19af56409",
-      "lastUpdated": "1758578544",
+      "sha256": "585661a3abf96350e18fee7cfe308adda40af6469fc325acfe9cfaecda1a901a",
+      "lastUpdated": "1758637119",
       "nutritionFacts": {
         "data": [
           {
@@ -800,12 +806,13 @@
         "id": "smartSearch",
         "name": "Smart Search",
         "nameHint": "Feature Name",
+        "permissions": 2,
         "revision": "2025.09.12"
       }
     },
     "askyourdata": {
       "sha256": "ce29be981e1f8fc6ee4b68f653223ffefc6ca7ca378cfe4d81fd427277ee1ee9",
-      "lastUpdated": "1758635212",
+      "lastUpdated": "1758637119",
       "nutritionFacts": {
         "data": [
           {
@@ -919,8 +926,8 @@
       }
     },
     "canvasdiscussionsummaries": {
-      "sha256": "3c5898415ddb8547b1cde8b2c2f58ae5e80e73c7b11d023d1cb0c2b36760b6db",
-      "lastUpdated": "1758578544",
+      "sha256": "5042d16cccab94a6f118c66226b330dead1d48761334384671da144437ad732b",
+      "lastUpdated": "1758637119",
       "nutritionFacts": {
         "data": [
           {
@@ -1027,925 +1034,6 @@
         "descriptionHint": "Describe your feature",
         "group": "Canvas",
         "id": "canvasDiscussionSummaries",
-        "name": "Discussion Summaries",
-        "nameHint": "Feature Name",
-        "revision": "2025.09.12"
-      }
-    },
-    "canvasInboxTranslation": {
-      "sha256": "b825a74e6cc62f2139c82ed49d1202ae3308d7bc0968b66ecf9c6f5102f2a572",
-      "lastUpdated": "1758635212",
-      "nutritionFacts": {
-        "data": [
-          {
-            "blockTitle": "Model & Data",
-            "segmentData": [
-              {
-                "description": "The foundational AI on which further training and customizations are built.",
-                "descriptionHint": "Describe the base model",
-                "segmentTitle": "Base Model",
-                "value": "AWS Translate",
-                "valueDescription": "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
-                "valueHint": "Input base model"
-              },
-              {
-                "description": "Indicates the AI model has been given customer data in order to improve its results.",
-                "segmentTitle": "Trained with User Data",
-                "value": "No",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates which training or operational content was given to the model.",
-                "descriptionHint": "Describe the data shared",
-                "segmentTitle": "Data Shared with Model",
-                "value": "Other",
-                "valueDescription": "Inbox messages",
-                "valueHint": "Select shared data set"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Privacy & Compliance",
-            "segmentData": [
-              {
-                "description": "How long the model stores customer data.",
-                "descriptionHint": "Describe the data retention period",
-                "segmentTitle": "Data Retention",
-                "valueDescription": "Data is not stored or reused by the model."
-              },
-              {
-                "description": "Recording the AI's performance for auditing, analysis, and improvement.",
-                "descriptionHint": "Describe the data logging practices",
-                "segmentTitle": "Data Logging",
-                "value": "Does not log data",
-                "valueDescription": "",
-                "valueHint": "Logs data / Does not log data"
-              },
-              {
-                "description": "The locations where the AI model is officially available and supported.",
-                "descriptionHint": "Describe the supported regions",
-                "segmentTitle": "Regions Supported",
-                "value": "Global",
-                "valueDescription": "",
-                "valueHint": "Select region(s)"
-              },
-              {
-                "description": "Sensitive data that can be used to identify an individual.",
-                "descriptionHint": "Describe the handling of PII",
-                "segmentTitle": "PII",
-                "value": "Not Exposed",
-                "valueDescription": "PII in inbox messages may be sent to the model but no PII is intentionally sent to the model.",
-                "valueHint": "Exposed / Not Exposed"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Outputs",
-            "segmentData": [
-              {
-                "description": "The ability to turn the AI on or off within the product.",
-                "segmentTitle": "AI Settings Control",
-                "value": "Yes",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates if a human is involved in the AI's process or output.",
-                "descriptionHint": "Describe the human involvement",
-                "segmentTitle": "Human in the Loop",
-                "value": "Yes",
-                "valueDescription": "Users are displayed the translated copy of their message and can edit or remove it before they send the message.",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Preventative safety mechanisms or limitations built into the AI model.",
-                "descriptionHint": "Describe the guardrails",
-                "segmentTitle": "Guardrails",
-                "valueDescription": ""
-              },
-              {
-                "description": "Any risks the model may pose to the user.",
-                "descriptionHint": "Describe the expected risks",
-                "segmentTitle": "Expected Risks",
-                "valueDescription": "Machine translation may not fully capture the meaning of the original message."
-              },
-              {
-                "description": "The specific results the AI model is meant to achieve.",
-                "descriptionHint": "Describe the intended outcomes",
-                "segmentTitle": "Intended Outcomes",
-                "valueDescription": "Enable better multi-lingual communication in learning environments."
-              }
-            ]
-          }
-        ],
-        "description": "Translation of inbox messages (\"Inbox AI Translation\" feature flag) across 10 languages.",
-        "descriptionHint": "Describe your feature",
-        "group": "Canvas",
-        "id": "canvasinboxtranslation",
-        "name": "Inbox Translation",
-        "nameHint": "Feature Name",
-        "permissions": 2,
-        "revision": "2025.09.10"
-      }
-    },
-    "canvasCourseTranslation": {
-      "sha256": "143a3113a933aa37629e07aa2b49abfedf938ab52d1f3ff9daa3ff00a26a9a09",
-      "lastUpdated": "1758635212",
-      "nutritionFacts": {
-        "data": [
-          {
-            "blockTitle": "Model & Data",
-            "segmentData": [
-              {
-                "description": "The foundational AI on which further training and customizations are built.",
-                "descriptionHint": "Describe the base model",
-                "segmentTitle": "Base Model",
-                "value": "Haiku 3",
-                "valueDescription": "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
-                "valueHint": "Input base model"
-              },
-              {
-                "description": "Indicates the AI model has been given customer data in order to improve its results.",
-                "segmentTitle": "Trained with User Data",
-                "value": "No",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates which training or operational content was given to the model.",
-                "descriptionHint": "Describe the data shared",
-                "segmentTitle": "Data Shared with Model",
-                "value": "Course",
-                "valueDescription": "Discussion prompts and replies",
-                "valueHint": "Select shared data set"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Privacy & Compliance",
-            "segmentData": [
-              {
-                "description": "How long the model stores customer data.",
-                "descriptionHint": "Describe the data retention period",
-                "segmentTitle": "Data Retention",
-                "valueDescription": "Data is not stored or reused by the model."
-              },
-              {
-                "description": "Recording the AI's performance for auditing, analysis, and improvement.",
-                "descriptionHint": "Describe the data logging practices",
-                "segmentTitle": "Data Logging",
-                "value": "Does not log data",
-                "valueDescription": "",
-                "valueHint": "Logs data / Does not log data"
-              },
-              {
-                "description": "The locations where the AI model is officially available and supported.",
-                "descriptionHint": "Describe the supported regions",
-                "segmentTitle": "Regions Supported",
-                "value": "Global",
-                "valueDescription": "",
-                "valueHint": "Select region(s)"
-              },
-              {
-                "description": "Sensitive data that can be used to identify an individual.",
-                "descriptionHint": "Describe the handling of PII",
-                "segmentTitle": "PII",
-                "value": "Not Exposed",
-                "valueDescription": "PII in discussion replies may be sent to the model, but no PII is intentionally sent to the model.",
-                "valueHint": "Exposed / Not Exposed"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Outputs",
-            "segmentData": [
-              {
-                "description": "The ability to turn the AI on or off within the product.",
-                "segmentTitle": "AI Settings Control",
-                "value": "Yes",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates if a human is involved in the AI's process or output.",
-                "descriptionHint": "Describe the human involvement",
-                "segmentTitle": "Human in the Loop",
-                "value": "Yes",
-                "valueDescription": "Untranslated content is available to review translations against",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Preventative safety mechanisms or limitations built into the AI model.",
-                "descriptionHint": "Describe the guardrails",
-                "segmentTitle": "Guardrails",
-                "valueDescription": ""
-              },
-              {
-                "description": "Any risks the model may pose to the user.",
-                "descriptionHint": "Describe the expected risks",
-                "segmentTitle": "Expected Risks",
-                "valueDescription": "Machine translation may not fully capture the meaning of the original message."
-              },
-              {
-                "description": "The specific results the AI model is meant to achieve.",
-                "descriptionHint": "Describe the intended outcomes",
-                "segmentTitle": "Intended Outcomes",
-                "valueDescription": "Improve participation for students who do not natively speak the language of instruction or other replies."
-              }
-            ]
-          }
-        ],
-        "description": "Translation of Discussion threads (\"Course AI Translation\" feature flag) across 10 languages.",
-        "descriptionHint": "Describe your feature",
-        "group": "Canvas",
-        "id": "canvascoursetranslation",
-        "name": "Discussions Translation",
-        "nameHint": "Feature Name",
-        "permissions": 2,
-        "revision": "2025.09.10"
-      }
-    },
-    "IgniteAgent": {
-      "sha256": "2b18ed76caad3b15b846721dc3d900b8afb54202bd50b687a3dc518dcc952bb8",
-      "lastUpdated": "1758635212",
-      "nutritionFacts": {
-        "data": [
-          {
-            "blockTitle": "Model & Data",
-            "segmentData": [
-              {
-                "description": "The foundational AI on which further training and customizations are built.",
-                "descriptionHint": "Describe the base model",
-                "segmentTitle": "Base Model",
-                "value": "Haiku 3.5, Sonnet 3.5",
-                "valueDescription": "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
-                "valueHint": "Input base model"
-              },
-              {
-                "description": "Indicates the AI model has been given customer data in order to improve its results.",
-                "segmentTitle": "Trained with User Data",
-                "value": "No",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates which training or operational content was given to the model.",
-                "descriptionHint": "Describe the data shared",
-                "segmentTitle": "Data Shared with Model",
-                "value": "Other",
-                "valueDescription": "The model uses chat transcripts and information requested from the Canvas API to execute its actions.",
-                "valueHint": "Select shared data set"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Privacy & Compliance",
-            "segmentData": [
-              {
-                "description": "How long the model stores customer data.",
-                "descriptionHint": "Describe the data retention period",
-                "segmentTitle": "Data Retention",
-                "valueDescription": "Chat logs are retained indefinitely for troubleshooting and debugging."
-              },
-              {
-                "description": "Recording the AI's performance for auditing, analysis, and improvement.",
-                "descriptionHint": "Describe the data logging practices",
-                "segmentTitle": "Data Logging",
-                "value": "Logs data",
-                "valueDescription": "Chat logs are retained for troubleshooting and debugging purposes.",
-                "valueHint": "Logs data / Does not log data"
-              },
-              {
-                "description": "The locations where the AI model is officially available and supported.",
-                "descriptionHint": "Describe the supported regions",
-                "segmentTitle": "Regions Supported",
-                "value": "Virginia, Oregon",
-                "valueDescription": "",
-                "valueHint": "Select region(s)"
-              },
-              {
-                "description": "Sensitive data that can be used to identify an individual.",
-                "descriptionHint": "Describe the handling of PII",
-                "segmentTitle": "PII",
-                "value": "Exposed",
-                "valueDescription": "If requested during the the chat, user, course, and student identifiers or metadata may be shared with the model.",
-                "valueHint": "Exposed / Not Exposed"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Outputs",
-            "segmentData": [
-              {
-                "description": "The ability to turn the AI on or off within the product.",
-                "segmentTitle": "AI Settings Control",
-                "value": "Yes",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates if a human is involved in the AI's process or output.",
-                "descriptionHint": "Describe the human involvement",
-                "segmentTitle": "Human in the Loop",
-                "value": "Yes",
-                "valueDescription": "The agent only takes action based on human requests, and all write actions must be confirmed by the user.",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Preventative safety mechanisms or limitations built into the AI model.",
-                "descriptionHint": "Describe the guardrails",
-                "segmentTitle": "Guardrails",
-                "valueDescription": "Access to the agent is limited to users with an Admin- or Teacher-based role. Data access and functions are scoped to the permissions available to the chat user."
-              },
-              {
-                "description": "Any risks the model may pose to the user.",
-                "descriptionHint": "Describe the expected risks",
-                "segmentTitle": "Expected Risks",
-                "valueDescription": "The model may misinterpret user requests and require additional prompting."
-              },
-              {
-                "description": "The specific results the AI model is meant to achieve.",
-                "descriptionHint": "Describe the intended outcomes",
-                "segmentTitle": "Intended Outcomes",
-                "valueDescription": "Users are able to save time by relying on the Agent to execute complex workflows, batch actions, and other time-consuming Canvas tasks."
-              }
-            ]
-          }
-        ],
-        "description": "Ignite Agent is a faculty chat assistant capable of translating natural language requests into complex Canvas workflows.",
-        "descriptionHint": "Describe your feature",
-        "group": "IgniteAI",
-        "id": "igniteagent",
-        "name": "Agent",
-        "nameHint": "Feature Name",
-        "permissions": 2,
-        "revision": "2025.09.10"
-      }
-    },
-    "rubricGenerator": {
-      "sha256": "a8ee23afbb71c4693e8b64fb6761f078aac10ec3a965f5c6893eb2a801950e20",
-      "lastUpdated": "1758635212",
-      "nutritionFacts": {
-        "data": [
-          {
-            "blockTitle": "Model & Data",
-            "segmentData": [
-              {
-                "description": "The foundational AI on which further training and customizations are built.",
-                "descriptionHint": "Describe the base model",
-                "segmentTitle": "Base Model",
-                "value": "Haiku 3",
-                "valueDescription": "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
-                "valueHint": "Input base model"
-              },
-              {
-                "description": "Indicates the AI model has been given customer data in order to improve its results.",
-                "segmentTitle": "Trained with User Data",
-                "value": "No",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates which training or operational content was given to the model.",
-                "descriptionHint": "Describe the data shared",
-                "segmentTitle": "Data Shared with Model",
-                "value": "Course",
-                "valueDescription": "The Canvas assignment description field is used in generating rubric criteria.",
-                "valueHint": "Select shared data set"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Privacy & Compliance",
-            "segmentData": [
-              {
-                "description": "How long the model stores customer data.",
-                "descriptionHint": "Describe the data retention period",
-                "segmentTitle": "Data Retention",
-                "valueDescription": "Model responses are stored for debugging purposes."
-              },
-              {
-                "description": "Recording the AI's performance for auditing, analysis, and improvement.",
-                "descriptionHint": "Describe the data logging practices",
-                "segmentTitle": "Data Logging",
-                "value": "Logs data",
-                "valueDescription": "Request, response, and feedback data is logged to assist in troubleshooting.",
-                "valueHint": "Logs data / Does not log data"
-              },
-              {
-                "description": "The locations where the AI model is officially available and supported.",
-                "descriptionHint": "Describe the supported regions",
-                "segmentTitle": "Regions Supported",
-                "value": "Global",
-                "valueDescription": "",
-                "valueHint": "Select region(s)"
-              },
-              {
-                "description": "Sensitive data that can be used to identify an individual.",
-                "descriptionHint": "Describe the handling of PII",
-                "segmentTitle": "PII",
-                "value": "Not Exposed",
-                "valueDescription": "",
-                "valueHint": "Exposed / Not Exposed"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Outputs",
-            "segmentData": [
-              {
-                "description": "The ability to turn the AI on or off within the product.",
-                "segmentTitle": "AI Settings Control",
-                "value": "Yes",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates if a human is involved in the AI's process or output.",
-                "descriptionHint": "Describe the human involvement",
-                "segmentTitle": "Human in the Loop",
-                "value": "Yes",
-                "valueDescription": "All created rubrics are reviewable and editable by the instructor.",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Preventative safety mechanisms or limitations built into the AI model.",
-                "descriptionHint": "Describe the guardrails",
-                "segmentTitle": "Guardrails",
-                "valueDescription": "The instructor may editcriteria before accepting the rubric."
-              },
-              {
-                "description": "Any risks the model may pose to the user.",
-                "descriptionHint": "Describe the expected risks",
-                "segmentTitle": "Expected Risks",
-                "valueDescription": "The created rubric may not align with the assignment's intended learning outcomes."
-              },
-              {
-                "description": "The specific results the AI model is meant to achieve.",
-                "descriptionHint": "Describe the intended outcomes",
-                "segmentTitle": "Intended Outcomes",
-                "valueDescription": "A rubric aligned to learning outcomes is created for the instructor to use during grading."
-              }
-            ]
-          }
-        ],
-        "description": "AI-generated rubric recommendations for Canvas assignments.",
-        "descriptionHint": "Describe your feature",
-        "group": "Canvas",
-        "id": "rubricgenerator",
-        "name": "Rubric Creator",
-        "nameHint": "Feature Name",
-        "permissions": 2,
-        "revision": "2025.09.10"
-      }
-    },
-    "canvasGradingAssistance": {
-      "sha256": "7a0fa20339970551a2937573a855e9aa4c0dbab9b7bfe7921abb80ef967b8d61",
-      "lastUpdated": "1758635212",
-      "nutritionFacts": {
-        "data": [
-          {
-            "blockTitle": "Model & Data",
-            "segmentData": [
-              {
-                "description": "The foundational AI on which further training and customizations are built.",
-                "descriptionHint": "Describe the base model",
-                "segmentTitle": "Base Model",
-                "value": "Haiku 3.5",
-                "valueDescription": "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
-                "valueHint": "Input base model"
-              },
-              {
-                "description": "Indicates the AI model has been given customer data in order to improve its results.",
-                "segmentTitle": "Trained with User Data",
-                "value": "No",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates which training or operational content was given to the model.",
-                "descriptionHint": "Describe the data shared",
-                "segmentTitle": "Data Shared with Model",
-                "value": "Course, Student",
-                "valueDescription": "Assignment information, rubric, and student submissions.",
-                "valueHint": "Select shared data set"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Privacy & Compliance",
-            "segmentData": [
-              {
-                "description": "How long the model stores customer data.",
-                "descriptionHint": "Describe the data retention period",
-                "segmentTitle": "Data Retention",
-                "valueDescription": "Transactional data is retained for the life of the request"
-              },
-              {
-                "description": "Recording the AI's performance for auditing, analysis, and improvement.",
-                "descriptionHint": "Describe the data logging practices",
-                "segmentTitle": "Data Logging",
-                "value": "Logs data",
-                "valueDescription": "Complete response from the LLM is retained in the Canvas database for auditing purposes.",
-                "valueHint": "Logs data / Does not log data"
-              },
-              {
-                "description": "The locations where the AI model is officially available and supported.",
-                "descriptionHint": "Describe the supported regions",
-                "segmentTitle": "Regions Supported",
-                "value": "Virginia, Oregon",
-                "valueDescription": "",
-                "valueHint": "Select region(s)"
-              },
-              {
-                "description": "Sensitive data that can be used to identify an individual.",
-                "descriptionHint": "Describe the handling of PII",
-                "segmentTitle": "PII",
-                "value": "Not Exposed",
-                "valueDescription": "No PII is intentionally sent to the model. If there is incidental PII in any of the shared data, such as in the submission body, it will be sent to the model.",
-                "valueHint": "Exposed / Not Exposed"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Outputs",
-            "segmentData": [
-              {
-                "description": "The ability to turn the AI on or off within the product.",
-                "segmentTitle": "AI Settings Control",
-                "value": "Yes",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates if a human is involved in the AI's process or output.",
-                "descriptionHint": "Describe the human involvement",
-                "segmentTitle": "Human in the Loop",
-                "value": "Yes",
-                "valueDescription": "Grade suggestion is displayed and selected by default, but the instructor much make the final decision to edit or accept the suggestions.",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Preventative safety mechanisms or limitations built into the AI model.",
-                "descriptionHint": "Describe the guardrails",
-                "segmentTitle": "Guardrails",
-                "valueDescription": "The Claude Sonnet model has inherent guardrails built in."
-              },
-              {
-                "description": "Any risks the model may pose to the user.",
-                "descriptionHint": "Describe the expected risks",
-                "segmentTitle": "Expected Risks",
-                "valueDescription": "Model may work better with certain kinds of assignment types or disciplines. The grader must remain alert to incorrect assumptions from the model."
-              },
-              {
-                "description": "The specific results the AI model is meant to achieve.",
-                "descriptionHint": "Describe the intended outcomes",
-                "segmentTitle": "Intended Outcomes",
-                "valueDescription": "Reduced bias in grading, fairness, and consistency. Grading efficiency, saving teachers time."
-              }
-            ]
-          }
-        ],
-        "description": "AI powered automatic grading and feedback suggestions to enable more consistent, fair, and efficient grading workflows.",
-        "descriptionHint": "Describe your feature",
-        "group": "Canvas",
-        "id": "canvasgradingassistance",
-        "name": "Grading Assistance",
-        "nameHint": "Feature Name",
-        "permissions": 2,
-        "revision": "2025.09.10"
-      }
-    },
-    "discussionInsights": {
-      "sha256": "2340cc40bb84de62148b49451b0868b9c7bfe525b8fb36158694d7cacd9221e5",
-      "lastUpdated": "1758635212",
-      "nutritionFacts": {
-        "data": [
-          {
-            "blockTitle": "Model & Data",
-            "segmentData": [
-              {
-                "description": "The foundational AI on which further training and customizations are built.",
-                "descriptionHint": "Describe the base model",
-                "segmentTitle": "Base Model",
-                "value": "Haiku 3",
-                "valueDescription": "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
-                "valueHint": "Input base model"
-              },
-              {
-                "description": "Indicates the AI model has been given customer data in order to improve its results.",
-                "segmentTitle": "Trained with User Data",
-                "value": "No",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates which training or operational content was given to the model.",
-                "descriptionHint": "Describe the data shared",
-                "segmentTitle": "Data Shared with Model",
-                "value": "Course",
-                "valueDescription": "Discussion topic, prompt, and student replies are used.",
-                "valueHint": "Select shared data set"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Privacy & Compliance",
-            "segmentData": [
-              {
-                "description": "How long the model stores customer data.",
-                "descriptionHint": "Describe the data retention period",
-                "segmentTitle": "Data Retention",
-                "valueDescription": "No user data is stored or reused by the model."
-              },
-              {
-                "description": "Recording the AI's performance for auditing, analysis, and improvement.",
-                "descriptionHint": "Describe the data logging practices",
-                "segmentTitle": "Data Logging",
-                "value": "Logs data",
-                "valueDescription": "Model evaluations and reply labels are logged for debugging and troubleshooting purposes.",
-                "valueHint": "Logs data / Does not log data"
-              },
-              {
-                "description": "The locations where the AI model is officially available and supported.",
-                "descriptionHint": "Describe the supported regions",
-                "segmentTitle": "Regions Supported",
-                "value": "Global",
-                "valueDescription": "",
-                "valueHint": "Select region(s)"
-              },
-              {
-                "description": "Sensitive data that can be used to identify an individual.",
-                "descriptionHint": "Describe the handling of PII",
-                "segmentTitle": "PII",
-                "value": "Exposed",
-                "valueDescription": "Known PII is masked before being sent to the model, though any PII present in the discussion reply is not and may be shared with the model.",
-                "valueHint": "Exposed / Not Exposed"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Outputs",
-            "segmentData": [
-              {
-                "description": "The ability to turn the AI on or off within the product.",
-                "segmentTitle": "AI Settings Control",
-                "value": "Yes",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates if a human is involved in the AI's process or output.",
-                "descriptionHint": "Describe the human involvement",
-                "segmentTitle": "Human in the Loop",
-                "value": "Yes",
-                "valueDescription": "Instructors may review AI-generated evaluations or review posts directly.",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Preventative safety mechanisms or limitations built into the AI model.",
-                "descriptionHint": "Describe the guardrails",
-                "segmentTitle": "Guardrails",
-                "valueDescription": "Model responses are logged for quality assurance, and responses with low confidence are flagged \"Needs Review\" to encourage human intervention."
-              },
-              {
-                "description": "Any risks the model may pose to the user.",
-                "descriptionHint": "Describe the expected risks",
-                "segmentTitle": "Expected Risks",
-                "valueDescription": "The model may misclassify some nuanced replies."
-              },
-              {
-                "description": "The specific results the AI model is meant to achieve.",
-                "descriptionHint": "Describe the intended outcomes",
-                "segmentTitle": "Intended Outcomes",
-                "valueDescription": "Instructors are able to quickly assess the quality of student replies, identify low-effor or off-topic contributions, and focus their attention to where it is needed most."
-              }
-            ]
-          }
-        ],
-        "description": "Discussion Insights uses AI to evaluate student discussion replies, highlight relevant contributions, and flag those that may need instructor review.",
-        "descriptionHint": "Describe your feature",
-        "group": "Canvas",
-        "id": "discussioninsights",
-        "name": "Discussion Insights",
-        "nameHint": "Feature Name",
-        "permissions": 2,
-        "revision": "2025.09.12"
-      }
-    },
-    "smartSearch": {
-      "sha256": "585661a3abf96350e18fee7cfe308adda40af6469fc325acfe9cfaecda1a901a",
-      "lastUpdated": "1758635212",
-      "nutritionFacts": {
-        "data": [
-          {
-            "blockTitle": "Model & Data",
-            "segmentData": [
-              {
-                "description": "The foundational AI on which further training and customizations are built.",
-                "descriptionHint": "Describe the base model",
-                "segmentTitle": "Base Model",
-                "value": "Cohere Embed Multilingual",
-                "valueDescription": "Cohere models are provided via Amazon Bedrock Foundation Models (FMs).",
-                "valueHint": "Input base model"
-              },
-              {
-                "description": "Indicates the AI model has been given customer data in order to improve its results.",
-                "segmentTitle": "Trained with User Data",
-                "value": "No",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates which training or operational content was given to the model.",
-                "descriptionHint": "Describe the data shared",
-                "segmentTitle": "Data Shared with Model",
-                "value": "Course",
-                "valueDescription": "Course content is indexed by the model and then stored in the Canvas database.",
-                "valueHint": "Select shared data set"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Privacy & Compliance",
-            "segmentData": [
-              {
-                "description": "How long the model stores customer data.",
-                "descriptionHint": "Describe the data retention period",
-                "segmentTitle": "Data Retention",
-                "valueDescription": "Data is not stored or reused by the model. Indexed course content is stored in the Canvas database."
-              },
-              {
-                "description": "Recording the AI's performance for auditing, analysis, and improvement.",
-                "descriptionHint": "Describe the data logging practices",
-                "segmentTitle": "Data Logging",
-                "value": "Does not log data",
-                "valueDescription": "",
-                "valueHint": "Logs data / Does not log data"
-              },
-              {
-                "description": "The locations where the AI model is officially available and supported.",
-                "descriptionHint": "Describe the supported regions",
-                "segmentTitle": "Regions Supported",
-                "value": "Global",
-                "valueDescription": "",
-                "valueHint": "Select region(s)"
-              },
-              {
-                "description": "Sensitive data that can be used to identify an individual.",
-                "descriptionHint": "Describe the handling of PII",
-                "segmentTitle": "PII",
-                "value": "Not Exposed",
-                "valueDescription": "PII in course content may be indexed, but no PII is intentionally sent to the model.",
-                "valueHint": "Exposed / Not Exposed"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Outputs",
-            "segmentData": [
-              {
-                "description": "The ability to turn the AI on or off within the product.",
-                "segmentTitle": "AI Settings Control",
-                "value": "Yes",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates if a human is involved in the AI's process or output.",
-                "descriptionHint": "Describe the human involvement",
-                "segmentTitle": "Human in the Loop",
-                "value": "Yes",
-                "valueDescription": "Users are presented with a list of results related to their search query and can act or not act on them.",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Preventative safety mechanisms or limitations built into the AI model.",
-                "descriptionHint": "Describe the guardrails",
-                "segmentTitle": "Guardrails",
-                "valueDescription": ""
-              },
-              {
-                "description": "Any risks the model may pose to the user.",
-                "descriptionHint": "Describe the expected risks",
-                "segmentTitle": "Expected Risks",
-                "valueDescription": "Search results may be incorrectly sorted or may not be relevant to the search term."
-              },
-              {
-                "description": "The specific results the AI model is meant to achieve.",
-                "descriptionHint": "Describe the intended outcomes",
-                "segmentTitle": "Intended Outcomes",
-                "valueDescription": "Student are able to quicly find answers to questions, and instructors are able to quickly navigate their courses."
-              }
-            ]
-          }
-        ],
-        "description": "Natural language search of course content for students and instructors.",
-        "descriptionHint": "Describe your feature",
-        "group": "Canvas",
-        "id": "smartsearch",
-        "name": "Smart Search",
-        "nameHint": "Feature Name",
-        "permissions": 2,
-        "revision": "2025.09.12"
-      }
-    },
-    "canvasDiscussionSummaries": {
-      "sha256": "5042d16cccab94a6f118c66226b330dead1d48761334384671da144437ad732b",
-      "lastUpdated": "1758635212",
-      "nutritionFacts": {
-        "data": [
-          {
-            "blockTitle": "Model & Data",
-            "segmentData": [
-              {
-                "description": "The foundational AI on which further training and customizations are built.",
-                "descriptionHint": "Describe the base model",
-                "segmentTitle": "Base Model",
-                "value": "Haiku 3",
-                "valueDescription": "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
-                "valueHint": "Input base model"
-              },
-              {
-                "description": "Indicates the AI model has been given customer data in order to improve its results.",
-                "segmentTitle": "Trained with User Data",
-                "value": "No",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates which training or operational content was given to the model.",
-                "descriptionHint": "Describe the data shared",
-                "segmentTitle": "Data Shared with Model",
-                "value": "Course",
-                "valueDescription": "Discussion prompt and replies.",
-                "valueHint": "Select shared data set"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Privacy & Compliance",
-            "segmentData": [
-              {
-                "description": "How long the model stores customer data.",
-                "descriptionHint": "Describe the data retention period",
-                "segmentTitle": "Data Retention",
-                "valueDescription": "Data is not stored or reused by the model."
-              },
-              {
-                "description": "Recording the AI's performance for auditing, analysis, and improvement.",
-                "descriptionHint": "Describe the data logging practices",
-                "segmentTitle": "Data Logging",
-                "value": "Logs data",
-                "valueDescription": "Summaries are logged in the Canvas database for review and reuse.",
-                "valueHint": "Logs data / Does not log data"
-              },
-              {
-                "description": "The locations where the AI model is officially available and supported.",
-                "descriptionHint": "Describe the supported regions",
-                "segmentTitle": "Regions Supported",
-                "value": "Global",
-                "valueDescription": "",
-                "valueHint": "Select region(s)"
-              },
-              {
-                "description": "Sensitive data that can be used to identify an individual.",
-                "descriptionHint": "Describe the handling of PII",
-                "segmentTitle": "PII",
-                "value": "Not Exposed",
-                "valueDescription": "Pii in discussion replies may be sent to the model, but no PII is intentionally sent to the model.",
-                "valueHint": "Exposed / Not Exposed"
-              }
-            ]
-          },
-          {
-            "blockTitle": "Outputs",
-            "segmentData": [
-              {
-                "description": "The ability to turn the AI on or off within the product.",
-                "segmentTitle": "AI Settings Control",
-                "value": "Yes",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Indicates if a human is involved in the AI's process or output.",
-                "descriptionHint": "Describe the human involvement",
-                "segmentTitle": "Human in the Loop",
-                "value": "Yes",
-                "valueDescription": "Instructors may regenerate summaries or fine-tune them with additional instructions.",
-                "valueHint": "Yes / No"
-              },
-              {
-                "description": "Preventative safety mechanisms or limitations built into the AI model.",
-                "descriptionHint": "Describe the guardrails",
-                "segmentTitle": "Guardrails",
-                "valueDescription": ""
-              },
-              {
-                "description": "Any risks the model may pose to the user.",
-                "descriptionHint": "Describe the expected risks",
-                "segmentTitle": "Expected Risks",
-                "valueDescription": "Summaries may not capture all desired information."
-              },
-              {
-                "description": "The specific results the AI model is meant to achieve.",
-                "descriptionHint": "Describe the intended outcomes",
-                "segmentTitle": "Intended Outcomes",
-                "valueDescription": "Summaries allow discussion topics to be used in large-format courses and other environments where discussions were previously infeasible."
-              }
-            ]
-          }
-        ],
-        "description": "Discussion summaries of key points, questions, and insights.",
-        "descriptionHint": "Describe your feature",
-        "group": "Canvas",
-        "id": "canvasdiscussionsummaries",
         "name": "Discussion Summaries",
         "nameHint": "Feature Name",
         "permissions": 2,
