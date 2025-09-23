@@ -145,4 +145,4 @@ export type StrictAiInformation = {
 	modelNameText: "Base Model";
 	modelName: StrictNutritionFacts["data"][0]["segmentData"][0]["value"];
 	nutritionFactsModalTriggerText: "AI Nutrition Facts";
-}	
+};	
