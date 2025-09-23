@@ -13,7 +13,7 @@ export type PageLayout = {
 	permissions: boolean;
 };
 
-/* Destructured, but strict NutritionFacts */
+/* Nutritionfacts */
 
 export type SegmentBase = Readonly<
 	{
@@ -121,3 +121,15 @@ export type ProductsMeta = {
 	cache: CacheMeta;
 	features: Record<ProductNutritionFacts["id"], FeatureMeta>;
 };
+
+/* Permissions Levels */
+
+export type AiPermissions = {
+	name: string;
+	title: string;
+	description: string;
+	descriptionHint?: string;
+	highlighted?: boolean;
+};
+
+export type StrictAiPermissions = Readonly<Omit<AiPermissions, "descriptionHint">>;
