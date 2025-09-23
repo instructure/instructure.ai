@@ -7,7 +7,7 @@
     "@instructure/browserslist-config-instui": "^10.25.0",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
-    "@typescript/native-preview": "7.0.0-dev.20250918.1",
+    "@typescript/native-preview": "7.0.0-dev.20250922.1",
     "@vitejs/plugin-react": "^5.0.3",
     "babel-plugin-react-compiler": "19.1.0-rc.3",
     "browserslist": "^4.26.2",
@@ -20,7 +20,7 @@
   },
   "version": "0.1.0",
   "name": "@instructure.ai/shared-configs",
-  "packageManager": "pnpm@10.17.0",
+  "packageManager": "pnpm@10.17.1",
   "private": true,
   "scripts": {
     "build": "vite-node ./scripts/build.mts",

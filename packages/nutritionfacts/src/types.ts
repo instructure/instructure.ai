@@ -111,14 +111,13 @@ export type CacheMeta = {
 	count: number;
 };
 
+export type FeatureMeta = {
+	sha256: string;
+	lastUpdated: string;
+	nutritionFacts: ProductNutritionFacts;
+};
+
 export type ProductsMeta = {
 	cache: CacheMeta;
-	features: Record<
-		ProductNutritionFacts["id"],
-		{
-			sha256: string;
-			lastUpdated: string;
-			nutritionFacts: ProductNutritionFacts;
-		}
-	>;
+	features: Record<ProductNutritionFacts["id"], FeatureMeta>;
 };

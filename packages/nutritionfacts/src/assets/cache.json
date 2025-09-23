@@ -5,7 +5,7 @@
     "count": 9
   },
   "features": {
-    "canvasInboxTranslation": {
+    "canvasinboxtranslation": {
       "sha256": "7ec56d891f8ecd4edb6075a27d31bed542c40b90b4f2ac9be64b44a7422d9994",
       "lastUpdated": "1758578544",
       "nutritionFacts": {
@@ -119,7 +119,7 @@
         "revision": "2025.09.10"
       }
     },
-    "canvasCourseTranslation": {
+    "canvascoursetranslation": {
       "sha256": "aece7e681f5e8cd79c53cc7821567fc8fdf6cef2183c4cae9467a151b75813fb",
       "lastUpdated": "1758578544",
       "nutritionFacts": {
@@ -233,7 +233,7 @@
         "revision": "2025.09.10"
       }
     },
-    "IgniteAgent": {
+    "igniteagent": {
       "sha256": "8485e1874e8e035fdb933a93b922ea98deb23c7d611a89502eedc6f28daa586f",
       "lastUpdated": "1758578544",
       "nutritionFacts": {
@@ -347,7 +347,7 @@
         "revision": "2025.09.10"
       }
     },
-    "rubricGenerator": {
+    "rubricgenerator": {
       "sha256": "a7890280a479fb8db810c4047b61e2f6601fb263b2c91f4a33cc869f7fd74dd2",
       "lastUpdated": "1758578544",
       "nutritionFacts": {
@@ -461,7 +461,7 @@
         "revision": "2025.09.10"
       }
     },
-    "canvasGradingAssistance": {
+    "canvasgradingassistance": {
       "sha256": "a26116e349eafcc6fc8f0358e64678c1d59d48e394508ec2b896a641d9a092af",
       "lastUpdated": "1758578544",
       "nutritionFacts": {
@@ -575,7 +575,7 @@
         "revision": "2025.09.10"
       }
     },
-    "discussionInsights": {
+    "discussioninsights": {
       "sha256": "613f93979940becf7af78331143711b34357ff3f33b41767374f903288457f2d",
       "lastUpdated": "1758578544",
       "nutritionFacts": {
@@ -689,7 +689,7 @@
         "revision": "2025.09.12"
       }
     },
-    "smartSearch": {
+    "smartsearch": {
       "sha256": "4b2b858b61bb4b46eab7913c3410099386c637809e6060114bc25ee19af56409",
       "lastUpdated": "1758578544",
       "nutritionFacts": {
@@ -917,7 +917,7 @@
         "revision": "2025.09.12"
       }
     },
-    "canvasDiscussionSummaries": {
+    "canvasdiscussionsummaries": {
       "sha256": "3c5898415ddb8547b1cde8b2c2f58ae5e80e73c7b11d023d1cb0c2b36760b6db",
       "lastUpdated": "1758578544",
       "nutritionFacts": {

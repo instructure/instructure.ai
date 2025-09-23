@@ -154,7 +154,7 @@ function getProductFromLine(values: string[]): ProductNutritionFacts {
 		description: values[3],
 		descriptionHint: "Describe your feature",
 		group: group,
-		id: values[0],
+		id: values[0].toLowerCase(),
 		name: values[2],
 		nameHint: "Feature Name",
 		permissions: permissions,
