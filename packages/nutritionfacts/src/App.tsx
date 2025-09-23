@@ -16,7 +16,7 @@ import {
 	LogoDark,
 	Product,
 } from "./assets";
-import { EmbedControl, LinkControl } from "./Components/Export";
+import { EmbedControl, LinkControl, ObjectControl } from "./Components/Export";
 import {
 	getProductFromCSV,
 	getProductFromObject,
@@ -109,11 +109,19 @@ const App: FC = () => {
 											product={product}
 										/>
 									</View>
+									<View margin="0 x-small 0">
 									<LinkControl
 										background={false}
 										border={false}
 										color={isDark ? "primary-inverse" : "primary"}
 										product={product}
+									/>
+									</View>
+									<ObjectControl
+										product={product}
+										background={false}
+										border={false}
+										color={isDark ? "primary-inverse" : "primary"}
 									/>
 								</Flex.Item>
 							)}
@@ -173,7 +181,6 @@ const App: FC = () => {
 					</View>
 				)}
 			</View>
-		</InstUISettingsProvider>
-	);
+</InstUISettingsProvider>)
 };
 export default App;
