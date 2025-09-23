@@ -55,16 +55,17 @@ The "Copy embed code" generates an iFrame that is sized to fit the content witho
 
 ### JSON
 
-When viewing a Nutrition Facts page a "Copy JSON Object" helper is displayed in the header. This object is for use with @instructure/ui AI Components.
+When viewing a Nutrition Facts page a "Copy JSON Object" helper is displayed in the header. This object is for use with @instructure/ui AI Components. An sha256 and a last updated Epoch timestamp are included for easier update validation.
 
 ```JSON
 {
-  "id": "askyourdata",
-  "sha256": "ce29be981e1f8fc6ee4b68f653223ffefc6ca7ca378cfe4d81fd427277ee1ee9",
-  "lastUpdated": "1758638262",
-	"nutritionFacts": "<StrictNutritionFacts>",
-	"dataPermissionsLevel": "<AiPermissions>",
-	"AiInformation": "<StrictAiInformation>"
+  "id": "<uid>",
+  "name": "<featureName>",
+  "sha256": "abc...xyz",
+  "lastUpdated": "1234567890",
+  "nutritionFacts": "<StrictNutritionFacts>",
+  "dataPermissionsLevel": "<AiPermissions>",
+  "AiInformation": "<StrictAiInformation>"
 }
 ```
 
@@ -76,8 +77,6 @@ This makes outputting AI Components fairly simple, and standard.
 const ai = {jsonObj}
 
 <AiInformation
-  trigger={<Button>AI information</Button>}
-
   data={ai.AiInformation}
   dataPermissionLevelsCurrentFeature={ai.name}
   dataPermissionLevelsData={ai.dataPermissionsLevel}
@@ -85,6 +84,7 @@ const ai = {jsonObj}
   nutritionFactsData={ai.nutritionFacts.data}
 
   title="Features"
+  trigger={<Button>AI information</Button>}
 
   dataPermissionLevelsTitle="Data Permission Levels"
   dataPermissionLevelsCurrentFeatureText="Current Feature:"
@@ -111,7 +111,7 @@ const { nutritionFacts } = jsonObj  // Destructured
 
 <NutritionFacts
   featureName={ai.name || nutritionFacts.name}
-	data={ai.nutritionFacts.data || nutritionFacts.data }
+  data={ai.nutritionFacts.data || nutritionFacts.data }
 
   title="Nutrition Facts"
   modalLabel="This is a modal for AI facts"
@@ -127,9 +127,8 @@ const { nutritionFacts } = jsonObj  // Destructured
 const ai = {jsonObj}
 
  <DataPermissionLevels
-
   currentFeature={ai.name}
-	data={ai.dataPermissionsLevel}
+  data={ai.dataPermissionsLevel}
 
   title="Data Permission Levels"
   currentFeatureText="Current Feature:"
@@ -137,6 +136,7 @@ const ai = {jsonObj}
   closeButtonText="Close"
   modalLabel="This is a Data Permission Levels modal"
   triggerText="Data Permission Levels"
+/>
 ```
 
 ### Importing
