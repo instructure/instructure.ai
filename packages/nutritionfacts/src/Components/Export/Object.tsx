@@ -27,9 +27,7 @@ function stripSegment<
 }
 
 const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
-	console.log(Cache.features)
 	const cachedFeature = Cache.features[id.toLocaleLowerCase()];
-	console.log("cachedFeature:", cachedFeature)
 
 	if (!cachedFeature) {
 		return {
@@ -46,11 +44,11 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 
 	const level: ProductNutritionFacts["permissions"] = (cachedFeature.nutritionFacts as ProductNutritionFacts).permissions
 
-		level ? Permissions[level + 1].highlighted = true : undefined
+		level ? Permissions[level].highlighted = true : undefined
 
 	const strictPermissions: AiPermissions[] = Permissions.slice(1)
 
-	const strictData = cachedFeature.nutritionFacts.data.map((block) => {
+	const strictNutritionFactsData = cachedFeature.nutritionFacts.data.map((block) => {
 		switch (block.blockTitle) {
 			case "Model & Data":
 				return {
@@ -76,8 +74,9 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 		sha256: cachedFeature.sha256,
 		lastUpdated: cachedFeature.lastUpdated,
 		nutritionFacts: {
-			...cachedFeature.nutritionFacts,
-			data: strictData
+			name: cachedFeature.nutritionFacts.name,
+			description: cachedFeature.nutritionFacts.description,
+			data: strictNutritionFactsData
 		} as StrictNutritionFacts,
 		dataPermissionsLevel: strictPermissions
 	} as FeatureMeta
