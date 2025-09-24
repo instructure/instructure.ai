@@ -50,8 +50,6 @@ const paramsToPendo = (params: string | null): RoadmapFeatures | null => {
     features
   };
 
-  console.log('Parsed roadmap:', roadmap);
-
   if (
     Array.isArray(roadmap.stages) &&
     Array.isArray(roadmap.products) &&

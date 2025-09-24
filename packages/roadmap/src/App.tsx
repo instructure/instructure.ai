@@ -1,7 +1,8 @@
 import type { FC } from "react";
-import { InstUISettingsProvider } from "@instructure/ui";
+import { InstUISettingsProvider, Flex } from "@instructure/ui";
 import { paramsToPendo } from "./utils";
 import { useEffect } from "react";
+import { Card } from "./components";
 
 const App: FC = () => {
   const queryParams = new URLSearchParams(window.location.search);
@@ -16,7 +17,11 @@ const App: FC = () => {
 
   return (
     <InstUISettingsProvider>
-      {roadmap && <pre>{JSON.stringify(roadmap, null, 2)}</pre>}
+      {roadmap && (
+        <Flex wrap="wrap" gap="paddingCardMedium" justifyItems="space-around" withVisualDebug>
+          {roadmap.features.map((entry) => <Card key={entry.feature.title} entry={entry} />)}
+        </Flex>
+      )}
     </InstUISettingsProvider>
   );
 };

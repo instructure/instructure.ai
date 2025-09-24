@@ -20,7 +20,6 @@ const main = async () => {
 	const buildPackage = (pkg: PackageName, args: CommandExtraArgs) => {
 		console.log(`Building package: ${pkg}`);
 		exec(`pnpm -F ${pkg} build`, { args: args.slice(2) });
-		// copyPublicToDist(pkg as FullPackageName);
 	};
 
 	const buildPackages = (packages: PackageName[], args: CommandExtraArgs) => {
@@ -34,11 +33,11 @@ const main = async () => {
 
 		const src = path.resolve(
 			__dirname,
-			`${pkg ? `../packages/${pack}/public` : "../public"}`,
+			`${pack ? `../packages/${pack}/public` : "../public"}`,
 		);
 		const dest = path.resolve(
 			__dirname,
-			`${pkg ? `../dist/${pack}` : "../dist"}`,
+			`${pack ? `../dist/${pack}` : "../dist"}`,
 		);
 
 		if (!fs.existsSync(src)) {
