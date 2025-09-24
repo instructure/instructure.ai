@@ -39,6 +39,7 @@ const App: FC = () => {
     <InstUISettingsProvider>
       {roadmap && (
         <Flex wrap="wrap" gap="paddingCardMedium" justifyItems="start">
+
           {roadmap.features.map((entry) => <Card key={entry.feature.title} entry={entry} />)}
         </Flex>
       )}
