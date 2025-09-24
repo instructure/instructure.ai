@@ -15,10 +15,31 @@ const App: FC = () => {
     }
   }, [roadmap]);
 
+  useEffect(() => {
+    const sendHeight = () => {
+      window.parent.postMessage(
+        { type: "setHeight", height: document.body.scrollHeight },
+        "*"
+      );
+    };
+
+    sendHeight();
+
+    window.addEventListener("resize", sendHeight);
+
+    window.addEventListener("load", sendHeight);
+
+    return () => {
+      window.removeEventListener("resize", sendHeight);
+      window.removeEventListener("load", sendHeight);
+    };
+  }, []);
+
   return (
     <InstUISettingsProvider>
       {roadmap && (
-        <Flex wrap="wrap" gap="paddingCardMedium" justifyItems="space-around" withVisualDebug>
+        <Flex wrap="wrap" gap="paddingCardMedium" justifyItems="start">
+
           {roadmap.features.map((entry) => <Card key={entry.feature.title} entry={entry} />)}
         </Flex>
       )}
