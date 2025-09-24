@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useState } from 'react';
-import { Heading, Text, Flex, TruncateText, View, Pill,IconCanvasLogoLine } from '@instructure/ui';
+import { Heading, Text, Flex, TruncateText, View, Pill, IconCanvasLogoLine } from '@instructure/ui';
 
 const Card: FC<{ entry: PendoAPIFeature }> = ({ entry }) => {
   const [isFocused, setFocused] = useState(false);
