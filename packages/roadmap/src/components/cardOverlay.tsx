@@ -108,9 +108,8 @@ const CardOverlay: FC<{
 		<Responsive
 			query={{ large: { minWidth: "50rem" }, small: { maxWidth: "50rem" } }}
 			render={(_props, matches) => {
-				const isSmall = Array.isArray(matches)
-					? matches.includes("small")
-					: false;
+				// matches is expected to be an array of strings, e.g. ["small"]
+				const isSmall = matches.includes("small");
 				return (
 					<CardOverlayContent
 						entry={entry}
