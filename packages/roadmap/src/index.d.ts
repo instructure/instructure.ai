@@ -1,3 +1,5 @@
+/// <reference types="@instructure/ui" />
+
 type PendoAPI = {
 	results: PendoAPIFeature[];
 };
@@ -18,6 +20,7 @@ type PendoAPIFeature = {
 	product: {
 		area: string | null;
 		name: string;
+		logo: SVGIconProps | null;
 	};
 };
 
