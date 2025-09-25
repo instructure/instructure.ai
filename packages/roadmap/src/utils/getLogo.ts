@@ -6,6 +6,6 @@ const getLogo = (product: PendoAPIFeature["product"]["name"]) => {
     return Logos[brand as keyof typeof Logos];
   }
   return Logos.instructure;
-}
+};
 
 export default getLogo;
