@@ -17,8 +17,14 @@ const getBrandConfig = (): Promise<BrandConfig> => {
 		const handler = async (event: PageSettingsEvent) => {
 			if (event.data?.pageSettings) {
 				const url = event.data.pageSettings.active_brand_config_json_url;
-				const response = await fetch(url);
-				const brandConfig: BrandConfig = await response.json();
+				let brandConfig: BrandConfig = {};
+				try {
+					const response = await fetch(url);
+					brandConfig = await response.json();
+				} catch (error) {
+					// Optionally log the error for debugging
+					console.error("Failed to fetch or parse brand config:", error);
+				}
 				window.removeEventListener("message", handler);
 				resolve(
 					event.data.pageSettings.use_high_contrast ? {} : (brandConfig ?? {}),
