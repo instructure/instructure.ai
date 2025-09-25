@@ -1,18 +1,26 @@
-import { Flex, InstUISettingsProvider } from "@instructure/ui";
+import { Flex, InstUISettingsProvider, canvas } from "@instructure/ui";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { Card, CardOverlay } from "./components";
-import { paramsToPendo } from "./utils";
+import { paramsToPendo, getBrandConfig } from "./utils";
 import "./App.css"
 
 const App: FC = () => {
-	const queryParams = new URLSearchParams(window.location.search);
-	const roadmap: RoadmapFeatures | null = paramsToPendo(queryParams.get("q"));
-
 	const [overlayOpen, setOverlayOpen] = useState(false);
 	const [selectedEntry, setSelectedEntry] = useState<PendoAPIFeature | null>(
 		null,
 	);
+	const [brandConfig, setBrandConfig] = useState<unknown>({});
+	const queryParams = new URLSearchParams(window.location.search);
+	const roadmap: RoadmapFeatures | null = paramsToPendo(queryParams.get("q"));
+
+	useEffect(() => {
+		getBrandConfig().then((config) => {
+			setBrandConfig(config);
+		});
+	}, []);
+
+
 
 	useEffect(() => {
 		if (!roadmap) {
@@ -41,7 +49,7 @@ const App: FC = () => {
 	}, []);
 
 	return (
-		<InstUISettingsProvider>
+		<InstUISettingsProvider theme={{...canvas, ...(brandConfig as object)}}>
 			{roadmap && (<>
 				<Flex gap="paddingCardMedium" justifyItems="start" wrap="wrap">
 					{roadmap.features.map((entry) => (
