@@ -1,7 +1,6 @@
 import {
 	Flex,
 	Heading,
-	IconCanvasLogoLine,
 	Pill,
 	Text,
 	TruncateText,
@@ -40,7 +39,7 @@ const Card: FC<{
 	};
 
 	return (
-		<Flex.Item align="start" shouldGrow shouldShrink size="20.5rem">
+		<Flex.Item align="start" shouldGrow shouldShrink size="19.875rem">
 			<View as="div" padding="x-small">
 				<View
 					as="div"
@@ -56,7 +55,7 @@ const Card: FC<{
 					shouldAnimateFocus
 					tabIndex={0}
 				>
-					<Flex direction="column" gap="moduleElements" height="15rem">
+					<Flex direction="column" gap="moduleElements" height="16rem">
 						<Flex.Item>
 							<View
 								as="div"
@@ -64,10 +63,7 @@ const Card: FC<{
 								borderWidth="0 0 small 0"
 								padding="moduleElements"
 							>
-								<Flex gap="small">
-									<Flex.Item>
-										<IconCanvasLogoLine color="error" size="x-small" />
-									</Flex.Item>
+								<Flex gap="small" alignItems="center" justifyItems="center">
 									<Flex.Item shouldGrow shouldShrink>
 										<Heading level="h2" variant="titleCardMini">
 											<TruncateText maxLines={1}>{feature.title}</TruncateText>
@@ -76,6 +72,16 @@ const Card: FC<{
 								</Flex>
 							</View>
 						</Flex.Item>
+						<Flex.Item padding="0 0 0 small">
+							<Flex alignItems="center" gap="xx-small" direction="row">
+								<Flex.Item>
+									<View as="div" margin="xx-small 0 0"><product.logo inline height="1.25rem" /></View>
+									</Flex.Item>
+								<Flex.Item>
+									<Text variant="contentImportant">{product.name}</Text>
+									</Flex.Item>
+							</Flex>
+							</Flex.Item>
 						<Flex.Item shouldGrow shouldShrink>
 							<View as="div" padding="0 small">
 								<Text size="contentSmall">
