@@ -12,6 +12,7 @@ import {
 } from "@instructure/ui";
 import type { FC } from "react";
 import { TagList, VideoPlayer } from "./";
+import { useMemo } from "react";
 
 const CardOverlayContent: FC<{
 	entry: PendoAPIFeature;
@@ -22,8 +23,14 @@ const CardOverlayContent: FC<{
 	const { feature, product } = entry;
 	const { links } = feature;
 
-	const video = links?.find((link) => link.title === "video")?.linkUrl;
-	const image = links?.find((link) => link.title === "image")?.linkUrl;
+	const video = useMemo(
+		() => links?.find((link) => link.title === "video")?.linkUrl,
+		[links]
+	);
+	const image = useMemo(
+		() => links?.find((link) => link.title === "image")?.linkUrl,
+		[links]
+	);
 
 	return (
 		<Modal
