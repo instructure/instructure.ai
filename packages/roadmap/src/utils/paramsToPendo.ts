@@ -1,4 +1,4 @@
-const isPendoAPIFeature = (obj: any): obj is PendoAPIFeature => {
+const isPendoAPIFeature = (obj: unknown): obj is PendoAPIFeature => {
 	return (
 		obj &&
 		typeof obj === "object" &&
@@ -13,7 +13,7 @@ const isPendoAPIFeature = (obj: any): obj is PendoAPIFeature => {
 	);
 };
 
-const isPendoAPI = (obj: any): obj is PendoAPI => {
+const isPendoAPI = (obj: unknown): obj is PendoAPI => {
 	return (
 		obj &&
 		typeof obj === "object" &&
@@ -25,7 +25,7 @@ const isPendoAPI = (obj: any): obj is PendoAPI => {
 const paramsToPendo = (params: string | null): RoadmapFeatures | null => {
 	if (!params) return null;
 
-	let p: any;
+	let p: unknown;
 	try {
 		p = JSON.parse(decodeURIComponent(params));
 	} catch {
