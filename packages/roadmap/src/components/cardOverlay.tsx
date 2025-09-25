@@ -11,7 +11,7 @@ import {
 	View,
 } from "@instructure/ui";
 import type { FC } from "react";
-import { VideoPlayer } from "./";
+import { VideoPlayer, TagList } from "./";
 
 const CardOverlay: FC<{
 	entry: PendoAPIFeature;
@@ -54,8 +54,9 @@ const CardOverlay: FC<{
 			</Modal.Header>
 			<Modal.Body>
 				<View overflowX="hidden" withFocusOutline={false}>
-					<Flex direction="row" gap="small" margin="0 0 small">
+					<Flex direction="row" gap="none" alignItems="start">
 						<Flex.Item shouldGrow shouldShrink>
+							<View as="div" margin="0 large 0 0">
 							{video ? (
 								<VideoPlayer url={video} />
 							) : image ? (
@@ -66,8 +67,11 @@ const CardOverlay: FC<{
 								<br />
 								{community && <Link href={community}>Learn more</Link>}
 							</Text>
+							</View>
 						</Flex.Item>
-						<Flex.Item>Tags</Flex.Item>
+						<Flex.Item>
+							<TagList entry={entry} />
+						</Flex.Item>
 					</Flex>
 				</View>
 			</Modal.Body>
