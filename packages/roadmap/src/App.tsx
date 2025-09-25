@@ -1,8 +1,8 @@
 import { canvas, Flex, InstUISettingsProvider } from "@instructure/ui";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
-import { Card, CardOverlay } from "./components";
-import { getBrandConfig, paramsToPendo } from "./utils";
+import { Card, CardOverlay, } from "./components";
+import { getBrandConfig, paramsToPendo, getLogo } from "./utils";
 import "./App.css";
 
 const App: FC = () => {
@@ -22,8 +22,7 @@ const App: FC = () => {
 
 	useEffect(() => {
 		if (!roadmap) {
-			//window.location.href = "https://roadmap.instructure.com";
-			console.log("Redirecting to https://roadmap.instructure.com");
+			window.location.href = "https://roadmap.instructure.com";
 		}
 	}, [roadmap]);
 
@@ -56,14 +55,16 @@ const App: FC = () => {
 			{roadmap && (
 				<>
 					<Flex gap="paddingCardMedium" justifyItems="start" wrap="wrap">
-						{roadmap.features.map((entry) => (
+						{roadmap.features.map((entry) => {
+							entry.product.logo = getLogo(entry.product.name);
+							return(
 							<Card
 								entry={entry}
 								key={entry.feature.title}
 								setOverlayOpen={setOverlayOpen}
 								setSelectedEntry={setSelectedEntry}
 							/>
-						))}
+						)})}
 					</Flex>
 					{selectedEntry && (
 						<CardOverlay
