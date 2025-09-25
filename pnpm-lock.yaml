@@ -85,8 +85,8 @@ importers:
   packages/roadmap:
     dependencies:
       '@instructure/ui':
-        specifier: 10.25.1-pr-snapshot-1758274491790
-        version: 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 10.25.1-pr-snapshot-1758747818199
+        version: 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -578,11 +578,24 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/console@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-/LfJlwGfYEu0pEt7eeciR0IQbIOV1akH/eKEsjz9hu7e3njA6yFWV316BZbdOn6ivEvCOE8xZe+s47Rj6SPwOw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/debounce@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-k6i0V606xXVC2foZ+TUM48UhIDJZoZEpRyWBT6qynMFQxuZ+7SISJZd4i48U2M0GyWwZ5cbNwsyqklZ0a/nIUg==}
 
+  '@instructure/debounce@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-pUl1abyixSkzK1CqO+WRdqLhmJxNFQLFn6+ULJHW12fW5fOzxYN7Os3qrMllK3P3Jt5sJ6Q6KiJ0hWsmjMVkdA==}
+
   '@instructure/emotion@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-bbOgj91ta0KP9zYjYFbbP7qhO98x6jvLpAq0P14qrVodeWvxhM1NJljN/Yt2FHzxB7n8NY04QKKLDrdAGaG23Q==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/emotion@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-aKD1BDjlPnLJzJjijoXbO7MTLtEVPh3s9LLZCT9MNkJTVqERe2ry3m4c7vF7zuqXjCcbk8MtWh7ZkfKYt1rxiQ==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -596,6 +609,11 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/shared-types@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-/SorfB3w4DX30YrInWcqkJA9jlAu6tZ2IBRmFGpxQ+9PmDS1hgftsZj9t3WsrthKzWMQ5aDX61h3vEXeHkUYdw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/theme-registry@10.25.0':
     resolution: {integrity: sha512-J45roEysrQyEIa3jTcztBOG5xPciWt9C4ugylBCEl9u7z2tFeeZ774TFmUsOjQbNdznoRR2XQeWN/EdZEKClDw==}
 
@@ -604,8 +622,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-a11y-content@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-Vmfkcc6UtMr51c5VQfmw8vILB01DwDhoTh0duCWO36KYV6nSgbbDKCB2EUvH6TwQrYKvJwW73Hay4DxcfH6ZvA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-a11y-utils@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-YtSXBk1scxKGCbGKEE2Yw5M0zUW8Y+hiXhPHSuCN8vt3btfYMT9xyNpJzgINOKP/3Mw8Y2RvDqm+/Yr+0L/QLw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-a11y-utils@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-XtVWiAGiAtL5IxlrGPMMxvlK0DRgbvQ4YXSpt2EcfnXBtXfoKpNpGIbV3BVMwg6g/egUJ2xQB/5/q0A4/vdwUA==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -615,8 +643,19 @@ packages:
       react: '>=18 <=19'
       react-dom: '>=18 <=19'
 
+  '@instructure/ui-alerts@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-gUZiRHtECZakMKW79yacX88ClsjoMX6YLqoaxWeeccKYGN+aXTT9yRJdMt7gvL7lm4SzriaxyqRDQInuiPxb/g==}
+    peerDependencies:
+      react: '>=18 <=19'
+      react-dom: '>=18 <=19'
+
   '@instructure/ui-avatar@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-dr8Fkq5H/IuVwNH/BJHsJ1glweAfoW+qcisENZTC2WYPpFs2KIhcxo0QW6nFYAdVJtlYIyrQ14ep5ZIxNxsAmQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-avatar@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-fjqvGkcNvoj5kIRASsSlgGOytV6q9+XepBcAE/v5pYtsNtslGVObgGCvUM1yy+ufkwNEtSVbv9GlJppmtfxqCQ==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -625,8 +664,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-badge@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-8gOwh3Dfa1ldv+f8qrIncbYnnGDHJ/hiUHNOLe6DnvR/HBid/qKSMqqwOnKldSFTtgJxqsq3zvbefq57uh0m/g==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-billboard@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-cd5rVDWu0s6i8Ed5/E+tMqjLw2+//26yxC/4rAW7m2pRI8uSWjcCIF9eqHuliaTh27oTt4jRFa7+B/5cBgU1xA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-billboard@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-rxmEfCGJkXQi3pJ44+8DEBBHYNBJHhxMRredNZuyH5mSlecxx69UsGwlmgnxxST1kDL3f/FzE+LIuxV+8Gq0xg==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -635,8 +684,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-breadcrumb@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-mlX0bbgGzbtD3Z3w6kUQ/YdXXzvFS2fNydmvT0sSS49RyXgsjfVDUp/TVPdMRJ9QBdowRzVF9GK+9lBu0XY0kA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-buttons@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-22pJbuMdHO1fua06dAlt9FwUv9GIyG7SyNmxJuyuXabV2ypE6snaO3yeNMc4IINOBD87un3WGj20pMUU9zGo2Q==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-buttons@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-eF6PmLI4qQzyvODrySLqvUZsjMZPFrZabW9IDwFLjt1/S+SV0dmm2tqIdVhaJWKw+5eCFQb0i11hEZD5/v3mKA==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -645,8 +704,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-byline@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-ImsnhDXZ9N1onl1W7/Dnm8P0AU7BGk/oa+TWClfUg90NU1yBt1XB6RMiBVxTZs9ZxqflSEs90liEzLoxKtGEYw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-calendar@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-gC5hLdxUYaQfXzzz6sVhvHXCjjzN+7wUOpXqMRyUdCUq4ItxU0nuH5+oXSWQRHfbZREwq0p5qFJwVIETQN58lQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-calendar@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-H/tnUaplMSda7jqwogsSpqNFJ61YKEp+5O5JhReW6+fHwxQYquuvytlzpmvLdyrv+KkUu693LoF2BJ3KMBfURw==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -655,16 +724,34 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-checkbox@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-lS214YDPU/HSxmJnpPEtC7ow0+zb/C/ahUF2no7RpE7H8bPRFS4TG+vvKgAitWZF1L/0YxvQXuiHfqcYKIA28w==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-color-picker@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-LOytW0lNZKZLmo9ioDm7C9PCWKvzIAzRkAkjv4/f+onz+nF0MSP+Wz18xfCpBKbB3bIVyZz6qaYNp0BZ8yGZgg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-color-picker@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-wod/hLeIPVOffiHmgmUna0r5sn5wtIWASZIPrJgnYalvjBoRRM1Xf0GfloJAGV+BBXVVTR362IidoHH84CkNfg==}
     peerDependencies:
       react: '>=18 <=19'
 
   '@instructure/ui-color-utils@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-OK/RqPlRubHf+di/94bC9RrjmHL9Ad6BiVGucugyOXmo7zEQ7PQq5aRck9FiyCPCZIRtxlraujjZDk+CxkhP/A==}
 
+  '@instructure/ui-color-utils@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-5VY42bhQoaaogntLVaLJd5CavfPPKIwVydlqeXSRhaHhXiLc7ArfzI4RprAqEvXLxEJ8gQh3GkC+ibYwkXWr9Q==}
+
   '@instructure/ui-date-input@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-Enkv2m3ryIi3ZPxBh/ZvERwDqtI1FeqGwJVcBVYchNwgAOilnEvhSjzZFvwiEzyn1YWJCP1CumOVPFnCAdagMA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-date-input@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-wGDpAk4P/sK/R4eCEJ5LFC/o90IGJHPMdkHFupM50DnJ2C/CP0lRjEJzo7lWvd5jjVjoe+8rwgewTA0SZaff2Q==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -673,11 +760,24 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-date-time-input@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-UIaJQYu1m/8cVHGXnFMaDXBe2dtqo/7blAcKHdef6vzk+ZifdI+lKrptH0y0FDteFY0y8sCrPj67XkEw0U3Hvg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-decorator@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-vtmDPLV1lACjfNkW/cWlXKYEXsb5AOtvxUkrpCQuFaL3IsmqXo1i3bJL3vgWaLqsV2/oZF18S+kO6XQ33x8dHw==}
 
+  '@instructure/ui-decorator@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-7qmTS4LGe2Lm0A9C5GPZAbjprrooi4k+T1/hvohWeJ/a+u5XoAKej5QDjVJ5NwP0v1axw/I5vxY18Je6T+foTw==}
+
   '@instructure/ui-dialog@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-Zuf8hkWyP6YlOxsbxRBXqU5/5BZTK038naBZG78L6FhoCMtENCmpcgHlBQA0D7g10ZGsJz9vS5K2qOMXZZMRxw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-dialog@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-3TK0IVSlh7CGD1GQGkVs0yxP+tZMu+kXEgEI5EczsxaeKQhxouVZqKkeFWEdQco7Kib8nfv3u1YhjArU1KNkpg==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -693,13 +793,29 @@ packages:
       react: '>=18 <=19'
       react-dom: '>=18 <=19'
 
+  '@instructure/ui-dom-utils@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-dXg+kgeGGE7god2zikqWGuVzlBj5Ttuamre7+YkrxM/CQshgaaNrHjsLYtUHpERKN6SzC//21ocxxFYSJCyCHg==}
+    peerDependencies:
+      react: '>=18 <=19'
+      react-dom: '>=18 <=19'
+
   '@instructure/ui-drawer-layout@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-kpB72Gfu9DczKinHQisXmwLUcx52zu8t01PEWBk3YL/Rvf5mhfOFZD6+b+TmaMjmf6XiAruLXJ9gmYw1ZjkWdg==}
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-drawer-layout@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-jISenUmeUEXe2P1Y8pfMQ06qq8bj9IRjTnlSQWGP8BnC5+MMbG8QC1iqbuAFzBPrMt9WspPAuY41JGDpRiJx8w==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-drilldown@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-hiB8sqW8/t1mH0s4ncVxoEQKy50XueYPRDwVlhdAsMDtirOXlrfcnmnuOnDGmFgju0NyVLOeYTpjWrtRnTSoyA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-drilldown@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-02eii0hU0rcUCGqg83qDaJtnIkLDXi5xfzeMO8XZcGyhOazL2IKriUuvFi24bL6xrdokfuNL+0/GNZIGtFu5Jw==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -709,8 +825,19 @@ packages:
       react: '>=18 <=19'
       react-dom: '>=18 <=19'
 
+  '@instructure/ui-editable@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-z7SC9nWs4wO5wpgY7QnIUmahHrQk/BB+13sc4c0uCV0fiAQy0G1XqvXj9/2r3rwsFGNHf7yRaT64ezD8PHwhBA==}
+    peerDependencies:
+      react: '>=18 <=19'
+      react-dom: '>=18 <=19'
+
   '@instructure/ui-expandable@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-MTHMVzsYx02zlbRQqkYHqTmI9+tev5xv5o1QD5FbwC934+C/51v5P18N0NMe6SPZneu4ErvFHiRPsIz5/x/7xA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-expandable@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-j9JBxj8hldLDa+oOG60fQpdLyc98GKWZYwWjJH+yWq2ckANHZSU5E8cMUboLhq4W19PC5jSI3RkTxjtrXsGd/Q==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -719,8 +846,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-file-drop@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-aTCpgoPHpLYJ2Q6u/q8G5KMFeaiYbOEHnAzqGYS0oGlIBbL3xuAi0hXXSSt2jiwa44uIwZIQzlZuNoGreDb2Fw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-flex@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-2U5jHiZmCbwD+cC1PSiHoiO8T7+OSntQkBQ/wdvHmB9Y5Kzso88VhhTHNHP47hsudHdMrnyNJmMxT6bWI6mJhA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-flex@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-iCtYw9TSMgJyUSmMBeGplNX6UtxIskaZ0fzomJNiIVrGmu15nAJeYZwFG5eCaoQsEBUV5LVsOnpGRr611HztxQ==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -729,8 +866,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-focusable@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-IT1tCgwzyUFZBFX2cKwBqaOauBUDTh19nIfF3ft5qyJBoEz2/qFUyLVVEyKLwjkpbKW4qsoruWaTg4FG/CxH9w==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-form-field@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-efYEvPsU0SNlQ/VNdTVmC9mi5P59lqHEkuLwusJuwKdIhGsSeCLAkvM8xnM/gFRERSwWakKUfwLYQ1w2NJRlgA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-form-field@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-xnTTs5zhrD4XbO9lenKLkeariBsGzcIcYJdEqWmhclnLGNjGlOo4aFUgrhPX648Zt4alBJVwL/rkmxJ+pK3N2A==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -739,8 +886,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-grid@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-bIV/+cpIUwj09N+MLgdeDpcfigNHBtiYLatB8FuUQFYk5y1OwovrAswTevS9iagNWZwzusiAW2QgkIBFhgtkGw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-heading@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-oaI8oMlQGiXYRNaVWPuhw2ZjCgE0F9h/tjue0H81KWGM5fqr8wF9Bd3Y0/44AP5TNi0pD5Z3pyfxBvZV+e+VzQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-heading@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-fhMaVDV/DlK/IqN224o37bunajfl8MzRdsWjZtNVDc1UVOXczusA0Vvltl8yj+ft9HJOqrwExCFYtDF2wAmLQw==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -749,8 +906,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-i18n@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-u5w6VDu8Quc73yhnmDFkvx7ND5EbXBsa3U+v+EWNYSmC6/AcX3lb55BUT3hdl00sqaXC6PqyDMpheqZtYR8iIw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-icons@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-8IZd00zMgaA6mLtHV4HF2rEU6Y8n3Utu1p4Bo2QQDrHfv4+oZKg078TQIE81ylyWlNw8iNXVXoi/NM1aiIoZ3w==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-icons@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-gk/1eDVAp64BHhkjqvSntdvC/tu0a9SSvEZzwpbKVAP/MlXaBmOE5WFFr5IE8elMGbEVY+Obgf0K9BU7wfVkjw==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -759,8 +926,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-img@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-QBz1+v+zZCZ2faK1ZS+LO4643msYFgKm8fRyYUMOtPmG3CEVqkPhUcPWUw732QuVJHz7rck7i9TEUQjMZapKGw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-instructure@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-JqPjXOc4aRvcRZTOqDWnQjI68VkgFHfwWqyIDh7x3kYFQRDRp0WrRCkNgIjWXmx4IarcnalABrlGc9XWS7xAkA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-instructure@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-SB5MC1eON0o5dgmBIdKpO2wX4Yzz8WQEuu+OleSNA2Sn7lLNSo63ckbO0TYuszwMYoQm9c0sVXKiLWSsvNUHtg==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -769,8 +946,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-link@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-YXIz+EptS/NY4uxcfKkxkRIaGPl6YZNQiINjtZh+xk3dUhkzBDba9V/WPoHaDQbwGt4FjxyJ4p45u4BaseYnoA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-list@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-9rd+IPq7uNSIati9jggziCpw0V5WgjByY8h19g5XazBMw1RWeHZVGR1dWCdlP08dfFva/JI551Q9vPWZ0bJ9Wg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-list@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-LkUzHbUgPEZweeCoD5zoMbTe6oLCh+rEiW3dy1HpfU7akC1yLKLmPqyfxFS9fGqS5CjjKEfb5YxCbSCVQBaG7Q==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -779,8 +966,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-menu@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-W0uaA2X6DtehjIv2x4z/FjHaObMKA0teiJsxeug14mcbXkgz737hWXYrvPxF1M7n9v3TIqx+r4yTqOE/3//WMQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-metric@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-zGdYLNmqJ/qfKlz2y/Jpyu8AWjJXIBXvardMPAf/f+FgWX0a1YszysMM9QzhKM3Gldpz2cCiEOIw87xgPqq2Wg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-metric@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-ADwpghVjaYcacoAHOdGfOx3b3238U0H61RBj31tVm4qocP+63qosOMwZ6kkn3PI7b3R2c+BwAPTcHdzQwOPDXg==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -789,8 +986,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-modal@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-MOp3am6MyR8nCyBj008LuT7LQnm+mLnt2Z8LPrSIswU88ZYXm/5tiE/3QMw8jLow7HKhQnyUTFty7k+fjSPpvg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-motion@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-Eu53/rOYz+ZFPhjFApwEmR3w1OZGJBwkbmw704tglWivjUeFJxObwp4xfoxwJobn3OsK9iFmkW8w0QTnxDETQQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-motion@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-nftqVBjpZDx6W2VihZWS0gACx1AMC1jabX20S/CE4uAdIiOSjV69iZ7pb/qpGzyWJUtuhGe7QcN0Go+59huGAw==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -799,8 +1006,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-navigation@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-DERnugGhv/OPBXsiMW18o8Lz9wsoWANTl3yIXUXfvNiX3frxXhKAx7iZyCGmirvC+BEx3FIfM0Ek7tXZOHq9hw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-number-input@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-Xp/LB+rAsvjf0M9vatXdL3BqxRC3oAYU4njRFA1bkjRjrdCnuglgAlxj2muyYtN+CX2xuZm/Shlp6fZITbP30Q==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-number-input@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-gOrhozyOfeLgbz2c/ZjTb8sm2l5V9etmT6FgnfdJ36uHBoulZkVxKAECl7FhN7hPUiN8jf54QLA6X8AycfshzQ==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -809,8 +1026,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-options@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-6rzbHqm3m8BJqVA3TGkY9Z+keTsz6DDljzwHBcT85tKOduCvGKXpHuMKsuteTnH9DnrJILquuhVY/eD5zSobPQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-overlays@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-pYIjpiC78BILFYZR2H6NhLfFs4JMcGEBCCtegEVSsNl7DT5kTsPXdiEwaWgfiQsqBJ77wwXbXmAM2u+a+1gc6Q==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-overlays@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-InCwkRBFa9cs1zWLq0mFPjgyGhIoIUranU64IwdUi8a26Jmont28Hl3KyATcA7G+ecgbIql/Lw5E8v/KhJKgGw==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -819,8 +1046,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-pages@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-+yh9UYCsjk47SnI4/lh5D5puPFTWxSnb9BqahwxDbEAq2AlX68b++dlqGGr+u0N9LhAo5hrtiYsy2Y3bMPlgAA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-pagination@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-ry0/22NPLfuvxj1x36a7Ukdn0p9oDtGn9Yf6U0LLXqflyQ5QNA2agaGIe22OvLWeh6bLiL2grdRTGMRtxCdzQA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-pagination@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-Oa9fQN5RS37EWycrINzg6/Z3M5U6qC/R19ZYfW1ZO74Y90K72jgCQ7V5gXjyIBVAa9QddOv1aHCanqF5Mgtppw==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -829,8 +1066,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-pill@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-fnXqpc0E8bx0eabgDGH9Zh/FXxsLUukh98J2V50v1NIajWXbR6fKwnXTfsayW+BjVzvk61VMo2u13GTiM3/coQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-popover@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-OPKk7NQfkH0LftBKCSqRQbW5jw4KRis4MZYoJkAAS54Ilv3WMD4i3D3Xm+Wi2V1T/Z5J+VR9pB7AkXHrzgfvuw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-popover@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-uks8p8ZGAHGKDaAJQSrszkBEuFm4Ndci+255UZXweWVXcknd6pP46bC/Ypp0/x5/iGlVyfAuKUfMWJxemXIEFw==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -840,8 +1087,19 @@ packages:
       react: '>=18 <=19'
       react-dom: '>=18 <=19'
 
+  '@instructure/ui-portal@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-KcYTxgmaZlcSw9IcN6vY1bmebXQb8pfp+JNKsl3QQgs7U0SAiH/RG3GT5D63+y+xwiRWqTr6lprGbB7NFPCnyQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+      react-dom: '>=18 <=19'
+
   '@instructure/ui-position@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-9fZCblSzCKCaR7y1yCKTBcY9BgBKw2pIqbk/TgtoKW8U8CfAvX0phYCtxEnRB5O1ZvuDocVMF4CXvOaXbR0OzA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-position@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-iZa+1Ey7lptgS0K3q5wXIZh5Fhzmt6gTLrT0PmeODOPGMCpr28pAM3+h9F2bBXxzxOAcZV1R7rXCtNe0WZq3jw==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -850,8 +1108,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-progress@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-h4T2gNopF0CZI+tBW7B+tGTq4o4dNvKU5ZVVPgAvyatkUgo/oBeNIhRI3IBzO9O9lg1NtBZ8XNMhCCeoAvGG+g==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-radio-input@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-6wtv2GQzdjaOOY25YK7B4RRIYyoD+Zjb6ZJqjW001zPo56TpFPi6iigSY/uGNj8sz+MopsQM0SNQBQR9wpkW3Q==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-radio-input@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-h8oKFJCCH+CyU8ppLQnx4j52zc8sUyJUMT5Evp7qOYQg7sTqIGJ7PNpKo+hI/ZjRPmmklwOeSozQfbjoXdBfwg==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -860,8 +1128,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-range-input@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-Q6XiL2GK370H9ohZJP2lh7A2OyYrP8HNNXCM7CO+I+ghJslkfjfw1jLeC9Q79jk91nfTQsU284DhdkZtmJAEBQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-rating@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-RRL0e6U75Sn3fl+RRLGgwClukHRP44Je4b/GBSY/pBRQWLyhK8Z4/nQxKmUYZN2IWi3F2S/YxzTFkMp+sHcSNw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-rating@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-mXAVW/EBhFVKGfN2iZ4wSzUH2kxF7fg/w5yt9cGe6N64CqKIDTgvUpjazvhNahZRqha63Ptq4aX69uyS0L83Kg==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -871,8 +1149,19 @@ packages:
       react: '>=18 <=19'
       react-dom: '>=18 <=19'
 
+  '@instructure/ui-react-utils@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-Fcv2FczebuTc+epXQCx/nZR4HnUTyOZwuSz2kdrErh84/9uSsifnsuASVoiYft2mLMEoVvgZQ7ROZxw2egqCRg==}
+    peerDependencies:
+      react: '>=18 <=19'
+      react-dom: '>=18 <=19'
+
   '@instructure/ui-responsive@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-AKKcEMB0J8pfnHHvaSQnOakPI1gYQysLCoJnisXSo0qvRZMByFNsuS9PP/zjcdRlm+U74Fjn1Lm7WWyHTCL1OA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-responsive@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-PjkplcS0h9+1jnhPpkQadM6fvftfOxEDwoCJPN3mpPVOxIkuvZKtPKPcpl01EDsMX3xuPSIYFRhtNxAAUxiG5Q==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -881,8 +1170,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-select@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-/SggKdZl6V6B91yNocPzAgkK6+okPt98CSZu+Miz+lic7vWtP/41ZQftpevxgiq3k2dSecNz1tQyHu7AAcI2mw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-selectable@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-b7df6RYZox3nR2SGDc9EW8ol3AkRkjgoCSqz1DA3IvbozN03gTJuVkeNcfRzXryvW551z0Y3MkDrJn9plYod1A==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-selectable@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-FW/1j/89yjrI8XrhDxJwNmqB3Vg7S5hx4B82tp8Uy6PTTeG5IACArV5snMWmGzggGyAY5lsafM4rl6H70vw+Sw==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -891,8 +1190,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-side-nav-bar@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-x0siT9HG05QcXHOV76wTnIJ31BHUkIcAgKum4MPk6gsd7g5N9fQNDVFqli2g+C/IxdnLj+JJ+m6pJsIHedb9mQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-simple-select@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-KT405ZHIqQ0nwd3pvgbg/MweAvIhEMXHc3adgzhVA+pFIC5OMKFzPhKHJLJDb6f7Mozsfk7RpLrlZ87pI6lb9A==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-simple-select@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-5qmk8Vw4Gn2I/2CrKApBL+QKRN1LXsLZXJasYV25TGSEUZdAAB6134PQ3xl9SpBUpUhQ5FTuz69g0tMrjRqNtA==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -902,8 +1211,19 @@ packages:
       react: '>=18 <=19'
       react-dom: '>=18 <=19'
 
+  '@instructure/ui-source-code-editor@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-WnDJTyH1DR/oC81s6nK91gnU+i+KERCwGjJ17baX+CM5fjLtJxHGV7LuWXEyGSt+JfdkYeIuqZChQGtCMhADWQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+      react-dom: '>=18 <=19'
+
   '@instructure/ui-spinner@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-KCKgEB8t9I4sTHRQpV/8ARvu4cYUk1rvamvaXKp2MmIvyCGw8Ioe3mA0TlmuI6dClsFLQLCm3FKBbYsLswJ5Fw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-spinner@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-ft7mhS0ZrrNQBYVLHoMtJk8i52Jm15VgH0z+DMxEZwVBrulH+50j8rxj4H7neXpvRTD+bFMbjRz1F3OSCUIlHw==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -912,8 +1232,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-svg-images@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-05wLpXGreASSkYAvY2Ko9SemuuqCrsf2Ir/A+1fsVR3GDPdO+TiZORU6Ulkucu9nw8dOJJsdkhmBVYM2nD1oug==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-table@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-7O41Lg70OMD78hGtmir6hlpx5C6UmmhlFOnJ2u56K1o1jRgIKZFH2omLnt+sPQMUvFYa4LTkO6XRcc/6ac4alg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-table@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-lZWg7a3gGlQKtrhiSHXNBXAgQJUlm0AZLaH4J/nhlc5l2RNxcKC2YfmdWS9lVA1IaouhQsFD6qnWAh9/D8tA8A==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -922,8 +1252,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-tabs@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-VfdU3HUoEIFr1ZmmWfeLqvJ4ZY5POMWJTvMGiNIQqGthiY35fNS5HtCtxGBRctZeBt63t2qM+WBZeNokfNPDtw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-tag@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-h6msS6wa9H4Vh9te+QSyIorr6mEvmnuXx2VWIJB5F545DBbfYOTLsfSkoBrhb/CGognY3sfxJ1/Mw9fqUh0VBQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-tag@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-O7bY3gA7GOHHLemQIGS96k4aLyB1U/JQ6Iq6MQZknL/dk8PAVjhOdVFj6usLewNfaJwHo3E+tAmaTdmE5IpcrQ==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -932,8 +1272,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-text-area@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-d1B5dGrjyn5gmPplFAKcyrVAzZJ9CuCg1SaNNUDyRN/8x3h6Dgi5Glt7a3401gne42G+wsvNvDQnM3T6bGYo9A==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-text-input@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-nsX+9iaF+Li4uOWiSI8LnNzAxBlzAg+77Bts1a5fJNYrPKJqjDgzX5RJP9SIN59C8Su2FB9D73NiMxb8Zl2ZCw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-text-input@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-B/LbfD9p6FE3X7pVIMyn8JQ0OYZtd09cf/VUTpU9sUSiaJv2bAiwzsiqXFsLcCUwK7eaD3t741WEQ9RDgn0ZeA==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -942,11 +1292,24 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-text@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-KSxxdrFcZ+SofqYB2gZFiPtJaLbE61Cw0oyexb9asIYJnzTBcUf/8ELavJtqQRkClacWuj2UWRmoOk32KLUsGg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-themes@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-pRZaN6zRsKKEMGlYMYB3A5BHSByoGSlVKDQ8fpWzjL60jyoGGLLdtXoh3MsyQXZZHv0Sjm1WwzlhOhhG9LxxoA==}
 
+  '@instructure/ui-themes@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-+pcGoNVSaG0Eq+yfx+OYoy7ybGKy+JwcC9nDK4EeyFT0ZRQ2sJ1pzHYePRhXy6T5RC/yg+VlAOttEueD+moL1g==}
+
   '@instructure/ui-time-select@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-TWTdrOYEMUaPe5pDy5o6C0jJwjLQ0PHZzrD7lhtNXRSe1tcI+c/CYUib06BNUMBg7F+GPbw3kWFErcHigJ+TPQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-time-select@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-6EMLXgucqVPpdl0J6mkg+dzzNKvk+2whl5DUvnaMyHCkU3Hahi6kLWqIQ8W5xHExmJZpCQhaJaaoptlvUtGn6A==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -955,8 +1318,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-toggle-details@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-YAVMv4b3elk+zwg+0yYlOlVPyFPrTvdY5div4M71HLgtVLFV7t7cyfd1jmCyp6gB4s5sD53iq0GAQDBxNz0Ejw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-tooltip@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-lW2aOMhNxsiYpn5r2ymBG/Tnclup7yHXUNrjZj1nNDgU2F41x3wlOaGtr6JDAuxI1vYqhDT6yR+BbE79ALmxPA==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-tooltip@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-D6lS3x1jTIgfhjckapSAGIP3FOkRQ6djFxcwfRmVYUqAOFF6n8V0tMVwLMphBushI9sclXixRiF2ci2//NkWpg==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -965,8 +1338,18 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-top-nav-bar@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-2e77OkMge/SOcbRmAM2Qe582feEbJn15msLJdI0OCQb26Szuqguw/wx0FGyRsLOwdQSk9lZrByc+SNibUejV7g==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-tray@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-pzIRvwbXXH1kDLf364ZSJrhZJzDN73C2AYRPSxMY+46y6WiCp9KzDwKrEDb21RTYOWRBL3XrQP9yNB2GT4rcKw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-tray@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-qP78Jlv/CofvlYnX9gc3Gt+mt744e/ohGeJ0jeuRABh0A0Ln7N8/uwYOo39OER/S/wwe7/e55XkrHcugWVPXcw==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -975,13 +1358,28 @@ packages:
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-tree-browser@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-Ye+CaNmM8UC0edCW9GjOr46cBZwoS4bqtOenWGZ8Z/NQuEGBcGGEAt5ruuy6m3f9T+Yy2OEr6sJY/ReLPZCGKg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-truncate-list@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-rp4TDgqfSWdkE3TeOcsChCwgr3yQoACMA28RQ7C68aC0p4bYdabqwj88FPzi8NBxMsXwoyZWjhlrcvlHVFz2PA==}
     peerDependencies:
       react: '>=18 <=19'
 
+  '@instructure/ui-truncate-list@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-Xx3migR8tDbjjB5TJzY2HJqNfRF169LjnHelYMSlERNvZMtWwfViR9xUMtpRhv5QSk7qh6nCELbOydCJ5L/CSQ==}
+    peerDependencies:
+      react: '>=18 <=19'
+
   '@instructure/ui-truncate-text@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-baYHoCfOmCwNXzpc3nDj+2iVxztgk0fMssFBIxJZBOYjd1VBf8SvbBAUOzFk4NNm3CcxoCYtKhLhQlMG405ADg==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-truncate-text@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-3pmBV1W5irjMH3YkjUgli7LLP9gOU3cKHMY+cNbPuXwv4kct2hSWqj313mwc8DVZPPZLHomtyDBIkgo6zHzAvQ==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -997,8 +1395,19 @@ packages:
       react: '>=18 <=19'
       react-dom: '>=18 <=19'
 
+  '@instructure/ui-utils@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-bpElz8N8NjzpQQTBdiV2grXspDenAN5XgAKV/eHzKUTZyBq9LaKJ77+r3Uqs0RCrNKtAauqt5SQq9XB8KI+1TA==}
+    peerDependencies:
+      react: '>=18 <=19'
+      react-dom: '>=18 <=19'
+
   '@instructure/ui-view@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-qLcIR4WT9V931Div35pML0P+ZRo70gZuDHulF9W+6OFOVM2wEGVkdGy3Pz01KlepmbtZjEsLkG9Hu4ULisrRiw==}
+    peerDependencies:
+      react: '>=18 <=19'
+
+  '@instructure/ui-view@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-Khd3a3pSNU469050ozhXZpb9Q4EAkFxeYiCUFgbrFO/KYzyCBAXuZt2hJpiIsKKIzBzWgKXcJsXFRIRkEJZ8gg==}
     peerDependencies:
       react: '>=18 <=19'
 
@@ -1008,8 +1417,17 @@ packages:
       react: '>= 18 <= 19'
       react-dom: '>= 18 <= 19'
 
+  '@instructure/ui@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-wbpTGftF/CE7iZ9ADxWHG+MO/KsVZNS/WuFAw9v+LuqWZ4B7P2afhvXhtoCUwcvnMLfPehc5Ygqm6wcBZHAxEw==}
+    peerDependencies:
+      react: '>= 18 <= 19'
+      react-dom: '>= 18 <= 19'
+
   '@instructure/uid@10.25.1-pr-snapshot-1758274491790':
     resolution: {integrity: sha512-+EdJtTHNGUJmWXe5aYfKB/FK75MVMzWEZaWYD7QuYr0n+WJ6l1javPOTIwbCUIfTnGeHofXE7tkFQcjfVQWtuA==}
+
+  '@instructure/uid@10.25.1-pr-snapshot-1758747818199':
+    resolution: {integrity: sha512-kymN8xBQM7WdFScVziO4Z1YxiT/WrmnMYkj0knjXiK471/dOYVbLAbU9HnGpzpl1jgSQtgNwW06GD+2fjGByMA==}
 
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
@@ -2869,7 +3287,15 @@ snapshots:
     dependencies:
       react: 19.1.1
 
+  '@instructure/console@10.25.1-pr-snapshot-1758747818199(react@19.1.1)':
+    dependencies:
+      react: 19.1.1
+
   '@instructure/debounce@10.25.1-pr-snapshot-1758274491790':
+    dependencies:
+      '@babel/runtime': 7.28.4
+
+  '@instructure/debounce@10.25.1-pr-snapshot-1758747818199':
     dependencies:
       '@babel/runtime': 7.28.4
 
@@ -2892,12 +3318,34 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/emotion@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@emotion/react': 11.14.0(@types/react@19.1.13)(react@19.1.1)
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-decorator': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-themes': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      hoist-non-react-statics: 3.3.2
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/shared-types@10.25.0(react@19.1.1)':
     dependencies:
       prop-types: 15.8.1
       react: 19.1.1
 
   '@instructure/shared-types@10.25.1-pr-snapshot-1758274491790(react@19.1.1)':
+    dependencies:
+      react: 19.1.1
+
+  '@instructure/shared-types@10.25.1-pr-snapshot-1758747818199(react@19.1.1)':
     dependencies:
       react: 19.1.1
 
@@ -2923,6 +3371,18 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-a11y-content@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-a11y-utils@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -2932,6 +3392,22 @@ snapshots:
       '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/uid': 10.25.1-pr-snapshot-1758274491790
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-a11y-utils@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
       keycode: 2.2.1
       react: 19.1.1
     transitivePeerDependencies:
@@ -2959,6 +3435,26 @@ snapshots:
       - '@types/react'
       - supports-color
 
+  '@instructure/ui-alerts@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-themes': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      keycode: 2.2.1
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - supports-color
+
   '@instructure/ui-avatar@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -2967,6 +3463,20 @@ snapshots:
       '@instructure/ui-icons': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-avatar@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -2988,6 +3498,21 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-badge@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-billboard@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -2997,6 +3522,21 @@ snapshots:
       '@instructure/ui-img': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-billboard@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-heading': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-img': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3015,6 +3555,24 @@ snapshots:
       '@instructure/ui-truncate-text': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-breadcrumb@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-link': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-truncate-text': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3044,6 +3602,29 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-buttons@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-byline@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3051,6 +3632,19 @@ snapshots:
       '@instructure/shared-types': 10.25.1-pr-snapshot-1758274491790(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-byline@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3078,6 +3672,27 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-calendar@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-simple-select': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-checkbox@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3092,6 +3707,27 @@ snapshots:
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/uid': 10.25.1-pr-snapshot-1758274491790
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-checkbox@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-svg-images': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
       keycode: 2.2.1
       react: 19.1.1
     transitivePeerDependencies:
@@ -3127,7 +3763,40 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-color-picker@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-drilldown': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-pill': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text-input': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-themes': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-color-utils@10.25.1-pr-snapshot-1758274491790':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      tinycolor2: 1.6.0
+
+  '@instructure/ui-color-utils@10.25.1-pr-snapshot-1758747818199':
     dependencies:
       '@babel/runtime': 7.28.4
       tinycolor2: 1.6.0
@@ -3147,6 +3816,28 @@ snapshots:
       '@instructure/ui-selectable': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-text-input': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      moment-timezone: 0.6.0
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-date-input@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-calendar': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-selectable': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text-input': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       moment-timezone: 0.6.0
       react: 19.1.1
     transitivePeerDependencies:
@@ -3175,7 +3866,32 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-date-time-input@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-calendar': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-date-input': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-time-select': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-decorator@10.25.1-pr-snapshot-1758274491790':
+    dependencies:
+      '@babel/runtime': 7.28.4
+
+  '@instructure/ui-decorator@10.25.1-pr-snapshot-1758747818199':
     dependencies:
       '@babel/runtime': 7.28.4
 
@@ -3186,6 +3902,19 @@ snapshots:
       '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-dialog@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3208,6 +3937,14 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
+  '@instructure/ui-dom-utils@10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
   '@instructure/ui-drawer-layout@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3225,6 +3962,29 @@ snapshots:
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/uid': 10.25.1-pr-snapshot-1758274491790
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-drawer-layout@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/debounce': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dialog': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-portal': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3252,6 +4012,27 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-drilldown@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-options': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-selectable': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-editable@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3272,6 +4053,26 @@ snapshots:
       - '@types/react'
       - supports-color
 
+  '@instructure/ui-editable@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-flex': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-focusable': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - supports-color
+
   '@instructure/ui-expandable@10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3279,6 +4080,17 @@ snapshots:
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/uid': 10.25.1-pr-snapshot-1758274491790
+      react: 19.1.1
+    transitivePeerDependencies:
+      - react-dom
+
+  '@instructure/ui-expandable@10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
       react: 19.1.1
     transitivePeerDependencies:
       - react-dom
@@ -3302,6 +4114,25 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-file-drop@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-flex@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3310,6 +4141,20 @@ snapshots:
       '@instructure/shared-types': 10.25.1-pr-snapshot-1758274491790(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-flex@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3325,6 +4170,21 @@ snapshots:
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-focusable@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3350,6 +4210,25 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-form-field@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-grid': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-grid@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3359,6 +4238,21 @@ snapshots:
       '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-grid@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3380,6 +4274,21 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-heading@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-i18n@10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3394,10 +4303,34 @@ snapshots:
     transitivePeerDependencies:
       - react-dom
 
+  '@instructure/ui-i18n@10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-decorator': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      hoist-non-react-statics: 3.3.2
+      moment-timezone: 0.6.0
+      react: 19.1.1
+    transitivePeerDependencies:
+      - react-dom
+
   '@instructure/ui-icons@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
       '@instructure/ui-svg-images': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-icons@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/ui-svg-images': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3419,6 +4352,21 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-img@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-instructure@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3430,6 +4378,23 @@ snapshots:
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-text': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-instructure@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-heading': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-modal': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3454,6 +4419,24 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-link@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-list@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3462,6 +4445,20 @@ snapshots:
       '@instructure/shared-types': 10.25.1-pr-snapshot-1758274491790(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-list@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3489,6 +4486,27 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-menu@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-metric@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3496,6 +4514,19 @@ snapshots:
       '@instructure/emotion': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/shared-types': 10.25.1-pr-snapshot-1758274491790(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-metric@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3523,6 +4554,27 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-modal@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dialog': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-overlays': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-portal': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-motion@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3531,6 +4583,20 @@ snapshots:
       '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-motion@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3562,6 +4628,31 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-navigation@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/debounce': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-badge': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-focusable': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-menu': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-truncate-list': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-number-input@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3579,6 +4670,23 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-number-input@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-options@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3588,6 +4696,21 @@ snapshots:
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-options@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3621,6 +4744,33 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-overlays@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dialog': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-focusable': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-portal': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
+      no-scroll: 2.1.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-pages@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3631,6 +4781,22 @@ snapshots:
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-pages@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3661,6 +4827,30 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-pagination@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-number-input': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-portal': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-themes': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-pill@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3672,6 +4862,23 @@ snapshots:
       '@instructure/ui-truncate-text': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-pill@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-truncate-text': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3700,6 +4907,28 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-popover@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dialog': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-portal@10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3707,6 +4936,16 @@ snapshots:
       '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
+  '@instructure/ui-portal@10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
@@ -3721,6 +4960,23 @@ snapshots:
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/uid': 10.25.1-pr-snapshot-1758274491790
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-position@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/debounce': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-portal': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3743,6 +4999,22 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-progress@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-radio-input@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3751,6 +5023,20 @@ snapshots:
       '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-radio-input@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3777,6 +5063,26 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-range-input@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-rating@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3789,6 +5095,24 @@ snapshots:
       '@instructure/ui-motion': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-rating@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3808,6 +5132,19 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
+  '@instructure/ui-react-utils@10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@emotion/is-prop-valid': 1.4.0
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-decorator': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      hoist-non-react-statics: 3.3.2
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
   '@instructure/ui-responsive@10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3817,6 +5154,19 @@ snapshots:
       '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - react-dom
+
+  '@instructure/ui-responsive@10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/debounce': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - react-dom
@@ -3844,6 +5194,29 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-select@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-options': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-selectable': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text-input': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-selectable@10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3852,6 +5225,19 @@ snapshots:
       '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - react-dom
+
+  '@instructure/ui-selectable@10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       keycode: 2.2.1
       react: 19.1.1
     transitivePeerDependencies:
@@ -3875,6 +5261,24 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-side-nav-bar@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/debounce': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-a11y-utils': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-badge': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-simple-select@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3884,6 +5288,21 @@ snapshots:
       '@instructure/ui-position': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-select': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-simple-select@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-select': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3924,6 +5343,40 @@ snapshots:
       - '@types/react'
       - supports-color
 
+  '@instructure/ui-source-code-editor@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@codemirror/autocomplete': 6.18.7
+      '@codemirror/commands': 6.8.1
+      '@codemirror/lang-css': 6.3.1
+      '@codemirror/lang-html': 6.4.10
+      '@codemirror/lang-javascript': 6.2.4
+      '@codemirror/lang-json': 6.0.2
+      '@codemirror/lang-markdown': 6.3.4
+      '@codemirror/language': 6.11.3
+      '@codemirror/legacy-modes': 6.5.1
+      '@codemirror/lint': 6.8.5
+      '@codemirror/search': 6.5.11
+      '@codemirror/state': 6.5.2
+      '@codemirror/view': 6.38.2
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text-input': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-themes': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@lezer/highlight': 1.2.1
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - supports-color
+
   '@instructure/ui-spinner@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3935,6 +5388,23 @@ snapshots:
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/uid': 10.25.1-pr-snapshot-1758274491790
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-spinner@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3955,6 +5425,20 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-svg-images@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-table@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -3967,6 +5451,24 @@ snapshots:
       '@instructure/ui-simple-select': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-table@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-simple-select': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -3995,6 +5497,28 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-tabs@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/debounce': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-focusable': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-tag@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -4006,6 +5530,23 @@ snapshots:
       '@instructure/ui-icons': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-view': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-tag@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -4029,6 +5570,23 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-text-area@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/debounce': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-text-input@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -4039,6 +5597,22 @@ snapshots:
       '@instructure/ui-icons': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-tag': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-text-input@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tag': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -4059,6 +5633,20 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-text@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-themes@10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@instructure/shared-types': 10.25.1-pr-snapshot-1758274491790(react@19.1.1)
@@ -4066,6 +5654,12 @@ snapshots:
     transitivePeerDependencies:
       - react
       - react-dom
+
+  '@instructure/ui-themes@10.25.1-pr-snapshot-1758747818199(react@19.1.1)':
+    dependencies:
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+    transitivePeerDependencies:
+      - react
 
   '@instructure/ui-time-select@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
@@ -4077,6 +5671,22 @@ snapshots:
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-select': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-time-select@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-select': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -4104,6 +5714,27 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-toggle-details@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-expandable': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-flex': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/uid': 10.25.1-pr-snapshot-1758747818199
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-tooltip@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -4113,6 +5744,21 @@ snapshots:
       '@instructure/ui-position': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-tooltip@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -4148,6 +5794,35 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-top-nav-bar@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-avatar': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-breadcrumb': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dialog': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-drilldown': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-link': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-responsive': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tray': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-truncate-list': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-tray@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -4168,6 +5843,26 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-tray@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dialog': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-overlays': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-portal': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-tree-browser@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -4177,6 +5872,22 @@ snapshots:
       '@instructure/ui-img': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      keycode: 2.2.1
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-tree-browser@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-img': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       keycode: 2.2.1
       react: 19.1.1
     transitivePeerDependencies:
@@ -4200,6 +5911,22 @@ snapshots:
       - react-dom
       - supports-color
 
+  '@instructure/ui-truncate-list@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/debounce': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
   '@instructure/ui-truncate-text@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -4210,6 +5937,23 @@ snapshots:
       '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      escape-html: 1.0.3
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-truncate-text@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/debounce': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       escape-html: 1.0.3
       react: 19.1.1
     transitivePeerDependencies:
@@ -4243,6 +5987,19 @@ snapshots:
       react-dom: 19.1.1(react@19.1.1)
       ua-parser-js: 1.0.41
 
+  '@instructure/ui-utils@10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@types/ua-parser-js': 0.7.39
+      fast-deep-equal: 3.1.3
+      json-stable-stringify: 1.3.0
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      ua-parser-js: 1.0.41
+
   '@instructure/ui-view@10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -4254,6 +6011,23 @@ snapshots:
       '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-position': 10.25.1-pr-snapshot-1758274491790(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758274491790(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
+
+  '@instructure/ui-view@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/console': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/shared-types': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-color-utils': 10.25.1-pr-snapshot-1758747818199
+      '@instructure/ui-dom-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-react-utils': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
     transitivePeerDependencies:
       - '@types/react'
@@ -4342,7 +6116,93 @@ snapshots:
       - '@types/react'
       - supports-color
 
+  '@instructure/ui@10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@instructure/emotion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-a11y-content': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-alerts': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-avatar': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-badge': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-billboard': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-breadcrumb': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-buttons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-byline': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-calendar': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-checkbox': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-color-picker': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-date-input': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-date-time-input': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-dialog': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-drawer-layout': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-drilldown': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-editable': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-expandable': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-file-drop': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-flex': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-focusable': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-form-field': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-grid': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-heading': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-i18n': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-icons': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-img': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-instructure': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-link': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-list': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-menu': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-metric': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-modal': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-motion': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-navigation': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-number-input': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-options': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-overlays': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-pages': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-pagination': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-pill': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-popover': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-portal': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-position': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-progress': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-radio-input': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-range-input': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-rating': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-responsive': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-select': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-selectable': 10.25.1-pr-snapshot-1758747818199(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-side-nav-bar': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-simple-select': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-source-code-editor': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-spinner': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-svg-images': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-table': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tabs': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tag': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text-area': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-text-input': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-themes': 10.25.1-pr-snapshot-1758747818199(react@19.1.1)
+      '@instructure/ui-time-select': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-toggle-details': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tooltip': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-top-nav-bar': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tray': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-tree-browser': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-truncate-list': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-truncate-text': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@instructure/ui-view': 10.25.1-pr-snapshot-1758747818199(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - supports-color
+
   '@instructure/uid@10.25.1-pr-snapshot-1758274491790':
+    dependencies:
+      '@babel/runtime': 7.28.4
+
+  '@instructure/uid@10.25.1-pr-snapshot-1758747818199':
     dependencies:
       '@babel/runtime': 7.28.4
 

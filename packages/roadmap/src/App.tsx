@@ -1,48 +1,67 @@
+import { Flex, InstUISettingsProvider } from "@instructure/ui";
 import type { FC } from "react";
-import { InstUISettingsProvider, Flex } from "@instructure/ui";
+import { useEffect, useState } from "react";
+import { Card, CardOverlay } from "./components";
 import { paramsToPendo } from "./utils";
-import { useEffect } from "react";
-import { Card } from "./components";
+import "./App.css"
 
 const App: FC = () => {
-  const queryParams = new URLSearchParams(window.location.search);
-  const roadmap: RoadmapFeatures | null = paramsToPendo(queryParams.get("q"));
+	const queryParams = new URLSearchParams(window.location.search);
+	const roadmap: RoadmapFeatures | null = paramsToPendo(queryParams.get("q"));
 
-  useEffect(() => {
-    if (!roadmap) {
-      //window.location.href = "https://roadmap.instructure.com";
-      console.log("Redirecting to https://roadmap.instructure.com");
-    }
-  }, [roadmap]);
+	const [overlayOpen, setOverlayOpen] = useState(false);
+	const [selectedEntry, setSelectedEntry] = useState<PendoAPIFeature | null>(
+		null,
+	);
 
-  useEffect(() => {
-    const sendHeight = () => {
-      window.parent.postMessage(
-        { type: "setHeight", height: document.body.scrollHeight },
-        "*"
-      );
-    };
+	useEffect(() => {
+		if (!roadmap) {
+			//window.location.href = "https://roadmap.instructure.com";
+			console.log("Redirecting to https://roadmap.instructure.com");
+		}
+	}, [roadmap]);
 
-    sendHeight();
+	useEffect(() => {
+		const sendHeight = () => {
+			window.parent.postMessage(
+				{ height: document.body.scrollHeight, type: "setHeight", source: "roadmap" },
+				"*",
+			);
+		};
 
-    window.addEventListener("resize", sendHeight);
+		sendHeight();
 
-    window.addEventListener("load", sendHeight);
+		window.addEventListener("resize", sendHeight);
+		window.addEventListener("load", sendHeight);
 
-    return () => {
-      window.removeEventListener("resize", sendHeight);
-      window.removeEventListener("load", sendHeight);
-    };
-  }, []);
+		return () => {
+			window.removeEventListener("resize", sendHeight);
+			window.removeEventListener("load", sendHeight);
+		};
+	}, []);
 
-  return (
-    <InstUISettingsProvider>
-      {roadmap && (
-        <Flex wrap="wrap" gap="paddingCardMedium" justifyItems="start">
-          {roadmap.features.map((entry) => <Card key={entry.feature.title} entry={entry} />)}
-        </Flex>
-      )}
-    </InstUISettingsProvider>
-  );
+	return (
+		<InstUISettingsProvider>
+			{roadmap && (<>
+				<Flex gap="paddingCardMedium" justifyItems="start" wrap="wrap">
+					{roadmap.features.map((entry) => (
+						<Card
+							entry={entry}
+							key={entry.feature.title}
+							setOverlayOpen={setOverlayOpen}
+							setSelectedEntry={setSelectedEntry}
+						/>
+					))}
+				</Flex>
+				{selectedEntry && (
+					<CardOverlay
+						entry={selectedEntry}
+						isOpen={overlayOpen}
+						setOpen={setOverlayOpen}
+					/>
+				)}
+			</>)}
+		</InstUISettingsProvider>
+	);
 };
 export default App;

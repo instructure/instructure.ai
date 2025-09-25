@@ -1,1 +1,1 @@
-export { default as paramsToPendo } from './paramsToPendo';
+export { default as paramsToPendo } from "./paramsToPendo";
