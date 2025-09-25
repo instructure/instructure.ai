@@ -1,8 +1,8 @@
 import { canvas, Flex, InstUISettingsProvider } from "@instructure/ui";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
-import { Card, CardOverlay, } from "./components";
-import { getBrandConfig, paramsToPendo, getLogo } from "./utils";
+import { Card, CardOverlay } from "./components";
+import { getBrandConfig, getLogo, paramsToPendo } from "./utils";
 import "./App.css";
 
 const App: FC = () => {
@@ -28,7 +28,8 @@ const App: FC = () => {
 
 	useEffect(() => {
 		const sendHeight = () => {
-			const frameHeight = document.body.scrollHeight < 800 ? 800 : document.body.scrollHeight;
+			const frameHeight =
+				document.body.scrollHeight < 800 ? 800 : document.body.scrollHeight;
 			window.parent.postMessage(
 				{
 					height: frameHeight,
@@ -57,14 +58,15 @@ const App: FC = () => {
 					<Flex gap="paddingCardMedium" justifyItems="start" wrap="wrap">
 						{roadmap.features.map((entry) => {
 							entry.product.logo = getLogo(entry.product.name);
-							return(
-							<Card
-								entry={entry}
-								key={entry.feature.title}
-								setOverlayOpen={setOverlayOpen}
-								setSelectedEntry={setSelectedEntry}
-							/>
-						)})}
+							return (
+								<Card
+									entry={entry}
+									key={entry.feature.title}
+									setOverlayOpen={setOverlayOpen}
+									setSelectedEntry={setSelectedEntry}
+								/>
+							);
+						})}
 					</Flex>
 					{selectedEntry && (
 						<CardOverlay

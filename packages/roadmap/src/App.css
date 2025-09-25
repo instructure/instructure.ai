@@ -1,4 +1,4 @@
 [class*="-modalBody"],
 [data-cid="ModalHeader"] {
-  padding-inline: 0.5rem !important;
+	padding-inline: 0.5rem;
 }

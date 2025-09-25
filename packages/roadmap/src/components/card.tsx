@@ -1,11 +1,4 @@
-import {
-	Flex,
-	Heading,
-	Pill,
-	Text,
-	TruncateText,
-	View,
-} from "@instructure/ui";
+import { Flex, Heading, Pill, Text, TruncateText, View } from "@instructure/ui";
 import type { FC } from "react";
 import { useState } from "react";
 
@@ -63,7 +56,7 @@ const Card: FC<{
 								borderWidth="0 0 small 0"
 								padding="moduleElements"
 							>
-								<Flex gap="small" alignItems="center" justifyItems="center">
+								<Flex alignItems="center" gap="small" justifyItems="center">
 									<Flex.Item shouldGrow shouldShrink>
 										<Heading level="h2" variant="titleCardMini">
 											<TruncateText maxLines={1}>{feature.title}</TruncateText>
@@ -73,15 +66,17 @@ const Card: FC<{
 							</View>
 						</Flex.Item>
 						<Flex.Item padding="0 0 0 small">
-							<Flex alignItems="center" gap="xx-small" direction="row">
+							<Flex alignItems="center" direction="row" gap="xx-small">
 								<Flex.Item>
-									<View as="div" margin="xx-small 0 0"><product.logo inline height="1.25rem" /></View>
-									</Flex.Item>
+									<View as="div" margin="xx-small 0 0">
+										<product.logo height="1.25rem" inline />
+									</View>
+								</Flex.Item>
 								<Flex.Item>
 									<Text variant="contentImportant">{product.name}</Text>
-									</Flex.Item>
+								</Flex.Item>
 							</Flex>
-							</Flex.Item>
+						</Flex.Item>
 						<Flex.Item shouldGrow shouldShrink>
 							<View as="div" padding="0 small">
 								<Text size="contentSmall">

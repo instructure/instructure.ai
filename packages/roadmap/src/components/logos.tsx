@@ -6,9 +6,9 @@ type ColorSVGProps = {
 	children: ReactNode;
 	title: string;
 	viewBox: string;
-  width?: string;
-  height?: string;
-  inline?: boolean;
+	width?: string;
+	height?: string;
+	inline?: boolean;
 };
 
 interface SVGInfo {
@@ -23,11 +23,17 @@ const ColorSVG: FC<ColorSVGProps> = ({
 	children,
 	title,
 	viewBox,
-  width = "auto",
-  height = "1rem",
-  inline = false,
+	width = "auto",
+	height = "1rem",
+	inline = false,
 }) => (
-	<InlineSVG title={title} viewBox={viewBox} width={width} height={height} inline={inline}>
+	<InlineSVG
+		height={height}
+		inline={inline}
+		title={title}
+		viewBox={viewBox}
+		width={width}
+	>
 		<g fill={color}>{children}</g>
 	</InlineSVG>
 );
@@ -117,31 +123,39 @@ const Instructure: SVGInfo = {
 };
 
 interface SVGProps {
-  height?: string;
-  width?: string;
-  inline?: boolean;
+	height?: string;
+	width?: string;
+	inline?: boolean;
 }
 
-const ParchmentBugColor: FC<SVGProps> = ({height = "1rem", width = "auto", inline = false}) => (
+const ParchmentBugColor: FC<SVGProps> = ({
+	height = "1rem",
+	width = "auto",
+	inline = false,
+}) => (
 	<ColorSVG
 		color={Parchment.color}
+		height={height}
+		inline={inline}
 		title={Parchment.title}
 		viewBox={Parchment.viewBox}
-		height={height}
 		width={width}
-		inline={inline}
 	>
 		{Parchment.SVG}
 	</ColorSVG>
 );
 
-const InstructureBugColor: FC<SVGProps> = ({height = "1rem", width = "auto", inline = false}) => (
+const InstructureBugColor: FC<SVGProps> = ({
+	height = "1rem",
+	width = "auto",
+	inline = false,
+}) => (
 	<InlineSVG
 		height={height}
 		inline={inline}
-		width={width}
 		title={Instructure.title}
 		viewBox={Instructure.viewBox}
+		width={width}
 	>
 		<rect fill={Instructure.color} height="53.42" width="53.42" />
 		<path
@@ -152,27 +166,52 @@ const InstructureBugColor: FC<SVGProps> = ({height = "1rem", width = "auto", inl
 	</InlineSVG>
 );
 
-const MasteryBugColor: FC<SVGProps> = ({height = "1rem", width = "auto", inline = false}) => (
+const MasteryBugColor: FC<SVGProps> = ({
+	height = "1rem",
+	width = "auto",
+	inline = false,
+}) => (
 	<ColorSVG
 		color={Mastery.color}
+		height={height}
+		inline={inline}
 		title={Mastery.title}
 		viewBox={Mastery.viewBox}
-		height={height}
 		width={width}
-		inline={inline}
 	>
 		{Mastery.SVG}
 	</ColorSVG>
 );
 
-const CanvasBugColor: FC<SVGProps> = ({height = "1rem", width = "auto", inline = false}) => (
-	<ColorSVG color={Canvas.color} title={Canvas.title} viewBox={Canvas.viewBox} height={height} width={width} inline={inline}>
+const CanvasBugColor: FC<SVGProps> = ({
+	height = "1rem",
+	width = "auto",
+	inline = false,
+}) => (
+	<ColorSVG
+		color={Canvas.color}
+		height={height}
+		inline={inline}
+		title={Canvas.title}
+		viewBox={Canvas.viewBox}
+		width={width}
+	>
 		{Canvas.SVG}
 	</ColorSVG>
 );
 
-const IgniteBugColor: FC<SVGProps> = ({height = "1rem", width = "auto", inline = false}) => (
-	<InlineSVG title={Ignite.title} viewBox={Ignite.viewBox} height={height} width={width} inline={inline}>
+const IgniteBugColor: FC<SVGProps> = ({
+	height = "1rem",
+	width = "auto",
+	inline = false,
+}) => (
+	<InlineSVG
+		height={height}
+		inline={inline}
+		title={Ignite.title}
+		viewBox={Ignite.viewBox}
+		width={width}
+	>
 		<g clipPath="url(#clip0_11521_4097)">
 			<path
 				d="M960 0L1219.29 700.713L1920 960L1219.29 1219.29L960 1920L700.713 1219.29L0 960L700.713 700.713L960 0Z"
@@ -214,11 +253,11 @@ const IgniteBugColor: FC<SVGProps> = ({height = "1rem", width = "auto", inline =
 );
 
 const Logos = {
-	mastery: MasteryBugColor,
 	canvas: CanvasBugColor,
 	ignite: IgniteBugColor,
-	parchment: ParchmentBugColor,
 	instructure: InstructureBugColor,
-}
+	mastery: MasteryBugColor,
+	parchment: ParchmentBugColor,
+};
 
 export default Logos;

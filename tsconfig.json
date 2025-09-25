@@ -2,12 +2,6 @@
 	"compilerOptions": {
 		"allowImportingTsExtensions": true,
 		"erasableSyntaxOnly": true,
-		"exclude": [
-			".template"
-		],
-		"include": [
-			"./types/**/*.d.ts"
-		],
 		"lib": [
 			"esnext",
 			"dom",
@@ -29,5 +23,11 @@
 		],
 		"useDefineForClassFields": true,
 		"verbatimModuleSyntax": true
-	}
+	},
+	"exclude": [
+		".template"
+	],
+	"include": [
+		"./types/**/*.d.ts"
+	],
 }

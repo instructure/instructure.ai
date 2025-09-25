@@ -6,7 +6,7 @@ type PageSettings = {
 	window_width: number;
 };
 
-type BrandConfig = Record<string, any>;
+type BrandConfig = Record<string, unknown>;
 
 type PageSettingsEvent = MessageEvent<{ pageSettings?: PageSettings }>;
 
@@ -15,7 +15,7 @@ const getBrandConfig = (): Promise<BrandConfig> => {
 
 	return new Promise((resolve) => {
 		const handler = async (event: PageSettingsEvent) => {
-			if (event.data && event.data.pageSettings) {
+			if (event.data?.pageSettings) {
 				const url = event.data.pageSettings.active_brand_config_json_url;
 				const response = await fetch(url);
 				const brandConfig: BrandConfig = await response.json();
