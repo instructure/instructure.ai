@@ -1,9 +1,9 @@
-import { Flex, InstUISettingsProvider, canvas } from "@instructure/ui";
+import { canvas, Flex, InstUISettingsProvider } from "@instructure/ui";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { Card, CardOverlay } from "./components";
-import { paramsToPendo, getBrandConfig } from "./utils";
-import "./App.css"
+import { getBrandConfig, paramsToPendo } from "./utils";
+import "./App.css";
 
 const App: FC = () => {
 	const [overlayOpen, setOverlayOpen] = useState(false);
@@ -20,8 +20,6 @@ const App: FC = () => {
 		});
 	}, []);
 
-
-
 	useEffect(() => {
 		if (!roadmap) {
 			//window.location.href = "https://roadmap.instructure.com";
@@ -32,7 +30,11 @@ const App: FC = () => {
 	useEffect(() => {
 		const sendHeight = () => {
 			window.parent.postMessage(
-				{ height: document.body.scrollHeight, type: "setHeight", source: "roadmap" },
+				{
+					height: document.body.scrollHeight,
+					source: "roadmap",
+					type: "setHeight",
+				},
 				"*",
 			);
 		};
@@ -49,26 +51,28 @@ const App: FC = () => {
 	}, []);
 
 	return (
-		<InstUISettingsProvider theme={{...canvas, ...(brandConfig as object)}}>
-			{roadmap && (<>
-				<Flex gap="paddingCardMedium" justifyItems="start" wrap="wrap">
-					{roadmap.features.map((entry) => (
-						<Card
-							entry={entry}
-							key={entry.feature.title}
-							setOverlayOpen={setOverlayOpen}
-							setSelectedEntry={setSelectedEntry}
+		<InstUISettingsProvider theme={{ ...canvas, ...(brandConfig as object) }}>
+			{roadmap && (
+				<>
+					<Flex gap="paddingCardMedium" justifyItems="start" wrap="wrap">
+						{roadmap.features.map((entry) => (
+							<Card
+								entry={entry}
+								key={entry.feature.title}
+								setOverlayOpen={setOverlayOpen}
+								setSelectedEntry={setSelectedEntry}
+							/>
+						))}
+					</Flex>
+					{selectedEntry && (
+						<CardOverlay
+							entry={selectedEntry}
+							isOpen={overlayOpen}
+							setOpen={setOverlayOpen}
 						/>
-					))}
-				</Flex>
-				{selectedEntry && (
-					<CardOverlay
-						entry={selectedEntry}
-						isOpen={overlayOpen}
-						setOpen={setOverlayOpen}
-					/>
-				)}
-			</>)}
+					)}
+				</>
+			)}
 		</InstUISettingsProvider>
 	);
 };

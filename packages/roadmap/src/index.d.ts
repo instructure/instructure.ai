@@ -13,11 +13,11 @@ type PendoAPIFeature = {
 			  }[]
 			| null;
 		stage: string | null;
-		title: string | null;
+		title: string;
 	};
 	product: {
 		area: string | null;
-		name: string | null;
+		name: string;
 	};
 };
 
@@ -30,6 +30,6 @@ type RoadmapFeatures = {
 };
 
 declare module "*.css" {
-  const classes: { [key: string]: string };
-  export default classes;
+	const classes: { [key: string]: string };
+	export default classes;
 }
