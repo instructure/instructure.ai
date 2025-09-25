@@ -5,10 +5,10 @@ import {
 	IconCanvasLogoLine,
 	IconXSolid,
 	Img,
-	Link,
 	Modal,
 	Text,
 	View,
+	Pill
 } from "@instructure/ui";
 import type { FC } from "react";
 import { VideoPlayer, TagList } from "./";
@@ -22,7 +22,6 @@ const CardOverlay: FC<{
 	const { links } = feature;
 
 	const video = links?.find((link) => link.title === "video")?.linkUrl;
-	const community = links?.find((link) => link.title === "community")?.linkUrl;
 	const image = links?.find((link) => link.title === "image")?.linkUrl;
 
 	return (
@@ -53,19 +52,20 @@ const CardOverlay: FC<{
 				</Flex>
 			</Modal.Header>
 			<Modal.Body>
-				<View overflowX="hidden" withFocusOutline={false}>
-					<Flex direction="row" gap="none" alignItems="start">
+				<View overflowX="hidden" withFocusOutline={false} id="overlay">
+					<Flex direction="row" gap="medium" alignItems="start">
 						<Flex.Item shouldGrow shouldShrink>
-							<View as="div" margin="0 large 0 0">
+							<View as="div">
 							{video ? (
 								<VideoPlayer url={video} />
 							) : image ? (
 								<Img alt={feature.title} src={image} />
 							) : null}
-							<Text size="content">
+							{feature.labels?.length && <View as="div" margin="0 0 small">{feature.labels.map((label) => (
+								<Pill key={label} margin="x-small 0 0">{label}</Pill>
+							))}</View>}
+							<Text variant="content">
 								{feature.description}
-								<br />
-								{community && <Link href={community}>Learn more</Link>}
 							</Text>
 							</View>
 						</Flex.Item>

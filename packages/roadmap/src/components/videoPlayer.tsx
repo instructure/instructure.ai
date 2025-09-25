@@ -2,7 +2,7 @@ import { View } from "@instructure/ui";
 
 const VideoPlayer = ({ url }: { url: string | undefined }) => {
 	return url ? (
-		<View as="div" margin="0 0 medium" textAlign="center">
+		<View as="div" margin="0 0 small" textAlign="center">
 			<iframe
 				allowFullScreen
 				height="500px"
