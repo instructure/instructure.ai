@@ -29,9 +29,10 @@ const App: FC = () => {
 
 	useEffect(() => {
 		const sendHeight = () => {
+			const frameHeight = document.body.scrollHeight < 800 ? 800 : document.body.scrollHeight;
 			window.parent.postMessage(
 				{
-					height: document.body.scrollHeight,
+					height: frameHeight,
 					source: "roadmap",
 					type: "setHeight",
 				},
