@@ -1,24 +1,32 @@
+
+
+const hasProp = <T extends object, K extends PropertyKey>(obj: T, prop: K): obj is T & Record<K, unknown> =>
+	Object.prototype.hasOwnProperty.call(obj, prop);
+
 const isPendoAPIFeature = (obj: unknown): obj is PendoAPIFeature => {
 	return (
-		obj &&
 		typeof obj === "object" &&
-		obj.feature &&
-		typeof obj.feature === "object" &&
-		"stage" in obj.feature &&
-		"title" in obj.feature &&
-		obj.product &&
-		typeof obj.product === "object" &&
-		"name" in obj.product &&
-		"area" in obj.product
+		obj !== null &&
+		hasProp(obj, "feature") &&
+		typeof (obj as { feature: unknown }).feature === "object" &&
+		(obj as { feature: unknown }).feature !== null &&
+		hasProp((obj as { feature: any }).feature, "stage") &&
+		hasProp((obj as { feature: any }).feature, "title") &&
+		hasProp(obj, "product") &&
+		typeof (obj as { product: unknown }).product === "object" &&
+		(obj as { product: unknown }).product !== null &&
+		hasProp((obj as { product: any }).product, "name") &&
+		hasProp((obj as { product: any }).product, "area")
 	);
 };
 
 const isPendoAPI = (obj: unknown): obj is PendoAPI => {
 	return (
-		obj &&
 		typeof obj === "object" &&
-		Array.isArray(obj.results) &&
-		obj.results.every(isPendoAPIFeature)
+		obj !== null &&
+		hasProp(obj, "results") &&
+		Array.isArray((obj as { results: unknown }).results) &&
+		(obj as { results: any[] }).results.every(isPendoAPIFeature)
 	);
 };
 
@@ -37,18 +45,18 @@ const paramsToPendo = (params: string | null): RoadmapFeatures | null => {
 	}
 
 	const stages = Array.from(
-		new Set(p.results.map((result) => result.feature.stage)),
+		new Set((p as PendoAPI).results.map((result) => result.feature.stage)),
 	).filter(Boolean) as string[];
 	const products = Array.from(
-		new Set(p.results.map((result) => result.product.name)),
+		new Set((p as PendoAPI).results.map((result) => result.product.name)),
 	).filter(Boolean) as string[];
 	const productAreas = Array.from(
-		new Set(p.results.map((result) => result.product.area)),
+		new Set((p as PendoAPI).results.map((result) => result.product.area)),
 	).filter(Boolean) as string[];
 	const labels = Array.from(
-		new Set(p.results.flatMap((result) => result.feature.labels)),
+		new Set((p as PendoAPI).results.flatMap((result) => result.feature.labels)),
 	).filter(Boolean) as string[];
-	const features = p.results;
+	const features = (p as PendoAPI).results;
 
 	const roadmap: RoadmapFeatures = {
 		features,
@@ -70,5 +78,4 @@ const paramsToPendo = (params: string | null): RoadmapFeatures | null => {
 
 	return null;
 };
-
 export default paramsToPendo;
