@@ -48,7 +48,7 @@ const Card: FC<{
 					shouldAnimateFocus
 					tabIndex={0}
 					onKeyDown={(e) => {
-            if (e.key === " " || e.key === "Enter") {
+            if (e.code === "Space" || e.key === "Enter") {
               e.preventDefault();
               handleClick();
             }
