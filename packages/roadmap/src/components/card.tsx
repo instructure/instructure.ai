@@ -47,6 +47,12 @@ const Card: FC<{
 					shadow={shadow}
 					shouldAnimateFocus
 					tabIndex={0}
+					onKeyDown={(e) => {
+            if (e.key === " " || e.key === "Enter") {
+              e.preventDefault();
+              handleClick();
+            }
+          }}
 				>
 					<Flex direction="column" gap="moduleElements" height="16rem">
 						<Flex.Item>
