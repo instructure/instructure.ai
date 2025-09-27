@@ -13,6 +13,7 @@ import {
 import type { FC } from "react";
 import { TagList, VideoPlayer } from "./";
 import { useMemo } from "react";
+import { getLinkType } from "../utils";
 
 const CardOverlayContent: FC<{
 	entry: PendoAPIFeature;
@@ -23,13 +24,17 @@ const CardOverlayContent: FC<{
 	const { feature, product } = entry;
 	const { links } = feature;
 
+	const Links = links?.map((link) => {
+		return { title: getLinkType(link), url: link.linkUrl };
+	});
+
 	const video = useMemo(
-		() => links?.find((link) => link.title === "video")?.linkUrl,
-		[links]
+		() => Links?.find((link) => link.title === "video")?.url,
+		[Links]
 	);
 	const image = useMemo(
-		() => links?.find((link) => link.title === "image")?.linkUrl,
-		[links]
+		() => Links?.find((link) => link.title === "image")?.url,
+		[Links]
 	);
 
 	return (
@@ -108,8 +113,7 @@ const CardOverlay: FC<{
 		<Responsive
 			query={{ large: { minWidth: "50rem" }, small: { maxWidth: "50rem" } }}
 			render={(_props, matches) => {
-				// matches is expected to be an array of strings, e.g. ["small"]
-				const isSmall = matches.includes("small");
+				const isSmall = matches?.includes("small") || false;
 				return (
 					<CardOverlayContent
 						entry={entry}
