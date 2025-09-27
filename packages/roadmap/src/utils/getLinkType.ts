@@ -24,7 +24,7 @@ const getLinkTitle = (link: VerifiedLink): string => {
   if (url.includes("community.canvaslms.com")) return "Community";
 
   /* Video Links */
-  if (url.match(/\.(mp4|mov|avi|mkv|mpeg|mov)$/)) return "Video";
+  if (url.match(/\.(mp4|mov|avi|mkv|mpeg)$/)) return "Video";
   if (url.includes("instructuremedia.com")) return "Video";
   if (url.includes("youtube.com")) return "Video";
   if (url.includes("vimeo.com")) return "Video";
