@@ -42,17 +42,17 @@ const Card: FC<{
 					onBlur={handleFocusOut}
 					onClick={handleClick}
 					onFocus={handleFocusIn}
+					onKeyDown={(e) => {
+						if (e.code === "Space" || e.key === "Enter") {
+							e.preventDefault();
+							handleClick();
+						}
+					}}
 					onMouseEnter={handleFocusIn}
 					onMouseLeave={handleFocusOut}
 					shadow={shadow}
 					shouldAnimateFocus
 					tabIndex={0}
-					onKeyDown={(e) => {
-            if (e.code === "Space" || e.key === "Enter") {
-              e.preventDefault();
-              handleClick();
-            }
-          }}
 				>
 					<Flex direction="column" gap="moduleElements" height="16rem">
 						<Flex.Item>
@@ -62,13 +62,9 @@ const Card: FC<{
 								borderWidth="0 0 small 0"
 								padding="moduleElements"
 							>
-								<Flex alignItems="center" gap="small" justifyItems="center">
-									<Flex.Item shouldGrow shouldShrink>
-										<Heading level="h2" variant="titleCardMini">
-											<TruncateText maxLines={1}>{feature.title}</TruncateText>
-										</Heading>
-									</Flex.Item>
-								</Flex>
+								<Heading level="h2" variant="titleCardMini">
+									<TruncateText maxLines={1}>{feature.title}</TruncateText>
+								</Heading>
 							</View>
 						</Flex.Item>
 						<Flex.Item padding="0 0 0 small">
