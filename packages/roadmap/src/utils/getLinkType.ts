@@ -21,20 +21,19 @@ const getLinkTitle = (link: VerifiedLink): string => {
   /* Community Links */
   if (/change[-]?log/i.test(href)) return "changelog";
   if (/time[ ]?line/i.test(href)) return "timeline";
-  if (href.includes("faq")) return "FAQ";
-  if (href.includes("the-product-blog")) return "Product Blog";
+  if (href.includes("faq")) return "faq";
+  if (href.includes("the-product-blog")) return "product blog";
   if (href.includes("guide")) return "Guides";
-  if (host.endsWith("community.canvaslms.com")) return "Community";
+  if (host.endsWith("community.canvaslms.com")) return "community";
 
   /* Video Links */
-  if (href.match(/\.(mp4|mov|avi|mkv|mpeg)$/)) return "Video";
-  if (host.endsWith("instructuremedia.com")) return "Video";
-  if (host.endsWith("youtube.com")) return "Video";
-  if (host.endsWith("vimeo.com")) return "Video";
-  if (host.endsWith("wistia.com")) return "Video";
+  if (
+    href.match(/\.(mp4|mov|avi|mkv|mpeg)$/) ||
+    host.match(/(?:^|\.)((instructuremedia|youtube|vimeo|wistia)\.com|youtu\.be)$/)
+  ) return "video";
 
   /* Image Links */
-  if (href.match(/\.(jpeg|jpg|gif|png|svg|webp)$/)) return "Image";
+  if (href.match(/\.(jpeg|jpg|gif|png|svg|webp)$/)) return "image";
 
   return title;
 };
