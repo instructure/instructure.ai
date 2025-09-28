@@ -24,7 +24,7 @@ const getLinkTitle = (link: VerifiedLink): string => {
 	if (href.includes("faq")) return "faq";
 	if (href.includes("the-product-blog")) return "product blog";
 	if (href.includes("guide")) return "guides";
-	if (host.endsWith("community.canvaslms.com")) return "community";
+	if (host === "community.canvaslms.com") return "community";
 
 	/* Video Links */
 	if (
