@@ -29,11 +29,11 @@ const CardOverlayContent: FC<{
 	});
 
 	const video = useMemo(
-		() => Links?.find((link) => link.title === "video")?.url,
+		() => Links?.find((link) => link.title.toLowerCase() === "video")?.url,
 		[Links]
 	);
 	const image = useMemo(
-		() => Links?.find((link) => link.title === "image")?.url,
+		() => Links?.find((link) => link.title.toLowerCase() === "image")?.url,
 		[Links]
 	);
 
