@@ -62,13 +62,9 @@ const Card: FC<{
 								borderWidth="0 0 small 0"
 								padding="moduleElements"
 							>
-								<Flex alignItems="center" gap="small" justifyItems="center">
-									<Flex.Item shouldGrow shouldShrink>
 										<Heading level="h2" variant="titleCardMini">
 											<TruncateText maxLines={1}>{feature.title}</TruncateText>
 										</Heading>
-									</Flex.Item>
-								</Flex>
 							</View>
 						</Flex.Item>
 						<Flex.Item padding="0 0 0 small">
