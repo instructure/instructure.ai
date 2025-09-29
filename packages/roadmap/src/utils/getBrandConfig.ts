@@ -11,12 +11,22 @@ type BrandConfig = Record<string, unknown>;
 type PageSettingsEvent = MessageEvent<{ pageSettings?: PageSettings }>;
 
 let brandConfigListenerAdded = false;
+let cachedBrandConfig: BrandConfig | null = null;
 
 const getBrandConfig = (): Promise<BrandConfig> => {
 	window.parent.postMessage({ subject: "lti.getPageSettings" }, "*");
 
-	return new Promise((resolve) => {
+	return new Promise((resolve, reject) => {
 		if (brandConfigListenerAdded) {
+			if (cachedBrandConfig !== null) {
+				resolve(cachedBrandConfig);
+			} else {
+				reject(
+					new Error(
+						"Brand config listener already added and no cached value available.",
+					),
+				);
+			}
 			return;
 		}
 		brandConfigListenerAdded = true;
@@ -32,9 +42,11 @@ const getBrandConfig = (): Promise<BrandConfig> => {
 				}
 				window.removeEventListener("message", handler);
 				brandConfigListenerAdded = false;
-				resolve(
-					event.data.pageSettings.use_high_contrast ? {} : (brandConfig ?? {}),
-				);
+				const result = event.data.pageSettings.use_high_contrast
+					? {}
+					: (brandConfig ?? {});
+				cachedBrandConfig = result;
+				resolve(result);
 			}
 		};
 		window.addEventListener("message", handler);
