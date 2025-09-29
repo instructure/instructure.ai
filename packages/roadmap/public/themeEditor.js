@@ -1,13 +1,9 @@
 /* Canvas Theme Editor: Dynamically resize roadmap iframe to fit content */
 window.location.pathname.endsWith("/pages/instructure-roadmap") &&
 	(() => {
-		console.info("Roadmap iframe resize script loaded");
-		window.addEventListener("message", (event) => {
-			if (
-				event.data &&
-				event.data.source === "roadmap" &&
-				event.data.type === "setHeight"
-			) {
+
+		console.info("Roadmap script loaded");
+
 				const iFrame = document.getElementById("roadmap");
 				if (!iFrame) {
 					console.error("Roadmap iframe not found");
@@ -19,6 +15,14 @@ window.location.pathname.endsWith("/pages/instructure-roadmap") &&
 					);
 					return;
 				}
+
+		window.addEventListener("message", (event) => {
+			if (
+				event.data &&
+				event.data.source === "roadmap" &&
+				event.data.type === "setHeight"
+			) {
+
 				try {
 					iFrame.height = event.data.height;
 					console.info("Set iframe height to", event.data.height);
@@ -27,4 +31,18 @@ window.location.pathname.endsWith("/pages/instructure-roadmap") &&
 				}
 			}
 		});
+
+		window.addEventListener("DOMContentLoaded", (event) => {
+			const roadmap = iFrame.getAttribute("data-roadmap")
+
+			if(!roadmap) {
+				console.error("data-roadmap attribute not found");
+				return;
+			}
+
+			window.postMessage({value: roadmap}, "*")
+
+
+		})
+		
 	})();
