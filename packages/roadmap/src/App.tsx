@@ -56,7 +56,7 @@ const App: FC = () => {
 							return (
 								<Card
 									entry={{ ...entry, product: { ...entry.product, logo } }}
-									key={entry.feature.id}
+									key={entry.feature.title}
 									setOverlayOpen={setOverlayOpen}
 									setSelectedEntry={setSelectedEntry}
 								/>
