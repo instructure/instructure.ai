@@ -78,6 +78,7 @@
 			{
 				"select": {
 					"feature.description": "vocItemDescription",
+					"feature.id": "id",
 					"feature.labels": "labelNames",
 					"feature.links": "linksData",
 					"feature.stage": "stage",
