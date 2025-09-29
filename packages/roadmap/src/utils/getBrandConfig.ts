@@ -17,7 +17,6 @@ const getBrandConfig = (): Promise<BrandConfig> => {
 
 	return new Promise((resolve) => {
 		if (brandConfigListenerAdded) {
-			// Listener already added, do not add again
 			return;
 		}
 		brandConfigListenerAdded = true;
@@ -29,7 +28,6 @@ const getBrandConfig = (): Promise<BrandConfig> => {
 					const response = await fetch(url);
 					brandConfig = await response.json();
 				} catch (error) {
-					// Optionally log the error for debugging
 					console.error("Failed to fetch or parse brand config:", error);
 				}
 				window.removeEventListener("message", handler);

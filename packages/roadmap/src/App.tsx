@@ -14,11 +14,8 @@ const App: FC = () => {
 	const [roadmap, setRoadmap] = useState<RoadmapFeatures | null>(null);
 
 	useEffect(() => {
-		console.debug("Fetching roadmap...");
 		getRoadmap().then((data) => {
-			console.debug("Roadmap fetched:", data);
 			setRoadmap((prev) => {
-				// Only update if data is different
 				if (JSON.stringify(prev) !== JSON.stringify(data)) {
 					return data;
 				}
@@ -28,23 +25,19 @@ const App: FC = () => {
 	}, []);
 
 	useEffect(() => {
-		console.debug("Fetching brand config...");
 		getBrandConfig().then((config) => {
-			console.debug("Brand config fetched.");
 			setBrandConfig(config);
 		});
 	}, []);
 
 	useEffect(() => {
 		if (roadmap) {
-			console.debug("Roadmap loaded, sending initial height.");
 			sendHeight();
 		}
 	}, [roadmap]);
 
 	useEffect(() => {
 		const handleResize = () => {
-			console.debug("Window resized, sending height...");
 			sendHeight();
 		};
 		window.addEventListener("resize", handleResize);
