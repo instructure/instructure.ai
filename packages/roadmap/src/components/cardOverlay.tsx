@@ -24,9 +24,10 @@ const CardOverlayContent: FC<{
 	const { feature, product } = entry;
 	const { links } = feature;
 
-	const Links = links?.map((link) => {
-		return { title: getLinkType(link), url: link.linkUrl };
-	});
+	const Links = links?.map((link) => ({
+		title: getLinkType(link),
+		url: link.linkUrl,
+	}));
 
 	const video = useMemo(
 		() => Links?.find((link) => link.title.toLowerCase() === "video")?.url,
