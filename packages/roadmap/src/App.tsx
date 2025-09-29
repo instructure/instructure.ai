@@ -22,7 +22,8 @@ const App: FC = () => {
 
 	useEffect(() => {
 		if (!roadmap) {
-			window.location.href = "https://roadmap.instructure.com";
+			// window.location.href = "https://roadmap.instructure.com";
+			console.log("No roadmap data found");
 		}
 	}, [roadmap]);
 
