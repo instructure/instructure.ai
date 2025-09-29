@@ -17,15 +17,14 @@
 if (window.location.pathname.endsWith("/pages/instructure-roadmap")) {
 	console.info("Roadmap script loaded");
 
-	let roadmapListenerAdded = false;
+	const iframeListenerMap = new WeakMap();
 	const attachListener = (iFrame) => {
 		if (!(iFrame instanceof HTMLIFrameElement)) {
 			console.error('Element with id "roadmap" is not an HTMLIFrameElement');
 			return;
 		}
-		if (roadmapListenerAdded) return;
+		if (iframeListenerMap.has(iFrame)) return;
 
-		roadmapListenerAdded = true;
 		const handler = (event) => {
 			if (!event.data) return;
 			switch (event.data.type) {
@@ -46,6 +45,7 @@ if (window.location.pathname.endsWith("/pages/instructure-roadmap")) {
 			}
 		};
 		window.addEventListener("message", handler);
+		iframeListenerMap.set(iFrame, handler);
 	};
 
 	const observer = new MutationObserver((_mutations, obs) => {
