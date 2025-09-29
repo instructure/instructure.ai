@@ -66,6 +66,7 @@ const TagList: FC<{ entry: PendoAPIFeature; isNarrow: boolean }> = ({
 													href={link.linkUrl}
 													rel="noreferrer"
 													target="_blank"
+													key={link.linkUrl}
 												>
 													<Text transform="capitalize">{link.type}</Text>
 												</Link>
