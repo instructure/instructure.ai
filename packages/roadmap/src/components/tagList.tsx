@@ -1,5 +1,6 @@
 import { Flex, Heading, Link, List, Text, View } from "@instructure/ui";
 import type { FC } from "react";
+import { getLinkType } from "../utils";
 
 const TagList: FC<{ entry: PendoAPIFeature; isNarrow: boolean }> = ({
 	entry,
@@ -52,7 +53,13 @@ const TagList: FC<{ entry: PendoAPIFeature; isNarrow: boolean }> = ({
 								<Text variant="contentImportant">Links:</Text>
 								<List>
 									{feature.links
-										.filter((link) => link.title !== "image")
+										.map((link) => ({
+											...link,
+											type: getLinkType(link),
+										}))
+										.filter(
+											(link) => link.type !== "image" && link.type !== "video"
+										)
 										.map((link) => (
 											<List.Item key={link.linkUrl}>
 												<Link
@@ -60,7 +67,7 @@ const TagList: FC<{ entry: PendoAPIFeature; isNarrow: boolean }> = ({
 													rel="noreferrer"
 													target="_blank"
 												>
-													<Text transform="capitalize">{link.title}</Text>
+													<Text transform="capitalize">{link.type}</Text>
 												</Link>
 											</List.Item>
 										))}

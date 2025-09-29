@@ -2,7 +2,7 @@ import { canvas, Flex, InstUISettingsProvider } from "@instructure/ui";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { Card, CardOverlay } from "./components";
-import { getBrandConfig, getLogo, paramsToPendo } from "./utils";
+import { getBrandConfig, getLogo, getRoadmap, sendHeight } from "./utils";
 import "./App.css";
 
 const App: FC = () => {
@@ -11,45 +11,31 @@ const App: FC = () => {
 		null,
 	);
 	const [brandConfig, setBrandConfig] = useState<unknown>({});
-	const queryParams = new URLSearchParams(window.location.search);
-	const roadmap: RoadmapFeatures | null = paramsToPendo(queryParams.get("q"));
+	const [roadmap, setRoadmap] = useState<RoadmapFeatures | null>(null);
+
+	useEffect(() => {
+		getRoadmap().then((data) => {
+			setRoadmap(data);
+		});
+	}, []);
 
 	useEffect(() => {
 		getBrandConfig().then((config) => {
 			setBrandConfig(config);
 		});
 	}, []);
-
+	
 	useEffect(() => {
-		if (!roadmap) {
-			window.location.href = "https://roadmap.instructure.com";
-		}
-	}, [roadmap]);
-
-	useEffect(() => {
-		const sendHeight = () => {
-			const frameHeight =
-				document.body.scrollHeight < 800 ? 800 : document.body.scrollHeight;
-			window.parent.postMessage(
-				{
-					height: frameHeight,
-					source: "roadmap",
-					type: "setHeight",
-				},
-				"*",
-			);
-		};
+		if (!roadmap) return;
 
 		sendHeight();
-
-		window.addEventListener("resize", sendHeight);
-		window.addEventListener("load", sendHeight);
+		const handleResize = () => sendHeight();
+		window.addEventListener("resize", handleResize);
 
 		return () => {
-			window.removeEventListener("resize", sendHeight);
-			window.removeEventListener("load", sendHeight);
+			window.removeEventListener("resize", handleResize);
 		};
-	}, []);
+	}, [roadmap]);
 
 	return (
 		<InstUISettingsProvider theme={{ ...canvas, ...(brandConfig as object) }}>
