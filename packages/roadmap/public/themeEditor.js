@@ -6,9 +6,12 @@
  * This script listens for messages from the roadmap iframe and handles
  * communication for roadmap data and dynamic resizing.
  *
+ * Features:
  * - Listens for "getRoadmap" messages to return roadmap data from the iframe.
  * - Listens for "setHeight" messages to update the iframe's height dynamically.
  * - Uses a MutationObserver to attach listeners when the roadmap iframe is added to the DOM.
+ * - Ensures only one message event listener is attached at a time for the roadmap iframe.
+ * - Removes the event listener after handling a message to prevent multiple listeners and memory leaks.
  *
  * Only runs on the "/pages/instructure-roadmap" path.
  */
