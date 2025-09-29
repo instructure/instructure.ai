@@ -58,7 +58,7 @@ const TagList: FC<{ entry: PendoAPIFeature; isNarrow: boolean }> = ({
 											type: getLinkType(link),
 										}))
 										.filter(
-											(link) => link.type !== "image" && link.type !== "video"
+											(link) => link.type !== "image" && link.type !== "video",
 										)
 										.map((link) => (
 											<List.Item key={link.linkUrl}>
