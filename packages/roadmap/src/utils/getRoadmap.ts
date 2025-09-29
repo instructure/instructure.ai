@@ -10,8 +10,6 @@ const getRoadmap = (): Promise<RoadmapFeatures | null> => {
 			if (event.data?.value) {
 				window.removeEventListener("message", handler);
 				resolve(paramsToPendo(event.data.value));
-			} else {
-				window.location.href = "https://roadmap.instructure.com";
 			}
 		};
 		window.addEventListener("message", handler);
