@@ -2,7 +2,7 @@ import { canvas, Flex, InstUISettingsProvider } from "@instructure/ui";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { Card, CardOverlay } from "./components";
-import { getBrandConfig, getLogo, getRoadmap } from "./utils";
+import { getBrandConfig, getLogo, getRoadmap, sendHeight } from "./utils";
 import "./App.css";
 
 const App: FC = () => {
@@ -24,38 +24,15 @@ const App: FC = () => {
 			setBrandConfig(config);
 		});
 	}, []);
-
+	
 	useEffect(() => {
-		if (!roadmap) {
-			// window.location.href = "https://roadmap.instructure.com";
-			console.log("No roadmap data found");
-		}
-	}, [roadmap]);
-
-	useEffect(() => {
-		const sendHeight = () => {
-			const frameHeight =
-				document.body.scrollHeight < 800 ? 800 : document.body.scrollHeight;
-			window.parent.postMessage(
-				{
-					height: frameHeight,
-					source: "roadmap",
-					type: "setHeight",
-				},
-				"*",
-			);
-		};
-
-		sendHeight();
-
+		if (roadmap) sendHeight();
 		window.addEventListener("resize", sendHeight);
-		window.addEventListener("load", sendHeight);
 
 		return () => {
 			window.removeEventListener("resize", sendHeight);
-			window.removeEventListener("load", sendHeight);
 		};
-	}, []);
+	}, [roadmap]);
 
 	return (
 		<InstUISettingsProvider theme={{ ...canvas, ...(brandConfig as object) }}>
