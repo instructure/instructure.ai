@@ -18,11 +18,17 @@ window.location.pathname.endsWith("/pages/instructure-roadmap") &&
 
 		window.addEventListener("message", (event) => {
 			if (
-				event.data &&
-				event.data.source === "roadmap" &&
-				event.data.type === "setHeight"
-			) {
+				!event.data &&
+				!event.data.source === "roadmap"
+			) { return; }
 
+			else if (event.data?.type === "getRoadmap") {
+				const roadmap = iFrame.getAttribute("data-roadmap");
+				window.postMessage({ value: roadmap }, "*");
+				return;
+			}
+
+			if (event.data?.type === "setHeight") {
 				try {
 					iFrame.height = event.data.height;
 					console.info("Set iframe height to", event.data.height);
@@ -31,18 +37,4 @@ window.location.pathname.endsWith("/pages/instructure-roadmap") &&
 				}
 			}
 		});
-
-		window.addEventListener("DOMContentLoaded", (event) => {
-			const roadmap = iFrame.getAttribute("data-roadmap")
-
-			if(!roadmap) {
-				console.error("data-roadmap attribute not found");
-				return;
-			}
-
-			window.postMessage({value: roadmap}, "*")
-
-
-		})
-		
 	})();
