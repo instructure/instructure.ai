@@ -2,7 +2,7 @@ import { canvas, Flex, InstUISettingsProvider } from "@instructure/ui";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { Card, CardOverlay } from "./components";
-import { getBrandConfig, getLogo, paramsToPendo } from "./utils";
+import { getBrandConfig, getLogo, getRoadmap } from "./utils";
 import "./App.css";
 
 const App: FC = () => {
@@ -11,8 +11,13 @@ const App: FC = () => {
 		null,
 	);
 	const [brandConfig, setBrandConfig] = useState<unknown>({});
-	const queryParams = new URLSearchParams(window.location.search);
-	const roadmap: RoadmapFeatures | null = paramsToPendo(queryParams.get("q"));
+	const [roadmap, setRoadmap] = useState<RoadmapFeatures | null>(null);
+
+	useEffect(() => {
+		getRoadmap().then((data) => {
+			setRoadmap(data);
+		});
+	}, []);
 
 	useEffect(() => {
 		getBrandConfig().then((config) => {
