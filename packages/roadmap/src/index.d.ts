@@ -7,6 +7,7 @@ type PendoAPI = {
 type PendoAPIFeature = {
 	feature: {
 		description: string | null;
+		id: string;
 		labels: string[] | null;
 		links:
 			| {
