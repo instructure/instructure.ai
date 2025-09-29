@@ -64,7 +64,6 @@ const TagList: FC<{ entry: PendoAPIFeature; isNarrow: boolean }> = ({
 											<List.Item key={link.linkUrl}>
 												<Link
 													href={link.linkUrl}
-													key={link.linkUrl}
 													rel="noreferrer"
 													target="_blank"
 												>
