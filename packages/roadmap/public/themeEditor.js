@@ -16,11 +16,15 @@
 if (window.location.pathname.endsWith("/pages/instructure-roadmap")) {
 	console.info("Roadmap script loaded");
 
+	let roadmapListenerAdded = false;
 	const attachListener = (iFrame) => {
 		if (!(iFrame instanceof HTMLIFrameElement)) {
 			console.error('Element with id "roadmap" is not an HTMLIFrameElement');
 			return;
 		}
+		if (roadmapListenerAdded) return;
+
+		roadmapListenerAdded = true;
 		window.addEventListener("message", (event) => {
 			if (!event.data) return;
 			switch (event.data.type) {
