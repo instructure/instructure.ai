@@ -26,11 +26,14 @@ const App: FC = () => {
 	}, []);
 	
 	useEffect(() => {
-		if (roadmap) sendHeight();
-		window.addEventListener("resize", sendHeight);
+		if (!roadmap) return;
+
+		sendHeight();
+		const handleResize = () => sendHeight();
+		window.addEventListener("resize", handleResize);
 
 		return () => {
-			window.removeEventListener("resize", sendHeight);
+			window.removeEventListener("resize", handleResize);
 		};
 	}, [roadmap]);
 
