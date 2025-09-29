@@ -25,12 +25,14 @@ if (window.location.pathname.endsWith("/pages/instructure-roadmap")) {
 		if (roadmapListenerAdded) return;
 
 		roadmapListenerAdded = true;
-		window.addEventListener("message", (event) => {
+		const handler = (event) => {
 			if (!event.data) return;
 			switch (event.data.type) {
 				case "getRoadmap": {
 					const roadmap = iFrame.getAttribute("data-roadmap");
 					event.source.postMessage({ value: roadmap }, event.origin);
+					window.removeEventListener("message", handler);
+					roadmapListenerAdded = false;
 					break;
 				}
 				case "setHeight":
@@ -40,11 +42,14 @@ if (window.location.pathname.endsWith("/pages/instructure-roadmap")) {
 					} catch (err) {
 						console.error("Failed to set iframe height:", err);
 					}
+					window.removeEventListener("message", handler);
+					roadmapListenerAdded = false;
 					break;
 				default:
 					break;
 			}
-		});
+		};
+		window.addEventListener("message", handler);
 	};
 
 	const observer = new MutationObserver((_mutations, obs) => {

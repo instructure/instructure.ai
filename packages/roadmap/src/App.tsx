@@ -14,28 +14,44 @@ const App: FC = () => {
 	const [roadmap, setRoadmap] = useState<RoadmapFeatures | null>(null);
 
 	useEffect(() => {
+		console.debug("Fetching roadmap...");
 		getRoadmap().then((data) => {
-			setRoadmap(data);
+			console.debug("Roadmap fetched:", data);
+			setRoadmap((prev) => {
+				// Only update if data is different
+				if (JSON.stringify(prev) !== JSON.stringify(data)) {
+					return data;
+				}
+				return prev;
+			});
 		});
 	}, []);
 
 	useEffect(() => {
+		console.debug("Fetching brand config...");
 		getBrandConfig().then((config) => {
+			console.debug("Brand config fetched.");
 			setBrandConfig(config);
 		});
 	}, []);
-	
+
 	useEffect(() => {
-		if (!roadmap) return;
+		if (roadmap) {
+			console.debug("Roadmap loaded, sending initial height.");
+			sendHeight();
+		}
+	}, [roadmap]);
 
-		sendHeight();
-		const handleResize = () => sendHeight();
+	useEffect(() => {
+		const handleResize = () => {
+			console.debug("Window resized, sending height...");
+			sendHeight();
+		};
 		window.addEventListener("resize", handleResize);
-
 		return () => {
 			window.removeEventListener("resize", handleResize);
 		};
-	}, [roadmap]);
+	}, []);
 
 	return (
 		<InstUISettingsProvider theme={{ ...canvas, ...(brandConfig as object) }}>
@@ -43,11 +59,11 @@ const App: FC = () => {
 				<>
 					<Flex gap="paddingCardMedium" justifyItems="start" wrap="wrap">
 						{roadmap.features.map((entry) => {
-							entry.product.logo = getLogo(entry.product.name);
+							const logo = getLogo(entry.product.name);
 							return (
 								<Card
-									entry={entry}
-									key={entry.feature.title}
+									entry={{ ...entry, product: { ...entry.product, logo } }}
+									key={entry.feature.id}
 									setOverlayOpen={setOverlayOpen}
 									setSelectedEntry={setSelectedEntry}
 								/>
