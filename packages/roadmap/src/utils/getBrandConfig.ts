@@ -39,11 +39,13 @@ const getBrandConfig = (): Promise<BrandConfig> => {
 					? {}
 					: (brandConfig ?? {});
 				cachedBrandConfig = result;
-				brandConfigPromise = null;
 				resolve(result);
 			}
 		};
 		window.addEventListener("message", handler);
+	});
+	brandConfigPromise.then(() => {
+		brandConfigPromise = null;
 	});
 	return brandConfigPromise;
 };
