@@ -13,10 +13,22 @@ const App: FC = () => {
 	const [brandConfig, setBrandConfig] = useState<unknown>({});
 	const [roadmap, setRoadmap] = useState<RoadmapFeatures | null>(null);
 
+	function shallowEqual(objA: object, objB: object) {
+		if (objA === objB) return true;
+		if (!objA || !objB) return false;
+		const keysA = Object.keys(objA || {});
+		const keysB = Object.keys(objB || {});
+		if (keysA.length !== keysB.length) return false;
+		for (const key of keysA) {
+			if ((objA as Record<string, unknown>)[key] !== (objB as Record<string, unknown>)[key]) return false;
+		}
+		return true;
+	}
+
 	useEffect(() => {
 		getRoadmap().then((data) => {
 			setRoadmap((prev) => {
-				if (JSON.stringify(prev) !== JSON.stringify(data)) {
+				if (!shallowEqual(prev as object, data as object)) {
 					return data;
 				}
 				return prev;
