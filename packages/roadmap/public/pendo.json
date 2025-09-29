@@ -5,9 +5,7 @@
 			{
 				"source": {
 					"vocItems": {
-						"appId": [
-							"expandAppIds(\"*\")"
-						],
+						"appId": ["expandAppIds(\"*\")"],
 						"type": "idea"
 					}
 				}
@@ -45,9 +43,7 @@
 			},
 			{
 				"merge": {
-					"fields": [
-						"appId"
-					],
+					"fields": ["appId"],
 					"mappings": {
 						"appDisplayName": "displayName",
 						"appId": "id"
@@ -63,9 +59,7 @@
 			},
 			{
 				"merge": {
-					"fields": [
-						"productAreaId"
-					],
+					"fields": ["productAreaId"],
 					"mappings": {
 						"productAreaId": "id",
 						"productAreaName": "name"
