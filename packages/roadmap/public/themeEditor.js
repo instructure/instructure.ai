@@ -10,8 +10,6 @@
  * - Listens for "getRoadmap" messages to return roadmap data from the iframe.
  * - Listens for "setHeight" messages to update the iframe's height dynamically.
  * - Uses a MutationObserver to attach listeners when the roadmap iframe is added to the DOM.
- * - Ensures only one message event listener is attached at a time for the roadmap iframe.
- * - Removes the event listener after handling a message to prevent multiple listeners and memory leaks.
  *
  * Only runs on the "/pages/instructure-roadmap" path.
  */
@@ -34,19 +32,14 @@ if (window.location.pathname.endsWith("/pages/instructure-roadmap")) {
 				case "getRoadmap": {
 					const roadmap = iFrame.getAttribute("data-roadmap");
 					event.source.postMessage({ value: roadmap }, event.origin);
-					window.removeEventListener("message", handler);
-					roadmapListenerAdded = false;
 					break;
 				}
 				case "setHeight":
 					try {
 						iFrame.height = event.data.height;
-						console.info("Set iframe height to", event.data.height);
 					} catch (err) {
 						console.error("Failed to set iframe height:", err);
 					}
-					window.removeEventListener("message", handler);
-					roadmapListenerAdded = false;
 					break;
 				default:
 					break;
