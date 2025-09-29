@@ -1,6 +1,6 @@
 import { canvas, Flex, InstUISettingsProvider } from "@instructure/ui";
 import type { FC } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Card, CardOverlay } from "./components";
 import {
 	getBrandConfig,
@@ -52,22 +52,30 @@ const App: FC = () => {
 		};
 	}, []);
 
+	const Entries = useMemo(() => {
+		if (!roadmap) return [];
+		return roadmap.features.map((entry) => ({
+			...entry,
+			product: {
+				...entry.product,
+				logo: getLogo(entry.product.name),
+			},
+		}));
+	}, [roadmap]);
+
 	return (
 		<InstUISettingsProvider theme={{ ...canvas, ...(brandConfig as object) }}>
 			{roadmap && (
 				<>
 					<Flex gap="paddingCardMedium" justifyItems="start" wrap="wrap">
-						{roadmap.features.map((entry) => {
-							const logo = getLogo(entry.product.name);
-							return (
-								<Card
-									entry={{ ...entry, product: { ...entry.product, logo } }}
-									key={entry.feature.title}
-									setOverlayOpen={setOverlayOpen}
-									setSelectedEntry={setSelectedEntry}
-								/>
-							);
-						})}
+						{Entries.map((entry) => (
+							<Card
+								entry={entry}
+								key={entry.feature.title}
+								setOverlayOpen={setOverlayOpen}
+								setSelectedEntry={setSelectedEntry}
+							/>
+						))}
 					</Flex>
 					{selectedEntry && (
 						<CardOverlay
