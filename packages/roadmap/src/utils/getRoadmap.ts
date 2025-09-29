@@ -10,6 +10,7 @@ const getRoadmap = (): Promise<RoadmapFeatures | null> => {
 	return new Promise((resolve) => {
 		if (roadmapListenerAdded) {
 			// Listener already added, do not add again
+			resolve(null);
 			return;
 		}
 		roadmapListenerAdded = true;
