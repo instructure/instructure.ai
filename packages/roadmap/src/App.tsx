@@ -2,13 +2,7 @@ import { canvas, Flex, InstUISettingsProvider } from "@instructure/ui";
 import type { FC } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { Card, CardOverlay } from "./components";
-import {
-	getBrandConfig,
-	getLogo,
-	getRoadmap,
-	sendHeight,
-	shallowCompare,
-} from "./utils";
+import { getBrandConfig, getLogo, getRoadmap, sendHeight } from "./utils";
 import "./App.css";
 
 const App: FC = () => {
@@ -21,12 +15,7 @@ const App: FC = () => {
 
 	useEffect(() => {
 		getRoadmap().then((data) => {
-			setRoadmap((prev) => {
-				if (!shallowCompare(prev, data)) {
-					return data;
-				}
-				return prev;
-			});
+			setRoadmap(data);
 		});
 	}, []);
 
