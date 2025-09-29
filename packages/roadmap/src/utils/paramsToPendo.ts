@@ -13,6 +13,7 @@ const isPendoAPIFeature = (obj: unknown): obj is PendoAPIFeature => {
 		(obj as { feature: unknown }).feature !== null &&
 		hasProp((obj as { feature: any }).feature, "stage") &&
 		hasProp((obj as { feature: any }).feature, "title") &&
+		hasProp((obj as { feature: any }).feature, "id") &&
 		hasProp(obj, "product") &&
 		typeof (obj as { product: unknown }).product === "object" &&
 		(obj as { product: unknown }).product !== null &&
