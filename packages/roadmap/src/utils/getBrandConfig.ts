@@ -44,7 +44,7 @@ const getBrandConfig = (): Promise<BrandConfig> => {
 		};
 		window.addEventListener("message", handler);
 	});
-	brandConfigPromise.then(() => {
+	brandConfigPromise.finally(() => {
 		brandConfigPromise = null;
 	});
 	return brandConfigPromise;
