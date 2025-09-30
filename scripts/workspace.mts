@@ -278,24 +278,19 @@ const Workspace = (
 				return exportObj;
 			}
 
-			let index = -1;
-
+			let appFullName: FullPackageName | undefined;
 			if (isValidFullPackageName(pkg)) {
-				index = workspace.apps().indexOf(pkg);
+				appFullName = workspace.apps().find((app) => app === pkg);
 			} else {
-				index = workspace
-					.all()
-					.findIndex((fullPkg) => fullPkg.endsWith(`/${pkg}`));
+				appFullName = workspace.apps().find((app) => app.endsWith(`/${pkg}`));
 			}
-
-			if (index === -1) {
+			if (!appFullName) {
 				exitWithError(
 					`Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`,
 				);
 				return exportObj;
 			}
-
-			exportObj.output = workspace.apps()[index];
+			exportObj.output = appFullName;
 			break;
 		}
 		default:
