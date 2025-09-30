@@ -132,11 +132,7 @@ class WorkspaceClass implements WorkspaceInfo {
 	) {
 		this.workspaceName =
 			workspaceName ?? getWorkspace(getRootPackage() as FullPackageName);
-		this.workspacePackages =
-			workspacePackages ??
-			getPackages("packages").filter(
-				(pkg) => pkg !== getPackageName(getRootPackage()),
-			);
+		this.workspacePackages = workspacePackages ?? getPackages("packages");
 		this.workspaceApps =
 			workspaceApps ??
 			getPackages("apps").filter(
@@ -164,13 +160,15 @@ class WorkspaceClass implements WorkspaceInfo {
 	}
 
 	packages(): FullPackageName[] {
-		return this.workspacePackages.map((_pkg, index) =>
-			this.fullPackageName(index),
+		return this.workspacePackages.map(
+			(app) => `${this.workspaceName}/${app}` as FullPackageName,
 		);
 	}
 
 	apps(): FullPackageName[] {
-		return this.workspaceApps.map((_pkg, index) => this.fullPackageName(index));
+		return this.workspaceApps.map(
+			(app) => `${this.workspaceName}/${app}` as FullPackageName,
+		);
 	}
 
 	info(): WorkspaceObj {
