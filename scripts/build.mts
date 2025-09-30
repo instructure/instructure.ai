@@ -5,13 +5,13 @@ import {
 	exitWithError,
 	getPackageName,
 	isValidCommand,
+	isValidPackage,
 	unknownError,
 	Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 
 const main = async () => {
 	const { command, output, args } = Workspace();
-
 	const buildCommands = ["all", "packages", "package", "apps", "app"];
 
 	if (!isValidCommand(command, buildCommands))
@@ -113,10 +113,17 @@ const main = async () => {
 				}
 				break;
 			case "all":
+				console.log("Building apps:");
+				console.log(output);
 				buildPackages(output as PackageName[], args);
 				break;
 			default:
-				exitWithError(`Unknown build command: ${command}`);
+				if (isValidPackage(output)) {
+					buildPackage(output as PackageName, args);
+				} else {
+					exitWithError(`Unknown build command: ${command}
+Valid commands are: ${buildCommands.join(", ")}`);
+				}
 		}
 	} catch (error) {
 		exitWithError("Build failed:", error);
