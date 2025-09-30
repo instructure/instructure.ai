@@ -7,12 +7,14 @@ import {
 	Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 
-const TEMPLATES = ["vanilla", "react", "instui"] as const;
-
-const USAGE = `new <packagename> [--template ${TEMPLATES.join(" | ")}]`;
-
 async function main() {
 	const { output } = Workspace(["workspace"], "new");
+
+	const TEMPLATES = ["vanilla", "react", "instui"] as const;
+	const TYPES = ["app", "package"] as const;
+	let TEMPLATE: WorkspaceTemplate = "vanilla";
+	let TYPE: WorkspaceType = "app";
+	const USAGE = `new <name> [--template (default) ${TEMPLATES.join(" | ")}] [--type (default)${TYPES.join(" | ")}]`;
 
 	const args = process.argv.slice(2);
 	if (args.length === 0) {
@@ -20,10 +22,20 @@ async function main() {
 		process.exit(1);
 	}
 
+	const typeIdx = args.indexOf("--type");
+
+	if (typeIdx !== -1 && args[typeIdx + 1]) {
+		const tArg = args[typeIdx + 1];
+		if (typeof tArg === "string") {
+			const t: WorkspaceType = tArg.trim().toLowerCase() as WorkspaceType;
+			if (TYPES.includes(t)) TYPE = t;
+		}
+	}
+
 	const PACKAGENAME = args[0] ? args[0].trim() : "";
 
 	if (!PACKAGENAME)
-		exitWithError("Error: Package name is required as the first argument.");
+		exitWithError(`Error: ${TYPE} name is required as the first argument.`);
 
 	const workspaceName =
 		output && typeof output === "object" && "name" in output
@@ -34,16 +46,13 @@ async function main() {
 
 	if (!isAvailablePackage(PACKAGENAME))
 		exitWithError(
-			`Package '${PACKAGENAME}' already exists in workspace ${workspaceName}.`,
+			`'${PACKAGENAME}' already exists in workspace ${workspaceName}.`,
 		);
 
-	let TEMPLATE: WorkspaceTemplate = "vanilla";
 	const REPLACESTRING = "<<packagename>>";
 	const FULLPACKAGENAME = `${workspaceName}/${PACKAGENAME}`;
 
-	const tIdx = args.indexOf("--template");
-	const tShortIdx = args.indexOf("-T");
-	const templateIdx = tIdx !== -1 ? tIdx : tShortIdx;
+	const templateIdx = args.indexOf("--template");
 
 	if (templateIdx !== -1 && args[templateIdx + 1]) {
 		const tArg = args[templateIdx + 1];
@@ -56,24 +65,24 @@ async function main() {
 	}
 
 	// Validate NPM package name (unscoped)
-	console.log(`Creating package '${PACKAGENAME}'...`);
+	console.log(`Creating ${TYPE} '${PACKAGENAME}'...`);
 	if (!isAvailablePackage(PACKAGENAME))
 		exitWithError(
 			"Error: Package name must be a valid NPM package name: lowercase letters, numbers, hyphens, periods, and start with a letter or number.",
 		);
 
 	const cwd = process.cwd();
-	const pkgDir = path.resolve(cwd, "packages", PACKAGENAME);
+	const pkgDir = path.resolve(cwd, `${TYPE}s`, PACKAGENAME);
 	const sharedTplDir = path.resolve(cwd, ".template", "shared");
 	const chosenTplDir = path.resolve(cwd, ".template", TEMPLATE);
 
 	// Check if package already exists
 	if (await pathExists(pkgDir))
 		exitWithError(
-			`Error: Package '${PACKAGENAME}' already exists in ./packages.`,
+			`Error: ${TYPE} '${PACKAGENAME}' already exists in ./${TYPE}s.`,
 		);
 
-	console.log(`Initializing package: ${PACKAGENAME}`);
+	console.log(`Initializing ${TYPE}: ${PACKAGENAME}`);
 	console.log(`Using template: ${TEMPLATE}`);
 
 	// Create directory
