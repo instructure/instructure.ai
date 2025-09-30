@@ -299,7 +299,14 @@ const Workspace = (
 			break;
 		}
 		default:
-			exitWithError(`Unknown command: ${command.command}`);
+			if (
+				isValidFullPackageName(command.command) ||
+				isValidPackageName(command.command)
+			) {
+				exportObj.output = command.command;
+			} else {
+				exitWithError(`Unknown command: ${command.command}`);
+			}
 			break;
 	}
 
@@ -310,7 +317,11 @@ const isValidCommand = (
 	cmd: string,
 	cmds: WorkspaceCommand["command"][] = [],
 ): boolean => {
-	if (cmds.includes(cmd)) {
+	if (
+		cmds.includes(cmd) ||
+		isValidFullPackageName(cmd) ||
+		isValidPackageName(cmd)
+	) {
 		return true;
 	} else {
 		exitWithError(
@@ -368,4 +379,5 @@ export {
 	exitWithError,
 	unknownError,
 	getPackageName,
+	getPackages,
 };
