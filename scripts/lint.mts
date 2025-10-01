@@ -78,7 +78,6 @@ const main = async (): Promise<void> => {
 				lintPackages(output as PackageName[], args);
 				break;
 			case "root":
-				console.log(output);
 				lintRoot(output as PackageName, args);
 				break;
 			default:

@@ -48,22 +48,21 @@ const main = async () => {
 			dir = path.resolve(__dirname, `../public`);
 		}
 
-		const src = path.resolve(__dirname, dir);
 		const dest = path.resolve(
 			__dirname,
 			`${pack ? `../dist/${pack}` : "../dist"}`,
 		);
 
-		if (!fs.existsSync(src)) {
-			console.warn("Source directory does not exist", src);
+		if (!fs.existsSync(dir)) {
+			console.warn("Source directory does not exist", dir);
 			return;
 		}
 
 		fs.rmSync(dest, { force: true, recursive: true });
 		fs.mkdirSync(dest, { recursive: true });
 
-		fs.readdirSync(src).forEach((file) => {
-			const srcFile = path.join(src, file);
+		fs.readdirSync(dir).forEach((file) => {
+			const srcFile = path.join(dir, file);
 			const destFile = path.join(dest, file);
 
 			if (fs.statSync(srcFile).isDirectory()) {

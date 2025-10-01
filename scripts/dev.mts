@@ -32,7 +32,7 @@ const main = async (): Promise<void> => {
 				devPackage(command as PackageName, args);
 			} else {
 				exitWithError(`Unknown dev command: ${command}
- Valid commands are: ${devCommands.join(", ")}`);
+Valid commands are: ${devCommands.join(", ")}`);
 			}
 		}
 	} catch (e) {
