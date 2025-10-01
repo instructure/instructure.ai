@@ -388,4 +388,5 @@ export {
 	getPackageName,
 	getPackages,
 	getFullPackageName,
+	getRootPackage,
 };

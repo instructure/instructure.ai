@@ -11,6 +11,7 @@ import {
 	unknownError,
 	Workspace,
 } from "@instructure.ai/shared-configs/workspace";
+import { updateIssues } from "./issues.mts";
 
 const main = async () => {
 	const { command, output, args } = Workspace();
@@ -127,6 +128,7 @@ const main = async () => {
 Valid commands are: ${buildCommands.join(", ")}`);
 				}
 		}
+		await updateIssues();
 	} catch (error) {
 		exitWithError("Build failed:", error);
 	}
