@@ -142,10 +142,10 @@ class WorkspaceClass implements WorkspaceInfo {
 		this.workspaceName =
 			workspaceName ?? getWorkspace(getRootPackage() as FullPackageName);
 		this.workspacePackages =
-			workspacePackages ?? getPackages("packages" as WorkspaceType);
+			workspacePackages ?? getPackages("package" as WorkspaceType);
 		this.workspaceApps =
 			workspaceApps ??
-			getPackages("apps" as WorkspaceType).filter(
+			getPackages("app" as WorkspaceType).filter(
 				(app) => app !== getPackageName(getRootPackage()),
 			);
 		this.workspaceAll = workspaceAll ?? getPackages();
