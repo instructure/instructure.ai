@@ -17,7 +17,7 @@
 const path = window.location.pathname;
 const matchesRoadmap = path.endsWith("/pages/instructure-roadmap");
 const matchesCourse = /^\/courses\/\d+$/.test(path);
-const matchesCourseWiki = /^\/courses\/\d+\/wiki$/.test(path);
+const matchesCourseWiki = /^\/courses\/[1-9]\d*\/wiki$/.test(path);
 
 if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 	console.info("Roadmap script loaded");
