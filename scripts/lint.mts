@@ -12,7 +12,7 @@ import {
 const main = async (): Promise<void> => {
 	const { command, output, args }: WorkspaceCommand = Workspace();
 
-	const lintCommands = ["all", "packages", "root", "package"];
+	const lintCommands = ["all", "packages", "root", "package", "apps", "app"];
 
 	if (!isValidCommand(command, lintCommands))
 		exitWithError("Invalid lint command.");
