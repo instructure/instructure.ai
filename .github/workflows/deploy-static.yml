@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: pnpm i
       - name: Build
-        run: pnpm build packages
+        run: pnpm build apps
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
