@@ -1,6 +1,6 @@
 /// <reference path="../types/index.d.ts" />
 
-import { execSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
 import { name } from "../package.json" with { type: "json" };
@@ -156,7 +156,11 @@ class WorkspaceClass implements WorkspaceInfo {
 	}
 
 	fullPackageName(index: number): FullPackageName {
-		return `${this.workspaceName}/${this.workspaceAll[index]}`;
+		const fullName: FullPackageName = `${this.workspaceName}/${this.workspaceAll[index]}`;
+		if (!isValidFullPackageName(fullName)) {
+			exitWithError("Error: Invalid full package name.");
+		}
+		return fullName;
 	}
 
 	rootPackage(): FullPackageName {
@@ -360,10 +364,8 @@ const exec = (
 		} else {
 			const { args, ...restOptions } = options as { args?: unknown[] };
 			const extraArgs =
-				args && Array.isArray(args) && args.length > 0
-					? ` ${args.map(String).join(" ")}`
-					: "";
-			execSync(`${cmd}${extraArgs}`, {
+				args && Array.isArray(args) && args.length > 0 ? args.map(String) : [];
+			execFileSync(cmd, extraArgs, {
 				...restOptions,
 				stdio: "inherit",
 			});

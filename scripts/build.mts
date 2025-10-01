@@ -120,8 +120,6 @@ const main = async () => {
 				buildPackages(output as PackageName[], args);
 				break;
 			default:
-				console.log("output:", output);
-				// Try to build if the command is a valid package name
 				if (isValidPackage(command)) {
 					buildPackage(command as PackageName, args);
 				} else {
