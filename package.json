@@ -26,14 +26,13 @@
   "scripts": {
     "build": "vite-node ./scripts/build.mts",
     "build:root": "vite build",
-    "dev": "vite dev",
+    "dev": "vite-node ./scripts/dev.mts",
     "new": "vite-node ./scripts/new.mts",
     "lint": "vite-node ./scripts/lint.mts",
     "lint:root": "biome check",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "preview": "vite-node ./scripts/preview.mts",
-    "preview:all": "vite-node ./plugins/multiPreview.mts",
     "workspace": "vite-node ./scripts/info.mts"
   },
   "exports": {
