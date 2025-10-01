@@ -156,7 +156,11 @@ class WorkspaceClass implements WorkspaceInfo {
 	}
 
 	fullPackageName(index: number): FullPackageName {
-		return `${this.workspaceName}/${this.workspaceAll[index]}`;
+		const fullName: FullPackageName = `${this.workspaceName}/${this.workspaceAll[index]}`;
+		if (!isValidFullPackageName(fullName)) {
+			exitWithError("Error: Invalid full package name.");
+		}
+		return fullName;
 	}
 
 	rootPackage(): FullPackageName {
