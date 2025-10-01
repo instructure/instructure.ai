@@ -4,6 +4,7 @@ type PackageName = string;
 type WorkspaceObj = {
 	name: WorkspaceName;
 	packages: PackageName[];
+	apps: PackageName[];
 };
 
 interface WorkspaceInfo {
@@ -31,3 +32,5 @@ type WorkspaceCommand = {
 type CommandExtraArgs = string[];
 
 type WorkspaceTemplate = "vanilla" | "react" | "instui";
+
+type WorkspaceType = "app" | "package";
