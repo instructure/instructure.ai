@@ -53,6 +53,7 @@ async function main() {
 
 	const REPLACESTRING = "<<packagename>>";
 	const FULLPACKAGENAME = `${workspaceName}/${PACKAGENAME}`;
+	const INSTUI = "<<instui-guidelines>>";
 
 	const templateIdx = args.indexOf("--template");
 
@@ -105,6 +106,23 @@ async function main() {
 		REPLACESTRING,
 		FULLPACKAGENAME,
 	);
+
+	if (TEMPLATE === "instui") {
+		const url = "https://instructure.design/llms.txt";
+		let guidelines = "";
+		try {
+			const response = await fetch(url);
+			guidelines = (await response.text()) ?? url;
+		} catch (err) {
+			console.error("Failed to fetch instui guidelines:", err);
+			guidelines = url;
+		}
+		await replaceInFile(
+			path.join(pkgDir, "/.github/copilot-instructions.md"),
+			INSTUI,
+			guidelines,
+		);
+	}
 
 	// Install dependencies for the new package (pnpm workspace)
 	console.log("Installing dependencies...");
