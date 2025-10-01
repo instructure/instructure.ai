@@ -1,4 +1,4 @@
-/// <reference path="../types/instructure.ai__shared-configs-workspace.d.ts" />
+/// <reference path="../types/index.d.ts" />
 
 import { execSync } from "node:child_process";
 import { readdirSync } from "node:fs";

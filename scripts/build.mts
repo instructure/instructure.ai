@@ -1,4 +1,4 @@
-/// <reference path="../types/instructure.ai__shared-configs-workspace.d.ts" />
+/// <reference path="../types/index.d.ts" />
 
 import fs from "node:fs";
 import path from "node:path";
