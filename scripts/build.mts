@@ -120,8 +120,10 @@ const main = async () => {
 				buildPackages(output as PackageName[], args);
 				break;
 			default:
-				if (isValidPackage(output as PackageName)) {
-					buildPackage(output as PackageName, args);
+				console.log("output:", output);
+				// Try to build if the command is a valid package name
+				if (isValidPackage(command)) {
+					buildPackage(command as PackageName, args);
 				} else {
 					exitWithError(`Unknown build command: ${command}
 Valid commands are: ${buildCommands.join(", ")}`);

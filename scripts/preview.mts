@@ -45,9 +45,8 @@ const main = async (): Promise<void> => {
 			if (typeof output === "string" && isValidPackage(output)) {
 				previewPackage(output as FullPackageName, args);
 			} else {
-				console.log("output:", output, "args:", args);
-				if (isValidPackage(output as FullPackageName)) {
-					previewPackage(output as FullPackageName, args);
+				if (isValidPackage(command as FullPackageName)) {
+					previewPackage(command as FullPackageName, args);
 				} else {
 					exitWithError(`Unknown preview command: ${command}
 Valid commands are: ${previewCommands.join(", ")}`);

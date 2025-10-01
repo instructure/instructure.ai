@@ -82,8 +82,8 @@ const main = async (): Promise<void> => {
 				lintRoot(output as PackageName, args);
 				break;
 			default:
-				if (isValidPackage(output as PackageName)) {
-					lintPackage(output as PackageName, args);
+				if (isValidPackage(command as PackageName)) {
+					lintPackage(command as PackageName, args);
 				} else {
 					exitWithError(`Unknown lint command: ${command}
 Valid commands are: ${lintCommands.join(", ")}`);
