@@ -367,6 +367,7 @@ const exec = (
 				args && Array.isArray(args) && args.length > 0 ? args.map(String) : [];
 			execFileSync(cmd, extraArgs, {
 				...restOptions,
+				shell: true,
 				stdio: "inherit",
 			});
 		}
