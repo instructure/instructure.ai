@@ -4,7 +4,7 @@
 import browsersList from "@instructure/browserslist-config-instui";
 import { browserslistToTargets } from "lightningcss";
 import { defineConfig } from "vite";
-import basicSsl from '@vitejs/plugin-basic-ssl'
+import basicSsl from '@vitejs/plugin-basic-ssl';
 
 const PACKAGE_NAME = process.env.npm_package_name?.split("/").pop();
 const PACKAGE_VERSION = String(process.env.npm_package_version);
