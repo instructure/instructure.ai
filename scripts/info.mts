@@ -7,7 +7,7 @@ import {
 } from "@instructure.ai/shared-configs/workspace";
 
 const main = async () => {
-	const { output } = Workspace(["workspace"], "info");
+	const { output } = Workspace(["workspace"]);
 	exec(() => {
 		console.log(output);
 	});

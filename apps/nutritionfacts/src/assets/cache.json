@@ -1,8 +1,8 @@
 {
   "cache": {
-    "sha256": "ab4dd4bef0792fd0e5d98e7985c93184423b3dd773e6cd305050dd7295ed3228",
-    "lastUpdated": "1758643492",
-    "count": 9
+    "sha256": "718e0ce0bbb49165aadeffc5cec3802b40414990ce756efa7e97a0a3b68f6fe2",
+    "lastUpdated": "1759349310",
+    "count": 10
   },
   "features": {
     "canvasinboxtranslation": {
@@ -1056,6 +1056,123 @@
         "nameHint": "Feature Name",
         "permissions": 2,
         "revision": "2025.09.12"
+      }
+    },
+    "bcealttext": {
+      "sha256": "357dbdae5027f884c3ba0be04b700880b3f302cbced8eff6120a672decfde34d",
+      "lastUpdated": "1759349310",
+      "id": "bcealttext",
+      "name": "Block Content Editor Alt Text Generator",
+      "nutritionFacts": {
+        "data": [
+          {
+            "blockTitle": "Model & Data",
+            "segmentData": [
+              {
+                "description": "The foundational AI on which further training and customizations are built.",
+                "descriptionHint": "Describe the base model",
+                "segmentTitle": "Base Model",
+                "value": "Haiku 3",
+                "valueDescription": "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+                "valueHint": "Input base model"
+              },
+              {
+                "description": "Indicates the AI model has been given customer data in order to improve its results.",
+                "segmentTitle": "Trained with User Data",
+                "value": "No",
+                "valueHint": "Yes / No"
+              },
+              {
+                "description": "Indicates which training or operational content was given to the model.",
+                "descriptionHint": "Describe the data shared",
+                "segmentTitle": "Data Shared with Model",
+                "value": "Course",
+                "valueDescription": "Content Editor Images.",
+                "valueHint": "Select shared data set"
+              }
+            ]
+          },
+          {
+            "blockTitle": "Privacy & Compliance",
+            "segmentData": [
+              {
+                "description": "How long the model stores customer data.",
+                "descriptionHint": "Describe the data retention period",
+                "segmentTitle": "Data Retention",
+                "valueDescription": "Model responses are stored for debugging purposes."
+              },
+              {
+                "description": "Recording the AI's performance for auditing, analysis, and improvement.",
+                "descriptionHint": "Describe the data logging practices",
+                "segmentTitle": "Data Logging",
+                "value": "Logs data",
+                "valueDescription": "Request, response, and feedback data is logged to assist in troubleshooting.",
+                "valueHint": "Logs data / Does not log data"
+              },
+              {
+                "description": "The locations where the AI model is officially available and supported.",
+                "descriptionHint": "Describe the supported regions",
+                "segmentTitle": "Regions Supported",
+                "value": "Global",
+                "valueDescription": "",
+                "valueHint": "Select region(s)"
+              },
+              {
+                "description": "Sensitive data that can be used to identify an individual.",
+                "descriptionHint": "Describe the handling of PII",
+                "segmentTitle": "PII",
+                "value": "Not Exposed",
+                "valueDescription": "",
+                "valueHint": "Exposed / Not Exposed"
+              }
+            ]
+          },
+          {
+            "blockTitle": "Outputs",
+            "segmentData": [
+              {
+                "description": "The ability to turn the AI on or off within the product.",
+                "segmentTitle": "AI Settings Control",
+                "value": "No",
+                "valueHint": "Yes / No"
+              },
+              {
+                "description": "Indicates if a human is involved in the AI's process or output.",
+                "descriptionHint": "Describe the human involvement",
+                "segmentTitle": "Human in the Loop",
+                "value": "Yes",
+                "valueDescription": "User initiated, User must confirm output.",
+                "valueHint": "Yes / No"
+              },
+              {
+                "description": "Preventative safety mechanisms or limitations built into the AI model.",
+                "descriptionHint": "Describe the guardrails",
+                "segmentTitle": "Guardrails",
+                "valueDescription": ""
+              },
+              {
+                "description": "Any risks the model may pose to the user.",
+                "descriptionHint": "Describe the expected risks",
+                "segmentTitle": "Expected Risks",
+                "valueDescription": "Alt text might not always be accurate. "
+              },
+              {
+                "description": "The specific results the AI model is meant to achieve.",
+                "descriptionHint": "Describe the intended outcomes",
+                "segmentTitle": "Intended Outcomes",
+                "valueDescription": "An accessible Alt Text description of the image is generated."
+              }
+            ]
+          }
+        ],
+        "description": "",
+        "descriptionHint": "Describe your feature",
+        "group": "Canvas",
+        "id": "BCEAltText",
+        "name": "Block Content Editor Alt Text Generator",
+        "nameHint": "Feature Name",
+        "permissions": 2,
+        "revision": "2025.10.01"
       }
     }
   }

@@ -1,0 +1,27 @@
+name: Bug Report
+description: Report a bug in the project
+title: "[BUG]: "
+labels: Bug
+body:
+  - type: dropdown
+    id: package
+    attributes:
+      label: Affected Package
+      description: Select the affected package (will be reported as
+        @instructure.ai/[package])
+      options:
+        - shared-configs
+        - nutritionfacts
+        - roadmap
+        - site
+      default: 0
+      validations:
+        required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Provide a clear and concise description of the bug.
+      placeholder: Describe the bug here...
+      validations:
+        required: true
