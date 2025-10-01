@@ -4,6 +4,7 @@ type PackageName = string;
 type WorkspaceObj = {
 	name: WorkspaceName;
 	packages: PackageName[];
+	apps: PackageName[];
 };
 
 interface WorkspaceInfo {
