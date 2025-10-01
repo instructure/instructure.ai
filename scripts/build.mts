@@ -1,3 +1,5 @@
+/// <reference path="../types/instructure.ai__shared-configs-workspace.d.ts" />
+
 import fs from "node:fs";
 import path from "node:path";
 import {
@@ -94,7 +96,7 @@ const main = async () => {
 				}
 				break;
 			case "packages":
-				if (output.length) {
+				if (Array.isArray(output) && output.length) {
 					console.log("Building packages:");
 					console.log(output);
 					buildPackages(output as PackageName[], args);
@@ -103,7 +105,7 @@ const main = async () => {
 				}
 				break;
 			case "apps":
-				if (output.length) {
+				if (Array.isArray(output) && output.length) {
 					console.log("Building apps:");
 					console.log(output);
 					copyPublicToDist();
@@ -118,7 +120,7 @@ const main = async () => {
 				buildPackages(output as PackageName[], args);
 				break;
 			default:
-				if (isValidPackage(output)) {
+				if (isValidPackage(output as PackageName)) {
 					buildPackage(output as PackageName, args);
 				} else {
 					exitWithError(`Unknown build command: ${command}

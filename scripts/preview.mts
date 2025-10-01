@@ -1,7 +1,12 @@
+/// <reference path="../types/instructure.ai__shared-configs-workspace.d.ts" />
+
 import {
 	exec,
 	exitWithError,
+	getPackageName,
 	isValidCommand,
+	isValidFullPackageName,
+	isValidPackage,
 	unknownError,
 	Workspace,
 } from "./workspace.mts";
@@ -9,13 +14,22 @@ import {
 const main = async (): Promise<void> => {
 	const { command, output, args }: WorkspaceCommand = Workspace();
 
-	const previewCommands = ["all", "package", "packages"];
+	const previewCommands = ["all", "app", "apps"];
 
 	if (!isValidCommand(command, previewCommands))
 		exitWithError("Invalid preview command.");
 
-	const previewPackage = (pkg: PackageName, args: CommandExtraArgs) => {
-		exec(`pnpm -F ${pkg} preview`, { args: args.slice(2) });
+	const previewPackage = (
+		pkg: FullPackageName | PackageName,
+		args: CommandExtraArgs,
+	) => {
+		const app = isValidFullPackageName(pkg as FullPackageName)
+			? getPackageName(pkg as FullPackageName)
+			: (pkg as PackageName);
+		exec(`pnpm preview`, {
+			args: args.slice(2),
+			cwd: `apps/${app}`,
+		});
 	};
 
 	const previewPackages = (args: CommandExtraArgs) => {
@@ -24,8 +38,22 @@ const main = async (): Promise<void> => {
 	};
 
 	try {
-		if (command === "package") previewPackage(output as string, args);
-		else if (command === "all" || command === "packages") previewPackages(args);
+		if (command === "app") {
+			previewPackage(output as FullPackageName, args);
+		} else if (command === "all" || command === "apps") previewPackages(args);
+		else {
+			if (typeof output === "string" && isValidPackage(output)) {
+				previewPackage(output as FullPackageName, args);
+			} else {
+				console.log("output:", output, "args:", args);
+				if (isValidPackage(output as FullPackageName)) {
+					previewPackage(output as FullPackageName, args);
+				} else {
+					exitWithError(`Unknown preview command: ${command}
+Valid commands are: ${previewCommands.join(", ")}`);
+				}
+			}
+		}
 	} catch (error) {
 		exitWithError("Preview failed:", error);
 	}

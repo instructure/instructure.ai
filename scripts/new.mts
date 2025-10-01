@@ -1,3 +1,5 @@
+/// <reference path="../types/instructure.ai__shared-configs-workspace.d.ts" />
+
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import {

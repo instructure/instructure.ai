@@ -1,3 +1,5 @@
+/// <reference path="../types/instructure.ai__shared-configs-workspace.d.ts" />
+
 import { execSync } from "node:child_process";
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
@@ -53,14 +55,21 @@ const getPackageName = (name: FullPackageName): PackageName => {
 	return name.split("/")[1] as PackageName;
 };
 
+const getFullPackageName = (name: PackageName): FullPackageName => {
+	if (!isValidPackageName(name)) {
+		exitWithError("Error: Invalid package name.");
+	}
+	return `${getWorkspace(getRootPackage())}/${name}` as FullPackageName;
+};
+
 const getPackages = (type?: WorkspaceType): PackageName[] => {
 	const appsDir = join(process.cwd(), "apps");
 	const pkgsDir = join(process.cwd(), "packages");
 
 	const packagesDirs =
-		type === "apps"
+		type === "app"
 			? [appsDir]
-			: type === "packages"
+			: type === "package"
 				? [pkgsDir]
 				: [appsDir, pkgsDir];
 	const workspaceName = getWorkspace(getRootPackage() as FullPackageName);
@@ -132,10 +141,11 @@ class WorkspaceClass implements WorkspaceInfo {
 	) {
 		this.workspaceName =
 			workspaceName ?? getWorkspace(getRootPackage() as FullPackageName);
-		this.workspacePackages = workspacePackages ?? getPackages("packages");
+		this.workspacePackages =
+			workspacePackages ?? getPackages("packages" as WorkspaceType);
 		this.workspaceApps =
 			workspaceApps ??
-			getPackages("apps").filter(
+			getPackages("apps" as WorkspaceType).filter(
 				(app) => app !== getPackageName(getRootPackage()),
 			);
 		this.workspaceAll = workspaceAll ?? getPackages();
@@ -146,29 +156,27 @@ class WorkspaceClass implements WorkspaceInfo {
 	}
 
 	fullPackageName(index: number): FullPackageName {
-		return `${this.workspaceName}/${this.workspaceAll[index]}` as FullPackageName;
+		return `${this.workspaceName}/${this.workspaceAll[index]}`;
 	}
 
 	rootPackage(): FullPackageName {
-		return this.fullPackageName(0) as FullPackageName;
+		return this.fullPackageName(0);
+	}
+
+	allPackages(): FullPackageName[] {
+		return this.workspaceAll.map((_pkg, index) => this.fullPackageName(index));
 	}
 
 	all(): FullPackageName[] {
-		return this.workspaceAll.map(
-			(_pkg, index) => this.fullPackageName(index) as FullPackageName,
-		);
+		return this.workspaceAll.map((_pkg, index) => this.fullPackageName(index));
 	}
 
 	packages(): FullPackageName[] {
-		return this.workspacePackages.map(
-			(app) => `${this.workspaceName}/${app}` as FullPackageName,
-		);
+		return this.workspacePackages.map((app) => getFullPackageName(app));
 	}
 
 	apps(): FullPackageName[] {
-		return this.workspaceApps.map(
-			(app) => `${this.workspaceName}/${app}` as FullPackageName,
-		);
+		return this.workspaceApps.map((app) => getFullPackageName(app));
 	}
 
 	info(): WorkspaceObj {
@@ -294,12 +302,12 @@ const Workspace = (
 			break;
 		}
 		default:
-			if (
-				isValidFullPackageName(command.command) ||
-				isValidPackageName(command.command)
-			) {
+			if (isValidFullPackageName(command.command)) {
 				exportObj.output = command.command;
+			} else if (isValidPackageName(command.command)) {
+				exportObj.output = getFullPackageName(command.command);
 			} else {
+				exportObj.output = undefined;
 				exitWithError(`Unknown command: ${command.command}`);
 			}
 			break;
@@ -369,10 +377,13 @@ export {
 	Workspace,
 	isValidCommand,
 	isValidPackage,
+	isValidFullPackageName,
+	isValidPackageName,
 	exec,
 	isAvailablePackage,
 	exitWithError,
 	unknownError,
 	getPackageName,
 	getPackages,
+	getFullPackageName,
 };

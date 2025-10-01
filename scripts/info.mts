@@ -1,3 +1,5 @@
+/// <reference path="../types/instructure.ai__shared-configs-workspace.d.ts" />
+
 import {
 	exec,
 	unknownError,

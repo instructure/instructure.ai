@@ -1,3 +1,5 @@
+/// <reference path="../types/instructure.ai__shared-configs-workspace.d.ts" />
+
 import {
 	exec,
 	exitWithError,
@@ -53,7 +55,7 @@ const main = async (): Promise<void> => {
 				}
 				break;
 			case "packages":
-				if (output.length) {
+				if (Array.isArray(output) && output.length) {
 					console.log("Linting packages:");
 					console.log(output);
 					lintPackages(output as PackageName[], args);
@@ -62,7 +64,7 @@ const main = async (): Promise<void> => {
 				}
 				break;
 			case "apps":
-				if (output.length) {
+				if (Array.isArray(output) && output.length) {
 					console.log("Linting apps:");
 					console.log(output);
 					lintPackages(output as PackageName[], args);
@@ -80,7 +82,7 @@ const main = async (): Promise<void> => {
 				lintRoot(output as PackageName, args);
 				break;
 			default:
-				if (isValidPackage(output)) {
+				if (isValidPackage(output as PackageName)) {
 					lintPackage(output as PackageName, args);
 				} else {
 					exitWithError(`Unknown lint command: ${command}
