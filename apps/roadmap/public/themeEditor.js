@@ -14,7 +14,12 @@
  * Only runs on the "/pages/instructure-roadmap" path.
  */
 
-if (window.location.pathname.endsWith("/pages/instructure-roadmap")) {
+const path = window.location.pathname;
+const matchesRoadmap = path.endsWith("/pages/instructure-roadmap");
+const matchesCourse = /^\/courses\/\d+$/.test(path);
+const matchesCourseWiki = /^\/courses\/\d+\/wiki$/.test(path);
+
+if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 	console.info("Roadmap script loaded");
 
 	const iframeListenerMap = new WeakMap();
