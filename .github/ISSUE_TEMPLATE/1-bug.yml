@@ -11,6 +11,7 @@ body:
         @instructure.ai/[package])
       options:
         - shared-configs
+        - aiinfocontent
         - nutritionfacts
         - roadmap
         - site
