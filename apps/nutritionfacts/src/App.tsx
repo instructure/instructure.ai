@@ -110,18 +110,18 @@ const App: FC = () => {
 										/>
 									</View>
 									<View margin="0 x-small 0">
-									<LinkControl
-										background={false}
-										border={false}
-										color={isDark ? "primary-inverse" : "primary"}
-										product={product}
-									/>
+										<LinkControl
+											background={false}
+											border={false}
+											color={isDark ? "primary-inverse" : "primary"}
+											product={product}
+										/>
 									</View>
 									<ObjectControl
-										product={product}
 										background={false}
 										border={false}
 										color={isDark ? "primary-inverse" : "primary"}
+										product={product}
 									/>
 								</Flex.Item>
 							)}
@@ -181,6 +181,7 @@ const App: FC = () => {
 					</View>
 				)}
 			</View>
-</InstUISettingsProvider>)
+		</InstUISettingsProvider>
+	);
 };
 export default App;

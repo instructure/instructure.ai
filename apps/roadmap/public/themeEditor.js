@@ -12,6 +12,9 @@
  * - Uses a MutationObserver to attach listeners when the roadmap iframe is added to the DOM.
  *
  * Only runs on the "/pages/instructure-roadmap" path.
+ * 
+ * @version 2025.10.02.00
+ * 
  */
 
 const path = window.location.pathname;
@@ -57,6 +60,12 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 		const iFrame = document.getElementById("roadmap");
 		if (iFrame) {
 			attachListener(iFrame);
+			if (matchesCourse) {
+    			console.info("Setting Roadmap page to full screen");
+    			document.querySelector("#right-side-wrapper")?.remove();
+    			document.querySelector("#left-side")?.remove();
+    			document.querySelector("#main")?.style?.setProperty("margin", "0");
+  		}
 			obs.disconnect();
 		}
 	});

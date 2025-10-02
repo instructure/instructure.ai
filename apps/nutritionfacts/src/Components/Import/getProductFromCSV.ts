@@ -1,5 +1,5 @@
 import Papa from "papaparse";
-import { csvUrl, cacheJson } from "../../assets";
+import { cacheJson, csvUrl } from "../../assets";
 import type {
 	PageLayout,
 	ProductNutritionFacts,
@@ -171,7 +171,7 @@ const fetchCSV = async (): Promise<{ raw: string; parsed: string[][] }> => {
 			delimiter: ",",
 			skipEmptyLines: true,
 		});
-		return { raw: data, parsed: parsed.data };
+		return { parsed: parsed.data, raw: data };
 	} catch (error) {
 		console.error(
 			`Error fetching CSV data from URL "${csvUrl}":`,
@@ -184,13 +184,13 @@ const fetchCSV = async (): Promise<{ raw: string; parsed: string[][] }> => {
 			products[uid] = feature.nutritionFacts as ProductNutritionFacts;
 		}
 		// Return empty CSV data, but products can be used directly
-		return { raw: "", parsed: [] };
+		return { parsed: [], raw: "" };
 	}
 };
 
 const fetchProductsFromCSV = async (): Promise<Products> => {
 	const products: Products = {};
-	const {parsed: rows} = await fetchCSV();
+	const { parsed: rows } = await fetchCSV();
 	for (const values of rows) {
 		const uid = values[0]?.toLowerCase();
 		if (!uid) continue;

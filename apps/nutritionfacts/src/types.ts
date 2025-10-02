@@ -112,16 +112,18 @@ export type CacheMeta = {
 };
 
 export type FeatureMeta = Omit<CacheMeta, "count"> & {
-		id: string;
-    nutritionFacts: StrictNutritionFacts | ProductNutritionFacts;
-		dataPermissionLevels: StrictAiPermissions[];
-		name: StrictNutritionFacts["name"];
-
+	id: string;
+	nutritionFacts: StrictNutritionFacts | ProductNutritionFacts;
+	dataPermissionLevels: StrictAiPermissions[];
+	name: StrictNutritionFacts["name"];
 };
 
 export type ProductsMeta = {
 	cache: CacheMeta;
-	features: Record<ProductNutritionFacts["id"], Omit<FeatureMeta, "datapermissionLevels" >>;
+	features: Record<
+		ProductNutritionFacts["id"],
+		Omit<FeatureMeta, "datapermissionLevels">
+	>;
 };
 
 /* Permissions Levels */
@@ -134,7 +136,9 @@ export type AiPermissions = {
 	highlighted?: boolean;
 };
 
-export type StrictAiPermissions = Readonly<Omit<AiPermissions, "descriptionHint">>;
+export type StrictAiPermissions = Readonly<
+	Omit<AiPermissions, "descriptionHint">
+>;
 
 /* AI Information */
 
@@ -147,4 +151,4 @@ export type StrictAiInformation = {
 	modelNameText: "Base Model";
 	modelName: StrictNutritionFacts["data"][0]["segmentData"][0]["value"];
 	nutritionFactsModalTriggerText: "AI Nutrition Facts";
-};	
+};

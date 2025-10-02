@@ -1,19 +1,19 @@
-import type {
-	ProductNutritionFacts,
-	FeatureMeta,
-	SegmentBase,
-	ModelAndDataSegment,
-	PrivacyComplianceSegment,
-	OutputsSegment,
-	ProductsMeta, 
-AiPermissions, 
-StrictAiPermissions, 
-StrictNutritionFacts, 
-StrictAiInformation, 
-} from "../../types.ts";
-import { cacheJson, Permissions, AiInformation } from "../../assets";
-import { ControlButton } from "./";
 import { IconCodeLine, type SVGIconProps } from "@instructure/ui";
+import { AiInformation, cacheJson, Permissions } from "../../assets";
+import type {
+	AiPermissions,
+	FeatureMeta,
+	ModelAndDataSegment,
+	OutputsSegment,
+	PrivacyComplianceSegment,
+	ProductNutritionFacts,
+	ProductsMeta,
+	SegmentBase,
+	StrictAiInformation,
+	StrictAiPermissions,
+	StrictNutritionFacts,
+} from "../../types.ts";
+import { ControlButton } from "./";
 
 const Cache = cacheJson as ProductsMeta;
 
@@ -32,77 +32,87 @@ const ExportJSON = (id: ProductNutritionFacts["id"]): FeatureMeta => {
 
 	if (!cachedFeature) {
 		return {
-			sha256: "",
-			lastUpdated: "",
 			dataPermissionLevels: [] as StrictAiPermissions[],
+			lastUpdated: "",
 			nutritionFacts: {
+				data: [],
 				id: "<id> not found",
 				name: "",
-				data: [],
 				permissions: 0,
-			} as ProductNutritionFacts
-		} as FeatureMeta
+			} as ProductNutritionFacts,
+			sha256: "",
+		} as FeatureMeta;
 	}
 
-	const level: ProductNutritionFacts["permissions"] = (cachedFeature.nutritionFacts as ProductNutritionFacts).permissions
+	const level: ProductNutritionFacts["permissions"] = (
+		cachedFeature.nutritionFacts as ProductNutritionFacts
+	).permissions;
 
-		level ? Permissions[level].highlighted = true : undefined
+	level ? (Permissions[level].highlighted = true) : undefined;
 
-	const strictPermissions: AiPermissions[] = Permissions.slice(1)
+	const strictPermissions: AiPermissions[] = Permissions.slice(1);
 
-	const strictNutritionFactsData = cachedFeature.nutritionFacts.data.map((block) => {
-		switch (block.blockTitle) {
-			case "Model & Data":
-				return {
-					blockTitle: block.blockTitle,
-					segmentData: block.segmentData.map(stripSegment) as ModelAndDataSegment[],
-				};
-			case "Privacy & Compliance":
-				return {
-					blockTitle: block.blockTitle,
-					segmentData: block.segmentData.map(stripSegment) as PrivacyComplianceSegment[],
-				};
-			case "Outputs":
-				return {
-					blockTitle: block.blockTitle,
-					segmentData: block.segmentData.map(stripSegment) as OutputsSegment[],
-				};
-			default:
-				return block;
-		}
-	});
+	const strictNutritionFactsData = cachedFeature.nutritionFacts.data.map(
+		(block) => {
+			switch (block.blockTitle) {
+				case "Model & Data":
+					return {
+						blockTitle: block.blockTitle,
+						segmentData: block.segmentData.map(
+							stripSegment,
+						) as ModelAndDataSegment[],
+					};
+				case "Privacy & Compliance":
+					return {
+						blockTitle: block.blockTitle,
+						segmentData: block.segmentData.map(
+							stripSegment,
+						) as PrivacyComplianceSegment[],
+					};
+				case "Outputs":
+					return {
+						blockTitle: block.blockTitle,
+						segmentData: block.segmentData.map(
+							stripSegment,
+						) as OutputsSegment[],
+					};
+				default:
+					return block;
+			}
+		},
+	);
 
 	const strictAiInfo: StrictAiInformation = {
-		...AiInformation[0] as StrictAiInformation,
+		...(AiInformation[0] as StrictAiInformation),
+		description:
+			level > 0 && level <= strictPermissions.length
+				? strictPermissions[level - 1].description
+				: "",
 		featureName: cachedFeature.nutritionFacts.name,
-		permissionLevel: `LEVEL ${level}`,
 		modelName: cachedFeature.nutritionFacts.data[0].segmentData[0].value,
-		description: (level > 0 && level <= strictPermissions.length)
-			? strictPermissions[level - 1].description
-			: "",
-
+		permissionLevel: `LEVEL ${level}`,
 	};
 
 	const strictReturn = {
-		id: id.toLowerCase(),
-		name: cachedFeature.nutritionFacts.name,
-		sha256: cachedFeature.sha256,
-		lastUpdated: cachedFeature.lastUpdated,
-		nutritionFacts: {
-			name: cachedFeature.nutritionFacts.name,
-			description: cachedFeature.nutritionFacts.description,
-			data: strictNutritionFactsData
-		} as StrictNutritionFacts,
+		AiInformation: strictAiInfo,
 		dataPermissionLevels: strictPermissions,
-		AiInformation: strictAiInfo
-	} as FeatureMeta
+		id: id.toLowerCase(),
+		lastUpdated: cachedFeature.lastUpdated,
+		name: cachedFeature.nutritionFacts.name,
+		nutritionFacts: {
+			data: strictNutritionFactsData,
+			description: cachedFeature.nutritionFacts.description,
+			name: cachedFeature.nutritionFacts.name,
+		} as StrictNutritionFacts,
+		sha256: cachedFeature.sha256,
+	} as FeatureMeta;
 
-	return strictReturn
-}
+	return strictReturn;
+};
 
 const CopyObject = async (id: string) => {
 	try {
-		const productObj: FeatureMeta = ExportJSON(id)
+		const productObj: FeatureMeta = ExportJSON(id);
 		await navigator.clipboard.writeText(JSON.stringify(productObj, null, 2));
 	} catch (error) {
 		let msg: string = "Failed to copy data to clipboard";
