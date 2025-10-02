@@ -2,12 +2,12 @@ import { createHash } from "node:crypto";
 import { writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import {cacheJson} from "../src/assets";
-import type { ProductsMeta } from "../src/types";
+import { cacheJson } from "../src/assets";
 import {
 	fetchCSV,
 	getProductFromLine,
 } from "../src/Components/Import/getProductFromCSV";
+import type { ProductsMeta } from "../src/types";
 
 const {
 	cache: Cache,
@@ -20,12 +20,10 @@ const __dirname: string = dirname(fileURLToPath(import.meta.url));
 const sha = (str: string): string =>
 	createHash("sha256").update(str).digest("hex");
 
-
-const {raw, parsed: rows} = await fetchCSV();
+const { raw, parsed: rows } = await fetchCSV();
 
 const remoteSha: string = sha(raw);
 const localSha: string = Cache.sha256;
-
 
 if (remoteSha !== localSha) {
 	console.log("Updating local cache...");
@@ -49,20 +47,20 @@ if (remoteSha !== localSha) {
 		const newSha = sha(values.join(","));
 		if (!(id in cachedFeatures) || cachedFeatures[id].sha256 !== newSha) {
 			cachedFeatures[id] = {
-				sha256: newSha,
-				lastUpdated: newTimestamp,
 				id: id,
+				lastUpdated: newTimestamp,
 				name: getProductFromLine(values).name,
 				nutritionFacts: getProductFromLine(values),
+				sha256: newSha,
 			};
 		}
 	}
 
 	const newCacheJson: ProductsMeta = {
 		cache: {
-			sha256: remoteSha,
-			lastUpdated: newTimestamp,
 			count: newCount,
+			lastUpdated: newTimestamp,
+			sha256: remoteSha,
 		},
 		features: cachedFeatures,
 	};

@@ -1,14 +1,14 @@
 const AiInformation = [
-    {
-      featureName: "",
-      permissionLevelText: "Permission Level",
-      permissionLevel: "LEVEL 0",
-      description: "",
-      permissionLevelsModalTriggerText: "Permission Levels",
-      modelNameText: "Base Model",
-      modelName: "",
-      nutritionFactsModalTriggerText: "AI Nutrition Facts",
-      }
-  ]
+	{
+		description: "",
+		featureName: "",
+		modelName: "",
+		modelNameText: "Base Model",
+		nutritionFactsModalTriggerText: "AI Nutrition Facts",
+		permissionLevel: "LEVEL 0",
+		permissionLevelsModalTriggerText: "Permission Levels",
+		permissionLevelText: "Permission Level",
+	},
+];
 
-  export { AiInformation } 
+export { AiInformation };
