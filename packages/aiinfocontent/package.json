@@ -1,0 +1,16 @@
+{
+  "name": "@instructure.ai/aiinfocontent",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview",
+    "typecheck": "tsgo --noEmit",
+    "lint": "pnpm biome check"
+  },
+  "devDependencies": {
+    "@instructure.ai/shared-configs": "workspace:^"
+  },
+  "type": "module",
+  "version": "0.0.0"
+}
