@@ -21,6 +21,9 @@ const getRoadmap = (): Promise<RoadmapFeatures | null> => {
 				cachedRoadmap = result;
 				roadmapPromise = null;
 				resolve(result);
+			} else {
+				console.log("no roadmap data found in event", event);
+				resolve(null);
 			}
 		};
 		window.addEventListener("message", handler);
