@@ -1,0 +1,22 @@
+{
+	"dependencies": {
+		"ansis": "^4.2.0"
+	},
+	"devDependencies": {
+		"@instructure.ai/shared-configs": "workspace:^",
+		"@instructure/ui-instructure": "10.25.1-pr-snapshot-1758747818199",
+		"@types/papaparse": "^5.3.16",
+		"papaparse": "^5.5.3"
+	},
+	"name": "@instructure.ai/aiinfo",
+	"private": true,
+	"scripts": {
+		"build": "vite-node ./scripts/build.mts",
+		"dev": "vite",
+		"lint": "pnpm biome check",
+		"typecheck": "tsgo --noEmit",
+		"update:cache": "vite-node ./scripts/updateCache.mts"
+	},
+	"type": "module",
+	"version": "0.0.0"
+}
