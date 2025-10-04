@@ -4,8 +4,8 @@ import type { AiInfo, CSV } from "../types";
 import {
 	entryToAIInformation,
 	entryToNutritionFacts,
-	entryToPermissionLevels,
 	entryToObj,
+	entryToPermissionLevels,
 	Log,
 } from "../utils";
 import { parseCSV } from "./";
