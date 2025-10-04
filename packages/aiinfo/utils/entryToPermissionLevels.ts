@@ -3,7 +3,12 @@ import type { AiInfoFeature } from "../types.js";
 const entryToPermissionLevels = (
 	entry: Entry,
 ): AiInfoFeature["DataPermissionLevels"] => {
-	return {} as AiInfoFeature["DataPermissionLevels"];
+
+	const permissions: AiInfoFeature["DataPermissionLevels"] = {
+
+	}
+
+	return permissions;
 };
 
 export { entryToPermissionLevels };
