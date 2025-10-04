@@ -34,7 +34,8 @@ const entryToObj = (entry: CSV[number]) => {
 			risks: entry[20],
 			settings: entry[16],
 		},
-		permissions: entry[22],
+		group: entry[22],
+		permissions: entry[23],
 	};
 	return obj;
 };
