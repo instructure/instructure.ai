@@ -3,7 +3,13 @@
 import type { CSV, Entry } from "../types";
 
 const entryToObj = (entry: CSV[number]): Entry => {
-	console.log("size of entry:", entry.length);
+	if (entry.length !== 24) {
+		throw new Error(
+			`Invalid entry length: expected 24, got ${entry.length}. Entry: ${JSON.stringify(
+				entry,
+			)}`,
+		);
+	}
 	const obj: Entry = {
 		uid: entry[0],
 		revision: entry[1],
