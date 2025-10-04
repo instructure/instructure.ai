@@ -1,8 +1,6 @@
-import type { AiInfoFeature } from "../types";
+import type { AiInfoFeature, Entry } from "../types";
 
-const entryToAIInformation = (
-	entry
-): AiInfoFeature["AiInformation"] => {
+const entryToAIInformation = (entry: Entry): AiInfoFeature["AiInformation"] => {
 	return {} as AiInfoFeature["AiInformation"];
 };
 

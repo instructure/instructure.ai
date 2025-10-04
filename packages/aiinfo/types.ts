@@ -43,10 +43,46 @@ interface LogObject {
 
 type LogProps = LogObject | message;
 
+type Entry = {
+	uid: string;
+	revision: string;
+	feature: {
+		description: string;
+		name: string;
+	};
+	model: {
+		data: string;
+		dataDescription: string;
+		description: string;
+		name: string;
+		trained: string;
+	};
+	compliance: {
+		logging: string;
+		loggingDescription: string;
+		pii: string;
+		piiDescription: string;
+		regions: string;
+		regionsDescription: string;
+		retention: string;
+	};
+	outputs: {
+		guardrails: string;
+		human: string;
+		humanDescription: string;
+		outcomes: string;
+		risks: string;
+		settings: string;
+	};
+	group: string;
+	permissions: string;
+}
+
 export type {
 	CSV,
 	Checksum,
 	CSVFetchResult,
+	Entry,
 	Hash,
 	AiInfo,
 	AiInformationProps as AiInformation,

@@ -1,10 +1,10 @@
 // biome-ignore-all assist/source/useSortedKeys: Sane ordering for CSV columns
 
-import type { CSV } from "../types";
+import type { CSV, Entry } from "../types";
 
-const entryToObj = (entry: CSV[number]) => {
+const entryToObj = (entry: CSV[number]): Entry => {
 	console.log("size of entry:", entry.length);
-	const obj = {
+	const obj: Entry = {
 		uid: entry[0],
 		revision: entry[1],
 		feature: {
