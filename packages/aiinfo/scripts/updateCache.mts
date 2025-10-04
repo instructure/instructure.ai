@@ -61,7 +61,7 @@ const main = async () => {
 	const start = true;
 	const end = true;
 	const color = "magentaBright";
-	Log({ message: "Updating Cache", start, color });
+	Log({ color, message: "Updating Cache", start });
 	const data = await fetchCSVFromURL();
 	if (data) {
 		updateCache(data);
@@ -72,7 +72,7 @@ const main = async () => {
 			type: "error",
 		});
 	}
-	Log({ end, message: "AI Info cache update complete." , color});
+	Log({ color, end, message: "AI Info cache update complete." });
 };
 
 export { main as UpdateCache, parseCSV };

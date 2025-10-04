@@ -1,16 +1,45 @@
-import { Log } from "../utils";
-import { name } from "../package.json";
 import { cache } from "../cache";
+import { name } from "../package.json";
+import type { AiInfo, CSV } from "../types";
+import {
+	entryToAIInformation,
+	entryToNutritionFacts,
+	entryToPermissionLevels,
+	Log,
+} from "../utils";
 import { parseCSV } from "./";
 
+const parseEntries = (entries: CSV): AiInfo => {
+	return Object.fromEntries(
+		entries.map((entry) => [
+			entry[0],
+			{
+				AiInformation: entryToAIInformation(entry),
+				DataPermissionLevels: entryToPermissionLevels(entry),
+				NutritionFacts: entryToNutritionFacts(entry),
+			},
+		]),
+	);
+};
+
 const main = async () => {
-  const start = true;
-  const end = true;
-  const color = "greenBright";
-	Log({ message: `Building ${name}`, start, color });
-	const features = parseCSV(cache).parsed;
-	Log(features);
-	Log({ message: "Build complete.", end, color });
+	const start = true;
+	const end = true;
+	const color = "magenta";
+	Log({ color, message: `Building ${name}`, start });
+
+	const rawEntries = parseCSV(cache).parsed;
+
+	Log(`Found ${rawEntries.length} entries`);
+
+	if (rawEntries.length) {
+		const entries = parseEntries(rawEntries);
+		console.log(entries);
+	} else {
+		Log({ color: "yellowBright", message: "No entries found.", type: "info" });
+	}
+
+	Log({ color, end, message: "Build complete." });
 };
 
 console.log("import.meta.url:", import.meta.url);

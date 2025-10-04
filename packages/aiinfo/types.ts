@@ -30,7 +30,7 @@ type Checksum = {
 	[feature: FeatureName]: Hash;
 };
 
-type message = string | unknown[];
+type message = number | string | unknown[];
 
 interface LogObject {
 	message: message;
@@ -52,6 +52,7 @@ export type {
 	AiInformationProps as AiInformation,
 	DataPermissionLevelsProps as DataPermissionLevels,
 	NutritionFactsProps as NutritionFacts,
+	AiInfoFeature,
 	LogProps,
 	LogObject,
 };

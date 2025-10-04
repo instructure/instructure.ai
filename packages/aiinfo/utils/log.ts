@@ -1,7 +1,11 @@
 import ansis from "ansis";
 import type { LogObject, LogProps } from "../types";
 
-const groupHeader = (title: string = "", color: LogObject["color"] = "cyan", style: LogObject["style"] = "bold"): string => {
+const groupHeader = (
+	title: string = "",
+	color: LogObject["color"] = "cyan",
+	style: LogObject["style"] = "bold",
+): string => {
 	const line = "═".repeat(38);
 	let header: string = `╔${line}╗\n║ ${title.padEnd(37)}║\n╚${line}╝`;
 	if (color && typeof color === "string" && color in ansis) {
@@ -13,7 +17,8 @@ const groupHeader = (title: string = "", color: LogObject["color"] = "cyan", sty
 	return header;
 };
 
-const groupFooter = (color: LogObject["color"] = "cyan"): string => ansis[color]("═".repeat(40));
+const groupFooter = (color: LogObject["color"] = "cyan"): string =>
+	ansis[color]("═".repeat(40));
 
 const Log = (content: LogProps): void => {
 	const {
@@ -35,22 +40,24 @@ const Log = (content: LogProps): void => {
 			}
 			return formatted;
 		}
-	return msg
+		return msg;
 	};
-
 	if (start) {
 		console.group(
 			groupHeader(typeof message === "string" ? message : undefined, color),
 		);
 		return;
 	}
-
 	if (end) {
 		console.groupEnd();
 		console[type](`${groupFooter(color)}\n`);
 		return;
 	}
-	if (typeof content === "string" || Array.isArray(content)) {
+	if (
+		typeof content === "number" ||
+		typeof content === "string" ||
+		Array.isArray(content)
+	) {
 		if (Array.isArray(content)) {
 			content.forEach((msg) => {
 				console.log(format(msg));
@@ -62,10 +69,10 @@ const Log = (content: LogProps): void => {
 	}
 	if (Array.isArray(message)) {
 		message.forEach((msg) => {
-			console[type](format(msg))
+			console[type](format(msg));
 		});
 	} else {
-		console[type](message);
+		console[type](format(message));
 	}
 };
 
