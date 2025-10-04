@@ -1,7 +1,7 @@
-import type { AiInfoFeature, CSV } from "../types.js";
+import type { AiInfoFeature } from "../types.js";
 
 const entryToNutritionFacts = (
-	entry: CSV[number],
+	entry
 ): AiInfoFeature["NutritionFacts"] => {
 	return {} as AiInfoFeature["NutritionFacts"];
 };

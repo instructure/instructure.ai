@@ -5,20 +5,24 @@ import {
 	entryToAIInformation,
 	entryToNutritionFacts,
 	entryToPermissionLevels,
+	entryToObj,
 	Log,
 } from "../utils";
 import { parseCSV } from "./";
 
 const parseEntries = (entries: CSV): AiInfo => {
 	return Object.fromEntries(
-		entries.map((entry) => [
-			entry[0],
-			{
-				AiInformation: entryToAIInformation(entry),
-				DataPermissionLevels: entryToPermissionLevels(entry),
-				NutritionFacts: entryToNutritionFacts(entry),
-			},
-		]),
+		entries.map((entry) => {
+			const obj = entryToObj(entry);
+			return [
+				entry[0],
+				{
+					AiInformation: entryToAIInformation(obj),
+					DataPermissionLevels: entryToPermissionLevels(obj),
+					NutritionFacts: entryToNutritionFacts(obj),
+				},
+			];
+		}),
 	);
 };
 

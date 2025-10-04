@@ -1,7 +1,7 @@
-import type { AiInfoFeature, CSV } from "../types.js";
+import type { AiInfoFeature } from "../types.js";
 
 const entryToPermissionLevels = (
-	entry: CSV[number],
+	entry
 ): AiInfoFeature["DataPermissionLevels"] => {
 	return {} as AiInfoFeature["DataPermissionLevels"];
 };
