@@ -1,13 +1,15 @@
 import { Log } from "../utils";
-import { UpdateCache } from "./";
 import { name } from "../package.json";
+import { cache } from "../cache";
+import { parseCSV } from "./";
 
 const main = async () => {
   const start = true;
   const end = true;
   const color = "greenBright";
 	Log({ message: `Building ${name}`, start, color });
-  await UpdateCache();
+	const features = parseCSV(cache).parsed;
+	Log(features);
 	Log({ message: "Build complete.", end, color });
 };
 

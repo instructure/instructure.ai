@@ -75,7 +75,7 @@ const main = async () => {
 	Log({ end, message: "AI Info cache update complete." , color});
 };
 
-export { main as UpdateCache };
+export { main as UpdateCache, parseCSV };
 
 if (process.env.UPDATE) {
 	main().catch((error) => {

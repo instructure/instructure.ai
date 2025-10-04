@@ -1,2 +1,2 @@
 export { Build } from "./build.mts";
-export { UpdateCache } from "./updateCache.mts";
+export { UpdateCache, parseCSV } from "./updateCache.mts";
