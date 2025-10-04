@@ -58,7 +58,10 @@ const fetchCSVFromURL = async (): Promise<CSVFetchResult> => {
 };
 
 const main = async () => {
-	Log({ message: "Updating Cache", start: true });
+	const start = true;
+	const end = true;
+	const color = "magentaBright";
+	Log({ message: "Updating Cache", start, color });
 	const data = await fetchCSVFromURL();
 	if (data) {
 		updateCache(data);
@@ -69,9 +72,14 @@ const main = async () => {
 			type: "error",
 		});
 	}
-	Log({ end: true, message: "AI Info cache update complete." });
+	Log({ end, message: "AI Info cache update complete." , color});
 };
 
-export type { main as UpdateCache };
+export { main as UpdateCache };
 
-main().catch((e) => Log(e));
+if (process.env.UPDATE) {
+	main().catch((error) => {
+		Log({ color: "redBright", message: ["Error updating cache:", error] });
+		process.exit(1);
+	});
+}

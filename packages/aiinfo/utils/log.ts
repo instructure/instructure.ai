@@ -1,16 +1,16 @@
 import ansis from "ansis";
 import type { LogObject, LogProps } from "../types";
 
-const groupHeader = (title?: string): string => {
+const groupHeader = (title?: string, color: LogObject["color"] = "cyan"): string => {
 	const line = "═".repeat(38);
 	if (title) {
-		return ansis.cyan(`╔${line}╗\n║ ${title.padEnd(37)}║\n╚${line}╝`);
+		return ansis[color](`╔${line}╗\n║ ${title.padEnd(37)}║\n╚${line}╝`);
 	} else {
-		return ansis.cyan(`╔${line}╗\n╚${line}╝`);
+		return ansis[color](`╔${line}╗\n╚${line}╝`);
 	}
 };
 
-const groupFooter = (): string => ansis.cyan("═".repeat(40));
+const groupFooter = (color: LogObject["color"] = "cyan"): string => ansis[color]("═".repeat(40));
 
 const Log = (content: LogProps): void => {
 	const {
@@ -40,14 +40,14 @@ const Log = (content: LogProps): void => {
 
 	if (start) {
 		console.group(
-			groupHeader(typeof message === "string" ? message : undefined),
+			groupHeader(typeof message === "string" ? message : undefined, color),
 		);
 		return;
 	}
 
 	if (end) {
 		console.groupEnd();
-		console[type](`${groupFooter()}\n`);
+		console[type](`${groupFooter(color)}\n`);
 		return;
 	}
 	if (typeof content === "string" || Array.isArray(content)) {

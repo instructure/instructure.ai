@@ -11,11 +11,10 @@
 	"name": "@instructure.ai/aiinfo",
 	"private": true,
 	"scripts": {
-		"build": "vite-node ./scripts/build.mts",
-		"dev": "vite",
+		"build": "BUILD=1 vite-node ./scripts/build.mts",
 		"lint": "pnpm biome check",
 		"typecheck": "tsgo --noEmit",
-		"update:cache": "vite-node ./scripts/updateCache.mts"
+		"update:cache": "UPDATE=1 vite-node ./scripts/updateCache.mts"
 	},
 	"type": "module",
 	"version": "0.0.0"
