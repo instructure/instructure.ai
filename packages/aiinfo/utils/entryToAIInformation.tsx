@@ -1,7 +1,6 @@
 import { aiInformationStrings, permissionLevelsStrings } from "../strings";
 import type { AiInfoFeature, AiInformationStrings, Entry } from "../types";
 import { entryToNutritionFacts, entryToPermissionLevels } from "./";
-import { Button } from "@instructure/ui-buttons";
 
 const setData = (
 	data: AiInformationStrings["data"],

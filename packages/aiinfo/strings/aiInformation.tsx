@@ -1,9 +1,9 @@
 // biome-ignore-all assist/source/useSortedKeys: Required order for Strings
 
+import { Button } from "@instructure/ui-buttons";
 import type { AiInformationStrings } from "../types";
 import { strings as nutritionFactsStrings } from "./nutritionFacts";
 import { strings as permissionLevelsStrings } from "./permissionLevels";
-import { Button } from "@instructure/ui-buttons";
 
 const strings: { en: AiInformationStrings } = {
 	en: {

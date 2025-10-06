@@ -17,10 +17,10 @@ const parseEntries = (entries: CSV): AiInfo => {
 			return [
 				entry[0],
 				{
-					revision: obj.revision,
 					AiInformation: entryToAIInformation(obj),
 					DataPermissionLevels: entryToPermissionLevels(obj),
 					NutritionFacts: entryToNutritionFacts(obj),
+					revision: obj.revision,
 				},
 			];
 		}),
