@@ -3,11 +3,12 @@
 import type { AiInformationStrings } from "../types";
 import { strings as nutritionFactsStrings } from "./nutritionFacts";
 import { strings as permissionLevelsStrings } from "./permissionLevels";
+import { Button } from "@instructure/ui-buttons";
 
 const strings: { en: AiInformationStrings } = {
 	en: {
 		title: "Features",
-		triggerText: "AI Information",
+		trigger: <Button>AI Information</Button>,
 		data: {
 			permissionLevelText: "Permission Level:",
 			permissionLevelsModalTriggerText: permissionLevelsStrings.en.title,

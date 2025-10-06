@@ -31,7 +31,7 @@ const entryToAIInformation = (entry: Entry): AiInfoFeature["AiInformation"] => {
 		dataPermissionLevelsData: permissionLevels.data,
 		nutritionFactsData: nutritionFacts.data,
 		nutritionFactsFeatureName: nutritionFacts.featureName,
-		trigger: <Button>{s.triggerText}</Button>,
+		trigger: s.trigger,
 	};
 };
 

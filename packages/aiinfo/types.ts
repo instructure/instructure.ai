@@ -12,6 +12,7 @@ type CSVFetchResult = {
 };
 
 type AiInfoFeature = {
+	revision: string;
 	AiInformation: AiInformationProps;
 	DataPermissionLevels: DataPermissionLevelsProps;
 	NutritionFacts: NutritionFactsProps;
@@ -90,7 +91,6 @@ type DataPermissionLevelsStrings = Omit<
 /* TODO: Omit based on INSTUI NutritionFactsOwnProps.BlockType[] */
 type AiInformationStrings = Omit<
 	AiInfoFeature["AiInformation"],
-	| "trigger"
 	| "data"
 	| "dataPermissionLevelsCurrentFeature"
 	| "dataPermissionLevelsData"
@@ -104,7 +104,6 @@ type AiInformationStrings = Omit<
 		nutritionFactsModalTriggerText: string;
 	};
 	title: string;
-	triggerText: string;
 	dataPermissionLevelsTitle: string;
 	dataPermissionLevelsCurrentFeatureText: string;
 	dataPermissionLevelsCloseIconButtonScreenReaderLabel: string;
