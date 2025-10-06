@@ -76,14 +76,34 @@ type Entry = {
 	};
 	group: string;
 	permissions: string;
-}
+};
+
+type LangCode =
+	| `${Lowercase<string>}`
+	| `${Lowercase<string>}_${Uppercase<string>}`;
+
+type DataPermissionLevelsStrings = Omit<
+	AiInfoFeature["DataPermissionLevels"],
+	"currentFeature"
+>;
+type AiInformationStrings = AiInfoFeature["AiInformation"];
+type NutritionFactsStrings = AiInfoFeature["NutritionFacts"];
+
+type Strings = {
+	[langcode in LangCode]:
+		| DataPermissionLevelsStrings
+		| AiInformationStrings
+		| NutritionFactsStrings;
+};
 
 export type {
 	CSV,
 	Checksum,
 	CSVFetchResult,
+	DataPermissionLevelsStrings,
 	Entry,
 	Hash,
+	LangCode,
 	AiInfo,
 	AiInformationProps as AiInformation,
 	DataPermissionLevelsProps as DataPermissionLevels,
@@ -91,4 +111,5 @@ export type {
 	AiInfoFeature,
 	LogProps,
 	LogObject,
+	Strings,
 };
