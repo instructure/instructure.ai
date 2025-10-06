@@ -110,12 +110,11 @@ type AiInformationStrings = Omit<
 	dataPermissionLevelsCloseIconButtonScreenReaderLabel: string;
 	dataPermissionLevelsCloseButtonText: string;
 	dataPermissionLevelsModalLabel: string;
-	dataPermissionLevelsTriggerText: string;
 	nutritionFactsModalLabel: string;
 	nutritionFactsTitle: string;
 	nutritionFactsCloseButtonText: string;
 	nutritionFactsCloseIconButtonScreenReaderLabel: string;
-	nutritionFactsTriggerText: string;
+	
 };
 
 type NutritionFactsStrings = Omit<

@@ -4,24 +4,34 @@ import type {
 	NutritionFactsProps,
 } from "@instructure/ui-instructure";
 
-type AiInfo = {
-	[uid: string]: {
-		nutritionFacts: NutritionFactsProps;
-		aiInformation: AiInformationProps;
-		dataPermissionLevels: DataPermissionLevelsProps;
-	};
+type AiInfoFeatureProps = {
+	NutritionFacts: NutritionFactsProps;
+	DataPermissionLevels: DataPermissionLevelsProps;
+	AiInformation: AiInformationProps;
+	uid: string;
+	revision: string;
 };
 
-type nutritionFactsData = {
+type AiInfoProps = {
+	[uid: string]: AiInfoFeatureProps;
+};
+
+type AiInfoNutritionFactsProps = {
 	[uid: string]: NutritionFactsProps;
 };
 
-type dataPermissionLevelsData = {
+type AiInfoDataPermissionLevelsProps = {
 	[uid: string]: DataPermissionLevelsProps;
 };
 
-type aiInformationData = {
+type AiInfoAiInformationProps = {
 	[uid: string]: AiInformationProps;
 };
 
-export type { AiInfo, nutritionFactsData, dataPermissionLevelsData, aiInformationData };
+export type {
+	AiInfoProps,
+	AiInfoFeatureProps,
+	AiInfoNutritionFactsProps,
+	AiInfoDataPermissionLevelsProps,
+	AiInfoAiInformationProps,
+};
