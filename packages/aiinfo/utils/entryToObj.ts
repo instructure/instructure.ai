@@ -11,7 +11,7 @@ const entryToObj = (entry: CSV[number]): Entry => {
 		);
 	}
 	const obj: Entry = {
-		uid: entry[0],
+		uid: entry[0].toLowerCase(),
 		revision: entry[1],
 		feature: {
 			name: entry[2],
