@@ -8,6 +8,7 @@ import {
 	entryToPermissionLevels,
 	Log,
 	writeEntry,
+	writeBarrel,
 } from "../utils";
 import { parseCSV } from "./";
 
@@ -64,6 +65,13 @@ const main = async () => {
 	for (const entry of Object.values(entries)) {
 		writeEntry(entry);
 	}
+		Log({
+		color: "greenBright",
+		message: `Wrote ${rawEntries.length} packages.\n`,
+	});
+
+	Log("Building barrel file...")
+	writeBarrel();
 
 	Log({ color, end, message: "Build complete." });
 };

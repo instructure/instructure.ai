@@ -1,19 +1,22 @@
 {
 	"dependencies": {
-		"ansis": "^4.2.0"
+		"@instructure/shared-types": "11.0.0",
+		"@instructure/ui-buttons": "^11.0.0",
+		"@instructure/ui-instructure": "^11.0.0",
+		"ansis": "^4.2.0",
+		"papaparse": "^5.5.3",
+		"react": "^19.1.1",
+		"typescript": "^5.9.3"
 	},
 	"devDependencies": {
 		"@instructure.ai/shared-configs": "workspace:^",
-		"@instructure/ui-buttons": "^11.0.0",
-		"@instructure/ui-instructure": "^11.0.0",
-		"@types/papaparse": "^5.3.16",
-		"papaparse": "^5.5.3",
-		"react": "^19.1.1"
+		"@types/papaparse": "^5.3.16"
 	},
 	"name": "@instructure.ai/aiinfo",
 	"private": true,
 	"scripts": {
-		"build": "pnpm update:cache && BUILD=1 vite-node ./scripts/build.mts",
+		"build": "BUILD=1 vite-node ./scripts/build.mts",
+		"bundle": "pnpm update:cache && pnpm build && biome check ./src --write",
 		"lint": "pnpm biome check",
 		"typecheck": "tsgo --noEmit",
 		"update:cache": "UPDATE=1 vite-node ./scripts/updateCache.mts"
