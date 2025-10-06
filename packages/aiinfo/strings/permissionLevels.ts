@@ -1,12 +1,12 @@
 // biome-ignore-all assist/source/useSortedKeys: Required order for Strings
 
-import type { DataPermissionLevelsStrings, Strings } from "../types";
+import type { DataPermissionLevelsStrings } from "../types";
 
-const strings: Strings = {
+const strings: {en: DataPermissionLevelsStrings} = {
 	en: {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeatureText: "Current feature",
+		currentFeatureText: "Current Feature:",
 		data: [
 			{
 				description:

@@ -2,37 +2,43 @@ import { nutritionFactsStrings } from "../strings/index.js";
 import type { AiInfoFeature, Entry, NutritionFactsStrings } from "../types.js";
 
 const setData = (
-  data: NutritionFactsStrings["data"],
-  entry: Entry,
+	data: NutritionFactsStrings["data"],
+	entry: Entry,
 ): AiInfoFeature["NutritionFacts"]["data"] => {
-  const { model, compliance, outputs } = entry;
-  const valueMap = [
-    [
-      { value: model.name, valueDescription: model.description },
-      { value: model.trained },
-      { value: model.dataDescription },
-    ],
-    [
-      { value: compliance.retention },
-      { value: compliance.logging, valueDescription: compliance.loggingDescription },
-      { value: compliance.regions, valueDescription: compliance.regionsDescription },
-      { value: compliance.pii, valueDescription: compliance.piiDescription },
-    ],
-    [
-      { value: outputs.settings },
-      { value: outputs.human, valueDescription: outputs.humanDescription },
-      { value: outputs.guardrails },
-      { value: outputs.risks },
-      { value: outputs.outcomes },
-    ],
-  ];
-  return data.map((block, i) => ({
-    blockTitle: block.blockTitle,
-    segmentData: block.segmentData.map((seg, j) => ({
-      ...seg,
-      ...valueMap[i][j],
-    })),
-  }));
+	const { model, compliance, outputs } = entry;
+	const valueMap = [
+		[
+			{ value: model.name, valueDescription: model.description },
+			{ value: model.trained },
+			{ value: model.dataDescription },
+		],
+		[
+			{ value: compliance.retention },
+			{
+				value: compliance.logging,
+				valueDescription: compliance.loggingDescription,
+			},
+			{
+				value: compliance.regions,
+				valueDescription: compliance.regionsDescription,
+			},
+			{ value: compliance.pii, valueDescription: compliance.piiDescription },
+		],
+		[
+			{ value: outputs.settings },
+			{ value: outputs.human, valueDescription: outputs.humanDescription },
+			{ value: outputs.guardrails },
+			{ value: outputs.risks },
+			{ value: outputs.outcomes },
+		],
+	];
+	return data.map((block, i) => ({
+		blockTitle: block.blockTitle,
+		segmentData: block.segmentData.map((seg, j) => ({
+			...seg,
+			...valueMap[i][j],
+		})),
+	}));
 };
 
 const entryToNutritionFacts = (

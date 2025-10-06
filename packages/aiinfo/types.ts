@@ -75,7 +75,7 @@ type Entry = {
 		settings: string;
 	};
 	group: string;
-	permissions: string;
+	permissions: "1" | "2" | "3" | "4";
 };
 
 type LangCode =
@@ -86,7 +86,35 @@ type DataPermissionLevelsStrings = Omit<
 	AiInfoFeature["DataPermissionLevels"],
 	"currentFeature"
 >;
-type AiInformationStrings = AiInfoFeature["AiInformation"];
+
+/* TODO: Omit based on INSTUI NutritionFactsOwnProps.BlockType[] */
+type AiInformationStrings = Omit<
+	AiInfoFeature["AiInformation"],
+	| "trigger"
+	| "data"
+	| "dataPermissionLevelsCurrentFeature"
+	| "dataPermissionLevelsData"
+	| "nutritionFactsFeatureName"
+	| "nutritionFactsData"
+> & {
+	data: {
+		permissionLevelText: string;
+		permissionLevelsModalTriggerText: string;
+		modelNameText: string;
+		nutritionFactsModalTriggerText: string;
+	};
+	dataPermissionLevelsTitle: string;
+	dataPermissionLevelsCurrentFeatureText: string;
+	dataPermissionLevelsCloseIconButtonScreenReaderLabel: string;
+	dataPermissionLevelsCloseButtonText: string;
+	dataPermissionLevelsModalLabel: string;
+	dataPermissionLevelsTriggerText: string;
+	nutritionFactsModalLabel: string;
+	nutritionFactsTitle: string;
+	nutritionFactsCloseButtonText: string;
+	nutritionFactsCloseIconButtonScreenReaderLabel: string;
+	nutritionFactsTriggerText: string;
+};
 
 type NutritionFactsStrings = Omit<
 	AiInfoFeature["NutritionFacts"],

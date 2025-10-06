@@ -1,11 +1,11 @@
 // biome-ignore-all assist/source/useSortedKeys: Required order for Strings
 
-import type { NutritionFactsStrings, Strings } from "../types";
+import type { NutritionFactsStrings } from "../types";
 
-const strings: Strings = {
+const strings: {en: NutritionFactsStrings} = {
 	en: {
 		modalLabel: "This is a modal for AI facts",
-		title: "Nutrition Facts",
+		title: "AI Nutrition Facts",
 		data: [
 			{
 				blockTitle: "Model & Data",
@@ -84,7 +84,7 @@ const strings: Strings = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		triggerText: "Nutrition Facts",
-	} as NutritionFactsStrings,
+	},
 };
 
 export { strings };
