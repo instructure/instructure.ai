@@ -6,6 +6,7 @@ import {
 	entryToNutritionFacts,
 	entryToObj,
 	entryToPermissionLevels,
+	writeEntry,
 	Log,
 } from "../utils";
 import { parseCSV } from "./";
@@ -22,6 +23,7 @@ const parseEntries = (entries: CSV): AiInfo => {
 					DataPermissionLevels: entryToPermissionLevels(obj),
 					NutritionFacts: entryToNutritionFacts(obj),
 					revision: obj.revision,
+					uid: obj.uid,
 				},
 			];
 		}),
@@ -52,6 +54,9 @@ const main = async () => {
 	Log({ color: "greenBright", message: `Compiled ${rawEntries.length} packages.\n` });
 
 	Log("Writing output...");
+	for (const entry of Object.values(entries)) {
+		writeEntry(entry);
+	}
 	
 	Log({ color, end, message: "Build complete." });
 };

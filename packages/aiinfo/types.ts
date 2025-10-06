@@ -13,6 +13,7 @@ type CSVFetchResult = {
 
 type AiInfoFeature = {
 	revision: string;
+	uid: string;
 	AiInformation: AiInformationProps;
 	DataPermissionLevels: DataPermissionLevelsProps;
 	NutritionFacts: NutritionFactsProps;
