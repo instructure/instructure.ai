@@ -42,7 +42,7 @@ const entryToObj = (entry: CSV[number]): Entry => {
 			outcomes: entry[21],
 		},
 		group: entry[22],
-		permissions: entry[23],
+		permissions: entry[23] as Entry["permissions"],
 	};
 	return obj;
 };
