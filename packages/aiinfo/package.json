@@ -4,7 +4,7 @@
 	},
 	"devDependencies": {
 		"@instructure.ai/shared-configs": "workspace:^",
-		"@instructure/ui-instructure": "10.25.1-pr-snapshot-1758747818199",
+		"@instructure/ui-buttons": "^11.0.0",
 		"@types/papaparse": "^5.3.16",
 		"papaparse": "^5.5.3"
 	},

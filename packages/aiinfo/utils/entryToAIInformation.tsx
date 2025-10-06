@@ -1,6 +1,7 @@
 import { aiInformationStrings, permissionLevelsStrings } from "../strings";
 import type { AiInfoFeature, AiInformationStrings, Entry } from "../types";
 import { entryToNutritionFacts, entryToPermissionLevels } from "./";
+import { Button } from "@instructure/ui-buttons";
 
 const setData = (
 	data: AiInformationStrings["data"],
@@ -30,7 +31,7 @@ const entryToAIInformation = (entry: Entry): AiInfoFeature["AiInformation"] => {
 		dataPermissionLevelsData: permissionLevels.data,
 		nutritionFactsData: nutritionFacts.data,
 		nutritionFactsFeatureName: nutritionFacts.featureName,
-		trigger: `<button>${s.triggerText}</button>`,
+		trigger: <Button>{s.triggerText}</Button>,
 	};
 };
 
