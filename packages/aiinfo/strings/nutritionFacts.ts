@@ -1,6 +1,6 @@
 // biome-ignore-all assist/source/useSortedKeys: Required order for Strings
 
-import type { Strings } from "../types";
+import type { NutritionFactsStrings, Strings } from "../types";
 
 const strings: Strings = {
 	en: {
@@ -84,7 +84,7 @@ const strings: Strings = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		triggerText: "Nutrition Facts",
-	},
+	} as NutritionFactsStrings,
 };
 
 export { strings };

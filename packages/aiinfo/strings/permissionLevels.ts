@@ -1,6 +1,6 @@
 // biome-ignore-all assist/source/useSortedKeys: Required order for Strings
 
-import type { Strings } from "../types";
+import type { DataPermissionLevelsStrings, Strings } from "../types";
 
 const strings: Strings = {
 	en: {
@@ -36,7 +36,7 @@ const strings: Strings = {
 		modalLabel: "Data Permission Levels modal",
 		title: "Data Permission Levels",
 		triggerText: "Data Permission Levels",
-	},
+	} as DataPermissionLevelsStrings,
 };
 
 export { strings };
