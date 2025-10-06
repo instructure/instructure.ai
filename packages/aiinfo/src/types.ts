@@ -12,16 +12,16 @@ type AiInfo = {
 	};
 };
 
-type nutritionFacts = {
+type nutritionFactsData = {
 	[uid: string]: NutritionFactsProps;
 };
 
-type dataPermissionLevels = {
+type dataPermissionLevelsData = {
 	[uid: string]: DataPermissionLevelsProps;
 };
 
-type aiInformation = {
+type aiInformationData = {
 	[uid: string]: AiInformationProps;
 };
 
-export type { AiInfo, nutritionFacts, dataPermissionLevels, aiInformation };
+export type { AiInfo, nutritionFactsData, dataPermissionLevelsData, aiInformationData };
