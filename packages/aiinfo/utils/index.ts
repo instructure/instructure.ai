@@ -4,3 +4,4 @@ export { entryToNutritionFacts } from "./entryToNutritionFacts";
 export { entryToObj } from "./entryToObj";
 export { entryToPermissionLevels } from "./entryToPermissionLevels";
 export { Log } from "./log";
+export { writeEntry } from "./writeEntry";
