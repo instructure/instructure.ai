@@ -1,11 +1,13 @@
 // biome-ignore-all assist/source/useSortedKeys: Required order for Strings
 
 import type { AiInformationStrings } from "../types";
-import { nutritionFactsStrings, permissionLevelsStrings } from "./";
+import { strings as nutritionFactsStrings } from "./nutritionFacts";
+import { strings as permissionLevelsStrings } from "./permissionLevels";
 
-const strings: {en: AiInformationStrings} = {
+const strings: { en: AiInformationStrings } = {
 	en: {
 		title: "Features",
+		triggerText: "AI Information",
 		data: {
 			permissionLevelText: "Permission Level:",
 			permissionLevelsModalTriggerText: permissionLevelsStrings.en.title,

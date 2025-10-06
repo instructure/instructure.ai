@@ -2,7 +2,7 @@
 
 import type { DataPermissionLevelsStrings } from "../types";
 
-const strings: {en: DataPermissionLevelsStrings} = {
+const strings: { en: DataPermissionLevelsStrings } = {
 	en: {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",

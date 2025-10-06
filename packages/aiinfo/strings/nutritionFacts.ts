@@ -2,7 +2,7 @@
 
 import type { NutritionFactsStrings } from "../types";
 
-const strings: {en: NutritionFactsStrings} = {
+const strings: { en: NutritionFactsStrings } = {
 	en: {
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",

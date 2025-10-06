@@ -103,6 +103,8 @@ type AiInformationStrings = Omit<
 		modelNameText: string;
 		nutritionFactsModalTriggerText: string;
 	};
+	title: string;
+	triggerText: string;
 	dataPermissionLevelsTitle: string;
 	dataPermissionLevelsCurrentFeatureText: string;
 	dataPermissionLevelsCloseIconButtonScreenReaderLabel: string;
