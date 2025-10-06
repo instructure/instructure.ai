@@ -13,7 +13,7 @@
 	"name": "@instructure.ai/aiinfo",
 	"private": true,
 	"scripts": {
-		"build": "BUILD=1 vite-node ./scripts/build.mts",
+		"build": "pnpm update:cache && BUILD=1 vite-node ./scripts/build.mts",
 		"lint": "pnpm biome check",
 		"typecheck": "tsgo --noEmit",
 		"update:cache": "UPDATE=1 vite-node ./scripts/updateCache.mts"

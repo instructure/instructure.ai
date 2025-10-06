@@ -14,6 +14,7 @@ const parseEntries = (entries: CSV): AiInfo => {
 	return Object.fromEntries(
 		entries.map((entry) => {
 			const obj = entryToObj(entry);
+			Log(` * ${obj.uid} (${obj.revision})`)
 			return [
 				entry[0],
 				{
@@ -34,21 +35,26 @@ const main = async () => {
 	Log({ color, message: `Building ${name}`, start });
 
 	const rawEntries = parseCSV(cache).parsed;
+	let entries: AiInfo = {};
 
 	Log(`Found ${rawEntries.length} entries`);
 
 	if (rawEntries.length) {
-		const entries = parseEntries(rawEntries);
-		console.log(entries);
+		Log("Compiling entries...");
+		entries = parseEntries(rawEntries);
 	} else {
 		Log({ color: "yellowBright", message: "No entries found.", type: "info" });
 	}
+	if (!entries) {
+		Log({ color: "redBright", message: "An error occurred during build.", type: "error" });
+		return;
+	}
+	Log({ color: "greenBright", message: `Compiled ${rawEntries.length}` });
 
+
+	
 	Log({ color, end, message: "Build complete." });
 };
-
-console.log("import.meta.url:", import.meta.url);
-console.log("process.argv[1]:", process.argv[1]);
 
 if (process.env.BUILD) {
 	main().catch((error) => {

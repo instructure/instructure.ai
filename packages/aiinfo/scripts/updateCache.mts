@@ -60,7 +60,7 @@ const fetchCSVFromURL = async (): Promise<CSVFetchResult> => {
 const main = async () => {
 	const start = true;
 	const end = true;
-	const color = "magentaBright";
+	const color = "cyan";
 	Log({ color, message: "Updating Cache", start });
 	const data = await fetchCSVFromURL();
 	if (data) {
