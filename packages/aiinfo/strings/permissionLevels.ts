@@ -1,3 +1,5 @@
+// biome-ignore-all assist/source/useSortedKeys: Required order for Strings
+
 import type { Strings } from "../types";
 
 const strings: Strings = {

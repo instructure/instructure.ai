@@ -1,9 +1,9 @@
-import type { AiInfoFeature } from "../types.js";
+import type { AiInfoFeature, Entry } from "../types.js";
 
 const entryToNutritionFacts = (
 	entry: Entry,
 ): AiInfoFeature["NutritionFacts"] => {
-	return {} as AiInfoFeature["NutritionFacts"];
+	return {};
 };
 
 export { entryToNutritionFacts };

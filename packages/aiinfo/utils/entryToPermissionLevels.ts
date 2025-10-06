@@ -26,12 +26,14 @@ const entryToPermissionLevels = (
 		en: DataPermissionLevelsStrings;
 	};
 
+	const highlighted = setHighlighted(s.data, permissions);
+
 	return {
 		closeButtonText: s.closeButtonText,
 		closeIconButtonScreenReaderLabel: s.closeIconButtonScreenReaderLabel,
 		currentFeature: name,
 		currentFeatureText: s.currentFeatureText,
-		data: setHighlighted(s.data, permissions),
+		data: highlighted,
 		modalLabel: s.modalLabel,
 		title: s.title,
 		triggerText: s.triggerText,

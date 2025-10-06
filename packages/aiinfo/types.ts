@@ -87,7 +87,22 @@ type DataPermissionLevelsStrings = Omit<
 	"currentFeature"
 >;
 type AiInformationStrings = AiInfoFeature["AiInformation"];
-type NutritionFactsStrings = AiInfoFeature["NutritionFacts"];
+
+type NutritionFactsStrings = Omit<
+	AiInfoFeature["NutritionFacts"],
+	"featureName" | "fullscreen" | "data"
+> & {
+	data: Array<{
+		blockTitle: string;
+		segmentData: NutritionFactsSegmentDataStrings[];
+	}>;
+};
+
+/* TODO: Omit based on INSTUI NutritionFactsOwnProps.BlockType[] */
+type NutritionFactsSegmentDataStrings = {
+	segmentTitle: string;
+	description: string;
+};
 
 type Strings = {
 	[langcode in LangCode]:
@@ -105,6 +120,8 @@ export type {
 	Hash,
 	LangCode,
 	AiInfo,
+	NutritionFactsStrings,
+	AiInformationStrings,
 	AiInformationProps as AiInformation,
 	DataPermissionLevelsProps as DataPermissionLevels,
 	NutritionFactsProps as NutritionFacts,
