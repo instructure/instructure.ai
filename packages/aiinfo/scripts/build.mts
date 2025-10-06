@@ -49,9 +49,9 @@ const main = async () => {
 		Log({ color: "redBright", message: "An error occurred during build.", type: "error" });
 		return;
 	}
-	Log({ color: "greenBright", message: `Compiled ${rawEntries.length}` });
+	Log({ color: "greenBright", message: `Compiled ${rawEntries.length} packages.\n` });
 
-
+	Log("Writing output...");
 	
 	Log({ color, end, message: "Build complete." });
 };
