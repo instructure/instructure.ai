@@ -71,9 +71,9 @@ Helper types are included for managing or passing imports from `AiInfo`
 
 ```typescript
 type AiInfoFeatureProps = {
-	NutritionFacts: NutritionFactsProps; // INSTUI type definition
-	DataPermissionLevels: DataPermissionLevelsProps; // INSTUI type definition
-	AiInformation: AiInformationProps; // INSTUI type definition
+	nutritionFacts: NutritionFactsProps; // INSTUI type definition
+	dataPermissionLevels: DataPermissionLevelsProps; // INSTUI type definition
+	aiInformation: AiInformationProps; // INSTUI type definition
 	uid: string;
 	revision: string;
 };
@@ -142,7 +142,7 @@ import type { FC } from "react";
 
 const App: FC = () => (
 	<InstUISettingsProvider>
-		<DataPermissionLevels {...smartsearch.DataPermissionLevels} />
+		<DataPermissionLevels {...smartsearch.dataPermissionLevels} />
 	</InstUISettingsProvider>
 );
 export default App;
@@ -178,45 +178,45 @@ import type { FC } from "react";
 const App: FC = () => (
 	<InstUISettingsProvider>
 		<AiInformation
-			data={smartsearch.AiInformation.data}
+			data={smartsearch.aiInformation.data}
 			dataPermissionLevelsCloseButtonText={
-				smartsearch.AiInformation.dataPermissionLevelsCloseButtonText
+				smartsearch.aiInformation.dataPermissionLevelsCloseButtonText
 			}
 			dataPermissionLevelsCloseIconButtonScreenReaderLabel={
-				smartsearch.AiInformation
+				smartsearch.aiInformation
 					.dataPermissionLevelsCloseIconButtonScreenReaderLabel
 			}
 			dataPermissionLevelsCurrentFeature={
-				smartsearch.AiInformation.dataPermissionLevelsCurrentFeature
+				smartsearch.aiInformation.dataPermissionLevelsCurrentFeature
 			}
 			dataPermissionLevelsCurrentFeatureText={
-				smartsearch.AiInformation.dataPermissionLevelsCurrentFeatureText
+				smartsearch.aiInformation.dataPermissionLevelsCurrentFeatureText
 			}
 			// sibling object
-			dataPermissionLevelsData={smartsearch.DataPermissionLevels.data}
+			dataPermissionLevelsData={smartsearch.dataPermissionLevels.data}
 			dataPermissionLevelsModalLabel={
-				smartsearch.AiInformation.dataPermissionLevelsModalLabel
+				smartsearch.aiInformation.dataPermissionLevelsModalLabel
 			}
 			dataPermissionLevelsTitle={
-				smartsearch.AiInformation.dataPermissionLevelsTitle
+				smartsearch.aiInformation.dataPermissionLevelsTitle
 			}
 			nutritionFactsCloseButtonText={
-				smartsearch.AiInformation.nutritionFactsCloseButtonText
+				smartsearch.aiInformation.nutritionFactsCloseButtonText
 			}
 			nutritionFactsCloseIconButtonScreenReaderLabel={
-				smartsearch.AiInformation.nutritionFactsCloseIconButtonScreenReaderLabel
+				smartsearch.aiInformation.nutritionFactsCloseIconButtonScreenReaderLabel
 			}
 			// child object
-			nutritionFactsData={smartsearch.AiInformation.nutritionFactsData}
+			nutritionFactsData={smartsearch.aiInformation.nutritionFactsData}
 			nutritionFactsFeatureName={
-				smartsearch.AiInformation.nutritionFactsFeatureName
+				smartsearch.aiInformation.nutritionFactsFeatureName
 			}
 			nutritionFactsModalLabel={
-				smartsearch.AiInformation.nutritionFactsModalLabel
+				smartsearch.aiInformation.nutritionFactsModalLabel
 			}
-			nutritionFactsTitle={smartsearch.AiInformation.nutritionFactsTitle}
-			title={smartsearch.AiInformation.title}
-			trigger={smartsearch.AiInformation.trigger}
+			nutritionFactsTitle={smartsearch.aiInformation.nutritionFactsTitle}
+			title={smartsearch.aiInformation.title}
+			trigger={smartsearch.aiInformation.trigger}
 		/>
 	</InstUISettingsProvider>
 );
