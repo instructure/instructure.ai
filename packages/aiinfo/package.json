@@ -10,7 +10,8 @@
 	},
 	"devDependencies": {
 		"@instructure.ai/shared-configs": "workspace:^",
-		"@types/papaparse": "^5.3.16"
+		"@types/papaparse": "^5.3.16",
+		"vite-tsconfig-paths": "^5.1.4"
 	},
 	"name": "@instructure.ai/aiinfo",
 	"private": true,
@@ -22,5 +23,5 @@
 		"update:cache": "UPDATE=1 vite-node ./scripts/updateCache.mts"
 	},
 	"type": "module",
-	"version": "0.0.0"
+	"version": "1.0.0"
 }

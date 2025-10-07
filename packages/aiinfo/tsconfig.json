@@ -1,4 +1,9 @@
 {
 	"extends": "../../tsconfig.node.json",
-	"include": ["src", "utils", "scripts", "vite.config.mts"]
+	"include": ["src", "utils", "scripts", "vite.config.mts"],
+	"paths": {
+		"paths": {
+			"@instructure.ai/aiinfo": ["packages/@instructure.ai/aiinfo/src/index.ts"]
+		}
+	}
 }
