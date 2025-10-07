@@ -62,17 +62,34 @@ const main = async () => {
 	const end = true;
 	const color = "cyan";
 	Log({ color, message: "Updating Cache", start });
-	const data = await fetchCSVFromURL();
-	if (data) {
-		updateCache(data);
-	} else {
-		Log({
-			color: "redBright",
-			message: "No data fetched; skipping cache update.",
-			type: "error",
-		});
+	try {
+		let data;
+		try {
+			data = await fetchCSVFromURL();
+		} catch (err) {
+			Log({ color: "redBright", message: ["Error fetching CSV from URL:", err], type: "error" });
+			throw err;
+		}
+		if (data) {
+			try {
+				updateCache(data);
+			} catch (err) {
+				Log({ color: "redBright", message: ["Error updating cache:", err], type: "error" });
+				throw err;
+			}
+		} else {
+			Log({
+				color: "redBright",
+				message: "No data fetched; skipping cache update.",
+				type: "error",
+			});
+			throw new Error("No data fetched");
+		}
+		Log({ color, end, message: "AI Info cache update complete." });
+	} catch (error) {
+		Log({ color: "redBright", message: ["Cache update failed:", error], type: "error" });
+		throw error;
 	}
-	Log({ color, end, message: "AI Info cache update complete." });
 };
 
 export { main as UpdateCache, parseCSV };
