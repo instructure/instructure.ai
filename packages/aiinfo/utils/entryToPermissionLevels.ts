@@ -9,35 +9,52 @@ const setHighlighted = (
 	data: DataPermissionLevelsStrings["data"],
 	level: Entry["permissions"],
 ): AiInfoFeature["DataPermissionLevels"]["data"] => {
-	return data.map((entry, idx) => ({
-		...entry,
-		highlighted: idx === Number(level) - 1,
-	}));
+	try {
+		return data.map((entry, idx) => ({
+			...entry,
+			highlighted: idx === Number(level) - 1,
+		}));
+	} catch (err) {
+		console.error("Error in setHighlighted:", err);
+		return [{ description: "Error", level: "Error", title: "Error", highlighted: false }];
+	}
 };
 
 const entryToPermissionLevels = (
 	entry: Entry,
 ): AiInfoFeature["DataPermissionLevels"] => {
-	const {
-		feature: { name },
-		permissions,
-	} = entry;
-	const { en: s } = permissionLevelsStrings as {
-		en: DataPermissionLevelsStrings;
-	};
-
-	const highlighted = setHighlighted(s.data, permissions);
-
-	return {
-		closeButtonText: s.closeButtonText,
-		closeIconButtonScreenReaderLabel: s.closeIconButtonScreenReaderLabel,
-		currentFeature: name,
-		currentFeatureText: s.currentFeatureText,
-		data: highlighted,
-		modalLabel: s.modalLabel,
-		title: s.title,
-		triggerText: s.triggerText,
-	};
+	try {
+		const {
+			feature: { name },
+			permissions,
+		} = entry;
+		const { en: s } = permissionLevelsStrings as {
+			en: DataPermissionLevelsStrings;
+		};
+		const highlighted = setHighlighted(s.data, permissions);
+		return {
+			closeButtonText: s.closeButtonText,
+			closeIconButtonScreenReaderLabel: s.closeIconButtonScreenReaderLabel,
+			currentFeature: name,
+			currentFeatureText: s.currentFeatureText,
+			data: highlighted,
+			modalLabel: s.modalLabel,
+			title: s.title,
+			triggerText: s.triggerText,
+		};
+	} catch (err) {
+		console.error("Error in entryToPermissionLevels:", err);
+		return {
+			closeButtonText: "Error",
+			closeIconButtonScreenReaderLabel: "Error",
+			currentFeature: "Error",
+			currentFeatureText: "Error",
+			data: [{ description: "Error", level: "Error", title: "Error", highlighted: false }],
+			modalLabel: "Error",
+			title: "Error",
+			triggerText: "Error",
+		};
+	}
 };
 
 export { entryToPermissionLevels };

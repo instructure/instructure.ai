@@ -93,6 +93,7 @@ const main = async () => {
 			color: "greenBright",
 			message: `Wrote barrel file.\n`,
 		});
+		Log({ color: "greenBright", message: "Build complete." });
 		Log({ color, end, message: "Build complete." });
 	} catch (error) {
 		Log({ color: "redBright", message: ["Build failed:", error], type: "error" });
