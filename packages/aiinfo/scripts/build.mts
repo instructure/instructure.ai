@@ -36,48 +36,68 @@ const main = async () => {
 	const end = true;
 	const color = "magenta";
 	Log({ color, message: `Building ${name}`, start });
-
-	const rawEntries = parseCSV(cache).parsed;
-	let entries: AiInfo = {};
-
-	Log(`Found ${rawEntries.length} entries\n`);
-
-	if (rawEntries.length) {
-		Log("Compiling entries...");
-		entries = parseEntries(rawEntries);
-	} else {
-		Log({ color: "yellowBright", message: "No entries found.", type: "info" });
-	}
-	if (!entries) {
+	try {
+		let rawEntries;
+		try {
+			rawEntries = parseCSV(cache).parsed;
+		} catch (err) {
+			Log({ color: "redBright", message: ["Error parsing CSV:", err], type: "error" });
+			throw err;
+		}
+		let entries: AiInfo = {};
+		Log(`Found ${rawEntries.length} entries\n`);
+		if (rawEntries.length) {
+			Log("Compiling entries...");
+			try {
+				entries = parseEntries(rawEntries);
+			} catch (err) {
+				Log({ color: "redBright", message: ["Error compiling entries:", err], type: "error" });
+				throw err;
+			}
+		} else {
+			Log({ color: "yellowBright", message: "No entries found.", type: "info" });
+		}
+		if (!entries) {
+			Log({
+				color: "redBright",
+				message: "An error occurred during build.",
+				type: "error",
+			});
+			throw new Error("No entries compiled");
+		}
 		Log({
-			color: "redBright",
-			message: "An error occurred during build.",
-			type: "error",
+			color: "greenBright",
+			message: `Compiled ${rawEntries.length} packages.\n`,
 		});
-		return;
+		Log("Writing output...");
+		try {
+			for (const entry of Object.values(entries)) {
+				writeEntry(entry);
+			}
+		} catch (err) {
+			Log({ color: "redBright", message: ["Error writing entries:", err], type: "error" });
+			throw err;
+		}
+		Log({
+			color: "greenBright",
+			message: `Wrote ${rawEntries.length} packages.\n`,
+		});
+		Log("Building barrel file...");
+		try {
+			writeBarrel();
+		} catch (err) {
+			Log({ color: "redBright", message: ["Error writing barrel file:", err], type: "error" });
+			throw err;
+		}
+		Log({
+			color: "greenBright",
+			message: `Wrote barrel file.\n`,
+		});
+		Log({ color, end, message: "Build complete." });
+	} catch (error) {
+		Log({ color: "redBright", message: ["Build failed:", error], type: "error" });
+		throw error;
 	}
-	Log({
-		color: "greenBright",
-		message: `Compiled ${rawEntries.length} packages.\n`,
-	});
-
-	Log("Writing output...");
-	for (const entry of Object.values(entries)) {
-		writeEntry(entry);
-	}
-	Log({
-		color: "greenBright",
-		message: `Wrote ${rawEntries.length} packages.\n`,
-	});
-
-	Log("Building barrel file...");
-	writeBarrel();
-	Log({
-		color: "greenBright",
-		message: `Wrote barrel file.\n`,
-	});
-
-	Log({ color, end, message: "Build complete." });
 };
 
 if (process.env.BUILD) {
