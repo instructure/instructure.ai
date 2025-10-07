@@ -1,15 +1,15 @@
 /// <reference path="../types/index.d.ts" />
 
+import { execFileSync } from "node:child_process";
 import { promises as fs } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { unknownError } from "@instructure.ai/shared-configs/workspace";
-import { execFileSync } from "node:child_process";
 import Arborist from "@npmcli/arborist";
 import packlist from "npm-packlist";
 import pkg from "../package.json" with { type: "json" };
-import { Log } from "../utils";
 import type { LogObject } from "../types";
+import { Log } from "../utils";
 
 interface PackageJson {
 	name: string;
@@ -21,6 +21,7 @@ interface PackageJson {
 	private?: boolean;
 	scripts?: Record<string, string>;
 	files?: string[];
+	publishConfig?: { access: string };
 }
 
 const main = async () => {
@@ -28,7 +29,7 @@ const main = async () => {
 	const end = true;
 	const color: LogObject["color"] = "yellowBright";
 
-	Log({ message: `Packaging ${pkg.name}`, type: "info", start, color });
+	Log({ color, message: `Packaging ${pkg.name}`, start, type: "info" });
 	// 1. Create temp dir
 	const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "aiinfo-pack-"));
 	const pkgDir = path.resolve(__dirname, "..");
@@ -54,6 +55,8 @@ const main = async () => {
 	}
 
 	const pkgData: PackageJson = { ...pkg };
+	// Add publishConfig for public access
+	pkgData.publishConfig = { access: "public" };
 	const toRemove: (keyof PackageJson)[] = [
 		"private",
 		"scripts",
@@ -70,13 +73,15 @@ const main = async () => {
 		JSON.stringify(pkgData, null, 2),
 	);
 
-	const distDir = path.resolve(__dirname, "../dist");
-	await fs.mkdir(distDir, { recursive: true });
-	execFileSync("pnpm", ["pack", "--pack-destination", distDir], { cwd: tmpDir, stdio: "inherit" });
+	const pubDir = path.resolve(__dirname, "../../../pub");
+	await fs.mkdir(pubDir, { recursive: true });
+	execFileSync("pnpm", ["pack", "--pack-destination", pubDir], {
+		cwd: tmpDir,
+		stdio: "inherit",
+	});
 
-await fs.rm(tmpDir, { force: true, recursive: true });
-	Log({ message: "", type: "info", end, color });
-
+	await fs.rm(tmpDir, { force: true, recursive: true });
+	Log({ color, end, message: "", type: "info" });
 };
 
 main().catch((e) => unknownError(e));
