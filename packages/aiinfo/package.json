@@ -1,6 +1,6 @@
 {
 	"dependencies": {
-		"@instructure/shared-types": "11.0.0",
+		"@instructure/shared-types": "^11.0.0",
 		"@instructure/ui-buttons": "^11.0.0",
 		"@instructure/ui-instructure": "^11.0.0",
 		"ansis": "^4.2.0",
