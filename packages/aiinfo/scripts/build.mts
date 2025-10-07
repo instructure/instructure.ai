@@ -72,6 +72,10 @@ const main = async () => {
 
 	Log("Building barrel file...");
 	writeBarrel();
+	Log({
+		color: "greenBright",
+		message: `Wrote barrel file.\n`,
+	});
 
 	Log({ color, end, message: "Build complete." });
 };
