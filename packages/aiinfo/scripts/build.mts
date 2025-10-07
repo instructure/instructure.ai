@@ -37,7 +37,7 @@ const main = async () => {
 	const color = "magenta";
 	Log({ color, message: `Building ${name}`, start });
 	try {
-	let rawEntries: CSV;
+		let rawEntries: CSV;
 		try {
 			rawEntries = parseCSV(cache).parsed;
 		} catch (err) {
