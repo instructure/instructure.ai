@@ -21,7 +21,7 @@
   },
   "version": "0.1.0",
   "name": "@instructure.ai/shared-configs",
-  "packageManager": "pnpm@10.18.0",
+  "packageManager": "pnpm@10.18.1",
   "private": true,
   "scripts": {
     "build": "vite-node ./scripts/build.mts",
