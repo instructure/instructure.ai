@@ -40,7 +40,7 @@ const main = async () => {
 	const rawEntries = parseCSV(cache).parsed;
 	let entries: AiInfo = {};
 
-	Log(`Found ${rawEntries.length} entries`);
+	Log(`Found ${rawEntries.length} entries\n`);
 
 	if (rawEntries.length) {
 		Log("Compiling entries...");
