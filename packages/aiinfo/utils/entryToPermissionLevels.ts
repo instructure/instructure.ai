@@ -16,7 +16,14 @@ const setHighlighted = (
 		}));
 	} catch (err) {
 		console.error("Error in setHighlighted:", err);
-		return [{ description: "Error", level: "Error", title: "Error", highlighted: false }];
+		return [
+			{
+				description: "Error",
+				highlighted: false,
+				level: "Error",
+				title: "Error",
+			},
+		];
 	}
 };
 
@@ -49,7 +56,14 @@ const entryToPermissionLevels = (
 			closeIconButtonScreenReaderLabel: "Error",
 			currentFeature: "Error",
 			currentFeatureText: "Error",
-			data: [{ description: "Error", level: "Error", title: "Error", highlighted: false }],
+			data: [
+				{
+					description: "Error",
+					highlighted: false,
+					level: "Error",
+					title: "Error",
+				},
+			],
 			modalLabel: "Error",
 			title: "Error",
 			triggerText: "Error",

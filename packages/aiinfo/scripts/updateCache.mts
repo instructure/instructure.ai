@@ -63,18 +63,26 @@ const main = async () => {
 	const color = "cyan";
 	Log({ color, message: "Updating Cache", start });
 	try {
-		let data;
+		let data: CSVFetchResult | undefined;
 		try {
 			data = await fetchCSVFromURL();
 		} catch (err) {
-			Log({ color: "redBright", message: ["Error fetching CSV from URL:", err], type: "error" });
+			Log({
+				color: "redBright",
+				message: ["Error fetching CSV from URL:", err],
+				type: "error",
+			});
 			throw err;
 		}
 		if (data) {
 			try {
 				updateCache(data);
 			} catch (err) {
-				Log({ color: "redBright", message: ["Error updating cache:", err], type: "error" });
+				Log({
+					color: "redBright",
+					message: ["Error updating cache:", err],
+					type: "error",
+				});
 				throw err;
 			}
 		} else {
@@ -87,7 +95,11 @@ const main = async () => {
 		}
 		Log({ color, end, message: "AI Info cache update complete." });
 	} catch (error) {
-		Log({ color: "redBright", message: ["Cache update failed:", error], type: "error" });
+		Log({
+			color: "redBright",
+			message: ["Cache update failed:", error],
+			type: "error",
+		});
 		throw error;
 	}
 };
