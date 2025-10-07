@@ -20,9 +20,9 @@ const parseEntries = (entries: CSV): AiInfo => {
 			return [
 				entry[0],
 				{
-					AiInformation: entryToAIInformation(obj),
-					DataPermissionLevels: entryToPermissionLevels(obj),
-					NutritionFacts: entryToNutritionFacts(obj),
+					aiInformation: entryToAIInformation(obj),
+					dataPermissionLevels: entryToPermissionLevels(obj),
+					nutritionFacts: entryToNutritionFacts(obj),
 					revision: obj.revision,
 					uid: obj.uid,
 				},

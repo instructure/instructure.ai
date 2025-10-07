@@ -25,12 +25,12 @@ const writeEntry = (entry: AiInfoFeature) => {
 	try {
 		content = TEMPLATE_PACKAGE.replace(/<<uid>>/g, entry.uid)
 			.replace(/<<data>>/g, toTsObjectLiteral(entry))
-			.replace(/<<nutritionFacts>>/g, toTsObjectLiteral(entry.NutritionFacts))
+			.replace(/<<nutritionFacts>>/g, toTsObjectLiteral(entry.nutritionFacts))
 			.replace(
 				/<<dataPermissionLevels>>/g,
-				toTsObjectLiteral(entry.DataPermissionLevels),
+				toTsObjectLiteral(entry.dataPermissionLevels),
 			)
-			.replace(/<<aiInformation>>/g, toTsObjectLiteral(entry.AiInformation));
+			.replace(/<<aiInformation>>/g, toTsObjectLiteral(entry.aiInformation));
 	} catch (err) {
 		throw new Error(
 			`Failed to generate entry content: ${err instanceof Error ? err.message : String(err)}`,

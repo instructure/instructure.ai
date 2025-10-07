@@ -7,7 +7,7 @@ import type {
 import type { AiInfoFeatureProps } from "../types";
 
 const rubricgenerator: AiInfoFeatureProps = {
-	AiInformation: {
+	aiInformation: {
 		data: [
 			{
 				description:
@@ -164,7 +164,7 @@ const rubricgenerator: AiInfoFeatureProps = {
 		title: "Features",
 		trigger: <Button>AI Information</Button>,
 	},
-	DataPermissionLevels: {
+	dataPermissionLevels: {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
 		currentFeature: "Rubric Creator",
@@ -203,7 +203,7 @@ const rubricgenerator: AiInfoFeatureProps = {
 		title: "Data Permission Levels",
 		triggerText: "Data Permission Levels",
 	},
-	NutritionFacts: {
+	nutritionFacts: {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: [

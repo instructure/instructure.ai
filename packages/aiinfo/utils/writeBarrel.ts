@@ -64,15 +64,15 @@ import type {
 		.join("\n")}\n};`;
 
 	const nutritionFacts = `const nutritionFacts: AiInfoNutritionFactsProps = {\n${uids
-		.map((u) => `\t${u}: ${u}.NutritionFacts,`)
+		.map((u) => `\t${u}: ${u}.nutritionFacts,`)
 		.join("\n")}\n};`;
 
 	const dataPermissionLevels = `const dataPermissionLevels: AiInfoDataPermissionLevelsProps = {\n${uids
-		.map((u) => `\t${u}: ${u}.DataPermissionLevels,`)
+		.map((u) => `\t${u}: ${u}.dataPermissionLevels,`)
 		.join("\n")}\n};`;
 
 	const aiInformation = `const aiInformation: AiInfoAiInformationProps = {\n${uids
-		.map((u) => `\t${u}: ${u}.AiInformation,`)
+		.map((u) => `\t${u}: ${u}.aiInformation,`)
 		.join("\n")}\n};`;
 
 	const exportsBlock = `
