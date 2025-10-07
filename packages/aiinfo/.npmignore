@@ -1,0 +1,4 @@
+*
+!*.md
+!src/
+!package.json
