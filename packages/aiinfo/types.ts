@@ -114,7 +114,6 @@ type AiInformationStrings = Omit<
 	nutritionFactsTitle: string;
 	nutritionFactsCloseButtonText: string;
 	nutritionFactsCloseIconButtonScreenReaderLabel: string;
-	
 };
 
 type NutritionFactsStrings = Omit<
