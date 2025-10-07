@@ -142,7 +142,7 @@ import type { FC } from "react";
 
 const App: FC = () => (
 	<InstUISettingsProvider>
-		<DataPermissionLevels {...smartsearch.dataPermissionLevels} />
+		<DataPermissionLevels {...smartsearch.DataPermissionLevels} />
 	</InstUISettingsProvider>
 );
 export default App;
@@ -207,7 +207,7 @@ const App: FC = () => (
 				smartsearch.AiInformation.nutritionFactsCloseIconButtonScreenReaderLabel
 			}
 			// child object
-			nutritionFactsData={smartsearch.aiInformation.nutritionFactsData}
+			nutritionFactsData={smartsearch.AiInformation.nutritionFactsData}
 			nutritionFactsFeatureName={
 				smartsearch.AiInformation.nutritionFactsFeatureName
 			}
