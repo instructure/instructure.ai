@@ -24,7 +24,11 @@ const writeEntry = (entry: AiInfoFeature) => {
 		)
 		.replace(/<<aiInformation>>/g, toTsObjectLiteral(entry.AiInformation));
 
-	const formatted = formatTs(content);
+	// toTsObjectLiteral only handles ES syntax, so we need to format the code to fix JSX
+	const formatted = formatTs(content).replace(
+		/"<Button>AI Information<\/Button>"/g,
+		"<Button>AI Information</Button>",
+	);
 	writeFileSync(indexPath, formatted, "utf8");
 };
 
