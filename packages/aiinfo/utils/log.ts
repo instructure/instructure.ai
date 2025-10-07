@@ -5,32 +5,31 @@ const groupHeader = (
 	title: string = "",
 	color: LogObject["color"] = "cyan",
 	style: LogObject["style"] = "bold",
-	): string => {
-		try {
-			const line = "═".repeat(38);
-			let header: string = `╔${line}╗\n║ ${title.padEnd(37)}║\n╚${line}╝`;
-			if (color && typeof color === "string" && color in ansis) {
-				header = ansis[color](header);
-			}
-			if (style && typeof style === "string" && style in ansis) {
-				header = ansis[style](header);
-			}
-			return header;
-		} catch (err) {
-			console.error("Error in groupHeader:", err);
-			return `╔══════════════════════════════════════╗\n║ Error generating header             ║\n╚══════════════════════════════════════╝`;
+): string => {
+	try {
+		const line = "═".repeat(38);
+		let header: string = `╔${line}╗\n║ ${title.padEnd(37)}║\n╚${line}╝`;
+		if (color && typeof color === "string" && color in ansis) {
+			header = ansis[color](header);
 		}
-	};
-
-const groupFooter = (color: LogObject["color"] = "cyan"): string =>
-	{
-		try {
-			return ansis[color]("═".repeat(40));
-		} catch (err) {
-			console.error("Error in groupFooter:", err);
-			return "════════════════════════════════════════";
+		if (style && typeof style === "string" && style in ansis) {
+			header = ansis[style](header);
 		}
+		return header;
+	} catch (err) {
+		console.error("Error in groupHeader:", err);
+		return `╔══════════════════════════════════════╗\n║ Error generating header             ║\n╚══════════════════════════════════════╝`;
 	}
+};
+
+const groupFooter = (color: LogObject["color"] = "cyan"): string => {
+	try {
+		return ansis[color]("═".repeat(40));
+	} catch (err) {
+		console.error("Error in groupFooter:", err);
+		return "════════════════════════════════════════";
+	}
+};
 
 const Log = (content: LogProps): void => {
 	try {

@@ -37,11 +37,15 @@ const main = async () => {
 	const color = "magenta";
 	Log({ color, message: `Building ${name}`, start });
 	try {
-		let rawEntries;
+	let rawEntries: CSV;
 		try {
 			rawEntries = parseCSV(cache).parsed;
 		} catch (err) {
-			Log({ color: "redBright", message: ["Error parsing CSV:", err], type: "error" });
+			Log({
+				color: "redBright",
+				message: ["Error parsing CSV:", err],
+				type: "error",
+			});
 			throw err;
 		}
 		let entries: AiInfo = {};
@@ -51,11 +55,19 @@ const main = async () => {
 			try {
 				entries = parseEntries(rawEntries);
 			} catch (err) {
-				Log({ color: "redBright", message: ["Error compiling entries:", err], type: "error" });
+				Log({
+					color: "redBright",
+					message: ["Error compiling entries:", err],
+					type: "error",
+				});
 				throw err;
 			}
 		} else {
-			Log({ color: "yellowBright", message: "No entries found.", type: "info" });
+			Log({
+				color: "yellowBright",
+				message: "No entries found.",
+				type: "info",
+			});
 		}
 		if (!entries) {
 			Log({
@@ -75,7 +87,11 @@ const main = async () => {
 				writeEntry(entry);
 			}
 		} catch (err) {
-			Log({ color: "redBright", message: ["Error writing entries:", err], type: "error" });
+			Log({
+				color: "redBright",
+				message: ["Error writing entries:", err],
+				type: "error",
+			});
 			throw err;
 		}
 		Log({
@@ -86,7 +102,11 @@ const main = async () => {
 		try {
 			writeBarrel();
 		} catch (err) {
-			Log({ color: "redBright", message: ["Error writing barrel file:", err], type: "error" });
+			Log({
+				color: "redBright",
+				message: ["Error writing barrel file:", err],
+				type: "error",
+			});
 			throw err;
 		}
 		Log({
@@ -96,7 +116,11 @@ const main = async () => {
 		Log({ color: "greenBright", message: "Build complete." });
 		Log({ color, end, message: "Build complete." });
 	} catch (error) {
-		Log({ color: "redBright", message: ["Build failed:", error], type: "error" });
+		Log({
+			color: "redBright",
+			message: ["Build failed:", error],
+			type: "error",
+		});
 		throw error;
 	}
 };
