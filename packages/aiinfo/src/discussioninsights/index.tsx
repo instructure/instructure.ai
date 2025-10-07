@@ -7,7 +7,7 @@ import type {
 import type { AiInfoFeatureProps } from "../types";
 
 const discussioninsights: AiInfoFeatureProps = {
-	AiInformation: {
+	aiInformation: {
 		data: [
 			{
 				description:
@@ -163,7 +163,7 @@ const discussioninsights: AiInfoFeatureProps = {
 		title: "Features",
 		trigger: <Button>AI Information</Button>,
 	},
-	DataPermissionLevels: {
+	dataPermissionLevels: {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
 		currentFeature: "Discussion Insights",
@@ -202,7 +202,7 @@ const discussioninsights: AiInfoFeatureProps = {
 		title: "Data Permission Levels",
 		triggerText: "Data Permission Levels",
 	},
-	NutritionFacts: {
+	nutritionFacts: {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: [

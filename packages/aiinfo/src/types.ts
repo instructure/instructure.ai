@@ -5,9 +5,9 @@ import type {
 } from "@instructure/ui-instructure";
 
 type AiInfoFeatureProps = {
-	NutritionFacts: NutritionFactsProps;
-	DataPermissionLevels: DataPermissionLevelsProps;
-	AiInformation: AiInformationProps;
+	nutritionFacts: NutritionFactsProps;
+	dataPermissionLevels: DataPermissionLevelsProps;
+	aiInformation: AiInformationProps;
 	uid: string;
 	revision: string;
 };
