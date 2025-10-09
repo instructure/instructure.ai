@@ -5,7 +5,7 @@
 
 This is a monorepo of apps and packages. Apps are served on [instructure.ai](https://instructure.ai)
 
-Cconfigs and dev dependencies are shared from the root package `@instructure.ai/shared-configs` and extended in workspace packages in `apps` and `/packages`.
+Configs and dev dependencies are shared from the root package `@instructure.ai/shared-configs` and extended in workspace packages in `apps` and `/packages`.
 
 Helper utilities are provided for adding and managing packages.
 
