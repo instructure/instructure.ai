@@ -6,10 +6,7 @@ import { cache, checksum } from "../cache";
 import type { CSVFetchResult, Entry, Hash } from "../types";
 import {
 	CSVURL,
-	entryToAIInformation,
-	entryToNutritionFacts,
 	entryToObj,
-	entryToPermissionLevels,
 	Log,
 	writeBarrel,
 	writeEntry,
@@ -90,13 +87,7 @@ const main = async () => {
 				for (const entry of data.parsed) {
 					// Ensure the entry object includes all required AiInfoFeature properties
 					const EntryObj: Entry = entryToObj(entry);
-					writeEntry({
-						aiInformation: entryToAIInformation(EntryObj),
-						dataPermissionLevels: entryToPermissionLevels(EntryObj),
-						nutritionFacts: entryToNutritionFacts(EntryObj),
-						revision: EntryObj.revision,
-						uid: EntryObj.uid,
-					});
+					writeEntry(EntryObj);
 				}
 				// Call writeBarrel after writing entries
 				writeBarrel();
