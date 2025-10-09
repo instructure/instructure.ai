@@ -41,20 +41,7 @@ const setData = (
 			})),
 		}));
 	} catch (err) {
-		console.error("Error in setData (NutritionFacts):", err);
-		return [
-			{
-				blockTitle: "Error",
-				segmentData: [
-					{
-						description: "Error",
-						segmentTitle: "Error",
-						value: "Error",
-						valueDescription: "Error",
-					},
-				],
-			},
-		];
+		throw new Error(`Error in entryToNutritionFacts: ${String(err)}`);
 	}
 };
 
@@ -74,28 +61,7 @@ const entryToNutritionFacts = (
 			triggerText: s.triggerText,
 		};
 	} catch (err) {
-		console.error("Error in entryToNutritionFacts:", err);
-		return {
-			closeButtonText: "Error",
-			closeIconButtonScreenReaderLabel: "Error",
-			data: [
-				{
-					blockTitle: "Error",
-					segmentData: [
-						{
-							description: "Error",
-							segmentTitle: "Error",
-							value: "Error",
-							valueDescription: "Error",
-						},
-					],
-				},
-			],
-			featureName: "Error",
-			modalLabel: "Error",
-			title: "Error",
-			triggerText: "Error",
-		};
+		throw new Error(`Error in entryToNutritionFacts: ${String(err)}`);
 	}
 };
 
