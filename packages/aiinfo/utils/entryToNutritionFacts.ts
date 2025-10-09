@@ -4,7 +4,7 @@ import type { AiInfoFeature, Entry, NutritionFactsStrings } from "../types.js";
 const setData = (
 	data: NutritionFactsStrings["data"],
 	entry: Entry,
-): AiInfoFeature["NutritionFacts"]["data"] => {
+): AiInfoFeature["nutritionFacts"]["data"] => {
 	try {
 		const { model, compliance, outputs } = entry;
 		const valueMap = [
@@ -60,7 +60,7 @@ const setData = (
 
 const entryToNutritionFacts = (
 	entry: Entry,
-): AiInfoFeature["NutritionFacts"] => {
+): AiInfoFeature["nutritionFacts"] => {
 	try {
 		const { en: s } = nutritionFactsStrings as { en: NutritionFactsStrings };
 		const { feature } = entry;

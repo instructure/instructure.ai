@@ -8,7 +8,7 @@ import type {
 const setHighlighted = (
 	data: DataPermissionLevelsStrings["data"],
 	level: Entry["permissions"],
-): AiInfoFeature["DataPermissionLevels"]["data"] => {
+): AiInfoFeature["dataPermissionLevels"]["data"] => {
 	try {
 		return data.map((entry, idx) => ({
 			...entry,
@@ -29,7 +29,7 @@ const setHighlighted = (
 
 const entryToPermissionLevels = (
 	entry: Entry,
-): AiInfoFeature["DataPermissionLevels"] => {
+): AiInfoFeature["dataPermissionLevels"] => {
 	try {
 		const {
 			feature: { name },

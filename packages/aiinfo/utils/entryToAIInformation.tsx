@@ -5,7 +5,7 @@ import { entryToNutritionFacts, entryToPermissionLevels } from "./";
 const setData = (
 	data: AiInformationStrings["data"],
 	entry: Entry,
-): AiInfoFeature["AiInformation"]["data"] => {
+): AiInfoFeature["aiInformation"]["data"] => {
 	try {
 		return [
 			{
@@ -40,7 +40,7 @@ const setData = (
 	}
 };
 
-const entryToAIInformation = (entry: Entry): AiInfoFeature["AiInformation"] => {
+const entryToAIInformation = (entry: Entry): AiInfoFeature["aiInformation"] => {
 	try {
 		const { en: s } = aiInformationStrings as { en: AiInformationStrings };
 		const nutritionFacts = entryToNutritionFacts(entry);
