@@ -1,8 +1,7 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { AiInfoFeature } from "../types";
-import { formatTs } from "../utils/formatTs";
-import { toTsObjectLiteral } from "../utils/toTsObjectLiteral";
+import { formatTs, toTsObjectLiteral } from "../utils";
 import { TEMPLATE_PACKAGE } from "./";
 
 const writeEntry = (entry: AiInfoFeature) => {
