@@ -4,10 +4,6 @@
 		"@instructure/ui-buttons": ">=10.22.0 < 12",
 		"@instructure/ui-instructure": ">=10.22.0 < 12"
 	},
-	"peerDependencies": {
-		"react": "^18 || ^19",
-		"react-dom": "^18 || ^19"
-	},
 	"devDependencies": {
 		"@instructure.ai/shared-configs": "workspace:^",
 		"@types/papaparse": "^5.3.16",
@@ -22,9 +18,9 @@
 	},
 	"exports": {
 		".": {
-			"types": "./dist/index.d.ts",
+			"default": "./dist/index.mjs",
 			"import": "./dist/index.mjs",
-			"default": "./dist/index.mjs"
+			"types": "./dist/index.d.ts"
 		}
 	},
 	"files": [
@@ -33,17 +29,21 @@
 	],
 	"module": "./dist/index.mjs",
 	"name": "@instructure.ai/aiinfo",
+	"peerDependencies": {
+		"react": "^18 || ^19",
+		"react-dom": "^18 || ^19"
+	},
 	"publishConfig": {
 		"access": "public"
 	},
 	"scripts": {
 		"build": "vite build",
-		"update:cache": "UPDATE=1 vite-node ./scripts/updateCache.mts",
 		"bundle": "pnpm update:cache && pnpm build && biome check ./src --write",
+		"lint": "pnpm biome check",
 		"package": "pnpm bundle && pnpm pack --pack-destination ./dist",
 		"prepublish": "pnpm package",
-		"lint": "pnpm biome check",
-		"typecheck": "tsgo --noEmit"
+		"typecheck": "tsgo --noEmit",
+		"update:cache": "UPDATE=1 vite-node ./scripts/updateCache.mts"
 	},
 	"sideEffects": false,
 	"type": "module",

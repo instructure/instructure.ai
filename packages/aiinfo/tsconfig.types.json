@@ -1,14 +1,22 @@
 {
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "rootDir": "src",
-    "outDir": "dist",
-    "skipLibCheck": true,
-    "moduleResolution": "Bundler",
-    "jsx": "react-jsx"
-  },
-  "include": ["src"],
-  "exclude": ["**/*.test.*", "**/__tests__/**", "scripts/**", "utils/**", "dist/**", "**/*.config.*", "vite.config.*"]
+	"compilerOptions": {
+		"declaration": true,
+		"emitDeclarationOnly": true,
+		"jsx": "react-jsx",
+		"moduleResolution": "Bundler",
+		"outDir": "dist",
+		"rootDir": "src",
+		"skipLibCheck": true
+	},
+	"exclude": [
+		"**/*.test.*",
+		"**/__tests__/**",
+		"scripts/**",
+		"utils/**",
+		"dist/**",
+		"**/*.config.*",
+		"vite.config.*"
+	],
+	"extends": "./tsconfig.json",
+	"include": ["src"]
 }
