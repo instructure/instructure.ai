@@ -1,6 +1,6 @@
 # @instructure.ai/aiinfo
 
-A TypeScript package providing (IgniteAI)[https://www.instructure.com/igniteai] feature metadata, nutrition facts, and data permission levels for Instructure products. This package is designed to help developers and product teams understand, display, and manage information about AI features.
+A TypeScript package providing [IgniteAI](https://www.instructure.com/igniteai) feature metadata, nutrition facts, and data permission levels for Instructure products. This package is designed to help developers and product teams understand, display, and manage information about AI features.
 
 ## Entries
 
