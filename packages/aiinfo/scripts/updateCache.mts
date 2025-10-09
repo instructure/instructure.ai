@@ -3,8 +3,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { parse } from "papaparse";
 import { cache, checksum } from "../cache";
-import type { CSVFetchResult, Hash } from "../types";
-import { CSVURL, Log } from "../utils";
+import type { CSVFetchResult, Entry, Hash } from "../types";
+import {
+	CSVURL,
+	entryToObj,
+	Log,
+	writeBarrel,
+	writeEntry,
+} from "../utils";
 
 const generateChecksum = (data: string): Hash => {
 	const hash = createHash("shake128", { outputLength: 32 })
@@ -77,10 +83,18 @@ const main = async () => {
 		if (data) {
 			try {
 				updateCache(data);
+				// Call writeEntry for each parsed entry
+				for (const entry of data.parsed) {
+					// Ensure the entry object includes all required AiInfoFeature properties
+					const EntryObj: Entry = entryToObj(entry);
+					writeEntry(EntryObj);
+				}
+				// Call writeBarrel after writing entries
+				writeBarrel();
 			} catch (err) {
 				Log({
 					color: "redBright",
-					message: ["Error updating cache:", err],
+					message: ["Error updating cache or writing entries:", err],
 					type: "error",
 				});
 				throw err;

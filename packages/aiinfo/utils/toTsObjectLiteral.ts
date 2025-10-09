@@ -12,8 +12,7 @@ class RawTs {
 		try {
 			this.code = code;
 		} catch (err) {
-			console.error("Error in RawTs constructor:", err);
-			this.code = "";
+			throw new Error(`Error in RawTs constructor: ${String(err)}`);
 		}
 	}
 }
@@ -65,8 +64,7 @@ export function toTsObjectLiteral(value: unknown): string {
 				return "undefined";
 		}
 	} catch (err) {
-		console.error("Error in toTsObjectLiteral:", err);
-		return `"Error converting to TypeScript object literal"`;
+		throw new Error(`Error in toTsObjectLiteral: ${String(err)}`);
 	}
 }
 

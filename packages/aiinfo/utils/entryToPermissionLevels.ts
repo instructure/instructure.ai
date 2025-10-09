@@ -8,28 +8,20 @@ import type {
 const setHighlighted = (
 	data: DataPermissionLevelsStrings["data"],
 	level: Entry["permissions"],
-): AiInfoFeature["DataPermissionLevels"]["data"] => {
+): AiInfoFeature["dataPermissionLevels"]["data"] => {
 	try {
 		return data.map((entry, idx) => ({
 			...entry,
 			highlighted: idx === Number(level) - 1,
 		}));
 	} catch (err) {
-		console.error("Error in setHighlighted:", err);
-		return [
-			{
-				description: "Error",
-				highlighted: false,
-				level: "Error",
-				title: "Error",
-			},
-		];
+		throw new Error(`Error in entryToPermissionLevels: ${String(err)}`);
 	}
 };
 
 const entryToPermissionLevels = (
 	entry: Entry,
-): AiInfoFeature["DataPermissionLevels"] => {
+): AiInfoFeature["dataPermissionLevels"] => {
 	try {
 		const {
 			feature: { name },
@@ -50,24 +42,7 @@ const entryToPermissionLevels = (
 			triggerText: s.triggerText,
 		};
 	} catch (err) {
-		console.error("Error in entryToPermissionLevels:", err);
-		return {
-			closeButtonText: "Error",
-			closeIconButtonScreenReaderLabel: "Error",
-			currentFeature: "Error",
-			currentFeatureText: "Error",
-			data: [
-				{
-					description: "Error",
-					highlighted: false,
-					level: "Error",
-					title: "Error",
-				},
-			],
-			modalLabel: "Error",
-			title: "Error",
-			triggerText: "Error",
-		};
+		throw new Error(`Error in entryToPermissionLevels: ${String(err)}`);
 	}
 };
 

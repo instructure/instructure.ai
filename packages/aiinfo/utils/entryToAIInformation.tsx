@@ -5,7 +5,7 @@ import { entryToNutritionFacts, entryToPermissionLevels } from "./";
 const setData = (
 	data: AiInformationStrings["data"],
 	entry: Entry,
-): AiInfoFeature["AiInformation"]["data"] => {
+): AiInfoFeature["aiInformation"]["data"] => {
 	try {
 		return [
 			{
@@ -24,23 +24,11 @@ const setData = (
 			},
 		];
 	} catch (err) {
-		console.error("Error in setData:", err);
-		return [
-			{
-				description: "Error",
-				featureName: "Error",
-				modelName: "Error",
-				modelNameText: "Error",
-				nutritionFactsModalTriggerText: "Error",
-				permissionLevel: "Error",
-				permissionLevelsModalTriggerText: "Error",
-				permissionLevelText: "Error",
-			},
-		];
+		throw new Error(`Error in entryToAIInformation: ${String(err)}`);
 	}
 };
 
-const entryToAIInformation = (entry: Entry): AiInfoFeature["AiInformation"] => {
+const entryToAIInformation = (entry: Entry): AiInfoFeature["aiInformation"] => {
 	try {
 		const { en: s } = aiInformationStrings as { en: AiInformationStrings };
 		const nutritionFacts = entryToNutritionFacts(entry);
@@ -55,36 +43,7 @@ const entryToAIInformation = (entry: Entry): AiInfoFeature["AiInformation"] => {
 			trigger: s.trigger,
 		};
 	} catch (err) {
-		console.error("Error in entryToAIInformation:", err);
-		return {
-			data: [
-				{
-					description: "Error",
-					featureName: "Error",
-					modelName: "Error",
-					modelNameText: "Error",
-					nutritionFactsModalTriggerText: "Error",
-					permissionLevel: "Error",
-					permissionLevelsModalTriggerText: "Error",
-					permissionLevelText: "Error",
-				},
-			],
-			dataPermissionLevelsCloseButtonText: "Error",
-			dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Error",
-			dataPermissionLevelsCurrentFeature: "Error",
-			dataPermissionLevelsCurrentFeatureText: "Error",
-			dataPermissionLevelsData: [],
-			dataPermissionLevelsModalLabel: "Error",
-			dataPermissionLevelsTitle: "Error",
-			nutritionFactsCloseButtonText: "Error",
-			nutritionFactsCloseIconButtonScreenReaderLabel: "Error",
-			nutritionFactsData: [],
-			nutritionFactsFeatureName: "Error",
-			nutritionFactsModalLabel: "Error",
-			nutritionFactsTitle: "Error",
-			title: "Error",
-			trigger: "Error",
-		};
+		throw new Error(`Error in entryToAIInformation: ${String(err)}`);
 	}
 };
 

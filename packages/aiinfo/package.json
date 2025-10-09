@@ -1,36 +1,53 @@
 {
 	"dependencies": {
-		"@instructure/shared-types": "^11.0.0",
-		"@instructure/ui-buttons": "^11.0.0",
-		"@instructure/ui-instructure": "^11.0.0"
+		"@instructure/shared-types": ">=10.22.0 < 12",
+		"@instructure/ui-buttons": ">=10.22.0 < 12",
+		"@instructure/ui-instructure": ">=10.22.0 < 12"
 	},
 	"devDependencies": {
 		"@instructure.ai/shared-configs": "workspace:^",
-		"@npmcli/arborist": "^9.1.5",
-		"@types/npm-packlist": "^7.0.3",
-		"@types/npmcli__arborist": "^6.3.1",
 		"@types/papaparse": "^5.3.16",
 		"ansis": "^4.2.0",
-		"npm-packlist": "^10.0.2",
 		"papaparse": "^5.5.3",
 		"typescript": "^5.9.3",
+		"vite-plugin-dts": "^4.5.4",
 		"vite-tsconfig-paths": "^5.1.4"
 	},
+	"engines": {
+		"node": ">=22"
+	},
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.mjs"
+		}
+	},
 	"files": [
-		"src/",
+		"dist",
 		"*.md"
 	],
+	"module": "./dist/index.mjs",
 	"name": "@instructure.ai/aiinfo",
-	"private": true,
+	"peerDependencies": {
+		"react": "^18 || ^19",
+		"react-dom": "^18 || ^19"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
-		"build": "BUILD=1 vite-node ./scripts/build.mts",
+		"build": "vite build",
 		"bundle": "pnpm update:cache && pnpm build && biome check ./src --write",
 		"lint": "pnpm biome check",
-		"package": "pnpm bundle && vite-node ./scripts/package.mts",
+		"package": "pnpm bundle && pnpm pack --pack-destination ./dist",
+		"prepublish": "pnpm package",
+		"publish:public": "pnpm publish ./dist/instructure.ai-aiinfo-$npm_package_version.tgz --access public --no-git-checks",
 		"typecheck": "tsgo --noEmit",
 		"update:cache": "UPDATE=1 vite-node ./scripts/updateCache.mts"
 	},
+	"sideEffects": false,
 	"type": "module",
-	"types": "./src/index.ts",
-	"version": "1.0.2"
+	"types": "./dist/index.d.ts",
+	"version": "1.1.0"
 }

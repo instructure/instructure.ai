@@ -4,7 +4,7 @@ import type { AiInfoFeature, Entry, NutritionFactsStrings } from "../types.js";
 const setData = (
 	data: NutritionFactsStrings["data"],
 	entry: Entry,
-): AiInfoFeature["NutritionFacts"]["data"] => {
+): AiInfoFeature["nutritionFacts"]["data"] => {
 	try {
 		const { model, compliance, outputs } = entry;
 		const valueMap = [
@@ -41,26 +41,13 @@ const setData = (
 			})),
 		}));
 	} catch (err) {
-		console.error("Error in setData (NutritionFacts):", err);
-		return [
-			{
-				blockTitle: "Error",
-				segmentData: [
-					{
-						description: "Error",
-						segmentTitle: "Error",
-						value: "Error",
-						valueDescription: "Error",
-					},
-				],
-			},
-		];
+		throw new Error(`Error in entryToNutritionFacts: ${String(err)}`);
 	}
 };
 
 const entryToNutritionFacts = (
 	entry: Entry,
-): AiInfoFeature["NutritionFacts"] => {
+): AiInfoFeature["nutritionFacts"] => {
 	try {
 		const { en: s } = nutritionFactsStrings as { en: NutritionFactsStrings };
 		const { feature } = entry;
@@ -74,28 +61,7 @@ const entryToNutritionFacts = (
 			triggerText: s.triggerText,
 		};
 	} catch (err) {
-		console.error("Error in entryToNutritionFacts:", err);
-		return {
-			closeButtonText: "Error",
-			closeIconButtonScreenReaderLabel: "Error",
-			data: [
-				{
-					blockTitle: "Error",
-					segmentData: [
-						{
-							description: "Error",
-							segmentTitle: "Error",
-							value: "Error",
-							valueDescription: "Error",
-						},
-					],
-				},
-			],
-			featureName: "Error",
-			modalLabel: "Error",
-			title: "Error",
-			triggerText: "Error",
-		};
+		throw new Error(`Error in entryToNutritionFacts: ${String(err)}`);
 	}
 };
 

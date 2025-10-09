@@ -1,61 +1,76 @@
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
-import type { AiInfoFeature } from "../types";
-import { formatTs } from "../utils/formatTs";
-import { toTsObjectLiteral } from "../utils/toTsObjectLiteral";
-import { TEMPLATE_PACKAGE } from "./";
+import { writeFileSync, mkdirSync } from "node:fs";
+import { resolve, dirname } from "node:path";
+import { formatTs, toTsObjectLiteral, entryToAIInformation, entryToPermissionLevels, entryToNutritionFacts } from "../utils";
+import type { Entry } from "../types";
 
-const writeEntry = (entry: AiInfoFeature) => {
-	const srcDir = join(__dirname, "../src");
-	const entryDir = join(srcDir, entry.uid);
 
-	if (!existsSync(entryDir)) {
-		try {
-			mkdirSync(entryDir, { recursive: true });
-		} catch (err) {
-			throw new Error(
-				`Failed to create directory '${entryDir}': ${err instanceof Error ? err.message : String(err)}`,
-			);
-		}
-	}
 
-	const indexPath = join(entryDir, "index.tsx");
+export async function writeEntry(entry: Entry) {
+  const file = resolve(process.cwd(), "src", entry.uid, "index.tsx");
 
-	let content: string;
-	try {
-		content = TEMPLATE_PACKAGE.replace(/<<uid>>/g, entry.uid)
-			.replace(/<<data>>/g, toTsObjectLiteral(entry))
-			.replace(/<<nutritionFacts>>/g, toTsObjectLiteral(entry.nutritionFacts))
-			.replace(
-				/<<dataPermissionLevels>>/g,
-				toTsObjectLiteral(entry.dataPermissionLevels),
-			)
-			.replace(/<<aiInformation>>/g, toTsObjectLiteral(entry.aiInformation));
-	} catch (err) {
-		throw new Error(
-			`Failed to generate entry content: ${err instanceof Error ? err.message : String(err)}`,
-		);
-	}
+  const UID = entry.uid;
+  const FEATURE_NAME = entry.feature.name;
+  const REVISION = entry.revision;
 
-	let formatted: string;
-	try {
-		formatted = formatTs(content).replace(
-			/"<Button>AI Information<\/Button>"/g,
-			"<Button>AI Information</Button>",
-		);
-	} catch (err) {
-		throw new Error(
-			`Failed to format TypeScript code: ${err instanceof Error ? err.message : String(err)}`,
-		);
-	}
+	const nutritionFacts = entryToNutritionFacts(entry);
+	const aiInformation = entryToAIInformation(entry);
+	const dataPermissionLevels = entryToPermissionLevels(entry);
 
-	try {
-		writeFileSync(indexPath, formatted, "utf8");
-	} catch (err) {
-		throw new Error(
-			`Failed to write entry file '${indexPath}': ${err instanceof Error ? err.message : String(err)}`,
-		);
-	}
+  const DPL = dataPermissionLevels.data;
+  const NF = nutritionFacts.data;
+
+  const code = `import { Button } from "@instructure/ui-buttons";
+import type {
+  AiInformationProps,
+  DataPermissionLevelsProps,
+  NutritionFactsProps,
+} from "@instructure/ui-instructure";
+import type { AiInfoFeatureProps } from "../types";
+
+const FEATURE_NAME = ${JSON.stringify(FEATURE_NAME)};
+const UID = ${JSON.stringify(UID)};
+
+const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = ${toTsObjectLiteral(DPL)};
+const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = ${toTsObjectLiteral(NF)};
+
+const nutritionFacts: NutritionFactsProps = {
+  ...${toTsObjectLiteral({ ...nutritionFacts, data: undefined })},
+  data: NUTRITION_FACTS_DATA,
+  featureName: FEATURE_NAME,
 };
 
-export { writeEntry };
+const dataPermissionLevels: DataPermissionLevelsProps = {
+  ...${toTsObjectLiteral({ ...dataPermissionLevels, data: undefined })},
+  data: DATA_PERMISSION_LEVELS,
+  currentFeature: FEATURE_NAME,
+};
+const aiInformation: AiInformationProps = {
+  ...${toTsObjectLiteral({ ...aiInformation, dataPermissionLevelsData: undefined, nutritionFactsData: undefined, trigger: undefined })},
+  dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
+  nutritionFactsData: NUTRITION_FACTS_DATA,
+	trigger: "${aiInformation.trigger}",
+};
+
+const ${UID}: AiInfoFeatureProps = {
+  aiInformation,
+  dataPermissionLevels,
+  nutritionFacts,
+  revision: ${JSON.stringify(REVISION)},
+  uid: UID,
+}
+export {
+	${UID}
+  nutritionFacts,
+  dataPermissionLevels,
+  aiInformation,
+};
+export default ${UID};
+`;
+
+  const pretty = formatTs(code, "index.tsx").replace(
+      /"<Button>AI Information<\/Button>"/g,
+      "<Button>AI Information</Button>",
+    );
+  mkdirSync(dirname(file), { recursive: true });
+  writeFileSync(file, pretty, "utf8");
+}
