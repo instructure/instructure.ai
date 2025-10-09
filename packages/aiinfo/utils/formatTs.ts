@@ -15,7 +15,6 @@ export function formatTs(code: string, fileName = "index.tsx"): string {
 		});
 		return printer.printFile(sourceFile);
 	} catch (err) {
-		console.error("Error in formatTs:", err);
-		return `// Error formatting TypeScript code: ${err}`;
+		throw new Error(`Error formatting TypeScript code: ${String(err)}`);
 	}
 }
