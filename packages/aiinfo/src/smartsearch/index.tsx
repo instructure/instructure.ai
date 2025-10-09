@@ -153,7 +153,7 @@ const smartsearch: AiInfoFeatureProps = {
 							"The specific results the AI model is meant to achieve.",
 						segmentTitle: "Intended Outcomes",
 						value:
-							"Student are able to quicly find answers to questions, and instructors are able to quickly navigate their courses.",
+							"Students are able to quickly find answers to questions, and instructors are able to quickly navigate their courses.",
 					},
 				],
 			},
@@ -300,7 +300,7 @@ const smartsearch: AiInfoFeatureProps = {
 							"The specific results the AI model is meant to achieve.",
 						segmentTitle: "Intended Outcomes",
 						value:
-							"Student are able to quicly find answers to questions, and instructors are able to quickly navigate their courses.",
+							"Students are able to quickly find answers to questions, and instructors are able to quickly navigate their courses.",
 					},
 				],
 			},
@@ -310,7 +310,7 @@ const smartsearch: AiInfoFeatureProps = {
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
 	},
-	revision: "2025.09.12",
+	revision: "2025.10.02",
 	uid: "smartsearch",
 };
 const nutritionFacts: NutritionFactsProps = {
@@ -409,7 +409,7 @@ const nutritionFacts: NutritionFactsProps = {
 					description: "The specific results the AI model is meant to achieve.",
 					segmentTitle: "Intended Outcomes",
 					value:
-						"Student are able to quicly find answers to questions, and instructors are able to quickly navigate their courses.",
+						"Students are able to quickly find answers to questions, and instructors are able to quickly navigate their courses.",
 				},
 			],
 		},
@@ -603,7 +603,7 @@ const aiInformation: AiInformationProps = {
 					description: "The specific results the AI model is meant to achieve.",
 					segmentTitle: "Intended Outcomes",
 					value:
-						"Student are able to quicly find answers to questions, and instructors are able to quickly navigate their courses.",
+						"Students are able to quickly find answers to questions, and instructors are able to quickly navigate their courses.",
 				},
 			],
 		},

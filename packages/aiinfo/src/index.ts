@@ -11,59 +11,48 @@ import { smartsearch } from "./smartsearch";
 import type {
 	AiInfoAiInformationProps,
 	AiInfoDataPermissionLevelsProps,
-	AiInfoFeatureProps,
 	AiInfoNutritionFactsProps,
 	AiInfoProps,
 } from "./types";
 
+const pluck = <
+	TRecord extends Record<string, object>,
+	K extends keyof TRecord[keyof TRecord],
+>(
+	obj: TRecord,
+	key: K,
+): {
+	[P in keyof TRecord]: TRecord[P][K];
+} => {
+	const out = {} as {
+		[P in keyof TRecord]: TRecord[P][K];
+	};
+	for (const k in obj) {
+		out[k] = obj[k][key];
+	}
+	return out;
+};
 const AiInfo: AiInfoProps = {
-	askyourdata: askyourdata,
-	bcealttext: bcealttext,
-	canvascoursetranslation: canvascoursetranslation,
-	canvasdiscussionsummaries: canvasdiscussionsummaries,
-	canvasgradingassistance: canvasgradingassistance,
-	canvasinboxtranslation: canvasinboxtranslation,
-	discussioninsights: discussioninsights,
-	igniteagent: igniteagent,
-	rubricgenerator: rubricgenerator,
-	smartsearch: smartsearch,
+	askyourdata,
+	bcealttext,
+	canvascoursetranslation,
+	canvasdiscussionsummaries,
+	canvasgradingassistance,
+	canvasinboxtranslation,
+	discussioninsights,
+	igniteagent,
+	rubricgenerator,
+	smartsearch,
 };
-const nutritionFacts: AiInfoNutritionFactsProps = {
-	askyourdata: askyourdata.nutritionFacts,
-	bcealttext: bcealttext.nutritionFacts,
-	canvascoursetranslation: canvascoursetranslation.nutritionFacts,
-	canvasdiscussionsummaries: canvasdiscussionsummaries.nutritionFacts,
-	canvasgradingassistance: canvasgradingassistance.nutritionFacts,
-	canvasinboxtranslation: canvasinboxtranslation.nutritionFacts,
-	discussioninsights: discussioninsights.nutritionFacts,
-	igniteagent: igniteagent.nutritionFacts,
-	rubricgenerator: rubricgenerator.nutritionFacts,
-	smartsearch: smartsearch.nutritionFacts,
-};
-const dataPermissionLevels: AiInfoDataPermissionLevelsProps = {
-	askyourdata: askyourdata.dataPermissionLevels,
-	bcealttext: bcealttext.dataPermissionLevels,
-	canvascoursetranslation: canvascoursetranslation.dataPermissionLevels,
-	canvasdiscussionsummaries: canvasdiscussionsummaries.dataPermissionLevels,
-	canvasgradingassistance: canvasgradingassistance.dataPermissionLevels,
-	canvasinboxtranslation: canvasinboxtranslation.dataPermissionLevels,
-	discussioninsights: discussioninsights.dataPermissionLevels,
-	igniteagent: igniteagent.dataPermissionLevels,
-	rubricgenerator: rubricgenerator.dataPermissionLevels,
-	smartsearch: smartsearch.dataPermissionLevels,
-};
-const aiInformation: AiInfoAiInformationProps = {
-	askyourdata: askyourdata.aiInformation,
-	bcealttext: bcealttext.aiInformation,
-	canvascoursetranslation: canvascoursetranslation.aiInformation,
-	canvasdiscussionsummaries: canvasdiscussionsummaries.aiInformation,
-	canvasgradingassistance: canvasgradingassistance.aiInformation,
-	canvasinboxtranslation: canvasinboxtranslation.aiInformation,
-	discussioninsights: discussioninsights.aiInformation,
-	igniteagent: igniteagent.aiInformation,
-	rubricgenerator: rubricgenerator.aiInformation,
-	smartsearch: smartsearch.aiInformation,
-};
+const nutritionFacts: AiInfoNutritionFactsProps = pluck(
+	AiInfo,
+	"nutritionFacts",
+);
+const dataPermissionLevels: AiInfoDataPermissionLevelsProps = pluck(
+	AiInfo,
+	"dataPermissionLevels",
+);
+const aiInformation: AiInfoAiInformationProps = pluck(AiInfo, "aiInformation");
 export {
 	AiInfo,
 	nutritionFacts,
@@ -80,11 +69,5 @@ export {
 	rubricgenerator,
 	smartsearch,
 };
-export type {
-	AiInfoProps,
-	AiInfoFeatureProps,
-	AiInfoNutritionFactsProps,
-	AiInfoDataPermissionLevelsProps,
-	AiInfoAiInformationProps,
-};
+export type * from "./types";
 export default AiInfo;

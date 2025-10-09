@@ -152,7 +152,7 @@ const discussioninsights: AiInfoFeatureProps = {
 							"The specific results the AI model is meant to achieve.",
 						segmentTitle: "Intended Outcomes",
 						value:
-							"Instructors are able to quickly assess the quality of student replies, identify low-effor or off-topic contributions, and focus their attention to where it is needed most.",
+							"Instructors are able to quickly assess the quality of student replies, identify low-effort or off-topic contributions, and focus their attention to where it is needed most.",
 					},
 				],
 			},
@@ -298,7 +298,7 @@ const discussioninsights: AiInfoFeatureProps = {
 							"The specific results the AI model is meant to achieve.",
 						segmentTitle: "Intended Outcomes",
 						value:
-							"Instructors are able to quickly assess the quality of student replies, identify low-effor or off-topic contributions, and focus their attention to where it is needed most.",
+							"Instructors are able to quickly assess the quality of student replies, identify low-effort or off-topic contributions, and focus their attention to where it is needed most.",
 					},
 				],
 			},
@@ -308,7 +308,7 @@ const discussioninsights: AiInfoFeatureProps = {
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
 	},
-	revision: "2025.09.12",
+	revision: "2025.10.02",
 	uid: "discussioninsights",
 };
 const nutritionFacts: NutritionFactsProps = {
@@ -406,7 +406,7 @@ const nutritionFacts: NutritionFactsProps = {
 					description: "The specific results the AI model is meant to achieve.",
 					segmentTitle: "Intended Outcomes",
 					value:
-						"Instructors are able to quickly assess the quality of student replies, identify low-effor or off-topic contributions, and focus their attention to where it is needed most.",
+						"Instructors are able to quickly assess the quality of student replies, identify low-effort or off-topic contributions, and focus their attention to where it is needed most.",
 				},
 			],
 		},
@@ -599,7 +599,7 @@ const aiInformation: AiInformationProps = {
 					description: "The specific results the AI model is meant to achieve.",
 					segmentTitle: "Intended Outcomes",
 					value:
-						"Instructors are able to quickly assess the quality of student replies, identify low-effor or off-topic contributions, and focus their attention to where it is needed most.",
+						"Instructors are able to quickly assess the quality of student replies, identify low-effort or off-topic contributions, and focus their attention to where it is needed most.",
 				},
 			],
 		},

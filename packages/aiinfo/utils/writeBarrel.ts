@@ -16,7 +16,7 @@ const writeBarrel = (opts: Options = {}) => {
 	const isDir = (p: string) => {
 		try {
 			return statSync(p).isDirectory();
-		} catch (_err) {
+		} catch {
 			return false;
 		}
 	};
@@ -30,7 +30,9 @@ const writeBarrel = (opts: Options = {}) => {
 		);
 	} catch (err) {
 		throw new Error(
-			`Failed to read directory '${SRC_DIR}': ${err instanceof Error ? err.message : String(err)}`,
+			`Failed to read directory '${SRC_DIR}': ${
+				err instanceof Error ? err.message : String(err)
+			}`,
 		);
 	}
 
@@ -47,33 +49,37 @@ const writeBarrel = (opts: Options = {}) => {
 		}
 	}
 
-	const header = `
-import type {
-  AiInfoAiInformationProps,
-  AiInfoDataPermissionLevelsProps,
-  AiInfoFeatureProps,
-  AiInfoNutritionFactsProps,
+	const imports =
+		uids.map((u) => `import { ${u} } from "./${u}";`).join("\n") ||
+		"// no feature folders found";
+
+	const typesImport = `import type {
   AiInfoProps,
-} from "./types";
-`.trim();
+  AiInfoNutritionFactsProps,
+  AiInfoDataPermissionLevelsProps,
+  AiInfoAiInformationProps
+} from "./types";`;
 
-	const imports = uids.map((u) => `import { ${u} } from "./${u}";`).join("\n");
+	const pluckHelper = `const pluck = <
+    TRecord extends Record<string, object>,
+    K extends keyof TRecord[keyof TRecord]
+  >(obj: TRecord, key: K): { [P in keyof TRecord]: TRecord[P][K] } => {
+    const out = {} as { [P in keyof TRecord]: TRecord[P][K] };
+    for (const k in obj) {
+      out[k] = obj[k][key];
+    }
+    return out;
+  };`;
 
-	const AiInfo = `const AiInfo: AiInfoProps = {\n${uids
-		.map((u) => `\t${u}: ${u},`)
-		.join("\n")}\n};`;
+	const AiInfo = `const AiInfo: AiInfoProps = {
+${uids.map((u) => `  ${u},`).join("\n")}
+};`;
 
-	const nutritionFacts = `const nutritionFacts: AiInfoNutritionFactsProps = {\n${uids
-		.map((u) => `\t${u}: ${u}.nutritionFacts,`)
-		.join("\n")}\n};`;
+	const nutritionFacts = `const nutritionFacts: AiInfoNutritionFactsProps = pluck(AiInfo, "nutritionFacts");`;
 
-	const dataPermissionLevels = `const dataPermissionLevels: AiInfoDataPermissionLevelsProps = {\n${uids
-		.map((u) => `\t${u}: ${u}.dataPermissionLevels,`)
-		.join("\n")}\n};`;
+	const dataPermissionLevels = `const dataPermissionLevels: AiInfoDataPermissionLevelsProps = pluck(AiInfo, "dataPermissionLevels");`;
 
-	const aiInformation = `const aiInformation: AiInfoAiInformationProps = {\n${uids
-		.map((u) => `\t${u}: ${u}.aiInformation,`)
-		.join("\n")}\n};`;
+	const aiInformation = `const aiInformation: AiInfoAiInformationProps = pluck(AiInfo, "aiInformation");`;
 
 	const exportsBlock = `
 export {
@@ -81,21 +87,16 @@ export {
   nutritionFacts,
   dataPermissionLevels,
   aiInformation,
-  ${uids.join(",\n  ")},
+  ${uids.join(",\n  ")}
 };
-export type {
-  AiInfoProps,
-  AiInfoFeatureProps,
-  AiInfoNutritionFactsProps,
-  AiInfoDataPermissionLevelsProps,
-  AiInfoAiInformationProps,
-};
-export default AiInfo;
-`.trim();
+
+export type * from "./types";
+export default AiInfo;`.trim();
 
 	const code = [
-		header,
 		imports,
+		typesImport,
+		pluckHelper,
 		AiInfo,
 		nutritionFacts,
 		dataPermissionLevels,
@@ -110,7 +111,9 @@ export default AiInfo;
 		formatted = formatTs(code, "index.ts");
 	} catch (err) {
 		throw new Error(
-			`Failed to format TypeScript code: ${err instanceof Error ? err.message : String(err)}`,
+			`Failed to format TypeScript code: ${
+				err instanceof Error ? err.message : String(err)
+			}`,
 		);
 	}
 
@@ -118,7 +121,9 @@ export default AiInfo;
 		writeFileSync(OUT_FILE, formatted, "utf8");
 	} catch (err) {
 		throw new Error(
-			`Failed to write barrel file '${OUT_FILE}': ${err instanceof Error ? err.message : String(err)}`,
+			`Failed to write barrel file '${OUT_FILE}': ${
+				err instanceof Error ? err.message : String(err)
+			}`,
 		);
 	}
 };
