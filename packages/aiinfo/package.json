@@ -10,6 +10,7 @@
 	},
 	"devDependencies": {
 		"@instructure.ai/shared-configs": "workspace:^",
+		"@types/papaparse": "^5.3.16",
 		"ansis": "^4.2.0",
 		"papaparse": "^5.5.3",
 		"typescript": "^5.9.3",
@@ -43,8 +44,8 @@
 		"build": "vite build",
 		"update:cache": "UPDATE=1 vite-node ./scripts/updateCache.mts",
 		"bundle": "pnpm run update:cache && pnpm run build && biome check ./src --write",
-    "package": "pnpm run bundle && pnpm pack --pack-destination ./dist",
-	  "prepublishOnly": "pnpm run package",
+		"package": "pnpm run bundle && pnpm pack --pack-destination ./dist",
+		"prepublishOnly": "pnpm run package",
 		"lint": "pnpm biome check",
 		"typecheck": "tsgo --noEmit"
 	},
