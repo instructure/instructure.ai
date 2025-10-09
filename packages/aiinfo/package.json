@@ -39,9 +39,9 @@
 	"scripts": {
 		"build": "vite build",
 		"update:cache": "UPDATE=1 vite-node ./scripts/updateCache.mts",
-		"bundle": "pnpm run update:cache && pnpm run build && biome check ./src --write",
-		"package": "pnpm run bundle && pnpm pack --pack-destination ./dist",
-		"prepublishOnly": "pnpm run package",
+		"bundle": "pnpm update:cache && pnpm build && biome check ./src --write",
+		"package": "pnpm bundle && pnpm pack --pack-destination ./dist",
+		"prepublish": "pnpm package",
 		"lint": "pnpm biome check",
 		"typecheck": "tsgo --noEmit"
 	},
