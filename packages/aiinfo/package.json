@@ -42,7 +42,7 @@
 		"lint": "pnpm biome check",
 		"package": "pnpm bundle && pnpm pack --pack-destination ./dist",
 		"prepublish": "pnpm package",
-		"publish:public": "pnpm publish ./dist/instructure.ai-aiinfo-$npm_package_version.tgz --access public",
+		"publish:public": "pnpm publish ./dist/instructure.ai-aiinfo-$npm_package_version.tgz --access public --no-git-checks",
 		"typecheck": "tsgo --noEmit",
 		"update:cache": "UPDATE=1 vite-node ./scripts/updateCache.mts"
 	},
