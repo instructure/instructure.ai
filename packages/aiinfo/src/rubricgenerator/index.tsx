@@ -117,7 +117,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"Preventative safety mechanisms or limitations built into the AI model.",
 				segmentTitle: "Guardrails",
-				value: "The instructor may editcriteria before accepting the rubric.",
+				value: "The instructor may edit criteria before accepting the rubric.",
 			},
 			{
 				description: "Any risks the model may pose to the user.",
@@ -200,7 +200,7 @@ const rubricgenerator: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
 	nutritionFacts,
-	revision: "2025.09.10",
+	revision: "2025.10.09",
 	uid: UID,
 };
 export { rubricgenerator, nutritionFacts, dataPermissionLevels, aiInformation };
