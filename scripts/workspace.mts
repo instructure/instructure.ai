@@ -321,7 +321,7 @@ const Workspace = (
 
 const isValidCommand = (
 	cmd: string,
-	cmds: WorkspaceCommand["command"][] = [],
+	cmds: readonly WorkspaceCommand["command"][] = [],
 ): boolean => {
 	if (
 		cmds.includes(cmd) ||

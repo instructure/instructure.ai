@@ -12,7 +12,7 @@ import {
 const main = async (): Promise<void> => {
 	const { command, output, args }: WorkspaceCommand = Workspace();
 
-	const devCommands = ["package", "app"];
+	const devCommands = ["package", "app"] as const;
 
 	if (!isValidCommand(command, devCommands))
 		exitWithError("Invalid dev command.");

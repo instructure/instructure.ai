@@ -33,6 +33,7 @@
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "preview": "vite-node ./scripts/preview.mts",
+    "release": "vite-node ./scripts/release.mts",
     "update-issues": "vite-node ./scripts/issues.mts",
     "workspace": "vite-node ./scripts/info.mts"
   },
