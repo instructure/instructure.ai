@@ -326,11 +326,12 @@ const isValidCommand = (
 };
 
 const isValidPackage = (
-	pkg: PackageName,
+	pkg: PackageName | FullPackageName,
 	pkgs: PackageName[] = getPackages(),
-): boolean => {
-	return pkgs.includes(pkg) && isValidPackageName(pkg);
-};
+	): boolean => {
+		const packageName = isValidFullPackageName(pkg) ? getPackageName(pkg) : pkg;
+		return pkgs.includes(packageName) && isValidPackageName(packageName);
+	};
 
 const isAvailablePackage = (
 	pkg: PackageName,

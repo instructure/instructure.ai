@@ -2,6 +2,8 @@
 
 import {
 	exitWithError,
+	getPackageName,
+	getRootPackage,
 	isValidCommand,
 	isValidPackage,
 	unknownError,
@@ -10,7 +12,6 @@ import {
 
 const main = async () => {
 	const { command, args, output } = Workspace();
-
 
 	const releaseCommands: AllowedCommands = ["package", "root"] as const;
 
@@ -22,9 +23,8 @@ const main = async () => {
 	const pack = (
 		command: AllowedCommand,
 		args: WorkspaceCommand["args"] = [],
-		output?: WorkspaceCommand["output"]
+		output?: WorkspaceCommand["output"],
 	) => {
-		console.log("you are in pack()")
 		console.log("command:", command);
 		console.log("args:", args);
 		console.log("output:", output);
@@ -36,14 +36,20 @@ const main = async () => {
 	try {
 		switch (command) {
 			case "package":
+				if (!isValidPackage(output as FullPackageName)) {
+					exitWithError(
+						"A valid package name is required for the package command.",
+					);
+				}
 				pack(command, args, output);
 				break;
 			case "root":
+				pack(command, args, getRootPackage());
 				console.log("releasing root");
 				break;
 			default:
 				if (isValidPackage(command)) {
-					console.log(`Releasing package: ${command}`);
+					pack(command, args, output);
 				} else {
 					exitWithError(`Unknown build command: ${command}
 Valid commands are: ${releaseCommands.join(", ")}`);
