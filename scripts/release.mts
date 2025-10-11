@@ -1,9 +1,8 @@
 /// <reference path="../types/index.d.ts" />
 
 import {
+	exec,
 	exitWithError,
-	getPackageName,
-	getRootPackage,
 	isValidCommand,
 	isValidPackage,
 	unknownError,
@@ -13,7 +12,7 @@ import {
 const main = async () => {
 	const { command, args, output } = Workspace();
 
-	const releaseCommands: AllowedCommands = ["package", "root"] as const;
+	const releaseCommands: AllowedCommands = ["package", "root", "all"] as const;
 
 	if (!isValidCommand(command, releaseCommands))
 		exitWithError("Invalid release command.");
@@ -21,16 +20,14 @@ const main = async () => {
 	const getArgs = (args: WorkspaceCommand["args"]) => args.slice(2);
 
 	const pack = (
-		command: AllowedCommand,
+		pkg: FullPackageName,
 		args: WorkspaceCommand["args"] = [],
-		output?: WorkspaceCommand["output"],
 	) => {
-		console.log("command:", command);
-		console.log("args:", args);
-		console.log("output:", output);
-		const extraArgs: CommandExtraArgs = getArgs(args);
-		console.log("extraArgs:", extraArgs);
-		// do stuff here
+		const hasPackDestination = args.some(arg => typeof arg === "string" && arg.startsWith("--pack-destination"));
+		if (!hasPackDestination) {
+			args.push("--pack-destination=./pub");
+		}
+		exec(`pnpm -F ${pkg} pack ${getArgs(args).join(" ")}`);
 	};
 
 	try {
@@ -41,15 +38,17 @@ const main = async () => {
 						"A valid package name is required for the package command.",
 					);
 				}
-				pack(command, args, output);
+				pack(output as FullPackageName, args);
 				break;
 			case "root":
-				pack(command, args, getRootPackage());
-				console.log("releasing root");
+				console.log("Packaging root is not supported yet.");
+				break;
+			case "all":
+				console.log("Packaging all is not supported yet.");
 				break;
 			default:
 				if (isValidPackage(command)) {
-					pack(command, args, output);
+					pack(command as FullPackageName, args);
 				} else {
 					exitWithError(`Unknown build command: ${command}
 Valid commands are: ${releaseCommands.join(", ")}`);
