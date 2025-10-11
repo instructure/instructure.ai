@@ -198,10 +198,10 @@ class CommandClass implements CommandInfo {
 		this.args = args || process.argv;
 	}
 	get command() {
-		return this.args[0];
+		return this.args[0] as WorkspaceCommand["command"];
 	}
 	get package() {
-		return this.args[1];
+		return this.args[1] as PackageName | FullPackageName | undefined;
 	}
 	help(script?: WorkspaceCommand["script"]) {
 		console.log(`
@@ -320,7 +320,7 @@ const Workspace = (
 };
 
 const isValidCommand = (
-	cmd: string,
+	cmd: WorkspaceCommand["command"],
 	cmds: readonly WorkspaceCommand["command"][] = [],
 ): boolean => {
 	if (

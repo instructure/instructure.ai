@@ -9,19 +9,27 @@ import {
 } from "@instructure.ai/shared-configs/workspace";
 
 const main = async () => {
-	const { command } = Workspace();
-	const releaseCommands = ["package", "root"] as const;
+	const { command, output, args } = Workspace();
+
+	const releaseCommands: AllowedCommands = ["package", "root"] as const;
 
 	if (!isValidCommand(command, releaseCommands))
 		exitWithError("Invalid release command.");
 
-  const package = (command) => {}
-
+	const pack = (
+		command: WorkspaceCommand["command"],
+		output: WorkspaceCommand["output"],
+		args: WorkspaceCommand["args"],
+	) => {
+		console.log(`command is: ${command}`);
+		console.log(`args are: ${args}`);
+		console.log(`Output is package: ${output}`);
+	};
 
 	try {
 		switch (command) {
 			case "package":
-				console.log(`Releasing package ${command}`);
+				pack(command, output, args);
 				break;
 			case "root":
 				console.log("releasing root");

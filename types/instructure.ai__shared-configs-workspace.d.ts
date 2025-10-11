@@ -22,8 +22,25 @@ interface CommandInfo {
 	readonly command: string | undefined;
 }
 
+const COMMANDS = [
+	"app",
+	"apps",
+	"package",
+	"packages",
+	"root",
+	"help",
+	"name",
+	"all",
+	"workspace"
+] as const;
+type Command = typeof COMMANDS[number];
+
+type AllowedCommands = ReadonlyArray<
+		WorkspaceCommand["command"]
+	>
+
 type WorkspaceCommand = {
-	command: string;
+	command: Command;
 	args: string[];
 	script?: string;
 	output?: WorkspaceName | WorkspaceObj | FullPackageName | FullPackageName[];

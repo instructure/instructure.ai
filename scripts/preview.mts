@@ -14,7 +14,7 @@ import {
 const main = async (): Promise<void> => {
 	const { command, output, args }: WorkspaceCommand = Workspace();
 
-	const previewCommands = ["all", "app", "apps"] as const;
+	const previewCommands: AllowedCommands = ["all", "app", "apps"] as const;
 
 	if (!isValidCommand(command, previewCommands))
 		exitWithError("Invalid preview command.");
