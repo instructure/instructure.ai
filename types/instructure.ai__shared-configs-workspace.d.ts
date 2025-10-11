@@ -39,6 +39,8 @@ type AllowedCommands = ReadonlyArray<
 		WorkspaceCommand["command"]
 	>
 
+type AllowedCommand = AllowedCommands[number];
+
 type WorkspaceCommand = {
 	command: Command;
 	args: string[];

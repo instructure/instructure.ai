@@ -261,25 +261,17 @@ const Workspace = (
 				exitWithError("Error: Package name is required.");
 				return exportObj;
 			}
-
-			let index = -1;
-
+			let fullPkg: FullPackageName | undefined;
 			if (isValidFullPackageName(pkg)) {
-				index = workspace.packages().indexOf(pkg);
-			} else {
-				index = workspace
-					.all()
-					.findIndex((fullPkg) => fullPkg.endsWith(`/${pkg}`));
+				fullPkg = workspace.packages().find((p) => p === pkg);
+			} else if (isValidPackageName(pkg)) {
+				fullPkg = workspace.packages().find((p) => p.endsWith(`/${pkg}`));
 			}
-
-			if (index === -1) {
-				exitWithError(
-					`Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`,
-				);
+			if (!fullPkg) {
+				exitWithError(`Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`);
 				return exportObj;
 			}
-
-			exportObj.output = workspace.packages()[index];
+			exportObj.output = fullPkg;
 			break;
 		}
 		case "app": {
@@ -288,17 +280,13 @@ const Workspace = (
 				exitWithError("Error: App name is required.");
 				return exportObj;
 			}
-
-			let appFullName: FullPackageName | undefined;
-			if (isValidFullPackageName(pkg)) {
-				appFullName = workspace.apps().find((app) => app === pkg);
-			} else {
-				appFullName = workspace.apps().find((app) => app.endsWith(`/${pkg}`));
-			}
+			const appFullName = isValidFullPackageName(pkg)
+				? workspace.apps().find((app) => app === pkg)
+				: isValidPackageName(pkg)
+					? workspace.apps().find((app) => app.endsWith(`/${pkg}`))
+					: undefined;
 			if (!appFullName) {
-				exitWithError(
-					`Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`,
-				);
+				exitWithError(`Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`);
 				return exportObj;
 			}
 			exportObj.output = appFullName;
