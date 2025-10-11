@@ -15,7 +15,13 @@ import { updateIssues } from "./issues.mts";
 
 const main = async () => {
 	const { command, output, args } = Workspace();
-	const buildCommands: AllowedCommands = ["all", "packages", "package", "apps", "app"] as const;
+	const buildCommands: AllowedCommands = [
+		"all",
+		"packages",
+		"package",
+		"apps",
+		"app",
+	] as const;
 
 	if (!isValidCommand(command, buildCommands))
 		exitWithError("Invalid build command.");
