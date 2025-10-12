@@ -22,6 +22,19 @@ const isValidWorkspaceName = (ws: string): ws is WorkspaceName => {
 	return wn.test(ws);
 };
 
+const getPackageJson = (pkg: PackageName | FullPackageName) => {
+	if (!isValidPackageName(pkg) && !isValidFullPackageName(pkg)) {
+		exitWithError("Error: Invalid package name.");
+	}
+	const packageName = isValidFullPackageName(pkg) ? getPackageName(pkg) : pkg;
+	const pkgJsonPath = join(__dirname, "../packages", packageName, "package.json");
+	try {
+		return require(pkgJsonPath);
+	} catch (err) {
+		exitWithError(`Error: Could not read package.json for package '${packageName}'.`, err);
+	}
+}
+
 const getRootPackage = (): FullPackageName => {
 	if (!isValidFullPackageName(name)) {
 		exitWithError(
@@ -378,4 +391,5 @@ export {
 	getPackages,
 	getFullPackageName,
 	getRootPackage,
+	getPackageJson,
 };
