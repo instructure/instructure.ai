@@ -1,0 +1,29 @@
+name: Tag on Merge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Tag changed packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for pkg in $(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep 'packages/.*/package.json' | xargs -n1 dirname); do
+            NAME=$(jq -r .name $pkg/package.json)
+            VERSION=$(jq -r .version $pkg/package.json)
+            TAG="${NAME}@${VERSION}"
+            git tag $TAG
+            git push origin $TAG
+          done
