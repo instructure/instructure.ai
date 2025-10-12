@@ -22,18 +22,29 @@ const isValidWorkspaceName = (ws: string): ws is WorkspaceName => {
 	return wn.test(ws);
 };
 
-const getPackageJson = (pkg: PackageName | FullPackageName) => {
+const getPackageJson = (
+	pkg: PackageName | FullPackageName,
+): { content: PackageJson; path: string } => {
 	if (!isValidPackageName(pkg) && !isValidFullPackageName(pkg)) {
 		exitWithError("Error: Invalid package name.");
 	}
 	const packageName = isValidFullPackageName(pkg) ? getPackageName(pkg) : pkg;
-	const pkgJsonPath = join(__dirname, "../packages", packageName, "package.json");
+	const pkgJsonPath = join(
+		__dirname,
+		"../packages",
+		packageName,
+		"package.json",
+	);
 	try {
-		return require(pkgJsonPath);
+		return { content: require(pkgJsonPath), path: pkgJsonPath };
 	} catch (err) {
-		exitWithError(`Error: Could not read package.json for package '${packageName}'.`, err);
+		exitWithError(
+			`Error: Could not read package.json for package '${packageName}'.`,
+			err,
+		);
 	}
-}
+	return { content: {} as PackageJson, path: "" };
+};
 
 const getRootPackage = (): FullPackageName => {
 	if (!isValidFullPackageName(name)) {
@@ -281,7 +292,9 @@ const Workspace = (
 				fullPkg = workspace.packages().find((p) => p.endsWith(`/${pkg}`));
 			}
 			if (!fullPkg) {
-				exitWithError(`Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`);
+				exitWithError(
+					`Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`,
+				);
 				return exportObj;
 			}
 			exportObj.output = fullPkg;
@@ -299,7 +312,9 @@ const Workspace = (
 					? workspace.apps().find((app) => app.endsWith(`/${pkg}`))
 					: undefined;
 			if (!appFullName) {
-				exitWithError(`Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`);
+				exitWithError(
+					`Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`,
+				);
 				return exportObj;
 			}
 			exportObj.output = appFullName;
@@ -341,10 +356,10 @@ const isValidCommand = (
 const isValidPackage = (
 	pkg: PackageName | FullPackageName,
 	pkgs: PackageName[] = getPackages(),
-	): boolean => {
-		const packageName = isValidFullPackageName(pkg) ? getPackageName(pkg) : pkg;
-		return pkgs.includes(packageName) && isValidPackageName(packageName);
-	};
+): boolean => {
+	const packageName = isValidFullPackageName(pkg) ? getPackageName(pkg) : pkg;
+	return pkgs.includes(packageName) && isValidPackageName(packageName);
+};
 
 const isAvailablePackage = (
 	pkg: PackageName,

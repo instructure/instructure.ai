@@ -7,6 +7,12 @@ type WorkspaceObj = {
 	apps: PackageName[];
 };
 
+interface PackageJson {
+	version: `${number}.${number}.${number}`;
+	name: `@instructure.ai/${string}`;
+	[key: string]: unknown;
+}
+
 interface WorkspaceInfo {
 	name(): void;
 	fullPackageName(index: number): void;
