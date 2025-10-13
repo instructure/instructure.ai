@@ -16,10 +16,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Tag changed packages
+      - name: Tag changed packages and root
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Tag changed packages
           for pkg in $(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep 'packages/.*/package.json' | xargs -n1 dirname); do
             NAME=$(jq -r .name $pkg/package.json)
             VERSION=$(jq -r .version $pkg/package.json)
@@ -27,3 +28,12 @@ jobs:
             git tag $TAG
             git push origin $TAG
           done
+
+          # Tag root package if changed
+          if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^package.json$'; then
+            NAME=$(jq -r .name package.json)
+            VERSION=$(jq -r .version package.json)
+            TAG="${NAME}@${VERSION}"
+            git tag $TAG
+            git push origin $TAG
+          fi
