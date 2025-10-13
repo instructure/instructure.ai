@@ -74,7 +74,11 @@ jobs:
             fi
 
             # Create GitHub release using gh CLI
-            gh release create "$TAG" ./dist/*.tgz --title "Release $TAG" --notes "Automated release of $TAG"
+            if [ "$PKG_NAME" = "shared-configs" ]; then
+              gh release create "$TAG" --title "Release $TAG" --notes "Automated release of $TAG"
+            else
+              gh release create "$TAG" ./dist/*.tgz --title "Release $TAG" --notes "Automated release of $TAG"
+            fi
           done
         env:
           tags: ${{ env.tags }}
