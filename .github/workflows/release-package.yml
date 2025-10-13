@@ -16,6 +16,13 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Remove deprecated always-auth from .npmrc
+        run: |
+          if [ -f "$NPM_CONFIG_USERCONFIG" ]; then
+            sed -i.bak '/always-auth/d' "$NPM_CONFIG_USERCONFIG"
+          fi
+        env:
+          NPM_CONFIG_USERCONFIG: $HOME/.npmrc
       - name: Exclude shared-configs tags
         run: |
           if [[ "${GITHUB_REF_NAME}" == @instructure.ai/shared-configs*@* ]]; then
@@ -24,17 +31,26 @@ jobs:
           fi
       - uses: actions/checkout@v4
 
+
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Update npm
-        run: npm install -g npm@latest
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
-      - run: npm publish
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies with pnpm
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build --if-present
+
+      - name: Test
+        run: pnpm test
+
+      - name: Publish package with pnpm
+        run: pnpm publish
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1

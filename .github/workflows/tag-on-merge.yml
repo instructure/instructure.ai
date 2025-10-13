@@ -1,4 +1,4 @@
-name: retag-on-merge
+name: Tag on Merge
 on:
   push:
     branches:
@@ -16,6 +16,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Fetch full git history
+        run: git fetch --unshallow || git fetch --all
       - name: Retag all changed packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
