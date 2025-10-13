@@ -104,6 +104,12 @@ async function main() {
 		FULLPACKAGENAME,
 	);
 
+	await replaceInFile(
+		path.join(pkgDir, "README.md"),
+		CLINAME,
+		PACKAGENAME,
+	);
+
 	if (TEMPLATE === "instui") {
 		const url = "https://instructure.design/llms.txt";
 		let guidelines = "";
