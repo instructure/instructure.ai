@@ -39,7 +39,7 @@ jobs:
           fi
           if ! git diff --name-only $DIFF_RANGE | grep '^apps/'; then
             echo "No changes in ./apps directory. Exiting early."
-            exit 0
+            exit 78
           fi
       - name: Set up Node
         uses: actions/setup-node@v4
