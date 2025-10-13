@@ -1,0 +1,26 @@
+{
+  "name": "<<packagename>>",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "tsgo --noEmit",
+    "lint": "pnpm biome check",
+    "<<cliname>>": "vite-node ./dist/index.mjs"
+  },
+  "bin": {
+    "<<cliname>>": "./dist/index.mjs"
+  },
+  "devDependencies": {
+    "@instructure.ai/shared-configs": "workspace:^"
+  }
+}

@@ -1,13 +1,10 @@
 {
   "devDependencies": {
-    "@biomejs/biome": "^2.2.5",
-    "@changesets/changelog-github": "^0.5.1",
-    "@changesets/cli": "^2.29.7",
-    "@dotenvx/dotenvx": "^1.51.0",
-    "@instructure/browserslist-config-instui": "^11.0.0",
+    "@biomejs/biome": "^2.2.6",
+    "@instructure/browserslist-config-instui": "^11.0.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.1",
-    "@typescript/native-preview": "7.0.0-dev.20251010.1",
+    "@typescript/native-preview": "7.0.0-dev.20251013.1",
     "@vitejs/plugin-react": "^5.0.4",
     "babel-plugin-react-compiler": "^1.0.0",
     "browserslist": "^4.26.3",
@@ -16,12 +13,13 @@
     "terser": "^5.44.0",
     "vite": "^7.1.9",
     "vite-node": "^3.2.4",
+    "vite-plugin-dts": "^4.5.4",
     "vitest": "^3.2.4",
     "yaml": "^2.8.1"
   },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "@instructure.ai/shared-configs",
-  "packageManager": "pnpm@10.18.1",
+  "packageManager": "pnpm@10.18.2",
   "private": true,
   "scripts": {
     "build": "vite-node ./scripts/build.mts",
@@ -33,12 +31,14 @@
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "preview": "vite-node ./scripts/preview.mts",
+    "release": "vite-node ./scripts/release.mts",
     "update-issues": "vite-node ./scripts/issues.mts",
     "workspace": "vite-node ./scripts/info.mts"
   },
   "exports": {
     "./vanilla": "./vite.config.mts",
     "./react": "./vite.config.react.mts",
+    "./esm": "./vite.config.esm.mts",
     "./workspace": "./scripts/workspace.mts",
     "./types": "./types/index.d.ts",
     ".": "./types/index.d.ts"

@@ -22,6 +22,27 @@ const isValidWorkspaceName = (ws: string): ws is WorkspaceName => {
 	return wn.test(ws);
 };
 
+const getPackageJson = (
+	pkg: PackageName | FullPackageName,
+): { content: PackageJson; path: string } => {
+	if (!isValidPackageName(pkg) && !isValidFullPackageName(pkg)) {
+		exitWithError("Error: Invalid package name.");
+	}
+	const packageName = isValidFullPackageName(pkg) ? getPackageName(pkg) : pkg;
+	let pkgJsonPath: string;
+	if (pkg === getRootPackage() || packageName === getPackageName(getRootPackage())) {
+		pkgJsonPath = join(__dirname, "../package.json");
+	} else {
+		pkgJsonPath = join(__dirname, "../packages", packageName, "package.json");
+	}
+	try {
+		return { content: require(pkgJsonPath), path: pkgJsonPath };
+	} catch (err) {
+		exitWithError(`Error: Could not read package.json for package '${packageName}'.`, err);
+	}
+	return { content: {} as PackageJson, path: "" };
+};
+
 const getRootPackage = (): FullPackageName => {
 	if (!isValidFullPackageName(name)) {
 		exitWithError(
@@ -198,10 +219,10 @@ class CommandClass implements CommandInfo {
 		this.args = args || process.argv;
 	}
 	get command() {
-		return this.args[0];
+		return this.args[0] as WorkspaceCommand["command"];
 	}
 	get package() {
-		return this.args[1];
+		return this.args[1] as PackageName | FullPackageName | undefined;
 	}
 	help(script?: WorkspaceCommand["script"]) {
 		console.log(`
@@ -261,25 +282,19 @@ const Workspace = (
 				exitWithError("Error: Package name is required.");
 				return exportObj;
 			}
-
-			let index = -1;
-
+			let fullPkg: FullPackageName | undefined;
 			if (isValidFullPackageName(pkg)) {
-				index = workspace.packages().indexOf(pkg);
-			} else {
-				index = workspace
-					.all()
-					.findIndex((fullPkg) => fullPkg.endsWith(`/${pkg}`));
+				fullPkg = workspace.packages().find((p) => p === pkg);
+			} else if (isValidPackageName(pkg)) {
+				fullPkg = workspace.packages().find((p) => p.endsWith(`/${pkg}`));
 			}
-
-			if (index === -1) {
+			if (!fullPkg) {
 				exitWithError(
 					`Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`,
 				);
 				return exportObj;
 			}
-
-			exportObj.output = workspace.packages()[index];
+			exportObj.output = fullPkg;
 			break;
 		}
 		case "app": {
@@ -288,13 +303,11 @@ const Workspace = (
 				exitWithError("Error: App name is required.");
 				return exportObj;
 			}
-
-			let appFullName: FullPackageName | undefined;
-			if (isValidFullPackageName(pkg)) {
-				appFullName = workspace.apps().find((app) => app === pkg);
-			} else {
-				appFullName = workspace.apps().find((app) => app.endsWith(`/${pkg}`));
-			}
+			const appFullName = isValidFullPackageName(pkg)
+				? workspace.apps().find((app) => app === pkg)
+				: isValidPackageName(pkg)
+					? workspace.apps().find((app) => app.endsWith(`/${pkg}`))
+					: undefined;
 			if (!appFullName) {
 				exitWithError(
 					`Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`,
@@ -320,8 +333,8 @@ const Workspace = (
 };
 
 const isValidCommand = (
-	cmd: string,
-	cmds: WorkspaceCommand["command"][] = [],
+	cmd: WorkspaceCommand["command"],
+	cmds: readonly WorkspaceCommand["command"][] = [],
 ): boolean => {
 	if (
 		cmds.includes(cmd) ||
@@ -337,11 +350,17 @@ const isValidCommand = (
 	}
 };
 
+const isStrictlyValidCommand = (
+	cmd: WorkspaceCommand["command"],
+	cmds: readonly WorkspaceCommand["command"][] = [],
+): boolean => cmds.includes(cmd);
+
 const isValidPackage = (
-	pkg: PackageName,
+	pkg: PackageName | FullPackageName,
 	pkgs: PackageName[] = getPackages(),
 ): boolean => {
-	return pkgs.includes(pkg) && isValidPackageName(pkg);
+	const packageName = isValidFullPackageName(pkg) ? getPackageName(pkg) : pkg;
+	return pkgs.includes(packageName) && isValidPackageName(packageName);
 };
 
 const isAvailablePackage = (
@@ -389,4 +408,6 @@ export {
 	getPackages,
 	getFullPackageName,
 	getRootPackage,
+	getPackageJson,
+	isStrictlyValidCommand,
 };

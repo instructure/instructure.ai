@@ -7,6 +7,12 @@ type WorkspaceObj = {
 	apps: PackageName[];
 };
 
+interface PackageJson {
+	version: `${number}.${number}.${number}`;
+	name: `@instructure.ai/${string}`;
+	[key: string]: unknown;
+}
+
 interface WorkspaceInfo {
 	name(): void;
 	fullPackageName(index: number): void;
@@ -22,8 +28,27 @@ interface CommandInfo {
 	readonly command: string | undefined;
 }
 
+const COMMANDS = [
+	"app",
+	"apps",
+	"package",
+	"packages",
+	"root",
+	"help",
+	"name",
+	"all",
+	"workspace"
+] as const;
+type Command = typeof COMMANDS[number];
+
+type AllowedCommands = ReadonlyArray<
+		WorkspaceCommand["command"]
+	>
+
+type AllowedCommand = AllowedCommands[number];
+
 type WorkspaceCommand = {
-	command: string;
+	command: Command;
 	args: string[];
 	script?: string;
 	output?: WorkspaceName | WorkspaceObj | FullPackageName | FullPackageName[];
@@ -31,6 +56,6 @@ type WorkspaceCommand = {
 
 type CommandExtraArgs = string[];
 
-type WorkspaceTemplate = "vanilla" | "react" | "instui";
+type WorkspaceTemplate = "vanilla" | "react" | "instui" | "esm";
 
 type WorkspaceType = "app" | "package";
