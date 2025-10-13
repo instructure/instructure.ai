@@ -1,25 +1,29 @@
-import { writeFileSync, mkdirSync } from "node:fs";
-import { resolve, dirname } from "node:path";
-import { formatTs, toTsObjectLiteral, entryToAIInformation, entryToPermissionLevels, entryToNutritionFacts } from "../utils";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
 import type { Entry } from "../types";
-
-
+import {
+	entryToAIInformation,
+	entryToNutritionFacts,
+	entryToPermissionLevels,
+	formatTs,
+	toTsObjectLiteral,
+} from "../utils";
 
 export async function writeEntry(entry: Entry) {
-  const file = resolve(process.cwd(), "src", entry.uid, "index.tsx");
+	const file = resolve(process.cwd(), "src", entry.uid, "index.tsx");
 
-  const UID = entry.uid;
-  const FEATURE_NAME = entry.feature.name;
-  const REVISION = entry.revision;
+	const UID = entry.uid;
+	const FEATURE_NAME = entry.feature.name;
+	const REVISION = entry.revision;
 
 	const nutritionFacts = entryToNutritionFacts(entry);
 	const aiInformation = entryToAIInformation(entry);
 	const dataPermissionLevels = entryToPermissionLevels(entry);
 
-  const DPL = dataPermissionLevels.data;
-  const NF = nutritionFacts.data;
+	const DPL = dataPermissionLevels.data;
+	const NF = nutritionFacts.data;
 
-  const code = `import { Button } from "@instructure/ui-buttons";
+	const code = `import { Button } from "@instructure/ui-buttons";
 import type {
   AiInformationProps,
   DataPermissionLevelsProps,
@@ -67,10 +71,10 @@ export {
 export default ${UID};
 `;
 
-  const pretty = formatTs(code, "index.tsx").replace(
-      /"<Button>AI Information<\/Button>"/g,
-      "<Button>AI Information</Button>",
-    );
-  mkdirSync(dirname(file), { recursive: true });
-  writeFileSync(file, pretty, "utf8");
+	const pretty = formatTs(code, "index.tsx").replace(
+		/"<Button>AI Information<\/Button>"/g,
+		"<Button>AI Information</Button>",
+	);
+	mkdirSync(dirname(file), { recursive: true });
+	writeFileSync(file, pretty, "utf8");
 }

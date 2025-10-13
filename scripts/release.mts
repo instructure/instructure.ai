@@ -5,7 +5,6 @@ import {
 	exec,
 	exitWithError,
 	getPackageJson,
-	isStrictlyValidCommand,
 	isValidCommand,
 	isValidPackage,
 	unknownError,
@@ -19,8 +18,6 @@ const main = async () => {
 
 	if (!isValidCommand(command, releaseCommands))
 		exitWithError("Invalid release command.");
-
-	const getArgs = (args: WorkspaceCommand["args"]) => args.slice(2);
 
 	const getVersion = (pkgJson: PackageJson) => pkgJson.version;
 
@@ -110,18 +107,12 @@ const main = async () => {
 	const pack = ({
 		pkg,
 		args = [],
-		root = false,
 	}: {
 		pkg: FullPackageName;
 		args: WorkspaceCommand["args"];
 		root?: boolean;
 	}) => {
-		const hasPackDestination = args.some(
-			(arg) => typeof arg === "string" && arg.startsWith("--pack-destination"),
-		);
-		if (!hasPackDestination) {
-			args.push("--pack-destination=./pub");
-		}
+
 		const pkgJson = getPackageJson(pkg);
 		if (!pkgJson) {
 			exitWithError(`Could not find package.json for package: ${pkg}`);
@@ -141,16 +132,6 @@ const main = async () => {
 			path: pkgJson.path,
 			version: version,
 		});
-
-		const passedArgs = isStrictlyValidCommand(
-			args[0] as WorkspaceCommand["command"],
-		)
-			? getArgs(args)
-			: args;
-
-		const finalCommand = `pnpm -F ${pkg} pack ${passedArgs.join(" ")}`;
-
-		!root ? exec(finalCommand) : console.log("Skipping pack for root package");
 
 		commit({ pkg, pkgJsonPath: pkgJson.path, version: writeVersion });
 	};
@@ -179,7 +160,7 @@ const main = async () => {
 				pack({ args: args, pkg: output as FullPackageName });
 				break;
 			case "root":
-				pack({ args: args, pkg: output as FullPackageName, root: true });
+				pack({ args: args, pkg: output as FullPackageName});
 				break;
 			case "all":
 				console.log("Packaging all is not supported yet.");
