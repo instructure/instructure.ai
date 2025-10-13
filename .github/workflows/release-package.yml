@@ -56,7 +56,7 @@ jobs:
               echo "Skipping build for @instructure.ai/shared-configs."
             else
               echo "Building package: $PKG_NAME"
-              pnpm -F "$PKG_NAME" prepublish
+              pnpm build package "$PKG_NAME"
             fi
 
             # Test
@@ -70,7 +70,34 @@ jobs:
             if [ "$PKG_NAME" = "shared-configs" ]; then
               echo "Skipping publish for @instructure.ai/shared-configs."
             else
-              pnpm publish
+              PKG_JSON_PATH="packages/$PKG_NAME/package.json"
+              APP_JSON_PATH="apps/$PKG_NAME/package.json"
+              if [ -f "$PKG_JSON_PATH" ]; then
+                JSON_PATH="$PKG_JSON_PATH"
+              elif [ -f "$APP_JSON_PATH" ]; then
+                JSON_PATH="$APP_JSON_PATH"
+              else
+                JSON_PATH=""
+              fi
+
+              if [ -n "$JSON_PATH" ]; then
+                ACCESS_PUBLIC=$(jq -r '.publishConfig.access' "$JSON_PATH")
+                PRIVATE=$(jq -r '.private' "$JSON_PATH")
+                if [ "$ACCESS_PUBLIC" = "public" ] && [ "$PRIVATE" != "true" ]; then
+                  echo "Publishing $PKG_NAME as public..."
+                  pnpm publish ./dist/*.tgz --access public
+                elif [ "$PRIVATE" = "true" ]; then
+                  echo "Skipping publish for $PKG_NAME because it is marked private in package.json."
+                elif [ -n "$ACCESS_PUBLIC" ] && [ "$ACCESS_PUBLIC" != "public" ]; then
+                  echo "Skipping publish for $PKG_NAME because publishConfig.access is set to '$ACCESS_PUBLIC' (not public)."
+                else
+                  echo "Publishing $PKG_NAME without --access public..."
+                  pnpm publish ./dist/*.tgz
+                fi
+              else
+                echo "package.json not found for $PKG_NAME in packages or apps, publishing without access check."
+                pnpm publish ./dist/*.tgz
+              fi
             fi
 
             # Create GitHub release using gh CLI
