@@ -5,12 +5,12 @@
 
 This is a monorepo of apps and packages. Apps are served on [instructure.ai](https://instructure.ai)
 
-Configs and dev dependencies are shared from the root package `@instructure.ai/shared-configs` and extended in workspace packages in `apps` and `/packages`.
+Configs and dev dependencies are shared from the root package `@instructure.ai/shared-configs` and extended in workspace packages in `/apps` and `/packages`.
 
 Helper utilities are provided for adding and managing packages.
 
 ```shell
-pnpm new <packagename> [--template (default: vanilla | react | instui)] [--type (default: app | package)]
+pnpm new <packagename> [--template (default: vanilla | react | instui | esm)]
 ```
 
 Will instantiate a new vanillajs or react project with all configurations set up under `./<apps|packages>/<packagename>`
@@ -40,6 +40,7 @@ What comes out of the box?
 
 * vite (vanilla-ts, react-ts)
 * vite-node
+* vite-plugin-dts
 * vitest
 * biomejs
 * typescript-native
