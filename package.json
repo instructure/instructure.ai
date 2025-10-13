@@ -17,7 +17,7 @@
     "vitest": "^3.2.4",
     "yaml": "^2.8.1"
   },
-  "version": "1.1.9",
+  "version": "1.1.10",
   "name": "@instructure.ai/shared-configs",
   "packageManager": "pnpm@10.18.2",
   "private": true,
