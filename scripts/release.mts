@@ -63,6 +63,17 @@ const main = async () => {
 		return false;
 	};
 
+	const isValidVersion = (newVersion, version) => {
+				if (
+			(newVersion && !isVersionBigger(version, newVersion)) ||
+			newVersion === version
+		) {
+			exitWithError(
+				`The new version (${newVersion}) must be greater than the current version (${version}).`,
+			);
+		}
+	}
+
 	const setVersion = ({
 		newVersion,
 		version,

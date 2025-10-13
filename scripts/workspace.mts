@@ -29,19 +29,16 @@ const getPackageJson = (
 		exitWithError("Error: Invalid package name.");
 	}
 	const packageName = isValidFullPackageName(pkg) ? getPackageName(pkg) : pkg;
-	const pkgJsonPath = join(
-		__dirname,
-		"../packages",
-		packageName,
-		"package.json",
-	);
+	let pkgJsonPath: string;
+	if (pkg === getRootPackage() || packageName === getPackageName(getRootPackage())) {
+		pkgJsonPath = join(__dirname, "../package.json");
+	} else {
+		pkgJsonPath = join(__dirname, "../packages", packageName, "package.json");
+	}
 	try {
 		return { content: require(pkgJsonPath), path: pkgJsonPath };
 	} catch (err) {
-		exitWithError(
-			`Error: Could not read package.json for package '${packageName}'.`,
-			err,
-		);
+		exitWithError(`Error: Could not read package.json for package '${packageName}'.`, err);
 	}
 	return { content: {} as PackageJson, path: "" };
 };
@@ -356,7 +353,7 @@ const isValidCommand = (
 const isStrictlyValidCommand = (
 	cmd: WorkspaceCommand["command"],
 	cmds: readonly WorkspaceCommand["command"][] = [],
-): boolean => cmds.includes(cmd)
+): boolean => cmds.includes(cmd);
 
 const isValidPackage = (
 	pkg: PackageName | FullPackageName,
@@ -412,5 +409,5 @@ export {
 	getFullPackageName,
 	getRootPackage,
 	getPackageJson,
-	isStrictlyValidCommand
+	isStrictlyValidCommand,
 };
