@@ -89,7 +89,7 @@ async function main() {
 	await fs.mkdir(pkgDir, { recursive: true });
 
 	// Copy template contents
-	!isESM && await safeCopyDir(sharedTplDir, pkgDir);
+	!isESM && (await safeCopyDir(sharedTplDir, pkgDir));
 	await safeCopyDir(chosenTplDir, pkgDir);
 
 	// Replace placeholders in specific files
@@ -120,12 +120,12 @@ async function main() {
 			guidelines,
 		);
 	}
-	if(isESM) {
-	await replaceInFile(
-		path.join(pkgDir, "package.json"),
-		CLINAME,
-		PACKAGENAME,
-	);
+	if (isESM) {
+		await replaceInFile(
+			path.join(pkgDir, "package.json"),
+			CLINAME,
+			PACKAGENAME,
+		);
 	}
 
 	// Install dependencies for the new package (pnpm workspace)
@@ -133,11 +133,12 @@ async function main() {
 	exec(`pnpm --filter ${PACKAGENAME} install`, { cwd });
 
 	console.log(`Package '${PACKAGENAME}' initialized successfully.`);
-	if(isESM) {
-		exec(`pnpm --filter ${PACKAGENAME} build`, { cwd })
+	if (isESM) {
+		exec(`pnpm --filter ${PACKAGENAME} build`, { cwd });
 		console.log(`\`pnpm ${PACKAGENAME}\` to run the script.`);
 	} else {
-		console.log(`\`pnpm dev ${PACKAGENAME}\` to run the development server.`);}
+		console.log(`\`pnpm dev ${PACKAGENAME}\` to run the development server.`);
+	}
 	process.exit(0);
 }
 

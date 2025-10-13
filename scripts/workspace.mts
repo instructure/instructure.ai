@@ -30,7 +30,10 @@ const getPackageJson = (
 	}
 	const packageName = isValidFullPackageName(pkg) ? getPackageName(pkg) : pkg;
 	let pkgJsonPath: string;
-	if (pkg === getRootPackage() || packageName === getPackageName(getRootPackage())) {
+	if (
+		pkg === getRootPackage() ||
+		packageName === getPackageName(getRootPackage())
+	) {
 		pkgJsonPath = join(__dirname, "../package.json");
 	} else {
 		pkgJsonPath = join(__dirname, "../packages", packageName, "package.json");
@@ -38,7 +41,10 @@ const getPackageJson = (
 	try {
 		return { content: require(pkgJsonPath), path: pkgJsonPath };
 	} catch (err) {
-		exitWithError(`Error: Could not read package.json for package '${packageName}'.`, err);
+		exitWithError(
+			`Error: Could not read package.json for package '${packageName}'.`,
+			err,
+		);
 	}
 	return { content: {} as PackageJson, path: "" };
 };
