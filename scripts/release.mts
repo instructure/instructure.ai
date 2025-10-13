@@ -164,7 +164,7 @@ const main = async () => {
 	}) => {
 		const tag = `${pkg}@${version}`;
 		exec(`git add .`);
-		exec(`git commit -m " ${tag}"`);
+		exec(`git commit -m "${tag}"`);
 	};
 	try {
 		switch (command) {
