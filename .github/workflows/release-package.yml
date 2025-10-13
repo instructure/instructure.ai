@@ -50,7 +50,7 @@ jobs:
         run: pnpm test
 
       - name: Publish package with pnpm
-        run: pnpm publish --no-git-checks
+        run: pnpm publish
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
