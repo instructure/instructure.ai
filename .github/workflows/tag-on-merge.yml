@@ -34,6 +34,11 @@ jobs:
             NAME=$(jq -r .name $pkgjson)
             VERSION=$(jq -r .version $pkgjson)
             TAG="${NAME}@${VERSION}"
-            git tag -f $TAG
-            git push --force origin $TAG
+            # Check if tag exists remotely
+            if git ls-remote --tags origin | grep -q "refs/tags/$TAG"; then
+              echo "Tag $TAG already exists on remote, skipping push."
+            else
+              git tag $TAG
+              git push origin $TAG
+            fi
           done
