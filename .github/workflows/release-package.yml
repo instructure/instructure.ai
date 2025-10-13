@@ -3,8 +3,6 @@ name: Publish Package
 
 on:
   push:
-    branches:
-      - main
     tags:
       - '@instructure.ai/*@*.*.*'
 
@@ -23,12 +21,6 @@ jobs:
           fi
         env:
           NPM_CONFIG_USERCONFIG: $HOME/.npmrc
-      - name: Exclude shared-configs tags
-        run: |
-          if [[ "${GITHUB_REF_NAME}" == @instructure.ai/shared-configs*@* ]]; then
-            echo "Tag matches excluded pattern (@instructure.ai/shared-configs). Skipping publish."
-            exit 0
-          fi
       - uses: actions/checkout@v4
 
 
@@ -43,14 +35,34 @@ jobs:
       - name: Install dependencies with pnpm
         run: pnpm install --frozen-lockfile
 
+      - name: Extract package name
+        id: pkgname
+        run: echo "PKG_NAME=$(echo \"${GITHUB_REF_NAME}\" | sed -E 's/@instructure.ai\/([^@]+)@.*/\1/')" >> $GITHUB_ENV
+
       - name: Build
-        run: pnpm build package ${{ github.ref_name }}
+        run: |
+          if [ "$PKG_NAME" = "shared-configs" ]; then
+            echo "Skipping build for @instructure.ai/shared-configs."
+          else
+            echo "Building package: $PKG_NAME"
+            pnpm build package "$PKG_NAME"
+          fi
 
       - name: Test
-        run: pnpm test
+        run: |
+          if [ "$PKG_NAME" = "shared-configs" ]; then
+            echo "Skipping test for @instructure.ai/shared-configs."
+          else
+            pnpm test
+          fi
 
       - name: Publish package with pnpm
-        run: pnpm publish
+        run: |
+          if [ "$PKG_NAME" = "shared-configs" ]; then
+            echo "Skipping publish for @instructure.ai/shared-configs."
+          else
+            pnpm publish
+          fi
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
