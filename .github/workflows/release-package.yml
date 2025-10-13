@@ -1,10 +1,10 @@
-
-name: Release Package
+name: Release Packages
 
 on:
-  push:
-    tags:
-      - '@instructure.ai/*@*.*.*'
+  workflow_run:
+    workflows: ["Tag on Merge"]
+    types:
+      - completed
 
 permissions:
   id-token: write
@@ -14,61 +14,67 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Remove deprecated always-auth from .npmrc
-        run: |
-          if [ -f "$NPM_CONFIG_USERCONFIG" ]; then
-            sed -i.bak '/always-auth/d' "$NPM_CONFIG_USERCONFIG"
-          fi
-        env:
-          NPM_CONFIG_USERCONFIG: $HOME/.npmrc
       - uses: actions/checkout@v4
-
-
-      - uses: actions/setup-node@v4
         with:
-          node-version: '24'
-          registry-url: 'https://registry.npmjs.org'
+          fetch-depth: 0
 
-      - name: Install pnpm
-        run: npm install -g pnpm
+      - name: Fetch all tags
+        run: git fetch --tags
 
-      - name: Install dependencies with pnpm
-        run: pnpm install --frozen-lockfile
-
-      - name: Extract package name
-        id: pkgname
-        run: echo "PKG_NAME=$(echo \"${GITHUB_REF_NAME}\" | sed -E 's/@instructure.ai\/([^@]+)@.*/\1/')" >> $GITHUB_ENV
-
-      - name: Build
+      - name: Find all new package tags on this commit
+        id: find_tags
         run: |
-          if [ "$PKG_NAME" = "shared-configs" ]; then
-            echo "Skipping build for @instructure.ai/shared-configs."
-          else
-            echo "Building package: $PKG_NAME"
-            pnpm build package "$PKG_NAME"
+          TAGS=$(git tag --points-at HEAD | grep -E '^@instructure.ai/.+@([0-9]+\.[0-9]+\.[0-9]+)$' || true)
+          if [[ -z "$TAGS" ]]; then
+            echo "No new matching tags found on this commit."
+            exit 0
           fi
+          # Save tags list for next steps
+          echo "tags<<EOF" >> $GITHUB_ENV
+          echo "$TAGS" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
-      - name: Test
+      - name: Release each package tag
+        if: env.tags != ''
         run: |
-          if [ "$PKG_NAME" = "shared-configs" ]; then
-            echo "Skipping test for @instructure.ai/shared-configs."
-          else
-            pnpm test
-          fi
+          IFS=$'\n'
+          for TAG in $tags; do
+            PKG_NAME=$(echo "$TAG" | sed -E 's/@instructure.ai\/([^@]+)@.*/\1/')
+            echo "Processing release for tag: $TAG (package: $PKG_NAME)"
 
-      - name: Publish package with pnpm
-        run: |
-          if [ "$PKG_NAME" = "shared-configs" ]; then
-            echo "Skipping publish for @instructure.ai/shared-configs."
-          else
-            pnpm publish
-          fi
+            # Remove deprecated always-auth from .npmrc
+            if [ -f "$HOME/.npmrc" ]; then
+              sed -i.bak '/always-auth/d' "$HOME/.npmrc"
+            fi
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
-          draft: false
-          prerelease: false
-          files: ./dist/*.tgz
+            # Install dependencies
+            npm install -g pnpm
+            pnpm install --frozen-lockfile
+
+            # Build
+            if [ "$PKG_NAME" = "shared-configs" ]; then
+              echo "Skipping build for @instructure.ai/shared-configs."
+            else
+              echo "Building package: $PKG_NAME"
+              pnpm build package "$PKG_NAME"
+            fi
+
+            # Test
+            if [ "$PKG_NAME" = "shared-configs" ]; then
+              echo "Skipping test for @instructure.ai/shared-configs."
+            else
+              pnpm test
+            fi
+
+            # Publish
+            if [ "$PKG_NAME" = "shared-configs" ]; then
+              echo "Skipping publish for @instructure.ai/shared-configs."
+            else
+              pnpm publish
+            fi
+
+            # Create GitHub release using gh CLI
+            gh release create "$TAG" ./dist/*.tgz --title "Release $TAG" --notes "Automated release of $TAG"
+          done
+        env:
+          tags: ${{ env.tags }}
