@@ -13,6 +13,7 @@
     "terser": "^5.44.0",
     "vite": "^7.1.9",
     "vite-node": "^3.2.4",
+    "vite-plugin-dts": "^4.5.4",
     "vitest": "^3.2.4",
     "yaml": "^2.8.1"
   },
@@ -37,6 +38,7 @@
   "exports": {
     "./vanilla": "./vite.config.mts",
     "./react": "./vite.config.react.mts",
+    "./esm": "./vite.config.esm.mts",
     "./workspace": "./scripts/workspace.mts",
     "./types": "./types/index.d.ts",
     ".": "./types/index.d.ts"

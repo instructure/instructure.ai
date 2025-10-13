@@ -56,6 +56,6 @@ type WorkspaceCommand = {
 
 type CommandExtraArgs = string[];
 
-type WorkspaceTemplate = "vanilla" | "react" | "instui";
+type WorkspaceTemplate = "vanilla" | "react" | "instui" | "esm";
 
 type WorkspaceType = "app" | "package";

@@ -12,26 +12,34 @@ import {
 async function main() {
 	const { output } = Workspace(["workspace"], "new");
 
-	const TEMPLATES = ["vanilla", "react", "instui"] as const;
+	const getTemplate = () => {
+		const args = process.argv.slice(2);
+		const templateIdx = args.indexOf("--template");
+		if (templateIdx !== -1 && args[templateIdx + 1]) {
+			const tArg = args[templateIdx + 1];
+			if (typeof tArg === "string") {
+				const t: WorkspaceTemplate = tArg
+					.trim()
+					.toLowerCase() as WorkspaceTemplate;
+				return t;
+			}
+		}
+		return "vanilla" as WorkspaceTemplate;
+	};
+
+	const TEMPLATES = ["vanilla", "react", "instui", "esm"] as const;
 	const TYPES = ["app", "package"] as const;
-	let TEMPLATE: WorkspaceTemplate = "vanilla";
-	let TYPE: WorkspaceType = "app";
+	const TEMPLATE: WorkspaceTemplate = getTemplate();
+
+	const isESM = TEMPLATE === "esm";
+
+	const TYPE: WorkspaceType = isESM ? "package" : "app";
 	const USAGE = `new <name> [--template (default) ${TEMPLATES.join(" | ")}] [--type (default)${TYPES.join(" | ")}]`;
 
 	const args = process.argv.slice(2);
 	if (args.length === 0) {
 		console.error(USAGE);
 		process.exit(1);
-	}
-
-	const typeIdx = args.indexOf("--type");
-
-	if (typeIdx !== -1 && args[typeIdx + 1]) {
-		const tArg = args[typeIdx + 1];
-		if (typeof tArg === "string") {
-			const t: WorkspaceType = tArg.trim().toLowerCase() as WorkspaceType;
-			if (TYPES.includes(t)) TYPE = t;
-		}
 	}
 
 	const PACKAGENAME = args[0] ? args[0].trim() : "";
@@ -52,20 +60,9 @@ async function main() {
 		);
 
 	const REPLACESTRING = "<<packagename>>";
+	const CLINAME = "<<cliname>>";
 	const FULLPACKAGENAME = `${workspaceName}/${PACKAGENAME}`;
 	const INSTUI = "<<instui-guidelines>>";
-
-	const templateIdx = args.indexOf("--template");
-
-	if (templateIdx !== -1 && args[templateIdx + 1]) {
-		const tArg = args[templateIdx + 1];
-		if (typeof tArg === "string") {
-			const t: WorkspaceTemplate = tArg
-				.trim()
-				.toLowerCase() as WorkspaceTemplate;
-			if (TEMPLATES.includes(t)) TEMPLATE = t;
-		}
-	}
 
 	// Validate NPM package name (unscoped)
 	console.log(`Creating ${TYPE} '${PACKAGENAME}'...`);
@@ -92,7 +89,7 @@ async function main() {
 	await fs.mkdir(pkgDir, { recursive: true });
 
 	// Copy template contents
-	await safeCopyDir(sharedTplDir, pkgDir);
+	!isESM && await safeCopyDir(sharedTplDir, pkgDir);
 	await safeCopyDir(chosenTplDir, pkgDir);
 
 	// Replace placeholders in specific files
@@ -123,13 +120,24 @@ async function main() {
 			guidelines,
 		);
 	}
+	if(isESM) {
+	await replaceInFile(
+		path.join(pkgDir, "package.json"),
+		CLINAME,
+		PACKAGENAME,
+	);
+	}
 
 	// Install dependencies for the new package (pnpm workspace)
 	console.log("Installing dependencies...");
 	exec(`pnpm --filter ${PACKAGENAME} install`, { cwd });
 
 	console.log(`Package '${PACKAGENAME}' initialized successfully.`);
-	console.log(`\`pnpm dev ${PACKAGENAME}\` to run the development server.`);
+	if(isESM) {
+		exec(`pnpm --filter ${PACKAGENAME} build`, { cwd })
+		console.log(`\`pnpm ${PACKAGENAME}\` to run the script.`);
+	} else {
+		console.log(`\`pnpm dev ${PACKAGENAME}\` to run the development server.`);}
 	process.exit(0);
 }
 
