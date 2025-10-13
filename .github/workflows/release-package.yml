@@ -22,7 +22,7 @@ jobs:
             sed -i.bak '/always-auth/d' "$NPM_CONFIG_USERCONFIG"
           fi
         env:
-          NPM_CONFIG_USERCONFIG: ${{ env.NPM_CONFIG_USERCONFIG }}
+          NPM_CONFIG_USERCONFIG: $HOME/.npmrc
       - name: Exclude shared-configs tags
         run: |
           if [[ "${GITHUB_REF_NAME}" == @instructure.ai/shared-configs*@* ]]; then
@@ -50,7 +50,7 @@ jobs:
         run: pnpm test
 
       - name: Publish package with pnpm
-        run: pnpm publish --no-git-checks
+        run: pnpm publish
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
