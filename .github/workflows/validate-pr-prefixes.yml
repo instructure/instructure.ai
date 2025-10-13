@@ -1,9 +1,10 @@
-name: validate-pr-prefixes
-permissions:
-  contents: read
+name: Validate PR Prefixes
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
 
 jobs:
   validate:
@@ -12,7 +13,7 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v4
 
-      - name: Validate PR source branch prefix for package branches
+      - name: Validate PR source branch prefix
         shell: bash
         run: |
           BASE="${{ github.base_ref }}"
@@ -20,40 +21,46 @@ jobs:
           echo "Base: $BASE"
           echo "Head: $HEAD"
 
-          # Gather package directory names (one level)
-          if [[ ! -d "./packages" ]]; then
-            echo "No ./packages directory; skipping."
-            exit 0
-          else
-            mapfile -t PKGS < <(find ./packages -mindepth 1 -maxdepth 1 -type d -printf '%f\n')
+          # Gather package and app folder names
+          PKGS=()
+          if [ -d ./packages ]; then
+            mapfile -t PKGDIRS < <(ls -1d ./packages/*/ 2>/dev/null | xargs -n 1 basename)
+            PKGS+=("${PKGDIRS[@]}")
+          fi
+          if [ -d ./apps ]; then
+            mapfile -t APPDIRS < <(ls -1d ./apps/*/ 2>/dev/null | xargs -n 1 basename)
+            PKGS+=("${APPDIRS[@]}")
+          fi
+          echo "Package/app branches: ${PKGS[@]}"
+
+          # If base is main, allow only main-* or <packagename>-* branches
+          if [[ "$BASE" == "main" ]]; then
+            for pkg in "${PKGS[@]}"; do
+              if [[ "$HEAD" =~ ^"${pkg}-" ]]; then
+                echo "✅ Allowed: PR from branch '$HEAD' (package prefix)"
+                exit 0
+              fi
+            done
+            if [[ "$HEAD" =~ ^"main-" ]]; then
+              echo "✅ Allowed: PR from branch '$HEAD' (main- prefix)"
+              exit 0
+            fi
+            echo "❌ Only PRs from branches starting with 'main-' or '<package>-' may target main."
+            exit 1
           fi
 
-          if [[ ${#PKGS[@]} -eq 0 ]]; then
-            echo "No packages found; skipping."
-            exit 0
-          fi
-
-          # Is the base branch one of the package names?
-          is_pkg_base="false"
+          # If base is a package branch, allow only <packagename>-* branches
           for pkg in "${PKGS[@]}"; do
             if [[ "$BASE" == "$pkg" ]]; then
-              is_pkg_base="true"
-              target_pkg="$pkg"
-              break
+              if [[ "$HEAD" =~ ^"${pkg}-" ]]; then
+                echo "✅ Allowed: PR from branch '$HEAD' (package prefix)"
+                exit 0
+              else
+                echo "❌ PRs into '$BASE' must come from branches starting with '${BASE}-'"
+                exit 1
+              fi
             fi
           done
 
-          if [[ "$is_pkg_base" != "true" ]]; then
-            echo "Base '$BASE' is not a package branch; skipping."
-            exit 0
-          fi
-
-          # Enforce prefix: HEAD must start with "<base>-"
-          required_prefix="${target_pkg}-"
-          if [[ "$HEAD" =~ ^"${required_prefix}" ]]; then
-            echo "✅ OK: head branch starts with '${required_prefix}'"
-            exit 0
-          fi
-
-          echo "❌ PRs into '${target_pkg}' must come from branches starting with '${required_prefix}'"
-          exit 1
+          echo "Base branch '$BASE' is not main or a package branch; skipping validation."
+          exit 0
