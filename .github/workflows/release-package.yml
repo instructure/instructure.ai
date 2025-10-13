@@ -1,7 +1,10 @@
 
 name: Publish Package
+
 on:
   push:
+    branches:
+      - main
     tags:
       - '@instructure.ai/*@*.*.*'
 
