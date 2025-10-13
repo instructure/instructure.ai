@@ -1,8 +1,12 @@
+
 name: retag-on-merge
 on:
   push:
     branches:
       - main
+
+permissions:
+  contents: write
 
 jobs:
   retag:
