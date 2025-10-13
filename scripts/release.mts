@@ -152,7 +152,7 @@ const main = async () => {
 
 		!root ? exec(finalCommand) : console.log("Skipping pack for root package");
 
-		commit({pkg, version: writeVersion, pkgJsonPath: pkgJson.path});
+		commit({ pkg, pkgJsonPath: pkgJson.path, version: writeVersion });
 	};
 
 	const commit = ({
