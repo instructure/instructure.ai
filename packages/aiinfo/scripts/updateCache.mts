@@ -4,13 +4,7 @@ import path from "node:path";
 import { parse } from "papaparse";
 import { cache, checksum } from "../cache";
 import type { CSVFetchResult, Entry, Hash } from "../types";
-import {
-	CSVURL,
-	entryToObj,
-	Log,
-	writeBarrel,
-	writeEntry,
-} from "../utils";
+import { CSVURL, entryToObj, Log, writeBarrel, writeEntry } from "../utils";
 
 const generateChecksum = (data: string): Hash => {
 	const hash = createHash("shake128", { outputLength: 32 })

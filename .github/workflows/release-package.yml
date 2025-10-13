@@ -56,14 +56,14 @@ jobs:
               echo "Skipping build for @instructure.ai/shared-configs."
             else
               echo "Building package: $PKG_NAME"
-              pnpm build package "$PKG_NAME"
+              pnpm -F "$PKG_NAME" prepublish
             fi
 
             # Test
             if [ "$PKG_NAME" = "shared-configs" ]; then
               echo "Skipping test for @instructure.ai/shared-configs."
             else
-              pnpm test
+              pnpm -F "$PKG_NAME" test
             fi
 
             # Publish
