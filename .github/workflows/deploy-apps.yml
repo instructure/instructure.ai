@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Exit if no changes in ./apps
         shell: bash
@@ -31,6 +33,18 @@ jobs:
             echo "No changes in ./apps directory."
             exit 0
           fi
+            BEFORE_SHA="${{ github.event.before }}"
+            AFTER_SHA="${{ github.sha }}"
+            # Try diffing with BEFORE_SHA, fallback to HEAD~1 if not available
+            if git cat-file -e "$BEFORE_SHA" 2>/dev/null; then
+              DIFF_RANGE="$BEFORE_SHA $AFTER_SHA"
+            else
+              DIFF_RANGE="HEAD~1 HEAD"
+            fi
+            if ! git diff --name-only $DIFF_RANGE | grep '^apps/'; then
+              echo "No changes in ./apps directory. Exiting early."
+              exit 0
+            fi
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
