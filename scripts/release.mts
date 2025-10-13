@@ -152,18 +152,20 @@ const main = async () => {
 
 		!root ? exec(finalCommand) : console.log("Skipping pack for root package");
 
-		commit({pkg, version: writeVersion});
+		commit({pkg, version: writeVersion, pkgJsonPath: pkgJson.path});
 	};
 
 	const commit = ({
 		pkg,
 		version,
+		pkgJsonPath,
 	}: {
 		pkg: FullPackageName;
 		version: PackageJson["version"];
+		pkgJsonPath: string;
 	}) => {
 		const tag = `${pkg}@${version}`;
-		exec(`git add .`);
+		exec(`git add ${pkgJsonPath}`);
 		exec(`git commit -m "${tag}"`);
 	};
 	try {
