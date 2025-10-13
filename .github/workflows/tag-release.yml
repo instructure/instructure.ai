@@ -23,20 +23,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Tag changed packages
-          for pkg in $(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep 'packages/.*/package.json' | xargs -n1 dirname); do
-            NAME=$(jq -r .name $pkg/package.json)
-            VERSION=$(jq -r .version $pkg/package.json)
+          for pkgjson in $(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '^(package.json|packages/.*/package.json)$'); do
+            NAME=$(jq -r .name $pkgjson)
+            VERSION=$(jq -r .version $pkgjson)
             TAG="${NAME}@${VERSION}"
-            git tag $TAG
-            git push origin $TAG
+            git tag -f $TAG
+            git push --force origin $TAG
           done
-
-          # Tag root package if changed
-          if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^package.json$'; then
-            NAME=$(jq -r .name package.json)
-            VERSION=$(jq -r .version package.json)
-            TAG="${NAME}@${VERSION}"
-            git tag $TAG
-            git push origin $TAG
-          fi
