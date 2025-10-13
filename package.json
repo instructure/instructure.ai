@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@biomejs/biome": "^2.2.5",
+    "@biomejs/biome": "^2.2.6",
     "@instructure/browserslist-config-instui": "^11.0.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.1",
@@ -18,7 +18,7 @@
   },
   "version": "1.0.0",
   "name": "@instructure.ai/shared-configs",
-  "packageManager": "pnpm@10.18.1",
+  "packageManager": "pnpm@10.18.2",
   "private": true,
   "scripts": {
     "build": "vite-node ./scripts/build.mts",
