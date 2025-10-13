@@ -44,7 +44,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: pnpm run build --if-present
+        run: pnpm run build
 
       - name: Test
         run: pnpm test
@@ -59,3 +59,4 @@ jobs:
           name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
+          files: ./dist/*.tgz
