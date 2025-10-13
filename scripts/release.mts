@@ -63,16 +63,16 @@ const main = async () => {
 		return false;
 	};
 
-	const isValidVersion = (newVersion, version) => {
-				if (
-			(newVersion && !isVersionBigger(version, newVersion)) ||
-			newVersion === version
-		) {
-			exitWithError(
-				`The new version (${newVersion}) must be greater than the current version (${version}).`,
-			);
-		}
-	}
+	const isValidVersion = ({
+		newVersion,
+		version,
+	}: {
+		newVersion?: PackageJson["version"];
+		version: PackageJson["version"];
+	}): boolean =>
+		(newVersion && !isVersionBigger(version, newVersion)) ||
+		newVersion !== version ||
+		typeof newVersion === "undefined";
 
 	const setVersion = ({
 		newVersion,
@@ -106,16 +106,21 @@ const main = async () => {
 		}
 	};
 
-	const pack = (pkg: FullPackageName, args: WorkspaceCommand["args"] = []) => {
-		console.log("args:", args);
+	const pack = ({
+		pkg,
+		args = [],
+		root = false,
+	}: {
+		pkg: FullPackageName;
+		args: WorkspaceCommand["args"];
+		root?: boolean;
+	}) => {
 		const hasPackDestination = args.some(
 			(arg) => typeof arg === "string" && arg.startsWith("--pack-destination"),
 		);
-		console.log("hasPackDestination:", hasPackDestination);
 		if (!hasPackDestination) {
 			args.push("--pack-destination=./pub");
 		}
-		console.log("args after:", args);
 		const pkgJson = getPackageJson(pkg);
 		if (!pkgJson) {
 			exitWithError(`Could not find package.json for package: ${pkg}`);
@@ -124,10 +129,7 @@ const main = async () => {
 		const version = getVersion(pkgJson.content);
 		const newVersion = getNewVersion(args);
 
-		if (
-			(newVersion && !isVersionBigger(version, newVersion)) ||
-			newVersion === version
-		) {
+		if (!isValidVersion({ newVersion: newVersion, version: version })) {
 			exitWithError(
 				`The new version (${newVersion}) must be greater than the current version (${version}).`,
 			);
@@ -139,13 +141,15 @@ const main = async () => {
 			version: version,
 		});
 
-		const passedArgs = isStrictlyValidCommand(args[0] as WorkspaceCommand["command"])
+		const passedArgs = isStrictlyValidCommand(
+			args[0] as WorkspaceCommand["command"],
+		)
 			? getArgs(args)
 			: args;
 
-		const finalCommand = `pnpm -F ${pkg} pack ${passedArgs.join(" ")}`
+		const finalCommand = `pnpm -F ${pkg} pack ${passedArgs.join(" ")}`;
 
-		exec(finalCommand);
+		!root ? exec(finalCommand) : console.log("Skipping pack for root package");
 	};
 
 	try {
@@ -156,17 +160,17 @@ const main = async () => {
 						"A valid package name is required for the package command.",
 					);
 				}
-				pack(output as FullPackageName, args);
+				pack({ args: args, pkg: output as FullPackageName });
 				break;
 			case "root":
-				console.log("Packaging root is not supported yet.");
+				pack({ args: args, pkg: output as FullPackageName, root: true });
 				break;
 			case "all":
 				console.log("Packaging all is not supported yet.");
 				break;
 			default:
 				if (isValidPackage(command)) {
-					pack(command as FullPackageName, args);
+					pack({ args: args, pkg: command as FullPackageName });
 				} else {
 					exitWithError(`Unknown build command: ${command}
 Valid commands are: ${releaseCommands.join(", ")}`);
