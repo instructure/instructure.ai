@@ -129,10 +129,12 @@ const main = async () => {
 		const version = getVersion(pkgJson.content);
 		const newVersion = getNewVersion(args);
 
-		if (!isValidVersion({ newVersion: newVersion, version: version })) {
-			exitWithError(
-				`The new version (${newVersion}) must be greater than the current version (${version}).`,
-			);
+		if (newVersion) {
+			if (!isVersionBigger(version, newVersion) || newVersion === version) {
+				exitWithError(
+					`The new version (${newVersion}) must be greater than the current version (${version}).`,
+				);
+			}
 		}
 
 		setVersion({
