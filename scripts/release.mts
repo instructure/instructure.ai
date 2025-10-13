@@ -69,11 +69,11 @@ const main = async () => {
 	}: {
 		newVersion?: PackageJson["version"];
 		version: PackageJson["version"];
-	}): boolean =>
-		(newVersion && !isVersionBigger(version, newVersion)) ||
-		newVersion !== version ||
-		typeof newVersion === "undefined";
-
+	}): boolean => {
+		if (typeof newVersion === "undefined") return false;
+		if (newVersion === version) return false;
+		return isVersionBigger(version, newVersion);
+	};
 	const setVersion = ({
 		newVersion,
 		version,
