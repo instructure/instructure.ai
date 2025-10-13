@@ -12,7 +12,7 @@
   },
   "files": ["dist"],
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && pnpm pack --pack-destination ./dist",
     "typecheck": "tsgo --noEmit",
     "lint": "pnpm biome check",
     "<<cliname>>": "vite-node ./dist/index.mjs"

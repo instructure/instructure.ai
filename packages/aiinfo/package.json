@@ -18,9 +18,9 @@
 	},
 	"exports": {
 		".": {
+			"default": "./dist/index.mjs",
 			"import": "./dist/index.mjs",
-			"types": "./dist/index.d.ts",
-			"default": "./dist/index.mjs"
+			"types": "./dist/index.d.ts"
 		}
 	},
 	"files": [
@@ -37,12 +37,10 @@
 		"access": "public"
 	},
 	"scripts": {
-		"build": "vite build",
-		"bundle": "pnpm update:cache && pnpm build && biome check ./src --write",
+		"build": "pnpm bundle && pnpm pack --pack-destination ./dist",
+		"build:vite": "vite build",
+		"bundle": "pnpm update:cache && pnpm build:vite && pnpm lint --write",
 		"lint": "pnpm biome check",
-		"package": "pnpm bundle && pnpm pack --pack-destination ./dist",
-		"prepublish": "pnpm package",
-		"publish:public": "pnpm publish ./dist/instructure.ai-aiinfo-$npm_package_version.tgz --access public --no-git-checks",
 		"typecheck": "tsgo --noEmit",
 		"update:cache": "UPDATE=1 vite-node ./scripts/updateCache.mts"
 	},
