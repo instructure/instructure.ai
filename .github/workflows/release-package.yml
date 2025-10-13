@@ -1,5 +1,5 @@
 
-name: Publish Package
+name: Release Package
 
 on:
   push:
