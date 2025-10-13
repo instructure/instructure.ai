@@ -353,6 +353,11 @@ const isValidCommand = (
 	}
 };
 
+const isStrictlyValidCommand = (
+	cmd: WorkspaceCommand["command"],
+	cmds: readonly WorkspaceCommand["command"][] = [],
+): boolean => cmds.includes(cmd)
+
 const isValidPackage = (
 	pkg: PackageName | FullPackageName,
 	pkgs: PackageName[] = getPackages(),
@@ -407,4 +412,5 @@ export {
 	getFullPackageName,
 	getRootPackage,
 	getPackageJson,
+	isStrictlyValidCommand
 };

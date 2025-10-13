@@ -5,6 +5,7 @@ import {
 	exec,
 	exitWithError,
 	getPackageJson,
+	isStrictlyValidCommand,
 	isValidCommand,
 	isValidPackage,
 	unknownError,
@@ -25,16 +26,14 @@ const main = async () => {
 
 	const getNewVersion = (args: WorkspaceCommand["args"]) => {
 		for (const arg of args) {
-			let newVersion: PackageJson["version"] | undefined;
 			if (typeof arg === "string") {
 				const vMatch = arg.match(/^(-v|--version)=(\d+\.\d+\.\d+)$/);
 				if (vMatch) {
-					newVersion = vMatch[2] as PackageJson["version"];
-					break;
+					return vMatch[2] as PackageJson["version"];
 				}
 			}
-			return newVersion;
 		}
+		return undefined;
 	};
 
 	const bumpVersion = (
@@ -49,6 +48,21 @@ const main = async () => {
 		});
 		return bumpedVersion.join(".") as PackageJson["version"];
 	};
+
+	const isVersionBigger = (
+		oldVersion: PackageJson["version"],
+		newVersion: PackageJson["version"],
+	) => {
+		const oldParts = oldVersion.split(".").map((part) => parseInt(part, 10));
+		const newParts = newVersion.split(".").map((part) => parseInt(part, 10));
+
+		for (let i = 0; i < 3; i++) {
+			if (newParts[i] > oldParts[i]) return true;
+			if (newParts[i] < oldParts[i]) return false;
+		}
+		return false;
+	};
+
 	const setVersion = ({
 		newVersion,
 		version,
@@ -62,8 +76,10 @@ const main = async () => {
 		if (!writeVersion) {
 			writeVersion = bumpVersion(version);
 			console.warn(
-				`New new version specified, auto-incrementing to ${writeVersion}`,
+				`No new version specified, auto-incrementing to ${writeVersion}\n`,
 			);
+		} else {
+			console.log(`Setting new version to ${writeVersion}\n`);
 		}
 		try {
 			if (!writeVersion) {
@@ -74,19 +90,21 @@ const main = async () => {
 			fs.writeFileSync(path, `${JSON.stringify(pkgJson, null, 2)}\n`, {
 				encoding: "utf-8",
 			});
-			console.log(`Set new version to ${writeVersion} in ${path}`);
 		} catch (error) {
 			exitWithError("Error setting new version.", error);
 		}
 	};
 
 	const pack = (pkg: FullPackageName, args: WorkspaceCommand["args"] = []) => {
+		console.log("args:", args);
 		const hasPackDestination = args.some(
 			(arg) => typeof arg === "string" && arg.startsWith("--pack-destination"),
 		);
+		console.log("hasPackDestination:", hasPackDestination);
 		if (!hasPackDestination) {
 			args.push("--pack-destination=./pub");
 		}
+		console.log("args after:", args);
 		const pkgJson = getPackageJson(pkg);
 		if (!pkgJson) {
 			exitWithError(`Could not find package.json for package: ${pkg}`);
@@ -95,9 +113,12 @@ const main = async () => {
 		const version = getVersion(pkgJson.content);
 		const newVersion = getNewVersion(args);
 
-		if (newVersion && newVersion === version) {
+		if (
+			(newVersion && !isVersionBigger(version, newVersion)) ||
+			newVersion === version
+		) {
 			exitWithError(
-				`The new version (${newVersion}) must be different from the current version (${version}).`,
+				`The new version (${newVersion}) must be greater than the current version (${version}).`,
 			);
 		}
 
@@ -107,7 +128,13 @@ const main = async () => {
 			version: version,
 		});
 
-		exec(`pnpm -F ${pkg} pack ${getArgs(args).join(" ")}`);
+		const passedArgs = isStrictlyValidCommand(args[0] as WorkspaceCommand["command"])
+			? getArgs(args)
+			: args;
+
+		const finalCommand = `pnpm -F ${pkg} pack ${passedArgs.join(" ")}`
+
+		exec(finalCommand);
 	};
 
 	try {
