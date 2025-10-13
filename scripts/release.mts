@@ -82,7 +82,7 @@ const main = async () => {
 		version: PackageJson["version"];
 		newVersion?: PackageJson["version"];
 		path: string;
-	}) => {
+	}): PackageJson["version"] => {
 		let writeVersion = newVersion;
 		if (!writeVersion) {
 			writeVersion = bumpVersion(version);
@@ -104,6 +104,7 @@ const main = async () => {
 		} catch (error) {
 			exitWithError("Error setting new version.", error);
 		}
+		return writeVersion;
 	};
 
 	const pack = ({
@@ -129,13 +130,13 @@ const main = async () => {
 		const version = getVersion(pkgJson.content);
 		const newVersion = getNewVersion(args);
 
-		if (!isValidVersion({ newVersion: newVersion, version: version })) {
+		if (newVersion && !isValidVersion({ newVersion, version })) {
 			exitWithError(
-				`The new version (${newVersion}) must be greater than the current version (${version}).`,
+				`The new version (${newVersion}) must be greater than the current version (${version}) and follow semantic versioning.`,
 			);
 		}
 
-		setVersion({
+		const writeVersion = setVersion({
 			newVersion: newVersion,
 			path: pkgJson.path,
 			version: version,
@@ -150,8 +151,23 @@ const main = async () => {
 		const finalCommand = `pnpm -F ${pkg} pack ${passedArgs.join(" ")}`;
 
 		!root ? exec(finalCommand) : console.log("Skipping pack for root package");
+
+		commit({pkg, version: writeVersion, pkgJsonPath: pkgJson.path});
 	};
 
+	const commit = ({
+		pkg,
+		version,
+		pkgJsonPath,
+	}: {
+		pkg: FullPackageName;
+		version: PackageJson["version"];
+		pkgJsonPath: string;
+	}) => {
+		const tag = `${pkg}@${version}`;
+		exec(`git add ${pkgJsonPath}`);
+		exec(`git commit -m "${tag}"`);
+	};
 	try {
 		switch (command) {
 			case "package":
