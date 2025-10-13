@@ -22,7 +22,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          for pkgjson in $(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '^(package.json|packages/.*/package.json)$'); do
+          BEFORE_SHA="${{ github.event.before }}"
+          AFTER_SHA="${{ github.sha }}"
+          # Try diffing with BEFORE_SHA, fallback to HEAD~1 if not available
+          if git cat-file -e "$BEFORE_SHA" 2>/dev/null; then
+            DIFF_RANGE="$BEFORE_SHA $AFTER_SHA"
+          else
+            DIFF_RANGE="HEAD~1 HEAD"
+          fi
+          for pkgjson in $(git diff --name-only $DIFF_RANGE | grep -E '^(package.json|packages/.*/package.json)$'); do
             NAME=$(jq -r .name $pkgjson)
             VERSION=$(jq -r .version $pkgjson)
             TAG="${NAME}@${VERSION}"
