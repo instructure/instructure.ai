@@ -16,6 +16,13 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Remove deprecated always-auth from .npmrc
+        run: |
+          if [ -f "$NPM_CONFIG_USERCONFIG" ]; then
+            sed -i.bak '/always-auth/d' "$NPM_CONFIG_USERCONFIG"
+          fi
+        env:
+          NPM_CONFIG_USERCONFIG: ${{ env.NPM_CONFIG_USERCONFIG }}
       - name: Exclude shared-configs tags
         run: |
           if [[ "${GITHUB_REF_NAME}" == @instructure.ai/shared-configs*@* ]]; then
