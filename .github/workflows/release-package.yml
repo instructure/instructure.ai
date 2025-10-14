@@ -20,6 +20,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+
       - name: Fetch all tags
         run: git fetch --tags
 
@@ -49,16 +55,16 @@ jobs:
             PKG_NAME=$(echo "$TAG" | sed -E 's/@instructure.ai\/([^@]+)@.*/\1/')
             echo "Processing release for tag: $TAG (package: $PKG_NAME)"
 
-            # Remove deprecated always-auth from .npmrc
+            # Remove deprecated always-auth from any pre-existing .npmrc
             if [ -f "$HOME/.npmrc" ]; then
               sed -i.bak '/always-auth/d' "$HOME/.npmrc"
             fi
 
-            # Install deps (no vite-node loader yet)
+            # Install deps
             npm install -g pnpm
             pnpm install --frozen-lockfile
 
-            # NOW enable vite-node loader using the new register() API
+            # Enable vite-node loader using the register() API
             export NODE_OPTIONS="--import=${{ github.workspace }}/scripts/loader.mjs"
 
             # Build
@@ -76,7 +82,7 @@ jobs:
               pnpm -F "$PKG_NAME" test
             fi
 
-            # Publish
+            # Publish (use npm CLI to trigger OIDC Trusted Publishing)
             if [ "$PKG_NAME" = "shared-configs" ]; then
               echo "Skipping publish for @instructure.ai/shared-configs."
             else
@@ -90,23 +96,24 @@ jobs:
                 JSON_PATH=""
               fi
 
+              TARBALL="./packages/$PKG_NAME/dist/"*.tgz
               if [ -n "$JSON_PATH" ]; then
-                ACCESS_PUBLIC=$(jq -r '.publishConfig.access' "$JSON_PATH")
-                PRIVATE=$(jq -r '.private' "$JSON_PATH")
-                if [ "$ACCESS_PUBLIC" = "public" ] && [ "$PRIVATE" != "true" ]; then
-                  echo "Publishing $PKG_NAME as public..."
-                  pnpm publish ./packages/$PKG_NAME/dist/*.tgz --access public --no-git-checks
-                elif [ "$PRIVATE" = "true" ]; then
+                ACCESS_PUBLIC=$(jq -r '.publishConfig.access // empty' "$JSON_PATH")
+                PRIVATE=$(jq -r '.private // false' "$JSON_PATH")
+                if [ "$PRIVATE" = "true" ]; then
                   echo "Skipping publish for $PKG_NAME because it is marked private in package.json."
+                elif [ "$ACCESS_PUBLIC" = "public" ]; then
+                  echo "Publishing $PKG_NAME as public via npm (OIDC)…"
+                  npm publish "$TARBALL" --access public --provenance
                 elif [ -n "$ACCESS_PUBLIC" ] && [ "$ACCESS_PUBLIC" != "public" ]; then
-                  echo "Skipping publish for $PKG_NAME because publishConfig.access is set to '$ACCESS_PUBLIC' (not public)."
+                  echo "Skipping publish for $PKG_NAME because publishConfig.access is '$ACCESS_PUBLIC' (not public)."
                 else
-                  echo "Publishing $PKG_NAME without --access public..."
-                  pnpm publish ./packages/$PKG_NAME/dist/*.tgz --no-git-checks
+                  echo "Publishing $PKG_NAME via npm (no --access public)…"
+                  npm publish "$TARBALL" --provenance
                 fi
               else
                 echo "package.json not found for $PKG_NAME in packages or apps, publishing without access check."
-                pnpm publish ./packages/$PKG_NAME/dist/*.tgz --no-git-checks
+                npm publish "$TARBALL" --provenance
               fi
             fi
 
