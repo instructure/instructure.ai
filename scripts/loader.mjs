@@ -1,16 +1,17 @@
 import { readFile } from "node:fs/promises";
+import { register } from "node:module";
 import { extname } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { transformWithEsbuild } from "vite";
 
 const mtsExtensions = new Set([".ts", ".mts", ".cts", ".tsx"]);
 
+register(fileURLToPath(import.meta.url), pathToFileURL("./"));
 
 export async function resolve(specifier, context, nextResolve) {
 	const resolved = await nextResolve(specifier, context, nextResolve);
 	return resolved;
 }
-
 
 export async function load(url, context, nextLoad) {
 	const extension = extname(url);
