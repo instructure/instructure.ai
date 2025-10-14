@@ -6,7 +6,7 @@ import { transformWithEsbuild } from "vite";
 
 const mtsExtensions = new Set([".ts", ".mts", ".cts", ".tsx"]);
 
-register(new URL(import.meta.url).pathname, pathToFileURL("./"));
+register(fileURLToPath(import.meta.url), pathToFileURL("./"));
 
 export async function resolve(specifier, context, nextResolve) {
 	const resolved = await nextResolve(specifier, context, nextResolve);
