@@ -13,8 +13,7 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    env:
-      NODE_OPTIONS: "--loader=vite-node/loader"
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,7 +37,12 @@ jobs:
 
       - name: Release each package tag
         if: env.tags != ''
+        env:
+          tags: ${{ env.tags }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -euo pipefail
+
           IFS=$'\n'
           for TAG in $tags; do
             PKG_NAME=$(echo "$TAG" | sed -E 's/@instructure.ai\/([^@]+)@.*/\1/')
@@ -49,9 +53,12 @@ jobs:
               sed -i.bak '/always-auth/d' "$HOME/.npmrc"
             fi
 
-            # Install dependencies
+            # Install deps (no vite-node loader yet)
             npm install -g pnpm
             pnpm install --frozen-lockfile
+
+            # NOW enable vite-node loader so any .ts/.mts imports work everywhere below
+            export NODE_OPTIONS="--loader=$(pwd)/node_modules/vite-node/loader"
 
             # Build
             if [ "$PKG_NAME" = "shared-configs" ]; then
@@ -109,6 +116,3 @@ jobs:
               gh release create "$TAG" ./dist/*.tgz --title "$TAG" --generate-notes
             fi
           done
-        env:
-          tags: ${{ env.tags }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
