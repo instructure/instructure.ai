@@ -28,7 +28,6 @@ type CSV = ParseResult<string[]>["data"];
 type Hash = string;
 
 type Checksum = {
-	CSV: Hash;
 	[feature: FeatureName]: Hash;
 };
 
@@ -139,8 +138,17 @@ type Strings = {
 		| NutritionFactsStrings;
 };
 
+type ChangedEntry = {
+	uid: string;
+	oldChecksum?: string;
+	newChecksum: string;
+	oldEntry?: Entry;
+	newEntry: Entry;
+};
+
 export type {
 	CSV,
+	ChangedEntry,
 	Checksum,
 	CSVFetchResult,
 	DataPermissionLevelsStrings,
