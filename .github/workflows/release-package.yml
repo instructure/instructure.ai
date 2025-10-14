@@ -57,8 +57,8 @@ jobs:
             npm install -g pnpm
             pnpm install --frozen-lockfile
 
-            # NOW enable vite-node loader so any .ts/.mts imports work everywhere below
-            export NODE_OPTIONS="--loader=${{ github.workspace }}/scripts/loader.mjs"
+            # NOW enable vite-node loader using the new register() API
+            export NODE_OPTIONS="--import='data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"${{ github.workspace }}/scripts/loader.mjs\", pathToFileURL(\"./\"));'"
 
             # Build
             if [ "$PKG_NAME" = "shared-configs" ]; then
@@ -94,18 +94,18 @@ jobs:
                 PRIVATE=$(jq -r '.private' "$JSON_PATH")
                 if [ "$ACCESS_PUBLIC" = "public" ] && [ "$PRIVATE" != "true" ]; then
                   echo "Publishing $PKG_NAME as public..."
-                  pnpm publish ./dist/*.tgz --access public
+                  pnpm publish ./dist/*.tgz --access public --no-git-checks
                 elif [ "$PRIVATE" = "true" ]; then
                   echo "Skipping publish for $PKG_NAME because it is marked private in package.json."
                 elif [ -n "$ACCESS_PUBLIC" ] && [ "$ACCESS_PUBLIC" != "public" ]; then
                   echo "Skipping publish for $PKG_NAME because publishConfig.access is set to '$ACCESS_PUBLIC' (not public)."
                 else
                   echo "Publishing $PKG_NAME without --access public..."
-                  pnpm publish ./dist/*.tgz
+                  pnpm publish ./dist/*.tgz --no-git-checks
                 fi
               else
                 echo "package.json not found for $PKG_NAME in packages or apps, publishing without access check."
-                pnpm publish ./dist/*.tgz
+                pnpm publish ./dist/*.tgz --no-git-checks
               fi
             fi
 
