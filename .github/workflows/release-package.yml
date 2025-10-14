@@ -94,18 +94,18 @@ jobs:
                 PRIVATE=$(jq -r '.private' "$JSON_PATH")
                 if [ "$ACCESS_PUBLIC" = "public" ] && [ "$PRIVATE" != "true" ]; then
                   echo "Publishing $PKG_NAME as public..."
-                  pnpm publish ./dist/*.tgz --access public --no-git-checks
+                  pnpm publish ./packages/$PKG_NAME/dist/*.tgz --access public --no-git-checks
                 elif [ "$PRIVATE" = "true" ]; then
                   echo "Skipping publish for $PKG_NAME because it is marked private in package.json."
                 elif [ -n "$ACCESS_PUBLIC" ] && [ "$ACCESS_PUBLIC" != "public" ]; then
                   echo "Skipping publish for $PKG_NAME because publishConfig.access is set to '$ACCESS_PUBLIC' (not public)."
                 else
                   echo "Publishing $PKG_NAME without --access public..."
-                  pnpm publish ./dist/*.tgz --no-git-checks
+                  pnpm publish ./packages/$PKG_NAME/dist/*.tgz --no-git-checks
                 fi
               else
                 echo "package.json not found for $PKG_NAME in packages or apps, publishing without access check."
-                pnpm publish ./dist/*.tgz --no-git-checks
+                pnpm publish ./packages/$PKG_NAME/dist/*.tgz --no-git-checks
               fi
             fi
 
@@ -113,6 +113,6 @@ jobs:
             if [ "$PKG_NAME" = "shared-configs" ]; then
               gh release create "$TAG" --title "$TAG" --generate-notes
             else
-              gh release create "$TAG" ./dist/*.tgz --title "$TAG" --generate-notes
+              gh release create "$TAG" ./packages/$PKG_NAME/dist/*.tgz --title "$TAG" --generate-notes
             fi
           done
