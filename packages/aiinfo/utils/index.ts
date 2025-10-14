@@ -7,4 +7,5 @@ export { formatTs } from "./formatTs";
 export { Log } from "./log";
 export { toTsObjectLiteral } from "./toTsObjectLiteral";
 export { writeBarrel } from "./writeBarrel";
+export { writeChangelog } from "./writeChangelog";
 export { writeEntry } from "./writeEntry";
