@@ -1,12 +1,14 @@
 import { readFile } from "node:fs/promises";
 import { register } from "node:module";
-import { extname } from "node:path";
+import { dirname, extname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { transformWithEsbuild } from "vite";
 
-const mtsExtensions = new Set([".ts", ".mts", ".cts", ".tsx"]);
+// Use the directory containing loader.mjs as the context
+const loaderDir = dirname(fileURLToPath(import.meta.url));
+register(new URL(import.meta.url).pathname, pathToFileURL(loaderDir));
 
-register(fileURLToPath(import.meta.url), pathToFileURL("./"));
+const mtsExtensions = new Set([".ts", ".mts", ".cts", ".tsx"]);
 
 export async function resolve(specifier, context, nextResolve) {
 	const resolved = await nextResolve(specifier, context, nextResolve);
