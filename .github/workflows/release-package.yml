@@ -20,14 +20,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
-      
-      - name: Install pnpm
-        run: npm install -g pnpm
 
       - name: Fetch all tags
         run: git fetch --tags
