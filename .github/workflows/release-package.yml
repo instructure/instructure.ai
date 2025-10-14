@@ -25,6 +25,9 @@ jobs:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
+      
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       - name: Fetch all tags
         run: git fetch --tags
