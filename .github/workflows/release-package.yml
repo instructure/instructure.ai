@@ -101,7 +101,7 @@ jobs:
                 JSON_PATH=""
               fi
 
-              TARBALL=$(ls ./packages/$PKG_NAME/dist/*.tgz 2>/dev/null | head -n 1)
+              TARBALL=$(find ./packages/$PKG_NAME/dist -name '*.tgz' -type f | head -n 1)
               if [ -z "$TARBALL" ]; then
                 echo "Error: No .tgz tarball found for $PKG_NAME in ./packages/$PKG_NAME/dist/"
                 continue
