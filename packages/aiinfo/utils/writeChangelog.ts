@@ -64,7 +64,7 @@ const writeChangelog = ({
 				return diffText;
 			})
 			.join("\n");
-		changelog += entryDiffs + "\n";
+		changelog += `${entryDiffs}\n`;
 		try {
 			// Read existing changelog
 			let existing = "";

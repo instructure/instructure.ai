@@ -28,9 +28,9 @@ const updateCache = (data: CSVFetchResult): void => {
 
 	// Update overall CSV checksum
 	const newCSVChecksum = generateChecksum(data.raw);
-	const oldCSVChecksum = checksums["CSV"];
+	const oldCSVChecksum = checksums.csv;
 	const isCSVOutdated = newCSVChecksum !== oldCSVChecksum;
-	checksums["CSV"] = newCSVChecksum;
+	checksums.csv = newCSVChecksum;
 
 	// Prepare changelog update if CSV is outdated
 	const changelogPath = path.resolve(__dirname, "../Changelog.md");
@@ -54,7 +54,7 @@ const updateCache = (data: CSVFetchResult): void => {
 	// Update per-entry checksums only if outdated
 	for (const entry of data.parsed) {
 		const EntryObj: Entry = entryToObj(entry);
-		if (EntryObj && EntryObj.uid) {
+		if (EntryObj?.uid) {
 			const entryChecksum = generateChecksum(JSON.stringify(entry));
 			// Check if the checksum is outdated for this entry
 			const oldEntryChecksum = checksums[EntryObj.uid];
@@ -150,7 +150,7 @@ const main = async () => {
 		if (data) {
 			// Determine if cache will be updated by checking CSV checksum
 			const newCSVChecksum = generateChecksum(data.raw);
-			cacheUpdated = newCSVChecksum !== checksum["CSV"];
+			cacheUpdated = newCSVChecksum !== checksum.csv;
 			if (!cacheUpdated) {
 				Log({
 					color: "green",
