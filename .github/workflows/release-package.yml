@@ -13,6 +13,8 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: "--loader=vite-node/loader"
     steps:
       - uses: actions/checkout@v4
         with:
