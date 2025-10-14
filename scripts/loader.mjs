@@ -5,12 +5,14 @@ import { transformWithEsbuild } from "vite";
 
 const mtsExtensions = new Set([".ts", ".mts", ".cts", ".tsx"]);
 
-export async function resolve(specifier, context, defaultResolve) {
-	const resolved = await defaultResolve(specifier, context, defaultResolve);
+
+export async function resolve(specifier, context, nextResolve) {
+	const resolved = await nextResolve(specifier, context, nextResolve);
 	return resolved;
 }
 
-export async function load(url, context, defaultLoad) {
+
+export async function load(url, context, nextLoad) {
 	const extension = extname(url);
 	if (mtsExtensions.has(extension)) {
 		const filename = fileURLToPath(url);
@@ -27,5 +29,5 @@ export async function load(url, context, defaultLoad) {
 		};
 	}
 
-	return defaultLoad(url, context, defaultLoad);
+	return nextLoad(url, context, nextLoad);
 }
