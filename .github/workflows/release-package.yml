@@ -57,8 +57,8 @@ jobs:
             npm install -g pnpm
             pnpm install --frozen-lockfile
 
-            # NOW enable vite-node loader so any .ts/.mts imports work everywhere below
-            export NODE_OPTIONS="--loader=${{ github.workspace }}/scripts/loader.mjs"
+            # NOW enable vite-node loader using the new register() API
+            export NODE_OPTIONS="--import='data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"${{ github.workspace }}/scripts/loader.mjs\", pathToFileURL(\"./\"));'"
 
             # Build
             if [ "$PKG_NAME" = "shared-configs" ]; then
