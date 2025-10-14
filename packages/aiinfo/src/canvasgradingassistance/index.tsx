@@ -84,7 +84,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"The locations where the AI model is officially available and supported.",
 				segmentTitle: "Regions Supported",
-				value: "Virginia, Oregon",
+				value: "Global",
 				valueDescription: "",
 			},
 			{
@@ -200,7 +200,7 @@ const canvasgradingassistance: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
 	nutritionFacts,
-	revision: "2025.09.10",
+	revision: "2025.10.14",
 	uid: UID,
 };
 export {
