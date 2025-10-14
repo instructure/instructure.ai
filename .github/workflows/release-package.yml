@@ -64,7 +64,6 @@ jobs:
             fi
 
             # Install deps
-            npm install -g pnpm
             pnpm install --frozen-lockfile
 
             # Enable vite-node loader using the register() API
@@ -99,7 +98,7 @@ jobs:
                 JSON_PATH=""
               fi
 
-              TARBALL="./packages/$PKG_NAME/dist/"*.tgz
+              TARBALL=$(ls ./packages/$PKG_NAME/dist/*.tgz 2>/dev/null | head -n 1)
               if [ -n "$JSON_PATH" ]; then
                 ACCESS_PUBLIC=$(jq -r '.publishConfig.access // empty' "$JSON_PATH")
                 PRIVATE=$(jq -r '.private // false' "$JSON_PATH")
