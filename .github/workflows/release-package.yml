@@ -58,7 +58,7 @@ jobs:
             pnpm install --frozen-lockfile
 
             # NOW enable vite-node loader using the new register() API
-            export NODE_OPTIONS="--import=data:text/javascript,(async () => { const { register } = await import('node:module'); const { pathToFileURL } = await import('node:url'); register('${{ github.workspace }}/scripts/loader.mjs', pathToFileURL('./')); })()"
+            export NODE_OPTIONS="--import=${{ github.workspace }}/scripts/loader.mjs"
 
             # Build
             if [ "$PKG_NAME" = "shared-configs" ]; then
