@@ -1,8 +1,11 @@
 name: Branch naming policy
 
+permissions:
+  contents: read
+
 on:
   pull_request:
-    types: [opened  , reopened, synchronize, edited, ready_for_review]
+    types: [opened, reopened, synchronize, edited, ready_for_review]
 
 jobs:
   check-branch-name:
