@@ -51,14 +51,14 @@ const writeChangelog = ({
 					const newObj = e.newEntry as Record<string, unknown>;
 					for (const key of Object.keys(newObj)) {
 						const value = newObj[key];
-						diffText += `\n\n#### ${key}\n\nOld: \`(none)\`\n\n#### New:\n\n\`\`\`JSON\n${JSON.stringify(value)}\n\`\`\``;
+ 						diffText += `\n\n#### ${key}\n\nOld: \`(none)\`\n\n#### New:\n\n\`\`\`JSON\n${JSON.stringify(value, null, 2)}\n\`\`\``;
 					}
 				} else if (e.oldEntry && e.newEntry) {
 					// Show diffs for changed entries
 					const diffs = getObjectDiffs(e.oldEntry, e.newEntry);
 					for (const diff of diffs) {
 						const pathStr = diff.path.join(".");
-						diffText += `\n\n#### ${pathStr}:\n\nOld:\n\n\`\`\`JSON\n${JSON.stringify(diff.oldValue)}\n\`\`\`\n#### New:\n\n\`\`\`JSON\n${JSON.stringify(diff.newValue)}\n\`\`\``;
+ 						diffText += `\n\n#### ${pathStr}:\n\nOld:\n\n\`\`\`JSON\n${JSON.stringify(diff.oldValue, null, 2)}\n\`\`\`\n#### New:\n\n\`\`\`JSON\n${JSON.stringify(diff.newValue, null, 2)}\n\`\`\``;
 					}
 				}
 				return diffText;
