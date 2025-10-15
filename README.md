@@ -3,7 +3,7 @@
 
 # @instructure.ai/shared-configs
 
-![Version](https://img.shields.io/github/package-json/version/instructure/instructure.ai?labelColor=%230E1721&color=%234279B6) ![NPM Builds](https://img.shields.io/github/actions/workflow/status/instructure/instructure.ai/release-package.yml?logo=npm&logoColor=%23CB3837&label=package%20builds&labelColor=%230E1721) ![Web Builds](https://img.shields.io/github/actions/workflow/status/instructure/instructure.ai/deploy-apps.yml?logo=javascript&logoColor=%23F7DF1E&label=web%20builds&labelColor=%230E1721)
+![Version](https://img.shields.io/github/package-json/version/instructure/instructure.ai?labelColor=%230E1721&color=%234279B6) ![NPM Builds](https://img.shields.io/github/actions/workflow/status/instructure/instructure.ai/release-package.yml?logo=npm&logoColor=%23CB3837&label=package%20builds&labelColor=%230E1721) ![Web Builds](https://img.shields.io/github/actions/workflow/status/instructure/instructure.ai/deploy-apps.yml?logo=javascript&logoColor=%23F7DF1E&label=web%20builds&labelColor=%230E1721) ![Code Coverage](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Finstructure%2Finstructure.ai%2Frefs%2Fheads%2Fmain%2Fcoverage%2Fcoverage.yml&query=coverage.total&logo=vitest&logoColor=%236E9F18&label=coverage&labelColor=%230E1721&color=%234279B6)
 
 
 This is a monorepo of apps and packages. Apps are served on [instructure.ai](https://instructure.ai)
