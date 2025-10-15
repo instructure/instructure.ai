@@ -112,7 +112,6 @@ const main = async () => {
 		args: WorkspaceCommand["args"];
 		root?: boolean;
 	}) => {
-
 		const pkgJson = getPackageJson(pkg);
 		if (!pkgJson) {
 			exitWithError(`Could not find package.json for package: ${pkg}`);
@@ -160,7 +159,7 @@ const main = async () => {
 				pack({ args: args, pkg: output as FullPackageName });
 				break;
 			case "root":
-				pack({ args: args, pkg: output as FullPackageName});
+				pack({ args: args, pkg: output as FullPackageName });
 				break;
 			case "all":
 				console.log("Packaging all is not supported yet.");

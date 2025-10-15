@@ -9,6 +9,11 @@
 	},
 	"name": "@instructure.ai/roadmap",
 	"private": true,
+	"repository": {
+  	"type": "git",
+  	"url": "https://github.com/instructure/instructure.ai",
+  	"directory": "apps/roadmap"
+	},
 	"scripts": {
 		"build": "vite build",
 		"dev": "vite",
