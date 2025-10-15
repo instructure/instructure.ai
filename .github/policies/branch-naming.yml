@@ -1,0 +1,6 @@
+# Branch must start with:
+# - any folder under apps/
+# - any folder under packages/
+# - shared-configs/
+# - release/
+branch_name_regex: '^(apps|packages)\/[^\/]+[\/_.-].+|^(shared-configs|release)[\/_.-].+'

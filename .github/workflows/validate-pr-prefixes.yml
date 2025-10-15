@@ -33,7 +33,7 @@ jobs:
           fi
           echo "Package/app branches: ${PKGS[@]}"
 
-          # If base is main, allow only main-* or <packagename>-* branches
+          # If base is main, allow only main-*, shared-configs-*, or <packagename>-* branches
           if [[ "$BASE" == "main" ]]; then
             for pkg in "${PKGS[@]}"; do
               if [[ "$HEAD" =~ ^"${pkg}-" ]]; then
@@ -41,11 +41,15 @@ jobs:
                 exit 0
               fi
             done
+            if [[ "$HEAD" =~ ^"shared-configs-" ]]; then
+              echo "✅ Allowed: PR from branch '$HEAD' (shared-configs prefix)"
+              exit 0
+            fi
             if [[ "$HEAD" =~ ^"main-" ]]; then
               echo "✅ Allowed: PR from branch '$HEAD' (main- prefix)"
               exit 0
             fi
-            echo "❌ Only PRs from branches starting with 'main-' or '<package>-' may target main."
+            echo "❌ Only PRs from branches starting with 'main-', 'shared-configs-', or '<package>-' may target main."
             exit 1
           fi
 

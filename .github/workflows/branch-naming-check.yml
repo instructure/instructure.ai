@@ -1,0 +1,30 @@
+name: Branch naming policy
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, edited, ready_for_review]
+
+jobs:
+  check-branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (no submodules needed)
+        uses: actions/checkout@v4
+
+      - name: Read policy
+        id: policy
+        run: |
+          regex=$(python .github/scripts/read_branch_policy.py)
+          echo "regex=$regex" >> $GITHUB_OUTPUT
+
+      - name: Validate branch name
+        env:
+          BRANCH: ${{ github.head_ref || github.ref_name }}
+          REGEX: ${{ steps.policy.outputs.regex }}
+        run: |
+          echo "Branch: $BRANCH"
+          echo "Regex : $REGEX"
+          python .github/scripts/validate_branch_name.py
