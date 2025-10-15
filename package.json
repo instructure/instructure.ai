@@ -28,7 +28,7 @@
     "new": "vite-node ./scripts/new.mts",
     "lint": "vite-node ./scripts/lint.mts",
     "lint:root": "biome check",
-    "test": "pnpm -r test",
+    "test": "vitest run",
     "typecheck": "pnpm -r typecheck",
     "preview": "vite-node ./scripts/preview.mts",
     "release": "vite-node ./scripts/release.mts",
