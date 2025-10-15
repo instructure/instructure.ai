@@ -41,7 +41,10 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Inbox Translation","description":"Translation of inbox messages (\"Inbox AI Translation\" feature flag) across 10 languages."}
+{
+  "name": "Inbox Translation",
+  "description": "Translation of inbox messages (\"Inbox AI Translation\" feature flag) across 10 languages."
+}
 ```
 
 #### model
@@ -51,7 +54,13 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"AWS Translate","description":"Anthropic Claude models are provided via Instructure's in-house AI Platform.","trained":"No","data":"Other","dataDescription":"Inbox messages"}
+{
+  "name": "AWS Translate",
+  "description": "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
+  "trained": "No",
+  "data": "Other",
+  "dataDescription": "Inbox messages"
+}
 ```
 
 #### compliance
@@ -61,7 +70,15 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"retention":"Data is not stored or reused by the model.","logging":"Does not log data","loggingDescription":"","regions":"Global","regionsDescription":"","pii":"Not Exposed","piiDescription":"PII in inbox messages may be sent to the model but no PII is intentionally sent to the model."}
+{
+  "retention": "Data is not stored or reused by the model.",
+  "logging": "Does not log data",
+  "loggingDescription": "",
+  "regions": "Global",
+  "regionsDescription": "",
+  "pii": "Not Exposed",
+  "piiDescription": "PII in inbox messages may be sent to the model but no PII is intentionally sent to the model."
+}
 ```
 
 #### outputs
@@ -71,7 +88,14 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"settings":"Yes","human":"Yes","humanDescription":"Users are displayed the translated copy of their message and can edit or remove it before they send the message.","guardrails":"","risks":"Machine translation may not fully capture the meaning of the original message.","outcomes":"Enable better multi-lingual communication in learning environments."}
+{
+  "settings": "Yes",
+  "human": "Yes",
+  "humanDescription": "Users are displayed the translated copy of their message and can edit or remove it before they send the message.",
+  "guardrails": "",
+  "risks": "Machine translation may not fully capture the meaning of the original message.",
+  "outcomes": "Enable better multi-lingual communication in learning environments."
+}
 ```
 
 #### group
@@ -129,7 +153,10 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Discussions Translation","description":"Translation of Discussion threads (\"Course AI Translation\" feature flag) across 10 languages."}
+{
+  "name": "Discussions Translation",
+  "description": "Translation of Discussion threads (\"Course AI Translation\" feature flag) across 10 languages."
+}
 ```
 
 #### model
@@ -139,7 +166,13 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Haiku 3","description":"Anthropic Claude models are provided via Instructure's in-house AI Platform.","trained":"No","data":"Course","dataDescription":"Discussion prompts and replies"}
+{
+  "name": "Haiku 3",
+  "description": "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
+  "trained": "No",
+  "data": "Course",
+  "dataDescription": "Discussion prompts and replies"
+}
 ```
 
 #### compliance
@@ -149,7 +182,15 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"retention":"Data is not stored or reused by the model.","logging":"Does not log data","loggingDescription":"","regions":"Global","regionsDescription":"","pii":"Not Exposed","piiDescription":"PII in discussion replies may be sent to the model, but no PII is intentionally sent to the model."}
+{
+  "retention": "Data is not stored or reused by the model.",
+  "logging": "Does not log data",
+  "loggingDescription": "",
+  "regions": "Global",
+  "regionsDescription": "",
+  "pii": "Not Exposed",
+  "piiDescription": "PII in discussion replies may be sent to the model, but no PII is intentionally sent to the model."
+}
 ```
 
 #### outputs
@@ -159,7 +200,14 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"settings":"Yes","human":"Yes","humanDescription":"Untranslated content is available to review translations against","guardrails":"","risks":"Machine translation may not fully capture the meaning of the original message.","outcomes":"Improve participation for students who do not natively speak the language of instruction or other replies."}
+{
+  "settings": "Yes",
+  "human": "Yes",
+  "humanDescription": "Untranslated content is available to review translations against",
+  "guardrails": "",
+  "risks": "Machine translation may not fully capture the meaning of the original message.",
+  "outcomes": "Improve participation for students who do not natively speak the language of instruction or other replies."
+}
 ```
 
 #### group
@@ -217,7 +265,10 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Agent","description":"Ignite Agent is a faculty chat assistant capable of translating natural language requests into complex Canvas workflows."}
+{
+  "name": "Agent",
+  "description": "Ignite Agent is a faculty chat assistant capable of translating natural language requests into complex Canvas workflows."
+}
 ```
 
 #### model
@@ -227,7 +278,13 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Haiku 3.5, Sonnet 3.5","description":"Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).","trained":"No","data":"Other","dataDescription":"The model uses chat transcripts and information requested from the Canvas API to execute its actions."}
+{
+  "name": "Haiku 3.5, Sonnet 3.5",
+  "description": "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+  "trained": "No",
+  "data": "Other",
+  "dataDescription": "The model uses chat transcripts and information requested from the Canvas API to execute its actions."
+}
 ```
 
 #### compliance
@@ -237,7 +294,15 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"retention":"Chat logs are retained indefinitely for troubleshooting and debugging.","logging":"Logs data","loggingDescription":"Chat logs are retained for troubleshooting and debugging purposes.","regions":"Virginia, Oregon","regionsDescription":"","pii":"Exposed","piiDescription":"If requested during the the chat, user, course, and student identifiers or metadata may be shared with the model."}
+{
+  "retention": "Chat logs are retained indefinitely for troubleshooting and debugging.",
+  "logging": "Logs data",
+  "loggingDescription": "Chat logs are retained for troubleshooting and debugging purposes.",
+  "regions": "Virginia, Oregon",
+  "regionsDescription": "",
+  "pii": "Exposed",
+  "piiDescription": "If requested during the the chat, user, course, and student identifiers or metadata may be shared with the model."
+}
 ```
 
 #### outputs
@@ -247,7 +312,14 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"settings":"Yes","human":"Yes","humanDescription":"The agent only takes action based on human requests, and all write actions must be confirmed by the user.","guardrails":"Access to the agent is limited to users with an Admin- or Teacher-based role. Data access and functions are scoped to the permissions available to the chat user.","risks":"The model may misinterpret user requests and require additional prompting.","outcomes":"Users are able to save time by relying on the Agent to execute complex workflows, batch actions, and other time-consuming Canvas tasks."}
+{
+  "settings": "Yes",
+  "human": "Yes",
+  "humanDescription": "The agent only takes action based on human requests, and all write actions must be confirmed by the user.",
+  "guardrails": "Access to the agent is limited to users with an Admin- or Teacher-based role. Data access and functions are scoped to the permissions available to the chat user.",
+  "risks": "The model may misinterpret user requests and require additional prompting.",
+  "outcomes": "Users are able to save time by relying on the Agent to execute complex workflows, batch actions, and other time-consuming Canvas tasks."
+}
 ```
 
 #### group
@@ -305,7 +377,10 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Rubric Creator","description":"AI-generated rubric recommendations for Canvas assignments."}
+{
+  "name": "Rubric Creator",
+  "description": "AI-generated rubric recommendations for Canvas assignments."
+}
 ```
 
 #### model
@@ -315,7 +390,13 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Haiku 3","description":"Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).","trained":"No","data":"Course","dataDescription":"The Canvas assignment description field is used in generating rubric criteria."}
+{
+  "name": "Haiku 3",
+  "description": "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+  "trained": "No",
+  "data": "Course",
+  "dataDescription": "The Canvas assignment description field is used in generating rubric criteria."
+}
 ```
 
 #### compliance
@@ -325,7 +406,15 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"retention":"Model responses are stored for debugging purposes.","logging":"Logs data","loggingDescription":"Request, response, and feedback data is logged to assist in troubleshooting.","regions":"Global","regionsDescription":"","pii":"Not Exposed","piiDescription":""}
+{
+  "retention": "Model responses are stored for debugging purposes.",
+  "logging": "Logs data",
+  "loggingDescription": "Request, response, and feedback data is logged to assist in troubleshooting.",
+  "regions": "Global",
+  "regionsDescription": "",
+  "pii": "Not Exposed",
+  "piiDescription": ""
+}
 ```
 
 #### outputs
@@ -335,7 +424,14 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"settings":"Yes","human":"Yes","humanDescription":"All created rubrics are reviewable and editable by the instructor.","guardrails":"The instructor may edit criteria before accepting the rubric.","risks":"The created rubric may not align with the assignment's intended learning outcomes.","outcomes":"A rubric aligned to learning outcomes is created for the instructor to use during grading."}
+{
+  "settings": "Yes",
+  "human": "Yes",
+  "humanDescription": "All created rubrics are reviewable and editable by the instructor.",
+  "guardrails": "The instructor may edit criteria before accepting the rubric.",
+  "risks": "The created rubric may not align with the assignment's intended learning outcomes.",
+  "outcomes": "A rubric aligned to learning outcomes is created for the instructor to use during grading."
+}
 ```
 
 #### group
@@ -393,7 +489,10 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Grading Assistance","description":"AI powered automatic grading and feedback suggestions to enable more consistent, fair, and efficient grading workflows."}
+{
+  "name": "Grading Assistance",
+  "description": "AI powered automatic grading and feedback suggestions to enable more consistent, fair, and efficient grading workflows."
+}
 ```
 
 #### model
@@ -403,7 +502,13 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Haiku 3.5","description":"Anthropic Claude models are provided via Instructure's in-house AI Platform.","trained":"No","data":"Course, Student","dataDescription":"Assignment information, rubric, and student submissions."}
+{
+  "name": "Haiku 3.5",
+  "description": "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
+  "trained": "No",
+  "data": "Course, Student",
+  "dataDescription": "Assignment information, rubric, and student submissions."
+}
 ```
 
 #### compliance
@@ -413,7 +518,15 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"retention":"Transactional data is retained for the life of the request","logging":"Logs data","loggingDescription":"Complete response from the LLM is retained in the Canvas database for auditing purposes.","regions":"Global","regionsDescription":"","pii":"Not Exposed","piiDescription":"No PII is intentionally sent to the model. If there is incidental PII in any of the shared data, such as in the submission body, it will be sent to the model."}
+{
+  "retention": "Transactional data is retained for the life of the request",
+  "logging": "Logs data",
+  "loggingDescription": "Complete response from the LLM is retained in the Canvas database for auditing purposes.",
+  "regions": "Global",
+  "regionsDescription": "",
+  "pii": "Not Exposed",
+  "piiDescription": "No PII is intentionally sent to the model. If there is incidental PII in any of the shared data, such as in the submission body, it will be sent to the model."
+}
 ```
 
 #### outputs
@@ -423,7 +536,14 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"settings":"Yes","human":"Yes","humanDescription":"Grade suggestion is displayed and selected by default, but the instructor much make the final decision to edit or accept the suggestions.","guardrails":"The Claude Sonnet model has inherent guardrails built in.","risks":"Model may work better with certain kinds of assignment types or disciplines. The grader must remain alert to incorrect assumptions from the model.","outcomes":"Reduced bias in grading, fairness, and consistency. Grading efficiency, saving teachers time."}
+{
+  "settings": "Yes",
+  "human": "Yes",
+  "humanDescription": "Grade suggestion is displayed and selected by default, but the instructor much make the final decision to edit or accept the suggestions.",
+  "guardrails": "The Claude Sonnet model has inherent guardrails built in.",
+  "risks": "Model may work better with certain kinds of assignment types or disciplines. The grader must remain alert to incorrect assumptions from the model.",
+  "outcomes": "Reduced bias in grading, fairness, and consistency. Grading efficiency, saving teachers time."
+}
 ```
 
 #### group
@@ -481,7 +601,10 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Discussion Insights","description":"Discussion Insights uses AI to evaluate student discussion replies, highlight relevant contributions, and flag those that may need instructor review."}
+{
+  "name": "Discussion Insights",
+  "description": "Discussion Insights uses AI to evaluate student discussion replies, highlight relevant contributions, and flag those that may need instructor review."
+}
 ```
 
 #### model
@@ -491,7 +614,13 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Haiku 3","description":"Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).","trained":"No","data":"Course","dataDescription":"Discussion topic, prompt, and student replies are used."}
+{
+  "name": "Haiku 3",
+  "description": "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+  "trained": "No",
+  "data": "Course",
+  "dataDescription": "Discussion topic, prompt, and student replies are used."
+}
 ```
 
 #### compliance
@@ -501,7 +630,15 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"retention":"No user data is stored or reused by the model.","logging":"Logs data","loggingDescription":"Model evaluations and reply labels are logged for debugging and troubleshooting purposes.","regions":"Global","regionsDescription":"","pii":"Exposed","piiDescription":"Known PII is masked before being sent to the model, though any PII present in the discussion reply is not and may be shared with the model."}
+{
+  "retention": "No user data is stored or reused by the model.",
+  "logging": "Logs data",
+  "loggingDescription": "Model evaluations and reply labels are logged for debugging and troubleshooting purposes.",
+  "regions": "Global",
+  "regionsDescription": "",
+  "pii": "Exposed",
+  "piiDescription": "Known PII is masked before being sent to the model, though any PII present in the discussion reply is not and may be shared with the model."
+}
 ```
 
 #### outputs
@@ -511,7 +648,14 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"settings":"Yes","human":"Yes","humanDescription":"Instructors may review AI-generated evaluations or review posts directly.","guardrails":"Model responses are logged for quality assurance, and responses with low confidence are flagged \"Needs Review\" to encourage human intervention.","risks":"The model may misclassify some nuanced replies.","outcomes":"Instructors are able to quickly assess the quality of student replies, identify low-effort or off-topic contributions, and focus their attention to where it is needed most."}
+{
+  "settings": "Yes",
+  "human": "Yes",
+  "humanDescription": "Instructors may review AI-generated evaluations or review posts directly.",
+  "guardrails": "Model responses are logged for quality assurance, and responses with low confidence are flagged \"Needs Review\" to encourage human intervention.",
+  "risks": "The model may misclassify some nuanced replies.",
+  "outcomes": "Instructors are able to quickly assess the quality of student replies, identify low-effort or off-topic contributions, and focus their attention to where it is needed most."
+}
 ```
 
 #### group
@@ -569,7 +713,10 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Smart Search","description":"Natural language search of course content for students and instructors."}
+{
+  "name": "Smart Search",
+  "description": "Natural language search of course content for students and instructors."
+}
 ```
 
 #### model
@@ -579,7 +726,13 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Cohere Embed Multilingual","description":"Cohere models are provided via Amazon Bedrock Foundation Models (FMs).","trained":"No","data":"Course","dataDescription":"Course content is indexed by the model and then stored in the Canvas database."}
+{
+  "name": "Cohere Embed Multilingual",
+  "description": "Cohere models are provided via Amazon Bedrock Foundation Models (FMs).",
+  "trained": "No",
+  "data": "Course",
+  "dataDescription": "Course content is indexed by the model and then stored in the Canvas database."
+}
 ```
 
 #### compliance
@@ -589,7 +742,15 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"retention":"Data is not stored or reused by the model. Indexed course content is stored in the Canvas database.","logging":"Does not log data","loggingDescription":"","regions":"Global","regionsDescription":"","pii":"Not Exposed","piiDescription":"PII in course content may be indexed, but no PII is intentionally sent to the model."}
+{
+  "retention": "Data is not stored or reused by the model. Indexed course content is stored in the Canvas database.",
+  "logging": "Does not log data",
+  "loggingDescription": "",
+  "regions": "Global",
+  "regionsDescription": "",
+  "pii": "Not Exposed",
+  "piiDescription": "PII in course content may be indexed, but no PII is intentionally sent to the model."
+}
 ```
 
 #### outputs
@@ -599,7 +760,14 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"settings":"Yes","human":"Yes","humanDescription":"Users are presented with a list of results related to their search query and can act or not act on them.","guardrails":"","risks":"Search results may be incorrectly sorted or may not be relevant to the search term.","outcomes":"Students are able to quickly find answers to questions, and instructors are able to quickly navigate their courses."}
+{
+  "settings": "Yes",
+  "human": "Yes",
+  "humanDescription": "Users are presented with a list of results related to their search query and can act or not act on them.",
+  "guardrails": "",
+  "risks": "Search results may be incorrectly sorted or may not be relevant to the search term.",
+  "outcomes": "Students are able to quickly find answers to questions, and instructors are able to quickly navigate their courses."
+}
 ```
 
 #### group
@@ -665,7 +833,10 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Discussion Summaries","description":"Discussion summaries of key points, questions, and insights."}
+{
+  "name": "Discussion Summaries",
+  "description": "Discussion summaries of key points, questions, and insights."
+}
 ```
 
 #### model
@@ -675,7 +846,13 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Haiku 3","description":"Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).","trained":"No","data":"Course","dataDescription":"Discussion prompt and replies."}
+{
+  "name": "Haiku 3",
+  "description": "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+  "trained": "No",
+  "data": "Course",
+  "dataDescription": "Discussion prompt and replies."
+}
 ```
 
 #### compliance
@@ -685,7 +862,15 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"retention":"Data is not stored or reused by the model.","logging":"Logs data","loggingDescription":"Summaries are logged in the Canvas database for review and reuse.","regions":"Global","regionsDescription":"","pii":"Not Exposed","piiDescription":"Pii in discussion replies may be sent to the model, but no PII is intentionally sent to the model."}
+{
+  "retention": "Data is not stored or reused by the model.",
+  "logging": "Logs data",
+  "loggingDescription": "Summaries are logged in the Canvas database for review and reuse.",
+  "regions": "Global",
+  "regionsDescription": "",
+  "pii": "Not Exposed",
+  "piiDescription": "Pii in discussion replies may be sent to the model, but no PII is intentionally sent to the model."
+}
 ```
 
 #### outputs
@@ -695,7 +880,14 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"settings":"Yes","human":"Yes","humanDescription":"Instructors may regenerate summaries or fine-tune them with additional instructions.","guardrails":"","risks":"Summaries may not capture all desired information.","outcomes":"Summaries allow discussion topics to be used in large-format courses and other environments where discussions were previously infeasible."}
+{
+  "settings": "Yes",
+  "human": "Yes",
+  "humanDescription": "Instructors may regenerate summaries or fine-tune them with additional instructions.",
+  "guardrails": "",
+  "risks": "Summaries may not capture all desired information.",
+  "outcomes": "Summaries allow discussion topics to be used in large-format courses and other environments where discussions were previously infeasible."
+}
 ```
 
 #### group
@@ -753,7 +945,10 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Block Content Editor Alt Text Generator","description":""}
+{
+  "name": "Block Content Editor Alt Text Generator",
+  "description": ""
+}
 ```
 
 #### model
@@ -763,7 +958,13 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"name":"Haiku 3","description":"Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).","trained":"No","data":"Course","dataDescription":"Content Editor Images."}
+{
+  "name": "Haiku 3",
+  "description": "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+  "trained": "No",
+  "data": "Course",
+  "dataDescription": "Content Editor Images."
+}
 ```
 
 #### compliance
@@ -773,7 +974,15 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"retention":"Model responses are stored for debugging purposes.","logging":"Logs data","loggingDescription":"Request, response, and feedback data is logged to assist in troubleshooting.","regions":"Global","regionsDescription":"","pii":"Not Exposed","piiDescription":""}
+{
+  "retention": "Model responses are stored for debugging purposes.",
+  "logging": "Logs data",
+  "loggingDescription": "Request, response, and feedback data is logged to assist in troubleshooting.",
+  "regions": "Global",
+  "regionsDescription": "",
+  "pii": "Not Exposed",
+  "piiDescription": ""
+}
 ```
 
 #### outputs
@@ -783,7 +992,14 @@ Old: `(none)`
 #### New:
 
 ```JSON
-{"settings":"No","human":"Yes","humanDescription":"User initiated, User must confirm output.","guardrails":"","risks":"Alt text might not always be accurate. ","outcomes":"An accessible Alt Text description of the image is generated."}
+{
+  "settings": "No",
+  "human": "Yes",
+  "humanDescription": "User initiated, User must confirm output.",
+  "guardrails": "",
+  "risks": "Alt text might not always be accurate. ",
+  "outcomes": "An accessible Alt Text description of the image is generated."
+}
 ```
 
 #### group
