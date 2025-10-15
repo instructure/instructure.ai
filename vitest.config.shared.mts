@@ -6,7 +6,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
 	test: {
-		include: ['tests/**/*.{test,spec}.{ts,tsx,js,cjs,mjs}'],
 			projects: [
 				defineProject({
 					test: {
@@ -22,7 +21,10 @@ export default defineConfig({
       reporter: [
         'text',
 				[
-					path.resolve(process.cwd(), 'plugins/coverageReporter.cjs'),
+					path.resolve(
+						process.cwd(),
+						'plugins/vitest.plugin.coverageReporter.cjs'
+					),
 					{ file: path.resolve(__dirname, 'coverage.yml' )}
 				],
       ],
