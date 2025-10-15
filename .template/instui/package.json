@@ -1,6 +1,11 @@
 {
   "name": "<<packagename>>",
   "private": true,
+	"repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure.ai",
+    "directory": "apps/<<cliname>>"
+	},
   "scripts": {
     "build": "vite build",
     "dev": "vite",

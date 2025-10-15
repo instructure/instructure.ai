@@ -104,11 +104,7 @@ async function main() {
 		FULLPACKAGENAME,
 	);
 
-	await replaceInFile(
-		path.join(pkgDir, "README.md"),
-		CLINAME,
-		PACKAGENAME,
-	);
+	await replaceInFile(path.join(pkgDir, "README.md"), CLINAME, PACKAGENAME);
 
 	if (TEMPLATE === "instui") {
 		const url = "https://instructure.design/llms.txt";
@@ -126,13 +122,7 @@ async function main() {
 			guidelines,
 		);
 	}
-	if (isESM) {
-		await replaceInFile(
-			path.join(pkgDir, "package.json"),
-			CLINAME,
-			PACKAGENAME,
-		);
-	}
+	await replaceInFile(path.join(pkgDir, "package.json"), CLINAME, PACKAGENAME);
 
 	// Install dependencies for the new package (pnpm workspace)
 	console.log("Installing dependencies...");

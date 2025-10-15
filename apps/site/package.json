@@ -4,6 +4,11 @@
 	},
 	"name": "@instructure.ai/site",
 	"private": true,
+	"repository": {
+  	"type": "git",
+  	"url": "https://github.com/instructure/instructure.ai",
+  	"directory": "apps/site"
+	},
 	"scripts": {
 		"build": "vite build",
 		"dev": "vite",
