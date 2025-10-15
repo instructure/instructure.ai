@@ -70,7 +70,7 @@ const main = async () => {
 				break;
 			case "apps":
 				if (Array.isArray(output) && output.length) {
-					console.log("Building apps:");
+					console.log("Testing apps:");
 					console.log(output);
 					testPackages(output as FullPackageName[], args);
 				} else {
@@ -79,7 +79,7 @@ const main = async () => {
 				break;
 			case "packages":
 				if (Array.isArray(output) && output.length) {
-					console.log("Building packages:");
+					console.log("Testing packages:");
 					console.log(output);
 					testPackages(output as FullPackageName[], args);
 				} else {
