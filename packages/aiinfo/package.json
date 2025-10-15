@@ -36,6 +36,11 @@
   "publishConfig": {
     "access": "public"
   },
+	"repository": {
+  	"type": "git",
+  	"url": "https://github.com/instructure/instructure.ai",
+  	"directory": "packages/aiinfo"
+	},
   "scripts": {
     "build": "pnpm cache:update && pnpm build:vite && pnpm lint --write && pnpm typecheck && pnpm package",
     "build:vite": "vite build",
