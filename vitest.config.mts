@@ -8,8 +8,8 @@ export default mergeConfig(baseConfig, {
 				exclude: [
 					'packages/*/**',
 					'apps/*/**',
-					".template/*/**",
-					".vscode/*/**"
+					'.template/*/**',
+					'.vscode/*/**'
 				]
 			}
 		}
