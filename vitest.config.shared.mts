@@ -22,7 +22,7 @@ export default defineConfig({
       reporter: [
         "text",
         [
-          path.resolve(process.cwd(), "plugins/coverageReporter.cjs"),
+          path.resolve(process.cwd(), "plugins/vitest.plugin.coverageReporter.cjs"),
           { file: path.resolve(__dirname, "coverage.yml" )}
         ],
       ],

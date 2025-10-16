@@ -22,6 +22,33 @@ const isValidWorkspaceName = (ws: string): ws is WorkspaceName => {
 	return wn.test(ws);
 };
 
+const getPackagePath = (
+	pkg: PackageName | FullPackageName,
+): string => {
+	if (!isValidPackageName(pkg) && !isValidFullPackageName(pkg)) {
+		exitWithError("Error: Invalid package name.");
+	}
+	const packageName = isValidFullPackageName(pkg) ? getPackageName(pkg) : pkg;
+	if (
+		pkg === getRootPackage() ||
+		packageName === getPackageName(getRootPackage())
+	) {
+		return join(__dirname, "../");
+	} else {
+		const fs = require('node:fs');
+		const packagesPath = join(__dirname, "../packages", packageName);
+		const appsPath = join(__dirname, "../apps", packageName);
+		if (fs.existsSync(packagesPath)) {
+			return packagesPath;
+		} else if (fs.existsSync(appsPath)) {
+			return appsPath;
+		} else {
+			exitWithError(`Error: Could not find package directory for '${packageName}' in either packages or apps.`);
+			return "";
+		}
+	}
+}
+
 const getPackageJson = (
 	pkg: PackageName | FullPackageName,
 ): { content: PackageJson; path: string } => {
@@ -36,7 +63,8 @@ const getPackageJson = (
 	) {
 		pkgJsonPath = join(__dirname, "../package.json");
 	} else {
-		pkgJsonPath = join(__dirname, "../packages", packageName, "package.json");
+		const packageDir = getPackagePath(packageName);
+		pkgJsonPath = join(packageDir, "package.json");
 	}
 	try {
 		return { content: require(pkgJsonPath), path: pkgJsonPath };
@@ -387,9 +415,11 @@ const exec = (
 			);
 		} else {
 			const { args, ...restOptions } = options as { args?: unknown[] };
-			const extraArgs =
-				args && Array.isArray(args) && args.length > 0 ? args.map(String) : [];
-			execFileSync(cmd, extraArgs, {
+			const extraArgs = args && Array.isArray(args) && args.length > 0
+    ? args.map(a => shellEscape(String(a)))
+    : [];
+			const fullCmd = [cmd, ...extraArgs].join(' ');
+			execFileSync(fullCmd, [], {
 				...restOptions,
 				shell: true,
 				stdio: "inherit",
@@ -399,6 +429,10 @@ const exec = (
 		exitWithError(`Error executing command: ${e}`);
 	}
 };
+
+function shellEscape(arg: string): string {
+    return `'${arg.replace(/'/g, `'\\''`)}'`;
+}
 
 export {
 	Workspace,
@@ -411,6 +445,7 @@ export {
 	exitWithError,
 	unknownError,
 	getPackageName,
+	getPackagePath,
 	getPackages,
 	getFullPackageName,
 	getRootPackage,
