@@ -13,6 +13,8 @@ jobs:
   publish:
     environment: npm-release
     runs-on: ubuntu-latest
+    env:
+      tags: ""
 
     steps:
       - uses: actions/checkout@v4
@@ -27,35 +29,41 @@ jobs:
         shell: bash
         run: |
           TAGS=$(git tag --points-at HEAD | grep -E '^@instructure.ai/.+@([0-9]+\.[0-9]+\.[0-9]+)$' || true)
-          if [[ -z "$TAGS" ]]; then
-            echo "No new matching tags found on this commit."
-          fi
-          # Save tags (even if empty)
+
+          # Output for conditionals in later steps
+          echo "tags<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$TAGS" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+          # Also set env var for shell scripts in later steps
           {
             echo "tags<<EOF"
             echo "$TAGS"
             echo "EOF"
           } >> "$GITHUB_ENV"
 
+          if [[ -z "$TAGS" ]]; then
+            echo "No new matching tags found on this commit."
+          fi
+
       # Only set up Node/pnpm + caching if we actually have tags to release
       - name: Install pnpm
-        if: env.tags != ''
+        if: steps.find_tags.outputs.tags != ''
         run: npm install -g pnpm
 
       - uses: actions/setup-node@v4
-        if: env.tags != ''
+        if: steps.find_tags.outputs.tags != ''
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
-          # Helps produce a stable cache key for monorepos
           cache-dependency-path: |
             pnpm-lock.yaml
             **/pnpm-lock.yaml
 
-      # Pre-create the ACTUAL pnpm store path so post-job cache save never errors
+      # Pre-create the ACTUAL pnpm store so post-job cache save never errors
       - name: Ensure pnpm store exists for caching
-        if: env.tags != ''
+        if: steps.find_tags.outputs.tags != ''
         shell: bash
         run: |
           STORE="$(pnpm store path)"
@@ -63,9 +71,9 @@ jobs:
           mkdir -p "$STORE"
 
       - name: Release each package tag
-        if: env.tags != ''
+        if: steps.find_tags.outputs.tags != ''
         env:
-          tags: ${{ env.tags }}
+          tags: ${{ env.tags }}    # comes from $GITHUB_ENV we set above
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         run: |
@@ -85,7 +93,7 @@ jobs:
             pnpm install --frozen-lockfile
 
             # Enable vite-node loader using the register() API
-            export NODE_OPTIONS="--import=${{ github.workspace }}/plugins/vite-node.plugin.loader.mjs"
+            export NODE_OPTIONS="--import=${{ github.workspace }}/scripts/loader.mjs"
 
             # Build & test (skip for shared-configs)
             if [ "$PKG_NAME" != "shared-configs" ]; then
