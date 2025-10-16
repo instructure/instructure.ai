@@ -3,8 +3,7 @@ name: Release Packages
 on:
   workflow_run:
     workflows: ["Tag on Merge"]
-    types:
-      - completed
+    types: [completed]
 
 permissions:
   id-token: write
@@ -20,43 +19,55 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-          registry-url: 'https://registry.npmjs.org'
-          cache: 'pnpm'
-
-      - name: Ensure pnpm store exists for caching
-        run: |
-          mkdir -p ~/.pnpm-store
-      
-      - name: Install pnpm
-        run: npm install -g pnpm
-
       - name: Fetch all tags
         run: git fetch --tags
 
       - name: Find all new package tags on this commit
         id: find_tags
+        shell: bash
         run: |
           TAGS=$(git tag --points-at HEAD | grep -E '^@instructure.ai/.+@([0-9]+\.[0-9]+\.[0-9]+)$' || true)
           if [[ -z "$TAGS" ]]; then
             echo "No new matching tags found on this commit."
-            exit 0
           fi
-          # Save tags list for next steps
-          echo "tags<<EOF" >> $GITHUB_ENV
-          echo "$TAGS" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          # Save tags (even if empty)
+          {
+            echo "tags<<EOF"
+            echo "$TAGS"
+            echo "EOF"
+          } >> "$GITHUB_ENV"
+
+      # Only set up Node/pnpm + caching if we actually have tags to release
+      - name: Install pnpm
+        if: env.tags != ''
+        run: npm install -g pnpm
+
+      - uses: actions/setup-node@v4
+        if: env.tags != ''
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+          # Helps produce a stable cache key for monorepos
+          cache-dependency-path: |
+            pnpm-lock.yaml
+            **/pnpm-lock.yaml
+
+      # Pre-create the ACTUAL pnpm store path so post-job cache save never errors
+      - name: Ensure pnpm store exists for caching
+        if: env.tags != ''
+        shell: bash
+        run: |
+          STORE="$(pnpm store path)"
+          echo "pnpm store path: $STORE"
+          mkdir -p "$STORE"
 
       - name: Release each package tag
         if: env.tags != ''
         env:
           tags: ${{ env.tags }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
         run: |
           set -euo pipefail
 
@@ -74,27 +85,19 @@ jobs:
             pnpm install --frozen-lockfile
 
             # Enable vite-node loader using the register() API
-            export NODE_OPTIONS="--import=${{ github.workspace }}/scripts/loader.mjs"
+            export NODE_OPTIONS="--import=${{ github.workspace }}/plugins/vite-node.plugin.loader.mjs"
 
-            # Build
-            if [ "$PKG_NAME" = "shared-configs" ]; then
-              echo "Skipping build for @instructure.ai/shared-configs."
-            else
+            # Build & test (skip for shared-configs)
+            if [ "$PKG_NAME" != "shared-configs" ]; then
               echo "Building package: $PKG_NAME"
               CI=1 pnpm build package "$PKG_NAME"
-            fi
-
-            # Test
-            if [ "$PKG_NAME" = "shared-configs" ]; then
-              echo "Skipping test for @instructure.ai/shared-configs."
-            else
               pnpm -F "$PKG_NAME" test
+            else
+              echo "Skipping build/test for @instructure.ai/shared-configs."
             fi
 
             # Publish (use npm CLI to trigger OIDC Trusted Publishing)
-            if [ "$PKG_NAME" = "shared-configs" ]; then
-              echo "Skipping publish for @instructure.ai/shared-configs."
-            else
+            if [ "$PKG_NAME" != "shared-configs" ]; then
               PKG_JSON_PATH="packages/$PKG_NAME/package.json"
               APP_JSON_PATH="apps/$PKG_NAME/package.json"
               if [ -f "$PKG_JSON_PATH" ]; then
@@ -105,21 +108,22 @@ jobs:
                 JSON_PATH=""
               fi
 
-              TARBALL=$(find ./packages/$PKG_NAME/dist -name '*.tgz' -type f | head -n 1)
+              TARBALL=$(find "./packages/$PKG_NAME/dist" -name '*.tgz' -type f | head -n 1)
               if [ -z "$TARBALL" ]; then
                 echo "Error: No .tgz tarball found for $PKG_NAME in ./packages/$PKG_NAME/dist/"
                 continue
               fi
+
               if [ -n "$JSON_PATH" ]; then
                 ACCESS_PUBLIC=$(jq -r '.publishConfig.access // empty' "$JSON_PATH")
                 PRIVATE=$(jq -r '.private // false' "$JSON_PATH")
                 if [ "$PRIVATE" = "true" ]; then
-                  echo "Skipping publish for $PKG_NAME because it is marked private in package.json."
+                  echo "Skipping publish for $PKG_NAME because it is marked private."
                 elif [ "$ACCESS_PUBLIC" = "public" ]; then
                   echo "Publishing $PKG_NAME as public via npm (OIDC)…"
                   npm publish "$TARBALL" --access public --provenance
                 elif [ -n "$ACCESS_PUBLIC" ] && [ "$ACCESS_PUBLIC" != "public" ]; then
-                  echo "Skipping publish for $PKG_NAME because publishConfig.access is '$ACCESS_PUBLIC' (not public)."
+                  echo "Skipping publish for $PKG_NAME because publishConfig.access is '$ACCESS_PUBLIC'."
                 else
                   echo "Publishing $PKG_NAME via npm (no --access public)…"
                   npm publish "$TARBALL" --provenance
@@ -128,9 +132,11 @@ jobs:
                 echo "package.json not found for $PKG_NAME in packages or apps, publishing without access check."
                 npm publish "$TARBALL" --provenance
               fi
+            else
+              echo "Skipping publish for @instructure.ai/shared-configs."
             fi
 
-            # Create GitHub release using gh CLI
+            # Create GitHub release with or without asset
             if [ "$PKG_NAME" = "shared-configs" ]; then
               gh release create "$TAG" --title "$TAG" --generate-notes
             else
