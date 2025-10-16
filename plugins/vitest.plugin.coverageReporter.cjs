@@ -63,7 +63,7 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
 
     // Build nested tree of files (keys relative to repo root)
     const tree = {}; // { [segment]: subtree | { __metrics } }
-    const fileNodes = root.getChildren ? root.getChildren() : [];
+  const fileNodes = root.getChildren ? root.getChildren() : [];
 
     const ensurePath = (parts) => {
       let node = tree;
@@ -74,12 +74,19 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
       return node;
     };
 
-    if (Array.isArray(fileNodes) && fileNodes.length) {
-      fileNodes.forEach((node) => {
-        if (typeof node.getFileCoverage !== 'function') return;
+    function visitNodes(nodes, cb) {
+      nodes.forEach((node) => {
+        if (node.children && node.children.length) {
+          visitNodes(node.children, cb);
+        } else if (node.fileCoverage) {
+          cb(node);
+        }
+      });
+    }
 
-        // Canonical path from Istanbul; print as path relative to project root
-        const fc = node.getFileCoverage();
+    if (Array.isArray(fileNodes) && fileNodes.length) {
+      visitNodes(fileNodes, (node) => {
+        const fc = node.fileCoverage;
         const absPath = (fc && (fc.path || (fc.data && fc.data.path))) || null;
         const relPath = absPath ? relFromCwd(absPath) : (node.displayShortName || node.name || 'unknown');
         const parts = relPath.split('/').filter(Boolean);
