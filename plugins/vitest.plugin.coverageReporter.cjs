@@ -3,12 +3,14 @@ const { ReportBase } = require('istanbul-lib-report');
 const path = require('node:path');
 
 module.exports = class CustomCoveragePercentReporter extends ReportBase {
-  constructor(opts) {
+  constructor(opts = {}) {
     super();
     this.file = opts.file || 'coverage.yml';
+    this.contentWriter = null;
   }
 
   onStart(root, context) {
+    // ✅ Use the exact path handling you confirmed works
     let outFile = this.file;
     if (path.isAbsolute(outFile)) {
       outFile = path.relative(context.dir, outFile);
@@ -21,24 +23,27 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
 
   onEnd(root) {
     // Helpers
-    const pct = (v) => (typeof v === 'number' && !Number.isNaN(v) ? Math.round(v * 100) / 100 : 0);
+    const pct = (v) =>
+      typeof v === 'number' && !Number.isNaN(v) ? Math.round(v * 100) / 100 : 0;
+
     const rangeStr = (lines) => {
       if (!lines || !lines.length) return '';
-      lines = [...lines].sort((a, b) => a - b);
-      const first = lines[0], last = lines[lines.length - 1];
+      const sorted = [...lines].sort((a, b) => a - b);
+      const first = sorted[0];
+      const last = sorted[sorted.length - 1];
       return first === last ? `${first}` : `${first}-${last}`;
     };
+
     const relFromCwd = (absPath) => {
       try {
         const rel = path.relative(process.cwd(), absPath || '');
-        // Normalize to forward slashes for nicer YAML keys
-        return rel.split(path.sep).join('/');
+        return rel.split(path.sep).join('/'); // normalize separators
       } catch {
         return absPath || 'unknown';
       }
     };
 
-    // Print header + totals
+    // Rollup totals
     const sum = root.getCoverageSummary();
     const totals = {
       statements: pct(sum.statements.pct),
@@ -56,10 +61,10 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
     }
     w.println(`    total: ${pct(totalAvg)}%`);
 
-    // Build a folder tree for files with metrics at leaves
+    // Build nested tree of files (keys relative to repo root)
     const tree = {}; // { [segment]: subtree | { __metrics } }
-
     const fileNodes = root.getChildren ? root.getChildren() : [];
+
     const ensurePath = (parts) => {
       let node = tree;
       for (const part of parts) {
@@ -73,19 +78,19 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
       fileNodes.forEach((node) => {
         if (typeof node.getFileCoverage !== 'function') return;
 
-        // Use the canonical file path, then convert to relative-from-project-root
+        // Canonical path from Istanbul; print as path relative to project root
         const fc = node.getFileCoverage();
         const absPath = (fc && (fc.path || (fc.data && fc.data.path))) || null;
         const relPath = absPath ? relFromCwd(absPath) : (node.displayShortName || node.name || 'unknown');
         const parts = relPath.split('/').filter(Boolean);
 
         // Per-file totals
-        const fs = node.getCoverageSummary ? node.getCoverageSummary() : {};
+        const fsu = node.getCoverageSummary ? node.getCoverageSummary() : {};
         const fileTotals = {
-          statements: pct(fs?.statements?.pct),
-          branches:   pct(fs?.branches?.pct),
-          functions:  pct(fs?.functions?.pct),
-          lines:      pct(fs?.lines?.pct),
+          statements: pct(fsu?.statements?.pct),
+          branches:   pct(fsu?.branches?.pct),
+          functions:  pct(fsu?.functions?.pct),
+          lines:      pct(fsu?.lines?.pct),
         };
 
         // Uncovered lines
@@ -110,7 +115,7 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
       });
     }
 
-    // Print the tree as nested YAML under "files:"
+    // Emit nested YAML under "files:"
     const printTree = (node, indent = 2) => {
       const keys = Object.keys(node).filter((k) => k !== '__metrics').sort();
       for (const key of keys) {

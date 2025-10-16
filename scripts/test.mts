@@ -4,6 +4,7 @@ import {
 	exec,
 	exitWithError,
 	getFullPackageName,
+	getPackagePath,
 	getRootPackage,
 	isValidCommand,
 	isValidPackage,
@@ -15,9 +16,7 @@ const main = async () => {
 	const { command, output, args } = Workspace();
 	const testCommands: AllowedCommands = [
 		"all",
-		"packages",
 		"package",
-		"apps",
 		"app",
 		"root",
 	] as const;
@@ -26,7 +25,9 @@ const main = async () => {
 		exitWithError("Invalid test command.");
 
 	const testPackage = (pkg: FullPackageName, args: CommandExtraArgs) => {
-		exec(`pnpx vitest run --project=${pkg}`, { args });
+		exec(`pnpx vitest run --config=${getPackagePath(pkg)}/vitest.config.mts`, {
+			args,
+		});
 	};
 
 	const testPackages = (
@@ -48,7 +49,7 @@ const main = async () => {
 				break;
 			case "app":
 				if (output) {
-					testPackage(output as FullPackageName, args);
+					testPackage(output as FullPackageName, args.slice(2));
 				} else {
 					console.log(
 						"No app found in workspace. Did you mean `test package <name>`?",
@@ -57,7 +58,7 @@ const main = async () => {
 				break;
 			case "package":
 				if (output) {
-					testPackage(output as FullPackageName, args);
+					testPackage(output as FullPackageName, args.slice(2));
 				} else {
 					console.log(
 						"No package found in workspace. Did you mean `test app <name>`?",
@@ -66,24 +67,24 @@ const main = async () => {
 				break;
 			case "apps":
 				if (Array.isArray(output) && output.length) {
-					testPackages(output as FullPackageName[], args);
+					console.log("Apps is not currently supported.");
 				} else {
 					console.log("No apps found in workspace.");
 				}
 				break;
 			case "packages":
 				if (Array.isArray(output) && output.length) {
-					testPackages(output as FullPackageName[], args);
+					console.log("Packages is not currently supported.");
 				} else {
 					console.log("No packages found in workspace.");
 				}
 				break;
 			default:
 				if (isValidPackage(command)) {
-					testPackage(getFullPackageName(command) as FullPackageName, args);
+					testPackage(getFullPackageName(command) as FullPackageName, args.slice(1));
 				} else {
 					exitWithError(`Unknown test command: ${command}`);
-				}
+				}	
 		}
 	} catch (error) {
 		exitWithError("Test failed:", error);

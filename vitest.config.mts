@@ -1,44 +1,16 @@
+import { mergeConfig } from "vitest/config";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
 import baseConfig from "@instructure.ai/shared-configs/vitest";
-import { mergeConfig, defineProject } from "vitest/config";
+
+const __dir = path.dirname(fileURLToPath(import.meta.url));
+const __cdir = path.resolve(__dir, "coverage");
 
 export default mergeConfig(baseConfig, {
-	test: {
-		projects: [
-      defineProject({
-        test: {
-          name: "@instructure.ai/shared-configs",
-          include: [
-						"**/*.{test,spec}.{ts,tsx,js,cjs,mjs,mts}"
-					],
-					exclude: [
-					"**/node_modules/**",
-					"**/dist/**",
-					"**/build/**",
-					"**/coverage/**",
-					"**/.*/**",
-					"packages/*/**",
-					"apps/*/**",
-					".template/*/**",
-					".vscode/*/**"
-				]
-        }
-      })
-    ],
-			coverage: {
-				include: [
-					"scripts/**/*.{ts,tsx,js,cjs,mjs,mts}",
-				],
-				exclude: [
-					"**/node_modules/**",
-					"**/dist/**",
-					"**/build/**",
-					"**/coverage/**",
-					"**/.*/**",
-					"packages/*/**",
-					"apps/*/**",
-					".template/*/**",
-					".vscode/*/**"
-				]
-			}
-		}
+  root: __dirname,
+  test: {
+    coverage: {
+      reportsDirectory: __cdir,
+    }
+  }
 });

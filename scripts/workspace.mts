@@ -1,8 +1,22 @@
+import { renameSync } from "node:fs";
+
+/**
+ * Move or rename a file from src to dest.
+ * Throws if the operation fails.
+ */
+function moveFile(src: string, dest: string): void {
+	try {
+		renameSync(src, dest);
+	} catch (err) {
+		exitWithError(`Error moving file from '${src}' to '${dest}':`, err);
+	}
+}
+
 /// <reference path="../types/index.d.ts" />
 
 import { execFileSync } from "node:child_process";
-import { readdirSync } from "node:fs";
-import { join } from "node:path";
+import { existsSync, readdirSync } from "node:fs";
+import { join, resolve } from "node:path";
 import { name } from "../package.json" with { type: "json" };
 
 // Regex to match valid NPM unscoped package names and scoped workspace names.
@@ -22,9 +36,7 @@ const isValidWorkspaceName = (ws: string): ws is WorkspaceName => {
 	return wn.test(ws);
 };
 
-const getPackagePath = (
-	pkg: PackageName | FullPackageName,
-): string => {
+const getPackagePath = (pkg: PackageName | FullPackageName): string => {
 	if (!isValidPackageName(pkg) && !isValidFullPackageName(pkg)) {
 		exitWithError("Error: Invalid package name.");
 	}
@@ -33,21 +45,23 @@ const getPackagePath = (
 		pkg === getRootPackage() ||
 		packageName === getPackageName(getRootPackage())
 	) {
-		return join(__dirname, "../");
+		// Return the absolute path to the workspace root, without trailing slash
+		return resolve(__dirname, "../");
 	} else {
-		const fs = require('node:fs');
 		const packagesPath = join(__dirname, "../packages", packageName);
 		const appsPath = join(__dirname, "../apps", packageName);
-		if (fs.existsSync(packagesPath)) {
+		if (existsSync(packagesPath)) {
 			return packagesPath;
-		} else if (fs.existsSync(appsPath)) {
+		} else if (existsSync(appsPath)) {
 			return appsPath;
 		} else {
-			exitWithError(`Error: Could not find package directory for '${packageName}' in either packages or apps.`);
+			exitWithError(
+				`Error: Could not find package directory for '${packageName}' in either packages or apps.`,
+			);
 			return "";
 		}
 	}
-}
+};
 
 const getPackageJson = (
 	pkg: PackageName | FullPackageName,
@@ -415,10 +429,11 @@ const exec = (
 			);
 		} else {
 			const { args, ...restOptions } = options as { args?: unknown[] };
-			const extraArgs = args && Array.isArray(args) && args.length > 0
-    ? args.map(a => shellEscape(String(a)))
-    : [];
-			const fullCmd = [cmd, ...extraArgs].join(' ');
+			const extraArgs =
+				args && Array.isArray(args) && args.length > 0
+					? args.map((a) => shellEscape(String(a)))
+					: [];
+			const fullCmd = [cmd, ...extraArgs].join(" ");
 			execFileSync(fullCmd, [], {
 				...restOptions,
 				shell: true,
@@ -431,7 +446,7 @@ const exec = (
 };
 
 function shellEscape(arg: string): string {
-    return `'${arg.replace(/'/g, `'\\''`)}'`;
+	return `'${arg.replace(/'/g, `'\\''`)}'`;
 }
 
 export {
@@ -451,4 +466,5 @@ export {
 	getRootPackage,
 	getPackageJson,
 	isStrictlyValidCommand,
+	moveFile,
 };

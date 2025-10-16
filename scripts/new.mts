@@ -89,7 +89,21 @@ async function main() {
 	await fs.mkdir(pkgDir, { recursive: true });
 
 	// Copy template contents
-	!isESM && (await safeCopyDir(sharedTplDir, pkgDir));
+	if (!isESM) {
+		await safeCopyDir(sharedTplDir, pkgDir);
+		// After copying shared configs, rename tests/package.t.ts to tests/package.test.ts
+		const testSrc = path.join(pkgDir, "tests/package.t.ts");
+		const testDest = path.join(pkgDir, "tests/package.test.ts");
+		try {
+			// Use moveFile from workspace utils
+			const { moveFile } = await import("@instructure.ai/shared-configs/workspace");
+			if (await pathExists(testSrc)) {
+				moveFile(testSrc, testDest);
+			}
+		} catch (err) {
+			console.warn("Could not rename test file:", err);
+		}
+	}
 	await safeCopyDir(chosenTplDir, pkgDir);
 
 	// Replace placeholders in specific files

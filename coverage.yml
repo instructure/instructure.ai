@@ -1,10 +1,10 @@
 coverage:
   totals:
-    statements: 0%
+    statements: 0.82%
     branches: 0%
-    functions: 0%
-    lines: 0%
-    total: 0%
+    functions: 2%
+    lines: 0.86%
+    total: 0.92%
   files:
     scripts:
       build.mts:
@@ -20,17 +20,10 @@ coverage:
         lines: 0%
         uncovered_line_numbers: "12-43"
       info.mts:
-        statements: 0%
+        statements: 83.33%
         branches: 100%
-        functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "9-18"
-      info.test.mts:
-        statements: 0%
-        branches: 100%
-        functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "5-49"
+        functions: 66.66%
+        lines: 100%
       issues.mts:
         statements: 0%
         branches: 0%
@@ -48,7 +41,7 @@ coverage:
         branches: 0%
         functions: 0%
         lines: 0%
-        uncovered_line_numbers: "13-197"
+        uncovered_line_numbers: "13-183"
       preview.mts:
         statements: 0%
         branches: 0%
@@ -66,10 +59,10 @@ coverage:
         branches: 0%
         functions: 0%
         lines: 0%
-        uncovered_line_numbers: "15-94"
+        uncovered_line_numbers: "14-92"
       workspace.mts:
         statements: 0%
         branches: 0%
         functions: 0%
         lines: 0%
-        uncovered_line_numbers: "8-449"
+        uncovered_line_numbers: "9-434"
