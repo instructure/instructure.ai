@@ -43,7 +43,7 @@ const main = async () => {
 			case "all":
 				console.log("Testing all:");
 				console.log(output);
-				exec(`pnpx vitest`);
+				exec(`pnpx vitest run`, { args: args.slice(2) });
 				break;
 			case "root":
 				console.log("Testing root package:");
