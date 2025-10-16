@@ -26,7 +26,7 @@ const main = async () => {
 		exitWithError("Invalid test command.");
 
 	const testPackage = (pkg: FullPackageName, args: CommandExtraArgs) => {
-		exec(`pnpx vitest run --project=${pkg}`, { args: args.slice(2) });
+		exec(`pnpx vitest run --project=${pkg}`, { args });
 	};
 
 	const testPackages = (
@@ -44,7 +44,7 @@ const main = async () => {
 				exec(`pnpx vitest run`, { args: args.slice(2) });
 				break;
 			case "root":
-				testPackage(getRootPackage(), args);
+				testPackage(getRootPackage(), args.slice(1));
 				break;
 			case "app":
 				if (output) {

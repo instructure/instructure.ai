@@ -6,14 +6,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   test: {
-    include: ["tests/**/*.{test,spec}.{ts,tsx,js,cjs,mjs}"],
+    include: ["**/*.{test,spec}.{ts,tsx,js,cjs,mjs}"],
     projects: [
-      defineProject({
-        test: {
-          name: "@instructure.ai/shared-configs",
-          include: ["tests/**/*.{test,spec}.{ts,tsx,js,cjs,mjs}"],
-        }
-      }),
       "apps/*/vitest.config.mts",
       "packages/*/vitest.config.mts",
     ],

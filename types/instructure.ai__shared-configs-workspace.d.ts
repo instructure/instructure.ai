@@ -28,6 +28,8 @@ interface CommandInfo {
 	readonly command: string | undefined;
 }
 
+type WorkspaceFn = (args?: string[], script?: string | undefined) => WorkspaceCommand;
+
 const COMMANDS = [
 	"app",
 	"apps",

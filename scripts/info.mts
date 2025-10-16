@@ -13,4 +13,6 @@ const main = async () => {
 	});
 };
 
+export { main };
+
 main().catch((e) => unknownError(e));
