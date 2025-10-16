@@ -118,7 +118,7 @@ Vitest uses shared configs to provide a baseline setup for each package.  Settin
             └── vite.config.mts # Merges ./vitest.config.shared.mts
 ```
 
-Vitest uses instanbul to provide coverage for non-v8 (hi firefox 👋) testing. A custom reporter is included that outputs basic rollup stats in `./coverage/coverage.yml`.
+Vitest uses istanbul to provide coverage for non-v8 (hi firefox 👋) testing. A custom reporter is included that outputs basic rollup stats in `./coverage/coverage.yml`.
 
 #### Biome
 
@@ -150,7 +150,7 @@ The root workspace package.json defines workspace exports and shares workspace `
     │       └── package.json # Imports ./package.json
     └── 📂 /packages
         └── 📂 aiinfo/
-            └── biome.jsonc # Imports ./package.json
+            └── package.json # Imports ./package.json
 ```
 
 ##### devDependencies
