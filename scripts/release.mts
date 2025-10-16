@@ -14,7 +14,7 @@ import {
 const main = async () => {
 	const { command, args, output } = Workspace();
 
-	const releaseCommands: AllowedCommands = ["package", "root", "all"] as const;
+	const releaseCommands: AllowedCommands = ["package", "root", "packages"] as const;
 
 	if (!isValidCommand(command, releaseCommands))
 		exitWithError("Invalid release command.");
@@ -161,8 +161,8 @@ const main = async () => {
 			case "root":
 				pack({ args: args, pkg: output as FullPackageName });
 				break;
-			case "all":
-				console.log("Packaging all is not supported yet.");
+			case "packages":
+				console.log("packages is not supported yet.");
 				break;
 			default:
 				if (isValidPackage(command)) {
