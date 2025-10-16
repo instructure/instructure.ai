@@ -150,7 +150,7 @@ The root workspace package.json defines workspace exports and shares workspace `
     │       └── package.json # Imports ./package.json
     └── 📂 /packages
         └── 📂 aiinfo/
-            └── biome.jsonc # Imports ./package.json
+            └── package.json # Imports ./package.json
 ```
 
 ##### devDependencies
