@@ -1,6 +1,68 @@
 coverage:
-  statements: 0%
-  branches: 0%
-  lines: 0%
-  functions: 0%
-  total: 0%
+  totals:
+    statements: 0.82%
+    branches: 0%
+    functions: 2%
+    lines: 0.86%
+    total: 0.92%
+  files:
+    scripts:
+      build.mts:
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "16-143"
+      dev.mts:
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "12-43"
+      info.mts:
+        statements: 83.33%
+        branches: 100%
+        functions: 66.66%
+        lines: 100%
+      issues.mts:
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "14-87"
+      lint.mts:
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "12-104"
+      new.mts:
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "13-183"
+      preview.mts:
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "14-61"
+      release.mts:
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "14-180"
+      test.mts:
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "14-92"
+      workspace.mts:
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "9-434"
