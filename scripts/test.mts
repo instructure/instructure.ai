@@ -41,12 +41,9 @@ const main = async () => {
 	try {
 		switch (command) {
 			case "all":
-				console.log("Testing all:");
-				console.log(output);
 				exec(`pnpx vitest run`, { args: args.slice(2) });
 				break;
 			case "root":
-				console.log("Testing root package:");
 				testPackage(getRootPackage(), args);
 				break;
 			case "app":
@@ -69,8 +66,6 @@ const main = async () => {
 				break;
 			case "apps":
 				if (Array.isArray(output) && output.length) {
-					console.log("Testing apps:");
-					console.log(output);
 					testPackages(output as FullPackageName[], args);
 				} else {
 					console.log("No apps found in workspace.");
@@ -78,8 +73,6 @@ const main = async () => {
 				break;
 			case "packages":
 				if (Array.isArray(output) && output.length) {
-					console.log("Testing packages:");
-					console.log(output);
 					testPackages(output as FullPackageName[], args);
 				} else {
 					console.log("No packages found in workspace.");
