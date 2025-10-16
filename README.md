@@ -191,3 +191,11 @@ In workspace packages they are imported with:
 ```
 
 This import is included in the template when using the workspace script `new`.
+
+## Contributing
+
+This repo uses github rules to protect the `main` branch.  Requirements:
+
+* Must be a PR
+* Must be a squash merge
+* Branch name must start with a valid package name (incl. `shared-configs`)
