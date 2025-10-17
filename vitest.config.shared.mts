@@ -6,7 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   test: {
-    include: ["**/*.{test,spec}.{ts,tsx,js,cjs,mjs}"],
+    include: ["{src,scripts,utils,tests}/**/*.{test,spec}.{ts,tsx,js,cjs,mjs,mts}"],
     coverage: {
       provider: "istanbul",
       reporter: [
@@ -31,7 +31,7 @@ export default defineConfig({
           ".github/*/**",
 					".template/*/**",
 					".vscode/*/**",
-          "**/*.test.ts",
+          "**/*.test.{ts,tsx,js,cjs,mjs,mts}",
           "tests/**"
 				]
     }
