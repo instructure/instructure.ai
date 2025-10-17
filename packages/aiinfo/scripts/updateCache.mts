@@ -202,21 +202,21 @@ const main = async () => {
 export { main, main as UpdateCache, parseCSV };
 
 if (process.env.UPDATE) {
-       main()
-	       .then((cacheUpdated) => {
-		       console.log(JSON.stringify({ cacheUpdated }));
-		       if (cacheUpdated) {
-			       process.exit(0);
-		       } else {
-			       if (process.env.CI) {
-				       process.exit(0);
-			       } else {
-				       process.exit(1);
-			       }
-		       }
-	       })
-	       .catch((error) => {
-		       Log({ color: "redBright", message: ["Error updating cache:", error] });
-		       process.exit(2);
-	       });
+	main()
+		.then((cacheUpdated) => {
+			console.log(JSON.stringify({ cacheUpdated }));
+			if (cacheUpdated) {
+				process.exit(0);
+			} else {
+				if (process.env.CI) {
+					process.exit(0);
+				} else {
+					process.exit(1);
+				}
+			}
+		})
+		.catch((error) => {
+			Log({ color: "redBright", message: ["Error updating cache:", error] });
+			process.exit(2);
+		});
 }
