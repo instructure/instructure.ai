@@ -46,24 +46,12 @@ const main = async () => {
 			case "all":
 				exec(`pnpx vitest run`, { args: args.slice(2) });
 				break;
-			case "root":
-				testPackage(getRootPackage(), args.slice(1));
-				break;
 			case "app":
 				if (output) {
 					testPackage(output as FullPackageName, args.slice(2));
 				} else {
 					console.log(
 						"No app found in workspace. Did you mean `test package <name>`?",
-					);
-				}
-				break;
-			case "package":
-				if (output) {
-					testPackage(output as FullPackageName, args.slice(2));
-				} else {
-					console.log(
-						"No package found in workspace. Did you mean `test app <name>`?",
 					);
 				}
 				break;
@@ -75,6 +63,15 @@ const main = async () => {
 					console.log("No apps found in workspace.");
 				}
 				break;
+			case "package":
+				if (output) {
+					testPackage(output as FullPackageName, args.slice(2));
+				} else {
+					console.log(
+						"No package found in workspace. Did you mean `test app <name>`?",
+					);
+				}
+				break;
 			case "packages":
 				if (Array.isArray(output) && output.length) {
 					console.log("Testing packages:", output);
@@ -82,6 +79,9 @@ const main = async () => {
 				} else {
 					console.log("No packages found in workspace.");
 				}
+				break;
+			case "root":
+				testPackage(getRootPackage(), args.slice(1));
 				break;
 			default:
 				if (isValidPackage(command)) {
