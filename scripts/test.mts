@@ -44,8 +44,12 @@ const main = async () => {
 	try {
 		switch (command) {
 			case "all":
-				exec(`pnpx vitest run`, { args: args.slice(2) });
-				break;
+				if (Array.isArray(output) && output.length) {
+					console.log("Testing all:", output);
+					testPackages(output, args.slice(1));
+				} else {
+					console.log("No apps or packages found in workspace.");
+				}				break;
 			case "app":
 				if (output) {
 					testPackage(output as FullPackageName, args.slice(2));
