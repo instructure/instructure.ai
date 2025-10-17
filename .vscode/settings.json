@@ -6,5 +6,6 @@
     "source.action.useSortedKeys.biome": "explicit",
     "source.action.useSortedProperties.biome": "explicit"
   },
-  "typescript.experimental.useTsgo": true
+  "typescript.experimental.useTsgo": true,
+  "vitest.disableWorkspaceWarning": true
 }
