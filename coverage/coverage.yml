@@ -1,10 +1,10 @@
 coverage:
   totals:
-    statements: 2.16%
+    statements: 2.15%
     branches: 0.85%
     functions: 3.03%
-    lines: 2.28%
-    total: 2.08%
+    lines: 2.27%
+    total: 2.07%
   plugins:
     totals:
       statements: 33.33%
@@ -86,7 +86,7 @@ coverage:
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "15-104"
+      uncovered_line_numbers: "14-109"
     "workspace.mts":
       statements: 0%
       branches: 0%

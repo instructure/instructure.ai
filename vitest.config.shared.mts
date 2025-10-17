@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const coveragePlugin = path.resolve(__dirname, "plugins/vitest.plugin.coverageReporter.cjs"); // changed
 
 export default defineConfig({
   test: {
@@ -12,28 +13,25 @@ export default defineConfig({
       reporter: [
         "text",
         [
-          path.resolve(
-            process.cwd(),
-            "plugins/vitest.plugin.coverageReporter.cjs"
-          ),
-          { file: path.resolve(__dirname, "coverage.yml" ) }
+          coveragePlugin,
+          { file: path.resolve(__dirname, "coverage.yml") }
         ],
       ],
       all: true,
-        include: [
-          "{src,scripts,utils}/**/*.{ts,tsx,js,cjs,mjs,mts}",
-        ],
-				exclude: [
-					"**/node_modules/**",
-					"**/dist/**",
-					"**/build/**",
-					"**/coverage/**",
-          ".github/*/**",
-					".template/*/**",
-					".vscode/*/**",
-          "**/*.test.{ts,tsx,js,cjs,mjs,mts}",
-          "tests/**"
-				]
+      include: [
+        "{src,scripts,utils}/**/*.{ts,tsx,js,cjs,mjs,mts}",
+      ],
+      exclude: [
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/coverage/**",
+        ".github/*/**",
+        ".template/*/**",
+        ".vscode/*/**",
+        "**/*.test.{ts,tsx,js,cjs,mjs,mts}",
+        "tests/**"
+      ]
     }
-	}
+  }
 });

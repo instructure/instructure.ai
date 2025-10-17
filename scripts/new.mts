@@ -63,6 +63,7 @@ async function main() {
 	const CLINAME = "<<cliname>>";
 	const FULLPACKAGENAME = `${workspaceName}/${PACKAGENAME}`;
 	const INSTUI = "<<instui-guidelines>>";
+	const PKGTYPE = "<<pkgtype>>";
 
 	// Validate NPM package name (unscoped)
 	console.log(`Creating ${TYPE} '${PACKAGENAME}'...`);
@@ -108,16 +109,22 @@ async function main() {
 	}
 	await safeCopyDir(chosenTplDir, pkgDir);
 
-	// Replace placeholders in specific files
 	await replaceInFile(
 		path.join(pkgDir, "package.json"),
 		REPLACESTRING,
 		FULLPACKAGENAME,
 	);
+
 	await replaceInFile(
 		path.join(pkgDir, "README.md"),
 		REPLACESTRING,
 		FULLPACKAGENAME,
+	);
+
+	await replaceInFile(
+		path.join(pkgDir, "README.md"),
+		PKGTYPE,
+		TYPE === "app" ? "apps" : "packages",
 	);
 
 	await replaceInFile(path.join(pkgDir, "README.md"), CLINAME, PACKAGENAME);

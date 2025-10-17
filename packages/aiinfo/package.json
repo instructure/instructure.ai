@@ -9,9 +9,7 @@
     "@types/papaparse": "^5.3.16",
     "ansis": "^4.2.0",
     "papaparse": "^5.5.3",
-    "typescript": "^5.9.3",
-    "vite-plugin-dts": "^4.5.4",
-    "vite-tsconfig-paths": "^5.1.4"
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=20"
@@ -48,10 +46,11 @@
     "cache:update": "UPDATE=1 vite-node ./scripts/updateCache.mts",
     "lint": "pnpm biome check",
     "package": "pnpm pack --pack-destination ./dist",
+    "test": "pnpm vitest run",
     "typecheck": "tsgo --noEmit"
   },
   "sideEffects": false,
   "type": "module",
   "types": "./dist/index.d.ts",
-  "version": "1.2.19"
+  "version": "1.3.0"
 }

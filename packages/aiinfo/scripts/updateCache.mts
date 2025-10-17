@@ -201,22 +201,35 @@ const main = async () => {
 
 export { main, main as UpdateCache, parseCSV };
 
-if (process.env.UPDATE) {
-       main()
-	       .then((cacheUpdated) => {
-		       console.log(JSON.stringify({ cacheUpdated }));
-		       if (cacheUpdated) {
-			       process.exit(0);
-		       } else {
-			       if (process.env.CI) {
-				       process.exit(0);
-			       } else {
-				       process.exit(1);
-			       }
-		       }
-	       })
-	       .catch((error) => {
-		       Log({ color: "redBright", message: ["Error updating cache:", error] });
-		       process.exit(2);
-	       });
+// Only run as CLI when:
+// 1. UPDATE env var is set
+// 2. This module is the direct entry point (not just imported in tests)
+const isDirectInvocation =
+	process.argv[1] &&
+	new URL(import.meta.url).pathname === path.resolve(process.argv[1]);
+
+if (process.env.UPDATE && isDirectInvocation) {
+	main()
+		.then((cacheUpdated) => {
+			// Keep JSON output only when explicitly verbose
+			if (process.env.VERBOSE_UPDATE) {
+				console.log(JSON.stringify({ cacheUpdated }));
+			}
+			// Exit codes:
+			// 0 success (updated or already current in CI)
+			// 1 no update (local non-CI run) to signal "nothing changed"
+			if (cacheUpdated) {
+				process.exit(0);
+			} else {
+				if (process.env.CI) {
+					process.exit(0);
+				} else {
+					process.exit(1);
+				}
+			}
+		})
+		.catch((error) => {
+			Log({ color: "redBright", message: ["Error updating cache:", error] });
+			process.exit(2);
+		});
 }

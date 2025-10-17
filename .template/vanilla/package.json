@@ -11,6 +11,7 @@
     "dev": "vite",
     "preview": "vite preview",
     "typecheck": "tsgo --noEmit",
+    "test": "pnpm vitest run",
     "lint": "pnpm biome check"
   },
   "devDependencies": {

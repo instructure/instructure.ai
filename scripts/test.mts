@@ -4,7 +4,6 @@ import {
 	exec,
 	exitWithError,
 	getFullPackageName,
-	getPackagePath,
 	getRootPackage,
 	isValidCommand,
 	isValidPackage,
@@ -27,9 +26,15 @@ const main = async () => {
 		exitWithError("Invalid test command.");
 
 	const testPackage = (pkg: FullPackageName, args: CommandExtraArgs) => {
-		exec(`pnpx vitest run --config=${getPackagePath(pkg)}/vitest.config.mts`, {
-			args,
-		});
+		if (pkg === getRootPackage()) {
+			exec(`pnpm test:root`, {
+				args,
+			});
+		} else {
+			exec(`pnpm -F ${pkg} test`, {
+				args,
+			});
+		}
 	};
 
 	const testPackages = (
@@ -49,7 +54,8 @@ const main = async () => {
 					testPackages(output, args.slice(1));
 				} else {
 					console.log("No apps or packages found in workspace.");
-				}				break;
+				}
+				break;
 			case "app":
 				if (output) {
 					testPackage(output as FullPackageName, args.slice(2));
