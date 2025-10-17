@@ -2,6 +2,28 @@ import { aiInformationStrings, permissionLevelsStrings } from "../strings";
 import type { AiInfoFeature, AiInformationStrings, Entry } from "../types";
 import { entryToNutritionFacts, entryToPermissionLevels } from "./";
 
+// Fix: Accept title and description as string | undefined, and coerce to string in output
+function normalizePermissionLevelsData(
+	data: Array<{
+		level?: string;
+		title?: string;
+		description?: string;
+		highlighted?: boolean;
+	}>,
+): Array<{
+	level: string;
+	title: string;
+	description: string;
+	highlighted?: boolean;
+}> {
+	return data.map((d) => ({
+		description: d.description ?? "",
+		highlighted: d.highlighted,
+		level: d.level ?? "",
+		title: d.title ?? "",
+	}));
+}
+
 const setData = (
 	data: AiInformationStrings["data"],
 	entry: Entry,
@@ -37,7 +59,9 @@ const entryToAIInformation = (entry: Entry): AiInfoFeature["aiInformation"] => {
 			...s,
 			data: setData(s.data, entry),
 			dataPermissionLevelsCurrentFeature: permissionLevels.currentFeature,
-			dataPermissionLevelsData: permissionLevels.data,
+			dataPermissionLevelsData: normalizePermissionLevelsData(
+				permissionLevels.data,
+			),
 			nutritionFactsData: nutritionFacts.data,
 			nutritionFactsFeatureName: nutritionFacts.featureName,
 			trigger: s.trigger,
