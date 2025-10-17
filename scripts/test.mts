@@ -31,10 +31,10 @@ const main = async () => {
 				args,
 			});
 		} else {
-		exec(`pnpm -F ${pkg} test`, {
-			args,
-		});
-	}
+			exec(`pnpm -F ${pkg} test`, {
+				args,
+			});
+		}
 	};
 
 	const testPackages = (
@@ -54,7 +54,8 @@ const main = async () => {
 					testPackages(output, args.slice(1));
 				} else {
 					console.log("No apps or packages found in workspace.");
-				}				break;
+				}
+				break;
 			case "app":
 				if (output) {
 					testPackage(output as FullPackageName, args.slice(2));
