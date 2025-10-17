@@ -176,7 +176,8 @@ const main = async () => {
 					releasePackages(output, args.slice(1));
 				} else {
 					console.log("No packages found in workspace.");
-				}				break;
+				}
+				break;
 			case "root":
 				releasePackage({ args: args.slice(1), pkg: output as FullPackageName });
 				break;

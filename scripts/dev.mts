@@ -42,4 +42,4 @@ const main = async (): Promise<void> => {
 
 main().catch((e) => unknownError(e));
 
-export { main }
+export { main };

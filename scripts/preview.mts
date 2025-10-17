@@ -40,8 +40,9 @@ const main = async (): Promise<void> => {
 	try {
 		if (command === "app") {
 			previewPackage(output as FullPackageName, args.slice(2));
-		} else if (command === "all" || command === "apps") {previewPackages(args.slice(1));}
-		else {
+		} else if (command === "all" || command === "apps") {
+			previewPackages(args.slice(1));
+		} else {
 			if (typeof output === "string" && isValidPackage(output)) {
 				previewPackage(output as FullPackageName, args.slice(1));
 			} else {
