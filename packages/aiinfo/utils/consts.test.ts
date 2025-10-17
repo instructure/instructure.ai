@@ -43,7 +43,7 @@ describe("consts.ts TEMPLATE_PACKAGE", () => {
 	it("placeholder occurrence counts are correct", () => {
 		const count = (ph: string) =>
 			(
-				TEMPLATE_PACKAGE.match(new RegExp(ph.replace(/[<>]/g, "\\$&"), "g")) ||
+				TEMPLATE_PACKAGE.match(new RegExp(ph.replace(/\\/g, "\\\\").replace(/[<>]/g, "\\$&"), "g")) ||
 				[]
 			).length;
 		expect(count("<<uid>>")).toBe(3); // declaration + named export + default export
