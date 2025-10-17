@@ -32,7 +32,8 @@ describe("scripts/info.mts", () => {
 		await main();
 		expect(workspaceModule.exec).toHaveBeenCalled();
 		// Get the function passed to exec and call it
-		const fn = (workspaceModule.exec as ReturnType<typeof vi.fn>).mock.calls[0][0];
+		const fn = (workspaceModule.exec as ReturnType<typeof vi.fn>).mock
+			.calls[0][0];
 		fn();
 		expect(consoleLogSpy).toHaveBeenCalledWith("mocked output");
 		consoleLogSpy.mockRestore();
@@ -43,7 +44,7 @@ describe("scripts/info.mts", () => {
 	});
 
 	it("should throw if Workspace throws", async () => {
-		(vi.mocked(workspaceModule.Workspace)).mockImplementationOnce(() => {
+		vi.mocked(workspaceModule.Workspace).mockImplementationOnce(() => {
 			throw new Error("fail");
 		});
 		await expect(main()).rejects.toThrow("fail");

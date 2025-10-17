@@ -14,7 +14,11 @@ import {
 const main = async () => {
 	const { command, args, output } = Workspace();
 
-	const releaseCommands: AllowedCommands = ["package", "root", "packages"] as const;
+	const releaseCommands: AllowedCommands = [
+		"package",
+		"root",
+		"packages",
+	] as const;
 
 	if (!isValidCommand(command, releaseCommands))
 		exitWithError("Invalid release command.");

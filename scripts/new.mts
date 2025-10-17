@@ -96,7 +96,9 @@ async function main() {
 		const testDest = path.join(pkgDir, "tests/package.test.ts");
 		try {
 			// Use moveFile from workspace utils
-			const { moveFile } = await import("@instructure.ai/shared-configs/workspace");
+			const { moveFile } = await import(
+				"@instructure.ai/shared-configs/workspace"
+			);
 			if (await pathExists(testSrc)) {
 				moveFile(testSrc, testDest);
 			}
