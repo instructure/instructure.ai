@@ -1,97 +1,111 @@
 coverage:
   totals:
-    statements: 0%
-    branches: 0%
-    functions: 0%
-    lines: 0%
-    total: 0%
+    statements: 96.15%
+    branches: 87.75%
+    functions: 100%
+    lines: 96.01%
+    total: 94.98%
   scripts:
     totals:
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
+      statements: 96.28%
+      branches: 88.24%
+      functions: 100%
+      lines: 96.28%
     "clearCache.mts":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "5-16"
-    "updateCache.mts":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "16-220"
-  utils:
-    totals:
-      statements: 0%
-      branches: 36.36%
-      functions: 9.09%
-      lines: 0%
-    "consts.ts":
-      statements: 0%
+      statements: 100%
       branches: 100%
       functions: 100%
-      lines: 0%
-      uncovered_line_numbers: "2-4"
+      lines: 100%
+    "updateCache.mts":
+      statements: 92.55%
+      branches: 76.47%
+      functions: 100%
+      lines: 92.55%
+      uncovered_line_numbers: "50-188"
+  strings:
+    totals:
+      statements: 100%
+      branches: 100%
+      functions: 100%
+      lines: 100%
+    "aiInformation.tsx":
+      statements: 100%
+      branches: 100%
+      functions: 100%
+      lines: 100%
+    "nutritionFacts.ts":
+      statements: 100%
+      branches: 100%
+      functions: 100%
+      lines: 100%
+    "permissionLevels.ts":
+      statements: 100%
+      branches: 100%
+      functions: 100%
+      lines: 100%
+  utils:
+    totals:
+      statements: 97.78%
+      branches: 92.61%
+      functions: 100%
+      lines: 97.64%
+    "consts.ts":
+      statements: 100%
+      branches: 100%
+      functions: 100%
+      lines: 100%
     "entryToAIInformation.tsx":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "5-46"
+      statements: 90.9%
+      branches: 75%
+      functions: 100%
+      lines: 90.9%
+      uncovered_line_numbers: "27"
     "entryToNutritionFacts.ts":
-      statements: 0%
-      branches: 100%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "4-64"
+      statements: 100%
+      branches: 83.33%
+      functions: 100%
+      lines: 100%
     "entryToObj.ts":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "5-45"
+      statements: 100%
+      branches: 100%
+      functions: 100%
+      lines: 100%
     "entryToPermissionLevels.ts":
-      statements: 0%
-      branches: 100%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "8-45"
+      statements: 94.11%
+      branches: 94.11%
+      functions: 100%
+      lines: 93.33%
+      uncovered_line_numbers: "28"
     "formatTs.ts":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "4-18"
-    "log.ts":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "4-96"
-    "toTsObjectLiteral.ts":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "7-72"
-    "writeBarrel.ts":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "12-123"
-    "writeChangelog.ts":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "10-86"
-    "writeEntry.ts":
-      statements: 0%
+      statements: 100%
       branches: 100%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "13-79"
+      functions: 100%
+      lines: 100%
+    "log.ts":
+      statements: 96%
+      branches: 90.9%
+      functions: 100%
+      lines: 96%
+      uncovered_line_numbers: "20-21"
+    "toTsObjectLiteral.ts":
+      statements: 97.05%
+      branches: 100%
+      functions: 100%
+      lines: 96.66%
+      uncovered_line_numbers: "15"
+    "writeBarrel.ts":
+      statements: 97.56%
+      branches: 85.71%
+      functions: 100%
+      lines: 97.14%
+      uncovered_line_numbers: "20"
+    "writeChangelog.ts":
+      statements: 100%
+      branches: 89.65%
+      functions: 100%
+      lines: 100%
+    "writeEntry.ts":
+      statements: 100%
+      branches: 100%
+      functions: 100%
+      lines: 100%
