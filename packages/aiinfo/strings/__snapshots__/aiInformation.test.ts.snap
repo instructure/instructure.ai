@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`aiInformation strings > snapshot of english strings 1`] = `
+{
+  "data": {
+    "modelNameText": "Base Model",
+    "nutritionFactsModalTriggerText": "AI Nutrition Facts",
+    "permissionLevelText": "Permission Level:",
+    "permissionLevelsModalTriggerText": "Data Permission Levels",
+  },
+  "dataPermissionLevelsCloseButtonText": "Close",
+  "dataPermissionLevelsCloseIconButtonScreenReaderLabel": "Close dialog",
+  "dataPermissionLevelsCurrentFeatureText": "Current Feature:",
+  "dataPermissionLevelsModalLabel": "Data Permission Levels modal",
+  "dataPermissionLevelsTitle": "Data Permission Levels",
+  "nutritionFactsCloseButtonText": "Close",
+  "nutritionFactsCloseIconButtonScreenReaderLabel": "Close",
+  "nutritionFactsModalLabel": "This is a modal for AI facts",
+  "nutritionFactsTitle": "AI Nutrition Facts",
+  "title": "Features",
+  "trigger": "<Button>AI Information</Button>",
+}
+`;

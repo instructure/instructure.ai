@@ -1,72 +1,97 @@
 coverage:
   totals:
-    statements: 0.79%
+    statements: 0%
     branches: 0%
-    functions: 1.94%
-    lines: 0.83%
-    total: 0.89%
+    functions: 0%
+    lines: 0%
+    total: 0%
   scripts:
     totals:
-      statements: 8.33%
-      branches: 10%
-      functions: 6.67%
-      lines: 10%
-    "build.mts":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "16-143"
-    "dev.mts":
+    "clearCache.mts":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "12-43"
-    "info.mts":
-      statements: 83.33%
+      uncovered_line_numbers: "5-16"
+    "updateCache.mts":
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "16-220"
+  utils:
+    totals:
+      statements: 0%
+      branches: 36.36%
+      functions: 9.09%
+      lines: 0%
+    "consts.ts":
+      statements: 0%
       branches: 100%
-      functions: 66.66%
-      lines: 100%
-    "issues.mts":
+      functions: 100%
+      lines: 0%
+      uncovered_line_numbers: "2-4"
+    "entryToAIInformation.tsx":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "14-87"
-    "lint.mts":
+      uncovered_line_numbers: "5-46"
+    "entryToNutritionFacts.ts":
+      statements: 0%
+      branches: 100%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "4-64"
+    "entryToObj.ts":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "12-104"
-    "new.mts":
+      uncovered_line_numbers: "5-45"
+    "entryToPermissionLevels.ts":
+      statements: 0%
+      branches: 100%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "8-45"
+    "formatTs.ts":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "13-199"
-    "preview.mts":
+      uncovered_line_numbers: "4-18"
+    "log.ts":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "14-61"
-    "release.mts":
+      uncovered_line_numbers: "4-96"
+    "toTsObjectLiteral.ts":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "14-199"
-    "test.mts":
+      uncovered_line_numbers: "7-72"
+    "writeBarrel.ts":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "15-104"
-    "workspace.mts":
+      uncovered_line_numbers: "12-123"
+    "writeChangelog.ts":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "8-449"
+      uncovered_line_numbers: "10-86"
+    "writeEntry.ts":
+      statements: 0%
+      branches: 100%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "13-79"
