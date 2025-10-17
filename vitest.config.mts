@@ -11,7 +11,7 @@ export default mergeConfig(baseConfig, {
     include: ["{src,scripts,utils,plugins,tests}/**/*.{test,spec}.{ts,tsx,js,cjs,mjs,mts}"],
     coverage: {
       include: [
-          "{src,scripts,utils,plugins}/**/*.{ts,js,mts,mjs}",
+          "{src,scripts,utils,plugins}/**/*.{ts,tsx,js,cjs,mjs,mts}",
         ],
       reportsDirectory: __cdir,
     }
