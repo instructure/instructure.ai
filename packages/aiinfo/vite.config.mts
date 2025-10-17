@@ -1,4 +1,4 @@
-import baseConfig from "@instructure.ai/shared-configs/react";
+import baseConfig from "@instructure.ai/shared-configs/esm";
 import { defineConfig, mergeConfig } from "vite";
 import dts from "vite-plugin-dts";
 import tsconfigPaths from "vite-tsconfig-paths";
