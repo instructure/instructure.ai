@@ -17,7 +17,9 @@ const main = async () => {
 	const testCommands: AllowedCommands = [
 		"all",
 		"package",
+		"packages",
 		"app",
+		"apps",
 		"root",
 	] as const;
 
@@ -67,24 +69,29 @@ const main = async () => {
 				break;
 			case "apps":
 				if (Array.isArray(output) && output.length) {
-					console.log("Apps is not currently supported.");
+					console.log("Testing apps:", output);
+					testPackages(output, args.slice(1));
 				} else {
 					console.log("No apps found in workspace.");
 				}
 				break;
 			case "packages":
 				if (Array.isArray(output) && output.length) {
-					console.log("Packages is not currently supported.");
+					console.log("Testing packages:", output);
+					testPackages(output, args.slice(1));
 				} else {
 					console.log("No packages found in workspace.");
 				}
 				break;
 			default:
 				if (isValidPackage(command)) {
-					testPackage(getFullPackageName(command) as FullPackageName, args.slice(1));
+					testPackage(
+						getFullPackageName(command) as FullPackageName,
+						args.slice(1),
+					);
 				} else {
 					exitWithError(`Unknown test command: ${command}`);
-				}	
+				}
 		}
 	} catch (error) {
 		exitWithError("Test failed:", error);
