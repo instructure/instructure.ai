@@ -23,13 +23,13 @@ const main = async (): Promise<void> => {
 	try {
 		if (command === "package" || command === "app") {
 			if (output) {
-				devPackage(output as PackageName, args);
+				devPackage(output as PackageName, args.slice(2));
 			} else {
 				console.log("No package found in workspace.");
 			}
 		} else {
 			if (isValidPackage(command)) {
-				devPackage(command as PackageName, args);
+				devPackage(command as PackageName, args.slice(1));
 			} else {
 				exitWithError(`Unknown dev command: ${command}
  Valid commands are: ${devCommands.join(", ")}`);
