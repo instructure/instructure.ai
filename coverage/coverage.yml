@@ -1,9 +1,9 @@
 coverage:
   totals:
     statements: 2.15%
-    branches: 0.85%
+    branches: 0.84%
     functions: 3.03%
-    lines: 2.27%
+    lines: 2.26%
     total: 2.07%
   plugins:
     totals:
@@ -68,25 +68,25 @@ coverage:
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "13-199"
+      uncovered_line_numbers: "13-206"
     "preview.mts":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "14-61"
+      uncovered_line_numbers: "14-62"
     "release.mts":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "14-199"
+      uncovered_line_numbers: "14-200"
     "test.mts":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "14-109"
+      uncovered_line_numbers: "14-110"
     "workspace.mts":
       statements: 0%
       branches: 0%
