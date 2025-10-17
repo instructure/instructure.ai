@@ -1,4 +1,3 @@
-# Logs
 logs
 *.log
 npm-debug.log*
@@ -10,7 +9,9 @@ lerna-debug.log*
 node_modules
 dist-ssr
 dist
-coverage  
+pub
+coverage/*
+!coverage.yml
 *.local
 
 .idea

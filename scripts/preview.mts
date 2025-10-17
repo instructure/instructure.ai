@@ -27,7 +27,7 @@ const main = async (): Promise<void> => {
 			? getPackageName(pkg as FullPackageName)
 			: (pkg as PackageName);
 		exec(`pnpm preview`, {
-			args: args.slice(2),
+			args,
 			cwd: `apps/${app}`,
 		});
 	};
@@ -39,14 +39,14 @@ const main = async (): Promise<void> => {
 
 	try {
 		if (command === "app") {
-			previewPackage(output as FullPackageName, args);
-		} else if (command === "all" || command === "apps") previewPackages(args);
+			previewPackage(output as FullPackageName, args.slice(2));
+		} else if (command === "all" || command === "apps") {previewPackages(args.slice(1));}
 		else {
 			if (typeof output === "string" && isValidPackage(output)) {
-				previewPackage(output as FullPackageName, args);
+				previewPackage(output as FullPackageName, args.slice(1));
 			} else {
 				if (isValidPackage(command as FullPackageName)) {
-					previewPackage(command as FullPackageName, args);
+					previewPackage(command as FullPackageName, args.slice(1));
 				} else {
 					exitWithError(`Unknown preview command: ${command}
 Valid commands are: ${previewCommands.join(", ")}`);
@@ -59,3 +59,5 @@ Valid commands are: ${previewCommands.join(", ")}`);
 };
 
 main().catch((e) => unknownError(e));
+
+export { main };

@@ -1,8 +1,22 @@
+import { renameSync } from "node:fs";
+
+/**
+ * Move or rename a file from src to dest.
+ * Throws if the operation fails.
+ */
+function moveFile(src: string, dest: string): void {
+	try {
+		renameSync(src, dest);
+	} catch (err) {
+		exitWithError(`Error moving file from '${src}' to '${dest}':`, err);
+	}
+}
+
 /// <reference path="../types/index.d.ts" />
 
 import { execFileSync } from "node:child_process";
-import { readdirSync } from "node:fs";
-import { join } from "node:path";
+import { existsSync, readdirSync } from "node:fs";
+import { join, resolve } from "node:path";
 import { name } from "../package.json" with { type: "json" };
 
 // Regex to match valid NPM unscoped package names and scoped workspace names.
@@ -22,6 +36,33 @@ const isValidWorkspaceName = (ws: string): ws is WorkspaceName => {
 	return wn.test(ws);
 };
 
+const getPackagePath = (pkg: PackageName | FullPackageName): string => {
+	if (!isValidPackageName(pkg) && !isValidFullPackageName(pkg)) {
+		exitWithError("Error: Invalid package name.");
+	}
+	const packageName = isValidFullPackageName(pkg) ? getPackageName(pkg) : pkg;
+	if (
+		pkg === getRootPackage() ||
+		packageName === getPackageName(getRootPackage())
+	) {
+		// Return the absolute path to the workspace root, without trailing slash
+		return resolve(__dirname, "../");
+	} else {
+		const packagesPath = join(__dirname, "../packages", packageName);
+		const appsPath = join(__dirname, "../apps", packageName);
+		if (existsSync(packagesPath)) {
+			return packagesPath;
+		} else if (existsSync(appsPath)) {
+			return appsPath;
+		} else {
+			exitWithError(
+				`Error: Could not find package directory for '${packageName}' in either packages or apps.`,
+			);
+			return "";
+		}
+	}
+};
+
 const getPackageJson = (
 	pkg: PackageName | FullPackageName,
 ): { content: PackageJson; path: string } => {
@@ -36,7 +77,8 @@ const getPackageJson = (
 	) {
 		pkgJsonPath = join(__dirname, "../package.json");
 	} else {
-		pkgJsonPath = join(__dirname, "../packages", packageName, "package.json");
+		const packageDir = getPackagePath(packageName);
+		pkgJsonPath = join(packageDir, "package.json");
 	}
 	try {
 		return { content: require(pkgJsonPath), path: pkgJsonPath };
@@ -388,8 +430,11 @@ const exec = (
 		} else {
 			const { args, ...restOptions } = options as { args?: unknown[] };
 			const extraArgs =
-				args && Array.isArray(args) && args.length > 0 ? args.map(String) : [];
-			execFileSync(cmd, extraArgs, {
+				args && Array.isArray(args) && args.length > 0
+					? args.map((a) => shellEscape(String(a)))
+					: [];
+			const fullCmd = [cmd, ...extraArgs].join(" ");
+			execFileSync(fullCmd, [], {
 				...restOptions,
 				shell: true,
 				stdio: "inherit",
@@ -399,6 +444,10 @@ const exec = (
 		exitWithError(`Error executing command: ${e}`);
 	}
 };
+
+function shellEscape(arg: string): string {
+	return `'${arg.replace(/'/g, `'\\''`)}'`;
+}
 
 export {
 	Workspace,
@@ -411,9 +460,11 @@ export {
 	exitWithError,
 	unknownError,
 	getPackageName,
+	getPackagePath,
 	getPackages,
 	getFullPackageName,
 	getRootPackage,
 	getPackageJson,
 	isStrictlyValidCommand,
+	moveFile,
 };

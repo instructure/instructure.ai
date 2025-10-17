@@ -1,0 +1,95 @@
+coverage:
+  totals:
+    statements: 0%
+    branches: 0%
+    functions: 0%
+    lines: 0%
+    total: 0%
+  packages:
+    totals:
+      statements: 0%
+      branches: 46.67%
+      functions: 3.33%
+      lines: 0%
+    aiinfo:
+      scripts:
+        "clearCache.mts":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "5-16"
+        "updateCache.mts":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "16-220"
+      src:
+        "index.ts":
+          statements: 0%
+          branches: 100%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "18-55"
+      utils:
+        "consts.ts":
+          statements: 0%
+          branches: 100%
+          functions: 100%
+          lines: 0%
+          uncovered_line_numbers: "2-4"
+        "entryToNutritionFacts.ts":
+          statements: 0%
+          branches: 100%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "4-64"
+        "entryToObj.ts":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "5-45"
+        "entryToPermissionLevels.ts":
+          statements: 0%
+          branches: 100%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "8-45"
+        "formatTs.ts":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "4-18"
+        "log.ts":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "4-96"
+        "toTsObjectLiteral.ts":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "7-72"
+        "writeBarrel.ts":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "12-123"
+        "writeChangelog.ts":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "10-86"
+        "writeEntry.ts":
+          statements: 0%
+          branches: 100%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "13-79"

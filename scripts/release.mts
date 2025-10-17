@@ -14,7 +14,11 @@ import {
 const main = async () => {
 	const { command, args, output } = Workspace();
 
-	const releaseCommands: AllowedCommands = ["package", "root", "packages"] as const;
+	const releaseCommands: AllowedCommands = [
+		"package",
+		"root",
+		"packages",
+	] as const;
 
 	if (!isValidCommand(command, releaseCommands))
 		exitWithError("Invalid release command.");
@@ -104,7 +108,7 @@ const main = async () => {
 		return writeVersion;
 	};
 
-	const pack = ({
+	const releasePackage = ({
 		pkg,
 		args = [],
 	}: {
@@ -135,6 +139,14 @@ const main = async () => {
 		commit({ pkg, pkgJsonPath: pkgJson.path, version: writeVersion });
 	};
 
+	const releasePackages = (
+		packages: FullPackageName[],
+		args: CommandExtraArgs,
+	) => {
+		packages.forEach((pkg) => {
+			releasePackage({ args, pkg });
+		});
+	};
 	const commit = ({
 		pkg,
 		version,
@@ -156,17 +168,24 @@ const main = async () => {
 						"A valid package name is required for the package command.",
 					);
 				}
-				pack({ args: args, pkg: output as FullPackageName });
-				break;
-			case "root":
-				pack({ args: args, pkg: output as FullPackageName });
+				releasePackage({ args: args.slice(2), pkg: output as FullPackageName });
 				break;
 			case "packages":
-				console.log("packages is not supported yet.");
+				if (Array.isArray(output) && output.length) {
+					console.log("Releasing packages:", output);
+					releasePackages(output, args.slice(1));
+				} else {
+					console.log("No packages found in workspace.");
+				}				break;
+			case "root":
+				releasePackage({ args: args.slice(1), pkg: output as FullPackageName });
 				break;
 			default:
 				if (isValidPackage(command)) {
-					pack({ args: args, pkg: command as FullPackageName });
+					releasePackage({
+						args: args.slice(1),
+						pkg: command as FullPackageName,
+					});
 				} else {
 					exitWithError(`Unknown build command: ${command}
 Valid commands are: ${releaseCommands.join(", ")}`);
@@ -178,3 +197,5 @@ Valid commands are: ${releaseCommands.join(", ")}`);
 };
 
 main().catch((e) => unknownError(e));
+
+export { main };

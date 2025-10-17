@@ -4,6 +4,7 @@ import {
 	exec,
 	exitWithError,
 	getFullPackageName,
+	getPackagePath,
 	getRootPackage,
 	isValidCommand,
 	isValidPackage,
@@ -15,10 +16,10 @@ const main = async () => {
 	const { command, output, args } = Workspace();
 	const testCommands: AllowedCommands = [
 		"all",
-		"packages",
 		"package",
-		"apps",
+		"packages",
 		"app",
+		"apps",
 		"root",
 	] as const;
 
@@ -26,8 +27,9 @@ const main = async () => {
 		exitWithError("Invalid test command.");
 
 	const testPackage = (pkg: FullPackageName, args: CommandExtraArgs) => {
-		console.log(`test ${pkg}`);
-		exec(`pnpx vitest run --project=${pkg}`, { args: args.slice(2) });
+		exec(`pnpx vitest run --config=${getPackagePath(pkg)}/vitest.config.mts`, {
+			args,
+		});
 	};
 
 	const testPackages = (
@@ -42,53 +44,55 @@ const main = async () => {
 	try {
 		switch (command) {
 			case "all":
-				console.log("Testing all:");
-				console.log(output);
-				exec(`pnpx vitest`);
-				break;
-			case "root":
-				console.log("Testing root package:");
-				testPackage(getRootPackage(), args);
-				break;
+				if (Array.isArray(output) && output.length) {
+					console.log("Testing all:", output);
+					testPackages(output, args.slice(1));
+				} else {
+					console.log("No apps or packages found in workspace.");
+				}				break;
 			case "app":
 				if (output) {
-					testPackage(output as FullPackageName, args);
+					testPackage(output as FullPackageName, args.slice(2));
 				} else {
 					console.log(
 						"No app found in workspace. Did you mean `test package <name>`?",
 					);
 				}
 				break;
+			case "apps":
+				if (Array.isArray(output) && output.length) {
+					console.log("Testing apps:", output);
+					testPackages(output, args.slice(1));
+				} else {
+					console.log("No apps found in workspace.");
+				}
+				break;
 			case "package":
 				if (output) {
-					testPackage(output as FullPackageName, args);
+					testPackage(output as FullPackageName, args.slice(2));
 				} else {
 					console.log(
 						"No package found in workspace. Did you mean `test app <name>`?",
 					);
 				}
 				break;
-			case "apps":
-				if (Array.isArray(output) && output.length) {
-					console.log("Testing apps:");
-					console.log(output);
-					testPackages(output as FullPackageName[], args);
-				} else {
-					console.log("No apps found in workspace.");
-				}
-				break;
 			case "packages":
 				if (Array.isArray(output) && output.length) {
-					console.log("Testing packages:");
-					console.log(output);
-					testPackages(output as FullPackageName[], args);
+					console.log("Testing packages:", output);
+					testPackages(output, args.slice(1));
 				} else {
 					console.log("No packages found in workspace.");
 				}
 				break;
+			case "root":
+				testPackage(getRootPackage(), args.slice(1));
+				break;
 			default:
 				if (isValidPackage(command)) {
-					testPackage(getFullPackageName(command) as FullPackageName, args);
+					testPackage(
+						getFullPackageName(command) as FullPackageName,
+						args.slice(1),
+					);
 				} else {
 					exitWithError(`Unknown test command: ${command}`);
 				}
@@ -98,3 +102,5 @@ const main = async () => {
 	}
 };
 main().catch((e) => unknownError(e));
+
+export { main };

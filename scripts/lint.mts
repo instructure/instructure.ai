@@ -26,7 +26,7 @@ const main = async (): Promise<void> => {
 
 	const lintRoot = (pkg: PackageName, args: CommandExtraArgs) => {
 		console.log(`Linting root package: ${pkg}`);
-		exec("pnpm biome check", { args: args.slice(1) });
+		exec("pnpm biome check", { args });
 	};
 
 	const lintPackage = (pkg: PackageName, args: CommandExtraArgs) => {
@@ -42,22 +42,36 @@ const main = async (): Promise<void> => {
 
 	try {
 		switch (command) {
-			case "package":
-				if (output) {
-					lintPackage(output as PackageName, args);
-				} else {
-					console.log(
-						"No package found in workspace. Did you mean `lint app <name>`?",
-					);
-				}
+			case "all":
+				console.log("Linting apps:");
+				console.log(output);
+				lintPackages(output as PackageName[], args.slice(2));
 				break;
 			case "app":
 				console.log("output:", output);
 				if (output) {
-					lintPackage(output as PackageName, args);
+					lintPackage(output as PackageName, args.slice(2));
 				} else {
 					console.log(
 						"No app found in workspace. Did you mean `lint package <name>`?",
+					);
+				}
+				break;
+			case "apps":
+				if (Array.isArray(output) && output.length) {
+					console.log("Linting apps:");
+					console.log(output);
+					lintPackages(output as PackageName[], args.slice(1));
+				} else {
+					console.log("No apps found in workspace.");
+				}
+				break;
+			case "package":
+				if (output) {
+					lintPackage(output as PackageName, args.slice(2));
+				} else {
+					console.log(
+						"No package found in workspace. Did you mean `lint app <name>`?",
 					);
 				}
 				break;
@@ -65,32 +79,18 @@ const main = async (): Promise<void> => {
 				if (Array.isArray(output) && output.length) {
 					console.log("Linting packages:");
 					console.log(output);
-					lintPackages(output as PackageName[], args);
+					lintPackages(output as PackageName[], args.slice(1));
 				} else {
 					console.log("No packages found in workspace.");
 				}
 				break;
-			case "apps":
-				if (Array.isArray(output) && output.length) {
-					console.log("Linting apps:");
-					console.log(output);
-					lintPackages(output as PackageName[], args);
-				} else {
-					console.log("No apps found in workspace.");
-				}
-				break;
-			case "all":
-				console.log("Linting apps:");
-				console.log(output);
-				lintPackages(output as PackageName[], args);
-				break;
 			case "root":
 				console.log(output);
-				lintRoot(output as PackageName, args);
+				lintRoot(output as PackageName, args.slice(1));
 				break;
 			default:
 				if (isValidPackage(command as PackageName)) {
-					lintPackage(command as PackageName, args);
+					lintPackage(command as PackageName, args.slice(1));
 				} else {
 					exitWithError(`Unknown lint command: ${command}
 Valid commands are: ${lintCommands.join(", ")}`);
@@ -102,3 +102,5 @@ Valid commands are: ${lintCommands.join(", ")}`);
 };
 
 main().catch((e) => unknownError(e));
+
+export { main };
