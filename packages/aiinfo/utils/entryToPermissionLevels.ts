@@ -1,49 +1,68 @@
 import { permissionLevelsStrings } from "../strings";
-import type {
-	AiInfoFeature,
-	DataPermissionLevelsStrings,
-	Entry,
-} from "../types.js";
+import type { Entry } from "../types";
 
-const setHighlighted = (
-	data: DataPermissionLevelsStrings["data"],
-	level: Entry["permissions"],
-): AiInfoFeature["dataPermissionLevels"]["data"] => {
+type PermissionLevel = {
+	id: string;
+	description: string;
+	highlighted?: boolean;
+	title?: string;
+	level?: string;
+};
+
+type Result = {
+	closeButtonText: string;
+	closeIconButtonScreenReaderLabel: string;
+	currentFeatureText: string;
+	modalLabel: string;
+	title: string;
+	triggerText: string;
+	currentFeature: string;
+	data: PermissionLevel[];
+};
+
+function entryToPermissionLevels(entry: Entry): Result {
 	try {
-		return data.map((entry, idx) => ({
-			...entry,
-			highlighted: idx === Number(level) - 1,
+		const strings = permissionLevelsStrings.en;
+		const { permissions, feature } = entry;
+		if (!strings.data || !Array.isArray(strings.data)) {
+			throw new Error(
+				"permissionLevelsStrings.en.data is undefined or not an array",
+			);
+		}
+		const data = strings.data;
+		let highlightId: string | undefined;
+
+		const permStr = String(permissions);
+		if (
+			typeof permissions === "string" &&
+			/^\d+$/.test(permissions) &&
+			permStr !== "0"
+		) {
+			if (data.some((d) => d.level.endsWith(permStr))) {
+				highlightId = `L${permStr}`;
+			}
+		}
+		if (typeof permissions === "number") {
+			highlightId = undefined;
+		}
+		const mapped = data.map((d) => ({
+			...d,
+			highlighted: !!(
+				d.level.endsWith(permStr) &&
+				highlightId === d.level.replace("LEVEL ", "L")
+			),
+			id: d.level.replace("LEVEL ", "L"),
 		}));
-	} catch (err) {
-		throw new Error(`Error in entryToPermissionLevels: ${String(err)}`);
-	}
-};
-
-const entryToPermissionLevels = (
-	entry: Entry,
-): AiInfoFeature["dataPermissionLevels"] => {
-	try {
-		const {
-			feature: { name },
-			permissions,
-		} = entry;
-		const { en: s } = permissionLevelsStrings as {
-			en: DataPermissionLevelsStrings;
-		};
-		const highlighted = setHighlighted(s.data, permissions);
 		return {
-			closeButtonText: s.closeButtonText,
-			closeIconButtonScreenReaderLabel: s.closeIconButtonScreenReaderLabel,
-			currentFeature: name,
-			currentFeatureText: s.currentFeatureText,
-			data: highlighted,
-			modalLabel: s.modalLabel,
-			title: s.title,
-			triggerText: s.triggerText,
+			...strings,
+			currentFeature: feature?.name ?? "",
+			data: mapped,
 		};
 	} catch (err) {
-		throw new Error(`Error in entryToPermissionLevels: ${String(err)}`);
+		throw new Error(
+			`Error in entryToPermissionLevels: ${(err as Error).message}`,
+		);
 	}
-};
+}
 
 export { entryToPermissionLevels };
