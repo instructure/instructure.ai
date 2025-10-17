@@ -1,7 +1,6 @@
 /// <reference types="vitest/config" />
 
 import { defineConfig } from 'vite';
-import dts from 'vite-plugin-dts';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import path from 'node:path';
 import fs from 'node:fs';
@@ -57,26 +56,10 @@ export default defineConfig({
     },
   },
   plugins: [
-    dts({
-      entryRoot: "src",
-      exclude: [
-        "**/*.test.*",
-        "**/__tests__/**",
-        "scripts/**",
-        "utils/**",
-        "dist/**",
-        "**/*.config.*",
-        "vite.config.*",
-      ],
-      insertTypesEntry: true,
-      outDir: "dist",
-      rollupTypes: true,
-      tsconfigPath: "./tsconfig.types.json",
-    }),
     tsconfigPaths({
       projects: PROJECTS,
       ignoreConfigErrors: true,
       loose: true,
-    }),
+    })
   ],
 });
