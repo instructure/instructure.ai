@@ -15,23 +15,32 @@ import type {
 	AiInfoProps,
 } from "./types";
 
-const pluck = <
-	TRecord extends Record<string, object>,
-	K extends keyof TRecord[keyof TRecord],
->(
-	obj: TRecord,
-	key: K,
-): {
-	[P in keyof TRecord]: TRecord[P][K];
-} => {
-	const out = {} as {
-		[P in keyof TRecord]: TRecord[P][K];
-	};
+type NutritionFactsType = {
+	[K in keyof typeof AiInfo]: (typeof AiInfo)[K]["nutritionFacts"];
+};
+type DataPermissionLevelsType = {
+	[K in keyof typeof AiInfo]: (typeof AiInfo)[K]["dataPermissionLevels"];
+};
+type AiInformationType = {
+	[K in keyof typeof AiInfo]: (typeof AiInfo)[K]["aiInformation"];
+};
+
+function pluck(obj: typeof AiInfo, key: "nutritionFacts"): NutritionFactsType;
+function pluck(
+	obj: typeof AiInfo,
+	key: "dataPermissionLevels",
+): DataPermissionLevelsType;
+function pluck(obj: typeof AiInfo, key: "aiInformation"): AiInformationType;
+function pluck(
+	obj: typeof AiInfo,
+	key: "nutritionFacts" | "dataPermissionLevels" | "aiInformation",
+) {
+	const out: Record<string, unknown> = {};
 	for (const k in obj) {
 		out[k] = obj[k][key];
 	}
 	return out;
-};
+}
 const AiInfo: AiInfoProps = {
 	askyourdata,
 	bcealttext,
