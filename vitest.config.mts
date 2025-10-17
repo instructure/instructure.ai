@@ -7,9 +7,12 @@ const __dir = path.dirname(fileURLToPath(import.meta.url));
 const __cdir = path.resolve(__dir, "coverage");
 
 export default mergeConfig(baseConfig, {
-  root: __dirname,
   test: {
+    include: ["{src,scripts,utils,plugins,tests}/**/*.{test,spec}.{ts,tsx,js,cjs,mjs,mts}"],
     coverage: {
+      include: [
+          "{src,scripts,utils,plugins}/**/*.{ts,js,mts,mjs}",
+        ],
       reportsDirectory: __cdir,
     }
   }
