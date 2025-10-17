@@ -46,6 +46,7 @@
     "cache:update": "UPDATE=1 vite-node ./scripts/updateCache.mts",
     "lint": "pnpm biome check",
     "package": "pnpm pack --pack-destination ./dist",
+    "test": "pnpm vitest run --config=./vitest.config.mts",
     "typecheck": "tsgo --noEmit"
   },
   "sideEffects": false,
