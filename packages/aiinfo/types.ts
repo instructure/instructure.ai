@@ -146,6 +146,25 @@ type ChangedEntry = {
 	newEntry: Entry;
 };
 
+type PermissionLevel = {
+	id: string;
+	description: string;
+	highlighted?: boolean;
+	title?: string;
+	level?: string;
+};
+
+type Result = {
+	closeButtonText: string;
+	closeIconButtonScreenReaderLabel: string;
+	currentFeatureText: string;
+	modalLabel: string;
+	title: string;
+	triggerText: string;
+	currentFeature: string;
+	data: PermissionLevel[];
+};
+
 export type {
 	CSV,
 	ChangedEntry,
@@ -165,4 +184,5 @@ export type {
 	LogProps,
 	LogObject,
 	Strings,
+	Result,
 };

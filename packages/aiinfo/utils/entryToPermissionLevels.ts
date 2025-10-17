@@ -1,24 +1,5 @@
 import { permissionLevelsStrings } from "../strings";
-import type { Entry } from "../types";
-
-type PermissionLevel = {
-	id: string;
-	description: string;
-	highlighted?: boolean;
-	title?: string;
-	level?: string;
-};
-
-type Result = {
-	closeButtonText: string;
-	closeIconButtonScreenReaderLabel: string;
-	currentFeatureText: string;
-	modalLabel: string;
-	title: string;
-	triggerText: string;
-	currentFeature: string;
-	data: PermissionLevel[];
-};
+import type { Entry, Result } from "../types";
 
 function entryToPermissionLevels(entry: Entry): Result {
 	try {
