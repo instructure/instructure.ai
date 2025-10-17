@@ -206,8 +206,7 @@ export { main, main as UpdateCache, parseCSV };
 // 2. This module is the direct entry point (not just imported in tests)
 const isDirectInvocation =
 	process.argv[1] &&
-	new URL(import.meta.url).pathname ===
-		path.resolve(process.argv[1] || "");
+	new URL(import.meta.url).pathname === path.resolve(process.argv[1] || "");
 
 if (process.env.UPDATE && isDirectInvocation) {
 	main()
