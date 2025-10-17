@@ -15,6 +15,7 @@
     "build": "vite build && pnpm pack --pack-destination ./dist",
     "typecheck": "tsgo --noEmit",
     "lint": "pnpm biome check",
+    "test": "pnpm vitest run",
     "<<cliname>>": "vite-node ./dist/index.mjs"
   },
   "bin": {

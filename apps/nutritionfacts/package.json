@@ -24,6 +24,7 @@
 		"dev": "vite",
 		"lint": "pnpm biome check",
 		"preview": "vite preview",
+    "test": "pnpm vitest run",
 		"typecheck": "tsgo --noEmit",
 		"update-cache": "vite-node ./scripts/updateCache.mts"
 	},

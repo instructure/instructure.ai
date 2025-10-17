@@ -19,6 +19,7 @@
 		"dev": "vite",
 		"lint": "pnpm biome check",
 		"preview": "vite preview",
+    "test": "pnpm vitest run",
 		"typecheck": "tsgo --noEmit"
 	},
 	"type": "module",
