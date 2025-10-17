@@ -33,13 +33,22 @@ const setData = (
 				{ value: outputs.outcomes },
 			],
 		];
-		return data.map((block, i) => ({
-			blockTitle: block.blockTitle,
-			segmentData: block.segmentData.map((seg, j) => ({
-				...seg,
-				...valueMap[i][j],
-			})),
-		}));
+
+		return data.map((block, i) => {
+			// Explicit length guard so tests can assert error on mismatch
+			if (!valueMap[i] || block.segmentData.length !== valueMap[i].length) {
+				throw new Error(
+					`Segment length mismatch in block "${block.blockTitle}" (expected ${valueMap[i]?.length ?? 0}, got ${block.segmentData.length})`,
+				);
+			}
+			return {
+				blockTitle: block.blockTitle,
+				segmentData: block.segmentData.map((seg, j) => ({
+					...seg,
+					...valueMap[i][j],
+				})),
+			};
+		});
 	} catch (err) {
 		throw new Error(`Error in entryToNutritionFacts: ${String(err)}`);
 	}
