@@ -1,4 +1,3 @@
-// plugins/vite-node.plugin.loader.test.mjs
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // Mock node:fs/promises and vite before importing the loader
