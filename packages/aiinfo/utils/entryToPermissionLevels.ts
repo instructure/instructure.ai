@@ -24,7 +24,7 @@ function entryToPermissionLevels(entry: Entry): Result {
 			}
 		}
 		if (typeof permissions === "number") {
-			highlightId = undefined;
+			// Numeric permissions should never be highlighted.
 		}
 		const mapped = data.map((d) => ({
 			...d,
