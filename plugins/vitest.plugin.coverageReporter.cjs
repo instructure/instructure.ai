@@ -123,10 +123,67 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
     }
 
     // Emit nested YAML under "files:"
-    const printTree = (node, indent = 2) => {
+    // Helper to aggregate subtotals for a node
+    const aggregateMetrics = (node) => {
+      let count = 0;
+      let sum = { statements: 0, branches: 0, functions: 0, lines: 0 };
+      let uncovered = [];
+      for (const key of Object.keys(node)) {
+        if (key === '__metrics') continue;
+        const child = node[key];
+        const agg = aggregateMetrics(child);
+        if (agg) {
+          count++;
+          sum.statements += agg.statements;
+          sum.branches += agg.branches;
+          sum.functions += agg.functions;
+          sum.lines += agg.lines;
+          if (agg.uncovered_line_numbers) {
+            uncovered = uncovered.concat(agg.uncovered_line_numbers);
+          }
+        }
+      }
+      if (node.__metrics) {
+        // Leaf node (file)
+        return {
+          statements: node.__metrics.statements || 0,
+          branches: node.__metrics.branches || 0,
+          functions: node.__metrics.functions || 0,
+          lines: node.__metrics.lines || 0,
+          uncovered_line_numbers: node.__metrics.uncovered_line_numbers
+            ? node.__metrics.uncovered_line_numbers.split(/,|-/).map(Number).filter(Boolean)
+            : [],
+        };
+      }
+      if (count > 0) {
+        // Subtotal for this node
+        return {
+          statements: Math.round((sum.statements / count) * 100) / 100,
+          branches: Math.round((sum.branches / count) * 100) / 100,
+          functions: Math.round((sum.functions / count) * 100) / 100,
+          lines: Math.round((sum.lines / count) * 100) / 100,
+          uncovered_line_numbers: uncovered,
+        };
+      }
+      return null;
+    };
+
+    const printTree = (node, indent = 2, isTopLevel = false) => {
       const keys = Object.keys(node).filter((k) => k !== '__metrics').sort();
       for (const key of keys) {
-        w.println(`${' '.repeat(indent)}${key}:`);
+        // Quote the key if it contains a dot or other special YAML chars
+        const quotedKey = /[.\s:]/.test(key) ? `"${key}"` : key;
+        w.println(`${' '.repeat(indent)}${quotedKey}:`);
+        // If this is a top-level node, print subtotal with a 'totals:' header before children
+        if (indent === 2) {
+          const subtotal = aggregateMetrics(node[key]);
+          if (subtotal) {
+            w.println(`${' '.repeat(indent + 2)}totals:`);
+            for (const k of ['statements', 'branches', 'functions', 'lines']) {
+              w.println(`${' '.repeat(indent + 4)}${k}: ${subtotal[k]}%`);
+            }
+          }
+        }
         printTree(node[key], indent + 2);
       }
       if (node.__metrics) {
@@ -140,8 +197,7 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
       }
     };
 
-    w.println(`  files:`);
-    printTree(tree, 4); // start files’ children at 4 spaces
+    printTree(tree, 2, true);
     w.close();
   }
 };
