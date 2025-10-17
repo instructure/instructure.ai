@@ -59,3 +59,5 @@ Valid commands are: ${previewCommands.join(", ")}`);
 };
 
 main().catch((e) => unknownError(e));
+
+export { main };

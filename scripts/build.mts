@@ -141,3 +141,5 @@ Valid commands are: ${buildCommands.join(", ")}`);
 };
 
 main().catch((e) => unknownError(e));
+
+export { main };

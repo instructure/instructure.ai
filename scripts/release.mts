@@ -197,3 +197,5 @@ Valid commands are: ${releaseCommands.join(", ")}`);
 };
 
 main().catch((e) => unknownError(e));
+
+export { main };

@@ -102,3 +102,5 @@ const main = async () => {
 	}
 };
 main().catch((e) => unknownError(e));
+
+export { main };

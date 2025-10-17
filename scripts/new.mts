@@ -197,3 +197,5 @@ async function replaceInFile(
 }
 
 main().catch((err) => exitWithError("Error running new script.", err));
+
+export { main };

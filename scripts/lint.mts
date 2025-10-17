@@ -102,3 +102,5 @@ Valid commands are: ${lintCommands.join(", ")}`);
 };
 
 main().catch((e) => unknownError(e));
+
+export { main };
