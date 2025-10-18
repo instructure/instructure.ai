@@ -103,7 +103,7 @@ jobs:
             if [ "$PKG_NAME" != "shared-configs" ]; then
               echo "Building package: $PKG_NAME"
               pnpm test package "$PKG_NAME"
-              CI=1 pnpm build package "$PKG_NAME"
+              pnpm build package "$PKG_NAME"
             else
               echo "Skipping build/test for @instructure.ai/shared-configs."
             fi
