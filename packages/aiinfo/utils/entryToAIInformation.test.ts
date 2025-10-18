@@ -27,7 +27,6 @@ vi.mock("../strings", () => ({
 vi.mock("./", () => ({
 	entryToNutritionFacts: vi.fn((entry: Record<string, unknown>) => ({
 		data: [{ calories: 0 }, { tokens: 123 }],
-		// FIX: Ensure entry.feature is an object with a name property before accessing
 		featureName:
 			entry &&
 			typeof entry.feature === "object" &&
@@ -38,7 +37,11 @@ vi.mock("./", () => ({
 	})),
 	entryToPermissionLevels: vi.fn(() => ({
 		currentFeature: "Current Feature",
-		data: ["L1", "L2", "L3"],
+		data: [
+			{ description: "", highlighted: undefined, level: "L1", title: "" },
+			{ description: "", highlighted: undefined, level: "L2", title: "" },
+			{ description: "", highlighted: undefined, level: "L3", title: "" },
+		],
 	})),
 }));
 
@@ -100,7 +103,11 @@ describe("entryToAIInformation", () => {
 		]);
 		expect(result.nutritionFactsFeatureName).toBe("CoolFeature");
 		expect(result.dataPermissionLevelsCurrentFeature).toBe("Current Feature");
-		expect(result.dataPermissionLevelsData).toEqual(["L1", "L2", "L3"]);
+		expect(result.dataPermissionLevelsData).toEqual([
+			{ description: "", highlighted: undefined, level: "L1", title: "" },
+			{ description: "", highlighted: undefined, level: "L2", title: "" },
+			{ description: "", highlighted: undefined, level: "L3", title: "" },
+		]);
 	});
 
 	it('falls back to "Unknown" description when permission index out of range', async () => {
