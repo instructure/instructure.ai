@@ -9,6 +9,10 @@ permissions:
   id-token: write
   contents: write
 
+env:
+  CI: 1
+  UPDATE: 1
+
 jobs:
   publish:
     environment: npm-release
@@ -98,8 +102,8 @@ jobs:
             # Build & test (skip for shared-configs)
             if [ "$PKG_NAME" != "shared-configs" ]; then
               echo "Building package: $PKG_NAME"
-              CI=1 pnpm build package "$PKG_NAME"
-              pnpm -F "$PKG_NAME" test
+              pnpm test package "$PKG_NAME"
+              pnpm build package "$PKG_NAME"
             else
               echo "Skipping build/test for @instructure.ai/shared-configs."
             fi

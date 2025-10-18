@@ -1,0 +1,110 @@
+name: AiInfo Scheduled Release
+
+on:
+  schedule:
+    - cron: "0 17 * * 2"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    env:
+      UPDATE: "1"
+      CI: "1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create release branch from main
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          ts="$(date +%s)"
+          echo "TS=$ts" >> "$GITHUB_ENV"
+          branch="release-$ts"
+          echo "BRANCH=$branch" >> "$GITHUB_ENV"
+          # Create branch from the remote main
+          git switch --create "$branch" origin/main
+
+      - name: Update cache, test & build aiinfo
+        run: |
+          set -euo pipefail
+          pnpm -F aiinfo cache:update
+          pnpm test package aiinfo
+          pnpm build package aiinfo
+
+      - name: Commit only ./src and ./cache (if any)
+        id: maybe_commit
+        run: |
+          set -euo pipefail
+          # Stage only the desired paths
+          git add -A ./src ./cache || true
+          # If nothing staged, exit early (success)
+          if git diff --cached --quiet; then
+            echo "no_changes=true" >> "$GITHUB_OUTPUT"
+            echo "No changes detected in ./src or ./cache. Exiting successfully."
+            exit 0
+          fi
+          git commit -m "chore(aiinfo): update cache/build [skip ci]"
+          echo "no_changes=false" >> "$GITHUB_OUTPUT"
+
+      - name: Run repo release command
+        if: steps.maybe_commit.outputs.no_changes == 'false'
+        run: |
+          set -euo pipefail
+          # As requested:
+          pnpm release package aiinfo
+
+      - name: Push branch
+        if: steps.maybe_commit.outputs.no_changes == 'false'
+        run: |
+          set -euo pipefail
+          git push --set-upstream origin "$BRANCH"
+
+      - name: Create PR to main and enable auto squash-merge
+        if: steps.maybe_commit.outputs.no_changes == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          # Create PR
+          pr_url="$(gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "chore(aiinfo): scheduled release ($TS)" \
+            --body "Automated weekly release for **aiinfo** via workflow run." )"
+          echo "PR URL: $pr_url"
+
+          # Get PR number
+          pr_number="$(gh pr view "$pr_url" --json number -q .number)"
+          echo "PR Number: $pr_number"
+
+          # Enable auto-merge (squash)
+          gh pr merge "$pr_number" --squash --auto

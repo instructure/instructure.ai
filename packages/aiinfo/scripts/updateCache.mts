@@ -201,23 +201,10 @@ const main = async () => {
 
 export { main, main as UpdateCache, parseCSV };
 
-// Only run as CLI when:
-// 1. UPDATE env var is set
-// 2. This module is the direct entry point (not just imported in tests)
-const isDirectInvocation =
-	process.argv[1] &&
-	new URL(import.meta.url).pathname === path.resolve(process.argv[1]);
-
-if (process.env.UPDATE && isDirectInvocation) {
+if (process.env.UPDATE) {
 	main()
 		.then((cacheUpdated) => {
-			// Keep JSON output only when explicitly verbose
-			if (process.env.VERBOSE_UPDATE) {
-				console.log(JSON.stringify({ cacheUpdated }));
-			}
-			// Exit codes:
-			// 0 success (updated or already current in CI)
-			// 1 no update (local non-CI run) to signal "nothing changed"
+			console.log(JSON.stringify({ cacheUpdated }));
 			if (cacheUpdated) {
 				process.exit(0);
 			} else {

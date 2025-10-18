@@ -43,7 +43,7 @@
     "build": "pnpm cache:update && pnpm build:vite && pnpm lint --write && pnpm typecheck && pnpm package",
     "build:vite": "vite build",
     "cache:clear": "CLEAR=1 vite-node ./scripts/clearCache.mts",
-    "cache:update": "UPDATE=1 vite-node ./scripts/updateCache.mts",
+    "cache:update": "vite-node ./scripts/updateCache.mts",
     "lint": "pnpm biome check",
     "package": "pnpm pack --pack-destination ./dist",
     "test": "pnpm vitest run",
