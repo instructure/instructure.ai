@@ -108,20 +108,3 @@ jobs:
 
           # Enable auto-merge (squash)
           gh pr merge "$pr_number" --squash --auto
-
-      - name: Delete release branch after merge
-        if: steps.maybe_commit.outputs.no_changes == 'false'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          # Wait for PR to be merged
-          pr_number="$(gh pr view "$BRANCH" --json number -q .number)"
-          # Confirm PR is merged before deleting branch
-          merged="$(gh pr view "$pr_number" --json merged -q .merged)"
-          if [ "$merged" = "true" ]; then
-            git push origin --delete "$BRANCH"
-            echo "Deleted branch $BRANCH after successful merge."
-          else
-            echo "PR not merged, branch not deleted."
-          fi
