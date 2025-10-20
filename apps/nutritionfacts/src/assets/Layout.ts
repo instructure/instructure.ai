@@ -1,4 +1,4 @@
-import type { PageLayout } from "../types.ts";
+import type { PageLayout } from "../types";
 
 class Layout implements PageLayout {
 	copyright: boolean;

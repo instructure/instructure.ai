@@ -1,5 +1,4 @@
 import { IconCodeLine, type SVGIconProps } from "@instructure/ui";
-import { AiInformation, cacheJson, Permissions } from "../../assets";
 import type {
 	AiPermissions,
 	FeatureMeta,
@@ -12,7 +11,7 @@ import type {
 	StrictAiInformation,
 	StrictAiPermissions,
 	StrictNutritionFacts,
-} from "../../types.ts";
+} from "../../types";
 import { ControlButton } from "./";
 
 const Cache = cacheJson as ProductsMeta;
