@@ -4,7 +4,7 @@
 	],
 	"dependencies": {
 		"@instructure.ai/aiinfo": "workspace:^",
-		"@instructure/ui": "10.25.1-pr-snapshot-1758747818199",
+		"@instructure/ui": "^11.0.1",
 		"papaparse": "^5.5.3",
 		"react": "^19.1.1",
 		"react-dom": "^19.1.1"
@@ -16,9 +16,9 @@
 	"name": "@instructure.ai/nutritionfacts",
 	"private": true,
 	"repository": {
+		"directory": "apps/nutritionfacts",
 		"type": "git",
-		"url": "https://github.com/instructure/instructure.ai",
-		"directory": "apps/nutritionfacts"
+		"url": "https://github.com/instructure/instructure.ai"
 	},
 	"scripts": {
 		"build": "pnpm update-cache && vite build",
