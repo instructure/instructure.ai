@@ -6,13 +6,14 @@ import type {
 } from "@instructure/ui-instructure";
 import type { AiInfoFeatureProps } from "../types";
 
-const FEATURE_NAME = "Block Content Editor Alt Text Generator";
-const UID = "bcealttext";
+const FEATURE_NAME = "Grading Assistance";
+const UID = "canvasgradingassistance";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
 		description:
 			"We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
 		highlighted: false,
+		id: "L1",
 		level: "LEVEL 1",
 		title: "Descriptive Analytics and Research",
 	},
@@ -20,6 +21,7 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 		description:
 			"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
 		highlighted: true,
+		id: "L2",
 		level: "LEVEL 2",
 		title: "AI-Powered Features Without Data Training",
 	},
@@ -27,6 +29,7 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 		description:
 			"We customize AI solutions tailored to the unique needs and resources of educational institutions. We use customer data to fine-tune data and train AI models that only serve your institution. Your institution's data only serves them through trained models.",
 		highlighted: false,
+		id: "L3",
 		level: "LEVEL 3",
 		title: "AI Customization for Individual Institutions",
 	},
@@ -34,6 +37,7 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 		description:
 			"We established a consortium with educational institutions that shares anonymized data, best practices, and research findings. This fosters collaboration and accelerates the responsible development of AI in education. Specialized AI models are created for better outcomes in education, cost savings, and more.",
 		highlighted: false,
+		id: "L4",
 		level: "LEVEL 4",
 		title: "Collaborative AI Consortium",
 	},
@@ -46,9 +50,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"The foundational AI on which further training and customizations are built.",
 				segmentTitle: "Base Model",
-				value: "Haiku 3",
+				value: "Haiku 3.5",
 				valueDescription:
-					"Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+					"Anthropic Claude models are provided via Instructure's in-house AI Platform.",
 			},
 			{
 				description:
@@ -60,7 +64,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"Indicates which training or operational content was given to the model.",
 				segmentTitle: "Data Shared with Model",
-				value: "Content Editor Images.",
+				value: "Assignment information, rubric, and student submissions.",
 			},
 		],
 	},
@@ -70,7 +74,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			{
 				description: "How long the model stores customer data.",
 				segmentTitle: "Data Retention",
-				value: "Model responses are stored for debugging purposes.",
+				value: "Transactional data is retained for the life of the request",
 			},
 			{
 				description:
@@ -78,7 +82,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				segmentTitle: "Data Logging",
 				value: "Logs data",
 				valueDescription:
-					"Request, response, and feedback data is logged to assist in troubleshooting.",
+					"Complete response from the LLM is retained in the Canvas database for auditing purposes.",
 			},
 			{
 				description:
@@ -92,7 +96,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 					"Sensitive data that can be used to identify an individual.",
 				segmentTitle: "PII",
 				value: "Not Exposed",
-				valueDescription: "",
+				valueDescription:
+					"No PII is intentionally sent to the model. If there is incidental PII in any of the shared data, such as in the submission body, it will be sent to the model.",
 			},
 		],
 	},
@@ -102,30 +107,33 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			{
 				description: "The ability to turn the AI on or off within the product.",
 				segmentTitle: "AI Settings Control",
-				value: "No",
+				value: "Yes",
 			},
 			{
 				description:
 					"Indicates if a human is involved in the AI's process or output.",
 				segmentTitle: "Human in the Loop",
 				value: "Yes",
-				valueDescription: "User initiated, User must confirm output.",
+				valueDescription:
+					"Grade suggestion is displayed and selected by default, but the instructor much make the final decision to edit or accept the suggestions.",
 			},
 			{
 				description:
 					"Preventative safety mechanisms or limitations built into the AI model.",
 				segmentTitle: "Guardrails",
-				value: "",
+				value: "The Claude Sonnet model has inherent guardrails built in.",
 			},
 			{
 				description: "Any risks the model may pose to the user.",
 				segmentTitle: "Expected Risks",
-				value: "Alt text might not always be accurate. ",
+				value:
+					"Model may work better with certain kinds of assignment types or disciplines. The grader must remain alert to incorrect assumptions from the model.",
 			},
 			{
 				description: "The specific results the AI model is meant to achieve.",
 				segmentTitle: "Intended Outcomes",
-				value: "An accessible Alt Text description of the image is generated.",
+				value:
+					"Reduced bias in grading, fairness, and consistency. Grading efficiency, saving teachers time.",
 			},
 		],
 	},
@@ -135,7 +143,7 @@ const nutritionFacts: NutritionFactsProps = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: undefined,
-		featureName: "Block Content Editor Alt Text Generator",
+		featureName: "Grading Assistance",
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
@@ -147,7 +155,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	...{
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Block Content Editor Alt Text Generator",
+		currentFeature: "Grading Assistance",
 		currentFeatureText: "Current Feature:",
 		data: undefined,
 		modalLabel: "Data Permission Levels modal",
@@ -163,8 +171,8 @@ const aiInformation: AiInformationProps = {
 			{
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-				featureName: "Block Content Editor Alt Text Generator",
-				modelName: "Haiku 3",
+				featureName: "Grading Assistance",
+				modelName: "Haiku 3.5",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
 				permissionLevel: "LEVEL 2",
@@ -174,8 +182,7 @@ const aiInformation: AiInformationProps = {
 		],
 		dataPermissionLevelsCloseButtonText: "Close",
 		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature:
-			"Block Content Editor Alt Text Generator",
+		dataPermissionLevelsCurrentFeature: "Grading Assistance",
 		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
 		dataPermissionLevelsData: undefined,
 		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -183,7 +190,7 @@ const aiInformation: AiInformationProps = {
 		nutritionFactsCloseButtonText: "Close",
 		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
 		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Block Content Editor Alt Text Generator",
+		nutritionFactsFeatureName: "Grading Assistance",
 		nutritionFactsModalLabel: "This is a modal for AI facts",
 		nutritionFactsTitle: "AI Nutrition Facts",
 		title: "Features",
@@ -193,12 +200,18 @@ const aiInformation: AiInformationProps = {
 	nutritionFactsData: NUTRITION_FACTS_DATA,
 	trigger: <Button>AI Information</Button>,
 };
-const bcealttext: AiInfoFeatureProps = {
+const canvasgradingassistance: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	group: "Canvas",
 	nutritionFacts,
-	revision: "2025.10.01",
+	revision: "2025.10.14",
 	uid: UID,
 };
-export { bcealttext, nutritionFacts, dataPermissionLevels, aiInformation };
-export default bcealttext;
+export {
+	canvasgradingassistance,
+	nutritionFacts,
+	dataPermissionLevels,
+	aiInformation,
+};
+export default canvasgradingassistance;

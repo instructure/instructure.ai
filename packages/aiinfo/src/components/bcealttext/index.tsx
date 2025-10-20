@@ -6,13 +6,14 @@ import type {
 } from "@instructure/ui-instructure";
 import type { AiInfoFeatureProps } from "../types";
 
-const FEATURE_NAME = "Rubric Creator";
-const UID = "rubricgenerator";
+const FEATURE_NAME = "Block Content Editor Alt Text Generator";
+const UID = "bcealttext";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
 		description:
 			"We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
 		highlighted: false,
+		id: "L1",
 		level: "LEVEL 1",
 		title: "Descriptive Analytics and Research",
 	},
@@ -20,6 +21,7 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 		description:
 			"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
 		highlighted: true,
+		id: "L2",
 		level: "LEVEL 2",
 		title: "AI-Powered Features Without Data Training",
 	},
@@ -27,6 +29,7 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 		description:
 			"We customize AI solutions tailored to the unique needs and resources of educational institutions. We use customer data to fine-tune data and train AI models that only serve your institution. Your institution's data only serves them through trained models.",
 		highlighted: false,
+		id: "L3",
 		level: "LEVEL 3",
 		title: "AI Customization for Individual Institutions",
 	},
@@ -34,6 +37,7 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 		description:
 			"We established a consortium with educational institutions that shares anonymized data, best practices, and research findings. This fosters collaboration and accelerates the responsible development of AI in education. Specialized AI models are created for better outcomes in education, cost savings, and more.",
 		highlighted: false,
+		id: "L4",
 		level: "LEVEL 4",
 		title: "Collaborative AI Consortium",
 	},
@@ -60,8 +64,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"Indicates which training or operational content was given to the model.",
 				segmentTitle: "Data Shared with Model",
-				value:
-					"The Canvas assignment description field is used in generating rubric criteria.",
+				value: "Content Editor Images.",
 			},
 		],
 	},
@@ -103,33 +106,30 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			{
 				description: "The ability to turn the AI on or off within the product.",
 				segmentTitle: "AI Settings Control",
-				value: "Yes",
+				value: "No",
 			},
 			{
 				description:
 					"Indicates if a human is involved in the AI's process or output.",
 				segmentTitle: "Human in the Loop",
 				value: "Yes",
-				valueDescription:
-					"All created rubrics are reviewable and editable by the instructor.",
+				valueDescription: "User initiated, User must confirm output.",
 			},
 			{
 				description:
 					"Preventative safety mechanisms or limitations built into the AI model.",
 				segmentTitle: "Guardrails",
-				value: "The instructor may edit criteria before accepting the rubric.",
+				value: "",
 			},
 			{
 				description: "Any risks the model may pose to the user.",
 				segmentTitle: "Expected Risks",
-				value:
-					"The created rubric may not align with the assignment's intended learning outcomes.",
+				value: "Alt text might not always be accurate. ",
 			},
 			{
 				description: "The specific results the AI model is meant to achieve.",
 				segmentTitle: "Intended Outcomes",
-				value:
-					"A rubric aligned to learning outcomes is created for the instructor to use during grading.",
+				value: "An accessible Alt Text description of the image is generated.",
 			},
 		],
 	},
@@ -139,7 +139,7 @@ const nutritionFacts: NutritionFactsProps = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: undefined,
-		featureName: "Rubric Creator",
+		featureName: "Block Content Editor Alt Text Generator",
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
@@ -151,7 +151,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	...{
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Rubric Creator",
+		currentFeature: "Block Content Editor Alt Text Generator",
 		currentFeatureText: "Current Feature:",
 		data: undefined,
 		modalLabel: "Data Permission Levels modal",
@@ -167,7 +167,7 @@ const aiInformation: AiInformationProps = {
 			{
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-				featureName: "Rubric Creator",
+				featureName: "Block Content Editor Alt Text Generator",
 				modelName: "Haiku 3",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
@@ -178,7 +178,8 @@ const aiInformation: AiInformationProps = {
 		],
 		dataPermissionLevelsCloseButtonText: "Close",
 		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature: "Rubric Creator",
+		dataPermissionLevelsCurrentFeature:
+			"Block Content Editor Alt Text Generator",
 		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
 		dataPermissionLevelsData: undefined,
 		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -186,7 +187,7 @@ const aiInformation: AiInformationProps = {
 		nutritionFactsCloseButtonText: "Close",
 		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
 		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Rubric Creator",
+		nutritionFactsFeatureName: "Block Content Editor Alt Text Generator",
 		nutritionFactsModalLabel: "This is a modal for AI facts",
 		nutritionFactsTitle: "AI Nutrition Facts",
 		title: "Features",
@@ -196,12 +197,13 @@ const aiInformation: AiInformationProps = {
 	nutritionFactsData: NUTRITION_FACTS_DATA,
 	trigger: <Button>AI Information</Button>,
 };
-const rubricgenerator: AiInfoFeatureProps = {
+const bcealttext: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	group: "Canvas",
 	nutritionFacts,
-	revision: "2025.10.09",
+	revision: "2025.10.01",
 	uid: UID,
 };
-export { rubricgenerator, nutritionFacts, dataPermissionLevels, aiInformation };
-export default rubricgenerator;
+export { bcealttext, nutritionFacts, dataPermissionLevels, aiInformation };
+export default bcealttext;

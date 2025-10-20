@@ -6,13 +6,14 @@ import type {
 } from "@instructure/ui-instructure";
 import type { AiInfoFeatureProps } from "../types";
 
-const FEATURE_NAME = "Discussions Translation";
-const UID = "canvascoursetranslation";
+const FEATURE_NAME = "Agent";
+const UID = "igniteagent";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
 		description:
 			"We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
 		highlighted: false,
+		id: "L1",
 		level: "LEVEL 1",
 		title: "Descriptive Analytics and Research",
 	},
@@ -20,6 +21,7 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 		description:
 			"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
 		highlighted: true,
+		id: "L2",
 		level: "LEVEL 2",
 		title: "AI-Powered Features Without Data Training",
 	},
@@ -27,6 +29,7 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 		description:
 			"We customize AI solutions tailored to the unique needs and resources of educational institutions. We use customer data to fine-tune data and train AI models that only serve your institution. Your institution's data only serves them through trained models.",
 		highlighted: false,
+		id: "L3",
 		level: "LEVEL 3",
 		title: "AI Customization for Individual Institutions",
 	},
@@ -34,6 +37,7 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 		description:
 			"We established a consortium with educational institutions that shares anonymized data, best practices, and research findings. This fosters collaboration and accelerates the responsible development of AI in education. Specialized AI models are created for better outcomes in education, cost savings, and more.",
 		highlighted: false,
+		id: "L4",
 		level: "LEVEL 4",
 		title: "Collaborative AI Consortium",
 	},
@@ -46,9 +50,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"The foundational AI on which further training and customizations are built.",
 				segmentTitle: "Base Model",
-				value: "Haiku 3",
+				value: "Haiku 3.5, Sonnet 3.5",
 				valueDescription:
-					"Anthropic Claude models are provided via Instructure's in-house AI Platform.",
+					"Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
 			},
 			{
 				description:
@@ -60,7 +64,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"Indicates which training or operational content was given to the model.",
 				segmentTitle: "Data Shared with Model",
-				value: "Discussion prompts and replies",
+				value:
+					"The model uses chat transcripts and information requested from the Canvas API to execute its actions.",
 			},
 		],
 	},
@@ -70,29 +75,31 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			{
 				description: "How long the model stores customer data.",
 				segmentTitle: "Data Retention",
-				value: "Data is not stored or reused by the model.",
+				value:
+					"Chat logs are retained indefinitely for troubleshooting and debugging.",
 			},
 			{
 				description:
 					"Recording the AI's performance for auditing, analysis, and improvement.",
 				segmentTitle: "Data Logging",
-				value: "Does not log data",
-				valueDescription: "",
+				value: "Logs data",
+				valueDescription:
+					"Chat logs are retained for troubleshooting and debugging purposes.",
 			},
 			{
 				description:
 					"The locations where the AI model is officially available and supported.",
 				segmentTitle: "Regions Supported",
-				value: "Global",
+				value: "Virginia, Oregon",
 				valueDescription: "",
 			},
 			{
 				description:
 					"Sensitive data that can be used to identify an individual.",
 				segmentTitle: "PII",
-				value: "Not Exposed",
+				value: "Exposed",
 				valueDescription:
-					"PII in discussion replies may be sent to the model, but no PII is intentionally sent to the model.",
+					"If requested during the the chat, user, course, and student identifiers or metadata may be shared with the model.",
 			},
 		],
 	},
@@ -110,25 +117,26 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				segmentTitle: "Human in the Loop",
 				value: "Yes",
 				valueDescription:
-					"Untranslated content is available to review translations against",
+					"The agent only takes action based on human requests, and all write actions must be confirmed by the user.",
 			},
 			{
 				description:
 					"Preventative safety mechanisms or limitations built into the AI model.",
 				segmentTitle: "Guardrails",
-				value: "",
+				value:
+					"Access to the agent is limited to users with an Admin- or Teacher-based role. Data access and functions are scoped to the permissions available to the chat user.",
 			},
 			{
 				description: "Any risks the model may pose to the user.",
 				segmentTitle: "Expected Risks",
 				value:
-					"Machine translation may not fully capture the meaning of the original message.",
+					"The model may misinterpret user requests and require additional prompting.",
 			},
 			{
 				description: "The specific results the AI model is meant to achieve.",
 				segmentTitle: "Intended Outcomes",
 				value:
-					"Improve participation for students who do not natively speak the language of instruction or other replies.",
+					"Users are able to save time by relying on the Agent to execute complex workflows, batch actions, and other time-consuming Canvas tasks.",
 			},
 		],
 	},
@@ -138,7 +146,7 @@ const nutritionFacts: NutritionFactsProps = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: undefined,
-		featureName: "Discussions Translation",
+		featureName: "Agent",
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
@@ -150,7 +158,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	...{
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Discussions Translation",
+		currentFeature: "Agent",
 		currentFeatureText: "Current Feature:",
 		data: undefined,
 		modalLabel: "Data Permission Levels modal",
@@ -166,8 +174,8 @@ const aiInformation: AiInformationProps = {
 			{
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-				featureName: "Discussions Translation",
-				modelName: "Haiku 3",
+				featureName: "Agent",
+				modelName: "Haiku 3.5, Sonnet 3.5",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
 				permissionLevel: "LEVEL 2",
@@ -177,7 +185,7 @@ const aiInformation: AiInformationProps = {
 		],
 		dataPermissionLevelsCloseButtonText: "Close",
 		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature: "Discussions Translation",
+		dataPermissionLevelsCurrentFeature: "Agent",
 		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
 		dataPermissionLevelsData: undefined,
 		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -185,7 +193,7 @@ const aiInformation: AiInformationProps = {
 		nutritionFactsCloseButtonText: "Close",
 		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
 		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Discussions Translation",
+		nutritionFactsFeatureName: "Agent",
 		nutritionFactsModalLabel: "This is a modal for AI facts",
 		nutritionFactsTitle: "AI Nutrition Facts",
 		title: "Features",
@@ -195,17 +203,13 @@ const aiInformation: AiInformationProps = {
 	nutritionFactsData: NUTRITION_FACTS_DATA,
 	trigger: <Button>AI Information</Button>,
 };
-const canvascoursetranslation: AiInfoFeatureProps = {
+const igniteagent: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	group: "IgniteAI",
 	nutritionFacts,
 	revision: "2025.09.10",
 	uid: UID,
 };
-export {
-	canvascoursetranslation,
-	nutritionFacts,
-	dataPermissionLevels,
-	aiInformation,
-};
-export default canvascoursetranslation;
+export { igniteagent, nutritionFacts, dataPermissionLevels, aiInformation };
+export default igniteagent;

@@ -6,13 +6,14 @@ import type {
 } from "@instructure/ui-instructure";
 import type { AiInfoFeatureProps } from "../types";
 
-const FEATURE_NAME = "Discussion Summaries";
-const UID = "canvasdiscussionsummaries";
+const FEATURE_NAME = "Ask Your Data";
+const UID = "askyourdata";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
 		description:
 			"We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
 		highlighted: false,
+		id: "L1",
 		level: "LEVEL 1",
 		title: "Descriptive Analytics and Research",
 	},
@@ -20,6 +21,7 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 		description:
 			"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
 		highlighted: true,
+		id: "L2",
 		level: "LEVEL 2",
 		title: "AI-Powered Features Without Data Training",
 	},
@@ -27,6 +29,7 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 		description:
 			"We customize AI solutions tailored to the unique needs and resources of educational institutions. We use customer data to fine-tune data and train AI models that only serve your institution. Your institution's data only serves them through trained models.",
 		highlighted: false,
+		id: "L3",
 		level: "LEVEL 3",
 		title: "AI Customization for Individual Institutions",
 	},
@@ -34,6 +37,7 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 		description:
 			"We established a consortium with educational institutions that shares anonymized data, best practices, and research findings. This fosters collaboration and accelerates the responsible development of AI in education. Specialized AI models are created for better outcomes in education, cost savings, and more.",
 		highlighted: false,
+		id: "L4",
 		level: "LEVEL 4",
 		title: "Collaborative AI Consortium",
 	},
@@ -46,9 +50,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"The foundational AI on which further training and customizations are built.",
 				segmentTitle: "Base Model",
-				value: "Haiku 3",
+				value: "Doowii (multiple)",
 				valueDescription:
-					"Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+					"Doowii is a third-party sub-processor for Intelligent Insights. Doowii's tools use OpenAI GPT-4o, GPT-3.5 Turbo, and Claude Sonnet 3.5",
 			},
 			{
 				description:
@@ -60,7 +64,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"Indicates which training or operational content was given to the model.",
 				segmentTitle: "Data Shared with Model",
-				value: "Discussion prompt and replies.",
+				value:
+					"Doowii is trained on the Canvas LMS database schema, and receives no data from Canvas. The user's prompt and heuristics (such as summary statistics) are shared with the model to generate a response.",
 			},
 		],
 	},
@@ -70,15 +75,15 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			{
 				description: "How long the model stores customer data.",
 				segmentTitle: "Data Retention",
-				value: "Data is not stored or reused by the model.",
+				value:
+					"Data is retained through the life of your contract with Instructure.",
 			},
 			{
 				description:
 					"Recording the AI's performance for auditing, analysis, and improvement.",
 				segmentTitle: "Data Logging",
 				value: "Logs data",
-				valueDescription:
-					"Summaries are logged in the Canvas database for review and reuse.",
+				valueDescription: "",
 			},
 			{
 				description:
@@ -91,9 +96,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"Sensitive data that can be used to identify an individual.",
 				segmentTitle: "PII",
-				value: "Not Exposed",
-				valueDescription:
-					"Pii in discussion replies may be sent to the model, but no PII is intentionally sent to the model.",
+				value: "Exposed",
+				valueDescription: "Prompt, summary statistics.",
 			},
 		],
 	},
@@ -111,24 +115,26 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				segmentTitle: "Human in the Loop",
 				value: "Yes",
 				valueDescription:
-					"Instructors may regenerate summaries or fine-tune them with additional instructions.",
+					"Ask your data returns a methodology description along with a generated query. Users have the ability to edit the generated SQL directly.",
 			},
 			{
 				description:
 					"Preventative safety mechanisms or limitations built into the AI model.",
 				segmentTitle: "Guardrails",
-				value: "",
+				value:
+					"Questions are scoped to the domain only, highly ambiguous terms ask for clarification.",
 			},
 			{
 				description: "Any risks the model may pose to the user.",
 				segmentTitle: "Expected Risks",
-				value: "Summaries may not capture all desired information.",
+				value:
+					"Incorrect interpretation of the question. Inaccurate SQL may be generated. Suggested questions or methodologies may not be relevant.",
 			},
 			{
 				description: "The specific results the AI model is meant to achieve.",
 				segmentTitle: "Intended Outcomes",
 				value:
-					"Summaries allow discussion topics to be used in large-format courses and other environments where discussions were previously infeasible.",
+					"Provide accurate data retrieval and analysis through natural language prompting.",
 			},
 		],
 	},
@@ -138,7 +144,7 @@ const nutritionFacts: NutritionFactsProps = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: undefined,
-		featureName: "Discussion Summaries",
+		featureName: "Ask Your Data",
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
@@ -150,7 +156,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	...{
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Discussion Summaries",
+		currentFeature: "Ask Your Data",
 		currentFeatureText: "Current Feature:",
 		data: undefined,
 		modalLabel: "Data Permission Levels modal",
@@ -166,8 +172,8 @@ const aiInformation: AiInformationProps = {
 			{
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-				featureName: "Discussion Summaries",
-				modelName: "Haiku 3",
+				featureName: "Ask Your Data",
+				modelName: "Doowii (multiple)",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
 				permissionLevel: "LEVEL 2",
@@ -177,7 +183,7 @@ const aiInformation: AiInformationProps = {
 		],
 		dataPermissionLevelsCloseButtonText: "Close",
 		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature: "Discussion Summaries",
+		dataPermissionLevelsCurrentFeature: "Ask Your Data",
 		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
 		dataPermissionLevelsData: undefined,
 		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -185,7 +191,7 @@ const aiInformation: AiInformationProps = {
 		nutritionFactsCloseButtonText: "Close",
 		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
 		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Discussion Summaries",
+		nutritionFactsFeatureName: "Ask Your Data",
 		nutritionFactsModalLabel: "This is a modal for AI facts",
 		nutritionFactsTitle: "AI Nutrition Facts",
 		title: "Features",
@@ -195,17 +201,13 @@ const aiInformation: AiInformationProps = {
 	nutritionFactsData: NUTRITION_FACTS_DATA,
 	trigger: <Button>AI Information</Button>,
 };
-const canvasdiscussionsummaries: AiInfoFeatureProps = {
+const askyourdata: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	group: "Intelligent Insights",
 	nutritionFacts,
 	revision: "2025.09.12",
 	uid: UID,
 };
-export {
-	canvasdiscussionsummaries,
-	nutritionFacts,
-	dataPermissionLevels,
-	aiInformation,
-};
-export default canvasdiscussionsummaries;
+export { askyourdata, nutritionFacts, dataPermissionLevels, aiInformation };
+export default askyourdata;
