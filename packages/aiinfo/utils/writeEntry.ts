@@ -48,6 +48,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
   data: DATA_PERMISSION_LEVELS,
   currentFeature: FEATURE_NAME,
 };
+
 const aiInformation: AiInformationProps = {
   ...${toTsObjectLiteral({ ...aiInformation, dataPermissionLevelsData: undefined, nutritionFactsData: undefined, trigger: undefined })},
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
@@ -61,13 +62,16 @@ const ${UID}: AiInfoFeatureProps = {
   nutritionFacts,
   revision: ${JSON.stringify(REVISION)},
   uid: UID,
+	group: ${JSON.stringify(entry.group)},
 }
+
 export {
 	${UID}
   nutritionFacts,
   dataPermissionLevels,
   aiInformation,
 };
+
 export default ${UID};
 `;
 
