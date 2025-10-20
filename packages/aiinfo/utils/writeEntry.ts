@@ -9,8 +9,21 @@ import {
 	toTsObjectLiteral,
 } from "../utils";
 
+/**
+ * Writes a TypeScript entry file for the given Entry object.
+ * The file is created at src/components/{entry.uid}/index.tsx and contains
+ * all relevant data objects for the feature.
+ *
+ * @param entry - The Entry object to serialize and write.
+ */
 export async function writeEntry(entry: Entry) {
-	const file = resolve(process.cwd(), "src", entry.uid, "index.tsx");
+	const file = resolve(
+		process.cwd(),
+		"src",
+		"components",
+		entry.uid,
+		"index.tsx",
+	);
 
 	const UID = entry.uid;
 	const FEATURE_NAME = entry.feature.name;
@@ -53,7 +66,7 @@ const aiInformation: AiInformationProps = {
   ...${toTsObjectLiteral({ ...aiInformation, dataPermissionLevelsData: undefined, nutritionFactsData: undefined, trigger: undefined })},
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
   nutritionFactsData: NUTRITION_FACTS_DATA,
-	trigger: "${aiInformation.trigger}",
+  trigger: "${aiInformation.trigger}",
 };
 
 const ${UID}: AiInfoFeatureProps = {
@@ -62,11 +75,11 @@ const ${UID}: AiInfoFeatureProps = {
   nutritionFacts,
   revision: ${JSON.stringify(REVISION)},
   uid: UID,
-	group: ${JSON.stringify(entry.group)},
+  group: ${JSON.stringify(entry.group)},
 }
 
 export {
-	${UID}
+  ${UID},
   nutritionFacts,
   dataPermissionLevels,
   aiInformation,
