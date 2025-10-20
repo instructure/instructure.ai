@@ -7,7 +7,7 @@ export default mergeConfig(
 	defineConfig({
 		build: {
 			lib: {
-				entry: "src/index.mts",
+				entry: "src/index.ts",
 				name: "AiInfo",
 			},
 			rollupOptions: {
