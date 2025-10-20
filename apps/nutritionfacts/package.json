@@ -5,13 +5,11 @@
 	"dependencies": {
 		"@instructure.ai/aiinfo": "workspace:^",
 		"@instructure/ui": "^11.0.1",
-		"papaparse": "^5.5.3",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0"
 	},
 	"devDependencies": {
-		"@instructure.ai/shared-configs": "workspace:^",
-		"@types/papaparse": "^5.3.16"
+		"@instructure.ai/shared-configs": "workspace:^"
 	},
 	"name": "@instructure.ai/nutritionfacts",
 	"private": true,

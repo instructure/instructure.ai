@@ -3,7 +3,7 @@ const CSVURL =
 
 const TEMPLATE_PACKAGE = `import { Button } from "@instructure/ui-buttons";
 import type { AiInfoFeatureProps } from "../types";
-import type { AiInformationProps, DataPermissionLevelsProps, NutritionFactsProps } from "@instructure/ui-instructure";
+import type { AiInformationProps, DataPermissionLevelsProps, NutritionFactsProps } from "@instructure/ui";
 
 const <<uid>>: AiInfoFeatureProps = <<data>>;
 

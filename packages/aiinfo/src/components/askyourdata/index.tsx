@@ -1,9 +1,9 @@
-import { Button } from "@instructure/ui-buttons";
 import type {
 	AiInformationProps,
 	DataPermissionLevelsProps,
 	NutritionFactsProps,
-} from "@instructure/ui-instructure";
+} from "@instructure/ui";
+import { Button } from "@instructure/ui";
 import type { AiInfoFeatureProps } from "../../types";
 
 const FEATURE_NAME = "Ask Your Data";

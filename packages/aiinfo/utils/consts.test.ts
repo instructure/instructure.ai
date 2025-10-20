@@ -30,7 +30,7 @@ describe("consts.ts TEMPLATE_PACKAGE", () => {
 			'import type { AiInfoFeatureProps } from "../types";',
 		);
 		expect(TEMPLATE_PACKAGE).toContain(
-			'import type { AiInformationProps, DataPermissionLevelsProps, NutritionFactsProps } from "@instructure/ui-instructure";',
+			'import type { AiInformationProps, DataPermissionLevelsProps, NutritionFactsProps } from "@instructure/ui";',
 		);
 	});
 
