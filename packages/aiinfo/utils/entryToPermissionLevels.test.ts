@@ -64,7 +64,7 @@ describe("entryToPermissionLevels", () => {
 		expect(result.currentFeature).toBe("FeatureX");
 		const highlighted = result.data.filter((d) => d.highlighted);
 		expect(highlighted).toHaveLength(1);
-		expect(highlighted[0].level).toBe("Level 2");
+		expect(highlighted[0].level).toBe("LEVEL 2");
 	});
 
 	it('highlights first index when permissions "1"', async () => {

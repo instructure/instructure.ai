@@ -24,7 +24,7 @@ describe("consts.ts TEMPLATE_PACKAGE", () => {
 
 	it("contains required import lines with correct modules and specifiers", () => {
 		expect(TEMPLATE_PACKAGE).toContain(
-			'import { Button } from "@instructure/ui-buttons";',
+			'import { Button } from "@instructure/ui";',
 		);
 		expect(TEMPLATE_PACKAGE).toContain(
 			'import type { AiInfoFeatureProps } from "../types";',
@@ -120,9 +120,9 @@ describe("consts.ts TEMPLATE_PACKAGE", () => {
 	// Replaced brittle inline snapshot with explicit normalized comparison
 	it("matches expected template content (normalized)", () => {
 		const normalized = TEMPLATE_PACKAGE.replace(/\r\n/g, "\n").trim();
-		const expected = `import { Button } from "@instructure/ui-buttons";
+		const expected = `import { Button } from "@instructure/ui";
 import type { AiInfoFeatureProps } from "../types";
-import type { AiInformationProps, DataPermissionLevelsProps, NutritionFactsProps } from "@instructure/ui-instructure";
+import type { AiInformationProps, DataPermissionLevelsProps, NutritionFactsProps } from "@instructure/ui";
 
 const <<uid>>: AiInfoFeatureProps = <<data>>;
 

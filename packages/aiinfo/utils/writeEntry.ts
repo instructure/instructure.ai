@@ -36,12 +36,12 @@ export async function writeEntry(entry: Entry) {
 	const DPL = dataPermissionLevels.data;
 	const NF = nutritionFacts.data;
 
-	const code = `import { Button } from "@instructure/ui-buttons";
+	const code = `import { Button } from "@instructure/ui";
 import type {
   AiInformationProps,
   DataPermissionLevelsProps,
   NutritionFactsProps,
-} from "@instructure/ui-instructure";
+} from "@instructure/ui";
 import type { AiInfoFeatureProps } from "../../types";
 
 const FEATURE_NAME = ${JSON.stringify(FEATURE_NAME)};

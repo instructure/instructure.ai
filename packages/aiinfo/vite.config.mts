@@ -11,7 +11,7 @@ export default mergeConfig(
 				name: "AiInfo",
 			},
 			rollupOptions: {
-				external: [/^react($|\/)/, /^react-dom($|\/)/, /^@instructure\/ui-/],
+				external: [/^react($|\/)/, /^react-dom($|\/)/, /^@instructure\/ui/],
 			},
 		},
 		plugins: [
