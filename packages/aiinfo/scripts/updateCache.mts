@@ -30,7 +30,7 @@ const updateCache = (data: CSVFetchResult): void => {
 	const newCSVChecksum = generateChecksum(data.raw);
 	const oldCSVChecksum = checksums.csv;
 	const isCSVOutdated = newCSVChecksum !== oldCSVChecksum;
-	checksums.csv = newCSVChecksum;
+	checksums.CSV = newCSVChecksum;
 
 	// Prepare changelog update if CSV is outdated
 	const changelogPath = path.resolve(__dirname, "../Changelog.md");
