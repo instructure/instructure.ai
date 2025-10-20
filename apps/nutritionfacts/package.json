@@ -3,6 +3,7 @@
 		"extends @instructure/browserslist-config-instui"
 	],
 	"dependencies": {
+		"@instructure.ai/aiinfo": "workspace:^",
 		"@instructure/ui": "10.25.1-pr-snapshot-1758747818199",
 		"papaparse": "^5.5.3",
 		"react": "^19.1.1",
@@ -15,16 +16,16 @@
 	"name": "@instructure.ai/nutritionfacts",
 	"private": true,
 	"repository": {
-  "type": "git",
-  "url": "https://github.com/instructure/instructure.ai",
-  "directory": "apps/nutritionfacts"
+		"type": "git",
+		"url": "https://github.com/instructure/instructure.ai",
+		"directory": "apps/nutritionfacts"
 	},
 	"scripts": {
 		"build": "pnpm update-cache && vite build",
 		"dev": "vite",
 		"lint": "pnpm biome check",
 		"preview": "vite preview",
-    "test": "pnpm vitest run",
+		"test": "pnpm vitest run",
 		"typecheck": "tsgo --noEmit",
 		"update-cache": "vite-node ./scripts/updateCache.mts"
 	},
