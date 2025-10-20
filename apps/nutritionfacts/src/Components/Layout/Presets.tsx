@@ -8,10 +8,6 @@ import {
 } from "@instructure/ui";
 import { useId, useState } from "react";
 import { brands } from "../../assets";
-import type { ProductNutritionFacts } from "../../types";
-import { getProductsFromCSV } from "../Import";
-
-type ProductRecords = Record<string, ProductNutritionFacts>;
 
 interface PresetsProps {
 	setProduct: React.Dispatch<React.SetStateAction<ProductNutritionFacts>>;
@@ -30,7 +26,7 @@ const Presets = ({ setProduct }: PresetsProps) => {
 	const [value, setValue] = useState<string>(placeholder);
 	const loadingId = useId();
 
-	const fetchProducts = async () => {
+	const fetchProducts = () => {
 		if (Object.keys(products).length === 0) {
 			getProductsFromCSV().then((products) => {
 				setProducts(products);

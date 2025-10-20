@@ -3,9 +3,12 @@ import {
 	Flex,
 	InlineSVG,
 	InstUISettingsProvider,
+	Link,
+	type NutritionFactsProps,
 	Text,
 	View,
 } from "@instructure/ui";
+import AiInfo from "@instructure.ai/aiinfo";
 import { type FC, useEffect, useState } from "react";
 import {
 	colors,
@@ -14,41 +17,26 @@ import {
 	disclaimer,
 	Logo,
 	LogoDark,
-	Product,
 } from "./assets";
 import { EmbedControl, LinkControl, ObjectControl } from "./Components/Export";
-import {
-	getProductFromCSV,
-	getProductFromObject,
-	getProductFromParams,
-} from "./Components/Import";
 import { getLayoutFromParams, NutritionFactsForm } from "./Components/Layout";
-import type { ProductNutritionFacts } from "./types.ts";
 
 const App: FC = () => {
 	const searchParams = new URLSearchParams(window.location.search);
 	const id = searchParams.get("id");
 
-	const [product, setProduct] = useState<ProductNutritionFacts>(() =>
-		getProductFromObject(getProductFromParams(Product)),
-	);
+	const [product, setProduct] = useState<NutritionFactsProps>();
 
 	useEffect(() => {
-		if (product.id) {
+		if (product?.id) {
 			document.title = `IgniteAI Nutrition Facts | ${product.name}`;
 		}
-	}, [product.id, product.name]);
+	}, [product?.id, product?.name]);
 
 	useEffect(() => {
-		const fetchProduct = async () => {
-			if (id) {
-				const csvProduct = await getProductFromCSV(Product, DefaultLayout, id);
-				if (csvProduct) {
-					setProduct(csvProduct.product);
-				}
-			}
-		};
-		fetchProduct();
+		if (id && id in AiInfo) {
+			setProduct(AiInfo[id as keyof typeof AiInfo]);
+		}
 	}, [id]);
 
 	const { layout } = getLayoutFromParams(DefaultLayout);
@@ -89,15 +77,17 @@ const App: FC = () => {
 					>
 						<Flex data-print="hidden">
 							<Flex.Item shouldGrow shouldShrink>
-								<InlineSVG
-									height="2.5rem"
-									inline={false}
-									src={isDark ? LogoDark : Logo}
-									title="Instructure"
-									width="auto"
-								/>
+								<Link href="./nutritionfacts">
+									<InlineSVG
+										height="2.5rem"
+										inline={false}
+										src={isDark ? LogoDark : Logo}
+										title="Instructure"
+										width="auto"
+									/>
+								</Link>
 							</Flex.Item>
-							{product.id && product.id.length > 0 && (
+							{product?.id && product.id.length > 0 && (
 								<Flex.Item>
 									<View margin="0 x-small 0">
 										<EmbedControl
