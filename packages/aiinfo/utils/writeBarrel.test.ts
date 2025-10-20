@@ -33,7 +33,7 @@ const resetFsConfig = (cfg: FSConfig) => {
 	});
 	fsMocks.existsSync.mockImplementation((p: string) =>
 		cfg.withIndex.some(
-			(d) => p === path.join(path.resolve(CWD, "src"), d, "index.tsx"),
+			(d) => p === path.join(path.resolve(CWD, "src", "components"), d, "index.tsx"),
 		),
 	);
 	fsMocks.writeFileSync.mockImplementation(() => {});
@@ -71,8 +71,8 @@ describe("writeBarrel", () => {
 		writeBarrel();
 		expect(fsMocks.writeFileSync).toHaveBeenCalledTimes(1);
 		const out = getWritten();
-		expect(out).toContain('import { alpha } from "./alpha";');
-		expect(out).toContain('import { beta } from "./beta";');
+		expect(out).toContain('import { alpha } from "./components/alpha";');
+		expect(out).toContain('import { beta } from "./components/beta";');
 		const iAlpha = out.indexOf("import { alpha }");
 		const iBeta = out.indexOf("import { beta }");
 		expect(iAlpha).toBeLessThan(iBeta);
@@ -140,8 +140,8 @@ describe("writeBarrel", () => {
 		const writeBarrel = await importSubject();
 		writeBarrel({ skipInvalidIdentifiers: true });
 		const out = getWritten();
-		expect(out).toContain('import { alpha } from "./alpha";');
-		expect(out).toContain('import { beta } from "./beta";');
+		expect(out).toContain('import { alpha } from "./components/alpha";');
+		expect(out).toContain('import { beta } from "./components/beta";');
 		expect(out).not.toContain("invalid-name");
 		expect(out).toMatch(/const AiInfo: AiInfoProps = {\s+alpha,\s+beta,\s+};/);
 	});
@@ -228,16 +228,17 @@ describe("writeBarrel", () => {
 
 	it("calls formatTs with generated code before writing", async () => {
 		resetFsConfig({
-			dirs: ["alpha"],
-			entries: ["alpha"],
-			withIndex: ["alpha"],
+			dirs: ["alpha", "beta"],
+			entries: ["alpha", "beta"],
+			withIndex: ["alpha", "beta"],
 		});
 		const writeBarrel = await importSubject();
 		writeBarrel();
 		expect(formatTsMock).toHaveBeenCalledTimes(1);
 		expect(fsMocks.writeFileSync).toHaveBeenCalledTimes(1);
 		const codePassed = formatTsMock.mock.calls[0][0];
-		expect(codePassed).toContain('import { alpha } from "./alpha";');
+		expect(codePassed).toContain('import { alpha } from "./components/alpha";');
+		expect(codePassed).toContain('import { beta } from "./components/beta";');
 		expect(codePassed).toContain("const AiInfo: AiInfoProps = {");
 	});
 });
