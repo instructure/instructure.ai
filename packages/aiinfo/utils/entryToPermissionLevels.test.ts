@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { permissionLevelsStrings as snapshotStrings } from "../tests/__snapshots__/permissionLevelsStrings";
-import type { Entry } from "../types";
+import type { Entry, Result } from "../types";
 
 var backing: typeof snapshotStrings.en = snapshotStrings.en;
 
@@ -20,24 +20,6 @@ vi.mock("../strings", () => ({
 		return { en: { ...source, data: normalized } };
 	},
 }));
-
-type PermissionLevel = {
-	description: string;
-	highlighted?: boolean;
-	title?: string;
-	level?: string;
-};
-
-type Result = {
-	closeButtonText: string;
-	closeIconButtonScreenReaderLabel: string;
-	currentFeatureText: string;
-	modalLabel: string;
-	title: string;
-	triggerText: string;
-	currentFeature: string;
-	data: PermissionLevel[];
-};
 
 type Fn = (e: Entry) => Result;
 
