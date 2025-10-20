@@ -32,7 +32,6 @@ function entryToPermissionLevels(entry: Entry): Result {
 				d.level.endsWith(permStr) &&
 				highlightId === d.level.replace("LEVEL ", "L")
 			),
-			id: d.level.replace("LEVEL ", "L"),
 		}));
 		return {
 			...strings,

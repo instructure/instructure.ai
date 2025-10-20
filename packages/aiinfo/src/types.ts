@@ -10,6 +10,7 @@ type AiInfoFeatureProps = {
 	aiInformation: AiInformationProps;
 	uid: string;
 	revision: string;
+	group: string;
 };
 
 type AiInfoProps = {
