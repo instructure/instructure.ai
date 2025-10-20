@@ -6,8 +6,8 @@ import type {
 } from "@instructure/ui-instructure";
 import type { AiInfoFeatureProps } from "../../types";
 
-const FEATURE_NAME = "Smart Search";
-const UID = "smartsearch";
+const FEATURE_NAME = "Portfolios";
+const UID = "portfolios";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
 		description:
@@ -46,9 +46,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"The foundational AI on which further training and customizations are built.",
 				segmentTitle: "Base Model",
-				value: "Cohere Embed Multilingual",
+				value: "Haiku 3",
 				valueDescription:
-					"Cohere models are provided via Amazon Bedrock Foundation Models (FMs).",
+					"Anthropic Claude models are provided via Instructure's in-house AI Platform.",
 			},
 			{
 				description:
@@ -61,7 +61,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 					"Indicates which training or operational content was given to the model.",
 				segmentTitle: "Data Shared with Model",
 				value:
-					"Course content is indexed by the model and then stored in the Canvas database.",
+					"Custom instructions that teachers provide in their Evaluation portfolios for students.",
 			},
 		],
 	},
@@ -71,15 +71,15 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			{
 				description: "How long the model stores customer data.",
 				segmentTitle: "Data Retention",
-				value:
-					"Data is not stored or reused by the model. Indexed course content is stored in the Canvas database.",
+				value: "Data is not stored or re-used by the model.",
 			},
 			{
 				description:
 					"Recording the AI's performance for auditing, analysis, and improvement.",
 				segmentTitle: "Data Logging",
-				value: "Does not log data",
-				valueDescription: "",
+				value: "Logs data",
+				valueDescription:
+					"Model evaluations and reply labels are logged for debugging and troubleshooting purposes.",
 			},
 			{
 				description:
@@ -93,8 +93,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 					"Sensitive data that can be used to identify an individual.",
 				segmentTitle: "PII",
 				value: "Not Exposed",
-				valueDescription:
-					"PII in course content may be indexed, but no PII is intentionally sent to the model.",
+				valueDescription: "",
 			},
 		],
 	},
@@ -112,25 +111,26 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				segmentTitle: "Human in the Loop",
 				value: "Yes",
 				valueDescription:
-					"Users are presented with a list of results related to their search query and can act or not act on them.",
+					"Teachers provide the input of the model (content) and the response by the model is not auto accepted. Teachers have the chance to modify the result every occasion.",
 			},
 			{
 				description:
 					"Preventative safety mechanisms or limitations built into the AI model.",
 				segmentTitle: "Guardrails",
-				value: "",
+				value:
+					"Teachers acces to the model is limited, it's only through the intructions of the portfolio/ evidence. There is suspicious prompt detection build in for extra security. ",
 			},
 			{
 				description: "Any risks the model may pose to the user.",
 				segmentTitle: "Expected Risks",
 				value:
-					"Search results may be incorrectly sorted or may not be relevant to the search term.",
+					"LLM might suggest not the right questions or skills, or not an improved instruction to the user's liking.",
 			},
 			{
 				description: "The specific results the AI model is meant to achieve.",
 				segmentTitle: "Intended Outcomes",
 				value:
-					"Students are able to quickly find answers to questions, and instructors are able to quickly navigate their courses.",
+					"A user-friendly tool for a safe writing assistant, and features to speed up administrative work, and provide more reliable portfolios for students to work with.",
 			},
 		],
 	},
@@ -140,7 +140,7 @@ const nutritionFacts: NutritionFactsProps = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: undefined,
-		featureName: "Smart Search",
+		featureName: "Portfolios",
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
@@ -152,7 +152,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	...{
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Smart Search",
+		currentFeature: "Portfolios",
 		currentFeatureText: "Current Feature:",
 		data: undefined,
 		modalLabel: "Data Permission Levels modal",
@@ -168,8 +168,8 @@ const aiInformation: AiInformationProps = {
 			{
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-				featureName: "Smart Search",
-				modelName: "Cohere Embed Multilingual",
+				featureName: "Portfolios",
+				modelName: "Haiku 3",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
 				permissionLevel: "LEVEL 2",
@@ -179,7 +179,7 @@ const aiInformation: AiInformationProps = {
 		],
 		dataPermissionLevelsCloseButtonText: "Close",
 		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature: "Smart Search",
+		dataPermissionLevelsCurrentFeature: "Portfolios",
 		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
 		dataPermissionLevelsData: undefined,
 		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -187,7 +187,7 @@ const aiInformation: AiInformationProps = {
 		nutritionFactsCloseButtonText: "Close",
 		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
 		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Smart Search",
+		nutritionFactsFeatureName: "Portfolios",
 		nutritionFactsModalLabel: "This is a modal for AI facts",
 		nutritionFactsTitle: "AI Nutrition Facts",
 		title: "Features",
@@ -197,14 +197,14 @@ const aiInformation: AiInformationProps = {
 	nutritionFactsData: NUTRITION_FACTS_DATA,
 	trigger: <Button>AI Information</Button>,
 };
-const smartsearch: AiInfoFeatureProps = {
+const portfolios: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
 	group: "Canvas",
 	name: FEATURE_NAME,
 	nutritionFacts,
-	revision: "2025.10.02",
+	revision: "2025.10.17",
 	uid: UID,
 };
-export { smartsearch, nutritionFacts, dataPermissionLevels, aiInformation };
-export default smartsearch;
+export { portfolios, nutritionFacts, dataPermissionLevels, aiInformation };
+export default portfolios;

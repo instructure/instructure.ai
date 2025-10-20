@@ -199,6 +199,7 @@ const canvasinboxtranslation: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
 	group: "Canvas",
+	name: FEATURE_NAME,
 	nutritionFacts,
 	revision: "2025.09.10",
 	uid: UID,

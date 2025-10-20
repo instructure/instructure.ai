@@ -11,6 +11,7 @@ type AiInfoFeatureProps = {
 	uid: string;
 	revision: string;
 	group: string;
+	name: string;
 };
 
 type AiInfoProps = {

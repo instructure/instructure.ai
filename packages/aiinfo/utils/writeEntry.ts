@@ -76,6 +76,7 @@ const ${UID}: AiInfoFeatureProps = {
   revision: ${JSON.stringify(REVISION)},
   uid: UID,
   group: ${JSON.stringify(entry.group)},
+	name: FEATURE_NAME,
 }
 
 export {

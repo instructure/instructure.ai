@@ -201,6 +201,7 @@ const askyourdata: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
 	group: "Intelligent Insights",
+	name: FEATURE_NAME,
 	nutritionFacts,
 	revision: "2025.09.12",
 	uid: UID,

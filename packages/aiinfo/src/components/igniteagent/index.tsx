@@ -203,6 +203,7 @@ const igniteagent: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
 	group: "IgniteAI",
+	name: FEATURE_NAME,
 	nutritionFacts,
 	revision: "2025.09.10",
 	uid: UID,

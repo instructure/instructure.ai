@@ -199,6 +199,7 @@ const canvasdiscussionsummaries: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
 	group: "Canvas",
+	name: FEATURE_NAME,
 	nutritionFacts,
 	revision: "2025.09.12",
 	uid: UID,

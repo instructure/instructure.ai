@@ -200,6 +200,7 @@ const rubricgenerator: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
 	group: "Canvas",
+	name: FEATURE_NAME,
 	nutritionFacts,
 	revision: "2025.10.09",
 	uid: UID,
