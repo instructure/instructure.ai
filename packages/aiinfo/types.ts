@@ -17,9 +17,11 @@ type AiInfoFeature = {
 	aiInformation: AiInformationProps;
 	dataPermissionLevels: DataPermissionLevelsProps;
 	nutritionFacts: NutritionFactsProps;
+	name: string;
+	group: string;
 };
 
-type FeatureName = string;
+type FeatureName = AiInfoFeature["uid"];
 
 type AiInfo = Record<FeatureName, AiInfoFeature>;
 
