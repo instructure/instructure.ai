@@ -147,7 +147,6 @@ type ChangedEntry = {
 };
 
 type PermissionLevel = {
-	id: string;
 	description: string;
 	highlighted?: boolean;
 	title?: string;
