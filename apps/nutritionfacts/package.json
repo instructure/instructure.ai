@@ -6,8 +6,8 @@
 		"@instructure.ai/aiinfo": "workspace:^",
 		"@instructure/ui": "^11.0.1",
 		"papaparse": "^5.5.3",
-		"react": "^19.1.1",
-		"react-dom": "^19.1.1"
+		"react": "^19.2.0",
+		"react-dom": "^19.2.0"
 	},
 	"devDependencies": {
 		"@instructure.ai/shared-configs": "workspace:^",

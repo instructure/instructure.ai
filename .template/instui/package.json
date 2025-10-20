@@ -20,8 +20,8 @@
     "@instructure.ai/shared-configs": "workspace:^"
   },
   "dependencies": {
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "@instructure/ui": "^11.0.0"
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "@instructure/ui": "^11.0.1"
   }
 }
