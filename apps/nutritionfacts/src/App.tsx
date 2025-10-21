@@ -15,7 +15,7 @@ import { getLayoutFromParams, NutritionFactsForm } from "./Components/Layout";
 
 const App: FC = () => {
 	const searchParams = new URLSearchParams(window.location.search);
-	const id = searchParams.get("id");
+	const id = searchParams.get("id")?.toLowerCase() || undefined;
 
 	const [product, setProduct] = useState<AiInfoFeatureProps | undefined>(
 		undefined,
