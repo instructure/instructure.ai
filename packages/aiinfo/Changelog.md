@@ -1,57 +1,141 @@
 # Changelog
 
-## 2025-10-21T18:03:42.385Z
+## 2025-10-21T20:13:52.750Z
 
 ### CSV
 
-**SHA:** `e4fde48757a6d375a20a822aecb74e7ac9f7d2bb43204243b5f3a6240882fb45`
+**SHA:** `fb0b079f1550d1302447434d4ccf7d126afa237f42e44946334365b4784e5741`
 
 ### portfolios
 
 #### SHA
 
-**Old:** `3fa4d3977aa30f05a060e80d040c829feb5f60b6766c1c8348fc2cb14c916762`
+**Old:** `7754000b75ffd1f157bcca8bce6ce3454f7a3c718a5a1480ce29ffc310f8b2a8`
 
-**New:** `7754000b75ffd1f157bcca8bce6ce3454f7a3c718a5a1480ce29ffc310f8b2a8`
-
-#### revision:
-
-Old:
-
-```JSON
-"2025.10.17"
-```
-#### New:
-
-```JSON
-"2025.10.21"
-```
-
-#### feature.description:
-
-Old:
-
-```JSON
-"AI Assitant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation."
-```
-#### New:
-
-```JSON
-"AI Assistant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation."
-```
+**New:** `a2f764be1f3aa37082a694f92498523720d8db02b35d3cbdab5db803a1432e20`
 
 #### outputs.guardrails:
 
 Old:
 
 ```JSON
-"Teachers acces to the model is limited, it's only through the intructions of the portfolio/ evidence. There is suspicious prompt detection build in for extra security. "
+"Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection build in for extra security. "
 ```
 #### New:
 
 ```JSON
-"Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection build in for extra security. "
+"Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection built in for extra security. "
 ```
+
+
+
+## 2025-10-21T18:03:42.385Z
+
+
+
+### CSV
+
+
+
+**SHA:** `e4fde48757a6d375a20a822aecb74e7ac9f7d2bb43204243b5f3a6240882fb45`
+
+
+
+### portfolios
+
+
+
+#### SHA
+
+
+
+**Old:** `3fa4d3977aa30f05a060e80d040c829feb5f60b6766c1c8348fc2cb14c916762`
+
+
+
+**New:** `7754000b75ffd1f157bcca8bce6ce3454f7a3c718a5a1480ce29ffc310f8b2a8`
+
+
+
+#### revision:
+
+
+
+Old:
+
+
+
+```JSON
+
+"2025.10.17"
+
+```
+
+#### New:
+
+
+
+```JSON
+
+"2025.10.21"
+
+```
+
+
+
+#### feature.description:
+
+
+
+Old:
+
+
+
+```JSON
+
+"AI Assitant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation."
+
+```
+
+#### New:
+
+
+
+```JSON
+
+"AI Assistant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation."
+
+```
+
+
+
+#### outputs.guardrails:
+
+
+
+Old:
+
+
+
+```JSON
+
+"Teachers acces to the model is limited, it's only through the intructions of the portfolio/ evidence. There is suspicious prompt detection build in for extra security. "
+
+```
+
+#### New:
+
+
+
+```JSON
+
+"Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection build in for extra security. "
+
+```
+
+
+
+
 
 
 
@@ -59,7 +143,15 @@ Old:
 
 
 
+
+
+
+
 ### CSV
+
+
+
+
 
 
 
@@ -67,7 +159,15 @@ Old:
 
 
 
+
+
+
+
 ### canvasinboxtranslation
+
+
+
+
 
 
 
@@ -75,7 +175,15 @@ Old:
 
 
 
+
+
+
+
 **Old:** `83554f0eb098ac592eedf73cdccf04e3e570ca670682e6e96719239075b3a545`
+
+
+
+
 
 
 
@@ -83,7 +191,15 @@ Old:
 
 
 
+
+
+
+
 #### model.description:
+
+
+
+
 
 
 
@@ -91,21 +207,47 @@ Old:
 
 
 
+
+
+
+
 ```JSON
+
+
 
 "Anthropic Claude models are provided via Instructure's in-house AI Platform."
 
+
+
 ```
+
+
 
 #### New:
 
 
 
+
+
+
+
 ```JSON
+
+
 
 "AWS Translate model is provided via Instructure's in-house AI Platform."
 
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -121,7 +263,23 @@ Old:
 
 
 
+
+
+
+
+
+
+
+
 ### CSV
+
+
+
+
+
+
+
+
 
 
 
@@ -137,6 +295,14 @@ Old:
 
 
 
+
+
+
+
+
+
+
+
 ### canvascoursetranslation
 
 
@@ -145,7 +311,23 @@ Old:
 
 
 
+
+
+
+
+
+
+
+
 #### SHA
+
+
+
+
+
+
+
+
 
 
 
@@ -161,7 +343,23 @@ Old:
 
 
 
+
+
+
+
+
+
+
+
 **New:** `0869c157cb9ab0c007f088fcfc0a642404831158ff365395b6f6b69de5c179fb`
+
+
+
+
+
+
+
+
 
 
 
@@ -177,7 +375,23 @@ Old:
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -193,7 +407,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -201,7 +427,19 @@ Old: `(none)`
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -217,7 +455,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -233,7 +487,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -241,7 +507,19 @@ Old: `(none)`
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -257,7 +535,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -273,7 +567,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -281,7 +587,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "name": "Discussions Translation",
+
+
+
+
 
 
 
@@ -289,11 +603,27 @@ Old: `(none)`
 
 
 
+
+
+
+
 }
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -309,7 +639,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -325,7 +671,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -333,7 +691,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "name": "Haiku 3",
+
+
+
+
 
 
 
@@ -341,7 +707,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "trained": "No",
+
+
+
+
 
 
 
@@ -349,7 +723,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "dataDescription": "Announcement and Discussion prompts and replies"
+
+
+
+
 
 
 
@@ -357,7 +739,19 @@ Old: `(none)`
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -373,7 +767,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -389,7 +799,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -397,7 +819,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "retention": "Data is not stored or reused by the model.",
+
+
+
+
 
 
 
@@ -405,7 +835,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "loggingDescription": "",
+
+
+
+
 
 
 
@@ -413,7 +851,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "regionsDescription": "",
+
+
+
+
 
 
 
@@ -421,7 +867,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "piiDescription": "PII in discussion replies may be sent to the model, but no PII is intentionally sent to the model."
+
+
+
+
 
 
 
@@ -429,7 +883,19 @@ Old: `(none)`
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -445,7 +911,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -461,7 +943,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -469,7 +963,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "settings": "Yes",
+
+
+
+
 
 
 
@@ -477,7 +979,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "humanDescription": "Untranslated content is available to review translations against",
+
+
+
+
 
 
 
@@ -485,7 +995,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "risks": "Machine translation may not fully capture the meaning of the original message.",
+
+
+
+
 
 
 
@@ -493,11 +1011,27 @@ Old: `(none)`
 
 
 
+
+
+
+
 }
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -513,7 +1047,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -529,7 +1079,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -537,7 +1099,19 @@ Old: `(none)`
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -553,7 +1127,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -569,7 +1159,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -577,7 +1179,19 @@ Old: `(none)`
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -593,7 +1207,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 #### SHA
+
+
+
+
+
+
+
+
 
 
 
@@ -609,7 +1239,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 **New:** `3fa4d3977aa30f05a060e80d040c829feb5f60b6766c1c8348fc2cb14c916762`
+
+
+
+
+
+
+
+
 
 
 
@@ -625,7 +1271,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -641,7 +1303,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -649,7 +1323,19 @@ Old: `(none)`
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -665,7 +1351,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -681,7 +1383,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -689,7 +1403,19 @@ Old: `(none)`
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -705,7 +1431,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -721,7 +1463,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -729,7 +1483,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "name": "Portfolios",
+
+
+
+
 
 
 
@@ -737,11 +1499,27 @@ Old: `(none)`
 
 
 
+
+
+
+
 }
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -757,7 +1535,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -773,7 +1567,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -781,7 +1587,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "name": "Haiku 3",
+
+
+
+
 
 
 
@@ -789,7 +1603,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "trained": "No",
+
+
+
+
 
 
 
@@ -797,7 +1619,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "dataDescription": "Custom instructions that teachers provide in their Evaluation portfolios for students."
+
+
+
+
 
 
 
@@ -805,7 +1635,19 @@ Old: `(none)`
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -821,7 +1663,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -837,7 +1695,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -845,7 +1715,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "retention": "Data is not stored or re-used by the model.",
+
+
+
+
 
 
 
@@ -853,7 +1731,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "loggingDescription": "Model evaluations and reply labels are logged for debugging and troubleshooting purposes.",
+
+
+
+
 
 
 
@@ -861,7 +1747,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "regionsDescription": "",
+
+
+
+
 
 
 
@@ -869,7 +1763,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "piiDescription": ""
+
+
+
+
 
 
 
@@ -877,7 +1779,19 @@ Old: `(none)`
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -893,7 +1807,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -909,7 +1839,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -917,7 +1859,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "settings": "Yes",
+
+
+
+
 
 
 
@@ -925,7 +1875,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "humanDescription": "Teachers provide the input of the model (content) and the response by the model is not auto accepted. Teachers have the chance to modify the result every occasion.",
+
+
+
+
 
 
 
@@ -933,7 +1891,15 @@ Old: `(none)`
 
 
 
+
+
+
+
   "risks": "LLM might suggest not the right questions or skills, or not an improved instruction to the user's liking.",
+
+
+
+
 
 
 
@@ -941,11 +1907,27 @@ Old: `(none)`
 
 
 
+
+
+
+
 }
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -961,7 +1943,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -977,7 +1975,19 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
+
+
+
+
 
 
 
@@ -985,7 +1995,19 @@ Old: `(none)`
 
 
 
+
+
+
+
 ```
+
+
+
+
+
+
+
+
 
 
 
@@ -1001,7 +2023,23 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 Old: `(none)`
+
+
+
+
+
+
+
+
 
 
 
@@ -1017,11 +2055,27 @@ Old: `(none)`
 
 
 
+
+
+
+
+
+
+
+
 ```JSON
 
 
 
+
+
+
+
 "2"
+
+
+
+
 
 
 
