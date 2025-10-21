@@ -135,6 +135,7 @@ const App: FC = () => {
 					layout={layout}
 					product={product}
 					setProduct={setProduct}
+					isInIframe={isInIframe}
 				/>
 			</View>
 			{!isInIframe && (

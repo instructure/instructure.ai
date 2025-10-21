@@ -18,7 +18,8 @@ const NutritionFactsForm: FC<{
 	layout: PageLayout;
 	setProduct: Dispatch<SetStateAction<AiInfoFeatureProps | undefined>>;
 	isNarrow?: boolean;
-}> = ({ product, layout, setProduct, isNarrow }) => {
+	isInIframe?: boolean;
+}> = ({ product, layout, setProduct, isNarrow, isInIframe }) => {
 	function isNutritionFacts(obj: unknown): obj is NutritionFactsProps {
 		return (
 			typeof obj === "object" &&
@@ -45,11 +46,11 @@ const NutritionFactsForm: FC<{
 						Nutrition Facts
 					</Heading>
 				</Flex.Item>
-				<Flex.Item size="50%">
+				{!isInIframe && <Flex.Item size="50%">
 					<View as="div" margin="0 0 small">
 						<Presets product={product} setProduct={setProduct} />
 					</View>
-				</Flex.Item>
+				</Flex.Item>}
 			</Flex>
 			<Divider />
 			<Flex alignItems="center" direction="column">

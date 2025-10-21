@@ -29,7 +29,7 @@ const Embed = async (product: AiInfoFeatureProps, layout: PageLayout) => {
 		].join(" ");
 
 		const separator = baseUrl.includes("?") ? "&" : "?";
-		const embedCode = `<iframe id="ai-facts" width="670px" height="${height}px" class="${helperClasses}" style="width:670px; outline: none; border:0 none;" allowfullscreen src="${baseUrl}${separator}embed&id=${product.uid}${layout.copyright ? "" : "&copyright=false"}${layout.disclaimer ? "" : "&disclaimer=false"}${layout.revision ? "" : "&revision=false"}"></iframe>
+		const embedCode = `<iframe id="ai-facts" width="670px" height="${height}px" class="${helperClasses}" style="width:670px; outline: none; border:0 none;" allowfullscreen src="${baseUrl}${separator}id=${product.uid}${layout.copyright ? "" : "&copyright=false"}${layout.disclaimer ? "" : "&disclaimer=false"}${layout.revision ? "" : "&revision=false"}"></iframe>
 <div class="hidden" id="ai-facts-hidden" style="display:none;">
   ${productToText(product)}
 </div>`;
