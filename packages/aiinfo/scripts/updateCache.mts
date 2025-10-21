@@ -34,8 +34,17 @@ const updateCache = (data: CSVFetchResult): void => {
 
 	// Prepare changelog update if CSV is outdated
 	const changelogPath = path.resolve(__dirname, "../Changelog.md");
-	const changedEntries: ChangedEntry[] = [];
-	const oldEntries = parseCSV(cache);
+	   const changedEntries: ChangedEntry[] = [];
+	   // Read previous cache.csv from disk to get old entries
+	   const cacheCSVPath = path.resolve(__dirname, "../cache/cache.csv");
+	   let oldCacheRaw = "";
+	   if (fs.existsSync(cacheCSVPath)) {
+		   oldCacheRaw = fs.readFileSync(cacheCSVPath, "utf-8");
+	   } else if (cache) {
+		   // fallback to in-memory cache if file doesn't exist
+		   oldCacheRaw = cache;
+	   }
+	   const oldEntries = parseCSV(oldCacheRaw);
 
 	// If CSV checksum changed, write new CSV to cache.csv
 	if (isCSVOutdated) {
@@ -51,14 +60,14 @@ const updateCache = (data: CSVFetchResult): void => {
 		}
 	}
 
-	// Update per-entry checksums only if outdated
 	for (const entry of data.parsed) {
-		const EntryObj: Entry = entryToObj(entry);
+		   let EntryObj: Entry = entryToObj(entry);
+		   if (EntryObj && typeof EntryObj.uid === 'string') {
+			   EntryObj.uid = EntryObj.uid.toLowerCase();
+		   }
 		if (EntryObj?.uid) {
 			const entryChecksum = generateChecksum(JSON.stringify(entry));
-			// Check if the checksum is outdated for this entry
 			const oldEntryChecksum = checksums[EntryObj.uid];
-			// Use cacheOutdated logic for per-entry
 			const isOutdated = entryChecksum !== oldEntryChecksum;
 			if (isOutdated) {
 				checksums[EntryObj.uid] = entryChecksum;
@@ -66,20 +75,19 @@ const updateCache = (data: CSVFetchResult): void => {
 					color: "yellow",
 					message: [`Checksum updated for entry uid: ${EntryObj.uid}`],
 				});
-				// Add to changedEntries for changelog
-				changedEntries.push({
-					newChecksum: entryChecksum,
-					newEntry: EntryObj,
-					oldChecksum: oldEntryChecksum,
-					oldEntry: oldEntries.parsed.find((e) => e[0] === EntryObj.uid)
-						? entryToObj(
-								oldEntries.parsed.find(
-									(e) => e[0] === EntryObj.uid,
-								) as string[],
-							)
-						: undefined,
-					uid: EntryObj.uid,
-				});
+				   let oldEntryObj: Entry | undefined = undefined;
+				   const oldEntryArr = oldEntries.parsed.find((e) => Array.isArray(e) && typeof e[0] === 'string' && e[0].toLowerCase() === EntryObj.uid.toLowerCase());
+				   if (oldEntryArr && oldEntryArr.length > 0) {
+					   oldEntryObj = entryToObj(oldEntryArr);
+				   }
+
+				   changedEntries.push({
+					   newChecksum: entryChecksum,
+					   newEntry: EntryObj,
+					   oldChecksum: oldEntryChecksum,
+					   oldEntry: oldEntryObj,
+					   uid: EntryObj.uid,
+				   });
 			}
 		}
 	}

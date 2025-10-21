@@ -163,12 +163,26 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAGS: ${{ steps.find_tags.outputs.tags }}
+        shell: bash
         run: |
+          set -euo pipefail
+          IFS=$'\n'
+
           for TAG in $TAGS; do
             # Extract the package name from the tag (e.g., @instructure.ai/foo@1.2.3 => foo)
             NAME=$(echo "$TAG" | sed -E 's/@instructure.ai\/([^@]+)@.*/\1/')
             EVENT_TYPE="${NAME}_release"
-            gh api repos/${{ github.repository }}/dispatches \
-              -F event_type="$EVENT_TYPE" \
-              -F client_payload="$(jq -nc --arg tag "$TAG" '{tag: $tag}')"
+
+            # Build the required JSON payload and POST it
+            PAYLOAD=$(jq -n \
+              --arg et "$EVENT_TYPE" \
+              --arg tag "$TAG" \
+              '{event_type: $et, client_payload: {tag: $tag}}')
+
+            echo "Dispatching event: $EVENT_TYPE with payload: $PAYLOAD"
+
+            echo "$PAYLOAD" | gh api repos/${{ github.repository }}/dispatches \
+              --method POST \
+              -H "Accept: application/vnd.github+json" \
+              --input -
           done
