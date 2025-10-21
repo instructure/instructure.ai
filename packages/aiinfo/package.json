@@ -16,13 +16,11 @@
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.mjs"
+      "require": "./dist/index.cjs"
     }
   },
   "files": [
-    "dist",
-    "*.md"
+    "dist"
   ],
   "module": "./dist/index.mjs",
   "name": "@instructure.ai/aiinfo",
