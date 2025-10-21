@@ -1,7 +1,7 @@
 // apps/nutritionfacts/test_index.html
 
 // @ts-expect-error Vite raw import
-import html from './index.html?raw'
+import html from "./index.html?raw"
 import { describe, it, expect, beforeEach } from 'vitest'
 
 describe('index.html', () => {
