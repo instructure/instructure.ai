@@ -3,7 +3,7 @@
     "extends @instructure/browserslist-config-instui"
   ],
   "dependencies": {
-    "@instructure.ai/aiinfo": "^1.5.1",
+    "@instructure.ai/aiinfo": "^1.6.0",
     "@instructure/ui": "^11.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
