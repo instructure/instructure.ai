@@ -1,16 +1,16 @@
 coverage:
   totals:
-    statements: 23.12%
-    branches: 14.9%
-    functions: 20.83%
-    lines: 23.95%
-    total: 20.7%
+    statements: 0%
+    branches: 0%
+    functions: 0%
+    lines: 0%
+    total: 0%
   src:
     totals:
-      statements: 45.63%
-      branches: 44.17%
-      functions: 43.75%
-      lines: 45.63%
+      statements: 0%
+      branches: 15%
+      functions: 6.25%
+      lines: 0%
     "App.tsx":
       statements: 0%
       branches: 0%
@@ -69,30 +69,33 @@ coverage:
           lines: 0%
           uncovered_line_numbers: "4-19"
     "Main.tsx":
-      statements: 87.5%
-      branches: 83.33%
-      functions: 100%
-      lines: 87.5%
-      uncovered_line_numbers: "26"
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "6-26"
     assets:
       "Layout.ts":
-        statements: 100%
+        statements: 0%
         branches: 100%
-        functions: 100%
-        lines: 100%
-      "Logos.tsx":
-        statements: 100%
-        branches: 100%
-        functions: 100%
-        lines: 100%
-      "colors.ts":
-        statements: 100%
-        branches: 100%
-        functions: 100%
-        lines: 100%
-      "consts.tsx":
-        statements: 80%
-        branches: 33.33%
         functions: 0%
-        lines: 80%
-        uncovered_line_numbers: "64"
+        lines: 0%
+        uncovered_line_numbers: "9-15"
+      "Logos.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "23-244"
+      "colors.ts":
+        statements: 0%
+        branches: 100%
+        functions: 100%
+        lines: 0%
+        uncovered_line_numbers: "10"
+      "consts.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "14-79"

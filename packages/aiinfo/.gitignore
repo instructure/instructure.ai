@@ -8,10 +8,13 @@ lerna-debug.log*
 
 node_modules
 dist-ssr
-dist
 pub
 coverage/*
 !coverage.yml
+dist/*
+!dist/index.cjs
+!dist/index.mjs
+!dist/index.d.ts
 *.local
 
 .idea
