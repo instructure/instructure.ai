@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const mockFsWrite = vi.fn();
+const mockFsRead = vi.fn(() => ""); // Return empty string or mock CSV content
 const mockLog = vi.fn();
 const mockWriteEntry = vi.fn();
 const mockWriteBarrel = vi.fn();
@@ -112,8 +113,14 @@ function applyMocks(opts: MockOptions) {
 	}));
 
 	vi.mock("node:fs", () => ({
-		default: { writeFileSync: mockFsWrite },
+		default: {
+			writeFileSync: mockFsWrite,
+			existsSync: () => true,
+			readFileSync: mockFsRead,
+		},
 		writeFileSync: mockFsWrite,
+		existsSync: () => true,
+		readFileSync: mockFsRead,
 	}));
 
 	vi.mock("papaparse", async (orig) => {

@@ -80,7 +80,7 @@ describe("writeChangelog", () => {
 		expect(result?.success).toBe(true);
 		expect(result?.changelog).toContain("## 2024-02-02");
 		expect(result?.changelog).toContain("### CSV");
-		expect(result?.changelog).toContain("**SHA:** csvShaX");
+		expect(result?.changelog).toContain("**SHA:** `csvShaX`");
 		expect(result?.changelog).toContain("### uid-new");
 		expect(result?.changelog).toMatch(/Old:\s`\(none\)`/);
 		expect(result?.changelog).toContain("#### name");
@@ -256,7 +256,7 @@ describe("writeChangelog", () => {
 			dateStr: "2024-10-10",
 		});
 		expect(result).toBeDefined();
-		expect(result?.changelog).toContain("**SHA:** csvGlobalSha");
+		expect(result?.changelog).toContain("**SHA:** `csvGlobalSha`");
 	});
 
 	it("writes changelog", () => {
