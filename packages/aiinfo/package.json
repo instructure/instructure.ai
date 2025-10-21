@@ -27,7 +27,7 @@
   "peerDependencies": {
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19",
-    "@instructure/ui": " ^10.22.0 || ^ 11"
+    "@instructure/ui": "^10.22.0 || ^11"
   },
   "publishConfig": {
     "access": "public"
