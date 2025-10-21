@@ -1,10 +1,9 @@
-import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
+import type { AiInfoFeatureProps, AiInfoProps } from "@instructure.ai/aiinfo";
+import type { ExtendedNutritionFactsProps } from "../../types";
 
-/**
- * Returns extended nutrition facts in the block/segment format.
- * Adds the permissions segment to the nutritionFacts.data array.
- */
-const extendedNutritionFacts = (product: AiInfoFeatureProps) => {
+const extendedNutritionFacts = (
+	product: AiInfoFeatureProps,
+): ExtendedNutritionFactsProps => {
 	const firstData =
 		Array.isArray(product.aiInformation?.data) &&
 		product.aiInformation.data.length > 0
@@ -31,7 +30,7 @@ const extendedNutritionFacts = (product: AiInfoFeatureProps) => {
 		: [];
 
 	return {
-		"description": product.description,
+		description: product.description as unknown as AiInfoProps["description"],
 		...nutritionFacts,
 		data: [...dataArray, permissionsSegment],
 	};

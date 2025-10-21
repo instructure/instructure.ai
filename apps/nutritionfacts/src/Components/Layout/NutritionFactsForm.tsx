@@ -1,14 +1,14 @@
 import {
 	Flex,
 	Heading,
+	IconAiLine,
 	type NutritionFactsProps,
 	Text,
 	View,
-	IconAiLine
 } from "@instructure/ui";
 import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import type { Dispatch, FC, SetStateAction } from "react";
-import type { PageLayout } from "../../types";
+import type { ExtendedNutritionFactsProps, PageLayout } from "../../types";
 import { Divider } from "./";
 import { extendedNutritionFacts } from "./extendedNutritionFacts";
 import { Presets } from "./Presets";
@@ -27,7 +27,7 @@ const NutritionFactsForm: FC<{
 		);
 	}
 
-	let Feature;
+	let Feature: ExtendedNutritionFactsProps | undefined;
 	if (product && isNutritionFacts(product?.nutritionFacts)) {
 		Feature = extendedNutritionFacts(product);
 	}
@@ -51,7 +51,7 @@ const NutritionFactsForm: FC<{
 					</View>
 				</Flex.Item>
 			</Flex>
-				<Divider />
+			<Divider />
 			<Flex alignItems="center" direction="column">
 				{Feature ? (
 					<>
@@ -92,9 +92,17 @@ const NutritionFactsForm: FC<{
 																</Text>
 															</View>
 															<Text variant="content">{value}</Text>
-															{valueDescription && <><br/><Text color="secondary" variant="contentSmall">
-																{valueDescription}
-															</Text></>}
+															{valueDescription && (
+																<>
+																	<br />
+																	<Text
+																		color="secondary"
+																		variant="contentSmall"
+																	>
+																		{valueDescription}
+																	</Text>
+																</>
+															)}
 														</View>
 													);
 												},
@@ -114,12 +122,12 @@ const NutritionFactsForm: FC<{
 					</>
 				) : (
 					<Flex.Item shouldGrow shouldShrink>
-							<View as="div" textAlign="center" margin="0 0 medium">
-								<IconAiLine color="secondary" size="x-large" />
-							</View>
-							<Heading level="h2" variant="titleCardSection" color="secondary">
-								Select a feature to view its Nutrition Facts
-							</Heading>
+						<View as="div" margin="0 0 medium" textAlign="center">
+							<IconAiLine color="secondary" size="x-large" />
+						</View>
+						<Heading color="secondary" level="h2" variant="titleCardSection">
+							Select a feature to view its Nutrition Facts
+						</Heading>
 					</Flex.Item>
 				)}
 			</Flex>

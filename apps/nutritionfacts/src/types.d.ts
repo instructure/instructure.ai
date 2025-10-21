@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 import type { Dispatch, SetStateAction } from "react";
-import type { NutritionFactsProps, AiInformationProps } from "@instructure/ui";
+import type { NutritionFactsProps } from "@instructure/ui";
 import type { AiInfoProps } from "@instructure.ai/aiinfo";
 
 type StateProp<T, K extends string> = {
@@ -16,8 +16,8 @@ type PageLayout = {
 	revision: boolean;
 };
 
-type ExtendedNutritionFactsDataProps = NutritionFactsProps["data"] & {
+type ExtendedNutritionFactsProps = NutritionFactsProps & {
 	description: AiInfoProps["description"];
 };
 
-export type { StateProp, PageLayout, Features };
+export type { StateProp, PageLayout, Features, ExtendedNutritionFactsProps };
