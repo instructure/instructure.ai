@@ -81,7 +81,7 @@ importers:
   apps/nutritionfacts:
     dependencies:
       '@instructure.ai/aiinfo':
-        specifier: ^1.5.1
+        specifier: ^1.6.0
         version: link:../../packages/aiinfo
       '@instructure/ui':
         specifier: ^11.0.1
