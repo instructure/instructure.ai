@@ -85,7 +85,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          RELEASE_LABEL="${{ github.event.client_payload.tag || github.event.client_payload.tag_name || github.event.client_payload.name || 'aiinfo release' }}"
+          RELEASE_LABEL="${{ github.event.client_payload.tag || 'aiinfo release' }}"
           PR_URL=$(gh pr create \
             --title "(chore) nutritionfacts deps sync after aiinfo release" \
             --body "Automated bump after release: **${RELEASE_LABEL}**" \
