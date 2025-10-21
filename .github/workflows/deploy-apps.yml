@@ -54,7 +54,7 @@ jobs:
         uses: pnpm/action-setup@v4.1.0          
       - name: Install dependencies
         if: steps.changes.outputs.skip_steps != 'true'
-        run: pnpm i
+        run: pnpm install --prefer-workspace-packages=false
       - name: Build
         if: steps.changes.outputs.skip_steps != 'true'
         run: pnpm build apps
