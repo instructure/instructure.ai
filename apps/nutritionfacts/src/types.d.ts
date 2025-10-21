@@ -2,6 +2,7 @@
 
 import type { Dispatch, SetStateAction } from "react";
 import type { NutritionFactsProps, AiInformationProps } from "@instructure/ui";
+import type { AiInfoProps } from "@instructure.ai/aiinfo";
 
 type StateProp<T, K extends string> = {
 	[key in K]: T;
@@ -16,10 +17,8 @@ type PageLayout = {
 	permissions: boolean;
 };
 
-type ExtendedNutritionFactsProps = NutritionFactsProps & {
-	level: AiInformationProps["data"]["level"];
+type ExtendedNutritionFactsDataProps = NutritionFactsProps["data"] & {
+	description: AiInfoProps["description"];
 };
-
-type Features = Record<string, ExtendedNutritionFactsProps>;
 
 export type { StateProp, PageLayout, Features };
