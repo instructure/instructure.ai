@@ -2,11 +2,18 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Set up the mock before importing Divider
 vi.mock("@instructure/ui", () => {
-	const ViewMock = vi.fn(({ children, ...props }) => (
-		<div data-testid="view-mock" {...props}>
-			{children}
-		</div>
-	));
+	const ViewMock = vi.fn(({ children, ...props }) => {
+		const { borderColor, borderWidth, ...rest } = props;
+		return (
+			<div
+				data-testid="view-mock"
+				style={{ borderColor, borderWidth }}
+				{...rest} // rest should not include borderColor or borderWidth
+			>
+				{children}
+			</div>
+		);
+	});
 	return { View: ViewMock };
 });
 
