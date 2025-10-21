@@ -3,7 +3,7 @@
     "extends @instructure/browserslist-config-instui"
   ],
   "dependencies": {
-    "@instructure.ai/aiinfo": "workspace:^",
+    "@instructure.ai/aiinfo": "^1.5.1",
     "@instructure/ui": "^11.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
@@ -28,5 +28,5 @@
     "update-cache": "vite-node ./scripts/updateCache.mts"
   },
   "type": "module",
-  "version": "1.5.0"
+  "version": "1.5.1"
 }
