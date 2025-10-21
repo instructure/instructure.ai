@@ -1,26 +1,26 @@
 coverage:
   totals:
-    statements: 96.15%
-    branches: 87.75%
+    statements: 96.14%
+    branches: 87.11%
     functions: 100%
-    lines: 96.01%
-    total: 94.98%
+    lines: 96%
+    total: 94.81%
   scripts:
     totals:
-      statements: 96.28%
-      branches: 88.24%
+      statements: 96.2%
+      branches: 88.46%
       functions: 100%
-      lines: 96.28%
+      lines: 96.2%
     "clearCache.mts":
       statements: 100%
       branches: 100%
       functions: 100%
       lines: 100%
     "updateCache.mts":
-      statements: 92.55%
-      branches: 76.47%
+      statements: 92.39%
+      branches: 76.92%
       functions: 100%
-      lines: 92.55%
+      lines: 92.39%
       uncovered_line_numbers: "50-188"
   strings:
     totals:
@@ -45,20 +45,20 @@ coverage:
       lines: 100%
   utils:
     totals:
-      statements: 97.78%
-      branches: 92.61%
+      statements: 97.82%
+      branches: 91.99%
       functions: 100%
-      lines: 97.64%
+      lines: 97.66%
     "consts.ts":
       statements: 100%
       branches: 100%
       functions: 100%
       lines: 100%
     "entryToAIInformation.tsx":
-      statements: 90.9%
-      branches: 75%
+      statements: 91.66%
+      branches: 68.18%
       functions: 100%
-      lines: 90.9%
+      lines: 91.66%
       uncovered_line_numbers: "27"
     "entryToNutritionFacts.ts":
       statements: 100%
@@ -71,11 +71,11 @@ coverage:
       functions: 100%
       lines: 100%
     "entryToPermissionLevels.ts":
-      statements: 94.11%
+      statements: 93.75%
       branches: 94.11%
       functions: 100%
-      lines: 93.33%
-      uncovered_line_numbers: "28"
+      lines: 92.85%
+      uncovered_line_numbers: "9"
     "formatTs.ts":
       statements: 100%
       branches: 100%
