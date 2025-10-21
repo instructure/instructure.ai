@@ -12,6 +12,7 @@
     "browserslist": "^4.26.3",
     "istanbul-lib-report": "^3.0.1",
     "istanbul-reports": "^3.2.0",
+    "jsdom": "^27.0.1",
     "lightningcss": "^1.30.2",
     "react-compiler-runtime": "^1.0.0",
     "terser": "^5.44.0",
