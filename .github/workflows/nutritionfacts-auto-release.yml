@@ -1,4 +1,4 @@
-name: After aiinfo Release → Bump nutritionfacts
+name: Nutrition Facts autorelease
 
 on:
   release:
