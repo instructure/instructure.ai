@@ -10,8 +10,8 @@ type Options = {
 };
 
 const writeBarrel = (opts: Options = {}) => {
-	const SRC_DIR = resolve(process.cwd(), opts.srcDir ?? "src");
-	const OUT_FILE = join(SRC_DIR, opts.outFileName ?? "index.ts");
+	const SRC_DIR = resolve(process.cwd(), opts.srcDir ?? "src/components");
+	const OUT_FILE = join(process.cwd(), "src", opts.outFileName ?? "index.ts");
 
 	const isDir = (p: string) => {
 		try {
@@ -50,7 +50,7 @@ const writeBarrel = (opts: Options = {}) => {
 	}
 
 	const imports =
-		uids.map((u) => `import { ${u} } from "./${u}";`).join("\n") ||
+		uids.map((u) => `import { ${u} } from "./components/${u}";`).join("\n") ||
 		"// no feature folders found";
 
 	const typesImport = `import type {

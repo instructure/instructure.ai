@@ -1,13 +1,13 @@
-import { Button } from "@instructure/ui-buttons";
 import type {
 	AiInformationProps,
 	DataPermissionLevelsProps,
 	NutritionFactsProps,
-} from "@instructure/ui-instructure";
-import type { AiInfoFeatureProps } from "../types";
+} from "@instructure/ui";
+import { Button } from "@instructure/ui";
+import type { AiInfoFeatureProps } from "../../types";
 
-const FEATURE_NAME = "Discussions Translation";
-const UID = "canvascoursetranslation";
+const FEATURE_NAME = "Rubric Creator";
+const UID = "rubricgenerator";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
 		description:
@@ -48,7 +48,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				segmentTitle: "Base Model",
 				value: "Haiku 3",
 				valueDescription:
-					"Anthropic Claude models are provided via Instructure's in-house AI Platform.",
+					"Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
 			},
 			{
 				description:
@@ -60,7 +60,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"Indicates which training or operational content was given to the model.",
 				segmentTitle: "Data Shared with Model",
-				value: "Discussion prompts and replies",
+				value:
+					"The Canvas assignment description field is used in generating rubric criteria.",
 			},
 		],
 	},
@@ -70,14 +71,15 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			{
 				description: "How long the model stores customer data.",
 				segmentTitle: "Data Retention",
-				value: "Data is not stored or reused by the model.",
+				value: "Model responses are stored for debugging purposes.",
 			},
 			{
 				description:
 					"Recording the AI's performance for auditing, analysis, and improvement.",
 				segmentTitle: "Data Logging",
-				value: "Does not log data",
-				valueDescription: "",
+				value: "Logs data",
+				valueDescription:
+					"Request, response, and feedback data is logged to assist in troubleshooting.",
 			},
 			{
 				description:
@@ -91,8 +93,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 					"Sensitive data that can be used to identify an individual.",
 				segmentTitle: "PII",
 				value: "Not Exposed",
-				valueDescription:
-					"PII in discussion replies may be sent to the model, but no PII is intentionally sent to the model.",
+				valueDescription: "",
 			},
 		],
 	},
@@ -110,25 +111,25 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				segmentTitle: "Human in the Loop",
 				value: "Yes",
 				valueDescription:
-					"Untranslated content is available to review translations against",
+					"All created rubrics are reviewable and editable by the instructor.",
 			},
 			{
 				description:
 					"Preventative safety mechanisms or limitations built into the AI model.",
 				segmentTitle: "Guardrails",
-				value: "",
+				value: "The instructor may edit criteria before accepting the rubric.",
 			},
 			{
 				description: "Any risks the model may pose to the user.",
 				segmentTitle: "Expected Risks",
 				value:
-					"Machine translation may not fully capture the meaning of the original message.",
+					"The created rubric may not align with the assignment's intended learning outcomes.",
 			},
 			{
 				description: "The specific results the AI model is meant to achieve.",
 				segmentTitle: "Intended Outcomes",
 				value:
-					"Improve participation for students who do not natively speak the language of instruction or other replies.",
+					"A rubric aligned to learning outcomes is created for the instructor to use during grading.",
 			},
 		],
 	},
@@ -138,7 +139,7 @@ const nutritionFacts: NutritionFactsProps = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: undefined,
-		featureName: "Discussions Translation",
+		featureName: "Rubric Creator",
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
@@ -150,7 +151,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	...{
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Discussions Translation",
+		currentFeature: "Rubric Creator",
 		currentFeatureText: "Current Feature:",
 		data: undefined,
 		modalLabel: "Data Permission Levels modal",
@@ -166,7 +167,7 @@ const aiInformation: AiInformationProps = {
 			{
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-				featureName: "Discussions Translation",
+				featureName: "Rubric Creator",
 				modelName: "Haiku 3",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
@@ -177,7 +178,7 @@ const aiInformation: AiInformationProps = {
 		],
 		dataPermissionLevelsCloseButtonText: "Close",
 		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature: "Discussions Translation",
+		dataPermissionLevelsCurrentFeature: "Rubric Creator",
 		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
 		dataPermissionLevelsData: undefined,
 		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -185,7 +186,7 @@ const aiInformation: AiInformationProps = {
 		nutritionFactsCloseButtonText: "Close",
 		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
 		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Discussions Translation",
+		nutritionFactsFeatureName: "Rubric Creator",
 		nutritionFactsModalLabel: "This is a modal for AI facts",
 		nutritionFactsTitle: "AI Nutrition Facts",
 		title: "Features",
@@ -195,17 +196,15 @@ const aiInformation: AiInformationProps = {
 	nutritionFactsData: NUTRITION_FACTS_DATA,
 	trigger: <Button>AI Information</Button>,
 };
-const canvascoursetranslation: AiInfoFeatureProps = {
+const rubricgenerator: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	description: "AI-generated rubric recommendations for Canvas assignments.",
+	group: "Canvas",
+	name: FEATURE_NAME,
 	nutritionFacts,
-	revision: "2025.09.10",
+	revision: "2025.10.09",
 	uid: UID,
 };
-export {
-	canvascoursetranslation,
-	nutritionFacts,
-	dataPermissionLevels,
-	aiInformation,
-};
-export default canvascoursetranslation;
+export { rubricgenerator, nutritionFacts, dataPermissionLevels, aiInformation };
+export default rubricgenerator;

@@ -1,13 +1,13 @@
-import { Button } from "@instructure/ui-buttons";
 import type {
 	AiInformationProps,
 	DataPermissionLevelsProps,
 	NutritionFactsProps,
-} from "@instructure/ui-instructure";
-import type { AiInfoFeatureProps } from "../types";
+} from "@instructure/ui";
+import { Button } from "@instructure/ui";
+import type { AiInfoFeatureProps } from "../../types";
 
-const FEATURE_NAME = "Discussion Insights";
-const UID = "discussioninsights";
+const FEATURE_NAME = "Agent";
+const UID = "igniteagent";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
 		description:
@@ -46,7 +46,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"The foundational AI on which further training and customizations are built.",
 				segmentTitle: "Base Model",
-				value: "Haiku 3",
+				value: "Haiku 3.5, Sonnet 3.5",
 				valueDescription:
 					"Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
 			},
@@ -60,7 +60,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"Indicates which training or operational content was given to the model.",
 				segmentTitle: "Data Shared with Model",
-				value: "Discussion topic, prompt, and student replies are used.",
+				value:
+					"The model uses chat transcripts and information requested from the Canvas API to execute its actions.",
 			},
 		],
 	},
@@ -70,7 +71,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			{
 				description: "How long the model stores customer data.",
 				segmentTitle: "Data Retention",
-				value: "No user data is stored or reused by the model.",
+				value:
+					"Chat logs are retained indefinitely for troubleshooting and debugging.",
 			},
 			{
 				description:
@@ -78,13 +80,13 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				segmentTitle: "Data Logging",
 				value: "Logs data",
 				valueDescription:
-					"Model evaluations and reply labels are logged for debugging and troubleshooting purposes.",
+					"Chat logs are retained for troubleshooting and debugging purposes.",
 			},
 			{
 				description:
 					"The locations where the AI model is officially available and supported.",
 				segmentTitle: "Regions Supported",
-				value: "Global",
+				value: "Virginia, Oregon",
 				valueDescription: "",
 			},
 			{
@@ -93,7 +95,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				segmentTitle: "PII",
 				value: "Exposed",
 				valueDescription:
-					"Known PII is masked before being sent to the model, though any PII present in the discussion reply is not and may be shared with the model.",
+					"If requested during the the chat, user, course, and student identifiers or metadata may be shared with the model.",
 			},
 		],
 	},
@@ -111,25 +113,26 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				segmentTitle: "Human in the Loop",
 				value: "Yes",
 				valueDescription:
-					"Instructors may review AI-generated evaluations or review posts directly.",
+					"The agent only takes action based on human requests, and all write actions must be confirmed by the user.",
 			},
 			{
 				description:
 					"Preventative safety mechanisms or limitations built into the AI model.",
 				segmentTitle: "Guardrails",
 				value:
-					'Model responses are logged for quality assurance, and responses with low confidence are flagged "Needs Review" to encourage human intervention.',
+					"Access to the agent is limited to users with an Admin- or Teacher-based role. Data access and functions are scoped to the permissions available to the chat user.",
 			},
 			{
 				description: "Any risks the model may pose to the user.",
 				segmentTitle: "Expected Risks",
-				value: "The model may misclassify some nuanced replies.",
+				value:
+					"The model may misinterpret user requests and require additional prompting.",
 			},
 			{
 				description: "The specific results the AI model is meant to achieve.",
 				segmentTitle: "Intended Outcomes",
 				value:
-					"Instructors are able to quickly assess the quality of student replies, identify low-effort or off-topic contributions, and focus their attention to where it is needed most.",
+					"Users are able to save time by relying on the Agent to execute complex workflows, batch actions, and other time-consuming Canvas tasks.",
 			},
 		],
 	},
@@ -139,7 +142,7 @@ const nutritionFacts: NutritionFactsProps = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: undefined,
-		featureName: "Discussion Insights",
+		featureName: "Agent",
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
@@ -151,7 +154,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	...{
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Discussion Insights",
+		currentFeature: "Agent",
 		currentFeatureText: "Current Feature:",
 		data: undefined,
 		modalLabel: "Data Permission Levels modal",
@@ -167,8 +170,8 @@ const aiInformation: AiInformationProps = {
 			{
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-				featureName: "Discussion Insights",
-				modelName: "Haiku 3",
+				featureName: "Agent",
+				modelName: "Haiku 3.5, Sonnet 3.5",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
 				permissionLevel: "LEVEL 2",
@@ -178,7 +181,7 @@ const aiInformation: AiInformationProps = {
 		],
 		dataPermissionLevelsCloseButtonText: "Close",
 		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature: "Discussion Insights",
+		dataPermissionLevelsCurrentFeature: "Agent",
 		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
 		dataPermissionLevelsData: undefined,
 		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -186,7 +189,7 @@ const aiInformation: AiInformationProps = {
 		nutritionFactsCloseButtonText: "Close",
 		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
 		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Discussion Insights",
+		nutritionFactsFeatureName: "Agent",
 		nutritionFactsModalLabel: "This is a modal for AI facts",
 		nutritionFactsTitle: "AI Nutrition Facts",
 		title: "Features",
@@ -196,17 +199,16 @@ const aiInformation: AiInformationProps = {
 	nutritionFactsData: NUTRITION_FACTS_DATA,
 	trigger: <Button>AI Information</Button>,
 };
-const discussioninsights: AiInfoFeatureProps = {
+const igniteagent: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	description:
+		"Ignite Agent is a faculty chat assistant capable of translating natural language requests into complex Canvas workflows.",
+	group: "IgniteAI",
+	name: FEATURE_NAME,
 	nutritionFacts,
-	revision: "2025.10.02",
+	revision: "2025.09.10",
 	uid: UID,
 };
-export {
-	discussioninsights,
-	nutritionFacts,
-	dataPermissionLevels,
-	aiInformation,
-};
-export default discussioninsights;
+export { igniteagent, nutritionFacts, dataPermissionLevels, aiInformation };
+export default igniteagent;

@@ -1,0 +1,97 @@
+name: After aiinfo Release → Bump nutritionfacts
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  CI: 1
+
+jobs:
+  bump-nutritionfacts:
+    name: Bump nutritionfacts on aiinfo release
+    runs-on: ubuntu-latest
+
+    if: contains(github.event.release.name, '@instructure.ai/aiinfo') || contains(github.event.release.tag_name, '@instructure.ai/aiinfo')
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Create release branch
+        id: mkbranch
+        shell: bash
+        run: |
+          set -euo pipefail
+          TS="$(date -u +%s)"
+          BRANCH="release-${TS}"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+          git switch -c "$BRANCH"
+
+      - name: Update nutritionfacts deps
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm -F nutritionfacts up @instructure.ai/aiinfo@latest
+
+      - name: Commit changes (if any)
+        id: commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -A
+          if git diff --cached --quiet; then
+            echo "no_changes=true" >> "$GITHUB_OUTPUT"
+            echo "No changes to commit."
+          else
+            git commit -m "(chore) update dependencies"
+            echo "no_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run custom release step
+        if: steps.commit.outputs.no_changes == 'false'
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Your custom command
+          git release app nutritionfacts
+
+      - name: Push branch
+        if: steps.commit.outputs.no_changes == 'false'
+        run: |
+          git push --set-upstream origin "${{ steps.mkbranch.outputs.branch }}"
+
+      - name: Create PR and enable auto-merge
+        if: steps.commit.outputs.no_changes == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          PR_URL=$(gh pr create \
+            --title "(chore) nutritionfacts deps sync after aiinfo release" \
+            --body "Automated bump after release: **${{ github.event.release.tag_name || github.event.release.name }}**" \
+            --base main \
+            --head "${{ steps.mkbranch.outputs.branch }}")
+          echo "Opened PR: $PR_URL"
+          # Queue auto-merge (squash). Requires repo setting 'Allow auto-merge' to be enabled.
+          gh pr merge --auto --squash "$PR_URL"

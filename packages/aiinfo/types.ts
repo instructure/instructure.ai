@@ -2,7 +2,7 @@ import type {
 	AiInformationProps,
 	DataPermissionLevelsProps,
 	NutritionFactsProps,
-} from "@instructure/ui-instructure";
+} from "@instructure/ui";
 import type { AnsiColors, AnsiStyles } from "ansis";
 import type { ParseResult } from "papaparse";
 
@@ -17,9 +17,11 @@ type AiInfoFeature = {
 	aiInformation: AiInformationProps;
 	dataPermissionLevels: DataPermissionLevelsProps;
 	nutritionFacts: NutritionFactsProps;
+	name: string;
+	group: string;
 };
 
-type FeatureName = string;
+type FeatureName = AiInfoFeature["uid"];
 
 type AiInfo = Record<FeatureName, AiInfoFeature>;
 
@@ -147,7 +149,6 @@ type ChangedEntry = {
 };
 
 type PermissionLevel = {
-	id: string;
 	description: string;
 	highlighted?: boolean;
 	title?: string;

@@ -1,13 +1,13 @@
-import { Button } from "@instructure/ui-buttons";
 import type {
 	AiInformationProps,
 	DataPermissionLevelsProps,
 	NutritionFactsProps,
-} from "@instructure/ui-instructure";
-import type { AiInfoFeatureProps } from "../types";
+} from "@instructure/ui";
+import { Button } from "@instructure/ui";
+import type { AiInfoFeatureProps } from "../../types";
 
-const FEATURE_NAME = "Inbox Translation";
-const UID = "canvasinboxtranslation";
+const FEATURE_NAME = "Discussion Insights";
+const UID = "discussioninsights";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
 		description:
@@ -46,9 +46,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"The foundational AI on which further training and customizations are built.",
 				segmentTitle: "Base Model",
-				value: "AWS Translate",
+				value: "Haiku 3",
 				valueDescription:
-					"Anthropic Claude models are provided via Instructure's in-house AI Platform.",
+					"Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
 			},
 			{
 				description:
@@ -60,7 +60,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"Indicates which training or operational content was given to the model.",
 				segmentTitle: "Data Shared with Model",
-				value: "Inbox messages",
+				value: "Discussion topic, prompt, and student replies are used.",
 			},
 		],
 	},
@@ -70,14 +70,15 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			{
 				description: "How long the model stores customer data.",
 				segmentTitle: "Data Retention",
-				value: "Data is not stored or reused by the model.",
+				value: "No user data is stored or reused by the model.",
 			},
 			{
 				description:
 					"Recording the AI's performance for auditing, analysis, and improvement.",
 				segmentTitle: "Data Logging",
-				value: "Does not log data",
-				valueDescription: "",
+				value: "Logs data",
+				valueDescription:
+					"Model evaluations and reply labels are logged for debugging and troubleshooting purposes.",
 			},
 			{
 				description:
@@ -90,9 +91,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"Sensitive data that can be used to identify an individual.",
 				segmentTitle: "PII",
-				value: "Not Exposed",
+				value: "Exposed",
 				valueDescription:
-					"PII in inbox messages may be sent to the model but no PII is intentionally sent to the model.",
+					"Known PII is masked before being sent to the model, though any PII present in the discussion reply is not and may be shared with the model.",
 			},
 		],
 	},
@@ -110,25 +111,25 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				segmentTitle: "Human in the Loop",
 				value: "Yes",
 				valueDescription:
-					"Users are displayed the translated copy of their message and can edit or remove it before they send the message.",
+					"Instructors may review AI-generated evaluations or review posts directly.",
 			},
 			{
 				description:
 					"Preventative safety mechanisms or limitations built into the AI model.",
 				segmentTitle: "Guardrails",
-				value: "",
+				value:
+					'Model responses are logged for quality assurance, and responses with low confidence are flagged "Needs Review" to encourage human intervention.',
 			},
 			{
 				description: "Any risks the model may pose to the user.",
 				segmentTitle: "Expected Risks",
-				value:
-					"Machine translation may not fully capture the meaning of the original message.",
+				value: "The model may misclassify some nuanced replies.",
 			},
 			{
 				description: "The specific results the AI model is meant to achieve.",
 				segmentTitle: "Intended Outcomes",
 				value:
-					"Enable better multi-lingual communication in learning environments.",
+					"Instructors are able to quickly assess the quality of student replies, identify low-effort or off-topic contributions, and focus their attention to where it is needed most.",
 			},
 		],
 	},
@@ -138,7 +139,7 @@ const nutritionFacts: NutritionFactsProps = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: undefined,
-		featureName: "Inbox Translation",
+		featureName: "Discussion Insights",
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
@@ -150,7 +151,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	...{
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Inbox Translation",
+		currentFeature: "Discussion Insights",
 		currentFeatureText: "Current Feature:",
 		data: undefined,
 		modalLabel: "Data Permission Levels modal",
@@ -166,8 +167,8 @@ const aiInformation: AiInformationProps = {
 			{
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-				featureName: "Inbox Translation",
-				modelName: "AWS Translate",
+				featureName: "Discussion Insights",
+				modelName: "Haiku 3",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
 				permissionLevel: "LEVEL 2",
@@ -177,7 +178,7 @@ const aiInformation: AiInformationProps = {
 		],
 		dataPermissionLevelsCloseButtonText: "Close",
 		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature: "Inbox Translation",
+		dataPermissionLevelsCurrentFeature: "Discussion Insights",
 		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
 		dataPermissionLevelsData: undefined,
 		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -185,7 +186,7 @@ const aiInformation: AiInformationProps = {
 		nutritionFactsCloseButtonText: "Close",
 		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
 		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Inbox Translation",
+		nutritionFactsFeatureName: "Discussion Insights",
 		nutritionFactsModalLabel: "This is a modal for AI facts",
 		nutritionFactsTitle: "AI Nutrition Facts",
 		title: "Features",
@@ -195,17 +196,21 @@ const aiInformation: AiInformationProps = {
 	nutritionFactsData: NUTRITION_FACTS_DATA,
 	trigger: <Button>AI Information</Button>,
 };
-const canvasinboxtranslation: AiInfoFeatureProps = {
+const discussioninsights: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	description:
+		"Discussion Insights uses AI to evaluate student discussion replies, highlight relevant contributions, and flag those that may need instructor review.",
+	group: "Canvas",
+	name: FEATURE_NAME,
 	nutritionFacts,
-	revision: "2025.09.10",
+	revision: "2025.10.02",
 	uid: UID,
 };
 export {
-	canvasinboxtranslation,
+	discussioninsights,
 	nutritionFacts,
 	dataPermissionLevels,
 	aiInformation,
 };
-export default canvasinboxtranslation;
+export default discussioninsights;

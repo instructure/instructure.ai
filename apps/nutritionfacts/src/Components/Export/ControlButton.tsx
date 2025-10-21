@@ -17,7 +17,7 @@ const ControlButton: React.FC<ControlButtonProps> = ({
 	background = false,
 	disabled = false,
 	color = "primary",
-	border = true,
+	border = false,
 }) => (
 	<Tooltip
 		className="screen-only"

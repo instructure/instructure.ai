@@ -1,6 +1,6 @@
 import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { Entry } from "../types"; // fixed import for Entry type
+import type { Entry } from "../types";
 
 const mkdirSyncSpy = vi.fn();
 const writeFileSyncSpy = vi.fn();
@@ -136,6 +136,7 @@ describe("writeEntry", () => {
 		const expectedPath = path.resolve(
 			process.cwd(),
 			"src",
+			"components",
 			entry.uid,
 			"index.tsx",
 		);
@@ -193,8 +194,12 @@ describe("writeEntry", () => {
 		await writeEntry(makeEntry("uid2"));
 		expect(writeFileSyncSpy).toHaveBeenCalledTimes(2);
 		const paths = writeFileSyncSpy.mock.calls.map((c) => c[0]);
-		expect(paths[0]).toContain(path.join("src", "uid1", "index.tsx"));
-		expect(paths[1]).toContain(path.join("src", "uid2", "index.tsx"));
+		expect(paths[0]).toContain(
+			path.join("src", "components", "uid1", "index.tsx"),
+		);
+		expect(paths[1]).toContain(
+			path.join("src", "components", "uid2", "index.tsx"),
+		);
 	});
 
 	it("formatTs output is used then post-processed for trigger", async () => {

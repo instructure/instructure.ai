@@ -5,9 +5,8 @@ const Divider = () => {
 		<View
 			as="div"
 			borderColor="primary"
-			borderRadius="large"
-			borderWidth="0 medium 0 0"
-			minHeight="100%"
+			borderWidth="medium 0 0"
+			margin="0 0 medium"
 		/>
 	);
 };

@@ -1,35 +1,33 @@
 {
-  "dependencies": {
-    "@instructure/shared-types": ">=10.22.0 < 12",
-    "@instructure/ui-buttons": ">=10.22.0 < 12",
-    "@instructure/ui-instructure": ">=10.22.0 < 12"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@instructure.ai/shared-configs": "workspace:^",
     "@types/papaparse": "^5.3.16",
     "ansis": "^4.2.0",
     "papaparse": "^5.5.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "@instructure/shared-types": "^11.0.1",
+    "@instructure/ui": "^11.0.1"
   },
   "engines": {
     "node": ">=20"
   },
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.mjs"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
     }
   },
   "files": [
-    "dist",
-    "*.md"
+    "dist"
   ],
   "module": "./dist/index.mjs",
   "name": "@instructure.ai/aiinfo",
   "peerDependencies": {
     "react": "^18 || ^19",
-    "react-dom": "^18 || ^19"
+    "react-dom": "^18 || ^19",
+    "@instructure/ui": "^10.22.0 || ^11"
   },
   "publishConfig": {
     "access": "public"
@@ -52,5 +50,5 @@
   "sideEffects": false,
   "type": "module",
   "types": "./dist/index.d.ts",
-  "version": "1.3.1"
+  "version": "1.4.0"
 }

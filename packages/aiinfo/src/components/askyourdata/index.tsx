@@ -1,13 +1,13 @@
-import { Button } from "@instructure/ui-buttons";
 import type {
 	AiInformationProps,
 	DataPermissionLevelsProps,
 	NutritionFactsProps,
-} from "@instructure/ui-instructure";
-import type { AiInfoFeatureProps } from "../types";
+} from "@instructure/ui";
+import { Button } from "@instructure/ui";
+import type { AiInfoFeatureProps } from "../../types";
 
-const FEATURE_NAME = "Block Content Editor Alt Text Generator";
-const UID = "bcealttext";
+const FEATURE_NAME = "Ask Your Data";
+const UID = "askyourdata";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
 		description:
@@ -46,9 +46,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"The foundational AI on which further training and customizations are built.",
 				segmentTitle: "Base Model",
-				value: "Haiku 3",
+				value: "Doowii (multiple)",
 				valueDescription:
-					"Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+					"Doowii is a third-party sub-processor for Intelligent Insights. Doowii's tools use OpenAI GPT-4o, GPT-3.5 Turbo, and Claude Sonnet 3.5",
 			},
 			{
 				description:
@@ -60,7 +60,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"Indicates which training or operational content was given to the model.",
 				segmentTitle: "Data Shared with Model",
-				value: "Content Editor Images.",
+				value:
+					"Doowii is trained on the Canvas LMS database schema, and receives no data from Canvas. The user's prompt and heuristics (such as summary statistics) are shared with the model to generate a response.",
 			},
 		],
 	},
@@ -70,15 +71,15 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			{
 				description: "How long the model stores customer data.",
 				segmentTitle: "Data Retention",
-				value: "Model responses are stored for debugging purposes.",
+				value:
+					"Data is retained through the life of your contract with Instructure.",
 			},
 			{
 				description:
 					"Recording the AI's performance for auditing, analysis, and improvement.",
 				segmentTitle: "Data Logging",
 				value: "Logs data",
-				valueDescription:
-					"Request, response, and feedback data is logged to assist in troubleshooting.",
+				valueDescription: "",
 			},
 			{
 				description:
@@ -91,8 +92,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"Sensitive data that can be used to identify an individual.",
 				segmentTitle: "PII",
-				value: "Not Exposed",
-				valueDescription: "",
+				value: "Exposed",
+				valueDescription: "Prompt, summary statistics.",
 			},
 		],
 	},
@@ -102,30 +103,34 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			{
 				description: "The ability to turn the AI on or off within the product.",
 				segmentTitle: "AI Settings Control",
-				value: "No",
+				value: "Yes",
 			},
 			{
 				description:
 					"Indicates if a human is involved in the AI's process or output.",
 				segmentTitle: "Human in the Loop",
 				value: "Yes",
-				valueDescription: "User initiated, User must confirm output.",
+				valueDescription:
+					"Ask your data returns a methodology description along with a generated query. Users have the ability to edit the generated SQL directly.",
 			},
 			{
 				description:
 					"Preventative safety mechanisms or limitations built into the AI model.",
 				segmentTitle: "Guardrails",
-				value: "",
+				value:
+					"Questions are scoped to the domain only, highly ambiguous terms ask for clarification.",
 			},
 			{
 				description: "Any risks the model may pose to the user.",
 				segmentTitle: "Expected Risks",
-				value: "Alt text might not always be accurate. ",
+				value:
+					"Incorrect interpretation of the question. Inaccurate SQL may be generated. Suggested questions or methodologies may not be relevant.",
 			},
 			{
 				description: "The specific results the AI model is meant to achieve.",
 				segmentTitle: "Intended Outcomes",
-				value: "An accessible Alt Text description of the image is generated.",
+				value:
+					"Provide accurate data retrieval and analysis through natural language prompting.",
 			},
 		],
 	},
@@ -135,7 +140,7 @@ const nutritionFacts: NutritionFactsProps = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: undefined,
-		featureName: "Block Content Editor Alt Text Generator",
+		featureName: "Ask Your Data",
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
@@ -147,7 +152,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	...{
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Block Content Editor Alt Text Generator",
+		currentFeature: "Ask Your Data",
 		currentFeatureText: "Current Feature:",
 		data: undefined,
 		modalLabel: "Data Permission Levels modal",
@@ -163,8 +168,8 @@ const aiInformation: AiInformationProps = {
 			{
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-				featureName: "Block Content Editor Alt Text Generator",
-				modelName: "Haiku 3",
+				featureName: "Ask Your Data",
+				modelName: "Doowii (multiple)",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
 				permissionLevel: "LEVEL 2",
@@ -174,8 +179,7 @@ const aiInformation: AiInformationProps = {
 		],
 		dataPermissionLevelsCloseButtonText: "Close",
 		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature:
-			"Block Content Editor Alt Text Generator",
+		dataPermissionLevelsCurrentFeature: "Ask Your Data",
 		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
 		dataPermissionLevelsData: undefined,
 		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -183,7 +187,7 @@ const aiInformation: AiInformationProps = {
 		nutritionFactsCloseButtonText: "Close",
 		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
 		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Block Content Editor Alt Text Generator",
+		nutritionFactsFeatureName: "Ask Your Data",
 		nutritionFactsModalLabel: "This is a modal for AI facts",
 		nutritionFactsTitle: "AI Nutrition Facts",
 		title: "Features",
@@ -193,12 +197,16 @@ const aiInformation: AiInformationProps = {
 	nutritionFactsData: NUTRITION_FACTS_DATA,
 	trigger: <Button>AI Information</Button>,
 };
-const bcealttext: AiInfoFeatureProps = {
+const askyourdata: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	description:
+		"AI-powered query tool enables users to ask natural language questions and receive textual or visual responses with detailed explanations of the methodology.",
+	group: "Intelligent Insights",
+	name: FEATURE_NAME,
 	nutritionFacts,
-	revision: "2025.10.01",
+	revision: "2025.09.12",
 	uid: UID,
 };
-export { bcealttext, nutritionFacts, dataPermissionLevels, aiInformation };
-export default bcealttext;
+export { askyourdata, nutritionFacts, dataPermissionLevels, aiInformation };
+export default askyourdata;

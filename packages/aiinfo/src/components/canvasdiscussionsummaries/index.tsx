@@ -1,10 +1,10 @@
-import { Button } from "@instructure/ui-buttons";
 import type {
 	AiInformationProps,
 	DataPermissionLevelsProps,
 	NutritionFactsProps,
-} from "@instructure/ui-instructure";
-import type { AiInfoFeatureProps } from "../types";
+} from "@instructure/ui";
+import { Button } from "@instructure/ui";
+import type { AiInfoFeatureProps } from "../../types";
 
 const FEATURE_NAME = "Discussion Summaries";
 const UID = "canvasdiscussionsummaries";
@@ -198,6 +198,9 @@ const aiInformation: AiInformationProps = {
 const canvasdiscussionsummaries: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	description: "Discussion summaries of key points, questions, and insights.",
+	group: "Canvas",
+	name: FEATURE_NAME,
 	nutritionFacts,
 	revision: "2025.09.12",
 	uid: UID,

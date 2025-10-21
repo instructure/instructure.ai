@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { permissionLevelsStrings as snapshotStrings } from "../tests/__snapshots__/permissionLevelsStrings";
-import type { Entry } from "../types";
+import type { Entry, Result } from "../types";
 
 var backing: typeof snapshotStrings.en = snapshotStrings.en;
 
@@ -21,25 +21,6 @@ vi.mock("../strings", () => ({
 	},
 }));
 
-type PermissionLevel = {
-	id: string;
-	description: string;
-	highlighted?: boolean;
-	title?: string;
-	level?: string;
-};
-
-type Result = {
-	closeButtonText: string;
-	closeIconButtonScreenReaderLabel: string;
-	currentFeatureText: string;
-	modalLabel: string;
-	title: string;
-	triggerText: string;
-	currentFeature: string;
-	data: PermissionLevel[];
-};
-
 type Fn = (e: Entry) => Result;
 
 const importSubject = async (): Promise<Fn> => {
@@ -55,6 +36,7 @@ const setBacking = (overrides: Partial<typeof backing> = {}) => {
 const buildEntry = (custom: Partial<Entry> = {}): Entry =>
 	({
 		feature: { description: "Desc", name: "FeatureX" },
+		group: "GroupA",
 		permissions: custom.permissions as unknown as Entry["permissions"],
 		revision: "1",
 		uid: "uid-1",
@@ -82,7 +64,7 @@ describe("entryToPermissionLevels", () => {
 		expect(result.currentFeature).toBe("FeatureX");
 		const highlighted = result.data.filter((d) => d.highlighted);
 		expect(highlighted).toHaveLength(1);
-		expect(highlighted[0].id).toBe("L2");
+		expect(highlighted[0].level).toBe("LEVEL 2");
 	});
 
 	it('highlights first index when permissions "1"', async () => {
@@ -177,13 +159,6 @@ describe("entryToPermissionLevels", () => {
 	});
 
 	// Additional tests
-
-	it("returns correct ids for all permission levels", async () => {
-		const entryToPermissionLevels = await importSubject();
-		const result = entryToPermissionLevels(buildEntry({ permissions: "1" }));
-		const ids = result.data.map((d) => d.id);
-		expect(ids.every((id) => /^L\d+$/.test(id))).toBe(true);
-	});
 
 	it("returns empty string for currentFeature if feature is missing", async () => {
 		const entryToPermissionLevels = await importSubject();
@@ -353,13 +328,13 @@ describe("entryToPermissionLevels edge cases", () => {
 	it("returns correct highlighted for valid permission string", () => {
 		const result = entryToPermissionLevels(buildEntry({ permissions: "2" }));
 		expect(result.data.some((d) => d.highlighted)).toBe(true);
-		expect(result.data.find((d) => d.highlighted)?.id).toBe("L2");
+		expect(result.data.find((d) => d.highlighted)?.level).toBe("LEVEL 2");
 	});
 
 	it("returns correct highlighted for valid permission string '1'", () => {
 		const result = entryToPermissionLevels(buildEntry({ permissions: "1" }));
 		expect(result.data.some((d) => d.highlighted)).toBe(true);
-		expect(result.data.find((d) => d.highlighted)?.id).toBe("L1");
+		expect(result.data.find((d) => d.highlighted)?.level).toBe("LEVEL 1");
 	});
 
 	it("returns all highlighted false for permission string not matching any level", () => {

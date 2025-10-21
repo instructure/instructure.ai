@@ -1,6 +1,6 @@
 import { Link, type LinkProps } from "@instructure/ui";
-import type { ProductNutritionFacts } from "../types"; // adjust path as needed
-import { colors } from "./"; // adjust path as needed
+import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
+import { colors } from "./colors";
 import {
 	CanvasBug,
 	IgniteBug,
@@ -10,16 +10,13 @@ import {
 	type SVGWrapperProps,
 } from "./Logos";
 
-const csvUrl =
-	"https://docs.google.com/spreadsheets/d/e/2PACX-1vRTUoO92jyiHlJq36oKbtCdL57J7bdOKJbhxRahR2YTR6lTyfhQyo5kidHRwk45jagV9C9DXf80SgfS/pub?gid=2000446087&single=true&output=csv";
-
 const baseUrl =
 	typeof window !== "undefined"
 		? `${window.location.origin}${window.location.pathname}`
 		: "https://instructure.ai/nutritionfacts";
 
 const brands: Record<
-	NonNullable<ProductNutritionFacts["group"]>,
+	Lowercase<AiInfoFeatureProps["group"]>,
 	{
 		name: string;
 		color: string;
@@ -81,4 +78,4 @@ const disclaimer = (color: LinkProps["color"] = "link") => (
 
 const copyright = `©${new Date().getFullYear()} Instructure, Inc. All rights reserved.`;
 
-export { csvUrl, baseUrl, colors, disclaimer, copyright, brands };
+export { baseUrl, colors, disclaimer, copyright, brands };

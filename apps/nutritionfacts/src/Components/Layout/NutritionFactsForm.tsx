@@ -1,45 +1,40 @@
-import { Flex, Heading, Text, View } from "@instructure/ui";
+import {
+	Flex,
+	Heading,
+	IconAiLine,
+	type NutritionFactsProps,
+	Text,
+	View,
+} from "@instructure/ui";
+import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import type { Dispatch, FC, SetStateAction } from "react";
-import { Permissions } from "../../assets";
-import type { PageLayout, ProductNutritionFacts } from "../../types.ts";
+import type { ExtendedNutritionFactsProps, PageLayout } from "../../types";
+import { Divider } from "./";
+import { extendedNutritionFacts } from "./extendedNutritionFacts";
 import { Presets } from "./Presets";
 
 const NutritionFactsForm: FC<{
-	product: ProductNutritionFacts;
+	product: AiInfoFeatureProps | undefined;
 	layout: PageLayout;
-	setProduct: Dispatch<SetStateAction<ProductNutritionFacts>>;
-}> = ({ product, layout, setProduct }) => {
-	const getRevisionDate = () => {
-		const d = new Date();
-		const yyyy = d.getFullYear();
-		const mm = String(d.getMonth() + 1).padStart(2, "0");
-		const dd = String(d.getDate()).padStart(2, "0");
-		return `${yyyy}.${mm}.${dd}`;
-	};
-	const params = new URLSearchParams(window.location.search);
-	const noParams = params.size === 0;
+	setProduct: Dispatch<SetStateAction<AiInfoFeatureProps | undefined>>;
+	isNarrow?: boolean;
+}> = ({ product, layout, setProduct, isNarrow }) => {
+	function isNutritionFacts(obj: unknown): obj is NutritionFactsProps {
+		return (
+			typeof obj === "object" &&
+			obj !== null &&
+			typeof (obj as NutritionFactsProps).modalLabel === "string"
+		);
+	}
 
-	const productPermissions =
-		Permissions[product.permissions as keyof typeof Permissions];
-
-	const hasPermissions =
-		typeof productPermissions === "object" &&
-		productPermissions !== null &&
-		"name" in productPermissions &&
-		"title" in productPermissions &&
-		"description" in productPermissions &&
-		typeof productPermissions.name === "string" &&
-		typeof productPermissions.title === "string" &&
-		typeof productPermissions.description === "string";
-
-	const heading =
-		product.group && product.group !== "other"
-			? `${product.group} ${product.name}`
-			: (product.name ?? "No product selected");
+	let Feature: ExtendedNutritionFactsProps | undefined;
+	if (product && isNutritionFacts(product?.nutritionFacts)) {
+		Feature = extendedNutritionFacts(product);
+	}
 
 	return (
 		<>
-			<Flex alignItems="start" direction="row">
+			<Flex alignItems="end" direction={isNarrow ? "column" : "row"}>
 				<Flex.Item shouldGrow shouldShrink>
 					<Heading
 						aiVariant="stacked"
@@ -50,93 +45,91 @@ const NutritionFactsForm: FC<{
 						Nutrition Facts
 					</Heading>
 				</Flex.Item>
-			</Flex>
-			<Flex alignItems="start" direction="row">
-				<Flex.Item shouldGrow shouldShrink>
-					<View as="div" borderWidth="medium 0 0 0" padding="medium 0 0">
-						{noParams ? (
-							<Presets setProduct={setProduct} />
-						) : (
-							<Heading as="h2">{heading}</Heading>
-						)}
-					</View>
-					<Heading as="h3" margin="medium 0 xx-small 0">
-						Description
-					</Heading>
-					<Text size="small">{product.description}</Text>
-					{product.data.map((block) => (
-						<View as="div" key={block.blockTitle}>
-							<Heading as="h3" margin="medium 0 0">
-								{block.blockTitle}
-							</Heading>
-							{block.segmentData.map((segment) => (
-								<View
-									as="div"
-									borderRadius="medium"
-									borderWidth="small"
-									data-print="no-break"
-									key={segment.segmentTitle}
-									margin="small 0"
-									padding="small"
-								>
-									<Heading as="h4">{segment.segmentTitle}</Heading>
-									<View as="div" margin="0 0 x-small">
-										<Text color="secondary" size="contentSmall">
-											{segment.description}
-										</Text>
-									</View>
-									{segment.valueHint && (
-										<View as="div">
-											<Text>{segment.value}</Text>
-										</View>
-									)}
-									<View as="div">
-										{segment.descriptionHint && (
-											<Text size="small">{segment.valueDescription}</Text>
-										)}
-									</View>
-								</View>
-							))}
-						</View>
-					))}
-					{layout.permissions && hasPermissions && (
-						<>
-							<Heading as="h3" margin="medium 0 0">
-								Permission Level
-							</Heading>
-							<View
-								as="div"
-								borderRadius="medium"
-								borderWidth="small"
-								data-print="no-break"
-								margin="small 0"
-								padding="small"
-							>
-								<Heading as="h4">{productPermissions.name}</Heading>
-								{productPermissions.descriptionHint && (
-									<View as="div" margin="0 0 x-small">
-										<Text>{productPermissions.descriptionHint}</Text>
-									</View>
-								)}
-								<View as="div">
-									<Text size="small">{productPermissions.description}</Text>
-								</View>
-							</View>
-						</>
-					)}
-					<View as="div" margin="0 auto" maxWidth="66%" textAlign="center">
-						{layout.revision && (
-							<Text
-								color="secondary"
-								data-print={layout.revision ? "" : "hidden"}
-								variant="contentSmall"
-							>
-								Revision:{" "}
-								{product.revision ? product.revision : getRevisionDate()}
-							</Text>
-						)}
+				<Flex.Item size="50%">
+					<View as="div" margin="0 0 small">
+						<Presets product={product} setProduct={setProduct} />
 					</View>
 				</Flex.Item>
+			</Flex>
+			<Divider />
+			<Flex alignItems="center" direction="column">
+				{Feature ? (
+					<>
+						<Flex.Item>
+							<Heading level="h2" variant="titleCardSection">
+								{Feature.featureName}
+							</Heading>
+							{Feature.data.map(({ blockTitle, segmentData }) => {
+								return (
+									<View as="div" key={blockTitle} margin="sectionElements 0">
+										<Heading level="h3" variant="titleModule">
+											{blockTitle}
+										</Heading>
+										<View as="div" margin="sectionElements 0 0">
+											{segmentData.map(
+												({
+													segmentTitle,
+													description,
+													value,
+													valueDescription,
+												}) => {
+													return (
+														<View
+															as="div"
+															borderColor="primary"
+															borderRadius="medium"
+															borderWidth="small"
+															key={segmentTitle}
+															margin="0 0 modalElements"
+															padding="space12"
+														>
+															<View as="div" margin="0 0 space8">
+																<Heading level="h4" variant="label">
+																	{segmentTitle}
+																</Heading>
+																<Text color="secondary" variant="contentSmall">
+																	{description}
+																</Text>
+															</View>
+															<Text variant="content">{value}</Text>
+															{valueDescription && (
+																<>
+																	<br />
+																	<Text
+																		color="secondary"
+																		variant="contentSmall"
+																	>
+																		{valueDescription}
+																	</Text>
+																</>
+															)}
+														</View>
+													);
+												},
+											)}
+										</View>
+									</View>
+								);
+							})}
+						</Flex.Item>
+						{layout.revision && product?.revision && (
+							<Flex.Item>
+								<Text color="secondary" variant="contentSmall">
+									Revision: {product.revision}
+								</Text>
+							</Flex.Item>
+						)}
+					</>
+				) : (
+					<Flex.Item shouldGrow shouldShrink>
+						<View as="div" margin="0 0 medium" textAlign="center">
+							<IconAiLine color="secondary" size="x-large" />
+						</View>
+						<Heading color="secondary" level="h2" variant="titleCardSection">
+							Select a feature to view its Nutrition Facts
+						</Heading>
+					</Flex.Item>
+				)}
 			</Flex>
 		</>
 	);

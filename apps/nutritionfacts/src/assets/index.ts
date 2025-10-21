@@ -1,12 +1,8 @@
-export { AiInformation } from "./AiInformation";
-export { default as Cache } from "./cache.csv?raw";
-export { default as cacheJson } from "./cache.json";
 export { colors } from "./colors";
 export {
 	baseUrl,
 	brands,
 	copyright,
-	csvUrl,
 	disclaimer,
 } from "./consts";
 export { DefaultLayout } from "./Layout";
@@ -16,8 +12,7 @@ export {
 	InstructureBug,
 	MasteryBug,
 	ParchmentBug,
+	type SVGWrapperProps,
 } from "./Logos";
 export { default as Logo } from "./logo.svg?raw";
 export { default as LogoDark } from "./logoDark.svg?raw";
-export { Permissions } from "./Permissions";
-export { Product } from "./Products";

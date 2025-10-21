@@ -7,11 +7,13 @@ export default mergeConfig(
 	defineConfig({
 		build: {
 			lib: {
-				entry: "src/index.mts",
+				entry: "src/index.ts",
+				fileName: (format) => (format === "es" ? "index.mjs" : "index.cjs"),
+				formats: ["es", "cjs"],
 				name: "AiInfo",
 			},
 			rollupOptions: {
-				external: [/^react($|\/)/, /^react-dom($|\/)/, /^@instructure\/ui-/],
+				external: [/^react($|\/)/, /^react-dom($|\/)/, /^@instructure\/ui/],
 			},
 		},
 		plugins: [

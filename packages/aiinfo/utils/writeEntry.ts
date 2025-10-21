@@ -9,12 +9,26 @@ import {
 	toTsObjectLiteral,
 } from "../utils";
 
+/**
+ * Writes a TypeScript entry file for the given Entry object.
+ * The file is created at src/components/{entry.uid}/index.tsx and contains
+ * all relevant data objects for the feature.
+ *
+ * @param entry - The Entry object to serialize and write.
+ */
 export async function writeEntry(entry: Entry) {
-	const file = resolve(process.cwd(), "src", entry.uid, "index.tsx");
+	const file = resolve(
+		process.cwd(),
+		"src",
+		"components",
+		entry.uid,
+		"index.tsx",
+	);
 
 	const UID = entry.uid;
 	const FEATURE_NAME = entry.feature.name;
 	const REVISION = entry.revision;
+	const DESCRIPTION = entry.feature.description;
 
 	const nutritionFacts = entryToNutritionFacts(entry);
 	const aiInformation = entryToAIInformation(entry);
@@ -23,13 +37,13 @@ export async function writeEntry(entry: Entry) {
 	const DPL = dataPermissionLevels.data;
 	const NF = nutritionFacts.data;
 
-	const code = `import { Button } from "@instructure/ui-buttons";
+	const code = `import { Button } from "@instructure/ui";
 import type {
   AiInformationProps,
   DataPermissionLevelsProps,
   NutritionFactsProps,
-} from "@instructure/ui-instructure";
-import type { AiInfoFeatureProps } from "../types";
+} from "@instructure/ui";
+import type { AiInfoFeatureProps } from "../../types";
 
 const FEATURE_NAME = ${JSON.stringify(FEATURE_NAME)};
 const UID = ${JSON.stringify(UID)};
@@ -48,11 +62,12 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
   data: DATA_PERMISSION_LEVELS,
   currentFeature: FEATURE_NAME,
 };
+
 const aiInformation: AiInformationProps = {
   ...${toTsObjectLiteral({ ...aiInformation, dataPermissionLevelsData: undefined, nutritionFactsData: undefined, trigger: undefined })},
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
   nutritionFactsData: NUTRITION_FACTS_DATA,
-	trigger: "${aiInformation.trigger}",
+  trigger: "${aiInformation.trigger}",
 };
 
 const ${UID}: AiInfoFeatureProps = {
@@ -61,13 +76,18 @@ const ${UID}: AiInfoFeatureProps = {
   nutritionFacts,
   revision: ${JSON.stringify(REVISION)},
   uid: UID,
+  group: ${JSON.stringify(entry.group)},
+	name: FEATURE_NAME,
+	description: ${JSON.stringify(DESCRIPTION)},
 }
+
 export {
-	${UID}
+  ${UID},
   nutritionFacts,
   dataPermissionLevels,
   aiInformation,
 };
+
 export default ${UID};
 `;
 

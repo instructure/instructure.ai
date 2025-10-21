@@ -1,6 +1,6 @@
 import { IconLinkLine, type SVGIconProps } from "@instructure/ui";
+import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { baseUrl } from "../../assets";
-import type { ProductNutritionFacts } from "../../types.ts";
 import { ControlButton } from "./ControlButton.tsx";
 
 const PermanentLink = async (id: string) => {
@@ -23,7 +23,7 @@ const LinkControl = ({
 	border,
 	color,
 }: {
-	product?: ProductNutritionFacts;
+	product: AiInfoFeatureProps;
 	background?: boolean;
 	border?: boolean;
 	color?: "primary" | "primary-inverse";
@@ -33,14 +33,11 @@ const LinkControl = ({
 			background={background}
 			border={border}
 			color={color}
-			disabled={!product?.id}
 			Icon={IconLinkLine as React.ElementType<SVGIconProps>}
 			key="link"
 			label="Copy permalink"
 			onClick={() => {
-				if (product?.id) {
-					PermanentLink(product.id);
-				}
+				PermanentLink(product.uid);
 			}}
 		/>
 	);
