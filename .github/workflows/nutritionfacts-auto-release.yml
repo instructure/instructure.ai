@@ -1,8 +1,8 @@
-name: After aiinfo Release → Bump nutritionfacts
+name: Nutrition Facts autorelease
 
 on:
-  release:
-    types: [published]
+  repository_dispatch:
+    types: [aiinfo_release]
 
 permissions:
   contents: write
@@ -15,8 +15,6 @@ jobs:
   bump-nutritionfacts:
     name: Bump nutritionfacts on aiinfo release
     runs-on: ubuntu-latest
-
-    if: contains(github.event.release.name, '@instructure.ai/aiinfo') || contains(github.event.release.tag_name, '@instructure.ai/aiinfo')
 
     steps:
       - name: Checkout
@@ -87,9 +85,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          RELEASE_LABEL="${{ github.event.client_payload.tag || 'aiinfo release' }}"
           PR_URL=$(gh pr create \
             --title "(chore) nutritionfacts deps sync after aiinfo release" \
-            --body "Automated bump after release: **${{ github.event.release.tag_name || github.event.release.name }}**" \
+            --body "Automated bump after release: **${RELEASE_LABEL}**" \
             --base main \
             --head "${{ steps.mkbranch.outputs.branch }}")
           echo "Opened PR: $PR_URL"
