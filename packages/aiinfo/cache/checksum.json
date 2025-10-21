@@ -1,13 +1,14 @@
 {
-	"askyourdata": "8de9e2815ff3aec88e14be9ae042be0b9b40319ad6e9be5985c918fc8b5a63b5",
-	"bcealttext": "757060c8e6a7fad9d79489ac69de4ae0c484e4b82d5e362ad243e1b10ba29572",
-	"CSV": "7e39a76ec6173e67a71c3e1f2a1cf856317ca120815fdec699390238a2a3e7f2",
-	"canvascoursetranslation": "493b6f3ce5a8650cd5c760b7aa1136de6fc88897e81c353f5be19de2c917e9e1",
-	"canvasdiscussionsummaries": "8dea644532ad2b211f6c5bca6bfeebe3a79f0286b2f0a8ba2f44fda2903d32e0",
-	"canvasgradingassistance": "edb6de555dfc2e53ad80cba3f893dd929af293de53642c9a57a8f94f4374cffb",
-	"canvasinboxtranslation": "83554f0eb098ac592eedf73cdccf04e3e570ca670682e6e96719239075b3a545",
-	"discussioninsights": "bf8f800481a6a884bf573692903d4ffdcb2842d33da5d4ee4f3c4d349f53dc11",
-	"igniteagent": "422effb260b4e53ba74b387832f7d1d835824de58645c1c28ee39620f6c5334e",
-	"rubricgenerator": "c462f99c082872bcdbd49d5f5ccf25dc97134e30d1bd90b43ff8e056e2d22640",
-	"smartsearch": "4b5c8873fcb95dc7dcff194f499c84ade3b1e3ed4e37d717172834ef43338c79"
+  "askyourdata": "8de9e2815ff3aec88e14be9ae042be0b9b40319ad6e9be5985c918fc8b5a63b5",
+  "bcealttext": "757060c8e6a7fad9d79489ac69de4ae0c484e4b82d5e362ad243e1b10ba29572",
+  "CSV": "86553f2cc37930e62ff8c3af69c3c384a4d93320d855018058144f27d05d5fb5",
+  "canvascoursetranslation": "0869c157cb9ab0c007f088fcfc0a642404831158ff365395b6f6b69de5c179fb",
+  "canvasdiscussionsummaries": "8dea644532ad2b211f6c5bca6bfeebe3a79f0286b2f0a8ba2f44fda2903d32e0",
+  "canvasgradingassistance": "edb6de555dfc2e53ad80cba3f893dd929af293de53642c9a57a8f94f4374cffb",
+  "canvasinboxtranslation": "83554f0eb098ac592eedf73cdccf04e3e570ca670682e6e96719239075b3a545",
+  "discussioninsights": "bf8f800481a6a884bf573692903d4ffdcb2842d33da5d4ee4f3c4d349f53dc11",
+  "igniteagent": "422effb260b4e53ba74b387832f7d1d835824de58645c1c28ee39620f6c5334e",
+  "rubricgenerator": "c462f99c082872bcdbd49d5f5ccf25dc97134e30d1bd90b43ff8e056e2d22640",
+  "smartsearch": "4b5c8873fcb95dc7dcff194f499c84ade3b1e3ed4e37d717172834ef43338c79",
+  "portfolios": "3fa4d3977aa30f05a060e80d040c829feb5f60b6766c1c8348fc2cb14c916762"
 }
