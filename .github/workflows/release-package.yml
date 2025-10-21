@@ -160,7 +160,7 @@ jobs:
         if: steps.find_tags.outputs.tags != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAGS: ${{ env.tags }}
+          TAGS: ${{ steps.find_tags.outputs.tags }}
         run: |
           for TAG in $TAGS; do
             # Extract the package name from the tag (e.g., @instructure.ai/foo@1.2.3 => foo)
