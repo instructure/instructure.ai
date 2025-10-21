@@ -10,7 +10,8 @@ lerna-debug.log*
 node_modules
 dist-ssr
 dist
-coverage  
+coverage/*
+!coverage.yml
 *.local
 
 .idea
