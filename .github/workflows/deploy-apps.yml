@@ -59,6 +59,8 @@ jobs:
         run: pnpm i
       - name: Build
         if: steps.changes.outputs.skip_steps != 'true'
+        env:
+          NODE_OPTIONS: --import=${{ github.workspace }}/plugins/vite-node.plugin.loader.mjs
         run: pnpm build apps
 
       - name: Setup Pages
