@@ -1,6 +1,6 @@
-// @ts-expect-error Vite raw import
 
 import { beforeEach, describe, expect, it } from "vitest";
+// @ts-expect-error Vite raw import
 import html from "./index.html?raw";
 
 describe("index.html", () => {
