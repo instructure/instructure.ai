@@ -1,4 +1,3 @@
-
 # @instructure.ai/nutritionfacts
 
 ## IgniteAI Nutrition Facts Generator

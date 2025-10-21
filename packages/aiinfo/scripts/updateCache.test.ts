@@ -182,7 +182,6 @@ describe("updateCache.mts parseCSV", () => {
 });
 
 describe("main behavior without side-effect", () => {
-
 	it("returns true and updates cache when CSV changed", async () => {
 		const oldCSV = "uid1,name1,desc1\nuid2,name2,desc2";
 		const newCSV = "uid1,name1,desc1-mod\nuid2,name2,desc2";
@@ -252,7 +251,6 @@ describe("main behavior without side-effect", () => {
 });
 
 describe("side-effect import with UPDATE env", () => {
-
 	it("exits with code 0 when cache updated", async () => {
 		const oldCSV = "uid1,name1,desc1";
 		const newCSV = "uid1,name1,desc1-mod";
