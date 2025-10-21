@@ -49,23 +49,37 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
+
       - name: Setup pnpm
         if: steps.changes.outputs.skip_steps != 'true'
         uses: pnpm/action-setup@v4.1.0          
+
+      # ✅ NEW: configure pnpm to use registry packages, not workspace links
+      - name: Configure pnpm for registry install
+        if: steps.changes.outputs.skip_steps != 'true'
+        run: |
+          echo "link-workspace-packages=false" >> .npmrc
+          echo "prefer-workspace-packages=false" >> .npmrc
+          echo "auto-install-peers=true" >> .npmrc
+
       - name: Install dependencies
         if: steps.changes.outputs.skip_steps != 'true'
-        run: pnpm install --prefer-workspace-packages=false
+        run: pnpm install --config.prefer-workspace-packages=false --link-workspace-packages=false
+
       - name: Build
         if: steps.changes.outputs.skip_steps != 'true'
         run: pnpm build apps
+
       - name: Setup Pages
         if: steps.changes.outputs.skip_steps != 'true'
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         if: steps.changes.outputs.skip_steps != 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
+
       - name: Deploy to GitHub Pages
         if: steps.changes.outputs.skip_steps != 'true'
         id: deployment
