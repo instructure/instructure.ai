@@ -9,7 +9,7 @@ import {
 	type AiInfoFeatureProps,
 	type AiInfoProps,
 } from "@instructure.ai/aiinfo";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { brands } from "../../assets";
 
 interface PresetsProps {
@@ -28,16 +28,20 @@ const Presets = ({ setProduct, product }: PresetsProps) => {
 		>
 	>({});
 	const placeholder = "Select a feature";
-	const [value, setValue] = useState<string>(product ? product.name : placeholder);
+	const [value, setValue] = useState<string>(
+		product ? product.name : placeholder,
+	);
 
-	const fetchProducts = () => {
+	const fetchProducts = useCallback(() => {
 		if (Object.keys(products).length === 0) {
+			// biome-ignore-start lint/correctness/noUnusedVariables: Destructuring for feature list
 			const {
 				nutritionFacts,
 				dataPermissionLevels,
 				aiInformation,
 				...productEntries
 			} = AiInfo;
+			// biome-ignore-end lint/correctness/noUnusedVariables: Destructuring for feature list
 
 			setProducts(productEntries);
 			const grouped: Record<
@@ -73,7 +77,7 @@ const Presets = ({ setProduct, product }: PresetsProps) => {
 
 			setGroupedOptions(grouped);
 		}
-	};
+	}, [products]);
 
 	useEffect(() => {
 		fetchProducts();
@@ -93,37 +97,37 @@ const Presets = ({ setProduct, product }: PresetsProps) => {
 			window.history.replaceState({}, "", url.toString());
 		}
 	};
-	
+
 	return (
-			<View data-print="hidden">
-				<SimpleSelect
-					assistiveText="Use arrow keys to navigate options."
-					onChange={handleSelect}
-					placeholder={placeholder}
-					renderLabel={
-						<ScreenReaderContent>Select a product</ScreenReaderContent>
-					}
-					value={value}
-					visibleOptionsCount={5}
-				>
-					{Object.entries(groupedOptions)
-						.sort(([a], [b]) => a.localeCompare(b))
-						.map(([group, { renderLabel, options }]) => (
-							<SimpleSelect.Group key={group} renderLabel={renderLabel}>
-								{options.map((option) => (
-									<SimpleSelect.Option
-										id={option.id}
-										key={option.id}
-										renderBeforeLabel=" "
-										value={option.id}
-									>
-										{option.label}
-									</SimpleSelect.Option>
-								))}
-							</SimpleSelect.Group>
-						))}
-				</SimpleSelect>
-			</View>
+		<View data-print="hidden">
+			<SimpleSelect
+				assistiveText="Use arrow keys to navigate options."
+				onChange={handleSelect}
+				placeholder={placeholder}
+				renderLabel={
+					<ScreenReaderContent>Select a product</ScreenReaderContent>
+				}
+				value={value}
+				visibleOptionsCount={5}
+			>
+				{Object.entries(groupedOptions)
+					.sort(([a], [b]) => a.localeCompare(b))
+					.map(([group, { renderLabel, options }]) => (
+						<SimpleSelect.Group key={group} renderLabel={renderLabel}>
+							{options.map((option) => (
+								<SimpleSelect.Option
+									id={option.id}
+									key={option.id}
+									renderBeforeLabel=" "
+									value={option.id}
+								>
+									{option.label}
+								</SimpleSelect.Option>
+							))}
+						</SimpleSelect.Group>
+					))}
+			</SimpleSelect>
+		</View>
 	);
 };
 
