@@ -19,7 +19,7 @@
     "url": "https://github.com/instructure/instructure.ai"
   },
   "scripts": {
-    "build": "pnpm update-cache && vite build",
+    "build": "vite build",
     "dev": "vite",
     "lint": "pnpm biome check",
     "preview": "vite preview",
