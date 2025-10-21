@@ -54,18 +54,9 @@ jobs:
         if: steps.changes.outputs.skip_steps != 'true'
         uses: pnpm/action-setup@v4.1.0          
 
-      # ✅ NEW: configure pnpm to use registry packages, not workspace links
-      - name: Configure pnpm for registry install
-        if: steps.changes.outputs.skip_steps != 'true'
-        run: |
-          echo "link-workspace-packages=false" >> .npmrc
-          echo "prefer-workspace-packages=false" >> .npmrc
-          echo "auto-install-peers=true" >> .npmrc
-
       - name: Install dependencies
         if: steps.changes.outputs.skip_steps != 'true'
-        run: pnpm install --config.prefer-workspace-packages=false --link-workspace-packages=false
-
+        run: pnpm i
       - name: Build
         if: steps.changes.outputs.skip_steps != 'true'
         run: pnpm build apps

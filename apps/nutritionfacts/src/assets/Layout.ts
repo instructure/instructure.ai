@@ -18,4 +18,4 @@ const DefaultLayout = new Layout({
 	revision: true,
 } as PageLayout);
 
-export { DefaultLayout };
+export { DefaultLayout, Layout };
