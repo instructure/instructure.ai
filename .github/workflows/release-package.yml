@@ -155,3 +155,18 @@ jobs:
               gh release create "$TAG" ./packages/$PKG_NAME/dist/*.tgz --title "$TAG" --generate-notes
             fi
           done
+
+      - name: Trigger nutritionfacts auto-release
+        if: steps.find_tags.outputs.tags != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAGS: ${{ env.tags }}
+        run: |
+          for TAG in $TAGS; do
+            # Extract the package name from the tag (e.g., @instructure.ai/foo@1.2.3 => foo)
+            NAME=$(echo "$TAG" | sed -E 's/@instructure.ai\/([^@]+)@.*/\1/')
+            EVENT_TYPE="${NAME}_release"
+            gh api repos/${{ github.repository }}/dispatches \
+              -F event_type="$EVENT_TYPE" \
+              -F client_payload='{"tag":"'$TAG'"}'
+          done
