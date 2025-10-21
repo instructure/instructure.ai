@@ -8,6 +8,8 @@ export default mergeConfig(
 		build: {
 			lib: {
 				entry: "src/index.ts",
+				fileName: (format) => (format === "es" ? "index.mjs" : "index.cjs"),
+				formats: ["es", "cjs"],
 				name: "AiInfo",
 			},
 			rollupOptions: {
