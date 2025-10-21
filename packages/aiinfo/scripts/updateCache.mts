@@ -28,7 +28,7 @@ const updateCache = (data: CSVFetchResult): void => {
 
 	// Update overall CSV checksum
 	const newCSVChecksum = generateChecksum(data.raw);
-	const oldCSVChecksum = checksums.csv;
+	const oldCSVChecksum = checksums.CSV;
 	const isCSVOutdated = newCSVChecksum !== oldCSVChecksum;
 	checksums.CSV = newCSVChecksum;
 
@@ -150,7 +150,7 @@ const main = async () => {
 		if (data) {
 			// Determine if cache will be updated by checking CSV checksum
 			const newCSVChecksum = generateChecksum(data.raw);
-			cacheUpdated = newCSVChecksum !== checksum.csv;
+			cacheUpdated = newCSVChecksum !== checksum.CSV;
 			if (!cacheUpdated) {
 				Log({
 					color: "green",
