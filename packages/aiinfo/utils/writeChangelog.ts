@@ -42,7 +42,7 @@ const writeChangelog = ({
 }) => {
 	if (changedEntries.length > 0) {
 		let changelog = `\n\n## ${dateStr}\n\n`;
-		changelog += `### CSV\n\n**SHA:** ${csvSha}\n`;
+		changelog += `### CSV\n\n**SHA:** \`${csvSha}\`\n`;
 		const entryDiffs = changedEntries
 			.map((e) => {
 				let diffText = `\n### ${e.uid}\n\n#### SHA\n\n**Old:** \`${e.oldChecksum ? `${e.oldChecksum}` : "(none)"}\`\n\n**New:** \`${e.newChecksum}\``;
