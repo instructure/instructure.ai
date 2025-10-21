@@ -37,8 +37,8 @@ const App: FC = () => {
 	}, [product?.uid, product?.name]);
 
 	useEffect(() => {
-		if (id && id in AiInfo) {
-			setProduct(AiInfo[id as keyof typeof AiInfo]);
+		if (id && id.toLowerCase() in AiInfo) {
+			setProduct(AiInfo[id.toLowerCase() as keyof typeof AiInfo]);
 		}
 	}, [id]);
 
