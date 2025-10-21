@@ -85,7 +85,7 @@ const App: FC = () => {
 								display="inline-block"
 								margin={isNarrow ? "0 0 small" : "0"}
 							>
-								<Link href="./nutritionfacts">
+								<Link href="/nutritionfacts">
 									<InlineSVG
 										height={isNarrow ? "2rem" : "2.5rem"}
 										inline={false}
