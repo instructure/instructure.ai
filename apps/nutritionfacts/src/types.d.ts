@@ -14,7 +14,6 @@ type PageLayout = {
 	disclaimer: boolean;
 	copyright: boolean;
 	revision: boolean;
-	permissions: boolean;
 };
 
 type ExtendedNutritionFactsDataProps = NutritionFactsProps["data"] & {
