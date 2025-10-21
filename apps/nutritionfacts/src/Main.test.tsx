@@ -1,7 +1,3 @@
-/**
- * @vitest-environment jsdom
- */
-
 import * as React from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 

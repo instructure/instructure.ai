@@ -1,3 +1,7 @@
+/**
+ * @vitest-environment node
+ */
+
 import { readFile } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
 import { name } from "../package.json" with { type: "json" };
