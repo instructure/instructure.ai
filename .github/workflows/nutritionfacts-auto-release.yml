@@ -49,7 +49,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          pnpm -F nutritionfacts add ${TAG}
+          pnpm -F nutritionfacts add pnpm -F nutritionfacts add "@instructure.ai/aiinfo@^${TAG#*@}"
 
       - name: Commit changes (if any)
         id: commit
