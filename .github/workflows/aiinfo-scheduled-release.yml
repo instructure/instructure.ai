@@ -1,4 +1,4 @@
-name: Nutrition Facts Scheduled Release
+name: AiInfo Scheduled Release
 
 on:
   schedule:
