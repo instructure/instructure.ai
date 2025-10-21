@@ -1,0 +1,98 @@
+coverage:
+  totals:
+    statements: 23.12%
+    branches: 14.9%
+    functions: 20.83%
+    lines: 23.95%
+    total: 20.7%
+  src:
+    totals:
+      statements: 45.63%
+      branches: 44.17%
+      functions: 43.75%
+      lines: 45.63%
+    "App.tsx":
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "16-64"
+    Components:
+      Export:
+        "ControlButton.tsx":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "13-22"
+        "Embed.tsx":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "7-67"
+        "Link.tsx":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "6-40"
+      Layout:
+        "Divider.tsx":
+          statements: 0%
+          branches: 100%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "3-4"
+        "NutritionFactsForm.tsx":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "21-76"
+        "Presets.tsx":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "22-118"
+        "extendedNutritionFacts.tsx":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "4-32"
+        "getLayoutFromParams.ts":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "4-19"
+    "Main.tsx":
+      statements: 87.5%
+      branches: 83.33%
+      functions: 100%
+      lines: 87.5%
+      uncovered_line_numbers: "26"
+    assets:
+      "Layout.ts":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+      "Logos.tsx":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+      "colors.ts":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+      "consts.tsx":
+        statements: 80%
+        branches: 33.33%
+        functions: 0%
+        lines: 80%
+        uncovered_line_numbers: "64"
