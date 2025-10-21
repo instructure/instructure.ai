@@ -15,6 +15,8 @@ const main = async () => {
 	const { command, args, output } = Workspace();
 
 	const releaseCommands: AllowedCommands = [
+		"app",
+		"apps",
 		"package",
 		"root",
 		"packages",
@@ -162,10 +164,26 @@ const main = async () => {
 	};
 	try {
 		switch (command) {
+			case "app":
+				if (!isValidPackage(output as FullPackageName)) {
+					exitWithError(
+						"A valid app name is required for the release command.",
+					);
+				}
+				releasePackage({ args: args.slice(2), pkg: output as FullPackageName });
+				break;
+			case "apps":
+				if (Array.isArray(output) && output.length) {
+					console.log("Releasing apps:", output);
+					releasePackages(output, args.slice(1));
+				} else {
+					console.log("No apps found in workspace.");
+				}
+				break;
 			case "package":
 				if (!isValidPackage(output as FullPackageName)) {
 					exitWithError(
-						"A valid package name is required for the package command.",
+						"A valid package name is required for the release command.",
 					);
 				}
 				releasePackage({ args: args.slice(2), pkg: output as FullPackageName });
