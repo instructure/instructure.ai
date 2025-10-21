@@ -202,6 +202,8 @@ const aiInformation: AiInformationProps = {
 const igniteagent: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	description:
+		"Ignite Agent is a faculty chat assistant capable of translating natural language requests into complex Canvas workflows.",
 	group: "IgniteAI",
 	name: FEATURE_NAME,
 	nutritionFacts,

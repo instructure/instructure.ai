@@ -198,6 +198,8 @@ const aiInformation: AiInformationProps = {
 const canvasinboxtranslation: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	description:
+		'Translation of inbox messages ("Inbox AI Translation" feature flag) across 10 languages.',
 	group: "Canvas",
 	name: FEATURE_NAME,
 	nutritionFacts,

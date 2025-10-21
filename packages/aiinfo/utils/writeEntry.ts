@@ -28,6 +28,7 @@ export async function writeEntry(entry: Entry) {
 	const UID = entry.uid;
 	const FEATURE_NAME = entry.feature.name;
 	const REVISION = entry.revision;
+	const DESCRIPTION = entry.feature.description;
 
 	const nutritionFacts = entryToNutritionFacts(entry);
 	const aiInformation = entryToAIInformation(entry);
@@ -77,6 +78,7 @@ const ${UID}: AiInfoFeatureProps = {
   uid: UID,
   group: ${JSON.stringify(entry.group)},
 	name: FEATURE_NAME,
+	description: ${JSON.stringify(DESCRIPTION)},
 }
 
 export {

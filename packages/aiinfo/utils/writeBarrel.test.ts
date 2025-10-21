@@ -33,7 +33,8 @@ const resetFsConfig = (cfg: FSConfig) => {
 	});
 	fsMocks.existsSync.mockImplementation((p: string) =>
 		cfg.withIndex.some(
-			(d) => p === path.join(path.resolve(CWD, "src", "components"), d, "index.tsx"),
+			(d) =>
+				p === path.join(path.resolve(CWD, "src", "components"), d, "index.tsx"),
 		),
 	);
 	fsMocks.writeFileSync.mockImplementation(() => {});

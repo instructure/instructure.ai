@@ -200,6 +200,8 @@ const aiInformation: AiInformationProps = {
 const smartsearch: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	description:
+		"Natural language search of course content for students and instructors.",
 	group: "Canvas",
 	name: FEATURE_NAME,
 	nutritionFacts,

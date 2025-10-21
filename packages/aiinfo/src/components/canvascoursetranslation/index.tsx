@@ -198,6 +198,8 @@ const aiInformation: AiInformationProps = {
 const canvascoursetranslation: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	description:
+		'Translation of Discussion threads ("Course AI Translation" feature flag) across 10 languages.',
 	group: "Canvas",
 	name: FEATURE_NAME,
 	nutritionFacts,

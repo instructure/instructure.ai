@@ -200,6 +200,8 @@ const aiInformation: AiInformationProps = {
 const askyourdata: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	description:
+		"AI-powered query tool enables users to ask natural language questions and receive textual or visual responses with detailed explanations of the methodology.",
 	group: "Intelligent Insights",
 	name: FEATURE_NAME,
 	nutritionFacts,

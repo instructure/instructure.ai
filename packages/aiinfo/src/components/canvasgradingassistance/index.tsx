@@ -199,6 +199,8 @@ const aiInformation: AiInformationProps = {
 const canvasgradingassistance: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	description:
+		"AI powered automatic grading and feedback suggestions to enable more consistent, fair, and efficient grading workflows.",
 	group: "Canvas",
 	name: FEATURE_NAME,
 	nutritionFacts,

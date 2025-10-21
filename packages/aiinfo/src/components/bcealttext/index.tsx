@@ -196,6 +196,7 @@ const aiInformation: AiInformationProps = {
 const bcealttext: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	description: "",
 	group: "Canvas",
 	name: FEATURE_NAME,
 	nutritionFacts,

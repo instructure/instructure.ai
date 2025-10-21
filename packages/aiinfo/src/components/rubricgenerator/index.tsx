@@ -199,6 +199,7 @@ const aiInformation: AiInformationProps = {
 const rubricgenerator: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	description: "AI-generated rubric recommendations for Canvas assignments.",
 	group: "Canvas",
 	name: FEATURE_NAME,
 	nutritionFacts,

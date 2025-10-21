@@ -198,6 +198,7 @@ const aiInformation: AiInformationProps = {
 const canvasdiscussionsummaries: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
+	description: "Discussion summaries of key points, questions, and insights.",
 	group: "Canvas",
 	name: FEATURE_NAME,
 	nutritionFacts,

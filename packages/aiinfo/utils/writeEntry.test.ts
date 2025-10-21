@@ -194,8 +194,12 @@ describe("writeEntry", () => {
 		await writeEntry(makeEntry("uid2"));
 		expect(writeFileSyncSpy).toHaveBeenCalledTimes(2);
 		const paths = writeFileSyncSpy.mock.calls.map((c) => c[0]);
-		expect(paths[0]).toContain(path.join("src", "components", "uid1", "index.tsx"));
-		expect(paths[1]).toContain(path.join("src", "components", "uid2", "index.tsx"));
+		expect(paths[0]).toContain(
+			path.join("src", "components", "uid1", "index.tsx"),
+		);
+		expect(paths[1]).toContain(
+			path.join("src", "components", "uid2", "index.tsx"),
+		);
 	});
 
 	it("formatTs output is used then post-processed for trigger", async () => {
