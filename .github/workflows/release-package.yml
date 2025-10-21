@@ -168,5 +168,5 @@ jobs:
             EVENT_TYPE="${NAME}_release"
             gh api repos/${{ github.repository }}/dispatches \
               -F event_type="$EVENT_TYPE" \
-              -F client_payload='{"tag":"'$TAG'"}'
+              -F client_payload="$(jq -nc --arg tag "$TAG" '{tag: $tag}')"
           done
