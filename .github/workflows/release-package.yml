@@ -99,23 +99,22 @@ jobs:
             # Enable vite-node loader using the register() API
             export NODE_OPTIONS="--import=${{ github.workspace }}/plugins/vite-node.plugin.loader.mjs"
 
-            # Build & test (skip for shared-configs)
-            if [ "$PKG_NAME" != "shared-configs" ]; then
-              echo "Building package: $PKG_NAME"
-              pnpm test "$PKG_NAME"
-              pnpm build "$PKG_NAME"
+
+            # Only build & test if package is in /packages (skip apps and shared-configs)
+            if [ -d "packages/$PKG_NAME" ] && [ "$PKG_NAME" != "shared-configs" ]; then
+              echo "Building package: $PKG_NAME (in /packages)"
+              pnpm test package "$PKG_NAME"
+              pnpm build package "$PKG_NAME"
             else
-              echo "Skipping build/test for @instructure.ai/shared-configs."
+              echo "Skipping build/test for $PKG_NAME (not in /packages or is shared-configs)."
             fi
 
-            # Publish (use npm CLI to trigger OIDC Trusted Publishing)
-            if [ "$PKG_NAME" != "shared-configs" ]; then
+
+            # Publish (only for /packages, skip apps and shared-configs)
+            if [ -d "packages/$PKG_NAME" ] && [ "$PKG_NAME" != "shared-configs" ]; then
               PKG_JSON_PATH="packages/$PKG_NAME/package.json"
-              APP_JSON_PATH="apps/$PKG_NAME/package.json"
               if [ -f "$PKG_JSON_PATH" ]; then
                 JSON_PATH="$PKG_JSON_PATH"
-              elif [ -f "$APP_JSON_PATH" ]; then
-                JSON_PATH="$APP_JSON_PATH"
               else
                 JSON_PATH=""
               fi
@@ -141,18 +140,21 @@ jobs:
                   npm publish "$TARBALL" --provenance
                 fi
               else
-                echo "package.json not found for $PKG_NAME in packages or apps, publishing without access check."
+                echo "package.json not found for $PKG_NAME in packages, publishing without access check."
                 npm publish "$TARBALL" --provenance
               fi
             else
-              echo "Skipping publish for @instructure.ai/shared-configs."
+              echo "Skipping publish for $PKG_NAME (not in /packages or is shared-configs)."
             fi
 
-            # Create GitHub release with or without asset
+
+            # Create GitHub release (attach asset only for /packages)
             if [ "$PKG_NAME" = "shared-configs" ]; then
               gh release create "$TAG" --title "$TAG" --generate-notes
-            else
+            elif [ -d "packages/$PKG_NAME" ]; then
               gh release create "$TAG" ./packages/$PKG_NAME/dist/*.tgz --title "$TAG" --generate-notes
+            else
+              gh release create "$TAG" --title "$TAG" --generate-notes
             fi
           done
 
