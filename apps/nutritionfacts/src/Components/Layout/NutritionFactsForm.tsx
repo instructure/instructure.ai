@@ -4,7 +4,7 @@ import {
 	type NutritionFactsProps,
 	Text,
 	View,
-	IconAiColoredSolid
+	IconAiLine
 } from "@instructure/ui";
 import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import type { Dispatch, FC, SetStateAction } from "react";
@@ -114,12 +114,12 @@ const NutritionFactsForm: FC<{
 					</>
 				) : (
 					<Flex.Item shouldGrow shouldShrink>
+							<View as="div" textAlign="center" margin="0 0 medium">
+								<IconAiLine color="secondary" size="x-large" />
+							</View>
 							<Heading level="h2" variant="titleCardSection" color="secondary">
 								Select a feature to view its Nutrition Facts
 							</Heading>
-							<View as="div" textAlign="center" margin="large 0 0">
-								<IconAiColoredSolid size="x-large" />
-							</View>
 					</Flex.Item>
 				)}
 			</Flex>
