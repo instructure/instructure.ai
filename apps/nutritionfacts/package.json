@@ -19,7 +19,7 @@
     "url": "https://github.com/instructure/instructure.ai"
   },
   "scripts": {
-    "build": "pnpm update-cache && vite build",
+    "build": "vite build",
     "dev": "vite",
     "lint": "pnpm biome check",
     "preview": "vite preview",
@@ -28,5 +28,5 @@
     "update-cache": "vite-node ./scripts/updateCache.mts"
   },
   "type": "module",
-  "version": "1.4.2"
+  "version": "1.4.3"
 }
