@@ -114,13 +114,13 @@ function applyMocks(opts: MockOptions) {
 
 	vi.mock("node:fs", () => ({
 		default: {
-			writeFileSync: mockFsWrite,
 			existsSync: () => true,
 			readFileSync: mockFsRead,
+			writeFileSync: mockFsWrite,
 		},
-		writeFileSync: mockFsWrite,
 		existsSync: () => true,
 		readFileSync: mockFsRead,
+		writeFileSync: mockFsWrite,
 	}));
 
 	vi.mock("papaparse", async (orig) => {
