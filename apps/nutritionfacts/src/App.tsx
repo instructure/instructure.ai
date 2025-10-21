@@ -80,7 +80,11 @@ const App: FC = () => {
 				>
 					<Flex data-print="hidden" direction={isNarrow ? "column" : "row"}>
 						<Flex.Item shouldGrow shouldShrink>
-							<View display="inline-block" as="div" margin={isNarrow ? "0 0 small" : "0"}>
+							<View
+								as="div"
+								display="inline-block"
+								margin={isNarrow ? "0 0 small" : "0"}
+							>
 								<Link href="./nutritionfacts">
 									<InlineSVG
 										height={isNarrow ? "2rem" : "2.5rem"}

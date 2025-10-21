@@ -1,20 +1,15 @@
 import { IconExternalLinkLine, type SVGIconProps } from "@instructure/ui";
+import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { baseUrl } from "../../assets";
-import type {
-	PageLayout,
-} from "../../types.ts";
+import type { PageLayout } from "../../types.ts";
 import { ControlButton } from "./ControlButton.tsx";
-import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo"
 
 const productToText = (product: AiInfoFeatureProps): string => {
 	const text = `<h2>${product.group} ${product.name}</h2><p>${product.description}</p>`;
 	return text;
 };
 
-const Embed = async (
-	product: AiInfoFeatureProps,
-	layout: PageLayout,
-) => {
+const Embed = async (product: AiInfoFeatureProps, layout: PageLayout) => {
 	setTimeout(async () => {
 		const pageElement = document.getElementById("embed");
 		let height = 1800;

@@ -1,7 +1,7 @@
 import { IconLinkLine, type SVGIconProps } from "@instructure/ui";
+import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { baseUrl } from "../../assets";
 import { ControlButton } from "./ControlButton.tsx";
-import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo"
 
 const PermanentLink = async (id: string) => {
 	try {
@@ -37,7 +37,7 @@ const LinkControl = ({
 			key="link"
 			label="Copy permalink"
 			onClick={() => {
-					PermanentLink(product.uid);
+				PermanentLink(product.uid);
 			}}
 		/>
 	);
