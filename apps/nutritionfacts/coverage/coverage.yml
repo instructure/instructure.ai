@@ -1,16 +1,16 @@
 coverage:
   totals:
-    statements: 0%
-    branches: 0%
-    functions: 0%
-    lines: 0%
-    total: 0%
+    statements: 24.27%
+    branches: 14.9%
+    functions: 22.91%
+    lines: 25.14%
+    total: 21.81%
   src:
     totals:
-      statements: 0%
-      branches: 15%
-      functions: 6.25%
-      lines: 0%
+      statements: 48.13%
+      branches: 44.17%
+      functions: 46.25%
+      lines: 48.13%
     "App.tsx":
       statements: 0%
       branches: 0%
@@ -39,11 +39,10 @@ coverage:
           uncovered_line_numbers: "6-40"
       Layout:
         "Divider.tsx":
-          statements: 0%
+          statements: 100%
           branches: 100%
-          functions: 0%
-          lines: 0%
-          uncovered_line_numbers: "3-4"
+          functions: 100%
+          lines: 100%
         "NutritionFactsForm.tsx":
           statements: 0%
           branches: 0%
@@ -69,33 +68,30 @@ coverage:
           lines: 0%
           uncovered_line_numbers: "4-19"
     "Main.tsx":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "6-26"
+      statements: 87.5%
+      branches: 83.33%
+      functions: 100%
+      lines: 87.5%
+      uncovered_line_numbers: "26"
     assets:
       "Layout.ts":
-        statements: 0%
-        branches: 100%
-        functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "9-15"
-      "Logos.tsx":
-        statements: 0%
-        branches: 0%
-        functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "23-244"
-      "colors.ts":
-        statements: 0%
+        statements: 100%
         branches: 100%
         functions: 100%
-        lines: 0%
-        uncovered_line_numbers: "10"
+        lines: 100%
+      "Logos.tsx":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+      "colors.ts":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
       "consts.tsx":
-        statements: 0%
-        branches: 0%
+        statements: 80%
+        branches: 33.33%
         functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "14-79"
+        lines: 80%
+        uncovered_line_numbers: "64"
