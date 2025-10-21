@@ -77,6 +77,9 @@ type AiInfoFeatureProps = {
 	aiInformation: AiInformationProps; // INSTUI type definition
 	uid: string;
 	revision: string;
+	group: string;
+	name: string;
+	description: string;
 };
 
 type AiInfoNutritionFactsProps = {
@@ -94,82 +97,7 @@ type AiInfoAiInformationProps = {
 
 ## Examples
 
-### Render a &lt;NutritionFacts /&gt; component
-
-You don't have to use the whole object, it can be destructured for your convenience. Here we don't use the triggerText because we want to provide something different, and we also pass the optional `fullscreen` prop directly.
-
-```jsx
-import { InstUISettingsProvider, NutritionFacts } from "@instructure/ui";
-import { nutritionFacts } from "@instructure.ai/aiinfo";
-import type { FC } from "react";
-
-const App: FC = () => {
-	const {
-		smartsearch: {
-			closeButtonText,
-			closeIconButtonScreenReaderLabel,
-			featureName,
-			modalLabel,
-			data,
-			title,
-		},
-	} = nutritionFacts;
-	return (
-		<InstUISettingsProvider>
-			<NutritionFacts
-				closeButtonText={closeButtonText}
-				closeIconButtonScreenReaderLabel={closeIconButtonScreenReaderLabel}
-				data={data}
-				featureName={featureName}
-				modalLabel={modalLabel}
-				title={title}
-				triggerText="Learn more"
-        fullscreen
-			/>
-		</InstUISettingsProvider>
-	);
-};
-export default App;
-```
-
-### Render a &lt;DataPermissionLevels /&gt; Component
-
-Since the props of our object are the same as the expected props for the INSTUI component, we can spread them for shorthand.
-
-```jsx
-import { DataPermissionLevels, InstUISettingsProvider } from "@instructure/ui";
-import { smartsearch } from "@instructure.ai/aiinfo";
-import type { FC } from "react";
-
-const App: FC = () => (
-	<InstUISettingsProvider>
-		<DataPermissionLevels { ...smartsearch.dataPermissionLevels } />
-	</InstUISettingsProvider>
-);
-export default App;
-```
-
-### Render a &lt;AiInformation /&gt; Component
-
-`AiInformation` is a superset of `DataPermissionLevels` and `NutritionFacts`, while we provide the data for both of those components directly, they are also nested. This example shows how to pull either.
-
-The two objects are strictly equivalent.
-
-```jsx
-// nutritionFacts
-AiInformation.uid.nutritionFactsData ===
-uid.AiInformation.nutritionFactsData === 
-uid.nutritionFacts.data === 
-nutritionFacts.uid.data
-
-//dataPermissionLevels
-AiInformation.uid.dataPermissionLevelsData ===
-uid.AiInformation.dataPermissionLevelsData ===
-uid.dataPermissionLevels.data ===
-dataPermissionLevels.uid.data
-```
-
-Though the best practice is not to mix and match, these equivalencies are provided for easier importing and destructuring.
+### ESM
 
 ```jsx
 import { AiInformation, InstUISettingsProvider } from "@instructure/ui";
@@ -178,48 +106,31 @@ import type { FC } from "react";
 
 const App: FC = () => (
 	<InstUISettingsProvider>
-		<AiInformation
-			data={smartsearch.aiInformation.data}
-			dataPermissionLevelsCloseButtonText={
-				smartsearch.aiInformation.dataPermissionLevelsCloseButtonText
-			}
-			dataPermissionLevelsCloseIconButtonScreenReaderLabel={
-				smartsearch.aiInformation
-					.dataPermissionLevelsCloseIconButtonScreenReaderLabel
-			}
-			dataPermissionLevelsCurrentFeature={
-				smartsearch.aiInformation.dataPermissionLevelsCurrentFeature
-			}
-			dataPermissionLevelsCurrentFeatureText={
-				smartsearch.aiInformation.dataPermissionLevelsCurrentFeatureText
-			}
-			// sibling object
-			dataPermissionLevelsData={smartsearch.dataPermissionLevels.data}
-			dataPermissionLevelsModalLabel={
-				smartsearch.aiInformation.dataPermissionLevelsModalLabel
-			}
-			dataPermissionLevelsTitle={
-				smartsearch.aiInformation.dataPermissionLevelsTitle
-			}
-			nutritionFactsCloseButtonText={
-				smartsearch.aiInformation.nutritionFactsCloseButtonText
-			}
-			nutritionFactsCloseIconButtonScreenReaderLabel={
-				smartsearch.aiInformation.nutritionFactsCloseIconButtonScreenReaderLabel
-			}
-			// child object
-			nutritionFactsData={smartsearch.aiInformation.nutritionFactsData}
-			nutritionFactsFeatureName={
-				smartsearch.aiInformation.nutritionFactsFeatureName
-			}
-			nutritionFactsModalLabel={
-				smartsearch.aiInformation.nutritionFactsModalLabel
-			}
-			nutritionFactsTitle={smartsearch.aiInformation.nutritionFactsTitle}
-			title={smartsearch.aiInformation.title}
-			trigger={smartsearch.aiInformation.trigger}
-		/>
+		<AiInformation { ...smartsearch.aiInformation } />
 	</InstUISettingsProvider>
 );
 export default App;
+```
+
+### CommonJs
+
+Since the props of our object are the same as the expected props for the INSTUI component, we can spread them for shorthand.
+
+```jsx
+const React = require("react");
+const { DataPermissionLevels, InstUISettingsProvider } = require("@instructure/ui");
+const { smartsearch } = require("@instructure.ai/aiinfo");
+
+const App = () => (
+	React.createElement(
+		InstUISettingsProvider,
+		null,
+		React.createElement(
+			DataPermissionLevels,
+			{ ...smartsearch.dataPermissionLevels }
+		)
+	)
+);
+
+module.exports = App;
 ```
