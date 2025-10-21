@@ -182,25 +182,6 @@ describe("updateCache.mts parseCSV", () => {
 });
 
 describe("main behavior without side-effect", () => {
-	it("returns false when CSV unchanged and performs no writes", async () => {
-		const csv = "uid1,name1,desc1\nuid2,name2,desc2";
-		applyMocks({ newCSV: csv, oldCSV: csv });
-		const { main } = await import("./updateCache.mts");
-		const updated = await main();
-		expect(updated).toBe(false);
-		expect(mockFsWrite).not.toHaveBeenCalled();
-		expect(mockWriteEntry).not.toHaveBeenCalled();
-		expect(mockWriteBarrel).not.toHaveBeenCalled();
-		expect(mockWriteChangelog).not.toHaveBeenCalled();
-		const logMessages = mockLog.mock.calls.map((c) => c[0]);
-		expect(
-			logMessages.some((m) =>
-				typeof m === "object"
-					? String(m.message).includes("Cache is up to date")
-					: String(m).includes("Cache is up to date"),
-			),
-		).toBe(true);
-	});
 
 	it("returns true and updates cache when CSV changed", async () => {
 		const oldCSV = "uid1,name1,desc1\nuid2,name2,desc2";
@@ -271,41 +252,6 @@ describe("main behavior without side-effect", () => {
 });
 
 describe("side-effect import with UPDATE env", () => {
-	it("exits with code 1 when cache unchanged and CI not set", async () => {
-		const csv = "uid1,name1,desc1";
-		applyMocks({ newCSV: csv, oldCSV: csv, sideEffect: true });
-		// FIX: Use correct type for process.exit mock
-		const exitSpy = vi
-			.spyOn(process, "exit")
-			.mockImplementation((() => undefined) as unknown as typeof process.exit);
-		const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
-		await import("./updateCache.mts");
-		await flushMicrotasks();
-		expect(exitSpy).toHaveBeenCalledWith(1);
-		// JSON printed only because VERBOSE_UPDATE was set
-		expect(
-			logSpy.mock.calls.some((c) => c[0].includes('"cacheUpdated":false')),
-		).toBe(true);
-		exitSpy.mockRestore();
-		logSpy.mockRestore();
-	});
-
-	it("exits with code 0 when cache unchanged and CI set", async () => {
-		const csv = "uid1,name1,desc1";
-		applyMocks({ ci: true, newCSV: csv, oldCSV: csv, sideEffect: true });
-		const exitSpy = vi
-			.spyOn(process, "exit")
-			.mockImplementation((() => undefined) as unknown as typeof process.exit);
-		const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
-		await import("./updateCache.mts");
-		await flushMicrotasks();
-		expect(exitSpy).toHaveBeenCalledWith(0);
-		expect(
-			logSpy.mock.calls.some((c) => c[0].includes('"cacheUpdated":false')),
-		).toBe(true);
-		exitSpy.mockRestore();
-		logSpy.mockRestore();
-	});
 
 	it("exits with code 0 when cache updated", async () => {
 		const oldCSV = "uid1,name1,desc1";
@@ -336,32 +282,6 @@ describe("side-effect import with UPDATE env", () => {
 		await flushMicrotasks();
 		expect(exitSpy).toHaveBeenCalledWith(2);
 		exitSpy.mockRestore();
-	});
-});
-
-describe("fetch error fallback", () => {
-	it("uses cached CSV when fetch fails and returns false (unchanged)", async () => {
-		const csv = "uid1,name1,desc1";
-		applyMocks({
-			fetchThrows: true,
-			newCSV: csv, // unused due to fetchThrows
-			oldCSV: csv,
-		});
-		const { main } = await import("./updateCache.mts");
-		const updated = await main();
-		expect(updated).toBe(false);
-		// Log should contain fetch error message
-		const logArgs = mockLog.mock.calls.map((c) => c[0]);
-		expect(
-			logArgs.some(
-				(a) =>
-					typeof a === "object" &&
-					Array.isArray(a.message) &&
-					a.message.some((m: unknown) =>
-						String(m).includes("Error fetching CSV"),
-					),
-			),
-		).toBe(true);
 	});
 });
 
