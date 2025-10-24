@@ -1,35 +1,55 @@
 {
-  "dependencies": {},
-  "devDependencies": {
-    "@instructure.ai/shared-configs": "workspace:^",
-    "@types/papaparse": "^5.3.16",
-    "ansis": "^4.2.0",
-    "papaparse": "^5.5.3",
-    "typescript": "^5.9.3",
-    "@instructure/shared-types": "^11.0.1",
-    "@instructure/ui": "^11.0.1"
-  },
-  "engines": {
-    "node": ">=20"
-  },
+  "name": "@instructure.ai/aiinfo",
+  "version": "1.6.0",
+  "type": "module",
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs",
       "default": "./dist/index.mjs"
+    },
+    "./utils/instructure/Button": {
+      "types": "./dist/utils/instructure/Button.d.ts",
+      "browser": "./dist/utils/instructure/Button.browser.js",
+      "import": "./dist/utils/instructure/Button.node.js",
+      "require": "./dist/utils/instructure/Button.node.cjs",
+      "default": "./dist/utils/instructure/Button.node.js"
     }
   },
+  "peerDependencies": {
+    "@instructure/ui": "^10.22.0 || ^11",
+    "@instructure/ui-buttons": "^10.22.0 || ^11",
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
+  },
+  "peerDependenciesMeta": {
+    "@instructure/ui": {
+      "optional": true
+    },
+    "@instructure/ui-buttons": {
+      "optional": true
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "name": "@instructure.ai/aiinfo",
-  "peerDependencies": {
-    "react": "^18 || ^19",
-    "react-dom": "^18 || ^19",
-    "@instructure/ui": "^10.22.0 || ^11"
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@instructure.ai/shared-configs": "workspace:^",
+    "@instructure/shared-types": "^11.0.1",
+    "@instructure/ui": "^11.0.1",
+    "@types/node": "^22.18.12",
+    "@types/papaparse": "^5.3.16",
+    "ansis": "^4.2.0",
+    "papaparse": "^5.5.3",
+    "typescript": "^5.9.3"
   },
   "publishConfig": {
     "access": "public"
@@ -42,15 +62,14 @@
   "scripts": {
     "build": "pnpm cache:update && pnpm build:vite && pnpm lint --write && pnpm typecheck && pnpm package",
     "build:vite": "vite build",
-    "cache:clear": "CLEAR=1 vite-node ./scripts/clearCache.mts",
+    "cache:clear": "vite-node ./scripts/clearCache.mts",
     "cache:update": "vite-node ./scripts/updateCache.mts",
     "lint": "pnpm biome check",
     "package": "pnpm pack --pack-destination ./dist",
     "test": "pnpm vitest run",
-    "typecheck": "tsgo --noEmit"
-  },
-  "sideEffects": false,
-  "type": "module",
-  "types": "./dist/index.d.ts",
-  "version": "1.6.0"
+    "typecheck": "tsgo --noEmit",
+    "write:all": "vite-node ./scripts/writeEntries.mts",
+    "write:entries": "vite-node ./scripts/writeEntries.mts --entries",
+    "write:barrel": "vite-node ./scripts/writeEntries.mts --barrel"
+  }
 }

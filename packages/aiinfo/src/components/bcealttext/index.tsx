@@ -3,8 +3,8 @@ import type {
 	DataPermissionLevelsProps,
 	NutritionFactsProps,
 } from "@instructure/ui";
-import { Button } from "@instructure/ui";
 import type { AiInfoFeatureProps } from "../../types";
+import { Button } from "../../utils/instructure";
 
 const FEATURE_NAME = "Block Content Editor Alt Text Generator";
 const UID = "bcealttext";

@@ -37,7 +37,7 @@ export async function writeEntry(entry: Entry) {
 	const DPL = dataPermissionLevels.data;
 	const NF = nutritionFacts.data;
 
-	const code = `import { Button } from "@instructure/ui";
+	const code = `import { Button } from "../../utils/instructure";
 import type {
   AiInformationProps,
   DataPermissionLevelsProps,

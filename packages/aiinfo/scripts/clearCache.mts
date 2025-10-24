@@ -8,11 +8,18 @@ const main = async () => {
 	fs.writeFileSync(checksumPath, JSON.stringify(emptyChecksum, null, 2));
 };
 
-export { main, main as ClearCache };
+const isVitest = typeof process !== "undefined" && process.env.VITEST;
 
-if (process.env.CLEAR) {
-	main().catch((error) => {
-		Log({ color: "redBright", message: ["Error updating cache:", error] });
-		process.exit(2);
+const isViteNodeEntrypoint =
+	!isVitest &&
+	((process.argv[1] && import.meta.url === `file://${process.argv[1]}`) ||
+		import.meta.url.endsWith("/scripts/clearCache.mts") ||
+		import.meta.url.endsWith("\\scripts\\clearCache.mts"));
+
+if (isViteNodeEntrypoint) {
+	main().catch((err) => {
+		Log({ color: "redBright", message: ["Error clearing cache:", err] });
+		process.exit(1);
 	});
 }
+export { main, main as clearCache };
