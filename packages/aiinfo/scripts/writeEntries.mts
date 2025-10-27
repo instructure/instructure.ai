@@ -47,8 +47,12 @@ const main = async (entries?: string[][]) => {
 	Log({ color: "green", message: ["Entries and barrel written."] });
 };
 
-// Only run main() if this script is executed directly, not when imported
-if (import.meta.url === `file://${process.argv[1]}`) {
+const isDirect =
+	import.meta.url === `file://${process.argv[1]}` ||
+	process.env.npm_lifecycle_event === "write:all" ||
+	process.env.WRITE === "1";
+
+if (isDirect) {
 	main().catch((err) => {
 		Log({ color: "redBright", message: ["Error writing entries:", err] });
 		process.exit(1);

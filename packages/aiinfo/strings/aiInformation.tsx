@@ -1,6 +1,4 @@
 // biome-ignore-all assist/source/useSortedKeys: Required order for Strings
-
-import type { Renderable } from "@instructure/shared-types";
 import type { AiInformationStrings } from "../types";
 import { strings as nutritionFactsStrings } from "./nutritionFacts";
 import { strings as permissionLevelsStrings } from "./permissionLevels";
@@ -8,7 +6,6 @@ import { strings as permissionLevelsStrings } from "./permissionLevels";
 const strings: { en: AiInformationStrings } = {
 	en: {
 		title: "Features",
-		trigger: "<Button>AI Information</Button>" as Renderable,
 		data: {
 			permissionLevelText: "Permission Level:",
 			permissionLevelsModalTriggerText: permissionLevelsStrings.en.title,

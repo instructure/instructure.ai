@@ -120,23 +120,10 @@ importers:
         version: link:../..
 
   packages/aiinfo:
-    dependencies:
-      react:
-        specifier: ^18 || ^19
-        version: 19.2.0
-      react-dom:
-        specifier: ^18 || ^19
-        version: 19.2.0(react@19.2.0)
     devDependencies:
       '@instructure.ai/shared-configs':
         specifier: workspace:^
         version: link:../..
-      '@instructure/shared-types':
-        specifier: ^11.0.1
-        version: 11.0.1(react@19.2.0)
-      '@instructure/ui-buttons':
-        specifier: ^11.0.1
-        version: 11.0.1(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@instructure/ui-instructure':
         specifier: ^11.0.1
         version: 11.0.1(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)

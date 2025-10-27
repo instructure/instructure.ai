@@ -37,8 +37,7 @@ export async function writeEntry(entry: Entry) {
 	const DPL = dataPermissionLevels.data;
 	const NF = nutritionFacts.data;
 
-	const code = `import { Button } from "@instructure/ui-buttons";
-import type {
+	const code = `import type {
   AiInformationProps,
   DataPermissionLevelsProps,
   NutritionFactsProps,
@@ -67,7 +66,6 @@ const aiInformation: AiInformationProps = {
   ...${toTsObjectLiteral({ ...aiInformation, dataPermissionLevelsData: undefined, nutritionFactsData: undefined, trigger: undefined })},
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
   nutritionFactsData: NUTRITION_FACTS_DATA,
-  trigger: "${aiInformation.trigger}",
 };
 
 const ${UID}: AiInfoFeatureProps = {
@@ -91,10 +89,6 @@ export {
 export default ${UID};
 `;
 
-	const pretty = formatTs(code, "index.tsx").replace(
-		/"<Button>AI Information<\/Button>"/g,
-		"<Button>AI Information</Button>",
-	);
 	mkdirSync(dirname(file), { recursive: true });
-	writeFileSync(file, pretty, "utf8");
+	writeFileSync(file, formatTs(code, "index.tsx"), "utf8");
 }

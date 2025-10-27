@@ -1,4 +1,3 @@
-import { Button } from "@instructure/ui-buttons";
 import type {
 	AiInformationProps,
 	DataPermissionLevelsProps,
@@ -195,7 +194,6 @@ const aiInformation: AiInformationProps = {
 	},
 	dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
 	nutritionFactsData: NUTRITION_FACTS_DATA,
-	trigger: <Button>AI Information</Button>,
 };
 const askyourdata: AiInfoFeatureProps = {
 	aiInformation,

@@ -6,9 +6,7 @@
     "ansis": "^4.2.0",
     "papaparse": "^5.5.3",
     "typescript": "^5.9.3",
-    "@instructure/shared-types": "^11.0.1",
-    "@instructure/ui-instructure": "^11.0.1",
-    "@instructure/ui-buttons": "^11.0.1"
+    "@instructure/ui-instructure": "^11.0.1"
   },
   "engines": {
     "node": ">=20"
@@ -27,11 +25,6 @@
   "main": "./src/index.mjs",
   "module": "./src/index.mjs",
   "name": "@instructure.ai/aiinfo",
-  "peerDependencies": {
-    "react": "^18 || ^19",
-    "react-dom": "^18 || ^19",
-    "@instructure/ui-buttons": "^10.22.0 || ^11"
-  },
   "publishConfig": {
     "access": "public"
   },
@@ -49,9 +42,9 @@
     "package": "pnpm pack --pack-destination ./src",
     "test": "pnpm vitest run",
     "typecheck": "tsgo --noEmit",
-    "write:all": "vite-node ./scripts/writeEntries.mts",
-    "write:entries": "vite-node ./scripts/writeEntries.mts --entries",
-    "write:barrel": "vite-node ./scripts/writeEntries.mts --barrel"
+    "write:all": "WRITE=1 vite-node ./scripts/writeEntries.mts",
+    "write:entries": "WRITE=1 vite-node ./scripts/writeEntries.mts --entries",
+    "write:barrel": "WRITE=1 vite-node ./scripts/writeEntries.mts --barrel"
   },
   "sideEffects": false,
   "type": "module",

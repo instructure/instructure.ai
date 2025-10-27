@@ -45,7 +45,7 @@ const entryToAIInformation = (entry: Entry): AiInfoFeature["aiInformation"] => {
 			})),
 			nutritionFactsData: nutritionFacts.data,
 			nutritionFactsFeatureName: nutritionFacts.featureName,
-			trigger: s.trigger,
+			trigger: undefined,
 		};
 	} catch (err) {
 		throw new Error(`Error in entryToAIInformation: ${String(err)}`);
