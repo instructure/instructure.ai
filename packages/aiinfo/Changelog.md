@@ -8,13 +8,13 @@ fbcefd273d8991abc9dbeef49b025502650f7decce5fcaced0657ef46983fd7a
 ### portfolios
 #### revision
 ```diff
-+ "2025.10.27"
 - "2025.10.21"
++ "2025.10.27"
 ```
 #### outputs.guardrails
 ```diff
-+ "Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection built in for extra security."
 - "Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection built in for extra security. "
++ "Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection built in for extra security."
 ```
 ## 2025-10-27T16:47:22.334Z
 ### CSV
@@ -24,18 +24,18 @@ fbcefd273d8991abc9dbeef49b025502650f7decce5fcaced0657ef46983fd7a
 ```
 #### revision
 ```diff
-+ "2025.10.22"
 - "2025.10.14"
++ "2025.10.22"
 ```
 #### model.name
 ```diff
-+ "Haiku 3"
 - "Haiku 3.5"
++ "Haiku 3"
 ```
 #### outputs.guardrails
 ```diff
-+ "The Claude Haiku model has inherent guardrails built in."
 - "The Claude Sonnet model has inherent guardrails built in."
++ "The Claude Haiku model has inherent guardrails built in."
 ```
 ## 2025-10-21T20:13:52.750Z
 ### CSV
@@ -46,8 +46,8 @@ fb0b079f1550d1302447434d4ccf7d126afa237f42e44946334365b4784e5741
 ### portfolios
 #### outputs.guardrails:
 ```diff
-+ "Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection built in for extra security. "
 - "Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection build in for extra security. "
++ "Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection built in for extra security. "
 ```
 ## 2025-10-21T18:03:42.385Z
 ### CSV
@@ -58,19 +58,19 @@ e4fde48757a6d375a20a822aecb74e7ac9f7d2bb43204243b5f3a6240882fb45
 ### portfolios
 #### revision:
 ```diff
-+ "2025.10.21"
 - "2025.10.17"
++ "2025.10.21"
 ```
 #### feature.description:
 Old:
 ```diff
-+ "AI Assistant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation."
 - "AI Assitant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation."
++ "AI Assistant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation."
 ```
 #### outputs.guardrails:
 ```diff
-+ "Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection build in for extra security."
 - "Teachers acces to the model is limited, it's only through the intructions of the portfolio/ evidence. There is suspicious prompt detection build in for extra security."
++ "Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection build in for extra security."
 ```
 ## 2025-10-21T17:35:42.207Z
 ### CSV
@@ -81,8 +81,8 @@ Old:
 ### canvasinboxtranslation
 #### model.description:
 ```diff
-+ "AWS Translate model is provided via Instructure's in-house AI Platform."
 - "Anthropic Claude models are provided via Instructure's in-house AI Platform."
++ "AWS Translate model is provided via Instructure's in-house AI Platform."
 
 ```
 ## 2025-10-21T17:08:20.332Z
