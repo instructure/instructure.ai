@@ -80,9 +80,9 @@ describe("writeChangelog", () => {
 		expect(result?.success).toBe(true);
 		expect(result?.changelog).toContain("## 2024-02-02");
 		expect(result?.changelog).toContain("### CSV");
-		expect(result?.changelog).toContain("**SHA:** `csvShaX`");
+		expect(result?.changelog).toContain("#### SHA");
+		expect(result?.changelog).toContain("```diff\ncsvShaX\n```");
 		expect(result?.changelog).toContain("### uid-new");
-		expect(result?.changelog).toMatch(/Old:\s`\(none\)`/);
 		expect(result?.changelog).toContain("#### name");
 		expect(result?.changelog).toContain("#### nested");
 		expect(writeFileSync).toHaveBeenCalledTimes(1);
@@ -112,11 +112,15 @@ describe("writeChangelog", () => {
 		expect(result?.success).toBe(true);
 		const c = result?.changelog ?? "";
 		expect(c).toContain("### uid-diff");
-		expect(c).toContain("#### nested.a:");
-		expect(c).toContain("#### nested.c:");
-		expect(c).toContain("#### added:");
-		expect(c).toMatch(/Old:\s*\n\n```JSON\n.*\n```/);
-		expect(c).toMatch(/New:\s*\n\n```JSON\n.*\n```/);
+		expect(c).toContain("#### nested.a");
+		expect(c).toContain("#### nested.c");
+		expect(c).toContain("#### added");
+		expect(c).toContain("```diff");
+		expect(c).toContain("+ 99");
+		expect(c).toContain("- 1");
+		expect(c).toContain("+ 3");
+		expect(c).toContain("- undefined");
+		expect(c).toContain('+ "value"');
 	});
 
 	it("unchanged entry only shows SHA section", () => {
@@ -204,7 +208,6 @@ describe("writeChangelog", () => {
 		expect(c).toMatch(/### uidA/);
 		expect(c).toMatch(/### uidB/);
 		expect(c).toContain("#### name");
-		expect(c).toContain("Old: `(none)`");
 	});
 
 	it("captures added property diff (old undefined)", () => {
@@ -220,10 +223,9 @@ describe("writeChangelog", () => {
 			csvSha: "sha8",
 			dateStr: "2024-08-08",
 		});
-		expect(result?.changelog).toContain("#### extra:");
-		expect(result?.changelog).toMatch(
-			/Old:\n\n```JSON\nnull\n```|Old:\n\n```JSON\nundefined\n```/,
-		);
+		expect(result?.changelog).toContain("#### extra");
+		expect(result?.changelog).toContain('+ "val"');
+		expect(result?.changelog).toContain("- undefined");
 	});
 
 	it("returns success false on write error", () => {
@@ -256,7 +258,8 @@ describe("writeChangelog", () => {
 			dateStr: "2024-10-10",
 		});
 		expect(result).toBeDefined();
-		expect(result?.changelog).toContain("**SHA:** `csvGlobalSha`");
+		expect(result?.changelog).toContain("#### SHA");
+		expect(result?.changelog).toContain("```diff\ncsvGlobalSha\n```");
 	});
 
 	it("writes changelog", () => {

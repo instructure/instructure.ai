@@ -64,7 +64,7 @@ type AIInformationResult = {
 };
 
 const importSubject = async () => {
-	const mod = await import("./entryToAIInformation.tsx");
+	const mod = await import("./entryToAIInformation.ts");
 	// FIX: Cast to expected output type so result is not 'unknown'
 	return mod.entryToAIInformation as (e: unknown) => AIInformationResult;
 };
