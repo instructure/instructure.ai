@@ -7,7 +7,7 @@ export default mergeConfig(
 	defineConfig({
 		build: {
 			lib: {
-				entry: "src/index.ts",
+				entry: "node/index.ts",
 				fileName: (format) => (format === "es" ? "index.mjs" : "index.cjs"),
 				formats: ["es", "cjs"],
 				name: "AiInfo",
@@ -18,18 +18,18 @@ export default mergeConfig(
 		},
 		plugins: [
 			dts({
-				entryRoot: "src",
+				entryRoot: "node",
 				exclude: [
 					"**/*.test.*",
 					"**/__tests__/**",
 					"scripts/**",
 					"utils/**",
-					"dist/**",
+					"src/**",
 					"**/*.config.*",
 					"vite.config.*",
 				],
 				insertTypesEntry: true,
-				outDir: "dist",
+				outDir: "src",
 				rollupTypes: true,
 				tsconfigPath: "./tsconfig.types.json",
 			}),

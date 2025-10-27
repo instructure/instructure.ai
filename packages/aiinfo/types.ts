@@ -2,7 +2,7 @@ import type {
 	AiInformationProps,
 	DataPermissionLevelsProps,
 	NutritionFactsProps,
-} from "@instructure/ui";
+} from "@instructure/ui-instructure";
 import type { AnsiColors, AnsiStyles } from "ansis";
 import type { ParseResult } from "papaparse";
 

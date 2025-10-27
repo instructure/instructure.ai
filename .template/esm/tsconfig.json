@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
+    "paths": {
+      "<<packagename>>": ["./node/index.ts"]
+    },
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "outDir": "dist",
-    "rootDir": "src",
+    "outDir": "src",
+    "rootDir": "node",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true
   },
   "extends": "../../tsconfig.json",
-  "include": ["src"]
+  "include": ["node"]
 }

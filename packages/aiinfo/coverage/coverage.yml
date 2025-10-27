@@ -1,34 +1,40 @@
 coverage:
   totals:
-    statements: 92.83%
-    branches: 81.42%
-    functions: 97.87%
-    lines: 92.58%
-    total: 91.18%
+    statements: 90.28%
+    branches: 80.78%
+    functions: 94.33%
+    lines: 89.97%
+    total: 88.84%
   scripts:
     totals:
-      statements: 90.69%
-      branches: 74.36%
-      functions: 93.75%
-      lines: 90.69%
+      statements: 85.4%
+      branches: 78.56%
+      functions: 82.82%
+      lines: 85.4%
     "clearCache.mts":
       statements: 100%
       branches: 100%
       functions: 100%
       lines: 100%
     "updateCache.mts":
-      statements: 81.37%
-      branches: 48.71%
-      functions: 87.5%
-      lines: 81.37%
-      uncovered_line_numbers: "43-227"
+      statements: 76.19%
+      branches: 51.06%
+      functions: 81.81%
+      lines: 76.19%
+      uncovered_line_numbers: "37-233"
+    "writeEntries.mts":
+      statements: 80%
+      branches: 84.61%
+      functions: 66.66%
+      lines: 80%
+      uncovered_line_numbers: "24-58"
   strings:
     totals:
       statements: 100%
       branches: 100%
       functions: 100%
       lines: 100%
-    "aiInformation.tsx":
+    "aiInformation.ts":
       statements: 100%
       branches: 100%
       functions: 100%
@@ -46,7 +52,7 @@ coverage:
   utils:
     totals:
       statements: 97.82%
-      branches: 92.08%
+      branches: 92.02%
       functions: 100%
       lines: 97.66%
     "consts.ts":
@@ -54,7 +60,7 @@ coverage:
       branches: 100%
       functions: 100%
       lines: 100%
-    "entryToAIInformation.tsx":
+    "entryToAIInformation.ts":
       statements: 91.66%
       branches: 68.18%
       functions: 100%
@@ -101,7 +107,7 @@ coverage:
       uncovered_line_numbers: "20"
     "writeChangelog.ts":
       statements: 100%
-      branches: 90.62%
+      branches: 90%
       functions: 100%
       lines: 100%
     "writeEntry.ts":

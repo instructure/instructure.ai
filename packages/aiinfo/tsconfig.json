@@ -1,10 +1,10 @@
 {
 	"compilerOptions": {
 		"paths": {
-			"@instructure.ai/aiinfo": ["./src/index.ts"]
+			"@instructure.ai/aiinfo": ["./node/index.ts"]
 		}
 	},
-	"exclude": ["dist"],
+	"exclude": ["src"],
 	"extends": "../../tsconfig.node.json",
-	"include": ["src", "utils", "scripts", "vite.config.mts"]
+	"include": ["node", "utils", "scripts", "vite.config.mts"]
 }

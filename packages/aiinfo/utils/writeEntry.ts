@@ -11,7 +11,7 @@ import {
 
 /**
  * Writes a TypeScript entry file for the given Entry object.
- * The file is created at src/components/{entry.uid}/index.tsx and contains
+ * The file is created at node/components/{entry.uid}/index.ts and contains
  * all relevant data objects for the feature.
  *
  * @param entry - The Entry object to serialize and write.
@@ -19,10 +19,10 @@ import {
 export async function writeEntry(entry: Entry) {
 	const file = resolve(
 		process.cwd(),
-		"src",
+		"node",
 		"components",
 		entry.uid,
-		"index.tsx",
+		"index.ts",
 	);
 
 	const UID = entry.uid;
@@ -37,12 +37,11 @@ export async function writeEntry(entry: Entry) {
 	const DPL = dataPermissionLevels.data;
 	const NF = nutritionFacts.data;
 
-	const code = `import { Button } from "@instructure/ui";
-import type {
+	const code = `import type {
   AiInformationProps,
   DataPermissionLevelsProps,
   NutritionFactsProps,
-} from "@instructure/ui";
+} from "@instructure/ui-instructure";
 import type { AiInfoFeatureProps } from "../../types";
 
 const FEATURE_NAME = ${JSON.stringify(FEATURE_NAME)};
@@ -64,10 +63,10 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 };
 
 const aiInformation: AiInformationProps = {
-  ...${toTsObjectLiteral({ ...aiInformation, dataPermissionLevelsData: undefined, nutritionFactsData: undefined, trigger: undefined })},
-  dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-  nutritionFactsData: NUTRITION_FACTS_DATA,
-  trigger: "${aiInformation.trigger}",
+	...${toTsObjectLiteral({ ...aiInformation, dataPermissionLevelsData: undefined, nutritionFactsData: undefined, trigger: undefined })},
+	dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
+	nutritionFactsData: NUTRITION_FACTS_DATA,
+	trigger: undefined,
 };
 
 const ${UID}: AiInfoFeatureProps = {
@@ -91,10 +90,6 @@ export {
 export default ${UID};
 `;
 
-	const pretty = formatTs(code, "index.tsx").replace(
-		/"<Button>AI Information<\/Button>"/g,
-		"<Button>AI Information</Button>",
-	);
 	mkdirSync(dirname(file), { recursive: true });
-	writeFileSync(file, pretty, "utf8");
+	writeFileSync(file, formatTs(code, "index.ts"), "utf8");
 }

@@ -1,4 +1,4 @@
 *
 !*.md
-!src/
+!node/
 !package.json

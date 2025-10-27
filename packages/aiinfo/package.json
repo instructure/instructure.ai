@@ -6,31 +6,25 @@
     "ansis": "^4.2.0",
     "papaparse": "^5.5.3",
     "typescript": "^5.9.3",
-    "@instructure/shared-types": "^11.0.1",
-    "@instructure/ui": "^11.0.1"
+    "@instructure/ui-instructure": "^11.0.1"
   },
   "engines": {
     "node": ">=20"
   },
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "default": "./dist/index.mjs"
+      "types": "./src/index.d.ts",
+      "import": "./src/index.mjs",
+      "require": "./src/index.cjs",
+      "default": "./src/index.mjs"
     }
   },
   "files": [
-    "dist"
+    "src"
   ],
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
+  "main": "./src/index.mjs",
+  "module": "./src/index.mjs",
   "name": "@instructure.ai/aiinfo",
-  "peerDependencies": {
-    "react": "^18 || ^19",
-    "react-dom": "^18 || ^19",
-    "@instructure/ui": "^10.22.0 || ^11"
-  },
   "publishConfig": {
     "access": "public"
   },
@@ -45,12 +39,15 @@
     "cache:clear": "CLEAR=1 vite-node ./scripts/clearCache.mts",
     "cache:update": "vite-node ./scripts/updateCache.mts",
     "lint": "pnpm biome check",
-    "package": "pnpm pack --pack-destination ./dist",
+    "package": "pnpm pack --pack-destination ./src",
     "test": "pnpm vitest run",
-    "typecheck": "tsgo --noEmit"
+    "typecheck": "tsgo --noEmit",
+    "write:all": "WRITE=1 vite-node ./scripts/writeEntries.mts",
+    "write:entries": "WRITE=1 vite-node ./scripts/writeEntries.mts --entries",
+    "write:barrel": "WRITE=1 vite-node ./scripts/writeEntries.mts --barrel"
   },
   "sideEffects": false,
   "type": "module",
-  "types": "./dist/index.d.ts",
-  "version": "1.6.0"
+  "types": "./src/index.d.ts",
+  "version": "2.0.0"
 }

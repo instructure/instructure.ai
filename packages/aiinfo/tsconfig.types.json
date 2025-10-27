@@ -4,8 +4,8 @@
 		"emitDeclarationOnly": true,
 		"jsx": "react-jsx",
 		"moduleResolution": "Bundler",
-		"outDir": "dist",
-		"rootDir": "src",
+		"outDir": "src",
+		"rootDir": "node",
 		"skipLibCheck": true
 	},
 	"exclude": [
@@ -13,10 +13,10 @@
 		"**/__tests__/**",
 		"scripts/**",
 		"utils/**",
-		"dist/**",
+		"src/**",
 		"**/*.config.*",
 		"vite.config.*"
 	],
 	"extends": "./tsconfig.json",
-	"include": ["src"]
+	"include": ["node"]
 }

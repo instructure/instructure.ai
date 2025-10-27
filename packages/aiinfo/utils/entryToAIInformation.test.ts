@@ -10,7 +10,7 @@ vi.mock("../strings", () => ({
 				permissionLevelsModalTriggerText: "Permission Levels",
 				permissionLevelText: "Permission Level",
 			},
-			trigger: "TRIGGER_TEXT",
+			trigger: undefined,
 		},
 	},
 	permissionLevelsStrings: {
@@ -46,7 +46,7 @@ vi.mock("./", () => ({
 }));
 
 type AIInformationResult = {
-	trigger: string;
+	trigger: undefined;
 	data: Array<{
 		description: string;
 		featureName: string;
@@ -64,7 +64,7 @@ type AIInformationResult = {
 };
 
 const importSubject = async () => {
-	const mod = await import("./entryToAIInformation.tsx");
+	const mod = await import("./entryToAIInformation.ts");
 	// FIX: Cast to expected output type so result is not 'unknown'
 	return mod.entryToAIInformation as (e: unknown) => AIInformationResult;
 };
@@ -83,7 +83,7 @@ describe("entryToAIInformation", () => {
 		};
 		const result = entryToAIInformation(entry);
 
-		expect(result.trigger).toBe("TRIGGER_TEXT");
+		expect(result.trigger).toBe(undefined);
 		expect(Array.isArray(result.data)).toBe(true);
 		expect(result.data).toHaveLength(1);
 

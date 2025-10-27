@@ -24,9 +24,9 @@ const PROJECTS = [CWD_TS, ROOT_TS, ROOT_NODE_TS].filter(Boolean) as string[];
 export default defineConfig({
   build: {
     emptyOutDir: true,
-    outDir: 'dist',
+    outDir: 'src',
     lib: {
-      entry: 'src/index.mts',
+      entry: 'node/index.mts',
       formats: ['es'],
       fileName: () => "index.mjs",
     },

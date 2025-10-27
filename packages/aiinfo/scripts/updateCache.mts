@@ -4,14 +4,8 @@ import path from "node:path";
 import { parse } from "papaparse";
 import { cache, checksum } from "../cache";
 import type { ChangedEntry, CSVFetchResult, Entry, Hash } from "../types";
-import {
-	CSVURL,
-	entryToObj,
-	Log,
-	writeBarrel,
-	writeChangelog,
-	writeEntry,
-} from "../utils";
+import { CSVURL, entryToObj, Log, writeChangelog } from "../utils";
+import { WriteEntries } from "./writeEntries.mts";
 
 const generateChecksum = (data: string): Hash => {
 	const hash: Hash = createHash("shake128", { outputLength: 32 })
@@ -20,7 +14,7 @@ const generateChecksum = (data: string): Hash => {
 	return hash;
 };
 
-const updateCache = (data: CSVFetchResult): void => {
+const updateCache = async (data: CSVFetchResult): Promise<void> => {
 	Log("Validating cache integrity...");
 	const checksumPath = path.resolve(__dirname, "../cache/checksum.json");
 	// Use imported checksum object instead of reading file
@@ -58,6 +52,7 @@ const updateCache = (data: CSVFetchResult): void => {
 		} catch (err) {
 			Log(["Failed to update cache.csv:", err]);
 		}
+		// Do not write entries here; wait until after changedEntries are determined
 	}
 
 	for (const entry of data.parsed) {
@@ -97,14 +92,27 @@ const updateCache = (data: CSVFetchResult): void => {
 		}
 	}
 
-	// Write updated checksums
+	if (isCSVOutdated && changedEntries.length > 0) {
+		const changedParsed = changedEntries
+			.map((e) =>
+				data.parsed.find(
+					(arr) =>
+						Array.isArray(arr) &&
+						arr[0]?.toLowerCase() === e.uid?.toLowerCase(),
+				),
+			)
+			.filter((arr): arr is string[] => Array.isArray(arr));
+		if (changedParsed.length > 0) {
+			await WriteEntries(changedParsed as string[][]);
+		}
+	}
+
 	try {
-		fs.writeFileSync(checksumPath, JSON.stringify(checksums, null, 2));
+		fs.writeFileSync(checksumPath, `${JSON.stringify(checksums, null, 2)}\n`);
 	} catch (err) {
 		Log(["Failed to update checksum.json:", err]);
 	}
 
-	// Write changelog if there are changed entries and CSV was updated
 	if (isCSVOutdated && changedEntries.length > 0) {
 		const dateStr = new Date().toISOString();
 		const result = writeChangelog({
@@ -175,15 +183,7 @@ const main = async () => {
 				return false;
 			}
 			try {
-				updateCache(data);
-				// Call writeEntry for each parsed entry
-				for (const entry of data.parsed) {
-					// Ensure the entry object includes all required AiInfoFeature properties
-					const EntryObj: Entry = entryToObj(entry);
-					writeEntry(EntryObj);
-				}
-				// Call writeBarrel after writing entries
-				writeBarrel();
+				await updateCache(data);
 			} catch (err) {
 				Log({
 					color: "redBright",

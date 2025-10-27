@@ -11,8 +11,6 @@ describe("aiInformation strings", () => {
 	it("has correct static literals", () => {
 		const ai = aiInformationStrings.en;
 		expect(ai.title).toBe("Features");
-		expect(ai.trigger).toBe("<Button>AI Information</Button>");
-		expect(String(ai.trigger)).toContain("<Button>");
 	});
 
 	it("maps data object fields correctly", () => {
@@ -56,7 +54,6 @@ describe("aiInformation strings", () => {
 			expect(typeof val === "string" && val.length).toBeGreaterThan(0);
 
 		check(ai.title);
-		check(ai.trigger);
 		check(ai.data.permissionLevelText);
 		check(ai.data.permissionLevelsModalTriggerText);
 		check(ai.data.modelNameText);

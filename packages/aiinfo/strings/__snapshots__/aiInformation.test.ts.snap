@@ -18,6 +18,5 @@ exports[`aiInformation strings > snapshot of english strings 1`] = `
   "nutritionFactsModalLabel": "This is a modal for AI facts",
   "nutritionFactsTitle": "AI Nutrition Facts",
   "title": "Features",
-  "trigger": "<Button>AI Information</Button>",
 }
 `;
