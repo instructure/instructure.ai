@@ -45,7 +45,7 @@ const writeChangelog = ({
 		changelog += `### CSV\n#### SHA\n\`\`\`diff\n${csvSha}\n\`\`\`\n`;
 		const entryDiffs = changedEntries
 			.map((e) => {
-				let diffText = "";
+				let diffText = `### ${e.uid}\n`;
 				if (e.newEntry && (e.oldEntry === undefined || e.oldEntry === null)) {
 					const newObj = e.newEntry as Record<string, unknown>;
 					for (const key of Object.keys(newObj)) {
