@@ -63,9 +63,10 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 };
 
 const aiInformation: AiInformationProps = {
-  ...${toTsObjectLiteral({ ...aiInformation, dataPermissionLevelsData: undefined, nutritionFactsData: undefined, trigger: undefined })},
-  dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-  nutritionFactsData: NUTRITION_FACTS_DATA,
+	...${toTsObjectLiteral({ ...aiInformation, dataPermissionLevelsData: undefined, nutritionFactsData: undefined, trigger: undefined })},
+	dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
+	nutritionFactsData: NUTRITION_FACTS_DATA,
+	trigger: undefined,
 };
 
 const ${UID}: AiInfoFeatureProps = {

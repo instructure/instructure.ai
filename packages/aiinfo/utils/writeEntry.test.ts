@@ -52,7 +52,7 @@ function makeEntry(
 }
 
 function mockUtils({
-	trigger = "<Button>AI Information</Button>",
+	trigger = undefined,
 	nutritionData = [{ seg: 1 }],
 	dplData = [{ level: 1 }],
 	aiInfoBase = { something: "x" } as Record<string, unknown>,
@@ -127,15 +127,15 @@ describe("writeEntry", () => {
 		setupMocks();
 	});
 
-	it("writes file with expected path and unquoted AI Information trigger", async () => {
-		setupMocks({ trigger: "<Button>AI Information</Button>" });
+	it("writes file with expected path and trigger as undefined", async () => {
+		setupMocks({ trigger: undefined });
 		const { writeEntry } = await import("./writeEntry");
 		const entry = makeEntry("abc123", "My Feature", "rev-42");
 		await writeEntry(entry);
 
 		const expectedPath = path.resolve(
 			process.cwd(),
-			"src",
+			"node",
 			"components",
 			entry.uid,
 			"index.tsx",
@@ -150,19 +150,7 @@ describe("writeEntry", () => {
 		expect(content).toContain('const FEATURE_NAME = "My Feature";');
 		expect(content).toContain('const UID = "abc123";');
 		expect(content).toContain('revision: "rev-42"');
-		expect(content).toContain("trigger: <Button>AI Information</Button>,");
-		expect(content).not.toContain(
-			'trigger: "<Button>AI Information</Button>",',
-		);
-	});
-
-	it("does not unquote trigger when different text", async () => {
-		setupMocks({ trigger: "<Button>Other</Button>" });
-		const { writeEntry } = await import("./writeEntry");
-		await writeEntry(makeEntry("uidX"));
-		const content = getWrittenContent();
-		expect(content).toContain('trigger: "<Button>Other</Button>",');
-		expect(content).not.toContain("trigger: <Button>Other</Button>,");
+		expect(content).toContain("trigger: undefined,");
 	});
 
 	it("calls toTsObjectLiteral correct number of times and with expected shapes", async () => {
@@ -195,16 +183,16 @@ describe("writeEntry", () => {
 		expect(writeFileSyncSpy).toHaveBeenCalledTimes(2);
 		const paths = writeFileSyncSpy.mock.calls.map((c) => c[0]);
 		expect(paths[0]).toContain(
-			path.join("src", "components", "uid1", "index.tsx"),
+			path.join("node", "components", "uid1", "index.tsx"),
 		);
 		expect(paths[1]).toContain(
-			path.join("src", "components", "uid2", "index.tsx"),
+			path.join("node", "components", "uid2", "index.tsx"),
 		);
 	});
 
-	it("formatTs output is used then post-processed for trigger", async () => {
+	it("formatTs output is used and trigger is undefined", async () => {
 		// Call setupMocks first (it resets spies), then set custom implementation
-		setupMocks({ trigger: "<Button>AI Information</Button>" });
+		setupMocks({ trigger: undefined });
 		formatTsSpy.mockImplementation((code: string) => `// formatted\n${code}`);
 		const { writeEntry } = await import("./writeEntry");
 		await writeEntry(makeEntry("uidFmt"));
@@ -212,7 +200,7 @@ describe("writeEntry", () => {
 		expect(formatTsSpy.mock.calls[0][1]).toBe("index.tsx");
 		const content = getWrittenContent();
 		expect(content.startsWith("// formatted")).toBe(true);
-		expect(content).toContain("trigger: <Button>AI Information</Button>,");
+		expect(content).toContain("trigger: undefined,");
 	});
 
 	it("export block includes UID identifier", async () => {
