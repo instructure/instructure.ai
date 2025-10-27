@@ -1,4 +1,21 @@
 # Changelog
+## 2025-10-27T17:53:08.481Z
+### CSV
+#### SHA
+```diff
+fbcefd273d8991abc9dbeef49b025502650f7decce5fcaced0657ef46983fd7a
+```
+### portfolios
+#### revision
+```diff
++ "2025.10.27"
+- "2025.10.21"
+```
+#### outputs.guardrails
+```diff
++ "Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection built in for extra security."
+- "Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection built in for extra security. "
+```
 ## 2025-10-27T16:47:22.334Z
 ### CSV
 #### SHA

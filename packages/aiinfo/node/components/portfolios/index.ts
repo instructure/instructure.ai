@@ -117,7 +117,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 					"Preventative safety mechanisms or limitations built into the AI model.",
 				segmentTitle: "Guardrails",
 				value:
-					"Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection built in for extra security. ",
+					"Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection built in for extra security.",
 			},
 			{
 				description: "Any risks the model may pose to the user.",
@@ -204,7 +204,7 @@ const portfolios: AiInfoFeatureProps = {
 	group: "Canvas",
 	name: FEATURE_NAME,
 	nutritionFacts,
-	revision: "2025.10.21",
+	revision: "2025.10.27",
 	uid: UID,
 };
 export { portfolios, nutritionFacts, dataPermissionLevels, aiInformation };
