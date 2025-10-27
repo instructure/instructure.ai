@@ -40,7 +40,7 @@ const main = async (entries?: string[][]) => {
 	writeBarrel();
 
 	try {
-		execSync("pnpm biome check ./src --write", { stdio: "ignore" });
+		execSync("pnpm biome check ./node --write", { stdio: "ignore" });
 	} catch (err) {
 		Log({ color: "redBright", message: ["Biome formatting failed:", err] });
 	}

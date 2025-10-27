@@ -5,7 +5,7 @@ import { parse } from "papaparse";
 import { cache, checksum } from "../cache";
 import type { ChangedEntry, CSVFetchResult, Entry, Hash } from "../types";
 import { CSVURL, entryToObj, Log, writeChangelog } from "../utils";
-import { writeEntries } from "./writeEntries.mts";
+import { WriteEntries } from "./writeEntries.mts";
 
 const generateChecksum = (data: string): Hash => {
 	const hash: Hash = createHash("shake128", { outputLength: 32 })
@@ -52,8 +52,7 @@ const updateCache = (data: CSVFetchResult): void => {
 		} catch (err) {
 			Log(["Failed to update cache.csv:", err]);
 		}
-		// Write all entries and barrel using writeEntries abstraction
-		writeEntries(data.parsed);
+		WriteEntries(data.parsed);
 	}
 
 	for (const entry of data.parsed) {

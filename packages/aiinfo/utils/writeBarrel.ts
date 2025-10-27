@@ -10,8 +10,8 @@ type Options = {
 };
 
 const writeBarrel = (opts: Options = {}) => {
-	const SRC_DIR = resolve(process.cwd(), opts.srcDir ?? "node/components");
-	const OUT_FILE = join(process.cwd(), "node", opts.outFileName ?? "index.ts");
+	const SRC_DIR = resolve(process.cwd(), opts.srcDir ?? "src/components");
+	const OUT_FILE = join(process.cwd(), "src", opts.outFileName ?? "index.ts");
 
 	const isDir = (p: string) => {
 		try {
