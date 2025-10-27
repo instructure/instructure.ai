@@ -1,10 +1,10 @@
 coverage:
   totals:
-    statements: 58.1%
-    branches: 80.95%
-    functions: 90.9%
-    lines: 74.6%
-    total: 76.14%
+    statements: 90.28%
+    branches: 80.78%
+    functions: 94.33%
+    lines: 89.97%
+    total: 88.84%
   scripts:
     totals:
       statements: 85.4%
@@ -28,24 +28,6 @@ coverage:
       functions: 66.66%
       lines: 80%
       uncovered_line_numbers: "24-58"
-  src:
-    totals:
-      statements: 0%
-      branches: 100%
-      functions: 0%
-      lines: 0%
-    "index.cjs":
-      statements: 0%
-      branches: 100%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "1"
-    "index.mjs":
-      statements: 0%
-      branches: 100%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "1-1850"
   strings:
     totals:
       statements: 100%
@@ -70,7 +52,7 @@ coverage:
   utils:
     totals:
       statements: 97.82%
-      branches: 92.08%
+      branches: 92.02%
       functions: 100%
       lines: 97.66%
     "consts.ts":
@@ -78,7 +60,7 @@ coverage:
       branches: 100%
       functions: 100%
       lines: 100%
-    "entryToAIInformation.tsx":
+    "entryToAIInformation.ts":
       statements: 91.66%
       branches: 68.18%
       functions: 100%
@@ -125,7 +107,7 @@ coverage:
       uncovered_line_numbers: "20"
     "writeChangelog.ts":
       statements: 100%
-      branches: 90.62%
+      branches: 90%
       functions: 100%
       lines: 100%
     "writeEntry.ts":
