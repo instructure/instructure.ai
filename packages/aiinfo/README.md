@@ -3,6 +3,28 @@
 
 A TypeScript package providing [IgniteAI](https://www.instructure.com/igniteai) feature metadata, nutrition facts, and data permission levels for Instructure products. This package is designed to help developers and product teams understand, display, and manage information about AI features.
 
+> [!WARNING]
+> v2.x has breaking changes from 1.x
+
+## Migrating from v1 to v2
+
+`AiInformation.trigger` is now `undefined`, you must bring your own Renderable trigger.  The default value of `undefined` will pass typechecks but you may have unexpected outputs.
+
+```jsx
+//V1
+<AiInformation {...aIInformation} />
+```
+
+```jsx
+//V2
+<AiInformation
+  {...aIInformation}
+  trigger={<Button>AiInformation</Button>}
+/>
+```
+
+If you were not using @instructure/ui's AiInformation component, then there are no changes needed. This does not effect NutritionFacts or DataPermissionLevels
+
 ## Entries
 
 ## Entries & Features
@@ -106,7 +128,14 @@ import type { FC } from "react";
 
 const App: FC = () => (
 	<InstUISettingsProvider>
-		<AiInformation { ...smartsearch.aiInformation } />
+    <AiInformation
+      {...smartsearch.aiInformation}
+      trigger={
+        <IconButton screenReaderLabel="AI Information">
+          <IconAIInfoLine />
+        </IconButton>
+			}
+    />
 	</InstUISettingsProvider>
 );
 export default App;
