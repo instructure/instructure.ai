@@ -6,20 +6,20 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
+      "import": "./src/index.mjs",
+      "types": "./src/index.d.ts"
     }
   },
-  "files": ["dist"],
+  "files": ["src"],
   "scripts": {
-    "build": "vite build && pnpm pack --pack-destination ./dist",
+    "build": "vite build && pnpm pack --pack-destination ./src",
     "typecheck": "tsgo --noEmit",
     "lint": "pnpm biome check",
     "test": "pnpm vitest run",
-    "<<cliname>>": "vite-node ./dist/index.mjs"
+    "<<cliname>>": "vite-node ./src/index.mjs"
   },
   "bin": {
-    "<<cliname>>": "./dist/index.mjs"
+    "<<cliname>>": "./src/index.mjs"
   },
   "devDependencies": {
     "@instructure.ai/shared-configs": "workspace:^"

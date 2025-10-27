@@ -127,7 +127,17 @@ async function main() {
 		TYPE === "app" ? "apps" : "packages",
 	);
 
-	await replaceInFile(path.join(pkgDir, "README.md"), CLINAME, PACKAGENAME);
+	await replaceInFile(
+		path.join(pkgDir, "README.md"),
+		CLINAME,
+		PACKAGENAME
+	);
+
+	await replaceInFile(
+		path.join(pkgDir, "tsconfig.json"),
+		REPLACESTRING,
+		FULLPACKAGENAME,
+	);
 
 	if (TEMPLATE === "instui") {
 		const url = "https://instructure.design/llms.txt";

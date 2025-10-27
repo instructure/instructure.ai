@@ -158,7 +158,7 @@ const i = "Ask Your Data", U = "askyourdata", I = [
   dataPermissionLevelsData: I,
   nutritionFactsData: T,
   trigger: /* @__PURE__ */ e(t, { children: "AI Information" }, void 0, !1, {
-    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/src/components/askyourdata/index.tsx",
+    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/node/components/askyourdata/index.tsx",
     lineNumber: 198,
     columnNumber: 11
   }, void 0)
@@ -329,7 +329,7 @@ const i = "Ask Your Data", U = "askyourdata", I = [
   dataPermissionLevelsData: L,
   nutritionFactsData: A,
   trigger: /* @__PURE__ */ e(t, { children: "AI Information" }, void 0, !1, {
-    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/src/components/bcealttext/index.tsx",
+    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/node/components/bcealttext/index.tsx",
     lineNumber: 194,
     columnNumber: 11
   }, void 0)
@@ -500,7 +500,7 @@ const i = "Ask Your Data", U = "askyourdata", I = [
   dataPermissionLevelsData: b,
   nutritionFactsData: D,
   trigger: /* @__PURE__ */ e(t, { children: "AI Information" }, void 0, !1, {
-    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/src/components/canvascoursetranslation/index.tsx",
+    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/node/components/canvascoursetranslation/index.tsx",
     lineNumber: 196,
     columnNumber: 11
   }, void 0)
@@ -671,7 +671,7 @@ const i = "Ask Your Data", U = "askyourdata", I = [
   dataPermissionLevelsData: F,
   nutritionFactsData: C,
   trigger: /* @__PURE__ */ e(t, { children: "AI Information" }, void 0, !1, {
-    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/src/components/canvasdiscussionsummaries/index.tsx",
+    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/node/components/canvasdiscussionsummaries/index.tsx",
     lineNumber: 196,
     columnNumber: 11
   }, void 0)
@@ -842,7 +842,7 @@ const i = "Ask Your Data", U = "askyourdata", I = [
   dataPermissionLevelsData: P,
   nutritionFactsData: y,
   trigger: /* @__PURE__ */ e(t, { children: "AI Information" }, void 0, !1, {
-    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/src/components/canvasgradingassistance/index.tsx",
+    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/node/components/canvasgradingassistance/index.tsx",
     lineNumber: 197,
     columnNumber: 11
   }, void 0)
@@ -1013,7 +1013,7 @@ const i = "Ask Your Data", U = "askyourdata", I = [
   dataPermissionLevelsData: N,
   nutritionFactsData: x,
   trigger: /* @__PURE__ */ e(t, { children: "AI Information" }, void 0, !1, {
-    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/src/components/canvasinboxtranslation/index.tsx",
+    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/node/components/canvasinboxtranslation/index.tsx",
     lineNumber: 196,
     columnNumber: 11
   }, void 0)
@@ -1184,7 +1184,7 @@ const i = "Ask Your Data", U = "askyourdata", I = [
   dataPermissionLevelsData: E,
   nutritionFactsData: w,
   trigger: /* @__PURE__ */ e(t, { children: "AI Information" }, void 0, !1, {
-    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/src/components/discussioninsights/index.tsx",
+    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/node/components/discussioninsights/index.tsx",
     lineNumber: 197,
     columnNumber: 11
   }, void 0)
@@ -1355,7 +1355,7 @@ const i = "Ask Your Data", U = "askyourdata", I = [
   dataPermissionLevelsData: S,
   nutritionFactsData: R,
   trigger: /* @__PURE__ */ e(t, { children: "AI Information" }, void 0, !1, {
-    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/src/components/igniteagent/index.tsx",
+    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/node/components/igniteagent/index.tsx",
     lineNumber: 200,
     columnNumber: 11
   }, void 0)
@@ -1526,7 +1526,7 @@ const i = "Ask Your Data", U = "askyourdata", I = [
   dataPermissionLevelsData: M,
   nutritionFactsData: k,
   trigger: /* @__PURE__ */ e(t, { children: "AI Information" }, void 0, !1, {
-    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/src/components/portfolios/index.tsx",
+    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/node/components/portfolios/index.tsx",
     lineNumber: 198,
     columnNumber: 11
   }, void 0)
@@ -1697,7 +1697,7 @@ const i = "Ask Your Data", U = "askyourdata", I = [
   dataPermissionLevelsData: B,
   nutritionFactsData: z,
   trigger: /* @__PURE__ */ e(t, { children: "AI Information" }, void 0, !1, {
-    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/src/components/rubricgenerator/index.tsx",
+    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/node/components/rubricgenerator/index.tsx",
     lineNumber: 197,
     columnNumber: 11
   }, void 0)
@@ -1868,7 +1868,7 @@ const i = "Ask Your Data", U = "askyourdata", I = [
   dataPermissionLevelsData: W,
   nutritionFactsData: $,
   trigger: /* @__PURE__ */ e(t, { children: "AI Information" }, void 0, !1, {
-    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/src/components/smartsearch/index.tsx",
+    fileName: "/Users/dwahl/Scripts/instructure.ai/packages/aiinfo/node/components/smartsearch/index.tsx",
     lineNumber: 198,
     columnNumber: 11
   }, void 0)
