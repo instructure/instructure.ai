@@ -42,7 +42,7 @@ import type {
   AiInformationProps,
   DataPermissionLevelsProps,
   NutritionFactsProps,
-} from "@instructure/ui";
+} from "@instructure/ui-instructure";
 import type { AiInfoFeatureProps } from "../../types";
 
 const FEATURE_NAME = ${JSON.stringify(FEATURE_NAME)};

@@ -1,6 +1,6 @@
-import { AiInformationProps } from '@instructure/ui';
-import { DataPermissionLevelsProps } from '@instructure/ui';
-import { NutritionFactsProps } from '@instructure/ui';
+import { AiInformationProps } from '@instructure/ui-instructure';
+import { DataPermissionLevelsProps } from '@instructure/ui-instructure';
+import { NutritionFactsProps } from '@instructure/ui-instructure';
 
 declare const AiInfo: AiInfoProps;
 export { AiInfo }

@@ -1,9 +1,9 @@
+import { Button } from "@instructure/ui-buttons";
 import type {
 	AiInformationProps,
 	DataPermissionLevelsProps,
 	NutritionFactsProps,
-} from "@instructure/ui";
-import { Button } from "@instructure/ui";
+} from "@instructure/ui-instructure";
 import type { AiInfoFeatureProps } from "../../types";
 
 const FEATURE_NAME = "Rubric Creator";

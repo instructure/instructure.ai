@@ -1,5 +1,5 @@
 import { jsxDEV as e } from "react/jsx-dev-runtime";
-import { Button as t } from "@instructure/ui";
+import { Button as t } from "@instructure/ui-buttons";
 const i = "Ask Your Data", U = "askyourdata", I = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",

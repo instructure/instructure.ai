@@ -2,7 +2,7 @@ import type {
 	AiInformationProps,
 	DataPermissionLevelsProps,
 	NutritionFactsProps,
-} from "@instructure/ui";
+} from "@instructure/ui-instructure";
 
 type AiInfoFeatureProps = {
 	nutritionFacts: NutritionFactsProps;
