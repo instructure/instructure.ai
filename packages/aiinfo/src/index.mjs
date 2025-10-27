@@ -698,7 +698,7 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
       {
         description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
-        value: "Haiku 3.5",
+        value: "Haiku 3",
         valueDescription: "Anthropic Claude models are provided via Instructure's in-house AI Platform."
       },
       {
@@ -758,7 +758,7 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
-        value: "The Claude Sonnet model has inherent guardrails built in."
+        value: "The Claude Haiku model has inherent guardrails built in."
       },
       {
         description: "Any risks the model may pose to the user.",
@@ -798,7 +798,7 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
       featureName: "Grading Assistance",
-      modelName: "Haiku 3.5",
+      modelName: "Haiku 3",
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
@@ -831,7 +831,7 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
   group: "Canvas",
   name: s,
   nutritionFacts: ne,
-  revision: "2025.10.14",
+  revision: "2025.10.22",
   uid: oe
 }, o = "Inbox Translation", ue = "canvasinboxtranslation", P = [
   {
@@ -1426,7 +1426,7 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
-        value: "Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection built in for extra security. "
+        value: "Teacher access to the model is limited, it's only through the instructions of the portfolio/evidence. There is suspicious prompt detection built in for extra security."
       },
       {
         description: "Any risks the model may pose to the user.",
@@ -1499,7 +1499,7 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
   group: "Canvas",
   name: l,
   nutritionFacts: Pe,
-  revision: "2025.10.21",
+  revision: "2025.10.27",
   uid: Ce
 }, d = "Rubric Creator", xe = "rubricgenerator", M = [
   {
