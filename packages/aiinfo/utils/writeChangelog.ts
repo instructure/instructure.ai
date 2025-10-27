@@ -41,34 +41,32 @@ const writeChangelog = ({
 	changedEntries: ChangedEntry[];
 }) => {
 	if (changedEntries.length > 0) {
-		let changelog = `\n\n## ${dateStr}\n\n`;
-		changelog += `### CSV\n\n**SHA:** \`${csvSha}\`\n`;
+		let changelog = `\n## ${dateStr}\n`;
+		changelog += `### CSV\n#### SHA\n\`\`\`diff\n${csvSha}\n\`\`\`\n`;
 		const entryDiffs = changedEntries
 			.map((e) => {
-				let diffText = `\n### ${e.uid}\n\n#### SHA\n\n**Old:** \`${e.oldChecksum ? `${e.oldChecksum}` : "(none)"}\`\n\n**New:** \`${e.newChecksum}\``;
+				let diffText = "";
 				if (e.newEntry && (e.oldEntry === undefined || e.oldEntry === null)) {
-					// Show all new values for new entries
 					const newObj = e.newEntry as Record<string, unknown>;
 					for (const key of Object.keys(newObj)) {
 						const value = newObj[key];
-						diffText += `\n\n#### ${key}\n\nOld: \`(none)\`\n\n#### New:\n\n\`\`\`JSON\n${JSON.stringify(value, null, 2)}\n\`\`\``;
+						diffText += `#### ${key}\n\`\`\`diff\n+ ${JSON.stringify(value, null, 2)}\n\`\`\`\n`;
 					}
 				} else if (e.oldEntry && e.newEntry) {
-					// Show diffs for changed entries
 					const diffs = getObjectDiffs(e.oldEntry, e.newEntry);
 					if (diffs.length === 0) {
-						diffText += `\n\n_No changes detected in entry fields._`;
+						diffText += `_No changes detected in entry fields._\n`;
 					} else {
 						for (const diff of diffs) {
 							const pathStr = diff.path.join(".");
-							diffText += `\n\n#### ${pathStr}:\n\nOld:\n\n\`\`\`JSON\n${JSON.stringify(diff.oldValue, null, 2)}\n\`\`\`\n#### New:\n\n\`\`\`JSON\n${JSON.stringify(diff.newValue, null, 2)}\n\`\`\``;
+							diffText += `#### ${pathStr}\n\`\`\`diff\n+ ${JSON.stringify(diff.newValue, null, 2)}\n- ${JSON.stringify(diff.oldValue, null, 2)}\n\`\`\`\n`;
 						}
 					}
 				}
 				return diffText;
 			})
 			.join("\n");
-		changelog += `${entryDiffs}\n`;
+		changelog += `${entryDiffs}`;
 		try {
 			// Read existing changelog
 			let existing = "";
@@ -82,7 +80,7 @@ const writeChangelog = ({
 			}
 			// Prepend new changelog after header
 			const newContent = [lines[0], changelog.trim(), ...lines.slice(1)].join(
-				"\n\n",
+				"\n",
 			);
 			fs.writeFileSync(changelogPath, newContent);
 			return { changelog, success: true };
