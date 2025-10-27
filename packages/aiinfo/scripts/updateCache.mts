@@ -108,7 +108,7 @@ const updateCache = async (data: CSVFetchResult): Promise<void> => {
 	}
 
 	try {
-		fs.writeFileSync(checksumPath, JSON.stringify(checksums, null, 2));
+		fs.writeFileSync(checksumPath, `${JSON.stringify(checksums, null, 2)}\n`);
 	} catch (err) {
 		Log(["Failed to update checksum.json:", err]);
 	}
