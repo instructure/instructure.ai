@@ -59,7 +59,7 @@ const writeChangelog = ({
 					} else {
 						for (const diff of diffs) {
 							const pathStr = diff.path.join(".");
-							diffText += `#### ${pathStr}\n\`\`\`diff\n+ ${JSON.stringify(diff.newValue, null, 2)}\n- ${JSON.stringify(diff.oldValue, null, 2)}\n\`\`\`\n`;
+							diffText += `#### ${pathStr}\n\`\`\`diff\n- ${JSON.stringify(diff.oldValue, null, 2)}\n+ ${JSON.stringify(diff.newValue, null, 2)}\n\`\`\`\n`;
 						}
 					}
 				}
