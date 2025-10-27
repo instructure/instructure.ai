@@ -48,7 +48,10 @@
     "lint": "pnpm biome check",
     "package": "pnpm pack --pack-destination ./src",
     "test": "pnpm vitest run",
-    "typecheck": "tsgo --noEmit"
+    "typecheck": "tsgo --noEmit",
+    "write:all": "vite-node ./scripts/writeEntries.mts",
+    "write:entries": "vite-node ./scripts/writeEntries.mts --entries",
+    "write:barrel": "vite-node ./scripts/writeEntries.mts --barrel"
   },
   "sideEffects": false,
   "type": "module",
