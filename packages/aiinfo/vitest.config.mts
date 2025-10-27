@@ -9,11 +9,11 @@ const __cdir = path.resolve(__dir, "coverage");
 export default mergeConfig(baseConfig, {
 	test: {
 		coverage: {
-			exclude: ["src/**"],
+			exclude: ["node/**"],
 			include: ["strings/**/*.{ts,tsx,js,cjs,mjs,mts}"],
 			reportsDirectory: __cdir,
 		},
-		exclude: ["/src/**"],
+		exclude: ["/node/**"],
 		include: ["strings/**/*.{test,spec}.{ts,tsx,js,cjs,mjs,mts}"],
 	},
 });

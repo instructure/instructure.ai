@@ -121,6 +121,9 @@ importers:
 
   packages/aiinfo:
     dependencies:
+      '@instructure/ui-buttons':
+        specifier: ^10.22.0 || ^11
+        version: 11.0.1(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react:
         specifier: ^18 || ^19
         version: 19.2.0
@@ -134,9 +137,6 @@ importers:
       '@instructure/shared-types':
         specifier: ^11.0.1
         version: 11.0.1(react@19.2.0)
-      '@instructure/ui':
-        specifier: ^11.0.1
-        version: 11.0.1(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@types/papaparse':
         specifier: ^5.3.16
         version: 5.3.16

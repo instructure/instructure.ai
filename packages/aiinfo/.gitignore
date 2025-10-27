@@ -7,14 +7,14 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist-ssr
+src-ssr
 pub
 coverage/*
 !coverage.yml
-dist/*
-!dist/index.cjs
-!dist/index.mjs
-!dist/index.d.ts
+src/*
+!src/index.cjs
+!src/index.mjs
+!src/index.d.ts
 *.local
 
 .idea

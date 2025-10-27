@@ -11,7 +11,7 @@ import {
 
 /**
  * Writes a TypeScript entry file for the given Entry object.
- * The file is created at src/components/{entry.uid}/index.tsx and contains
+ * The file is created at node/components/{entry.uid}/index.tsx and contains
  * all relevant data objects for the feature.
  *
  * @param entry - The Entry object to serialize and write.
@@ -19,7 +19,7 @@ import {
 export async function writeEntry(entry: Entry) {
 	const file = resolve(
 		process.cwd(),
-		"src",
+		"node",
 		"components",
 		entry.uid,
 		"index.tsx",
@@ -37,7 +37,7 @@ export async function writeEntry(entry: Entry) {
 	const DPL = dataPermissionLevels.data;
 	const NF = nutritionFacts.data;
 
-	const code = `import { Button } from "@instructure/ui";
+	const code = `import { Button } from "@instructure/ui-buttons";
 import type {
   AiInformationProps,
   DataPermissionLevelsProps,
