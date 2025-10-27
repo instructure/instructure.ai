@@ -19,7 +19,7 @@ import {
 export async function writeEntry(entry: Entry) {
 	const file = resolve(
 		process.cwd(),
-		"src",
+		"node",
 		"components",
 		entry.uid,
 		"index.tsx",
