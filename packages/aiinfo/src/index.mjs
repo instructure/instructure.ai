@@ -154,7 +154,8 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
   title: "Features",
   trigger: void 0,
   dataPermissionLevelsData: p,
-  nutritionFactsData: f
+  nutritionFactsData: f,
+  trigger: void 0
 }, O = {
   aiInformation: U,
   dataPermissionLevels: _,
@@ -320,7 +321,8 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
   title: "Features",
   trigger: void 0,
   dataPermissionLevelsData: I,
-  nutritionFactsData: T
+  nutritionFactsData: T,
+  trigger: void 0
 }, Q = {
   aiInformation: q,
   dataPermissionLevels: G,
@@ -486,7 +488,8 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
   title: "Features",
   trigger: void 0,
   dataPermissionLevelsData: L,
-  nutritionFactsData: A
+  nutritionFactsData: A,
+  trigger: void 0
 }, j = {
   aiInformation: Z,
   dataPermissionLevels: X,
@@ -652,7 +655,8 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
   title: "Features",
   trigger: void 0,
   dataPermissionLevelsData: b,
-  nutritionFactsData: D
+  nutritionFactsData: D,
+  trigger: void 0
 }, se = {
   aiInformation: ae,
   dataPermissionLevels: ie,
@@ -818,7 +822,8 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
   title: "Features",
   trigger: void 0,
   dataPermissionLevelsData: F,
-  nutritionFactsData: C
+  nutritionFactsData: C,
+  trigger: void 0
 }, de = {
   aiInformation: le,
   dataPermissionLevels: re,
@@ -984,7 +989,8 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
   title: "Features",
   trigger: void 0,
   dataPermissionLevelsData: P,
-  nutritionFactsData: y
+  nutritionFactsData: y,
+  trigger: void 0
 }, ve = {
   aiInformation: he,
   dataPermissionLevels: me,
@@ -1150,7 +1156,8 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
   title: "Features",
   trigger: void 0,
   dataPermissionLevelsData: N,
-  nutritionFactsData: E
+  nutritionFactsData: E,
+  trigger: void 0
 }, Te = {
   aiInformation: Ie,
   dataPermissionLevels: fe,
@@ -1316,7 +1323,8 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
   title: "Features",
   trigger: void 0,
   dataPermissionLevelsData: x,
-  nutritionFactsData: w
+  nutritionFactsData: w,
+  trigger: void 0
 }, Fe = {
   aiInformation: De,
   dataPermissionLevels: be,
@@ -1482,7 +1490,8 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
   title: "Features",
   trigger: void 0,
   dataPermissionLevelsData: S,
-  nutritionFactsData: R
+  nutritionFactsData: R,
+  trigger: void 0
 }, Ee = {
   aiInformation: Ne,
   dataPermissionLevels: ye,
@@ -1648,7 +1657,8 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
   title: "Features",
   trigger: void 0,
   dataPermissionLevelsData: M,
-  nutritionFactsData: B
+  nutritionFactsData: B,
+  trigger: void 0
 }, Me = {
   aiInformation: Re,
   dataPermissionLevels: Se,
@@ -1814,7 +1824,8 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
   title: "Features",
   trigger: void 0,
   dataPermissionLevelsData: k,
-  nutritionFactsData: z
+  nutritionFactsData: z,
+  trigger: void 0
 }, $e = {
   aiInformation: We,
   dataPermissionLevels: ze,

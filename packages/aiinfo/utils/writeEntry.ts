@@ -11,7 +11,7 @@ import {
 
 /**
  * Writes a TypeScript entry file for the given Entry object.
- * The file is created at node/components/{entry.uid}/index.tsx and contains
+ * The file is created at node/components/{entry.uid}/index.ts and contains
  * all relevant data objects for the feature.
  *
  * @param entry - The Entry object to serialize and write.
@@ -22,7 +22,7 @@ export async function writeEntry(entry: Entry) {
 		"node",
 		"components",
 		entry.uid,
-		"index.tsx",
+		"index.ts",
 	);
 
 	const UID = entry.uid;
@@ -91,5 +91,5 @@ export default ${UID};
 `;
 
 	mkdirSync(dirname(file), { recursive: true });
-	writeFileSync(file, formatTs(code, "index.tsx"), "utf8");
+	writeFileSync(file, formatTs(code, "index.ts"), "utf8");
 }

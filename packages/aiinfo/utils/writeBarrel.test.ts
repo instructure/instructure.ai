@@ -34,7 +34,8 @@ const resetFsConfig = (cfg: FSConfig) => {
 	fsMocks.existsSync.mockImplementation((p: string) =>
 		cfg.withIndex.some(
 			(d) =>
-				p === path.join(path.resolve(CWD, "node", "components"), d, "index.tsx"),
+				p ===
+				path.join(path.resolve(CWD, "node", "components"), d, "index.tsx"),
 		),
 	);
 	fsMocks.writeFileSync.mockImplementation(() => {});
@@ -84,7 +85,7 @@ describe("writeBarrel", () => {
 		expect(out).toMatch(/export type \* from "\.\/types";/);
 		expect(out).toMatch(/export default AiInfo;/);
 		expect(formatTsMock).toHaveBeenCalledWith(expect.any(String), "index.ts");
-	const expectedPath = path.join(path.resolve(CWD, "node"), "index.ts");
+		const expectedPath = path.join(path.resolve(CWD, "node"), "index.ts");
 		expect(getWrittenPath()).toBe(expectedPath);
 	});
 
@@ -115,7 +116,7 @@ describe("writeBarrel", () => {
 		});
 		const writeBarrel = await importSubject();
 		writeBarrel({ outFileName: "index.ts" });
-	const expectedPath = path.join(path.resolve(CWD, "node"), "index.ts");
+		const expectedPath = path.join(path.resolve(CWD, "node"), "index.ts");
 		expect(getWrittenPath()).toBe(expectedPath);
 	});
 
@@ -170,7 +171,9 @@ describe("writeBarrel", () => {
 			throw new Error("boom");
 		});
 		const writeBarrel = await importSubject();
-		expect(() => writeBarrel()).toThrow(/Failed to read directory .*node.*components.*boom/);
+		expect(() => writeBarrel()).toThrow(
+			/Failed to read directory .*node.*components.*boom/,
+		);
 		expect(fsMocks.writeFileSync).not.toHaveBeenCalled();
 	});
 
@@ -223,9 +226,9 @@ describe("writeBarrel", () => {
 		expect(out).toMatch(/export default AiInfo;/);
 		const occurrencesAlpha = (out.match(/alpha/g) || []).length;
 		const occurrencesGamma = (out.match(/gamma/g) || []).length;
-	// Barrel should reference each UID at least in import and AiInfo object
-	expect(occurrencesAlpha).toBeGreaterThanOrEqual(1);
-	expect(occurrencesGamma).toBeGreaterThanOrEqual(1);
+		// Barrel should reference each UID at least in import and AiInfo object
+		expect(occurrencesAlpha).toBeGreaterThanOrEqual(1);
+		expect(occurrencesGamma).toBeGreaterThanOrEqual(1);
 	});
 
 	it("calls formatTs with generated code before writing", async () => {
@@ -239,13 +242,15 @@ describe("writeBarrel", () => {
 		expect(formatTsMock).toHaveBeenCalledTimes(1);
 		expect(fsMocks.writeFileSync).toHaveBeenCalledTimes(1);
 		const codePassed = formatTsMock.mock.calls[0][0];
-			// Only check for import statements if features are present
-			if (codePassed.includes('import { alpha')) {
-				expect(codePassed).toContain('import { alpha } from "./components/alpha";');
-			}
-			if (codePassed.includes('import { beta')) {
-				expect(codePassed).toContain('import { beta } from "./components/beta";');
-			}
+		// Only check for import statements if features are present
+		if (codePassed.includes("import { alpha")) {
+			expect(codePassed).toContain(
+				'import { alpha } from "./components/alpha";',
+			);
+		}
+		if (codePassed.includes("import { beta")) {
+			expect(codePassed).toContain('import { beta } from "./components/beta";');
+		}
 		expect(codePassed).toContain("const AiInfo: AiInfoProps = {");
 	});
 });

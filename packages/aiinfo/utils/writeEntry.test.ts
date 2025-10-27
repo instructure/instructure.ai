@@ -138,7 +138,7 @@ describe("writeEntry", () => {
 			"node",
 			"components",
 			entry.uid,
-			"index.tsx",
+			"index.ts",
 		);
 		expect(mkdirSyncSpy).toHaveBeenCalledTimes(1);
 		expect(mkdirSyncSpy.mock.calls[0][0]).toBe(path.dirname(expectedPath));
@@ -183,10 +183,10 @@ describe("writeEntry", () => {
 		expect(writeFileSyncSpy).toHaveBeenCalledTimes(2);
 		const paths = writeFileSyncSpy.mock.calls.map((c) => c[0]);
 		expect(paths[0]).toContain(
-			path.join("node", "components", "uid1", "index.tsx"),
+			path.join("node", "components", "uid1", "index.ts"),
 		);
 		expect(paths[1]).toContain(
-			path.join("node", "components", "uid2", "index.tsx"),
+			path.join("node", "components", "uid2", "index.ts"),
 		);
 	});
 
@@ -197,7 +197,7 @@ describe("writeEntry", () => {
 		const { writeEntry } = await import("./writeEntry");
 		await writeEntry(makeEntry("uidFmt"));
 		expect(formatTsSpy).toHaveBeenCalledTimes(1);
-		expect(formatTsSpy.mock.calls[0][1]).toBe("index.tsx");
+		expect(formatTsSpy.mock.calls[0][1]).toBe("index.ts");
 		const content = getWrittenContent();
 		expect(content.startsWith("// formatted")).toBe(true);
 		expect(content).toContain("trigger: undefined,");
