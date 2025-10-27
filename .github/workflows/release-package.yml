@@ -119,9 +119,9 @@ jobs:
                 JSON_PATH=""
               fi
 
-              TARBALL=$(find "./packages/$PKG_NAME/dist" -name '*.tgz' -type f | head -n 1)
+              TARBALL=$(find "./packages/$PKG_NAME/src" -name '*.tgz' -type f | head -n 1)
               if [ -z "$TARBALL" ]; then
-                echo "Error: No .tgz tarball found for $PKG_NAME in ./packages/$PKG_NAME/dist/"
+                echo "Error: No .tgz tarball found for $PKG_NAME in ./packages/$PKG_NAME/src/"
                 continue
               fi
 
@@ -152,7 +152,7 @@ jobs:
             if [ "$PKG_NAME" = "shared-configs" ]; then
               gh release create "$TAG" --title "$TAG" --generate-notes
             elif [ -d "packages/$PKG_NAME" ]; then
-              gh release create "$TAG" ./packages/$PKG_NAME/dist/*.tgz --title "$TAG" --generate-notes
+              gh release create "$TAG" ./packages/$PKG_NAME/src/*.tgz --title "$TAG" --generate-notes
             else
               gh release create "$TAG" --title "$TAG" --generate-notes
             fi
