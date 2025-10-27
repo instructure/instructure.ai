@@ -47,15 +47,8 @@ const main = async (entries?: string[][]) => {
 	Log({ color: "green", message: ["Entries and barrel written."] });
 };
 
-const isVitest = typeof process !== "undefined" && process.env.VITEST;
-
-const isViteNodeEntrypoint =
-	!isVitest &&
-	((process.argv[1] && import.meta.url === `file://${process.argv[1]}`) ||
-		import.meta.url.endsWith("/scripts/writeEntries.mts") ||
-		import.meta.url.endsWith("\\scripts\\writeEntries.mts"));
-
-if (isViteNodeEntrypoint) {
+// Only run main() if this script is executed directly, not when imported
+if (import.meta.url === `file://${process.argv[1]}`) {
 	main().catch((err) => {
 		Log({ color: "redBright", message: ["Error writing entries:", err] });
 		process.exit(1);
