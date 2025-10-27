@@ -22,6 +22,7 @@ fbcefd273d8991abc9dbeef49b025502650f7decce5fcaced0657ef46983fd7a
 ```diff
 764a870a31eaef555d1956b203241631476ac610403d1db3ecca305c7a947000
 ```
+### canvasGradingAssistance
 #### revision
 ```diff
 - "2025.10.14"
