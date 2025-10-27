@@ -19,7 +19,7 @@ A TypeScript package providing [IgniteAI](https://www.instructure.com/igniteai) 
 //V2
 <AiInformation
   {...aIInformation}
-  trigger={<Button>AiInformation</Button>}
+  trigger={<Button>AI Information</Button>}
 />
 ```
 
