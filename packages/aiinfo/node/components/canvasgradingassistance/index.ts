@@ -45,7 +45,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"The foundational AI on which further training and customizations are built.",
 				segmentTitle: "Base Model",
-				value: "Haiku 3.5",
+				value: "Haiku 3",
 				valueDescription:
 					"Anthropic Claude models are provided via Instructure's in-house AI Platform.",
 			},
@@ -116,7 +116,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"Preventative safety mechanisms or limitations built into the AI model.",
 				segmentTitle: "Guardrails",
-				value: "The Claude Sonnet model has inherent guardrails built in.",
+				value: "The Claude Haiku model has inherent guardrails built in.",
 			},
 			{
 				description: "Any risks the model may pose to the user.",
@@ -167,7 +167,7 @@ const aiInformation: AiInformationProps = {
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
 				featureName: "Grading Assistance",
-				modelName: "Haiku 3.5",
+				modelName: "Haiku 3",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
 				permissionLevel: "LEVEL 2",
@@ -203,7 +203,7 @@ const canvasgradingassistance: AiInfoFeatureProps = {
 	group: "Canvas",
 	name: FEATURE_NAME,
 	nutritionFacts,
-	revision: "2025.10.14",
+	revision: "2025.10.22",
 	uid: UID,
 };
 export {

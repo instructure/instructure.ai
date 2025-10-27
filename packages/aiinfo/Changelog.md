@@ -1,3 +1,25 @@
+# Changelog
+## 2025-10-27T16:47:22.334Z
+### CSV
+#### SHA
+```diff
+764a870a31eaef555d1956b203241631476ac610403d1db3ecca305c7a947000
+```
+#### revision
+```diff
++ "2025.10.22"
+- "2025.10.14"
+```
+#### model.name
+```diff
++ "Haiku 3"
+- "Haiku 3.5"
+```
+#### outputs.guardrails
+```diff
++ "The Claude Haiku model has inherent guardrails built in."
+- "The Claude Sonnet model has inherent guardrails built in."
+```
 ## 2025-10-21T20:13:52.750Z
 ### CSV
 #### SHA
@@ -63,24 +85,24 @@ Old:
 ```
 #### feature
 ```diff
-{
++ {
 +   "name": "Discussions Translation",
 +   "description": "Translation of Discussion threads (\"Course AI Translation\" feature flag) across 10 languages."
-}
++ }
 ```
 #### model
 ```diff
-{
++ {
 +   "name": "Haiku 3",
 +   "description": "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
 +   "trained": "No",
 +   "data": "Course",
 +   "dataDescription": "Announcement and Discussion prompts and replies"
-}
++ }
 ```
 #### compliance
 ```diff
-{
++ {
 +   "retention": "Data is not stored or reused by the model.",
 +   "logging": "Does not log data",
 +   "loggingDescription": "",
@@ -88,18 +110,18 @@ Old:
 +   "regionsDescription": "",
 +   "pii": "Not Exposed",
 +   "piiDescription": "PII in discussion replies may be sent to the model, but no PII is intentionally sent to the model."
-}
++ }
 ```
 #### outputs
 ```diff
-{
++ {
 +   "settings": "Yes",
 +   "human": "Yes",
 +   "humanDescription": "Untranslated content is available to review translations against",
 +   "guardrails": "",
 +   "risks": "Machine translation may not fully capture the meaning of the original message.",
 +   "outcomes": "Improve participation for students who do not natively speak the language of instruction or other replies."
-}
++ + }
 ```
 #### group
 ```diff
@@ -123,21 +145,21 @@ Old:
 {
 +   "name": "Portfolios",
 +   "description": "AI Assitant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation."
-}
++ }
 ```
 #### model
 ```diff
-{
++ {
 +   "name": "Haiku 3",
 +   "description": "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
 +   "trained": "No",
 +   "data": "Other",
 +   "dataDescription": "Custom instructions that teachers provide in their Evaluation portfolios for students."
-}
++ }
 ```
 #### compliance
 ```diff
-{
++ {
 +   "retention": "Data is not stored or re-used by the model",
 +   "logging": "Logs data",
 +   "loggingDescription": "Model evaluations and reply labels are logged for debugging and troubleshooting purposes.",
@@ -145,18 +167,18 @@ Old:
 +   "regionsDescription": "",
 +   "pii": "Not Exposed",
 +   "piiDescription": ""
-}
++ }
 ```
 #### outputs
 ```diff
-{
++ {
 +   "settings": "Yes",
 +   "human": "Yes",
 +   "humanDescription": "Teachers provide the input of the model (content) and the response by the model is not auto accepted. Teachers have the chance to modify the result every occasion.",
 +   "guardrails": "Teachers acces to the model is limited, it's only through the intructions of the portfolio/ evidence. There is suspicious prompt detection build in for extra security. ",
 +   "risks": "LLM might suggest not the right questions or skills, or not an improved instruction to the user's liking.",
 +   "outcomes": "A user-friendly tool for a safe writing assistant, and features to speed up administrative work, and provide more reliable portfolios for students to work with."
-}
++ }
 ```
 #### group
 ```diff
