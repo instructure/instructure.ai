@@ -1,4 +1,132 @@
 # Changelog
+## 2025-10-28T20:56:32.209Z
+### CSV
+#### SHA
+```diff
+cb94462a64ddfdf50e03c51f9d7956ebfb09699f9cf426027e06888920f5d9c5
+```
+### canvasgradingassistance
+#### outputs.humanDescription
+```diff
+- "Grade suggestion is displayed and selected by default, but the instructor much make the final decision to edit or accept the suggestions."
++ "Grade suggestion is displayed and selected by default, but the instructor must make the final decision to edit or accept the suggestions."
+```
+
+### quickreassess
+#### uid
+```diff
++ "quickreassess"
+```
+#### revision
+```diff
++ "2025.10.27"
+```
+#### feature
+```diff
++ {
+  "name": "Suggestions for Quick Reassess",
+  "description": "Allows the use of AI to generate a question derived from the original. These questions can be re-generated, edited, and rejected or approved before they are published to students."
+}
+```
+#### model
+```diff
++ {
+  "name": "Claude Family Models",
+  "description": "",
+  "trained": "No",
+  "data": "Other",
+  "dataDescription": "The original question stem used to generate derivatives"
+}
+```
+#### compliance
+```diff
++ {
+  "retention": "Standard execution, infrastructure, and other operational logs are retained for a reasonable period to enable monitoring and troubleshooting of underlying services.",
+  "logging": "Does not log data",
+  "loggingDescription": "",
+  "regions": "Virginia",
+  "regionsDescription": "",
+  "pii": "Not Exposed",
+  "piiDescription": ""
+}
+```
+#### outputs
+```diff
++ {
+  "settings": "Yes",
+  "human": "Yes",
+  "humanDescription": "Educators have access to tools that allow them to preview, regenerate, edit, or replace AI generated questions before they are published in an assessment.",
+  "guardrails": "Only educators can generate items and all AI generated items are in draft status until reviewed and approved.",
+  "risks": "AI generated questions may require additional review and editing to ensure accuracy, relevance, and alignment with intended learning objectives.",
+  "outcomes": "Educators can generate new standards-aligned questions based on existing items in order to quickly create diverse, tailored assessments that expand beyond the current Mastery Item Bank content, enhancing instructional flexibility and efficiency."
+}
+```
+#### group
+```diff
++ "Mastery"
+```
+#### permissions
+```diff
++ "2"
+```
+
+### conversionalignment
+#### uid
+```diff
++ "conversionalignment"
+```
+#### revision
+```diff
++ "2025.09.15"
+```
+#### feature
+```diff
++ {
+  "name": "",
+  "description": ""
+}
+```
+#### model
+```diff
++ {
+  "name": "",
+  "description": "",
+  "trained": "",
+  "data": "",
+  "dataDescription": ""
+}
+```
+#### compliance
+```diff
++ {
+  "retention": "",
+  "logging": "",
+  "loggingDescription": "",
+  "regions": "",
+  "regionsDescription": "",
+  "pii": "",
+  "piiDescription": ""
+}
+```
+#### outputs
+```diff
++ {
+  "settings": "",
+  "human": "",
+  "humanDescription": "",
+  "guardrails": "",
+  "risks": "",
+  "outcomes": ""
+}
+```
+#### group
+```diff
++ "Mastery"
+```
+#### permissions
+```diff
++ ""
+```
 ## 2025-10-27T17:53:08.481Z
 ### CSV
 #### SHA

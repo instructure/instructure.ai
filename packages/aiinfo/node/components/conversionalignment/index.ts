@@ -5,8 +5,8 @@ import type {
 } from "@instructure/ui-instructure";
 import type { AiInfoFeatureProps } from "../../types";
 
-const FEATURE_NAME = "Grading Assistance";
-const UID = "canvasgradingassistance";
+const FEATURE_NAME = "";
+const UID = "conversionalignment";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
 		description:
@@ -18,7 +18,7 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
 		description:
 			"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-		highlighted: true,
+		highlighted: false,
 		level: "LEVEL 2",
 		title: "AI-Powered Features Without Data Training",
 	},
@@ -45,21 +45,20 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"The foundational AI on which further training and customizations are built.",
 				segmentTitle: "Base Model",
-				value: "Haiku 3",
-				valueDescription:
-					"Anthropic Claude models are provided via Instructure's in-house AI Platform.",
+				value: "",
+				valueDescription: "",
 			},
 			{
 				description:
 					"Indicates the AI model has been given customer data in order to improve its results.",
 				segmentTitle: "Trained with User Data",
-				value: "No",
+				value: "",
 			},
 			{
 				description:
 					"Indicates which training or operational content was given to the model.",
 				segmentTitle: "Data Shared with Model",
-				value: "Assignment information, rubric, and student submissions.",
+				value: "",
 			},
 		],
 	},
@@ -69,30 +68,28 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			{
 				description: "How long the model stores customer data.",
 				segmentTitle: "Data Retention",
-				value: "Transactional data is retained for the life of the request",
+				value: "",
 			},
 			{
 				description:
 					"Recording the AI's performance for auditing, analysis, and improvement.",
 				segmentTitle: "Data Logging",
-				value: "Logs data",
-				valueDescription:
-					"Complete response from the LLM is retained in the Canvas database for auditing purposes.",
+				value: "",
+				valueDescription: "",
 			},
 			{
 				description:
 					"The locations where the AI model is officially available and supported.",
 				segmentTitle: "Regions Supported",
-				value: "Global",
+				value: "",
 				valueDescription: "",
 			},
 			{
 				description:
 					"Sensitive data that can be used to identify an individual.",
 				segmentTitle: "PII",
-				value: "Not Exposed",
-				valueDescription:
-					"No PII is intentionally sent to the model. If there is incidental PII in any of the shared data, such as in the submission body, it will be sent to the model.",
+				value: "",
+				valueDescription: "",
 			},
 		],
 	},
@@ -102,33 +99,30 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			{
 				description: "The ability to turn the AI on or off within the product.",
 				segmentTitle: "AI Settings Control",
-				value: "Yes",
+				value: "",
 			},
 			{
 				description:
 					"Indicates if a human is involved in the AI's process or output.",
 				segmentTitle: "Human in the Loop",
-				value: "Yes",
-				valueDescription:
-					"Grade suggestion is displayed and selected by default, but the instructor must make the final decision to edit or accept the suggestions.",
+				value: "",
+				valueDescription: "",
 			},
 			{
 				description:
 					"Preventative safety mechanisms or limitations built into the AI model.",
 				segmentTitle: "Guardrails",
-				value: "The Claude Haiku model has inherent guardrails built in.",
+				value: "",
 			},
 			{
 				description: "Any risks the model may pose to the user.",
 				segmentTitle: "Expected Risks",
-				value:
-					"Model may work better with certain kinds of assignment types or disciplines. The grader must remain alert to incorrect assumptions from the model.",
+				value: "",
 			},
 			{
 				description: "The specific results the AI model is meant to achieve.",
 				segmentTitle: "Intended Outcomes",
-				value:
-					"Reduced bias in grading, fairness, and consistency. Grading efficiency, saving teachers time.",
+				value: "",
 			},
 		],
 	},
@@ -138,7 +132,7 @@ const nutritionFacts: NutritionFactsProps = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: undefined,
-		featureName: "Grading Assistance",
+		featureName: "",
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
@@ -150,7 +144,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	...{
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Grading Assistance",
+		currentFeature: "",
 		currentFeatureText: "Current Feature:",
 		data: undefined,
 		modalLabel: "Data Permission Levels modal",
@@ -164,20 +158,19 @@ const aiInformation: AiInformationProps = {
 	...{
 		data: [
 			{
-				description:
-					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-				featureName: "Grading Assistance",
-				modelName: "Haiku 3",
+				description: "Unknown",
+				featureName: "",
+				modelName: "",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
-				permissionLevel: "LEVEL 2",
+				permissionLevel: "LEVEL ",
 				permissionLevelsModalTriggerText: "Data Permission Levels",
 				permissionLevelText: "Permission Level:",
 			},
 		],
 		dataPermissionLevelsCloseButtonText: "Close",
 		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature: "Grading Assistance",
+		dataPermissionLevelsCurrentFeature: "",
 		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
 		dataPermissionLevelsData: undefined,
 		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -185,7 +178,7 @@ const aiInformation: AiInformationProps = {
 		nutritionFactsCloseButtonText: "Close",
 		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
 		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Grading Assistance",
+		nutritionFactsFeatureName: "",
 		nutritionFactsModalLabel: "This is a modal for AI facts",
 		nutritionFactsTitle: "AI Nutrition Facts",
 		title: "Features",
@@ -195,21 +188,20 @@ const aiInformation: AiInformationProps = {
 	nutritionFactsData: NUTRITION_FACTS_DATA,
 	trigger: undefined,
 };
-const canvasgradingassistance: AiInfoFeatureProps = {
+const conversionalignment: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
-	description:
-		"AI powered automatic grading and feedback suggestions to enable more consistent, fair, and efficient grading workflows.",
-	group: "Canvas",
+	description: "",
+	group: "Mastery",
 	name: FEATURE_NAME,
 	nutritionFacts,
-	revision: "2025.10.22",
+	revision: "2025.09.15",
 	uid: UID,
 };
 export {
-	canvasgradingassistance,
+	conversionalignment,
 	nutritionFacts,
 	dataPermissionLevels,
 	aiInformation,
 };
-export default canvasgradingassistance;
+export default conversionalignment;
