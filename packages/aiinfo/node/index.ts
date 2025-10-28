@@ -4,9 +4,11 @@ import { canvascoursetranslation } from "./components/canvascoursetranslation";
 import { canvasdiscussionsummaries } from "./components/canvasdiscussionsummaries";
 import { canvasgradingassistance } from "./components/canvasgradingassistance";
 import { canvasinboxtranslation } from "./components/canvasinboxtranslation";
+import { conversionalignment } from "./components/conversionalignment";
 import { discussioninsights } from "./components/discussioninsights";
 import { igniteagent } from "./components/igniteagent";
 import { portfolios } from "./components/portfolios";
+import { quickreassess } from "./components/quickreassess";
 import { rubricgenerator } from "./components/rubricgenerator";
 import { smartsearch } from "./components/smartsearch";
 import type {
@@ -40,9 +42,11 @@ const AiInfo: AiInfoProps = {
 	canvasdiscussionsummaries,
 	canvasgradingassistance,
 	canvasinboxtranslation,
+	conversionalignment,
 	discussioninsights,
 	igniteagent,
 	portfolios,
+	quickreassess,
 	rubricgenerator,
 	smartsearch,
 };
@@ -66,9 +70,11 @@ export {
 	canvasdiscussionsummaries,
 	canvasgradingassistance,
 	canvasinboxtranslation,
+	conversionalignment,
 	discussioninsights,
 	igniteagent,
 	portfolios,
+	quickreassess,
 	rubricgenerator,
 	smartsearch,
 };
