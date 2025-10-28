@@ -57,6 +57,8 @@ export declare const nutritionFacts: AiInfoNutritionFactsProps;
 
 export declare const portfolios: AiInfoFeatureProps;
 
+export declare const quickreassess: AiInfoFeatureProps;
+
 export declare const rubricgenerator: AiInfoFeatureProps;
 
 export declare const smartsearch: AiInfoFeatureProps;

@@ -7,6 +7,7 @@ import { canvasinboxtranslation } from "./components/canvasinboxtranslation";
 import { discussioninsights } from "./components/discussioninsights";
 import { igniteagent } from "./components/igniteagent";
 import { portfolios } from "./components/portfolios";
+import { quickreassess } from "./components/quickreassess";
 import { rubricgenerator } from "./components/rubricgenerator";
 import { smartsearch } from "./components/smartsearch";
 import type {
@@ -43,6 +44,7 @@ const AiInfo: AiInfoProps = {
 	discussioninsights,
 	igniteagent,
 	portfolios,
+	quickreassess,
 	rubricgenerator,
 	smartsearch,
 };
@@ -69,6 +71,7 @@ export {
 	discussioninsights,
 	igniteagent,
 	portfolios,
+	quickreassess,
 	rubricgenerator,
 	smartsearch,
 };

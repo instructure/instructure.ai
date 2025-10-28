@@ -20,13 +20,15 @@ const writeBarrel = (opts: Options = {}) => {
 			return false;
 		}
 	};
-	const hasIndexTsx = (dir: string) => existsSync(join(dir, "index.tsx"));
+	const hasIndexTsOrTsx = (dir: string) =>
+		existsSync(join(dir, "index.ts")) || existsSync(join(dir, "index.tsx"));
 	const isValidIdentifier = (s: string) => /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(s);
 
 	let uids: string[];
 	try {
 		uids = readdirSync(SRC_DIR).filter(
-			(name) => isDir(join(SRC_DIR, name)) && hasIndexTsx(join(SRC_DIR, name)),
+			(name) =>
+				isDir(join(SRC_DIR, name)) && hasIndexTsOrTsx(join(SRC_DIR, name)),
 		);
 	} catch (err) {
 		throw new Error(
