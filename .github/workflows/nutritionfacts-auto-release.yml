@@ -57,13 +57,13 @@ jobs:
           if [ -z "$TAG" ]; then
             TAG="latest"
           fi
-          echo "TAG=$TAG" >> $GITHUB_ENV
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
 
       - name: Update nutritionfacts deps
         shell: bash
         run: |
           set -euo pipefail
-          pnpm -F nutritionfacts add "@instructure.ai/aiinfo@^${TAG#*@}"
+          pnpm -F nutritionfacts add "${{ steps.set_tag.outputs.tag }}"
 
       - name: Commit changes (if any)
         id: commit
