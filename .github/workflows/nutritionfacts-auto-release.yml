@@ -55,7 +55,8 @@ jobs:
           set -euo pipefail
           TAG="${EVENT_TAG:-}"
           if [ -z "$TAG" ]; then
-            TAG="latest"
+            LATEST_VERSION=$(npm view @instructure.ai/aiinfo version)
+            TAG="@instructure.ai/aiinfo@${LATEST_VERSION}"
           fi
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
 
@@ -85,7 +86,7 @@ jobs:
         run: |
           set -euo pipefail
           # Your custom command
-          git release app nutritionfacts
+          pnpm release app nutritionfacts
 
       - name: Push branch
         if: steps.commit.outputs.no_changes == 'false'
