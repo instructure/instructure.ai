@@ -3,6 +3,7 @@ name: Nutrition Facts autorelease
 on:
   repository_dispatch:
     types: [aiinfo_release]
+  workflow_dispatch:
 
 permissions:
   contents: write
