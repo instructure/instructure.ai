@@ -47,6 +47,8 @@ export declare const canvasgradingassistance: AiInfoFeatureProps;
 
 export declare const canvasinboxtranslation: AiInfoFeatureProps;
 
+export declare const conversionalignment: AiInfoFeatureProps;
+
 export declare const dataPermissionLevels: AiInfoDataPermissionLevelsProps;
 
 export declare const discussioninsights: AiInfoFeatureProps;
@@ -56,6 +58,8 @@ export declare const igniteagent: AiInfoFeatureProps;
 export declare const nutritionFacts: AiInfoNutritionFactsProps;
 
 export declare const portfolios: AiInfoFeatureProps;
+
+export declare const quickreassess: AiInfoFeatureProps;
 
 export declare const rubricgenerator: AiInfoFeatureProps;
 
