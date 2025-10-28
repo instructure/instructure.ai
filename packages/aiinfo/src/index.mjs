@@ -753,7 +753,7 @@ const e = "Ask Your Data", $ = "askyourdata", p = [
         description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
-        valueDescription: "Grade suggestion is displayed and selected by default, but the instructor much make the final decision to edit or accept the suggestions."
+        valueDescription: "Grade suggestion is displayed and selected by default, but the instructor must make the final decision to edit or accept the suggestions."
       },
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
