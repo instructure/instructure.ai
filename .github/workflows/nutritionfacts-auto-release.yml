@@ -85,7 +85,7 @@ jobs:
         run: |
           set -euo pipefail
           # Your custom command
-          git release app nutritionfacts
+          pnpm release app nutritionfacts
 
       - name: Push branch
         if: steps.commit.outputs.no_changes == 'false'
