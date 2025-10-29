@@ -18,6 +18,14 @@ interface SVGInfo {
 	viewBox: string;
 }
 
+interface SVGProps {
+	height?: string;
+	width?: string;
+	inline?: boolean;
+	color?: string;
+}
+
+
 const ColorSVG: FC<ColorSVGProps> = ({
 	color = "currentColor",
 	children,
@@ -27,19 +35,20 @@ const ColorSVG: FC<ColorSVGProps> = ({
 	height = "1rem",
 	inline = false,
 }) => (
-	<InlineSVG
-		height={height}
-		inline={inline}
-		title={title}
-		viewBox={viewBox}
-		width={width}
-	>
-		<g fill={color}>{children}</g>
-	</InlineSVG>
+		<InlineSVG
+			height={height}
+			inline={inline}
+			title={title}
+			viewBox={viewBox}
+			width={width}
+			style={{ verticalAlign: "text-bottom" }}
+		>
+			<g fill={color}>{children}</g>
+		</InlineSVG>
 );
 
 const Mastery: SVGInfo = {
-	color: "#3C8645",
+	color: "#088744",
 	SVG: (
 		<>
 			<path d="M8.51,24.3c-4.7,0-8.51,3.81-8.51,8.51h0c0,4.7,3.81,8.51,8.51,8.51s8.51-3.81,8.51-8.51h0c0-4.7-3.81-8.51-8.51-8.51Z" />
@@ -52,7 +61,7 @@ const Mastery: SVGInfo = {
 };
 
 const Canvas: SVGInfo = {
-	color: "#D24E21",
+	color: "#e41e25",
 	SVG: (
 		<>
 			<path d="M8.66,29.79c0-4.36-3.25-8.03-7.57-8.56-1.45,5.61-1.45,11.5,0,17.12,4.32-.53,7.57-4.2,7.57-8.56" />
@@ -89,7 +98,7 @@ const Ignite: SVGInfo = {
 };
 
 const Parchment: SVGInfo = {
-	color: "#4279B6",
+	color: "#2c7bb9",
 	SVG: (
 		<>
 			<path d="M63.35,43.25c0,2.06-1.67,3.74-3.74,3.74H10.67c-2.06,0-3.74-1.67-3.74-3.74V11.21c0-2.06,1.67-3.74,3.74-3.74h35.72V.54H9.25C4.14.54,0,4.68,0,9.78v34.89c0,5.11,4.14,9.25,9.25,9.25h51.8c5.11,0,9.25-4.14,9.25-9.25v-20.24h-6.93v18.81Z" />
@@ -104,7 +113,7 @@ const Parchment: SVGInfo = {
 };
 
 const Instructure: SVGInfo = {
-	color: "#0E1721",
+	color: "#0f1923",
 	SVG: (
 		<>
 			<rect
@@ -122,19 +131,14 @@ const Instructure: SVGInfo = {
 	viewBox: "0 0 53.42 53.42",
 };
 
-interface SVGProps {
-	height?: string;
-	width?: string;
-	inline?: boolean;
-}
-
-const ParchmentBugColor: FC<SVGProps> = ({
+const ParchmentBug: FC<SVGProps> = ({
 	height = "1rem",
 	width = "auto",
 	inline = false,
+	color = Parchment.color,
 }) => (
 	<ColorSVG
-		color={Parchment.color}
+		color={color}
 		height={height}
 		inline={inline}
 		title={Parchment.title}
@@ -145,34 +149,37 @@ const ParchmentBugColor: FC<SVGProps> = ({
 	</ColorSVG>
 );
 
-const InstructureBugColor: FC<SVGProps> = ({
+const InstructureBug: FC<SVGProps> = ({
 	height = "1rem",
 	width = "auto",
 	inline = false,
+	color = Instructure.color,
 }) => (
-	<InlineSVG
-		height={height}
-		inline={inline}
-		title={Instructure.title}
-		viewBox={Instructure.viewBox}
-		width={width}
-	>
-		<rect fill={Instructure.color} height="53.42" width="53.42" />
-		<path
-			d="M30.24,37.26h0c0-2.05,1.66-3.71,3.71-3.71s3.71,1.66,3.71,3.71-1.66,3.71-3.71,3.71-3.71-1.66-3.71-3.71"
-			fill={Canvas.color}
-		/>
-		<rect fill="#fff" height="28.52" width="6.18" x="19.28" y="12.45" />
-	</InlineSVG>
+		<InlineSVG
+			height={height}
+			inline={inline}
+			title={Instructure.title}
+			viewBox={Instructure.viewBox}
+			width={width}
+			style={{ verticalAlign: "text-bottom" }}
+		>
+			<rect fill={color} height="53.42" width="53.42" />
+			<path
+				d="M30.24,37.26h0c0-2.05,1.66-3.71,3.71-3.71s3.71,1.66,3.71,3.71-1.66,3.71-3.71,3.71-3.71-1.66-3.71-3.71"
+				fill={Canvas.color}
+			/>
+			<rect fill="#fff" height="28.52" width="6.18" x="19.28" y="12.45" />
+		</InlineSVG>
 );
 
-const MasteryBugColor: FC<SVGProps> = ({
+const MasteryBug: FC<SVGProps> = ({
 	height = "1rem",
 	width = "auto",
 	inline = false,
+	color = Mastery.color,
 }) => (
 	<ColorSVG
-		color={Mastery.color}
+		color={color}
 		height={height}
 		inline={inline}
 		title={Mastery.title}
@@ -183,13 +190,14 @@ const MasteryBugColor: FC<SVGProps> = ({
 	</ColorSVG>
 );
 
-const CanvasBugColor: FC<SVGProps> = ({
+const CanvasBug: FC<SVGProps> = ({
 	height = "1rem",
 	width = "auto",
 	inline = false,
+	color = Canvas.color,
 }) => (
 	<ColorSVG
-		color={Canvas.color}
+		color={color}
 		height={height}
 		inline={inline}
 		title={Canvas.title}
@@ -200,18 +208,20 @@ const CanvasBugColor: FC<SVGProps> = ({
 	</ColorSVG>
 );
 
-const IgniteBugColor: FC<SVGProps> = ({
+const IgniteBug: FC<SVGProps> = ({
 	height = "1rem",
 	width = "auto",
 	inline = false,
+	color = undefined
 }) => (
-	<InlineSVG
+	<ColorSVG
 		height={height}
 		inline={inline}
 		title={Ignite.title}
 		viewBox={Ignite.viewBox}
 		width={width}
 	>
+		{color ? <g fill={color}>{Ignite.SVG}</g> :<>
 		<g clipPath="url(#clip0_11521_4097)">
 			<path
 				d="M960 0L1219.29 700.713L1920 960L1219.29 1219.29L960 1920L700.713 1219.29L0 960L700.713 700.713L960 0Z"
@@ -248,16 +258,25 @@ const IgniteBugColor: FC<SVGProps> = ({
 			<clipPath id="clip0_11521_4097">
 				<rect fill="#fff" height="1920" width="1920" />
 			</clipPath>
-		</defs>
-	</InlineSVG>
+		</defs></>}
+	</ColorSVG>
 );
 
 const Logos = {
-	canvas: CanvasBugColor,
-	ignite: IgniteBugColor,
-	instructure: InstructureBugColor,
-	mastery: MasteryBugColor,
-	parchment: ParchmentBugColor,
+	canvas: CanvasBug,
+	ignite: IgniteBug,
+	instructure: InstructureBug,
+	mastery: MasteryBug,
+	parchment: ParchmentBug,
 };
 
+const Colors = {
+	canvas: Canvas.color,
+	ignite: Instructure.color,
+	instructure: Instructure.color,
+	mastery: Mastery.color,
+	parchment: Parchment.color,
+}
+
 export default Logos;
+export { Logos, Colors };

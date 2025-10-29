@@ -20,7 +20,8 @@ type PendoAPIFeature = {
 	product: {
 		area: string | null;
 		name: string;
-		logo: SVGIconProps | null;
+		logo: SVGIconProps | undefined;
+		color: string | undefined;
 	};
 };
 

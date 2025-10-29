@@ -2,7 +2,7 @@ import { canvas, Flex, InstUISettingsProvider } from "@instructure/ui";
 import type { FC } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { Card, CardOverlay } from "./components";
-import { getBrandConfig, getLogo, getRoadmap, sendHeight } from "./utils";
+import { getBrandConfig, getLogo, getRoadmap, sendHeight, getColor } from "./utils";
 import "./App.css";
 
 const App: FC = () => {
@@ -43,13 +43,14 @@ const App: FC = () => {
 
 	const Entries = useMemo(() => {
 		if (!roadmap) return [];
-		return roadmap.features.map((entry) => ({
-			...entry,
-			product: {
-				...entry.product,
-				logo: getLogo(entry.product.name),
-			},
-		}));
+			return roadmap.features.map((entry) => ({
+				...entry,
+				product: {
+					...entry.product,
+					logo: getLogo(entry.product.name),
+					color: getColor(entry.product.name),
+				},
+			}));
 	}, [roadmap]);
 
 	return (
