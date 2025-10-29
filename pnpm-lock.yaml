@@ -102,6 +102,9 @@ importers:
       '@instructure/ui':
         specifier: ^11.0.1
         version: 11.0.1(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@instructure/ui-color-utils':
+        specifier: ^10.26.2
+        version: 10.26.2
       react:
         specifier: ^19.2.0
         version: 19.2.0
@@ -653,6 +656,9 @@ packages:
     resolution: {integrity: sha512-2q102yIy2jIksRGT/24K9UayPfFC2yZ2XEWpG3mVZdRajpvN0Jfz66k9GfTxUH8kya5rYoBTS/7+6uqaD61Qpw==}
     peerDependencies:
       react: '>=18 <=19'
+
+  '@instructure/ui-color-utils@10.26.2':
+    resolution: {integrity: sha512-HaZF1jm21evOdAKbZX+2Q+H1Ejnpaj+B398VGoooj4lRYkl6aLjI6gqbNuUlSNMuVR6dF3vIQF31XXkENNVxfw==}
 
   '@instructure/ui-color-utils@11.0.1':
     resolution: {integrity: sha512-mRNXe5fQU1/ePuEDHIytX8oIP4XuvsThyekq5cPRoBm71hZGdcWvV6QZVazbJfHw4EcPb14O038PoE4++MulWw==}
@@ -3230,6 +3236,11 @@ snapshots:
       - '@types/react'
       - react-dom
       - supports-color
+
+  '@instructure/ui-color-utils@10.26.2':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      tinycolor2: 1.6.0
 
   '@instructure/ui-color-utils@11.0.1':
     dependencies:

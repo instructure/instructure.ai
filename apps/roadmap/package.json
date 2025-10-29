@@ -1,6 +1,7 @@
 {
 	"dependencies": {
 		"@instructure/ui": "^11.0.1",
+		"@instructure/ui-color-utils": "^10.26.2",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0"
 	},
@@ -10,16 +11,16 @@
 	"name": "@instructure.ai/roadmap",
 	"private": true,
 	"repository": {
-  	"directory": "apps/roadmap",
-  	"type": "git",
-  	"url": "https://github.com/instructure/instructure.ai"
+		"directory": "apps/roadmap",
+		"type": "git",
+		"url": "https://github.com/instructure/instructure.ai"
 	},
 	"scripts": {
 		"build": "vite build",
 		"dev": "vite",
 		"lint": "pnpm biome check",
 		"preview": "vite preview",
-    "test": "pnpm vitest run",
+		"test": "pnpm vitest run",
 		"typecheck": "tsgo --noEmit"
 	},
 	"type": "module",

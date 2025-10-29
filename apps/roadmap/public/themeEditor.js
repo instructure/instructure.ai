@@ -13,7 +13,7 @@
  *
  * Only runs on the "/pages/instructure-roadmap" path.
  * 
- * @version 2025.10.02.00
+ * @version 2025.10.29.00
  * 
  */
 
@@ -33,25 +33,33 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 		}
 		if (iframeListenerMap.has(iFrame)) return;
 
-		const handler = (event) => {
-			if (!event.data) return;
-			switch (event.data.type) {
-				case "getRoadmap": {
-					const roadmap = iFrame.getAttribute("data-roadmap");
-					event.source.postMessage({ value: roadmap }, event.origin);
-					break;
-				}
-				case "setHeight":
-					try {
-						iFrame.height = event.data.height;
-					} catch (err) {
-						console.error("Failed to set iframe height:", err);
-					}
-					break;
-				default:
-					break;
-			}
-		};
+					const handler = (event) => {
+						if (!event.data) return;
+						// Only respond to getRoadmap and lti.getPageSettings events
+						if (event.data.type === "getRoadmap") {
+							const roadmap = iFrame.getAttribute("data-roadmap");
+							console.log("[themeEditor.js] Roadmap attribute:", roadmap);
+							if (iFrame.contentWindow) {
+								iFrame.contentWindow.postMessage({ value: roadmap }, "*");
+								console.log("[themeEditor.js] Sent roadmap message", { value: roadmap });
+							} else {
+								console.error("No contentWindow for roadmap iframe");
+							}
+						} else if (event.data.subject === "lti.getPageSettings") {
+							// Echo lti.getPageSettings as lti.postMessage for brand config
+							if (iFrame.contentWindow) {
+								iFrame.contentWindow.postMessage({ subject: "lti.postMessage", pageSettings: event.data.pageSettings }, "*");
+								console.log("[themeEditor.js] Sent lti.postMessage", event.data.pageSettings);
+							}
+						} else if (event.data.type === "setHeight") {
+							try {
+								iFrame.height = event.data.height;
+							} catch (err) {
+								console.error("Failed to set iframe height:", err);
+							}
+						}
+						// Ignore all other events
+					};
 		window.addEventListener("message", handler);
 		iframeListenerMap.set(iFrame, handler);
 	};
@@ -64,6 +72,7 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
     			console.info("Setting Roadmap page to full screen");
     			document.querySelector("#right-side-wrapper")?.remove();
     			document.querySelector("#left-side")?.remove();
+					document.querySelector("#courseMenuToggle")?.remove();
     			document.querySelector("#main")?.style?.setProperty("margin", "0");
   		}
 			obs.disconnect();
