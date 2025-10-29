@@ -53,7 +53,7 @@ const App: FC = () => {
 			}));
 	}, [roadmap]);
 
-	return (
+	return Entries.length ? (
 		<InstUISettingsProvider theme={{ ...canvas, ...(brandConfig as object) }}>
 			{roadmap && (
 				<>
@@ -77,6 +77,6 @@ const App: FC = () => {
 				</>
 			)}
 		</InstUISettingsProvider>
-	);
+	) : (<>👋 Don't panic.  Site admin doesn't load custom JS. Log in as a regular user.</>);
 };
 export default App;
