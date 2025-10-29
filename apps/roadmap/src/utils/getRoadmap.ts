@@ -21,7 +21,11 @@ const getRoadmap = (): Promise<RoadmapFeatures | null> => {
 		console.debug("Listening for roadmap response");
 		const handler = (event: RoadmapRequestEvent) => {
 			console.debug("Received message event:", event);
-			if (event.data && 'value' in event.data && event.data.value !== undefined) {
+			if (
+				event.data &&
+				"value" in event.data &&
+				event.data.value !== undefined
+			) {
 				window.removeEventListener("message", handler);
 				const result = paramsToPendo(event.data.value);
 				cachedRoadmap = result;

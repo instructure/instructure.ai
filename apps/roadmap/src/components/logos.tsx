@@ -1,6 +1,6 @@
 import { InlineSVG } from "@instructure/ui";
+import { darken, lighten } from "@instructure/ui-color-utils";
 import type { FC, ReactNode } from "react";
-import { darken, lighten } from "@instructure/ui-color-utils"
 
 type ColorSVGProps = {
 	color?: string;
@@ -26,7 +26,6 @@ interface SVGProps {
 	color?: string;
 }
 
-
 const ColorSVG: FC<ColorSVGProps> = ({
 	color = "currentColor",
 	children,
@@ -36,16 +35,16 @@ const ColorSVG: FC<ColorSVGProps> = ({
 	height = "1rem",
 	inline = false,
 }) => (
-		<InlineSVG
-			height={height}
-			inline={inline}
-			title={title}
-			viewBox={viewBox}
-			width={width}
-			style={{ verticalAlign: "top" }}
-		>
-			<g fill={color}>{children}</g>
-		</InlineSVG>
+	<InlineSVG
+		height={height}
+		inline={inline}
+		style={{ verticalAlign: "top" }}
+		title={title}
+		viewBox={viewBox}
+		width={width}
+	>
+		<g fill={color}>{children}</g>
+	</InlineSVG>
 );
 
 const Mastery: SVGInfo = {
@@ -133,7 +132,6 @@ const Parchment: SVGInfo = {
 	viewBox: "0 0 70.82 53.92",
 };
 
-
 const ParchmentBug: FC<SVGProps> = ({
 	height = "1rem",
 	width = "auto",
@@ -157,21 +155,27 @@ const InstructureBug: FC<SVGProps> = ({
 	width = "auto",
 	inline = false,
 }) => (
-		<InlineSVG
-			height={height}
-			inline={inline}
-			title={Instructure.title}
-			viewBox={Instructure.viewBox}
-			width={width}
-			style={{ verticalAlign: "text-bottom" }}
-		>
-			<rect fill="none" stroke="#fff" strokeWidth="3" height="53.42" width="53.42" />
-			<path
-				d="M30.24,37.26h0c0-2.05,1.66-3.71,3.71-3.71s3.71,1.66,3.71,3.71-1.66,3.71-3.71,3.71-3.71-1.66-3.71-3.71"
-				fill={Canvas.color}
-			/>
-			<rect height="28.52" fill="#fff" width="6.18" x="19.28" y="12.45" />
-		</InlineSVG>
+	<InlineSVG
+		height={height}
+		inline={inline}
+		style={{ verticalAlign: "text-bottom" }}
+		title={Instructure.title}
+		viewBox={Instructure.viewBox}
+		width={width}
+	>
+		<rect
+			fill="none"
+			height="53.42"
+			stroke="#fff"
+			strokeWidth="3"
+			width="53.42"
+		/>
+		<path
+			d="M30.24,37.26h0c0-2.05,1.66-3.71,3.71-3.71s3.71,1.66,3.71,3.71-1.66,3.71-3.71,3.71-3.71-1.66-3.71-3.71"
+			fill={Canvas.color}
+		/>
+		<rect fill="#fff" height="28.52" width="6.18" x="19.28" y="12.45" />
+	</InlineSVG>
 );
 
 const MasteryBug: FC<SVGProps> = ({
@@ -214,7 +218,7 @@ const IgniteBug: FC<SVGProps> = ({
 	height = "1rem",
 	width = "auto",
 	inline = false,
-	color = undefined
+	color = undefined,
 }) => (
 	<ColorSVG
 		height={height}
@@ -223,44 +227,49 @@ const IgniteBug: FC<SVGProps> = ({
 		viewBox={Ignite.viewBox}
 		width={width}
 	>
-		{color ? <g fill={color}>{Ignite.SVG}</g> :<>
-		<g clipPath="url(#clip0_11521_4097)">
-			<path
-				d="M960 0L1219.29 700.713L1920 960L1219.29 1219.29L960 1920L700.713 1219.29L0 960L700.713 700.713L960 0Z"
-				fill="url(#paint0_linear_11521_4097)"
-			/>
-			<path
-				d="M1600 0L1686.43 233.571L1920 320L1686.43 406.429L1600 640L1513.57 406.429L1280 320L1513.57 233.571L1600 0Z"
-				fill="url(#paint1_linear_11521_4097)"
-			/>
-		</g>
-		<defs>
-			<linearGradient
-				gradientUnits="userSpaceOnUse"
-				id="paint0_linear_11521_4097"
-				x1="-476.25"
-				x2="-7.61685"
-				y1="-392.727"
-				y2="3078.25"
-			>
-				<stop stopColor="#9E58BD" />
-				<stop offset="1" stopColor="#00828E" />
-			</linearGradient>
-			<linearGradient
-				gradientUnits="userSpaceOnUse"
-				id="paint1_linear_11521_4097"
-				x1="1121.25"
-				x2="1277.46"
-				y1="-130.909"
-				y2="1026.08"
-			>
-				<stop stopColor="#9E58BD" />
-				<stop offset="1" stopColor="#00828E" />
-			</linearGradient>
-			<clipPath id="clip0_11521_4097">
-				<rect fill="#fff" height="1920" width="1920" />
-			</clipPath>
-		</defs></>}
+		{color ? (
+			<g fill={color}>{Ignite.SVG}</g>
+		) : (
+			<>
+				<g clipPath="url(#clip0_11521_4097)">
+					<path
+						d="M960 0L1219.29 700.713L1920 960L1219.29 1219.29L960 1920L700.713 1219.29L0 960L700.713 700.713L960 0Z"
+						fill="url(#paint0_linear_11521_4097)"
+					/>
+					<path
+						d="M1600 0L1686.43 233.571L1920 320L1686.43 406.429L1600 640L1513.57 406.429L1280 320L1513.57 233.571L1600 0Z"
+						fill="url(#paint1_linear_11521_4097)"
+					/>
+				</g>
+				<defs>
+					<linearGradient
+						gradientUnits="userSpaceOnUse"
+						id="paint0_linear_11521_4097"
+						x1="-476.25"
+						x2="-7.61685"
+						y1="-392.727"
+						y2="3078.25"
+					>
+						<stop stopColor="#9E58BD" />
+						<stop offset="1" stopColor="#00828E" />
+					</linearGradient>
+					<linearGradient
+						gradientUnits="userSpaceOnUse"
+						id="paint1_linear_11521_4097"
+						x1="1121.25"
+						x2="1277.46"
+						y1="-130.909"
+						y2="1026.08"
+					>
+						<stop stopColor="#9E58BD" />
+						<stop offset="1" stopColor="#00828E" />
+					</linearGradient>
+					<clipPath id="clip0_11521_4097">
+						<rect fill="#fff" height="1920" width="1920" />
+					</clipPath>
+				</defs>
+			</>
+		)}
 	</ColorSVG>
 );
 
@@ -268,40 +277,37 @@ const CardBackground: FC<SVGProps> = ({
 	height = "160px",
 	width = "374px",
 	inline = false,
-	color = Instructure?.color
+	color = Instructure?.color,
 }) => {
 	const circle1 = lighten(color, 15);
 	const circle2 = color;
 	const circle3 = darken(color, 10);
 	const bg = darken(color, 20);
-	console.debug("color:", color)
-	return(
-	<ColorSVG
-		height={height}
-		inline={inline}
-		title="Card Background"
-		viewBox="0 0 374 160"
-		width={width}
-	>
-		<rect
-			fill={bg}
-			height="160"
-			width="374"
-		/>
-			<circle cx="374" cy="160" r="200" fill={circle3} />	
-			<circle cx="374" cy="160" r="140" fill={circle2} />	
-			<circle cx="374" cy="160" r="80" fill={circle1} />
-	</ColorSVG>
-)};
+	console.debug("color:", color);
+	return (
+		<ColorSVG
+			height={height}
+			inline={inline}
+			title="Card Background"
+			viewBox="0 0 374 160"
+			width={width}
+		>
+			<rect fill={bg} height="160" width="374" />
+			<circle cx="374" cy="160" fill={circle3} r="200" />
+			<circle cx="374" cy="160" fill={circle2} r="140" />
+			<circle cx="374" cy="160" fill={circle1} r="80" />
+		</ColorSVG>
+	);
+};
 
 const Logos = {
+	CardBackground: CardBackground,
 	canvas: CanvasBug,
 	ignite: IgniteBug,
 	instructure: InstructureBug,
 	mastery: MasteryBug,
 	parchment: ParchmentBug,
 	studio: CanvasBug,
-	CardBackground: CardBackground,
 };
 
 const Colors = {
@@ -309,9 +315,9 @@ const Colors = {
 	ignite: Ignite.color,
 	instructure: Instructure.color,
 	mastery: Mastery.color,
-	studio: Canvas.color,
 	parchment: Parchment.color,
-}
+	studio: Canvas.color,
+};
 
 export default Logos;
 export { Logos, Colors };

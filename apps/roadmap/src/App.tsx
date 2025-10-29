@@ -2,7 +2,13 @@ import { canvas, Flex, InstUISettingsProvider } from "@instructure/ui";
 import type { FC } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { Card, CardOverlay } from "./components";
-import { getBrandConfig, getLogo, getRoadmap, sendHeight, getColor } from "./utils";
+import {
+	getBrandConfig,
+	getColor,
+	getLogo,
+	getRoadmap,
+	sendHeight,
+} from "./utils";
 import "./App.css";
 
 const App: FC = () => {
@@ -43,14 +49,14 @@ const App: FC = () => {
 
 	const Entries = useMemo(() => {
 		if (!roadmap) return [];
-			return roadmap.features.map((entry) => ({
-				...entry,
-				product: {
-					...entry.product,
-					logo: getLogo(entry.product.name),
-					color: getColor(entry.product.name),
-				},
-			}));
+		return roadmap.features.map((entry) => ({
+			...entry,
+			product: {
+				...entry.product,
+				color: getColor(entry.product.name),
+				logo: getLogo(entry.product.name),
+			},
+		}));
 	}, [roadmap]);
 
 	return Entries.length ? (
@@ -77,6 +83,11 @@ const App: FC = () => {
 				</>
 			)}
 		</InstUISettingsProvider>
-	) : (<>👋 Don't panic.  Site admin doesn't load custom JS. Log in as a regular user.</>);
+	) : (
+		<>
+			👋 Don't panic. Site admin doesn't load custom JS. Log in as a regular
+			user.
+		</>
+	);
 };
 export default App;
