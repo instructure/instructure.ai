@@ -1,8 +1,8 @@
 {
 	"dependencies": {
-		"@instructure/ui": "10.25.1-pr-snapshot-1758747818199",
-		"react": "^19.1.1",
-		"react-dom": "^19.1.1"
+		"@instructure/ui": "^11.0.1",
+		"react": "^19.2.0",
+		"react-dom": "^19.2.0"
 	},
 	"devDependencies": {
 		"@instructure.ai/shared-configs": "workspace:^"
@@ -10,9 +10,9 @@
 	"name": "@instructure.ai/roadmap",
 	"private": true,
 	"repository": {
+  	"directory": "apps/roadmap",
   	"type": "git",
-  	"url": "https://github.com/instructure/instructure.ai",
-  	"directory": "apps/roadmap"
+  	"url": "https://github.com/instructure/instructure.ai"
 	},
 	"scripts": {
 		"build": "vite build",
