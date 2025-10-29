@@ -1,6 +1,7 @@
 import { Flex, Heading, Pill, Text, TruncateText, View, Button } from "@instructure/ui"
 import type { FC } from "react"
 import { useLayoutEffect, useRef, useState } from "react"
+import Logos from "./logos"
 
 const Card: FC<{
   entry: PendoAPIFeature
@@ -9,6 +10,8 @@ const Card: FC<{
 }> = ({ entry, setSelectedEntry, setOverlayOpen }) => {
   const [maxLines, setMaxLines] = useState(4)
   const headingEl = useRef<Element | null>(null)
+
+	const { CardBackground } = Logos
 
   const { feature, product } = entry
 
@@ -43,32 +46,48 @@ const Card: FC<{
 
   return (
     <Flex.Item align="start" size="25rem">
-      <View as="div" padding="x-small">
         <View
           as="div"
           background="primary"
           borderRadius="large"
-          onClick={handleClick}
-          shouldAnimateFocus
-          tabIndex={0}
+					borderColor="secondary"
+					borderWidth="small"
+					themeOverride={{borderColorSecondary: "#D7DADE"}}
         >
-          <Flex direction="column" gap="moduleElements" padding="moduleElements">
+          <Flex direction="column" gap="moduleElements" padding="paddingCardSmall">
             <Flex.Item>
-              <View
-                as="div"
-                themeOverride={{ backgroundSecondary: product.color }}
-                background="secondary"
-                borderRadius="large"
-                height="10rem"
-                padding="moduleElements"
-              >
-                <product.logo height="1.25rem" inline color="#fff" />{" "}
-                <Text variant="contentImportant" color="secondary-inverse">
-                  {product.name}
-                </Text>
-              </View>
-            </Flex.Item>
+<View
+  as="div"
+  height="10rem"
+  overflowX="hidden"
+  overflowY="hidden"
+  borderRadius="large"
+  position="relative"
+>
+  <View
+    as="div"
+    position="absolute"
+    width="100%"
+    height="100%"
+    borderRadius="large"    
+  >
+    <CardBackground color={product.color} />
+  </View>
 
+  <View
+    as="div"
+    position="relative" 
+    padding="paddingCardLarge 0 0 paddingCardLarge"
+  >
+    <product.logo height="2rem" inline color="#fff" />
+    <View margin="0 small 0">
+      <Text variant="descriptionPage" color="secondary-inverse">
+        {product.name}
+      </Text>
+    </View>
+  </View>
+</View>
+            </Flex.Item>
             <Flex.Item>
               <View as="div">
                 <Flex direction="row" gap="xx-small" wrap="wrap">
@@ -85,7 +104,6 @@ const Card: FC<{
                 </Flex>
               </View>
             </Flex.Item>
-
             <Flex.Item>
               <View as="div" overflowY="hidden" height="110px">
                 <Heading
@@ -98,7 +116,6 @@ const Card: FC<{
                 >
                   {feature.title}
                 </Heading>
-
                 <Text size="contentSmall">
                   <TruncateText maxLines={maxLines} truncate="word">
                     {feature.description}
@@ -106,8 +123,8 @@ const Card: FC<{
                 </Text>
               </View>
             </Flex.Item>
-
             <Flex.Item>
+							<View as="div" padding="xx-small">
               <Button
                 display="block"
                 textAlign="center"
@@ -117,10 +134,10 @@ const Card: FC<{
               >
                 Details
               </Button>
+							</View>
             </Flex.Item>
           </Flex>
         </View>
-      </View>
     </Flex.Item>
   )
 }

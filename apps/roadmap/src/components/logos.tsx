@@ -1,5 +1,6 @@
 import { InlineSVG } from "@instructure/ui";
 import type { FC, ReactNode } from "react";
+import { darken, lighten } from "@instructure/ui-color-utils"
 
 type ColorSVGProps = {
 	color?: string;
@@ -12,7 +13,7 @@ type ColorSVGProps = {
 };
 
 interface SVGInfo {
-	color?: string;
+	color: string;
 	SVG: ReactNode;
 	title: string;
 	viewBox: string;
@@ -41,7 +42,7 @@ const ColorSVG: FC<ColorSVGProps> = ({
 			title={title}
 			viewBox={viewBox}
 			width={width}
-			style={{ verticalAlign: "text-bottom" }}
+			style={{ verticalAlign: "top" }}
 		>
 			<g fill={color}>{children}</g>
 		</InlineSVG>
@@ -86,7 +87,27 @@ const Canvas: SVGInfo = {
 	viewBox: "0 0 59.68 59.68",
 };
 
+const Instructure: SVGInfo = {
+	color: "#0f1923",
+	SVG: (
+		<>
+			<rect
+				fill="none"
+				height="53.42"
+				stroke="currentColor"
+				strokeWidth="5"
+				width="53.42"
+			/>
+			<path d="M30.24,37.26h0c0-2.05,1.66-3.71,3.71-3.71s3.71,1.66,3.71,3.71-1.66,3.71-3.71,3.71-3.71-1.66-3.71-3.71" />
+			<rect height="28.52" width="6.18" x="19.28" y="12.45" />
+		</>
+	),
+	title: "Instructure Logo",
+	viewBox: "0 0 53.42 53.42",
+};
+
 const Ignite: SVGInfo = {
+	color: "#9e57bc",
 	SVG: (
 		<g clipRule="evenodd" fillRule="evenodd" stroke="none" strokeWidth="1">
 			<path d="M960 0L1219.29 700.713L1920 960L1219.29 1219.29L960 1920L700.713 1219.29L0 960L700.713 700.713L960 0Z" />
@@ -112,24 +133,6 @@ const Parchment: SVGInfo = {
 	viewBox: "0 0 70.82 53.92",
 };
 
-const Instructure: SVGInfo = {
-	color: "#0f1923",
-	SVG: (
-		<>
-			<rect
-				fill="none"
-				height="53.42"
-				stroke="currentColor"
-				strokeWidth="5"
-				width="53.42"
-			/>
-			<path d="M30.24,37.26h0c0-2.05,1.66-3.71,3.71-3.71s3.71,1.66,3.71,3.71-1.66,3.71-3.71,3.71-3.71-1.66-3.71-3.71" />
-			<rect height="28.52" width="6.18" x="19.28" y="12.45" />
-		</>
-	),
-	title: "Instructure Logo",
-	viewBox: "0 0 53.42 53.42",
-};
 
 const ParchmentBug: FC<SVGProps> = ({
 	height = "1rem",
@@ -153,7 +156,6 @@ const InstructureBug: FC<SVGProps> = ({
 	height = "1rem",
 	width = "auto",
 	inline = false,
-	color = Instructure.color,
 }) => (
 		<InlineSVG
 			height={height}
@@ -163,12 +165,12 @@ const InstructureBug: FC<SVGProps> = ({
 			width={width}
 			style={{ verticalAlign: "text-bottom" }}
 		>
-			<rect fill={color} height="53.42" width="53.42" />
+			<rect fill="none" stroke="#fff" strokeWidth="3" height="53.42" width="53.42" />
 			<path
 				d="M30.24,37.26h0c0-2.05,1.66-3.71,3.71-3.71s3.71,1.66,3.71,3.71-1.66,3.71-3.71,3.71-3.71-1.66-3.71-3.71"
 				fill={Canvas.color}
 			/>
-			<rect fill="#fff" height="28.52" width="6.18" x="19.28" y="12.45" />
+			<rect height="28.52" fill="#fff" width="6.18" x="19.28" y="12.45" />
 		</InlineSVG>
 );
 
@@ -262,19 +264,52 @@ const IgniteBug: FC<SVGProps> = ({
 	</ColorSVG>
 );
 
+const CardBackground: FC<SVGProps> = ({
+	height = "160px",
+	width = "374px",
+	inline = false,
+	color = Instructure?.color
+}) => {
+	const circle1 = lighten(color, 15);
+	const circle2 = color;
+	const circle3 = darken(color, 10);
+	const bg = darken(color, 20);
+	console.debug("color:", color)
+	return(
+	<ColorSVG
+		height={height}
+		inline={inline}
+		title="Card Background"
+		viewBox="0 0 374 160"
+		width={width}
+	>
+		<rect
+			fill={bg}
+			height="160"
+			width="374"
+		/>
+			<circle cx="374" cy="160" r="200" fill={circle3} />	
+			<circle cx="374" cy="160" r="140" fill={circle2} />	
+			<circle cx="374" cy="160" r="80" fill={circle1} />
+	</ColorSVG>
+)};
+
 const Logos = {
 	canvas: CanvasBug,
 	ignite: IgniteBug,
 	instructure: InstructureBug,
 	mastery: MasteryBug,
 	parchment: ParchmentBug,
+	studio: CanvasBug,
+	CardBackground: CardBackground,
 };
 
 const Colors = {
 	canvas: Canvas.color,
-	ignite: Instructure.color,
+	ignite: Ignite.color,
 	instructure: Instructure.color,
 	mastery: Mastery.color,
+	studio: Canvas.color,
 	parchment: Parchment.color,
 }
 
