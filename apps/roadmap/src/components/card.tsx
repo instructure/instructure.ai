@@ -37,7 +37,7 @@ const Card: FC<{
 				<View
 					as="div"
 					borderColor="primary"
-					borderRadius="medium"
+					borderRadius="large"
 					borderWidth="small"
 					onBlur={handleFocusOut}
 					onClick={handleClick}
