@@ -32,7 +32,7 @@ const Card: FC<{
 	};
 
 	return (
-		<Flex.Item align="start" shouldGrow shouldShrink size="19.875rem">
+		<Flex.Item align="start" size="25rem">
 			<View as="div" padding="x-small">
 				<View
 					as="div"
