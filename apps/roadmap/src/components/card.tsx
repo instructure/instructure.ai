@@ -55,18 +55,6 @@ const Card: FC<{
 					tabIndex={0}
 				>
 					<Flex direction="column" gap="moduleElements" height="16rem">
-						<Flex.Item>
-							<View
-								as="div"
-								borderColor="primary"
-								borderWidth="0 0 small 0"
-								padding="moduleElements"
-							>
-								<Heading level="h2" variant="titleCardMini">
-									<TruncateText maxLines={1}>{feature.title}</TruncateText>
-								</Heading>
-							</View>
-						</Flex.Item>
 						<Flex.Item padding="0 0 0 small">
 							<Flex alignItems="center" direction="row" gap="xx-small">
 								<Flex.Item>
@@ -78,15 +66,6 @@ const Card: FC<{
 									<Text variant="contentImportant">{product.name}</Text>
 								</Flex.Item>
 							</Flex>
-						</Flex.Item>
-						<Flex.Item shouldGrow shouldShrink>
-							<View as="div" padding="0 small">
-								<Text size="contentSmall">
-									<TruncateText maxLines={4} truncate="word">
-										{feature.description}
-									</TruncateText>
-								</Text>
-							</View>
 						</Flex.Item>
 						<Flex.Item>
 							<View as="div" padding="moduleElements">
@@ -106,6 +85,27 @@ const Card: FC<{
 										</Pill>
 									</Flex.Item>
 								</Flex>
+							</View>
+						</Flex.Item>
+						<Flex.Item>
+							<View
+								as="div"
+								borderColor="primary"
+								borderWidth="0 0 small 0"
+								padding="moduleElements"
+							>
+								<Heading level="h2" variant="titleCardMini">
+									<TruncateText maxLines={1}>{feature.title}</TruncateText>
+								</Heading>
+							</View>
+						</Flex.Item>
+						<Flex.Item shouldGrow shouldShrink>
+							<View as="div" padding="0 small">
+								<Text size="contentSmall">
+									<TruncateText maxLines={4} truncate="word">
+										{feature.description}
+									</TruncateText>
+								</Text>
 							</View>
 						</Flex.Item>
 					</Flex>
