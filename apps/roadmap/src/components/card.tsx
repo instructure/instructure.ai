@@ -89,7 +89,7 @@ const Card: FC<{
 							</View>
 						</Flex.Item>
 						<Flex.Item>
-							<View as="div" background="secondary" padding="moduleElements">
+							<View as="div" padding="moduleElements">
 								<Flex direction="row" gap="xx-small" wrap="wrap">
 									<Flex.Item>
 										<Pill
