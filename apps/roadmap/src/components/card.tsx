@@ -8,7 +8,7 @@ import {
 	View,
 } from "@instructure/ui";
 import type { FC } from "react";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import Logos from "./logos";
 
 const Card: FC<{
@@ -25,7 +25,7 @@ const Card: FC<{
 
 	const { feature, product } = entry;
 
-	const recalc = () => {
+	const recalc = useCallback(() => {
 		const el = headingEl.current;
 		if (!el) return;
 		const style = window.getComputedStyle(el);
@@ -33,7 +33,7 @@ const Card: FC<{
 		const height = el.getBoundingClientRect().height;
 		const lines = Math.max(1, Math.round(height / lineHeight));
 		setMaxLines(lines > 1 ? 3 : 4);
-	};
+	}, []);
 
 	// Measure after layout (and when the title changes)
 	useLayoutEffect(() => {
