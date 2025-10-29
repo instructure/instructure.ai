@@ -1,6 +1,5 @@
 import { Flex, Heading, Pill, Text, TruncateText, View } from "@instructure/ui";
 import type { FC } from "react";
-import { useState } from "react";
 
 const Card: FC<{
 	entry: PendoAPIFeature;
@@ -9,22 +8,8 @@ const Card: FC<{
 	>;
 	setOverlayOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ entry, setSelectedEntry, setOverlayOpen }) => {
-	const [isFocused, setFocused] = useState(false);
-	const [isHovered, setHovered] = useState(false);
 
 	const { feature, product } = entry;
-
-	const shadow = isFocused || isHovered ? "above" : "resting";
-
-	const handleFocusIn = () => {
-		setFocused(true);
-		setHovered(true);
-	};
-
-	const handleFocusOut = () => {
-		setFocused(false);
-		setHovered(false);
-	};
 
 	const handleClick = () => {
 		setSelectedEntry(entry);
@@ -36,36 +21,19 @@ const Card: FC<{
 			<View as="div" padding="x-small">
 				<View
 					as="div"
-					borderColor="primary"
+					background="primary"
 					borderRadius="large"
-					borderWidth="small"
-					onBlur={handleFocusOut}
 					onClick={handleClick}
-					onFocus={handleFocusIn}
-					onKeyDown={(e) => {
-						if (e.code === "Space" || e.key === "Enter") {
-							e.preventDefault();
-							handleClick();
-						}
-					}}
-					onMouseEnter={handleFocusIn}
-					onMouseLeave={handleFocusOut}
-					shadow={shadow}
 					shouldAnimateFocus
 					tabIndex={0}
 				>
-					<Flex direction="column" gap="moduleElements" height="16rem">
-						<Flex.Item padding="0 0 0 small">
-							<Flex alignItems="center" direction="row" gap="xx-small">
-								<Flex.Item>
-									<View as="div" margin="xx-small 0 0">
-										<product.logo height="1.25rem" inline />
-									</View>
-								</Flex.Item>
-								<Flex.Item>
-									<Text variant="contentImportant">{product.name}</Text>
-								</Flex.Item>
-							</Flex>
+					<Flex direction="column" gap="moduleElements">
+						<Flex.Item>
+							<View as="div" themeOverride={{backgroundSecondary: product.color}} background="secondary" borderRadius="large large 0 0" height="10rem" padding="medium 0 0 medium">
+								<product.logo height="1.25rem" inline />
+								{" "}
+								<Text variant="contentImportant">{product.name}</Text>
+							</View>
 						</Flex.Item>
 						<Flex.Item>
 							<View as="div" padding="moduleElements">
