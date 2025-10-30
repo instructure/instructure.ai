@@ -112,11 +112,16 @@ const Card: FC<{
 										<Text size="legend">{feature.stage}</Text>
 									</Pill>
 								</Flex.Item>
-								<Flex.Item>
-									<Pill>
-										<Text size="legend">{product.area?.split(" - ")[1]}</Text>
-									</Pill>
-								</Flex.Item>
+								{(() => {
+									const areaParts = product.area?.split(" - ");
+									return areaParts?.[1] ? (
+										<Flex.Item>
+											<Pill>
+												<Text size="legend">{areaParts[1]}</Text>
+											</Pill>
+										</Flex.Item>
+									) : null;
+								})()}
 							</Flex>
 						</View>
 					</Flex.Item>
