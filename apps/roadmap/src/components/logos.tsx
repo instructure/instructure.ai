@@ -283,7 +283,6 @@ const CardBackground: FC<SVGProps> = ({
 	const circle2 = color;
 	const circle3 = darken(color, 10);
 	const bg = darken(color, 20);
-	console.debug("color:", color);
 	return (
 		<ColorSVG
 			height={height}
