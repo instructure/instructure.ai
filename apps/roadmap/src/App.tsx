@@ -30,7 +30,6 @@ const App: FC = () => {
 		return () => mediaQuery.removeEventListener("change", handler);
 	}, []);
 
-
 	useEffect(() => {
 		getRoadmap().then((data) => {
 			setRoadmap(data);
@@ -79,19 +78,19 @@ const App: FC = () => {
 						{Entries.map((entry) => (
 							<Card
 								entry={entry}
+								isDark={isDark}
 								key={entry.feature.title}
 								setOverlayOpen={setOverlayOpen}
 								setSelectedEntry={setSelectedEntry}
-								isDark={isDark}
 							/>
 						))}
 					</Flex>
 					{selectedEntry && (
 						<CardOverlay
 							entry={selectedEntry}
+							isDark={isDark}
 							isOpen={overlayOpen}
 							setOpen={setOverlayOpen}
-							isDark={isDark}
 						/>
 					)}
 				</>

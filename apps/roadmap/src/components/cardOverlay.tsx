@@ -2,10 +2,10 @@ import {
 	Flex,
 	Heading,
 	IconButton,
-	IconXSolid,
-	Img,
-	Modal,
+	IconXLine,
+	Mask,
 	Pill,
+	Portal,
 	Responsive,
 	Text,
 	View,
@@ -13,14 +13,15 @@ import {
 import type { FC } from "react";
 import { useMemo } from "react";
 import { getLinkType } from "../utils";
-import { TagList, VideoPlayer } from "./";
+import { Colors } from "./logos";
 
 const CardOverlayContent: FC<{
 	entry: PendoAPIFeature;
 	isOpen: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	isNarrow: boolean;
-}> = ({ entry, isOpen, setOpen, isNarrow = false }) => {
+	isDark: boolean;
+}> = ({ entry, isOpen, setOpen, isNarrow = false, isDark = false }) => {
 	const { feature, product } = entry;
 	const { links } = feature;
 
@@ -29,79 +30,103 @@ const CardOverlayContent: FC<{
 		url: link.linkUrl,
 	}));
 
-	const video = useMemo(
+	const _video = useMemo(
 		() => Links?.find((link) => link.title.toLowerCase() === "video")?.url,
 		[Links],
 	);
-	const image = useMemo(
+	const _image = useMemo(
 		() => Links?.find((link) => link.title.toLowerCase() === "image")?.url,
 		[Links],
 	);
 
-	return (
-		<Modal
-			label="Feature Details"
-			onDismiss={() => setOpen(false)}
-			open={isOpen}
-			size="fullscreen"
-		>
-			<Modal.Header>
-				<Flex alignItems="center" direction="row" gap="x-small" wrap="no-wrap">
-					{product.logo && (
-						<Flex.Item>
-							<product.logo height="2.5rem" />
-						</Flex.Item>
-					)}
+	const handleClick = () => {
+		setOpen(false);
+	};
 
-					<Flex.Item shouldGrow shouldShrink>
-						<Heading variant="titleCardLarge">{feature.title}</Heading>
-					</Flex.Item>
-					<Flex.Item>
-						<IconButton
-							onClick={() => setOpen(false)}
-							screenReaderLabel="Close"
-							withBackground={false}
-							withBorder={false}
-						>
-							<IconXSolid />
-						</IconButton>
-					</Flex.Item>
-				</Flex>
-			</Modal.Header>
-			<Modal.Body>
-				<View id="overlay" overflowX="hidden" withFocusOutline={false}>
+	return (
+		<Portal open={isOpen}>
+			<Mask
+				placement="top"
+				themeOverride={{ background: isDark ? "#0E1316" : "#F2F4F4" }}
+			>
+				<View
+					as="div"
+					background={isDark ? "primary-inverse" : "primary"}
+					borderColor={isDark ? "secondary" : "primary"}
+					borderRadius="large"
+					borderWidth="small"
+					margin={isDark ? "none" : "xx-small"}
+					padding="small"
+					shadow={isDark ? "none" : "above"}
+					themeOverride={{
+						backgroundPrimaryInverse: "#171f24",
+						borderColorPrimary: "#D7DADE",
+						borderColorSecondary: "#2A353F",
+					}}
+					width="100%"
+				>
 					<Flex
 						alignItems="start"
-						direction="row"
-						gap="medium"
-						wrap={isNarrow ? "wrap-reverse" : "no-wrap"}
+						direction="column"
+						gap="small"
 					>
-						<Flex.Item shouldShrink>
-							<View as="div">
-								{video ? (
-									<VideoPlayer url={video} />
-								) : image ? (
-									<Img alt={feature.title} src={image} />
-								) : null}
-								{feature.labels?.length && (
-									<View as="div" margin="0 0 small">
-										{feature.labels.map((label) => (
-											<Pill key={label} margin="x-small x-small 0 0">
-												{label}
-											</Pill>
-										))}
-									</View>
-								)}
-								<Text variant="content">{feature.description}</Text>
-							</View>
+						<Flex.Item shouldGrow shouldShrink width="100%">
+							<Flex direction="row" gap="medium">
+								<Flex.Item shouldGrow shouldShrink>
+									<product.logo inline /> {product.name}
+								</Flex.Item>
+								<Flex.Item>
+									<IconButton
+										color={isDark ? "primary-inverse" : undefined}
+										onClick={handleClick}
+										screenReaderLabel="Close"
+										size="small"
+										withBackground={false}
+										withBorder={false}
+									>
+										<IconXLine />
+									</IconButton>
+								</Flex.Item>
+							</Flex>
 						</Flex.Item>
 						<Flex.Item>
-							<TagList entry={entry} isNarrow={isNarrow} />
+							<Heading variant="titleCardMini">{feature.title}</Heading>
+						</Flex.Item>
+						<Flex.Item>
+							<Flex direction="row" gap="xx-small" wrap="wrap">
+								<Flex.Item>
+									<Pill
+										color={feature.stage === "Coming Soon" ? "success" : "info"}
+										themeOverride={{
+											background: isDark ? "#0E1316" : "#fff",
+											infoColor: Colors.parchment,
+											successColor: Colors.mastery,
+										}}
+									>
+										<Text size="legend">{feature.stage}</Text>
+									</Pill>
+								</Flex.Item>
+								{(() => {
+									const areaParts = product.area?.split(" - ");
+									return areaParts?.[1] ? (
+										<Flex.Item>
+											<Pill
+												themeOverride={{
+													background: isDark ? "#0E1316" : "#fff",
+													primaryColor: "#9EA6AD",
+												}}
+											>
+												<Text size="legend">{areaParts[1]}</Text>
+											</Pill>
+										</Flex.Item>
+									) : null;
+								})()}
+							</Flex>
 						</Flex.Item>
 					</Flex>
 				</View>
-			</Modal.Body>
-		</Modal>
+			</Mask>
+		</Portal>
 	);
 };
 
@@ -109,7 +134,8 @@ const CardOverlay: FC<{
 	entry: PendoAPIFeature;
 	isOpen: boolean;
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ entry, isOpen, setOpen }) => {
+	isDark: boolean;
+}> = ({ entry, isOpen, setOpen, isDark = false }) => {
 	return (
 		<Responsive
 			query={{ large: { minWidth: "50rem" }, small: { maxWidth: "50rem" } }}
@@ -118,6 +144,7 @@ const CardOverlay: FC<{
 				return (
 					<CardOverlayContent
 						entry={entry}
+						isDark={isDark}
 						isNarrow={isSmall}
 						isOpen={isOpen}
 						setOpen={setOpen}
