@@ -10,6 +10,8 @@ import {
 import type { FC } from "react";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import Logos from "./logos";
+import { lighten } from "@instructure/ui-color-utils";
+import { Colors } from "./logos";
 
 const Card: FC<{
 	entry: PendoAPIFeature;
@@ -17,7 +19,8 @@ const Card: FC<{
 		React.SetStateAction<PendoAPIFeature | null>
 	>;
 	setOverlayOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ entry, setSelectedEntry, setOverlayOpen }) => {
+	isDark: boolean;
+}> = ({ entry, setSelectedEntry, setOverlayOpen, isDark }) => {
 	const [maxLines, setMaxLines] = useState(4);
 	const headingEl = useRef<Element | null>(null);
 
@@ -58,11 +61,11 @@ const Card: FC<{
 		<Flex.Item align="start" size="25rem">
 			<View
 				as="div"
-				background="primary"
-				borderColor="secondary"
+				background={isDark ? "primary-inverse" : "primary"}
+				borderColor={isDark ? "secondary" : "primary"}
 				borderRadius="large"
 				borderWidth="small"
-				themeOverride={{ borderColorSecondary: "#D7DADE" }}
+				themeOverride={{ borderColorPrimary: "#D7DADE", backgroundPrimaryInverse: "#171f24", borderColorSecondary: "#2A353F" }}
 			>
 				<Flex
 					direction="column"
@@ -108,6 +111,7 @@ const Card: FC<{
 								<Flex.Item>
 									<Pill
 										color={feature.stage === "Coming Soon" ? "success" : "info"}
+										themeOverride={{background: isDark ? "#0E1316" : "#fff", infoColor: Colors.parchment, successColor: Colors.mastery}}
 									>
 										<Text size="legend">{feature.stage}</Text>
 									</Pill>
@@ -116,7 +120,7 @@ const Card: FC<{
 									const areaParts = product.area?.split(" - ");
 									return areaParts?.[1] ? (
 										<Flex.Item>
-											<Pill>
+											<Pill themeOverride={{background: isDark ? "#0E1316" : "#fff", primaryColor: "#9EA6AD"}}>
 												<Text size="legend">{areaParts[1]}</Text>
 											</Pill>
 										</Flex.Item>
@@ -147,13 +151,17 @@ const Card: FC<{
 					<Flex.Item>
 						<View as="div" padding="xx-small">
 							<Button
-								color="secondary"
+								color={isDark ? "primary-inverse" : "secondary"}
 								display="block"
 								onClick={handleClick}
 								textAlign="center"
 								themeOverride={{
 									borderRadius: "0.5rem",
 									secondaryBorderColor: "transparent",
+									primaryInverseBackground: "#2A353F",
+									primaryInverseColor: "#fff",
+									primaryInverseBorderColor: "transparent",
+									primaryInverseHoverBackground: lighten("#2A353F", 5)
 								}}
 							>
 								Details

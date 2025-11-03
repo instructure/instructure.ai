@@ -18,6 +18,18 @@ const App: FC = () => {
 	);
 	const [brandConfig, setBrandConfig] = useState<unknown>({});
 	const [roadmap, setRoadmap] = useState<RoadmapFeatures | null>(null);
+	const [isDark, setIsDark] = useState(false);
+
+	useEffect(() => {
+		const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+		setIsDark(mediaQuery.matches);
+
+		const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
+		mediaQuery.addEventListener("change", handler);
+
+		return () => mediaQuery.removeEventListener("change", handler);
+	}, []);
+
 
 	useEffect(() => {
 		getRoadmap().then((data) => {
@@ -70,6 +82,7 @@ const App: FC = () => {
 								key={entry.feature.title}
 								setOverlayOpen={setOverlayOpen}
 								setSelectedEntry={setSelectedEntry}
+								isDark={isDark}
 							/>
 						))}
 					</Flex>
@@ -78,6 +91,7 @@ const App: FC = () => {
 							entry={selectedEntry}
 							isOpen={overlayOpen}
 							setOpen={setOverlayOpen}
+							isDark={isDark}
 						/>
 					)}
 				</>

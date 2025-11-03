@@ -87,7 +87,7 @@ const Canvas: SVGInfo = {
 };
 
 const Instructure: SVGInfo = {
-	color: "#0f1923",
+	color: "#2A353F",
 	SVG: (
 		<>
 			<rect
