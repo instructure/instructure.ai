@@ -71,7 +71,7 @@ const CardOverlayContent: FC<{
 						as="div"
 						borderColor={isDark ? "secondary" : "primary"}
 						borderWidth="0 0 small"
-						padding="small"
+						padding="0 0 small small"
 						themeOverride={{
 							borderColorPrimary: "#D7DADE",
 							borderColorSecondary: "#2A353F",
@@ -106,7 +106,7 @@ const CardOverlayContent: FC<{
 								</Flex>
 							</Flex.Item>
 							<Flex.Item>
-								<Heading margin="0 0 small" variant="titleCardMini">
+								<Heading level="h3" margin="0 0 small" variant="titleCardMini">
 									{feature.title}
 								</Heading>
 							</Flex.Item>
