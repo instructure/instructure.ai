@@ -2,16 +2,6 @@ import { InlineSVG } from "@instructure/ui";
 import { darken, lighten } from "@instructure/ui-color-utils";
 import type { FC, ReactNode } from "react";
 
-type ColorSVGProps = {
-	color?: string;
-	children: ReactNode;
-	title: string;
-	viewBox: string;
-	width?: string;
-	height?: string;
-	inline?: boolean;
-};
-
 interface SVGInfo {
 	color: string;
 	SVG: ReactNode;
@@ -24,7 +14,14 @@ interface SVGProps {
 	width?: string;
 	inline?: boolean;
 	color?: string;
+	valign?: "top" | "middle" | "bottom" | "unset";
 }
+
+type ColorSVGProps = SVGProps & {
+	children: ReactNode;
+	title: string;
+	viewBox: string;
+};
 
 const ColorSVG: FC<ColorSVGProps> = ({
 	color = "currentColor",
@@ -34,11 +31,12 @@ const ColorSVG: FC<ColorSVGProps> = ({
 	width = "auto",
 	height = "1rem",
 	inline = false,
+	valign = "top"
 }) => (
 	<InlineSVG
 		height={height}
 		inline={inline}
-		style={{ verticalAlign: "top" }}
+		style={{ verticalAlign: valign }}
 		title={title}
 		viewBox={viewBox}
 		width={width}
@@ -137,6 +135,7 @@ const ParchmentBug: FC<SVGProps> = ({
 	width = "auto",
 	inline = false,
 	color = Parchment.color,
+	valign = "top",
 }) => (
 	<ColorSVG
 		color={color}
@@ -145,6 +144,7 @@ const ParchmentBug: FC<SVGProps> = ({
 		title={Parchment.title}
 		viewBox={Parchment.viewBox}
 		width={width}
+		valign={valign}
 	>
 		{Parchment.SVG}
 	</ColorSVG>
@@ -183,6 +183,7 @@ const MasteryBug: FC<SVGProps> = ({
 	width = "auto",
 	inline = false,
 	color = Mastery.color,
+	valign = "top",
 }) => (
 	<ColorSVG
 		color={color}
@@ -191,6 +192,7 @@ const MasteryBug: FC<SVGProps> = ({
 		title={Mastery.title}
 		viewBox={Mastery.viewBox}
 		width={width}
+		valign={valign}
 	>
 		{Mastery.SVG}
 	</ColorSVG>
@@ -201,6 +203,7 @@ const CanvasBug: FC<SVGProps> = ({
 	width = "auto",
 	inline = false,
 	color = Canvas.color,
+	valign = "top",
 }) => (
 	<ColorSVG
 		color={color}
@@ -209,6 +212,7 @@ const CanvasBug: FC<SVGProps> = ({
 		title={Canvas.title}
 		viewBox={Canvas.viewBox}
 		width={width}
+		valign={valign}
 	>
 		{Canvas.SVG}
 	</ColorSVG>
@@ -219,6 +223,7 @@ const IgniteBug: FC<SVGProps> = ({
 	width = "auto",
 	inline = false,
 	color = undefined,
+	valign = "top",
 }) => (
 	<ColorSVG
 		height={height}
@@ -226,6 +231,7 @@ const IgniteBug: FC<SVGProps> = ({
 		title={Ignite.title}
 		viewBox={Ignite.viewBox}
 		width={width}
+		valign={valign}
 	>
 		{color ? (
 			<g fill={color}>{Ignite.SVG}</g>
