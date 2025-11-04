@@ -65,7 +65,9 @@ const CardOverlayContent: FC<{
 						backgroundPrimaryInverse: "#171f24",
 						borderColorPrimary: "#D7DADE",
 						borderColorSecondary: "#2A353F",
-					}}>
+					}}
+					maxWidth="77.125rem"
+					>
 
 					<View
 						as="div"

@@ -74,7 +74,7 @@ const App: FC = () => {
 		<InstUISettingsProvider theme={{ ...canvas, ...(brandConfig as object) }}>
 			{roadmap && (
 				<>
-					<Flex gap="paddingCardMedium" justifyItems="start" wrap="wrap">
+					<Flex gap="paddingCardMedium" justifyItems="start" wrap="wrap" width="77.125rem">
 						{Entries.map((entry) => (
 							<Card
 								entry={entry}
