@@ -9,6 +9,7 @@ import {
 	Responsive,
 	Text,
 	View,
+	Dialog
 } from "@instructure/ui";
 import type { FC } from "react";
 import { useMemo } from "react";
@@ -49,21 +50,23 @@ const CardOverlayContent: FC<{
 				placement="top"
 				themeOverride={{ background: isDark ? "#0E1316" : "#F2F4F4" }}
 			>
-				<View
-					as="div"
+				<Dialog open={isOpen} shouldContainFocus shouldReturnFocus onDismiss={handleClick}>
+					<Flex>
+					<Flex.Item shouldGrow shouldShrink width="100vw"
+				>
+					<View as="div" 
 					background={isDark ? "primary-inverse" : "primary"}
 					borderColor={isDark ? "secondary" : "primary"}
 					borderRadius="large"
 					borderWidth="small"
-					margin={isDark ? "none" : "xx-small"}
+					margin="xx-small"
 					shadow={isDark ? "none" : "above"}
 					themeOverride={{
 						backgroundPrimaryInverse: "#171f24",
 						borderColorPrimary: "#D7DADE",
 						borderColorSecondary: "#2A353F",
-					}}
-					width="100%"
-				>
+					}}>
+
 					<View
 						as="div"
 						borderColor={isDark ? "secondary" : "primary"}
@@ -78,7 +81,7 @@ const CardOverlayContent: FC<{
 							<Flex.Item shouldGrow shouldShrink width="100%">
 								<Flex direction="row">
 									<Flex.Item shouldGrow shouldShrink>
-										<product.logo inline />{" "}
+										<product.logo valign="bottom" inline />{" "}
 										<Text
 											color={isDark ? "primary-inverse" : "secondary"}
 											variant="contentSmall"
@@ -87,7 +90,7 @@ const CardOverlayContent: FC<{
 										</Text>
 									</Flex.Item>
 									<Flex.Item>
-										<View>
+										<View as="div" padding="xx-small">
 										<IconButton
 											color={isDark ? "primary-inverse" : undefined}
 											onClick={handleClick}
@@ -95,7 +98,6 @@ const CardOverlayContent: FC<{
 											size="small"
 											withBackground={false}
 											withBorder={false}
-											
 										>
 											<IconXLine />
 										</IconButton>
@@ -146,7 +148,10 @@ const CardOverlayContent: FC<{
 					<View as="div" padding="small">
 						Bottom
 					</View>
-				</View>
+					</View>
+				</Flex.Item>
+				</Flex>
+				</Dialog>
 			</Mask>
 		</Portal>
 	);
