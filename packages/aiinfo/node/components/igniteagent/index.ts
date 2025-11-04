@@ -45,7 +45,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"The foundational AI on which further training and customizations are built.",
 				segmentTitle: "Base Model",
-				value: "Haiku 3.5, Sonnet 3.5",
+				value: "Haiku 3, Sonnet 3.7",
 				valueDescription:
 					"Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
 			},
@@ -170,7 +170,7 @@ const aiInformation: AiInformationProps = {
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
 				featureName: "Agent",
-				modelName: "Haiku 3.5, Sonnet 3.5",
+				modelName: "Haiku 3, Sonnet 3.7",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
 				permissionLevel: "LEVEL 2",
