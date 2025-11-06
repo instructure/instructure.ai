@@ -5,8 +5,8 @@ import {
 	IconButton,
 	IconXLine,
 	Img,
-	List,
 	Link,
+	List,
 	Mask,
 	Pill,
 	Portal,
@@ -260,15 +260,25 @@ const CardOverlayContent: FC<{
 																	color: isDark ? "#fff" : undefined,
 																}}
 															>
-																<Text>Resources:</Text><br />
+																<Text>Resources:</Text>
+																<br />
 																<List margin="0 0 0 small">
 																	{externalLinks.map((link) => (
-																		<List.Item key={link.url} 
-																themeOverride={{
-																	color: isDark ? "#fff" : undefined,
-																}}>
-																			<Link href={link.url} target="_blank" rel="noopener" color={isDark ? "link-inverse" : "link"}>
-																				<Text transform="capitalize">{link.title}</Text>
+																		<List.Item
+																			key={link.url}
+																			themeOverride={{
+																				color: isDark ? "#fff" : undefined,
+																			}}
+																		>
+																			<Link
+																				color={isDark ? "link-inverse" : "link"}
+																				href={link.url}
+																				rel="noopener"
+																				target="_blank"
+																			>
+																				<Text transform="capitalize">
+																					{link.title}
+																				</Text>
 																			</Link>
 																		</List.Item>
 																	))}
