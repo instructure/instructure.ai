@@ -31,7 +31,7 @@ const ColorSVG: FC<ColorSVGProps> = ({
 	width = "auto",
 	height = "1rem",
 	inline = false,
-	valign = "top"
+	valign = "top",
 }) => (
 	<InlineSVG
 		height={height}
@@ -142,9 +142,9 @@ const ParchmentBug: FC<SVGProps> = ({
 		height={height}
 		inline={inline}
 		title={Parchment.title}
+		valign={valign}
 		viewBox={Parchment.viewBox}
 		width={width}
-		valign={valign}
 	>
 		{Parchment.SVG}
 	</ColorSVG>
@@ -190,9 +190,9 @@ const MasteryBug: FC<SVGProps> = ({
 		height={height}
 		inline={inline}
 		title={Mastery.title}
+		valign={valign}
 		viewBox={Mastery.viewBox}
 		width={width}
-		valign={valign}
 	>
 		{Mastery.SVG}
 	</ColorSVG>
@@ -210,9 +210,9 @@ const CanvasBug: FC<SVGProps> = ({
 		height={height}
 		inline={inline}
 		title={Canvas.title}
+		valign={valign}
 		viewBox={Canvas.viewBox}
 		width={width}
-		valign={valign}
 	>
 		{Canvas.SVG}
 	</ColorSVG>
@@ -229,9 +229,9 @@ const IgniteBug: FC<SVGProps> = ({
 		height={height}
 		inline={inline}
 		title={Ignite.title}
+		valign={valign}
 		viewBox={Ignite.viewBox}
 		width={width}
-		valign={valign}
 	>
 		{color ? (
 			<g fill={color}>{Ignite.SVG}</g>

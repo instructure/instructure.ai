@@ -12,9 +12,9 @@
  * - Uses a MutationObserver to attach listeners when the roadmap iframe is added to the DOM.
  *
  * Only runs on the "/pages/instructure-roadmap" path.
- * 
+ *
  * @version 2025.10.29.00
- * 
+ *
  */
 
 const path = window.location.pathname;
@@ -33,33 +33,44 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 		}
 		if (iframeListenerMap.has(iFrame)) return;
 
-					const handler = (event) => {
-						if (!event.data) return;
-						// Only respond to getRoadmap and lti.getPageSettings events
-						if (event.data.type === "getRoadmap") {
-							const roadmap = iFrame.getAttribute("data-roadmap");
-							console.log("[themeEditor.js] Roadmap attribute:", roadmap);
-							if (iFrame.contentWindow) {
-								iFrame.contentWindow.postMessage({ value: roadmap }, "*");
-								console.log("[themeEditor.js] Sent roadmap message", { value: roadmap });
-							} else {
-								console.error("No contentWindow for roadmap iframe");
-							}
-						} else if (event.data.subject === "lti.getPageSettings") {
-							// Echo lti.getPageSettings as lti.postMessage for brand config
-							if (iFrame.contentWindow) {
-								iFrame.contentWindow.postMessage({ subject: "lti.postMessage", pageSettings: event.data.pageSettings }, "*");
-								console.log("[themeEditor.js] Sent lti.postMessage", event.data.pageSettings);
-							}
-						} else if (event.data.type === "setHeight") {
-							try {
-								iFrame.height = event.data.height;
-							} catch (err) {
-								console.error("Failed to set iframe height:", err);
-							}
-						}
-						// Ignore all other events
-					};
+		const handler = (event) => {
+			if (!event.data) return;
+			// Only respond to getRoadmap and lti.getPageSettings events
+			if (event.data.type === "getRoadmap") {
+				const roadmap = iFrame.getAttribute("data-roadmap");
+				console.log("[themeEditor.js] Roadmap attribute:", roadmap);
+				if (iFrame.contentWindow) {
+					iFrame.contentWindow.postMessage({ value: roadmap }, "*");
+					console.log("[themeEditor.js] Sent roadmap message", {
+						value: roadmap,
+					});
+				} else {
+					console.error("No contentWindow for roadmap iframe");
+				}
+			} else if (event.data.subject === "lti.getPageSettings") {
+				// Echo lti.getPageSettings as lti.postMessage for brand config
+				if (iFrame.contentWindow) {
+					iFrame.contentWindow.postMessage(
+						{
+							pageSettings: event.data.pageSettings,
+							subject: "lti.postMessage",
+						},
+						"*",
+					);
+					console.log(
+						"[themeEditor.js] Sent lti.postMessage",
+						event.data.pageSettings,
+					);
+				}
+			} else if (event.data.type === "setHeight") {
+				try {
+					iFrame.height = event.data.height;
+				} catch (err) {
+					console.error("Failed to set iframe height:", err);
+				}
+			}
+			// Ignore all other events
+		};
 		window.addEventListener("message", handler);
 		iframeListenerMap.set(iFrame, handler);
 	};
@@ -77,9 +88,9 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 					const selectors = [
 						"#right-side-wrapper",
 						"#left-side",
-						"#courseMenuToggle"
+						"#courseMenuToggle",
 					];
-					selectors.forEach(sel => {
+					selectors.forEach((sel) => {
 						const el = document.querySelector(sel);
 						if (el) {
 							el.remove();
