@@ -4,6 +4,7 @@ import {
 	Heading,
 	IconButton,
 	IconXLine,
+	Img,
 	List,
 	Mask,
 	Pill,
@@ -15,6 +16,7 @@ import {
 import type { FC } from "react";
 import { useMemo } from "react";
 import { getLinkType, getProductArea } from "../utils";
+import { VideoPlayer } from "./";
 import { Colors } from "./logos";
 
 const CardOverlayContent: FC<{
@@ -34,11 +36,11 @@ const CardOverlayContent: FC<{
 		url: link.linkUrl,
 	}));
 
-	const _video = useMemo(
+	const video = useMemo(
 		() => Links?.find((link) => link.title.toLowerCase() === "video")?.url,
 		[Links],
 	);
-	const _image = useMemo(
+	const image = useMemo(
 		() => Links?.find((link) => link.title.toLowerCase() === "image")?.url,
 		[Links],
 	);
@@ -161,9 +163,41 @@ const CardOverlayContent: FC<{
 									</Flex>
 								</View>
 								<View as="div" padding="small">
-									<Flex direction={isNarrow ? "column" : "row"}>
-										<Flex.Item>
-											<View as="div" borderWidth="0 0 small 0">
+									<Flex
+										alignItems="start"
+										direction={isNarrow ? "column" : "row"}
+										gap="small"
+										withVisualDebug
+										wrap="wrap"
+									>
+										{video && (
+											<Flex.Item
+												shouldGrow
+												shouldShrink
+												width={isNarrow ? "100%" : "75"}
+											>
+												<View
+													as="div"
+													margin={isNarrow ? "small 0 0" : "large 0 0"}
+												>
+													<VideoPlayer url={video} />
+												</View>
+											</Flex.Item>
+										)}
+										{!video && image && (
+											<Flex.Item width={isNarrow ? "100%" : "75%"}>
+												<Img alt={feature.title} src={image} />
+											</Flex.Item>
+										)}
+										<Flex.Item width={isNarrow ? "100%" : "25%"}>
+											<View
+												as="div"
+												borderColor={isDark ? "secondary" : "primary"}
+												borderWidth="0 0 small 0"
+												themeOverride={{
+													borderColorSecondary: "#2A353F",
+												}}
+											>
 												<Heading
 													level="h5"
 													margin={isNarrow ? "0" : "large 0 large"}
@@ -172,27 +206,52 @@ const CardOverlayContent: FC<{
 													Product
 												</Heading>
 												<List isUnstyled>
-													<List.Item>Name: {product.name}</List.Item>
-													{area && <List.Item>Area: {area}</List.Item>}
+													<List.Item
+														themeOverride={{
+															color: isDark ? "#fff" : undefined,
+														}}
+													>
+														Name: {product.name}
+													</List.Item>
+													{area && (
+														<List.Item
+															themeOverride={{
+																color: isDark ? "#fff" : undefined,
+															}}
+														>
+															Area: {area}
+														</List.Item>
+													)}
 												</List>
-												</View>
-												<View as="div" borderWidth="0 0 small">
+											</View>
+											<View
+												as="div"
+												borderColor={isDark ? "secondary" : "primary"}
+												borderWidth="0 0 small 0"
+												themeOverride={{
+													borderColorSecondary: "#2A353F",
+												}}
+											>
 												<Heading
 													level="h5"
 													margin={isNarrow ? "small 0 0" : "large 0 large"}
 													variant="titleCardRegular"
-													>
-														Feature
-														<List isUnstyled>
-															<List.Item>Stage: {feature.stage}</List.Item>
-															</List>
-													</Heading>
+												>
+													Feature
+													<List isUnstyled>
+														<List.Item
+															themeOverride={{
+																color: isDark ? "#fff" : undefined,
+															}}
+														>
+															Stage: {feature.stage}
+														</List.Item>
+													</List>
+												</Heading>
 											</View>
 										</Flex.Item>
-										<Flex.Item shouldGrow shouldShrink>
-											<View as="div" margin={isNarrow ? "small 0 0" : "large 0 0"}>
-												Main content
-											</View>
+										<Flex.Item>
+											<Text as="p">{feature.description}</Text>
 										</Flex.Item>
 									</Flex>
 								</View>
