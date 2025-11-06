@@ -6,6 +6,7 @@ import {
 	IconXLine,
 	Img,
 	List,
+	Link,
 	Mask,
 	Pill,
 	Portal,
@@ -42,6 +43,14 @@ const CardOverlayContent: FC<{
 	);
 	const image = useMemo(
 		() => Links?.find((link) => link.title.toLowerCase() === "image")?.url,
+		[Links],
+	);
+
+	const externalLinks = useMemo(
+		() =>
+			Links?.filter(
+				(link) => !["video", "image"].includes(link.title.toLowerCase()),
+			),
 		[Links],
 	);
 
@@ -167,7 +176,6 @@ const CardOverlayContent: FC<{
 										alignItems="start"
 										direction={isNarrow ? "column" : "row"}
 										gap="small"
-										withVisualDebug
 										wrap="wrap"
 									>
 										{video && (
@@ -246,12 +254,33 @@ const CardOverlayContent: FC<{
 														>
 															Stage: {feature.stage}
 														</List.Item>
+														{externalLinks && externalLinks.length > 0 && (
+															<List.Item
+																themeOverride={{
+																	color: isDark ? "#fff" : undefined,
+																}}
+															>
+																<Text>Resources:</Text><br />
+																<List margin="0 0 0 small">
+																	{externalLinks.map((link) => (
+																		<List.Item key={link.url} 
+																themeOverride={{
+																	color: isDark ? "#fff" : undefined,
+																}}>
+																			<Link href={link.url} target="_blank" rel="noopener" color={isDark ? "link-inverse" : "link"}>
+																				<Text transform="capitalize">{link.title}</Text>
+																			</Link>
+																		</List.Item>
+																	))}
+																</List>
+															</List.Item>
+														)}
 													</List>
 												</Heading>
 											</View>
 										</Flex.Item>
 										<Flex.Item>
-											<Text as="p">{feature.description}</Text>
+											<Text>{feature.description}</Text>
 										</Flex.Item>
 									</Flex>
 								</View>
