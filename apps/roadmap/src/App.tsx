@@ -1,7 +1,7 @@
 import { canvas, Flex, InstUISettingsProvider } from "@instructure/ui";
 import type { FC } from "react";
 import { useEffect, useMemo, useState } from "react";
-import { Card, CardOverlay } from "./components";
+import { Card, CardOverlay, Loading } from "./components";
 import {
 	getBrandConfig,
 	getColor,
@@ -70,9 +70,9 @@ const App: FC = () => {
 		}));
 	}, [roadmap]);
 
-	return Entries.length ? (
+	return (
 		<InstUISettingsProvider theme={{ ...canvas, ...(brandConfig as object) }}>
-			{roadmap && (
+			{Entries.length ? (
 				<>
 					<Flex
 						gap="paddingCardMedium"
@@ -99,13 +99,10 @@ const App: FC = () => {
 						/>
 					)}
 				</>
+			) : (
+				<Loading isDark={isDark} />
 			)}
 		</InstUISettingsProvider>
-	) : (
-		<>
-			👋 Don't panic. Site admin doesn't load custom JS. Log in as a regular
-			user.
-		</>
 	);
 };
 export default App;
