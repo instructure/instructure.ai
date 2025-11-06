@@ -122,3 +122,80 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 }
 
 // ==== END Roadmap.js ====
+
+// ==== BEGIN MoveAvatar.js ====
+
+/**
+ * Canvas Theme Editor: MoveAvatar.js
+ *
+ * Rearranges the global nav structore to put the user avatar at the bottom
+ *
+ * @version 2025.11.06.00
+ *
+ */
+
+(() => {
+	let avatarObserver = null;
+	let lastPath = null;
+
+	const moveAvatar = () => {
+		const firstLi = document.querySelector("#menu li:first-child");
+		const targetList = document.querySelector(
+			".ic-app-header__secondary-navigation > .ic-app-header__menu-list",
+		);
+
+		// Only move when the target list exists AND currently has exactly one child
+		if (firstLi && targetList && targetList.childElementCount === 1) {
+			targetList.appendChild(firstLi);
+			if (avatarObserver) avatarObserver.disconnect(); // stop for this page
+			avatarObserver = null;
+		}
+	};
+
+	const startObserverForThisPage = () => {
+		// Ensure fresh observer per page view
+		if (avatarObserver) avatarObserver.disconnect();
+		avatarObserver = new MutationObserver(moveAvatar);
+		avatarObserver.observe(document.body, { childList: true, subtree: true });
+
+		// Immediate attempt (in case DOM is already ready)
+		moveAvatar();
+	};
+
+	const onLocationChange = () => {
+		const path = location.pathname + location.search + location.hash;
+		if (path !== lastPath) {
+			lastPath = path;
+			startObserverForThisPage();
+		}
+	};
+
+	const _pushState = history.pushState;
+	history.pushState = function (...args) {
+		const ret = _pushState.apply(this, args);
+		window.dispatchEvent(new Event("locationchange"));
+		return ret;
+	};
+
+	const _replaceState = history.replaceState;
+	history.replaceState = function (...args) {
+		const ret = _replaceState.apply(this, args);
+		window.dispatchEvent(new Event("locationchange"));
+		return ret;
+	};
+
+	window.addEventListener("popstate", () =>
+		window.dispatchEvent(new Event("locationchange")),
+	);
+	window.addEventListener("locationchange", onLocationChange);
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", onLocationChange, {
+			once: true,
+		});
+	} else {
+		onLocationChange();
+	}
+})();
+
+// ==== END MoveAvatar.js ====
