@@ -6,7 +6,7 @@
     "ansis": "^4.2.0",
     "papaparse": "^5.5.3",
     "typescript": "^5.9.3",
-    "@instructure/ui-instructure": "^11.0.1"
+    "@instructure/ui-instructure": "^11.2.0"
   },
   "engines": {
     "node": ">=20"

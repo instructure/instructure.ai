@@ -1,7 +1,7 @@
 {
 	"dependencies": {
-		"@instructure/ui": "^11.0.1",
-		"@instructure/ui-color-utils": "^10.26.2",
+		"@instructure/ui": "^11.2.0",
+		"@instructure/ui-color-utils": "^10.2.0",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0"
 	},

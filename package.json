@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "@biomejs/biome": "^2.3.4",
-    "@instructure/browserslist-config-instui": "^11.0.1",
+    "@instructure/browserslist-config-instui": "^11.2.0",
     "@testing-library/react": "^16.3.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
