@@ -1,19 +1,20 @@
 import {
+	Dialog,
 	Flex,
 	Heading,
 	IconButton,
 	IconXLine,
+	List,
 	Mask,
 	Pill,
 	Portal,
 	Responsive,
 	Text,
 	View,
-	Dialog
 } from "@instructure/ui";
 import type { FC } from "react";
 import { useMemo } from "react";
-import { getLinkType } from "../utils";
+import { getLinkType, getProductArea } from "../utils";
 import { Colors } from "./logos";
 
 const CardOverlayContent: FC<{
@@ -25,6 +26,8 @@ const CardOverlayContent: FC<{
 }> = ({ entry, isOpen, setOpen, isNarrow = false, isDark = false }) => {
 	const { feature, product } = entry;
 	const { links } = feature;
+
+	const area = getProductArea(product.area);
 
 	const Links = links?.map((link) => ({
 		title: getLinkType(link),
@@ -50,109 +53,152 @@ const CardOverlayContent: FC<{
 				placement="top"
 				themeOverride={{ background: isDark ? "#0E1316" : "#F2F4F4" }}
 			>
-				<Dialog open={isOpen} shouldContainFocus shouldReturnFocus onDismiss={handleClick}>
-					<Flex>
-					<Flex.Item shouldGrow shouldShrink width="100vw"
+				<Dialog
+					onDismiss={handleClick}
+					open={isOpen}
+					shouldContainFocus
+					shouldReturnFocus
 				>
-					<View as="div" 
-					background={isDark ? "primary-inverse" : "primary"}
-					borderColor={isDark ? "secondary" : "primary"}
-					borderRadius="large"
-					borderWidth="small"
-					margin="xx-small"
-					shadow={isDark ? "none" : "above"}
-					themeOverride={{
-						backgroundPrimaryInverse: "#171f24",
-						borderColorPrimary: "#D7DADE",
-						borderColorSecondary: "#2A353F",
-					}}
-					maxWidth="77.125rem"
-					>
-
-					<View
-						as="div"
-						borderColor={isDark ? "secondary" : "primary"}
-						borderWidth="0 0 small"
-						padding="0 0 small small"
-						themeOverride={{
-							borderColorPrimary: "#D7DADE",
-							borderColorSecondary: "#2A353F",
-						}}
-					>
-						<Flex alignItems="start" direction="column">
-							<Flex.Item shouldGrow shouldShrink width="100%">
-								<Flex direction="row">
-									<Flex.Item shouldGrow shouldShrink>
-										<product.logo valign="bottom" inline />{" "}
-										<Text
-											color={isDark ? "primary-inverse" : "secondary"}
-											variant="contentSmall"
-										>
-											{product.name}
-										</Text>
-									</Flex.Item>
-									<Flex.Item>
-										<View as="div" padding="xx-small">
-										<IconButton
-											color={isDark ? "primary-inverse" : undefined}
-											onClick={handleClick}
-											screenReaderLabel="Close"
-											size="small"
-											withBackground={false}
-											withBorder={false}
-										>
-											<IconXLine />
-										</IconButton>
-										</View>
-									</Flex.Item>
-								</Flex>
-							</Flex.Item>
-							<Flex.Item>
-								<Heading level="h3" margin="0 0 small" variant="titleCardMini">
-									{feature.title}
-								</Heading>
-							</Flex.Item>
-							<Flex.Item>
-								<Flex direction="row" gap="xx-small" wrap="wrap">
-									<Flex.Item>
-										<Pill
-											color={
-												feature.stage === "Coming Soon" ? "success" : "info"
-											}
-											themeOverride={{
-												background: isDark ? "#0E1316" : "#fff",
-												infoColor: Colors.parchment,
-												successColor: Colors.mastery,
-											}}
-										>
-											<Text size="legend">{feature.stage}</Text>
-										</Pill>
-									</Flex.Item>
-									{(() => {
-										const areaParts = product.area?.split(" - ");
-										return areaParts?.[1] ? (
-											<Flex.Item>
-												<Pill
-													themeOverride={{
-														background: isDark ? "#0E1316" : "#fff",
-														primaryColor: "#9EA6AD",
-													}}
+					<Flex>
+						<Flex.Item shouldGrow shouldShrink width="100vw">
+							<View
+								as="div"
+								background={isDark ? "primary-inverse" : "primary"}
+								borderColor={isDark ? "secondary" : "primary"}
+								borderRadius="large"
+								borderWidth="small"
+								margin="xx-small"
+								maxWidth="77.125rem"
+								shadow={isDark ? "none" : "above"}
+								themeOverride={{
+									backgroundPrimaryInverse: "#171f24",
+									borderColorPrimary: "#D7DADE",
+									borderColorSecondary: "#2A353F",
+								}}
+							>
+								<View
+									as="div"
+									borderColor={isDark ? "secondary" : "primary"}
+									borderWidth="0 0 small"
+									padding="0 0 small small"
+									themeOverride={{
+										borderColorPrimary: "#D7DADE",
+										borderColorSecondary: "#2A353F",
+									}}
+								>
+									<Flex alignItems="start" direction="column">
+										<Flex.Item shouldGrow shouldShrink width="100%">
+											<Flex direction="row">
+												<Flex.Item shouldGrow shouldShrink>
+													<product.logo inline valign="bottom" />{" "}
+													<Text
+														color={isDark ? "primary-inverse" : "secondary"}
+														variant="contentSmall"
+													>
+														{product.name}
+													</Text>
+												</Flex.Item>
+												<Flex.Item>
+													<View as="div" padding="xx-small">
+														<IconButton
+															color={isDark ? "primary-inverse" : undefined}
+															onClick={handleClick}
+															screenReaderLabel="Close"
+															size="small"
+															withBackground={false}
+															withBorder={false}
+														>
+															<IconXLine />
+														</IconButton>
+													</View>
+												</Flex.Item>
+											</Flex>
+										</Flex.Item>
+										<Flex.Item>
+											<Heading
+												level="h3"
+												margin="0 0 small"
+												variant="titleCardMini"
+											>
+												{feature.title}
+											</Heading>
+										</Flex.Item>
+										<Flex.Item>
+											<Flex direction="row" gap="xx-small" wrap="wrap">
+												<Flex.Item>
+													<Pill
+														color={
+															feature.stage === "Coming Soon"
+																? "success"
+																: "info"
+														}
+														themeOverride={{
+															background: isDark ? "#0E1316" : "#fff",
+															infoColor: Colors.parchment,
+															successColor: Colors.mastery,
+														}}
+													>
+														<Text size="legend">{feature.stage}</Text>
+													</Pill>
+												</Flex.Item>
+												{(() => {
+													const areaParts = product.area?.split(" - ");
+													return areaParts?.[1] ? (
+														<Flex.Item>
+															<Pill
+																themeOverride={{
+																	background: isDark ? "#0E1316" : "#fff",
+																	primaryColor: "#9EA6AD",
+																}}
+															>
+																<Text size="legend">{areaParts[1]}</Text>
+															</Pill>
+														</Flex.Item>
+													) : null;
+												})()}
+											</Flex>
+										</Flex.Item>
+									</Flex>
+								</View>
+								<View as="div" padding="small">
+									<Flex direction={isNarrow ? "column" : "row"}>
+										<Flex.Item>
+											<View as="div" borderWidth="0 0 small 0">
+												<Heading
+													level="h5"
+													margin={isNarrow ? "0" : "large 0 large"}
+													variant="titleCardRegular"
 												>
-													<Text size="legend">{areaParts[1]}</Text>
-												</Pill>
-											</Flex.Item>
-										) : null;
-									})()}
-								</Flex>
-							</Flex.Item>
-						</Flex>
-					</View>
-					<View as="div" padding="small">
-						Bottom
-					</View>
-					</View>
-				</Flex.Item>
-				</Flex>
+													Product
+												</Heading>
+												<List isUnstyled>
+													<List.Item>Name: {product.name}</List.Item>
+													{area && <List.Item>Area: {area}</List.Item>}
+												</List>
+												</View>
+												<View as="div" borderWidth="0 0 small">
+												<Heading
+													level="h5"
+													margin={isNarrow ? "small 0 0" : "large 0 large"}
+													variant="titleCardRegular"
+													>
+														Feature
+														<List isUnstyled>
+															<List.Item>Stage: {feature.stage}</List.Item>
+															</List>
+													</Heading>
+											</View>
+										</Flex.Item>
+										<Flex.Item shouldGrow shouldShrink>
+											<View as="div" margin={isNarrow ? "small 0 0" : "large 0 0"}>
+												Main content
+											</View>
+										</Flex.Item>
+									</Flex>
+								</View>
+							</View>
+						</Flex.Item>
+					</Flex>
 				</Dialog>
 			</Mask>
 		</Portal>

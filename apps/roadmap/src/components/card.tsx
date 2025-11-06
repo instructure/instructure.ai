@@ -10,6 +10,7 @@ import {
 import { lighten } from "@instructure/ui-color-utils";
 import type { FC } from "react";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { getProductArea } from "../utils";
 import Logos, { Colors } from "./logos";
 
 const Card: FC<{
@@ -26,6 +27,8 @@ const Card: FC<{
 	const { CardBackground } = Logos;
 
 	const { feature, product } = entry;
+
+	const area = getProductArea(product.area);
 
 	const recalc = useCallback(() => {
 		const el = headingEl.current;
@@ -123,21 +126,18 @@ const Card: FC<{
 										<Text size="legend">{feature.stage}</Text>
 									</Pill>
 								</Flex.Item>
-								{(() => {
-									const areaParts = product.area?.split(" - ");
-									return areaParts?.[1] ? (
-										<Flex.Item>
-											<Pill
-												themeOverride={{
-													background: isDark ? "#0E1316" : "#fff",
-													primaryColor: "#9EA6AD",
-												}}
-											>
-												<Text size="legend">{areaParts[1]}</Text>
-											</Pill>
-										</Flex.Item>
-									) : null;
-								})()}
+								{area && (
+									<Flex.Item>
+										<Pill
+											themeOverride={{
+												background: isDark ? "#0E1316" : "#fff",
+												primaryColor: "#9EA6AD",
+											}}
+										>
+											<Text size="legend">{area}</Text>
+										</Pill>
+									</Flex.Item>
+								)}
 							</Flex>
 						</View>
 					</Flex.Item>
