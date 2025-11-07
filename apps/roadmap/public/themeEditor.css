@@ -313,3 +313,15 @@ div[class$="-view-tab"][class]::after {
 }
 
 /* Reset: Forms */
+
+/* Roadmap Customizations */
+
+body.roadmap #right-side-wrapper,
+body.roadmap #left-side,
+body.roadmap #courseMenuToggle {
+	display: none;
+}
+
+body.roadmap #main {
+	margin: 0;
+}
