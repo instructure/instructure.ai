@@ -1,28 +1,28 @@
 {
-	"dependencies": {
-		"@instructure/ui": "^11.2.0",
-		"@instructure/ui-color-utils": "^10.2.0",
-		"react": "^19.2.0",
-		"react-dom": "^19.2.0"
-	},
-	"devDependencies": {
-		"@instructure.ai/shared-configs": "workspace:^"
-	},
-	"name": "@instructure.ai/roadmap",
-	"private": true,
-	"repository": {
-		"directory": "apps/roadmap",
-		"type": "git",
-		"url": "https://github.com/instructure/instructure.ai"
-	},
-	"scripts": {
-		"build": "vite build",
-		"dev": "vite",
-		"lint": "pnpm biome check",
-		"preview": "vite preview",
-		"test": "pnpm vitest run",
-		"typecheck": "tsgo --noEmit"
-	},
-	"type": "module",
-	"version": "0.0.0"
+  "dependencies": {
+    "@instructure/ui": "^11.2.0",
+    "@instructure/ui-color-utils": "^10.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@instructure.ai/shared-configs": "workspace:^"
+  },
+  "name": "@instructure.ai/roadmap",
+  "private": true,
+  "repository": {
+    "directory": "apps/roadmap",
+    "type": "git",
+    "url": "https://github.com/instructure/instructure.ai"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "lint": "pnpm biome check",
+    "preview": "vite preview",
+    "test": "pnpm vitest run",
+    "typecheck": "tsgo --noEmit"
+  },
+  "type": "module",
+  "version": "1.0.0"
 }
