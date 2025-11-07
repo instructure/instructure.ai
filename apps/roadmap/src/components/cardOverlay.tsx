@@ -71,7 +71,7 @@ const CardOverlayContent: FC<{
 					shouldReturnFocus
 				>
 					<Flex>
-						<Flex.Item shouldGrow shouldShrink>
+						<Flex.Item shouldGrow shouldShrink width="calc(100vw - 2px)">
 							<View
 								as="div"
 								background={isDark ? "primary-inverse" : "primary"}
