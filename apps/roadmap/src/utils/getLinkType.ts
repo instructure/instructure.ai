@@ -30,7 +30,7 @@ const getLinkTitle = (link: VerifiedLink): string => {
 	if (
 		href.match(/\.(mp4|mov|avi|mkv|mpeg)$/) ||
 		host.match(
-			/(?:^|\.)((instructuremedia|youtube|vimeo|wistia)\.com|youtu\.be)$/,
+			/(?:^|\.)((instructuremedia|youtube|vimeo|wistia|guidde)\.com|youtu\.be)$/,
 		)
 	)
 		return "video";
