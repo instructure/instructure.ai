@@ -1,8 +1,14 @@
 import { canvas, Flex, InstUISettingsProvider } from "@instructure/ui";
 import type { FC } from "react";
 import { useEffect, useMemo, useState } from "react";
-import { Card, CardOverlay } from "./components";
-import { getBrandConfig, getLogo, getRoadmap, sendHeight } from "./utils";
+import { Card, CardOverlay, Loading } from "./components";
+import {
+	getBrandConfig,
+	getColor,
+	getLogo,
+	getRoadmap,
+	sendHeight,
+} from "./utils";
 import "./App.css";
 
 const App: FC = () => {
@@ -12,6 +18,17 @@ const App: FC = () => {
 	);
 	const [brandConfig, setBrandConfig] = useState<unknown>({});
 	const [roadmap, setRoadmap] = useState<RoadmapFeatures | null>(null);
+	const [isDark, setIsDark] = useState(false);
+
+	useEffect(() => {
+		const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+		setIsDark(mediaQuery.matches);
+
+		const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
+		mediaQuery.addEventListener("change", handler);
+
+		return () => mediaQuery.removeEventListener("change", handler);
+	}, []);
 
 	useEffect(() => {
 		getRoadmap().then((data) => {
@@ -47,6 +64,7 @@ const App: FC = () => {
 			...entry,
 			product: {
 				...entry.product,
+				color: getColor(entry.product.name),
 				logo: getLogo(entry.product.name),
 			},
 		}));
@@ -54,12 +72,18 @@ const App: FC = () => {
 
 	return (
 		<InstUISettingsProvider theme={{ ...canvas, ...(brandConfig as object) }}>
-			{roadmap && (
+			{Entries.length ? (
 				<>
-					<Flex gap="paddingCardMedium" justifyItems="start" wrap="wrap">
+					<Flex
+						gap="paddingCardMedium"
+						justifyItems="start"
+						width="77.125rem"
+						wrap="wrap"
+					>
 						{Entries.map((entry) => (
 							<Card
 								entry={entry}
+								isDark={isDark}
 								key={entry.feature.title}
 								setOverlayOpen={setOverlayOpen}
 								setSelectedEntry={setSelectedEntry}
@@ -69,11 +93,14 @@ const App: FC = () => {
 					{selectedEntry && (
 						<CardOverlay
 							entry={selectedEntry}
+							isDark={isDark}
 							isOpen={overlayOpen}
 							setOpen={setOverlayOpen}
 						/>
 					)}
 				</>
+			) : (
+				<Loading isDark={isDark} />
 			)}
 		</InstUISettingsProvider>
 	);

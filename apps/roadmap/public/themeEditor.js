@@ -12,9 +12,9 @@
  * - Uses a MutationObserver to attach listeners when the roadmap iframe is added to the DOM.
  *
  * Only runs on the "/pages/instructure-roadmap" path.
- * 
- * @version 2025.10.02.00
- * 
+ *
+ * @version 2025.10.29.00
+ *
  */
 
 const path = window.location.pathname;
@@ -35,22 +35,41 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 
 		const handler = (event) => {
 			if (!event.data) return;
-			switch (event.data.type) {
-				case "getRoadmap": {
-					const roadmap = iFrame.getAttribute("data-roadmap");
-					event.source.postMessage({ value: roadmap }, event.origin);
-					break;
+			// Only respond to getRoadmap and lti.getPageSettings events
+			if (event.data.type === "getRoadmap") {
+				const roadmap = iFrame.getAttribute("data-roadmap");
+				console.log("[themeEditor.js] Roadmap attribute:", roadmap);
+				if (iFrame.contentWindow) {
+					iFrame.contentWindow.postMessage({ value: roadmap }, "*");
+					console.log("[themeEditor.js] Sent roadmap message", {
+						value: roadmap,
+					});
+				} else {
+					console.error("No contentWindow for roadmap iframe");
 				}
-				case "setHeight":
-					try {
-						iFrame.height = event.data.height;
-					} catch (err) {
-						console.error("Failed to set iframe height:", err);
-					}
-					break;
-				default:
-					break;
+			} else if (event.data.subject === "lti.getPageSettings") {
+				// Echo lti.getPageSettings as lti.postMessage for brand config
+				if (iFrame.contentWindow) {
+					iFrame.contentWindow.postMessage(
+						{
+							pageSettings: event.data.pageSettings,
+							subject: "lti.postMessage",
+						},
+						"*",
+					);
+					console.log(
+						"[themeEditor.js] Sent lti.postMessage",
+						event.data.pageSettings,
+					);
+				}
+			} else if (event.data.type === "setHeight") {
+				try {
+					iFrame.height = event.data.height;
+				} catch (err) {
+					console.error("Failed to set iframe height:", err);
+				}
 			}
+			// Ignore all other events
 		};
 		window.addEventListener("message", handler);
 		iframeListenerMap.set(iFrame, handler);
@@ -61,11 +80,34 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 		if (iFrame) {
 			attachListener(iFrame);
 			if (matchesCourse) {
-    			console.info("Setting Roadmap page to full screen");
-    			document.querySelector("#right-side-wrapper")?.remove();
-    			document.querySelector("#left-side")?.remove();
-    			document.querySelector("#main")?.style?.setProperty("margin", "0");
-  		}
+				console.info("Setting Roadmap page to full screen");
+				const removeElementsWithRetry = (attempt = 0) => {
+					const maxAttempts = 10;
+					const delay = 100;
+					let allRemoved = true;
+					const selectors = [
+						"#right-side-wrapper",
+						"#left-side",
+						"#courseMenuToggle",
+					];
+					selectors.forEach((sel) => {
+						const el = document.querySelector(sel);
+						if (el) {
+							el.remove();
+						} else {
+							allRemoved = false;
+						}
+					});
+					const main = document.querySelector("#main");
+					if (main?.style) {
+						main.style.setProperty("margin", "0");
+					}
+					if (!allRemoved && attempt < maxAttempts) {
+						setTimeout(() => removeElementsWithRetry(attempt + 1), delay);
+					}
+				};
+				removeElementsWithRetry();
+			}
 			obs.disconnect();
 		}
 	});
@@ -80,3 +122,80 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 }
 
 // ==== END Roadmap.js ====
+
+// ==== BEGIN MoveAvatar.js ====
+
+/**
+ * Canvas Theme Editor: MoveAvatar.js
+ *
+ * Rearranges the global nav structore to put the user avatar at the bottom
+ *
+ * @version 2025.11.06.00
+ *
+ */
+
+(() => {
+	let avatarObserver = null;
+	let lastPath = null;
+
+	const moveAvatar = () => {
+		const firstLi = document.querySelector("#menu li:first-child");
+		const targetList = document.querySelector(
+			".ic-app-header__secondary-navigation > .ic-app-header__menu-list",
+		);
+
+		// Only move when the target list exists AND currently has exactly one child
+		if (firstLi && targetList && targetList.childElementCount === 1) {
+			targetList.appendChild(firstLi);
+			if (avatarObserver) avatarObserver.disconnect(); // stop for this page
+			avatarObserver = null;
+		}
+	};
+
+	const startObserverForThisPage = () => {
+		// Ensure fresh observer per page view
+		if (avatarObserver) avatarObserver.disconnect();
+		avatarObserver = new MutationObserver(moveAvatar);
+		avatarObserver.observe(document.body, { childList: true, subtree: true });
+
+		// Immediate attempt (in case DOM is already ready)
+		moveAvatar();
+	};
+
+	const onLocationChange = () => {
+		const path = location.pathname + location.search + location.hash;
+		if (path !== lastPath) {
+			lastPath = path;
+			startObserverForThisPage();
+		}
+	};
+
+	const _pushState = history.pushState;
+	history.pushState = function (...args) {
+		const ret = _pushState.apply(this, args);
+		window.dispatchEvent(new Event("locationchange"));
+		return ret;
+	};
+
+	const _replaceState = history.replaceState;
+	history.replaceState = function (...args) {
+		const ret = _replaceState.apply(this, args);
+		window.dispatchEvent(new Event("locationchange"));
+		return ret;
+	};
+
+	window.addEventListener("popstate", () =>
+		window.dispatchEvent(new Event("locationchange")),
+	);
+	window.addEventListener("locationchange", onLocationChange);
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", onLocationChange, {
+			once: true,
+		});
+	} else {
+		onLocationChange();
+	}
+})();
+
+// ==== END MoveAvatar.js ====

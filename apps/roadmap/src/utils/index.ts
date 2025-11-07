@@ -1,6 +1,8 @@
 export { default as getBrandConfig } from "./getBrandConfig";
+export { default as getColor } from "./getColor";
 export { default as getLinkType } from "./getLinkType";
 export { default as getLogo } from "./getLogo";
+export { default as getProductArea } from "./getProductArea";
 export { default as getRoadmap } from "./getRoadmap";
 export { default as paramsToPendo } from "./paramsToPendo";
 export { default as sendHeight } from "./sendHeight";
