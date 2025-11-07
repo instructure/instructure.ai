@@ -71,7 +71,7 @@ const CardOverlayContent: FC<{
 					shouldReturnFocus
 				>
 					<Flex>
-						<Flex.Item shouldGrow shouldShrink width="100vw">
+						<Flex.Item shouldGrow shouldShrink>
 							<View
 								as="div"
 								background={isDark ? "primary-inverse" : "primary"}
@@ -178,25 +178,22 @@ const CardOverlayContent: FC<{
 										gap="small"
 										wrap="wrap"
 									>
-										{video && (
-											<Flex.Item
-												shouldGrow
-												shouldShrink
-												width={isNarrow ? "100%" : "75"}
+										<Flex.Item
+											shouldGrow
+											shouldShrink
+											width={isNarrow ? "100%" : "0"}
+										>
+											<View
+												as="div"
+												margin={isNarrow ? "small 0 0" : "large 0 0"}
 											>
-												<View
-													as="div"
-													margin={isNarrow ? "small 0 0" : "large 0 0"}
-												>
-													<VideoPlayer url={video} />
-												</View>
-											</Flex.Item>
-										)}
-										{!video && image && (
-											<Flex.Item width={isNarrow ? "100%" : "75%"}>
-												<Img alt={feature.title} src={image} />
-											</Flex.Item>
-										)}
+												{video && <VideoPlayer url={video} />}
+												{!video && image && (
+													<Img alt={feature.title} src={image} />
+												)}
+												{!video && !image && <Text>{feature.description}</Text>}
+											</View>
+										</Flex.Item>
 										<Flex.Item width={isNarrow ? "100%" : "25%"}>
 											<View
 												as="div"
@@ -208,7 +205,7 @@ const CardOverlayContent: FC<{
 											>
 												<Heading
 													level="h5"
-													margin={isNarrow ? "0" : "large 0 large"}
+													margin={isNarrow ? "0" : "medium 0 medium"}
 													variant="titleCardRegular"
 												>
 													Product
@@ -242,56 +239,59 @@ const CardOverlayContent: FC<{
 											>
 												<Heading
 													level="h5"
-													margin={isNarrow ? "small 0 0" : "large 0 large"}
+													margin={isNarrow ? "small 0 0" : "medium 0 medium"}
 													variant="titleCardRegular"
 												>
 													Feature
-													<List isUnstyled>
+												</Heading>
+
+												<List isUnstyled>
+													<List.Item
+														themeOverride={{
+															color: isDark ? "#fff" : undefined,
+														}}
+													>
+														Stage: {feature.stage}
+													</List.Item>
+													{externalLinks && externalLinks.length > 0 && (
 														<List.Item
 															themeOverride={{
 																color: isDark ? "#fff" : undefined,
 															}}
 														>
-															Stage: {feature.stage}
-														</List.Item>
-														{externalLinks && externalLinks.length > 0 && (
-															<List.Item
-																themeOverride={{
-																	color: isDark ? "#fff" : undefined,
-																}}
-															>
-																<Text>Resources:</Text>
-																<br />
-																<List margin="0 0 0 small">
-																	{externalLinks.map((link) => (
-																		<List.Item
-																			key={link.url}
-																			themeOverride={{
-																				color: isDark ? "#fff" : undefined,
-																			}}
+															<Text>Resources:</Text>
+															<br />
+															<List margin="0 0 0 small">
+																{externalLinks.map((link) => (
+																	<List.Item
+																		key={link.url}
+																		themeOverride={{
+																			color: isDark ? "#fff" : undefined,
+																		}}
+																	>
+																		<Link
+																			color={isDark ? "link-inverse" : "link"}
+																			href={link.url}
+																			rel="noopener"
+																			target="_blank"
 																		>
-																			<Link
-																				color={isDark ? "link-inverse" : "link"}
-																				href={link.url}
-																				rel="noopener"
-																				target="_blank"
-																			>
-																				<Text transform="capitalize">
-																					{link.title}
-																				</Text>
-																			</Link>
-																		</List.Item>
-																	))}
-																</List>
-															</List.Item>
-														)}
-													</List>
-												</Heading>
+																			<Text transform="capitalize">
+																				{link.title}
+																			</Text>
+																		</Link>
+																	</List.Item>
+																))}
+															</List>
+														</List.Item>
+													)}
+												</List>
 											</View>
 										</Flex.Item>
-										<Flex.Item>
-											<Text>{feature.description}</Text>
-										</Flex.Item>
+										{(video || image) && (
+											<Flex.Item>
+												<Text>{feature.description}</Text>
+											</Flex.Item>
+										)}
 									</Flex>
 								</View>
 							</View>
