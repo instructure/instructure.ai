@@ -127,11 +127,7 @@ async function main() {
 		TYPE === "app" ? "apps" : "packages",
 	);
 
-	await replaceInFile(
-		path.join(pkgDir, "README.md"),
-		CLINAME,
-		PACKAGENAME
-	);
+	await replaceInFile(path.join(pkgDir, "README.md"), CLINAME, PACKAGENAME);
 
 	await replaceInFile(
 		path.join(pkgDir, "tsconfig.json"),
