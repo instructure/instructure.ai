@@ -91,7 +91,7 @@ const CardOverlayContent: FC<{
 									as="div"
 									borderColor={isDark ? "secondary" : "primary"}
 									borderWidth="0 0 small"
-									padding="0 0 small small"
+									padding="paddingCardSmall paddingCardSmall paddingCardSmall paddingCardLarge"
 									themeOverride={{
 										borderColorPrimary: "#D7DADE",
 										borderColorSecondary: "#2A353F",
@@ -171,7 +171,7 @@ const CardOverlayContent: FC<{
 										</Flex.Item>
 									</Flex>
 								</View>
-								<View as="div" padding="small">
+								<View as="div" padding="paddingCardSmall paddingCardLarge paddingCardLarge">
 									<Flex
 										alignItems="start"
 										direction={isNarrow ? "column" : "row"}
