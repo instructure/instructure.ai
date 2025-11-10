@@ -1,4 +1,4 @@
-export { CSVURL, TEMPLATE_PACKAGE } from "./consts";
+export { CSVURL, SCHEMAURL, TEMPLATE_PACKAGE } from "./consts";
 export { entryToAIInformation } from "./entryToAIInformation";
 export { entryToNutritionFacts } from "./entryToNutritionFacts";
 export { entryToObj } from "./entryToObj";
