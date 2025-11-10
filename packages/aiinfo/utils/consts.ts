@@ -1,5 +1,7 @@
 const CSVURL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRTUoO92jyiHlJq36oKbtCdL57J7bdOKJbhxRahR2YTR6lTyfhQyo5kidHRwk45jagV9C9DXf80SgfS/pub?gid=2000446087&single=true&output=csv";
+	"https://docs.google.com/spreadsheets/d/e/2PACX-1vS_lbR3ZmU9adfQOgaOUvzET_tVR4AERgU_OEXGVFndVB6zNoArNZr-aQCs4HHAlGvX0QSjVor6nUvA/pub?gid=2000446087&single=true&output=csv";
+
+const SCHEMAURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_lbR3ZmU9adfQOgaOUvzET_tVR4AERgU_OEXGVFndVB6zNoArNZr-aQCs4HHAlGvX0QSjVor6nUvA/pub?gid=716417708&single=true&output=csv";
 
 const TEMPLATE_PACKAGE = `import { Button } from "@instructure/ui";
 import type { AiInfoFeatureProps } from "../types";
@@ -17,4 +19,4 @@ export { <<uid>>, nutritionFacts, dataPermissionLevels, aiInformation };
 export default <<uid>>;
 `;
 
-export { CSVURL, TEMPLATE_PACKAGE };
+export { CSVURL, SCHEMAURL, TEMPLATE_PACKAGE };
