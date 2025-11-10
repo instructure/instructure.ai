@@ -1,11 +1,4 @@
 {
-  "name": "@instructure.ai/aiinfo",
-  "version": "2.10.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/instructure/instructure.ai",
-    "directory": "packages/aiinfo"
-  },
   "sideEffects": false,
   "type": "module",
   "main": "./src/index.mjs",
