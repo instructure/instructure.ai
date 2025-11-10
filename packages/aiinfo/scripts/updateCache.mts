@@ -3,8 +3,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { parse } from "papaparse";
 import { cache, checksum } from "../cache";
-import { type CSVFetchResult, type ChangedEntry, type Entry, type Hash } from "../types";
-import { CSVURL, Log, entryToObj, writeChangelog } from "../utils";
+import type { ChangedEntry, CSVFetchResult, Entry, Hash } from "../types";
+import { CSVURL, entryToObj, Log, writeChangelog, SCHEMAURL } from "../utils";
 import { WriteEntries } from "./writeEntries.mts";
 
 const generateChecksum = (data: string): Hash => {
@@ -14,7 +14,12 @@ const generateChecksum = (data: string): Hash => {
   return hash;
 };
 
-const updateCache = async (data: CSVFetchResult): Promise<void> => {
+const updateCache = async (
+  data: CSVFetchResult,
+  file: "cache" | "schema" = "cache",
+): Promise<void> => {
+  const type = file === "cache" ? "CSV" : "schema";
+  const filePath = file === "cache" ? "cache.csv" : "schema.csv";
   Log("Validating cache integrity...");
   const checksumPath = path.resolve(__dirname, "../cache/checksum.json");
   // Use imported checksum object instead of reading file
@@ -22,35 +27,35 @@ const updateCache = async (data: CSVFetchResult): Promise<void> => {
 
   // Update overall CSV checksum
   const newCSVChecksum = generateChecksum(data.raw);
-  const oldCSVChecksum = checksums.CSV;
+  const oldCSVChecksum = checksums[type];
   const isCSVOutdated = newCSVChecksum !== oldCSVChecksum;
-  checksums.CSV = newCSVChecksum;
+  checksums[type] = newCSVChecksum;
 
   // Prepare changelog update if CSV is outdated
   const changelogPath = path.resolve(__dirname, "../Changelog.md");
   const changedEntries: ChangedEntry[] = [];
   // Read previous cache.csv from disk to get old entries
-  const cacheCSVPath = path.resolve(__dirname, "../cache/cache.csv");
+  const cacheCSVPath = path.resolve(__dirname, `../cache/${filePath}`);
   let oldCacheRaw = "";
   if (fs.existsSync(cacheCSVPath)) {
-    oldCacheRaw = fs.readFileSync(cacheCSVPath, "utf8");
+    oldCacheRaw = fs.readFileSync(cacheCSVPath, "utf-8");
   } else if (cache) {
-    // Fallback to in-memory cache if file doesn't exist
+    // fallback to in-memory cache if file doesn't exist
     oldCacheRaw = cache;
   }
   const oldEntries = parseCSV(oldCacheRaw);
 
   // If CSV checksum changed, write new CSV to cache.csv
   if (isCSVOutdated) {
-    const cacheCSVPath = path.resolve(__dirname, "../cache/cache.csv");
+    const cacheCSVPath = path.resolve(__dirname, `../cache/${filePath}`);
     try {
       fs.writeFileSync(cacheCSVPath, data.raw);
       Log({
         color: "yellow",
-        message: ["cache.csv updated due to CSV checksum change."],
+        message: [`${filePath} updated due to CSV checksum change.`],
       });
-    } catch (error) {
-      Log(["Failed to update cache.csv:", error]);
+    } catch (err) {
+      Log([`Failed to update ${filePath}:`, err]);
     }
     // Do not write entries here; wait until after changedEntries are determined
   }
@@ -145,9 +150,9 @@ const parseCSV = (data: string): CSVFetchResult => {
   return { parsed: parsed.data, raw: data };
 };
 
-const fetchCSVFromURL = async (): Promise<CSVFetchResult> => {
+const fetchCSVFromURL = async (url: string): Promise<CSVFetchResult> => {
   try {
-    const response = await fetch(CSVURL);
+    const response = await fetch(url);
     return parseCSV(await response.text());
   } catch (error) {
     Log({ color: "redBright", message: ["Error fetching CSV:", error] });
@@ -163,15 +168,39 @@ const main = async () => {
   let cacheUpdated = false;
   try {
     let data: CSVFetchResult | undefined;
+    let schema: CSVFetchResult | undefined;
     try {
-      data = await fetchCSVFromURL();
-    } catch (error) {
+      data = await fetchCSVFromURL(CSVURL);
+      schema = await fetchCSVFromURL(SCHEMAURL);
+    } catch (err) {
       Log({
         color: "redBright",
-        message: ["Error fetching CSV from URL:", error],
+        message: ["Error fetching CSV from URL:", err],
         type: "error",
       });
-      throw error;
+      throw err;
+    }
+    if (schema) {
+      const newSchemaChecksum = generateChecksum(schema.raw);
+      cacheUpdated = newSchemaChecksum !== checksum.SCHEMA;
+      if (!cacheUpdated) {
+        Log({
+          color: "green",
+          message: "Schema is up to date; no changes needed.",
+          type: "info",
+        });
+      }
+    } else {
+      try {
+        await updateCache(schema, "schema");
+      } catch (err) {
+        Log({
+          color: "redBright",
+          message: ["Error updating cache or writing entries:", err],
+          type: "error",
+        });
+        throw err;
+      }
     }
     if (data) {
       // Determine if cache will be updated by checking CSV checksum
