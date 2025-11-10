@@ -11,14 +11,21 @@ type CSVFetchResult = {
 	raw: string;
 };
 
+type LangCode =
+	| `${Lowercase<string>}`
+	| `${Lowercase<string>}_${Uppercase<string>}`;
+
 type AiInfoFeature = {
 	revision: string;
 	uid: string;
-	aiInformation: AiInformationProps;
-	dataPermissionLevels: DataPermissionLevelsProps;
-	nutritionFacts: NutritionFactsProps;
-	name: string;
 	group: string;
+} & {
+	[langcode in LangCode]?: {
+		name: string;
+		aiInformation: AiInformationProps;
+		dataPermissionLevels: DataPermissionLevelsProps;
+		nutritionFacts: NutritionFactsProps;
+	};
 };
 
 type FeatureName = AiInfoFeature["uid"];
@@ -81,18 +88,14 @@ type Entry = {
 	permissions: "1" | "2" | "3" | "4";
 };
 
-type LangCode =
-	| `${Lowercase<string>}`
-	| `${Lowercase<string>}_${Uppercase<string>}`;
-
 type DataPermissionLevelsStrings = Omit<
-	AiInfoFeature["dataPermissionLevels"],
+	DataPermissionLevelsProps,
 	"currentFeature"
 >;
 
 /* TODO: Omit based on INSTUI NutritionFactsOwnProps.BlockType[] */
 type AiInformationStrings = Omit<
-	AiInfoFeature["aiInformation"],
+	AiInformationProps,
 	| "data"
 	| "dataPermissionLevelsCurrentFeature"
 	| "dataPermissionLevelsData"
@@ -118,7 +121,7 @@ type AiInformationStrings = Omit<
 };
 
 type NutritionFactsStrings = Omit<
-	AiInfoFeature["nutritionFacts"],
+	NutritionFactsProps,
 	"featureName" | "fullscreen" | "data"
 > & {
 	data: Array<{
@@ -184,6 +187,6 @@ export type {
 	AiInfoFeature,
 	LogProps,
 	LogObject,
-	Strings,
 	Result,
+	Strings
 };
