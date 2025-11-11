@@ -10,7 +10,6 @@ import {
 	sendHeight,
 } from "./utils";
 import "./App.css";
-import "./assets/fonts/AtkinsonHyperlegibleNext.css";
 
 const App: FC = () => {
 	const [overlayOpen, setOverlayOpen] = useState(false);
@@ -87,7 +86,10 @@ const App: FC = () => {
 			theme={{
 				...canvas,
 				...(brandConfig as object),
-				typography: { fontFamily: "Atkinson Hyperlegible Next, sans-serif" },
+				typography: {
+					...canvas.typography,
+					fontFamily: "Atkinson Hyperlegible Next, sans-serif",
+				},
 			}}
 		>
 			{Entries.length ? (
