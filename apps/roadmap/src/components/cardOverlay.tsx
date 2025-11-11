@@ -14,6 +14,7 @@ import {
 	Text,
 	View,
 } from "@instructure/ui";
+import { lighten } from "@instructure/ui-color-utils";
 import type { FC } from "react";
 import { useMemo } from "react";
 import { getLinkType, getProductArea } from "../utils";
@@ -145,8 +146,12 @@ const CardOverlayContent: FC<{
 														}
 														themeOverride={{
 															background: isDark ? "#0E1316" : "#fff",
-															infoColor: Colors.parchment,
-															successColor: Colors.mastery,
+															infoColor: isDark
+																? lighten(Colors.parchment, 6)
+																: Colors.parchment,
+															successColor: isDark
+																? lighten(Colors.mastery, 5)
+																: Colors.mastery,
 														}}
 													>
 														<Text size="legend">{feature.stage}</Text>
@@ -171,11 +176,14 @@ const CardOverlayContent: FC<{
 										</Flex.Item>
 									</Flex>
 								</View>
-								<View as="div" padding="paddingCardSmall paddingCardLarge paddingCardLarge">
+								<View
+									as="div"
+									padding="paddingCardSmall paddingCardLarge paddingCardLarge"
+								>
 									<Flex
 										alignItems="start"
 										direction={isNarrow ? "column" : "row"}
-										gap="small"
+										gap="medium"
 										wrap="wrap"
 									>
 										<Flex.Item

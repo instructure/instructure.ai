@@ -10,6 +10,7 @@ import {
 	sendHeight,
 } from "./utils";
 import "./App.css";
+import "./assets/fonts/AtkinsonHyperlegibleNext.css";
 
 const App: FC = () => {
 	const [overlayOpen, setOverlayOpen] = useState(false);
@@ -70,8 +71,25 @@ const App: FC = () => {
 		}));
 	}, [roadmap]);
 
+	// Debounce loading state
+	const [showLoading, setShowLoading] = useState(false);
+	useEffect(() => {
+		if (!roadmap) {
+			const timeout = setTimeout(() => setShowLoading(true), 1000);
+			return () => clearTimeout(timeout);
+		} else {
+			setShowLoading(false);
+		}
+	}, [roadmap]);
+
 	return (
-		<InstUISettingsProvider theme={{ ...canvas, ...(brandConfig as object) }}>
+		<InstUISettingsProvider
+			theme={{
+				...canvas,
+				...(brandConfig as object),
+				typography: { fontFamily: "Atkinson Hyperlegible Next, sans-serif" },
+			}}
+		>
 			{Entries.length ? (
 				<>
 					<Flex
@@ -99,9 +117,9 @@ const App: FC = () => {
 						/>
 					)}
 				</>
-			) : (
+			) : showLoading ? (
 				<Loading isDark={isDark} />
-			)}
+			) : null}
 		</InstUISettingsProvider>
 	);
 };

@@ -7,7 +7,7 @@ import {
 	TruncateText,
 	View,
 } from "@instructure/ui";
-import { lighten } from "@instructure/ui-color-utils";
+import { darken, lighten } from "@instructure/ui-color-utils";
 import type { FC } from "react";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { getProductArea } from "../utils";
@@ -96,7 +96,6 @@ const Card: FC<{
 							>
 								<CardBackground color={product.color} />
 							</View>
-
 							<View
 								as="div"
 								padding="paddingCardLarge 0 0 paddingCardLarge"
@@ -112,15 +111,19 @@ const Card: FC<{
 						</View>
 					</Flex.Item>
 					<Flex.Item>
-						<View as="div">
+						<View as="div" padding="xx-small">
 							<Flex direction="row" gap="xx-small" wrap="wrap">
 								<Flex.Item>
 									<Pill
 										color={feature.stage === "Coming Soon" ? "success" : "info"}
 										themeOverride={{
 											background: isDark ? "#0E1316" : "#fff",
-											infoColor: Colors.parchment,
-											successColor: Colors.mastery,
+											infoColor: isDark
+												? lighten(Colors.parchment, 6)
+												: Colors.parchment,
+											successColor: isDark
+												? lighten(Colors.mastery, 5)
+												: Colors.mastery,
 										}}
 									>
 										<Text size="legend">{feature.stage}</Text>
@@ -131,7 +134,7 @@ const Card: FC<{
 										<Pill
 											themeOverride={{
 												background: isDark ? "#0E1316" : "#fff",
-												primaryColor: "#9EA6AD",
+												primaryColor: isDark ? "#8D959F" : "#6A7883",
 											}}
 										>
 											<Text size="legend">{area}</Text>
@@ -141,8 +144,8 @@ const Card: FC<{
 							</Flex>
 						</View>
 					</Flex.Item>
-					<Flex.Item>
-						<View as="div" height="110px" overflowY="hidden">
+					<Flex.Item as="div" overflowY="hidden" size="108px">
+						<View as="div" padding="0 xx-small">
 							<Heading
 								elementRef={(node) => {
 									headingEl.current = node;
@@ -165,15 +168,20 @@ const Card: FC<{
 							<Button
 								color={isDark ? "primary-inverse" : "secondary"}
 								display="block"
+								focusColor={isDark ? "inverse" : "info"}
 								onClick={handleClick}
 								textAlign="center"
 								themeOverride={{
 									borderRadius: "0.5rem",
+									fontWeight: 600,
 									primaryInverseBackground: "#2A353F",
 									primaryInverseBorderColor: "transparent",
 									primaryInverseColor: "#fff",
 									primaryInverseHoverBackground: lighten("#2A353F", 5),
+									secondaryBackground: "#D8E2EE",
 									secondaryBorderColor: "transparent",
+									secondaryColor: "#0C294A",
+									secondaryHoverBackground: darken("#D8E2EE", 5),
 								}}
 							>
 								Details

@@ -1,3 +1,161 @@
+@font-face {
+	font-family: "Atkinson Hyperlegible Next";
+	src:
+		local("Atkinson Hyperlegible Next"),
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraLight.woff2")
+		format("woff2");
+	font-weight: 200;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson Hyperlegible Next";
+	src:
+		local("Atkinson Hyperlegible Next"),
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraLightItalic.woff2")
+		format("woff2");
+	font-weight: 200;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson Hyperlegible Next";
+	src:
+		local("Atkinson Hyperlegible Next"),
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Light.woff2")
+		format("woff2");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson Hyperlegible Next";
+	src:
+		local("Atkinson Hyperlegible Next"),
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-LightItalic.woff2")
+		format("woff2");
+	font-weight: 300;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson Hyperlegible Next";
+	src:
+		local("Atkinson Hyperlegible Next"),
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Regular.woff2")
+		format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson Hyperlegible Next";
+	src:
+		local("Atkinson Hyperlegible Next"),
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-RegularItalic.woff2")
+		format("woff2");
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson Hyperlegible Next";
+	src:
+		local("Atkinson Hyperlegible Next"),
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Medium.woff2")
+		format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson Hyperlegible Next";
+	src:
+		local("Atkinson Hyperlegible Next"),
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-MediumItalic.woff2")
+		format("woff2");
+	font-weight: 500;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson Hyperlegible Next";
+	src:
+		local("Atkinson Hyperlegible Next"),
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBold.woff2")
+		format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson Hyperlegible Next";
+	src:
+		local("Atkinson Hyperlegible Next"),
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBoldItalic.woff2")
+		format("woff2");
+	font-weight: 600;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson Hyperlegible Next";
+	src:
+		local("Atkinson Hyperlegible Next"),
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Bold.woff2")
+		format("woff2");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson Hyperlegible Next";
+	src:
+		local("Atkinson Hyperlegible Next"),
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-BoldItalic.woff2")
+		format("woff2");
+	font-weight: 700;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson Hyperlegible Next";
+	src:
+		local("Atkinson Hyperlegible Next"),
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraBold.woff2")
+		format("woff2");
+	font-weight: 800;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson Hyperlegible Next";
+	src:
+		local("Atkinson Hyperlegible Next"),
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraBoldItalic.woff2")
+		format("woff2");
+	font-weight: 800;
+	font-style: italic;
+	font-display: swap;
+}
+
+:root,
+html,
+body,
+[class$="-view--block"],
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+p,
+div {
+	font-family:
+		"Atkinson Hyperlegible Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 :root {
 	--v12-background-color: #f2f4f4;
 }
@@ -38,6 +196,19 @@ body.primary-nav-expanded .ic-app-header {
 	border-radius: 1rem 1rem 0;
 }
 
+.ic-app-header__logomark {
+	border-radius: 1rem;
+}
+
+.ic-app-header__logomark:focus {
+	box-shadow: inset 0 0 0 0.125rem #6a7883;
+}
+
+.ic-app-header__logomark:hover,
+.ic-app-header__logomark:focus {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
 .ic-app-header__menu-list {
 	padding-bottom: 0.5rem;
 }
@@ -52,9 +223,18 @@ body.primary-nav-expanded .ic-app-header {
 	padding: 0.5625rem 0;
 }
 
+.ic-app-header__menu-list-link:focus {
+	box-shadow: inset 0 0 0 0.125rem #6a7883;
+}
+
 .ic-app-header__menu-list-item.ic-app-header__menu-list-item--active
 	.ic-app-header__menu-list-link {
-	background: #09508c;
+	background: #0c294a;
+}
+
+.ic-app-header__menu-list-item.ic-app-header__menu-list-item--active
+	.ic-app-header__menu-list-link:focus {
+	box-shadow: inset 0 0 0 0.125rem #103868;
 }
 
 .ic-app-header__menu-list-link.ic-app-header__menu-list-link--nav-toggle {

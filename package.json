@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@biomejs/biome": "^2.3.4",
+    "@biomejs/biome": "^2.3.5",
     "@instructure/browserslist-config-instui": "^11.2.0",
     "@testing-library/react": "^16.3.0",
     "@types/react": "^19.2.2",
@@ -10,7 +10,7 @@
     "@vitest/coverage-istanbul": "3.2.4",
     "@vitest/coverage-v8": "^3.2.4",
     "babel-plugin-react-compiler": "^1.0.0",
-    "browserslist": "^4.27.0",
+    "browserslist": "^4.28.0",
     "istanbul-lib-report": "^3.0.1",
     "istanbul-reports": "^3.2.0",
     "jsdom": "^27.1.0",
