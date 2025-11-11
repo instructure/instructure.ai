@@ -119,8 +119,8 @@ const Card: FC<{
 										color={feature.stage === "Coming Soon" ? "success" : "info"}
 										themeOverride={{
 											background: isDark ? "#0E1316" : "#fff",
-											infoColor: Colors.parchment,
-											successColor: Colors.mastery,
+											infoColor: isDark ? lighten(Colors.parchment, 6) : Colors.parchment,
+											successColor: isDark? lighten(Colors.mastery, 5) : Colors.mastery,
 										}}
 									>
 										<Text size="legend">{feature.stage}</Text>
@@ -131,7 +131,7 @@ const Card: FC<{
 										<Pill
 											themeOverride={{
 												background: isDark ? "#0E1316" : "#fff",
-												primaryColor: "#6A7883",
+												primaryColor: isDark? "#8D959F" : "#6A7883",
 											}}
 										>
 											<Text size="legend">{area}</Text>
@@ -141,8 +141,8 @@ const Card: FC<{
 							</Flex>
 						</View>
 					</Flex.Item>
-					<Flex.Item as="div">
-						<View as="div" overflowY="hidden">
+					<Flex.Item as="div" size="106px">
+						<View as="div">
 							<Heading
 								elementRef={(node) => {
 									headingEl.current = node;
@@ -167,6 +167,7 @@ const Card: FC<{
 								display="block"
 								onClick={handleClick}
 								textAlign="center"
+								focusColor={isDark ? "inverse" : "info"}
 								themeOverride={{
 									fontWeight: 600,
 									borderRadius: "0.5rem",
