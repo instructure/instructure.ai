@@ -47,7 +47,7 @@ const Loading = ({ isDark }: { isDark: boolean }) => {
 						color={isDark ? "link-inverse" : "link"}
 						href="/roadmap/themeEditor.js"
 						target="_blank"
-						themeOverride={{focusInverseOutlineColor: "#fff"}}
+						themeOverride={{ focusInverseOutlineColor: "#fff" }}
 					>
 						themeEditor.js
 					</Link>{" "}
@@ -56,8 +56,7 @@ const Loading = ({ isDark }: { isDark: boolean }) => {
 						color={isDark ? "link-inverse" : "link"}
 						href="/roadmap/themeEditor.css"
 						target="_blank"
-						themeOverride={{focusInverseOutlineColor: "#fff"}}
-
+						themeOverride={{ focusInverseOutlineColor: "#fff" }}
 					>
 						themeEditor.css
 					</Link>{" "}
@@ -81,8 +80,7 @@ const Loading = ({ isDark }: { isDark: boolean }) => {
 						color={isDark ? "link-inverse" : "link"}
 						href="https://instructure.ai/roadmap"
 						target="_blank"
-						themeOverride={{focusInverseOutlineColor: "#fff"}}
-
+						themeOverride={{ focusInverseOutlineColor: "#fff" }}
 					>
 						instructure.ai/roadmap
 					</Link>{" "}
@@ -98,7 +96,7 @@ const Loading = ({ isDark }: { isDark: boolean }) => {
 						color={isDark ? "link-inverse" : "link"}
 						href="#"
 						onClick={reload}
-						themeOverride={{focusInverseOutlineColor: "#fff"}}
+						themeOverride={{ focusInverseOutlineColor: "#fff" }}
 					>
 						reloading
 					</Link>{" "}

@@ -84,7 +84,11 @@ const App: FC = () => {
 
 	return (
 		<InstUISettingsProvider
-			theme={{ ...canvas, ...(brandConfig as object), typography: {fontFamily: 'Atkinson Hyperlegible Next, sans-serif'} }}
+			theme={{
+				...canvas,
+				...(brandConfig as object),
+				typography: { fontFamily: "Atkinson Hyperlegible Next, sans-serif" },
+			}}
 		>
 			{Entries.length ? (
 				<>
