@@ -131,7 +131,7 @@ const Card: FC<{
 										<Pill
 											themeOverride={{
 												background: isDark ? "#0E1316" : "#fff",
-												primaryColor: "#9EA6AD",
+												primaryColor: "#6A7883",
 											}}
 										>
 											<Text size="legend">{area}</Text>
