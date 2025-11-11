@@ -144,7 +144,7 @@ const Card: FC<{
 							</Flex>
 						</View>
 					</Flex.Item>
-					<Flex.Item as="div" size="106px">
+					<Flex.Item as="div" size="108px" overflowY="hidden">
 						<View as="div" padding="0 xx-small">
 							<Heading
 								elementRef={(node) => {
