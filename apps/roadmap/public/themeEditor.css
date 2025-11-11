@@ -1,97 +1,97 @@
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraLight.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraLight.woff2') format('woff2');
 	font-weight: 200;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraLightItalic.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraLightItalic.woff2') format('woff2');
 	font-weight: 200;
 	font-style: italic;
 	font-display: swap;
 }
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Light.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Light.woff2') format('woff2');
 	font-weight: 300;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-LightItalic.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-LightItalic.woff2') format('woff2');
 	font-weight: 300;
 	font-style: italic;
 	font-display: swap;
 }
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Regular.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Regular.woff2') format('woff2');
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-RegularItalic.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-RegularItalic.woff2') format('woff2');
 	font-weight: 400;
 	font-style: italic;
 	font-display: swap;
 }
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Medium.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Medium.woff2') format('woff2');
 	font-weight: 500;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-MediumItalic.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-MediumItalic.woff2') format('woff2');
 	font-weight: 500;
 	font-style: italic;
 	font-display: swap;
 }
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBold.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBold.woff2') format('woff2');
 	font-weight: 600;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBoldItalic.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBoldItalic.woff2') format('woff2');
 	font-weight: 600;
 	font-style: italic;
 	font-display: swap;
 }
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Bold.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Bold.woff2') format('woff2');
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-BoldItalic.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-BoldItalic.woff2') format('woff2');
 	font-weight: 700;
 	font-style: italic;
 	font-display: swap;
 }
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraBold.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraBold.woff2') format('woff2');
 	font-weight: 800;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraBoldItalic.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraBoldItalic.woff2') format('woff2');
 	font-weight: 800;
 	font-style: italic;
 	font-display: swap;
@@ -99,7 +99,7 @@
 
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Regular.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Regular.woff2') format('woff2');
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
@@ -107,7 +107,7 @@
 
 @font-face {
 	font-family: 'Atkinson Hyperlegible Next';
-	src: url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBold.woff2') format('woff2');
+	src: local('Atkinson Hyperlegible Next'), url('https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBold.woff2') format('woff2');
 	font-weight: 600;
 	font-style: normal;
 	font-display: swap;
