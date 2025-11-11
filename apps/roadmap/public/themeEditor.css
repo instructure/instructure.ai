@@ -138,26 +138,6 @@
 	font-style: italic;
 	font-display: swap;
 }
-@font-face {
-	font-family: "Atkinson Hyperlegible Next";
-	src:
-		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Regular.woff2")
-		format("woff2");
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Atkinson Hyperlegible Next";
-	src:
-		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBold.woff2")
-		format("woff2");
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
 
 :root,
 html,
