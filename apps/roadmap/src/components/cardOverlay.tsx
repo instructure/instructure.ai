@@ -19,6 +19,7 @@ import { useMemo } from "react";
 import { getLinkType, getProductArea } from "../utils";
 import { VideoPlayer } from "./";
 import { Colors } from "./logos";
+import { lighten } from "@instructure/ui-color-utils";
 
 const CardOverlayContent: FC<{
 	entry: PendoAPIFeature;
@@ -145,8 +146,8 @@ const CardOverlayContent: FC<{
 														}
 														themeOverride={{
 															background: isDark ? "#0E1316" : "#fff",
-															infoColor: Colors.parchment,
-															successColor: Colors.mastery,
+											infoColor: isDark ? lighten(Colors.parchment, 6) : Colors.parchment,
+											successColor: isDark? lighten(Colors.mastery, 5) : Colors.mastery,
 														}}
 													>
 														<Text size="legend">{feature.stage}</Text>
