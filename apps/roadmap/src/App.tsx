@@ -70,6 +70,17 @@ const App: FC = () => {
 		}));
 	}, [roadmap]);
 
+	// Debounce loading state
+	const [showLoading, setShowLoading] = useState(false);
+	useEffect(() => {
+		if (!roadmap) {
+			const timeout = setTimeout(() => setShowLoading(true), 1000);
+			return () => clearTimeout(timeout);
+		} else {
+			setShowLoading(false);
+		}
+	}, [roadmap]);
+
 	return (
 		<InstUISettingsProvider theme={{ ...canvas, ...(brandConfig as object) }}>
 			{Entries.length ? (
@@ -99,9 +110,9 @@ const App: FC = () => {
 						/>
 					)}
 				</>
-			) : (
+			) : showLoading ? (
 				<Loading isDark={isDark} />
-			)}
+			) : null}
 		</InstUISettingsProvider>
 	);
 };
