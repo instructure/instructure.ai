@@ -7,7 +7,7 @@ import {
 	TruncateText,
 	View,
 } from "@instructure/ui";
-import { lighten } from "@instructure/ui-color-utils";
+import { lighten, darken } from "@instructure/ui-color-utils";
 import type { FC } from "react";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { getProductArea } from "../utils";
@@ -168,12 +168,16 @@ const Card: FC<{
 								onClick={handleClick}
 								textAlign="center"
 								themeOverride={{
+									fontWeight: 600,
 									borderRadius: "0.5rem",
 									primaryInverseBackground: "#2A353F",
 									primaryInverseBorderColor: "transparent",
 									primaryInverseColor: "#fff",
 									primaryInverseHoverBackground: lighten("#2A353F", 5),
+									secondaryBackground: "#D8E2EE",
 									secondaryBorderColor: "transparent",
+									secondaryColor: "#0C294A",
+									secondaryHoverBackground: darken("#D8E2EE", 5)
 								}}
 							>
 								Details
