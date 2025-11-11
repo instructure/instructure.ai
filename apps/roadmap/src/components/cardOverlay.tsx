@@ -175,7 +175,7 @@ const CardOverlayContent: FC<{
 									<Flex
 										alignItems="start"
 										direction={isNarrow ? "column" : "row"}
-										gap="small"
+										gap="medium"
 										wrap="wrap"
 									>
 										<Flex.Item
