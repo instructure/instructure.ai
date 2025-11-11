@@ -141,8 +141,8 @@ const Card: FC<{
 							</Flex>
 						</View>
 					</Flex.Item>
-					<Flex.Item>
-						<View as="div" height="110px" overflowY="hidden">
+					<Flex.Item as="div">
+						<View as="div" overflowY="hidden">
 							<Heading
 								elementRef={(node) => {
 									headingEl.current = node;
