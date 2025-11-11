@@ -99,9 +99,6 @@ importers:
 
   apps/roadmap:
     dependencies:
-      '@instructure/debounce':
-        specifier: ^11.2.0
-        version: 11.2.0
       '@instructure/ui':
         specifier: ^11.2.0
         version: 11.2.0(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
