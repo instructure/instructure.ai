@@ -1,4 +1,125 @@
 # Changelog
+## 2025-11-18T20:25:05.839Z
+### CSV
+#### SHA
+```diff
+858e96391530102331964186a144034150fc6d61c0e84d916bd083975d3f99f4
+```
+### itemauthoringassistance
+#### uid
+```diff
++ "itemauthoringassistance"
+```
+#### revision
+```diff
++ "2025.11.18"
+```
+#### feature
+```diff
++ {
+  "name": "Question Authoring",
+  "description": "Question Authoring Assistance for Quizzes streamlines quiz creation by generating questions based on your course materials. \n"
+}
+```
+#### model
+```diff
++ {
+  "name": "Haiku 3",
+  "description": "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
+  "trained": "No",
+  "data": "Course",
+  "dataDescription": "Source material provided by the user (e.g., Custom standards, course content, text input, file input) for question/item generation."
+}
+```
+#### compliance
+```diff
++ {
+  "retention": "Data is not stored or reused by the model.",
+  "logging": "Logs data",
+  "loggingDescription": "Usage data is logged to improve the product.",
+  "regions": "Global",
+  "regionsDescription": "",
+  "pii": "Not Exposed",
+  "piiDescription": "PII in source material may be sent to the model if included by the user, but no PII is intentionally sent to the model."
+}
+```
+#### outputs
+```diff
++ {
+  "settings": "Yes",
+  "human": "Yes",
+  "humanDescription": "Instructors can review, edit, regenerate, or provide additional instructions to refine generated items.",
+  "guardrails": "",
+  "risks": "Generated items may not perfectly capture all desired information, require refinement, or occasionally contain inaccuracies.\n",
+  "outcomes": "Improved instructor efficiency and productivity"
+}
+```
+#### group
+```diff
++ "Canvas"
+```
+#### permissions
+```diff
++ "2"
+```
+
+### assessmentauthoringassistance
+#### uid
+```diff
++ "assessmentauthoringassistance"
+```
+#### revision
+```diff
++ "2025.11.18"
+```
+#### feature
+```diff
++ {
+  "name": "Item Authoring",
+  "description": "Item Authoring for Assessments streamlines assessment creation by generating questions based on your course materials. \n"
+}
+```
+#### model
+```diff
++ {
+  "name": "Haiku 3",
+  "description": "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
+  "trained": "No",
+  "data": "Course",
+  "dataDescription": "Source material provided by the user (e.g., Custom standards, course content, text input, file input) for question/item generation."
+}
+```
+#### compliance
+```diff
++ {
+  "retention": "Data is not stored or reused by the model.",
+  "logging": "Logs data",
+  "loggingDescription": "Usage data is logged to improve the product.",
+  "regions": "Global",
+  "regionsDescription": "",
+  "pii": "Not Exposed",
+  "piiDescription": "PII in source material may be sent to the model if included by the user, but no PII is intentionally sent to the model."
+}
+```
+#### outputs
+```diff
++ {
+  "settings": "Yes",
+  "human": "Yes",
+  "humanDescription": "Instructors can review, edit, regenerate, or provide additional instructions to refine generated items.",
+  "guardrails": "",
+  "risks": "Generated items may not perfectly capture all desired information, require refinement, or occasionally contain inaccuracies.\n",
+  "outcomes": "Improved instructor efficiency and productivity"
+}
+```
+#### group
+```diff
++ "Mastery"
+```
+#### permissions
+```diff
++ "2"
+```
 ## 2025-11-18T19:52:02.235Z
 ### CSV
 #### SHA

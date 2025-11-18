@@ -1,4 +1,5 @@
 import { askyourdata } from "./components/askyourdata";
+import { assessmentauthoringassistance } from "./components/assessmentauthoringassistance";
 import { bcealttext } from "./components/bcealttext";
 import { canvascoursetranslation } from "./components/canvascoursetranslation";
 import { canvasdiscussionsummaries } from "./components/canvasdiscussionsummaries";
@@ -6,6 +7,7 @@ import { canvasgradingassistance } from "./components/canvasgradingassistance";
 import { canvasinboxtranslation } from "./components/canvasinboxtranslation";
 import { discussioninsights } from "./components/discussioninsights";
 import { igniteagent } from "./components/igniteagent";
+import { itemauthoringassistance } from "./components/itemauthoringassistance";
 import { portfolios } from "./components/portfolios";
 import { quickreassess } from "./components/quickreassess";
 import { rubricgenerator } from "./components/rubricgenerator";
@@ -36,6 +38,7 @@ const pluck = <
 };
 const AiInfo: AiInfoProps = {
 	askyourdata,
+	assessmentauthoringassistance,
 	bcealttext,
 	canvascoursetranslation,
 	canvasdiscussionsummaries,
@@ -43,6 +46,7 @@ const AiInfo: AiInfoProps = {
 	canvasinboxtranslation,
 	discussioninsights,
 	igniteagent,
+	itemauthoringassistance,
 	portfolios,
 	quickreassess,
 	rubricgenerator,
@@ -63,6 +67,7 @@ export {
 	dataPermissionLevels,
 	aiInformation,
 	askyourdata,
+	assessmentauthoringassistance,
 	bcealttext,
 	canvascoursetranslation,
 	canvasdiscussionsummaries,
@@ -70,6 +75,7 @@ export {
 	canvasinboxtranslation,
 	discussioninsights,
 	igniteagent,
+	itemauthoringassistance,
 	portfolios,
 	quickreassess,
 	rubricgenerator,
