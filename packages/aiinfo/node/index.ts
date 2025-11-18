@@ -4,7 +4,6 @@ import { canvascoursetranslation } from "./components/canvascoursetranslation";
 import { canvasdiscussionsummaries } from "./components/canvasdiscussionsummaries";
 import { canvasgradingassistance } from "./components/canvasgradingassistance";
 import { canvasinboxtranslation } from "./components/canvasinboxtranslation";
-import { conversionalignment } from "./components/conversionalignment";
 import { discussioninsights } from "./components/discussioninsights";
 import { igniteagent } from "./components/igniteagent";
 import { portfolios } from "./components/portfolios";
@@ -42,7 +41,6 @@ const AiInfo: AiInfoProps = {
 	canvasdiscussionsummaries,
 	canvasgradingassistance,
 	canvasinboxtranslation,
-	conversionalignment,
 	discussioninsights,
 	igniteagent,
 	portfolios,
@@ -70,7 +68,6 @@ export {
 	canvasdiscussionsummaries,
 	canvasgradingassistance,
 	canvasinboxtranslation,
-	conversionalignment,
 	discussioninsights,
 	igniteagent,
 	portfolios,
