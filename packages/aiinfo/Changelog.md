@@ -1,4 +1,51 @@
 # Changelog
+## 2025-11-18T19:52:02.235Z
+### CSV
+#### SHA
+```diff
+6e5d47862429c5073e26beebe10100fbaa28615f7d76f7eaa4f7c94a36b7aaeb
+```
+### canvasinboxtranslation
+#### feature.name
+```diff
+- "Inbox Translation"
++ "Translations for Inbox"
+```
+
+### canvascoursetranslation
+#### feature.name
+```diff
+- "Discussions Translation"
++ "Translations for Discussions & Announcements"
+```
+
+### rubricgenerator
+#### feature.name
+```diff
+- "Rubric Creator"
++ "Generator for Rubrics"
+```
+
+### discussioninsights
+#### feature.name
+```diff
+- "Discussion Insights"
++ "Insights for Discussions"
+```
+
+### smartsearch
+#### feature.name
+```diff
+- "Smart Search"
++ "Search"
+```
+
+### canvasdiscussionsummaries
+#### feature.name
+```diff
+- "Discussion Summaries"
++ "Summaries for Discussions"
+```
 ## 2025-11-04T17:07:14.773Z
 ### CSV
 #### SHA
