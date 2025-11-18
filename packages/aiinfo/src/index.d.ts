@@ -47,8 +47,6 @@ export declare const canvasgradingassistance: AiInfoFeatureProps;
 
 export declare const canvasinboxtranslation: AiInfoFeatureProps;
 
-export declare const conversionalignment: AiInfoFeatureProps;
-
 export declare const dataPermissionLevels: AiInfoDataPermissionLevelsProps;
 
 export declare const discussioninsights: AiInfoFeatureProps;
