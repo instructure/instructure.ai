@@ -37,6 +37,8 @@ export declare const aiInformation: AiInfoAiInformationProps;
 
 export declare const askyourdata: AiInfoFeatureProps;
 
+export declare const assessmentauthoringassistance: AiInfoFeatureProps;
+
 export declare const bcealttext: AiInfoFeatureProps;
 
 export declare const canvascoursetranslation: AiInfoFeatureProps;
@@ -52,6 +54,8 @@ export declare const dataPermissionLevels: AiInfoDataPermissionLevelsProps;
 export declare const discussioninsights: AiInfoFeatureProps;
 
 export declare const igniteagent: AiInfoFeatureProps;
+
+export declare const itemauthoringassistance: AiInfoFeatureProps;
 
 export declare const nutritionFacts: AiInfoNutritionFactsProps;
 
