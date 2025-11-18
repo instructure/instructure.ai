@@ -5,7 +5,7 @@ import type {
 } from "@instructure/ui-instructure";
 import type { AiInfoFeatureProps } from "../../types";
 
-const FEATURE_NAME = "Discussion Insights";
+const FEATURE_NAME = "Insights for Discussions";
 const UID = "discussioninsights";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
@@ -138,7 +138,7 @@ const nutritionFacts: NutritionFactsProps = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: undefined,
-		featureName: "Discussion Insights",
+		featureName: "Insights for Discussions",
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
@@ -150,7 +150,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	...{
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Discussion Insights",
+		currentFeature: "Insights for Discussions",
 		currentFeatureText: "Current Feature:",
 		data: undefined,
 		modalLabel: "Data Permission Levels modal",
@@ -166,7 +166,7 @@ const aiInformation: AiInformationProps = {
 			{
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-				featureName: "Discussion Insights",
+				featureName: "Insights for Discussions",
 				modelName: "Haiku 3",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
@@ -177,7 +177,7 @@ const aiInformation: AiInformationProps = {
 		],
 		dataPermissionLevelsCloseButtonText: "Close",
 		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature: "Discussion Insights",
+		dataPermissionLevelsCurrentFeature: "Insights for Discussions",
 		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
 		dataPermissionLevelsData: undefined,
 		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -185,7 +185,7 @@ const aiInformation: AiInformationProps = {
 		nutritionFactsCloseButtonText: "Close",
 		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
 		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Discussion Insights",
+		nutritionFactsFeatureName: "Insights for Discussions",
 		nutritionFactsModalLabel: "This is a modal for AI facts",
 		nutritionFactsTitle: "AI Nutrition Facts",
 		title: "Features",

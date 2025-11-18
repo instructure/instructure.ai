@@ -5,7 +5,7 @@ import type {
 } from "@instructure/ui-instructure";
 import type { AiInfoFeatureProps } from "../../types";
 
-const FEATURE_NAME = "Smart Search";
+const FEATURE_NAME = "Search";
 const UID = "smartsearch";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
@@ -139,7 +139,7 @@ const nutritionFacts: NutritionFactsProps = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: undefined,
-		featureName: "Smart Search",
+		featureName: "Search",
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
@@ -151,7 +151,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	...{
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Smart Search",
+		currentFeature: "Search",
 		currentFeatureText: "Current Feature:",
 		data: undefined,
 		modalLabel: "Data Permission Levels modal",
@@ -167,7 +167,7 @@ const aiInformation: AiInformationProps = {
 			{
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-				featureName: "Smart Search",
+				featureName: "Search",
 				modelName: "Cohere Embed Multilingual",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
@@ -178,7 +178,7 @@ const aiInformation: AiInformationProps = {
 		],
 		dataPermissionLevelsCloseButtonText: "Close",
 		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature: "Smart Search",
+		dataPermissionLevelsCurrentFeature: "Search",
 		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
 		dataPermissionLevelsData: undefined,
 		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -186,7 +186,7 @@ const aiInformation: AiInformationProps = {
 		nutritionFactsCloseButtonText: "Close",
 		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
 		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Smart Search",
+		nutritionFactsFeatureName: "Search",
 		nutritionFactsModalLabel: "This is a modal for AI facts",
 		nutritionFactsTitle: "AI Nutrition Facts",
 		title: "Features",

@@ -5,7 +5,7 @@ import type {
 } from "@instructure/ui-instructure";
 import type { AiInfoFeatureProps } from "../../types";
 
-const FEATURE_NAME = "Inbox Translation";
+const FEATURE_NAME = "Translations for Inbox";
 const UID = "canvasinboxtranslation";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
@@ -137,7 +137,7 @@ const nutritionFacts: NutritionFactsProps = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: undefined,
-		featureName: "Inbox Translation",
+		featureName: "Translations for Inbox",
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
@@ -149,7 +149,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	...{
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Inbox Translation",
+		currentFeature: "Translations for Inbox",
 		currentFeatureText: "Current Feature:",
 		data: undefined,
 		modalLabel: "Data Permission Levels modal",
@@ -165,7 +165,7 @@ const aiInformation: AiInformationProps = {
 			{
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-				featureName: "Inbox Translation",
+				featureName: "Translations for Inbox",
 				modelName: "AWS Translate",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
@@ -176,7 +176,7 @@ const aiInformation: AiInformationProps = {
 		],
 		dataPermissionLevelsCloseButtonText: "Close",
 		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature: "Inbox Translation",
+		dataPermissionLevelsCurrentFeature: "Translations for Inbox",
 		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
 		dataPermissionLevelsData: undefined,
 		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -184,7 +184,7 @@ const aiInformation: AiInformationProps = {
 		nutritionFactsCloseButtonText: "Close",
 		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
 		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Inbox Translation",
+		nutritionFactsFeatureName: "Translations for Inbox",
 		nutritionFactsModalLabel: "This is a modal for AI facts",
 		nutritionFactsTitle: "AI Nutrition Facts",
 		title: "Features",
