@@ -108,7 +108,7 @@ const Presets = ({ setProduct, product }: PresetsProps) => {
 					<ScreenReaderContent>Select a product</ScreenReaderContent>
 				}
 				value={value}
-				visibleOptionsCount={5}
+				visibleOptionsCount={8}
 			>
 				{Object.entries(groupedOptions)
 					.sort(([a], [b]) => a.localeCompare(b))
