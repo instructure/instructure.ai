@@ -1,4 +1,21 @@
 # Changelog
+## 2025-11-19T13:51:04.973Z
+### CSV
+#### SHA
+```diff
+f62ad53ab4a0b498c59aa7a032648e344e0aa12cacd958c9a1f3594a0625d3bc
+```
+### conversionalignment
+#### compliance.retention
+```diff
+- "Standard execution, infrastructure, and other operational logs are retained for a reasonable period\nto enable monitoring and troubleshooting of underlying services."
++ "Standard execution, infrastructure, and other operational logs are retained for a reasonable period to enable monitoring and troubleshooting of underlying services."
+```
+#### outputs.outcomes
+```diff
+- "The intended outcomes are to streamline the process of aligning assessments with learning standards, save educators time, and\nensure consistency in assessment alignment."
++ "The intended outcomes are to streamline the process of aligning assessments with learning standards, save educators time, and ensure consistency in assessment alignment."
+```
 ## 2025-11-19T13:49:14.970Z
 ### CSV
 #### SHA

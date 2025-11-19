@@ -71,7 +71,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description: "How long the model stores customer data.",
 				segmentTitle: "Data Retention",
 				value:
-					"Standard execution, infrastructure, and other operational logs are retained for a reasonable period\nto enable monitoring and troubleshooting of underlying services.",
+					"Standard execution, infrastructure, and other operational logs are retained for a reasonable period to enable monitoring and troubleshooting of underlying services.",
 			},
 			{
 				description:
@@ -129,7 +129,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description: "The specific results the AI model is meant to achieve.",
 				segmentTitle: "Intended Outcomes",
 				value:
-					"The intended outcomes are to streamline the process of aligning assessments with learning standards, save educators time, and\nensure consistency in assessment alignment.",
+					"The intended outcomes are to streamline the process of aligning assessments with learning standards, save educators time, and ensure consistency in assessment alignment.",
 			},
 		],
 	},
