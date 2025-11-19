@@ -28,5 +28,5 @@
     "update-cache": "vite-node ./scripts/updateCache.mts"
   },
   "type": "module",
-  "version": "2.0.6"
+  "version": "2.0.7"
 }

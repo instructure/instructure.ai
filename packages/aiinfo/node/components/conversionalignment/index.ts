@@ -5,8 +5,8 @@ import type {
 } from "@instructure/ui-instructure";
 import type { AiInfoFeatureProps } from "../../types";
 
-const FEATURE_NAME = "Suggestions for Quick Reassess";
-const UID = "quickreassess";
+const FEATURE_NAME = "Standards Alignment for Quiz Conversion";
+const UID = "conversionalignment";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
 		description:
@@ -45,9 +45,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"The foundational AI on which further training and customizations are built.",
 				segmentTitle: "Base Model",
-				value: "Haiku 3",
+				value: "Claude Family Models",
 				valueDescription:
-					"Anthropic Claude models are provided via Instructure's in-house AI Platform.",
+					"Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
 			},
 			{
 				description:
@@ -59,7 +59,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				description:
 					"Indicates which training or operational content was given to the model.",
 				segmentTitle: "Data Shared with Model",
-				value: "The original question stem used to generate derivatives",
+				value:
+					"The Canvas Quiz content and Mastery Tracker metadata (Subject, Objectives) is shared with the\nmodel.",
 			},
 		],
 	},
@@ -77,13 +78,13 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 					"Recording the AI's performance for auditing, analysis, and improvement.",
 				segmentTitle: "Data Logging",
 				value: "Does not log data",
-				valueDescription: "",
+				valueDescription: "No user data is logged at any time.",
 			},
 			{
 				description:
 					"The locations where the AI model is officially available and supported.",
 				segmentTitle: "Regions Supported",
-				value: "Virginia",
+				value: "Virginia, Oregon",
 				valueDescription: "",
 			},
 			{
@@ -109,26 +110,26 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 				segmentTitle: "Human in the Loop",
 				value: "Yes",
 				valueDescription:
-					"Educators have access to tools that allow them to preview, regenerate, edit, or replace AI generated questions before they are published in an assessment.",
+					"The aligned standards can be reviewed and adjusted by educators prior to publishing the content.",
 			},
 			{
 				description:
 					"Preventative safety mechanisms or limitations built into the AI model.",
 				segmentTitle: "Guardrails",
 				value:
-					"Only educators can generate items and all AI generated items are in draft status until reviewed and approved.",
+					"AI suggestions are limited to the standards present in the linked tracker’s standard set. This ensures that only the intended audience (educators) can use the tool and only relevant standards are suggested.",
 			},
 			{
 				description: "Any risks the model may pose to the user.",
 				segmentTitle: "Expected Risks",
 				value:
-					"AI generated questions may require additional review and editing to ensure accuracy, relevance, and alignment with intended learning objectives.",
+					"Expected risks include possible misalignment if AI suggestions are not carefully reviewed, reliance on the accuracy of the tracker’s standard set, and the need for educator oversight to ensure quality.",
 			},
 			{
 				description: "The specific results the AI model is meant to achieve.",
 				segmentTitle: "Intended Outcomes",
 				value:
-					"Educators can generate new standards-aligned questions based on existing items in order to quickly create diverse, tailored assessments that expand beyond the current Mastery Item Bank content, enhancing instructional flexibility and efficiency.",
+					"The intended outcomes are to streamline the process of aligning assessments with learning standards, save educators time, and ensure consistency in assessment alignment.",
 			},
 		],
 	},
@@ -138,7 +139,7 @@ const nutritionFacts: NutritionFactsProps = {
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close",
 		data: undefined,
-		featureName: "Suggestions for Quick Reassess",
+		featureName: "Standards Alignment for Quiz Conversion",
 		modalLabel: "This is a modal for AI facts",
 		title: "AI Nutrition Facts",
 		triggerText: "Nutrition Facts",
@@ -150,7 +151,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	...{
 		closeButtonText: "Close",
 		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Suggestions for Quick Reassess",
+		currentFeature: "Standards Alignment for Quiz Conversion",
 		currentFeatureText: "Current Feature:",
 		data: undefined,
 		modalLabel: "Data Permission Levels modal",
@@ -166,8 +167,8 @@ const aiInformation: AiInformationProps = {
 			{
 				description:
 					"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-				featureName: "Suggestions for Quick Reassess",
-				modelName: "Haiku 3",
+				featureName: "Standards Alignment for Quiz Conversion",
+				modelName: "Claude Family Models",
 				modelNameText: "Base Model",
 				nutritionFactsModalTriggerText: "AI Nutrition Facts",
 				permissionLevel: "LEVEL 2",
@@ -177,7 +178,8 @@ const aiInformation: AiInformationProps = {
 		],
 		dataPermissionLevelsCloseButtonText: "Close",
 		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature: "Suggestions for Quick Reassess",
+		dataPermissionLevelsCurrentFeature:
+			"Standards Alignment for Quiz Conversion",
 		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
 		dataPermissionLevelsData: undefined,
 		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -185,7 +187,7 @@ const aiInformation: AiInformationProps = {
 		nutritionFactsCloseButtonText: "Close",
 		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
 		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Suggestions for Quick Reassess",
+		nutritionFactsFeatureName: "Standards Alignment for Quiz Conversion",
 		nutritionFactsModalLabel: "This is a modal for AI facts",
 		nutritionFactsTitle: "AI Nutrition Facts",
 		title: "Features",
@@ -195,16 +197,21 @@ const aiInformation: AiInformationProps = {
 	nutritionFactsData: NUTRITION_FACTS_DATA,
 	trigger: undefined,
 };
-const quickreassess: AiInfoFeatureProps = {
+const conversionalignment: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
 	description:
-		"Allows the use of AI to generate a question derived from the original. These questions can be re-generated, edited, and rejected or approved before they are published to students.",
+		"When importing Canvas Quizzes to Mastery Connect, AI can be used to suggest aligned standards.",
 	group: "Mastery",
 	name: FEATURE_NAME,
 	nutritionFacts,
 	revision: "2025.11.19",
 	uid: UID,
 };
-export { quickreassess, nutritionFacts, dataPermissionLevels, aiInformation };
-export default quickreassess;
+export {
+	conversionalignment,
+	nutritionFacts,
+	dataPermissionLevels,
+	aiInformation,
+};
+export default conversionalignment;

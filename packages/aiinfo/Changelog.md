@@ -1,4 +1,101 @@
 # Changelog
+## 2025-11-19T13:51:04.973Z
+### CSV
+#### SHA
+```diff
+f62ad53ab4a0b498c59aa7a032648e344e0aa12cacd958c9a1f3594a0625d3bc
+```
+### conversionalignment
+#### compliance.retention
+```diff
+- "Standard execution, infrastructure, and other operational logs are retained for a reasonable period\nto enable monitoring and troubleshooting of underlying services."
++ "Standard execution, infrastructure, and other operational logs are retained for a reasonable period to enable monitoring and troubleshooting of underlying services."
+```
+#### outputs.outcomes
+```diff
+- "The intended outcomes are to streamline the process of aligning assessments with learning standards, save educators time, and\nensure consistency in assessment alignment."
++ "The intended outcomes are to streamline the process of aligning assessments with learning standards, save educators time, and ensure consistency in assessment alignment."
+```
+## 2025-11-19T13:49:14.970Z
+### CSV
+#### SHA
+```diff
+02634d347b308c424937d4ed2e0621e548f9984ef3c860dedee9e79896af26c2
+```
+### quickreassess
+#### revision
+```diff
+- "2025.10.27"
++ "2025.11.19"
+```
+#### model.name
+```diff
+- "Claude Family Models"
++ "Haiku 3"
+```
+#### model.description
+```diff
+- ""
++ "Anthropic Claude models are provided via Instructure's in-house AI Platform."
+```
+
+### conversionalignment
+#### uid
+```diff
++ "conversionalignment"
+```
+#### revision
+```diff
++ "2025.11.19"
+```
+#### feature
+```diff
++ {
+  "name": "Standards Alignment for Quiz Conversion",
+  "description": "When importing Canvas Quizzes to Mastery Connect, AI can be used to suggest aligned standards."
+}
+```
+#### model
+```diff
++ {
+  "name": "Claude Family Models",
+  "description": "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+  "trained": "No",
+  "data": "Course",
+  "dataDescription": "The Canvas Quiz content and Mastery Tracker metadata (Subject, Objectives) is shared with the\nmodel."
+}
+```
+#### compliance
+```diff
++ {
+  "retention": "Standard execution, infrastructure, and other operational logs are retained for a reasonable period\nto enable monitoring and troubleshooting of underlying services.",
+  "logging": "Does not log data",
+  "loggingDescription": "No user data is logged at any time.",
+  "regions": "Virginia, Oregon",
+  "regionsDescription": "",
+  "pii": "Not Exposed",
+  "piiDescription": ""
+}
+```
+#### outputs
+```diff
++ {
+  "settings": "Yes",
+  "human": "Yes",
+  "humanDescription": "The aligned standards can be reviewed and adjusted by educators prior to publishing the content.",
+  "guardrails": "AI suggestions are limited to the standards present in the linked tracker’s standard set. This ensures that only the intended audience (educators) can use the tool and only relevant standards are suggested.",
+  "risks": "Expected risks include possible misalignment if AI suggestions are not carefully reviewed, reliance on the accuracy of the tracker’s standard set, and the need for educator oversight to ensure quality.",
+  "outcomes": "The intended outcomes are to streamline the process of aligning assessments with learning standards, save educators time, and\nensure consistency in assessment alignment."
+}
+```
+#### group
+```diff
++ "Mastery"
+```
+#### permissions
+```diff
++ "2"
+```
 ## 2025-11-18T20:25:05.839Z
 ### CSV
 #### SHA
