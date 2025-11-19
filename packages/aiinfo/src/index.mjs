@@ -1,4 +1,4 @@
-const e = "Ask Your Data", Q = "askyourdata", T = [
+const e = "Ask Your Data", J = "askyourdata", L = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted: !1,
@@ -23,7 +23,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
     level: "LEVEL 4",
     title: "Collaborative AI Consortium"
   }
-], L = [
+], A = [
   {
     blockTitle: "Model & Data",
     segmentData: [
@@ -104,7 +104,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
       }
     ]
   }
-], j = {
+], X = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close",
   data: void 0,
@@ -112,9 +112,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "This is a modal for AI facts",
   title: "AI Nutrition Facts",
   triggerText: "Nutrition Facts",
-  data: L,
+  data: A,
   featureName: e
-}, K = {
+}, Z = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close dialog",
   currentFeature: "Ask Your Data",
@@ -124,8 +124,8 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   title: "Data Permission Levels",
   triggerText: "Data Permission Levels",
   currentFeature: e,
-  data: T
-}, J = {
+  data: L
+}, ee = {
   data: [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
@@ -153,19 +153,19 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: void 0,
-  dataPermissionLevelsData: T,
-  nutritionFactsData: L,
+  dataPermissionLevelsData: L,
+  nutritionFactsData: A,
   trigger: void 0
-}, X = {
-  aiInformation: J,
-  dataPermissionLevels: K,
+}, te = {
+  aiInformation: ee,
+  dataPermissionLevels: Z,
   description: "AI-powered query tool enables users to ask natural language questions and receive textual or visual responses with detailed explanations of the methodology.",
   group: "Intelligent Insights",
   name: e,
-  nutritionFacts: j,
+  nutritionFacts: X,
   revision: "2025.09.12",
-  uid: Q
-}, t = "Item Authoring", Z = "assessmentauthoringassistance", A = [
+  uid: J
+}, t = "Item Authoring", ie = "assessmentauthoringassistance", b = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted: !1,
@@ -190,7 +190,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
     level: "LEVEL 4",
     title: "Collaborative AI Consortium"
   }
-], b = [
+], D = [
   {
     blockTitle: "Model & Data",
     segmentData: [
@@ -272,7 +272,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
       }
     ]
   }
-], ee = {
+], ae = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close",
   data: void 0,
@@ -280,9 +280,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "This is a modal for AI facts",
   title: "AI Nutrition Facts",
   triggerText: "Nutrition Facts",
-  data: b,
+  data: D,
   featureName: t
-}, te = {
+}, se = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close dialog",
   currentFeature: "Item Authoring",
@@ -292,8 +292,8 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   title: "Data Permission Levels",
   triggerText: "Data Permission Levels",
   currentFeature: t,
-  data: A
-}, ie = {
+  data: b
+}, oe = {
   data: [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
@@ -321,20 +321,20 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: void 0,
-  dataPermissionLevelsData: A,
-  nutritionFactsData: b,
+  dataPermissionLevelsData: b,
+  nutritionFactsData: D,
   trigger: void 0
-}, ae = {
-  aiInformation: ie,
-  dataPermissionLevels: te,
+}, ne = {
+  aiInformation: oe,
+  dataPermissionLevels: se,
   description: `Item Authoring for Assessments streamlines assessment creation by generating questions based on your course materials. 
 `,
   group: "Mastery",
   name: t,
-  nutritionFacts: ee,
+  nutritionFacts: ae,
   revision: "2025.11.18",
-  uid: Z
-}, i = "Block Content Editor Alt Text Generator", se = "bcealttext", D = [
+  uid: ie
+}, i = "Block Content Editor Alt Text Generator", re = "bcealttext", F = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted: !1,
@@ -359,7 +359,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
     level: "LEVEL 4",
     title: "Collaborative AI Consortium"
   }
-], F = [
+], C = [
   {
     blockTitle: "Model & Data",
     segmentData: [
@@ -440,7 +440,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
       }
     ]
   }
-], oe = {
+], le = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close",
   data: void 0,
@@ -448,9 +448,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "This is a modal for AI facts",
   title: "AI Nutrition Facts",
   triggerText: "Nutrition Facts",
-  data: F,
+  data: C,
   featureName: i
-}, ne = {
+}, de = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close dialog",
   currentFeature: "Block Content Editor Alt Text Generator",
@@ -460,8 +460,8 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   title: "Data Permission Levels",
   triggerText: "Data Permission Levels",
   currentFeature: i,
-  data: D
-}, re = {
+  data: F
+}, ue = {
   data: [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
@@ -489,19 +489,19 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: void 0,
-  dataPermissionLevelsData: D,
-  nutritionFactsData: F,
+  dataPermissionLevelsData: F,
+  nutritionFactsData: C,
   trigger: void 0
-}, le = {
-  aiInformation: re,
-  dataPermissionLevels: ne,
+}, ce = {
+  aiInformation: ue,
+  dataPermissionLevels: de,
   description: "",
   group: "Canvas",
   name: i,
-  nutritionFacts: oe,
+  nutritionFacts: le,
   revision: "2025.10.01",
-  uid: se
-}, a = "Translations for Discussions & Announcements", de = "canvascoursetranslation", C = [
+  uid: re
+}, a = "Translations for Discussions & Announcements", me = "canvascoursetranslation", y = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted: !1,
@@ -607,7 +607,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
       }
     ]
   }
-], ue = {
+], he = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close",
   data: void 0,
@@ -617,7 +617,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   triggerText: "Nutrition Facts",
   data: P,
   featureName: a
-}, ce = {
+}, ve = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close dialog",
   currentFeature: "Translations for Discussions & Announcements",
@@ -627,8 +627,8 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   title: "Data Permission Levels",
   triggerText: "Data Permission Levels",
   currentFeature: a,
-  data: C
-}, me = {
+  data: y
+}, ge = {
   data: [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
@@ -656,19 +656,19 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: void 0,
-  dataPermissionLevelsData: C,
+  dataPermissionLevelsData: y,
   nutritionFactsData: P,
   trigger: void 0
-}, he = {
-  aiInformation: me,
-  dataPermissionLevels: ce,
+}, pe = {
+  aiInformation: ge,
+  dataPermissionLevels: ve,
   description: 'Translation of Discussion threads ("Course AI Translation" feature flag) across 10 languages.',
   group: "Canvas",
   name: a,
-  nutritionFacts: ue,
+  nutritionFacts: he,
   revision: "2025.09.10",
-  uid: de
-}, s = "Summaries for Discussions", ve = "canvasdiscussionsummaries", y = [
+  uid: me
+}, s = "Summaries for Discussions", fe = "canvasdiscussionsummaries", N = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted: !1,
@@ -693,7 +693,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
     level: "LEVEL 4",
     title: "Collaborative AI Consortium"
   }
-], N = [
+], E = [
   {
     blockTitle: "Model & Data",
     segmentData: [
@@ -774,7 +774,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
       }
     ]
   }
-], ge = {
+], Ie = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close",
   data: void 0,
@@ -782,9 +782,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "This is a modal for AI facts",
   title: "AI Nutrition Facts",
   triggerText: "Nutrition Facts",
-  data: N,
+  data: E,
   featureName: s
-}, pe = {
+}, Te = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close dialog",
   currentFeature: "Summaries for Discussions",
@@ -794,8 +794,8 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   title: "Data Permission Levels",
   triggerText: "Data Permission Levels",
   currentFeature: s,
-  data: y
-}, fe = {
+  data: N
+}, Le = {
   data: [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
@@ -823,19 +823,19 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: void 0,
-  dataPermissionLevelsData: y,
-  nutritionFactsData: N,
+  dataPermissionLevelsData: N,
+  nutritionFactsData: E,
   trigger: void 0
-}, Ie = {
-  aiInformation: fe,
-  dataPermissionLevels: pe,
+}, Ae = {
+  aiInformation: Le,
+  dataPermissionLevels: Te,
   description: "Discussion summaries of key points, questions, and insights.",
   group: "Canvas",
   name: s,
-  nutritionFacts: ge,
+  nutritionFacts: Ie,
   revision: "2025.09.12",
-  uid: ve
-}, o = "Grading Assistance", Te = "canvasgradingassistance", E = [
+  uid: fe
+}, o = "Grading Assistance", be = "canvasgradingassistance", x = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted: !1,
@@ -860,7 +860,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
     level: "LEVEL 4",
     title: "Collaborative AI Consortium"
   }
-], x = [
+], w = [
   {
     blockTitle: "Model & Data",
     segmentData: [
@@ -941,7 +941,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
       }
     ]
   }
-], Le = {
+], De = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close",
   data: void 0,
@@ -949,9 +949,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "This is a modal for AI facts",
   title: "AI Nutrition Facts",
   triggerText: "Nutrition Facts",
-  data: x,
+  data: w,
   featureName: o
-}, Ae = {
+}, Fe = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close dialog",
   currentFeature: "Grading Assistance",
@@ -961,8 +961,8 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   title: "Data Permission Levels",
   triggerText: "Data Permission Levels",
   currentFeature: o,
-  data: E
-}, be = {
+  data: x
+}, Ce = {
   data: [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
@@ -990,19 +990,19 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: void 0,
-  dataPermissionLevelsData: E,
-  nutritionFactsData: x,
+  dataPermissionLevelsData: x,
+  nutritionFactsData: w,
   trigger: void 0
-}, De = {
-  aiInformation: be,
-  dataPermissionLevels: Ae,
+}, ye = {
+  aiInformation: Ce,
+  dataPermissionLevels: Fe,
   description: "AI powered automatic grading and feedback suggestions to enable more consistent, fair, and efficient grading workflows.",
   group: "Canvas",
   name: o,
-  nutritionFacts: Le,
+  nutritionFacts: De,
   revision: "2025.10.22",
-  uid: Te
-}, n = "Translations for Inbox", Fe = "canvasinboxtranslation", w = [
+  uid: be
+}, n = "Translations for Inbox", Pe = "canvasinboxtranslation", S = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted: !1,
@@ -1027,7 +1027,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
     level: "LEVEL 4",
     title: "Collaborative AI Consortium"
   }
-], S = [
+], R = [
   {
     blockTitle: "Model & Data",
     segmentData: [
@@ -1108,7 +1108,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
       }
     ]
   }
-], Ce = {
+], Ne = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close",
   data: void 0,
@@ -1116,9 +1116,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "This is a modal for AI facts",
   title: "AI Nutrition Facts",
   triggerText: "Nutrition Facts",
-  data: S,
+  data: R,
   featureName: n
-}, Pe = {
+}, Ee = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close dialog",
   currentFeature: "Translations for Inbox",
@@ -1128,8 +1128,8 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   title: "Data Permission Levels",
   triggerText: "Data Permission Levels",
   currentFeature: n,
-  data: w
-}, ye = {
+  data: S
+}, xe = {
   data: [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
@@ -1157,19 +1157,19 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: void 0,
-  dataPermissionLevelsData: w,
-  nutritionFactsData: S,
+  dataPermissionLevelsData: S,
+  nutritionFactsData: R,
   trigger: void 0
-}, Ne = {
-  aiInformation: ye,
-  dataPermissionLevels: Pe,
+}, we = {
+  aiInformation: xe,
+  dataPermissionLevels: Ee,
   description: 'Translation of inbox messages ("Inbox AI Translation" feature flag) across 10 languages.',
   group: "Canvas",
   name: n,
-  nutritionFacts: Ce,
+  nutritionFacts: Ne,
   revision: "2025.09.10",
-  uid: Fe
-}, r = "Insights for Discussions", Ee = "discussioninsights", R = [
+  uid: Pe
+}, r = "Standards Alignment for Quiz Conversion", Se = "conversionalignment", M = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted: !1,
@@ -1194,7 +1194,175 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
     level: "LEVEL 4",
     title: "Collaborative AI Consortium"
   }
-], M = [
+], B = [
+  {
+    blockTitle: "Model & Data",
+    segmentData: [
+      {
+        description: "The foundational AI on which further training and customizations are built.",
+        segmentTitle: "Base Model",
+        value: "Claude Family Models",
+        valueDescription: "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs)."
+      },
+      {
+        description: "Indicates the AI model has been given customer data in order to improve its results.",
+        segmentTitle: "Trained with User Data",
+        value: "No"
+      },
+      {
+        description: "Indicates which training or operational content was given to the model.",
+        segmentTitle: "Data Shared with Model",
+        value: `The Canvas Quiz content and Mastery Tracker metadata (Subject, Objectives) is shared with the
+model.`
+      }
+    ]
+  },
+  {
+    blockTitle: "Privacy & Compliance",
+    segmentData: [
+      {
+        description: "How long the model stores customer data.",
+        segmentTitle: "Data Retention",
+        value: "Standard execution, infrastructure, and other operational logs are retained for a reasonable period to enable monitoring and troubleshooting of underlying services."
+      },
+      {
+        description: "Recording the AI's performance for auditing, analysis, and improvement.",
+        segmentTitle: "Data Logging",
+        value: "Does not log data",
+        valueDescription: "No user data is logged at any time."
+      },
+      {
+        description: "The locations where the AI model is officially available and supported.",
+        segmentTitle: "Regions Supported",
+        value: "Virginia, Oregon",
+        valueDescription: ""
+      },
+      {
+        description: "Sensitive data that can be used to identify an individual.",
+        segmentTitle: "PII",
+        value: "Not Exposed",
+        valueDescription: ""
+      }
+    ]
+  },
+  {
+    blockTitle: "Outputs",
+    segmentData: [
+      {
+        description: "The ability to turn the AI on or off within the product.",
+        segmentTitle: "AI Settings Control",
+        value: "Yes"
+      },
+      {
+        description: "Indicates if a human is involved in the AI's process or output.",
+        segmentTitle: "Human in the Loop",
+        value: "Yes",
+        valueDescription: "The aligned standards can be reviewed and adjusted by educators prior to publishing the content."
+      },
+      {
+        description: "Preventative safety mechanisms or limitations built into the AI model.",
+        segmentTitle: "Guardrails",
+        value: "AI suggestions are limited to the standards present in the linked tracker’s standard set. This ensures that only the intended audience (educators) can use the tool and only relevant standards are suggested."
+      },
+      {
+        description: "Any risks the model may pose to the user.",
+        segmentTitle: "Expected Risks",
+        value: "Expected risks include possible misalignment if AI suggestions are not carefully reviewed, reliance on the accuracy of the tracker’s standard set, and the need for educator oversight to ensure quality."
+      },
+      {
+        description: "The specific results the AI model is meant to achieve.",
+        segmentTitle: "Intended Outcomes",
+        value: "The intended outcomes are to streamline the process of aligning assessments with learning standards, save educators time, and ensure consistency in assessment alignment."
+      }
+    ]
+  }
+], Re = {
+  closeButtonText: "Close",
+  closeIconButtonScreenReaderLabel: "Close",
+  data: void 0,
+  featureName: "Standards Alignment for Quiz Conversion",
+  modalLabel: "This is a modal for AI facts",
+  title: "AI Nutrition Facts",
+  triggerText: "Nutrition Facts",
+  data: B,
+  featureName: r
+}, Me = {
+  closeButtonText: "Close",
+  closeIconButtonScreenReaderLabel: "Close dialog",
+  currentFeature: "Standards Alignment for Quiz Conversion",
+  currentFeatureText: "Current Feature:",
+  data: void 0,
+  modalLabel: "Data Permission Levels modal",
+  title: "Data Permission Levels",
+  triggerText: "Data Permission Levels",
+  currentFeature: r,
+  data: M
+}, Be = {
+  data: [
+    {
+      description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+      featureName: "Standards Alignment for Quiz Conversion",
+      modelName: "Claude Family Models",
+      modelNameText: "Base Model",
+      nutritionFactsModalTriggerText: "AI Nutrition Facts",
+      permissionLevel: "LEVEL 2",
+      permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:"
+    }
+  ],
+  dataPermissionLevelsCloseButtonText: "Close",
+  dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
+  dataPermissionLevelsCurrentFeature: "Standards Alignment for Quiz Conversion",
+  dataPermissionLevelsCurrentFeatureText: "Current Feature:",
+  dataPermissionLevelsData: void 0,
+  dataPermissionLevelsModalLabel: "Data Permission Levels modal",
+  dataPermissionLevelsTitle: "Data Permission Levels",
+  nutritionFactsCloseButtonText: "Close",
+  nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
+  nutritionFactsData: void 0,
+  nutritionFactsFeatureName: "Standards Alignment for Quiz Conversion",
+  nutritionFactsModalLabel: "This is a modal for AI facts",
+  nutritionFactsTitle: "AI Nutrition Facts",
+  title: "Features",
+  trigger: void 0,
+  dataPermissionLevelsData: M,
+  nutritionFactsData: B,
+  trigger: void 0
+}, ke = {
+  aiInformation: Be,
+  dataPermissionLevels: Me,
+  description: "When importing Canvas Quizzes to Mastery Connect, AI can be used to suggest aligned standards.",
+  group: "Mastery",
+  name: r,
+  nutritionFacts: Re,
+  revision: "2025.11.19",
+  uid: Se
+}, l = "Insights for Discussions", ze = "discussioninsights", k = [
+  {
+    description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
+    highlighted: !1,
+    level: "LEVEL 1",
+    title: "Descriptive Analytics and Research"
+  },
+  {
+    description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+    highlighted: !0,
+    level: "LEVEL 2",
+    title: "AI-Powered Features Without Data Training"
+  },
+  {
+    description: "We customize AI solutions tailored to the unique needs and resources of educational institutions. We use customer data to fine-tune data and train AI models that only serve your institution. Your institution's data only serves them through trained models.",
+    highlighted: !1,
+    level: "LEVEL 3",
+    title: "AI Customization for Individual Institutions"
+  },
+  {
+    description: "We established a consortium with educational institutions that shares anonymized data, best practices, and research findings. This fosters collaboration and accelerates the responsible development of AI in education. Specialized AI models are created for better outcomes in education, cost savings, and more.",
+    highlighted: !1,
+    level: "LEVEL 4",
+    title: "Collaborative AI Consortium"
+  }
+], z = [
   {
     blockTitle: "Model & Data",
     segmentData: [
@@ -1275,7 +1443,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
       }
     ]
   }
-], xe = {
+], We = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close",
   data: void 0,
@@ -1283,9 +1451,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "This is a modal for AI facts",
   title: "AI Nutrition Facts",
   triggerText: "Nutrition Facts",
-  data: M,
-  featureName: r
-}, we = {
+  data: z,
+  featureName: l
+}, $e = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close dialog",
   currentFeature: "Insights for Discussions",
@@ -1294,9 +1462,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "Data Permission Levels modal",
   title: "Data Permission Levels",
   triggerText: "Data Permission Levels",
-  currentFeature: r,
-  data: R
-}, Se = {
+  currentFeature: l,
+  data: k
+}, Ve = {
   data: [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
@@ -1324,19 +1492,19 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: void 0,
-  dataPermissionLevelsData: R,
-  nutritionFactsData: M,
+  dataPermissionLevelsData: k,
+  nutritionFactsData: z,
   trigger: void 0
-}, Re = {
-  aiInformation: Se,
-  dataPermissionLevels: we,
+}, _e = {
+  aiInformation: Ve,
+  dataPermissionLevels: $e,
   description: "Discussion Insights uses AI to evaluate student discussion replies, highlight relevant contributions, and flag those that may need instructor review.",
   group: "Canvas",
-  name: r,
-  nutritionFacts: xe,
+  name: l,
+  nutritionFacts: We,
   revision: "2025.10.02",
-  uid: Ee
-}, l = "Agent", Me = "igniteagent", B = [
+  uid: ze
+}, d = "Agent", Ue = "igniteagent", W = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted: !1,
@@ -1361,7 +1529,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
     level: "LEVEL 4",
     title: "Collaborative AI Consortium"
   }
-], k = [
+], $ = [
   {
     blockTitle: "Model & Data",
     segmentData: [
@@ -1442,7 +1610,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
       }
     ]
   }
-], Be = {
+], Oe = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close",
   data: void 0,
@@ -1450,9 +1618,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "This is a modal for AI facts",
   title: "AI Nutrition Facts",
   triggerText: "Nutrition Facts",
-  data: k,
-  featureName: l
-}, ke = {
+  data: $,
+  featureName: d
+}, qe = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close dialog",
   currentFeature: "Agent",
@@ -1461,9 +1629,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "Data Permission Levels modal",
   title: "Data Permission Levels",
   triggerText: "Data Permission Levels",
-  currentFeature: l,
-  data: B
-}, ze = {
+  currentFeature: d,
+  data: W
+}, He = {
   data: [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
@@ -1491,19 +1659,19 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: void 0,
-  dataPermissionLevelsData: B,
-  nutritionFactsData: k,
+  dataPermissionLevelsData: W,
+  nutritionFactsData: $,
   trigger: void 0
-}, We = {
-  aiInformation: ze,
-  dataPermissionLevels: ke,
+}, Ge = {
+  aiInformation: He,
+  dataPermissionLevels: qe,
   description: "Ignite Agent is a faculty chat assistant capable of translating natural language requests into complex Canvas workflows.",
   group: "IgniteAI",
-  name: l,
-  nutritionFacts: Be,
+  name: d,
+  nutritionFacts: Oe,
   revision: "2025.09.10",
-  uid: Me
-}, d = "Question Authoring", $e = "itemauthoringassistance", z = [
+  uid: Ue
+}, u = "Question Authoring", Ye = "itemauthoringassistance", V = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted: !1,
@@ -1528,7 +1696,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
     level: "LEVEL 4",
     title: "Collaborative AI Consortium"
   }
-], W = [
+], _ = [
   {
     blockTitle: "Model & Data",
     segmentData: [
@@ -1610,7 +1778,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
       }
     ]
   }
-], Ve = {
+], Qe = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close",
   data: void 0,
@@ -1618,9 +1786,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "This is a modal for AI facts",
   title: "AI Nutrition Facts",
   triggerText: "Nutrition Facts",
-  data: W,
-  featureName: d
-}, _e = {
+  data: _,
+  featureName: u
+}, je = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close dialog",
   currentFeature: "Question Authoring",
@@ -1629,9 +1797,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "Data Permission Levels modal",
   title: "Data Permission Levels",
   triggerText: "Data Permission Levels",
-  currentFeature: d,
-  data: z
-}, Ue = {
+  currentFeature: u,
+  data: V
+}, Ke = {
   data: [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
@@ -1659,20 +1827,20 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: void 0,
-  dataPermissionLevelsData: z,
-  nutritionFactsData: W,
+  dataPermissionLevelsData: V,
+  nutritionFactsData: _,
   trigger: void 0
-}, Oe = {
-  aiInformation: Ue,
-  dataPermissionLevels: _e,
+}, Je = {
+  aiInformation: Ke,
+  dataPermissionLevels: je,
   description: `Question Authoring Assistance for Quizzes streamlines quiz creation by generating questions based on your course materials. 
 `,
   group: "Canvas",
-  name: d,
-  nutritionFacts: Ve,
+  name: u,
+  nutritionFacts: Qe,
   revision: "2025.11.18",
-  uid: $e
-}, u = "Portfolios", qe = "portfolios", $ = [
+  uid: Ye
+}, c = "Portfolios", Xe = "portfolios", U = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted: !1,
@@ -1697,7 +1865,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
     level: "LEVEL 4",
     title: "Collaborative AI Consortium"
   }
-], V = [
+], O = [
   {
     blockTitle: "Model & Data",
     segmentData: [
@@ -1778,7 +1946,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
       }
     ]
   }
-], Ge = {
+], Ze = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close",
   data: void 0,
@@ -1786,9 +1954,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "This is a modal for AI facts",
   title: "AI Nutrition Facts",
   triggerText: "Nutrition Facts",
-  data: V,
-  featureName: u
-}, He = {
+  data: O,
+  featureName: c
+}, et = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close dialog",
   currentFeature: "Portfolios",
@@ -1797,9 +1965,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "Data Permission Levels modal",
   title: "Data Permission Levels",
   triggerText: "Data Permission Levels",
-  currentFeature: u,
-  data: $
-}, Ye = {
+  currentFeature: c,
+  data: U
+}, tt = {
   data: [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
@@ -1827,19 +1995,19 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: void 0,
-  dataPermissionLevelsData: $,
-  nutritionFactsData: V,
+  dataPermissionLevelsData: U,
+  nutritionFactsData: O,
   trigger: void 0
-}, Qe = {
-  aiInformation: Ye,
-  dataPermissionLevels: He,
+}, it = {
+  aiInformation: tt,
+  dataPermissionLevels: et,
   description: "AI Assistant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation.",
   group: "Canvas",
-  name: u,
-  nutritionFacts: Ge,
+  name: c,
+  nutritionFacts: Ze,
   revision: "2025.10.27",
-  uid: qe
-}, c = "Suggestions for Quick Reassess", je = "quickreassess", _ = [
+  uid: Xe
+}, m = "Suggestions for Quick Reassess", at = "quickreassess", q = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted: !1,
@@ -1864,15 +2032,15 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
     level: "LEVEL 4",
     title: "Collaborative AI Consortium"
   }
-], U = [
+], H = [
   {
     blockTitle: "Model & Data",
     segmentData: [
       {
         description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
-        value: "Claude Family Models",
-        valueDescription: ""
+        value: "Haiku 3",
+        valueDescription: "Anthropic Claude models are provided via Instructure's in-house AI Platform."
       },
       {
         description: "Indicates the AI model has been given customer data in order to improve its results.",
@@ -1945,7 +2113,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
       }
     ]
   }
-], Ke = {
+], st = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close",
   data: void 0,
@@ -1953,9 +2121,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "This is a modal for AI facts",
   title: "AI Nutrition Facts",
   triggerText: "Nutrition Facts",
-  data: U,
-  featureName: c
-}, Je = {
+  data: H,
+  featureName: m
+}, ot = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close dialog",
   currentFeature: "Suggestions for Quick Reassess",
@@ -1964,14 +2132,14 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "Data Permission Levels modal",
   title: "Data Permission Levels",
   triggerText: "Data Permission Levels",
-  currentFeature: c,
-  data: _
-}, Xe = {
+  currentFeature: m,
+  data: q
+}, nt = {
   data: [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
       featureName: "Suggestions for Quick Reassess",
-      modelName: "Claude Family Models",
+      modelName: "Haiku 3",
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
@@ -1994,19 +2162,19 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: void 0,
-  dataPermissionLevelsData: _,
-  nutritionFactsData: U,
+  dataPermissionLevelsData: q,
+  nutritionFactsData: H,
   trigger: void 0
-}, Ze = {
-  aiInformation: Xe,
-  dataPermissionLevels: Je,
+}, rt = {
+  aiInformation: nt,
+  dataPermissionLevels: ot,
   description: "Allows the use of AI to generate a question derived from the original. These questions can be re-generated, edited, and rejected or approved before they are published to students.",
   group: "Mastery",
-  name: c,
-  nutritionFacts: Ke,
-  revision: "2025.10.27",
-  uid: je
-}, m = "Generator for Rubrics", et = "rubricgenerator", O = [
+  name: m,
+  nutritionFacts: st,
+  revision: "2025.11.19",
+  uid: at
+}, h = "Generator for Rubrics", lt = "rubricgenerator", G = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted: !1,
@@ -2031,7 +2199,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
     level: "LEVEL 4",
     title: "Collaborative AI Consortium"
   }
-], q = [
+], Y = [
   {
     blockTitle: "Model & Data",
     segmentData: [
@@ -2112,7 +2280,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
       }
     ]
   }
-], tt = {
+], dt = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close",
   data: void 0,
@@ -2120,9 +2288,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "This is a modal for AI facts",
   title: "AI Nutrition Facts",
   triggerText: "Nutrition Facts",
-  data: q,
-  featureName: m
-}, it = {
+  data: Y,
+  featureName: h
+}, ut = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close dialog",
   currentFeature: "Generator for Rubrics",
@@ -2131,9 +2299,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "Data Permission Levels modal",
   title: "Data Permission Levels",
   triggerText: "Data Permission Levels",
-  currentFeature: m,
-  data: O
-}, at = {
+  currentFeature: h,
+  data: G
+}, ct = {
   data: [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
@@ -2161,19 +2329,19 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: void 0,
-  dataPermissionLevelsData: O,
-  nutritionFactsData: q,
+  dataPermissionLevelsData: G,
+  nutritionFactsData: Y,
   trigger: void 0
-}, st = {
-  aiInformation: at,
-  dataPermissionLevels: it,
+}, mt = {
+  aiInformation: ct,
+  dataPermissionLevels: ut,
   description: "AI-generated rubric recommendations for Canvas assignments.",
   group: "Canvas",
-  name: m,
-  nutritionFacts: tt,
+  name: h,
+  nutritionFacts: dt,
   revision: "2025.10.09",
-  uid: et
-}, h = "Search", ot = "smartsearch", G = [
+  uid: lt
+}, v = "Search", ht = "smartsearch", Q = [
   {
     description: "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
     highlighted: !1,
@@ -2198,7 +2366,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
     level: "LEVEL 4",
     title: "Collaborative AI Consortium"
   }
-], H = [
+], j = [
   {
     blockTitle: "Model & Data",
     segmentData: [
@@ -2279,7 +2447,7 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
       }
     ]
   }
-], nt = {
+], vt = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close",
   data: void 0,
@@ -2287,9 +2455,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "This is a modal for AI facts",
   title: "AI Nutrition Facts",
   triggerText: "Nutrition Facts",
-  data: H,
-  featureName: h
-}, rt = {
+  data: j,
+  featureName: v
+}, gt = {
   closeButtonText: "Close",
   closeIconButtonScreenReaderLabel: "Close dialog",
   currentFeature: "Search",
@@ -2298,9 +2466,9 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   modalLabel: "Data Permission Levels modal",
   title: "Data Permission Levels",
   triggerText: "Data Permission Levels",
-  currentFeature: h,
-  data: G
-}, lt = {
+  currentFeature: v,
+  data: Q
+}, pt = {
   data: [
     {
       description: "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
@@ -2328,63 +2496,65 @@ const e = "Ask Your Data", Q = "askyourdata", T = [
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: void 0,
-  dataPermissionLevelsData: G,
-  nutritionFactsData: H,
+  dataPermissionLevelsData: Q,
+  nutritionFactsData: j,
   trigger: void 0
-}, dt = {
-  aiInformation: lt,
-  dataPermissionLevels: rt,
+}, ft = {
+  aiInformation: pt,
+  dataPermissionLevels: gt,
   description: "Natural language search of course content for students and instructors.",
   group: "Canvas",
-  name: h,
-  nutritionFacts: nt,
+  name: v,
+  nutritionFacts: vt,
   revision: "2025.10.02",
-  uid: ot
-}, v = (p, Y) => {
-  const f = {};
-  for (const I in p)
-    f[I] = p[I][Y];
-  return f;
-}, g = {
-  askyourdata: X,
-  assessmentauthoringassistance: ae,
-  bcealttext: le,
-  canvascoursetranslation: he,
-  canvasdiscussionsummaries: Ie,
-  canvasgradingassistance: De,
-  canvasinboxtranslation: Ne,
-  discussioninsights: Re,
-  igniteagent: We,
-  itemauthoringassistance: Oe,
-  portfolios: Qe,
-  quickreassess: Ze,
-  rubricgenerator: st,
-  smartsearch: dt
-}, ut = v(
-  g,
+  uid: ht
+}, g = (f, K) => {
+  const I = {};
+  for (const T in f)
+    I[T] = f[T][K];
+  return I;
+}, p = {
+  askyourdata: te,
+  assessmentauthoringassistance: ne,
+  bcealttext: ce,
+  canvascoursetranslation: pe,
+  canvasdiscussionsummaries: Ae,
+  canvasgradingassistance: ye,
+  canvasinboxtranslation: we,
+  conversionalignment: ke,
+  discussioninsights: _e,
+  igniteagent: Ge,
+  itemauthoringassistance: Je,
+  portfolios: it,
+  quickreassess: rt,
+  rubricgenerator: mt,
+  smartsearch: ft
+}, It = g(
+  p,
   "nutritionFacts"
-), ct = v(
-  g,
+), Tt = g(
+  p,
   "dataPermissionLevels"
-), mt = v(g, "aiInformation");
+), Lt = g(p, "aiInformation");
 export {
-  g as AiInfo,
-  mt as aiInformation,
-  X as askyourdata,
-  ae as assessmentauthoringassistance,
-  le as bcealttext,
-  he as canvascoursetranslation,
-  Ie as canvasdiscussionsummaries,
-  De as canvasgradingassistance,
-  Ne as canvasinboxtranslation,
-  ct as dataPermissionLevels,
-  g as default,
-  Re as discussioninsights,
-  We as igniteagent,
-  Oe as itemauthoringassistance,
-  ut as nutritionFacts,
-  Qe as portfolios,
-  Ze as quickreassess,
-  st as rubricgenerator,
-  dt as smartsearch
+  p as AiInfo,
+  Lt as aiInformation,
+  te as askyourdata,
+  ne as assessmentauthoringassistance,
+  ce as bcealttext,
+  pe as canvascoursetranslation,
+  Ae as canvasdiscussionsummaries,
+  ye as canvasgradingassistance,
+  we as canvasinboxtranslation,
+  ke as conversionalignment,
+  Tt as dataPermissionLevels,
+  p as default,
+  _e as discussioninsights,
+  Ge as igniteagent,
+  Je as itemauthoringassistance,
+  It as nutritionFacts,
+  it as portfolios,
+  rt as quickreassess,
+  mt as rubricgenerator,
+  ft as smartsearch
 };
