@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "typecheck": "tsgo --noEmit",
     "test": "pnpm vitest run",
-    "lint": "oxlint --type-aware --fix && oxfmt"
+    "lint": "oxlint --type-aware --fix --fix-suggestions && oxfmt"
   },
   "devDependencies": {
     "@instructure.ai/shared-configs": "workspace:^"

@@ -38,7 +38,7 @@
     "build:vite": "vite build",
     "cache:clear": "CLEAR=1 vite-node ./scripts/clearCache.mts",
     "cache:update": "vite-node ./scripts/updateCache.mts",
-    "lint": "oxlint --type-aware --fix && oxfmt",
+    "lint": "oxlint --type-aware --fix --fix-suggestions && oxfmt",
     "package": "pnpm pack --pack-destination ./src",
     "test": "pnpm vitest run",
     "typecheck": "tsgo --noEmit",

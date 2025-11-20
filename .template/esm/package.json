@@ -16,7 +16,7 @@
   "scripts": {
     "build": "vite build && pnpm pack --pack-destination ./src",
     "typecheck": "tsgo --noEmit",
-    "lint": "oxlint --type-aware --fix && oxfmt",
+    "lint": "oxlint --type-aware --fix --fix-suggestions && oxfmt",
     "test": "pnpm vitest run",
     "<<cliname>>": "vite-node ./src/index.mjs"
   },

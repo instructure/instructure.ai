@@ -18,7 +18,7 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "lint": "oxlint src --fix && oxfmt src",
+    "lint": "oxlint --type-aware --fix --fix-suggestions && oxfmt",
     "preview": "vite preview",
     "test": "pnpm vitest run",
     "typecheck": "tsgo --noEmit"
