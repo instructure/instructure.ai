@@ -1,18 +1,18 @@
 {
   "name": "<<packagename>>",
   "private": true,
-	"repository": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure.ai",
     "directory": "apps/<<cliname>>"
-	},
+  },
   "scripts": {
     "build": "vite build",
     "dev": "vite",
     "preview": "vite preview",
     "typecheck": "tsgo --noEmit",
     "test": "pnpm vitest run",
-    "lint": "oxlint src --fix && oxfmt src"
+    "lint": "oxlint --type-aware --fix && oxfmt"
   },
   "devDependencies": {
     "@instructure.ai/shared-configs": "workspace:^"

@@ -10,11 +10,13 @@
       "types": "./src/index.d.ts"
     }
   },
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "scripts": {
     "build": "vite build && pnpm pack --pack-destination ./src",
     "typecheck": "tsgo --noEmit",
-    "lint": "oxlint src --fix && oxfmt src",
+    "lint": "oxlint --type-aware --fix && oxfmt",
     "test": "pnpm vitest run",
     "<<cliname>>": "vite-node ./src/index.mjs"
   },
@@ -24,9 +26,9 @@
   "devDependencies": {
     "@instructure.ai/shared-configs": "workspace:^"
   },
-	"repository": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure.ai",
     "directory": "packages/<<cliname>>"
-	},
+  },
 }
