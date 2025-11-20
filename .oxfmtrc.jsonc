@@ -27,5 +27,6 @@
     "singleQuote": false,
     "jsxSingleQuote": false,
     "semi": true,
+    "singleAttributePerLine": true,
   }
 }
