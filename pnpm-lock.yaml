@@ -69,7 +69,7 @@ importers:
         specifier: ^5.1.4
         version: 5.1.4(typescript@5.9.3)(vite@7.2.4(@types/node@24.9.1)(lightningcss@1.30.2)(terser@5.44.1)(yaml@2.8.1))
       'vite:':
-        specifier: npm:rolldown-vite@latest
+        specifier: npm:rolldown-vite@^7.2.7
         version: rolldown-vite@7.2.7(@types/node@24.9.1)(esbuild@0.25.12)(terser@5.44.1)(yaml@2.8.1)
       vitest:
         specifier: ^3.2.4
