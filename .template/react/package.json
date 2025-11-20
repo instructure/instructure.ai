@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "typecheck": "tsgo --noEmit",
     "test": "pnpm vitest run",
-    "lint": "pnpm biome check"
+    "lint": "oxlint src --fix && oxfmt src"
   },
   "type": "module",
   "version": "0.0.0",

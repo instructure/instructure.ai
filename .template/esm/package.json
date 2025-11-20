@@ -14,7 +14,7 @@
   "scripts": {
     "build": "vite build && pnpm pack --pack-destination ./src",
     "typecheck": "tsgo --noEmit",
-    "lint": "pnpm biome check",
+    "lint": "oxlint src --fix && oxfmt src",
     "test": "pnpm vitest run",
     "<<cliname>>": "vite-node ./src/index.mjs"
   },

@@ -1,0 +1,31 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "files": {
+    "include": [
+      "scripts/**/*.{js,jsx,ts,tsx,mts,cts,css,scss,md,json}",
+      "configs/**/*.{js,jsx,ts,tsx,mts,cts,css,scss,md,json}",
+      "public/**/*.{js,jsx,ts,tsx,mts,cts,css,scss,md,json}",
+      "*.{js,jsx,ts,tsx,mts,cts,css,scss,md,json}"
+    ],
+    "exclude": [
+      "packages/**",
+      "apps/**",
+      ".template/**",
+      ".changeset/**",
+      "**/*.grit",
+      "**/dist/**",
+      "**/build/**",
+      "**/.turbo/**",
+      "**/.next/**",
+      "**/coverage/**",
+      "**/node_modules/**"
+    ]
+  },
+  "options": {
+    "useTabs": true,
+    "tabWidth": 2,
+    "singleQuote": false,
+    "jsxSingleQuote": false,
+    "semi": true
+  }
+}

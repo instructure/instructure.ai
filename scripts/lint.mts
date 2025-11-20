@@ -26,7 +26,7 @@ const main = async (): Promise<void> => {
 
 	const lintRoot = (pkg: PackageName, args: CommandExtraArgs) => {
 		console.log(`Linting root package: ${pkg}`);
-		exec("pnpm biome check", { args });
+		exec("pnpm lint:root", { args });
 	};
 
 	const lintPackage = (pkg: PackageName, args: CommandExtraArgs) => {
