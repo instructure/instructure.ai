@@ -17,7 +17,7 @@
     "lightningcss": "^1.30.2",
     "react-compiler-runtime": "^1.0.0",
     "terser": "^5.44.1",
-    "vite": "^7.2.2",
+    "vite:": "npm:rolldown-vite@latest",
     "vite-node": "^3.2.4",
     "vite-plugin-dts": "^4.5.4",
     "vite-tsconfig-paths": "^5.1.4",
