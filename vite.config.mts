@@ -1,16 +1,24 @@
 /// <reference types="vitest/config" />
+import type {} from "./types"
 
 import browsersList from "@instructure/browserslist-config-instui";
 import { browserslistToTargets } from "lightningcss";
 import { defineConfig } from "vite";
 
-const PACKAGE_NAME = process.env.npm_package_name?.split("/").pop();
-const PACKAGE_VERSION = String(process.env.npm_package_version);
+const pkgName = process.env.npm_package_name?.split("/").pop() ?? "";
+const pkgVersion = process.env.npm_package_version ?? "";
+const isSite = pkgName === "site";
+
+const basePath = isSite ? "/" : `/${pkgName}`;
+const outDir = isSite ? "../../dist" : `../../dist/${pkgName}`;
 
 export default defineConfig({
-  base: `/${PACKAGE_NAME === "site" ? "" : PACKAGE_NAME}`,
+  base: basePath,
   build: {
-    cssMinify: "lightningcss", minify: "terser", outDir: `../../dist/${PACKAGE_NAME === "site" ? "" : PACKAGE_NAME}`, sourcemap: true, target: "esnext",
+    cssMinify: "lightningcss",
+    outDir,
+    sourcemap: true,
+    target: "esnext",
   },
   css: {
     lightningcss: {
@@ -19,7 +27,7 @@ export default defineConfig({
     transformer: "lightningcss",
   },
   define: {
-    "import.meta.env.VITE_PACKAGE_NAME": JSON.stringify(PACKAGE_NAME),
-    "import.meta.env.VITE_PACKAGE_VERSION": JSON.stringify(PACKAGE_VERSION),
+    "import.meta.env.VITE_PACKAGE_NAME": JSON.stringify(pkgName),
+    "import.meta.env.VITE_PACKAGE_VERSION": JSON.stringify(pkgVersion),
   },
 });
