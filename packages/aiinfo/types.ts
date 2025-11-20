@@ -6,12 +6,12 @@ import type {
 import type { AnsiColors, AnsiStyles } from "ansis";
 import type { ParseResult } from "papaparse";
 
-type CSVFetchResult = {
+interface CSVFetchResult {
 	parsed: CSV;
 	raw: string;
-};
+}
 
-type AiInfoFeature = {
+interface AiInfoFeature {
 	revision: string;
 	uid: string;
 	aiInformation: AiInformationProps;
@@ -19,7 +19,7 @@ type AiInfoFeature = {
 	nutritionFacts: NutritionFactsProps;
 	name: string;
 	group: string;
-};
+}
 
 type FeatureName = AiInfoFeature["uid"];
 
@@ -29,9 +29,9 @@ type CSV = ParseResult<string[]>["data"];
 
 type Hash = string;
 
-type Checksum = {
+interface Checksum {
 	[feature: FeatureName]: Hash;
-};
+}
 
 type message = number | string | unknown[];
 
@@ -46,7 +46,7 @@ interface LogObject {
 
 type LogProps = LogObject | message;
 
-type Entry = {
+interface Entry {
 	uid: string;
 	revision: string;
 	feature: {
@@ -79,7 +79,7 @@ type Entry = {
 	};
 	group: string;
 	permissions: "1" | "2" | "3" | "4";
-};
+}
 
 type LangCode =
 	| `${Lowercase<string>}`
@@ -121,17 +121,17 @@ type NutritionFactsStrings = Omit<
 	AiInfoFeature["nutritionFacts"],
 	"featureName" | "fullscreen" | "data"
 > & {
-	data: Array<{
+	data: {
 		blockTitle: string;
 		segmentData: NutritionFactsSegmentDataStrings[];
-	}>;
+	}[];
 };
 
 /* TODO: Omit based on INSTUI NutritionFactsOwnProps.BlockType[] */
-type NutritionFactsSegmentDataStrings = {
+interface NutritionFactsSegmentDataStrings {
 	segmentTitle: string;
 	description: string;
-};
+}
 
 type Strings = {
 	[langcode in LangCode]:
@@ -140,22 +140,22 @@ type Strings = {
 		| NutritionFactsStrings;
 };
 
-type ChangedEntry = {
+interface ChangedEntry {
 	uid: string;
 	oldChecksum?: string;
 	newChecksum: string;
 	oldEntry?: Entry;
 	newEntry: Entry;
-};
+}
 
-type PermissionLevel = {
+interface PermissionLevel {
 	description: string;
 	highlighted?: boolean;
 	title?: string;
 	level?: string;
-};
+}
 
-type Result = {
+interface Result {
 	closeButtonText: string;
 	closeIconButtonScreenReaderLabel: string;
 	currentFeatureText: string;
@@ -164,7 +164,7 @@ type Result = {
 	triggerText: string;
 	currentFeature: string;
 	data: PermissionLevel[];
-};
+}
 
 export type {
 	CSV,
