@@ -1,4 +1,8 @@
 import { renameSync } from "node:fs";
+import { execFileSync } from "node:child_process";
+import { existsSync, readdirSync } from "node:fs";
+import { join, resolve } from "node:path";
+import { name } from "../package.json" with { type: "json" };
 
 /**
  * Move or rename a file from src to dest.
@@ -7,17 +11,10 @@ import { renameSync } from "node:fs";
 function moveFile(src: string, dest: string): void {
   try {
     renameSync(src, dest);
-  } catch (err) {
-    exitWithError(`Error moving file from '${src}' to '${dest}':`, err);
+  } catch (error) {
+    exitWithError(`Error moving file from '${src}' to '${dest}':`, error);
   }
 }
-
-/// <reference path="../types/index.d.ts" />
-
-import { execFileSync } from "node:child_process";
-import { existsSync, readdirSync } from "node:fs";
-import { join, resolve } from "node:path";
-import { name } from "../package.json" with { type: "json" };
 
 // Regex to match valid NPM unscoped package names and scoped workspace names.
 const pn = /^[a-z0-9\-~][a-z0-9\-._~]*$/;
@@ -82,10 +79,10 @@ const getPackageJson = (
   }
   try {
     return { content: require(pkgJsonPath), path: pkgJsonPath };
-  } catch (err) {
+  } catch (error) {
     exitWithError(
       `Error: Could not read package.json for package '${packageName}'.`,
-      err,
+      error,
     );
   }
   return { content: {} as PackageJson, path: "" };
@@ -110,7 +107,7 @@ const getWorkspace = (name: FullPackageName): WorkspaceName => {
   }
   const Workspace: WorkspaceName = name.split("/")[0] as WorkspaceName;
   if (!isValidWorkspaceName(Workspace))
-    exitWithError("Error: Invalid workspace name.");
+    {exitWithError("Error: Invalid workspace name.");}
 
   return Workspace;
 };
@@ -138,9 +135,9 @@ const getPackages = (type?: WorkspaceType): PackageName[] => {
   const packagesDirs =
     type === "app"
       ? [appsDir]
-      : type === "package"
+      : (type === "package"
         ? [pkgsDir]
-        : [appsDir, pkgsDir];
+        : [appsDir, pkgsDir]);
   const workspaceName = getWorkspace(getRootPackage() as FullPackageName);
   let allDirs: string[] = [];
   for (const dirPath of packagesDirs) {
@@ -149,7 +146,7 @@ const getPackages = (type?: WorkspaceType): PackageName[] => {
         .filter((dirent) => dirent.isDirectory())
         .map((dirent) => ({ base: dirPath, name: dirent.name }));
       allDirs = allDirs.concat(dirs.map((d) => JSON.stringify(d)));
-    } catch (_err) {
+    } catch {
       // Ignore missing folders
     }
   }
@@ -169,13 +166,13 @@ const getPackages = (type?: WorkspaceType): PackageName[] => {
           console.warn(
             `Warning: Invalid package name '${pkgJson.name}' in ${dir.base}/${dir.name}/package.json`,
           );
-          return null;
+          return ;
         }
-      } catch (_err) {
+      } catch {
         console.warn(
           `Warning: Could not read package.json for ${dir.base}/${dir.name}`,
         );
-        return null;
+        return ;
       }
     })
     .filter((name): name is PackageName => !!name);
@@ -254,9 +251,7 @@ class WorkspaceClass implements WorkspaceInfo {
   info(): WorkspaceObj {
     // oxc-ignore assist/source/useSortedKeys: manual order for console output
     return {
-      name: this.workspaceName,
-      apps: this.workspaceApps,
-      packages: this.workspacePackages,
+      apps: this.workspaceApps, name: this.workspaceName, packages: this.workspacePackages,
     };
   }
 }
@@ -303,27 +298,34 @@ const Workspace = (
   };
 
   switch (command.command) {
-    case "help":
+    case "help": {
       command.help(script);
       return exportObj;
-    case "name":
+    }
+    case "name": {
       exportObj.output = workspace.name();
       break;
-    case "workspace":
+    }
+    case "workspace": {
       exportObj.output = workspace.info();
       break;
-    case "all":
+    }
+    case "all": {
       exportObj.output = workspace.all();
       break;
-    case "packages":
+    }
+    case "packages": {
       exportObj.output = workspace.packages();
       break;
-    case "apps":
+    }
+    case "apps": {
       exportObj.output = workspace.apps();
       break;
-    case "root":
+    }
+    case "root": {
       exportObj.output = workspace.rootPackage();
       break;
+    }
     case "package": {
       const pkg = command.package;
       if (!pkg) {
@@ -353,9 +355,9 @@ const Workspace = (
       }
       const appFullName = isValidFullPackageName(pkg)
         ? workspace.apps().find((app) => app === pkg)
-        : isValidPackageName(pkg)
+        : (isValidPackageName(pkg)
           ? workspace.apps().find((app) => app.endsWith(`/${pkg}`))
-          : undefined;
+          : undefined);
       if (!appFullName) {
         exitWithError(
           `Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`,
@@ -365,7 +367,7 @@ const Workspace = (
       exportObj.output = appFullName;
       break;
     }
-    default:
+    default: {
       if (isValidFullPackageName(command.command)) {
         exportObj.output = command.command;
       } else if (isValidPackageName(command.command)) {
@@ -375,6 +377,7 @@ const Workspace = (
         exitWithError(`Unknown command: ${command.command}`);
       }
       break;
+    }
   }
 
   return exportObj;
@@ -440,8 +443,8 @@ const exec = (
         stdio: "inherit",
       });
     }
-  } catch (e) {
-    exitWithError(`Error executing command: ${e}`);
+  } catch (error) {
+    exitWithError(`Error executing command: ${error}`);
   }
 };
 

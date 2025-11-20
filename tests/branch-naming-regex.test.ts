@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import fs from "fs";
 import path from "path";
 
@@ -8,7 +8,7 @@ const yaml = fs.readFileSync(
   "utf8",
 );
 const match = yaml.match(/branch_name_regex:\s*'([^']+)'/);
-if (!match) throw new Error("branch_name_regex not found in YAML");
+if (!match) {throw new Error("branch_name_regex not found in YAML");}
 const REGEX = new RegExp(match[1]);
 
 describe("branch_name_regex", () => {
@@ -29,7 +29,7 @@ describe("branch_name_regex", () => {
 
   validBranches.forEach((branch) => {
     it(`should match valid branch: ${branch}`, () => {
-      expect(REGEX.test(branch)).toBe(true);
+      expect(REGEX.test(branch)).toBeTruthy();
     });
   });
 
@@ -48,7 +48,7 @@ describe("branch_name_regex", () => {
 
   invalidBranches.forEach((branch) => {
     it(`should not match invalid branch: ${branch}`, () => {
-      expect(REGEX.test(branch)).toBe(false);
+      expect(REGEX.test(branch)).toBeFalsy();
     });
   });
 });

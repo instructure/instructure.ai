@@ -1,12 +1,10 @@
-/// <reference path="../types/index.d.ts" />
-
 import {
+	Workspace,
 	exec,
 	exitWithError,
 	isValidCommand,
 	isValidPackage,
 	unknownError,
-	Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 
 const main = async (): Promise<void> => {
@@ -15,7 +13,7 @@ const main = async (): Promise<void> => {
 	const devCommands: AllowedCommands = ["package", "app"] as const;
 
 	if (!isValidCommand(command, devCommands))
-		exitWithError("Invalid dev command.");
+		{exitWithError("Invalid dev command.");}
 
 	const devPackage = (pkg: PackageName, args: CommandExtraArgs) =>
 		exec(`pnpm -F ${pkg} dev`, { args: args.slice(2) });
@@ -35,11 +33,11 @@ const main = async (): Promise<void> => {
  Valid commands are: ${devCommands.join(", ")}`);
 			}
 		}
-	} catch (e) {
-		exitWithError("Dev failed:", e);
+	} catch (error) {
+		exitWithError("Dev failed:", error);
 	}
 };
 
-main().catch((e) => unknownError(e));
+main().catch((error) => unknownError(error));
 
 export { main };

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 // Mock node:fs/promises and vite before importing the loader
 vi.mock('node:fs/promises', () => ({
@@ -32,7 +32,7 @@ describe('vite-node.plugin.loader.mjs', () => {
     let mockNextResolve;
 
     beforeEach(() => {
-      mockNextResolve = vi.fn(async (specifier, context) => ({ resolved: true, specifier, context }));
+      mockNextResolve = vi.fn(async (specifier, context) => ({ context, resolved: true, specifier }));
     });
 
     it('calls nextResolve with correct arguments and returns its result', async () => {
@@ -40,7 +40,7 @@ describe('vite-node.plugin.loader.mjs', () => {
       const context = { parentURL: 'file:///bar' };
       const result = await loader.resolve(specifier, context, mockNextResolve);
       expect(mockNextResolve).toHaveBeenCalledWith(specifier, context, mockNextResolve);
-      expect(result).toEqual({ resolved: true, specifier, context });
+      expect(result).toStrictEqual({ context, resolved: true, specifier });
     });
   });
 
@@ -51,7 +51,7 @@ describe('vite-node.plugin.loader.mjs', () => {
     const fakeTransformed = { code: 'export const x=1;', map: 'inline' };
 
     beforeEach(async () => {
-      mockNextLoad = vi.fn(async (url, context) => ({ format: 'module', url, context }));
+      mockNextLoad = vi.fn(async (url, context) => ({ context, format: 'module', url }));
       // Mock node:fs/promises.readFile
       const { readFile } = await import('node:fs/promises');
       readFile.mockResolvedValue('export const x = 1;');
@@ -80,7 +80,7 @@ describe('vite-node.plugin.loader.mjs', () => {
             sourcemap: 'inline',
           }
         );
-        expect(result).toEqual({
+        expect(result).toStrictEqual({
           format: 'module',
           shortCircuit: true,
           source: fakeTransformed.code,
@@ -93,7 +93,7 @@ describe('vite-node.plugin.loader.mjs', () => {
       const context = {};
       const result = await loader.load(url, context, mockNextLoad);
       expect(mockNextLoad).toHaveBeenCalledWith(url, context, mockNextLoad);
-      expect(result).toEqual({ format: 'module', url, context });
+      expect(result).toStrictEqual({ context, format: 'module', url });
     });
 
     it('handles readFile error', async () => {

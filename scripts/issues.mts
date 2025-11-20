@@ -1,13 +1,11 @@
-/// <reference path="../types/index.d.ts" />
-
 import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import {
+  Workspace,
   exitWithError,
   getPackageName,
   getRootPackage,
   unknownError,
-  Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 import { parse, stringify } from "yaml";
 
@@ -21,9 +19,9 @@ const main = async () => {
   const packageNames = Array.isArray(output)
     ? output
         .map((pkg) => getPackageName(pkg))
-        .sort((a, b) => {
-          if (a === root) return -1;
-          if (b === root) return 1;
+        .toSorted((a, b) => {
+          if (a === root) {return -1;}
+          if (b === root) {return 1;}
           return a.localeCompare(b);
         })
     : [];
@@ -84,5 +82,5 @@ const main = async () => {
 export const updateIssues = main;
 
 if (require.main === module) {
-  main().catch((e) => unknownError(e));
+  main().catch((error) => unknownError(error));
 }

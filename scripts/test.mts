@@ -1,6 +1,5 @@
-/// <reference path="../types/index.d.ts" />
-
 import {
+  Workspace,
   exec,
   exitWithError,
   getFullPackageName,
@@ -8,7 +7,6 @@ import {
   isValidCommand,
   isValidPackage,
   unknownError,
-  Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 
 const main = async () => {
@@ -23,7 +21,7 @@ const main = async () => {
   ] as const;
 
   if (!isValidCommand(command, testCommands))
-    exitWithError("Invalid test command.");
+    {exitWithError("Invalid test command.");}
 
   const testPackage = (pkg: FullPackageName, args: CommandExtraArgs) => {
     if (pkg === getRootPackage()) {
@@ -48,7 +46,7 @@ const main = async () => {
 
   try {
     switch (command) {
-      case "all":
+      case "all": {
         if (Array.isArray(output) && output.length) {
           console.log("Testing all:", output);
           testPackages(output, args.slice(1));
@@ -56,7 +54,8 @@ const main = async () => {
           console.log("No apps or packages found in workspace.");
         }
         break;
-      case "app":
+      }
+      case "app": {
         if (output) {
           testPackage(output as FullPackageName, args.slice(2));
         } else {
@@ -65,7 +64,8 @@ const main = async () => {
           );
         }
         break;
-      case "apps":
+      }
+      case "apps": {
         if (Array.isArray(output) && output.length) {
           console.log("Testing apps:", output);
           testPackages(output, args.slice(1));
@@ -73,7 +73,8 @@ const main = async () => {
           console.log("No apps found in workspace.");
         }
         break;
-      case "package":
+      }
+      case "package": {
         if (output) {
           testPackage(output as FullPackageName, args.slice(2));
         } else {
@@ -82,7 +83,8 @@ const main = async () => {
           );
         }
         break;
-      case "packages":
+      }
+      case "packages": {
         if (Array.isArray(output) && output.length) {
           console.log("Testing packages:", output);
           testPackages(output, args.slice(1));
@@ -90,10 +92,12 @@ const main = async () => {
           console.log("No packages found in workspace.");
         }
         break;
-      case "root":
+      }
+      case "root": {
         testPackage(getRootPackage(), args.slice(1));
         break;
-      default:
+      }
+      default: {
         if (isValidPackage(command)) {
           testPackage(
             getFullPackageName(command) as FullPackageName,
@@ -102,11 +106,12 @@ const main = async () => {
         } else {
           exitWithError(`Unknown test command: ${command}`);
         }
+      }
     }
   } catch (error) {
     exitWithError("Test failed:", error);
   }
 };
-main().catch((e) => unknownError(e));
+main().catch((error) => unknownError(error));
 
 export { main };

@@ -1,12 +1,10 @@
-/// <reference path="../types/index.d.ts" />
-
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import {
+  Workspace,
   exec,
   exitWithError,
   isAvailablePackage,
-  Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 
 async function main() {
@@ -45,19 +43,19 @@ async function main() {
   const PACKAGENAME = args[0] ? args[0].trim() : "";
 
   if (!PACKAGENAME)
-    exitWithError(`Error: ${TYPE} name is required as the first argument.`);
+    {exitWithError(`Error: ${TYPE} name is required as the first argument.`);}
 
   const workspaceName =
     output && typeof output === "object" && "name" in output
       ? output.name
       : undefined;
 
-  if (!workspaceName) exitWithError("No workspace name found in output.");
+  if (!workspaceName) {exitWithError("No workspace name found in output.");}
 
   if (!isAvailablePackage(PACKAGENAME))
-    exitWithError(
+    {exitWithError(
       `'${PACKAGENAME}' already exists in workspace ${workspaceName}.`,
-    );
+    );}
 
   const REPLACESTRING = "<<packagename>>";
   const CLINAME = "<<cliname>>";
@@ -68,9 +66,9 @@ async function main() {
   // Validate NPM package name (unscoped)
   console.log(`Creating ${TYPE} '${PACKAGENAME}'...`);
   if (!isAvailablePackage(PACKAGENAME))
-    exitWithError(
+    {exitWithError(
       "Error: Package name must be a valid NPM package name: lowercase letters, numbers, hyphens, periods, and start with a letter or number.",
-    );
+    );}
 
   const cwd = process.cwd();
   const pkgDir = path.resolve(cwd, `${TYPE}s`, PACKAGENAME);
@@ -79,9 +77,9 @@ async function main() {
 
   // Check if package already exists
   if (await pathExists(pkgDir))
-    exitWithError(
+    {exitWithError(
       `Error: ${TYPE} '${PACKAGENAME}' already exists in ./${TYPE}s.`,
-    );
+    );}
 
   console.log(`Initializing ${TYPE}: ${PACKAGENAME}`);
   console.log(`Using template: ${TEMPLATE}`);
@@ -102,8 +100,8 @@ async function main() {
       if (await pathExists(testSrc)) {
         moveFile(testSrc, testDest);
       }
-    } catch (err) {
-      console.warn("Could not rename test file:", err);
+    } catch (error) {
+      console.warn("Could not rename test file:", error);
     }
   }
   await safeCopyDir(chosenTplDir, pkgDir);
@@ -140,8 +138,8 @@ async function main() {
     try {
       const response = await fetch(url);
       guidelines = (await response.text()) ?? url;
-    } catch (err) {
-      console.error("Failed to fetch instui guidelines:", err);
+    } catch (error) {
+      console.error("Failed to fetch instui guidelines:", error);
       guidelines = url;
     }
     await replaceInFile(
@@ -178,7 +176,7 @@ async function pathExists(p: string): Promise<boolean> {
 }
 
 async function safeCopyDir(src: string, dest: string) {
-  if (!(await pathExists(src))) return;
+  if (!(await pathExists(src))) {return;}
   const entries = await fs.readdir(src, { withFileTypes: true });
   for (const entry of entries) {
     const srcPath = path.join(src, entry.name);
@@ -200,7 +198,7 @@ async function replaceInFile(
   search: string,
   replacement: string,
 ) {
-  if (!(await pathExists(filePath))) return;
+  if (!(await pathExists(filePath))) {return;}
   const content = await fs.readFile(filePath, "utf8");
   const updated = content.split(search).join(replacement);
   if (updated !== content) {
@@ -208,6 +206,6 @@ async function replaceInFile(
   }
 }
 
-main().catch((err) => exitWithError("Error running new script.", err));
+main().catch((error) => exitWithError("Error running new script.", error));
 
 export { main };

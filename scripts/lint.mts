@@ -1,12 +1,10 @@
-/// <reference path="../types/index.d.ts" />
-
 import {
+  Workspace,
   exec,
   exitWithError,
   isValidCommand,
   isValidPackage,
   unknownError,
-  Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 
 const main = async (): Promise<void> => {
@@ -22,7 +20,7 @@ const main = async (): Promise<void> => {
   ] as const;
 
   if (!isValidCommand(command, lintCommands))
-    exitWithError("Invalid lint command.");
+    {exitWithError("Invalid lint command.");}
 
   const lintRoot = (pkg: PackageName, args: CommandExtraArgs) => {
     console.log(`Linting root package: ${pkg}`);
@@ -42,12 +40,13 @@ const main = async (): Promise<void> => {
 
   try {
     switch (command) {
-      case "all":
+      case "all": {
         console.log("Linting apps:");
         console.log(output);
         lintPackages(output as PackageName[], args.slice(2));
         break;
-      case "app":
+      }
+      case "app": {
         console.log("output:", output);
         if (output) {
           lintPackage(output as PackageName, args.slice(2));
@@ -57,7 +56,8 @@ const main = async (): Promise<void> => {
           );
         }
         break;
-      case "apps":
+      }
+      case "apps": {
         if (Array.isArray(output) && output.length) {
           console.log("Linting apps:");
           console.log(output);
@@ -66,7 +66,8 @@ const main = async (): Promise<void> => {
           console.log("No apps found in workspace.");
         }
         break;
-      case "package":
+      }
+      case "package": {
         if (output) {
           lintPackage(output as PackageName, args.slice(2));
         } else {
@@ -75,7 +76,8 @@ const main = async (): Promise<void> => {
           );
         }
         break;
-      case "packages":
+      }
+      case "packages": {
         if (Array.isArray(output) && output.length) {
           console.log("Linting packages:");
           console.log(output);
@@ -84,23 +86,26 @@ const main = async (): Promise<void> => {
           console.log("No packages found in workspace.");
         }
         break;
-      case "root":
+      }
+      case "root": {
         console.log(output);
         lintRoot(output as PackageName, args.slice(1));
         break;
-      default:
+      }
+      default: {
         if (isValidPackage(command as PackageName)) {
           lintPackage(command as PackageName, args.slice(1));
         } else {
           exitWithError(`Unknown lint command: ${command}
 Valid commands are: ${lintCommands.join(", ")}`);
         }
+      }
     }
   } catch (error) {
     exitWithError("Lint failed:", error);
   }
 };
 
-main().catch((e) => unknownError(e));
+main().catch((error) => unknownError(error));
 
 export { main };

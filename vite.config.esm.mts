@@ -13,7 +13,7 @@ const existing = (p: string) => {
     fs.accessSync(p);
     return p;
   } catch {
-    return null;
+    return ;
   }
 };
 const CWD_TS = existing(path.resolve(process.cwd(), "tsconfig.json"));
@@ -23,19 +23,11 @@ const PROJECTS = [CWD_TS, ROOT_TS, ROOT_NODE_TS].filter(Boolean) as string[];
 
 export default defineConfig({
   build: {
-    emptyOutDir: true,
-    outDir: "src",
-    lib: {
-      entry: "node/index.mts",
-      formats: ["es"],
-      fileName: () => "index.mjs",
-    },
-    rollupOptions: {
+    emptyOutDir: true, lib: {
+      entry: "node/index.mts", fileName: () => "index.mjs", formats: ["es"],
+    }, outDir: "src", rollupOptions: {
       output: { exports: "named" },
-    },
-    sourcemap: false,
-    target: "esnext",
-    terserOptions: {
+    }, sourcemap: false, target: "esnext", terserOptions: {
       compress: {
         drop_console: true,
         drop_debugger: true,
@@ -57,9 +49,7 @@ export default defineConfig({
   },
   plugins: [
     tsconfigPaths({
-      projects: PROJECTS,
-      ignoreConfigErrors: true,
-      loose: true,
+      ignoreConfigErrors: true, loose: true, projects: PROJECTS,
     }),
   ],
 });

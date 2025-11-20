@@ -7,7 +7,7 @@ import history from 'connect-history-api-fallback'
 const DIST = path.resolve(process.cwd(), 'dist')
 
 function discoverPackages(): string[] {
-  if (!fs.existsSync(DIST)) return []
+  if (!fs.existsSync(DIST)) {return []}
   return fs
     .readdirSync(DIST, { withFileTypes: true })
     .filter(d => d.isDirectory())
@@ -22,30 +22,28 @@ function isHtmlRequest(req: IncomingMessage) {
 
 export function multiDistPreview(): Plugin {
   return {
-    name: 'multi-dist-preview',
     configurePreviewServer(server) {
       const packages = discoverPackages()
 
       // Per-package SPA fallback
       // @ts-ignore - connect's stack is not typed
       server.middlewares.stack.unshift({
-        route: '',
         handle(req: IncomingMessage, res: ServerResponse, next: Function) {
           try {
-            if (!isHtmlRequest(req) || !req.url) return next()
+            if (!isHtmlRequest(req) || !req.url) {return next()}
             const url = req.url.split('?')[0].split('#')[0] || '/'
             const hit = packages.find(name => url === `/${name}` || url.startsWith(`/${name}/`))
-            if (!hit) return next()
+            if (!hit) {return next()}
 
             const file = path.join(DIST, hit, 'index.html')
-            if (!fs.existsSync(file)) return next()
+            if (!fs.existsSync(file)) {return next()}
 
             res.setHeader('Content-Type', 'text/html; charset=utf-8')
             fs.createReadStream(file).pipe(res)
           } catch {
             next()
           }
-        },
+        }, route: '',
       })
 
       // Root SPA fallback if dist/index.html exists
@@ -53,21 +51,19 @@ export function multiDistPreview(): Plugin {
       if (fs.existsSync(rootIndex)) {
         server.middlewares.use(
           history({
-            index: '/index.html',
-            htmlAcceptHeaders: ['text/html', 'application/xhtml+xml'],
-            disableDotRule: true,
+            disableDotRule: true, htmlAcceptHeaders: ['text/html', 'application/xhtml+xml'], index: '/index.html',
           }),
         )
       }
 
       // Log discovered routes
       const list = [
-        fs.existsSync(rootIndex) ? '• /' : null,
+        fs.existsSync(rootIndex) ? '• /' : undefined,
         ...packages.map(p => `• /${p}`),
       ].filter(Boolean)
       if (list.length) {
         console.log(`multi-dist-preview: serving from ${DIST}\n${list.map(l => '  ' + l).join('\n')}`)
       }
-    },
+    }, name: 'multi-dist-preview',
   }
 }

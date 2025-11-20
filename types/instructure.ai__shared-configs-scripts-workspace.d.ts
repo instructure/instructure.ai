@@ -1,11 +1,11 @@
 type WorkspaceName = `@${string}`;
 type FullPackageName = `${WorkspaceName}/${string}`;
 type PackageName = string;
-type WorkspaceObj = {
+interface WorkspaceObj {
   name: WorkspaceName;
   packages: PackageName[];
   apps: PackageName[];
-};
+}
 
 interface PackageJson {
   version: `${number}.${number}.${number}`;
@@ -46,16 +46,16 @@ const COMMANDS = [
 ] as const;
 type Command = (typeof COMMANDS)[number];
 
-type AllowedCommands = ReadonlyArray<WorkspaceCommand["command"]>;
+type AllowedCommands = readonly WorkspaceCommand["command"][];
 
 type AllowedCommand = AllowedCommands[number];
 
-type WorkspaceCommand = {
+interface WorkspaceCommand {
   command: Command;
   args: string[];
   script?: string;
   output?: WorkspaceName | WorkspaceObj | FullPackageName | FullPackageName[];
-};
+}
 
 type CommandExtraArgs = string[];
 

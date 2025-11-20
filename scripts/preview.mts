@@ -1,6 +1,5 @@
-/// <reference path="../types/index.d.ts" />
-
 import {
+  Workspace,
   exec,
   exitWithError,
   getPackageName,
@@ -8,7 +7,6 @@ import {
   isValidFullPackageName,
   isValidPackage,
   unknownError,
-  Workspace,
 } from "./workspace.mts";
 
 const main = async (): Promise<void> => {
@@ -17,7 +15,7 @@ const main = async (): Promise<void> => {
   const previewCommands: AllowedCommands = ["all", "app", "apps"] as const;
 
   if (!isValidCommand(command, previewCommands))
-    exitWithError("Invalid preview command.");
+    {exitWithError("Invalid preview command.");}
 
   const previewPackage = (
     pkg: FullPackageName | PackageName,
@@ -59,6 +57,6 @@ Valid commands are: ${previewCommands.join(", ")}`);
   }
 };
 
-main().catch((e) => unknownError(e));
+main().catch((error) => unknownError(error));
 
 export { main };

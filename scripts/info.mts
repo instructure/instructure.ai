@@ -1,9 +1,7 @@
-/// <reference path="../types/index.d.ts" />
-
 import {
+  Workspace,
   exec,
   unknownError,
-  Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 
 const main = async () => {
@@ -13,6 +11,6 @@ const main = async () => {
   });
 };
 
-main().catch((e) => unknownError(e));
+main().catch((error) => unknownError(error));
 
 export { main };

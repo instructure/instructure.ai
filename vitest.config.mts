@@ -8,12 +8,11 @@ const __cdir = path.resolve(__dir, "coverage");
 
 export default mergeConfig(baseConfig, {
   test: {
-    include: [
-      "{src,scripts,utils,plugins,tests}/**/*.{test,spec}.{ts,tsx,js,cjs,mjs,mts}",
-    ],
     coverage: {
       include: ["{src,scripts,utils,plugins}/**/*.{ts,tsx,js,cjs,mjs,mts}"],
       reportsDirectory: __cdir,
-    },
+    }, include: [
+      "{src,scripts,utils,plugins,tests}/**/*.{test,spec}.{ts,tsx,js,cjs,mjs,mts}",
+    ],
   },
 });

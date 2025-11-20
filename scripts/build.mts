@@ -1,15 +1,13 @@
-/// <reference path="../types/index.d.ts" />
-
 import fs from "node:fs";
 import path from "node:path";
 import {
+	Workspace,
 	exec,
 	exitWithError,
 	getPackageName,
 	isValidCommand,
 	isValidPackage,
 	unknownError,
-	Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 import { updateIssues } from "./issues.mts";
 
@@ -24,7 +22,7 @@ const main = async () => {
 	] as const;
 
 	if (!isValidCommand(command, buildCommands))
-		exitWithError("Invalid build command.");
+		{exitWithError("Invalid build command.");}
 
 	const buildPackage = (pkg: PackageName, args: CommandExtraArgs) => {
 		console.log(`Building ${pkg}`);
@@ -38,7 +36,7 @@ const main = async () => {
 	};
 
 	const copyPublicToDist = (pkg?: FullPackageName) => {
-		const pack = pkg ? getPackageName(pkg) : null;
+		const pack = pkg ? getPackageName(pkg) : undefined;
 
 		let dir: string;
 		if (
@@ -83,12 +81,13 @@ const main = async () => {
 
 	try {
 		switch (command) {
-			case "all":
+			case "all": {
 				console.log("Building apps:");
 				console.log(output);
 				buildPackages(output as PackageName[], args.slice(2));
 				break;
-			case "app":
+			}
+			case "app": {
 				if (output) {
 					copyPublicToDist();
 					buildPackage(output as PackageName, args.slice(2));
@@ -98,7 +97,8 @@ const main = async () => {
 					);
 				}
 				break;
-			case "apps":
+			}
+			case "apps": {
 				if (Array.isArray(output) && output.length) {
 					console.log("Building apps:");
 					console.log(output);
@@ -108,7 +108,8 @@ const main = async () => {
 					console.log("No apps found in workspace.");
 				}
 				break;
-			case "package":
+			}
+			case "package": {
 				if (output) {
 					buildPackage(output as PackageName, args.slice(2));
 				} else {
@@ -117,7 +118,8 @@ const main = async () => {
 					);
 				}
 				break;
-			case "packages":
+			}
+			case "packages": {
 				if (Array.isArray(output) && output.length) {
 					console.log("Building packages:");
 					console.log(output);
@@ -126,13 +128,15 @@ const main = async () => {
 					console.log("No packages found in workspace.");
 				}
 				break;
-			default:
+			}
+			default: {
 				if (isValidPackage(command)) {
 					buildPackage(command as PackageName, args.slice(1));
 				} else {
 					exitWithError(`Unknown build command: ${command}
 Valid commands are: ${buildCommands.join(", ")}`);
 				}
+			}
 		}
 		await updateIssues();
 	} catch (error) {
@@ -140,6 +144,6 @@ Valid commands are: ${buildCommands.join(", ")}`);
 	}
 };
 
-main().catch((e) => unknownError(e));
+main().catch((error) => unknownError(error));
 
 export { main };

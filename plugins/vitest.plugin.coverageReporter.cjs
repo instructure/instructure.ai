@@ -6,7 +6,7 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
   constructor(opts = {}) {
     super();
     this.file = opts.file || 'coverage.yml';
-    this.contentWriter = null;
+    this.contentWriter = undefined;
   }
 
   onStart(root, context) {
@@ -27,8 +27,8 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
       typeof v === 'number' && !Number.isNaN(v) ? Math.round(v * 100) / 100 : 0;
 
     const rangeStr = (lines) => {
-      if (!lines || !lines.length) return '';
-      const sorted = [...lines].sort((a, b) => a - b);
+      if (!lines || !lines.length) {return '';}
+      const sorted = [...lines].toSorted((a, b) => a - b);
       const first = sorted[0];
       const last = sorted[sorted.length - 1];
       return first === last ? `${first}` : `${first}-${last}`;
@@ -46,10 +46,7 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
     // Rollup totals
     const sum = root.getCoverageSummary();
     const totals = {
-      statements: pct(sum.statements.pct),
-      branches:   pct(sum.branches.pct),
-      functions:  pct(sum.functions.pct),
-      lines:      pct(sum.lines.pct),
+      branches:   pct(sum.branches.pct), functions:  pct(sum.functions.pct), lines:      pct(sum.lines.pct), statements: pct(sum.statements.pct),
     };
     const totalAvg = (totals.statements + totals.branches + totals.functions + totals.lines) / 4;
 
@@ -68,7 +65,7 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
     const ensurePath = (parts) => {
       let node = tree;
       for (const part of parts) {
-        if (!node[part]) node[part] = {};
+        if (!node[part]) {node[part] = {};}
         node = node[part];
       }
       return node;
@@ -87,17 +84,14 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
     if (Array.isArray(fileNodes) && fileNodes.length) {
       visitNodes(fileNodes, (node) => {
         const fc = node.fileCoverage;
-        const absPath = (fc && (fc.path || (fc.data && fc.data.path))) || null;
+        const absPath = (fc && (fc.path || (fc.data && fc.data.path))) || undefined;
         const relPath = absPath ? relFromCwd(absPath) : (node.displayShortName || node.name || 'unknown');
         const parts = relPath.split('/').filter(Boolean);
 
         // Per-file totals
         const fsu = node.getCoverageSummary ? node.getCoverageSummary() : {};
         const fileTotals = {
-          statements: pct(fsu?.statements?.pct),
-          branches:   pct(fsu?.branches?.pct),
-          functions:  pct(fsu?.functions?.pct),
-          lines:      pct(fsu?.lines?.pct),
+          branches:   pct(fsu?.branches?.pct), functions:  pct(fsu?.functions?.pct), lines:      pct(fsu?.lines?.pct), statements: pct(fsu?.statements?.pct),
         };
 
         // Uncovered lines
@@ -126,10 +120,10 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
     // Helper to aggregate subtotals for a node
     const aggregateMetrics = (node) => {
       let count = 0;
-      let sum = { statements: 0, branches: 0, functions: 0, lines: 0 };
+      let sum = { branches: 0, functions: 0, lines: 0, statements: 0 };
       let uncovered = [];
       for (const key of Object.keys(node)) {
-        if (key === '__metrics') continue;
+        if (key === '__metrics') {continue;}
         const child = node[key];
         const agg = aggregateMetrics(child);
         if (agg) {
@@ -146,11 +140,7 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
       if (node.__metrics) {
         // Leaf node (file)
         return {
-          statements: node.__metrics.statements || 0,
-          branches: node.__metrics.branches || 0,
-          functions: node.__metrics.functions || 0,
-          lines: node.__metrics.lines || 0,
-          uncovered_line_numbers: node.__metrics.uncovered_line_numbers
+          branches: node.__metrics.branches || 0, functions: node.__metrics.functions || 0, lines: node.__metrics.lines || 0, statements: node.__metrics.statements || 0, uncovered_line_numbers: node.__metrics.uncovered_line_numbers
             ? node.__metrics.uncovered_line_numbers.split(/,|-/).map(Number).filter(Boolean)
             : [],
         };
@@ -158,18 +148,14 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
       if (count > 0) {
         // Subtotal for this node
         return {
-          statements: Math.round((sum.statements / count) * 100) / 100,
-          branches: Math.round((sum.branches / count) * 100) / 100,
-          functions: Math.round((sum.functions / count) * 100) / 100,
-          lines: Math.round((sum.lines / count) * 100) / 100,
-          uncovered_line_numbers: uncovered,
+          branches: Math.round((sum.branches / count) * 100) / 100, functions: Math.round((sum.functions / count) * 100) / 100, lines: Math.round((sum.lines / count) * 100) / 100, statements: Math.round((sum.statements / count) * 100) / 100, uncovered_line_numbers: uncovered,
         };
       }
-      return null;
+      return ;
     };
 
     const printTree = (node, indent = 2, isTopLevel = false) => {
-      const keys = Object.keys(node).filter((k) => k !== '__metrics').sort();
+      const keys = Object.keys(node).filter((k) => k !== '__metrics').toSorted();
       for (const key of keys) {
         // Quote the key if it contains a dot or other special YAML chars
         const quotedKey = /[.\s:]/.test(key) ? `"${key}"` : key;

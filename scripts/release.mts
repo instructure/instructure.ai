@@ -1,14 +1,12 @@
-/// <reference path="../types/index.d.ts" />
-
 import fs from "node:fs";
 import {
+  Workspace,
   exec,
   exitWithError,
   getPackageJson,
   isValidCommand,
   isValidPackage,
   unknownError,
-  Workspace,
 } from "@instructure.ai/shared-configs/workspace";
 
 const main = async () => {
@@ -23,7 +21,7 @@ const main = async () => {
   ] as const;
 
   if (!isValidCommand(command, releaseCommands))
-    exitWithError("Invalid release command.");
+    {exitWithError("Invalid release command.");}
 
   const getVersion = (pkgJson: PackageJson) => pkgJson.version;
 
@@ -60,8 +58,8 @@ const main = async () => {
     const newParts = newVersion.split(".").map((part) => parseInt(part, 10));
 
     for (let i = 0; i < 3; i++) {
-      if (newParts[i] > oldParts[i]) return true;
-      if (newParts[i] < oldParts[i]) return false;
+      if (newParts[i] > oldParts[i]) {return true;}
+      if (newParts[i] < oldParts[i]) {return false;}
     }
     return false;
   };
@@ -73,8 +71,8 @@ const main = async () => {
     newVersion?: PackageJson["version"];
     version: PackageJson["version"];
   }): boolean => {
-    if (typeof newVersion === "undefined") return false;
-    if (newVersion === version) return false;
+    if (typeof newVersion === "undefined") {return false;}
+    if (newVersion === version) {return false;}
     return isVersionBigger(version, newVersion);
   };
   const setVersion = ({
@@ -101,8 +99,8 @@ const main = async () => {
       }
       const pkgJson = require(path) as PackageJson;
       pkgJson.version = writeVersion;
-      fs.writeFileSync(path, `${JSON.stringify(pkgJson, null, 2)}\n`, {
-        encoding: "utf-8",
+      fs.writeFileSync(path, `${JSON.stringify(pkgJson, undefined, 2)}\n`, {
+        encoding: "utf8",
       });
     } catch (error) {
       exitWithError("Error setting new version.", error);
@@ -164,7 +162,7 @@ const main = async () => {
   };
   try {
     switch (command) {
-      case "app":
+      case "app": {
         if (!isValidPackage(output as FullPackageName)) {
           exitWithError(
             "A valid app name is required for the release command.",
@@ -172,7 +170,8 @@ const main = async () => {
         }
         releasePackage({ args: args.slice(2), pkg: output as FullPackageName });
         break;
-      case "apps":
+      }
+      case "apps": {
         if (Array.isArray(output) && output.length) {
           console.log("Releasing apps:", output);
           releasePackages(output, args.slice(1));
@@ -180,7 +179,8 @@ const main = async () => {
           console.log("No apps found in workspace.");
         }
         break;
-      case "package":
+      }
+      case "package": {
         if (!isValidPackage(output as FullPackageName)) {
           exitWithError(
             "A valid package name is required for the release command.",
@@ -188,7 +188,8 @@ const main = async () => {
         }
         releasePackage({ args: args.slice(2), pkg: output as FullPackageName });
         break;
-      case "packages":
+      }
+      case "packages": {
         if (Array.isArray(output) && output.length) {
           console.log("Releasing packages:", output);
           releasePackages(output, args.slice(1));
@@ -196,10 +197,12 @@ const main = async () => {
           console.log("No packages found in workspace.");
         }
         break;
-      case "root":
+      }
+      case "root": {
         releasePackage({ args: args.slice(1), pkg: output as FullPackageName });
         break;
-      default:
+      }
+      default: {
         if (isValidPackage(command)) {
           releasePackage({
             args: args.slice(1),
@@ -209,12 +212,13 @@ const main = async () => {
           exitWithError(`Unknown build command: ${command}
 Valid commands are: ${releaseCommands.join(", ")}`);
         }
+      }
     }
   } catch (error) {
     unknownError(error);
   }
 };
 
-main().catch((e) => unknownError(e));
+main().catch((error) => unknownError(error));
 
 export { main };
