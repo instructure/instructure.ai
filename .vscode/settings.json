@@ -7,7 +7,7 @@
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "TypeScriptTeam.native-preview"
   },
   "[javascriptreact]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
@@ -19,5 +19,6 @@
   "oxc.requireConfig": true,
   "oxc.typeAware": true,
   "typescript.experimental.useTsgo": true,
-  "vitest.disableWorkspaceWarning": true
+  "vitest.disableWorkspaceWarning": true,
+  "oxc.enable": false
 }

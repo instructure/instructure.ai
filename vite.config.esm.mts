@@ -1,10 +1,10 @@
 /// <reference types="vitest/config" />
 
-import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
-import path from 'node:path';
-import fs from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { defineConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
+import path from "node:path";
+import fs from "node:fs";
+import { fileURLToPath } from "node:url";
 
 const ROOT_DIR = path.dirname(fileURLToPath(import.meta.url));
 
@@ -15,19 +15,19 @@ const existing = (p: string) => {
   } catch {
     return null;
   }
-}
-const CWD_TS = existing(path.resolve(process.cwd(), 'tsconfig.json'));
-const ROOT_TS = existing(path.resolve(ROOT_DIR, 'tsconfig.json'));
-const ROOT_NODE_TS = existing(path.resolve(ROOT_DIR, 'tsconfig.node.json'));
+};
+const CWD_TS = existing(path.resolve(process.cwd(), "tsconfig.json"));
+const ROOT_TS = existing(path.resolve(ROOT_DIR, "tsconfig.json"));
+const ROOT_NODE_TS = existing(path.resolve(ROOT_DIR, "tsconfig.node.json"));
 const PROJECTS = [CWD_TS, ROOT_TS, ROOT_NODE_TS].filter(Boolean) as string[];
 
 export default defineConfig({
   build: {
     emptyOutDir: true,
-    outDir: 'src',
+    outDir: "src",
     lib: {
-      entry: 'node/index.mts',
-      formats: ['es'],
+      entry: "node/index.mts",
+      formats: ["es"],
       fileName: () => "index.mjs",
     },
     rollupOptions: {
@@ -60,6 +60,6 @@ export default defineConfig({
       projects: PROJECTS,
       ignoreConfigErrors: true,
       loose: true,
-    })
+    }),
   ],
 });
