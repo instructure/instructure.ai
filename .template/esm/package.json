@@ -14,7 +14,7 @@
     "src"
   ],
   "scripts": {
-    "build": "vite build && pnpm pack --pack-destination ./src",
+    "build": "tsdown && pnpm pack --pack-destination ./src",
     "typecheck": "tsgo --noEmit",
     "lint": "oxlint --type-aware --fix --fix-suggestions && oxfmt",
     "test": "pnpm vitest run",

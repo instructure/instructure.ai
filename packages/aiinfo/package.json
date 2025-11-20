@@ -34,8 +34,8 @@
     "directory": "packages/aiinfo"
   },
   "scripts": {
-    "build": "pnpm cache:update && pnpm build:vite && pnpm lint --write && pnpm typecheck && pnpm package",
-    "build:vite": "vite build",
+    "build": "pnpm cache:update && pnpm build:lib && pnpm lint --write && pnpm typecheck && pnpm package",
+    "build:lib": "tsdown",
     "cache:clear": "CLEAR=1 vite-node ./scripts/clearCache.mts",
     "cache:update": "vite-node ./scripts/updateCache.mts",
     "lint": "oxlint --type-aware --fix --fix-suggestions && oxfmt",
