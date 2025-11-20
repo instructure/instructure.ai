@@ -40,9 +40,9 @@ const main = async (entries?: string[][]) => {
 	writeBarrel();
 
 	try {
-		execSync("pnpm biome check ./node --write", { stdio: "ignore" });
+		execSync("pnpm oxfmt ./node", { stdio: "ignore" });
 	} catch (err) {
-		Log({ color: "redBright", message: ["Biome formatting failed:", err] });
+		Log({ color: "redBright", message: ["OxC formatting failed:", err] });
 	}
 	Log({ color: "green", message: ["Entries and barrel written."] });
 };
