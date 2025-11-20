@@ -34,14 +34,14 @@ const Presets = ({ setProduct, product }: PresetsProps) => {
 
 	const fetchProducts = useCallback(() => {
 		if (Object.keys(products).length === 0) {
-			// biome-ignore-start lint/correctness/noUnusedVariables: Destructuring for feature list
+			// oxc-ignore-start lint/correctness/noUnusedVariables: Destructuring for feature list
 			const {
 				nutritionFacts,
 				dataPermissionLevels,
 				aiInformation,
 				...productEntries
 			} = AiInfo;
-			// biome-ignore-end lint/correctness/noUnusedVariables: Destructuring for feature list
+			// oxc-ignore-end lint/correctness/noUnusedVariables: Destructuring for feature list
 
 			setProducts(productEntries);
 			const grouped: Record<

@@ -1,4 +1,4 @@
-// biome-ignore-all assist/source/useSortedKeys: Sane ordering for CSV columns
+// oxc-ignore-all assist/source/useSortedKeys: Sane ordering for CSV columns
 
 import type { CSV, Entry } from "../types";
 

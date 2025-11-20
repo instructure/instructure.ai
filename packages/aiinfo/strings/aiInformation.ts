@@ -1,4 +1,4 @@
-// biome-ignore-all assist/source/useSortedKeys: Required order for Strings
+// oxc-ignore-all assist/source/useSortedKeys: Required order for Strings
 import type { AiInformationStrings } from "../types";
 import { strings as nutritionFactsStrings } from "./nutritionFacts";
 import { strings as permissionLevelsStrings } from "./permissionLevels";

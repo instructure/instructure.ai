@@ -3,7 +3,7 @@ const hasProp = <T extends object, K extends PropertyKey>(
 	prop: K,
 ): obj is T & Record<K, unknown> => Object.hasOwn(obj, prop);
 
-// biome-ignore-start lint/suspicious/noExplicitAny: `any` is part of the type guard
+// oxc-ignore-start lint/suspicious/noExplicitAny: `any` is part of the type guard
 const isPendoAPIFeature = (obj: unknown): obj is PendoAPIFeature => {
 	return (
 		typeof obj === "object" &&
@@ -20,7 +20,7 @@ const isPendoAPIFeature = (obj: unknown): obj is PendoAPIFeature => {
 		hasProp((obj as { product: any }).product, "area")
 	);
 };
-// biome-ignore-end lint/suspicious/noExplicitAny: `any` is part of the type guard
+// oxc-ignore-end lint/suspicious/noExplicitAny: `any` is part of the type guard
 
 const isPendoAPI = (obj: unknown): obj is PendoAPI => {
 	return (
@@ -28,7 +28,7 @@ const isPendoAPI = (obj: unknown): obj is PendoAPI => {
 		obj !== null &&
 		hasProp(obj, "results") &&
 		Array.isArray((obj as { results: unknown }).results) &&
-		// biome-ignore lint/suspicious/noExplicitAny: `any` is part of the type guard
+		// oxc-ignore lint/suspicious/noExplicitAny: `any` is part of the type guard
 		(obj as { results: any[] }).results.every(isPendoAPIFeature)
 	);
 };

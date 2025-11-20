@@ -252,7 +252,7 @@ class WorkspaceClass implements WorkspaceInfo {
   }
 
   info(): WorkspaceObj {
-    // biome-ignore assist/source/useSortedKeys: manual order for console output
+    // oxc-ignore assist/source/useSortedKeys: manual order for console output
     return {
       name: this.workspaceName,
       apps: this.workspaceApps,
