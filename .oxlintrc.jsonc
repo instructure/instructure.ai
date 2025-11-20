@@ -1,31 +1,23 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "files": {
-    "include": [
-      "scripts/**/*.{js,jsx,ts,tsx,mts,cts}",
-      "configs/**/*.{js,jsx,ts,tsx,mts,cts}",
-      "public/**/*.{js,jsx,ts,tsx,mts,cts}",
-      "*.{js,jsx,ts,tsx,mts,cts}"
-    ],
-    "exclude": [
-      "packages/**",
-      "apps/**",
-      ".template/**",
-      ".changeset/**",
-      "**/*.grit",
-      "**/dist/**",
-      "**/build/**",
-      "**/.turbo/**",
-      "**/.next/**",
-      "**/coverage/**",
-      "**/node_modules/**"
-    ]
-  },
   "env": {
     "browser": true,
     "node": true,
     "jest": true
   },
+  "ignorePatterns": [
+    "packages/**",
+    "apps/**",
+    ".template/**",
+    ".changeset/**",
+    "**/*.grit",
+    "**/dist/**",
+    "**/build/**",
+    "**/.turbo/**",
+    "**/.next/**",
+    "**/coverage/**",
+    "**/node_modules/**"
+  ],
   "categories": {
     "correctness": "error",
     "suspicious": "warn",
