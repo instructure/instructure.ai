@@ -36,7 +36,7 @@
     "dev": "vite-node ./scripts/dev.mts",
     "new": "vite-node ./scripts/new.mts",
     "lint": "vite-node ./scripts/lint.mts",
-    "lint:root": "oxlint --type-aware --config .oxlintrc.jsonc --disable-nested-config --fix --fix-suggestions && oxfmt --config .oxfmtrc.jsonc",
+    "lint:root": "oxlint --type-aware --config .oxlintrc.json --disable-nested-config --fix --fix-suggestions && oxfmt --config .oxfmtrc.jsonc",
     "test": "vite-node ./scripts/test.mts",
     "test:root": "vitest run --config=vitest.config.mts",
     "typecheck": "pnpm -r typecheck",

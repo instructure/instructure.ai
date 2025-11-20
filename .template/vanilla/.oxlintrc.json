@@ -1,4 +1,6 @@
 {
   "$schema": "../../node_modules/oxlint/configuration_schema.json",
-  "extends": ["../../.oxlintrc.jsonc"]
+  "extends": [
+    "../../.oxlintrc.jsonc"
+  ],
 }

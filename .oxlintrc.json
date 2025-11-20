@@ -1,9 +1,16 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "style": "warn",
+    "perf": "warn",
+    "pedantic": "off"
+  },
   "env": {
     "browser": true,
     "node": true,
-    "jest": true
+    "vitest": true
   },
   "ignorePatterns": [
     "packages/**",
@@ -18,11 +25,14 @@
     "**/coverage/**",
     "**/node_modules/**"
   ],
-  "categories": {
-    "correctness": "error",
-    "suspicious": "warn",
-    "style": "warn",
-    "perf": "warn",
-    "pedantic": "off"
-  }
+  "plugins": [
+    "eslint",
+    "typescript",
+    "unicorn",
+    "oxc",
+    "vitest",
+    "jsdoc",
+    "import",
+    "node",
+  ]
 }
