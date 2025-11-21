@@ -14,10 +14,10 @@ import { quickreassess } from "./components/quickreassess";
 import { rubricgenerator } from "./components/rubricgenerator";
 import { smartsearch } from "./components/smartsearch";
 import type {
-  AiInfoProps,
-  AiInfoNutritionFactsProps,
-  AiInfoDataPermissionLevelsProps,
   AiInfoAiInformationProps,
+  AiInfoDataPermissionLevelsProps,
+  AiInfoNutritionFactsProps,
+  AiInfoProps,
 } from "./types";
 const pluck = <
   TRecord extends Record<string, object>,

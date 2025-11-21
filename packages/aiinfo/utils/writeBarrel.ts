@@ -59,10 +59,10 @@ const writeBarrel = (opts: Options = {}) => {
     "// no feature folders found";
 
   const typesImport = `import type {
-  AiInfoProps,
-  AiInfoNutritionFactsProps,
-  AiInfoDataPermissionLevelsProps,
   AiInfoAiInformationProps
+  AiInfoDataPermissionLevelsProps,
+  AiInfoNutritionFactsProps,
+  AiInfoProps,
 } from "./types";`;
 
   const pluckHelper = `const pluck = <
