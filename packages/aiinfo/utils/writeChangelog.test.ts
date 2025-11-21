@@ -2,6 +2,7 @@ import fs from "node:fs";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { ChangedEntry } from "../types";
 import { writeChangelog } from "./writeChangelog";
+import type { Entry } from "../types";
 
 const existsSync = vi.spyOn(fs, "existsSync");
 const readFileSync = vi.spyOn(fs, "readFileSync");
@@ -14,7 +15,6 @@ writeFileSync.mockImplementation((p, c) => {
   lastWrittenContent = String(c);
 });
 
-import type { Entry } from "../types";
 
 function makeChangedEntry(
   uid: string,
@@ -31,16 +31,6 @@ function makeChangedEntry(
   },
 ): ChangedEntry {
   const defaultEntry: Entry = {
-    uid,
-    revision: "",
-    feature: { description: "", name: "" },
-    model: {
-      data: "",
-      dataDescription: "",
-      description: "",
-      name: "",
-      trained: "",
-    },
     compliance: {
       logging: "",
       loggingDescription: "",
@@ -49,17 +39,20 @@ function makeChangedEntry(
       regions: "",
       regionsDescription: "",
       retention: "",
-    },
-    outputs: {
+    }, feature: { description: "", name: "" }, group: "", model: {
+      data: "",
+      dataDescription: "",
+      description: "",
+      name: "",
+      trained: "",
+    }, outputs: {
       guardrails: "",
       human: "",
       humanDescription: "",
       outcomes: "",
       risks: "",
       settings: "",
-    },
-    group: "",
-    permissions: "1",
+    }, permissions: "1", revision: "", uid,
   };
   return {
     newChecksum,
@@ -73,7 +66,7 @@ function makeChangedEntry(
 beforeEach(() => {
   vi.clearAllMocks();
   lastWrittenContent = "";
-  lastWrittenPath = null;
+  lastWrittenPath = "";
   existsSync.mockReturnValue(false);
   readFileSync.mockReturnValue("");
   writeFileSync.mockImplementation((p, c) => {
@@ -98,13 +91,9 @@ describe("writeChangelog", () => {
     const entry = makeChangedEntry("uid-new", {
       newChecksum: "newSha",
       newEntry: {
-        feature: { name: "Feature A", description: "Test description" },
+        feature: { description: "Test description", name: "Feature A" },
         model: {
-          name: "Test Model",
-          description: "Model description",
-          data: "Training data",
-          dataDescription: "Data details",
-          trained: "2024-01-01",
+          data: "Training data", dataDescription: "Data details", description: "Model description", name: "Test Model", trained: "2024-01-01",
         },
       },
     });
@@ -130,14 +119,6 @@ describe("writeChangelog", () => {
     const entry = makeChangedEntry("uid-diff", {
       newChecksum: "newC",
       newEntry: {
-        feature: { name: "Feature", description: "Test" },
-        model: {
-          name: "Model",
-          description: "desc",
-          data: "value",
-          dataDescription: "added data",
-          trained: "2024",
-        },
         compliance: {
           logging: "enabled",
           loggingDescription: "log desc",
@@ -146,8 +127,13 @@ describe("writeChangelog", () => {
           regions: "US",
           regionsDescription: "region desc",
           retention: "30d",
-        },
-        outputs: {
+        }, feature: { name: "Feature", description: "Test" }, model: {
+          name: "Model",
+          description: "desc",
+          data: "value",
+          dataDescription: "added data",
+          trained: "2024",
+        }, outputs: {
           guardrails: "yes",
           human: "yes",
           humanDescription: "human desc",
@@ -158,14 +144,6 @@ describe("writeChangelog", () => {
       },
       oldChecksum: "oldC",
       oldEntry: {
-        feature: { name: "Feature", description: "Test" },
-        model: {
-          name: "Model",
-          description: "desc",
-          data: "",
-          dataDescription: "",
-          trained: "2023",
-        },
         compliance: {
           logging: "enabled",
           loggingDescription: "log desc",
@@ -174,8 +152,13 @@ describe("writeChangelog", () => {
           regions: "US",
           regionsDescription: "region desc",
           retention: "30d",
-        },
-        outputs: {
+        }, feature: { name: "Feature", description: "Test" }, model: {
+          name: "Model",
+          description: "desc",
+          data: "",
+          dataDescription: "",
+          trained: "2023",
+        }, outputs: {
           guardrails: "yes",
           human: "yes",
           humanDescription: "human desc",
@@ -201,13 +184,9 @@ describe("writeChangelog", () => {
 
   it("unchanged entry only shows SHA section", () => {
     const obj = {
-      feature: { name: "Same", description: "Description" },
+      feature: { description: "Description", name: "Same" },
       model: {
-        name: "Model",
-        description: "desc",
-        data: "data",
-        dataDescription: "data desc",
-        trained: "2024",
+        data: "data", dataDescription: "data desc", description: "desc", name: "Model", trained: "2024",
       },
     };
     const entry = makeChangedEntry("uid-same", {
@@ -233,7 +212,7 @@ describe("writeChangelog", () => {
     readFileSync.mockReturnValue("Previous content");
     const entry = makeChangedEntry("uid1", {
       newChecksum: "nc1",
-      newEntry: { feature: { name: "N1", description: "New 1" } },
+      newEntry: { feature: { description: "New 1", name: "N1" } },
     });
     writeChangelog({
       changedEntries: [entry],
@@ -255,7 +234,7 @@ describe("writeChangelog", () => {
     readFileSync.mockReturnValue("# Changelog\n\n## 2024-01-01\n\nOld section");
     const entry = makeChangedEntry("uidX", {
       newChecksum: "ncX",
-      newEntry: { feature: { name: "NX", description: "New X" } },
+      newEntry: { feature: { description: "New X", name: "NX" } },
     });
     writeChangelog({
       changedEntries: [entry],
@@ -275,13 +254,13 @@ describe("writeChangelog", () => {
   it("handles multiple entries (new + changed)", () => {
     const e1 = makeChangedEntry("uidA", {
       newChecksum: "shaA",
-      newEntry: { feature: { name: "A", description: "A Desc" } },
+      newEntry: { feature: { description: "A Desc", name: "A" } },
     });
     const e2 = makeChangedEntry("uidB", {
       newChecksum: "newB",
-      newEntry: { feature: { name: "B2", description: "desc" } },
+      newEntry: { feature: { description: "desc", name: "B2" } },
       oldChecksum: "oldB",
-      oldEntry: { feature: { name: "B", description: "desc" } },
+      oldEntry: { feature: { description: "desc", name: "B" } },
     });
     const result = writeChangelog({
       changedEntries: [e1, e2],
@@ -299,11 +278,11 @@ describe("writeChangelog", () => {
     const entry = makeChangedEntry("uidAdd", {
       newChecksum: "newAdd",
       newEntry: {
-        feature: { name: "Feature", description: "New description" },
+        feature: { description: "New description", name: "Feature" },
       },
       oldChecksum: "oldAdd",
       oldEntry: {
-        feature: { name: "Feature", description: "" },
+        feature: { description: "", name: "Feature" },
       },
     });
     const result = writeChangelog({
@@ -322,7 +301,7 @@ describe("writeChangelog", () => {
     });
     const entry = makeChangedEntry("uidErr", {
       newChecksum: "shaErr",
-      newEntry: { feature: { name: "Err", description: "err desc" } },
+      newEntry: { feature: { description: "err desc", name: "Err" } },
     });
     const result = writeChangelog({
       changedEntries: [entry],
@@ -337,7 +316,7 @@ describe("writeChangelog", () => {
   it("changelog output includes csv SHA", () => {
     const entry = makeChangedEntry("uidSha", {
       newChecksum: "newSha",
-      newEntry: { feature: { name: "Feature", description: "Description" } },
+      newEntry: { feature: { description: "Description", name: "Feature" } },
     });
     const result = writeChangelog({
       changedEntries: [entry],
@@ -354,7 +333,7 @@ describe("writeChangelog", () => {
     const entry = makeChangedEntry("uid-new", {
       newChecksum: "newSha",
       newEntry: {
-        feature: { name: "Feature A", description: "Description" },
+        feature: { description: "Description", name: "Feature A" },
       },
     });
     writeChangelog({

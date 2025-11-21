@@ -43,9 +43,9 @@ function csvRowToStringArray(row: CSVRow): string[] {
   return row.map((cell) =>
     typeof cell === "string"
       ? cell
-      : typeof cell === "number"
+      : (typeof cell === "number"
         ? String(cell)
-        : "",
+        : ""),
   );
 }
 

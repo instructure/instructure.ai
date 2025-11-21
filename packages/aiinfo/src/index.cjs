@@ -2631,7 +2631,7 @@ model.`,
   },
   Q = (e, ee) => {
     let t = {};
-    for (let n in e) t[n] = e[n][ee];
+    for (let n in e) {t[n] = e[n][ee];}
     return t;
   },
   $ = {
