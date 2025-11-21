@@ -20,8 +20,12 @@ const main = async () => {
     ? output
         .map((pkg) => getPackageName(pkg))
         .toSorted((a, b) => {
-          if (a === root) {return -1;}
-          if (b === root) {return 1;}
+          if (a === root) {
+            return -1;
+          }
+          if (b === root) {
+            return 1;
+          }
           return a.localeCompare(b);
         })
     : [];

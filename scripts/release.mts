@@ -1,4 +1,10 @@
-import type { AllowedCommands, CommandExtraArgs, FullPackageName, PackageJson, WorkspaceCommand } from "@instructure.ai/shared-configs/types";
+import type {
+  AllowedCommands,
+  CommandExtraArgs,
+  FullPackageName,
+  PackageJson,
+  WorkspaceCommand,
+} from "@instructure.ai/shared-configs/types";
 import fs from "node:fs";
 import {
   Workspace,
@@ -21,8 +27,9 @@ const main = async () => {
     "packages",
   ] as const;
 
-  if (!isValidCommand(command, releaseCommands))
-    {exitWithError("Invalid release command.");}
+  if (!isValidCommand(command, releaseCommands)) {
+    exitWithError("Invalid release command.");
+  }
 
   const getVersion = (pkgJson: PackageJson) => pkgJson.version;
 
@@ -59,8 +66,12 @@ const main = async () => {
     const newParts = newVersion.split(".").map((part) => parseInt(part, 10));
 
     for (let i = 0; i < 3; i++) {
-      if (newParts[i] > oldParts[i]) {return true;}
-      if (newParts[i] < oldParts[i]) {return false;}
+      if (newParts[i] > oldParts[i]) {
+        return true;
+      }
+      if (newParts[i] < oldParts[i]) {
+        return false;
+      }
     }
     return false;
   };
@@ -72,8 +83,12 @@ const main = async () => {
     newVersion?: PackageJson["version"];
     version: PackageJson["version"];
   }): boolean => {
-    if (typeof newVersion === "undefined") {return false;}
-    if (newVersion === version) {return false;}
+    if (typeof newVersion === "undefined") {
+      return false;
+    }
+    if (newVersion === version) {
+      return false;
+    }
     return isVersionBigger(version, newVersion);
   };
   const setVersion = ({

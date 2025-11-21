@@ -2,14 +2,19 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Mock the workspace module
-vi.mock<typeof import('@instructure.ai/shared-configs/workspace')>("@instructure.ai/shared-configs/workspace", () => {
-  const mockExec = vi.fn();
-  const mockUnknownError = vi.fn();
-  const mockWorkspace = vi.fn(() => ({ output: "mocked output" }));
-  return {
-    Workspace: mockWorkspace, exec: mockExec, unknownError: mockUnknownError,
-  };
-});
+vi.mock<typeof import("@instructure.ai/shared-configs/workspace")>(
+  "@instructure.ai/shared-configs/workspace",
+  () => {
+    const mockExec = vi.fn();
+    const mockUnknownError = vi.fn();
+    const mockWorkspace = vi.fn(() => ({ output: "mocked output" }));
+    return {
+      Workspace: mockWorkspace,
+      exec: mockExec,
+      unknownError: mockUnknownError,
+    };
+  },
+);
 
 // Import after mocking
 import * as workspaceModule from "@instructure.ai/shared-configs/workspace";

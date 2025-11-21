@@ -6,7 +6,12 @@ import {
   isValidPackage,
   unknownError,
 } from "@instructure.ai/shared-configs/workspace";
-import type { AllowedCommands, CommandExtraArgs, PackageName, WorkspaceCommand } from "@instructure.ai/shared-configs/types";
+import type {
+  AllowedCommands,
+  CommandExtraArgs,
+  PackageName,
+  WorkspaceCommand,
+} from "@instructure.ai/shared-configs/types";
 
 const main = async (): Promise<void> => {
   const { command, output, args }: WorkspaceCommand = Workspace();
@@ -20,8 +25,9 @@ const main = async (): Promise<void> => {
     "app",
   ] as const;
 
-  if (!isValidCommand(command, lintCommands))
-    {exitWithError("Invalid lint command.");}
+  if (!isValidCommand(command, lintCommands)) {
+    exitWithError("Invalid lint command.");
+  }
 
   const lintRoot = (pkg: PackageName, args: CommandExtraArgs) => {
     console.log(`Linting root package: ${pkg}`);

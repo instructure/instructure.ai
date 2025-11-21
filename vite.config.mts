@@ -1,4 +1,4 @@
-import "@instructure.ai/shared-configs/types"
+import "@instructure.ai/shared-configs/types";
 import browsersList from "@instructure/browserslist-config-instui";
 import { browserslistToTargets } from "lightningcss";
 import { defineConfig } from "vite";

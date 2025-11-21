@@ -8,7 +8,9 @@ const yaml = fs.readFileSync(
   "utf8",
 );
 const match = yaml.match(/branch_name_regex:\s*'([^']+)'/);
-if (!match) {throw new Error("branch_name_regex not found in YAML");}
+if (!match) {
+  throw new Error("branch_name_regex not found in YAML");
+}
 const REGEX = new RegExp(match[1]);
 
 describe("branch_name_regex", () => {

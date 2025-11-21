@@ -8,15 +8,22 @@ import {
   isValidPackage,
   unknownError,
 } from "./workspace.mts";
-import type { AllowedCommands, CommandExtraArgs, FullPackageName, PackageName, WorkspaceCommand } from "@instructure.ai/shared-configs/types";
+import type {
+  AllowedCommands,
+  CommandExtraArgs,
+  FullPackageName,
+  PackageName,
+  WorkspaceCommand,
+} from "@instructure.ai/shared-configs/types";
 
 const main = async (): Promise<void> => {
   const { command, output, args }: WorkspaceCommand = Workspace();
 
   const previewCommands: AllowedCommands = ["all", "app", "apps"] as const;
 
-  if (!isValidCommand(command, previewCommands))
-    {exitWithError("Invalid preview command.");}
+  if (!isValidCommand(command, previewCommands)) {
+    exitWithError("Invalid preview command.");
+  }
 
   const previewPackage = (
     pkg: FullPackageName | PackageName,

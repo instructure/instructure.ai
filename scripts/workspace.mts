@@ -117,8 +117,9 @@ const getWorkspace = (name: FullPackageName): WorkspaceName => {
     );
   }
   const Workspace: WorkspaceName = name.split("/")[0] as WorkspaceName;
-  if (!isValidWorkspaceName(Workspace))
-    {exitWithError("Error: Invalid workspace name.");}
+  if (!isValidWorkspaceName(Workspace)) {
+    exitWithError("Error: Invalid workspace name.");
+  }
 
   return Workspace;
 };
@@ -177,13 +178,13 @@ const getPackages = (type?: WorkspaceType): PackageName[] => {
           console.warn(
             `Warning: Invalid package name '${pkgJson.name}' in ${dir.base}/${dir.name}/package.json`,
           );
-          return ;
+          return;
         }
       } catch {
         console.warn(
           `Warning: Could not read package.json for ${dir.base}/${dir.name}`,
         );
-        return ;
+        return;
       }
     })
     .filter((name): name is PackageName => !!name);
@@ -262,7 +263,9 @@ class WorkspaceClass implements WorkspaceInfo {
   info(): WorkspaceObj {
     // oxc-ignore assist/source/useSortedKeys: manual order for console output
     return {
-      apps: this.workspaceApps, name: this.workspaceName, packages: this.workspacePackages,
+      apps: this.workspaceApps,
+      name: this.workspaceName,
+      packages: this.workspacePackages,
     };
   }
 }

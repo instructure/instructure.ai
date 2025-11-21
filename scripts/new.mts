@@ -6,7 +6,10 @@ import {
   exitWithError,
   isAvailablePackage,
 } from "@instructure.ai/shared-configs/workspace";
-import type { WorkspaceTemplate, WorkspaceType } from "@instructure.ai/shared-configs/types";
+import type {
+  WorkspaceTemplate,
+  WorkspaceType,
+} from "@instructure.ai/shared-configs/types";
 
 async function main() {
   const { output } = Workspace(["workspace"], "new");
@@ -43,20 +46,24 @@ async function main() {
 
   const PACKAGENAME = args[0] ? args[0].trim() : "";
 
-  if (!PACKAGENAME)
-    {exitWithError(`Error: ${TYPE} name is required as the first argument.`);}
+  if (!PACKAGENAME) {
+    exitWithError(`Error: ${TYPE} name is required as the first argument.`);
+  }
 
   const workspaceName =
     output && typeof output === "object" && "name" in output
       ? output.name
       : undefined;
 
-  if (!workspaceName) {exitWithError("No workspace name found in output.");}
+  if (!workspaceName) {
+    exitWithError("No workspace name found in output.");
+  }
 
-  if (!isAvailablePackage(PACKAGENAME))
-    {exitWithError(
+  if (!isAvailablePackage(PACKAGENAME)) {
+    exitWithError(
       `'${PACKAGENAME}' already exists in workspace ${workspaceName}.`,
-    );}
+    );
+  }
 
   const REPLACESTRING = "<<packagename>>";
   const CLINAME = "<<cliname>>";
@@ -66,10 +73,11 @@ async function main() {
 
   // Validate NPM package name (unscoped)
   console.log(`Creating ${TYPE} '${PACKAGENAME}'...`);
-  if (!isAvailablePackage(PACKAGENAME))
-    {exitWithError(
+  if (!isAvailablePackage(PACKAGENAME)) {
+    exitWithError(
       "Error: Package name must be a valid NPM package name: lowercase letters, numbers, hyphens, periods, and start with a letter or number.",
-    );}
+    );
+  }
 
   const cwd = process.cwd();
   const pkgDir = path.resolve(cwd, `${TYPE}s`, PACKAGENAME);
@@ -77,10 +85,11 @@ async function main() {
   const chosenTplDir = path.resolve(cwd, ".template", TEMPLATE);
 
   // Check if package already exists
-  if (await pathExists(pkgDir))
-    {exitWithError(
+  if (await pathExists(pkgDir)) {
+    exitWithError(
       `Error: ${TYPE} '${PACKAGENAME}' already exists in ./${TYPE}s.`,
-    );}
+    );
+  }
 
   console.log(`Initializing ${TYPE}: ${PACKAGENAME}`);
   console.log(`Using template: ${TEMPLATE}`);
@@ -177,7 +186,9 @@ async function pathExists(p: string): Promise<boolean> {
 }
 
 async function safeCopyDir(src: string, dest: string) {
-  if (!(await pathExists(src))) {return;}
+  if (!(await pathExists(src))) {
+    return;
+  }
   const entries = await fs.readdir(src, { withFileTypes: true });
   for (const entry of entries) {
     const srcPath = path.join(src, entry.name);
@@ -199,7 +210,9 @@ async function replaceInFile(
   search: string,
   replacement: string,
 ) {
-  if (!(await pathExists(filePath))) {return;}
+  if (!(await pathExists(filePath))) {
+    return;
+  }
   const content = await fs.readFile(filePath, "utf8");
   const updated = content.split(search).join(replacement);
   if (updated !== content) {

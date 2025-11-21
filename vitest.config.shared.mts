@@ -11,7 +11,8 @@ const coveragePlugin = path.resolve(
 export default defineConfig({
   test: {
     coverage: {
-      all: true, exclude: [
+      all: true,
+      exclude: [
         "**/node_modules/**",
         "**/dist/**",
         "**/build/**",
@@ -21,11 +22,15 @@ export default defineConfig({
         ".vscode/*/**",
         "**/*.test.{ts,tsx,js,cjs,mjs,mts}",
         "tests/**",
-      ], include: ["{src,scripts,utils}/**/*.{ts,tsx,js,cjs,mjs,mts}"], provider: "istanbul", reporter: [
+      ],
+      include: ["{src,scripts,utils}/**/*.{ts,tsx,js,cjs,mjs,mts}"],
+      provider: "istanbul",
+      reporter: [
         "text",
         [coveragePlugin, { file: path.resolve(__dirname, "coverage.yml") }],
       ],
-    }, include: [
+    },
+    include: [
       "{src,scripts,utils,tests}/**/*.{test,spec}.{ts,tsx,js,cjs,mjs,mts}",
     ],
   },
