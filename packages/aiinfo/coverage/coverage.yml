@@ -1,27 +1,27 @@
 coverage:
   totals:
-    statements: 90.28%
-    branches: 80.78%
-    functions: 94.33%
-    lines: 89.97%
-    total: 88.84%
+    statements: 87.23%
+    branches: 78.94%
+    functions: 94.91%
+    lines: 86.98%
+    total: 87.02%
   scripts:
     totals:
-      statements: 85.4%
+      statements: 85.69%
       branches: 78.56%
-      functions: 82.82%
-      lines: 85.4%
+      functions: 83.76%
+      lines: 85.69%
     "clearCache.mts":
       statements: 100%
       branches: 100%
       functions: 100%
       lines: 100%
     "updateCache.mts":
-      statements: 76.19%
+      statements: 77.06%
       branches: 51.06%
-      functions: 81.81%
-      lines: 76.19%
-      uncovered_line_numbers: "37-233"
+      functions: 84.61%
+      lines: 77.06%
+      uncovered_line_numbers: "37-245"
     "writeEntries.mts":
       statements: 80%
       branches: 84.61%
@@ -51,10 +51,10 @@ coverage:
       lines: 100%
   utils:
     totals:
-      statements: 97.82%
-      branches: 92.02%
+      statements: 95.65%
+      branches: 90.61%
       functions: 100%
-      lines: 97.66%
+      lines: 95.51%
     "consts.ts":
       statements: 100%
       branches: 100%
@@ -88,22 +88,22 @@ coverage:
       functions: 100%
       lines: 100%
     "log.ts":
-      statements: 96%
-      branches: 90.9%
+      statements: 76.71%
+      branches: 81.08%
       functions: 100%
-      lines: 96%
-      uncovered_line_numbers: "20-21"
+      lines: 76.71%
+      uncovered_line_numbers: "20-158"
     "toTsObjectLiteral.ts":
-      statements: 97.05%
-      branches: 100%
+      statements: 92.5%
+      branches: 93.1%
       functions: 100%
-      lines: 96.66%
-      uncovered_line_numbers: "15"
+      lines: 92.1%
+      uncovered_line_numbers: "15-67"
     "writeBarrel.ts":
       statements: 97.56%
-      branches: 85.71%
+      branches: 86.95%
       functions: 100%
-      lines: 97.14%
+      lines: 97.29%
       uncovered_line_numbers: "20"
     "writeChangelog.ts":
       statements: 100%
