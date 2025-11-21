@@ -9,19 +9,31 @@ const UID = "rubricgenerator";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
   {
     description:
-      "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.", highlighted: false, level: "LEVEL 1", title: "Descriptive Analytics and Research",
+      "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
+    highlighted: false,
+    level: "LEVEL 1",
+    title: "Descriptive Analytics and Research",
   },
   {
     description:
-      "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.", highlighted: true, level: "LEVEL 2", title: "AI-Powered Features Without Data Training",
+      "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+    highlighted: true,
+    level: "LEVEL 2",
+    title: "AI-Powered Features Without Data Training",
   },
   {
     description:
-      "We customize AI solutions tailored to the unique needs and resources of educational institutions. We use customer data to fine-tune data and train AI models that only serve your institution. Your institution's data only serves them through trained models.", highlighted: false, level: "LEVEL 3", title: "AI Customization for Individual Institutions",
+      "We customize AI solutions tailored to the unique needs and resources of educational institutions. We use customer data to fine-tune data and train AI models that only serve your institution. Your institution's data only serves them through trained models.",
+    highlighted: false,
+    level: "LEVEL 3",
+    title: "AI Customization for Individual Institutions",
   },
   {
     description:
-      "We established a consortium with educational institutions that shares anonymized data, best practices, and research findings. This fosters collaboration and accelerates the responsible development of AI in education. Specialized AI models are created for better outcomes in education, cost savings, and more.", highlighted: false, level: "LEVEL 4", title: "Collaborative AI Consortium",
+      "We established a consortium with educational institutions that shares anonymized data, best practices, and research findings. This fosters collaboration and accelerates the responsible development of AI in education. Specialized AI models are created for better outcomes in education, cost savings, and more.",
+    highlighted: false,
+    level: "LEVEL 4",
+    title: "Collaborative AI Consortium",
   },
 ];
 const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
@@ -121,25 +133,46 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
   },
 ];
 const nutritionFacts: NutritionFactsProps = {
-  closeButtonText: "Close", closeIconButtonScreenReaderLabel: "Close", data: NUTRITION_FACTS_DATA, featureName: FEATURE_NAME, modalLabel: "This is a modal for AI facts", title: "AI Nutrition Facts", triggerText: "Nutrition Facts",
+  closeButtonText: "Close",
+  closeIconButtonScreenReaderLabel: "Close",
+  data: NUTRITION_FACTS_DATA,
+  featureName: FEATURE_NAME,
+  modalLabel: "This is a modal for AI facts",
+  title: "AI Nutrition Facts",
+  triggerText: "Nutrition Facts",
 };
 const dataPermissionLevels: DataPermissionLevelsProps = {
-  closeButtonText: "Close", closeIconButtonScreenReaderLabel: "Close dialog", currentFeature: FEATURE_NAME, currentFeatureText: "Current Feature:", data: DATA_PERMISSION_LEVELS, modalLabel: "Data Permission Levels modal", title: "Data Permission Levels", triggerText: "Data Permission Levels",
+  closeButtonText: "Close",
+  closeIconButtonScreenReaderLabel: "Close dialog",
+  currentFeature: FEATURE_NAME,
+  currentFeatureText: "Current Feature:",
+  data: DATA_PERMISSION_LEVELS,
+  modalLabel: "Data Permission Levels modal",
+  title: "Data Permission Levels",
+  triggerText: "Data Permission Levels",
 };
 const aiInformation: AiInformationProps = {
   data: [
     {
       description:
-        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-      featureName: "Generator for Rubrics",
-      modelName: "Haiku 3",
-      modelNameText: "Base Model",
-      nutritionFactsModalTriggerText: "AI Nutrition Facts",
-      permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
-      permissionLevelsModalTriggerText: "Data Permission Levels",
+        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.", featureName: "Generator for Rubrics", modelName: "Haiku 3", modelNameText: "Base Model", nutritionFactsModalTriggerText: "AI Nutrition Facts", permissionLevel: "LEVEL 2", permissionLevelText: "Permission Level:", permissionLevelsModalTriggerText: "Data Permission Levels",
     },
-  ], dataPermissionLevelsCloseButtonText: "Close", dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog", dataPermissionLevelsCurrentFeature: "Generator for Rubrics", dataPermissionLevelsCurrentFeatureText: "Current Feature:", dataPermissionLevelsData: DATA_PERMISSION_LEVELS, dataPermissionLevelsModalLabel: "Data Permission Levels modal", dataPermissionLevelsTitle: "Data Permission Levels", nutritionFactsCloseButtonText: "Close", nutritionFactsCloseIconButtonScreenReaderLabel: "Close", nutritionFactsData: NUTRITION_FACTS_DATA, nutritionFactsFeatureName: "Generator for Rubrics", nutritionFactsModalLabel: "This is a modal for AI facts", nutritionFactsTitle: "AI Nutrition Facts", title: "Features", trigger: undefined,
+  ],
+  dataPermissionLevelsCloseButtonText: "Close",
+  dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
+  dataPermissionLevelsCurrentFeature: "Generator for Rubrics",
+  dataPermissionLevelsCurrentFeatureText: "Current Feature:",
+  dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
+  dataPermissionLevelsModalLabel: "Data Permission Levels modal",
+  dataPermissionLevelsTitle: "Data Permission Levels",
+  nutritionFactsCloseButtonText: "Close",
+  nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
+  nutritionFactsData: NUTRITION_FACTS_DATA,
+  nutritionFactsFeatureName: "Generator for Rubrics",
+  nutritionFactsModalLabel: "This is a modal for AI facts",
+  nutritionFactsTitle: "AI Nutrition Facts",
+  title: "Features",
+  trigger: undefined,
 };
 const rubricgenerator: AiInfoFeatureProps = {
   aiInformation, dataPermissionLevels, description: "AI-generated rubric recommendations for Canvas assignments.", group: "Canvas", name: FEATURE_NAME, nutritionFacts, revision: "2025.10.09", uid: UID,
