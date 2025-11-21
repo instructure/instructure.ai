@@ -177,7 +177,6 @@ The following `devDependencies` are provided.  No `dependencies` are included.
     "oxlint": "latest",
     "oxlint-tsgolint": "latest",
     "react-compiler-runtime": "latest",
-    "terser": "latest",
     "vite": "npm:rolldown-vite@latest",
     "vite-node": "latest",
     "vite-plugin-dts": "latest",
