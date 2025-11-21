@@ -138,13 +138,9 @@ describe("writeChangelog", () => {
           regionsDescription: "region desc",
           retention: "30d",
         },
-        feature: { name: "Feature", description: "Test" },
+        feature: { description: "Test", name: "Feature" },
         model: {
-          name: "Model",
-          description: "desc",
-          data: "value",
-          dataDescription: "added data",
-          trained: "2024",
+          data: "value", dataDescription: "added data", description: "desc", name: "Model", trained: "2024",
         },
         outputs: {
           guardrails: "yes",
@@ -166,13 +162,9 @@ describe("writeChangelog", () => {
           regionsDescription: "region desc",
           retention: "30d",
         },
-        feature: { name: "Feature", description: "Test" },
+        feature: { description: "Test", name: "Feature" },
         model: {
-          name: "Model",
-          description: "desc",
-          data: "",
-          dataDescription: "",
-          trained: "2023",
+          data: "", dataDescription: "", description: "desc", name: "Model", trained: "2023",
         },
         outputs: {
           guardrails: "yes",

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-type Ansis = {
+interface Ansis {
   level: number;
   open: string;
   close: string;
@@ -11,7 +11,7 @@ type Ansis = {
   green: (s: string) => string;
   yellow: (s: string) => string;
   blue: (s: string) => string;
-};
+}
 interface AnsisMock {
   bold: (s: string) => string;
   cyan: (s: string) => string;
