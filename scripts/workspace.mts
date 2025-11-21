@@ -147,9 +147,9 @@ const getPackages = (type?: WorkspaceType): PackageName[] => {
   const packagesDirs =
     type === "app"
       ? [appsDir]
-      : (type === "package"
+      : type === "package"
         ? [pkgsDir]
-        : [appsDir, pkgsDir]);
+        : [appsDir, pkgsDir];
   const workspaceName = getWorkspace(getRootPackage() as FullPackageName);
   let allDirs: string[] = [];
   for (const dirPath of packagesDirs) {
@@ -369,9 +369,9 @@ const Workspace = (
       }
       const appFullName = isValidFullPackageName(pkg)
         ? workspace.apps().find((app) => app === pkg)
-        : (isValidPackageName(pkg)
+        : isValidPackageName(pkg)
           ? workspace.apps().find((app) => app.endsWith(`/${pkg}`))
-          : undefined);
+          : undefined;
       if (!appFullName) {
         exitWithError(
           `Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`,
