@@ -12,7 +12,15 @@ let lastWrittenPath: string | null;
 let lastWrittenContent = "";
 writeFileSync.mockImplementation((p, c) => {
   lastWrittenPath = String(p);
-  lastWrittenContent = String(c);
+  if (typeof c === "string") {
+    lastWrittenContent = c;
+  } else if (Buffer.isBuffer(c)) {
+    lastWrittenContent = c.toString("utf8");
+  } else if (c instanceof Uint8Array) {
+    lastWrittenContent = Buffer.from(c).toString("utf8");
+  } else {
+    lastWrittenContent = "";
+  }
 });
 
 function makeChangedEntry(
@@ -77,7 +85,15 @@ beforeEach(() => {
   readFileSync.mockReturnValue("");
   writeFileSync.mockImplementation((p, c) => {
     lastWrittenPath = String(p);
-    lastWrittenContent = String(c);
+    if (typeof c === "string") {
+      lastWrittenContent = c;
+    } else if (Buffer.isBuffer(c)) {
+      lastWrittenContent = c.toString("utf8");
+    } else if (c instanceof Uint8Array) {
+      lastWrittenContent = Buffer.from(c).toString("utf8");
+    } else {
+      lastWrittenContent = "";
+    }
   });
 });
 

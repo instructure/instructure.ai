@@ -41,7 +41,7 @@ const Log = (content: LogProps): void => {
       color,
       style,
     } = content as LogObject;
-    const format = (msg: unknown): string | unknown => {
+    const format = (msg: unknown): unknown => {
       try {
         if (typeof msg === "string") {
           let formatted = msg;
