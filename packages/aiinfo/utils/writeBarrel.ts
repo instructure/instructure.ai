@@ -3,66 +3,69 @@ import { join, resolve } from "node:path";
 import { formatTs } from "../utils/formatTs";
 
 interface Options {
-	srcDir?: string;
-	outFileName?: string;
-	sort?: boolean;
-	skipInvalidIdentifiers?: boolean;
+  srcDir?: string;
+  outFileName?: string;
+  sort?: boolean;
+  skipInvalidIdentifiers?: boolean;
 }
 
 const writeBarrel = (opts: Options = {}) => {
-	const SRC_DIR = resolve(process.cwd(), opts.srcDir ?? "node/components");
-	const OUT_FILE = join(process.cwd(), "node", opts.outFileName ?? "index.ts");
+  const SRC_DIR = resolve(process.cwd(), opts.srcDir ?? "node/components");
+  const OUT_FILE = join(process.cwd(), "node", opts.outFileName ?? "index.ts");
 
-	const isDir = (p: string) => {
-		try {
-			return statSync(p).isDirectory();
-		} catch {
-			return false;
-		}
-	};
-	const hasIndexTsOrTsx = (dir: string) =>
-		existsSync(join(dir, "index.ts")) || existsSync(join(dir, "index.tsx"));
-	const isValidIdentifier = (s: string) => /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(s);
+  const isDir = (p: string) => {
+    try {
+      return statSync(p).isDirectory();
+    } catch {
+      return false;
+    }
+  };
+  const hasIndexTsOrTsx = (dir: string) =>
+    existsSync(join(dir, "index.ts")) || existsSync(join(dir, "index.tsx"));
+  const isValidIdentifier = (s: string) => /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(s);
 
-	let uids: string[];
-	try {
-		uids = readdirSync(SRC_DIR).filter(
-			(name) =>
-				isDir(join(SRC_DIR, name)) && hasIndexTsOrTsx(join(SRC_DIR, name)),
-		);
-	} catch (error) {
-		throw new Error(
-			`Failed to read directory '${SRC_DIR}': ${
-				error instanceof Error ? error.message : String(error)
-			}`, { cause: error },
-		);
-	}
+  let uids: string[];
+  try {
+    uids = readdirSync(SRC_DIR).filter(
+      (name) =>
+        isDir(join(SRC_DIR, name)) && hasIndexTsOrTsx(join(SRC_DIR, name)),
+    );
+  } catch (error) {
+    throw new Error(
+      `Failed to read directory '${SRC_DIR}': ${
+        error instanceof Error ? error.message : String(error)
+      }`,
+      { cause: error },
+    );
+  }
 
-	if (opts.sort !== false) {uids.sort();}
+  if (opts.sort !== false) {
+    uids.sort();
+  }
 
-	const invalid = uids.filter((u) => !isValidIdentifier(u));
-	if (invalid.length) {
-		if (opts.skipInvalidIdentifiers) {
-			uids = uids.filter((u) => isValidIdentifier(u));
-		} else {
-			throw new Error(
-				`These uids are not valid TS identifiers: ${invalid.join(", ")}`,
-			);
-		}
-	}
+  const invalid = uids.filter((u) => !isValidIdentifier(u));
+  if (invalid.length) {
+    if (opts.skipInvalidIdentifiers) {
+      uids = uids.filter((u) => isValidIdentifier(u));
+    } else {
+      throw new Error(
+        `These uids are not valid TS identifiers: ${invalid.join(", ")}`,
+      );
+    }
+  }
 
-	const imports =
-		uids.map((u) => `import { ${u} } from "./components/${u}";`).join("\n") ||
-		"// no feature folders found";
+  const imports =
+    uids.map((u) => `import { ${u} } from "./components/${u}";`).join("\n") ||
+    "// no feature folders found";
 
-	const typesImport = `import type {
+  const typesImport = `import type {
   AiInfoProps,
   AiInfoNutritionFactsProps,
   AiInfoDataPermissionLevelsProps,
   AiInfoAiInformationProps
 } from "./types";`;
 
-	const pluckHelper = `const pluck = <
+  const pluckHelper = `const pluck = <
     TRecord extends Record<string, object>,
     K extends keyof TRecord[keyof TRecord]
   >(obj: TRecord, key: K): { [P in keyof TRecord]: TRecord[P][K] } => {
@@ -73,17 +76,17 @@ const writeBarrel = (opts: Options = {}) => {
     return out;
   };`;
 
-	const AiInfo = `const AiInfo: AiInfoProps = {
+  const AiInfo = `const AiInfo: AiInfoProps = {
 ${uids.map((u) => `  ${u},`).join("\n")}
 };`;
 
-	const nutritionFacts = `const nutritionFacts: AiInfoNutritionFactsProps = pluck(AiInfo, "nutritionFacts");`;
+  const nutritionFacts = `const nutritionFacts: AiInfoNutritionFactsProps = pluck(AiInfo, "nutritionFacts");`;
 
-	const dataPermissionLevels = `const dataPermissionLevels: AiInfoDataPermissionLevelsProps = pluck(AiInfo, "dataPermissionLevels");`;
+  const dataPermissionLevels = `const dataPermissionLevels: AiInfoDataPermissionLevelsProps = pluck(AiInfo, "dataPermissionLevels");`;
 
-	const aiInformation = `const aiInformation: AiInfoAiInformationProps = pluck(AiInfo, "aiInformation");`;
+  const aiInformation = `const aiInformation: AiInfoAiInformationProps = pluck(AiInfo, "aiInformation");`;
 
-	const exportsBlock = `
+  const exportsBlock = `
 export {
   AiInfo,
   nutritionFacts,
@@ -95,39 +98,41 @@ export {
 export type * from "./types";
 export default AiInfo;`.trim();
 
-	const code = [
-		imports,
-		typesImport,
-		pluckHelper,
-		AiInfo,
-		nutritionFacts,
-		dataPermissionLevels,
-		aiInformation,
-		exportsBlock,
-	]
-		.filter(Boolean)
-		.join("\n\n");
+  const code = [
+    imports,
+    typesImport,
+    pluckHelper,
+    AiInfo,
+    nutritionFacts,
+    dataPermissionLevels,
+    aiInformation,
+    exportsBlock,
+  ]
+    .filter(Boolean)
+    .join("\n\n");
 
-	let formatted: string;
-	try {
-		formatted = formatTs(code, "index.ts");
-	} catch (error) {
-		throw new Error(
-			`Failed to format TypeScript code: ${
-				error instanceof Error ? error.message : String(error)
-			}`, { cause: error },
-		);
-	}
+  let formatted: string;
+  try {
+    formatted = formatTs(code, "index.ts");
+  } catch (error) {
+    throw new Error(
+      `Failed to format TypeScript code: ${
+        error instanceof Error ? error.message : String(error)
+      }`,
+      { cause: error },
+    );
+  }
 
-	try {
-		writeFileSync(OUT_FILE, formatted, "utf8");
-	} catch (error) {
-		throw new Error(
-			`Failed to write barrel file '${OUT_FILE}': ${
-				error instanceof Error ? error.message : String(error)
-			}`, { cause: error },
-		);
-	}
+  try {
+    writeFileSync(OUT_FILE, formatted, "utf8");
+  } catch (error) {
+    throw new Error(
+      `Failed to write barrel file '${OUT_FILE}': ${
+        error instanceof Error ? error.message : String(error)
+      }`,
+      { cause: error },
+    );
+  }
 };
 
 export { writeBarrel };

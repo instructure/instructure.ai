@@ -1,40 +1,40 @@
 import type {
-	AiInformationProps,
-	DataPermissionLevelsProps,
-	NutritionFactsProps,
+  AiInformationProps,
+  DataPermissionLevelsProps,
+  NutritionFactsProps,
 } from "@instructure/ui-instructure";
 
 interface AiInfoFeatureProps {
-	nutritionFacts: NutritionFactsProps;
-	dataPermissionLevels: DataPermissionLevelsProps;
-	aiInformation: AiInformationProps;
-	uid: string;
-	revision: string;
-	group: string;
-	name: string;
-	description: string;
+  nutritionFacts: NutritionFactsProps;
+  dataPermissionLevels: DataPermissionLevelsProps;
+  aiInformation: AiInformationProps;
+  uid: string;
+  revision: string;
+  group: string;
+  name: string;
+  description: string;
 }
 
 interface AiInfoProps {
-	[uid: string]: AiInfoFeatureProps;
+  [uid: string]: AiInfoFeatureProps;
 }
 
 interface AiInfoNutritionFactsProps {
-	[uid: string]: NutritionFactsProps;
+  [uid: string]: NutritionFactsProps;
 }
 
 interface AiInfoDataPermissionLevelsProps {
-	[uid: string]: DataPermissionLevelsProps;
+  [uid: string]: DataPermissionLevelsProps;
 }
 
 interface AiInfoAiInformationProps {
-	[uid: string]: AiInformationProps;
+  [uid: string]: AiInformationProps;
 }
 
 export type {
-	AiInfoProps,
-	AiInfoFeatureProps,
-	AiInfoNutritionFactsProps,
-	AiInfoDataPermissionLevelsProps,
-	AiInfoAiInformationProps,
+  AiInfoProps,
+  AiInfoFeatureProps,
+  AiInfoNutritionFactsProps,
+  AiInfoDataPermissionLevelsProps,
+  AiInfoAiInformationProps,
 };

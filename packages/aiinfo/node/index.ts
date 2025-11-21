@@ -14,75 +14,75 @@ import { quickreassess } from "./components/quickreassess";
 import { rubricgenerator } from "./components/rubricgenerator";
 import { smartsearch } from "./components/smartsearch";
 import type {
-	AiInfoAiInformationProps,
-	AiInfoDataPermissionLevelsProps,
-	AiInfoNutritionFactsProps,
-	AiInfoProps,
+  AiInfoAiInformationProps,
+  AiInfoDataPermissionLevelsProps,
+  AiInfoNutritionFactsProps,
+  AiInfoProps,
 } from "./types";
 
 const pluck = <
-	TRecord extends Record<string, object>,
-	K extends keyof TRecord[keyof TRecord],
+  TRecord extends Record<string, object>,
+  K extends keyof TRecord[keyof TRecord],
 >(
-	obj: TRecord,
-	key: K,
+  obj: TRecord,
+  key: K,
 ): {
-	[P in keyof TRecord]: TRecord[P][K];
+  [P in keyof TRecord]: TRecord[P][K];
 } => {
-	const out = {} as {
-		[P in keyof TRecord]: TRecord[P][K];
-	};
-	for (const k in obj) {
-		out[k] = obj[k][key];
-	}
-	return out;
+  const out = {} as {
+    [P in keyof TRecord]: TRecord[P][K];
+  };
+  for (const k in obj) {
+    out[k] = obj[k][key];
+  }
+  return out;
 };
 const AiInfo: AiInfoProps = {
-	askyourdata,
-	assessmentauthoringassistance,
-	bcealttext,
-	canvascoursetranslation,
-	canvasdiscussionsummaries,
-	canvasgradingassistance,
-	canvasinboxtranslation,
-	conversionalignment,
-	discussioninsights,
-	igniteagent,
-	itemauthoringassistance,
-	portfolios,
-	quickreassess,
-	rubricgenerator,
-	smartsearch,
+  askyourdata,
+  assessmentauthoringassistance,
+  bcealttext,
+  canvascoursetranslation,
+  canvasdiscussionsummaries,
+  canvasgradingassistance,
+  canvasinboxtranslation,
+  conversionalignment,
+  discussioninsights,
+  igniteagent,
+  itemauthoringassistance,
+  portfolios,
+  quickreassess,
+  rubricgenerator,
+  smartsearch,
 };
 const nutritionFacts: AiInfoNutritionFactsProps = pluck(
-	AiInfo,
-	"nutritionFacts",
+  AiInfo,
+  "nutritionFacts",
 );
 const dataPermissionLevels: AiInfoDataPermissionLevelsProps = pluck(
-	AiInfo,
-	"dataPermissionLevels",
+  AiInfo,
+  "dataPermissionLevels",
 );
 const aiInformation: AiInfoAiInformationProps = pluck(AiInfo, "aiInformation");
 export {
-	AiInfo,
-	nutritionFacts,
-	dataPermissionLevels,
-	aiInformation,
-	askyourdata,
-	assessmentauthoringassistance,
-	bcealttext,
-	canvascoursetranslation,
-	canvasdiscussionsummaries,
-	canvasgradingassistance,
-	canvasinboxtranslation,
-	conversionalignment,
-	discussioninsights,
-	igniteagent,
-	itemauthoringassistance,
-	portfolios,
-	quickreassess,
-	rubricgenerator,
-	smartsearch,
+  AiInfo,
+  nutritionFacts,
+  dataPermissionLevels,
+  aiInformation,
+  askyourdata,
+  assessmentauthoringassistance,
+  bcealttext,
+  canvascoursetranslation,
+  canvasdiscussionsummaries,
+  canvasgradingassistance,
+  canvasinboxtranslation,
+  conversionalignment,
+  discussioninsights,
+  igniteagent,
+  itemauthoringassistance,
+  portfolios,
+  quickreassess,
+  rubricgenerator,
+  smartsearch,
 };
 export type * from "./types";
 export default AiInfo;

@@ -2,11 +2,11 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import type { Entry } from "../types";
 import {
-	entryToAIInformation,
-	entryToNutritionFacts,
-	entryToPermissionLevels,
-	formatTs,
-	toTsObjectLiteral,
+  entryToAIInformation,
+  entryToNutritionFacts,
+  entryToPermissionLevels,
+  formatTs,
+  toTsObjectLiteral,
 } from "../utils";
 
 /**
@@ -17,27 +17,27 @@ import {
  * @param entry - The Entry object to serialize and write.
  */
 export async function writeEntry(entry: Entry) {
-	const file = resolve(
-		process.cwd(),
-		"node",
-		"components",
-		entry.uid,
-		"index.ts",
-	);
+  const file = resolve(
+    process.cwd(),
+    "node",
+    "components",
+    entry.uid,
+    "index.ts",
+  );
 
-	const UID = entry.uid;
-	const FEATURE_NAME = entry.feature.name;
-	const REVISION = entry.revision;
-	const DESCRIPTION = entry.feature.description;
+  const UID = entry.uid;
+  const FEATURE_NAME = entry.feature.name;
+  const REVISION = entry.revision;
+  const DESCRIPTION = entry.feature.description;
 
-	const nutritionFacts = entryToNutritionFacts(entry);
-	const aiInformation = entryToAIInformation(entry);
-	const dataPermissionLevels = entryToPermissionLevels(entry);
+  const nutritionFacts = entryToNutritionFacts(entry);
+  const aiInformation = entryToAIInformation(entry);
+  const dataPermissionLevels = entryToPermissionLevels(entry);
 
-	const DPL = dataPermissionLevels.data;
-	const NF = nutritionFacts.data;
+  const DPL = dataPermissionLevels.data;
+  const NF = nutritionFacts.data;
 
-	const code = `import type {
+  const code = `import type {
   AiInformationProps,
   DataPermissionLevelsProps,
   NutritionFactsProps,
@@ -90,6 +90,6 @@ export {
 export default ${UID};
 `;
 
-	mkdirSync(dirname(file), { recursive: true });
-	writeFileSync(file, formatTs(code, "index.ts"), "utf8");
+  mkdirSync(dirname(file), { recursive: true });
+  writeFileSync(file, formatTs(code, "index.ts"), "utf8");
 }

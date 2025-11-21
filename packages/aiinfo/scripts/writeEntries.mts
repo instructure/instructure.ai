@@ -5,11 +5,11 @@ import { parse } from "papaparse";
 import { Log, entryToObj, writeBarrel, writeEntry } from "../utils";
 
 const parseCSV = (data: string) => {
-	const parsed = parse<string[]>(data, {
-		delimiter: ",",
-		skipEmptyLines: true,
-	});
-	return parsed.data;
+  const parsed = parse<string[]>(data, {
+    delimiter: ",",
+    skipEmptyLines: true,
+  });
+  return parsed.data;
 };
 
 /**
@@ -17,45 +17,45 @@ const parseCSV = (data: string) => {
  * @param entries Optional parsed array of entries. If not provided, reads from cache.
  */
 const main = async (entries?: string[][]) => {
-	let parsed = entries;
-	if (!parsed) {
-		const cachePath = path.resolve(__dirname, "../cache/cache.csv");
-		if (!fs.existsSync(cachePath)) {
-			Log({ color: "redBright", message: ["No cache.csv found."] });
-			return;
-		}
-		const raw = fs.readFileSync(cachePath, "utf8");
-		parsed = parseCSV(raw);
-	}
-	Log({ color: "green", message: "Writing entries..." });
-	if (!parsed || parsed.length === 0) {
-		Log({ color: "yellow", message: ["No entries to write."] });
-		return;
-	}
-	for (const entry of parsed) {
-		const EntryObj = entryToObj(entry);
-		await writeEntry(EntryObj);
-		Log({ color: "cyan", message: [` * ${EntryObj.uid}`] });
-	}
-	writeBarrel();
+  let parsed = entries;
+  if (!parsed) {
+    const cachePath = path.resolve(__dirname, "../cache/cache.csv");
+    if (!fs.existsSync(cachePath)) {
+      Log({ color: "redBright", message: ["No cache.csv found."] });
+      return;
+    }
+    const raw = fs.readFileSync(cachePath, "utf8");
+    parsed = parseCSV(raw);
+  }
+  Log({ color: "green", message: "Writing entries..." });
+  if (!parsed || parsed.length === 0) {
+    Log({ color: "yellow", message: ["No entries to write."] });
+    return;
+  }
+  for (const entry of parsed) {
+    const EntryObj = entryToObj(entry);
+    await writeEntry(EntryObj);
+    Log({ color: "cyan", message: [` * ${EntryObj.uid}`] });
+  }
+  writeBarrel();
 
-	try {
-		execSync("pnpm oxfmt ./node", { stdio: "ignore" });
-	} catch (error) {
-		Log({ color: "redBright", message: ["OxC formatting failed:", error] });
-	}
-	Log({ color: "green", message: ["Entries and barrel written."] });
+  try {
+    execSync("pnpm oxfmt ./node", { stdio: "ignore" });
+  } catch (error) {
+    Log({ color: "redBright", message: ["OxC formatting failed:", error] });
+  }
+  Log({ color: "green", message: ["Entries and barrel written."] });
 };
 
 const isDirect =
-	import.meta.url === `file://${process.argv[1]}` ||
-	process.env.npm_lifecycle_event === "write:all" ||
-	process.env.WRITE === "1";
+  import.meta.url === `file://${process.argv[1]}` ||
+  process.env.npm_lifecycle_event === "write:all" ||
+  process.env.WRITE === "1";
 
 if (isDirect) {
-	main().catch((error) => {
-		Log({ color: "redBright", message: ["Error writing entries:", error] });
-		process.exit(1);
-	});
+  main().catch((error) => {
+    Log({ color: "redBright", message: ["Error writing entries:", error] });
+    process.exit(1);
+  });
 }
 export { main, main as WriteEntries };

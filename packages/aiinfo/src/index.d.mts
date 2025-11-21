@@ -1,4 +1,8 @@
-import type { AiInformationProps, DataPermissionLevelsProps, NutritionFactsProps } from "@instructure/ui-instructure";
+import {
+  AiInformationProps,
+  DataPermissionLevelsProps,
+  NutritionFactsProps,
+} from "@instructure/ui-instructure";
 
 //#region node/types.d.ts
 interface AiInfoFeatureProps {
@@ -75,4 +79,30 @@ declare const nutritionFacts: AiInfoNutritionFactsProps;
 declare const dataPermissionLevels: AiInfoDataPermissionLevelsProps;
 declare const aiInformation: AiInfoAiInformationProps;
 //#endregion
-export { AiInfo, AiInfo as default, type AiInfoAiInformationProps, type AiInfoDataPermissionLevelsProps, type AiInfoFeatureProps, type AiInfoNutritionFactsProps, type AiInfoProps, aiInformation, askyourdata, assessmentauthoringassistance, bcealttext, canvascoursetranslation, canvasdiscussionsummaries, canvasgradingassistance, canvasinboxtranslation, conversionalignment, dataPermissionLevels, discussioninsights, igniteagent, itemauthoringassistance, nutritionFacts, portfolios, quickreassess, rubricgenerator, smartsearch };
+export {
+  AiInfo,
+  AiInfo as default,
+  type AiInfoAiInformationProps,
+  type AiInfoDataPermissionLevelsProps,
+  type AiInfoFeatureProps,
+  type AiInfoNutritionFactsProps,
+  type AiInfoProps,
+  aiInformation,
+  askyourdata,
+  assessmentauthoringassistance,
+  bcealttext,
+  canvascoursetranslation,
+  canvasdiscussionsummaries,
+  canvasgradingassistance,
+  canvasinboxtranslation,
+  conversionalignment,
+  dataPermissionLevels,
+  discussioninsights,
+  igniteagent,
+  itemauthoringassistance,
+  nutritionFacts,
+  portfolios,
+  quickreassess,
+  rubricgenerator,
+  smartsearch,
+};
