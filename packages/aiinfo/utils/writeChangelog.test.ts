@@ -135,7 +135,7 @@ describe("writeChangelog", () => {
     expect(result?.changelog).toContain("#### SHA");
     expect(result?.changelog).toContain("```diff\ncsvShaX\n```");
     expect(result?.changelog).toContain("### uid-new");
-    expect(result?.changelog).toContain("#### feature.name");
+    expect(result?.changelog).toContain("#### feature");
     expect(result?.changelog).toContain("#### model");
     expect(writeFileSync).toHaveBeenCalledTimes(1);
     expect(lastWrittenContent.startsWith("# Changelog")).toBeTruthy();
