@@ -1,7 +1,11 @@
 {
   "$schema": "../../node_modules/oxfmt/configuration_schema.json",
-  "extends": ["../../.oxfmtrc.jsonc"],
+  "extends": [
+    "../../.oxfmtrc.jsonc"
+  ],
   "files": {
-    "exclude": ["src/**"]
+    "exclude": [
+      "./src/**"
+    ]
   }
 }
