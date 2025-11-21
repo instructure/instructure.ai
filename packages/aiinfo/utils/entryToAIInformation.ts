@@ -11,20 +11,13 @@ const setData = (
 			{
 				description:
 					permissionLevelsStrings.en.data[Number(entry.permissions) - 1]
-						?.description ?? "Unknown",
-				featureName: entry.feature?.name ?? "Unknown",
-				modelName: entry.model?.name ?? "Unknown",
-				modelNameText: data.modelNameText ?? "Error",
-				nutritionFactsModalTriggerText:
-					data.nutritionFactsModalTriggerText ?? "Error",
-				permissionLevel: `LEVEL ${entry.permissions ?? "Unknown"}`,
-				permissionLevelsModalTriggerText:
+						?.description ?? "Unknown", featureName: entry.feature?.name ?? "Unknown", modelName: entry.model?.name ?? "Unknown", modelNameText: data.modelNameText ?? "Error", nutritionFactsModalTriggerText:
+					data.nutritionFactsModalTriggerText ?? "Error", permissionLevel: `LEVEL ${entry.permissions ?? "Unknown"}`, permissionLevelText: data.permissionLevelText ?? "Error", permissionLevelsModalTriggerText:
 					data.permissionLevelsModalTriggerText ?? "Error",
-				permissionLevelText: data.permissionLevelText ?? "Error",
 			},
 		];
-	} catch (err) {
-		throw new Error(`Error in entryToAIInformation: ${String(err)}`);
+	} catch (error) {
+		throw new Error(`Error in entryToAIInformation: ${String(error)}`, { cause: error });
 	}
 };
 
@@ -47,8 +40,8 @@ const entryToAIInformation = (entry: Entry): AiInfoFeature["aiInformation"] => {
 			nutritionFactsFeatureName: nutritionFacts.featureName,
 			trigger: undefined,
 		};
-	} catch (err) {
-		throw new Error(`Error in entryToAIInformation: ${String(err)}`);
+	} catch (error) {
+		throw new Error(`Error in entryToAIInformation: ${String(error)}`, { cause: error });
 	}
 };
 

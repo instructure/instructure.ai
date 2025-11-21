@@ -9,9 +9,9 @@ interface NutritionBacking {
 	closeIconButtonScreenReaderLabel: string;
 	data: {
 		blockTitle: string;
-		segmentData: Array<{
+		segmentData: {
 			id?: string;
-		}>;
+		}[];
 	}[];
 	modalLabel: string;
 	title: string;
