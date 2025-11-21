@@ -32,7 +32,7 @@ jobs:
         id: find_tags
         shell: bash
         run: |
-          TAGS=$(git tag --points-at HEAD | grep -E '^@instructure.ai/.+@([0-9]+\.[0-9]+\.[0-9]+)$' || true)
+          TAGS=$(git tag --points-at HEAD | grep -E '^@instructure.ai/.+@([0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9\.-]+)?)$' || true)
 
           # Output for conditionals in later steps
           echo "tags<<EOF" >> "$GITHUB_OUTPUT"
