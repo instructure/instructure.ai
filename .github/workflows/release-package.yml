@@ -128,33 +128,48 @@ jobs:
               if [ -n "$JSON_PATH" ]; then
                 ACCESS_PUBLIC=$(jq -r '.publishConfig.access // empty' "$JSON_PATH")
                 PRIVATE=$(jq -r '.private // false' "$JSON_PATH")
+                VERSION=$(jq -r '.version' "$JSON_PATH")
+                # Extract prerelease id (e.g., alpha, beta, rc) if present
+                if [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+-([a-zA-Z0-9]+)\.[0-9]+$ ]]; then
+                  PRERELEASE_ID="${BASH_REMATCH[1]}"
+                  NPM_TAG="--tag $PRERELEASE_ID"
+                else
+                  NPM_TAG=""
+                fi
                 if [ "$PRIVATE" = "true" ]; then
                   echo "Skipping publish for $PKG_NAME because it is marked private."
                 elif [ "$ACCESS_PUBLIC" = "public" ]; then
                   echo "Publishing $PKG_NAME as public via npm (OIDC)…"
-                  npm publish "$TARBALL" --access public --provenance
+                  npm publish "$TARBALL" --access public --provenance $NPM_TAG
                 elif [ -n "$ACCESS_PUBLIC" ] && [ "$ACCESS_PUBLIC" != "public" ]; then
                   echo "Skipping publish for $PKG_NAME because publishConfig.access is '$ACCESS_PUBLIC'."
                 else
                   echo "Publishing $PKG_NAME via npm (no --access public)…"
-                  npm publish "$TARBALL" --provenance
+                  npm publish "$TARBALL" --provenance $NPM_TAG
                 fi
               else
                 echo "package.json not found for $PKG_NAME in packages, publishing without access check."
-                npm publish "$TARBALL" --provenance
+                npm publish "$TARBALL" --provenance $NPM_TAG
               fi
             else
               echo "Skipping publish for $PKG_NAME (not in /packages or is shared-configs)."
             fi
 
 
+            # Determine if this is a prerelease (contains a hyphen after the patch version)
+            if [[ "$TAG" =~ ^@instructure\.ai/.+@[0-9]+\.[0-9]+\.[0-9]+- ]]; then
+              PRERELEASE_FLAG="--prerelease"
+            else
+              PRERELEASE_FLAG=""
+            fi
+
             # Create GitHub release (attach asset only for /packages)
             if [ "$PKG_NAME" = "shared-configs" ]; then
-              gh release create "$TAG" --title "$TAG" --generate-notes
+              gh release create "$TAG" --title "$TAG" --generate-notes $PRERELEASE_FLAG
             elif [ -d "packages/$PKG_NAME" ]; then
-              gh release create "$TAG" ./packages/$PKG_NAME/src/*.tgz --title "$TAG" --generate-notes
+              gh release create "$TAG" ./packages/$PKG_NAME/src/*.tgz --title "$TAG" --generate-notes $PRERELEASE_FLAG
             else
-              gh release create "$TAG" --title "$TAG" --generate-notes
+              gh release create "$TAG" --title "$TAG" --generate-notes $PRERELEASE_FLAG
             fi
           done
 
