@@ -48,16 +48,28 @@ export async function writeEntry(entry: Entry) {
   const DPL = dataPermissionLevels.data;
   const NF = nutritionFacts.data;
 
-  const nutritionFactsBase = omit(nutritionFacts, ["data", "featureName"]);
-  const dataPermissionLevelsBase = omit(dataPermissionLevels, [
-    "data",
-    "currentFeature",
-  ]);
-  const aiInformationBase = omit(aiInformation, [
-    "dataPermissionLevelsData",
-    "nutritionFactsData",
-    "trigger",
-  ]);
+  const nutritionFactsWithConstants = {
+    ...omit(nutritionFacts, ["data", "featureName"]),
+    data: "NUTRITION_FACTS_DATA",
+    featureName: "FEATURE_NAME",
+  };
+
+  const dataPermissionLevelsWithConstants = {
+    ...omit(dataPermissionLevels, ["data", "currentFeature"]),
+    data: "DATA_PERMISSION_LEVELS",
+    currentFeature: "FEATURE_NAME",
+  };
+
+  const aiInformationWithConstants = {
+    ...omit(aiInformation, [
+      "dataPermissionLevelsData",
+      "nutritionFactsData",
+      "trigger",
+    ]),
+    dataPermissionLevelsData: "DATA_PERMISSION_LEVELS",
+    nutritionFactsData: "NUTRITION_FACTS_DATA",
+    trigger: undefined,
+  };
 
   const code = `import type {
   AiInformationProps,
@@ -72,24 +84,11 @@ const UID = ${JSON.stringify(UID)};
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = ${toTsObjectLiteral(DPL)};
 const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = ${toTsObjectLiteral(NF)};
 
-const nutritionFacts: NutritionFactsProps = {
-  ...${toTsObjectLiteral(nutritionFactsBase)},
-  data: NUTRITION_FACTS_DATA,
-  featureName: FEATURE_NAME,
-};
+const nutritionFacts: NutritionFactsProps = ${toTsObjectLiteral(nutritionFactsWithConstants, { replaceStrings: ["NUTRITION_FACTS_DATA", "FEATURE_NAME"] })};
 
-const dataPermissionLevels: DataPermissionLevelsProps = {
-  ...${toTsObjectLiteral(dataPermissionLevelsBase)},
-  data: DATA_PERMISSION_LEVELS,
-  currentFeature: FEATURE_NAME,
-};
+const dataPermissionLevels: DataPermissionLevelsProps = ${toTsObjectLiteral(dataPermissionLevelsWithConstants, { replaceStrings: ["DATA_PERMISSION_LEVELS", "FEATURE_NAME"] })};
 
-const aiInformation: AiInformationProps = {
-  ...${toTsObjectLiteral(aiInformationBase)},
-  dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-  nutritionFactsData: NUTRITION_FACTS_DATA,
-  trigger: undefined,
-};
+const aiInformation: AiInformationProps = ${toTsObjectLiteral(aiInformationWithConstants, { replaceStrings: ["DATA_PERMISSION_LEVELS", "NUTRITION_FACTS_DATA"] })};
 
 const ${UID}: AiInfoFeatureProps = {
   aiInformation,
