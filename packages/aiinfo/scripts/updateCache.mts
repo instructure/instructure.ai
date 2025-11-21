@@ -108,9 +108,18 @@ const updateCache = async (data: CSVFetchResult): Promise<void> => {
   }
 
   try {
+    const sortedChecksums = Object.keys(checksums)
+      .sort((a, b) => {
+        return a.localeCompare(b);
+      })
+      .reduce<Record<string, Hash>>((acc, key) => {
+        acc[key] = checksums[key];
+        return acc;
+      }, {});
+
     fs.writeFileSync(
       checksumPath,
-      `${JSON.stringify(checksums, undefined, 2)}\n`,
+      `${JSON.stringify(sortedChecksums, undefined, 2)}\n`,
     );
   } catch (error) {
     Log(["Failed to update checksum.json:", error]);
