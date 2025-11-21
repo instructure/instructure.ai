@@ -154,7 +154,14 @@ const aiInformation: AiInformationProps = {
   data: [
     {
       description:
-        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.", featureName: "Translations for Inbox", modelName: "AWS Translate", modelNameText: "Base Model", nutritionFactsModalTriggerText: "AI Nutrition Facts", permissionLevel: "LEVEL 2", permissionLevelText: "Permission Level:", permissionLevelsModalTriggerText: "Data Permission Levels",
+        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+      featureName: "Translations for Inbox",
+      modelName: "AWS Translate",
+      modelNameText: "Base Model",
+      nutritionFactsModalTriggerText: "AI Nutrition Facts",
+      permissionLevel: "LEVEL 2",
+      permissionLevelText: "Permission Level:",
+      permissionLevelsModalTriggerText: "Data Permission Levels",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -174,8 +181,15 @@ const aiInformation: AiInformationProps = {
   trigger: undefined,
 };
 const canvasinboxtranslation: AiInfoFeatureProps = {
-  aiInformation, dataPermissionLevels, description:
-    'Translation of inbox messages ("Inbox AI Translation" feature flag) across 10 languages.', group: "Canvas", name: FEATURE_NAME, nutritionFacts, revision: "2025.09.10", uid: UID,
+  aiInformation,
+  dataPermissionLevels,
+  description:
+    'Translation of inbox messages ("Inbox AI Translation" feature flag) across 10 languages.',
+  group: "Canvas",
+  name: FEATURE_NAME,
+  nutritionFacts,
+  revision: "2025.09.10",
+  uid: UID,
 };
 export {
   canvasinboxtranslation,

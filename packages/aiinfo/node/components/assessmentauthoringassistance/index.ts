@@ -154,7 +154,14 @@ const aiInformation: AiInformationProps = {
   data: [
     {
       description:
-        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.", featureName: "Item Authoring", modelName: "Haiku 3", modelNameText: "Base Model", nutritionFactsModalTriggerText: "AI Nutrition Facts", permissionLevel: "LEVEL 2", permissionLevelText: "Permission Level:", permissionLevelsModalTriggerText: "Data Permission Levels",
+        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+      featureName: "Item Authoring",
+      modelName: "Haiku 3",
+      modelNameText: "Base Model",
+      nutritionFactsModalTriggerText: "AI Nutrition Facts",
+      permissionLevel: "LEVEL 2",
+      permissionLevelText: "Permission Level:",
+      permissionLevelsModalTriggerText: "Data Permission Levels",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -174,8 +181,15 @@ const aiInformation: AiInformationProps = {
   trigger: undefined,
 };
 const assessmentauthoringassistance: AiInfoFeatureProps = {
-  aiInformation, dataPermissionLevels, description:
-    "Item Authoring for Assessments streamlines assessment creation by generating questions based on your course materials. \n", group: "Mastery", name: FEATURE_NAME, nutritionFacts, revision: "2025.11.18", uid: UID,
+  aiInformation,
+  dataPermissionLevels,
+  description:
+    "Item Authoring for Assessments streamlines assessment creation by generating questions based on your course materials. \n",
+  group: "Mastery",
+  name: FEATURE_NAME,
+  nutritionFacts,
+  revision: "2025.11.18",
+  uid: UID,
 };
 export {
   assessmentauthoringassistance,

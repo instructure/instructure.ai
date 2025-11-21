@@ -156,7 +156,14 @@ const aiInformation: AiInformationProps = {
   data: [
     {
       description:
-        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.", featureName: "Portfolios", modelName: "Haiku 3", modelNameText: "Base Model", nutritionFactsModalTriggerText: "AI Nutrition Facts", permissionLevel: "LEVEL 2", permissionLevelText: "Permission Level:", permissionLevelsModalTriggerText: "Data Permission Levels",
+        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+      featureName: "Portfolios",
+      modelName: "Haiku 3",
+      modelNameText: "Base Model",
+      nutritionFactsModalTriggerText: "AI Nutrition Facts",
+      permissionLevel: "LEVEL 2",
+      permissionLevelText: "Permission Level:",
+      permissionLevelsModalTriggerText: "Data Permission Levels",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -176,8 +183,15 @@ const aiInformation: AiInformationProps = {
   trigger: undefined,
 };
 const portfolios: AiInfoFeatureProps = {
-  aiInformation, dataPermissionLevels, description:
-    "AI Assistant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation.", group: "Canvas", name: FEATURE_NAME, nutritionFacts, revision: "2025.10.27", uid: UID,
+  aiInformation,
+  dataPermissionLevels,
+  description:
+    "AI Assistant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation.",
+  group: "Canvas",
+  name: FEATURE_NAME,
+  nutritionFacts,
+  revision: "2025.10.27",
+  uid: UID,
 };
 export { portfolios, nutritionFacts, dataPermissionLevels, aiInformation };
 export default portfolios;

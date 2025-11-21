@@ -156,7 +156,14 @@ const aiInformation: AiInformationProps = {
   data: [
     {
       description:
-        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.", featureName: "Ask Your Data", modelName: "Doowii (multiple)", modelNameText: "Base Model", nutritionFactsModalTriggerText: "AI Nutrition Facts", permissionLevel: "LEVEL 2", permissionLevelText: "Permission Level:", permissionLevelsModalTriggerText: "Data Permission Levels",
+        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+      featureName: "Ask Your Data",
+      modelName: "Doowii (multiple)",
+      modelNameText: "Base Model",
+      nutritionFactsModalTriggerText: "AI Nutrition Facts",
+      permissionLevel: "LEVEL 2",
+      permissionLevelText: "Permission Level:",
+      permissionLevelsModalTriggerText: "Data Permission Levels",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -176,8 +183,15 @@ const aiInformation: AiInformationProps = {
   trigger: undefined,
 };
 const askyourdata: AiInfoFeatureProps = {
-  aiInformation, dataPermissionLevels, description:
-    "AI-powered query tool enables users to ask natural language questions and receive textual or visual responses with detailed explanations of the methodology.", group: "Intelligent Insights", name: FEATURE_NAME, nutritionFacts, revision: "2025.09.12", uid: UID,
+  aiInformation,
+  dataPermissionLevels,
+  description:
+    "AI-powered query tool enables users to ask natural language questions and receive textual or visual responses with detailed explanations of the methodology.",
+  group: "Intelligent Insights",
+  name: FEATURE_NAME,
+  nutritionFacts,
+  revision: "2025.09.12",
+  uid: UID,
 };
 export { askyourdata, nutritionFacts, dataPermissionLevels, aiInformation };
 export default askyourdata;

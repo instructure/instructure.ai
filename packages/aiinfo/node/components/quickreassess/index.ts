@@ -155,7 +155,14 @@ const aiInformation: AiInformationProps = {
   data: [
     {
       description:
-        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.", featureName: "Suggestions for Quick Reassess", modelName: "Haiku 3", modelNameText: "Base Model", nutritionFactsModalTriggerText: "AI Nutrition Facts", permissionLevel: "LEVEL 2", permissionLevelText: "Permission Level:", permissionLevelsModalTriggerText: "Data Permission Levels",
+        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+      featureName: "Suggestions for Quick Reassess",
+      modelName: "Haiku 3",
+      modelNameText: "Base Model",
+      nutritionFactsModalTriggerText: "AI Nutrition Facts",
+      permissionLevel: "LEVEL 2",
+      permissionLevelText: "Permission Level:",
+      permissionLevelsModalTriggerText: "Data Permission Levels",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -175,8 +182,15 @@ const aiInformation: AiInformationProps = {
   trigger: undefined,
 };
 const quickreassess: AiInfoFeatureProps = {
-  aiInformation, dataPermissionLevels, description:
-    "Allows the use of AI to generate a question derived from the original. These questions can be re-generated, edited, and rejected or approved before they are published to students.", group: "Mastery", name: FEATURE_NAME, nutritionFacts, revision: "2025.11.19", uid: UID,
+  aiInformation,
+  dataPermissionLevels,
+  description:
+    "Allows the use of AI to generate a question derived from the original. These questions can be re-generated, edited, and rejected or approved before they are published to students.",
+  group: "Mastery",
+  name: FEATURE_NAME,
+  nutritionFacts,
+  revision: "2025.11.19",
+  uid: UID,
 };
 export { quickreassess, nutritionFacts, dataPermissionLevels, aiInformation };
 export default quickreassess;

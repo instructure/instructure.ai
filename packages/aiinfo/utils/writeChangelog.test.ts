@@ -140,7 +140,11 @@ describe("writeChangelog", () => {
         },
         feature: { description: "Test", name: "Feature" },
         model: {
-          data: "value", dataDescription: "added data", description: "desc", name: "Model", trained: "2024",
+          data: "value",
+          dataDescription: "added data",
+          description: "desc",
+          name: "Model",
+          trained: "2024",
         },
         outputs: {
           guardrails: "yes",
@@ -164,7 +168,11 @@ describe("writeChangelog", () => {
         },
         feature: { description: "Test", name: "Feature" },
         model: {
-          data: "", dataDescription: "", description: "desc", name: "Model", trained: "2023",
+          data: "",
+          dataDescription: "",
+          description: "desc",
+          name: "Model",
+          trained: "2023",
         },
         outputs: {
           guardrails: "yes",

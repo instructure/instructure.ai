@@ -155,7 +155,14 @@ const aiInformation: AiInformationProps = {
   data: [
     {
       description:
-        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.", featureName: "Insights for Discussions", modelName: "Haiku 3", modelNameText: "Base Model", nutritionFactsModalTriggerText: "AI Nutrition Facts", permissionLevel: "LEVEL 2", permissionLevelText: "Permission Level:", permissionLevelsModalTriggerText: "Data Permission Levels",
+        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+      featureName: "Insights for Discussions",
+      modelName: "Haiku 3",
+      modelNameText: "Base Model",
+      nutritionFactsModalTriggerText: "AI Nutrition Facts",
+      permissionLevel: "LEVEL 2",
+      permissionLevelText: "Permission Level:",
+      permissionLevelsModalTriggerText: "Data Permission Levels",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -175,8 +182,15 @@ const aiInformation: AiInformationProps = {
   trigger: undefined,
 };
 const discussioninsights: AiInfoFeatureProps = {
-  aiInformation, dataPermissionLevels, description:
-    "Discussion Insights uses AI to evaluate student discussion replies, highlight relevant contributions, and flag those that may need instructor review.", group: "Canvas", name: FEATURE_NAME, nutritionFacts, revision: "2025.10.02", uid: UID,
+  aiInformation,
+  dataPermissionLevels,
+  description:
+    "Discussion Insights uses AI to evaluate student discussion replies, highlight relevant contributions, and flag those that may need instructor review.",
+  group: "Canvas",
+  name: FEATURE_NAME,
+  nutritionFacts,
+  revision: "2025.10.02",
+  uid: UID,
 };
 export {
   discussioninsights,
