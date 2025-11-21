@@ -85,8 +85,8 @@ const v=1`;
   });
 
   it("wraps and rethrows errors from typescript API", async () => {
-    vi.doMock<typeof import("typescript")>("typescript", () => ({
-      default: {
+    vi.doMock("typescript", () => {
+      const mockTS = {
         NewLineKind: { LineFeed: 0 },
         ScriptKind: { TS: 1 },
         ScriptTarget: { Latest: 99 },
@@ -94,8 +94,9 @@ const v=1`;
         createSourceFile: () => {
           throw new Error("Boom");
         },
-      },
-    }));
+      };
+      return { default: mockTS };
+    });
     const formatTs = await importSubject();
     expect(() => formatTs("const x=1")).toThrow(
       /Error formatting TypeScript code: Error: Boom/,

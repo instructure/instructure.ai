@@ -1,6 +1,17 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-// Hoisted ansis mock
+type Ansis = {
+  level: number;
+  open: string;
+  close: string;
+  isSupported: () => boolean;
+  strip: (s: string) => string;
+  extend: () => Ansis;
+  red: (s: string) => string;
+  green: (s: string) => string;
+  yellow: (s: string) => string;
+  blue: (s: string) => string;
+};
 interface AnsisMock {
   bold: (s: string) => string;
   cyan: (s: string) => string;
@@ -15,7 +26,28 @@ const ansisBacking: AnsisMock = {
   red: (s: string) => `<red>${s}</red>`,
   underline: (s: string) => `<underline>${s}</underline>`,
 };
-vi.mock<typeof import("ansis")>("ansis", () => ({ default: ansisBacking }));
+vi.mock("ansis", () => ({ default: ansisBacking }));
+
+vi.mock("ansis", () => {
+  const identity = (v: unknown) => String(v);
+  const ansisMock = Object.assign(identity, {
+    level: 0,
+    open: "",
+    close: "",
+    isSupported: () => true,
+    strip: (s: string) => s,
+    extend: () => ansisMock,
+    // Only stub the colors you actually use
+    red: identity,
+    green: identity,
+    yellow: identity,
+    blue: identity,
+  });
+
+  return {
+    default: ansisMock as unknown as Ansis,
+  };
+});
 
 const importSubject = async () => {
   const mod = await import("./log.ts");

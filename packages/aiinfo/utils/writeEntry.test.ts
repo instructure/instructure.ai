@@ -101,17 +101,24 @@ function setupMocks(opts?: Parameters<typeof mockUtils>[0]) {
   formatTsSpy.mockReset();
   toTsObjectLiteralSpy.mockReset();
 
-  vi.mock<typeof import("node:fs")>("node:fs", () => ({
-    mkdirSync: mkdirSyncSpy,
-    writeFileSync: writeFileSyncSpy,
-  }));
-  vi.mock<typeof import("../utils")>("../utils", () => ({
-    entryToAIInformation: entryToAIInformationSpy,
-    entryToNutritionFacts: entryToNutritionFactsSpy,
-    entryToPermissionLevels: entryToPermissionLevelsSpy,
-    formatTs: formatTsSpy,
-    toTsObjectLiteral: toTsObjectLiteralSpy,
-  }));
+  vi.mock("node:fs", () => {
+    const m: Partial<typeof import("node:fs")> = {
+      mkdirSync: mkdirSyncSpy as typeof import("node:fs").mkdirSync,
+      writeFileSync: writeFileSyncSpy as typeof import("node:fs").writeFileSync,
+    };
+    return m;
+  });
+
+  vi.mock("../utils", () => {
+    const m: Partial<typeof import("../utils")> = {
+      entryToAIInformation: entryToAIInformationSpy,
+      entryToNutritionFacts: entryToNutritionFactsSpy,
+      entryToPermissionLevels: entryToPermissionLevelsSpy,
+      formatTs: formatTsSpy,
+      toTsObjectLiteral: toTsObjectLiteralSpy,
+    };
+    return m;
+  });
 
   mockUtils(opts ?? {});
 }

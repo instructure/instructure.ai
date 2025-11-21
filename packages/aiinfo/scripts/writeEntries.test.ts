@@ -9,13 +9,13 @@ describe("writeEntries.mts", () => {
     const mockWriteEntry = vi.fn();
     const mockWriteBarrel = vi.fn();
     const mockLog = vi.fn();
-    vi.doMock<typeof import("../utils")>("../utils", () => ({
+    vi.doMock("../utils", () => ({
       Log: mockLog,
       entryToObj: (arr: string[]) => ({ raw: arr, uid: arr[0] }),
       writeBarrel: mockWriteBarrel,
       writeEntry: mockWriteEntry,
     }));
-    vi.doMock<typeof import("node:fs")>("node:fs", () => ({
+    vi.doMock("node:fs", () => ({
       default: {
         existsSync: () => true,
         readFileSync: () => sampleCSV,
@@ -44,13 +44,13 @@ describe("writeEntries.mts", () => {
     const mockWriteEntry = vi.fn();
     const mockWriteBarrel = vi.fn();
     const mockLog = vi.fn();
-    vi.doMock<typeof import("../utils")>("../utils", () => ({
+    vi.doMock("../utils", () => ({
       Log: mockLog,
       entryToObj: (arr: string[]) => ({ raw: arr, uid: arr[0] }),
       writeBarrel: mockWriteBarrel,
       writeEntry: mockWriteEntry,
     }));
-    vi.doMock<typeof import("node:fs")>("node:fs", () => ({
+    vi.doMock("node:fs", () => ({
       default: {
         existsSync: () => true,
         readFileSync: () => "",
@@ -83,13 +83,13 @@ describe("writeEntries.mts", () => {
     const mockWriteEntry = vi.fn();
     const mockWriteBarrel = vi.fn();
     const mockLog = vi.fn();
-    vi.doMock<typeof import("../utils")>("../utils", () => ({
+    vi.doMock("../utils", () => ({
       Log: mockLog,
       entryToObj: (arr: string[]) => ({ raw: arr, uid: arr[0] }),
       writeBarrel: mockWriteBarrel,
       writeEntry: mockWriteEntry,
     }));
-    vi.doMock<typeof import("node:fs")>("node:fs", () => ({
+    vi.doMock("node:fs", () => ({
       default: {
         existsSync: () => true,
         readFileSync: () => "",

@@ -16,7 +16,10 @@ import {
  *
  * @param entry - The Entry object to serialize and write.
  */
-function omit<T extends object, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> {
+function omit<T extends object, K extends keyof T>(
+  obj: T,
+  keys: K[],
+): Omit<T, K> {
   const clone = { ...obj };
   for (const key of keys) {
     delete clone[key];
@@ -46,7 +49,10 @@ export async function writeEntry(entry: Entry) {
   const NF = nutritionFacts.data;
 
   const nutritionFactsBase = omit(nutritionFacts, ["data", "featureName"]);
-  const dataPermissionLevelsBase = omit(dataPermissionLevels, ["data", "currentFeature"]);
+  const dataPermissionLevelsBase = omit(dataPermissionLevels, [
+    "data",
+    "currentFeature",
+  ]);
   const aiInformationBase = omit(aiInformation, [
     "dataPermissionLevelsData",
     "nutritionFactsData",

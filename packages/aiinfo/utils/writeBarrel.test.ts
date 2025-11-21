@@ -1,21 +1,26 @@
 import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-/* -------------------- Hoisted Mocks -------------------- */
 const fsMocks = {
   existsSync: vi.fn(),
   readdirSync: vi.fn(),
   statSync: vi.fn(),
   writeFileSync: vi.fn(),
 };
-vi.mock<typeof import("node:fs")>("node:fs", () => fsMocks);
+vi.mock("node:fs", () => {
+  const m: Partial<typeof import("node:fs")> = fsMocks;
+  return m;
+});
 
 const formatTsMock = vi.fn((code: string) => code);
-vi.mock<typeof import("../utils/formatTs")>("../utils/formatTs", () => ({
-  formatTs: formatTsMock,
-}));
 
-/* -------------------- Helpers -------------------- */
+vi.mock("../utils/formatTs", () => {
+  const m: Partial<typeof import("../utils/formatTs")> = {
+    formatTs: formatTsMock,
+  };
+  return m;
+});
+
 const CWD = "/tmp/project";
 vi.spyOn(process, "cwd").mockReturnValue(CWD);
 
@@ -58,7 +63,6 @@ const getWritten = (): string => {
 const getWrittenPath = () =>
   fsMocks.writeFileSync.mock.calls[0]?.[0] as string | undefined;
 
-/* -------------------- Tests -------------------- */
 describe("writeBarrel", () => {
   beforeEach(() => {
     vi.clearAllMocks();

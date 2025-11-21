@@ -13,16 +13,16 @@ function mockFailFs() {
 }
 
 function applyMocks() {
-  vi.mock<typeof import("node:fs")>("node:fs", () => ({
+  vi.mock("node:fs", () => ({
     default: { writeFileSync: mockFsWrite },
     writeFileSync: mockFsWrite,
   }));
-  vi.mock<typeof import("node:path")>("node:path", async (orig) => {
+  vi.mock("node:path", async (orig) => {
     // Use real path for realistic absolute resolution
     const real = await orig();
     return real;
   });
-  vi.mock<typeof import("../utils")>("../utils", () => ({
+  vi.mock("../utils", () => ({
     Log: mockLog,
   }));
 }

@@ -4,7 +4,7 @@ import type { Entry, Result } from "../types";
 
 var backing: typeof snapshotStrings.en = snapshotStrings.en;
 
-vi.mock<typeof import("../strings")>("../strings", () => ({
+vi.mock("../strings", () => ({
   get permissionLevelsStrings() {
     const source =
       typeof backing !== "undefined" && backing !== null

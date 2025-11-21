@@ -27,7 +27,7 @@ const cacheState = {
   cache: "",
   checksum: {} as Record<string, string>,
 };
-vi.mock<typeof import("../cache")>("../cache", () => cacheState);
+vi.mock("../cache", () => cacheState);
 
 let originalArg1: string | undefined;
 
@@ -86,7 +86,7 @@ function applyMocks(opts: MockOptions) {
     return { success: true };
   });
 
-  vi.mock<typeof import("../utils")>("../utils", () => ({
+  vi.mock("../utils", () => ({
     CSVURL: "https://example.com/cache.csv",
     Log: mockLog,
     entryToObj: (arr: string[]) => ({ raw: arr, uid: arr[0] }),
@@ -95,7 +95,7 @@ function applyMocks(opts: MockOptions) {
     writeEntry: vi.fn(),
   }));
 
-  vi.mock<typeof import("node:fs")>("node:fs", () => ({
+  vi.mock("node:fs", () => ({
     default: {
       existsSync: () => true,
       readFileSync: mockFsRead,
@@ -106,7 +106,7 @@ function applyMocks(opts: MockOptions) {
     writeFileSync: mockFsWrite,
   }));
 
-  vi.mock<typeof import("papaparse")>("papaparse", async (orig) => {
+  vi.mock("papaparse", async (orig) => {
     const real = await orig();
     return real;
   });

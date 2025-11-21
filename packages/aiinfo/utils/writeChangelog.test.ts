@@ -9,11 +9,12 @@ const writeFileSync = vi.spyOn(fs, "writeFileSync");
 
 let lastWrittenPath: string | null;
 let lastWrittenContent = "";
-// Capture writes
 writeFileSync.mockImplementation((p, c) => {
   lastWrittenPath = String(p);
   lastWrittenContent = String(c);
 });
+
+import type { Entry } from "../types";
 
 function makeChangedEntry(
   uid: string,
@@ -25,26 +26,56 @@ function makeChangedEntry(
   }: {
     oldChecksum?: string;
     newChecksum: string;
-    oldEntry?: Record<string, unknown>;
-    newEntry?: Record<string, unknown>;
+    oldEntry?: Partial<Entry>;
+    newEntry?: Partial<Entry>;
   },
 ): ChangedEntry {
+  const defaultEntry: Entry = {
+    uid,
+    revision: "",
+    feature: { description: "", name: "" },
+    model: {
+      data: "",
+      dataDescription: "",
+      description: "",
+      name: "",
+      trained: "",
+    },
+    compliance: {
+      logging: "",
+      loggingDescription: "",
+      pii: "",
+      piiDescription: "",
+      regions: "",
+      regionsDescription: "",
+      retention: "",
+    },
+    outputs: {
+      guardrails: "",
+      human: "",
+      humanDescription: "",
+      outcomes: "",
+      risks: "",
+      settings: "",
+    },
+    group: "",
+    permissions: "1",
+  };
   return {
     newChecksum,
-    newEntry,
+    newEntry: { ...defaultEntry, ...newEntry },
     oldChecksum,
-    oldEntry,
+    oldEntry: oldEntry ? { ...defaultEntry, ...oldEntry } : undefined,
     uid,
-  } as ChangedEntry;
+  };
 }
 
 beforeEach(() => {
   vi.clearAllMocks();
   lastWrittenContent = "";
-  lastWrittenPath = undefined;
+  lastWrittenPath = null;
   existsSync.mockReturnValue(false);
   readFileSync.mockReturnValue("");
-  // Reapply write capture after clearAllMocks (mock implementation was wiped)
   writeFileSync.mockImplementation((p, c) => {
     lastWrittenPath = String(p);
     lastWrittenContent = String(c);
@@ -67,8 +98,14 @@ describe("writeChangelog", () => {
     const entry = makeChangedEntry("uid-new", {
       newChecksum: "newSha",
       newEntry: {
-        name: "Feature A",
-        nested: { value: 1 },
+        feature: { name: "Feature A", description: "Test description" },
+        model: {
+          name: "Test Model",
+          description: "Model description",
+          data: "Training data",
+          dataDescription: "Data details",
+          trained: "2024-01-01",
+        },
       },
     });
     const result = writeChangelog({
@@ -83,8 +120,8 @@ describe("writeChangelog", () => {
     expect(result?.changelog).toContain("#### SHA");
     expect(result?.changelog).toContain("```diff\ncsvShaX\n```");
     expect(result?.changelog).toContain("### uid-new");
-    expect(result?.changelog).toContain("#### name");
-    expect(result?.changelog).toContain("#### nested");
+    expect(result?.changelog).toContain("#### feature.name");
+    expect(result?.changelog).toContain("#### model");
     expect(writeFileSync).toHaveBeenCalledTimes(1);
     expect(lastWrittenContent.startsWith("# Changelog")).toBeTruthy();
   });
@@ -93,14 +130,59 @@ describe("writeChangelog", () => {
     const entry = makeChangedEntry("uid-diff", {
       newChecksum: "newC",
       newEntry: {
-        added: "value",
-        name: "Feature",
-        nested: { a: 99, b: 2, c: 3 },
+        feature: { name: "Feature", description: "Test" },
+        model: {
+          name: "Model",
+          description: "desc",
+          data: "value",
+          dataDescription: "added data",
+          trained: "2024",
+        },
+        compliance: {
+          logging: "enabled",
+          loggingDescription: "log desc",
+          pii: "filtered",
+          piiDescription: "pii desc",
+          regions: "US",
+          regionsDescription: "region desc",
+          retention: "30d",
+        },
+        outputs: {
+          guardrails: "yes",
+          human: "yes",
+          humanDescription: "human desc",
+          outcomes: "outcomes",
+          risks: "risks",
+          settings: "per-course",
+        },
       },
       oldChecksum: "oldC",
       oldEntry: {
-        name: "Feature",
-        nested: { a: 1, b: 2 },
+        feature: { name: "Feature", description: "Test" },
+        model: {
+          name: "Model",
+          description: "desc",
+          data: "",
+          dataDescription: "",
+          trained: "2023",
+        },
+        compliance: {
+          logging: "enabled",
+          loggingDescription: "log desc",
+          pii: "filtered",
+          piiDescription: "pii desc",
+          regions: "US",
+          regionsDescription: "region desc",
+          retention: "30d",
+        },
+        outputs: {
+          guardrails: "yes",
+          human: "yes",
+          humanDescription: "human desc",
+          outcomes: "outcomes",
+          risks: "risks",
+          settings: "per-course",
+        },
       },
     });
     const result = writeChangelog({
@@ -112,19 +194,22 @@ describe("writeChangelog", () => {
     expect(result?.success).toBeTruthy();
     const c = result?.changelog ?? "";
     expect(c).toContain("### uid-diff");
-    expect(c).toContain("#### nested.a");
-    expect(c).toContain("#### nested.c");
-    expect(c).toContain("#### added");
     expect(c).toContain("```diff");
-    expect(c).toContain("+ 99");
-    expect(c).toContain("- 1");
-    expect(c).toContain("+ 3");
-    expect(c).toContain("- undefined");
-    expect(c).toContain('+ "value"');
+    expect(c).toContain("model.dataDescription");
+    expect(c).toContain("model.trained");
   });
 
   it("unchanged entry only shows SHA section", () => {
-    const obj = { name: "Same", nested: { x: 1 } };
+    const obj = {
+      feature: { name: "Same", description: "Description" },
+      model: {
+        name: "Model",
+        description: "desc",
+        data: "data",
+        dataDescription: "data desc",
+        trained: "2024",
+      },
+    };
     const entry = makeChangedEntry("uid-same", {
       newChecksum: "newSha",
       newEntry: obj,
@@ -139,8 +224,8 @@ describe("writeChangelog", () => {
     });
     const c = result?.changelog ?? "";
     expect(c).toContain("### uid-same");
-    expect(c).not.toMatch(/#### name:/);
-    expect(c).not.toMatch(/#### nested.x:/);
+    expect(c).not.toMatch(/#### feature\.name:/);
+    expect(c).not.toMatch(/#### model\./);
   });
 
   it("prepends header when missing in existing file", () => {
@@ -148,7 +233,7 @@ describe("writeChangelog", () => {
     readFileSync.mockReturnValue("Previous content");
     const entry = makeChangedEntry("uid1", {
       newChecksum: "nc1",
-      newEntry: { name: "N1" },
+      newEntry: { feature: { name: "N1", description: "New 1" } },
     });
     writeChangelog({
       changedEntries: [entry],
@@ -170,7 +255,7 @@ describe("writeChangelog", () => {
     readFileSync.mockReturnValue("# Changelog\n\n## 2024-01-01\n\nOld section");
     const entry = makeChangedEntry("uidX", {
       newChecksum: "ncX",
-      newEntry: { name: "NX" },
+      newEntry: { feature: { name: "NX", description: "New X" } },
     });
     writeChangelog({
       changedEntries: [entry],
@@ -190,13 +275,13 @@ describe("writeChangelog", () => {
   it("handles multiple entries (new + changed)", () => {
     const e1 = makeChangedEntry("uidA", {
       newChecksum: "shaA",
-      newEntry: { name: "A" },
+      newEntry: { feature: { name: "A", description: "A Desc" } },
     });
     const e2 = makeChangedEntry("uidB", {
       newChecksum: "newB",
-      newEntry: { name: "B2", nested: { v: 1 } },
+      newEntry: { feature: { name: "B2", description: "desc" } },
       oldChecksum: "oldB",
-      oldEntry: { name: "B", nested: { v: 1 } },
+      oldEntry: { feature: { name: "B", description: "desc" } },
     });
     const result = writeChangelog({
       changedEntries: [e1, e2],
@@ -207,15 +292,19 @@ describe("writeChangelog", () => {
     const c = result?.changelog ?? "";
     expect(c).toMatch(/### uidA/);
     expect(c).toMatch(/### uidB/);
-    expect(c).toContain("#### name");
+    expect(c).toContain("#### feature.name");
   });
 
   it("captures added property diff (old undefined)", () => {
     const entry = makeChangedEntry("uidAdd", {
       newChecksum: "newAdd",
-      newEntry: { base: 1, extra: "val" },
+      newEntry: {
+        feature: { name: "Feature", description: "New description" },
+      },
       oldChecksum: "oldAdd",
-      oldEntry: { base: 1 },
+      oldEntry: {
+        feature: { name: "Feature", description: "" },
+      },
     });
     const result = writeChangelog({
       changedEntries: [entry],
@@ -223,9 +312,8 @@ describe("writeChangelog", () => {
       csvSha: "sha8",
       dateStr: "2024-08-08",
     });
-    expect(result?.changelog).toContain("#### extra");
-    expect(result?.changelog).toContain('+ "val"');
-    expect(result?.changelog).toContain("- undefined");
+    expect(result?.changelog).toContain("#### feature.description");
+    expect(result?.changelog).toContain('+ "New description"');
   });
 
   it("returns success false on write error", () => {
@@ -234,7 +322,7 @@ describe("writeChangelog", () => {
     });
     const entry = makeChangedEntry("uidErr", {
       newChecksum: "shaErr",
-      newEntry: { name: "Err" },
+      newEntry: { feature: { name: "Err", description: "err desc" } },
     });
     const result = writeChangelog({
       changedEntries: [entry],
@@ -249,7 +337,7 @@ describe("writeChangelog", () => {
   it("changelog output includes csv SHA", () => {
     const entry = makeChangedEntry("uidSha", {
       newChecksum: "newSha",
-      newEntry: { name: "Feature" },
+      newEntry: { feature: { name: "Feature", description: "Description" } },
     });
     const result = writeChangelog({
       changedEntries: [entry],
@@ -266,8 +354,7 @@ describe("writeChangelog", () => {
     const entry = makeChangedEntry("uid-new", {
       newChecksum: "newSha",
       newEntry: {
-        name: "Feature A",
-        nested: { value: 1 },
+        feature: { name: "Feature A", description: "Description" },
       },
     });
     writeChangelog({

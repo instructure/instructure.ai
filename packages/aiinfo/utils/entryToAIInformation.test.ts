@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-// Hoisted mocks (define once). Use vi.fn so we can override implementations in specific tests.
-vi.mock<typeof import("../strings")>("../strings", () => ({
+vi.mock("../strings", () => ({
   aiInformationStrings: {
     en: {
       data: {
@@ -24,7 +23,7 @@ vi.mock<typeof import("../strings")>("../strings", () => ({
   },
 }));
 
-vi.mock<typeof import("./")>("./", () => ({
+vi.mock>(() => ({
   entryToNutritionFacts: vi.fn((entry: Record<string, unknown>) => ({
     data: [{ calories: 0 }, { tokens: 123 }],
     featureName:

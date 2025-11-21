@@ -19,7 +19,7 @@ interface NutritionBacking {
 }
 let backing: NutritionBacking;
 
-vi.mock<typeof import("../strings/index.js")>("../strings/index.js", () => ({
+vi.mock("../strings/index.js", () => ({
   get nutritionFactsStrings() {
     return { en: backing };
   },
