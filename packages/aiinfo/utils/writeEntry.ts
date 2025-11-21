@@ -16,6 +16,14 @@ import {
  *
  * @param entry - The Entry object to serialize and write.
  */
+function omit<T extends object, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> {
+  const clone = { ...obj };
+  for (const key of keys) {
+    delete clone[key];
+  }
+  return clone;
+}
+
 export async function writeEntry(entry: Entry) {
   const file = resolve(
     process.cwd(),
@@ -37,6 +45,14 @@ export async function writeEntry(entry: Entry) {
   const DPL = dataPermissionLevels.data;
   const NF = nutritionFacts.data;
 
+  const nutritionFactsBase = omit(nutritionFacts, ["data", "featureName"]);
+  const dataPermissionLevelsBase = omit(dataPermissionLevels, ["data", "currentFeature"]);
+  const aiInformationBase = omit(aiInformation, [
+    "dataPermissionLevelsData",
+    "nutritionFactsData",
+    "trigger",
+  ]);
+
   const code = `import type {
   AiInformationProps,
   DataPermissionLevelsProps,
@@ -51,22 +67,22 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = ${toTsObjectLi
 const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = ${toTsObjectLiteral(NF)};
 
 const nutritionFacts: NutritionFactsProps = {
-  ...${toTsObjectLiteral({ ...nutritionFacts, data: undefined })},
+  ...${toTsObjectLiteral(nutritionFactsBase)},
   data: NUTRITION_FACTS_DATA,
   featureName: FEATURE_NAME,
 };
 
 const dataPermissionLevels: DataPermissionLevelsProps = {
-  ...${toTsObjectLiteral({ ...dataPermissionLevels, data: undefined })},
+  ...${toTsObjectLiteral(dataPermissionLevelsBase)},
   data: DATA_PERMISSION_LEVELS,
   currentFeature: FEATURE_NAME,
 };
 
 const aiInformation: AiInformationProps = {
-	...${toTsObjectLiteral({ ...aiInformation, dataPermissionLevelsData: undefined, nutritionFactsData: undefined, trigger: undefined })},
-	dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-	nutritionFactsData: NUTRITION_FACTS_DATA,
-	trigger: undefined,
+  ...${toTsObjectLiteral(aiInformationBase)},
+  dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
+  nutritionFactsData: NUTRITION_FACTS_DATA,
+  trigger: undefined,
 };
 
 const ${UID}: AiInfoFeatureProps = {
@@ -76,8 +92,8 @@ const ${UID}: AiInfoFeatureProps = {
   revision: ${JSON.stringify(REVISION)},
   uid: UID,
   group: ${JSON.stringify(entry.group)},
-	name: FEATURE_NAME,
-	description: ${JSON.stringify(DESCRIPTION)},
+  name: FEATURE_NAME,
+  description: ${JSON.stringify(DESCRIPTION)},
 }
 
 export {
