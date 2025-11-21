@@ -3,8 +3,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { parse } from "papaparse";
 import { cache, checksum } from "../cache";
-import type { ChangedEntry, CSVFetchResult, Entry, Hash } from "../types";
-import { CSVURL, entryToObj, Log, writeChangelog, SCHEMAURL } from "../utils";
+import { type CSVFetchResult, type ChangedEntry, type Entry, type Hash } from "../types";
+import { CSVURL, Log, SCHEMAURL, entryToObj, writeChangelog } from "../utils";
 import { WriteEntries } from "./writeEntries.mts";
 
 const generateChecksum = (data: string): Hash => {
@@ -38,9 +38,9 @@ const updateCache = async (
   const cacheCSVPath = path.resolve(__dirname, `../cache/${filePath}`);
   let oldCacheRaw = "";
   if (fs.existsSync(cacheCSVPath)) {
-    oldCacheRaw = fs.readFileSync(cacheCSVPath, "utf-8");
+    oldCacheRaw = fs.readFileSync(cacheCSVPath, "utf8");
   } else if (cache) {
-    // fallback to in-memory cache if file doesn't exist
+    // Fallback to in-memory cache if file doesn't exist
     oldCacheRaw = cache;
   }
   const oldEntries = parseCSV(oldCacheRaw);
@@ -54,8 +54,8 @@ const updateCache = async (
         color: "yellow",
         message: [`${filePath} updated due to CSV checksum change.`],
       });
-    } catch (err) {
-      Log([`Failed to update ${filePath}:`, err]);
+    } catch (error) {
+      Log([`Failed to update ${filePath}:`, error]);
     }
     // Do not write entries here; wait until after changedEntries are determined
   }
@@ -172,13 +172,13 @@ const main = async () => {
     try {
       data = await fetchCSVFromURL(CSVURL);
       schema = await fetchCSVFromURL(SCHEMAURL);
-    } catch (err) {
+    } catch (error) {
       Log({
         color: "redBright",
-        message: ["Error fetching CSV from URL:", err],
+        message: ["Error fetching CSV from URL:", error],
         type: "error",
       });
-      throw err;
+      throw error;
     }
     if (schema) {
       const newSchemaChecksum = generateChecksum(schema.raw);
@@ -193,13 +193,13 @@ const main = async () => {
     } else {
       try {
         await updateCache(schema, "schema");
-      } catch (err) {
+      } catch (error) {
         Log({
           color: "redBright",
-          message: ["Error updating cache or writing entries:", err],
+          message: ["Error updating cache or writing entries:", error],
           type: "error",
         });
-        throw err;
+        throw error;
       }
     }
     if (data) {
