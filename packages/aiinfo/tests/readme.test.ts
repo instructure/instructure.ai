@@ -8,7 +8,7 @@ const readReadme = async () => {
 	return readFile(new URL("./README.md", pkgRoot), "utf8");
 };
 
-describe("README.md", () => {
+describe("rEADME.md", () => {
 	it('starts with "# <package name>"', async () => {
 		const readme = await readReadme();
 		const firstLine = readme.split(/\r?\n/, 1)[0].replace(/^\uFEFF/, "");

@@ -50,7 +50,7 @@ const setData = (
 			};
 		});
 	} catch (error) {
-		throw new Error(`Error in entryToNutritionFacts: ${String(error)}`, { cause: err });
+		throw new Error(`Error in entryToNutritionFacts: ${String(error)}`, { cause: error });
 	}
 };
 
@@ -70,7 +70,7 @@ const entryToNutritionFacts = (
 			triggerText: s.triggerText,
 		};
 	} catch (error) {
-		throw new Error(`Error in entryToNutritionFacts: ${String(error)}`, { cause: err });
+		throw new Error(`Error in entryToNutritionFacts: ${String(error)}`, { cause: error });
 	}
 };
 

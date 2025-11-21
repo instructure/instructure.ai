@@ -40,7 +40,7 @@ function entryToPermissionLevels(entry: Entry): Result {
 		};
 	} catch (error) {
 		throw new Error(
-			`Error in entryToPermissionLevels: ${(error as Error).message}`, { cause: err },
+			`Error in entryToPermissionLevels: ${(error as Error).message}`, { cause: error },
 		);
 	}
 }

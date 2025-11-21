@@ -7,12 +7,12 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 interface NutritionBacking {
 	closeButtonText: string;
 	closeIconButtonScreenReaderLabel: string;
-	data: Array<{
+	data: {
 		blockTitle: string;
 		segmentData: Array<{
 			id?: string;
 		}>;
-	}>;
+	}[];
 	modalLabel: string;
 	title: string;
 	triggerText: string;

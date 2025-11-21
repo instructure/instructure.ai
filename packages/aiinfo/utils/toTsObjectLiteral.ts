@@ -12,7 +12,7 @@ class RawTs {
 		try {
 			this.code = code;
 		} catch (error) {
-			throw new Error(`Error in RawTs constructor: ${String(error)}`, { cause: err });
+			throw new Error(`Error in RawTs constructor: ${String(error)}`, { cause: error });
 		}
 	}
 }
@@ -42,18 +42,18 @@ export function toTsObjectLiteral(value: unknown): string {
 				return `${value}n`;
 			}
 			case "object": {
-				if (value === null) return "null";
+				if (value === null) {return "null";}
 				if (value instanceof Date)
-					return `new Date(${JSON.stringify(value.toISOString())})`;
-				if (value instanceof RegExp) return value.toString();
+					{return `new Date(${JSON.stringify(value.toISOString())})`;}
+				if (value instanceof RegExp) {return value.toString();}
 				if (value instanceof Map) {
-					const entries = Array.from(value.entries()).map(
+					const entries = [...value.entries()].map(
 						([k, v]) => `[${toTsObjectLiteral(k)}, ${toTsObjectLiteral(v)}]`,
 					);
 					return `new Map([${entries.join(", ")}])`;
 				}
 				if (value instanceof Set) {
-					const items = Array.from(value.values()).map(toTsObjectLiteral);
+					const items = [...value.values()].map(toTsObjectLiteral);
 					return `new Set([${items.join(", ")}])`;
 				}
 				if (Array.isArray(value)) {
@@ -71,7 +71,7 @@ export function toTsObjectLiteral(value: unknown): string {
 			}
 		}
 	} catch (error) {
-		throw new Error(`Error in toTsObjectLiteral: ${String(error)}`, { cause: err });
+		throw new Error(`Error in toTsObjectLiteral: ${String(error)}`, { cause: error });
 	}
 }
 

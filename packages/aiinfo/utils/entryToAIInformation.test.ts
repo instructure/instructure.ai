@@ -44,7 +44,7 @@ vi.mock<typeof import('./')>("./", () => ({
 
 interface AIInformationResult {
 	trigger: undefined;
-	data: Array<{
+	data: {
 		description: string;
 		featureName: string;
 		modelName: string;
@@ -53,11 +53,11 @@ interface AIInformationResult {
 		nutritionFactsModalTriggerText: string;
 		permissionLevelsModalTriggerText: string;
 		permissionLevelText: string;
-	}>;
-	nutritionFactsData: Array<Record<string, unknown>>;
+	}[];
+	nutritionFactsData: Record<string, unknown>[];
 	nutritionFactsFeatureName: string;
 	dataPermissionLevelsCurrentFeature: string;
-	dataPermissionLevelsData: Array<unknown>;
+	dataPermissionLevelsData: unknown[];
 }
 
 const importSubject = async () => {

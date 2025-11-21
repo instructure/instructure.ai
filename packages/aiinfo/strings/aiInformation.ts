@@ -6,11 +6,8 @@ import { strings as permissionLevelsStrings } from "./permissionLevels";
 const strings: { en: AiInformationStrings } = {
 	en: {
 		data: {
-			permissionLevelText: "Permission Level:",
-			permissionLevelsModalTriggerText: permissionLevelsStrings.en.title,
 			modelNameText:
-				nutritionFactsStrings.en.data[0].segmentData[0].segmentTitle,
-			nutritionFactsModalTriggerText: nutritionFactsStrings.en.title,
+				nutritionFactsStrings.en.data[0].segmentData[0].segmentTitle, nutritionFactsModalTriggerText: nutritionFactsStrings.en.title, permissionLevelText: "Permission Level:", permissionLevelsModalTriggerText: permissionLevelsStrings.en.title,
 		}, dataPermissionLevelsCloseButtonText:
 			permissionLevelsStrings.en.closeButtonText, dataPermissionLevelsCloseIconButtonScreenReaderLabel:
 			permissionLevelsStrings.en.closeIconButtonScreenReaderLabel, dataPermissionLevelsCurrentFeatureText: "Current Feature:", dataPermissionLevelsModalLabel: permissionLevelsStrings.en.modalLabel, dataPermissionLevelsTitle: permissionLevelsStrings.en.title, nutritionFactsCloseButtonText: nutritionFactsStrings.en.closeButtonText, nutritionFactsCloseIconButtonScreenReaderLabel:

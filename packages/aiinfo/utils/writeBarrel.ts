@@ -34,7 +34,7 @@ const writeBarrel = (opts: Options = {}) => {
 		throw new Error(
 			`Failed to read directory '${SRC_DIR}': ${
 				error instanceof Error ? error.message : String(error)
-			}`, { cause: err },
+			}`, { cause: error },
 		);
 	}
 
@@ -115,7 +115,7 @@ export default AiInfo;`.trim();
 		throw new Error(
 			`Failed to format TypeScript code: ${
 				error instanceof Error ? error.message : String(error)
-			}`, { cause: err },
+			}`, { cause: error },
 		);
 	}
 
@@ -125,7 +125,7 @@ export default AiInfo;`.trim();
 		throw new Error(
 			`Failed to write barrel file '${OUT_FILE}': ${
 				error instanceof Error ? error.message : String(error)
-			}`, { cause: err },
+			}`, { cause: error },
 		);
 	}
 };
