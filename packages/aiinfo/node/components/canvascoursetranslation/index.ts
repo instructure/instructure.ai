@@ -9,31 +9,19 @@ const UID = "canvascoursetranslation";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
   {
     description:
-      "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
-    level: "LEVEL 1",
-    title: "Descriptive Analytics and Research",
-    highlighted: false,
+      "We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.", highlighted: false, level: "LEVEL 1", title: "Descriptive Analytics and Research",
   },
   {
     description:
-      "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-    level: "LEVEL 2",
-    title: "AI-Powered Features Without Data Training",
-    highlighted: true,
+      "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.", highlighted: true, level: "LEVEL 2", title: "AI-Powered Features Without Data Training",
   },
   {
     description:
-      "We customize AI solutions tailored to the unique needs and resources of educational institutions. We use customer data to fine-tune data and train AI models that only serve your institution. Your institution's data only serves them through trained models.",
-    level: "LEVEL 3",
-    title: "AI Customization for Individual Institutions",
-    highlighted: false,
+      "We customize AI solutions tailored to the unique needs and resources of educational institutions. We use customer data to fine-tune data and train AI models that only serve your institution. Your institution's data only serves them through trained models.", highlighted: false, level: "LEVEL 3", title: "AI Customization for Individual Institutions",
   },
   {
     description:
-      "We established a consortium with educational institutions that shares anonymized data, best practices, and research findings. This fosters collaboration and accelerates the responsible development of AI in education. Specialized AI models are created for better outcomes in education, cost savings, and more.",
-    level: "LEVEL 4",
-    title: "Collaborative AI Consortium",
-    highlighted: false,
+      "We established a consortium with educational institutions that shares anonymized data, best practices, and research findings. This fosters collaboration and accelerates the responsible development of AI in education. Specialized AI models are created for better outcomes in education, cost savings, and more.", highlighted: false, level: "LEVEL 4", title: "Collaborative AI Consortium",
   },
 ];
 const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
@@ -132,23 +120,10 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
   },
 ];
 const nutritionFacts: NutritionFactsProps = {
-  closeButtonText: "Close",
-  closeIconButtonScreenReaderLabel: "Close",
-  modalLabel: "This is a modal for AI facts",
-  title: "AI Nutrition Facts",
-  triggerText: "Nutrition Facts",
-  data: NUTRITION_FACTS_DATA,
-  featureName: FEATURE_NAME,
+  closeButtonText: "Close", closeIconButtonScreenReaderLabel: "Close", data: NUTRITION_FACTS_DATA, featureName: FEATURE_NAME, modalLabel: "This is a modal for AI facts", title: "AI Nutrition Facts", triggerText: "Nutrition Facts",
 };
 const dataPermissionLevels: DataPermissionLevelsProps = {
-  closeButtonText: "Close",
-  closeIconButtonScreenReaderLabel: "Close dialog",
-  currentFeatureText: "Current Feature:",
-  modalLabel: "Data Permission Levels modal",
-  title: "Data Permission Levels",
-  triggerText: "Data Permission Levels",
-  data: DATA_PERMISSION_LEVELS,
-  currentFeature: FEATURE_NAME,
+  closeButtonText: "Close", closeIconButtonScreenReaderLabel: "Close dialog", currentFeature: FEATURE_NAME, currentFeatureText: "Current Feature:", data: DATA_PERMISSION_LEVELS, modalLabel: "Data Permission Levels modal", title: "Data Permission Levels", triggerText: "Data Permission Levels",
 };
 const aiInformation: AiInformationProps = {
   data: [
@@ -163,34 +138,12 @@ const aiInformation: AiInformationProps = {
       permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
     },
-  ],
-  dataPermissionLevelsCloseButtonText: "Close",
-  dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeatureText: "Current Feature:",
-  dataPermissionLevelsModalLabel: "Data Permission Levels modal",
-  dataPermissionLevelsTitle: "Data Permission Levels",
-  nutritionFactsCloseButtonText: "Close",
-  nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
-  nutritionFactsModalLabel: "This is a modal for AI facts",
-  nutritionFactsTitle: "AI Nutrition Facts",
-  title: "Features",
-  dataPermissionLevelsCurrentFeature:
-    "Translations for Discussions & Announcements",
-  nutritionFactsFeatureName: "Translations for Discussions & Announcements",
-  dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-  nutritionFactsData: NUTRITION_FACTS_DATA,
-  trigger: undefined,
+  ], dataPermissionLevelsCloseButtonText: "Close", dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog", dataPermissionLevelsCurrentFeature:
+    "Translations for Discussions & Announcements", dataPermissionLevelsCurrentFeatureText: "Current Feature:", dataPermissionLevelsData: DATA_PERMISSION_LEVELS, dataPermissionLevelsModalLabel: "Data Permission Levels modal", dataPermissionLevelsTitle: "Data Permission Levels", nutritionFactsCloseButtonText: "Close", nutritionFactsCloseIconButtonScreenReaderLabel: "Close", nutritionFactsData: NUTRITION_FACTS_DATA, nutritionFactsFeatureName: "Translations for Discussions & Announcements", nutritionFactsModalLabel: "This is a modal for AI facts", nutritionFactsTitle: "AI Nutrition Facts", title: "Features", trigger: undefined,
 };
 const canvascoursetranslation: AiInfoFeatureProps = {
-  aiInformation,
-  dataPermissionLevels,
-  nutritionFacts,
-  revision: "2025.09.10",
-  uid: UID,
-  group: "Canvas",
-  name: FEATURE_NAME,
-  description:
-    'Translation of Discussion threads ("Course AI Translation" feature flag) across 10 languages.',
+  aiInformation, dataPermissionLevels, description:
+    'Translation of Discussion threads ("Course AI Translation" feature flag) across 10 languages.', group: "Canvas", name: FEATURE_NAME, nutritionFacts, revision: "2025.09.10", uid: UID,
 };
 export {
   canvascoursetranslation,

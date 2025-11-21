@@ -89,6 +89,7 @@ export function toTsObjectLiteral(
           return `[${value.map((v) => toTsObjectLiteral(v, options)).join(", ")}]`;
         }
         return `{ ${Object.entries(value as Record<string, unknown>)
+          .sort(([a], [b]) => a.localeCompare(b))
           .map(
             ([k, v]) =>
               `${isValidIdentifier(k) ? k : JSON.stringify(k)}: ${toTsObjectLiteral(v, options)}`,
