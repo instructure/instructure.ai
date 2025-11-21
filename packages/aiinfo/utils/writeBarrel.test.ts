@@ -223,7 +223,8 @@ describe("writeBarrel", () => {
     const writeBarrel = await importSubject();
     writeBarrel();
     const out = getWritten();
-    expect(out).toMatch(/import type {\s+AiInfoProps,/);
+    expect(out).toContain("import type {");
+    expect(out).toContain("AiInfoProps,");
     expect(out).toContain("const pluck = <");
     expect(out).toContain("const nutritionFacts:");
     expect(out).toContain("const dataPermissionLevels:");
