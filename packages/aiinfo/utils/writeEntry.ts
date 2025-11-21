@@ -50,13 +50,11 @@ export async function writeEntry(entry: Entry) {
 
   const nutritionFactsWithConstants = {
     ...omit(nutritionFacts, ["data", "featureName"]),
-    data: "NUTRITION_FACTS_DATA",
     featureName: "FEATURE_NAME",
   };
 
   const dataPermissionLevelsWithConstants = {
     ...omit(dataPermissionLevels, ["data", "currentFeature"]),
-    data: "DATA_PERMISSION_LEVELS",
     currentFeature: "FEATURE_NAME",
   };
 
@@ -66,8 +64,6 @@ export async function writeEntry(entry: Entry) {
       "nutritionFactsData",
       "trigger",
     ]),
-    dataPermissionLevelsData: "DATA_PERMISSION_LEVELS",
-    nutritionFactsData: "NUTRITION_FACTS_DATA",
     trigger: undefined,
   };
 
@@ -84,11 +80,22 @@ const UID = ${JSON.stringify(UID)};
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = ${toTsObjectLiteral(DPL)};
 const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = ${toTsObjectLiteral(NF)};
 
-const nutritionFacts: NutritionFactsProps = ${toTsObjectLiteral(nutritionFactsWithConstants, { replaceStrings: ["NUTRITION_FACTS_DATA", "FEATURE_NAME"] })};
+const nutritionFacts: NutritionFactsProps = {
+  ...${toTsObjectLiteral(nutritionFactsWithConstants, { replaceStrings: ["FEATURE_NAME"] })},
+  data: NUTRITION_FACTS_DATA,
+};
 
-const dataPermissionLevels: DataPermissionLevelsProps = ${toTsObjectLiteral(dataPermissionLevelsWithConstants, { replaceStrings: ["DATA_PERMISSION_LEVELS", "FEATURE_NAME"] })};
+const dataPermissionLevels: DataPermissionLevelsProps = {
+  ...${toTsObjectLiteral(dataPermissionLevelsWithConstants, { replaceStrings: ["FEATURE_NAME"] })},
+  data: DATA_PERMISSION_LEVELS,
+};
 
-const aiInformation: AiInformationProps = ${toTsObjectLiteral(aiInformationWithConstants, { replaceStrings: ["DATA_PERMISSION_LEVELS", "NUTRITION_FACTS_DATA"] })};
+const aiInformation: AiInformationProps = {
+  ...${toTsObjectLiteral(aiInformationWithConstants)},
+  dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
+  nutritionFactsData: NUTRITION_FACTS_DATA,
+  trigger: undefined,
+};
 
 const ${UID}: AiInfoFeatureProps = {
   aiInformation,

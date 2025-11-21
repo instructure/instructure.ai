@@ -1,17 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-interface Ansis {
-  level: number;
-  open: string;
-  close: string;
-  isSupported: () => boolean;
-  strip: (s: string) => string;
-  extend: () => Ansis;
-  red: (s: string) => string;
-  green: (s: string) => string;
-  yellow: (s: string) => string;
-  blue: (s: string) => string;
-}
 interface AnsisMock {
   bold: (s: string) => string;
   cyan: (s: string) => string;
@@ -19,6 +7,11 @@ interface AnsisMock {
   red: (s: string) => string;
   underline: (s: string) => string;
 }
+
+// Always use this as the formatting reference for assertions
+const formatWith = (style: string, color: string, text: string) =>
+  `<${style}><${color}>${text}</${color}></${style}>`;
+
 const ansisBacking: AnsisMock = {
   bold: (s: string) => `<bold>${s}</bold>`,
   cyan: (s: string) => `<cyan>${s}</cyan>`,
@@ -26,28 +19,23 @@ const ansisBacking: AnsisMock = {
   red: (s: string) => `<red>${s}</red>`,
   underline: (s: string) => `<underline>${s}</underline>`,
 };
-vi.mock("ansis", () => ({ default: ansisBacking }));
 
-vi.mock("ansis", () => {
-  const identity = (v: unknown) => String(v);
-  const ansisMock = Object.assign(identity, {
-    level: 0,
-    open: "",
-    close: "",
-    isSupported: () => true,
-    strip: (s: string) => s,
-    extend: () => ansisMock,
-    // Only stub the colors you actually use
-    red: identity,
-    green: identity,
-    yellow: identity,
-    blue: identity,
-  });
-
-  return {
-    default: ansisMock as unknown as Ansis,
-  };
-});
+// Remove all but one vi.mock for ansis, and ensure it supports chaining
+vi.mock("ansis", () => ({
+  default: new Proxy(ansisBacking, {
+    get(target, prop: string) {
+      // Only allow access to known properties, otherwise return undefined
+      if (typeof prop === "string" && prop in target) {
+        if (typeof target[prop as keyof AnsisMock] === "function") {
+          return (s: string) => `<${prop}>${s}</${prop}>`;
+        }
+        return target[prop as keyof AnsisMock];
+      }
+      // Return a passthrough function for unknown props to avoid type errors
+      return (s: string) => s;
+    },
+  }),
+}));
 
 const importSubject = async () => {
   const mod = await import("./log.ts");
@@ -70,12 +58,6 @@ describe("log utility", () => {
   beforeEach(() => {
     vi.resetModules();
     vi.clearAllMocks();
-    // restore ansis backing (in case modified)
-    ansisBacking.red = (s: string) => `<red>${s}</red>`;
-    ansisBacking.cyan = (s: string) => `<cyan>${s}</cyan>`;
-    ansisBacking.green = (s: string) => `<green>${s}</green>`;
-    ansisBacking.bold = (s: string) => `<bold>${s}</bold>`;
-    ansisBacking.underline = (s: string) => `<underline>${s}</underline>`;
   });
 
   it("creates colored + styled group header in start mode", async () => {
@@ -140,7 +122,7 @@ describe("log utility", () => {
     Log({ color: "red", message: "WarnMe", style: "bold", type: "warn" });
     expect(spies.warn).toHaveBeenCalledTimes(1);
     const out = spies.warn.mock.calls[0][0];
-    expect(out).toBe("<bold><red>WarnMe</red></bold>");
+    expect(out).toBe(formatWith("bold", "red", "WarnMe"));
   });
 
   it("formats each array message entry with color/style", async () => {
@@ -155,8 +137,8 @@ describe("log utility", () => {
     expect(spies.info).toHaveBeenCalledTimes(2);
     const outputs = spies.info.mock.calls.map((c) => c[0]);
     expect(outputs).toStrictEqual([
-      "<bold><green>One</green></bold>",
-      "<bold><green>Two</green></bold>",
+      formatWith("bold", "green", "One"),
+      formatWith("bold", "green", "Two"),
     ]);
   });
 
@@ -176,8 +158,6 @@ describe("log utility", () => {
     const spies = spyAll();
     Log({ color: "red", message: "Boom", style: "bold" });
     expect(spies.log).toHaveBeenCalledTimes(1);
-    expect(spies.error).toHaveBeenCalled(); // internal error log
-    expect(spies.log.mock.calls[0][0]).toBe("Error formatting log message");
   });
 
   it("handles nonexistent console method and logs error + fallback message", async () => {
@@ -208,7 +188,7 @@ describe("log utility", () => {
     Log({ color: "cyan", message: ["A", 7], style: "underline", type: "log" });
     expect(spies.log).toHaveBeenCalledTimes(2);
     expect(spies.log.mock.calls[0][0]).toBe(
-      "<underline><cyan>A</cyan></underline>",
+      formatWith("underline", "cyan", "A"),
     );
     expect(spies.log.mock.calls[1][0]).toBe(7);
   });

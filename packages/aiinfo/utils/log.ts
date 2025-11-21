@@ -67,7 +67,12 @@ const Log = (content: LogProps): void => {
     }
     if (end) {
       console.groupEnd();
-      console[type](`${groupFooter(color)}\n`);
+      if (typeof console[type] === "function") {
+        console[type](`${groupFooter(color)}\n`);
+      } else {
+        console.error(`Error in Log: console method "${type}" does not exist`);
+        console.log("Error logging message");
+      }
       return;
     }
     if (
@@ -84,12 +89,69 @@ const Log = (content: LogProps): void => {
       }
       return;
     }
+
+    const logMethod =
+      typeof console[type] === "function"
+        ? console[type].bind(console)
+        : undefined;
+
     if (Array.isArray(message)) {
-      message.forEach((msg) => {
-        console[type](format(msg));
-      });
+      for (const item of message) {
+        try {
+          if (
+            typeof item === "string" &&
+            color &&
+            typeof color === "string" &&
+            color in ansis &&
+            style &&
+            typeof style === "string" &&
+            style in ansis
+          ) {
+            if (logMethod) {
+              logMethod(ansis[style](ansis[color](item)));
+            } else {
+              throw new Error(`Console method "${type}" does not exist`);
+            }
+          } else {
+            if (logMethod) {
+              logMethod(item);
+            } else {
+              throw new Error(`Console method "${type}" does not exist`);
+            }
+          }
+        } catch (error) {
+          console.error("Error in Log:", error);
+          console.log("Error logging message");
+        }
+      }
+      return;
     } else {
-      console[type](format(message));
+      try {
+        if (
+          typeof message === "string" &&
+          color &&
+          typeof color === "string" &&
+          color in ansis &&
+          style &&
+          typeof style === "string" &&
+          style in ansis
+        ) {
+          if (logMethod) {
+            logMethod(ansis[style](ansis[color](message)));
+          } else {
+            throw new Error(`Console method "${type}" does not exist`);
+          }
+        } else {
+          if (logMethod) {
+            logMethod(message);
+          } else {
+            throw new Error(`Console method "${type}" does not exist`);
+          }
+        }
+      } catch (error) {
+        console.error("Error in Log:", error);
+        console.log("Error logging message");
+      }
     }
   } catch (error) {
     console.error("Error in Log:", error);

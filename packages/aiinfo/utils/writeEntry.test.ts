@@ -87,10 +87,12 @@ function mockUtils({
   });
   formatTsSpy.mockImplementation((code: string) => code);
   toTsObjectLiteralSpy.mockImplementation((obj) => {
-    if (typeof obj !== "object" || obj === null) return String(obj);
+    if (typeof obj !== "object" || obj === null) {
+      return String(obj);
+    }
     const entries = Object.entries(obj)
       .map(([k, v]) =>
-        v === undefined ? `${k}: undefined` : `${k}: ${JSON.stringify(v)}`
+        v === undefined ? `${k}: undefined` : `${k}: ${JSON.stringify(v)}`,
       )
       .join(", ");
     return `/*OBJ*/ {${entries}${entries ? "," : ""}}`;

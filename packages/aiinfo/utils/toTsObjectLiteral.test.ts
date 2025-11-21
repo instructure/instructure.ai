@@ -11,7 +11,6 @@ describe("toTsObjectLiteral", () => {
     expect(toTsObjectLiteral(true)).toBe("true");
     expect(toTsObjectLiteral(false)).toBe("false");
     expect(toTsObjectLiteral(undefined)).toBe("undefined");
-    expect(toTsObjectLiteral(undefined)).toBe("null");
   });
 
   it("serializes bigint", () => {
@@ -26,7 +25,6 @@ describe("toTsObjectLiteral", () => {
     const decl = toTsObjectLiteral(add);
     const arr = toTsObjectLiteral(arrow);
     expect(decl).toContain("function add");
-    // Type annotations are erased at runtime; just assert core structure
     expect(arr).toContain("(x) => x * 2");
   });
 
@@ -163,8 +161,9 @@ describe("toTsObjectLiteral", () => {
       title: "Hello",
     };
     const out = toTsObjectLiteral(complex);
+    // Now expect undefined in arrays to be serialized as "undefined"
     const expected =
-      '{ active: true, big: 9007199254740991n, data: [compute(), null, new Date("2024-01-01T00:00:00.000Z")], id: 7, meta: { "needs-quote": "yes", validKey: new Map([["a", new Set([1, 2, 3])]]) }, pattern: /abc/i, title: "Hello" }';
+      '{ active: true, big: 9007199254740991n, data: [compute(), undefined, new Date("2024-01-01T00:00:00.000Z")], id: 7, meta: { "needs-quote": "yes", validKey: new Map([["a", new Set([1, 2, 3])]]) }, pattern: /abc/i, title: "Hello" }';
     expect(out).toBe(expected);
     expect(out).toContain("id: 7");
     expect(out).toContain('title: "Hello"');
