@@ -15,7 +15,6 @@ writeFileSync.mockImplementation((p, c) => {
   lastWrittenContent = String(c);
 });
 
-
 function makeChangedEntry(
   uid: string,
   {
@@ -39,20 +38,27 @@ function makeChangedEntry(
       regions: "",
       regionsDescription: "",
       retention: "",
-    }, feature: { description: "", name: "" }, group: "", model: {
+    },
+    feature: { description: "", name: "" },
+    group: "",
+    model: {
       data: "",
       dataDescription: "",
       description: "",
       name: "",
       trained: "",
-    }, outputs: {
+    },
+    outputs: {
       guardrails: "",
       human: "",
       humanDescription: "",
       outcomes: "",
       risks: "",
       settings: "",
-    }, permissions: "1", revision: "", uid,
+    },
+    permissions: "1",
+    revision: "",
+    uid,
   };
   return {
     newChecksum,
@@ -93,7 +99,11 @@ describe("writeChangelog", () => {
       newEntry: {
         feature: { description: "Test description", name: "Feature A" },
         model: {
-          data: "Training data", dataDescription: "Data details", description: "Model description", name: "Test Model", trained: "2024-01-01",
+          data: "Training data",
+          dataDescription: "Data details",
+          description: "Model description",
+          name: "Test Model",
+          trained: "2024-01-01",
         },
       },
     });
@@ -127,13 +137,16 @@ describe("writeChangelog", () => {
           regions: "US",
           regionsDescription: "region desc",
           retention: "30d",
-        }, feature: { name: "Feature", description: "Test" }, model: {
+        },
+        feature: { name: "Feature", description: "Test" },
+        model: {
           name: "Model",
           description: "desc",
           data: "value",
           dataDescription: "added data",
           trained: "2024",
-        }, outputs: {
+        },
+        outputs: {
           guardrails: "yes",
           human: "yes",
           humanDescription: "human desc",
@@ -152,13 +165,16 @@ describe("writeChangelog", () => {
           regions: "US",
           regionsDescription: "region desc",
           retention: "30d",
-        }, feature: { name: "Feature", description: "Test" }, model: {
+        },
+        feature: { name: "Feature", description: "Test" },
+        model: {
           name: "Model",
           description: "desc",
           data: "",
           dataDescription: "",
           trained: "2023",
-        }, outputs: {
+        },
+        outputs: {
           guardrails: "yes",
           human: "yes",
           humanDescription: "human desc",
@@ -186,7 +202,11 @@ describe("writeChangelog", () => {
     const obj = {
       feature: { description: "Description", name: "Same" },
       model: {
-        data: "data", dataDescription: "data desc", description: "desc", name: "Model", trained: "2024",
+        data: "data",
+        dataDescription: "data desc",
+        description: "desc",
+        name: "Model",
+        trained: "2024",
       },
     };
     const entry = makeChangedEntry("uid-same", {
