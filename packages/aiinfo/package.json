@@ -38,7 +38,7 @@
     "build:lib": "tsdown",
     "cache:clear": "CLEAR=1 vite-node ./scripts/clearCache.mts",
     "cache:update": "vite-node ./scripts/updateCache.mts",
-    "lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
+    "lint": "oxfmt && oxlint --quiet --type-aware --fix --fix-suggestions",
     "package": "pnpm pack --pack-destination ./src",
     "test": "pnpm vitest run",
     "typecheck": "tsgo --noEmit",
