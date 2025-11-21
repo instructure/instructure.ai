@@ -64,7 +64,6 @@ export async function writeEntry(entry: Entry) {
       "nutritionFactsData",
       "trigger",
     ]),
-    trigger: undefined,
   };
 
   const code = `import type {
