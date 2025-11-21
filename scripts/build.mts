@@ -9,6 +9,12 @@ import {
 	isValidPackage,
 	unknownError,
 } from "@instructure.ai/shared-configs/workspace";
+import type {
+	AllowedCommands,
+	CommandExtraArgs,
+	FullPackageName,
+	PackageName,
+} from "@instructure.ai/shared-configs/types";
 import { updateIssues } from "./issues.mts";
 
 const main = async () => {

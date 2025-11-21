@@ -3,6 +3,17 @@ import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { name } from "../package.json" with { type: "json" };
+import type {
+  CommandInfo,
+  FullPackageName,
+  PackageJson,
+  PackageName,
+  WorkspaceCommand,
+  WorkspaceInfo,
+  WorkspaceName,
+  WorkspaceObj,
+  WorkspaceType,
+} from "@instructure.ai/shared-configs/types";
 
 /**
  * Move or rename a file from src to dest.

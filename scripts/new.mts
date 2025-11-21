@@ -6,6 +6,7 @@ import {
   exitWithError,
   isAvailablePackage,
 } from "@instructure.ai/shared-configs/workspace";
+import type { WorkspaceTemplate, WorkspaceType } from "@instructure.ai/shared-configs/types";
 
 async function main() {
   const { output } = Workspace(["workspace"], "new");

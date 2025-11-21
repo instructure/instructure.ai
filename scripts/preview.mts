@@ -8,6 +8,7 @@ import {
   isValidPackage,
   unknownError,
 } from "./workspace.mts";
+import type { AllowedCommands, CommandExtraArgs, FullPackageName, PackageName, WorkspaceCommand } from "@instructure.ai/shared-configs/types";
 
 const main = async (): Promise<void> => {
   const { command, output, args }: WorkspaceCommand = Workspace();

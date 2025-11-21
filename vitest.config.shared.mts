@@ -6,7 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const coveragePlugin = path.resolve(
   __dirname,
   "plugins/vitest.plugin.coverageReporter.cjs",
-); // changed
+);
 
 export default defineConfig({
   test: {

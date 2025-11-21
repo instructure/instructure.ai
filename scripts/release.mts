@@ -1,3 +1,4 @@
+import type { AllowedCommands, CommandExtraArgs, FullPackageName, PackageJson, WorkspaceCommand } from "@instructure.ai/shared-configs/types";
 import fs from "node:fs";
 import {
   Workspace,

@@ -8,6 +8,7 @@ import {
   isValidPackage,
   unknownError,
 } from "@instructure.ai/shared-configs/workspace";
+import type { AllowedCommands, CommandExtraArgs, FullPackageName, WorkspaceCommand } from "@instructure.ai/shared-configs/types";
 
 const main = async () => {
   const { command, output, args } = Workspace();
