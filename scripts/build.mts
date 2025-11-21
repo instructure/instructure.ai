@@ -27,9 +27,11 @@ const main = async () => {
     "app",
   ] as const;
 
-  if (!isValidCommand(command, buildCommands)) {
-    exitWithError("Invalid build command.");
-  }
+  const isPackageName = (val: unknown): val is PackageName =>
+    typeof val === "string" && isValidPackage(val);
+
+  const isPackageNameArray = (val: unknown): val is PackageName[] =>
+    Array.isArray(val) && val.every(isPackageName);
 
   const buildPackage = (pkg: PackageName, args: CommandExtraArgs) => {
     console.log(`Building ${pkg}`);
@@ -86,18 +88,32 @@ const main = async () => {
     });
   };
 
+  if (isPackageName(command)) {
+    buildPackage(command, args.slice(1));
+    await updateIssues();
+    return;
+  }
+
+  if (!isValidCommand(command, buildCommands)) {
+    exitWithError("Invalid build command.");
+  }
+
   try {
     switch (command) {
       case "all": {
         console.log("Building apps:");
         console.log(output);
-        buildPackages(output as PackageName[], args.slice(2));
+        if (isPackageNameArray(output)) {
+          buildPackages(output, args.slice(2));
+        } else {
+          console.log("No valid packages found.");
+        }
         break;
       }
       case "app": {
-        if (output) {
+        if (isPackageName(output)) {
           copyPublicToDist();
-          buildPackage(output as PackageName, args.slice(2));
+          buildPackage(output, args.slice(2));
         } else {
           console.log(
             "No app found in workspace. Did you mean `build package <name>`?",
@@ -106,19 +122,19 @@ const main = async () => {
         break;
       }
       case "apps": {
-        if (Array.isArray(output) && output.length) {
+        if (isPackageNameArray(output) && output.length) {
           console.log("Building apps:");
           console.log(output);
           copyPublicToDist();
-          buildPackages(output as PackageName[], args.slice(1));
+          buildPackages(output, args.slice(1));
         } else {
           console.log("No apps found in workspace.");
         }
         break;
       }
       case "package": {
-        if (output) {
-          buildPackage(output as PackageName, args.slice(2));
+        if (isPackageName(output)) {
+          buildPackage(output, args.slice(2));
         } else {
           console.log(
             "No package found in workspace. Did you mean `build app <name>`?",
@@ -127,22 +143,18 @@ const main = async () => {
         break;
       }
       case "packages": {
-        if (Array.isArray(output) && output.length) {
+        if (isPackageNameArray(output) && output.length) {
           console.log("Building packages:");
           console.log(output);
-          buildPackages(output as PackageName[], args.slice(1));
+          buildPackages(output, args.slice(1));
         } else {
           console.log("No packages found in workspace.");
         }
         break;
       }
       default: {
-        if (isValidPackage(command)) {
-          buildPackage(command as PackageName, args.slice(1));
-        } else {
-          exitWithError(`Unknown build command: ${command}
-Valid commands are: ${buildCommands.join(", ")}`);
-        }
+        // Unreachable: dynamic package names handled earlier.
+        exitWithError("Unknown build command.");
       }
     }
     await updateIssues();
