@@ -23,26 +23,27 @@ vi.mock("../strings", () => ({
   },
 }));
 
-vi.mock>(() => ({
-  entryToNutritionFacts: vi.fn((entry: Record<string, unknown>) => ({
-    data: [{ calories: 0 }, { tokens: 123 }],
-    featureName:
-      entry &&
-      typeof entry.feature === "object" &&
-      entry.feature !== null &&
-      "name" in entry.feature
-        ? ((entry.feature as { name?: string }).name ?? "NF Fallback")
-        : "NF Fallback",
-  })),
-  entryToPermissionLevels: vi.fn(() => ({
-    currentFeature: "Current Feature",
-    data: [
-      { description: "", highlighted: undefined, level: "L1", title: "" },
-      { description: "", highlighted: undefined, level: "L2", title: "" },
-      { description: "", highlighted: undefined, level: "L3", title: "" },
-    ],
-  })),
-}));
+vi.mock >
+  (() => ({
+    entryToNutritionFacts: vi.fn((entry: Record<string, unknown>) => ({
+      data: [{ calories: 0 }, { tokens: 123 }],
+      featureName:
+        entry &&
+        typeof entry.feature === "object" &&
+        entry.feature !== null &&
+        "name" in entry.feature
+          ? ((entry.feature as { name?: string }).name ?? "NF Fallback")
+          : "NF Fallback",
+    })),
+    entryToPermissionLevels: vi.fn(() => ({
+      currentFeature: "Current Feature",
+      data: [
+        { description: "", highlighted: undefined, level: "L1", title: "" },
+        { description: "", highlighted: undefined, level: "L2", title: "" },
+        { description: "", highlighted: undefined, level: "L3", title: "" },
+      ],
+    })),
+  }));
 
 interface AIInformationResult {
   trigger: undefined;
