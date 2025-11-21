@@ -12,13 +12,13 @@ A TypeScript package providing [IgniteAI](https://www.instructure.com/igniteai) 
 
 ```jsx
 //V1
-<AiInformation {...aIInformation} />
+<AiInformation {...aiInformation} />
 ```
 
 ```jsx
 //V2
 <AiInformation
-  {...aIInformation}
+  {...aiInformation}
   trigger={<Button>AI Information</Button>}
 />
 ```
