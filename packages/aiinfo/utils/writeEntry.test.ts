@@ -86,9 +86,15 @@ function mockUtils({
     data: dplData,
   });
   formatTsSpy.mockImplementation((code: string) => code);
-  toTsObjectLiteralSpy.mockImplementation(
-    (obj) => `/*OBJ*/ ${JSON.stringify(obj)}`,
-  );
+  toTsObjectLiteralSpy.mockImplementation((obj) => {
+    if (typeof obj !== "object" || obj === null) return String(obj);
+    const entries = Object.entries(obj)
+      .map(([k, v]) =>
+        v === undefined ? `${k}: undefined` : `${k}: ${JSON.stringify(v)}`
+      )
+      .join(", ");
+    return `/*OBJ*/ {${entries}${entries ? "," : ""}}`;
+  });
 }
 
 function setupMocks(opts?: Parameters<typeof mockUtils>[0]) {
