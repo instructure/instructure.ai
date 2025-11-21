@@ -28,6 +28,7 @@
 		".template"
 	],
 	"include": [
-		"./types/**/*.d.ts"
+		"./types/**/*.d.ts",
+		"./scripts/**/*.mts",
 	],
 }
