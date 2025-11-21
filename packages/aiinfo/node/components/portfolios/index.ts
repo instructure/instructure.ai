@@ -162,8 +162,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -185,13 +185,13 @@ const aiInformation: AiInformationProps = {
 const portfolios: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description:
-    "AI Assistant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation.",
-  group: "Canvas",
-  name: FEATURE_NAME,
   nutritionFacts,
   revision: "2025.10.27",
   uid: UID,
+  group: "Canvas",
+  name: FEATURE_NAME,
+  description:
+    "AI Assistant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation.",
 };
 export { portfolios, nutritionFacts, dataPermissionLevels, aiInformation };
 export default portfolios;

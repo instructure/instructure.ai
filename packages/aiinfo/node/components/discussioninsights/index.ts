@@ -161,8 +161,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -184,13 +184,13 @@ const aiInformation: AiInformationProps = {
 const discussioninsights: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description:
-    "Discussion Insights uses AI to evaluate student discussion replies, highlight relevant contributions, and flag those that may need instructor review.",
-  group: "Canvas",
-  name: FEATURE_NAME,
   nutritionFacts,
   revision: "2025.10.02",
   uid: UID,
+  group: "Canvas",
+  name: FEATURE_NAME,
+  description:
+    "Discussion Insights uses AI to evaluate student discussion replies, highlight relevant contributions, and flag those that may need instructor review.",
 };
 export {
   discussioninsights,

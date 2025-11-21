@@ -162,8 +162,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -185,13 +185,13 @@ const aiInformation: AiInformationProps = {
 const conversionalignment: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description:
-    "When importing Canvas Quizzes to Mastery Connect, AI can be used to suggest aligned standards.",
-  group: "Mastery",
-  name: FEATURE_NAME,
   nutritionFacts,
   revision: "2025.11.19",
   uid: UID,
+  group: "Mastery",
+  name: FEATURE_NAME,
+  description:
+    "When importing Canvas Quizzes to Mastery Connect, AI can be used to suggest aligned standards.",
 };
 export {
   conversionalignment,

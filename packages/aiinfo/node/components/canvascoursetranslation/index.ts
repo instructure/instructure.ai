@@ -160,8 +160,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -184,13 +184,13 @@ const aiInformation: AiInformationProps = {
 const canvascoursetranslation: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description:
-    'Translation of Discussion threads ("Course AI Translation" feature flag) across 10 languages.',
-  group: "Canvas",
-  name: FEATURE_NAME,
   nutritionFacts,
   revision: "2025.09.10",
   uid: UID,
+  group: "Canvas",
+  name: FEATURE_NAME,
+  description:
+    'Translation of Discussion threads ("Course AI Translation" feature flag) across 10 languages.',
 };
 export {
   canvascoursetranslation,

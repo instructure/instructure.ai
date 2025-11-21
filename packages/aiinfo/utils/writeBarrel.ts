@@ -59,7 +59,7 @@ const writeBarrel = (opts: Options = {}) => {
     "// no feature folders found";
 
   const typesImport = `import type {
-  AiInfoAiInformationProps
+  AiInfoAiInformationProps,
   AiInfoDataPermissionLevelsProps,
   AiInfoNutritionFactsProps,
   AiInfoProps,

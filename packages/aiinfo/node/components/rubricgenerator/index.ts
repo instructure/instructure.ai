@@ -161,8 +161,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -184,12 +184,12 @@ const aiInformation: AiInformationProps = {
 const rubricgenerator: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description: "AI-generated rubric recommendations for Canvas assignments.",
-  group: "Canvas",
-  name: FEATURE_NAME,
   nutritionFacts,
   revision: "2025.10.09",
   uid: UID,
+  group: "Canvas",
+  name: FEATURE_NAME,
+  description: "AI-generated rubric recommendations for Canvas assignments.",
 };
 export { rubricgenerator, nutritionFacts, dataPermissionLevels, aiInformation };
 export default rubricgenerator;

@@ -160,8 +160,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -183,13 +183,13 @@ const aiInformation: AiInformationProps = {
 const itemauthoringassistance: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description:
-    "Question Authoring Assistance for Quizzes streamlines quiz creation by generating questions based on your course materials. \n",
-  group: "Canvas",
-  name: FEATURE_NAME,
   nutritionFacts,
   revision: "2025.11.18",
   uid: UID,
+  group: "Canvas",
+  name: FEATURE_NAME,
+  description:
+    "Question Authoring Assistance for Quizzes streamlines quiz creation by generating questions based on your course materials. \n",
 };
 export {
   itemauthoringassistance,

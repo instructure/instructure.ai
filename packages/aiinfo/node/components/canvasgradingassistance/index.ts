@@ -161,8 +161,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -184,13 +184,13 @@ const aiInformation: AiInformationProps = {
 const canvasgradingassistance: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description:
-    "AI powered automatic grading and feedback suggestions to enable more consistent, fair, and efficient grading workflows.",
-  group: "Canvas",
-  name: FEATURE_NAME,
   nutritionFacts,
   revision: "2025.10.22",
   uid: UID,
+  group: "Canvas",
+  name: FEATURE_NAME,
+  description:
+    "AI powered automatic grading and feedback suggestions to enable more consistent, fair, and efficient grading workflows.",
 };
 export {
   canvasgradingassistance,

@@ -162,8 +162,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -185,13 +185,13 @@ const aiInformation: AiInformationProps = {
 const smartsearch: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description:
-    "Natural language search of course content for students and instructors.",
-  group: "Canvas",
-  name: FEATURE_NAME,
   nutritionFacts,
   revision: "2025.10.02",
   uid: UID,
+  group: "Canvas",
+  name: FEATURE_NAME,
+  description:
+    "Natural language search of course content for students and instructors.",
 };
 export { smartsearch, nutritionFacts, dataPermissionLevels, aiInformation };
 export default smartsearch;

@@ -164,8 +164,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -187,13 +187,13 @@ const aiInformation: AiInformationProps = {
 const igniteagent: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description:
-    "Ignite Agent is a faculty chat assistant capable of translating natural language requests into complex Canvas workflows.",
-  group: "IgniteAI",
-  name: FEATURE_NAME,
   nutritionFacts,
   revision: "2025.09.10",
   uid: UID,
+  group: "IgniteAI",
+  name: FEATURE_NAME,
+  description:
+    "Ignite Agent is a faculty chat assistant capable of translating natural language requests into complex Canvas workflows.",
 };
 export { igniteagent, nutritionFacts, dataPermissionLevels, aiInformation };
 export default igniteagent;
