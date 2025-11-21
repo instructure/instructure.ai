@@ -133,34 +133,15 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 	},
 ];
 const nutritionFacts: NutritionFactsProps = {
-	...{
-		closeButtonText: "Close",
-		closeIconButtonScreenReaderLabel: "Close",
-		data: undefined,
-		featureName: "Summaries for Discussions",
-		modalLabel: "This is a modal for AI facts",
-		title: "AI Nutrition Facts",
-		triggerText: "Nutrition Facts",
-	},
-	data: NUTRITION_FACTS_DATA,
-	featureName: FEATURE_NAME,
+	
+		closeButtonText: "Close", closeIconButtonScreenReaderLabel: "Close", data: undefined, data: NUTRITION_FACTS_DATA, featureName: "Summaries for Discussions", featureName: FEATURE_NAME, modalLabel: "This is a modal for AI facts", title: "AI Nutrition Facts", triggerText: "Nutrition Facts",
 };
 const dataPermissionLevels: DataPermissionLevelsProps = {
-	...{
-		closeButtonText: "Close",
-		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Summaries for Discussions",
-		currentFeatureText: "Current Feature:",
-		data: undefined,
-		modalLabel: "Data Permission Levels modal",
-		title: "Data Permission Levels",
-		triggerText: "Data Permission Levels",
-	},
-	currentFeature: FEATURE_NAME,
-	data: DATA_PERMISSION_LEVELS,
+	
+		closeButtonText: "Close", closeIconButtonScreenReaderLabel: "Close dialog", currentFeature: "Summaries for Discussions", currentFeature: FEATURE_NAME, currentFeatureText: "Current Feature:", data: undefined, data: DATA_PERMISSION_LEVELS, modalLabel: "Data Permission Levels modal", title: "Data Permission Levels", triggerText: "Data Permission Levels",
 };
 const aiInformation: AiInformationProps = {
-	...{
+	
 		data: [
 			{
 				description:
@@ -173,26 +154,7 @@ const aiInformation: AiInformationProps = {
 				permissionLevelsModalTriggerText: "Data Permission Levels",
 				permissionLevelText: "Permission Level:",
 			},
-		],
-		dataPermissionLevelsCloseButtonText: "Close",
-		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature: "Summaries for Discussions",
-		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
-		dataPermissionLevelsData: undefined,
-		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
-		dataPermissionLevelsTitle: "Data Permission Levels",
-		nutritionFactsCloseButtonText: "Close",
-		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
-		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Summaries for Discussions",
-		nutritionFactsModalLabel: "This is a modal for AI facts",
-		nutritionFactsTitle: "AI Nutrition Facts",
-		title: "Features",
-		trigger: undefined,
-	},
-	dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-	nutritionFactsData: NUTRITION_FACTS_DATA,
-	trigger: undefined,
+		], dataPermissionLevelsCloseButtonText: "Close", dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog", dataPermissionLevelsCurrentFeature: "Summaries for Discussions", dataPermissionLevelsCurrentFeatureText: "Current Feature:", dataPermissionLevelsData: undefined, dataPermissionLevelsData: DATA_PERMISSION_LEVELS, dataPermissionLevelsModalLabel: "Data Permission Levels modal", dataPermissionLevelsTitle: "Data Permission Levels", nutritionFactsCloseButtonText: "Close", nutritionFactsCloseIconButtonScreenReaderLabel: "Close", nutritionFactsData: undefined, nutritionFactsData: NUTRITION_FACTS_DATA, nutritionFactsFeatureName: "Summaries for Discussions", nutritionFactsModalLabel: "This is a modal for AI facts", nutritionFactsTitle: "AI Nutrition Facts", title: "Features", trigger: undefined, trigger: undefined,
 };
 const canvasdiscussionsummaries: AiInfoFeatureProps = {
 	aiInformation,

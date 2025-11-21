@@ -134,34 +134,15 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 	},
 ];
 const nutritionFacts: NutritionFactsProps = {
-	...{
-		closeButtonText: "Close",
-		closeIconButtonScreenReaderLabel: "Close",
-		data: undefined,
-		featureName: "Generator for Rubrics",
-		modalLabel: "This is a modal for AI facts",
-		title: "AI Nutrition Facts",
-		triggerText: "Nutrition Facts",
-	},
-	data: NUTRITION_FACTS_DATA,
-	featureName: FEATURE_NAME,
+	
+		closeButtonText: "Close", closeIconButtonScreenReaderLabel: "Close", data: undefined, data: NUTRITION_FACTS_DATA, featureName: "Generator for Rubrics", featureName: FEATURE_NAME, modalLabel: "This is a modal for AI facts", title: "AI Nutrition Facts", triggerText: "Nutrition Facts",
 };
 const dataPermissionLevels: DataPermissionLevelsProps = {
-	...{
-		closeButtonText: "Close",
-		closeIconButtonScreenReaderLabel: "Close dialog",
-		currentFeature: "Generator for Rubrics",
-		currentFeatureText: "Current Feature:",
-		data: undefined,
-		modalLabel: "Data Permission Levels modal",
-		title: "Data Permission Levels",
-		triggerText: "Data Permission Levels",
-	},
-	currentFeature: FEATURE_NAME,
-	data: DATA_PERMISSION_LEVELS,
+	
+		closeButtonText: "Close", closeIconButtonScreenReaderLabel: "Close dialog", currentFeature: "Generator for Rubrics", currentFeature: FEATURE_NAME, currentFeatureText: "Current Feature:", data: undefined, data: DATA_PERMISSION_LEVELS, modalLabel: "Data Permission Levels modal", title: "Data Permission Levels", triggerText: "Data Permission Levels",
 };
 const aiInformation: AiInformationProps = {
-	...{
+	
 		data: [
 			{
 				description:
@@ -174,26 +155,7 @@ const aiInformation: AiInformationProps = {
 				permissionLevelsModalTriggerText: "Data Permission Levels",
 				permissionLevelText: "Permission Level:",
 			},
-		],
-		dataPermissionLevelsCloseButtonText: "Close",
-		dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-		dataPermissionLevelsCurrentFeature: "Generator for Rubrics",
-		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
-		dataPermissionLevelsData: undefined,
-		dataPermissionLevelsModalLabel: "Data Permission Levels modal",
-		dataPermissionLevelsTitle: "Data Permission Levels",
-		nutritionFactsCloseButtonText: "Close",
-		nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
-		nutritionFactsData: undefined,
-		nutritionFactsFeatureName: "Generator for Rubrics",
-		nutritionFactsModalLabel: "This is a modal for AI facts",
-		nutritionFactsTitle: "AI Nutrition Facts",
-		title: "Features",
-		trigger: undefined,
-	},
-	dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-	nutritionFactsData: NUTRITION_FACTS_DATA,
-	trigger: undefined,
+		], dataPermissionLevelsCloseButtonText: "Close", dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog", dataPermissionLevelsCurrentFeature: "Generator for Rubrics", dataPermissionLevelsCurrentFeatureText: "Current Feature:", dataPermissionLevelsData: undefined, dataPermissionLevelsData: DATA_PERMISSION_LEVELS, dataPermissionLevelsModalLabel: "Data Permission Levels modal", dataPermissionLevelsTitle: "Data Permission Levels", nutritionFactsCloseButtonText: "Close", nutritionFactsCloseIconButtonScreenReaderLabel: "Close", nutritionFactsData: undefined, nutritionFactsData: NUTRITION_FACTS_DATA, nutritionFactsFeatureName: "Generator for Rubrics", nutritionFactsModalLabel: "This is a modal for AI facts", nutritionFactsTitle: "AI Nutrition Facts", title: "Features", trigger: undefined, trigger: undefined,
 };
 const rubricgenerator: AiInfoFeatureProps = {
 	aiInformation,
