@@ -12,7 +12,7 @@
 	"scripts": {
 		"build": "vite build",
 		"dev": "vite",
-		"lint": "oxlint --type-aware --fix --fix-suggestions && oxfmt",
+		"lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
 		"preview": "vite preview",
 		"test": "pnpm vitest run",
 		"typecheck": "tsgo --noEmit"

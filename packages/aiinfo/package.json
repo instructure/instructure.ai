@@ -34,11 +34,11 @@
     "directory": "packages/aiinfo"
   },
   "scripts": {
-    "build": "pnpm cache:update && pnpm typecheck && pnpm build:lib && oxfmt && pnpm package",
+    "build": "pnpm cache:update && pnpm typecheck && pnpm build:lib && pnpm lint && pnpm package",
     "build:lib": "tsdown",
     "cache:clear": "CLEAR=1 vite-node ./scripts/clearCache.mts",
     "cache:update": "vite-node ./scripts/updateCache.mts",
-    "lint": "oxlint --type-aware --fix --fix-suggestions && oxfmt",
+    "lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
     "package": "pnpm pack --pack-destination ./src",
     "test": "pnpm vitest run",
     "typecheck": "tsgo --noEmit",
