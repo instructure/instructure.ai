@@ -44,7 +44,9 @@ const isValidWorkspaceName = (ws: string): ws is WorkspaceName => {
   return wn.test(ws);
 };
 
-const getPackagePath = (pkg: PackageName | FullPackageName): string => {
+function getPackagePath(pkg: PackageName): string;
+function getPackagePath(pkg: FullPackageName): string;
+function getPackagePath(pkg: string): string {
   if (!isValidPackageName(pkg) && !isValidFullPackageName(pkg)) {
     exitWithError("Error: Invalid package name.");
   }
@@ -53,7 +55,6 @@ const getPackagePath = (pkg: PackageName | FullPackageName): string => {
     pkg === getRootPackage() ||
     packageName === getPackageName(getRootPackage())
   ) {
-    // Return the absolute path to the workspace root, without trailing slash
     return resolve(__dirname, "../");
   } else {
     const packagesPath = join(__dirname, "../packages", packageName);
@@ -69,11 +70,17 @@ const getPackagePath = (pkg: PackageName | FullPackageName): string => {
       return "";
     }
   }
-};
+}
 
-const getPackageJson = (
-  pkg: PackageName | FullPackageName,
-): { content: PackageJson; path: string } => {
+function getPackageJson(pkg: PackageName): {
+  content: PackageJson;
+  path: string;
+};
+function getPackageJson(pkg: FullPackageName): {
+  content: PackageJson;
+  path: string;
+};
+function getPackageJson(pkg: string): { content: PackageJson; path: string } {
   if (!isValidPackageName(pkg) && !isValidFullPackageName(pkg)) {
     exitWithError("Error: Invalid package name.");
   }
@@ -97,7 +104,7 @@ const getPackageJson = (
     );
   }
   return { content: {} as PackageJson, path: "" };
-};
+}
 
 const getRootPackage = (): FullPackageName => {
   if (!isValidFullPackageName(name)) {
@@ -147,9 +154,9 @@ const getPackages = (type?: WorkspaceType): PackageName[] => {
   const packagesDirs =
     type === "app"
       ? [appsDir]
-      : type === "package"
+      : (type === "package"
         ? [pkgsDir]
-        : [appsDir, pkgsDir];
+        : [appsDir, pkgsDir]);
   const workspaceName = getWorkspace(getRootPackage() as FullPackageName);
   let allDirs: string[] = [];
   for (const dirPath of packagesDirs) {
@@ -192,17 +199,19 @@ const getPackages = (type?: WorkspaceType): PackageName[] => {
   return [getPackageName(getRootPackage()), ...packageNames];
 };
 
-const exitWithError = (message: string, error?: Error | string | unknown) => {
+const exitWithError = (message: string, error?: unknown): never => {
   console.error(message);
   if (error instanceof Error) {
-    console.error(error.stack);
+    console.error(error.stack ?? error.message);
   } else if (typeof error === "string") {
+    console.error(error);
+  } else if (error !== undefined) {
     console.error(error);
   }
   process.exit(1);
 };
 
-const unknownError = (error?: Error | string | unknown) =>
+const unknownError = (error?: unknown) =>
   exitWithError("An unknown error occurred.", error);
 
 class WorkspaceClass implements WorkspaceInfo {
@@ -278,8 +287,24 @@ class CommandClass implements CommandInfo {
   get command() {
     return this.args[0] as WorkspaceCommand["command"];
   }
-  get package() {
-    return this.args[1] as PackageName | FullPackageName | undefined;
+  // Return raw second arg (un-normalized) to avoid unreachable narrowing later.
+  get packageRaw(): string | undefined {
+    const arg = this.args[1];
+    return typeof arg === "string" ? arg : undefined;
+  }
+  // Keep normalized full name when needed elsewhere.
+  get package(): FullPackageName | undefined {
+    const raw = this.packageRaw;
+    if (!raw) {
+      return undefined;
+    }
+    if (isValidFullPackageName(raw)) {
+      return raw;
+    }
+    if (isValidPackageName(raw)) {
+      return getFullPackageName(raw);
+    }
+    return undefined;
   }
   help(script?: WorkspaceCommand["script"]) {
     console.log(`
@@ -290,7 +315,7 @@ Commands:
   package <name>        Execute package <name> or <scope>/<name>
   packages              Execute all packages
   app <name>            Execute app <name> or <scope>/<name>
-	apps                  Execute all apps
+  apps                  Execute all apps
   root                  Execute against the root package
   help                  Show this help message
   name                  Show the workspace name
@@ -310,6 +335,16 @@ const Workspace = (
     command: command.command,
     script: script,
   };
+
+  // Hoist dynamic package/app commands before static switch
+  if (isValidFullPackageName(command.command)) {
+    exportObj.output = command.command;
+    return exportObj;
+  }
+  if (isValidPackageName(command.command)) {
+    exportObj.output = getFullPackageName(command.command);
+    return exportObj;
+  }
 
   switch (command.command) {
     case "help": {
@@ -341,55 +376,56 @@ const Workspace = (
       break;
     }
     case "package": {
-      const pkg = command.package;
-      if (!pkg) {
+      const raw = command.packageRaw;
+      if (!raw) {
         exitWithError("Error: Package name is required.");
         return exportObj;
       }
-      let fullPkg: FullPackageName | undefined;
-      if (isValidFullPackageName(pkg)) {
-        fullPkg = workspace.packages().find((p) => p === pkg);
-      } else if (isValidPackageName(pkg)) {
-        fullPkg = workspace.packages().find((p) => p.endsWith(`/${pkg}`));
-      }
-      if (!fullPkg) {
-        exitWithError(
-          `Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`,
-        );
+      const fullCandidate = isValidFullPackageName(raw)
+        ? raw
+        : (isValidPackageName(raw)
+          ? getFullPackageName(raw)
+          : undefined);
+
+      const found = fullCandidate
+        ? workspace.packages().find((p) => p === fullCandidate)
+        : undefined;
+
+      if (!found) {
+        const displayName = fullCandidate ?? raw;
+        exitWithError(`Error: ${displayName} is not in the workspace.`);
         return exportObj;
       }
-      exportObj.output = fullPkg;
+      exportObj.output = found;
       break;
     }
     case "app": {
-      const pkg = command.package;
-      if (!pkg) {
+      const raw = command.packageRaw;
+      if (!raw) {
         exitWithError("Error: App name is required.");
         return exportObj;
       }
-      const appFullName = isValidFullPackageName(pkg)
-        ? workspace.apps().find((app) => app === pkg)
-        : isValidPackageName(pkg)
-          ? workspace.apps().find((app) => app.endsWith(`/${pkg}`))
-          : undefined;
-      if (!appFullName) {
-        exitWithError(
-          `Error: ${isValidFullPackageName(pkg) ? pkg : `${workspace.name()}/${pkg}`} is not in the workspace.`,
-        );
+      const fullCandidate = isValidFullPackageName(raw)
+        ? raw
+        : (isValidPackageName(raw)
+          ? getFullPackageName(raw)
+          : undefined);
+
+      const found = fullCandidate
+        ? workspace.apps().find((a) => a === fullCandidate)
+        : undefined;
+
+      if (!found) {
+        const displayName = fullCandidate ?? raw;
+        exitWithError(`Error: ${displayName} is not in the workspace.`);
         return exportObj;
       }
-      exportObj.output = appFullName;
+      exportObj.output = found;
       break;
     }
     default: {
-      if (isValidFullPackageName(command.command)) {
-        exportObj.output = command.command;
-      } else if (isValidPackageName(command.command)) {
-        exportObj.output = getFullPackageName(command.command);
-      } else {
-        exportObj.output = undefined;
-        exitWithError(`Unknown command: ${command.command}`);
-      }
+      exportObj.output = undefined;
+      exitWithError(`Unknown command: ${String(command.command)}`);
       break;
     }
   }
@@ -397,36 +433,34 @@ const Workspace = (
   return exportObj;
 };
 
+// Simplified: only validates static commands (dynamic handled earlier)
 const isValidCommand = (
   cmd: WorkspaceCommand["command"],
   cmds: readonly WorkspaceCommand["command"][] = [],
 ): boolean => {
-  if (
-    cmds.includes(cmd) ||
-    isValidFullPackageName(cmd) ||
-    isValidPackageName(cmd)
-  ) {
-    return true;
-  } else {
-    exitWithError(
-      `Error: Invalid command '${cmd}'. Valid commands are: ${cmds.join(", ")}`,
-    );
-    return false;
-  }
+  return cmds.includes(cmd);
 };
 
-const isStrictlyValidCommand = (
-  cmd: WorkspaceCommand["command"],
-  cmds: readonly WorkspaceCommand["command"][] = [],
-): boolean => cmds.includes(cmd);
-
-const isValidPackage = (
-  pkg: PackageName | FullPackageName,
+// Overloads remove redundant union (PackageName | FullPackageName).
+function isValidPackage(
+  pkg: PackageName,
+  pkgs?: PackageName[],
+): pkg is PackageName;
+function isValidPackage(
+  pkg: FullPackageName,
+  pkgs?: PackageName[],
+): pkg is FullPackageName;
+function isValidPackage(
+  pkg: string,
   pkgs: PackageName[] = getPackages(),
-): boolean => {
-  const packageName = isValidFullPackageName(pkg) ? getPackageName(pkg) : pkg;
-  return pkgs.includes(packageName) && isValidPackageName(packageName);
-};
+): boolean {
+  const packageName = isValidFullPackageName(pkg)
+    ? getPackageName(pkg as FullPackageName)
+    : pkg;
+  return (
+    pkgs.includes(packageName as PackageName) && isValidPackageName(packageName)
+  );
+}
 
 const isAvailablePackage = (
   pkg: PackageName,
@@ -482,6 +516,5 @@ export {
   getFullPackageName,
   getRootPackage,
   getPackageJson,
-  isStrictlyValidCommand,
   moveFile,
 };

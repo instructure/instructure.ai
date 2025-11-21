@@ -18,27 +18,31 @@ const main = async (): Promise<void> => {
 
   const devCommands: AllowedCommands = ["package", "app"] as const;
 
+  const isPkgName = (val: unknown): val is PackageName =>
+    typeof val === "string" && isValidPackage(val);
+
+  if (isPkgName(command)) {
+    exec(`pnpm -F ${command} dev`, { args: args.slice(1) });
+    return;
+  }
+
   if (!isValidCommand(command, devCommands)) {
     exitWithError("Invalid dev command.");
   }
 
-  const devPackage = (pkg: PackageName, args: CommandExtraArgs) =>
-    exec(`pnpm -F ${pkg} dev`, { args: args.slice(2) });
+  const devPackage = (pkg: PackageName, extra: CommandExtraArgs) =>
+    exec(`pnpm -F ${pkg} dev`, { args: extra });
 
   try {
     if (command === "package" || command === "app") {
-      if (output) {
-        devPackage(output as PackageName, args.slice(2));
+      if (isPkgName(output)) {
+        // original arg slicing preserved
+        devPackage(output, args.slice(2));
       } else {
         console.log("No package found in workspace.");
       }
     } else {
-      if (isValidPackage(command)) {
-        devPackage(command as PackageName, args.slice(1));
-      } else {
-        exitWithError(`Unknown dev command: ${command}
- Valid commands are: ${devCommands.join(", ")}`);
-      }
+      exitWithError("Unknown dev command.");
     }
   } catch (error) {
     exitWithError("Dev failed:", error);

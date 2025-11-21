@@ -27,10 +27,6 @@ const main = async () => {
     "packages",
   ] as const;
 
-  if (!isValidCommand(command, releaseCommands)) {
-    exitWithError("Invalid release command.");
-  }
-
   const getVersion = (pkgJson: PackageJson) => pkgJson.version;
 
   const getNewVersion = (args: WorkspaceCommand["args"]) => {
@@ -91,6 +87,7 @@ const main = async () => {
     }
     return isVersionBigger(version, newVersion);
   };
+
   const setVersion = ({
     newVersion,
     version,
@@ -163,6 +160,7 @@ const main = async () => {
       releasePackage({ args, pkg });
     });
   };
+
   const commit = ({
     pkg,
     version,
@@ -176,6 +174,16 @@ const main = async () => {
     exec(`git add ${pkgJsonPath}`);
     exec(`git commit -m "${tag}"`);
   };
+
+  if (isValidPackage(command)) {
+    releasePackage({ args: args.slice(1), pkg: command as FullPackageName });
+    return;
+  }
+
+  if (!isValidCommand(command, releaseCommands)) {
+    exitWithError("Invalid release command.");
+  }
+
   try {
     switch (command) {
       case "app": {
@@ -219,15 +227,8 @@ const main = async () => {
         break;
       }
       default: {
-        if (isValidPackage(command)) {
-          releasePackage({
-            args: args.slice(1),
-            pkg: command as FullPackageName,
-          });
-        } else {
-          exitWithError(`Unknown build command: ${command}
-Valid commands are: ${releaseCommands.join(", ")}`);
-        }
+        // Unreachable: dynamic package names handled before validation.
+        exitWithError("Invalid release command.");
       }
     }
   } catch (error) {

@@ -182,7 +182,7 @@ module.exports = class CustomCoveragePercentReporter extends ReportBase {
       return;
     };
 
-    const printTree = (node, indent = 2, isTopLevel = false) => {
+    const printTree = (node, indent = 2, _isTopLevel = false) => {
       const keys = Object.keys(node)
         .filter((k) => k !== "__metrics")
         .toSorted();

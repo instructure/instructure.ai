@@ -1,6 +1,9 @@
 export type WorkspaceName = `@${string}`;
+
 export type FullPackageName = `${WorkspaceName}/${string}`;
+
 export type PackageName = string;
+
 export interface WorkspaceObj {
   name: WorkspaceName;
   packages: PackageName[];
@@ -23,14 +26,14 @@ export interface WorkspaceInfo {
 }
 
 export interface CommandInfo {
-  package?: PackageName | FullPackageName;
+  package?: FullPackageName;
   help(): void;
   readonly command: string | undefined;
 }
 
 export type WorkspaceFn = (
   args?: string[],
-  script?: string | undefined,
+  script?: string,
 ) => WorkspaceCommand;
 
 const COMMANDS = [

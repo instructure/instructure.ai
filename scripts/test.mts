@@ -12,7 +12,6 @@ import type {
   AllowedCommands,
   CommandExtraArgs,
   FullPackageName,
-  WorkspaceCommand,
 } from "@instructure.ai/shared-configs/types";
 
 const main = async () => {
@@ -26,10 +25,6 @@ const main = async () => {
     "root",
   ] as const;
 
-  if (!isValidCommand(command, testCommands)) {
-    exitWithError("Invalid test command.");
-  }
-
   const testPackage = (pkg: FullPackageName, args: CommandExtraArgs) => {
     if (pkg === getRootPackage()) {
       exec(`pnpm test:root`, {
@@ -41,6 +36,15 @@ const main = async () => {
       });
     }
   };
+
+  if (isValidPackage(command)) {
+    testPackage(getFullPackageName(command) as FullPackageName, args.slice(1));
+    return;
+  }
+
+  if (!isValidCommand(command, testCommands)) {
+    exitWithError("Invalid test command.");
+  }
 
   const testPackages = (
     packages: FullPackageName[],
@@ -105,14 +109,7 @@ const main = async () => {
         break;
       }
       default: {
-        if (isValidPackage(command)) {
-          testPackage(
-            getFullPackageName(command) as FullPackageName,
-            args.slice(1),
-          );
-        } else {
-          exitWithError(`Unknown test command: ${command}`);
-        }
+        exitWithError("Invalid test command.");
       }
     }
   } catch (error) {

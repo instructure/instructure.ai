@@ -12,8 +12,6 @@ vi.mock("vite", () => ({
 import * as loader from "./vite-node.plugin.loader.mjs";
 
 describe("vite-node.plugin.loader.mjs", () => {
-  let mockNextResolve, mockNextLoad;
-
   beforeEach(async () => {
     vi.resetAllMocks();
     // Mock node:fs/promises.readFile
