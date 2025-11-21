@@ -74,12 +74,15 @@ export function toTsObjectLiteral(
         }
         if (value instanceof Map) {
           const entries = [...value.entries()].map(
-            ([k, v]) => `[${toTsObjectLiteral(k, options)}, ${toTsObjectLiteral(v, options)}]`,
+            ([k, v]) =>
+              `[${toTsObjectLiteral(k, options)}, ${toTsObjectLiteral(v, options)}]`,
           );
           return `new Map([${entries.join(", ")}])`;
         }
         if (value instanceof Set) {
-          const items = [...value.values()].map((v) => toTsObjectLiteral(v, options));
+          const items = [...value.values()].map((v) =>
+            toTsObjectLiteral(v, options),
+          );
           return `new Set([${items.join(", ")}])`;
         }
         if (Array.isArray(value)) {

@@ -109,7 +109,7 @@ const updateCache = async (data: CSVFetchResult): Promise<void> => {
 
   try {
     const sortedChecksums = Object.keys(checksums)
-      .sort((a, b) => {
+      .toSorted((a, b) => {
         return a.localeCompare(b);
       })
       .reduce<Record<string, Hash>>((acc, key) => {

@@ -2570,7 +2570,9 @@ model.`,
   },
   Q = (e, t) => {
     let n = {};
-    for (let r in e) {n[r] = e[r][t];}
+    for (let r in e) {
+      n[r] = e[r][t];
+    }
     return n;
   },
   $ = {
