@@ -5,7 +5,7 @@ import { Log } from "../utils";
 const main = async () => {
 	const checksumPath = path.resolve(__dirname, "../cache/checksum.json");
 	const emptyChecksum = { CSV: "" };
-	fs.writeFileSync(checksumPath, JSON.stringify(emptyChecksum, null, 2));
+	fs.writeFileSync(checksumPath, JSON.stringify(emptyChecksum, undefined, 2));
 };
 
 export { main, main as ClearCache };

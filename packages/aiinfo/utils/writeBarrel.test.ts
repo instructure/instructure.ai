@@ -8,10 +8,10 @@ const fsMocks = {
 	statSync: vi.fn(),
 	writeFileSync: vi.fn(),
 };
-vi.mock("node:fs", () => fsMocks);
+vi.mock<typeof import('node:fs')>("node:fs", () => fsMocks);
 
 const formatTsMock = vi.fn((code: string) => code);
-vi.mock("../utils/formatTs", () => ({
+vi.mock<typeof import('../utils/formatTs')>("../utils/formatTs", () => ({
 	formatTs: formatTsMock,
 }));
 
@@ -19,11 +19,11 @@ vi.mock("../utils/formatTs", () => ({
 const CWD = "/tmp/project";
 vi.spyOn(process, "cwd").mockReturnValue(CWD);
 
-type FSConfig = {
+interface FSConfig {
 	entries: string[];
 	dirs: string[];
 	withIndex: string[];
-};
+}
 
 const resetFsConfig = (cfg: FSConfig) => {
 	fsMocks.readdirSync.mockImplementation(() => cfg.entries);
@@ -50,7 +50,7 @@ const importSubject = async () => {
 
 const getWritten = (): string => {
 	const v = fsMocks.writeFileSync.mock.calls[0]?.[1];
-	if (typeof v !== "string") throw new Error("No barrel content written");
+	if (typeof v !== "string") {throw new Error("No barrel content written");}
 	return v;
 };
 const getWrittenPath = () =>

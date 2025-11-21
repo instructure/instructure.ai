@@ -3,8 +3,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { parse } from "papaparse";
 import { cache, checksum } from "../cache";
-import type { ChangedEntry, CSVFetchResult, Entry, Hash } from "../types";
-import { CSVURL, entryToObj, Log, writeChangelog } from "../utils";
+import type { CSVFetchResult, ChangedEntry, Entry, Hash } from "../types";
+import { CSVURL, Log, entryToObj, writeChangelog } from "../utils";
 import { WriteEntries } from "./writeEntries.mts";
 
 const generateChecksum = (data: string): Hash => {
@@ -33,7 +33,7 @@ const updateCache = async (data: CSVFetchResult): Promise<void> => {
 	const cacheCSVPath = path.resolve(__dirname, "../cache/cache.csv");
 	let oldCacheRaw = "";
 	if (fs.existsSync(cacheCSVPath)) {
-		oldCacheRaw = fs.readFileSync(cacheCSVPath, "utf-8");
+		oldCacheRaw = fs.readFileSync(cacheCSVPath, "utf8");
 	} else if (cache) {
 		// fallback to in-memory cache if file doesn't exist
 		oldCacheRaw = cache;
@@ -49,8 +49,8 @@ const updateCache = async (data: CSVFetchResult): Promise<void> => {
 				color: "yellow",
 				message: ["cache.csv updated due to CSV checksum change."],
 			});
-		} catch (err) {
-			Log(["Failed to update cache.csv:", err]);
+		} catch (error) {
+			Log(["Failed to update cache.csv:", error]);
 		}
 		// Do not write entries here; wait until after changedEntries are determined
 	}
@@ -108,9 +108,9 @@ const updateCache = async (data: CSVFetchResult): Promise<void> => {
 	}
 
 	try {
-		fs.writeFileSync(checksumPath, `${JSON.stringify(checksums, null, 2)}\n`);
-	} catch (err) {
-		Log(["Failed to update checksum.json:", err]);
+		fs.writeFileSync(checksumPath, `${JSON.stringify(checksums, undefined, 2)}\n`);
+	} catch (error) {
+		Log(["Failed to update checksum.json:", error]);
 	}
 
 	if (isCSVOutdated && changedEntries.length > 0) {
@@ -160,13 +160,13 @@ const main = async () => {
 		let data: CSVFetchResult | undefined;
 		try {
 			data = await fetchCSVFromURL();
-		} catch (err) {
+		} catch (error) {
 			Log({
 				color: "redBright",
-				message: ["Error fetching CSV from URL:", err],
+				message: ["Error fetching CSV from URL:", error],
 				type: "error",
 			});
-			throw err;
+			throw error;
 		}
 		if (data) {
 			// Determine if cache will be updated by checking CSV checksum
@@ -184,13 +184,13 @@ const main = async () => {
 			}
 			try {
 				await updateCache(data);
-			} catch (err) {
+			} catch (error) {
 				Log({
 					color: "redBright",
-					message: ["Error updating cache or writing entries:", err],
+					message: ["Error updating cache or writing entries:", error],
 					type: "error",
 				});
-				throw err;
+				throw error;
 			}
 		} else {
 			Log({

@@ -2,7 +2,7 @@ import { execSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { parse } from "papaparse";
-import { entryToObj, Log, writeBarrel, writeEntry } from "../utils";
+import { Log, entryToObj, writeBarrel, writeEntry } from "../utils";
 
 const parseCSV = (data: string) => {
 	const parsed = parse<string[]>(data, {
@@ -24,7 +24,7 @@ const main = async (entries?: string[][]) => {
 			Log({ color: "redBright", message: ["No cache.csv found."] });
 			return;
 		}
-		const raw = fs.readFileSync(cachePath, "utf-8");
+		const raw = fs.readFileSync(cachePath, "utf8");
 		parsed = parseCSV(raw);
 	}
 	Log({ color: "green", message: "Writing entries..." });
@@ -41,8 +41,8 @@ const main = async (entries?: string[][]) => {
 
 	try {
 		execSync("pnpm oxfmt ./node", { stdio: "ignore" });
-	} catch (err) {
-		Log({ color: "redBright", message: ["OxC formatting failed:", err] });
+	} catch (error) {
+		Log({ color: "redBright", message: ["OxC formatting failed:", error] });
 	}
 	Log({ color: "green", message: ["Entries and barrel written."] });
 };
@@ -53,8 +53,8 @@ const isDirect =
 	process.env.WRITE === "1";
 
 if (isDirect) {
-	main().catch((err) => {
-		Log({ color: "redBright", message: ["Error writing entries:", err] });
+	main().catch((error) => {
+		Log({ color: "redBright", message: ["Error writing entries:", error] });
 		process.exit(1);
 	});
 }

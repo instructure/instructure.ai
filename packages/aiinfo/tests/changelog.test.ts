@@ -12,7 +12,7 @@ async function readChangelogFirstLine(): Promise<string> {
 	return firstLine;
 }
 
-describe("Changelog.md", () => {
+describe("changelog.md", () => {
 	it('exists and starts with "# Changelog"', async () => {
 		const firstLine = await readChangelogFirstLine();
 		expect(firstLine).toBeDefined();
@@ -21,6 +21,6 @@ describe("Changelog.md", () => {
 
 	it("has a proper changelog header format", async () => {
 		const firstLine = await readChangelogFirstLine();
-		expect(/^# Changelog\b/.test(firstLine)).toBe(true);
+		expect(/^# Changelog\b/.test(firstLine)).toBeTruthy();
 	});
 });

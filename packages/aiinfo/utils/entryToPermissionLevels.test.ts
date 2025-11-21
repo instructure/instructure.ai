@@ -4,7 +4,7 @@ import type { Entry, Result } from "../types";
 
 var backing: typeof snapshotStrings.en = snapshotStrings.en;
 
-vi.mock("../strings", () => ({
+vi.mock<typeof import('../strings')>("../strings", () => ({
 	get permissionLevelsStrings() {
 		const source =
 			typeof backing !== "undefined" && backing !== null
@@ -70,7 +70,7 @@ describe("entryToPermissionLevels", () => {
 	it('highlights first index when permissions "1"', async () => {
 		const entryToPermissionLevels = await importSubject();
 		const result = entryToPermissionLevels(buildEntry({ permissions: "1" }));
-		expect(result.data.map((d) => !!d.highlighted)).toEqual([
+		expect(result.data.map((d) => !!d.highlighted)).toStrictEqual([
 			true,
 			false,
 			false,
@@ -83,7 +83,7 @@ describe("entryToPermissionLevels", () => {
 			// @ts-expect-error purposely passing wrong type for robustness test
 			buildEntry({ permissions: 3 }),
 		);
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it('no highlight when permissions out of range ("99")', async () => {
@@ -91,7 +91,7 @@ describe("entryToPermissionLevels", () => {
 		const result = entryToPermissionLevels(
 			buildEntry({ permissions: "99" as Entry["permissions"] }),
 		);
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it('no highlight when permissions non-numeric ("abc")', async () => {
@@ -99,7 +99,7 @@ describe("entryToPermissionLevels", () => {
 		const result = entryToPermissionLevels(
 			buildEntry({ permissions: "abc" as Entry["permissions"] }),
 		);
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it("no highlight when permissions missing (undefined)", async () => {
@@ -107,7 +107,7 @@ describe("entryToPermissionLevels", () => {
 		const result = entryToPermissionLevels(
 			buildEntry({ permissions: undefined }),
 		);
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it('no highlight when permissions "0"', async () => {
@@ -115,16 +115,16 @@ describe("entryToPermissionLevels", () => {
 		const result = entryToPermissionLevels(
 			buildEntry({ permissions: "0" as Entry["permissions"] }),
 		);
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it("does not mutate original backing data objects", async () => {
-		type BackingRaw = { title: string; level: string; description: string };
+		interface BackingRaw { title: string; level: string; description: string }
 		const originalRefs: BackingRaw[] = backing.data.map((o: BackingRaw) => o);
 		const entryToPermissionLevels = await importSubject();
 		entryToPermissionLevels(buildEntry({ permissions: "2" }));
 		originalRefs.forEach((o) => {
-			expect(Object.hasOwn(o, "highlighted")).toBe(false);
+			expect(Object.hasOwn(o, "highlighted")).toBeFalsy();
 		});
 	});
 
@@ -149,13 +149,13 @@ describe("entryToPermissionLevels", () => {
 		let threw = false;
 		try {
 			entryToPermissionLevels(buildEntry({ permissions: "1" }));
-		} catch (err) {
+		} catch (error) {
 			threw = true;
-			expect((err as Error).message).toMatch(
+			expect((error as Error).message).toMatch(
 				/Error in entryToPermissionLevels:/,
 			);
 		}
-		expect(threw).toBe(true);
+		expect(threw).toBeTruthy();
 	});
 
 	// Additional tests
@@ -185,9 +185,9 @@ describe("entryToPermissionLevels", () => {
 	it("does not highlight if permissions is null", async () => {
 		const entryToPermissionLevels = await importSubject();
 		const result = entryToPermissionLevels(
-			buildEntry({ permissions: null as unknown as Entry["permissions"] }),
+			buildEntry({ permissions: undefined as unknown as Entry["permissions"] }),
 		);
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it("does not highlight if permissions is an empty string", async () => {
@@ -195,7 +195,7 @@ describe("entryToPermissionLevels", () => {
 		const result = entryToPermissionLevels(
 			buildEntry({ permissions: "" as Entry["permissions"] }),
 		);
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 });
 
@@ -232,13 +232,13 @@ describe("entryToPermissionLevels edge cases", () => {
 		let threw = false;
 		try {
 			entryToPermissionLevels(buildEntry({ permissions: "1" }));
-		} catch (err) {
+		} catch (error) {
 			threw = true;
-			expect((err as Error).message).toMatch(
+			expect((error as Error).message).toMatch(
 				/Error in entryToPermissionLevels:/,
 			);
 		}
-		expect(threw).toBe(false); // The implementation does not throw
+		expect(threw).toBeFalsy(); // The implementation does not throw
 	});
 
 	it("throws error if permissionLevelsStrings.en.data is not an array", () => {
@@ -251,20 +251,20 @@ describe("entryToPermissionLevels edge cases", () => {
 	it("returns all highlighted false if permissions is negative string", () => {
 		// @ts-expect-error purposely passing invalid permission string for robustness test
 		const result = entryToPermissionLevels(buildEntry({ permissions: "-1" }));
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it("returns all highlighted false if permissions is a float string", () => {
 		// @ts-expect-error purposely passing invalid permission string for robustness test
 		const result = entryToPermissionLevels(buildEntry({ permissions: "1.5" }));
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it("returns all highlighted false if permissions is a boolean", () => {
 		const result = entryToPermissionLevels(
 			buildEntry({ permissions: true as unknown as Entry["permissions"] }),
 		);
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it("returns all highlighted false if permissions is an object", () => {
@@ -273,7 +273,7 @@ describe("entryToPermissionLevels edge cases", () => {
 				permissions: { foo: "bar" } as unknown as Entry["permissions"],
 			}),
 		);
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it("returns all highlighted false if permissions is an array", () => {
@@ -282,64 +282,64 @@ describe("entryToPermissionLevels edge cases", () => {
 				permissions: ["1", "2"] as unknown as Entry["permissions"],
 			}),
 		);
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it("returns all highlighted false if permissions is NaN", () => {
 		const result = entryToPermissionLevels(
 			buildEntry({ permissions: NaN as unknown as Entry["permissions"] }),
 		);
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it("returns all highlighted false if permissions is Infinity", () => {
 		const result = entryToPermissionLevels(
 			buildEntry({ permissions: Infinity as unknown as Entry["permissions"] }),
 		);
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it("returns all highlighted false if permissions is null", () => {
 		const result = entryToPermissionLevels(
-			buildEntry({ permissions: null as unknown as Entry["permissions"] }),
+			buildEntry({ permissions: undefined as unknown as Entry["permissions"] }),
 		);
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it("returns all highlighted false if permissions is empty string", () => {
 		// @ts-expect-error purposely passing invalid permission string for robustness test
 		const result = entryToPermissionLevels(buildEntry({ permissions: "" }));
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it("returns all highlighted false if permissions is whitespace string", () => {
 		// @ts-expect-error purposely passing invalid permission string for robustness test
 		const result = entryToPermissionLevels(buildEntry({ permissions: "   " }));
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it("returns all highlighted false if permissions is undefined", () => {
 		const result = entryToPermissionLevels(
 			buildEntry({ permissions: undefined }),
 		);
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 
 	it("returns correct highlighted for valid permission string", () => {
 		const result = entryToPermissionLevels(buildEntry({ permissions: "2" }));
-		expect(result.data.some((d) => d.highlighted)).toBe(true);
+		expect(result.data.some((d) => d.highlighted)).toBeTruthy();
 		expect(result.data.find((d) => d.highlighted)?.level).toBe("LEVEL 2");
 	});
 
 	it("returns correct highlighted for valid permission string '1'", () => {
 		const result = entryToPermissionLevels(buildEntry({ permissions: "1" }));
-		expect(result.data.some((d) => d.highlighted)).toBe(true);
+		expect(result.data.some((d) => d.highlighted)).toBeTruthy();
 		expect(result.data.find((d) => d.highlighted)?.level).toBe("LEVEL 1");
 	});
 
 	it("returns all highlighted false for permission string not matching any level", () => {
 		// @ts-expect-error purposely passing invalid permission string for robustness test
 		const result = entryToPermissionLevels(buildEntry({ permissions: "99" }));
-		expect(result.data.every((d) => !d.highlighted)).toBe(true);
+		expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
 	});
 });

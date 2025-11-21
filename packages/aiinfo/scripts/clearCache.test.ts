@@ -13,16 +13,16 @@ function mockFailFs() {
 }
 
 function applyMocks() {
-	vi.mock("node:fs", () => ({
+	vi.mock<typeof import('node:fs')>("node:fs", () => ({
 		default: { writeFileSync: mockFsWrite },
 		writeFileSync: mockFsWrite,
 	}));
-	vi.mock("node:path", async (orig) => {
+	vi.mock<typeof import('node:path')>("node:path", async (orig) => {
 		// Use real path for realistic absolute resolution
 		const real = await orig();
 		return real;
 	});
-	vi.mock("../utils", () => ({
+	vi.mock<typeof import('../utils')>("../utils", () => ({
 		Log: mockLog,
 	}));
 }
@@ -57,11 +57,11 @@ describe("scripts/clearCache.mts", () => {
 		expect(mockFsWrite).toHaveBeenCalledTimes(1);
 		const [writtenPath, content] = mockFsWrite.mock.calls[0];
 		expect(typeof writtenPath).toBe("string");
-		expect(writtenPath.endsWith("/cache/checksum.json")).toBe(true);
+		expect(writtenPath.endsWith("/cache/checksum.json")).toBeTruthy();
 		const parsed = JSON.parse(content as string);
-		expect(parsed).toEqual({ CSV: "" });
+		expect(parsed).toStrictEqual({ CSV: "" });
 		// Pretty JSON: verify indentation (contains newline + two spaces)
-		expect((content as string).includes('\n  "CSV": ""')).toBe(true);
+		expect((content as string).includes('\n  "CSV": ""')).toBeTruthy();
 	});
 
 	it("main resolves without throwing", async () => {
@@ -99,10 +99,10 @@ describe("scripts/clearCache.mts", () => {
 		expect(mockLog).toHaveBeenCalledTimes(1);
 		const [arg] = mockLog.mock.calls[0];
 		expect(arg.color).toBe("redBright");
-		expect(Array.isArray(arg.message)).toBe(true);
+		expect(Array.isArray(arg.message)).toBeTruthy();
 		expect(
 			(arg.message as unknown[]).some((m) => String(m).includes("write fail")),
-		).toBe(true);
+		).toBeTruthy();
 		expect(exitSpy).toHaveBeenCalledWith(2);
 		exitSpy.mockRestore();
 	});

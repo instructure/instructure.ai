@@ -17,7 +17,7 @@ describe("nutritionFacts strings", () => {
 			"triggerText",
 		];
 		required.forEach((k) => {
-			expect(nf[k]).not.toBeUndefined();
+			expect(nf[k]).toBeDefined();
 		});
 		expect(nf.title).toBe("AI Nutrition Facts");
 		expect(nf.triggerText).toBe("Nutrition Facts");
@@ -29,14 +29,14 @@ describe("nutritionFacts strings", () => {
 
 	it("has three data blocks with expected lengths and titles", () => {
 		const nf = nutritionFactsStrings.en;
-		expect(Array.isArray(nf.data)).toBe(true);
+		expect(Array.isArray(nf.data)).toBeTruthy();
 		expect(nf.data).toHaveLength(3);
 
 		const [modelBlock, privacyBlock, outputsBlock] = nf.data;
 
 		expect(modelBlock.blockTitle).toBe("Model & Data");
 		expect(modelBlock.segmentData).toHaveLength(3);
-		expect(modelBlock.segmentData.map((s) => s.segmentTitle)).toEqual([
+		expect(modelBlock.segmentData.map((s) => s.segmentTitle)).toStrictEqual([
 			"Base Model",
 			"Trained with User Data",
 			"Data Shared with Model",
@@ -44,7 +44,7 @@ describe("nutritionFacts strings", () => {
 
 		expect(privacyBlock.blockTitle).toBe("Privacy & Compliance");
 		expect(privacyBlock.segmentData).toHaveLength(4);
-		expect(privacyBlock.segmentData.map((s) => s.segmentTitle)).toEqual([
+		expect(privacyBlock.segmentData.map((s) => s.segmentTitle)).toStrictEqual([
 			"Data Retention",
 			"Data Logging",
 			"Regions Supported",
@@ -53,7 +53,7 @@ describe("nutritionFacts strings", () => {
 
 		expect(outputsBlock.blockTitle).toBe("Outputs");
 		expect(outputsBlock.segmentData).toHaveLength(5);
-		expect(outputsBlock.segmentData.map((s) => s.segmentTitle)).toEqual([
+		expect(outputsBlock.segmentData.map((s) => s.segmentTitle)).toStrictEqual([
 			"AI Settings Control",
 			"Human in the Loop",
 			"Guardrails",
@@ -76,7 +76,7 @@ describe("nutritionFacts strings", () => {
 		const set = new Set(titles);
 		expect(set.size).toBe(titles.length);
 		titles.forEach((t) => {
-			expect(/^[A-Z]/.test(t)).toBe(true);
+			expect(/^[A-Z]/.test(t)).toBeTruthy();
 		});
 	});
 
@@ -98,14 +98,14 @@ describe("nutritionFacts strings", () => {
 	it("no undefined at top level", () => {
 		const nf = nutritionFactsStrings.en as Record<string, unknown>;
 		Object.entries(nf).forEach(([, v]) => {
-			expect(v).not.toBeUndefined();
+			expect(v).toBeDefined();
 		});
 	});
 
 	it("blocks have only expected keys", () => {
 		const nf = nutritionFactsStrings.en;
 		nf.data.forEach((block) => {
-			expect(Object.keys(block).sort()).toEqual(["blockTitle", "segmentData"]);
+			expect(Object.keys(block).toSorted()).toStrictEqual(["blockTitle", "segmentData"]);
 		});
 	});
 
@@ -113,7 +113,7 @@ describe("nutritionFacts strings", () => {
 		const nf = nutritionFactsStrings.en;
 		nf.data.forEach((block) => {
 			block.segmentData.forEach((seg) => {
-				expect(Object.keys(seg).sort()).toEqual([
+				expect(Object.keys(seg).toSorted()).toStrictEqual([
 					"description",
 					"segmentTitle",
 				]);

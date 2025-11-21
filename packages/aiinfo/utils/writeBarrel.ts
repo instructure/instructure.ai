@@ -2,12 +2,12 @@ import { existsSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { formatTs } from "../utils/formatTs";
 
-type Options = {
+interface Options {
 	srcDir?: string;
 	outFileName?: string;
 	sort?: boolean;
 	skipInvalidIdentifiers?: boolean;
-};
+}
 
 const writeBarrel = (opts: Options = {}) => {
 	const SRC_DIR = resolve(process.cwd(), opts.srcDir ?? "node/components");
@@ -30,15 +30,15 @@ const writeBarrel = (opts: Options = {}) => {
 			(name) =>
 				isDir(join(SRC_DIR, name)) && hasIndexTsOrTsx(join(SRC_DIR, name)),
 		);
-	} catch (err) {
+	} catch (error) {
 		throw new Error(
 			`Failed to read directory '${SRC_DIR}': ${
-				err instanceof Error ? err.message : String(err)
-			}`,
+				error instanceof Error ? error.message : String(error)
+			}`, { cause: err },
 		);
 	}
 
-	if (opts.sort !== false) uids.sort();
+	if (opts.sort !== false) {uids.sort();}
 
 	const invalid = uids.filter((u) => !isValidIdentifier(u));
 	if (invalid.length) {
@@ -111,21 +111,21 @@ export default AiInfo;`.trim();
 	let formatted: string;
 	try {
 		formatted = formatTs(code, "index.ts");
-	} catch (err) {
+	} catch (error) {
 		throw new Error(
 			`Failed to format TypeScript code: ${
-				err instanceof Error ? err.message : String(err)
-			}`,
+				error instanceof Error ? error.message : String(error)
+			}`, { cause: err },
 		);
 	}
 
 	try {
 		writeFileSync(OUT_FILE, formatted, "utf8");
-	} catch (err) {
+	} catch (error) {
 		throw new Error(
 			`Failed to write barrel file '${OUT_FILE}': ${
-				err instanceof Error ? err.message : String(err)
-			}`,
+				error instanceof Error ? error.message : String(error)
+			}`, { cause: err },
 		);
 	}
 };

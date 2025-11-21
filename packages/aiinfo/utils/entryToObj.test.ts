@@ -43,9 +43,9 @@ function csvRowToStringArray(row: CSVRow): string[] {
 	return row.map((cell) =>
 		typeof cell === "string"
 			? cell
-			: typeof cell === "number"
+			: (typeof cell === "number"
 				? String(cell)
-				: "",
+				: ""),
 	);
 }
 
@@ -55,15 +55,15 @@ describe("entryToObj", () => {
 		const result = entryToObj(csvRowToStringArray(row));
 		expect(result.uid).toBe("uid");
 		expect(result.revision).toBe(row[1]);
-		expect(result.feature).toEqual({ description: row[3], name: row[2] });
-		expect(result.model).toEqual({
+		expect(result.feature).toStrictEqual({ description: row[3], name: row[2] });
+		expect(result.model).toStrictEqual({
 			data: row[7],
 			dataDescription: row[8],
 			description: row[5],
 			name: row[4],
 			trained: row[6],
 		});
-		expect(result.compliance).toEqual({
+		expect(result.compliance).toStrictEqual({
 			logging: row[10],
 			loggingDescription: row[11],
 			pii: row[14],
@@ -72,7 +72,7 @@ describe("entryToObj", () => {
 			regionsDescription: row[13],
 			retention: row[9],
 		});
-		expect(result.outputs).toEqual({
+		expect(result.outputs).toStrictEqual({
 			guardrails: row[19],
 			human: row[17],
 			humanDescription: row[18],
@@ -86,9 +86,9 @@ describe("entryToObj", () => {
 
 	it("does not mutate the original array", () => {
 		const row: CSVRow = buildEntry();
-		const snapshot = row.slice();
+		const snapshot = [...row];
 		entryToObj(csvRowToStringArray(row));
-		expect(row).toEqual(snapshot);
+		expect(row).toStrictEqual(snapshot);
 		expect(row[0]).toBe("UID");
 	});
 
@@ -96,18 +96,18 @@ describe("entryToObj", () => {
 		const row: CSVRow = buildEntry();
 		row.pop(); // now 23
 		expect(row).toHaveLength(23);
-		expect(() => entryToObj(csvRowToStringArray(row))).toThrowError(
+		expect(() => entryToObj(csvRowToStringArray(row))).toThrow(
 			/Invalid entry length: expected 24, got 23/,
 		);
 		try {
 			entryToObj(csvRowToStringArray(row));
-		} catch (e) {
+		} catch (error) {
 			// Use unknown and type guard for error
-			if (e && typeof e === "object" && "message" in e) {
-				expect((e as { message: string }).message).toMatch(/Entry:/);
-				expect((e as { message: string }).message).toMatch(/"UID"/);
+			if (error && typeof error === "object" && "message" in error) {
+				expect((error as { message: string }).message).toMatch(/Entry:/);
+				expect((error as { message: string }).message).toMatch(/"UID"/);
 			} else {
-				throw e;
+				throw error;
 			}
 		}
 	});
@@ -116,7 +116,7 @@ describe("entryToObj", () => {
 		const row: CSVRow = buildEntry();
 		row.push("EXTRA");
 		expect(row).toHaveLength(25);
-		expect(() => entryToObj(csvRowToStringArray(row))).toThrowError(
+		expect(() => entryToObj(csvRowToStringArray(row))).toThrow(
 			/Invalid entry length: expected 24, got 25/,
 		);
 	});
@@ -140,7 +140,7 @@ describe("entryToObj", () => {
 		expect(
 			result.compliance.loggingDescription === undefined ||
 				result.compliance.loggingDescription === "",
-		).toBe(true);
+		).toBeTruthy();
 		expect(result.outputs.humanDescription).toBe("");
 	});
 

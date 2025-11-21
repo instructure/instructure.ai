@@ -5,8 +5,8 @@ function getObjectDiffs(
 	objA: unknown,
 	objB: unknown,
 	path: string[] = [],
-): Array<{ path: string[]; oldValue: unknown; newValue: unknown }> {
-	const diffs: Array<{ path: string[]; oldValue: unknown; newValue: unknown }> =
+): { path: string[]; oldValue: unknown; newValue: unknown }[] {
+	const diffs: { path: string[]; oldValue: unknown; newValue: unknown }[] =
 		[];
 	const keys = new Set([
 		...Object.keys((objA as object) || {}),
@@ -50,7 +50,7 @@ const writeChangelog = ({
 					const newObj = e.newEntry as Record<string, unknown>;
 					for (const key of Object.keys(newObj)) {
 						const value = newObj[key];
-						diffText += `#### ${key}\n\`\`\`diff\n+ ${JSON.stringify(value, null, 2)}\n\`\`\`\n`;
+						diffText += `#### ${key}\n\`\`\`diff\n+ ${JSON.stringify(value, undefined, 2)}\n\`\`\`\n`;
 					}
 				} else if (e.oldEntry && e.newEntry) {
 					const diffs = getObjectDiffs(e.oldEntry, e.newEntry);
@@ -59,7 +59,7 @@ const writeChangelog = ({
 					} else {
 						for (const diff of diffs) {
 							const pathStr = diff.path.join(".");
-							diffText += `#### ${pathStr}\n\`\`\`diff\n- ${JSON.stringify(diff.oldValue, null, 2)}\n+ ${JSON.stringify(diff.newValue, null, 2)}\n\`\`\`\n`;
+							diffText += `#### ${pathStr}\n\`\`\`diff\n- ${JSON.stringify(diff.oldValue, undefined, 2)}\n+ ${JSON.stringify(diff.newValue, undefined, 2)}\n\`\`\`\n`;
 						}
 					}
 				}
@@ -71,7 +71,7 @@ const writeChangelog = ({
 			// Read existing changelog
 			let existing = "";
 			if (fs.existsSync(changelogPath)) {
-				existing = fs.readFileSync(changelogPath, "utf-8");
+				existing = fs.readFileSync(changelogPath, "utf8");
 			}
 			const lines = existing.split(/\r?\n/);
 			// Ensure header exists
@@ -84,8 +84,8 @@ const writeChangelog = ({
 			);
 			fs.writeFileSync(changelogPath, newContent);
 			return { changelog, success: true };
-		} catch (err) {
-			return { error: err, success: false };
+		} catch (error) {
+			return { error: error, success: false };
 		}
 	}
 };

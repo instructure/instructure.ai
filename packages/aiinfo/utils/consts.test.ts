@@ -10,12 +10,12 @@ const ALLOWED_PLACEHOLDERS = [
 ];
 
 describe("consts.ts TEMPLATE_PACKAGE", () => {
-	it("TEMPLATE_PACKAGE is a non-empty string", () => {
+	it("tEMPLATE_PACKAGE is a non-empty string", () => {
 		expect(typeof TEMPLATE_PACKAGE).toBe("string");
 		expect(TEMPLATE_PACKAGE.length).toBeGreaterThan(50);
 	});
 
-	it("CSVURL matches the expected published CSV endpoint", () => {
+	it("cSVURL matches the expected published CSV endpoint", () => {
 		expect(CSVURL).toBe(
 			"https://docs.google.com/spreadsheets/d/e/2PACX-1vRTUoO92jyiHlJq36oKbtCdL57J7bdOKJbhxRahR2YTR6lTyfhQyo5kidHRwk45jagV9C9DXf80SgfS/pub?gid=2000446087&single=true&output=csv",
 		);
@@ -44,7 +44,7 @@ describe("consts.ts TEMPLATE_PACKAGE", () => {
 		const count = (ph: string) =>
 			(
 				TEMPLATE_PACKAGE.match(
-					new RegExp(ph.replace(/\\/g, "\\\\").replace(/[<>]/g, "\\$&"), "g"),
+					new RegExp(ph.replace(/\\/g, "\\\\").replace(/[<>]/g, String.raw`\$&`), "g"),
 				) || []
 			).length;
 		expect(count("<<uid>>")).toBe(3); // declaration + named export + default export
@@ -55,10 +55,10 @@ describe("consts.ts TEMPLATE_PACKAGE", () => {
 	});
 
 	it("does not contain unexpected placeholder tokens", () => {
-		const found = Array.from(TEMPLATE_PACKAGE.matchAll(/<<[^>]+>>/g)).map(
+		const found = [...TEMPLATE_PACKAGE.matchAll(/<<[^>]+>>/g)].map(
 			(m) => (m as RegExpMatchArray)[0],
 		);
-		const unique = Array.from(new Set(found));
+		const unique = [...new Set(found)];
 		// Ensure each found is allowed
 		unique.forEach((ph) => {
 			expect(ALLOWED_PLACEHOLDERS).toContain(ph);
@@ -108,13 +108,11 @@ describe("consts.ts TEMPLATE_PACKAGE", () => {
 
 	it("placeholders appear as standalone tokens (not partially embedded)", () => {
 		const badEmbedding = /[A-Za-z0-9_]<</;
-		expect(badEmbedding.test(TEMPLATE_PACKAGE)).toBe(false);
+		expect(badEmbedding.test(TEMPLATE_PACKAGE)).toBeFalsy();
 	});
 
 	it("ends with newline after default export (stable ending)", () => {
-		expect(TEMPLATE_PACKAGE.trimEnd().endsWith("export default <<uid>>;")).toBe(
-			true,
-		);
+		expect(TEMPLATE_PACKAGE.trimEnd().endsWith("export default <<uid>>;")).toBeTruthy();
 	});
 
 	// Replaced brittle inline snapshot with explicit normalized comparison

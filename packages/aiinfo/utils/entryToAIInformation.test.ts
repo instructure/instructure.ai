@@ -1,14 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Hoisted mocks (define once). Use vi.fn so we can override implementations in specific tests.
-vi.mock("../strings", () => ({
+vi.mock<typeof import('../strings')>("../strings", () => ({
 	aiInformationStrings: {
 		en: {
 			data: {
-				modelNameText: "Model Name",
-				nutritionFactsModalTriggerText: "Nutrition Facts",
-				permissionLevelsModalTriggerText: "Permission Levels",
-				permissionLevelText: "Permission Level",
+				modelNameText: "Model Name", nutritionFactsModalTriggerText: "Nutrition Facts", permissionLevelText: "Permission Level", permissionLevelsModalTriggerText: "Permission Levels",
 			},
 			trigger: undefined,
 		},
@@ -24,7 +21,7 @@ vi.mock("../strings", () => ({
 	},
 }));
 
-vi.mock("./", () => ({
+vi.mock<typeof import('./')>("./", () => ({
 	entryToNutritionFacts: vi.fn((entry: Record<string, unknown>) => ({
 		data: [{ calories: 0 }, { tokens: 123 }],
 		featureName:
@@ -45,7 +42,7 @@ vi.mock("./", () => ({
 	})),
 }));
 
-type AIInformationResult = {
+interface AIInformationResult {
 	trigger: undefined;
 	data: Array<{
 		description: string;
@@ -61,7 +58,7 @@ type AIInformationResult = {
 	nutritionFactsFeatureName: string;
 	dataPermissionLevelsCurrentFeature: string;
 	dataPermissionLevelsData: Array<unknown>;
-};
+}
 
 const importSubject = async () => {
 	const mod = await import("./entryToAIInformation.ts");
@@ -83,8 +80,8 @@ describe("entryToAIInformation", () => {
 		};
 		const result = entryToAIInformation(entry);
 
-		expect(result.trigger).toBe(undefined);
-		expect(Array.isArray(result.data)).toBe(true);
+		expect(result.trigger).toBeUndefined();
+		expect(Array.isArray(result.data)).toBeTruthy();
 		expect(result.data).toHaveLength(1);
 
 		const item = result.data[0];
@@ -97,13 +94,13 @@ describe("entryToAIInformation", () => {
 		expect(item.permissionLevelsModalTriggerText).toBe("Permission Levels");
 		expect(item.permissionLevelText).toBe("Permission Level");
 
-		expect(result.nutritionFactsData).toEqual([
+		expect(result.nutritionFactsData).toStrictEqual([
 			{ calories: 0 },
 			{ tokens: 123 },
 		]);
 		expect(result.nutritionFactsFeatureName).toBe("CoolFeature");
 		expect(result.dataPermissionLevelsCurrentFeature).toBe("Current Feature");
-		expect(result.dataPermissionLevelsData).toEqual([
+		expect(result.dataPermissionLevelsData).toStrictEqual([
 			{ description: "", highlighted: undefined, level: "L1", title: "" },
 			{ description: "", highlighted: undefined, level: "L2", title: "" },
 			{ description: "", highlighted: undefined, level: "L3", title: "" },
@@ -165,7 +162,7 @@ describe("entryToAIInformation", () => {
 				revision: "1",
 				uid: "test-uid",
 			}),
-		).toThrowError(/Error in entryToAIInformation: Error: Boom/);
+		).toThrow(/Error in entryToAIInformation: Error: Boom/);
 	});
 
 	it("does not let entry fields override static text", async () => {

@@ -65,8 +65,8 @@ function mockUtils({
 	dplBase = { title: "DPLTitle" } as Record<string, unknown>,
 }: {
 	trigger?: string;
-	nutritionData?: Array<Record<string, unknown>>;
-	dplData?: Array<Record<string, unknown>>;
+	nutritionData?: Record<string, unknown>[];
+	dplData?: Record<string, unknown>[];
 	aiInfoBase?: Record<string, unknown>;
 	nutritionBase?: Record<string, unknown>;
 	dplBase?: Record<string, unknown>;
@@ -101,11 +101,11 @@ function setupMocks(opts?: Parameters<typeof mockUtils>[0]) {
 	formatTsSpy.mockReset();
 	toTsObjectLiteralSpy.mockReset();
 
-	vi.mock("node:fs", () => ({
+	vi.mock<typeof import('node:fs')>("node:fs", () => ({
 		mkdirSync: mkdirSyncSpy,
 		writeFileSync: writeFileSyncSpy,
 	}));
-	vi.mock("../utils", () => ({
+	vi.mock<typeof import('../utils')>("../utils", () => ({
 		entryToAIInformation: entryToAIInformationSpy,
 		entryToNutritionFacts: entryToNutritionFactsSpy,
 		entryToPermissionLevels: entryToPermissionLevelsSpy,
@@ -142,7 +142,7 @@ describe("writeEntry", () => {
 		);
 		expect(mkdirSyncSpy).toHaveBeenCalledTimes(1);
 		expect(mkdirSyncSpy.mock.calls[0][0]).toBe(path.dirname(expectedPath));
-		expect(mkdirSyncSpy.mock.calls[0][1]).toEqual({ recursive: true });
+		expect(mkdirSyncSpy.mock.calls[0][1]).toStrictEqual({ recursive: true });
 		expect(writeFileSyncSpy).toHaveBeenCalledTimes(1);
 		expect(writeFileSyncSpy.mock.calls[0][0]).toBe(expectedPath);
 
@@ -161,8 +161,8 @@ describe("writeEntry", () => {
 		await writeEntry(makeEntry("uidD"));
 		expect(toTsObjectLiteralSpy).toHaveBeenCalledTimes(5);
 		const args = toTsObjectLiteralSpy.mock.calls.map((c) => c[0]);
-		expect(args[0]).toEqual(dplData);
-		expect(args[1]).toEqual(nfData);
+		expect(args[0]).toStrictEqual(dplData);
+		expect(args[1]).toStrictEqual(nfData);
 		expect(args[2]).toMatchObject({ modalLabel: "Modal" });
 		expect((args[2] as Record<string, unknown>).data).toBeUndefined();
 		expect(args[3]).toMatchObject({ title: "DPLTitle" });
@@ -199,7 +199,7 @@ describe("writeEntry", () => {
 		expect(formatTsSpy).toHaveBeenCalledTimes(1);
 		expect(formatTsSpy.mock.calls[0][1]).toBe("index.ts");
 		const content = getWrittenContent();
-		expect(content.startsWith("// formatted")).toBe(true);
+		expect(content.startsWith("// formatted")).toBeTruthy();
 		expect(content).toContain("trigger: undefined,");
 	});
 
@@ -214,7 +214,7 @@ describe("writeEntry", () => {
 		const { writeEntry } = await import("./writeEntry");
 		await writeEntry(makeEntry("uidVars", "Custom Feature", "rev-Z"));
 		const content = getWrittenContent();
-		expect(/const FEATURE_NAME = "Custom Feature";/.test(content)).toBe(true);
-		expect(/const uidVars: AiInfoFeatureProps/.test(content)).toBe(true);
+		expect(/const FEATURE_NAME = "Custom Feature";/.test(content)).toBeTruthy();
+		expect(/const uidVars: AiInfoFeatureProps/.test(content)).toBeTruthy();
 	});
 });

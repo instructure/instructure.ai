@@ -7,7 +7,7 @@ const existsSync = vi.spyOn(fs, "existsSync");
 const readFileSync = vi.spyOn(fs, "readFileSync");
 const writeFileSync = vi.spyOn(fs, "writeFileSync");
 
-let lastWrittenPath: string | null = null;
+let lastWrittenPath: string | null;
 let lastWrittenContent = "";
 // Capture writes
 writeFileSync.mockImplementation((p, c) => {
@@ -41,7 +41,7 @@ function makeChangedEntry(
 beforeEach(() => {
 	vi.clearAllMocks();
 	lastWrittenContent = "";
-	lastWrittenPath = null;
+	lastWrittenPath = undefined;
 	existsSync.mockReturnValue(false);
 	readFileSync.mockReturnValue("");
 	// Reapply write capture after clearAllMocks (mock implementation was wiped)
@@ -77,7 +77,7 @@ describe("writeChangelog", () => {
 			csvSha: "csvShaX",
 			dateStr: "2024-02-02",
 		});
-		expect(result?.success).toBe(true);
+		expect(result?.success).toBeTruthy();
 		expect(result?.changelog).toContain("## 2024-02-02");
 		expect(result?.changelog).toContain("### CSV");
 		expect(result?.changelog).toContain("#### SHA");
@@ -86,7 +86,7 @@ describe("writeChangelog", () => {
 		expect(result?.changelog).toContain("#### name");
 		expect(result?.changelog).toContain("#### nested");
 		expect(writeFileSync).toHaveBeenCalledTimes(1);
-		expect(lastWrittenContent.startsWith("# Changelog")).toBe(true);
+		expect(lastWrittenContent.startsWith("# Changelog")).toBeTruthy();
 	});
 
 	it("includes diffs for changed entry with nested objects", () => {
@@ -109,7 +109,7 @@ describe("writeChangelog", () => {
 			csvSha: "csvShaY",
 			dateStr: "2024-03-03",
 		});
-		expect(result?.success).toBe(true);
+		expect(result?.success).toBeTruthy();
 		const c = result?.changelog ?? "";
 		expect(c).toContain("### uid-diff");
 		expect(c).toContain("#### nested.a");
@@ -157,7 +157,7 @@ describe("writeChangelog", () => {
 			dateStr: "2024-05-05",
 		});
 		expect(writeFileSync).toHaveBeenCalled();
-		expect(lastWrittenContent.startsWith("# Changelog")).toBe(true);
+		expect(lastWrittenContent.startsWith("# Changelog")).toBeTruthy();
 		expect(lastWrittenContent).toContain("## 2024-05-05");
 		expect(lastWrittenContent).toContain("Previous content");
 		const idxNew = lastWrittenContent.indexOf("## 2024-05-05");
@@ -242,7 +242,7 @@ describe("writeChangelog", () => {
 			csvSha: "sha9",
 			dateStr: "2024-09-09",
 		});
-		expect(result?.success).toBe(false);
+		expect(result?.success).toBeFalsy();
 		expect(result?.error).toBeInstanceOf(Error);
 	});
 

@@ -1,13 +1,13 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Hoisted ansis mock
-type AnsisMock = {
+interface AnsisMock {
 	bold: (s: string) => string;
 	cyan: (s: string) => string;
 	green: (s: string) => string;
 	red: (s: string) => string;
 	underline: (s: string) => string;
-};
+}
 const ansisBacking: AnsisMock = {
 	bold: (s: string) => `<bold>${s}</bold>`,
 	cyan: (s: string) => `<cyan>${s}</cyan>`,
@@ -15,7 +15,7 @@ const ansisBacking: AnsisMock = {
 	red: (s: string) => `<red>${s}</red>`,
 	underline: (s: string) => `<underline>${s}</underline>`,
 };
-vi.mock("ansis", () => ({ default: ansisBacking }));
+vi.mock<typeof import('ansis')>("ansis", () => ({ default: ansisBacking }));
 
 const importSubject = async () => {
 	const mod = await import("./log.ts");
@@ -34,7 +34,7 @@ const spyAll = () => {
 	};
 };
 
-describe("Log utility", () => {
+describe("log utility", () => {
 	beforeEach(() => {
 		vi.resetModules();
 		vi.clearAllMocks();
@@ -99,7 +99,7 @@ describe("Log utility", () => {
 		const spies = spyAll();
 		Log(["A", "B"]);
 		expect(spies.log).toHaveBeenCalledTimes(2);
-		expect(spies.log.mock.calls.map((c) => c[0])).toEqual(["A", "B"]);
+		expect(spies.log.mock.calls.map((c) => c[0])).toStrictEqual(["A", "B"]);
 	});
 
 	it("formats object message with color and style using specified console method", async () => {
@@ -122,7 +122,7 @@ describe("Log utility", () => {
 		});
 		expect(spies.info).toHaveBeenCalledTimes(2);
 		const outputs = spies.info.mock.calls.map((c) => c[0]);
-		expect(outputs).toEqual([
+		expect(outputs).toStrictEqual([
 			"<bold><green>One</green></bold>",
 			"<bold><green>Two</green></bold>",
 		]);
@@ -155,11 +155,11 @@ describe("Log utility", () => {
 		expect(spies.error).toHaveBeenCalled();
 		expect(
 			spies.error.mock.calls.some((c) => String(c[0]).includes("Error in Log")),
-		).toBe(true);
+		).toBeTruthy();
 		expect(spies.log).toHaveBeenCalled();
 		expect(
 			spies.log.mock.calls.some((c) => c[0] === "Error logging message"),
-		).toBe(true);
+		).toBeTruthy();
 	});
 
 	it("logs numeric primitive content", async () => {
@@ -205,6 +205,6 @@ describe("Log utility", () => {
 		const spies = spyAll();
 		Log({ end: true });
 		const footerOut = spies.log.mock.calls[0][0];
-		expect(footerOut.endsWith("\n")).toBe(true);
+		expect(footerOut.endsWith("\n")).toBeTruthy();
 	});
 });

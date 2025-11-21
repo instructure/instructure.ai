@@ -27,7 +27,7 @@ const cacheState = {
 	cache: "",
 	checksum: {} as Record<string, string>,
 };
-vi.mock("../cache", () => cacheState);
+vi.mock<typeof import('../cache')>("../cache", () => cacheState);
 
 let originalArg1: string | undefined;
 
@@ -41,7 +41,7 @@ beforeEach(() => {
 	delete process.env.UPDATE;
 	delete process.env.CI;
 	delete process.env.VERBOSE_UPDATE;
-	if (!originalArg1) originalArg1 = process.argv[1];
+	if (!originalArg1) {originalArg1 = process.argv[1];}
 	process.argv[1] = originalArg1 ?? "";
 });
 
@@ -84,16 +84,11 @@ function applyMocks(opts: MockOptions) {
 		return { success: true };
 	});
 
-	vi.mock("../utils", () => ({
-		CSVURL: "https://example.com/cache.csv",
-		entryToObj: (arr: string[]) => ({ raw: arr, uid: arr[0] }),
-		Log: mockLog,
-		writeBarrel: vi.fn(),
-		writeChangelog: mockWriteChangelog,
-		writeEntry: vi.fn(),
+	vi.mock<typeof import('../utils')>("../utils", () => ({
+		CSVURL: "https://example.com/cache.csv", Log: mockLog, entryToObj: (arr: string[]) => ({ raw: arr, uid: arr[0] }), writeBarrel: vi.fn(), writeChangelog: mockWriteChangelog, writeEntry: vi.fn(),
 	}));
 
-	vi.mock("node:fs", () => ({
+	vi.mock<typeof import('node:fs')>("node:fs", () => ({
 		default: {
 			existsSync: () => true,
 			readFileSync: mockFsRead,
@@ -104,7 +99,7 @@ function applyMocks(opts: MockOptions) {
 		writeFileSync: mockFsWrite,
 	}));
 
-	vi.mock("papaparse", async (orig) => {
+	vi.mock<typeof import('papaparse')>("papaparse", async (orig) => {
 		const real = await orig();
 		return real;
 	});
@@ -124,7 +119,7 @@ function applyMocks(opts: MockOptions) {
 		process.env.VERBOSE_UPDATE = "1";
 		simulateDirectInvocation();
 	}
-	if (ci) process.env.CI = "1";
+	if (ci) {process.env.CI = "1";}
 }
 
 async function flushMicrotasks() {
@@ -144,7 +139,7 @@ describe("updateCache.mts parseCSV", () => {
 		const sample = "a,b,c\nd,e,f";
 		const result = mod.parseCSV(sample);
 		expect(result.raw).toBe(sample);
-		expect(result.parsed).toEqual([
+		expect(result.parsed).toStrictEqual([
 			["a", "b", "c"],
 			["d", "e", "f"],
 		]);
@@ -167,7 +162,7 @@ describe("side-effect import with UPDATE env", () => {
 		expect(exitSpy).toHaveBeenCalledWith(0);
 		expect(
 			logSpy.mock.calls.some((c) => c[0].includes('"cacheUpdated":true')),
-		).toBe(true);
+		).toBeTruthy();
 		exitSpy.mockRestore();
 		logSpy.mockRestore();
 	});
@@ -191,8 +186,8 @@ describe("checksum structural assertions", () => {
 		>;
 		for (const [_k, v] of Object.entries(parsed)) {
 			expect(typeof v).toBe("string");
-			expect(v.length).toBe(64);
-			expect(/^[0-9a-f]+$/.test(v)).toBe(true);
+			expect(v).toHaveLength(64);
+			expect(/^[0-9a-f]+$/.test(v)).toBeTruthy();
 		}
 	});
 });

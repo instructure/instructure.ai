@@ -11,8 +11,8 @@ class RawTs {
 	constructor(code: string) {
 		try {
 			this.code = code;
-		} catch (err) {
-			throw new Error(`Error in RawTs constructor: ${String(err)}`);
+		} catch (error) {
+			throw new Error(`Error in RawTs constructor: ${String(error)}`, { cause: err });
 		}
 	}
 }
@@ -23,20 +23,25 @@ class RawTs {
  */
 export function toTsObjectLiteral(value: unknown): string {
 	try {
-		if (value instanceof RawTs) return value.code;
+		if (value instanceof RawTs) {return value.code;}
 		switch (typeof value) {
-			case "string":
+			case "string": {
 				return JSON.stringify(value);
+			}
 			case "number":
-			case "boolean":
+			case "boolean": {
 				return String(value);
-			case "undefined":
+			}
+			case "undefined": {
 				return "undefined";
-			case "function":
+			}
+			case "function": {
 				return value.toString();
-			case "bigint":
+			}
+			case "bigint": {
 				return `${value}n`;
-			case "object":
+			}
+			case "object": {
 				if (value === null) return "null";
 				if (value instanceof Date)
 					return `new Date(${JSON.stringify(value.toISOString())})`;
@@ -60,11 +65,13 @@ export function toTsObjectLiteral(value: unknown): string {
 							`${isValidIdentifier(k) ? k : JSON.stringify(k)}: ${toTsObjectLiteral(v)}`,
 					)
 					.join(", ")} }`;
-			default:
+			}
+			default: {
 				return "undefined";
+			}
 		}
-	} catch (err) {
-		throw new Error(`Error in toTsObjectLiteral: ${String(err)}`);
+	} catch (error) {
+		throw new Error(`Error in toTsObjectLiteral: ${String(error)}`, { cause: err });
 	}
 }
 

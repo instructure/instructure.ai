@@ -18,6 +18,6 @@ describe("README.md", () => {
 	it("is not empty and has at least one heading", async () => {
 		const readme = await readReadme();
 		expect(readme.trim().length).toBeGreaterThan(0);
-		expect(/^\s*#\s+\S+/.test(readme)).toBe(true);
+		expect(/^\s*#\s+\S+/.test(readme)).toBeTruthy();
 	});
 });

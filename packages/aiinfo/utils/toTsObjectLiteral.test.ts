@@ -11,7 +11,7 @@ describe("toTsObjectLiteral", () => {
 		expect(toTsObjectLiteral(true)).toBe("true");
 		expect(toTsObjectLiteral(false)).toBe("false");
 		expect(toTsObjectLiteral(undefined)).toBe("undefined");
-		expect(toTsObjectLiteral(null)).toBe("null");
+		expect(toTsObjectLiteral(undefined)).toBe("null");
 	});
 
 	it("serializes bigint", () => {
@@ -70,12 +70,7 @@ describe("toTsObjectLiteral", () => {
 
 	it("serializes object with valid and invalid identifiers", () => {
 		const obj = {
-			" spaced key ": 6,
-			_underscore: 3,
-			$dollar_ok: 2,
-			"1x": 5,
-			"a-b": 4,
-			normalKey: 1,
+			" spaced key ": 6, $dollar_ok: 2, "1x": 5, _underscore: 3, "a-b": 4, normalKey: 1,
 		};
 		const out = toTsObjectLiteral(obj);
 		expect(out).toContain("normalKey: 1");
@@ -144,7 +139,7 @@ describe("toTsObjectLiteral", () => {
 		);
 	});
 
-	it("RawTs constructor assigns code", () => {
+	it("rawTs constructor assigns code", () => {
 		const snippet = raw("X");
 		expect((snippet as { code: string }).code).toBe("X");
 	});
@@ -152,8 +147,8 @@ describe("toTsObjectLiteral", () => {
 	it("complex snapshot", () => {
 		const complex = {
 			active: true,
-			big: 9007199254740991n,
-			data: [raw("compute()"), null, new Date("2024-01-01T00:00:00.000Z")],
+			big: 9_007_199_254_740_991n,
+			data: [raw("compute()"), undefined, new Date("2024-01-01T00:00:00.000Z")],
 			id: 7,
 			meta: {
 				"needs-quote": "yes",

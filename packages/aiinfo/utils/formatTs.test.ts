@@ -85,15 +85,11 @@ const v=1`;
 	});
 
 	it("wraps and rethrows errors from typescript API", async () => {
-		vi.doMock("typescript", () => ({
+		vi.doMock<typeof import('typescript')>("typescript", () => ({
 			default: {
-				createPrinter: () => ({ printFile: () => "" }),
-				createSourceFile: () => {
+				NewLineKind: { LineFeed: 0 }, ScriptKind: { TS: 1 }, ScriptTarget: { Latest: 99 }, createPrinter: () => ({ printFile: () => "" }), createSourceFile: () => {
 					throw new Error("Boom");
 				},
-				NewLineKind: { LineFeed: 0 },
-				ScriptKind: { TS: 1 },
-				ScriptTarget: { Latest: 99 },
 			},
 		}));
 		const formatTs = await importSubject();

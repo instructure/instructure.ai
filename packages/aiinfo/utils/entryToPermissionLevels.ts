@@ -38,9 +38,9 @@ function entryToPermissionLevels(entry: Entry): Result {
 			currentFeature: feature?.name ?? "",
 			data: mapped,
 		};
-	} catch (err) {
+	} catch (error) {
 		throw new Error(
-			`Error in entryToPermissionLevels: ${(err as Error).message}`,
+			`Error in entryToPermissionLevels: ${(error as Error).message}`, { cause: err },
 		);
 	}
 }

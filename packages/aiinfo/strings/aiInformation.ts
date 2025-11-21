@@ -5,26 +5,16 @@ import { strings as permissionLevelsStrings } from "./permissionLevels";
 
 const strings: { en: AiInformationStrings } = {
 	en: {
-		title: "Features",
 		data: {
 			permissionLevelText: "Permission Level:",
 			permissionLevelsModalTriggerText: permissionLevelsStrings.en.title,
 			modelNameText:
 				nutritionFactsStrings.en.data[0].segmentData[0].segmentTitle,
 			nutritionFactsModalTriggerText: nutritionFactsStrings.en.title,
-		},
-		dataPermissionLevelsTitle: permissionLevelsStrings.en.title,
-		dataPermissionLevelsCurrentFeatureText: "Current Feature:",
-		dataPermissionLevelsCloseIconButtonScreenReaderLabel:
-			permissionLevelsStrings.en.closeIconButtonScreenReaderLabel,
-		dataPermissionLevelsCloseButtonText:
-			permissionLevelsStrings.en.closeButtonText,
-		dataPermissionLevelsModalLabel: permissionLevelsStrings.en.modalLabel,
-		nutritionFactsModalLabel: nutritionFactsStrings.en.modalLabel,
-		nutritionFactsTitle: nutritionFactsStrings.en.title,
-		nutritionFactsCloseButtonText: nutritionFactsStrings.en.closeButtonText,
-		nutritionFactsCloseIconButtonScreenReaderLabel:
-			nutritionFactsStrings.en.closeIconButtonScreenReaderLabel,
+		}, dataPermissionLevelsCloseButtonText:
+			permissionLevelsStrings.en.closeButtonText, dataPermissionLevelsCloseIconButtonScreenReaderLabel:
+			permissionLevelsStrings.en.closeIconButtonScreenReaderLabel, dataPermissionLevelsCurrentFeatureText: "Current Feature:", dataPermissionLevelsModalLabel: permissionLevelsStrings.en.modalLabel, dataPermissionLevelsTitle: permissionLevelsStrings.en.title, nutritionFactsCloseButtonText: nutritionFactsStrings.en.closeButtonText, nutritionFactsCloseIconButtonScreenReaderLabel:
+			nutritionFactsStrings.en.closeIconButtonScreenReaderLabel, nutritionFactsModalLabel: nutritionFactsStrings.en.modalLabel, nutritionFactsTitle: nutritionFactsStrings.en.title, title: "Features",
 	} as AiInformationStrings,
 };
 

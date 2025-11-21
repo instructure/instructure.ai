@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
  * Hoisted mock with mutable backing object. Avoid referencing runtime-local
  * variables inside vi.mock factory (it is hoisted).
  */
-type NutritionBacking = {
+interface NutritionBacking {
 	closeButtonText: string;
 	closeIconButtonScreenReaderLabel: string;
 	data: Array<{
@@ -16,10 +16,10 @@ type NutritionBacking = {
 	modalLabel: string;
 	title: string;
 	triggerText: string;
-};
+}
 let backing: NutritionBacking;
 
-vi.mock("../strings/index.js", () => ({
+vi.mock<typeof import('../strings/index.js')>("../strings/index.js", () => ({
 	get nutritionFactsStrings() {
 		return { en: backing };
 	},
@@ -140,11 +140,11 @@ const importSubject = async () => {
 		featureName: string;
 		data: {
 			blockTitle: string;
-			segmentData: Array<{
+			segmentData: {
 				id: string;
 				value?: string;
 				valueDescription?: string;
-			}>;
+			}[];
 		}[];
 	};
 };

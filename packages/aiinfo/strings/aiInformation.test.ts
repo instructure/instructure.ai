@@ -72,7 +72,7 @@ describe("aiInformation strings", () => {
 	it("has no undefined properties at top level of 'en'", () => {
 		const ai = aiInformationStrings.en as Record<string, unknown>;
 		for (const [_k, v] of Object.entries(ai)) {
-			expect(v).not.toBeUndefined();
+			expect(v).toBeDefined();
 		}
 	});
 

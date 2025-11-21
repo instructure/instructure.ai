@@ -4,9 +4,7 @@ import type { NutritionFactsStrings } from "../types";
 
 const strings: { en: NutritionFactsStrings } = {
 	en: {
-		modalLabel: "This is a modal for AI facts",
-		title: "AI Nutrition Facts",
-		data: [
+		closeButtonText: "Close", closeIconButtonScreenReaderLabel: "Close", data: [
 			{
 				blockTitle: "Model & Data",
 				segmentData: [
@@ -80,10 +78,7 @@ const strings: { en: NutritionFactsStrings } = {
 					},
 				],
 			},
-		],
-		closeButtonText: "Close",
-		closeIconButtonScreenReaderLabel: "Close",
-		triggerText: "Nutrition Facts",
+		], modalLabel: "This is a modal for AI facts", title: "AI Nutrition Facts", triggerText: "Nutrition Facts",
 	},
 };
 

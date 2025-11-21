@@ -49,8 +49,8 @@ const setData = (
 				})),
 			};
 		});
-	} catch (err) {
-		throw new Error(`Error in entryToNutritionFacts: ${String(err)}`);
+	} catch (error) {
+		throw new Error(`Error in entryToNutritionFacts: ${String(error)}`, { cause: err });
 	}
 };
 
@@ -69,8 +69,8 @@ const entryToNutritionFacts = (
 			title: s.title,
 			triggerText: s.triggerText,
 		};
-	} catch (err) {
-		throw new Error(`Error in entryToNutritionFacts: ${String(err)}`);
+	} catch (error) {
+		throw new Error(`Error in entryToNutritionFacts: ${String(error)}`, { cause: err });
 	}
 };
 

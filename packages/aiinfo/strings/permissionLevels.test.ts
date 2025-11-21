@@ -18,7 +18,7 @@ describe("permissionLevels strings", () => {
 			"data",
 		];
 		required.forEach((k) => {
-			expect(pl[k]).not.toBeUndefined();
+			expect(pl[k]).toBeDefined();
 		});
 		expect(pl.title).toBe("Data Permission Levels");
 		expect(pl.triggerText).toBe(pl.title);
@@ -30,10 +30,10 @@ describe("permissionLevels strings", () => {
 
 	it("data array has correct length and structure", () => {
 		const pl = permissionLevelsStrings.en;
-		expect(Array.isArray(pl.data)).toBe(true);
+		expect(Array.isArray(pl.data)).toBeTruthy();
 		expect(pl.data).toHaveLength(4);
 		pl.data.forEach((entry) => {
-			expect(Object.keys(entry).sort()).toEqual([
+			expect(Object.keys(entry).toSorted()).toStrictEqual([
 				"description",
 				"level",
 				"title",
@@ -41,7 +41,7 @@ describe("permissionLevels strings", () => {
 			expect(typeof entry.description).toBe("string");
 			expect(entry.description.length).toBeGreaterThan(40);
 			expect(typeof entry.level).toBe("string");
-			expect(/^LEVEL [1-4]$/.test(entry.level)).toBe(true);
+			expect(/^LEVEL [1-4]$/.test(entry.level)).toBeTruthy();
 			expect(typeof entry.title).toBe("string");
 			expect(entry.title.length).toBeGreaterThan(5);
 		});
@@ -49,14 +49,14 @@ describe("permissionLevels strings", () => {
 
 	it("levels are in ascending order and unique", () => {
 		const levels = permissionLevelsStrings.en.data.map((d) => d.level);
-		expect(levels).toEqual(["LEVEL 1", "LEVEL 2", "LEVEL 3", "LEVEL 4"]);
+		expect(levels).toStrictEqual(["LEVEL 1", "LEVEL 2", "LEVEL 3", "LEVEL 4"]);
 		const set = new Set(levels);
 		expect(set.size).toBe(levels.length);
 	});
 
 	it("titles match expected ordered list and are unique", () => {
 		const titles = permissionLevelsStrings.en.data.map((d) => d.title);
-		expect(titles).toEqual([
+		expect(titles).toStrictEqual([
 			"Descriptive Analytics and Research",
 			"AI-Powered Features Without Data Training",
 			"AI Customization for Individual Institutions",
@@ -74,7 +74,7 @@ describe("permissionLevels strings", () => {
 
 	it("each title starts with an uppercase letter", () => {
 		permissionLevelsStrings.en.data.forEach((d) => {
-			expect(/^[A-Z]/.test(d.title)).toBe(true);
+			expect(/^[A-Z]/.test(d.title)).toBeTruthy();
 		});
 	});
 
@@ -82,7 +82,7 @@ describe("permissionLevels strings", () => {
 		const hasAI = permissionLevelsStrings.en.data.some((d) =>
 			d.description.includes("AI"),
 		);
-		expect(hasAI).toBe(true);
+		expect(hasAI).toBeTruthy();
 	});
 
 	it("currentFeatureText not duplicated inside data entries", () => {
@@ -96,15 +96,15 @@ describe("permissionLevels strings", () => {
 	it("no undefined values at top level", () => {
 		const pl = permissionLevelsStrings.en as Record<string, unknown>;
 		Object.entries(pl).forEach(([, v]) => {
-			expect(v).not.toBeUndefined();
+			expect(v).toBeDefined();
 		});
 	});
 
 	it("no undefined in any level entry fields", () => {
 		permissionLevelsStrings.en.data.forEach((d) => {
-			expect(d.description).not.toBeUndefined();
-			expect(d.level).not.toBeUndefined();
-			expect(d.title).not.toBeUndefined();
+			expect(d.description).toBeDefined();
+			expect(d.level).toBeDefined();
+			expect(d.title).toBeDefined();
 		});
 	});
 

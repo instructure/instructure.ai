@@ -16,8 +16,8 @@ const groupHeader = (
 			header = ansis[style](header);
 		}
 		return header;
-	} catch (err) {
-		console.error("Error in groupHeader:", err);
+	} catch (error) {
+		console.error("Error in groupHeader:", error);
 		return `╔══════════════════════════════════════╗\n║ Error generating header             ║\n╚══════════════════════════════════════╝`;
 	}
 };
@@ -25,8 +25,8 @@ const groupHeader = (
 const groupFooter = (color: LogObject["color"] = "cyan"): string => {
 	try {
 		return ansis[color]("═".repeat(40));
-	} catch (err) {
-		console.error("Error in groupFooter:", err);
+	} catch (error) {
+		console.error("Error in groupFooter:", error);
 		return "════════════════════════════════════════";
 	}
 };
@@ -54,8 +54,8 @@ const Log = (content: LogProps): void => {
 					return formatted;
 				}
 				return msg;
-			} catch (err) {
-				console.error("Error formatting log message:", err);
+			} catch (error) {
+				console.error("Error formatting log message:", error);
 				return "Error formatting log message";
 			}
 		};
@@ -91,8 +91,8 @@ const Log = (content: LogProps): void => {
 		} else {
 			console[type](format(message));
 		}
-	} catch (err) {
-		console.error("Error in Log:", err);
+	} catch (error) {
+		console.error("Error in Log:", error);
 		console.log("Error logging message");
 	}
 };
