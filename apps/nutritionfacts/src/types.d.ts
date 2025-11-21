@@ -10,11 +10,11 @@ type StateProp<T, K extends string> = {
 	[key in `set${Capitalize<K>}`]: Dispatch<SetStateAction<T>>;
 };
 
-type PageLayout = {
+interface PageLayout {
 	disclaimer: boolean;
 	copyright: boolean;
 	revision: boolean;
-};
+}
 
 type ExtendedNutritionFactsProps = NutritionFactsProps & {
 	description: AiInfoProps["description"];

@@ -4,15 +4,15 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 // --- Mock react-dom/client for ESM ---
 const renderSpy = vi.fn();
 const createRootMock = vi.fn(() => ({ render: renderSpy }));
-vi.mock("react-dom/client", () => ({ createRoot: createRootMock }));
+vi.mock<typeof import('react-dom/client')>("react-dom/client", () => ({ createRoot: createRootMock }));
 
 // Mock InstUISettingsProvider and App
-vi.mock("@instructure/ui", () => ({
+vi.mock<typeof import('@instructure/ui')>("@instructure/ui", () => ({
 	InstUISettingsProvider: ({ children }: { children: React.ReactNode }) => (
 		<div data-testid="instui-provider">{children}</div>
 	),
 }));
-vi.mock("./App", () => ({
+vi.mock<typeof import('./App')>("./App", () => ({
 	default: function App() {
 		return <div data-testid="app" />;
 	},
@@ -45,7 +45,7 @@ describe("main.tsx", () => {
 
 	afterEach(() => {
 		const elem = document.getElementById("root");
-		if (elem) elem.remove();
+		if (elem) {elem.remove();}
 	});
 
 	it("throws an error if root element is not found", async () => {
@@ -79,7 +79,7 @@ describe("main.tsx", () => {
 		// Check the rendered tree structure
 		const rendered = renderSpy.mock.calls[0][0];
 		// Should be <StrictMode>
-		expect(React.isValidElement(rendered)).toBe(true);
+		expect(React.isValidElement(rendered)).toBeTruthy();
 		expect(rendered.type).toBe(React.StrictMode);
 
 		// Should contain InstUISettingsProvider

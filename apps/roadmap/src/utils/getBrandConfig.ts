@@ -1,17 +1,17 @@
-type PageSettings = {
+interface PageSettings {
 	locale: string;
 	time_zone: string;
 	use_high_contrast: boolean;
 	active_brand_config_json_url: string;
 	window_width: number;
-};
+}
 
 type BrandConfig = Record<string, unknown>;
 
 type PageSettingsEvent = MessageEvent<{ pageSettings?: PageSettings }>;
 
-let cachedBrandConfig: BrandConfig | null = null;
-let brandConfigPromise: Promise<BrandConfig> | null = null;
+let cachedBrandConfig: BrandConfig | null;
+let brandConfigPromise: Promise<BrandConfig> | null;
 
 const getBrandConfig = (): Promise<BrandConfig> => {
 	if (cachedBrandConfig !== null) {
@@ -50,7 +50,7 @@ const getBrandConfig = (): Promise<BrandConfig> => {
 		window.addEventListener("message", handler);
 	});
 	brandConfigPromise.finally(() => {
-		brandConfigPromise = null;
+		brandConfigPromise = undefined;
 	});
 	return brandConfigPromise;
 };

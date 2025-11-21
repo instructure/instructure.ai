@@ -34,31 +34,23 @@ const isPendoAPI = (obj: unknown): obj is PendoAPI => {
 };
 
 const paramsToPendo = (params: string | null): RoadmapFeatures | null => {
-	if (!params) return null;
+	if (!params) {return null;}
 
 	let p: unknown;
 	try {
 		p = JSON.parse(decodeURIComponent(params));
 	} catch {
-		return null;
+		return ;
 	}
 
 	if (!isPendoAPI(p)) {
-		return null;
+		return ;
 	}
 
-	const stages = Array.from(
-		new Set((p as PendoAPI).results.map((result) => result.feature.stage)),
-	).filter(Boolean) as string[];
-	const products = Array.from(
-		new Set((p as PendoAPI).results.map((result) => result.product.name)),
-	).filter(Boolean) as string[];
-	const productAreas = Array.from(
-		new Set((p as PendoAPI).results.map((result) => result.product.area)),
-	).filter(Boolean) as string[];
-	const labels = Array.from(
-		new Set((p as PendoAPI).results.flatMap((result) => result.feature.labels)),
-	).filter(Boolean) as string[];
+	const stages = [...new Set((p as PendoAPI).results.map((result) => result.feature.stage))].filter(Boolean) as string[];
+	const products = [...new Set((p as PendoAPI).results.map((result) => result.product.name))].filter(Boolean) as string[];
+	const productAreas = [...new Set((p as PendoAPI).results.map((result) => result.product.area))].filter(Boolean) as string[];
+	const labels = [...new Set((p as PendoAPI).results.flatMap((result) => result.feature.labels))].filter(Boolean) as string[];
 	const features = (p as PendoAPI).results;
 
 	const roadmap: RoadmapFeatures = {
@@ -79,6 +71,6 @@ const paramsToPendo = (params: string | null): RoadmapFeatures | null => {
 		return roadmap;
 	}
 
-	return null;
+	return ;
 };
 export default paramsToPendo;

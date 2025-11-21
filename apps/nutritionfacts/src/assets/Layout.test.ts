@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { PageLayout } from "../types";
 import { DefaultLayout, Layout } from "./Layout";
 
-describe("Layout", () => {
+describe("layout", () => {
 	it("should correctly assign all true properties", () => {
 		const input: PageLayout = {
 			copyright: true,
@@ -10,9 +10,9 @@ describe("Layout", () => {
 			revision: true,
 		};
 		const layout = new Layout(input);
-		expect(layout.copyright).toBe(true);
-		expect(layout.disclaimer).toBe(true);
-		expect(layout.revision).toBe(true);
+		expect(layout.copyright).toBeTruthy();
+		expect(layout.disclaimer).toBeTruthy();
+		expect(layout.revision).toBeTruthy();
 	});
 
 	it("should correctly assign all false properties", () => {
@@ -22,9 +22,9 @@ describe("Layout", () => {
 			revision: false,
 		};
 		const layout = new Layout(input);
-		expect(layout.copyright).toBe(false);
-		expect(layout.disclaimer).toBe(false);
-		expect(layout.revision).toBe(false);
+		expect(layout.copyright).toBeFalsy();
+		expect(layout.disclaimer).toBeFalsy();
+		expect(layout.revision).toBeFalsy();
 	});
 
 	it("should correctly assign mixed property values", () => {
@@ -34,14 +34,14 @@ describe("Layout", () => {
 			revision: true,
 		};
 		const layout = new Layout(input);
-		expect(layout.copyright).toBe(true);
-		expect(layout.disclaimer).toBe(false);
-		expect(layout.revision).toBe(true);
+		expect(layout.copyright).toBeTruthy();
+		expect(layout.disclaimer).toBeFalsy();
+		expect(layout.revision).toBeTruthy();
 	});
 
-	it("DefaultLayout should have all properties true", () => {
-		expect(DefaultLayout.copyright).toBe(true);
-		expect(DefaultLayout.disclaimer).toBe(true);
-		expect(DefaultLayout.revision).toBe(true);
+	it("defaultLayout should have all properties true", () => {
+		expect(DefaultLayout.copyright).toBeTruthy();
+		expect(DefaultLayout.disclaimer).toBeTruthy();
+		expect(DefaultLayout.revision).toBeTruthy();
 	});
 });

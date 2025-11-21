@@ -1,10 +1,10 @@
 /// <reference types="@instructure/ui" />
 
-type PendoAPI = {
+interface PendoAPI {
 	results: PendoAPIFeature[];
-};
+}
 
-type PendoAPIFeature = {
+interface PendoAPIFeature {
 	feature: {
 		description: string | null;
 		labels: string[] | null;
@@ -23,15 +23,15 @@ type PendoAPIFeature = {
 		logo: SVGIconProps | undefined;
 		color: string | undefined;
 	};
-};
+}
 
-type RoadmapFeatures = {
+interface RoadmapFeatures {
 	stages: string[];
 	products: string[];
 	productAreas: string[];
 	labels: string[];
 	features: PendoAPIFeature[];
-};
+}
 
 declare module "*.css" {
 	const classes: { [key: string]: string };

@@ -1,7 +1,7 @@
-type VerifiedLink = {
+interface VerifiedLink {
 	title: string;
 	linkUrl: string;
-};
+}
 
 const getLinkTitle = (link: VerifiedLink): string => {
 	const { title, linkUrl } = link;
@@ -19,12 +19,12 @@ const getLinkTitle = (link: VerifiedLink): string => {
 	const host = url.hostname.toLowerCase();
 
 	/* Community Links */
-	if (/change[-]?log/i.test(href)) return "changelog";
-	if (/time[ ]?line/i.test(href)) return "timeline";
-	if (href.includes("faq")) return "faq";
-	if (href.includes("the-product-blog")) return "product blog";
-	if (href.includes("guide")) return "guides";
-	if (host === "community.canvaslms.com") return "community";
+	if (/change[-]?log/i.test(href)) {return "changelog";}
+	if (/time[ ]?line/i.test(href)) {return "timeline";}
+	if (href.includes("faq")) {return "faq";}
+	if (href.includes("the-product-blog")) {return "product blog";}
+	if (href.includes("guide")) {return "guides";}
+	if (host === "community.canvaslms.com") {return "community";}
 
 	/* Video Links */
 	if (
@@ -33,10 +33,10 @@ const getLinkTitle = (link: VerifiedLink): string => {
 			/(?:^|\.)((instructuremedia|youtube|vimeo|wistia|guidde)\.com|youtu\.be)$/,
 		)
 	)
-		return "video";
+		{return "video";}
 
 	/* Image Links */
-	if (href.match(/\.(jpeg|jpg|gif|png|svg|webp)$/)) return "image";
+	if (href.match(/\.(jpeg|jpg|gif|png|svg|webp)$/)) {return "image";}
 
 	return title;
 };

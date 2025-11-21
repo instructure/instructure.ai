@@ -170,7 +170,7 @@ const CardOverlayContent: FC<{
 																<Text size="legend">{areaParts[1]}</Text>
 															</Pill>
 														</Flex.Item>
-													) : null;
+													) : undefined;
 												})()}
 											</Flex>
 										</Flex.Item>

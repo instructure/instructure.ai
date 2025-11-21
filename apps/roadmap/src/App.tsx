@@ -1,4 +1,4 @@
-import { canvas, Flex, InstUISettingsProvider } from "@instructure/ui";
+import { Flex, InstUISettingsProvider, canvas } from "@instructure/ui";
 import type { FC } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { Card, CardOverlay, Loading } from "./components";
@@ -14,10 +14,10 @@ import "./App.css";
 const App: FC = () => {
 	const [overlayOpen, setOverlayOpen] = useState(false);
 	const [selectedEntry, setSelectedEntry] = useState<PendoAPIFeature | null>(
-		null,
+		undefined,
 	);
 	const [brandConfig, setBrandConfig] = useState<unknown>({});
-	const [roadmap, setRoadmap] = useState<RoadmapFeatures | null>(null);
+	const [roadmap, setRoadmap] = useState<RoadmapFeatures | null>(undefined);
 	const [isDark, setIsDark] = useState(false);
 
 	useEffect(() => {
@@ -59,7 +59,7 @@ const App: FC = () => {
 	}, []);
 
 	const Entries = useMemo(() => {
-		if (!roadmap) return [];
+		if (!roadmap) {return [];}
 		return roadmap.features.map((entry) => ({
 			...entry,
 			product: {
@@ -119,9 +119,9 @@ const App: FC = () => {
 						/>
 					)}
 				</>
-			) : showLoading ? (
+			) : (showLoading ? (
 				<Loading isDark={isDark} />
-			) : null}
+			) : null)}
 		</InstUISettingsProvider>
 	);
 };

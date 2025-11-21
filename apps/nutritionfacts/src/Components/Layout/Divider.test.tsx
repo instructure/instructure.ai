@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Set up the mock before importing Divider
-vi.mock("@instructure/ui", () => {
+vi.mock<typeof import('@instructure/ui')>("@instructure/ui", () => {
 	const ViewMock = vi.fn(({ children, ...props }) => {
 		const { borderColor, borderWidth, ...rest } = props;
 		return (
@@ -19,7 +19,7 @@ vi.mock("@instructure/ui", () => {
 
 import { Divider } from "./Divider";
 
-describe("Divider", () => {
+describe("divider", () => {
 	let ViewMock: ReturnType<typeof vi.fn>;
 
 	beforeEach(async () => {

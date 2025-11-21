@@ -1,6 +1,7 @@
-import { IconButton, type SVGIconProps, Tooltip } from "@instructure/ui";
+import { IconButton, Tooltip } from '@instructure/ui';
+import type { SVGIconProps } from '@instructure/ui';
 
-type ControlButtonProps = {
+interface ControlButtonProps {
 	label: string;
 	Icon: React.ElementType<SVGIconProps>;
 	onClick: () => void;
@@ -8,7 +9,7 @@ type ControlButtonProps = {
 	disabled?: boolean;
 	color?: "primary" | "primary-inverse";
 	border?: boolean;
-};
+}
 
 const ControlButton: React.FC<ControlButtonProps> = ({
 	label,

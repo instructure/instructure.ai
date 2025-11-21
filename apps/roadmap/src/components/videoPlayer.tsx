@@ -10,7 +10,7 @@ const VideoPlayer = ({ url }: { url: string | undefined }) => {
 				style={{ border: "none" }}
 				title="Video Player"
 				width="100%"
-			></iframe>
+			 />
 		</View>
 	) : undefined;
 };

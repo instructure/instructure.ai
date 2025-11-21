@@ -17,7 +17,7 @@ describe("index.html", () => {
 	it("should have correct meta tags", () => {
 		const charset = document.querySelector("meta[charset]");
 		expect(charset).not.toBeNull();
-		expect(charset?.getAttribute("charset")).toBe("UTF-8");
+		expect(charset?.getAttribute("charset")).toBe("utf8");
 
 		const viewport = document.querySelector('meta[name="viewport"]');
 		expect(viewport).not.toBeNull();

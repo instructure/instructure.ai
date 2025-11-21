@@ -1,4 +1,5 @@
-import { IconExternalLinkLine, type SVGIconProps } from "@instructure/ui";
+import { IconExternalLinkLine } from '@instructure/ui';
+import type { SVGIconProps } from '@instructure/ui';
 import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { baseUrl } from "../../assets";
 import type { PageLayout } from "../../types.ts";

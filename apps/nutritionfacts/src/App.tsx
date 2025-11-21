@@ -1,17 +1,19 @@
 import "./App.css";
 import { Flex, InlineSVG, Link, Text, View } from "@instructure/ui";
-import AiInfo, { type AiInfoFeatureProps } from "@instructure.ai/aiinfo";
-import { type FC, useEffect, useState } from "react";
+import AiInfo from '@instructure.ai/aiinfo';
+import type { AiInfoFeatureProps } from '@instructure.ai/aiinfo';
+import { useEffect, useState } from 'react';
+import type { FC } from 'react';
 import {
-	colors,
-	copyright,
 	DefaultLayout,
-	disclaimer,
 	Logo,
 	LogoDark,
+	colors,
+	copyright,
+	disclaimer,
 } from "./assets";
 import { EmbedControl, LinkControl } from "./Components/Export";
-import { getLayoutFromParams, NutritionFactsForm } from "./Components/Layout";
+import { NutritionFactsForm, getLayoutFromParams } from "./Components/Layout";
 
 const App: FC = () => {
 	const searchParams = new URLSearchParams(window.location.search);
@@ -67,7 +69,7 @@ const App: FC = () => {
 			background={isDark && !isInIframe ? "brand" : "secondary"}
 			data-print="no-padding, no-background"
 			minHeight="100vh"
-			padding={isInIframe ? "0" : isNarrow ? "medium" : "large"}
+			padding={isInIframe ? "0" : (isNarrow ? "medium" : "large")}
 			themeOverride={{ backgroundBrand: colors.instructure }}
 		>
 			{!isInIframe && (

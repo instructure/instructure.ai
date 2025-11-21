@@ -32,7 +32,7 @@ const Card: FC<{
 
 	const recalc = useCallback(() => {
 		const el = headingEl.current;
-		if (!el) return;
+		if (!el) {return;}
 		const style = window.getComputedStyle(el);
 		const lineHeight = parseFloat(style.lineHeight || "0") || 1;
 		const height = el.getBoundingClientRect().height;
@@ -48,7 +48,7 @@ const Card: FC<{
 	// Recalculate on heading resize (e.g., wrapping due to width changes)
 	useLayoutEffect(() => {
 		const el = headingEl.current;
-		if (!el || typeof ResizeObserver === "undefined") return;
+		if (!el || typeof ResizeObserver === "undefined") {return;}
 		const ro = new ResizeObserver(() => recalc());
 		ro.observe(el);
 		return () => ro.disconnect();

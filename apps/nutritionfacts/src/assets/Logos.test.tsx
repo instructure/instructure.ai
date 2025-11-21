@@ -11,7 +11,7 @@ import {
 } from "./Logos";
 
 // Mock InlineSVG to inspect props and children
-vi.mock("@instructure/ui", async (orig) => {
+vi.mock<typeof import('@instructure/ui')>("@instructure/ui", async (orig) => {
 	const mod = await orig();
 	// Always render a <title> for accessibility, even if empty
 	const InlineSVGMock = vi.fn(({ children, title, ...props }) => (
@@ -27,7 +27,7 @@ vi.mock("@instructure/ui", async (orig) => {
 });
 
 // Mock useId to return a stable value for IgniteBug
-vi.mock("react", async (orig) => {
+vi.mock<typeof import('react')>("react", async (orig) => {
 	const mod = await orig();
 	return {
 		...(typeof mod === "object" && mod !== null ? mod : {}),
@@ -37,7 +37,7 @@ vi.mock("react", async (orig) => {
 
 const InlineSVGMock = InlineSVG as unknown as ReturnType<typeof vi.fn>;
 
-describe("Logo Bug Components", () => {
+describe("logo Bug Components", () => {
 	beforeEach(() => {
 		InlineSVGMock.mockClear();
 	});
@@ -92,13 +92,13 @@ describe("Logo Bug Components", () => {
 		it(`${name} passes color prop and wraps children in <g fill>`, () => {
 			const { getAllByTestId } = render(<Component color="#123456" />);
 			const svg = getAllByTestId("inline-svg").pop();
-			if (!svg) throw new Error("SVG not found");
+			if (!svg) {throw new Error("SVG not found");}
 			const g = svg.querySelector("g[fill='#123456']");
 			expect(g).not.toBeNull();
 		});
 	});
 
-	it("InstructureBug renders with default props", () => {
+	it("instructureBug renders with default props", () => {
 		render(<InstructureBug />);
 		expect(InlineSVGMock).toHaveBeenCalledWith(
 			expect.objectContaining({
@@ -109,10 +109,10 @@ describe("Logo Bug Components", () => {
 		);
 	});
 
-	it("InstructureBug renders with color and custom fills", () => {
+	it("instructureBug renders with color and custom fills", () => {
 		const { getAllByTestId } = render(<InstructureBug color="#abc" />);
 		const svg = getAllByTestId("inline-svg").pop();
-		if (!svg) throw new Error("SVG not found");
+		if (!svg) {throw new Error("SVG not found");}
 		const rects = svg.querySelectorAll("rect");
 		expect(rects.length).toBeGreaterThan(0);
 		expect(rects[0].getAttribute("stroke")).toBe("#0E1721"); // colors.instructure
@@ -122,21 +122,21 @@ describe("Logo Bug Components", () => {
 		expect(path?.getAttribute("fill")).toBe("#D42E21"); // colors.canvas
 	});
 
-	it("IgniteBug renders with default props (no color)", () => {
+	it("igniteBug renders with default props (no color)", () => {
 		render(<IgniteBug />);
 		const call = InlineSVGMock.mock.calls[0][0];
 		expect(call.title).toBe("IgniteAI");
 		expect(call.viewBox).toBe("0 0 1920 1920");
 	});
 
-	it("IgniteBug renders with color and gradients/defs", () => {
+	it("igniteBug renders with color and gradients/defs", () => {
 		const { getAllByTestId } = render(<IgniteBug color="#f00" />);
 		const svg = getAllByTestId("inline-svg").pop();
 		expect(svg).toBeTruthy();
-		if (!svg) throw new Error("SVG not found");
+		if (!svg) {throw new Error("SVG not found");}
 		const defs = svg.querySelector("defs");
 		expect(defs).not.toBeNull();
-		if (!defs) throw new Error("defs not found");
+		if (!defs) {throw new Error("defs not found");}
 		const grad = defs.querySelector("linearGradient#paint0_linear_testid");
 		expect(grad).not.toBeNull();
 		const clip = defs.querySelector("clipPath#clip0_testid");
@@ -145,7 +145,7 @@ describe("Logo Bug Components", () => {
 		expect(g).not.toBeNull();
 	});
 
-	it("All logo bug components render without crashing", () => {
+	it("all logo bug components render without crashing", () => {
 		expect(() => {
 			render(<CanvasBug />);
 			render(<MasteryBug />);

@@ -1,7 +1,7 @@
 import paramsToPendo from "./paramsToPendo";
 
-let roadmapPromise: Promise<RoadmapFeatures | null> | null = null;
-let cachedRoadmap: RoadmapFeatures | null = null;
+let roadmapPromise: Promise<RoadmapFeatures | null> | null;
+let cachedRoadmap: RoadmapFeatures | null;
 
 type RoadmapRequestEvent = MessageEvent<{ value?: string }>;
 
@@ -29,7 +29,7 @@ const getRoadmap = (): Promise<RoadmapFeatures | null> => {
 				window.removeEventListener("message", handler);
 				const result = paramsToPendo(event.data.value);
 				cachedRoadmap = result;
-				roadmapPromise = null;
+				roadmapPromise = undefined;
 				resolve(result);
 			}
 			// Ignore unrelated events

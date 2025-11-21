@@ -2,10 +2,10 @@ import baseConfig from "@instructure.ai/shared-configs/vanilla";
 import { defineConfig, mergeConfig } from "vite";
 
 export default mergeConfig(
-	baseConfig,
-	defineConfig({
-		build: {
-			chunkSizeWarningLimit: 1024,
-		},
-	}),
+  baseConfig,
+  defineConfig({
+    build: {
+      chunkSizeWarningLimit: 1024,
+    },
+  }),
 );

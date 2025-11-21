@@ -31,10 +31,10 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 			console.error('Element with id "roadmap" is not an HTMLIFrameElement');
 			return;
 		}
-		if (iframeListenerMap.has(iFrame)) return;
+		if (iframeListenerMap.has(iFrame)) {return;}
 
 		const handler = (event) => {
-			if (!event.data) return;
+			if (!event.data) {return;}
 			// Only respond to getRoadmap and lti.getPageSettings events
 			if (event.data.type === "getRoadmap") {
 				const roadmap = iFrame.getAttribute("data-roadmap");
@@ -65,8 +65,8 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 			} else if (event.data.type === "setHeight") {
 				try {
 					iFrame.height = event.data.height;
-				} catch (err) {
-					console.error("Failed to set iframe height:", err);
+				} catch (error) {
+					console.error("Failed to set iframe height:", error);
 				}
 			}
 			// Ignore all other events
@@ -135,8 +135,8 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
  */
 
 (() => {
-	let avatarObserver = null;
-	let lastPath = null;
+	let avatarObserver;
+	let lastPath;
 
 	const moveAvatar = () => {
 		const firstLi = document.querySelector("#menu li:first-child");
@@ -147,14 +147,14 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 		// Only move when the target list exists AND currently has exactly one child
 		if (firstLi && targetList && targetList.childElementCount === 1) {
 			targetList.appendChild(firstLi);
-			if (avatarObserver) avatarObserver.disconnect(); // stop for this page
-			avatarObserver = null;
+			if (avatarObserver) {avatarObserver.disconnect();} // stop for this page
+			avatarObserver = undefined;
 		}
 	};
 
 	const startObserverForThisPage = () => {
 		// Ensure fresh observer per page view
-		if (avatarObserver) avatarObserver.disconnect();
+		if (avatarObserver) {avatarObserver.disconnect();}
 		avatarObserver = new MutationObserver(moveAvatar);
 		avatarObserver.observe(document.body, { childList: true, subtree: true });
 
@@ -171,14 +171,14 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 	};
 
 	const _pushState = history.pushState;
-	history.pushState = function (...args) {
+	history.pushState = function  pushState(...args) {
 		const ret = _pushState.apply(this, args);
 		window.dispatchEvent(new Event("locationchange"));
 		return ret;
 	};
 
 	const _replaceState = history.replaceState;
-	history.replaceState = function (...args) {
+	history.replaceState = function  replaceState(...args) {
 		const ret = _replaceState.apply(this, args);
 		window.dispatchEvent(new Event("locationchange"));
 		return ret;

@@ -1,14 +1,7 @@
-import {
-	ScreenReaderContent,
-	type SelectOptionProps,
-	SimpleSelect,
-	View,
-} from "@instructure/ui";
-import {
-	AiInfo,
-	type AiInfoFeatureProps,
-	type AiInfoProps,
-} from "@instructure.ai/aiinfo";
+import { ScreenReaderContent, SimpleSelect, View } from '@instructure/ui';
+import type { SelectOptionProps } from '@instructure/ui';
+import { AiInfo } from '@instructure.ai/aiinfo';
+import type { AiInfoFeatureProps, AiInfoProps } from '@instructure.ai/aiinfo';
 import { useCallback, useEffect, useState } from "react";
 import { brands } from "../../assets";
 
@@ -111,7 +104,7 @@ const Presets = ({ setProduct, product }: PresetsProps) => {
 				visibleOptionsCount={8}
 			>
 				{Object.entries(groupedOptions)
-					.sort(([a], [b]) => a.localeCompare(b))
+					.toSorted(([a], [b]) => a.localeCompare(b))
 					.map(([group, { renderLabel, options }]) => (
 						<SimpleSelect.Group key={group} renderLabel={renderLabel}>
 							{options.map((option) => (

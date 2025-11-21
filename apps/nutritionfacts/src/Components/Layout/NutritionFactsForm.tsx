@@ -1,11 +1,5 @@
-import {
-	Flex,
-	Heading,
-	IconAiLine,
-	type NutritionFactsProps,
-	Text,
-	View,
-} from "@instructure/ui";
+import { Flex, Heading, IconAiLine, Text, View } from '@instructure/ui';
+import type { NutritionFactsProps } from '@instructure/ui';
 import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import type { Dispatch, FC, SetStateAction } from "react";
 import type { ExtendedNutritionFactsProps, PageLayout } from "../../types";

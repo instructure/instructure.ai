@@ -5,7 +5,7 @@ import { name as workspaceName } from "../../../package.json" with {
 import { name } from "../package.json" with { type: "json" };
 
 describe("package.json", () => {
-	it("Package name should start with workspace prefix", () => {
+	it("package name should start with workspace prefix", () => {
 		expect(workspaceName.split("/")[0]).toBe(name.split("/")[0]);
 	});
 });

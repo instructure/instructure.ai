@@ -1,5 +1,6 @@
 import { StrictMode } from "react";
-import { createRoot, type Root } from "react-dom/client";
+import { createRoot } from 'react-dom/client';
+import type { Root } from 'react-dom/client';
 import App from "./App.tsx";
 import "./Main.css";
 import "./assets/fonts/AtkinsonHyperlegibleNext.css";
