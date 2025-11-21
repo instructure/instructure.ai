@@ -336,14 +336,34 @@ const Workspace = (
     script: script,
   };
 
-  // Hoist dynamic package/app commands before static switch
-  if (isValidFullPackageName(command.command)) {
-    exportObj.output = command.command;
-    return exportObj;
-  }
-  if (isValidPackageName(command.command)) {
-    exportObj.output = getFullPackageName(command.command);
-    return exportObj;
+  // Define static commands first
+  const staticCommands = [
+    "help",
+    "name",
+    "workspace",
+    "all",
+    "packages",
+    "apps",
+    "root",
+    "package",
+    "app",
+  ] as const;
+
+  // Check static commands BEFORE dynamic package names
+  const isStaticCommand = staticCommands.includes(
+    command.command as (typeof staticCommands)[number],
+  );
+
+  // Only check for dynamic package/app names if not a static command
+  if (!isStaticCommand) {
+    if (isValidFullPackageName(command.command)) {
+      exportObj.output = command.command;
+      return exportObj;
+    }
+    if (isValidPackageName(command.command)) {
+      exportObj.output = getFullPackageName(command.command);
+      return exportObj;
+    }
   }
 
   switch (command.command) {
@@ -383,9 +403,9 @@ const Workspace = (
       }
       const fullCandidate = isValidFullPackageName(raw)
         ? raw
-        : (isValidPackageName(raw)
+        : isValidPackageName(raw)
           ? getFullPackageName(raw)
-          : undefined);
+          : undefined;
 
       const found = fullCandidate
         ? workspace.packages().find((p) => p === fullCandidate)
@@ -407,9 +427,9 @@ const Workspace = (
       }
       const fullCandidate = isValidFullPackageName(raw)
         ? raw
-        : (isValidPackageName(raw)
+        : isValidPackageName(raw)
           ? getFullPackageName(raw)
-          : undefined);
+          : undefined;
 
       const found = fullCandidate
         ? workspace.apps().find((a) => a === fullCandidate)
