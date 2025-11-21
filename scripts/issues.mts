@@ -11,7 +11,6 @@ import { parse, stringify } from "yaml";
 
 const main = async () => {
   const { output } = Workspace(["all"]);
-
   const root = getPackageName(getRootPackage());
   if (!root) {
     exitWithError("Could not determine the root package.");
@@ -19,7 +18,7 @@ const main = async () => {
   const packageNames = Array.isArray(output)
     ? output
         .map((pkg) => getPackageName(pkg))
-        .toSorted((a, b) => {
+        .toSorted((a: string, b: string) => {
           if (a === root) {
             return -1;
           }
