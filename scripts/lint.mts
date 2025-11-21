@@ -25,25 +25,30 @@ const main = async (): Promise<void> => {
     "app",
   ] as const;
 
-  if (!isValidCommand(command, lintCommands)) {
-    exitWithError("Invalid lint command.");
-  }
-
   const lintRoot = (pkg: PackageName, args: CommandExtraArgs) => {
     console.log(`Linting root package: ${pkg}`);
     exec("pnpm lint:root", { args });
   };
 
-  const lintPackage = (pkg: PackageName, args: CommandExtraArgs) => {
+  const lintPackage = (pkg: PackageName, cmdArgs: CommandExtraArgs) => {
     console.log(`Linting package: ${pkg}`);
-    exec(`pnpm -F ${pkg} lint`, { args: args.slice(2) });
+    exec(`pnpm -F ${pkg} lint`, { args: cmdArgs.slice(2) });
   };
 
-  const lintPackages = (packages: string[], args: CommandExtraArgs) => {
+  const lintPackages = (packages: string[], cmdArgs: CommandExtraArgs) => {
     packages.forEach((pkg) => {
-      lintPackage(pkg, args);
+      lintPackage(pkg, cmdArgs);
     });
   };
+
+  if (isValidPackage(command)) {
+    lintPackage(command as PackageName, args.slice(1));
+    return;
+  }
+
+  if (!isValidCommand(command, lintCommands)) {
+    exitWithError("Invalid lint command.");
+  }
 
   try {
     switch (command) {
@@ -54,13 +59,10 @@ const main = async (): Promise<void> => {
         break;
       }
       case "app": {
-        console.log("output:", output);
         if (output) {
           lintPackage(output as PackageName, args.slice(2));
         } else {
-          console.log(
-            "No app found in workspace. Did you mean `lint package <name>`?",
-          );
+          console.log("No app found in workspace. Did you mean `lint package <name>`?");
         }
         break;
       }
@@ -78,9 +80,7 @@ const main = async (): Promise<void> => {
         if (output) {
           lintPackage(output as PackageName, args.slice(2));
         } else {
-          console.log(
-            "No package found in workspace. Did you mean `lint app <name>`?",
-          );
+          console.log("No package found in workspace. Did you mean `lint app <name>`?");
         }
         break;
       }
@@ -95,17 +95,11 @@ const main = async (): Promise<void> => {
         break;
       }
       case "root": {
-        console.log(output);
         lintRoot(output as PackageName, args.slice(1));
         break;
       }
       default: {
-        if (isValidPackage(command as PackageName)) {
-          lintPackage(command as PackageName, args.slice(1));
-        } else {
-          exitWithError(`Unknown lint command: ${command}
-Valid commands are: ${lintCommands.join(", ")}`);
-        }
+        exitWithError("Invalid lint command.");
       }
     }
   } catch (error) {

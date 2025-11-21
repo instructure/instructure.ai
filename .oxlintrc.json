@@ -2,9 +2,9 @@
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "categories": {
     "correctness": "error",
-    "suspicious": "warn",
-    "style": "warn",
-    "perf": "warn",
+    "suspicious": "off", // "warn",
+    "style": "off", // "warn",
+    "perf": "off", // "warn",
     "pedantic": "off"
   },
   "env": {

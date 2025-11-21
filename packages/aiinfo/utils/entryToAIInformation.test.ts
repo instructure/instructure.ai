@@ -23,27 +23,26 @@ vi.mock("../strings", () => ({
   },
 }));
 
-vi.mock >
-  (() => ({
-    entryToNutritionFacts: vi.fn((entry: Record<string, unknown>) => ({
-      data: [{ calories: 0 }, { tokens: 123 }],
-      featureName:
-        entry &&
-        typeof entry.feature === "object" &&
-        entry.feature !== null &&
-        "name" in entry.feature
-          ? ((entry.feature as { name?: string }).name ?? "NF Fallback")
-          : "NF Fallback",
-    })),
-    entryToPermissionLevels: vi.fn(() => ({
-      currentFeature: "Current Feature",
-      data: [
-        { description: "", highlighted: undefined, level: "L1", title: "" },
-        { description: "", highlighted: undefined, level: "L2", title: "" },
-        { description: "", highlighted: undefined, level: "L3", title: "" },
-      ],
-    })),
-  }));
+vi.mock("./", () => ({
+  entryToNutritionFacts: vi.fn((entry: Record<string, unknown>) => ({
+    data: [{ calories: 0 }, { tokens: 123 }],
+    featureName:
+      entry &&
+      typeof entry.feature === "object" &&
+      entry.feature !== null &&
+      "name" in entry.feature
+        ? ((entry.feature as { name?: string }).name ?? "NF Fallback")
+        : "NF Fallback",
+  })),
+  entryToPermissionLevels: vi.fn(() => ({
+    currentFeature: "Current Feature",
+    data: [
+      { description: "", highlighted: undefined, level: "L1", title: "" },
+      { description: "", highlighted: undefined, level: "L2", title: "" },
+      { description: "", highlighted: undefined, level: "L3", title: "" },
+    ],
+  })),
+}));
 
 interface AIInformationResult {
   trigger: undefined;
@@ -65,11 +64,10 @@ interface AIInformationResult {
 
 const importSubject = async () => {
   const mod = await import("./entryToAIInformation.ts");
-  // FIX: Cast to expected output type so result is not 'unknown'
   return mod.entryToAIInformation as (e: unknown) => AIInformationResult;
 };
 
-beforeEach(async () => {
+beforeEach(() => {
   vi.resetModules();
 });
 
@@ -147,13 +145,9 @@ describe("entryToAIInformation", () => {
 
   it("wraps thrown errors with custom message", async () => {
     const entryToAIInformation = await importSubject();
-    // Override helper for this test only
     const helpers = await import("./");
-    (
-      helpers.entryToNutritionFacts as unknown as {
-        mockImplementationOnce: (fn: () => void) => void;
-      }
-    ).mockImplementationOnce(() => {
+    const mockFn = helpers.entryToNutritionFacts as ReturnType<typeof vi.fn>;
+    mockFn.mockImplementationOnce(() => {
       throw new Error("Boom");
     });
 
