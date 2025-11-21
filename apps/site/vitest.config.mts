@@ -11,6 +11,6 @@ export default mergeConfig(baseConfig, {
   test: {
     coverage: {
       reportsDirectory: __cdir,
-    }
-  }
+    },
+  },
 });

@@ -5,16 +5,16 @@
 	"name": "@instructure.ai/site",
 	"private": true,
 	"repository": {
-  	"type": "git",
-  	"url": "https://github.com/instructure/instructure.ai",
-  	"directory": "apps/site"
+		"type": "git",
+		"url": "https://github.com/instructure/instructure.ai",
+		"directory": "apps/site"
 	},
 	"scripts": {
 		"build": "vite build",
 		"dev": "vite",
-		"lint": "biome check",
+		"lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
 		"preview": "vite preview",
-    "test": "pnpm vitest run",
+		"test": "pnpm vitest run",
 		"typecheck": "tsgo --noEmit"
 	},
 	"type": "module",

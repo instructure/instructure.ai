@@ -1,10 +1,10 @@
 coverage:
   totals:
     statements: 24.27%
-    branches: 14.9%
+    branches: 14.72%
     functions: 22.91%
     lines: 25.14%
-    total: 21.81%
+    total: 21.76%
   src:
     totals:
       statements: 48.13%
@@ -16,7 +16,7 @@ coverage:
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "16-64"
+      uncovered_line_numbers: "18-66"
     Components:
       Export:
         "ControlButton.tsx":
@@ -24,19 +24,19 @@ coverage:
           branches: 0%
           functions: 0%
           lines: 0%
-          uncovered_line_numbers: "13-22"
+          uncovered_line_numbers: "14-23"
         "Embed.tsx":
           statements: 0%
           branches: 0%
           functions: 0%
           lines: 0%
-          uncovered_line_numbers: "7-67"
+          uncovered_line_numbers: "8-68"
         "Link.tsx":
           statements: 0%
           branches: 0%
           functions: 0%
           lines: 0%
-          uncovered_line_numbers: "6-40"
+          uncovered_line_numbers: "7-41"
       Layout:
         "Divider.tsx":
           statements: 100%
@@ -48,13 +48,13 @@ coverage:
           branches: 0%
           functions: 0%
           lines: 0%
-          uncovered_line_numbers: "21-76"
+          uncovered_line_numbers: "16-73"
         "Presets.tsx":
           statements: 0%
           branches: 0%
           functions: 0%
           lines: 0%
-          uncovered_line_numbers: "22-118"
+          uncovered_line_numbers: "15-111"
         "extendedNutritionFacts.tsx":
           statements: 0%
           branches: 0%
@@ -72,7 +72,7 @@ coverage:
       branches: 83.33%
       functions: 100%
       lines: 87.5%
-      uncovered_line_numbers: "26"
+      uncovered_line_numbers: "27"
     assets:
       "Layout.ts":
         statements: 100%
@@ -94,4 +94,4 @@ coverage:
         branches: 33.33%
         functions: 0%
         lines: 80%
-        uncovered_line_numbers: "64"
+        uncovered_line_numbers: "65"

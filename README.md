@@ -47,9 +47,9 @@ Though individual scripts may only support a subset of options, and will throw a
 
 ```shell
 # lint & build apps
-# passes the `write` flag to `biome check`
+# passes the `jsx-a11y-plugin` flag to `oxclint`
 
-pnpm lint apps --write && pnpm build apps
+pnpm lint apps --jsx-a11y-plugin && pnpm build apps
 ```
 
 Package names can be passed with or without the workspace prefix.  `pnpm release @instructure.ai/aiinfo` is the same as `pnpm release aiinfo`.
@@ -120,22 +120,22 @@ Vitest uses shared configs to provide a baseline setup for each package.  Settin
 
 Vitest uses istanbul to provide coverage for non-v8 (hi firefox 👋) testing. A custom reporter is included that outputs basic rollup stats in `./coverage/coverage.yml`.
 
-#### Biome
+#### OxC
 
-Biome is **not** configured to use a root config, each package's config is a standalone copy from its template folder.
+OxC is configured to use a root config, each package's config is an extended copy from its template folder.
 
 ```shell
 📁 /
-    ├── 📄 biome.jsonc # Copy of ./template/shared/biome.jsonc (workspace root config)
-    ├── 📂 .template/
-    │   └── 📂 shared/
-    │       └── biome.jsonc # Base config
+    ├── 📄 .oxfmtrc.jsonc # Base formatter config
+    ├── 📄 .oxlintrc.json # Base lint config
     └── 📂 /apps
     │   └── 📂 roadmap/
-    │       └── biome.jsonc # Copy of ./template/shared/biome.jsonc
+    │       └── .oxfmtrc.jsonc # Merges ./.oxfmtrc.jsonc
+    │       └── .oxlintrc.json # Merges ./.oxlintrc.json
     └── 📂 /packages
         └── 📂 aiinfo/
-            └── biome.jsonc # Copy of ./template/shared/biome.jsonc
+    │       └── .oxfmtrc.jsonc # Merges ./.oxfmtrc.jsonc
+    │       └── .oxlintrc.json # Merges ./.oxlintrc.json
 ```
 
 #### Package.json
@@ -158,9 +158,9 @@ The root workspace package.json defines workspace exports and shares workspace `
 The following `devDependencies` are provided.  No `dependencies` are included.
 
 ```json
-"devDependencies": {
-    "@biomejs/biome": "latest",
-    "@instructure/browserslist-config-instui": "^11",
+  "devDependencies": {
+    "@instructure/browserslist-config-instui": "latest",
+    "@testing-library/react": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@typescript/native-preview": "latest",
@@ -171,12 +171,16 @@ The following `devDependencies` are provided.  No `dependencies` are included.
     "browserslist": "latest",
     "istanbul-lib-report": "latest",
     "istanbul-reports": "latest",
+    "jsdom": "latest",
     "lightningcss": "latest",
-    "react-compiler-runtime": "^latest",
-    "terser": "latest",
-    "vite": "latest",
+    "oxfmt": "latest",
+    "oxlint": "latest",
+    "oxlint-tsgolint": "latest",
+    "react-compiler-runtime": "latest",
+    "vite": "npm:rolldown-vite@latest",
     "vite-node": "latest",
     "vite-plugin-dts": "latest",
+    "vite-tsconfig-paths": "latest",
     "vitest": "latest",
     "yaml": "latest"
   },

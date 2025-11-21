@@ -1,39 +1,39 @@
 /// <reference types="@instructure/ui" />
 
-type PendoAPI = {
-	results: PendoAPIFeature[];
-};
+interface PendoAPI {
+  results: PendoAPIFeature[];
+}
 
-type PendoAPIFeature = {
-	feature: {
-		description: string | null;
-		labels: string[] | null;
-		links:
-			| {
-					title: string;
-					linkUrl: string;
-			  }[]
-			| null;
-		stage: string | null;
-		title: string;
-	};
-	product: {
-		area: string | null;
-		name: string;
-		logo: SVGIconProps | undefined;
-		color: string | undefined;
-	};
-};
+interface PendoAPIFeature {
+  feature: {
+    description: string | null;
+    labels: string[] | null;
+    links:
+      | {
+          title: string;
+          linkUrl: string;
+        }[]
+      | null;
+    stage: string | null;
+    title: string;
+  };
+  product: {
+    area: string | null;
+    name: string;
+    logo: SVGIconProps | undefined;
+    color: string | undefined;
+  };
+}
 
-type RoadmapFeatures = {
-	stages: string[];
-	products: string[];
-	productAreas: string[];
-	labels: string[];
-	features: PendoAPIFeature[];
-};
+interface RoadmapFeatures {
+  stages: string[];
+  products: string[];
+  productAreas: string[];
+  labels: string[];
+  features: PendoAPIFeature[];
+}
 
 declare module "*.css" {
-	const classes: { [key: string]: string };
-	export default classes;
+  const classes: { [key: string]: string };
+  export default classes;
 }

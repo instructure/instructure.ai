@@ -1,63 +1,68 @@
-type WorkspaceName = `@${string}`;
-type FullPackageName = `${WorkspaceName}/${string}`;
-type PackageName = string;
-type WorkspaceObj = {
-	name: WorkspaceName;
-	packages: PackageName[];
-	apps: PackageName[];
-};
+export type WorkspaceName = `@${string}`;
 
-interface PackageJson {
-	version: `${number}.${number}.${number}`;
-	name: `@instructure.ai/${string}`;
-	[key: string]: unknown;
+export type FullPackageName = `${WorkspaceName}/${string}`;
+
+export type PackageName = string;
+
+export interface WorkspaceObj {
+  name: WorkspaceName;
+  packages: PackageName[];
+  apps: PackageName[];
 }
 
-interface WorkspaceInfo {
-	name(): void;
-	fullPackageName(index: number): void;
-	rootPackage(): void;
-	allPackages(): void;
-	packages(): void;
-	info(): void;
+export interface PackageJson {
+  version: `${number}.${number}.${number}`;
+  name: `@instructure.ai/${string}`;
+  [key: string]: unknown;
 }
 
-interface CommandInfo {
-	package?: PackageName | FullPackageName;
-	help(): void;
-	readonly command: string | undefined;
+export interface WorkspaceInfo {
+  name(): void;
+  fullPackageName(index: number): void;
+  rootPackage(): void;
+  allPackages(): void;
+  packages(): void;
+  info(): void;
 }
 
-type WorkspaceFn = (args?: string[], script?: string | undefined) => WorkspaceCommand;
+export interface CommandInfo {
+  package?: FullPackageName;
+  help(): void;
+  readonly command: string | undefined;
+}
+
+export type WorkspaceFn = (
+  args?: string[],
+  script?: string,
+) => WorkspaceCommand;
 
 const COMMANDS = [
-	"app",
-	"apps",
-	"package",
-	"packages",
-	"root",
-	"help",
-	"name",
-	"all",
-	"workspace"
+  "app",
+  "apps",
+  "package",
+  "packages",
+  "root",
+  "help",
+  "name",
+  "all",
+  "workspace",
 ] as const;
-type Command = typeof COMMANDS[number];
 
-type AllowedCommands = ReadonlyArray<
-		WorkspaceCommand["command"]
-	>
+export type Command = (typeof COMMANDS)[number];
 
-type AllowedCommand = AllowedCommands[number];
+export type AllowedCommands = readonly WorkspaceCommand["command"][];
 
-type WorkspaceCommand = {
-	command: Command;
-	args: string[];
-	script?: string;
-	output?: WorkspaceName | WorkspaceObj | FullPackageName | FullPackageName[];
-};
+export type AllowedCommand = AllowedCommands[number];
 
-type CommandExtraArgs = string[];
+export interface WorkspaceCommand {
+  command: Command;
+  args: string[];
+  script?: string;
+  output?: WorkspaceName | WorkspaceObj | FullPackageName | FullPackageName[];
+}
 
-type WorkspaceTemplate = "vanilla" | "react" | "instui" | "esm";
+export type CommandExtraArgs = string[];
 
-type WorkspaceType = "app" | "package";
+export type WorkspaceTemplate = "vanilla" | "react" | "instui" | "esm";
+
+export type WorkspaceType = "app" | "package";

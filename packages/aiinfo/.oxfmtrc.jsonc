@@ -1,0 +1,11 @@
+{
+  "$schema": "../../node_modules/oxfmt/configuration_schema.json",
+  "extends": [
+    "../../.oxfmt.jsonc"
+  ],
+  "files": {
+    "exclude": [
+      "./src/**"
+    ]
+  }
+}

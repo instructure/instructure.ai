@@ -1,64 +1,82 @@
-/// <reference path="../types/index.d.ts" />
-
 import {
-	exec,
-	exitWithError,
-	getPackageName,
-	isValidCommand,
-	isValidFullPackageName,
-	isValidPackage,
-	unknownError,
-	Workspace,
+  Workspace,
+  exec,
+  exitWithError,
+  getPackageName,
+  isValidCommand,
+  isValidFullPackageName,
+  isValidPackage,
+  unknownError,
 } from "./workspace.mts";
+import type {
+  AllowedCommands,
+  CommandExtraArgs,
+  FullPackageName,
+  PackageName,
+  WorkspaceCommand,
+} from "@instructure.ai/shared-configs/types";
 
 const main = async (): Promise<void> => {
-	const { command, output, args }: WorkspaceCommand = Workspace();
+  const { command, output, args }: WorkspaceCommand = Workspace();
 
-	const previewCommands: AllowedCommands = ["all", "app", "apps"] as const;
+  const previewCommands: AllowedCommands = ["all", "app", "apps"] as const;
 
-	if (!isValidCommand(command, previewCommands))
-		exitWithError("Invalid preview command.");
+  const isPkgName = (val: unknown): val is PackageName =>
+    typeof val === "string" && isValidPackage(val);
 
-	const previewPackage = (
-		pkg: FullPackageName | PackageName,
-		args: CommandExtraArgs,
-	) => {
-		const app = isValidFullPackageName(pkg as FullPackageName)
-			? getPackageName(pkg as FullPackageName)
-			: (pkg as PackageName);
-		exec(`pnpm preview`, {
-			args,
-			cwd: `apps/${app}`,
-		});
-	};
+  const isFullPkgName = (val: unknown): val is FullPackageName =>
+    typeof val === "string" && isValidFullPackageName(val);
 
-	const previewPackages = (args: CommandExtraArgs) => {
-		exitWithError("Previewing all packages is not yet supported.", args);
-		//exec(`pnpm preview:all`, { args: args.slice(1) });
-	};
+  // Overloads remove redundant union (FullPackageName | PackageName) triggering no-redundant-type-constituents.
+  function previewPackage(pkg: FullPackageName, extra: CommandExtraArgs): void;
+  function previewPackage(pkg: PackageName, extra: CommandExtraArgs): void;
+  function previewPackage(pkg: string, extra: CommandExtraArgs): void {
+    const app = isFullPkgName(pkg) ? getPackageName(pkg) : pkg;
+    exec(`pnpm preview`, {
+      args: extra,
+      cwd: `apps/${app}`,
+    });
+  }
 
-	try {
-		if (command === "app") {
-			previewPackage(output as FullPackageName, args.slice(2));
-		} else if (command === "all" || command === "apps") {
-			previewPackages(args.slice(1));
-		} else {
-			if (typeof output === "string" && isValidPackage(output)) {
-				previewPackage(output as FullPackageName, args.slice(1));
-			} else {
-				if (isValidPackage(command as FullPackageName)) {
-					previewPackage(command as FullPackageName, args.slice(1));
-				} else {
-					exitWithError(`Unknown preview command: ${command}
-Valid commands are: ${previewCommands.join(", ")}`);
-				}
-			}
-		}
-	} catch (error) {
-		exitWithError("Preview failed:", error);
-	}
+  const previewAll = (extra: CommandExtraArgs) => {
+    exitWithError("Previewing all packages is not yet supported.", extra);
+  };
+
+  // Dynamic package name: run before static command validation.
+  if (isPkgName(command)) {
+    previewPackage(command, args.slice(1));
+    return;
+  }
+
+  if (!isValidCommand(command, previewCommands)) {
+    exitWithError("Invalid preview command.");
+  }
+
+  try {
+    switch (command) {
+      case "app": {
+        if (isFullPkgName(output) || isPkgName(output)) {
+          previewPackage(output as string, args.slice(2));
+        } else {
+          exitWithError("Invalid app name.");
+        }
+        break;
+      }
+      case "apps":
+      case "all": {
+        previewAll(args.slice(1));
+        break;
+      }
+      default: {
+        // Unreachable; dynamic names handled earlier.
+        exitWithError("Unknown preview command.");
+      }
+    }
+  } catch (error) {
+    exitWithError("Preview failed:", error);
+  }
 };
 
-main().catch((e) => unknownError(e));
+main().catch((error) => unknownError(error));
 
 export { main };

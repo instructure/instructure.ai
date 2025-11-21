@@ -2,7 +2,7 @@
 
 ## Technologies Used
 
-This project is a web application that is deployed to GitHub Pages as a static site in a directory based on the package name. It is built using modern web technologies and follows best practices for accessibility, performance, and maintainability. The application is designed to be responsive and works well on a variety of devices and screen sizes. It does not have a database and does not require user authentication. It is built with [React 19](https://react.dev/reference/react), [Typescript Native](https://github.com/microsoft/typescript-go), and [InstUI](https://instructure.design/). The project is set up with [Vite](https://vite.dev/guide/) for fast development and build times, [Biome](https://biomejs.dev/guides/getting-started/) for code quality and formatting, and [Vitest](https://vitest.dev/guide/) for testing.
+This project is a web application that is deployed to GitHub Pages as a static site in a directory based on the package name. It is built using modern web technologies and follows best practices for accessibility, performance, and maintainability. The application is designed to be responsive and works well on a variety of devices and screen sizes. It does not have a database and does not require user authentication. It is built with [React 19](https://react.dev/reference/react), [Typescript Native](https://github.com/microsoft/typescript-go), and [InstUI](https://instructure.design/). The project is set up with [Vite](https://vite.dev/guide/) for fast development and build times, [OxC](https://oxc.rs/docs/guide/introduction.html) for code quality and formatting, and [Vitest](https://vitest.dev/guide/) for testing.
 
 ## Coding Standards
 

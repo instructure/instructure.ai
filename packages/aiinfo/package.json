@@ -34,11 +34,11 @@
     "directory": "packages/aiinfo"
   },
   "scripts": {
-    "build": "pnpm cache:update && pnpm build:vite && pnpm lint --write && pnpm typecheck && pnpm package",
-    "build:vite": "vite build",
+    "build": "pnpm cache:update && pnpm typecheck && pnpm build:lib && pnpm lint && pnpm package",
+    "build:lib": "tsdown",
     "cache:clear": "CLEAR=1 vite-node ./scripts/clearCache.mts",
     "cache:update": "vite-node ./scripts/updateCache.mts",
-    "lint": "pnpm biome check",
+    "lint": "oxfmt && oxlint --quiet --type-aware --fix --fix-suggestions",
     "package": "pnpm pack --pack-destination ./src",
     "test": "pnpm vitest run",
     "typecheck": "tsgo --noEmit",
@@ -49,5 +49,5 @@
   "sideEffects": false,
   "type": "module",
   "types": "./src/index.d.ts",
-  "version": "2.0.9"
+  "version": "3.0.0-alpha.0"
 }

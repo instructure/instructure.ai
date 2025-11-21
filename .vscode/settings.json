@@ -1,11 +1,30 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.biome": "explicit",
-    "source.organizeImports.biome": "explicit",
-    "source.action.useSortedAttributes.biome": "explicit",
-    "source.action.useSortedKeys.biome": "explicit",
-    "source.action.useSortedProperties.biome": "explicit"
+    "source.fixAll.oxc": "explicit"
   },
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "files.associations": {
+    "*.mjs": "javascript",
+    "*.cjs": "javascript",
+    "*.mts": "typescript",
+    "*.cts": "typescript"
+  },
+  "oxc.lint.run": "onType",
+  "oxc.requireConfig": true,
+  "oxc.typeAware": true,
   "typescript.experimental.useTsgo": true,
-  "vitest.disableWorkspaceWarning": true
+  "vitest.disableWorkspaceWarning": true,
+  "oxc.enable": false,
 }

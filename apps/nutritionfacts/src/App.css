@@ -1,4 +1,4 @@
-/* biome-ignore-all lint/complexity/noImportantStyles: Important needed to override INSTUI */
+/* oxc-ignore-all lint/complexity/noImportantStyles: Important needed to override INSTUI */
 
 html,
 body {
@@ -16,6 +16,7 @@ body {
 }
 
 @media print {
+
 	[data-print*="hidden"],
 	[data-position-content^="Popover"] {
 		display: none !important;

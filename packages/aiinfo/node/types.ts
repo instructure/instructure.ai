@@ -1,40 +1,40 @@
 import type {
-	AiInformationProps,
-	DataPermissionLevelsProps,
-	NutritionFactsProps,
+  AiInformationProps,
+  DataPermissionLevelsProps,
+  NutritionFactsProps,
 } from "@instructure/ui-instructure";
 
-type AiInfoFeatureProps = {
-	nutritionFacts: NutritionFactsProps;
-	dataPermissionLevels: DataPermissionLevelsProps;
-	aiInformation: AiInformationProps;
-	uid: string;
-	revision: string;
-	group: string;
-	name: string;
-	description: string;
-};
+interface AiInfoFeatureProps {
+  nutritionFacts: NutritionFactsProps;
+  dataPermissionLevels: DataPermissionLevelsProps;
+  aiInformation: AiInformationProps;
+  uid: string;
+  revision: string;
+  group: string;
+  name: string;
+  description: string;
+}
 
-type AiInfoProps = {
-	[uid: string]: AiInfoFeatureProps;
-};
+interface AiInfoProps {
+  [uid: string]: AiInfoFeatureProps;
+}
 
-type AiInfoNutritionFactsProps = {
-	[uid: string]: NutritionFactsProps;
-};
+interface AiInfoNutritionFactsProps {
+  [uid: string]: NutritionFactsProps;
+}
 
-type AiInfoDataPermissionLevelsProps = {
-	[uid: string]: DataPermissionLevelsProps;
-};
+interface AiInfoDataPermissionLevelsProps {
+  [uid: string]: DataPermissionLevelsProps;
+}
 
-type AiInfoAiInformationProps = {
-	[uid: string]: AiInformationProps;
-};
+interface AiInfoAiInformationProps {
+  [uid: string]: AiInformationProps;
+}
 
 export type {
-	AiInfoProps,
-	AiInfoFeatureProps,
-	AiInfoNutritionFactsProps,
-	AiInfoDataPermissionLevelsProps,
-	AiInfoAiInformationProps,
+  AiInfoProps,
+  AiInfoFeatureProps,
+  AiInfoNutritionFactsProps,
+  AiInfoDataPermissionLevelsProps,
+  AiInfoAiInformationProps,
 };

@@ -14,7 +14,8 @@ coverage/*
 src/*
 !src/index.cjs
 !src/index.mjs
-!src/index.d.ts
+!src/index.d.cts
+!src/index.d.mts
 *.local
 
 .idea

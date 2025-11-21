@@ -1,7 +1,7 @@
 {
   "recommendations": [
-    "biomejs.biome",
     "ms-vscode.vscode-typescript-next",
-    "vitest.explorer"
+    "vitest.explorer",
+    "oxc.oxc-vscode"
   ]
 }

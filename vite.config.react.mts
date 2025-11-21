@@ -3,14 +3,14 @@ import { defineConfig, mergeConfig } from "vite";
 import baseConfig from "./vite.config.mts";
 
 export default mergeConfig(
-	baseConfig,
-	defineConfig({
-		plugins: [
-			react({
-				babel: {
-					plugins: [["babel-plugin-react-compiler", { target: "19" }]],
-				},
-			}),
-		],
-	}),
+  baseConfig,
+  defineConfig({
+    plugins: [
+      react({
+        babel: {
+          plugins: [["babel-plugin-react-compiler", { target: "19" }]],
+        },
+      }),
+    ],
+  }),
 );
