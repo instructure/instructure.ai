@@ -4,8 +4,8 @@ import type {
   NutritionFactsProps,
 } from "@instructure/ui-instructure";
 import type { AiInfoFeatureProps } from "../../types";
-const FEATURE_NAME = "Insights for Discussions";
-const UID = "discussioninsights";
+const FEATURE_NAME = "AI Experiences";
+const UID = "aiexperiences";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
   {
     description:
@@ -58,7 +58,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         description:
           "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
-        value: "Discussion topic, prompt, and student replies are used.",
+        value:
+          "The custom prompts that instructors provide to create the AI experience and student conversation with the AI Experience tool.",
       },
     ],
   },
@@ -68,7 +69,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "How long the model stores customer data.",
         segmentTitle: "Data Retention",
-        value: "No user data is stored or reused by the model.",
+        value:
+          "All conversation data and the activity context created by the instructor is saved.",
       },
       {
         description:
@@ -76,7 +78,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "Data Logging",
         value: "Logs data",
         valueDescription:
-          "Model evaluations and reply labels are logged for debugging and troubleshooting purposes.",
+          "Prompt data, LLM responses, and student responses are logged.",
       },
       {
         description:
@@ -89,9 +91,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         description:
           "Sensitive data that can be used to identify an individual.",
         segmentTitle: "PII",
-        value: "Exposed",
-        valueDescription:
-          "Known PII is masked before being sent to the model, though any PII present in the discussion reply is not and may be shared with the model.",
+        value: "Not Exposed",
+        valueDescription: "",
       },
     ],
   },
@@ -109,7 +110,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
-          "Instructors may review AI-generated evaluations or review posts directly.",
+          "Instructors set the parameters for each conversation, and students are informed they are interacting with AI. The AI’s output is delivered as-is, without post-editing. Instructors have full access to the conversation transcript.",
       },
       {
         description:
@@ -121,74 +122,73 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
-        value: "The model may misclassify some nuanced replies.",
+        value:
+          "The LLM might not ask the right questions or assess the conversation correctly. ",
       },
       {
         description: "The specific results the AI model is meant to achieve.",
         segmentTitle: "Intended Outcomes",
         value:
-          "Instructors are able to quickly assess the quality of student replies, identify low-effort or off-topic contributions, and focus their attention to where it is needed most.",
+          "New type of learning activity that incorporates conversational AI in the process of learning, allowing students to demonstrate understanding of a topic and engage in a new learning modality within the LMS.",
       },
     ],
   },
 ];
 const nutritionFacts: NutritionFactsProps = {
-  closeButtonText: "Close",
-  closeIconButtonScreenReaderLabel: "Close",
+  
+    closeButtonText: "Close",
+    closeIconButtonScreenReaderLabel: "Close",
+    featureName: FEATURE_NAME,
+    modalLabel: "This is a modal for AI facts",
+    title: "AI Nutrition Facts",
+    triggerText: "Nutrition Facts",
   data: NUTRITION_FACTS_DATA,
-  featureName: FEATURE_NAME,
-  modalLabel: "This is a modal for AI facts",
-  title: "AI Nutrition Facts",
-  triggerText: "Nutrition Facts",
 };
 const dataPermissionLevels: DataPermissionLevelsProps = {
-  closeButtonText: "Close",
-  closeIconButtonScreenReaderLabel: "Close dialog",
-  currentFeature: FEATURE_NAME,
-  currentFeatureText: "Current Feature:",
+  
+    closeButtonText: "Close",
+    closeIconButtonScreenReaderLabel: "Close dialog",
+    currentFeature: FEATURE_NAME,
+    currentFeatureText: "Current Feature:",
+    modalLabel: "Data Permission Levels modal",
+    title: "Data Permission Levels",
+    triggerText: "Data Permission Levels",
   data: DATA_PERMISSION_LEVELS,
-  modalLabel: "Data Permission Levels modal",
-  title: "Data Permission Levels",
-  triggerText: "Data Permission Levels",
 };
 const aiInformation: AiInformationProps = {
-  data: [
-    {
-      description:
-        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.", featureName: "Insights for Discussions", modelName: "Haiku 3", modelNameText: "Base Model", nutritionFactsModalTriggerText: "AI Nutrition Facts", permissionLevel: "LEVEL 2", permissionLevelText: "Permission Level:", permissionLevelsModalTriggerText: "Data Permission Levels",
-    },
-  ],
-  dataPermissionLevelsCloseButtonText: "Close",
-  dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeature: "Insights for Discussions",
-  dataPermissionLevelsCurrentFeatureText: "Current Feature:",
+  
+    data: [
+      {
+        description:
+          "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+        featureName: "AI Experiences",
+        modelName: "Haiku 3",
+        modelNameText: "Base Model",
+        nutritionFactsModalTriggerText: "AI Nutrition Facts",
+        permissionLevel: "LEVEL 2",
+        permissionLevelsModalTriggerText: "Data Permission Levels",
+        permissionLevelText: "Permission Level:",
+      },
+    ],
+    dataPermissionLevelsCloseButtonText: "Close",
+    dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
+    dataPermissionLevelsCurrentFeature: "AI Experiences",
+    dataPermissionLevelsCurrentFeatureText: "Current Feature:",
+    dataPermissionLevelsModalLabel: "Data Permission Levels modal",
+    dataPermissionLevelsTitle: "Data Permission Levels",
+    nutritionFactsCloseButtonText: "Close",
+    nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
+    nutritionFactsFeatureName: "AI Experiences",
+    nutritionFactsModalLabel: "This is a modal for AI facts",
+    nutritionFactsTitle: "AI Nutrition Facts",
+    title: "Features",
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-  dataPermissionLevelsModalLabel: "Data Permission Levels modal",
-  dataPermissionLevelsTitle: "Data Permission Levels",
-  nutritionFactsCloseButtonText: "Close",
-  nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
   nutritionFactsData: NUTRITION_FACTS_DATA,
-  nutritionFactsFeatureName: "Insights for Discussions",
-  nutritionFactsModalLabel: "This is a modal for AI facts",
-  nutritionFactsTitle: "AI Nutrition Facts",
-  title: "Features",
   trigger: undefined,
 };
-const discussioninsights: AiInfoFeatureProps = {
-  aiInformation,
-  dataPermissionLevels,
-  description:
-    "Discussion Insights uses AI to evaluate student discussion replies, highlight relevant contributions, and flag those that may need instructor review.",
-  group: "Canvas",
-  name: FEATURE_NAME,
-  nutritionFacts,
-  revision: "2025.10.02",
-  uid: UID,
+const aiexperiences: AiInfoFeatureProps = {
+  aiInformation, dataPermissionLevels, description:
+    "AI Experiences is a new activity type, allowing instructors to design and assess interactive chat experiences with AI.", group: "Canvas", name: FEATURE_NAME, nutritionFacts, revision: "2025.11.25", uid: UID,
 };
-export {
-  discussioninsights,
-  nutritionFacts,
-  dataPermissionLevels,
-  aiInformation,
-};
-export default discussioninsights;
+export { aiexperiences, nutritionFacts, dataPermissionLevels, aiInformation };
+export default aiexperiences;

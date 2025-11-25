@@ -1,4 +1,67 @@
 # Changelog
+## 2025-11-25T17:08:58.760Z
+### CSV
+#### SHA
+```diff
+f0f0627c5c8ea28f0528f8ee09ce51e66e0c9501e3d98ec403bda6257d4a58d4
+```
+### aiexperiences
+#### compliance
+```diff
++ {
+  "logging": "Logs data",
+  "loggingDescription": "Prompt data, LLM responses, and student responses are logged.",
+  "pii": "Not Exposed",
+  "piiDescription": "",
+  "regions": "Global",
+  "regionsDescription": "",
+  "retention": "All conversation data and the activity context created by the instructor is saved."
+}
+```
+#### feature
+```diff
++ {
+  "description": "AI Experiences is a new activity type, allowing instructors to design and assess interactive chat experiences with AI.",
+  "name": "AI Experiences"
+}
+```
+#### group
+```diff
++ "Canvas"
+```
+#### model
+```diff
++ {
+  "data": "Course, Student",
+  "dataDescription": "The custom prompts that instructors provide to create the AI experience and student conversation with the AI Experience tool.",
+  "description": "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+  "name": "Haiku 3",
+  "trained": "No"
+}
+```
+#### outputs
+```diff
++ {
+  "guardrails": "Model responses are logged for quality assurance, and responses with low confidence are flagged \"Needs Review\" to encourage human intervention.",
+  "human": "Yes",
+  "humanDescription": "Instructors set the parameters for each conversation, and students are informed they are interacting with AI. The AI’s output is delivered as-is, without post-editing. Instructors have full access to the conversation transcript.",
+  "outcomes": "New type of learning activity that incorporates conversational AI in the process of learning, allowing students to demonstrate understanding of a topic and engage in a new learning modality within the LMS.",
+  "risks": "The LLM might not ask the right questions or assess the conversation correctly. ",
+  "settings": "Yes"
+}
+```
+#### permissions
+```diff
++ "2"
+```
+#### revision
+```diff
++ "2025.11.25"
+```
+#### uid
+```diff
++ "aiexperiences"
+```
 ## 2025-11-19T13:51:04.973Z
 ### CSV
 #### SHA
