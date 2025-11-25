@@ -28,6 +28,9 @@ interface AiInfoAiInformationProps {
   [uid: string]: AiInformationProps;
 }
 //#endregion
+//#region node/components/aiexperiences/index.d.ts
+declare const aiexperiences: AiInfoFeatureProps;
+//#endregion
 //#region node/components/askyourdata/index.d.ts
 declare const askyourdata: AiInfoFeatureProps;
 //#endregion
@@ -88,6 +91,7 @@ export {
   type AiInfoNutritionFactsProps,
   type AiInfoProps,
   aiInformation,
+  aiexperiences,
   askyourdata,
   assessmentauthoringassistance,
   bcealttext,

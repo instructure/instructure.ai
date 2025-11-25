@@ -1,3 +1,4 @@
+import { aiexperiences } from "./components/aiexperiences";
 import { askyourdata } from "./components/askyourdata";
 import { assessmentauthoringassistance } from "./components/assessmentauthoringassistance";
 import { bcealttext } from "./components/bcealttext";
@@ -37,6 +38,7 @@ const pluck = <
   return out;
 };
 const AiInfo: AiInfoProps = {
+  aiexperiences,
   askyourdata,
   assessmentauthoringassistance,
   bcealttext,
@@ -67,6 +69,7 @@ export {
   nutritionFacts,
   dataPermissionLevels,
   aiInformation,
+  aiexperiences,
   askyourdata,
   assessmentauthoringassistance,
   bcealttext,
