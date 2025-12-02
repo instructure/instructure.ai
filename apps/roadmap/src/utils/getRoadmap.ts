@@ -1,19 +1,18 @@
 import paramsToPendo from "./paramsToPendo";
 
-let roadmapPromise: Promise<RoadmapFeatures | null> | null = null;
-let cachedRoadmap: RoadmapFeatures | null = null;
+let roadmapPromise: Promise<RoadmapFeatures | null> | undefined;
+let cachedRoadmap: RoadmapFeatures | null | undefined;
 
 type RoadmapRequestEvent = MessageEvent<{ value?: string }>;
 
 const getRoadmap = (): Promise<RoadmapFeatures | null> => {
   console.debug("getRoadmap called");
-  if (cachedRoadmap !== null) {
+  if (cachedRoadmap !== undefined && cachedRoadmap !== null) {
     console.debug("Returning cached roadmap");
     return Promise.resolve(cachedRoadmap);
   }
-  if (roadmapPromise !== null) {
+  if (roadmapPromise !== undefined) {
     console.debug("Returning existing roadmap promise");
-    console.log(roadmapPromise);
     return roadmapPromise;
   }
   window.parent.postMessage({ type: "getRoadmap" }, "*");
@@ -29,7 +28,7 @@ const getRoadmap = (): Promise<RoadmapFeatures | null> => {
         window.removeEventListener("message", handler);
         const result = paramsToPendo(event.data.value);
         cachedRoadmap = result;
-        roadmapPromise = null;
+        roadmapPromise = undefined;
         resolve(result);
       }
     };

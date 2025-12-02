@@ -16,7 +16,7 @@ import Logos, { Colors } from "./logos";
 const Card: FC<{
   entry: PendoAPIFeature;
   setSelectedEntry: React.Dispatch<
-    React.SetStateAction<PendoAPIFeature | null>
+    React.SetStateAction<PendoAPIFeature | undefined>
   >;
   setOverlayOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isDark: boolean;

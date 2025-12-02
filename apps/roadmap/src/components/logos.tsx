@@ -1,27 +1,6 @@
 import { InlineSVG } from "@instructure/ui";
 import { darken, lighten } from "@instructure/ui-color-utils";
-import type { FC, ReactNode } from "react";
-
-interface SVGInfo {
-  color: string;
-  SVG: ReactNode;
-  title: string;
-  viewBox: string;
-}
-
-interface SVGProps {
-  height?: string;
-  width?: string;
-  inline?: boolean;
-  color?: string;
-  valign?: "top" | "middle" | "bottom" | "unset";
-}
-
-type ColorSVGProps = SVGProps & {
-  children: ReactNode;
-  title: string;
-  viewBox: string;
-};
+import type { FC } from "react";
 
 const ColorSVG: FC<ColorSVGProps> = ({
   color = "currentColor",

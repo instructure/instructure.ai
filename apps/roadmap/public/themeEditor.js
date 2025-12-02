@@ -13,7 +13,7 @@
  *
  * Only runs on the "/pages/instructure-roadmap" path.
  *
- * @version 2025.10.29.00
+ * @version 2025.12.02.00
  *
  */
 
@@ -178,14 +178,14 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
     }
   };
 
-  const _pushState = history.pushState;
+  const _pushState = history.pushState.bind(history);
   history.pushState = function pushState(...args) {
     const ret = _pushState.apply(this, args);
     window.dispatchEvent(new Event("locationchange"));
     return ret;
   };
 
-  const _replaceState = history.replaceState;
+  const _replaceState = history.replaceState.bind(history);
   history.replaceState = function replaceState(...args) {
     const ret = _replaceState.apply(this, args);
     window.dispatchEvent(new Event("locationchange"));
