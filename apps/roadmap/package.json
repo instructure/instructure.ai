@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@instructure/ui": "^11.2.0",
-    "@instructure/ui-color-utils": "^10.2.0",
+    "@instructure/ui-color-utils": "^11.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
@@ -24,5 +24,5 @@
     "typecheck": "tsgo --noEmit"
   },
   "type": "module",
-  "version": "1.0.3"
+  "version": "1.0.4"
 }

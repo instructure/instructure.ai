@@ -49,7 +49,7 @@ const getBrandConfig = (): Promise<BrandConfig> => {
     };
     window.addEventListener("message", handler);
   });
-  brandConfigPromise.finally(() => {
+  void brandConfigPromise.finally(() => {
     brandConfigPromise = undefined;
   });
   return brandConfigPromise;
