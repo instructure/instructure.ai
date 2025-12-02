@@ -19,6 +19,7 @@ const App: FC = () => {
   const [brandConfig, setBrandConfig] = useState<unknown>({});
   const [roadmap, setRoadmap] = useState<RoadmapFeatures | null>(null);
   const [isDark, setIsDark] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -72,15 +73,11 @@ const App: FC = () => {
     }));
   }, [roadmap]);
 
-  // Debounce loading state
-  const [showLoading, setShowLoading] = useState(false);
   useEffect(() => {
     if (!roadmap) {
       setShowLoading(false); 
       const timeout = setTimeout(() => setShowLoading(true), 1000);
       return () => clearTimeout(timeout);
-    } else {
-      setShowLoading(false);
     }
   }, [roadmap]);
 
