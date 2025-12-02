@@ -14,10 +14,10 @@ import "./App.css";
 const App: FC = () => {
   const [overlayOpen, setOverlayOpen] = useState(false);
   const [selectedEntry, setSelectedEntry] = useState<PendoAPIFeature | null>(
-    undefined,
+    null,
   );
   const [brandConfig, setBrandConfig] = useState<unknown>({});
-  const [roadmap, setRoadmap] = useState<RoadmapFeatures | null>(undefined);
+  const [roadmap, setRoadmap] = useState<RoadmapFeatures | null>(null);
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -76,6 +76,7 @@ const App: FC = () => {
   const [showLoading, setShowLoading] = useState(false);
   useEffect(() => {
     if (!roadmap) {
+      setShowLoading(false); 
       const timeout = setTimeout(() => setShowLoading(true), 1000);
       return () => clearTimeout(timeout);
     } else {

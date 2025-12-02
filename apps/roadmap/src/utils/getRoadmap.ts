@@ -7,7 +7,7 @@ type RoadmapRequestEvent = MessageEvent<{ value?: string }>;
 
 const getRoadmap = (): Promise<RoadmapFeatures | null> => {
   console.debug("getRoadmap called");
-  if (cachedRoadmap !== null) {
+  if (cachedRoadmap) {
     console.debug("Returning cached roadmap");
     return Promise.resolve(cachedRoadmap);
   }
@@ -29,7 +29,7 @@ const getRoadmap = (): Promise<RoadmapFeatures | null> => {
         window.removeEventListener("message", handler);
         const result = paramsToPendo(event.data.value);
         cachedRoadmap = result;
-        roadmapPromise = undefined;
+        roadmapPromise = null;
         resolve(result);
       }
       // Ignore unrelated events
