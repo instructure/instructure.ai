@@ -135,60 +135,36 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
   },
 ];
 const nutritionFacts: NutritionFactsProps = {
-  
-    closeButtonText: "Close",
-    closeIconButtonScreenReaderLabel: "Close",
-    featureName: FEATURE_NAME,
-    modalLabel: "This is a modal for AI facts",
-    title: "AI Nutrition Facts",
-    triggerText: "Nutrition Facts",
-  data: NUTRITION_FACTS_DATA,
+  closeButtonText: "Close", closeIconButtonScreenReaderLabel: "Close", data: NUTRITION_FACTS_DATA, featureName: FEATURE_NAME, modalLabel: "This is a modal for AI facts", title: "AI Nutrition Facts", triggerText: "Nutrition Facts",
 };
 const dataPermissionLevels: DataPermissionLevelsProps = {
-  
-    closeButtonText: "Close",
-    closeIconButtonScreenReaderLabel: "Close dialog",
-    currentFeature: FEATURE_NAME,
-    currentFeatureText: "Current Feature:",
-    modalLabel: "Data Permission Levels modal",
-    title: "Data Permission Levels",
-    triggerText: "Data Permission Levels",
-  data: DATA_PERMISSION_LEVELS,
+  closeButtonText: "Close", closeIconButtonScreenReaderLabel: "Close dialog", currentFeature: FEATURE_NAME, currentFeatureText: "Current Feature:", data: DATA_PERMISSION_LEVELS, modalLabel: "Data Permission Levels modal", title: "Data Permission Levels", triggerText: "Data Permission Levels",
 };
 const aiInformation: AiInformationProps = {
-  
-    data: [
-      {
-        description:
-          "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-        featureName: "AI Experiences",
-        modelName: "Haiku 3",
-        modelNameText: "Base Model",
-        nutritionFactsModalTriggerText: "AI Nutrition Facts",
-        permissionLevel: "LEVEL 2",
-        permissionLevelsModalTriggerText: "Data Permission Levels",
-        permissionLevelText: "Permission Level:",
-      },
-    ],
-    dataPermissionLevelsCloseButtonText: "Close",
-    dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-    dataPermissionLevelsCurrentFeature: "AI Experiences",
-    dataPermissionLevelsCurrentFeatureText: "Current Feature:",
-    dataPermissionLevelsModalLabel: "Data Permission Levels modal",
-    dataPermissionLevelsTitle: "Data Permission Levels",
-    nutritionFactsCloseButtonText: "Close",
-    nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
-    nutritionFactsFeatureName: "AI Experiences",
-    nutritionFactsModalLabel: "This is a modal for AI facts",
-    nutritionFactsTitle: "AI Nutrition Facts",
-    title: "Features",
-  dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-  nutritionFactsData: NUTRITION_FACTS_DATA,
-  trigger: undefined,
+  data: [
+    {
+      description:
+        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+      featureName: "AI Experiences",
+      modelName: "Haiku 3",
+      modelNameText: "Base Model",
+      nutritionFactsModalTriggerText: "AI Nutrition Facts",
+      permissionLevel: "LEVEL 2",
+      permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
+    },
+  ], dataPermissionLevelsCloseButtonText: "Close", dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog", dataPermissionLevelsCurrentFeature: "AI Experiences", dataPermissionLevelsCurrentFeatureText: "Current Feature:", dataPermissionLevelsData: DATA_PERMISSION_LEVELS, dataPermissionLevelsModalLabel: "Data Permission Levels modal", dataPermissionLevelsTitle: "Data Permission Levels", nutritionFactsCloseButtonText: "Close", nutritionFactsCloseIconButtonScreenReaderLabel: "Close", nutritionFactsData: NUTRITION_FACTS_DATA, nutritionFactsFeatureName: "AI Experiences", nutritionFactsModalLabel: "This is a modal for AI facts", nutritionFactsTitle: "AI Nutrition Facts", title: "Features", trigger: undefined,
 };
 const aiexperiences: AiInfoFeatureProps = {
-  aiInformation, dataPermissionLevels, description:
-    "AI Experiences is a new activity type, allowing instructors to design and assess interactive chat experiences with AI.", group: "Canvas", name: FEATURE_NAME, nutritionFacts, revision: "2025.11.25", uid: UID,
+  aiInformation,
+  dataPermissionLevels,
+  description:
+    "AI Experiences is a new activity type, allowing instructors to design and assess interactive chat experiences with AI.",
+  group: "Canvas",
+  name: FEATURE_NAME,
+  nutritionFacts,
+  revision: "2025.11.25",
+  uid: UID,
 };
 export { aiexperiences, nutritionFacts, dataPermissionLevels, aiInformation };
 export default aiexperiences;
