@@ -1,17 +1,17 @@
 import paramsToPendo from "./paramsToPendo";
 
-let roadmapPromise: Promise<RoadmapFeatures | null> | null;
-let cachedRoadmap: RoadmapFeatures | null;
+let roadmapPromise: Promise<RoadmapFeatures | null> | null = null;
+let cachedRoadmap: RoadmapFeatures | null = null;
 
 type RoadmapRequestEvent = MessageEvent<{ value?: string }>;
 
 const getRoadmap = (): Promise<RoadmapFeatures | null> => {
   console.debug("getRoadmap called");
-  if (cachedRoadmap) {
+  if (cachedRoadmap !== null) {
     console.debug("Returning cached roadmap");
     return Promise.resolve(cachedRoadmap);
   }
-  if (roadmapPromise) {
+  if (roadmapPromise !== null) {
     console.debug("Returning existing roadmap promise");
     console.log(roadmapPromise);
     return roadmapPromise;
@@ -32,7 +32,6 @@ const getRoadmap = (): Promise<RoadmapFeatures | null> => {
         roadmapPromise = null;
         resolve(result);
       }
-      // Ignore unrelated events
     };
     window.addEventListener("message", handler);
   });
