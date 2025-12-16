@@ -1,4 +1,10 @@
-export { CSVURL, SCHEMAURL, TEMPLATE_PACKAGE } from "./consts";
+export {
+  CSVURL,
+  SCHEMAURL,
+  TEMPLATE_PACKAGE,
+  TRANSLATE_PROMPT,
+  LOCALES,
+} from "./consts";
 export { entryToAIInformation } from "./entryToAIInformation";
 export { entryToNutritionFacts } from "./entryToNutritionFacts";
 export { entryToObj } from "./entryToObj";
@@ -9,3 +15,4 @@ export { toTsObjectLiteral } from "./toTsObjectLiteral";
 export { writeBarrel } from "./writeBarrel";
 export { writeChangelog } from "./writeChangelog";
 export { writeEntry } from "./writeEntry";
+export { EntrySchema, type EntrySchemaType } from "./schemas";

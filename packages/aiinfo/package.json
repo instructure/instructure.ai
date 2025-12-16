@@ -1,11 +1,15 @@
 {
   "devDependencies": {
+    "@ai-sdk/google": "3.0.0-beta.62",
     "@instructure.ai/shared-configs": "workspace:^",
     "@instructure/ui-instructure": "^11.2.0",
-    "@types/papaparse": "^5.5.0",
+    "@types/papaparse": "^5.5.2",
+    "ai": "6.0.0-beta.129",
     "ansis": "^4.2.0",
+    "p-limit": "^7.2.0",
     "papaparse": "^5.5.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "zod": "^4.2.0"
   },
   "engines": {
     "node": ">=20"
@@ -36,7 +40,7 @@
     "build": "pnpm cache:update && pnpm typecheck && pnpm build:lib && pnpm lint && pnpm package",
     "build:lib": "tsdown",
     "cache:clear": "CLEAR=1 vite-node ./scripts/clearCache.mts",
-    "cache:update": "vite-node ./scripts/updateCache.mts",
+    "cache:update": "dotenvx run -- vite-node ./scripts/updateCache.mts",
     "lint": "oxfmt && oxlint --quiet --type-aware --fix --fix-suggestions",
     "package": "pnpm pack --pack-destination ./src",
     "test": "pnpm vitest run",

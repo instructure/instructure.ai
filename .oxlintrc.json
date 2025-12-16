@@ -30,9 +30,14 @@
     "typescript",
     "unicorn",
     "oxc",
-    // "vitest",
     "jsdoc",
     "import",
     "node",
+  ],
+  "unicorn/filename-case": [
+    "error",
+    {
+      "case": "camelCase"
+    }
   ]
 }

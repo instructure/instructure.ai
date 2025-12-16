@@ -45,7 +45,7 @@ describe("consts.ts TEMPLATE_PACKAGE", () => {
       (
         TEMPLATE_PACKAGE.match(
           new RegExp(
-            ph.replace(/\\/g, "\\\\").replace(/[<>]/g, String.raw`\$&`),
+            ph.replace(/\\/g, String.raw`\\`).replace(/[<>]/g, String.raw`\$&`),
             "g",
           ),
         ) || []
