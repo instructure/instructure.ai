@@ -31,7 +31,6 @@
     "typescript",
     "unicorn",
     "oxc",
-    // "vitest",
     "jsdoc",
     "import",
     "node",

@@ -19,7 +19,7 @@
     "build": "pnpm cache:update && pnpm typecheck && pnpm build:lib && pnpm lint && pnpm package",
     "build:lib": "tsdown",
     "cache:clear": "CLEAR=1 vite-node ./scripts/clearCache.mts",
-    "cache:update": "vite-node ./scripts/updateCache.mts",
+    "cache:update": "dotenvx run -- vite-node ./scripts/updateCache.mts",
     "lint": "oxfmt && oxlint --quiet --type-aware --fix --fix-suggestions",
     "package": "pnpm pack --pack-destination ./src",
     "test": "pnpm vitest run",

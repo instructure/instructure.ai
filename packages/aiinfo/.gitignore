@@ -26,3 +26,5 @@ src/*
 *.sln
 *.sw?
 .turbo
+
+.env.keys

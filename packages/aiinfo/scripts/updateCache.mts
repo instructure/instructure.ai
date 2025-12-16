@@ -5,7 +5,7 @@ import { parse } from "papaparse";
 import { cache, checksum } from "../cache";
 import { type CSVFetchResult, type ChangedEntry, type Entry, type Hash } from "../types";
 import { CSVURL, Log, SCHEMAURL, entryToObj, writeChangelog } from "../utils";
-import { WriteEntries } from "./writeEntries.mts";
+import { TranslateEntry, WriteEntries } from "./";
 
 const generateChecksum = (data: string): Hash => {
   const hash: Hash = createHash("shake128", { outputLength: 32 })
