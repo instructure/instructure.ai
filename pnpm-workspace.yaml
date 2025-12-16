@@ -3,9 +3,10 @@ packages:
   - apps/*
   - .
 
+linkWorkspacePackages: true
+
 onlyBuiltDependencies:
   - esbuild
-
-linkWorkspacePackages: true
+  - instructure-ui
 
 recursiveInstall: true
