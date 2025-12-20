@@ -23,18 +23,8 @@ const App: FC = () => {
   const [roadmap, setRoadmap] = useState<RoadmapFeatures | undefined>(
     undefined,
   );
-  const [isDark, setIsDark] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    setIsDark(mediaQuery.matches);
-
-    const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
-    mediaQuery.addEventListener("change", handler);
-
-    return () => mediaQuery.removeEventListener("change", handler);
-  }, []);
+  const isDark = false;
 
   useEffect(() => {
     void getRoadmap().then((data) => {
