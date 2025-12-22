@@ -25,13 +25,6 @@
     "vitest": "^3.2.4",
     "yaml": "^2.8.2"
   },
-  "pnpm": {
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "vite": "^8.0.0-beta"
-      }
-    }
-  },
   "version": "3.0.1",
   "name": "@instructure.ai/shared-configs",
   "packageManager": "pnpm@10.27.0",
@@ -64,5 +57,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure.ai"
+  },
+  "pnpm": {
+    "overrides": {
+      "@vitejs/plugin-react>vite": "^8.0.0"
+    }
   }
 }
