@@ -2,8 +2,8 @@
   "dependencies": {
     "@instructure/ui": "^11.2.0",
     "@instructure/ui-color-utils": "^11.2.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
     "@instructure.ai/shared-configs": "workspace:^"
