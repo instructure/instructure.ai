@@ -41,8 +41,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
     blockTitle: "Model & Data",
     segmentData: [
       {
-        description:
-          "The foundational AI on which further training and customizations are built.",
+        description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
         value: "Haiku 3, Sonnet 3.7",
         valueDescription:
@@ -55,8 +54,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "No",
       },
       {
-        description:
-          "Indicates which training or operational content was given to the model.",
+        description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
         value:
           "The model uses chat transcripts and information requested from the Canvas API to execute its actions.",
@@ -69,27 +67,22 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "How long the model stores customer data.",
         segmentTitle: "Data Retention",
-        value:
-          "Chat logs are retained indefinitely for troubleshooting and debugging.",
+        value: "Chat logs are retained indefinitely for troubleshooting and debugging.",
       },
       {
-        description:
-          "Recording the AI's performance for auditing, analysis, and improvement.",
+        description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Logs data",
-        valueDescription:
-          "Chat logs are retained for troubleshooting and debugging purposes.",
+        valueDescription: "Chat logs are retained for troubleshooting and debugging purposes.",
       },
       {
-        description:
-          "The locations where the AI model is officially available and supported.",
+        description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
         value: "Virginia, Oregon",
         valueDescription: "",
       },
       {
-        description:
-          "Sensitive data that can be used to identify an individual.",
+        description: "Sensitive data that can be used to identify an individual.",
         segmentTitle: "PII",
         value: "Exposed",
         valueDescription:
@@ -106,16 +99,14 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "Yes",
       },
       {
-        description:
-          "Indicates if a human is involved in the AI's process or output.",
+        description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
           "The agent only takes action based on human requests, and all write actions must be confirmed by the user.",
       },
       {
-        description:
-          "Preventative safety mechanisms or limitations built into the AI model.",
+        description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
         value:
           "Access to the agent is limited to users with an Admin- or Teacher-based role. Data access and functions are scoped to the permissions available to the chat user.",
@@ -123,8 +114,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
-        value:
-          "The model may misinterpret user requests and require additional prompting.",
+        value: "The model may misinterpret user requests and require additional prompting.",
       },
       {
         description: "The specific results the AI model is meant to achieve.",

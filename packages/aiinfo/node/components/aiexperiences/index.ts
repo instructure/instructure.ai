@@ -41,8 +41,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
     blockTitle: "Model & Data",
     segmentData: [
       {
-        description:
-          "The foundational AI on which further training and customizations are built.",
+        description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
         value: "Haiku 3",
         valueDescription:
@@ -55,8 +54,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "No",
       },
       {
-        description:
-          "Indicates which training or operational content was given to the model.",
+        description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
         value:
           "The custom prompts that instructors provide to create the AI experience and student conversation with the AI Experience tool.",
@@ -69,27 +67,22 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "How long the model stores customer data.",
         segmentTitle: "Data Retention",
-        value:
-          "All conversation data and the activity context created by the instructor is saved.",
+        value: "All conversation data and the activity context created by the instructor is saved.",
       },
       {
-        description:
-          "Recording the AI's performance for auditing, analysis, and improvement.",
+        description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Logs data",
-        valueDescription:
-          "Prompt data, LLM responses, and student responses are logged.",
+        valueDescription: "Prompt data, LLM responses, and student responses are logged.",
       },
       {
-        description:
-          "The locations where the AI model is officially available and supported.",
+        description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
         value: "Global",
         valueDescription: "",
       },
       {
-        description:
-          "Sensitive data that can be used to identify an individual.",
+        description: "Sensitive data that can be used to identify an individual.",
         segmentTitle: "PII",
         value: "Not Exposed",
         valueDescription: "",
@@ -105,16 +98,14 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "Yes",
       },
       {
-        description:
-          "Indicates if a human is involved in the AI's process or output.",
+        description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
           "Instructors set the parameters for each conversation, and students are informed they are interacting with AI. The AI’s output is delivered as-is, without post-editing. Instructors have full access to the conversation transcript.",
       },
       {
-        description:
-          "Preventative safety mechanisms or limitations built into the AI model.",
+        description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
         value:
           'Model responses are logged for quality assurance, and responses with low confidence are flagged "Needs Review" to encourage human intervention.',
@@ -122,8 +113,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
-        value:
-          "The LLM might not ask the right questions or assess the conversation correctly. ",
+        value: "The LLM might not ask the right questions or assess the conversation correctly. ",
       },
       {
         description: "The specific results the AI model is meant to achieve.",
@@ -135,10 +125,23 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
   },
 ];
 const nutritionFacts: NutritionFactsProps = {
-  closeButtonText: "Close", closeIconButtonScreenReaderLabel: "Close", data: NUTRITION_FACTS_DATA, featureName: FEATURE_NAME, modalLabel: "This is a modal for AI facts", title: "AI Nutrition Facts", triggerText: "Nutrition Facts",
+  closeButtonText: "Close",
+  closeIconButtonScreenReaderLabel: "Close",
+  data: NUTRITION_FACTS_DATA,
+  featureName: FEATURE_NAME,
+  modalLabel: "This is a modal for AI facts",
+  title: "AI Nutrition Facts",
+  triggerText: "Nutrition Facts",
 };
 const dataPermissionLevels: DataPermissionLevelsProps = {
-  closeButtonText: "Close", closeIconButtonScreenReaderLabel: "Close dialog", currentFeature: FEATURE_NAME, currentFeatureText: "Current Feature:", data: DATA_PERMISSION_LEVELS, modalLabel: "Data Permission Levels modal", title: "Data Permission Levels", triggerText: "Data Permission Levels",
+  closeButtonText: "Close",
+  closeIconButtonScreenReaderLabel: "Close dialog",
+  currentFeature: FEATURE_NAME,
+  currentFeatureText: "Current Feature:",
+  data: DATA_PERMISSION_LEVELS,
+  modalLabel: "Data Permission Levels modal",
+  title: "Data Permission Levels",
+  triggerText: "Data Permission Levels",
 };
 const aiInformation: AiInformationProps = {
   data: [
@@ -150,10 +153,25 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelsModalTriggerText: "Data Permission Levels",
       permissionLevelText: "Permission Level:",
+      permissionLevelsModalTriggerText: "Data Permission Levels",
     },
-  ], dataPermissionLevelsCloseButtonText: "Close", dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog", dataPermissionLevelsCurrentFeature: "AI Experiences", dataPermissionLevelsCurrentFeatureText: "Current Feature:", dataPermissionLevelsData: DATA_PERMISSION_LEVELS, dataPermissionLevelsModalLabel: "Data Permission Levels modal", dataPermissionLevelsTitle: "Data Permission Levels", nutritionFactsCloseButtonText: "Close", nutritionFactsCloseIconButtonScreenReaderLabel: "Close", nutritionFactsData: NUTRITION_FACTS_DATA, nutritionFactsFeatureName: "AI Experiences", nutritionFactsModalLabel: "This is a modal for AI facts", nutritionFactsTitle: "AI Nutrition Facts", title: "Features", trigger: undefined,
+  ],
+  dataPermissionLevelsCloseButtonText: "Close",
+  dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
+  dataPermissionLevelsCurrentFeature: "AI Experiences",
+  dataPermissionLevelsCurrentFeatureText: "Current Feature:",
+  dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
+  dataPermissionLevelsModalLabel: "Data Permission Levels modal",
+  dataPermissionLevelsTitle: "Data Permission Levels",
+  nutritionFactsCloseButtonText: "Close",
+  nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
+  nutritionFactsData: NUTRITION_FACTS_DATA,
+  nutritionFactsFeatureName: "AI Experiences",
+  nutritionFactsModalLabel: "This is a modal for AI facts",
+  nutritionFactsTitle: "AI Nutrition Facts",
+  title: "Features",
+  trigger: undefined,
 };
 const aiexperiences: AiInfoFeatureProps = {
   aiInformation,

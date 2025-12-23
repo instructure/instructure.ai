@@ -41,8 +41,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
     blockTitle: "Model & Data",
     segmentData: [
       {
-        description:
-          "The foundational AI on which further training and customizations are built.",
+        description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
         value: "Doowii (multiple)",
         valueDescription:
@@ -55,8 +54,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "No",
       },
       {
-        description:
-          "Indicates which training or operational content was given to the model.",
+        description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
         value:
           "Doowii is trained on the Canvas LMS database schema, and receives no data from Canvas. The user's prompt and heuristics (such as summary statistics) are shared with the model to generate a response.",
@@ -69,26 +67,22 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "How long the model stores customer data.",
         segmentTitle: "Data Retention",
-        value:
-          "Data is retained through the life of your contract with Instructure.",
+        value: "Data is retained through the life of your contract with Instructure.",
       },
       {
-        description:
-          "Recording the AI's performance for auditing, analysis, and improvement.",
+        description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Logs data",
         valueDescription: "",
       },
       {
-        description:
-          "The locations where the AI model is officially available and supported.",
+        description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
         value: "Global",
         valueDescription: "",
       },
       {
-        description:
-          "Sensitive data that can be used to identify an individual.",
+        description: "Sensitive data that can be used to identify an individual.",
         segmentTitle: "PII",
         value: "Exposed",
         valueDescription: "Prompt, summary statistics.",
@@ -104,16 +98,14 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "Yes",
       },
       {
-        description:
-          "Indicates if a human is involved in the AI's process or output.",
+        description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
           "Ask your data returns a methodology description along with a generated query. Users have the ability to edit the generated SQL directly.",
       },
       {
-        description:
-          "Preventative safety mechanisms or limitations built into the AI model.",
+        description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
         value:
           "Questions are scoped to the domain only, highly ambiguous terms ask for clarification.",
@@ -127,8 +119,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The specific results the AI model is meant to achieve.",
         segmentTitle: "Intended Outcomes",
-        value:
-          "Provide accurate data retrieval and analysis through natural language prompting.",
+        value: "Provide accurate data retrieval and analysis through natural language prompting.",
       },
     ],
   },

@@ -41,8 +41,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
     blockTitle: "Model & Data",
     segmentData: [
       {
-        description:
-          "The foundational AI on which further training and customizations are built.",
+        description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
         value: "Haiku 3",
         valueDescription:
@@ -55,8 +54,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "No",
       },
       {
-        description:
-          "Indicates which training or operational content was given to the model.",
+        description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
         value: "The original question stem used to generate derivatives",
       },
@@ -72,22 +70,19 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
           "Standard execution, infrastructure, and other operational logs are retained for a reasonable period to enable monitoring and troubleshooting of underlying services.",
       },
       {
-        description:
-          "Recording the AI's performance for auditing, analysis, and improvement.",
+        description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Does not log data",
         valueDescription: "",
       },
       {
-        description:
-          "The locations where the AI model is officially available and supported.",
+        description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
         value: "Virginia",
         valueDescription: "",
       },
       {
-        description:
-          "Sensitive data that can be used to identify an individual.",
+        description: "Sensitive data that can be used to identify an individual.",
         segmentTitle: "PII",
         value: "Not Exposed",
         valueDescription: "",
@@ -103,16 +98,14 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "Yes",
       },
       {
-        description:
-          "Indicates if a human is involved in the AI's process or output.",
+        description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
           "Educators have access to tools that allow them to preview, regenerate, edit, or replace AI generated questions before they are published in an assessment.",
       },
       {
-        description:
-          "Preventative safety mechanisms or limitations built into the AI model.",
+        description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
         value:
           "Only educators can generate items and all AI generated items are in draft status until reviewed and approved.",

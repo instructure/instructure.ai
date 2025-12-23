@@ -41,12 +41,10 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
     blockTitle: "Model & Data",
     segmentData: [
       {
-        description:
-          "The foundational AI on which further training and customizations are built.",
+        description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
         value: "Cohere Embed Multilingual",
-        valueDescription:
-          "Cohere models are provided via Amazon Bedrock Foundation Models (FMs).",
+        valueDescription: "Cohere models are provided via Amazon Bedrock Foundation Models (FMs).",
       },
       {
         description:
@@ -55,11 +53,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "No",
       },
       {
-        description:
-          "Indicates which training or operational content was given to the model.",
+        description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
-        value:
-          "Course content is indexed by the model and then stored in the Canvas database.",
+        value: "Course content is indexed by the model and then stored in the Canvas database.",
       },
     ],
   },
@@ -73,22 +69,19 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
           "Data is not stored or reused by the model. Indexed course content is stored in the Canvas database.",
       },
       {
-        description:
-          "Recording the AI's performance for auditing, analysis, and improvement.",
+        description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Does not log data",
         valueDescription: "",
       },
       {
-        description:
-          "The locations where the AI model is officially available and supported.",
+        description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
         value: "Global",
         valueDescription: "",
       },
       {
-        description:
-          "Sensitive data that can be used to identify an individual.",
+        description: "Sensitive data that can be used to identify an individual.",
         segmentTitle: "PII",
         value: "Not Exposed",
         valueDescription:
@@ -105,16 +98,14 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "Yes",
       },
       {
-        description:
-          "Indicates if a human is involved in the AI's process or output.",
+        description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
           "Users are presented with a list of results related to their search query and can act or not act on them.",
       },
       {
-        description:
-          "Preventative safety mechanisms or limitations built into the AI model.",
+        description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
         value: "",
       },
@@ -185,8 +176,7 @@ const aiInformation: AiInformationProps = {
 const smartsearch: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description:
-    "Natural language search of course content for students and instructors.",
+  description: "Natural language search of course content for students and instructors.",
   group: "Canvas",
   name: FEATURE_NAME,
   nutritionFacts,

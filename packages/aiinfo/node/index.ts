@@ -20,10 +20,7 @@ import type {
   AiInfoNutritionFactsProps,
   AiInfoProps,
 } from "./types";
-const pluck = <
-  TRecord extends Record<string, object>,
-  K extends keyof TRecord[keyof TRecord],
->(
+const pluck = <TRecord extends Record<string, object>, K extends keyof TRecord[keyof TRecord]>(
   obj: TRecord,
   key: K,
 ): {
@@ -55,14 +52,8 @@ const AiInfo: AiInfoProps = {
   rubricgenerator,
   smartsearch,
 };
-const nutritionFacts: AiInfoNutritionFactsProps = pluck(
-  AiInfo,
-  "nutritionFacts",
-);
-const dataPermissionLevels: AiInfoDataPermissionLevelsProps = pluck(
-  AiInfo,
-  "dataPermissionLevels",
-);
+const nutritionFacts: AiInfoNutritionFactsProps = pluck(AiInfo, "nutritionFacts");
+const dataPermissionLevels: AiInfoDataPermissionLevelsProps = pluck(AiInfo, "dataPermissionLevels");
 const aiInformation: AiInfoAiInformationProps = pluck(AiInfo, "aiInformation");
 export {
   AiInfo,

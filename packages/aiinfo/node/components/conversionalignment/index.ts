@@ -41,8 +41,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
     blockTitle: "Model & Data",
     segmentData: [
       {
-        description:
-          "The foundational AI on which further training and customizations are built.",
+        description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
         value: "Claude Family Models",
         valueDescription:
@@ -55,8 +54,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "No",
       },
       {
-        description:
-          "Indicates which training or operational content was given to the model.",
+        description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
         value:
           "The Canvas Quiz content and Mastery Tracker metadata (Subject, Objectives) is shared with the\nmodel.",
@@ -73,22 +71,19 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
           "Standard execution, infrastructure, and other operational logs are retained for a reasonable period to enable monitoring and troubleshooting of underlying services.",
       },
       {
-        description:
-          "Recording the AI's performance for auditing, analysis, and improvement.",
+        description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Does not log data",
         valueDescription: "No user data is logged at any time.",
       },
       {
-        description:
-          "The locations where the AI model is officially available and supported.",
+        description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
         value: "Virginia, Oregon",
         valueDescription: "",
       },
       {
-        description:
-          "Sensitive data that can be used to identify an individual.",
+        description: "Sensitive data that can be used to identify an individual.",
         segmentTitle: "PII",
         value: "Not Exposed",
         valueDescription: "",
@@ -104,16 +99,14 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "Yes",
       },
       {
-        description:
-          "Indicates if a human is involved in the AI's process or output.",
+        description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
           "The aligned standards can be reviewed and adjusted by educators prior to publishing the content.",
       },
       {
-        description:
-          "Preventative safety mechanisms or limitations built into the AI model.",
+        description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
         value:
           "AI suggestions are limited to the standards present in the linked tracker’s standard set. This ensures that only the intended audience (educators) can use the tool and only relevant standards are suggested.",
@@ -193,10 +186,5 @@ const conversionalignment: AiInfoFeatureProps = {
   revision: "2025.11.19",
   uid: UID,
 };
-export {
-  conversionalignment,
-  nutritionFacts,
-  dataPermissionLevels,
-  aiInformation,
-};
+export { conversionalignment, nutritionFacts, dataPermissionLevels, aiInformation };
 export default conversionalignment;
