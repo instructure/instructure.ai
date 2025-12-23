@@ -1,16 +1,14 @@
 {
-  "dependencies": {},
-  "devDependencies": {
-    "@instructure.ai/shared-configs": "workspace:^",
-    "@types/papaparse": "^5.3.16",
-    "ansis": "^4.2.0",
-    "papaparse": "^5.5.3",
-    "typescript": "^5.9.3",
-    "@instructure/ui-instructure": "^11.2.0"
+  "name": "@instructure.ai/aiinfo",
+  "version": "3.0.0-alpha.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure.ai",
+    "directory": "packages/aiinfo"
   },
-  "engines": {
-    "node": ">=20"
-  },
+  "sideEffects": false,
+  "type": "module",
+  "main": "./src/index.mjs",
   "exports": {
     ".": {
       "types": "./src/index.d.ts",
@@ -19,20 +17,11 @@
       "default": "./src/index.mjs"
     }
   },
+  "module": "./src/index.mjs",
+  "types": "./src/index.d.ts",
   "files": [
     "src"
   ],
-  "main": "./src/index.mjs",
-  "module": "./src/index.mjs",
-  "name": "@instructure.ai/aiinfo",
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/instructure/instructure.ai",
-    "directory": "packages/aiinfo"
-  },
   "scripts": {
     "build": "pnpm cache:update && pnpm typecheck && pnpm build:lib && pnpm lint && pnpm package",
     "build:lib": "tsdown",
@@ -46,8 +35,19 @@
     "write:entries": "WRITE=1 vite-node ./scripts/writeEntries.mts --entries",
     "write:barrel": "WRITE=1 vite-node ./scripts/writeEntries.mts --barrel"
   },
-  "sideEffects": false,
-  "type": "module",
-  "types": "./src/index.d.ts",
-  "version": "3.0.0-alpha.2"
+  "dependencies": {},
+  "devDependencies": {
+    "@instructure.ai/shared-configs": "workspace:^",
+    "@instructure/ui-instructure": "^11.2.0",
+    "@types/papaparse": "^5.3.16",
+    "ansis": "^4.2.0",
+    "papaparse": "^5.5.3",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
