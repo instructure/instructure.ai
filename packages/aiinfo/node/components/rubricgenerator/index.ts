@@ -41,8 +41,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
     blockTitle: "Model & Data",
     segmentData: [
       {
-        description:
-          "The foundational AI on which further training and customizations are built.",
+        description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
         value: "Haiku 3",
         valueDescription:
@@ -55,11 +54,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "No",
       },
       {
-        description:
-          "Indicates which training or operational content was given to the model.",
+        description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
-        value:
-          "The Canvas assignment description field is used in generating rubric criteria.",
+        value: "The Canvas assignment description field is used in generating rubric criteria.",
       },
     ],
   },
@@ -72,23 +69,20 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "Model responses are stored for debugging purposes.",
       },
       {
-        description:
-          "Recording the AI's performance for auditing, analysis, and improvement.",
+        description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Logs data",
         valueDescription:
           "Request, response, and feedback data is logged to assist in troubleshooting.",
       },
       {
-        description:
-          "The locations where the AI model is officially available and supported.",
+        description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
         value: "Global",
         valueDescription: "",
       },
       {
-        description:
-          "Sensitive data that can be used to identify an individual.",
+        description: "Sensitive data that can be used to identify an individual.",
         segmentTitle: "PII",
         value: "Not Exposed",
         valueDescription: "",
@@ -104,24 +98,20 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "Yes",
       },
       {
-        description:
-          "Indicates if a human is involved in the AI's process or output.",
+        description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
-        valueDescription:
-          "All created rubrics are reviewable and editable by the instructor.",
+        valueDescription: "All created rubrics are reviewable and editable by the instructor.",
       },
       {
-        description:
-          "Preventative safety mechanisms or limitations built into the AI model.",
+        description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
         value: "The instructor may edit criteria before accepting the rubric.",
       },
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
-        value:
-          "The created rubric may not align with the assignment's intended learning outcomes.",
+        value: "The created rubric may not align with the assignment's intended learning outcomes.",
       },
       {
         description: "The specific results the AI model is meant to achieve.",

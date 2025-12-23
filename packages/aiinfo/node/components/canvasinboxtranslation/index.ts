@@ -41,12 +41,10 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
     blockTitle: "Model & Data",
     segmentData: [
       {
-        description:
-          "The foundational AI on which further training and customizations are built.",
+        description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
         value: "AWS Translate",
-        valueDescription:
-          "AWS Translate model is provided via Instructure's in-house AI Platform.",
+        valueDescription: "AWS Translate model is provided via Instructure's in-house AI Platform.",
       },
       {
         description:
@@ -55,8 +53,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "No",
       },
       {
-        description:
-          "Indicates which training or operational content was given to the model.",
+        description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
         value: "Inbox messages",
       },
@@ -71,22 +68,19 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "Data is not stored or reused by the model.",
       },
       {
-        description:
-          "Recording the AI's performance for auditing, analysis, and improvement.",
+        description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Does not log data",
         valueDescription: "",
       },
       {
-        description:
-          "The locations where the AI model is officially available and supported.",
+        description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
         value: "Global",
         valueDescription: "",
       },
       {
-        description:
-          "Sensitive data that can be used to identify an individual.",
+        description: "Sensitive data that can be used to identify an individual.",
         segmentTitle: "PII",
         value: "Not Exposed",
         valueDescription:
@@ -103,30 +97,26 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "Yes",
       },
       {
-        description:
-          "Indicates if a human is involved in the AI's process or output.",
+        description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
           "Users are displayed the translated copy of their message and can edit or remove it before they send the message.",
       },
       {
-        description:
-          "Preventative safety mechanisms or limitations built into the AI model.",
+        description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
         value: "",
       },
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
-        value:
-          "Machine translation may not fully capture the meaning of the original message.",
+        value: "Machine translation may not fully capture the meaning of the original message.",
       },
       {
         description: "The specific results the AI model is meant to achieve.",
         segmentTitle: "Intended Outcomes",
-        value:
-          "Enable better multi-lingual communication in learning environments.",
+        value: "Enable better multi-lingual communication in learning environments.",
       },
     ],
   },
@@ -191,10 +181,5 @@ const canvasinboxtranslation: AiInfoFeatureProps = {
   revision: "2025.09.10",
   uid: UID,
 };
-export {
-  canvasinboxtranslation,
-  nutritionFacts,
-  dataPermissionLevels,
-  aiInformation,
-};
+export { canvasinboxtranslation, nutritionFacts, dataPermissionLevels, aiInformation };
 export default canvasinboxtranslation;

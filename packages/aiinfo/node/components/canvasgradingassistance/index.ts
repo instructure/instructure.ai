@@ -41,8 +41,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
     blockTitle: "Model & Data",
     segmentData: [
       {
-        description:
-          "The foundational AI on which further training and customizations are built.",
+        description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
         value: "Haiku 3",
         valueDescription:
@@ -55,8 +54,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "No",
       },
       {
-        description:
-          "Indicates which training or operational content was given to the model.",
+        description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
         value: "Assignment information, rubric, and student submissions.",
       },
@@ -68,26 +66,23 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "How long the model stores customer data.",
         segmentTitle: "Data Retention",
-        value: "Transactional data is retained for the life of the request",
+        value: "Transactional data is retained for the life of the requestCanvas",
       },
       {
-        description:
-          "Recording the AI's performance for auditing, analysis, and improvement.",
+        description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Logs data",
         valueDescription:
           "Complete response from the LLM is retained in the Canvas database for auditing purposes.",
       },
       {
-        description:
-          "The locations where the AI model is officially available and supported.",
+        description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
         value: "Global",
         valueDescription: "",
       },
       {
-        description:
-          "Sensitive data that can be used to identify an individual.",
+        description: "Sensitive data that can be used to identify an individual.",
         segmentTitle: "PII",
         value: "Not Exposed",
         valueDescription:
@@ -104,16 +99,14 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "Yes",
       },
       {
-        description:
-          "Indicates if a human is involved in the AI's process or output.",
+        description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
           "Grade suggestion is displayed and selected by default, but the instructor must make the final decision to edit or accept the suggestions.",
       },
       {
-        description:
-          "Preventative safety mechanisms or limitations built into the AI model.",
+        description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
         value: "The Claude Haiku model has inherent guardrails built in.",
       },
@@ -121,7 +114,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
         value:
-          "Model may work better with certain kinds of assignment types or disciplines. The grader must remain alert to incorrect assumptions from the model.",
+          "Grading Assistance does not flag unsafe content, verify facts or sources, enforce formatting or quantitative requirements, or reliably grade objective or single-answer questions. Results are based only on rubric criteria.",
       },
       {
         description: "The specific results the AI model is meant to achieve.",
@@ -132,55 +125,52 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
     ],
   },
 ];
-const nutritionFacts: NutritionFactsProps = {
-  closeButtonText: "Close",
-  closeIconButtonScreenReaderLabel: "Close",
-  data: NUTRITION_FACTS_DATA,
-  featureName: FEATURE_NAME,
-  modalLabel: "This is a modal for AI facts",
-  title: "AI Nutrition Facts",
-  triggerText: "Nutrition Facts",
-};
-const dataPermissionLevels: DataPermissionLevelsProps = {
-  closeButtonText: "Close",
-  closeIconButtonScreenReaderLabel: "Close dialog",
-  currentFeature: FEATURE_NAME,
-  currentFeatureText: "Current Feature:",
-  data: DATA_PERMISSION_LEVELS,
-  modalLabel: "Data Permission Levels modal",
-  title: "Data Permission Levels",
-  triggerText: "Data Permission Levels",
-};
-const aiInformation: AiInformationProps = {
-  data: [
-    {
-      description:
-        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-      featureName: "Grading Assistance",
-      modelName: "Haiku 3",
-      modelNameText: "Base Model",
-      nutritionFactsModalTriggerText: "AI Nutrition Facts",
-      permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
-      permissionLevelsModalTriggerText: "Data Permission Levels",
-    },
-  ],
-  dataPermissionLevelsCloseButtonText: "Close",
-  dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeature: "Grading Assistance",
-  dataPermissionLevelsCurrentFeatureText: "Current Feature:",
-  dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-  dataPermissionLevelsModalLabel: "Data Permission Levels modal",
-  dataPermissionLevelsTitle: "Data Permission Levels",
-  nutritionFactsCloseButtonText: "Close",
-  nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
-  nutritionFactsData: NUTRITION_FACTS_DATA,
-  nutritionFactsFeatureName: "Grading Assistance",
-  nutritionFactsModalLabel: "This is a modal for AI facts",
-  nutritionFactsTitle: "AI Nutrition Facts",
-  title: "Features",
-  trigger: undefined,
-};
+const nutritionFacts: NutritionFactsProps = ({
+	closeButtonText: 'Close',
+	closeIconButtonScreenReaderLabel: 'Close',
+	featureName: FEATURE_NAME,
+	modalLabel: 'This is a modal for AI facts',
+	title: 'AI Nutrition Facts',
+	triggerText: 'Nutrition Facts',
+	data: NUTRITION_FACTS_DATA
+});
+const dataPermissionLevels: DataPermissionLevelsProps = ({
+	closeButtonText: 'Close',
+	closeIconButtonScreenReaderLabel: 'Close dialog',
+	currentFeature: FEATURE_NAME,
+	currentFeatureText: 'Current Feature:',
+	modalLabel: 'Data Permission Levels modal',
+	title: 'Data Permission Levels',
+	triggerText: 'Data Permission Levels',
+	data: DATA_PERMISSION_LEVELS
+});
+const aiInformation: AiInformationProps = ({
+	data: [{
+		description: 'We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.',
+		featureName: 'Grading Assistance',
+		modelName: 'Haiku 3',
+		modelNameText: 'Base Model',
+		nutritionFactsModalTriggerText: 'AI Nutrition Facts',
+		permissionLevel: 'LEVEL 2',
+		permissionLevelsModalTriggerText: 'Data Permission Levels',
+		permissionLevelText: 'Permission Level:'
+	}],
+	dataPermissionLevelsCloseButtonText: 'Close',
+	dataPermissionLevelsCloseIconButtonScreenReaderLabel: 'Close dialog',
+	dataPermissionLevelsCurrentFeature: 'Grading Assistance',
+	dataPermissionLevelsCurrentFeatureText: 'Current Feature:',
+	dataPermissionLevelsModalLabel: 'Data Permission Levels modal',
+	dataPermissionLevelsTitle: 'Data Permission Levels',
+	nutritionFactsCloseButtonText: 'Close',
+	nutritionFactsCloseIconButtonScreenReaderLabel: 'Close',
+	nutritionFactsFeatureName: 'Grading Assistance',
+	nutritionFactsModalLabel: 'This is a modal for AI facts',
+	nutritionFactsTitle: 'AI Nutrition Facts',
+	title: 'Features',
+	dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
+	nutritionFactsData: NUTRITION_FACTS_DATA,
+	trigger: undefined
+});
 const canvasgradingassistance: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
@@ -192,10 +182,5 @@ const canvasgradingassistance: AiInfoFeatureProps = {
   revision: "2025.10.22",
   uid: UID,
 };
-export {
-  canvasgradingassistance,
-  nutritionFacts,
-  dataPermissionLevels,
-  aiInformation,
-};
+export { canvasgradingassistance, nutritionFacts, dataPermissionLevels, aiInformation };
 export default canvasgradingassistance;

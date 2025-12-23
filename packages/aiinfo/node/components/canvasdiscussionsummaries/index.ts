@@ -41,8 +41,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
     blockTitle: "Model & Data",
     segmentData: [
       {
-        description:
-          "The foundational AI on which further training and customizations are built.",
+        description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
         value: "Haiku 3",
         valueDescription:
@@ -55,8 +54,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "No",
       },
       {
-        description:
-          "Indicates which training or operational content was given to the model.",
+        description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
         value: "Discussion prompt and replies.",
       },
@@ -71,23 +69,19 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "Data is not stored or reused by the model.",
       },
       {
-        description:
-          "Recording the AI's performance for auditing, analysis, and improvement.",
+        description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Logs data",
-        valueDescription:
-          "Summaries are logged in the Canvas database for review and reuse.",
+        valueDescription: "Summaries are logged in the Canvas database for review and reuse.",
       },
       {
-        description:
-          "The locations where the AI model is officially available and supported.",
+        description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
         value: "Global",
         valueDescription: "",
       },
       {
-        description:
-          "Sensitive data that can be used to identify an individual.",
+        description: "Sensitive data that can be used to identify an individual.",
         segmentTitle: "PII",
         value: "Not Exposed",
         valueDescription:
@@ -104,16 +98,14 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         value: "Yes",
       },
       {
-        description:
-          "Indicates if a human is involved in the AI's process or output.",
+        description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
           "Instructors may regenerate summaries or fine-tune them with additional instructions.",
       },
       {
-        description:
-          "Preventative safety mechanisms or limitations built into the AI model.",
+        description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
         value: "",
       },
@@ -190,10 +182,5 @@ const canvasdiscussionsummaries: AiInfoFeatureProps = {
   revision: "2025.09.12",
   uid: UID,
 };
-export {
-  canvasdiscussionsummaries,
-  nutritionFacts,
-  dataPermissionLevels,
-  aiInformation,
-};
+export { canvasdiscussionsummaries, nutritionFacts, dataPermissionLevels, aiInformation };
 export default canvasdiscussionsummaries;
