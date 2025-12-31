@@ -2,6 +2,18 @@
   "sideEffects": false,
   "type": "module",
   "main": "./src/index.mjs",
+  "devDependencies": {
+    "@ai-sdk/google": "3.0.0-beta.62",
+    "@instructure.ai/shared-configs": "workspace:^",
+    "@instructure/ui-instructure": "^10.29.0",
+    "@types/papaparse": "^5.5.2",
+    "ai": "6.0.0-beta.129",
+    "ansis": "^4.2.0",
+    "p-limit": "^7.2.0",
+    "papaparse": "^5.5.3",
+    "typescript": "^5.9.3",
+    "zod": "^4.3.3"
+  },
   "exports": {
     ".": {
       "types": "./src/index.d.ts",
@@ -27,14 +39,6 @@
     "write:all": "WRITE=1 vite-node ./scripts/writeEntries.mts",
     "write:entries": "WRITE=1 vite-node ./scripts/writeEntries.mts --entries",
     "write:barrel": "WRITE=1 vite-node ./scripts/writeEntries.mts --barrel"
-  },
-  "devDependencies": {
-    "@instructure.ai/shared-configs": "workspace:^",
-    "@instructure/ui-instructure": "^10.29.0",
-    "@types/papaparse": "^5.5.2",
-    "ansis": "^4.2.0",
-    "papaparse": "^5.5.3",
-    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=20"

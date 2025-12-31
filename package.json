@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@dotenvx/dotenvx": "^1.51.2",
+    "@dotenvx/dotenvx": "^1.51.4",
     "@instructure/browserslist-config-instui": "^11.2.0",
     "@testing-library/react": "^16.3.1",
     "@types/react": "^19.2.7",
