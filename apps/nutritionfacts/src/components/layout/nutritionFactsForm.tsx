@@ -5,7 +5,7 @@ import type { Dispatch, FC, SetStateAction } from "react";
 import type { ExtendedNutritionFactsProps, PageLayout } from "../../types";
 import { Divider } from "./";
 import { extendedNutritionFacts } from "./extendedNutritionFacts";
-import { Presets } from "./Presets";
+import { Presets } from "./";
 
 const NutritionFactsForm: FC<{
   product: AiInfoFeatureProps | undefined;

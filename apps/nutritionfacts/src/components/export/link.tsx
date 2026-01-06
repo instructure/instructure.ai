@@ -2,7 +2,7 @@ import { IconLinkLine } from "@instructure/ui";
 import type { SVGIconProps } from "@instructure/ui";
 import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { baseUrl } from "../../assets";
-import { ControlButton } from "./ControlButton.tsx";
+import { ControlButton } from "./";
 
 const PermanentLink = async (id: string) => {
   try {

@@ -1,12 +1,12 @@
-import "./App.css";
+import "./app.css";
 import { Flex, InlineSVG, Link, Text, View } from "@instructure/ui";
 import AiInfo from "@instructure.ai/aiinfo";
 import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { useEffect, useState } from "react";
 import type { FC } from "react";
 import { DefaultLayout, Logo, LogoDark, colors, copyright, disclaimer } from "./assets";
-import { EmbedControl, LinkControl } from "./Components/Export";
-import { NutritionFactsForm, getLayoutFromParams } from "./Components/Layout";
+import { EmbedControl, LinkControl } from "./components/export";
+import { NutritionFactsForm, getLayoutFromParams } from "./components/layout";
 
 const App: FC = () => {
   const searchParams = new URLSearchParams(window.location.search);
