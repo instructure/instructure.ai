@@ -1,6 +1,6 @@
 export { colors } from "./colors";
 export { baseUrl, brands, copyright, disclaimer } from "./consts";
-export { DefaultLayout } from "./Layout";
+export { DefaultLayout } from "./layout";
 export {
   CanvasBug,
   IgniteBug,
@@ -8,6 +8,6 @@ export {
   MasteryBug,
   ParchmentBug,
   type SVGWrapperProps,
-} from "./Logos";
+} from "./logos";
 export { default as Logo } from "./logo.svg?raw";
 export { default as LogoDark } from "./logoDark.svg?raw";
