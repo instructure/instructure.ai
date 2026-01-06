@@ -1,16 +1,16 @@
 coverage:
   totals:
-    statements: 24.27%
-    branches: 14.72%
-    functions: 22.91%
-    lines: 25.14%
-    total: 21.76%
+    statements: 7.51%
+    branches: 3.06%
+    functions: 8.33%
+    lines: 7.78%
+    total: 6.67%
   src:
     totals:
-      statements: 48.13%
-      branches: 44.17%
-      functions: 46.25%
-      lines: 48.13%
+      statements: 30.63%
+      branches: 35.83%
+      functions: 40%
+      lines: 30.63%
     "app.tsx":
       statements: 0%
       branches: 0%
@@ -19,26 +19,28 @@ coverage:
       uncovered_line_numbers: "11-57"
     assets:
       "colors.ts":
-        statements: 100%
+        statements: 0%
         branches: 100%
         functions: 100%
-        lines: 100%
+        lines: 0%
+        uncovered_line_numbers: "5"
       "consts.tsx":
-        statements: 80%
-        branches: 33.33%
+        statements: 0%
+        branches: 0%
         functions: 0%
-        lines: 80%
-        uncovered_line_numbers: "59"
+        lines: 0%
+        uncovered_line_numbers: "9-74"
       "layout.ts":
         statements: 100%
         branches: 100%
         functions: 100%
         lines: 100%
       "logos.tsx":
-        statements: 100%
-        branches: 100%
-        functions: 100%
-        lines: 100%
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "21-230"
     components:
       export:
         "controlButton.tsx":
