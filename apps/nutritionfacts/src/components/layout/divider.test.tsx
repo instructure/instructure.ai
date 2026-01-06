@@ -17,7 +17,7 @@ vi.mock<typeof import("@instructure/ui")>("@instructure/ui", () => {
   return { View: ViewMock };
 });
 
-import { Divider } from "./Divider";
+import { Divider } from "./divider";
 
 describe("divider", () => {
   let ViewMock: ReturnType<typeof vi.fn>;
