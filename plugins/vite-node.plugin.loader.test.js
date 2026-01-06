@@ -5,7 +5,7 @@ vi.mock("node:fs/promises", () => ({
   readFile: vi.fn(),
 }));
 vi.mock("vite", () => ({
-  transformWithEsbuild: vi.fn(),
+  transformWithOxc: vi.fn(),
 }));
 
 // Import the module under test AFTER mocking
@@ -27,9 +27,9 @@ describe("vite-node.plugin.loader.mjs", () => {
       "fileURLToPath",
       vi.fn((url) => url.replace("file://", "")),
     );
-    // Mock vite.transformWithEsbuild
-    const { transformWithEsbuild } = await import("vite");
-    transformWithEsbuild.mockResolvedValue({
+    // Mock vite.transformWithOxc
+    const { transformWithOxc } = await import("vite");
+    transformWithOxc.mockResolvedValue({
       code: "export const x=1;",
       map: "inline",
     });
@@ -84,9 +84,9 @@ describe("vite-node.plugin.loader.mjs", () => {
         "fileURLToPath",
         vi.fn((url) => url.replace("file://", "")),
       );
-      // Mock vite.transformWithEsbuild
+      // Mock vite.transformWithOxc
       vi.stubGlobal(
-        "transformWithEsbuild",
+        "transformWithOxc",
         vi.fn(async () => fakeTransformed),
       );
     });
@@ -94,12 +94,12 @@ describe("vite-node.plugin.loader.mjs", () => {
     mtsExtensions.forEach((ext) => {
       it(`transforms ${ext} files and returns correct object`, async () => {
         const { readFile } = await import("node:fs/promises");
-        const { transformWithEsbuild } = await import("vite");
+        const { transformWithOxc } = await import("vite");
         const url = `file:///test${ext}`;
         const context = {};
         const result = await loader.load(url, context, mockNextLoad);
         expect(readFile).toHaveBeenCalledWith("/test" + ext, "utf8");
-        expect(transformWithEsbuild).toHaveBeenCalledWith(
+        expect(transformWithOxc).toHaveBeenCalledWith(
           fakeSource,
           "/test" + ext,
           {
@@ -131,11 +131,11 @@ describe("vite-node.plugin.loader.mjs", () => {
       await expect(loader.load(url, {}, mockNextLoad)).rejects.toThrow("fail");
     });
 
-    it("handles transformWithEsbuild error", async () => {
+    it("handles transformWithOxc error", async () => {
       const { readFile } = await import("node:fs/promises");
-      const { transformWithEsbuild } = await import("vite");
+      const { transformWithOxc } = await import("vite");
       readFile.mockResolvedValueOnce("source"); // ensure readFile succeeds
-      transformWithEsbuild.mockRejectedValueOnce(new Error("esbuild fail"));
+      transformWithOxc.mockRejectedValueOnce(new Error("esbuild fail"));
       const url = "file:///fail.ts";
       await expect(loader.load(url, {}, mockNextLoad)).rejects.toThrow(
         "esbuild fail",
