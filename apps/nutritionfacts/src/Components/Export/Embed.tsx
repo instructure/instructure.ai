@@ -24,9 +24,9 @@ const Embed = async (product: AiInfoFeatureProps, layout: PageLayout) => {
 
     const helperClasses = [
       "ui-helper-reset", // Removes iframe border in legacy Community platform.
-      "border-none", // tailwind
-      "outline-none", // tailwind
-      "border-0", // bootstrap
+      "border-none", // Tailwind
+      "outline-none", // Tailwind
+      "border-0", // Bootstrap
     ].join(" ");
 
     const separator = baseUrl.includes("?") ? "&" : "?";
@@ -37,7 +37,7 @@ const Embed = async (product: AiInfoFeatureProps, layout: PageLayout) => {
     try {
       await navigator.clipboard.writeText(embedCode);
     } catch (error) {
-      let msg: string = "Failed to copy data to clipboard";
+      let msg = "Failed to copy data to clipboard";
       if (error instanceof Error) {
         msg = error.message;
       } else if (typeof error === "string") {

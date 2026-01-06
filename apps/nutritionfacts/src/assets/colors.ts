@@ -1,9 +1,4 @@
-type BrandColor =
-  | "canvas"
-  | "instructure"
-  | "mastery"
-  | "igniteai"
-  | "parchment";
+type BrandColor = "canvas" | "instructure" | "mastery" | "igniteai" | "parchment";
 
 type Colors = Record<BrandColor, string>;
 

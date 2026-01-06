@@ -97,9 +97,7 @@ describe("main.tsx", () => {
     // Should contain App
     const app = React.Children.only(provider.props.children);
     expect(
-      app.type.name ||
-        app.type.displayName ||
-        (typeof app.type === "string" ? app.type : ""),
+      app.type.name || app.type.displayName || (typeof app.type === "string" ? app.type : ""),
     ).toMatch(/App/);
   });
 });

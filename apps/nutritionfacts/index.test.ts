@@ -9,20 +9,18 @@ describe("index.html", () => {
   });
 
   it("should have correct doctype", () => {
-    // jsdom does not expose doctype, so we skip this in jsdom
+    // Jsdom does not expose doctype, so we skip this in jsdom
     expect(document.documentElement.lang).toBe("en");
   });
 
   it("should have correct meta tags", () => {
     const charset = document.querySelector("meta[charset]");
     expect(charset).not.toBeNull();
-    expect(charset?.getAttribute("charset")).toBe("utf-8");
+    expect(charset?.getAttribute("charset")).toBe("utf8");
 
     const viewport = document.querySelector('meta[name="viewport"]');
     expect(viewport).not.toBeNull();
-    expect(viewport?.getAttribute("content")).toBe(
-      "width=device-width, initial-scale=1.0",
-    );
+    expect(viewport?.getAttribute("content")).toBe("width=device-width, initial-scale=1.0");
 
     const version = document.querySelector('meta[name="application-version"]');
     expect(version).not.toBeNull();

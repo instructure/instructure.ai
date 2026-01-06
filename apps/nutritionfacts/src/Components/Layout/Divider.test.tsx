@@ -8,7 +8,7 @@ vi.mock<typeof import("@instructure/ui")>("@instructure/ui", () => {
       <div
         data-testid="view-mock"
         style={{ borderColor, borderWidth }}
-        {...rest} // rest should not include borderColor or borderWidth
+        {...rest} // Rest should not include borderColor or borderWidth
       >
         {children}
       </div>
@@ -24,16 +24,13 @@ describe("divider", () => {
 
   beforeEach(async () => {
     // Dynamically import the mock after vi.mock is set up
-    const mocked =
-      await vi.importMock<typeof import("@instructure/ui")>("@instructure/ui");
+    const mocked = await vi.importMock<typeof import("@instructure/ui")>("@instructure/ui");
     ViewMock = mocked.View as unknown as ReturnType<typeof vi.fn>;
     ViewMock.mockClear();
   });
 
   it("renders a View with correct props", async () => {
-    const { container, getByTestId } = require("@testing-library/react").render(
-      <Divider />,
-    );
+    const { container, getByTestId } = require("@testing-library/react").render(<Divider />);
     expect(ViewMock).toHaveBeenCalledTimes(1);
     const call = ViewMock.mock.calls[0][0];
     expect(call.as).toBe("div");
@@ -41,9 +38,7 @@ describe("divider", () => {
     expect(call.borderWidth).toBe("medium 0 0");
     expect(call.margin).toBe("0 0 medium");
     expect(getByTestId("view-mock")).toBeTruthy();
-    expect(
-      container.querySelector("div[data-testid='view-mock']"),
-    ).not.toBeNull();
+    expect(container.querySelector("div[data-testid='view-mock']")).not.toBeNull();
   });
 
   it("does not render children", async () => {

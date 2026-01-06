@@ -8,7 +8,7 @@ const PermanentLink = async (id: string) => {
   try {
     await navigator.clipboard.writeText(`${baseUrl}?id=${id}`);
   } catch (error) {
-    let msg: string = "Failed to copy data to clipboard";
+    let msg = "Failed to copy data to clipboard";
     if (error instanceof Error) {
       msg = error.message;
     } else if (typeof error === "string") {
@@ -28,8 +28,7 @@ const LinkControl = ({
   background?: boolean;
   border?: boolean;
   color?: "primary" | "primary-inverse";
-}) => {
-  return (
+}) => (
     <ControlButton
       background={background}
       border={border}
@@ -42,6 +41,5 @@ const LinkControl = ({
       }}
     />
   );
-};
 
 export { LinkControl };

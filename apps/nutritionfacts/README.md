@@ -1,4 +1,5 @@
 # @instructure.ai/nutritionfacts
+
 ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Finstructure%2Finstructure.ai%2Frefs%2Fheads%2Fmain%2Fapps%2Fnutritionfacts%2Fpackage.json&query=%24.version&label=version&labelColor=%230e1721&color=%234279B6) ![coverage](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Finstructure%2Finstructure.ai%2Frefs%2Fheads%2Fmain%2Fapps%2Fnutritionfacts%2Fcoverage%2Fcoverage.yml&query=coverage.totals.total&logo=vitest&label=coverage&labelColor=%230E1721&color=%234279B6)
 
 ## IgniteAI Nutrition Facts Generator
@@ -16,10 +17,10 @@ An interactive web application for importing, viewing, and exporting Nutrition F
 
 [View the tool on the web](https://instructure.ai/nutritionfacts) and select a feature to view its Nutrition Facts. You can:
 
-* View the rendered Nutrition Facts
-* Print (Formatted nicely)
-* Copy an iFrame embed code to your clipboard
-* Copy the permalink to your clipboard
+- View the rendered Nutrition Facts
+- Print (Formatted nicely)
+- Copy an iFrame embed code to your clipboard
+- Copy the permalink to your clipboard
 
 ### Advanced Usage
 
@@ -39,7 +40,7 @@ Nutrition Facts provide two primary export methods: permalink & embed.
 
 ##### Permalink
 
-A permalink is an evergreen link to a specific feature's Nutrition Facts based on its unique id. Permalinks are structured as `ignite.ai/nutritionfacts/?id=<uid>`.  When a permalink is accessed, the `uid` is used to fetch the latest revision of the Nutrition Facts and render them.
+A permalink is an evergreen link to a specific feature's Nutrition Facts based on its unique id. Permalinks are structured as `ignite.ai/nutritionfacts/?id=<uid>`. When a permalink is accessed, the `uid` is used to fetch the latest revision of the Nutrition Facts and render them.
 
 When viewing a Nutrition Facts page a "Copy permalink" helper is displayed in the header.
 
@@ -55,7 +56,6 @@ The "Copy embed code" generates an iFrame that is sized to fit the content witho
 > Only the iFrame content is rendered dynamically. The copy of the product name / description are not dynamically updated and will need to be manually updated if either change significantly from the time the embed code is generated.
 
 This makes outputting AI Components fairly simple, and standard.
-
 
 ### Getting Started
 

@@ -4,14 +4,7 @@ import AiInfo from "@instructure.ai/aiinfo";
 import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { useEffect, useState } from "react";
 import type { FC } from "react";
-import {
-  DefaultLayout,
-  Logo,
-  LogoDark,
-  colors,
-  copyright,
-  disclaimer,
-} from "./assets";
+import { DefaultLayout, Logo, LogoDark, colors, copyright, disclaimer } from "./assets";
 import { EmbedControl, LinkControl } from "./Components/Export";
 import { NutritionFactsForm, getLayoutFromParams } from "./Components/Layout";
 
@@ -19,9 +12,7 @@ const App: FC = () => {
   const searchParams = new URLSearchParams(window.location.search);
   const id = searchParams.get("id")?.toLowerCase();
 
-  const [product, setProduct] = useState<AiInfoFeatureProps | undefined>(
-    undefined,
-  );
+  const [product, setProduct] = useState<AiInfoFeatureProps | undefined>(undefined);
   const [width, setWidth] = useState(() => window.innerWidth);
 
   useEffect(() => {
@@ -66,10 +57,10 @@ const App: FC = () => {
   return (
     <View
       as="div"
-      background={isInIframe ? "primary" : isDark ? "brand" : "secondary"}
+      background={isInIframe ? "primary" : (isDark ? "brand" : "secondary")}
       data-print="no-padding, no-background"
       minHeight="100vh"
-      padding={isInIframe ? "0" : isNarrow ? "medium" : "large"}
+      padding={isInIframe ? "0" : (isNarrow ? "medium" : "large")}
       themeOverride={{ backgroundBrand: colors.instructure }}
     >
       {!isInIframe && (
@@ -82,11 +73,7 @@ const App: FC = () => {
         >
           <Flex data-print="hidden" direction={isNarrow ? "column" : "row"}>
             <Flex.Item shouldGrow shouldShrink>
-              <View
-                as="div"
-                display="inline-block"
-                margin={isNarrow ? "0 0 small" : "0"}
-              >
+              <View as="div" display="inline-block" margin={isNarrow ? "0 0 small" : "0"}>
                 <Link href="/nutritionfacts">
                   <InlineSVG
                     height={isNarrow ? "2rem" : "2.5rem"}
@@ -108,10 +95,7 @@ const App: FC = () => {
                   />
                 </View>
                 <View margin="0 x-small 0">
-                  <LinkControl
-                    color={isDark ? "primary-inverse" : "primary"}
-                    product={product}
-                  />
+                  <LinkControl color={isDark ? "primary-inverse" : "primary"} product={product} />
                 </View>
               </Flex.Item>
             )}
@@ -148,25 +132,11 @@ const App: FC = () => {
           maxWidth="56rem"
           textAlign="center"
         >
-          <View
-            as="div"
-            data-print="max-width, color-secondary"
-            margin="0 auto"
-            maxWidth="66%"
-          >
-            <Text
-              as="p"
-              data-print={layout.disclaimer ? "" : "hidden"}
-              variant="contentSmall"
-            >
-              {layout.disclaimer &&
-                disclaimer(isDark ? "link-inverse" : "link")}
+          <View as="div" data-print="max-width, color-secondary" margin="0 auto" maxWidth="66%">
+            <Text as="p" data-print={layout.disclaimer ? "" : "hidden"} variant="contentSmall">
+              {layout.disclaimer && disclaimer(isDark ? "link-inverse" : "link")}
             </Text>
-            <Text
-              as="p"
-              data-print={layout.copyright ? "" : "hidden"}
-              variant="contentSmall"
-            >
+            <Text as="p" data-print={layout.copyright ? "" : "hidden"} variant="contentSmall">
               {layout.copyright && copyright}
             </Text>
           </View>

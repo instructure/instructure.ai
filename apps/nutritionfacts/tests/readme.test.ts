@@ -8,9 +8,7 @@ import { name } from "../package.json" with { type: "json" };
 
 const pkgRoot = new URL("..", import.meta.url);
 
-const readReadme = async () => {
-  return readFile(new URL("./README.md", pkgRoot), "utf8");
-};
+const readReadme = async () => readFile(new URL("./README.md", pkgRoot), "utf8");
 
 describe("rEADME.md", () => {
   it('starts with "# <package name>"', async () => {

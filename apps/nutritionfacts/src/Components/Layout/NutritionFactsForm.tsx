@@ -31,12 +31,7 @@ const NutritionFactsForm: FC<{
     <>
       <Flex alignItems="end" direction={isNarrow ? "column" : "row"}>
         <Flex.Item shouldGrow shouldShrink>
-          <Heading
-            aiVariant="stacked"
-            as="h1"
-            data-print="no-background"
-            margin="0 0 small"
-          >
+          <Heading aiVariant="stacked" as="h1" data-print="no-background" margin="0 0 small">
             Nutrition Facts
           </Heading>
         </Flex.Item>
@@ -56,58 +51,46 @@ const NutritionFactsForm: FC<{
               <Heading level="h2" variant="titleCardSection">
                 {Feature.featureName}
               </Heading>
-              {Feature.data.map(({ blockTitle, segmentData }) => {
-                return (
+              {Feature.data.map(({ blockTitle, segmentData }) => (
                   <View as="div" key={blockTitle} margin="sectionElements 0">
                     <Heading level="h3" variant="titleModule">
                       {blockTitle}
                     </Heading>
                     <View as="div" margin="sectionElements 0 0">
-                      {segmentData.map(
-                        ({
-                          segmentTitle,
-                          description,
-                          value,
-                          valueDescription,
-                        }) => {
-                          return (
-                            <View
-                              as="div"
-                              borderColor="primary"
-                              borderRadius="medium"
-                              borderWidth="small"
-                              key={segmentTitle}
-                              margin="0 0 modalElements"
-                              padding="space12"
-                            >
-                              <View as="div" margin="0 0 space8">
-                                <Heading level="h4" variant="label">
-                                  {segmentTitle}
-                                </Heading>
-                                <Text color="secondary" variant="contentSmall">
-                                  {description}
-                                </Text>
-                              </View>
-                              <Text variant="content">{value}</Text>
-                              {valueDescription && (
-                                <>
-                                  <br />
-                                  <Text
-                                    color="secondary"
-                                    variant="contentSmall"
-                                  >
-                                    {valueDescription}
-                                  </Text>
-                                </>
-                              )}
+                      {segmentData.map(({ segmentTitle, description, value, valueDescription }) => {
+                        return (
+                          <View
+                            as="div"
+                            borderColor="primary"
+                            borderRadius="medium"
+                            borderWidth="small"
+                            key={segmentTitle}
+                            margin="0 0 modalElements"
+                            padding="space12"
+                          >
+                            <View as="div" margin="0 0 space8">
+                              <Heading level="h4" variant="label">
+                                {segmentTitle}
+                              </Heading>
+                              <Text color="secondary" variant="contentSmall">
+                                {description}
+                              </Text>
                             </View>
-                          );
-                        },
-                      )}
+                            <Text variant="content">{value}</Text>
+                            {valueDescription && (
+                              <>
+                                <br />
+                                <Text color="secondary" variant="contentSmall">
+                                  {valueDescription}
+                                </Text>
+                              </>
+                            )}
+                          </View>
+                        );
+                      })}
                     </View>
                   </View>
-                );
-              })}
+                ))}
             </Flex.Item>
             {layout.revision && product?.revision && (
               <Flex.Item>
