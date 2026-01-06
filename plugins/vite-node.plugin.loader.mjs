@@ -1,28 +1,29 @@
-import { readFile } from "node:fs/promises";
-import { register } from "node:module";
 import { dirname, extname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { transformWithEsbuild } from "vite";
+import { readFile } from "node:fs/promises";
+import { register } from "node:module";
+import { transformWithOxc } from "vite";
 
-// Use the directory containing loader.mjs as the context
 const loaderDir = dirname(fileURLToPath(import.meta.url));
 register(new URL(import.meta.url).pathname, pathToFileURL(loaderDir));
 
 const mtsExtensions = new Set([".ts", ".mts", ".cts", ".tsx"]);
 
-export async function resolve(specifier, context, nextResolve) {
+const resolve = async function resolve(specifier, context, nextResolve) {
   const resolved = await nextResolve(specifier, context, nextResolve);
   return resolved;
-}
+};
 
-export async function load(url, context, nextLoad) {
+const load = async function load(url, context, nextLoad) {
   const extension = extname(url);
   if (mtsExtensions.has(extension)) {
     const filename = fileURLToPath(url);
     const source = await readFile(filename, "utf8");
-    const result = await transformWithEsbuild(source, filename, {
+    let loader = "ts";
+    if (extension === ".tsx") { loader = "tsx"; }
+    const result = await transformWithOxc(source, filename, {
       format: "esm",
-      loader: extension === ".tsx" ? "tsx" : "ts",
+      loader,
       sourcemap: "inline",
     });
     return {
@@ -31,6 +32,8 @@ export async function load(url, context, nextLoad) {
       source: result.code,
     };
   }
-
   return nextLoad(url, context, nextLoad);
-}
+};
+
+const loader = { load, resolve };
+export default loader;
