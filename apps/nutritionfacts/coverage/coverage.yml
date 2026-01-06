@@ -18,16 +18,6 @@ coverage:
       lines: 0%
       uncovered_line_numbers: "11-57"
     assets:
-      "Layout.ts":
-        statements: 100%
-        branches: 100%
-        functions: 100%
-        lines: 100%
-      "Logos.tsx":
-        statements: 100%
-        branches: 100%
-        functions: 100%
-        lines: 100%
       "colors.ts":
         statements: 100%
         branches: 100%
@@ -39,6 +29,16 @@ coverage:
         functions: 0%
         lines: 80%
         uncovered_line_numbers: "59"
+      "layout.ts":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+      "logos.tsx":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
     components:
       export:
         "controlButton.tsx":

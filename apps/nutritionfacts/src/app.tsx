@@ -57,10 +57,10 @@ const App: FC = () => {
   return (
     <View
       as="div"
-      background={isInIframe ? "primary" : isDark ? "brand" : "secondary"}
+      background={isInIframe ? "primary" : (isDark ? "brand" : "secondary")}
       data-print="no-padding, no-background"
       minHeight="100vh"
-      padding={isInIframe ? "0" : isNarrow ? "medium" : "large"}
+      padding={isInIframe ? "0" : (isNarrow ? "medium" : "large")}
       themeOverride={{ backgroundBrand: colors.instructure }}
     >
       {!isInIframe && (

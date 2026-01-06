@@ -50,6 +50,6 @@ describe("index.html", () => {
   it("should load main script as module", () => {
     const script = document.querySelector('script[type="module"]');
     expect(script).not.toBeNull();
-    expect(script?.getAttribute("src")).toBe("/src/Main.tsx");
+    expect(script?.getAttribute("src")).toBe("/src/main.tsx");
   });
 });
