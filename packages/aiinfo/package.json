@@ -35,11 +35,10 @@
     "write:entries": "WRITE=1 vite-node ./scripts/writeEntries.mts --entries",
     "write:barrel": "WRITE=1 vite-node ./scripts/writeEntries.mts --barrel"
   },
-  "dependencies": {},
   "devDependencies": {
     "@instructure.ai/shared-configs": "workspace:^",
     "@instructure/ui-instructure": "^11.2.0",
-    "@types/papaparse": "^5.3.16",
+    "@types/papaparse": "^5.5.2",
     "ansis": "^4.2.0",
     "papaparse": "^5.5.3",
     "typescript": "^5.9.3"
