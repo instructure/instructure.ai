@@ -7,34 +7,21 @@ import { brands } from "../../assets";
 
 interface PresetsProps {
   product: AiInfoFeatureProps | undefined;
-  setProduct: React.Dispatch<
-    React.SetStateAction<AiInfoFeatureProps | undefined>
-  >;
+  setProduct: React.Dispatch<React.SetStateAction<AiInfoFeatureProps | undefined>>;
 }
 
 const Presets = ({ setProduct, product }: PresetsProps) => {
   const [products, setProducts] = useState<AiInfoProps>({});
   const [groupedOptions, setGroupedOptions] = useState<
-    Record<
-      string,
-      { renderLabel: React.ReactNode; options: SelectOptionProps[] }
-    >
+    Record<string, { renderLabel: React.ReactNode; options: SelectOptionProps[] }>
   >({});
   const placeholder = "Select a feature";
-  const [value, setValue] = useState<string>(
-    product ? product.name : placeholder,
-  );
+  const [value, setValue] = useState<string>(product ? product.name : placeholder);
 
   const fetchProducts = useCallback(() => {
     if (Object.keys(products).length === 0) {
-      // oxc-ignore-start lint/correctness/noUnusedVariables: Destructuring for feature list
-      const {
-        nutritionFacts,
-        dataPermissionLevels,
-        aiInformation,
-        ...productEntries
-      } = AiInfo;
-      // oxc-ignore-end lint/correctness/noUnusedVariables: Destructuring for feature list
+      // oxlint-disable-next-line no-unused-vars
+      const { nutritionFacts, dataPermissionLevels, aiInformation, ...productEntries } = AiInfo;
 
       setProducts(productEntries);
       const grouped: Record<
@@ -63,9 +50,7 @@ const Presets = ({ setProduct, product }: PresetsProps) => {
       });
 
       Object.values(grouped).forEach((group) => {
-        group.options.sort((a, b) =>
-          (a.label ?? "").localeCompare(b.label ?? ""),
-        );
+        group.options.sort((a, b) => (a.label ?? "").localeCompare(b.label ?? ""));
       });
 
       setGroupedOptions(grouped);
@@ -77,7 +62,7 @@ const Presets = ({ setProduct, product }: PresetsProps) => {
   }, [fetchProducts]);
 
   const handleSelect = (
-    _event: React.SyntheticEvent<Element, Event>,
+    _event: React.SyntheticEvent,
     data: { id?: string; value?: string | number },
   ) => {
     if (data.value && typeof data.value === "string") {
@@ -97,9 +82,7 @@ const Presets = ({ setProduct, product }: PresetsProps) => {
         assistiveText="Use arrow keys to navigate options."
         onChange={handleSelect}
         placeholder={placeholder}
-        renderLabel={
-          <ScreenReaderContent>Select a product</ScreenReaderContent>
-        }
+        renderLabel={<ScreenReaderContent>Select a product</ScreenReaderContent>}
         value={value}
         visibleOptionsCount={8}
       >

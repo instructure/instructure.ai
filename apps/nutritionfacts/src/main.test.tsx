@@ -25,7 +25,7 @@ declare global {
   var __vite_ssr_module_cache__: Record<string, unknown> | undefined;
 }
 
-describe("main.tsx", () => {
+describe("Main.tsx", () => {
   let rootElem: HTMLElement | null;
 
   beforeEach(() => {
@@ -33,7 +33,7 @@ describe("main.tsx", () => {
     const viteCache = globalThis.__vite_ssr_module_cache__;
     if (typeof viteCache === "object" && viteCache !== null) {
       Object.keys(viteCache).forEach((key) => {
-        if (key.includes("/main.tsx")) {
+        if (key.includes("/Main.tsx")) {
           delete viteCache[key];
         }
       });
@@ -97,9 +97,7 @@ describe("main.tsx", () => {
     // Should contain App
     const app = React.Children.only(provider.props.children);
     expect(
-      app.type.name ||
-        app.type.displayName ||
-        (typeof app.type === "string" ? app.type : ""),
+      app.type.name || app.type.displayName || (typeof app.type === "string" ? app.type : ""),
     ).toMatch(/App/);
   });
 });

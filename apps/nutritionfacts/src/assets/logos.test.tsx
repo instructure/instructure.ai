@@ -1,14 +1,7 @@
 import { InlineSVG } from "@instructure/ui";
 import { render } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import {
-  CanvasBug,
-  IgniteBug,
-  InstructureBug,
-  MasteryBug,
-  ParchmentBug,
-  StudioBug,
-} from "./Logos";
+import { CanvasBug, IgniteBug, InstructureBug, MasteryBug, ParchmentBug, StudioBug } from "./Logos";
 
 // Mock InlineSVG to inspect props and children
 vi.mock<typeof import("@instructure/ui")>("@instructure/ui", async (orig) => {
@@ -119,11 +112,11 @@ describe("logo Bug Components", () => {
     }
     const rects = svg.querySelectorAll("rect");
     expect(rects.length).toBeGreaterThan(0);
-    expect(rects[0].getAttribute("stroke")).toBe("#0E1721"); // colors.instructure
-    expect(rects[1].getAttribute("fill")).toBe("#0E1721"); // colors.instructure
+    expect(rects[0].getAttribute("stroke")).toBe("#0E1721"); // Colors.instructure
+    expect(rects[1].getAttribute("fill")).toBe("#0E1721"); // Colors.instructure
     const path = svg.querySelector("path");
     expect(path).not.toBeNull();
-    expect(path?.getAttribute("fill")).toBe("#D42E21"); // colors.canvas
+    expect(path?.getAttribute("fill")).toBe("#D42E21"); // Colors.canvas
   });
 
   it("igniteBug renders with default props (no color)", () => {

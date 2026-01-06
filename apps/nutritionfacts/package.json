@@ -1,23 +1,13 @@
 {
-  "browserslist": [
-    "extends @instructure/browserslist-config-instui"
-  ],
-  "dependencies": {
-    "@instructure.ai/aiinfo": "workspace:^",
-    "@instructure/ui": "^11.2.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
-  },
-  "devDependencies": {
-    "@instructure.ai/shared-configs": "workspace:^"
-  },
   "name": "@instructure.ai/nutritionfacts",
+  "version": "2.0.10",
   "private": true,
   "repository": {
-    "directory": "apps/nutritionfacts",
     "type": "git",
-    "url": "https://github.com/instructure/instructure.ai"
+    "url": "https://github.com/instructure/instructure.ai",
+    "directory": "apps/nutritionfacts"
   },
+  "type": "module",
   "scripts": {
     "build": "vite build",
     "dev": "vite",
@@ -27,6 +17,16 @@
     "typecheck": "tsgo --noEmit",
     "update-cache": "vite-node ./scripts/updateCache.mts"
   },
-  "type": "module",
-  "version": "2.0.9"
+  "dependencies": {
+    "@instructure.ai/aiinfo": "workspace:^",
+    "@instructure/ui": "^11.2.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "devDependencies": {
+    "@instructure.ai/shared-configs": "workspace:^"
+  },
+  "browserslist": [
+    "extends @instructure/browserslist-config-instui"
+  ]
 }

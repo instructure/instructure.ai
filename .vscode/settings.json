@@ -26,5 +26,5 @@
   "oxc.typeAware": true,
   "typescript.experimental.useTsgo": true,
   "vitest.disableWorkspaceWarning": true,
-  "oxc.enable": false,
+  "oxc.enable": true,
 }

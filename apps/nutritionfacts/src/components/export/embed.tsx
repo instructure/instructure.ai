@@ -3,7 +3,7 @@ import type { SVGIconProps } from "@instructure/ui";
 import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { baseUrl } from "../../assets";
 import type { PageLayout } from "../../types.ts";
-import { ControlButton } from "./ControlButton.tsx";
+import { ControlButton } from "./";
 
 const productToText = (product: AiInfoFeatureProps): string => {
   const text = `<h2>${product.group} ${product.name}</h2><p>${product.description}</p>`;
@@ -23,10 +23,9 @@ const Embed = async (product: AiInfoFeatureProps, layout: PageLayout) => {
     }
 
     const helperClasses = [
-      "ui-helper-reset", // Removes iframe border in legacy Community platform.
-      "border-none", // tailwind
-      "outline-none", // tailwind
-      "border-0", // bootstrap
+      "border-none", // Tailwind
+      "outline-none", // Tailwind
+      "border-0", // Bootstrap
     ].join(" ");
 
     const separator = baseUrl.includes("?") ? "&" : "?";
@@ -37,7 +36,7 @@ const Embed = async (product: AiInfoFeatureProps, layout: PageLayout) => {
     try {
       await navigator.clipboard.writeText(embedCode);
     } catch (error) {
-      let msg: string = "Failed to copy data to clipboard";
+      let msg = "Failed to copy data to clipboard";
       if (error instanceof Error) {
         msg = error.message;
       } else if (typeof error === "string") {

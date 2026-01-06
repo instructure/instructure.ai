@@ -11,10 +11,7 @@ interface SVGInfo {
   viewBox: string;
 }
 
-export type SVGWrapperProps = Omit<
-  InlineSVGProps,
-  "children" | "viewBox" | "title" | "color"
-> & {
+export type SVGWrapperProps = Omit<InlineSVGProps, "children" | "viewBox" | "title" | "color"> & {
   children?: ReactNode;
   viewBox?: string;
   title?: string;
@@ -30,13 +27,7 @@ const SVGWrapper: FC<SVGWrapperProps> = ({
   color,
   ...rest
 }) => (
-  <InlineSVG
-    height={height}
-    title={title}
-    viewBox={viewBox}
-    width={width}
-    {...rest}
-  >
+  <InlineSVG height={height} title={title} viewBox={viewBox} width={width} {...rest}>
     {color ? <g fill={color}>{children}</g> : children}
   </InlineSVG>
 );
@@ -221,13 +212,7 @@ const IgniteBug: FC<SVGWrapperProps> = ({
 const InstructureLogo: SVGInfo = {
   SVG: (
     <>
-      <rect
-        fill="none"
-        height="53.42"
-        stroke="currentColor"
-        strokeWidth="5"
-        width="53.42"
-      />
+      <rect fill="none" height="53.42" stroke="currentColor" strokeWidth="5" width="53.42" />
       <path d="M30.24,37.26h0c0-2.05,1.66-3.71,3.71-3.71s3.71,1.66,3.71,3.71-1.66,3.71-3.71,3.71-3.71-1.66-3.71-3.71" />
       <rect height="28.52" width="6.18" x="19.28" y="12.45" />
     </>
@@ -256,13 +241,7 @@ const InstructureBug: FC<SVGWrapperProps> = ({
           d="M30.24,37.26h0c0-2.05,1.66-3.71,3.71-3.71s3.71,1.66,3.71,3.71-1.66,3.71-3.71,3.71-3.71-1.66-3.71-3.71"
           fill={CanvasLogo.color}
         />
-        <rect
-          fill={InstructureLogo.color}
-          height="28.52"
-          width="6.18"
-          x="19.28"
-          y="12.45"
-        />
+        <rect fill={InstructureLogo.color} height="28.52" width="6.18" x="19.28" y="12.45" />
       </>
     ) : (
       InstructureLogo.SVG
@@ -270,11 +249,4 @@ const InstructureBug: FC<SVGWrapperProps> = ({
   </SVGWrapper>
 );
 
-export {
-  CanvasBug,
-  IgniteBug,
-  InstructureBug,
-  MasteryBug,
-  StudioBug,
-  ParchmentBug,
-};
+export { CanvasBug, IgniteBug, InstructureBug, MasteryBug, StudioBug, ParchmentBug };

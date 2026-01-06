@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { PageLayout } from "../types";
-import { DefaultLayout, Layout } from "./Layout";
+import { DefaultLayout, Layout } from "./layout";
 
 describe("layout", () => {
   it("should correctly assign all true properties", () => {

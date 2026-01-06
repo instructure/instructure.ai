@@ -2,14 +2,8 @@ import { Link } from "@instructure/ui";
 import type { LinkProps } from "@instructure/ui";
 import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { colors } from "./colors";
-import {
-  CanvasBug,
-  IgniteBug,
-  InstructureBug,
-  MasteryBug,
-  ParchmentBug,
-} from "./Logos";
-import type { SVGWrapperProps } from "./Logos";
+import { CanvasBug, IgniteBug, InstructureBug, MasteryBug, ParchmentBug } from "./logos";
+import type { SVGWrapperProps } from "./";
 
 const baseUrl =
   typeof window !== "undefined"
@@ -63,8 +57,8 @@ const brands: Record<
 
 const disclaimer = (color: LinkProps["color"] = "link") => (
   <>
-    Instructure has developed nutrition fact labels for AI-enabled products to
-    increase transparency and improve decision making.{" "}
+    Instructure has developed nutrition fact labels for AI-enabled products to increase transparency
+    and improve decision making.{" "}
     <Link
       color={color}
       data-print="color-link"
