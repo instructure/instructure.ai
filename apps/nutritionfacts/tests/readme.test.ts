@@ -1,6 +1,4 @@
-/**
- * @vitest-environment node
- */
+// @vitest-environment node
 
 import { readFile } from "node:fs/promises";
 import { describe, expect, it } from "vitest";

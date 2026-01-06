@@ -20,9 +20,8 @@ const Presets = ({ setProduct, product }: PresetsProps) => {
 
   const fetchProducts = useCallback(() => {
     if (Object.keys(products).length === 0) {
-      // Oxc-ignore-start lint/correctness/noUnusedVariables: Destructuring for feature list
+      // oxlint-disable-next-line no-unused-vars
       const { nutritionFacts, dataPermissionLevels, aiInformation, ...productEntries } = AiInfo;
-      // Oxc-ignore-end lint/correctness/noUnusedVariables: Destructuring for feature list
 
       setProducts(productEntries);
       const grouped: Record<
