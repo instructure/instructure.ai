@@ -23,7 +23,6 @@ const Embed = async (product: AiInfoFeatureProps, layout: PageLayout) => {
     }
 
     const helperClasses = [
-      "ui-helper-reset", // Removes iframe border in legacy Community platform.
       "border-none", // Tailwind
       "outline-none", // Tailwind
       "border-0", // Bootstrap
