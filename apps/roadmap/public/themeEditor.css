@@ -2,138 +2,137 @@
 	font-family: "Atkinson Hyperlegible Next";
 	src:
 		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraLight.woff2")
-		format("woff2");
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraLight.woff2") format("woff2");
 	font-weight: 200;
 	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson Hyperlegible Next";
 	src:
 		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraLightItalic.woff2")
-		format("woff2");
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraLightItalic.woff2") format("woff2");
 	font-weight: 200;
 	font-style: italic;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson Hyperlegible Next";
 	src:
 		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Light.woff2")
-		format("woff2");
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Light.woff2") format("woff2");
 	font-weight: 300;
 	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson Hyperlegible Next";
 	src:
 		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-LightItalic.woff2")
-		format("woff2");
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-LightItalic.woff2") format("woff2");
 	font-weight: 300;
 	font-style: italic;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson Hyperlegible Next";
 	src:
 		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Regular.woff2")
-		format("woff2");
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Regular.woff2") format("woff2");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson Hyperlegible Next";
 	src:
 		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-RegularItalic.woff2")
-		format("woff2");
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-RegularItalic.woff2") format("woff2");
 	font-weight: 400;
 	font-style: italic;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson Hyperlegible Next";
 	src:
 		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Medium.woff2")
-		format("woff2");
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Medium.woff2") format("woff2");
 	font-weight: 500;
 	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson Hyperlegible Next";
 	src:
 		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-MediumItalic.woff2")
-		format("woff2");
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-MediumItalic.woff2") format("woff2");
 	font-weight: 500;
 	font-style: italic;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson Hyperlegible Next";
 	src:
 		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBold.woff2")
-		format("woff2");
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBold.woff2") format("woff2");
 	font-weight: 600;
 	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson Hyperlegible Next";
 	src:
 		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBoldItalic.woff2")
-		format("woff2");
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBoldItalic.woff2") format("woff2");
 	font-weight: 600;
 	font-style: italic;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson Hyperlegible Next";
 	src:
 		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Bold.woff2")
-		format("woff2");
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Bold.woff2") format("woff2");
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson Hyperlegible Next";
 	src:
 		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-BoldItalic.woff2")
-		format("woff2");
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-BoldItalic.woff2") format("woff2");
 	font-weight: 700;
 	font-style: italic;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson Hyperlegible Next";
 	src:
 		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraBold.woff2")
-		format("woff2");
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraBold.woff2") format("woff2");
 	font-weight: 800;
 	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson Hyperlegible Next";
 	src:
 		local("Atkinson Hyperlegible Next"),
-		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraBoldItalic.woff2")
-		format("woff2");
+		url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraBoldItalic.woff2") format("woff2");
 	font-weight: 800;
 	font-style: italic;
 	font-display: swap;
@@ -161,7 +160,7 @@ div {
 }
 
 body {
-	background: var(--v12-background-color);
+	background: var(#ffffff);
 	color: var(--ic-brand-font-color-dark);
 }
 
@@ -174,8 +173,7 @@ body {
 }
 
 @media (min-width: 768px) {
-	body:not(.no-headers):not(.content-only).primary-nav-expanded
-		.ic-Layout-wrapper {
+	body:not(.no-headers):not(.content-only).primary-nav-expanded .ic-Layout-wrapper {
 		margin-left: 100px;
 	}
 }
@@ -227,18 +225,17 @@ body.primary-nav-expanded .ic-app-header {
 	box-shadow: inset 0 0 0 0.125rem #6a7883;
 }
 
-.ic-app-header__menu-list-item.ic-app-header__menu-list-item--active
-	.ic-app-header__menu-list-link {
+.ic-app-header__menu-list-item.ic-app-header__menu-list-item--active .ic-app-header__menu-list-link {
 	background: #0c294a;
 }
 
-.ic-app-header__menu-list-item.ic-app-header__menu-list-item--active
-	.ic-app-header__menu-list-link:focus {
+.ic-app-header__menu-list-item.ic-app-header__menu-list-item--active .ic-app-header__menu-list-link:focus {
 	box-shadow: inset 0 0 0 0.125rem #103868;
 }
 
 .ic-app-header__menu-list-link.ic-app-header__menu-list-link--nav-toggle {
-	width: calc(100% - 1rem); /* item margin */
+	width: calc(100% - 1rem);
+	/* item margin */
 	margin: 0.5rem;
 	padding: inherit;
 }
@@ -265,7 +262,7 @@ body.primary-nav-expanded .ic-app-header {
 	margin-right: 0.5rem;
 }
 
-.tray-with-space-for-global-nav > div {
+.tray-with-space-for-global-nav>div {
 	min-height: calc(100vh - 1rem - 2px);
 	border-radius: 1rem;
 	background: var(--ic-brand-global-nav-bgd);
@@ -303,6 +300,7 @@ body.primary-nav-expanded .ic-app-header {
 #content {
 	padding-top: 0;
 }
+
 .pages.show .show-content,
 .pages.show.home .show-content {
 	padding: 0;
@@ -313,29 +311,29 @@ body.primary-nav-expanded .ic-app-header {
 #breadcrumbs,
 .header-bar,
 /* Start: Course Settings Tabs */
-	[class$="-view-tab"][class],
+[class$="-view-tab"][class],
 [class$="-view-tabs__container"][class],
-#details-selected > div,
-#sections-selected > div,
-#navigation-selected > div,
-#alerts-selected > div,
-#tools-selected > div,
-#features-selected > div,
-#integrations-selected > div,
+#details-selected>div,
+#sections-selected>div,
+#navigation-selected>div,
+#alerts-selected>div,
+#tools-selected>div,
+#features-selected>div,
+#integrations-selected>div,
 /* End: Course Settings Tabs */
 table.summary td,
 table.summary tbody th,
 .ui-tabs .ui-tabs-panel,
 /* Start: Discussions Overview */
-	.pinned-discussions-v2__wrapper,
+.pinned-discussions-v2__wrapper,
 .unpinned-discussions-v2__wrapper,
 .closed-for-comments-discussions-v2__wrapper,
 .discussions-v2__container-image
-	/* End: Discussions Overview */
-	/* Start: Rubrics */
-	#Saved
-	> div,
-#Archived > div {
+
+/* End: Discussions Overview */
+/* Start: Rubrics */
+#Saved>div,
+#Archived>div {
 	background-color: var(--v12-background-color);
 	color: var(--ic-brand-font-color-dark);
 }
@@ -357,7 +355,7 @@ div[class$="-view-tab"][class]::after {
 /* Reset: Buttons */
 
 /* Buttons: IgniteAI Agent */
-#top-nav-tools-mount-point > div > span > span > button > span {
+#top-nav-tools-mount-point>div>span>span>button>span {
 	background: var(--ic-brand-button--secondary-bgd);
 	color: var(--ic-brand-button--secondary-text);
 }
