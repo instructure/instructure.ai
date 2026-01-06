@@ -37,7 +37,7 @@ const LinkControl = ({
     key="link"
     label="Copy permalink"
     onClick={() => {
-      PermanentLink(product.uid);
+      void PermanentLink(product.uid);
     }}
   />
 );

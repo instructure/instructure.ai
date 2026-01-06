@@ -63,7 +63,7 @@ const Presets = ({ setProduct, product }: PresetsProps) => {
   }, [fetchProducts]);
 
   const handleSelect = (
-    _event: React.SyntheticEvent<Element, Event>,
+    _event: React.SyntheticEvent<Element>,
     data: { id?: string; value?: string | number },
   ) => {
     if (data.value && typeof data.value === "string") {
