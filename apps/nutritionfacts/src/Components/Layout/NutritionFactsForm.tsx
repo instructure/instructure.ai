@@ -52,45 +52,43 @@ const NutritionFactsForm: FC<{
                 {Feature.featureName}
               </Heading>
               {Feature.data.map(({ blockTitle, segmentData }) => (
-                  <View as="div" key={blockTitle} margin="sectionElements 0">
-                    <Heading level="h3" variant="titleModule">
-                      {blockTitle}
-                    </Heading>
-                    <View as="div" margin="sectionElements 0 0">
-                      {segmentData.map(({ segmentTitle, description, value, valueDescription }) => {
-                        return (
-                          <View
-                            as="div"
-                            borderColor="primary"
-                            borderRadius="medium"
-                            borderWidth="small"
-                            key={segmentTitle}
-                            margin="0 0 modalElements"
-                            padding="space12"
-                          >
-                            <View as="div" margin="0 0 space8">
-                              <Heading level="h4" variant="label">
-                                {segmentTitle}
-                              </Heading>
-                              <Text color="secondary" variant="contentSmall">
-                                {description}
-                              </Text>
-                            </View>
-                            <Text variant="content">{value}</Text>
-                            {valueDescription && (
-                              <>
-                                <br />
-                                <Text color="secondary" variant="contentSmall">
-                                  {valueDescription}
-                                </Text>
-                              </>
-                            )}
-                          </View>
-                        );
-                      })}
-                    </View>
+                <View as="div" key={blockTitle} margin="sectionElements 0">
+                  <Heading level="h3" variant="titleModule">
+                    {blockTitle}
+                  </Heading>
+                  <View as="div" margin="sectionElements 0 0">
+                    {segmentData.map(({ segmentTitle, description, value, valueDescription }) => (
+                      <View
+                        as="div"
+                        borderColor="primary"
+                        borderRadius="medium"
+                        borderWidth="small"
+                        key={segmentTitle}
+                        margin="0 0 modalElements"
+                        padding="space12"
+                      >
+                        <View as="div" margin="0 0 space8">
+                          <Heading level="h4" variant="label">
+                            {segmentTitle}
+                          </Heading>
+                          <Text color="secondary" variant="contentSmall">
+                            {description}
+                          </Text>
+                        </View>
+                        <Text variant="content">{value}</Text>
+                        {valueDescription && (
+                          <>
+                            <br />
+                            <Text color="secondary" variant="contentSmall">
+                              {valueDescription}
+                            </Text>
+                          </>
+                        )}
+                      </View>
+                    ))}
                   </View>
-                ))}
+                </View>
+              ))}
             </Flex.Item>
             {layout.revision && product?.revision && (
               <Flex.Item>

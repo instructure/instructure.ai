@@ -29,17 +29,17 @@ const LinkControl = ({
   border?: boolean;
   color?: "primary" | "primary-inverse";
 }) => (
-    <ControlButton
-      background={background}
-      border={border}
-      color={color}
-      Icon={IconLinkLine as React.ElementType<SVGIconProps>}
-      key="link"
-      label="Copy permalink"
-      onClick={() => {
-        PermanentLink(product.uid);
-      }}
-    />
-  );
+  <ControlButton
+    background={background}
+    border={border}
+    color={color}
+    Icon={IconLinkLine as React.ElementType<SVGIconProps>}
+    key="link"
+    label="Copy permalink"
+    onClick={() => {
+      PermanentLink(product.uid);
+    }}
+  />
+);
 
 export { LinkControl };
