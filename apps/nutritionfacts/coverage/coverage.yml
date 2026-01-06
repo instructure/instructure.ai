@@ -11,68 +11,12 @@ coverage:
       branches: 44.17%
       functions: 46.25%
       lines: 48.13%
-    "App.tsx":
+    "app.tsx":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "18-66"
-    Components:
-      Export:
-        "ControlButton.tsx":
-          statements: 0%
-          branches: 0%
-          functions: 0%
-          lines: 0%
-          uncovered_line_numbers: "14-23"
-        "Embed.tsx":
-          statements: 0%
-          branches: 0%
-          functions: 0%
-          lines: 0%
-          uncovered_line_numbers: "8-68"
-        "Link.tsx":
-          statements: 0%
-          branches: 0%
-          functions: 0%
-          lines: 0%
-          uncovered_line_numbers: "7-41"
-      Layout:
-        "Divider.tsx":
-          statements: 100%
-          branches: 100%
-          functions: 100%
-          lines: 100%
-        "NutritionFactsForm.tsx":
-          statements: 0%
-          branches: 0%
-          functions: 0%
-          lines: 0%
-          uncovered_line_numbers: "16-73"
-        "Presets.tsx":
-          statements: 0%
-          branches: 0%
-          functions: 0%
-          lines: 0%
-          uncovered_line_numbers: "15-111"
-        "extendedNutritionFacts.tsx":
-          statements: 0%
-          branches: 0%
-          functions: 0%
-          lines: 0%
-          uncovered_line_numbers: "4-32"
-        "getLayoutFromParams.ts":
-          statements: 0%
-          branches: 0%
-          functions: 0%
-          lines: 0%
-          uncovered_line_numbers: "4-19"
-    "Main.tsx":
-      statements: 87.5%
-      branches: 83.33%
-      functions: 100%
-      lines: 87.5%
-      uncovered_line_numbers: "27"
+      uncovered_line_numbers: "11-57"
     assets:
       "Layout.ts":
         statements: 100%
@@ -94,4 +38,60 @@ coverage:
         branches: 33.33%
         functions: 0%
         lines: 80%
-        uncovered_line_numbers: "65"
+        uncovered_line_numbers: "59"
+    components:
+      export:
+        "controlButton.tsx":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "14-23"
+        "embed.tsx":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "8-67"
+        "link.tsx":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "7-40"
+      layout:
+        "divider.tsx":
+          statements: 100%
+          branches: 100%
+          functions: 100%
+          lines: 100%
+        "extendedNutritionFacts.tsx":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "4-27"
+        "getLayoutFromParams.ts":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "4-14"
+        "nutritionFactsForm.tsx":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "16-61"
+        "presets.tsx":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "13-94"
+    "main.tsx":
+      statements: 87.5%
+      branches: 83.33%
+      functions: 100%
+      lines: 87.5%
+      uncovered_line_numbers: "27"
