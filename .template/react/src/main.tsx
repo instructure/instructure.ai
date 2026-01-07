@@ -1,7 +1,7 @@
+import "./main.css";
+import { type Root, createRoot } from "react-dom/client";
+import App from "./app.tsx";
 import { StrictMode } from "react";
-import { createRoot, type Root } from "react-dom/client";
-import App from "./App.tsx";
-import "./Main.css";
 
 const root: HTMLElement =
   document.getElementById("root") ||
