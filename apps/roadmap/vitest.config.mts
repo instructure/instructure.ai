@@ -1,7 +1,7 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 import baseConfig from "@instructure.ai/shared-configs/vitest";
+import { fileURLToPath } from "node:url";
 import { mergeConfig } from "vitest/config";
+import path from "node:path";
 
 const __dir = path.dirname(fileURLToPath(import.meta.url));
 const __cdir = path.resolve(__dir, "coverage");
