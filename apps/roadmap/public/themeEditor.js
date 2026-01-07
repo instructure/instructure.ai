@@ -19,10 +19,58 @@ const matchesRoadmap = path.endsWith("/pages/instructure-roadmap");
 const matchesCourse = /^\/courses\/\d+$/.test(path);
 const matchesCourseWiki = /^\/courses\/[1-9]\d*\/wiki$/.test(path);
 
+const handleGetRoadmap = (iFrame, _event) => {
+  const roadmap = iFrame.getAttribute("data-roadmap");
+  console.log("[themeEditor.js] Roadmap attribute:", roadmap);
+  if (iFrame.contentWindow) {
+    iFrame.contentWindow.postMessage({ value: roadmap }, "*");
+    console.log("[themeEditor.js] Sent roadmap message", {
+      value: roadmap,
+    });
+  } else {
+    console.error("No contentWindow for roadmap iframe");
+  }
+};
+
+const handleLtiGetPageSettings = (iFrame, event) => {
+  if (iFrame.contentWindow) {
+    iFrame.contentWindow.postMessage(
+      {
+        pageSettings: event.data.pageSettings,
+        subject: "lti.postMessage",
+      },
+      "*",
+    );
+    console.log("[themeEditor.js] Sent lti.postMessage", event.data.pageSettings);
+  }
+};
+
+const handleSetHeight = (iFrame, event) => {
+  try {
+    iFrame.height = event.data.height;
+  } catch (error) {
+    console.error("Failed to set iframe height:", error);
+  }
+};
+
 if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
   console.info("Roadmap script loaded");
 
   const iframeListenerMap = new WeakMap();
+
+  const handler = (iFrame, event) => {
+    if (!event.data) {
+      return;
+    }
+    if (event.data.type === "getRoadmap") {
+      handleGetRoadmap(iFrame, event);
+    } else if (event.data.subject === "lti.getPageSettings") {
+      handleLtiGetPageSettings(iFrame, event);
+    } else if (event.data.type === "setHeight") {
+      handleSetHeight(iFrame, event);
+    }
+  };
+
   const attachListener = (iFrame) => {
     if (!(iFrame instanceof HTMLIFrameElement)) {
       console.error('Element with id "roadmap" is not an HTMLIFrameElement');
@@ -31,43 +79,9 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
     if (iframeListenerMap.has(iFrame)) {
       return;
     }
-
-    const handler = (event) => {
-      if (!event.data) {
-        return;
-      }
-      if (event.data.type === "getRoadmap") {
-        const roadmap = iFrame.getAttribute("data-roadmap");
-        console.log("[themeEditor.js] Roadmap attribute:", roadmap);
-        if (iFrame.contentWindow) {
-          iFrame.contentWindow.postMessage({ value: roadmap }, "*");
-          console.log("[themeEditor.js] Sent roadmap message", {
-            value: roadmap,
-          });
-        } else {
-          console.error("No contentWindow for roadmap iframe");
-        }
-      } else if (event.data.subject === "lti.getPageSettings") {
-        if (iFrame.contentWindow) {
-          iFrame.contentWindow.postMessage(
-            {
-              pageSettings: event.data.pageSettings,
-              subject: "lti.postMessage",
-            },
-            "*",
-          );
-          console.log("[themeEditor.js] Sent lti.postMessage", event.data.pageSettings);
-        }
-      } else if (event.data.type === "setHeight") {
-        try {
-          iFrame.height = event.data.height;
-        } catch (error) {
-          console.error("Failed to set iframe height:", error);
-        }
-      }
-    };
-    globalThis.addEventListener("message", handler);
-    iframeListenerMap.set(iFrame, handler);
+    const boundHandler = (event) => handler(iFrame, event);
+    globalThis.addEventListener("message", boundHandler);
+    iframeListenerMap.set(iFrame, boundHandler);
   };
 
   const observer = new MutationObserver((_mutations, obs) => {
