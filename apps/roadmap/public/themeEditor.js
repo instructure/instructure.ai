@@ -36,7 +36,6 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
       if (!event.data) {
         return;
       }
-      // Only respond to getRoadmap and lti.getPageSettings events
       if (event.data.type === "getRoadmap") {
         const roadmap = iFrame.getAttribute("data-roadmap");
         console.log("[themeEditor.js] Roadmap attribute:", roadmap);
@@ -49,7 +48,6 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
           console.error("No contentWindow for roadmap iframe");
         }
       } else if (event.data.subject === "lti.getPageSettings") {
-        // Echo lti.getPageSettings as lti.postMessage for brand config
         if (iFrame.contentWindow) {
           iFrame.contentWindow.postMessage(
             {
@@ -67,19 +65,20 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
           console.error("Failed to set iframe height:", error);
         }
       }
-      // Ignore all other events
     };
     globalThis.addEventListener("message", handler);
     iframeListenerMap.set(iFrame, handler);
   };
 
   const observer = new MutationObserver((_mutations, obs) => {
+    const DEFAULT_ATTEMPT = 0;
+    const ATTEMPT_INCREMENT = 1;
     const iFrame = globalThis.document.getElementById("roadmap");
     if (iFrame) {
       attachListener(iFrame);
       if (matchesCourse) {
         console.info("Setting Roadmap page to full screen");
-        const removeElementsWithRetry = (attempt = 0) => {
+        const removeElementsWithRetry = (attempt = DEFAULT_ATTEMPT) => {
           const maxAttempts = 10;
           const delay = 100;
           let allRemoved = true;
@@ -97,7 +96,7 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
             main.style.setProperty("margin", "0");
           }
           if (!allRemoved && attempt < maxAttempts) {
-            setTimeout(() => removeElementsWithRetry(attempt + 1), delay);
+            setTimeout(() => removeElementsWithRetry(attempt + ATTEMPT_INCREMENT), delay);
           }
         };
         removeElementsWithRetry();
