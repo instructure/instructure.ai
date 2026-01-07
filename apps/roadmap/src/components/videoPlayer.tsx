@@ -1,7 +1,6 @@
 import { View } from "@instructure/ui";
 
-const VideoPlayer = ({ url }: { url: string | undefined }) => {
-  return url ? (
+const VideoPlayer = ({ url }: { url: string | undefined }) => url ? (
     <View as="div" margin="0 0 small" textAlign="center">
       <iframe
         allowFullScreen
@@ -13,6 +12,5 @@ const VideoPlayer = ({ url }: { url: string | undefined }) => {
       />
     </View>
   ) : undefined;
-};
 
 export default VideoPlayer;

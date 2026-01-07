@@ -1,20 +1,13 @@
 {
-  "dependencies": {
-    "@instructure/ui": "^11.2.0",
-    "@instructure/ui-color-utils": "^11.2.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3"
-  },
-  "devDependencies": {
-    "@instructure.ai/shared-configs": "workspace:^"
-  },
   "name": "@instructure.ai/roadmap",
+  "version": "1.0.4",
   "private": true,
   "repository": {
-    "directory": "apps/roadmap",
     "type": "git",
-    "url": "https://github.com/instructure/instructure.ai"
+    "url": "https://github.com/instructure/instructure.ai",
+    "directory": "apps/roadmap"
   },
+  "type": "module",
   "scripts": {
     "build": "vite build",
     "dev": "vite",
@@ -23,6 +16,13 @@
     "test": "pnpm vitest run",
     "typecheck": "tsgo --noEmit"
   },
-  "type": "module",
-  "version": "1.0.4"
+  "dependencies": {
+    "@instructure/ui": "^11.2.0",
+    "@instructure/ui-color-utils": "^11.2.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "devDependencies": {
+    "@instructure.ai/shared-configs": "workspace:^"
+  }
 }

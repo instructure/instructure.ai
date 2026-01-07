@@ -3,26 +3,16 @@ import type { FC } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { Card, CardOverlay, Loading } from "./components";
 import type { Theme } from "@instructure/ui";
-import {
-  getBrandConfig,
-  getColor,
-  getLogo,
-  getRoadmap,
-  sendHeight,
-} from "./utils";
+import { getBrandConfig, getColor, getLogo, getRoadmap, sendHeight } from "./utils";
 import "./App.css";
 
 type ThemeOrOverride = Theme | Record<string, unknown>;
 
 const App: FC = () => {
   const [overlayOpen, setOverlayOpen] = useState(false);
-  const [selectedEntry, setSelectedEntry] = useState<
-    PendoAPIFeature | undefined
-  >(undefined);
+  const [selectedEntry, setSelectedEntry] = useState<PendoAPIFeature | undefined>(undefined);
   const [brandConfig, setBrandConfig] = useState<ThemeOrOverride>();
-  const [roadmap, setRoadmap] = useState<RoadmapFeatures | undefined>(
-    undefined,
-  );
+  const [roadmap, setRoadmap] = useState<RoadmapFeatures | undefined>(undefined);
   const [showLoading, setShowLoading] = useState(false);
   const isDark = false;
 
@@ -91,12 +81,7 @@ const App: FC = () => {
     >
       {Entries.length ? (
         <>
-          <Flex
-            gap="paddingCardMedium"
-            justifyItems="start"
-            width="77.125rem"
-            wrap="wrap"
-          >
+          <Flex gap="paddingCardMedium" justifyItems="start" width="77.125rem" wrap="wrap">
             {Entries.map((entry) => (
               <Card
                 entry={entry}
@@ -116,9 +101,9 @@ const App: FC = () => {
             />
           )}
         </>
-      ) : (showLoading ? (
+      ) : showLoading ? (
         <Loading isDark={isDark} />
-      ) : null)}
+      ) : undefined}
     </InstUISettingsProvider>
   );
 };

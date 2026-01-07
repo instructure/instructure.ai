@@ -19,16 +19,10 @@ const Loading = ({ isDark }: { isDark: boolean }) => {
         borderColorSecondary: "#2A353F",
       }}
     >
-      <Heading
-        color={isDark ? "primary-inverse" : "primary"}
-        level="h3"
-        variant="titleCardSection"
-      >
+      <Heading color={isDark ? "primary-inverse" : "primary"} level="h3" variant="titleCardSection">
         Well, this is awkward.
       </Heading>
-      <Text as="p">
-        If you don't see any roadmap items, here are some ways to troubleshoot:
-      </Text>
+      <Text as="p">If you don't see any roadmap items, here are some ways to troubleshoot:</Text>
       <List>
         <List.Item
           themeOverride={{
@@ -67,8 +61,7 @@ const Loading = ({ isDark }: { isDark: boolean }) => {
             color: isDark ? "#fff" : undefined,
           }}
         >
-          Make sure the iframe has a valid <Text as="code">data-roadmap</Text>{" "}
-          attribute.
+          Make sure the iframe has a valid <Text as="code">data-roadmap</Text> attribute.
         </List.Item>
         <List.Item
           themeOverride={{

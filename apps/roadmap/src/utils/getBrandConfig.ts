@@ -40,9 +40,7 @@ const getBrandConfig = (): Promise<BrandConfig> => {
           console.error("Failed to fetch or parse brand config:", error);
         }
         window.removeEventListener("message", handler);
-        const result = event.data.pageSettings.use_high_contrast
-          ? {}
-          : (brandConfig ?? {});
+        const result = event.data.pageSettings.use_high_contrast ? {} : (brandConfig ?? {});
         cachedBrandConfig = result;
         resolve(result);
       }

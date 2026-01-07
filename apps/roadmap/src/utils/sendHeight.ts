@@ -1,6 +1,5 @@
 const sendHeight = () => {
-  const frameHeight =
-    document.body.scrollHeight < 800 ? 800 : document.body.scrollHeight;
+  const frameHeight = document.body.scrollHeight < 800 ? 800 : document.body.scrollHeight;
   window.parent.postMessage(
     {
       height: frameHeight,
