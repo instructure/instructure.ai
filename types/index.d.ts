@@ -1,2 +1,9 @@
-export * from "./instructure__browserslist-config-instui.d.ts";
-export * from "./instructure.ai__shared-configs-scripts-workspace.d.ts";
+import browserslistConfig from "./instructureBrowserslistConfigInstui.d.ts";
+import sharedConfig from "./instructureAiSharedConfigsScriptsWorkspace.d.ts";
+
+const types = {
+  browserslistConfig,
+  sharedConfig,
+};
+
+export default types;
