@@ -1,5 +1,10 @@
 {
-	"extends": ["../../tsconfig.json"],
-	"include": ["src", "vite.config*.mts"],
+	"extends": [
+		"../../tsconfig.json"
+	],
+	"include": [
+		"src",
+		"vite.config.mts"
+	],
 	"root": false
 }

@@ -6,9 +6,9 @@ A TypeScript package providing [IgniteAI](https://www.instructure.com/igniteai) 
 > [!WARNING]
 > v2.x has breaking changes from 1.x
 
-## Migrating from v1 to v2
+## Migrating to v2 from v1
 
-`AiInformation.trigger` is now `undefined`, you must bring your own Renderable trigger.  The default value of `undefined` will pass typechecks but you may have unexpected outputs.
+`AiInformation.trigger` is now `undefined`, you must bring your own `Renderable` trigger.  The default value of `undefined` will pass typechecks but you may have unexpected outputs.
 
 ```jsx
 //V1
@@ -24,8 +24,6 @@ A TypeScript package providing [IgniteAI](https://www.instructure.com/igniteai) 
 ```
 
 If you were not using @instructure/ui's AiInformation component, then there are no changes needed. This does not effect NutritionFacts or DataPermissionLevels
-
-## Entries
 
 ## Entries & Features
 
@@ -128,14 +126,14 @@ import type { FC } from "react";
 
 const App: FC = () => (
 	<InstUISettingsProvider>
-    <AiInformation
-      {...smartsearch.aiInformation}
-      trigger={
-        <IconButton screenReaderLabel="AI Information">
-          <IconAIInfoLine />
-        </IconButton>
+		<AiInformation
+			{...smartsearch.aiInformation}
+			trigger={
+				<IconButton screenReaderLabel="AI Information">
+					<IconAIInfoLine />
+				</IconButton>
 			}
-    />
+		/>
 	</InstUISettingsProvider>
 );
 export default App;

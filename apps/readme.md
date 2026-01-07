@@ -1,8 +1,8 @@
 # @instructure.ai apps
 
 > [!WARNING]
-> Don't manually add an app here.  Use the monorepo utils to create a new package and track it.
+> Don't manually add an app here.  Use the monorepo utils to create a new workspace entry and track it.
 
 ```shell
-pnpm new <appname> [--template=(default: vanilla | react | instui)]
+pnpm new <appName> [--template=(default: vanilla | react | instui)]
 ```

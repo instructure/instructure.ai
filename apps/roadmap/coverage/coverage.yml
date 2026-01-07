@@ -1,0 +1,111 @@
+coverage:
+  totals:
+    statements: 0%
+    branches: 0%
+    functions: 0%
+    lines: 0%
+    total: 0%
+  src:
+    totals:
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+    "App.tsx":
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "14-106"
+    "Main.tsx":
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "9-16"
+    components:
+      "card.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "23-155"
+      "cardOverlay.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "30-325"
+      "loading.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "3-8"
+      "logos.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "26-318"
+      "tagList.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "5-64"
+      "videoPlayer.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "3-4"
+    utils:
+      "getBrandConfig.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "16-55"
+      "getColor.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "3-8"
+      "getLinkType.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "6-56"
+      "getLogo.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "3-8"
+      "getProductArea.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "1-6"
+      "getRoadmap.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "8-39"
+      "paramsToPendo.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "1-86"
+      "sendHeight.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "1-4"

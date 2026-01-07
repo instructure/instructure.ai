@@ -2,14 +2,14 @@
 
 ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Finstructure%2Finstructure.ai%2Frefs%2Fheads%2Fmain%2Fapps%2Fnutritionfacts%2Fpackage.json&query=%24.version&label=version&labelColor=%230e1721&color=%234279B6) ![coverage](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Finstructure%2Finstructure.ai%2Frefs%2Fheads%2Fmain%2Fapps%2Fnutritionfacts%2Fcoverage%2Fcoverage.yml&query=coverage.totals.total&logo=vitest&label=coverage&labelColor=%230E1721&color=%234279B6)
 
-## IgniteAI Nutrition Facts Generator
+## IgniteAI Nutrition Facts Viewer
 
-An interactive web application for importing, viewing, and exporting Nutrition Facts for [IgniteAI features](https://www.instructure.com/ignite-ai). Built with React, TypeScript, and Vite, it provides a modern UI for customizing Nutrition Facts, layouts, and exporting results in various formats.
+An interactive web application for viewing, and exporting Nutrition Facts for [IgniteAI features](https://www.instructure.com/ignite-ai). Built with React, TypeScript, and Vite, it provides a modern UI for customizing Nutrition Facts, layouts, and exporting results in various formats.
 
 ### Features
 
 - **Customizable Layouts**: Change the appearance of the Nutrition Facts, including revision, permissions, disclaimer, and copyright.
-- **Import/Export**: Import products and export Nutrition Facts.
+- **Export**: Export Nutrition Facts via iFrame or Print.
 - **Modern UI**: Uses [@instructure/ui](https://github.com/instructure/instructure-ui) for a responsive and accessible interface.
 - **Dark Mode Support**: Automatically adapts to your system's color scheme.
 
@@ -56,40 +56,3 @@ The "Copy embed code" generates an iFrame that is sized to fit the content witho
 > Only the iFrame content is rendered dynamically. The copy of the product name / description are not dynamically updated and will need to be manually updated if either change significantly from the time the embed code is generated.
 
 This makes outputting AI Components fairly simple, and standard.
-
-### Getting Started
-
-> [!CAUTION]
-> The rest of this readme is for developing the generator. If you need to generate nutrition facts, see 'Usage' above.
-
-#### Prerequisites
-
-- [Node.js](https://nodejs.org/) (v20+ recommended)
-- [pnpm](https://pnpm.io/) (used for package management)
-- [typescript native](https://devblogs.microsoft.com/typescript/announcing-typescript-native-previews/)
-
-#### Installation
-
-This is part of the `@instructure.ai` monorepo. Clone the `instructure/instructure.ai` repository and install dependencies:
-
-```bash
-pnpm install
-```
-
-#### Development
-
-Start the development server using provided scripts:
-
-```bash
-pnpm dev nutritionfacts
-```
-
-Open [http://localhost:5173](http://localhost:5173) in your browser to use the app.
-
-#### Build
-
-The nutritionfacts repo buildscript includes a call to `pnpm update-cache` which fetches the current list of features and stores it locally.
-
-```bash
-pnpm build nutritionfacts
-```

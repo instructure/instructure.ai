@@ -1,9 +1,3 @@
-import browserslistConfig from "./instructureBrowserslistConfigInstui.d.ts";
-import sharedConfig from "./instructureAiSharedConfigsScriptsWorkspace.d.ts";
-
-const types = {
-  browserslistConfig,
-  sharedConfig,
-};
-
-export default types;
+// oxlint-disable no-named-export
+export * from "./instructureBrowserslistConfigInstui.d.ts";
+export * from "./instructureAiSharedConfigsScriptsWorkspace.d.ts";

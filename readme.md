@@ -16,7 +16,7 @@ Configs and dev dependencies are shared from the root package `@instructure.ai/s
 Package templates are provided for apps and packages and can be instantiated with the Workspace script `new`.
 
 ```shell
-pnpm new <packagename> [--template (default: vanilla | react | instui | esm)]
+pnpm new <packageName> [--template (default: vanilla | react | instui | esm)]
 ```
 
 ### Workspace Utilities
@@ -46,8 +46,8 @@ Global `option`s provided by `workspace` are:
 Though individual scripts may only support a subset of options, and will throw an error when an unsupported option is passed. Any args can be passed and will be used against each package in the options list.
 
 ```shell
-# lint & build apps
-# passes the `jsx-a11y-plugin` flag to `oxclint`
+# Example: lint & build all apps
+# and pass the `jsx-a11y-plugin` flag to `oxclint`
 
 pnpm lint apps --jsx-a11y-plugin && pnpm build apps
 ```
@@ -66,20 +66,21 @@ Configuration files are provided and where possible use inheritance. There are a
 
 #### Vite
 
-Vite uses shared configs to provide a baseline setup for each package.  Settings can be overwritten using [mergeConfig](https://vite.dev/guide/api-javascript.html#mergeconfig).
+Vite is only used for Apps and uses shared configs to provide a baseline setup for each package.  Settings can be overwritten using [mergeConfig](https://vite.dev/guide/api-javascript.html#mergeconfig).
 `mergeConfig(baseconfig, {...opts})`
 
 ```shell
 📁 /
     ├── 📄 vite.config.mts # Base config for apps
-    ├── 📄 vite.config.esm.mts # Base config for packages
     ├── 📄 vite.config.react.mts # Merges ./vite.config.mts
     ├── 📂 apps/
     │   └── 📂 roadmap/
-    │       └── vite.config.mts # Merges ./vite.config.react.mts
+    │       └── vite.config.mts # Merges ./vite.config.react.mts (INSTUI)
+    │   └── 📂 site/
+    │       └── vite.config.mts # Merges ./vite.config.mts (Vanilla)
     └── 📂 /packages
         └── 📂 aiinfo/
-            └── vite.config.mts # Merges ./vite.config.esm
+            └── ❌ # Packages do not use Vite (ESM)
 ```
   
 #### Typescript
@@ -95,10 +96,29 @@ Typescript uses shared configs to provide a baseline setup for each package. Set
     ├── 📄 tsconfig.node.json # Extends ./tsconfig.json
     ├── 📂 apps/
     │   └── 📂 roadmap/
-    │       └── tsconfig.json # Extends ./tsconfig.node.json
+    │       └── tsconfig.json # Extends ./tsconfig.node.json (INSTUI)
+    │   └── 📂 site/
+    │       └── tsconfig.json # Extends ./tsconfig.json (Vanilla)
     └── 📂 /packages
         └── 📂 aiinfo/
-            └── tsconfig.json # Extends ./tsconfig.json
+            └── tsconfig.json # Extends ./tsconfig.json (ESM)
+```
+
+#### TSDown
+
+tsdown is used for type-aware rolldown builds of ESM modules. It is not used for apps. tsdown does not currently provide a merge/extend functionality in its config so a fresh copy is created for each package.
+
+```shell
+📁 /
+    ├── 📂 .template/
+    │   └── 📂 esm/
+    │       └── tsdown.config.mts # Base config for packages (ESM)
+    ├── 📂 apps/
+    │   └── 📂 site/
+    │       └── ❌ # Apps do not use tsdown
+    └── 📂 /packages
+        └── 📂 aiinfo/
+            └── tsdown.config.mts # Copies ./.template/esm/tsdown.config.mts (ESM)
 ```
 
 #### Vitest
@@ -130,12 +150,12 @@ OxC is configured to use a root config, each package's config is an extended cop
     ├── 📄 .oxlintrc.json # Base lint config
     └── 📂 /apps
     │   └── 📂 roadmap/
-    │       └── .oxfmtrc.jsonc # Merges ./.oxfmtrc.jsonc
-    │       └── .oxlintrc.json # Merges ./.oxlintrc.json
+    │       └── .oxfmtrc.jsonc # Extends ./.oxfmtrc.jsonc
+    │       └── .oxlintrc.json # Extends ./.oxlintrc.json
     └── 📂 /packages
         └── 📂 aiinfo/
-    │       └── .oxfmtrc.jsonc # Merges ./.oxfmtrc.jsonc
-    │       └── .oxlintrc.json # Merges ./.oxlintrc.json
+    │       └── .oxfmtrc.jsonc # Extends ./.oxfmtrc.jsonc
+    │       └── .oxlintrc.json # Extends ./.oxlintrc.json
 ```
 
 #### Package.json
@@ -147,10 +167,10 @@ The root workspace package.json defines workspace exports and shares workspace `
     ├── 📄 package.json # Base config (workspace root config)
     └── 📂 /apps
     │   └── 📂 roadmap/
-    │       └── package.json # Imports ./package.json
+    │       └── package.json # Imports ./package.json exports
     └── 📂 /packages
         └── 📂 aiinfo/
-            └── package.json # Imports ./package.json
+            └── package.json # Imports ./package.json exports
 ```
 
 ##### devDependencies
@@ -188,7 +208,7 @@ The following `devDependencies` are provided.  No `dependencies` are included.
 
 In workspace packages they are imported with:
 
-```
+```json
   "devDependencies": {
     "@instructure.ai/shared-configs": "workspace:^"
   }
@@ -202,4 +222,18 @@ This repo uses github rules to protect the `main` branch.  Requirements:
 
 * Must be a PR
 * Must be a squash merge
-* Branch name must start with a valid package name (incl. `shared-configs`)
+* Branch name must start with a valid App or Package path or `shared-configs` followed by branch purpose
+
+### Valid
+
+* shared-configs/refactorTypes
+* apps/site/simplify
+* packages/widget/create
+
+### Invalid
+
+* site/simplify
+* widget/create
+* refactorWidget
+
+In general, try to only touch files in the app or package your PR is associated with.  Don't add a dependency to the root `./package.json` when it will only be used by your package.  Don't update root configs, etc. If there's a rationale for changing a root setup which will affect multiple packages, then each package needs to be released in your PR.
