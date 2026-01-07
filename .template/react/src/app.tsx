@@ -1,6 +1,3 @@
-import type { FC } from "react";
-
-const App: FC = () => {
-  return <>Hello, World!</>;
-};
+import { type FC } from "react";
+const App: FC = () => <>Hello, World!</>;
 export default App;
