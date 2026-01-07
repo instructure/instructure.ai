@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import fs from "fs";
 import path from "path";
 
-// Load regex from YAML config
 const yaml = fs.readFileSync(
   path.resolve(__dirname, "../.github/policies/branch-naming.yml"),
   "utf8",
@@ -11,7 +10,8 @@ const match = yaml.match(/branch_name_regex:\s*'([^']+)'/);
 if (!match) {
   throw new Error("branch_name_regex not found in YAML");
 }
-const REGEX = new RegExp(match[1]);
+const CAPTURED_GROUP_INDEX = 1;
+const REGEX = new RegExp(match[CAPTURED_GROUP_INDEX]);
 
 describe("branch_name_regex", () => {
   const validBranches = [
@@ -46,6 +46,7 @@ describe("branch_name_regex", () => {
     "release_",
     "release-",
     "release/",
+    "v1.2.3",
   ];
 
   invalidBranches.forEach((branch) => {

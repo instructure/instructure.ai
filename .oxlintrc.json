@@ -45,6 +45,7 @@
       {
         "allow": [
           "**/*.css",
+          "@instructure.ai/shared-configs/types"
         ]
       }
     ],
