@@ -34,5 +34,13 @@
     "jsdoc",
     "import",
     "node",
-  ]
+  ],
+  "rules": {
+    "unicorn/filename-case": [
+      "warn",
+      {
+        "case": "camelCase"
+      }
+    ],
+  }
 }
