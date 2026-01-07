@@ -48,6 +48,7 @@
         ]
       }
     ],
+    "react/react-in-jsx-scope": "off",
     "unicorn/filename-case": [
       "warn",
       {
