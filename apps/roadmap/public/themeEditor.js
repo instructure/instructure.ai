@@ -117,53 +117,18 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
 /**
  * Canvas Theme Editor: moveAvatar
  *
- * Rearranges the global nav structore to put the user avatar at the bottom
+ * Rearranges the global nav structure to put the user avatar at the bottom
  *
- * @version 2025.11.06.00
+ * @version 2026.01.07.00
  *
  */
 
-(() => {
-  let avatarObserver;
-  let lastPath;
+const ONLY_ONE_CHILD = 1;
 
-  const moveAvatar = () => {
-    const firstLi = globalThis.document.querySelector("#menu li:first-child");
-    const targetList = globalThis.document.querySelector(
-      ".ic-app-header__secondary-navigation > .ic-app-header__menu-list",
-    );
+const getCurrentPath = () =>
+  globalThis.location.pathname + globalThis.location.search + globalThis.location.hash;
 
-    // Only move when the target list exists AND currently has exactly one child
-    if (firstLi && targetList && targetList.childElementCount === 1) {
-      targetList.appendChild(firstLi);
-      if (avatarObserver) {
-        avatarObserver.disconnect();
-      } // Stop for this page
-      avatarObserver = undefined;
-    }
-  };
-
-  const startObserverForThisPage = () => {
-    // Ensure fresh observer per page view
-    if (avatarObserver) {
-      avatarObserver.disconnect();
-    }
-    avatarObserver = new MutationObserver(moveAvatar);
-    avatarObserver.observe(globalThis.document.body, { childList: true, subtree: true });
-
-    // Immediate attempt (in case DOM is already ready)
-    moveAvatar();
-  };
-
-  const onLocationChange = () => {
-    const path =
-      globalThis.location.pathname + globalThis.location.search + globalThis.location.hash;
-    if (path !== lastPath) {
-      lastPath = path;
-      startObserverForThisPage();
-    }
-  };
-
+const patchHistoryMethods = () => {
   const _pushState = globalThis.history.pushState.bind(globalThis.history);
   globalThis.history.pushState = function pushState(...args) {
     const ret = _pushState.apply(this, args);
@@ -177,17 +142,63 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
     globalThis.dispatchEvent(new Event("locationchange"));
     return ret;
   };
+};
 
-  globalThis.addEventListener("popstate", () =>
-    globalThis.dispatchEvent(new Event("locationchange")),
-  );
-  globalThis.addEventListener("locationchange", onLocationChange);
+(() => {
+  let avatarObserver = undefined;
+  let lastPath = "";
 
-  if (globalThis.document.readyState === "loading") {
-    globalThis.document.addEventListener("DOMContentLoaded", onLocationChange, {
-      once: true,
-    });
-  } else {
-    onLocationChange();
-  }
+  const moveAvatar = () => {
+    const firstLi = globalThis.document.querySelector("#menu li:first-child");
+    const targetList = globalThis.document.querySelector(
+      ".ic-app-header__secondary-navigation > .ic-app-header__menu-list",
+    );
+    if (firstLi && targetList && targetList.childElementCount === ONLY_ONE_CHILD) {
+      targetList.appendChild(firstLi);
+      disconnectAvatarObserver();
+    }
+  };
+
+  const disconnectAvatarObserver = () => {
+    if (avatarObserver) {
+      avatarObserver.disconnect();
+      avatarObserver = undefined;
+    }
+  };
+
+  const startObserverForThisPage = () => {
+    disconnectAvatarObserver();
+    avatarObserver = new MutationObserver(moveAvatar);
+    avatarObserver.observe(globalThis.document.body, { childList: true, subtree: true });
+    moveAvatar();
+  };
+
+  const onLocationChange = () => {
+    const path = getCurrentPath();
+    if (path !== lastPath) {
+      lastPath = path;
+      startObserverForThisPage();
+    }
+  };
+
+  const setupListeners = () => {
+    globalThis.addEventListener("popstate", () =>
+      globalThis.dispatchEvent(new Event("locationchange")),
+    );
+    globalThis.addEventListener("locationchange", onLocationChange);
+  };
+
+  const init = () => {
+    patchHistoryMethods();
+    setupListeners();
+    if (globalThis.document.readyState === "loading") {
+      globalThis.document.addEventListener("DOMContentLoaded", onLocationChange, {
+        once: true,
+      });
+    } else {
+      onLocationChange();
+    }
+  };
+
+  init();
 })();
