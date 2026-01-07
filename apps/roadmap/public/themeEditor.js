@@ -1,7 +1,5 @@
-// ==== BEGIN Roadmap.js ====
-
 /**
- * Canvas Theme Editor: Roadmap.js
+ * Canvas Theme Editor: co-labsRoadmap
  *
  * This script listens for messages from the roadmap iframe and handles
  * communication for roadmap data and dynamic resizing.
@@ -13,11 +11,10 @@
  *
  * Only runs on the "/pages/instructure-roadmap" path.
  *
- * @version 2025.12.02.00
- *
+ * @version 2026.01.07.00
  */
 
-const path = window.location.pathname;
+const path = globalThis.location.pathname;
 const matchesRoadmap = path.endsWith("/pages/instructure-roadmap");
 const matchesCourse = /^\/courses\/\d+$/.test(path);
 const matchesCourseWiki = /^\/courses\/[1-9]\d*\/wiki$/.test(path);
@@ -61,10 +58,7 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
             },
             "*",
           );
-          console.log(
-            "[themeEditor.js] Sent lti.postMessage",
-            event.data.pageSettings,
-          );
+          console.log("[themeEditor.js] Sent lti.postMessage", event.data.pageSettings);
         }
       } else if (event.data.type === "setHeight") {
         try {
@@ -75,12 +69,12 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
       }
       // Ignore all other events
     };
-    window.addEventListener("message", handler);
+    globalThis.addEventListener("message", handler);
     iframeListenerMap.set(iFrame, handler);
   };
 
   const observer = new MutationObserver((_mutations, obs) => {
-    const iFrame = document.getElementById("roadmap");
+    const iFrame = globalThis.document.getElementById("roadmap");
     if (iFrame) {
       attachListener(iFrame);
       if (matchesCourse) {
@@ -89,20 +83,16 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
           const maxAttempts = 10;
           const delay = 100;
           let allRemoved = true;
-          const selectors = [
-            "#right-side-wrapper",
-            "#left-side",
-            "#courseMenuToggle",
-          ];
+          const selectors = ["#right-side-wrapper", "#left-side", "#courseMenuToggle"];
           selectors.forEach((sel) => {
-            const el = document.querySelector(sel);
+            const el = globalThis.document.querySelector(sel);
             if (el) {
               el.remove();
             } else {
               allRemoved = false;
             }
           });
-          const main = document.querySelector("#main");
+          const main = globalThis.document.querySelector("#main");
           if (main?.style) {
             main.style.setProperty("margin", "0");
           }
@@ -116,21 +106,17 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
     }
   });
 
-  observer.observe(document.body, { childList: true, subtree: true });
+  observer.observe(globalThis.document.body, { childList: true, subtree: true });
 
-  const existing = document.getElementById("roadmap");
+  const existing = globalThis.document.getElementById("roadmap");
   if (existing) {
     attachListener(existing);
     observer.disconnect();
   }
 }
 
-// ==== END Roadmap.js ====
-
-// ==== BEGIN MoveAvatar.js ====
-
 /**
- * Canvas Theme Editor: MoveAvatar.js
+ * Canvas Theme Editor: moveAvatar
  *
  * Rearranges the global nav structore to put the user avatar at the bottom
  *
@@ -143,8 +129,8 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
   let lastPath;
 
   const moveAvatar = () => {
-    const firstLi = document.querySelector("#menu li:first-child");
-    const targetList = document.querySelector(
+    const firstLi = globalThis.document.querySelector("#menu li:first-child");
+    const targetList = globalThis.document.querySelector(
       ".ic-app-header__secondary-navigation > .ic-app-header__menu-list",
     );
 
@@ -153,7 +139,7 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
       targetList.appendChild(firstLi);
       if (avatarObserver) {
         avatarObserver.disconnect();
-      } // stop for this page
+      } // Stop for this page
       avatarObserver = undefined;
     }
   };
@@ -164,46 +150,45 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
       avatarObserver.disconnect();
     }
     avatarObserver = new MutationObserver(moveAvatar);
-    avatarObserver.observe(document.body, { childList: true, subtree: true });
+    avatarObserver.observe(globalThis.document.body, { childList: true, subtree: true });
 
     // Immediate attempt (in case DOM is already ready)
     moveAvatar();
   };
 
   const onLocationChange = () => {
-    const path = location.pathname + location.search + location.hash;
+    const path =
+      globalThis.location.pathname + globalThis.location.search + globalThis.location.hash;
     if (path !== lastPath) {
       lastPath = path;
       startObserverForThisPage();
     }
   };
 
-  const _pushState = history.pushState.bind(history);
-  history.pushState = function pushState(...args) {
+  const _pushState = globalThis.history.pushState.bind(globalThis.history);
+  globalThis.history.pushState = function pushState(...args) {
     const ret = _pushState.apply(this, args);
-    window.dispatchEvent(new Event("locationchange"));
+    globalThis.dispatchEvent(new Event("locationchange"));
     return ret;
   };
 
-  const _replaceState = history.replaceState.bind(history);
-  history.replaceState = function replaceState(...args) {
+  const _replaceState = globalThis.history.replaceState.bind(globalThis.history);
+  globalThis.history.replaceState = function replaceState(...args) {
     const ret = _replaceState.apply(this, args);
-    window.dispatchEvent(new Event("locationchange"));
+    globalThis.dispatchEvent(new Event("locationchange"));
     return ret;
   };
 
-  window.addEventListener("popstate", () =>
-    window.dispatchEvent(new Event("locationchange")),
+  globalThis.addEventListener("popstate", () =>
+    globalThis.dispatchEvent(new Event("locationchange")),
   );
-  window.addEventListener("locationchange", onLocationChange);
+  globalThis.addEventListener("locationchange", onLocationChange);
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", onLocationChange, {
+  if (globalThis.document.readyState === "loading") {
+    globalThis.document.addEventListener("DOMContentLoaded", onLocationChange, {
       once: true,
     });
   } else {
     onLocationChange();
   }
 })();
-
-// ==== END MoveAvatar.js ====
