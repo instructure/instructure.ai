@@ -36,6 +36,18 @@
     "node",
   ],
   "rules": {
+    "import/consistent-type-specifier-style": [
+      "warn",
+      "prefer-inline"
+    ],
+    "import/no-unassigned-import": [
+      "warn",
+      {
+        "allow": [
+          "**/*.css",
+        ]
+      }
+    ],
     "unicorn/filename-case": [
       "warn",
       {
