@@ -10,11 +10,11 @@ You should use the provided components and utilities from InstUI to build your a
 
 ## InstUI Guidelines
 
-
-- version 11.2.0 
+- version 11.2.0
 - Instructure UI (InstUI) is a comprehensive React component library.
 
 ### User Guides
+
 #### Getting Started
 
 - [Accessibility](https://instructure.design/markdowns/accessibility.md): Instructure UI targets WCAG 2.1 AA/AAA standards with proper color contrast, keyboard navigation, screen reader support, and ARIA compliance. Components are perceivable, operable, understandable, and robust.

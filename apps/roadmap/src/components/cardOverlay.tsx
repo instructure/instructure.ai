@@ -15,7 +15,7 @@ import {
   View,
 } from "@instructure/ui";
 import { lighten } from "@instructure/ui-color-utils";
-import type { FC } from "react";
+import  { type FC } from "react";
 import { useMemo } from "react";
 import { getLinkType, getProductArea } from "../utils";
 import { VideoPlayer } from "./";
@@ -280,21 +280,21 @@ const CardOverlay: FC<{
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isDark: boolean;
 }> = ({ entry, isOpen, setOpen, isDark = false }) => (
-    <Responsive
-      query={{ large: { minWidth: "50rem" }, small: { maxWidth: "50rem" } }}
-      render={(_props, matches) => {
-        const isSmall = matches?.includes("small") ?? false;
-        return (
-          <CardOverlayContent
-            entry={entry}
-            isDark={isDark}
-            isNarrow={isSmall}
-            isOpen={isOpen}
-            setOpen={setOpen}
-          />
-        );
-      }}
-    />
-  );
+  <Responsive
+    query={{ large: { minWidth: "50rem" }, small: { maxWidth: "50rem" } }}
+    render={(_props, matches) => {
+      const isSmall = matches?.includes("small") ?? false;
+      return (
+        <CardOverlayContent
+          entry={entry}
+          isDark={isDark}
+          isNarrow={isSmall}
+          isOpen={isOpen}
+          setOpen={setOpen}
+        />
+      );
+    }}
+  />
+);
 
 export default CardOverlay;

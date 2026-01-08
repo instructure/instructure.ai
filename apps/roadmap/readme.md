@@ -34,15 +34,15 @@ The Roadmap app does **not** automatically update content from SEnsei Panda / Pe
 
 ### Troubleshooting
 
-* Make sure you're not logged in with a site admin account.
-* Make sure themeEditor.js and themeEditor.css are installed in the current Sub-Account.
-* Make sure the iframe has a valid data-roadmap attribute.
-* Make sure access to instructure.ai/roadmap is not blocked by a firewall.
-* Try reloading the page.
+- Make sure you're not logged in with a site admin account.
+- Make sure themeEditor.js and themeEditor.css are installed in the current Sub-Account.
+- Make sure the iframe has a valid data-roadmap attribute.
+- Make sure access to instructure.ai/roadmap is not blocked by a firewall.
+- Try reloading the page.
 
 #### Blank Page
 
-If you've gone through the configuration process for a roadmap page in SEnsei Panda and don't see anything (blank page), please follow the troubleshooting steps above.  If you still have the same result, please [open an issue](https://github.com/instructure/instructure.ai/issues) and include any error messages in your browser's console.
+If you've gone through the configuration process for a roadmap page in SEnsei Panda and don't see anything (blank page), please follow the troubleshooting steps above. If you still have the same result, please [open an issue](https://github.com/instructure/instructure.ai/issues) and include any error messages in your browser's console.
 
 #### "Oops!" Error Page
 

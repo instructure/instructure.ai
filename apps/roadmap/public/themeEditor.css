@@ -1,8 +1,11 @@
+/* General Styles */
+
 @font-face {
   font-family: "Atkinson Hyperlegible Next";
   src:
     local("Atkinson Hyperlegible Next"),
-    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraLight.woff2") format("woff2");
+    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraLight.woff2")
+      format("woff2");
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -12,7 +15,8 @@
   font-family: "Atkinson Hyperlegible Next";
   src:
     local("Atkinson Hyperlegible Next"),
-    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraLightItalic.woff2") format("woff2");
+    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraLightItalic.woff2")
+      format("woff2");
   font-weight: 200;
   font-style: italic;
   font-display: swap;
@@ -32,7 +36,8 @@
   font-family: "Atkinson Hyperlegible Next";
   src:
     local("Atkinson Hyperlegible Next"),
-    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-LightItalic.woff2") format("woff2");
+    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-LightItalic.woff2")
+      format("woff2");
   font-weight: 300;
   font-style: italic;
   font-display: swap;
@@ -42,7 +47,8 @@
   font-family: "Atkinson Hyperlegible Next";
   src:
     local("Atkinson Hyperlegible Next"),
-    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Regular.woff2") format("woff2");
+    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Regular.woff2")
+      format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -52,7 +58,8 @@
   font-family: "Atkinson Hyperlegible Next";
   src:
     local("Atkinson Hyperlegible Next"),
-    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-RegularItalic.woff2") format("woff2");
+    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-RegularItalic.woff2")
+      format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -62,7 +69,8 @@
   font-family: "Atkinson Hyperlegible Next";
   src:
     local("Atkinson Hyperlegible Next"),
-    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Medium.woff2") format("woff2");
+    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-Medium.woff2")
+      format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -72,7 +80,8 @@
   font-family: "Atkinson Hyperlegible Next";
   src:
     local("Atkinson Hyperlegible Next"),
-    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-MediumItalic.woff2") format("woff2");
+    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-MediumItalic.woff2")
+      format("woff2");
   font-weight: 500;
   font-style: italic;
   font-display: swap;
@@ -82,7 +91,8 @@
   font-family: "Atkinson Hyperlegible Next";
   src:
     local("Atkinson Hyperlegible Next"),
-    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBold.woff2") format("woff2");
+    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBold.woff2")
+      format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -92,7 +102,8 @@
   font-family: "Atkinson Hyperlegible Next";
   src:
     local("Atkinson Hyperlegible Next"),
-    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBoldItalic.woff2") format("woff2");
+    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-SemiBoldItalic.woff2")
+      format("woff2");
   font-weight: 600;
   font-style: italic;
   font-display: swap;
@@ -112,7 +123,8 @@
   font-family: "Atkinson Hyperlegible Next";
   src:
     local("Atkinson Hyperlegible Next"),
-    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-BoldItalic.woff2") format("woff2");
+    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-BoldItalic.woff2")
+      format("woff2");
   font-weight: 700;
   font-style: italic;
   font-display: swap;
@@ -122,7 +134,8 @@
   font-family: "Atkinson Hyperlegible Next";
   src:
     local("Atkinson Hyperlegible Next"),
-    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraBold.woff2") format("woff2");
+    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraBold.woff2")
+      format("woff2");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -132,7 +145,8 @@
   font-family: "Atkinson Hyperlegible Next";
   src:
     local("Atkinson Hyperlegible Next"),
-    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraBoldItalic.woff2") format("woff2");
+    url("https://instructure.ai/roadmap/fonts/AtkinsonHyperlegibleNext-ExtraBoldItalic.woff2")
+      format("woff2");
   font-weight: 800;
   font-style: italic;
   font-display: swap;
@@ -215,7 +229,7 @@ body.primary-nav-expanded .ic-app-header__logomark {
 body:not(.primary-nav-expanded) .menu-item__text {
   color: var(--ic-brand-font-color-dark);
   margin-left: 0.5rem;
-  border: 1px solid #D7DADE;
+  border: 1px solid #d7dade;
   background-color: var(--ic-brand-global-nav-menu-item__badge-text);
 }
 
@@ -230,7 +244,7 @@ body:not(.primary-nav-expanded) .menu-item__text::before {
   border-style: solid;
   border-width: 6px;
   border-color: transparent;
-  border-right-color: #D7DADE;
+  border-right-color: #d7dade;
 }
 
 body:not(.primary-nav-expanded) .menu-item__text::after {
@@ -263,12 +277,14 @@ body.primary-nav-expanded #primaryNavToggle {
   width: 1.125rem;
 }
 
-body.primary-nav-expanded .ic-app-header__menu-list-item.ic-app-header__menu-list-item--active .menu-item__text {
+body.primary-nav-expanded
+  .ic-app-header__menu-list-item.ic-app-header__menu-list-item--active
+  .menu-item__text {
   color: var(--ic-brand-global-nav-menu-item__badge-text);
 }
 
 .ic-app-header__menu-list-item.ic-app-header__menu-list-item--active .ic-icon-svg {
-  fill: var(--ic-brand-global-nav-menu-item__badge-text)
+  fill: var(--ic-brand-global-nav-menu-item__badge-text);
 }
 
 .menu-item-icon-container {
@@ -295,18 +311,19 @@ body:not(.primary-nav-expanded) .menu-item__badge {
   box-shadow: inset 0 0 0 0.125rem #6a7883;
 }
 
-.ic-app-header__menu-list-item.ic-app-header__menu-list-item--active .ic-app-header__menu-list-link {
+.ic-app-header__menu-list-item.ic-app-header__menu-list-item--active
+  .ic-app-header__menu-list-link {
   background: var(--ic-brand-primary-darkened-15);
 }
 
-.ic-app-header__menu-list-item.ic-app-header__menu-list-item--active .ic-app-header__menu-list-link:focus {
+.ic-app-header__menu-list-item.ic-app-header__menu-list-item--active
+  .ic-app-header__menu-list-link:focus {
   box-shadow: inset 0 0 0 0.125rem #103868;
 }
 
 [class$="-tray__content"] {
   background: var(--ic-brand-global-nav-menu-item__badge-text);
 }
-
 
 #nav-tray-portal [class$="-closeButton"] {
   margin: 0.25rem 0.25rem 0 0;
@@ -327,7 +344,7 @@ body:not(.primary-nav-expanded) .menu-item__badge {
   margin-right: 0.5rem;
 }
 
-.tray-with-space-for-global-nav>div {
+.tray-with-space-for-global-nav > div {
   min-height: calc(100vh - 1rem - 2px);
   border-radius: 1rem;
   background: var(--ic-brand-global-nav-bgd);
@@ -337,6 +354,8 @@ body:not(.primary-nav-expanded) .menu-item__badge {
 .navigation-tray-container [class$="-closeButton"] {
   margin-top: 0.5rem 0.5rem 0;
 }
+
+/* Roadmap Specific Styles */
 
 body.roadmap,
 body.roadmap .header-bar {
@@ -379,7 +398,7 @@ body.roadmap #breadcrumbs {
   background-color: var(--ic-brand-global-nav-logo-bgd);
 }
 
-body.roadmap #breadcrumbs>ol>li:first-of-type {
+body.roadmap #breadcrumbs > ol > li:first-of-type {
   visibility: initial;
 }
 
@@ -394,10 +413,13 @@ body.roadmap .ic-app-nav-toggle-and-crumbs {
 }
 
 body.roadmap [class$="-tray__content"] {
-  background: var(--ic-brand-global-nav-bgd)
+  background: var(--ic-brand-global-nav-bgd);
 }
 
-
-body.roadmap .tray-with-space-for-global-nav>div {
+body.roadmap .tray-with-space-for-global-nav > div {
   background: var(--ic-brand-global-nav-menu-item__badge-text);
 }
+
+/* Roadmap Dark Mode Styles */
+
+/* @TODO -- Add dark mode styles when dark mode is supported in the roadmap app */
