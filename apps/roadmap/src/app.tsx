@@ -1,10 +1,8 @@
-import { Flex, InstUISettingsProvider, canvas } from "@instructure/ui";
-import type { FC } from "react";
-import { useEffect, useMemo, useState } from "react";
+import "./app.css";
 import { Card, CardOverlay, Loading } from "./components";
-import type { Theme } from "@instructure/ui";
+import { type FC, useEffect, useMemo, useState } from "react";
+import { Flex, InstUISettingsProvider, type Theme, canvas } from "@instructure/ui";
 import { getBrandConfig, getColor, getLogo, getRoadmap, sendHeight } from "./utils";
-import "./App.css";
 
 type ThemeOrOverride = Theme | Record<string, unknown>;
 

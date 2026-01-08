@@ -1,9 +1,8 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import type { Root } from "react-dom/client";
-import App from "./App.tsx";
-import "./Main.css";
 import "./assets/fonts/AtkinsonHyperlegibleNext.css";
+import "./main.css";
+import App from "./app.tsx";
+import { type Root, createRoot } from "react-dom/client";
+import { StrictMode } from "react";
 
 const root: HTMLElement =
   document.getElementById("root") ||
