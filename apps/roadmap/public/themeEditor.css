@@ -307,9 +307,6 @@ body:not(.primary-nav-expanded) .menu-item__badge {
   background: var(--ic-brand-global-nav-menu-item__badge-text);
 }
 
-body.roadmap [class$="-tray__content"] {
-  background: var(--ic-brand-global-nav-bgd)
-}
 
 #nav-tray-portal [class$="-closeButton"] {
   margin: 0.25rem 0.25rem 0 0;
@@ -335,10 +332,6 @@ body.roadmap [class$="-tray__content"] {
   border-radius: 1rem;
   background: var(--ic-brand-global-nav-bgd);
   border: 1px solid transparent;
-}
-
-body.roadmap .tray-with-space-for-global-nav>div {
-  background: var(--ic-brand-global-nav-menu-item__badge-text);
 }
 
 .navigation-tray-container [class$="-closeButton"] {
@@ -398,4 +391,13 @@ body.roadmap .ic-app-nav-toggle-and-crumbs {
   border-bottom: unset;
   min-height: unset;
   margin-top: 1rem;
+}
+
+body.roadmap [class$="-tray__content"] {
+  background: var(--ic-brand-global-nav-bgd)
+}
+
+
+body.roadmap .tray-with-space-for-global-nav>div {
+  background: var(--ic-brand-global-nav-menu-item__badge-text);
 }
