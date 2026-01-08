@@ -1,5 +1,5 @@
 import { Flex, Heading, Link, List, Text, View } from "@instructure/ui";
-import  { type FC } from "react";
+import { type FC } from "react";
 import { getLinkType } from "../utils";
 
 const TagList: FC<{ entry: PendoAPIFeature; isNarrow: boolean }> = ({

@@ -1,6 +1,6 @@
 import { InlineSVG } from "@instructure/ui";
 import { darken, lighten } from "@instructure/ui-color-utils";
-import  { type FC } from "react";
+import { type FC } from "react";
 
 const ColorSVG: FC<ColorSVGProps> = ({
   color = "currentColor",
