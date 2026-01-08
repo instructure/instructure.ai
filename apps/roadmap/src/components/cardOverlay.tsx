@@ -15,8 +15,8 @@ import {
   View,
 } from "@instructure/ui";
 import { lighten } from "@instructure/ui-color-utils";
-import  { type FC } from "react";
-import { useMemo } from "react";
+import { type FC } from "react";
+import { createElement, useMemo } from "react";
 import { getLinkType, getProductArea } from "../utils";
 import { VideoPlayer } from "./";
 import { Colors } from "./logos";
@@ -91,7 +91,14 @@ const CardOverlayContent: FC<{
                     <Flex.Item shouldGrow shouldShrink width="100%">
                       <Flex direction="row">
                         <Flex.Item shouldGrow shouldShrink>
-                          <product.logo inline valign="bottom" />{" "}
+                          {product.logo && (
+                            <>
+                              {createElement(product.logo, {
+                                inline: true,
+                                valign: "bottom",
+                              })}{" "}
+                            </>
+                          )}
                           <Text
                             color={isDark ? "primary-inverse" : "secondary"}
                             variant="contentSmall"
