@@ -9,13 +9,13 @@
  * - Listens for "setHeight" messages to update the iframe's height dynamically.
  * - Uses a MutationObserver to attach listeners when the roadmap iframe is added to the DOM.
  *
- * Only runs on the "/pages/instructure-roadmap" path.
+ * Only runs on the "/pages/instructure-roadmap*" path.
  *
- * @version 2026.01.07.00
+ * @version 2026.01.08.00
  */
 
 const path = globalThis.location.pathname;
-const matchesRoadmap = path.endsWith("/pages/instructure-roadmap");
+const matchesRoadmap = /\/pages\/instructure-roadmap(-\d+)?$/.test(path);
 const matchesCourse = /^\/courses\/\d+$/.test(path);
 const matchesCourseWiki = /^\/courses\/[1-9]\d*\/wiki$/.test(path);
 
@@ -84,38 +84,43 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
     iframeListenerMap.set(iFrame, boundHandler);
   };
 
+  const setupRoadmapIframe = (iFrame, obs) => {
+    attachListener(iFrame);
+    if (matchesCourse) {
+      console.info("Setting Roadmap page to full screen");
+      const DEFAULT_ATTEMPT = 0;
+      const ATTEMPT_INCREMENT = 1;
+      const removeElementsWithRetry = (attempt = DEFAULT_ATTEMPT) => {
+        const maxAttempts = 10;
+        const delay = 100;
+        let allRemoved = true;
+        const selectors = ["#right-side-wrapper", "#left-side", "#courseMenuToggle"];
+        selectors.forEach((sel) => {
+          const el = globalThis.document.querySelector(sel);
+          if (el) {
+            el.remove();
+          } else {
+            allRemoved = false;
+          }
+        });
+        const main = globalThis.document.querySelector("#main");
+        if (main?.style) {
+          main.style.setProperty("margin", "0");
+        }
+        if (!allRemoved && attempt < maxAttempts) {
+          setTimeout(() => removeElementsWithRetry(attempt + ATTEMPT_INCREMENT), delay);
+        }
+      };
+      removeElementsWithRetry();
+      globalThis.document.body.classList.add("roadmap");
+    }
+    obs.disconnect();
+  };
+
   const observer = new MutationObserver((_mutations, obs) => {
-    const DEFAULT_ATTEMPT = 0;
-    const ATTEMPT_INCREMENT = 1;
     const iFrame = globalThis.document.getElementById("roadmap");
     if (iFrame) {
-      attachListener(iFrame);
-      if (matchesCourse) {
-        console.info("Setting Roadmap page to full screen");
-        const removeElementsWithRetry = (attempt = DEFAULT_ATTEMPT) => {
-          const maxAttempts = 10;
-          const delay = 100;
-          let allRemoved = true;
-          const selectors = ["#right-side-wrapper", "#left-side", "#courseMenuToggle"];
-          selectors.forEach((sel) => {
-            const el = globalThis.document.querySelector(sel);
-            if (el) {
-              el.remove();
-            } else {
-              allRemoved = false;
-            }
-          });
-          const main = globalThis.document.querySelector("#main");
-          if (main?.style) {
-            main.style.setProperty("margin", "0");
-          }
-          if (!allRemoved && attempt < maxAttempts) {
-            setTimeout(() => removeElementsWithRetry(attempt + ATTEMPT_INCREMENT), delay);
-          }
-        };
-        removeElementsWithRetry();
-      }
-      obs.disconnect();
+      setupRoadmapIframe(iFrame, obs);
     }
   });
 
