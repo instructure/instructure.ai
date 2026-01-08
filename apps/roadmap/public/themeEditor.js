@@ -94,7 +94,14 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
         const maxAttempts = 10;
         const delay = 100;
         let allRemoved = true;
-        const selectors = ["#right-side-wrapper", "#left-side", "#courseMenuToggle"];
+        const selectors = [
+          "#right-side-wrapper",
+          "#left-side",
+          "#courseMenuToggle",
+          "#easy_student_view",
+          "#breadcrumbs .home",
+          ".page-toolbar .page-toolbar-end",
+        ];
         selectors.forEach((sel) => {
           const el = globalThis.document.querySelector(sel);
           if (el) {
