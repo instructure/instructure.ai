@@ -1,7 +1,7 @@
 import "./assets/fonts/AtkinsonHyperlegibleNext.css";
 import "./main.css";
-import App from "./app.tsx";
 import { type Root, createRoot } from "react-dom/client";
+import App from "./app.tsx";
 import { StrictMode } from "react";
 
 const root: HTMLElement =
