@@ -81,7 +81,7 @@ const Card: FC<{
                 <CardBackground color={product.color} />
               </View>
               <View as="div" padding="paddingCardLarge 0 0 paddingCardLarge" position="relative">
-                <product.logo color="#fff" height="2rem" inline />
+                {product.logo && <product.logo color="#fff" height="2rem" inline />}
                 <View margin="0 small 0">
                   <Text color="secondary-inverse" variant="descriptionPage">
                     {product.name}
