@@ -1,7 +1,5 @@
 /// <reference types="@instructure/ui" />
 
-type FC<P = {}> = import("react").FC<P>;
-
 interface SVGInfo {
   color: string;
   SVG: ReactNode;
@@ -43,7 +41,7 @@ interface PendoAPIFeature {
   product: {
     area: string | null;
     name: string;
-    logo: FC<SVGProps<SVGSVGElement>> | undefined;
+    logo: React.FC<SVGProps<SVGSVGElement>> | undefined;
     color: string | undefined;
   };
 }
@@ -57,6 +55,6 @@ interface RoadmapFeatures {
 }
 
 declare module "*.css" {
-  const classes: { [key: string]: string };
+  const classes: Record<string, string>;
   export default classes;
 }
