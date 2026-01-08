@@ -1,6 +1,6 @@
 import { Button, Flex, Heading, Pill, Text, TruncateText, View } from "@instructure/ui";
 import { darken, lighten } from "@instructure/ui-color-utils";
-import type { FC } from "react";
+import { type FC } from "react";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { getProductArea } from "../utils";
 import Logos, { Colors } from "./logos";
@@ -27,7 +27,7 @@ const Card: FC<{
     }
     const style = window.getComputedStyle(el);
     const lineHeight = parseFloat(style.lineHeight || "0") || 1;
-    const {height} = el.getBoundingClientRect();
+    const { height } = el.getBoundingClientRect();
     const lines = Math.max(1, Math.round(height / lineHeight));
     setMaxLines(lines > 1 ? 3 : 4);
   }, []);
@@ -132,7 +132,7 @@ const Card: FC<{
               >
                 {feature.title}
               </Heading>
-              <Text size="contentSmall">
+              <Text size="contentSmall" color="primary" themeOverride={{ primaryColor: "#576773" }}>
                 <TruncateText maxLines={maxLines} truncate="word">
                   {feature.description}
                 </TruncateText>
