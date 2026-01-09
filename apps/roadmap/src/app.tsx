@@ -2,7 +2,15 @@ import "./app.css";
 import { Card, CardOverlay, Loading } from "./components";
 import { type FC, useEffect, useMemo, useState } from "react";
 import { Flex, InstUISettingsProvider, type Theme, canvas } from "@instructure/ui";
-import { getBrandConfig, getColor, getLogo, getRoadmap, sendHeight } from "./utils";
+import {
+  frameResize,
+  getBrandConfig,
+  getColor,
+  getLogo,
+  getRoadmap,
+  hideNavigationMenu,
+  hideRightSideWrapper,
+} from "./utils";
 
 type ThemeOrOverride = Theme | Record<string, unknown>;
 
@@ -50,12 +58,12 @@ const useShowLoading = (roadmap: RoadmapFeatures | undefined) => {
 const useSendHeightOnChange = (roadmap: RoadmapFeatures | undefined) => {
   useEffect(() => {
     if (roadmap) {
-      sendHeight();
+      frameResize();
     }
   }, [roadmap]);
   useEffect(() => {
     const handleResize = () => {
-      sendHeight();
+      frameResize();
     };
     window.addEventListener("resize", handleResize);
     return () => {
@@ -175,6 +183,12 @@ const App: FC = () => {
   const isDark = false; // Placeholder for potential dark mode logic
   const { overlayOpen, setOverlayOpen, selectedEntry, setSelectedEntry } = useAppState();
   const { Entries, showLoading, theme } = useAppData();
+
+  useEffect(() => {
+    frameResize();
+    hideNavigationMenu();
+    hideRightSideWrapper();
+  }, []);
 
   return (
     <InstUISettingsProvider theme={theme}>

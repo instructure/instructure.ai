@@ -5,4 +5,6 @@ export { default as getLogo } from "./getLogo";
 export { default as getProductArea } from "./getProductArea";
 export { default as getRoadmap } from "./getRoadmap";
 export { default as paramsToPendo } from "./paramsToPendo";
-export { default as sendHeight } from "./sendHeight";
+export { default as frameResize } from "./frameResize";
+export { default as hideNavigationMenu } from "./hideNavigationMenu";
+export { default as hideRightSideWrapper } from "./hideRightSideWrapper";

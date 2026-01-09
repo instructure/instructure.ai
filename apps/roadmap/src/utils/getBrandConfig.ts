@@ -6,15 +6,25 @@ interface PageSettings {
   window_width: number;
 }
 
-type BrandConfig = Record<string, unknown>;
+type BrandConfig = Record<string, unknown> | undefined;
 
 type PageSettingsEvent = MessageEvent<{ pageSettings?: PageSettings }>;
 
-let cachedBrandConfig: BrandConfig | null;
-let brandConfigPromise: Promise<BrandConfig> | null;
+let cachedBrandConfig: BrandConfig | undefined = undefined;
+let brandConfigPromise: Promise<BrandConfig> | undefined = undefined;
+
+const fetchBrandConfig = async (url: string): Promise<BrandConfig> => {
+  try {
+    const response = await fetch(url);
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch or parse brand config:", error);
+    return {};
+  }
+};
 
 const getBrandConfig = (): Promise<BrandConfig> => {
-  if (cachedBrandConfig !== null) {
+  if (cachedBrandConfig) {
     return Promise.resolve(cachedBrandConfig);
   }
   if (brandConfigPromise) {
@@ -23,8 +33,7 @@ const getBrandConfig = (): Promise<BrandConfig> => {
   window.parent.postMessage({ subject: "lti.getPageSettings" }, "*");
 
   brandConfigPromise = new Promise((resolve) => {
-    const handler = async (event: PageSettingsEvent) => {
-      // Only process lti.postMessage events
+    const handlePageSettingsEvent = async (event: PageSettingsEvent) => {
       if (
         event.data &&
         "subject" in event.data &&
@@ -32,20 +41,22 @@ const getBrandConfig = (): Promise<BrandConfig> => {
         event.data.pageSettings
       ) {
         const url = event.data.pageSettings.active_brand_config_json_url;
-        let brandConfig: BrandConfig = {};
-        try {
-          const response = await fetch(url);
-          brandConfig = await response.json();
-        } catch (error) {
-          console.error("Failed to fetch or parse brand config:", error);
+        let brandConfig: BrandConfig = await fetchBrandConfig(url);
+
+        window.removeEventListener("message", handlePageSettingsEvent);
+
+        let result: BrandConfig = undefined;
+        if (event.data.pageSettings.use_high_contrast) {
+          result = undefined;
+        } else {
+          result = brandConfig ?? undefined;
         }
-        window.removeEventListener("message", handler);
-        const result = event.data.pageSettings.use_high_contrast ? {} : (brandConfig ?? {});
         cachedBrandConfig = result;
         resolve(result);
       }
     };
-    window.addEventListener("message", handler);
+
+    window.addEventListener("message", handlePageSettingsEvent);
   });
   void brandConfigPromise.finally(() => {
     brandConfigPromise = undefined;
