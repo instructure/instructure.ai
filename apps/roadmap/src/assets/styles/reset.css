@@ -1,0 +1,15 @@
+:root,
+html,
+body,
+[class$="-view--block"],
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+p,
+div {
+  font-family: "Atkinson Hyperlegible Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

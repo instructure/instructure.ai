@@ -23,7 +23,8 @@
     "**/.turbo/**",
     "**/.next/**",
     "**/coverage/**",
-    "**/node_modules/**"
+    "**/node_modules/**",
+    "**/public/**"
   ],
   "plugins": [
     "eslint",
@@ -34,5 +35,27 @@
     "jsdoc",
     "import",
     "node",
-  ]
+  ],
+  "rules": {
+    "import/consistent-type-specifier-style": [
+      "warn",
+      "prefer-inline"
+    ],
+    "import/no-unassigned-import": [
+      "warn",
+      {
+        "allow": [
+          "**/*.css",
+          "@instructure.ai/shared-configs/types"
+        ]
+      }
+    ],
+    "react/react-in-jsx-scope": "off",
+    "unicorn/filename-case": [
+      "warn",
+      {
+        "case": "camelCase"
+      }
+    ],
+  }
 }

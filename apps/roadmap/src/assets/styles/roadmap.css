@@ -1,0 +1,60 @@
+body.roadmap,
+body.roadmap .header-bar {
+  background-color: var(--ic-brand-global-nav-logo-bgd);
+}
+
+body.roadmap .ic-app-header,
+body.roadmap .ic-app-header__logomark-container {
+  background-color: var(--ic-brand-global-nav-menu-item__badge-text);
+}
+
+body.roadmap #courseMenuToggle,
+body.roadmap #easy_student_view,
+body.roadmap .page-toolbar .page-toolbar-end,
+body.roadmap #breadcrumbs .home {
+  display: none;
+}
+
+body.roadmap #main {
+  margin: 0;
+}
+
+body.roadmap #content {
+  padding-top: 0;
+}
+
+body.roadmap.pages.show .show-content,
+body.roadmap.pages.show.home .show-content {
+  padding: 0;
+}
+
+body.roadmap.pages.show .course-title {
+  color: var(--ic-brand-font-color-dark) !important;
+}
+
+body.roadmap #breadcrumbs {
+  padding-left: 1.5rem;
+  background-color: var(--ic-brand-global-nav-logo-bgd);
+}
+
+body.roadmap #breadcrumbs > ol > li:first-of-type {
+  visibility: initial;
+}
+
+body.roadmap #breadcrumbs a {
+  color: var(--ic-brand-font-color-dark);
+}
+
+body.roadmap .ic-app-nav-toggle-and-crumbs {
+  border-bottom: unset;
+  min-height: unset;
+  margin-top: 1rem;
+}
+
+body.roadmap [class$="-tray__content"] {
+  background: var(--ic-brand-global-nav-bgd);
+}
+
+body.roadmap .tray-with-space-for-global-nav > div {
+  background: var(--ic-brand-global-nav-menu-item__badge-text);
+}

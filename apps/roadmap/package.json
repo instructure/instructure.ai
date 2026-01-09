@@ -1,4 +1,27 @@
 {
+  "name": "@instructure.ai/roadmap",
+  "version": "1.1.0",
+  "private": true,
+  "homepage": "https://instructure.ai/roadmap",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure.ai",
+    "directory": "apps/roadmap"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "pnpm build:assets && vite build",
+    "build:apis": "vite-node ./scripts/buildApis.mts",
+    "build:assets": "pnpm build:scripts && pnpm build:styles && pnpm build:static && pnpm build:apis",
+    "build:scripts": "vite-node ./scripts/buildScripts.mts",
+    "build:static": "vite-node ./scripts/buildStatic.mts",
+    "build:styles": "vite-node ./scripts/buildStyles.mts",
+    "dev": "vite",
+    "lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
+    "preview": "vite preview",
+    "test": "pnpm vitest run",
+    "typecheck": "tsgo --noEmit"
+  },
   "dependencies": {
     "@instructure/ui": "^11.2.0",
     "@instructure/ui-color-utils": "^11.2.0",
@@ -7,22 +30,5 @@
   },
   "devDependencies": {
     "@instructure.ai/shared-configs": "workspace:^"
-  },
-  "name": "@instructure.ai/roadmap",
-  "private": true,
-  "repository": {
-    "directory": "apps/roadmap",
-    "type": "git",
-    "url": "https://github.com/instructure/instructure.ai"
-  },
-  "scripts": {
-    "build": "vite build",
-    "dev": "vite",
-    "lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
-    "preview": "vite preview",
-    "test": "pnpm vitest run",
-    "typecheck": "tsgo --noEmit"
-  },
-  "type": "module",
-  "version": "1.0.4"
+  }
 }

@@ -1,23 +1,13 @@
-import {
-  Button,
-  Flex,
-  Heading,
-  Pill,
-  Text,
-  TruncateText,
-  View,
-} from "@instructure/ui";
+import { Button, Flex, Heading, Pill, Text, TruncateText, View } from "@instructure/ui";
 import { darken, lighten } from "@instructure/ui-color-utils";
-import type { FC } from "react";
+import { type FC } from "react";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { getProductArea } from "../utils";
 import Logos, { Colors } from "./logos";
 
 const Card: FC<{
   entry: PendoAPIFeature;
-  setSelectedEntry: React.Dispatch<
-    React.SetStateAction<PendoAPIFeature | undefined>
-  >;
+  setSelectedEntry: React.Dispatch<React.SetStateAction<PendoAPIFeature | undefined>>;
   setOverlayOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isDark: boolean;
 }> = ({ entry, setSelectedEntry, setOverlayOpen, isDark }) => {
@@ -37,7 +27,7 @@ const Card: FC<{
     }
     const style = window.getComputedStyle(el);
     const lineHeight = parseFloat(style.lineHeight || "0") || 1;
-    const height = el.getBoundingClientRect().height;
+    const { height } = el.getBoundingClientRect();
     const lines = Math.max(1, Math.round(height / lineHeight));
     setMaxLines(lines > 1 ? 3 : 4);
   }, []);
@@ -77,11 +67,7 @@ const Card: FC<{
           borderColorSecondary: "#2A353F",
         }}
       >
-        <Flex
-          direction="column"
-          gap="moduleElements"
-          padding="paddingCardSmall"
-        >
+        <Flex direction="column" gap="moduleElements" padding="paddingCardSmall">
           <Flex.Item>
             <View
               as="div"
@@ -91,21 +77,11 @@ const Card: FC<{
               overflowY="hidden"
               position="relative"
             >
-              <View
-                as="div"
-                borderRadius="large"
-                height="100%"
-                position="absolute"
-                width="100%"
-              >
+              <View as="div" borderRadius="large" height="100%" position="absolute" width="100%">
                 <CardBackground color={product.color} />
               </View>
-              <View
-                as="div"
-                padding="paddingCardLarge 0 0 paddingCardLarge"
-                position="relative"
-              >
-                <product.logo color="#fff" height="2rem" inline />
+              <View as="div" padding="paddingCardLarge 0 0 paddingCardLarge" position="relative">
+                {product.logo && <product.logo color="#fff" height="2rem" inline />}
                 <View margin="0 small 0">
                   <Text color="secondary-inverse" variant="descriptionPage">
                     {product.name}
@@ -122,12 +98,8 @@ const Card: FC<{
                     color={feature.stage === "Coming Soon" ? "success" : "info"}
                     themeOverride={{
                       background: isDark ? "#0E1316" : "#fff",
-                      infoColor: isDark
-                        ? lighten(Colors.parchment, 6)
-                        : Colors.parchment,
-                      successColor: isDark
-                        ? lighten(Colors.mastery, 5)
-                        : Colors.mastery,
+                      infoColor: isDark ? lighten(Colors.parchment, 6) : Colors.parchment,
+                      successColor: isDark ? lighten(Colors.mastery, 5) : Colors.mastery,
                     }}
                   >
                     <Text size="legend">{feature.stage}</Text>
@@ -160,7 +132,7 @@ const Card: FC<{
               >
                 {feature.title}
               </Heading>
-              <Text size="contentSmall">
+              <Text size="contentSmall" color="primary" themeOverride={{ primaryColor: "#576773" }}>
                 <TruncateText maxLines={maxLines} truncate="word">
                   {feature.description}
                 </TruncateText>

@@ -15,8 +15,8 @@ import {
   View,
 } from "@instructure/ui";
 import { lighten } from "@instructure/ui-color-utils";
-import type { FC } from "react";
-import { useMemo } from "react";
+import { type FC } from "react";
+import { createElement, useMemo } from "react";
 import { getLinkType, getProductArea } from "../utils";
 import { VideoPlayer } from "./";
 import { Colors } from "./logos";
@@ -48,10 +48,7 @@ const CardOverlayContent: FC<{
   );
 
   const externalLinks = useMemo(
-    () =>
-      Links?.filter(
-        (link) => !["video", "image"].includes(link.title.toLowerCase()),
-      ),
+    () => Links?.filter((link) => !["video", "image"].includes(link.title.toLowerCase())),
     [Links],
   );
 
@@ -61,16 +58,8 @@ const CardOverlayContent: FC<{
 
   return (
     <Portal open={isOpen}>
-      <Mask
-        placement="top"
-        themeOverride={{ background: isDark ? "#0E1316" : "#F2F4F4" }}
-      >
-        <Dialog
-          onDismiss={handleClick}
-          open={isOpen}
-          shouldContainFocus
-          shouldReturnFocus
-        >
+      <Mask placement="top" themeOverride={{ background: isDark ? "#0E1316" : "#F2F4F4" }}>
+        <Dialog onDismiss={handleClick} open={isOpen} shouldContainFocus shouldReturnFocus>
           <Flex>
             <Flex.Item shouldGrow shouldShrink width="calc(100vw - 2px)">
               <View
@@ -102,7 +91,14 @@ const CardOverlayContent: FC<{
                     <Flex.Item shouldGrow shouldShrink width="100%">
                       <Flex direction="row">
                         <Flex.Item shouldGrow shouldShrink>
-                          <product.logo inline valign="bottom" />{" "}
+                          {product.logo && (
+                            <>
+                              {createElement(product.logo, {
+                                inline: true,
+                                valign: "bottom",
+                              })}{" "}
+                            </>
+                          )}
                           <Text
                             color={isDark ? "primary-inverse" : "secondary"}
                             variant="contentSmall"
@@ -127,11 +123,7 @@ const CardOverlayContent: FC<{
                       </Flex>
                     </Flex.Item>
                     <Flex.Item>
-                      <Heading
-                        level="h3"
-                        margin="0 0 small"
-                        variant="titleCardMini"
-                      >
+                      <Heading level="h3" margin="0 0 small" variant="titleCardMini">
                         {feature.title}
                       </Heading>
                     </Flex.Item>
@@ -139,19 +131,11 @@ const CardOverlayContent: FC<{
                       <Flex direction="row" gap="xx-small" wrap="wrap">
                         <Flex.Item>
                           <Pill
-                            color={
-                              feature.stage === "Coming Soon"
-                                ? "success"
-                                : "info"
-                            }
+                            color={feature.stage === "Coming Soon" ? "success" : "info"}
                             themeOverride={{
                               background: isDark ? "#0E1316" : "#fff",
-                              infoColor: isDark
-                                ? lighten(Colors.parchment, 6)
-                                : Colors.parchment,
-                              successColor: isDark
-                                ? lighten(Colors.mastery, 5)
-                                : Colors.mastery,
+                              infoColor: isDark ? lighten(Colors.parchment, 6) : Colors.parchment,
+                              successColor: isDark ? lighten(Colors.mastery, 5) : Colors.mastery,
                             }}
                           >
                             <Text size="legend">{feature.stage}</Text>
@@ -176,29 +160,17 @@ const CardOverlayContent: FC<{
                     </Flex.Item>
                   </Flex>
                 </View>
-                <View
-                  as="div"
-                  padding="paddingCardSmall paddingCardLarge paddingCardLarge"
-                >
+                <View as="div" padding="paddingCardSmall paddingCardLarge paddingCardLarge">
                   <Flex
                     alignItems="start"
                     direction={isNarrow ? "column" : "row"}
                     gap="medium"
                     wrap="wrap"
                   >
-                    <Flex.Item
-                      shouldGrow
-                      shouldShrink
-                      width={isNarrow ? "100%" : "0"}
-                    >
-                      <View
-                        as="div"
-                        margin={isNarrow ? "small 0 0" : "large 0 0"}
-                      >
+                    <Flex.Item shouldGrow shouldShrink width={isNarrow ? "100%" : "0"}>
+                      <View as="div" margin={isNarrow ? "small 0 0" : "large 0 0"}>
                         {video && <VideoPlayer url={video} />}
-                        {!video && image && (
-                          <Img alt={feature.title} src={image} />
-                        )}
+                        {!video && image && <Img alt={feature.title} src={image} />}
                         {!video && !image && <Text>{feature.description}</Text>}
                       </View>
                     </Flex.Item>
@@ -283,9 +255,7 @@ const CardOverlayContent: FC<{
                                       rel="noopener"
                                       target="_blank"
                                     >
-                                      <Text transform="capitalize">
-                                        {link.title}
-                                      </Text>
+                                      <Text transform="capitalize">{link.title}</Text>
                                     </Link>
                                   </List.Item>
                                 ))}
@@ -316,24 +286,22 @@ const CardOverlay: FC<{
   isOpen: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isDark: boolean;
-}> = ({ entry, isOpen, setOpen, isDark = false }) => {
-  return (
-    <Responsive
-      query={{ large: { minWidth: "50rem" }, small: { maxWidth: "50rem" } }}
-      render={(_props, matches) => {
-        const isSmall = matches?.includes("small") ?? false;
-        return (
-          <CardOverlayContent
-            entry={entry}
-            isDark={isDark}
-            isNarrow={isSmall}
-            isOpen={isOpen}
-            setOpen={setOpen}
-          />
-        );
-      }}
-    />
-  );
-};
+}> = ({ entry, isOpen, setOpen, isDark = false }) => (
+  <Responsive
+    query={{ large: { minWidth: "50rem" }, small: { maxWidth: "50rem" } }}
+    render={(_props, matches) => {
+      const isSmall = matches?.includes("small") ?? false;
+      return (
+        <CardOverlayContent
+          entry={entry}
+          isDark={isDark}
+          isNarrow={isSmall}
+          isOpen={isOpen}
+          setOpen={setOpen}
+        />
+      );
+    }}
+  />
+);
 
 export default CardOverlay;

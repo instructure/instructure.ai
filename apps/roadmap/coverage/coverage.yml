@@ -1,0 +1,185 @@
+coverage:
+  totals:
+    statements: 0%
+    branches: 0%
+    functions: 0%
+    lines: 0%
+    total: 0%
+  scripts:
+    totals:
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+    "buildApis.mts":
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "5-91"
+    "buildScripts.mts":
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "5-54"
+    "buildStatic.mts":
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "5-87"
+    "buildStyles.mts":
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "9-161"
+  src:
+    totals:
+      statements: 0%
+      branches: 6%
+      functions: 0%
+      lines: 0%
+    "app.tsx":
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "17-193"
+    assets:
+      scripts:
+        "moveAvatar.ts":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "6-56"
+        "themeEditor.ts":
+          statements: 0%
+          branches: 0%
+          functions: 0%
+          lines: 0%
+          uncovered_line_numbers: "14-107"
+    components:
+      "card.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "13-127"
+      "cardOverlay.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "30-294"
+      "downloadLink.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "10-38"
+      "loading.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "7-8"
+      "logos.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "5-281"
+      "tagList.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "5-55"
+      "themeEditor.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "28-407"
+      "troubleshooting.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "12-134"
+      "videoPlayer.tsx":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "3-4"
+    "main.tsx":
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "8-15"
+    utils:
+      "frameResize.ts":
+        statements: 0%
+        branches: 100%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "1-2"
+      "getBrandConfig.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "13-64"
+      "getColor.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "3-8"
+      "getLinkType.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "6-54"
+      "getLogo.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "3-8"
+      "getProductArea.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "1-6"
+      "getRoadmap.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "3-32"
+      "hideNavigationMenu.ts":
+        statements: 0%
+        branches: 100%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "1-2"
+      "hideRightSideWrapper.ts":
+        statements: 0%
+        branches: 100%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "1-2"
+      "paramsToPendo.ts":
+        statements: 0%
+        branches: 0%
+        functions: 0%
+        lines: 0%
+        uncovered_line_numbers: "1-76"

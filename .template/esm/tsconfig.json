@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "paths": {
-      "<<packagename>>": ["./node/index.ts"]
+      "<<packagename>>": [
+        "./node/index.ts"
+      ]
     },
     "target": "ES2022",
     "module": "ESNext",
@@ -14,5 +16,7 @@
     "skipLibCheck": true
   },
   "extends": "../../tsconfig.json",
-  "include": ["node"]
+  "include": [
+    "node"
+  ]
 }

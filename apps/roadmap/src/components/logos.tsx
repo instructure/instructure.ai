@@ -1,6 +1,6 @@
 import { InlineSVG } from "@instructure/ui";
 import { darken, lighten } from "@instructure/ui-color-utils";
-import type { FC } from "react";
+import { type FC } from "react";
 
 const ColorSVG: FC<ColorSVGProps> = ({
   color = "currentColor",
@@ -66,13 +66,7 @@ const Canvas: SVGInfo = {
 const Instructure: SVGInfo = {
   SVG: (
     <>
-      <rect
-        fill="none"
-        height="53.42"
-        stroke="currentColor"
-        strokeWidth="5"
-        width="53.42"
-      />
+      <rect fill="none" height="53.42" stroke="currentColor" strokeWidth="5" width="53.42" />
       <path d="M30.24,37.26h0c0-2.05,1.66-3.71,3.71-3.71s3.71,1.66,3.71,3.71-1.66,3.71-3.71,3.71-3.71-1.66-3.71-3.71" />
       <rect height="28.52" width="6.18" x="19.28" y="12.45" />
     </>
@@ -129,11 +123,7 @@ const ParchmentBug: FC<SVGProps> = ({
   </ColorSVG>
 );
 
-const InstructureBug: FC<SVGProps> = ({
-  height = "1rem",
-  width = "auto",
-  inline = false,
-}) => (
+const InstructureBug: FC<SVGProps> = ({ height = "1rem", width = "auto", inline = false }) => (
   <InlineSVG
     height={height}
     inline={inline}
@@ -142,13 +132,7 @@ const InstructureBug: FC<SVGProps> = ({
     viewBox={Instructure.viewBox}
     width={width}
   >
-    <rect
-      fill="none"
-      height="53.42"
-      stroke="#fff"
-      strokeWidth="3"
-      width="53.42"
-    />
+    <rect fill="none" height="53.42" stroke="#fff" strokeWidth="3" width="53.42" />
     <path
       d="M30.24,37.26h0c0-2.05,1.66-3.71,3.71-3.71s3.71,1.66,3.71,3.71-1.66,3.71-3.71,3.71-3.71-1.66-3.71-3.71"
       fill={Canvas.color}

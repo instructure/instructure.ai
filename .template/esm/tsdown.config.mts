@@ -1,12 +1,12 @@
 import { defineConfig } from "tsdown";
 
 export default defineConfig({
+  clean: true,
+  dts: true,
   entry: "node/index.mts",
   format: ["esm", "cjs"],
-  outDir: "src",
-  clean: true,
-  target: "node20",
   minify: true,
-  dts: true,
+  outDir: "src",
+  target: "node24",
   tsconfig: "./tsconfig.json",
 });

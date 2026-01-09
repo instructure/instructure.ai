@@ -7,8 +7,12 @@ const pkgName = process.env.npm_package_name?.split("/").pop() ?? "";
 const pkgVersion = process.env.npm_package_version ?? "";
 const isSite = pkgName === "site";
 
-const basePath = isSite ? "/" : `/${pkgName}`;
-const outDir = isSite ? "../../dist" : `../../dist/${pkgName}`;
+let basePath = "/";
+let outDir = "../../dist";
+if (!isSite) {
+  basePath = `/${pkgName}`;
+  outDir = `../../dist/${pkgName}`;
+}
 
 export default defineConfig({
   base: basePath,

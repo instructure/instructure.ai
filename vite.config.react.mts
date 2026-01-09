@@ -1,6 +1,6 @@
-import react from "@vitejs/plugin-react";
 import { defineConfig, mergeConfig } from "vite";
 import baseConfig from "./vite.config.mts";
+import react from "@vitejs/plugin-react";
 
 export default mergeConfig(
   baseConfig,

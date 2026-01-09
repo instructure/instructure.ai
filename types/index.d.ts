@@ -1,2 +1,3 @@
-export * from "./instructure__browserslist-config-instui.d.ts";
-export * from "./instructure.ai__shared-configs-scripts-workspace.d.ts";
+// oxlint-disable no-named-export
+export * from "./instructureBrowserslistConfigInstui.d.ts";
+export * from "./instructureAiSharedConfigsScriptsWorkspace.d.ts";
