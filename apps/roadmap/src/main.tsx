@@ -1,4 +1,4 @@
-import "./assets/styles/AtkinsonHyperlegibleNext.css";
+import "./assets/styles/fonts.css";
 import "./main.css";
 import { type Root, createRoot } from "react-dom/client";
 import App from "./app.tsx";
