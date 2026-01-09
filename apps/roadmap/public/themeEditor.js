@@ -21,53 +21,54 @@ const matchesCourseWiki = /^\/courses\/[1-9]\d*\/wiki$/.test(path);
 
 const handleGetRoadmap = (iFrame, _event) => {
   const roadmap = iFrame.getAttribute("data-roadmap");
-  console.log("[themeEditor.js] Roadmap attribute:", roadmap);
   if (iFrame.contentWindow) {
     iFrame.contentWindow.postMessage({ value: roadmap }, "*");
-    console.log("[themeEditor.js] Sent roadmap message", {
-      value: roadmap,
-    });
   } else {
     console.error("No contentWindow for roadmap iframe");
   }
 };
 
-const handleLtiGetPageSettings = (iFrame, event) => {
-  if (iFrame.contentWindow) {
-    iFrame.contentWindow.postMessage(
-      {
-        pageSettings: event.data.pageSettings,
-        subject: "lti.postMessage",
-      },
-      "*",
-    );
-    console.log("[themeEditor.js] Sent lti.postMessage", event.data.pageSettings);
-  }
-};
-
-const handleSetHeight = (iFrame, event) => {
-  try {
-    iFrame.height = event.data.height;
-  } catch (error) {
-    console.error("Failed to set iframe height:", error);
-  }
+const removeCoursePageElements = () => {
+  const selectors = [
+    "#courseMenuToggle",
+    "#easy_student_view",
+    "#breadcrumbs .home",
+    ".page-toolbar .page-toolbar-end",
+  ];
+  let attempts = 0;
+  const maxAttempts = 10;
+  const delay = 100;
+  const removeElementsWithRetry = () => {
+    let allRemoved = true;
+    selectors.forEach((sel) => {
+      const el = globalThis.document.querySelector(sel);
+      if (el) {
+        el.remove();
+      } else {
+        allRemoved = false;
+      }
+    });
+    const main = globalThis.document.querySelector("#main");
+    if (main?.style) {
+      main.style.setProperty("margin", "0");
+    }
+    if (!allRemoved && attempts < maxAttempts) {
+      attempts++;
+      setTimeout(removeElementsWithRetry, delay);
+    }
+  };
+  removeElementsWithRetry();
+  globalThis.document.body.classList.add("roadmap");
 };
 
 if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
-  console.info("Roadmap script loaded");
-
   const iframeListenerMap = new WeakMap();
-
   const handler = (iFrame, event) => {
     if (!event.data) {
       return;
     }
     if (event.data.type === "getRoadmap") {
       handleGetRoadmap(iFrame, event);
-    } else if (event.data.subject === "lti.getPageSettings") {
-      handleLtiGetPageSettings(iFrame, event);
-    } else if (event.data.type === "setHeight") {
-      handleSetHeight(iFrame, event);
     }
   };
 
@@ -87,39 +88,7 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
   const setupRoadmapIframe = (iFrame, obs) => {
     attachListener(iFrame);
     if (matchesCourse) {
-      console.info("Setting Roadmap page to full screen");
-      const DEFAULT_ATTEMPT = 0;
-      const ATTEMPT_INCREMENT = 1;
-      const removeElementsWithRetry = (attempt = DEFAULT_ATTEMPT) => {
-        const maxAttempts = 10;
-        const delay = 100;
-        let allRemoved = true;
-        const selectors = [
-          "#right-side-wrapper",
-          "#left-side",
-          "#courseMenuToggle",
-          "#easy_student_view",
-          "#breadcrumbs .home",
-          ".page-toolbar .page-toolbar-end",
-        ];
-        selectors.forEach((sel) => {
-          const el = globalThis.document.querySelector(sel);
-          if (el) {
-            el.remove();
-          } else {
-            allRemoved = false;
-          }
-        });
-        const main = globalThis.document.querySelector("#main");
-        if (main?.style) {
-          main.style.setProperty("margin", "0");
-        }
-        if (!allRemoved && attempt < maxAttempts) {
-          setTimeout(() => removeElementsWithRetry(attempt + ATTEMPT_INCREMENT), delay);
-        }
-      };
-      removeElementsWithRetry();
-      globalThis.document.body.classList.add("roadmap");
+      removeCoursePageElements();
     }
     obs.disconnect();
   };
@@ -150,27 +119,9 @@ if (matchesRoadmap || matchesCourse || matchesCourseWiki) {
  */
 
 const ONLY_ONE_CHILD = 1;
+const getCurrentPath = () => path + globalThis.location.search + globalThis.location.hash;
 
-const getCurrentPath = () =>
-  globalThis.location.pathname + globalThis.location.search + globalThis.location.hash;
-
-const patchHistoryMethods = () => {
-  const _pushState = globalThis.history.pushState.bind(globalThis.history);
-  globalThis.history.pushState = function pushState(...args) {
-    const ret = _pushState.apply(this, args);
-    globalThis.dispatchEvent(new Event("locationchange"));
-    return ret;
-  };
-
-  const _replaceState = globalThis.history.replaceState.bind(globalThis.history);
-  globalThis.history.replaceState = function replaceState(...args) {
-    const ret = _replaceState.apply(this, args);
-    globalThis.dispatchEvent(new Event("locationchange"));
-    return ret;
-  };
-};
-
-(() => {
+(function moveAvatarIIFE() {
   let avatarObserver = undefined;
   let lastPath = "";
 
@@ -181,50 +132,41 @@ const patchHistoryMethods = () => {
     );
     if (firstLi && targetList && targetList.childElementCount === ONLY_ONE_CHILD) {
       targetList.appendChild(firstLi);
-      disconnectAvatarObserver();
+      if (avatarObserver) {
+        avatarObserver.disconnect();
+        avatarObserver = undefined;
+      }
     }
   };
 
-  const disconnectAvatarObserver = () => {
+  const observeAvatar = () => {
     if (avatarObserver) {
       avatarObserver.disconnect();
       avatarObserver = undefined;
     }
-  };
-
-  const startObserverForThisPage = () => {
-    disconnectAvatarObserver();
     avatarObserver = new MutationObserver(moveAvatar);
-    avatarObserver.observe(globalThis.document.body, { childList: true, subtree: true });
+    if (globalThis.document.body) {
+      avatarObserver.observe(globalThis.document.body, { childList: true, subtree: true });
+    }
     moveAvatar();
   };
 
   const onLocationChange = () => {
-    const path = getCurrentPath();
-    if (path !== lastPath) {
-      lastPath = path;
-      startObserverForThisPage();
+    const pathNow = getCurrentPath();
+    if (pathNow !== lastPath) {
+      lastPath = pathNow;
+      observeAvatar();
     }
   };
 
-  const setupListeners = () => {
-    globalThis.addEventListener("popstate", () =>
-      globalThis.dispatchEvent(new Event("locationchange")),
-    );
-    globalThis.addEventListener("locationchange", onLocationChange);
-  };
+  globalThis.addEventListener("popstate", () =>
+    globalThis.dispatchEvent(new Event("locationchange")),
+  );
+  globalThis.addEventListener("locationchange", onLocationChange);
 
-  const init = () => {
-    patchHistoryMethods();
-    setupListeners();
-    if (globalThis.document.readyState === "loading") {
-      globalThis.document.addEventListener("DOMContentLoaded", onLocationChange, {
-        once: true,
-      });
-    } else {
-      onLocationChange();
-    }
-  };
-
-  init();
+  if (globalThis.document.readyState === "loading") {
+    globalThis.document.addEventListener("DOMContentLoaded", onLocationChange, { once: true });
+  } else {
+    onLocationChange();
+  }
 })();
