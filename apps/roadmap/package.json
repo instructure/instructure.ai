@@ -11,7 +11,11 @@
   "type": "module",
   "scripts": {
     "build": "pnpm build:assets && vite build",
-    "build:assets": "tsdown",
+    "build:apis": "vite-node ./scripts/buildApis.mts",
+    "build:assets": "pnpm build:scripts && pnpm build:styles && pnpm build:static && pnpm build:apis",
+    "build:scripts": "vite-node ./scripts/buildScripts.mts",
+    "build:static": "vite-node ./scripts/buildStatic.mts",
+    "build:styles": "vite-node ./scripts/buildStyles.mts",
     "dev": "vite",
     "lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
     "preview": "vite preview",
