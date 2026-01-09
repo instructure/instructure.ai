@@ -273,7 +273,7 @@ const ThemeEditorList = ({ isDark }: { isDark: boolean }) => {
       ),
     },
     {
-      content: ({ color = COLORS.primaryBrandColor, label = "Nav Logo Background:" }) => (
+      content: ({ color = COLORS.navBackground, label = "Nav Logo Background:" }) => (
         <ColorRow label={label} color={color} />
       ),
     },
