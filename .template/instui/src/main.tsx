@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
-import { createRoot, type Root } from "react-dom/client";
-import App from "./App.tsx";
-import "./Main.css";
+import { type Root, createRoot } from "react-dom/client";
+import App from "./app.tsx";
+import "./main.css";
 import { InstUISettingsProvider } from "@instructure/ui";
 
 const root: HTMLElement =
