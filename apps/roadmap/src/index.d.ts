@@ -58,3 +58,20 @@ declare module "*.css" {
   const classes: Record<string, string>;
   export default classes;
 }
+
+declare module "*.svg" {
+  const src: string;
+  export default src;
+}
+declare module "*.svg?raw" {
+  const src: string;
+  export default src;
+}
+declare module "*.ico" {
+  const src: string;
+  export default src;
+}
+declare module "*.png" {
+  const src: string;
+  export default src;
+}
