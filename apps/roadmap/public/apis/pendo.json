@@ -1,0 +1,63 @@
+{
+  "request": {
+    "name": "Instructure Roadmap",
+    "pipeline": [
+      { "source": { "vocItems": { "appId": ["expandAppIds(\"*\")"], "type": "idea" } } },
+      {
+        "eval": { "vocItemDescription": "formDataContent[1]", "vocItemTitle": "formDataContent[0]" }
+      },
+      {
+        "filter": "contains(labelIds, \"KJQ_tBZ62XHylgXDnQEyaUwBE6U\") || contains(labelIds, \"k_A0z_ocO814fJE8VHJ107WtbhM\")"
+      },
+      {
+        "eval": {
+          "appId": "if (len(appIds) > 0, appIds[0], \"\")",
+          "matchedLabelId": "if (contains(labelIds, \"KJQ_tBZ62XHylgXDnQEyaUwBE6U\"), \"KJQ_tBZ62XHylgXDnQEyaUwBE6U\", if (contains(labelIds, \"k_A0z_ocO814fJE8VHJ107WtbhM\"), \"k_A0z_ocO814fJE8VHJ107WtbhM\", \"\"))",
+          "matchedLabelIds": "filter(x, labelIds, x != \"KJQ_tBZ62XHylgXDnQEyaUwBE6U\" && x != \"k_A0z_ocO814fJE8VHJ107WtbhM\" && x != \"F0SzCWfSjdT_ivTw_3MM5If4Dr4\")",
+          "productAreaId": "if (len(productAreaVocIds) > 0, productAreaVocIds[0], \"\")",
+          "stage": "if (contains(labelIds, \"KJQ_tBZ62XHylgXDnQEyaUwBE6U\"), \"Active Development\", if (contains(labelIds, \"k_A0z_ocO814fJE8VHJ107WtbhM\"), \"Coming Soon\", if (contains(labelIds, \"F0SzCWfSjdT_ivTw_3MM5If4Dr4\"), \"Co-Labs\", if (contains(labelIds, \"faCkXE4yJxfGOrYdSGZoezExJlY\"), \"Built together\", if (contains(labelIds, \"qovdjyqsT57yMnYnvn6OvZXcJKc\"), \"Under Consideration\", \"\")))))"
+        }
+      },
+      {
+        "expandList": {
+          "inputField": "matchedLabelIds",
+          "outputField": "matchedLabels",
+          "typeName": "label"
+        }
+      },
+      {
+        "eval": {
+          "labelNames": "map(label, matchedLabels, label.name)",
+          "matchedLabels": "filter(label, matchedLabels, !isNull(label))"
+        }
+      },
+      {
+        "merge": {
+          "fields": ["appId"],
+          "mappings": { "appDisplayName": "displayName", "appId": "id" },
+          "pipeline": [{ "source": { "apps": null } }]
+        }
+      },
+      {
+        "merge": {
+          "fields": ["productAreaId"],
+          "mappings": { "productAreaId": "id", "productAreaName": "name" },
+          "pipeline": [{ "source": { "groups": { "groupType": "group" } } }]
+        }
+      },
+      {
+        "select": {
+          "feature.description": "vocItemDescription",
+          "feature.labels": "labelNames",
+          "feature.links": "linksData",
+          "feature.stage": "stage",
+          "feature.title": "vocItemTitle",
+          "product.area": "productAreaName",
+          "product.name": "appDisplayName"
+        }
+      }
+    ],
+    "requestId": "instructure_roadmap-sandbox"
+  },
+  "response": { "mimeType": "application/json" }
+}

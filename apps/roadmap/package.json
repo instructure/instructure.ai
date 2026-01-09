@@ -2,6 +2,7 @@
   "name": "@instructure.ai/roadmap",
   "version": "1.0.4",
   "private": true,
+  "homepage": "https://instructure.ai/roadmap",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure.ai",
@@ -9,7 +10,8 @@
   },
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "pnpm build:assets && vite build",
+    "build:assets": "tsdown",
     "dev": "vite",
     "lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
     "preview": "vite preview",
