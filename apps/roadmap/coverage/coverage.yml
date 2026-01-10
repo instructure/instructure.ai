@@ -1,10 +1,10 @@
 coverage:
   totals:
-    statements: 0%
-    branches: 0%
-    functions: 0%
-    lines: 0%
-    total: 0%
+    statements: 0.82%
+    branches: 0.42%
+    functions: 1%
+    lines: 0.85%
+    total: 0.77%
   scripts:
     totals:
       statements: 0%
@@ -37,10 +37,10 @@ coverage:
       uncovered_line_numbers: "9-161"
   src:
     totals:
-      statements: 0%
-      branches: 6%
-      functions: 0%
-      lines: 0%
+      statements: 22%
+      branches: 26%
+      functions: 22%
+      lines: 22%
     "app.tsx":
       statements: 0%
       branches: 0%
@@ -117,18 +117,16 @@ coverage:
         lines: 0%
         uncovered_line_numbers: "3-4"
     "main.tsx":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "8-15"
+      statements: 100%
+      branches: 100%
+      functions: 100%
+      lines: 100%
     utils:
       "frameResize.ts":
-        statements: 0%
+        statements: 100%
         branches: 100%
-        functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "1-2"
+        functions: 100%
+        lines: 100%
       "getBrandConfig.ts":
         statements: 0%
         branches: 0%
