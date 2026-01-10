@@ -1,7 +1,7 @@
 const frameResize: () => void = () => {
   window.parent.postMessage(
     {
-      height: document.body.scrollHeight,
+      height: document.documentElement.scrollHeight,
       subject: "lti.frameResize",
     },
     "*",
