@@ -64,4 +64,4 @@ const getBrandConfig = (): Promise<BrandConfig> => {
   return brandConfigPromise;
 };
 
-export default getBrandConfig;
+export { fetchBrandConfig, getBrandConfig };
