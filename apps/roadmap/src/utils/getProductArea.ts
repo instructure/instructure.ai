@@ -3,7 +3,8 @@ const getProductArea = (area?: string | null): string | undefined => {
     return undefined;
   }
   const parts = area.split(" - ");
-  return parts[1] || undefined;
+  const PRODUCT_AREA_INDEX = 1;
+  return parts[PRODUCT_AREA_INDEX] || undefined;
 };
 
 export default getProductArea;
