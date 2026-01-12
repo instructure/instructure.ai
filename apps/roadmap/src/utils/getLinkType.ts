@@ -3,22 +3,8 @@ interface VerifiedLink {
   linkUrl: string;
 }
 
-const getLinkTitle = (link: VerifiedLink): string => {
-  const { title, linkUrl } = link;
-
-  let url: URL;
-
-  try {
-    url = new URL(linkUrl);
-  } catch (error) {
-    console.error("Invalid URL:", linkUrl, error);
-    return title;
-  }
-
-  const href = url.href.toLowerCase();
-  const host = url.hostname.toLowerCase();
-
-  /* Community Links */
+// oxlint-disable-next-line max-statements
+const isCommunityLink = (href: string, host: string): string | undefined => {
   if (/change[-]?log/i.test(href)) {
     return "changelog";
   }
@@ -37,21 +23,54 @@ const getLinkTitle = (link: VerifiedLink): string => {
   if (host === "community.canvaslms.com") {
     return "community";
   }
+  return undefined;
+};
 
-  /* Video Links */
-  if (
-    href.match(/\.(mp4|mov|avi|mkv|mpeg)$/) ||
-    host.match(/(?:^|\.)((instructuremedia|youtube|vimeo|wistia|guidde)\.com|youtu\.be)$/)
-  ) {
+const VIDEO_REGEX = /\.(mp4|mov|avi|mkv|mpeg)$/i;
+const PLAYER_REGEX = /(?:^|\.)((instructuremedia|youtube|vimeo|wistia|guidde)\.com|youtu\.be)$/i;
+const isVideoLink = (href: string, host: string): boolean =>
+  VIDEO_REGEX.test(href) || PLAYER_REGEX.test(host);
+
+const IMAGE_REGEX = /\.(jpeg|jpg|gif|png|svg|webp)$/i;
+const isImageLink = (href: string): boolean => IMAGE_REGEX.test(href);
+
+const getUrlParts = (linkUrl: string): { href: string; host: string } | null => {
+  try {
+    const url = new URL(linkUrl);
+    return {
+      host: url.hostname.toLowerCase(),
+      href: url.href.toLowerCase(),
+    };
+  } catch (error) {
+    console.error("Invalid URL:", linkUrl, error);
+    return undefined;
+  }
+};
+
+const getLinkType = (href: string, host: string): string | undefined => {
+  const communityType = isCommunityLink(href, host);
+  if (communityType) {
+    return communityType;
+  }
+  if (isVideoLink(href, host)) {
     return "video";
   }
-
-  /* Image Links */
-  if (href.match(/\.(jpeg|jpg|gif|png|svg|webp)$/)) {
+  if (isImageLink(href)) {
     return "image";
   }
+  return undefined;
+};
 
-  return title;
+const getLinkTitle = (link: VerifiedLink): string => {
+  const { title, linkUrl } = link;
+  const urlParts = getUrlParts(linkUrl);
+
+  if (!urlParts) {
+    return title;
+  }
+
+  const type = getLinkType(urlParts.href, urlParts.host);
+  return type ?? title;
 };
 
 export default getLinkTitle;
