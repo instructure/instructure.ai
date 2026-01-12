@@ -1,8 +1,8 @@
 {
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "^11.2.0",
+    "@instructure/browserslist-config-instui": "^11.3.0",
     "@testing-library/react": "^16.3.1",
-    "@types/react": "^19.2.7",
+    "@types/react": "^19.2.8",
     "@types/react-dom": "^19.2.3",
     "@typescript/native-preview": "latest",
     "@vitejs/plugin-react": "^5.1.2",
@@ -15,7 +15,7 @@
     "jsdom": "^27.4.0",
     "lightningcss": "^1.30.2",
     "oxfmt": "^0.18.0",
-    "oxlint": "^1.38.0",
+    "oxlint": "^1.39.0",
     "oxlint-tsgolint": "^0.10.1",
     "react-compiler-runtime": "^1.0.0",
     "tsdown": "^0.16.8",
@@ -33,7 +33,7 @@
   },
   "version": "3.0.1",
   "name": "@instructure.ai/shared-configs",
-  "packageManager": "pnpm@10.27.0",
+  "packageManager": "pnpm@10.28.0",
   "private": true,
   "type": "module",
   "scripts": {

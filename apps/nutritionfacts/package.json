@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@instructure.ai/aiinfo": "workspace:^",
-    "@instructure/ui": "^11.2.0",
+    "@instructure/ui": "^11.3.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
