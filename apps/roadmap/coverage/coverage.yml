@@ -1,10 +1,10 @@
 coverage:
   totals:
-    statements: 0.82%
-    branches: 0.42%
-    functions: 1%
-    lines: 0.85%
-    total: 0.77%
+    statements: 26.68%
+    branches: 16.73%
+    functions: 13.87%
+    lines: 26.87%
+    total: 21.04%
   scripts:
     totals:
       statements: 0%
@@ -37,10 +37,10 @@ coverage:
       uncovered_line_numbers: "9-161"
   src:
     totals:
-      statements: 22%
-      branches: 26%
-      functions: 22%
-      lines: 22%
+      statements: 45.14%
+      branches: 39.54%
+      functions: 39.5%
+      lines: 45.26%
     "app.tsx":
       statements: 0%
       branches: 0%
@@ -63,59 +63,59 @@ coverage:
           uncovered_line_numbers: "14-107"
     components:
       "card.tsx":
-        statements: 0%
+        statements: 3.22%
         branches: 0%
         functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "13-127"
+        lines: 3.44%
+        uncovered_line_numbers: "14-127"
       "cardOverlay.tsx":
-        statements: 0%
+        statements: 8%
         branches: 0%
         functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "30-294"
+        lines: 9.52%
+        uncovered_line_numbers: "31-294"
       "downloadLink.tsx":
-        statements: 0%
+        statements: 15.38%
         branches: 0%
         functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "10-38"
+        lines: 15.38%
+        uncovered_line_numbers: "19-38"
       "loading.tsx":
-        statements: 0%
+        statements: 50%
         branches: 0%
         functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "7-8"
+        lines: 50%
+        uncovered_line_numbers: "8"
       "logos.tsx":
-        statements: 0%
+        statements: 57.14%
         branches: 0%
         functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "5-281"
+        lines: 60.6%
+        uncovered_line_numbers: "15-281"
       "tagList.tsx":
-        statements: 0%
+        statements: 16.66%
         branches: 0%
         functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "5-55"
+        lines: 16.66%
+        uncovered_line_numbers: "9-55"
       "themeEditor.tsx":
-        statements: 0%
+        statements: 17.89%
         branches: 0%
         functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "28-407"
+        lines: 18.27%
+        uncovered_line_numbers: "29-407"
       "troubleshooting.tsx":
-        statements: 0%
+        statements: 29.03%
         branches: 0%
         functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "12-134"
+        lines: 29.03%
+        uncovered_line_numbers: "13-134"
       "videoPlayer.tsx":
-        statements: 0%
+        statements: 50%
         branches: 0%
         functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "3-4"
+        lines: 50%
+        uncovered_line_numbers: "4"
     "main.tsx":
       statements: 100%
       branches: 100%
@@ -128,56 +128,48 @@ coverage:
         functions: 100%
         lines: 100%
       "getBrandConfig.ts":
-        statements: 0%
-        branches: 0%
-        functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "13-64"
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
       "getColor.ts":
-        statements: 0%
-        branches: 0%
-        functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "3-8"
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
       "getLinkType.ts":
-        statements: 0%
-        branches: 0%
-        functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "6-54"
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
       "getLogo.ts":
-        statements: 0%
-        branches: 0%
-        functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "3-8"
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
       "getProductArea.ts":
-        statements: 0%
-        branches: 0%
-        functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "1-6"
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
       "getRoadmap.ts":
-        statements: 0%
-        branches: 0%
-        functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "3-32"
+        statements: 82.14%
+        branches: 76.92%
+        functions: 75%
+        lines: 82.14%
+        uncovered_line_numbers: "17-38"
       "hideNavigationMenu.ts":
-        statements: 0%
+        statements: 100%
         branches: 100%
-        functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "1-2"
+        functions: 100%
+        lines: 100%
       "hideRightSideWrapper.ts":
-        statements: 0%
+        statements: 100%
         branches: 100%
-        functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "1-2"
+        functions: 100%
+        lines: 100%
       "paramsToPendo.ts":
-        statements: 0%
-        branches: 0%
-        functions: 0%
-        lines: 0%
-        uncovered_line_numbers: "1-76"
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
