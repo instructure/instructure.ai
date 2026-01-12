@@ -5,6 +5,8 @@ let cachedRoadmap: RoadmapFeatures | undefined = undefined;
 
 type RoadmapRequestEvent = MessageEvent<{ value?: string }>;
 
+const RESPONSE_TIMEOUT = 10_000; // 10 seconds
+
 const getRoadmap = (): Promise<RoadmapFeatures | undefined> => {
   console.debug("getRoadmap called");
   if (cachedRoadmap !== undefined && cachedRoadmap !== null) {
@@ -21,6 +23,7 @@ const getRoadmap = (): Promise<RoadmapFeatures | undefined> => {
     const handler = (event: RoadmapRequestEvent) => {
       if (event.data && "value" in event.data && event.data.value !== undefined) {
         window.removeEventListener("message", handler);
+        clearTimeout(timeoutId);
         const result = paramsToPendo(event.data.value) ?? undefined;
         cachedRoadmap = result;
         roadmapPromise = undefined;
@@ -28,6 +31,12 @@ const getRoadmap = (): Promise<RoadmapFeatures | undefined> => {
       }
     };
     window.addEventListener("message", handler);
+
+    const timeoutId = setTimeout(() => {
+      window.removeEventListener("message", handler);
+      roadmapPromise = undefined;
+      resolve(undefined);
+    }, RESPONSE_TIMEOUT);
   });
   return roadmapPromise;
 };
