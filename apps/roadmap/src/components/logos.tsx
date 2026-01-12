@@ -1,6 +1,6 @@
-import { InlineSVG } from "@instructure/ui";
+import { type FC, useMemo } from "react";
 import { darken, lighten } from "@instructure/ui-color-utils";
-import { type FC } from "react";
+import { InlineSVG } from "@instructure/ui";
 
 const ColorSVG: FC<ColorSVGProps> = ({
   color = "currentColor",
@@ -11,18 +11,21 @@ const ColorSVG: FC<ColorSVGProps> = ({
   height = "1rem",
   inline = false,
   valign = "top",
-}) => (
-  <InlineSVG
-    height={height}
-    inline={inline}
-    style={{ verticalAlign: valign }}
-    title={title}
-    viewBox={viewBox}
-    width={width}
-  >
-    <g fill={color}>{children}</g>
-  </InlineSVG>
-);
+}) => {
+  const style = useMemo(() => ({ verticalAlign: valign }), [valign]);
+  return (
+    <InlineSVG
+      height={height}
+      inline={inline}
+      style={style}
+      title={title}
+      viewBox={viewBox}
+      width={width}
+    >
+      <g fill={color}>{children}</g>
+    </InlineSVG>
+  );
+};
 
 const Mastery: SVGInfo = {
   SVG: (
@@ -123,11 +126,13 @@ const ParchmentBug: FC<SVGProps> = ({
   </ColorSVG>
 );
 
+const instructureBugStyle = { verticalAlign: "text-bottom" };
+
 const InstructureBug: FC<SVGProps> = ({ height = "1rem", width = "auto", inline = false }) => (
   <InlineSVG
     height={height}
     inline={inline}
-    style={{ verticalAlign: "text-bottom" }}
+    style={instructureBugStyle}
     title={Instructure.title}
     viewBox={Instructure.viewBox}
     width={width}
@@ -181,6 +186,64 @@ const CanvasBug: FC<SVGProps> = ({
   </ColorSVG>
 );
 
+const IgniteSVGGradient: FC = () => (
+  <>
+    {React.createElement("g", { clipPath: "url(#clip0_11521_4097)" }, [
+      React.createElement("path", {
+        // oxlint-disable-next-line id-length
+        d: "M960 0L1219.29 700.713L1920 960L1219.29 1219.29L960 1920L700.713 1219.29L0 960L700.713 700.713L960 0Z",
+        fill: "url(#paint0_linear_11521_4097)",
+        key: "path1",
+      }),
+      React.createElement("path", {
+        // oxlint-disable-next-line id-length
+        d: "M1600 0L1686.43 233.571L1920 320L1686.43 406.429L1600 640L1513.57 406.429L1280 320L1513.57 233.571L1600 0Z",
+        fill: "url(#paint1_linear_11521_4097)",
+        key: "path2",
+      }),
+    ])}
+    {React.createElement("defs", undefined, [
+      React.createElement(
+        "linearGradient",
+        {
+          gradientUnits: "userSpaceOnUse",
+          id: "paint0_linear_11521_4097",
+          key: "lg1",
+          x1: "-476.25",
+          x2: "-7.61685",
+          y1: "-392.727",
+          y2: "3078.25",
+        },
+        [
+          React.createElement("stop", { key: "stop1", stopColor: "#9E58BD" }),
+          React.createElement("stop", { key: "stop2", offset: "1", stopColor: "#00828E" }),
+        ],
+      ),
+      React.createElement(
+        "linearGradient",
+        {
+          gradientUnits: "userSpaceOnUse",
+          id: "paint1_linear_11521_4097",
+          key: "lg2",
+          x1: "1121.25",
+          x2: "1277.46",
+          y1: "-130.909",
+          y2: "1026.08",
+        },
+        [
+          React.createElement("stop", { key: "stop3", stopColor: "#9E58BD" }),
+          React.createElement("stop", { key: "stop4", offset: "1", stopColor: "#00828E" }),
+        ],
+      ),
+      React.createElement("clipPath", { id: "clip0_11521_4097", key: "clip" }, [
+        React.createElement("rect", { fill: "#fff", height: "1920", key: "rect", width: "1920" }),
+      ]),
+    ])}
+  </>
+);
+
+const IgniteSVGColor: FC<{ color: string }> = ({ color }) => <g fill={color}>{Ignite.SVG}</g>;
+
 const IgniteBug: FC<SVGProps> = ({
   height = "1rem",
   width = "auto",
@@ -196,51 +259,14 @@ const IgniteBug: FC<SVGProps> = ({
     viewBox={Ignite.viewBox}
     width={width}
   >
-    {color ? (
-      <g fill={color}>{Ignite.SVG}</g>
-    ) : (
-      <>
-        <g clipPath="url(#clip0_11521_4097)">
-          <path
-            d="M960 0L1219.29 700.713L1920 960L1219.29 1219.29L960 1920L700.713 1219.29L0 960L700.713 700.713L960 0Z"
-            fill="url(#paint0_linear_11521_4097)"
-          />
-          <path
-            d="M1600 0L1686.43 233.571L1920 320L1686.43 406.429L1600 640L1513.57 406.429L1280 320L1513.57 233.571L1600 0Z"
-            fill="url(#paint1_linear_11521_4097)"
-          />
-        </g>
-        <defs>
-          <linearGradient
-            gradientUnits="userSpaceOnUse"
-            id="paint0_linear_11521_4097"
-            x1="-476.25"
-            x2="-7.61685"
-            y1="-392.727"
-            y2="3078.25"
-          >
-            <stop stopColor="#9E58BD" />
-            <stop offset="1" stopColor="#00828E" />
-          </linearGradient>
-          <linearGradient
-            gradientUnits="userSpaceOnUse"
-            id="paint1_linear_11521_4097"
-            x1="1121.25"
-            x2="1277.46"
-            y1="-130.909"
-            y2="1026.08"
-          >
-            <stop stopColor="#9E58BD" />
-            <stop offset="1" stopColor="#00828E" />
-          </linearGradient>
-          <clipPath id="clip0_11521_4097">
-            <rect fill="#fff" height="1920" width="1920" />
-          </clipPath>
-        </defs>
-      </>
-    )}
+    {color !== undefined && <IgniteSVGColor color={color} />}
+    {color === undefined && <IgniteSVGGradient />}
   </ColorSVG>
 );
+
+const CARD_BG_LIGHTEN_AMOUNT = 15;
+const CARD_BG_DARKEN_AMOUNT_1 = 10;
+const CARD_BG_DARKEN_AMOUNT_2 = 20;
 
 const CardBackground: FC<SVGProps> = ({
   height = "160px",
@@ -248,10 +274,10 @@ const CardBackground: FC<SVGProps> = ({
   inline = false,
   color = Instructure?.color,
 }) => {
-  const circle1 = lighten(color, 15);
+  const circle1 = lighten(color, CARD_BG_LIGHTEN_AMOUNT);
   const circle2 = color;
-  const circle3 = darken(color, 10);
-  const bg = darken(color, 20);
+  const circle3 = darken(color, CARD_BG_DARKEN_AMOUNT_1);
+  const bg = darken(color, CARD_BG_DARKEN_AMOUNT_2);
   return (
     <ColorSVG
       height={height}
@@ -288,4 +314,5 @@ const Colors = {
 };
 
 export default Logos;
+// oxlint-disable-next-line no-named-export
 export { Logos, Colors };
