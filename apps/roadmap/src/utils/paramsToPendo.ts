@@ -55,24 +55,12 @@ const paramsToPendo = (params: string | null): RoadmapFeatures | undefined => {
   ) as string[];
   const features = p.results;
 
-  const roadmap: RoadmapFeatures = {
+  return {
     features,
     labels,
     productAreas,
     products,
     stages,
   };
-
-  if (
-    Array.isArray(roadmap.stages) &&
-    Array.isArray(roadmap.products) &&
-    Array.isArray(roadmap.productAreas) &&
-    Array.isArray(roadmap.labels) &&
-    Array.isArray(roadmap.features)
-  ) {
-    return roadmap;
-  }
-
-  return;
 };
 export default paramsToPendo;
