@@ -64,4 +64,5 @@ const getBrandConfig = (): Promise<BrandConfig> => {
   return brandConfigPromise;
 };
 
+// oxlint-disable-next-line no-named-export
 export { fetchBrandConfig, getBrandConfig };
