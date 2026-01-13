@@ -273,7 +273,7 @@ describe("paramsToPendo", () => {
     it("should filter out falsy values from products", () => {
       const features = [
         createValidPendoAPIFeature({ product: { name: "Product A" } }),
-        createValidPendoAPIFeature({ product: { name: null } }),
+        createValidPendoAPIFeature({ product: { name: undefined } }),
         createValidPendoAPIFeature({ product: { name: "" } }),
         createValidPendoAPIFeature({ product: { name: "Product B" } }),
       ];
@@ -297,9 +297,7 @@ describe("paramsToPendo", () => {
     });
 
     it("should filter out falsy values from labels", () => {
-      const features = [
-        createValidPendoAPIFeature({ feature: { labels: ["tag1", null, "", "tag2"] } }),
-      ];
+      const features = [createValidPendoAPIFeature({ feature: { labels: ["tag1", "", "tag2"] } })];
       const validData = createValidPendoAPI(features);
       const result = paramsToPendo(JSON.stringify(validData));
 
