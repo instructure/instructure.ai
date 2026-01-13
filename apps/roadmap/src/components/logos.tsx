@@ -1,4 +1,4 @@
-import { type FC, useMemo } from "react";
+import { type FC, useMemo, createElement } from "react";
 import { darken, lighten } from "@instructure/ui-color-utils";
 import { InlineSVG } from "@instructure/ui";
 
@@ -188,22 +188,22 @@ const CanvasBug: FC<SVGProps> = ({
 
 const IgniteSVGGradient: FC = () => (
   <>
-    {React.createElement("g", { clipPath: "url(#clip0_11521_4097)" }, [
-      React.createElement("path", {
+    {createElement("g", { clipPath: "url(#clip0_11521_4097)" }, [
+      createElement("path", {
         // oxlint-disable-next-line id-length
         d: "M960 0L1219.29 700.713L1920 960L1219.29 1219.29L960 1920L700.713 1219.29L0 960L700.713 700.713L960 0Z",
         fill: "url(#paint0_linear_11521_4097)",
         key: "path1",
       }),
-      React.createElement("path", {
+      createElement("path", {
         // oxlint-disable-next-line id-length
         d: "M1600 0L1686.43 233.571L1920 320L1686.43 406.429L1600 640L1513.57 406.429L1280 320L1513.57 233.571L1600 0Z",
         fill: "url(#paint1_linear_11521_4097)",
         key: "path2",
       }),
     ])}
-    {React.createElement("defs", undefined, [
-      React.createElement(
+    {createElement("defs", undefined, [
+      createElement(
         "linearGradient",
         {
           gradientUnits: "userSpaceOnUse",
@@ -215,11 +215,11 @@ const IgniteSVGGradient: FC = () => (
           y2: "3078.25",
         },
         [
-          React.createElement("stop", { key: "stop1", stopColor: "#9E58BD" }),
-          React.createElement("stop", { key: "stop2", offset: "1", stopColor: "#00828E" }),
+          createElement("stop", { key: "stop1", stopColor: "#9E58BD" }),
+          createElement("stop", { key: "stop2", offset: "1", stopColor: "#00828E" }),
         ],
       ),
-      React.createElement(
+      createElement(
         "linearGradient",
         {
           gradientUnits: "userSpaceOnUse",
@@ -231,12 +231,12 @@ const IgniteSVGGradient: FC = () => (
           y2: "1026.08",
         },
         [
-          React.createElement("stop", { key: "stop3", stopColor: "#9E58BD" }),
-          React.createElement("stop", { key: "stop4", offset: "1", stopColor: "#00828E" }),
+          createElement("stop", { key: "stop3", stopColor: "#9E58BD" }),
+          createElement("stop", { key: "stop4", offset: "1", stopColor: "#00828E" }),
         ],
       ),
-      React.createElement("clipPath", { id: "clip0_11521_4097", key: "clip" }, [
-        React.createElement("rect", { fill: "#fff", height: "1920", key: "rect", width: "1920" }),
+      createElement("clipPath", { id: "clip0_11521_4097", key: "clip" }, [
+        createElement("rect", { fill: "#fff", height: "1920", key: "rect", width: "1920" }),
       ]),
     ])}
   </>
