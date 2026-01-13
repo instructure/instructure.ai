@@ -2,7 +2,7 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-let hideNavigationMenu = undefined;
+let hideNavigationMenu: (() => void) | undefined = undefined;
 
 const setupSpies = () => ({
   postMessageSpy: vi.spyOn(globalThis.parent, "postMessage").mockImplementation(() => {}),
@@ -27,7 +27,7 @@ describe("hideNavigationMenu", () => {
   });
 
   it("should post message to parent window with hideNavigationMenu subject", () => {
-    hideNavigationMenu();
+    hideNavigationMenu!();
 
     expect(postMessageSpy).toHaveBeenCalledWith(
       {
@@ -38,21 +38,21 @@ describe("hideNavigationMenu", () => {
   });
 
   it("should post message to any origin", () => {
-    hideNavigationMenu();
+    hideNavigationMenu!();
 
     expect(postMessageSpy).toHaveBeenCalledWith(expect.any(Object), "*");
   });
 
   it("should call postMessage exactly once", () => {
-    hideNavigationMenu();
+    hideNavigationMenu!();
 
     expect(postMessageSpy).toHaveBeenCalledTimes(1);
   });
 
   it("should be callable multiple times", () => {
-    hideNavigationMenu();
-    hideNavigationMenu();
-    hideNavigationMenu();
+    hideNavigationMenu!();
+    hideNavigationMenu!();
+    hideNavigationMenu!();
 
     expect(postMessageSpy).toHaveBeenCalledTimes(3);
     expect(postMessageSpy).toHaveBeenNthCalledWith(1, { subject: "hideNavigationMenu" }, "*");
@@ -61,6 +61,6 @@ describe("hideNavigationMenu", () => {
   });
 
   it("should not throw errors when called", () => {
-    expect(() => hideNavigationMenu()).not.toThrow();
+    expect(() => hideNavigationMenu!()).not.toThrow();
   });
 });
