@@ -8,6 +8,8 @@ const createValidPendoAPIFeature = (
   } = {},
 ): PendoAPIFeature => ({
   feature: {
+    description: null,
+    links: null,
     stage: "In Progress",
     title: "Test Feature",
     labels: ["label1", "label2"],
@@ -16,6 +18,8 @@ const createValidPendoAPIFeature = (
   product: {
     name: "Product A",
     area: "Area 1",
+    logo: undefined,
+    color: undefined,
     ...overrides.product,
   },
 });
