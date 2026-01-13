@@ -8,8 +8,8 @@ const createValidPendoAPIFeature = (
   } = {},
 ): PendoAPIFeature => ({
   feature: {
-    description: null,
-    links: null,
+    description: undefined,
+    links: undefined,
     stage: "In Progress",
     title: "Test Feature",
     labels: ["label1", "label2"],
@@ -31,7 +31,7 @@ const createValidPendoAPI = (features: PendoAPIFeature[] = []): PendoAPI => ({
 describe("paramsToPendo", () => {
   describe("parameter validation", () => {
     it("should return undefined when params is null", () => {
-      const result = paramsToPendo(null);
+      const result = paramsToPendo(undefined);
       expect(result).toBeUndefined();
     });
 
@@ -76,7 +76,7 @@ describe("paramsToPendo", () => {
   describe("feature validation", () => {
     it("should return undefined when feature property is missing", () => {
       const invalidData = {
-        results: [{ product: { name: "Product A", area: "Area 1" } }],
+        results: [{ product: { area: "Area 1", name: "Product A" } }],
       };
       const result = paramsToPendo(JSON.stringify(invalidData));
       expect(result).toBeUndefined();
@@ -84,7 +84,7 @@ describe("paramsToPendo", () => {
 
     it("should return undefined when feature is not an object", () => {
       const invalidData = {
-        results: [{ feature: "not-an-object", product: { name: "Product A", area: "Area 1" } }],
+        results: [{ feature: "not-an-object", product: { area: "Area 1", name: "Product A" } }],
       };
       const result = paramsToPendo(JSON.stringify(invalidData));
       expect(result).toBeUndefined();
@@ -95,7 +95,7 @@ describe("paramsToPendo", () => {
         results: [
           {
             feature: { title: "Test" },
-            product: { name: "Product A", area: "Area 1" },
+            product: { area: "Area 1", name: "Product A" },
           },
         ],
       };
@@ -108,7 +108,7 @@ describe("paramsToPendo", () => {
         results: [
           {
             feature: { stage: "In Progress" },
-            product: { name: "Product A", area: "Area 1" },
+            product: { area: "Area 1", name: "Product A" },
           },
         ],
       };
@@ -260,7 +260,7 @@ describe("paramsToPendo", () => {
     it("should filter out falsy values from stages", () => {
       const features = [
         createValidPendoAPIFeature({ feature: { stage: "Planning" } }),
-        createValidPendoAPIFeature({ feature: { stage: null } }),
+        createValidPendoAPIFeature({ feature: { stage: undefined } }),
         createValidPendoAPIFeature({ feature: { stage: "" } }),
         createValidPendoAPIFeature({ feature: { stage: "Completed" } }),
       ];
@@ -286,7 +286,7 @@ describe("paramsToPendo", () => {
     it("should filter out falsy values from product areas", () => {
       const features = [
         createValidPendoAPIFeature({ product: { area: "Area 1" } }),
-        createValidPendoAPIFeature({ product: { area: null } }),
+        createValidPendoAPIFeature({ product: { area: undefined } }),
         createValidPendoAPIFeature({ product: { area: "" } }),
         createValidPendoAPIFeature({ product: { area: "Area 2" } }),
       ];

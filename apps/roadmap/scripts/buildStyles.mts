@@ -4,7 +4,7 @@ import path from "node:path";
 
 interface PackageJson {
   homepage?: string;
-};
+}
 
 const projectRoot = process.cwd();
 const ENTRY_CSS = path.join(projectRoot, "src/assets/styles/index.css");
@@ -40,10 +40,12 @@ const normalizeHomepageBase = (homepage: string): string => {
 const isRelativeUrl = (url: string): boolean => {
   const trimmedUrl = url.trim();
   return !(
-    trimmedUrl.startsWith("/") || // Absolute path
-    trimmedUrl.startsWith("#") || // Fragment
-    trimmedUrl.startsWith("//") || // Protocol-relative
-    /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(trimmedUrl) // Scheme: http:, https:, data:, blob:, etc.
+    (
+      trimmedUrl.startsWith("/") || // Absolute path
+      trimmedUrl.startsWith("#") || // Fragment
+      trimmedUrl.startsWith("//") || // Protocol-relative
+      /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(trimmedUrl)
+    ) // Scheme: http:, https:, data:, blob:, etc.
   );
 };
 
@@ -58,7 +60,8 @@ const toPosix = (filePath: string): string => filePath.split(path.sep).join("/")
  * - src/assets/styles/a.css:     url("../images/bg.png") -> {homepage}/images/bg.png
  * - src/assets/styles/a.css:     url("./icons/x.svg")    -> {homepage}/styles/icons/x.svg
  */
-const getRawUrl = (s1: string, s2: string, s3: string): string => String((s1 ?? s2 ?? s3 ?? "")).trim();
+const getRawUrl = (s1: string, s2: string, s3: string): string =>
+  String(s1 ?? s2 ?? s3 ?? "").trim();
 
 const getQuoteStyle = (s1: string | undefined, s2: string | undefined): string => {
   if (s1 !== undefined) {
@@ -70,7 +73,6 @@ const getQuoteStyle = (s1: string | undefined, s2: string | undefined): string =
 };
 
 const makeCssUrlRewriter = function makeCssUrlRewriter(homepageBase: string) {
-
   const getRelToAssets = (cssFilePath: string, raw: string): string => {
     const resolvedFsPath = path.resolve(path.dirname(cssFilePath), raw);
     return path.relative(ASSETS_ROOT, resolvedFsPath);
@@ -81,11 +83,8 @@ const makeCssUrlRewriter = function makeCssUrlRewriter(homepageBase: string) {
     return new URL(webPath, homepageBase).toString();
   };
 
-  const shouldRewriteUrl = (relToAssets: string): boolean => !(
-      relToAssets === "" ||
-      relToAssets.startsWith("..") ||
-      path.isAbsolute(relToAssets)
-    );
+  const shouldRewriteUrl = (relToAssets: string): boolean =>
+    !(relToAssets === "" || relToAssets.startsWith("..") || path.isAbsolute(relToAssets));
 
   const processUrl = ({
     match,
@@ -117,13 +116,10 @@ const makeCssUrlRewriter = function makeCssUrlRewriter(homepageBase: string) {
   };
 
   return function rewriteUrlsInCss(cssText: string, cssFilePath: string): string {
-    return cssText.replace(
-      URL_RE,
-      (...args: [string, string, string, string]) => {
-        const [match, s1, s2, s3] = args;
-        return processUrl({ cssFilePath, match, s1, s2, s3 });
-      }
-    );
+    return cssText.replace(URL_RE, (...args: [string, string, string, string]) => {
+      const [match, s1, s2, s3] = args;
+      return processUrl({ cssFilePath, match, s1, s2, s3 });
+    });
   };
 };
 

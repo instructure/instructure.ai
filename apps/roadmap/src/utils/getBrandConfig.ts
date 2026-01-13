@@ -35,9 +35,7 @@ const getBrandConfig = (): Promise<BrandConfig> => {
   brandConfigPromise = new Promise((resolve) => {
     const handlePageSettingsEvent = async (event: PageSettingsEvent) => {
       if (
-        event.data &&
-        "subject" in event.data &&
-        event.data.subject === "lti.postMessage" &&
+        event.data?.subject === "lti.postMessage" &&
         event.data.pageSettings
       ) {
         const url = event.data.pageSettings.active_brand_config_json_url;

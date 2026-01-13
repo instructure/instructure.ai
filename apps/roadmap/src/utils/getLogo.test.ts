@@ -1,7 +1,7 @@
 // @vitest-environment node
 
 import type React from "react";
-import type { SVGProps } from "react";
+import { type SVGProps } from "react";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 
 let getLogo: (brand: string) => React.FC<SVGProps<SVGSVGElement>>;

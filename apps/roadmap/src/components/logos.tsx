@@ -1,4 +1,4 @@
-import { type FC, useMemo, createElement } from "react";
+import { type FC, createElement, useMemo } from "react";
 import { darken, lighten } from "@instructure/ui-color-utils";
 import { InlineSVG } from "@instructure/ui";
 

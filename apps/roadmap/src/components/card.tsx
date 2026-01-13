@@ -25,7 +25,7 @@ const Card: FC<{
     if (!el) {
       return;
     }
-    const style = window.getComputedStyle(el);
+    const style = globalThis.getComputedStyle(el);
     const lineHeight = parseFloat(style.lineHeight || "0") || 1;
     const { height } = el.getBoundingClientRect();
     const lines = Math.max(1, Math.round(height / lineHeight));

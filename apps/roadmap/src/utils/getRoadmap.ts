@@ -21,7 +21,7 @@ const getRoadmap = (): Promise<RoadmapFeatures | undefined> => {
   roadmapPromise = new Promise((resolve) => {
     console.debug("Listening for roadmap response");
     const handler = (event: RoadmapRequestEvent) => {
-      if (event.data && "value" in event.data && event.data.value !== undefined) {
+      if (event.data?.value !== undefined) {
         window.removeEventListener("message", handler);
         clearTimeout(timeoutId);
         const result = paramsToPendo(event.data.value) ?? undefined;
