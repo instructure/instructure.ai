@@ -2,9 +2,9 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-let getRoadmap = undefined;
-let paramsToPendo = undefined;
-let getRoadmapModule = undefined;
+let getRoadmap: any = undefined;
+let paramsToPendo: any = undefined;
+let getRoadmapModule: any = undefined;
 
 const mockRoadmap = { features: ["feature1", "feature2"] };
 vi.mock("./paramsToPendo", () => ({
@@ -26,7 +26,7 @@ const importModulesAndResetCache = async () => {
   getRoadmap = getRoadmapImport.default;
   let mod = await import("./paramsToPendo");
   paramsToPendo = mod.default;
-  const roadmapMod = await import("./getRoadmap");
+  const roadmapMod = (await import("./getRoadmap")) as any;
   getRoadmapModule = {
     get cachedRoadmap() {
       return roadmapMod.cachedRoadmap;
