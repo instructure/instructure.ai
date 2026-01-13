@@ -2,7 +2,7 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-let hideRightSideWrapper = undefined;
+let hideRightSideWrapper: (() => void) | undefined = undefined;
 
 const setupSpies = () => ({
   postMessageSpy: vi.spyOn(globalThis.parent, "postMessage").mockImplementation(() => {}),
@@ -27,7 +27,7 @@ describe("hideRightSideWrapper", () => {
   });
 
   it("should post message to parent window with lti.hideRightSideWrapper subject", () => {
-    hideRightSideWrapper();
+    hideRightSideWrapper!();
 
     expect(postMessageSpy).toHaveBeenCalledWith(
       {
@@ -38,21 +38,21 @@ describe("hideRightSideWrapper", () => {
   });
 
   it("should post message to any origin", () => {
-    hideRightSideWrapper();
+    hideRightSideWrapper!();
 
     expect(postMessageSpy).toHaveBeenCalledWith(expect.any(Object), "*");
   });
 
   it("should call postMessage exactly once per invocation", () => {
-    hideRightSideWrapper();
+    hideRightSideWrapper!();
 
     expect(postMessageSpy).toHaveBeenCalledTimes(1);
   });
 
   it("should be callable multiple times", () => {
-    hideRightSideWrapper();
-    hideRightSideWrapper();
-    hideRightSideWrapper();
+    hideRightSideWrapper!();
+    hideRightSideWrapper!();
+    hideRightSideWrapper!();
 
     expect(postMessageSpy).toHaveBeenCalledTimes(3);
     expect(postMessageSpy).toHaveBeenNthCalledWith(1, { subject: "lti.hideRightSideWrapper" }, "*");
@@ -61,11 +61,11 @@ describe("hideRightSideWrapper", () => {
   });
 
   it("should not throw errors when called", () => {
-    expect(() => hideRightSideWrapper()).not.toThrow();
+    expect(() => hideRightSideWrapper!()).not.toThrow();
   });
 
   it("should send message with correct structure", () => {
-    hideRightSideWrapper();
+    hideRightSideWrapper!();
 
     const callArgs = postMessageSpy.mock.calls[0];
     expect(callArgs[0]).toHaveProperty("subject");
@@ -74,7 +74,7 @@ describe("hideRightSideWrapper", () => {
   });
 
   it("should target parent window specifically", () => {
-    hideRightSideWrapper();
+    hideRightSideWrapper!();
 
     expect(postMessageSpy).toHaveBeenCalledOnce();
     expect(vi.mocked(window.parent.postMessage)).toBe(postMessageSpy);
