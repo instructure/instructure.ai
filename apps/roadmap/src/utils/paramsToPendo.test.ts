@@ -280,7 +280,7 @@ describe("paramsToPendo", () => {
       const validData = createValidPendoAPI(features);
       const result = paramsToPendo(JSON.stringify(validData));
 
-      expect(result?.products).toEqual(["Product A", "Product B"]);
+      expect(result?.products).toStrictEqual(["Product A", "Product B"]);
     });
 
     it("should filter out falsy values from product areas", () => {
