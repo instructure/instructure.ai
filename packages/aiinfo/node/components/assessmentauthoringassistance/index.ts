@@ -1,9 +1,9 @@
-import  {
+import {
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
 } from "@instructure/ui-instructure";
-import  { type AiInfoFeatureProps } from "../../types";
+import { type AiInfoFeatureProps } from "../../types";
 const FEATURE_NAME = "Item Authoring";
 const UID = "assessmentauthoringassistance";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
@@ -125,64 +125,72 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
   },
 ];
 const nutritionFacts: NutritionFactsProps = {
-  closeButtonText: "Close",
-  closeIconButtonScreenReaderLabel: "Close",
+  ...{
+    closeButtonText: "Close",
+    closeIconButtonScreenReaderLabel: "Close",
+    featureName: FEATURE_NAME,
+    modalLabel: "This is a modal for AI facts",
+    title: "AI Nutrition Facts",
+    triggerText: "Nutrition Facts",
+  },
   data: NUTRITION_FACTS_DATA,
-  featureName: FEATURE_NAME,
-  modalLabel: "This is a modal for AI facts",
-  title: "AI Nutrition Facts",
-  triggerText: "Nutrition Facts",
 };
 const dataPermissionLevels: DataPermissionLevelsProps = {
-  closeButtonText: "Close",
-  closeIconButtonScreenReaderLabel: "Close dialog",
-  currentFeature: FEATURE_NAME,
-  currentFeatureText: "Current Feature:",
+  ...{
+    closeButtonText: "Close",
+    closeIconButtonScreenReaderLabel: "Close dialog",
+    currentFeature: FEATURE_NAME,
+    currentFeatureText: "Current Feature:",
+    modalLabel: "Data Permission Levels modal",
+    title: "Data Permission Levels",
+    triggerText: "Data Permission Levels",
+  },
   data: DATA_PERMISSION_LEVELS,
-  modalLabel: "Data Permission Levels modal",
-  title: "Data Permission Levels",
-  triggerText: "Data Permission Levels",
 };
 const aiInformation: AiInformationProps = {
-  data: [
-    {
-      description:
-        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-      featureName: "Item Authoring",
-      modelName: "Haiku 3",
-      modelNameText: "Base Model",
-      nutritionFactsModalTriggerText: "AI Nutrition Facts",
-      permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
-      permissionLevelsModalTriggerText: "Data Permission Levels",
-    },
-  ],
-  dataPermissionLevelsCloseButtonText: "Close",
-  dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeature: "Item Authoring",
-  dataPermissionLevelsCurrentFeatureText: "Current Feature:",
+  ...{
+    data: [
+      {
+        description:
+          "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+        featureName: "Item Authoring",
+        modelName: "Haiku 3",
+        modelNameText: "Base Model",
+        nutritionFactsModalTriggerText: "AI Nutrition Facts",
+        permissionLevel: "LEVEL 2",
+        permissionLevelsModalTriggerText: "Data Permission Levels",
+        permissionLevelText: "Permission Level:",
+        privacyNoticeText: undefined,
+        privacyNoticeUrl: undefined,
+      },
+    ],
+    dataPermissionLevelsCloseButtonText: "Close",
+    dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
+    dataPermissionLevelsCurrentFeature: "Item Authoring",
+    dataPermissionLevelsCurrentFeatureText: "Current Feature:",
+    dataPermissionLevelsModalLabel: "Data Permission Levels modal",
+    dataPermissionLevelsTitle: "Data Permission Levels",
+    nutritionFactsCloseButtonText: "Close",
+    nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
+    nutritionFactsFeatureName: "Item Authoring",
+    nutritionFactsModalLabel: "This is a modal for AI facts",
+    nutritionFactsTitle: "AI Nutrition Facts",
+    title: "Features",
+  },
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-  dataPermissionLevelsModalLabel: "Data Permission Levels modal",
-  dataPermissionLevelsTitle: "Data Permission Levels",
-  nutritionFactsCloseButtonText: "Close",
-  nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
   nutritionFactsData: NUTRITION_FACTS_DATA,
-  nutritionFactsFeatureName: "Item Authoring",
-  nutritionFactsModalLabel: "This is a modal for AI facts",
-  nutritionFactsTitle: "AI Nutrition Facts",
-  title: "Features",
   trigger: undefined,
 };
 const assessmentauthoringassistance: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description:
-    "Item Authoring for Assessments streamlines assessment creation by generating questions based on your course materials. \n",
-  group: "Mastery",
-  name: FEATURE_NAME,
   nutritionFacts,
   revision: "2025.11.18",
   uid: UID,
+  group: "Mastery",
+  name: FEATURE_NAME,
+  description:
+    "Item Authoring for Assessments streamlines assessment creation by generating questions based on your course materials. \n",
 };
 export { assessmentauthoringassistance, nutritionFacts, dataPermissionLevels, aiInformation };
 export default assessmentauthoringassistance;

@@ -14,7 +14,7 @@ import { portfolios } from "./components/portfolios";
 import { quickreassess } from "./components/quickreassess";
 import { rubricgenerator } from "./components/rubricgenerator";
 import { smartsearch } from "./components/smartsearch";
-import  {
+import {
   type AiInfoAiInformationProps,
   type AiInfoDataPermissionLevelsProps,
   type AiInfoNutritionFactsProps,

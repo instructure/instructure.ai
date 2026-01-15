@@ -41,7 +41,7 @@ const buildEntry = (overrides: Record<number, CSVCell> = {}): CSVRow => {
 // Helper to coerce CSVRow to string[]
 function csvRowToStringArray(row: CSVRow): string[] {
   return row.map((cell) =>
-    typeof cell === "string" ? cell : (typeof cell === "number" ? String(cell) : ""),
+    typeof cell === "string" ? cell : typeof cell === "number" ? String(cell) : "",
   );
 }
 
@@ -133,9 +133,7 @@ describe("entryToObj", () => {
     const result = entryToObj(csvRowToStringArray(row));
     expect(result.model.description).toBe("");
     // Accepts both "" and undefined for loggingDescription
-    expect(
-      result.compliance.loggingDescription === "",
-    ).toBeTruthy();
+    expect(result.compliance.loggingDescription === "").toBeTruthy();
     expect(result.outputs.humanDescription).toBe("");
   });
 

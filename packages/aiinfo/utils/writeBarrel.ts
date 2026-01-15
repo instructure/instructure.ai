@@ -55,11 +55,11 @@ const writeBarrel = (opts: Options = {}) => {
     uids.map((u) => `import { ${u} } from "./components/${u}";`).join("\n") ||
     "// no feature folders found";
 
-  const typesImport = `import type {
-  AiInfoAiInformationProps,
-  AiInfoDataPermissionLevelsProps,
-  AiInfoNutritionFactsProps,
-  AiInfoProps,
+  const typesImport = `import {
+  type AiInfoAiInformationProps,
+  type AiInfoDataPermissionLevelsProps,
+  type AiInfoNutritionFactsProps,
+  type AiInfoProps,
 } from "./types";`;
 
   const pluckHelper = `const pluck = <

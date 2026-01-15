@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { parse } from "papaparse";
 import { cache, checksum } from "../cache";
-import  { type CSVFetchResult, type ChangedEntry, type Entry, type Hash } from "../types";
+import { type CSVFetchResult, type ChangedEntry, type Entry, type Hash } from "../types";
 import { CSVURL, Log, entryToObj, writeChangelog } from "../utils";
 import { WriteEntries } from "./writeEntries.mts";
 

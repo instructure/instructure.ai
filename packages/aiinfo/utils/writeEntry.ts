@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
-import  { type Entry } from "../types";
+import { type Entry } from "../types";
 import {
   entryToAIInformation,
   entryToNutritionFacts,
@@ -53,12 +53,12 @@ export async function writeEntry(entry: Entry) {
     ...omit(aiInformation, ["dataPermissionLevelsData", "nutritionFactsData", "trigger"]),
   };
 
-  const code = `import type {
-  AiInformationProps,
-  DataPermissionLevelsProps,
-  NutritionFactsProps,
+  const code = `import {
+  type AiInformationProps,
+  type DataPermissionLevelsProps,
+  type NutritionFactsProps,
 } from "@instructure/ui-instructure";
-import type { AiInfoFeatureProps } from "../../types";
+import  {type AiInfoFeatureProps } from "../../types";
 
 const FEATURE_NAME = ${JSON.stringify(FEATURE_NAME)};
 const UID = ${JSON.stringify(UID)};

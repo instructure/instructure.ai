@@ -1,9 +1,9 @@
-import  {
+import {
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
 } from "@instructure/ui-instructure";
-import  { type AiInfoFeatureProps } from "../../types";
+import { type AiInfoFeatureProps } from "../../types";
 const FEATURE_NAME = "Translations for Inbox";
 const UID = "canvasinboxtranslation";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
@@ -122,64 +122,72 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
   },
 ];
 const nutritionFacts: NutritionFactsProps = {
-  closeButtonText: "Close",
-  closeIconButtonScreenReaderLabel: "Close",
+  ...{
+    closeButtonText: "Close",
+    closeIconButtonScreenReaderLabel: "Close",
+    featureName: FEATURE_NAME,
+    modalLabel: "This is a modal for AI facts",
+    title: "AI Nutrition Facts",
+    triggerText: "Nutrition Facts",
+  },
   data: NUTRITION_FACTS_DATA,
-  featureName: FEATURE_NAME,
-  modalLabel: "This is a modal for AI facts",
-  title: "AI Nutrition Facts",
-  triggerText: "Nutrition Facts",
 };
 const dataPermissionLevels: DataPermissionLevelsProps = {
-  closeButtonText: "Close",
-  closeIconButtonScreenReaderLabel: "Close dialog",
-  currentFeature: FEATURE_NAME,
-  currentFeatureText: "Current Feature:",
+  ...{
+    closeButtonText: "Close",
+    closeIconButtonScreenReaderLabel: "Close dialog",
+    currentFeature: FEATURE_NAME,
+    currentFeatureText: "Current Feature:",
+    modalLabel: "Data Permission Levels modal",
+    title: "Data Permission Levels",
+    triggerText: "Data Permission Levels",
+  },
   data: DATA_PERMISSION_LEVELS,
-  modalLabel: "Data Permission Levels modal",
-  title: "Data Permission Levels",
-  triggerText: "Data Permission Levels",
 };
 const aiInformation: AiInformationProps = {
-  data: [
-    {
-      description:
-        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-      featureName: "Translations for Inbox",
-      modelName: "AWS Translate",
-      modelNameText: "Base Model",
-      nutritionFactsModalTriggerText: "AI Nutrition Facts",
-      permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
-      permissionLevelsModalTriggerText: "Data Permission Levels",
-    },
-  ],
-  dataPermissionLevelsCloseButtonText: "Close",
-  dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeature: "Translations for Inbox",
-  dataPermissionLevelsCurrentFeatureText: "Current Feature:",
+  ...{
+    data: [
+      {
+        description:
+          "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+        featureName: "Translations for Inbox",
+        modelName: "AWS Translate",
+        modelNameText: "Base Model",
+        nutritionFactsModalTriggerText: "AI Nutrition Facts",
+        permissionLevel: "LEVEL 2",
+        permissionLevelsModalTriggerText: "Data Permission Levels",
+        permissionLevelText: "Permission Level:",
+        privacyNoticeText: undefined,
+        privacyNoticeUrl: undefined,
+      },
+    ],
+    dataPermissionLevelsCloseButtonText: "Close",
+    dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
+    dataPermissionLevelsCurrentFeature: "Translations for Inbox",
+    dataPermissionLevelsCurrentFeatureText: "Current Feature:",
+    dataPermissionLevelsModalLabel: "Data Permission Levels modal",
+    dataPermissionLevelsTitle: "Data Permission Levels",
+    nutritionFactsCloseButtonText: "Close",
+    nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
+    nutritionFactsFeatureName: "Translations for Inbox",
+    nutritionFactsModalLabel: "This is a modal for AI facts",
+    nutritionFactsTitle: "AI Nutrition Facts",
+    title: "Features",
+  },
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-  dataPermissionLevelsModalLabel: "Data Permission Levels modal",
-  dataPermissionLevelsTitle: "Data Permission Levels",
-  nutritionFactsCloseButtonText: "Close",
-  nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
   nutritionFactsData: NUTRITION_FACTS_DATA,
-  nutritionFactsFeatureName: "Translations for Inbox",
-  nutritionFactsModalLabel: "This is a modal for AI facts",
-  nutritionFactsTitle: "AI Nutrition Facts",
-  title: "Features",
   trigger: undefined,
 };
 const canvasinboxtranslation: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description:
-    'Translation of inbox messages ("Inbox AI Translation" feature flag) across 10 languages.',
-  group: "Canvas",
-  name: FEATURE_NAME,
   nutritionFacts,
   revision: "2025.09.10",
   uid: UID,
+  group: "Canvas",
+  name: FEATURE_NAME,
+  description:
+    'Translation of inbox messages ("Inbox AI Translation" feature flag) across 10 languages.',
 };
 export { canvasinboxtranslation, nutritionFacts, dataPermissionLevels, aiInformation };
 export default canvasinboxtranslation;

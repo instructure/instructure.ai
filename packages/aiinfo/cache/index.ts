@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-import  { type Checksum } from "../types";
+import { type Checksum } from "../types";
 import checksum from "./checksum.json" with { type: "json" };
 
 const CSVChecksum: Checksum = Object.fromEntries(

@@ -1,5 +1,5 @@
 // Oxc-ignore-all assist/source/useSortedKeys: Required order for Strings
-import  { type AiInformationStrings } from "../types";
+import { type AiInformationStrings } from "../types";
 import { strings as nutritionFactsStrings } from "./nutritionFacts";
 import { strings as permissionLevelsStrings } from "./permissionLevels";
 

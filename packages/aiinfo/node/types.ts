@@ -1,4 +1,4 @@
-import  {
+import {
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,

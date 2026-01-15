@@ -1,5 +1,5 @@
 import { nutritionFactsStrings } from "../strings/index.js";
-import  { type AiInfoFeature, type Entry, type NutritionFactsStrings } from "../types.js";
+import { type AiInfoFeature, type Entry, type NutritionFactsStrings } from "../types.js";
 
 const setData = (
   data: NutritionFactsStrings["data"],

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import  { type WriteEntries as WriteEntriesType } from "./writeEntries.mts";
+import { type WriteEntries as WriteEntriesType } from "./writeEntries.mts";
 
 const sampleCSV = "uid1,name1,desc1\nuid2,name2,desc2";
 
@@ -23,7 +23,7 @@ describe("writeEntries.mts", () => {
       existsSync: () => true,
       readFileSync: () => sampleCSV,
     }));
-    const { WriteEntries } = (await vi.importActual("./writeEntries.mts"));
+    const { WriteEntries } = await vi.importActual("./writeEntries.mts");
     await WriteEntries();
     expect(mockWriteEntry).toHaveBeenCalledTimes(2);
     expect(mockWriteBarrel).toHaveBeenCalledTimes(1);
@@ -56,7 +56,7 @@ describe("writeEntries.mts", () => {
       existsSync: () => true,
       readFileSync: () => "",
     }));
-    const { WriteEntries } = (await vi.importActual("./writeEntries.mts"));
+    const { WriteEntries } = await vi.importActual("./writeEntries.mts");
     const arr = [
       ["uidA", "nA", "dA"],
       ["uidB", "nB", "dB"],
@@ -93,7 +93,7 @@ describe("writeEntries.mts", () => {
       existsSync: () => true,
       readFileSync: () => "",
     }));
-    const { WriteEntries } = (await vi.importActual("./writeEntries.mts"));
+    const { WriteEntries } = await vi.importActual("./writeEntries.mts");
     await WriteEntries();
     expect(mockWriteEntry).not.toHaveBeenCalled();
     expect(mockWriteBarrel).not.toHaveBeenCalled();

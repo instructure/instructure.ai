@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import  { type ChangedEntry } from "../types";
+import { type ChangedEntry } from "../types";
 
 function getObjectDiffs(
   objA: unknown,
@@ -42,7 +42,7 @@ const writeChangelog = ({
         const toRecord = <T extends object>(obj: T): Record<string, unknown> =>
           obj as unknown as Record<string, unknown>;
         let diffText = `### ${e.uid}\n`;
-        if (e.newEntry && (e.oldEntry === null)) {
+        if (e.newEntry && e.oldEntry === null) {
           const newObj = toRecord(e.newEntry);
           for (const key of Object.keys(newObj)) {
             const value = newObj[key];

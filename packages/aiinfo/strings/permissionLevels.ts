@@ -1,6 +1,6 @@
 // Oxc-ignore-all assist/source/useSortedKeys: Required order for Strings
 
-import  { type DataPermissionLevelsStrings } from "../types";
+import { type DataPermissionLevelsStrings } from "../types";
 
 const strings: { en: DataPermissionLevelsStrings } = {
   en: {

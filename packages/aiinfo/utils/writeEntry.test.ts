@@ -1,6 +1,6 @@
 import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import  { type Entry } from "../types";
+import { type Entry } from "../types";
 
 const mkdirSyncSpy = vi.fn();
 const writeFileSyncSpy = vi.fn();

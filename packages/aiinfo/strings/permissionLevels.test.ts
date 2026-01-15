@@ -63,7 +63,7 @@ describe("permissionLevels strings", () => {
   });
 
   it("first and last titles are correct", () => {
-    const {data} = permissionLevelsStrings.en;
+    const { data } = permissionLevelsStrings.en;
     expect(data[0].title).toBe("Descriptive Analytics and Research");
     expect(data[data.length - 1].title).toBe("Collaborative AI Consortium");
   });

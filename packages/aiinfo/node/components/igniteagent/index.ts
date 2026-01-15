@@ -1,9 +1,9 @@
-import  {
+import {
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
 } from "@instructure/ui-instructure";
-import  { type AiInfoFeatureProps } from "../../types";
+import { type AiInfoFeatureProps } from "../../types";
 const FEATURE_NAME = "Agent";
 const UID = "igniteagent";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
@@ -45,7 +45,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "Base Model",
         value: "Haiku 3, Sonnet 3.7",
         valueDescription:
-          "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+          "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
       },
       {
         description:
@@ -103,13 +103,13 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
-          "The agent only takes action based on human requests, and all write actions must be confirmed by the user.",
+          "The Agent only takes action based on human requests, and all write actions must be confirmed by the user.",
       },
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
         value:
-          "Access to the agent is limited to users with an Admin- or Teacher-based role. Data access and functions are scoped to the permissions available to the chat user.",
+          "Access to the Agent is limited to users with an Admin- or Teacher-based role. Data access and functions are scoped to the permissions available to the chat user.",
       },
       {
         description: "Any risks the model may pose to the user.",
@@ -126,64 +126,72 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
   },
 ];
 const nutritionFacts: NutritionFactsProps = {
-  closeButtonText: "Close",
-  closeIconButtonScreenReaderLabel: "Close",
+  ...{
+    closeButtonText: "Close",
+    closeIconButtonScreenReaderLabel: "Close",
+    featureName: FEATURE_NAME,
+    modalLabel: "This is a modal for AI facts",
+    title: "AI Nutrition Facts",
+    triggerText: "Nutrition Facts",
+  },
   data: NUTRITION_FACTS_DATA,
-  featureName: FEATURE_NAME,
-  modalLabel: "This is a modal for AI facts",
-  title: "AI Nutrition Facts",
-  triggerText: "Nutrition Facts",
 };
 const dataPermissionLevels: DataPermissionLevelsProps = {
-  closeButtonText: "Close",
-  closeIconButtonScreenReaderLabel: "Close dialog",
-  currentFeature: FEATURE_NAME,
-  currentFeatureText: "Current Feature:",
+  ...{
+    closeButtonText: "Close",
+    closeIconButtonScreenReaderLabel: "Close dialog",
+    currentFeature: FEATURE_NAME,
+    currentFeatureText: "Current Feature:",
+    modalLabel: "Data Permission Levels modal",
+    title: "Data Permission Levels",
+    triggerText: "Data Permission Levels",
+  },
   data: DATA_PERMISSION_LEVELS,
-  modalLabel: "Data Permission Levels modal",
-  title: "Data Permission Levels",
-  triggerText: "Data Permission Levels",
 };
 const aiInformation: AiInformationProps = {
-  data: [
-    {
-      description:
-        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-      featureName: "Agent",
-      modelName: "Haiku 3, Sonnet 3.7",
-      modelNameText: "Base Model",
-      nutritionFactsModalTriggerText: "AI Nutrition Facts",
-      permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
-      permissionLevelsModalTriggerText: "Data Permission Levels",
-    },
-  ],
-  dataPermissionLevelsCloseButtonText: "Close",
-  dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeature: "Agent",
-  dataPermissionLevelsCurrentFeatureText: "Current Feature:",
+  ...{
+    data: [
+      {
+        description:
+          "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+        featureName: "Agent",
+        modelName: "Haiku 3, Sonnet 3.7",
+        modelNameText: "Base Model",
+        nutritionFactsModalTriggerText: "AI Nutrition Facts",
+        permissionLevel: "LEVEL 2",
+        permissionLevelsModalTriggerText: "Data Permission Levels",
+        permissionLevelText: "Permission Level:",
+        privacyNoticeText: undefined,
+        privacyNoticeUrl: undefined,
+      },
+    ],
+    dataPermissionLevelsCloseButtonText: "Close",
+    dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
+    dataPermissionLevelsCurrentFeature: "Agent",
+    dataPermissionLevelsCurrentFeatureText: "Current Feature:",
+    dataPermissionLevelsModalLabel: "Data Permission Levels modal",
+    dataPermissionLevelsTitle: "Data Permission Levels",
+    nutritionFactsCloseButtonText: "Close",
+    nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
+    nutritionFactsFeatureName: "Agent",
+    nutritionFactsModalLabel: "This is a modal for AI facts",
+    nutritionFactsTitle: "AI Nutrition Facts",
+    title: "Features",
+  },
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-  dataPermissionLevelsModalLabel: "Data Permission Levels modal",
-  dataPermissionLevelsTitle: "Data Permission Levels",
-  nutritionFactsCloseButtonText: "Close",
-  nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
   nutritionFactsData: NUTRITION_FACTS_DATA,
-  nutritionFactsFeatureName: "Agent",
-  nutritionFactsModalLabel: "This is a modal for AI facts",
-  nutritionFactsTitle: "AI Nutrition Facts",
-  title: "Features",
   trigger: undefined,
 };
 const igniteagent: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description:
-    "Ignite Agent is a faculty chat assistant capable of translating natural language requests into complex Canvas workflows.",
+  nutritionFacts,
+  revision: "2026.01.14",
+  uid: UID,
   group: "IgniteAI",
   name: FEATURE_NAME,
-  nutritionFacts,
-  revision: "2025.09.10",
-  uid: UID,
+  description:
+    "Ignite Agent is a faculty chat assistant capable of translating natural language requests into complex Canvas workflows.",
 };
 export { igniteagent, nutritionFacts, dataPermissionLevels, aiInformation };
 export default igniteagent;

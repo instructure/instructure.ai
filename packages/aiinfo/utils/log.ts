@@ -1,5 +1,5 @@
 import ansis from "ansis";
-import  { type LogObject, type LogProps } from "../types";
+import { type LogObject, type LogProps } from "../types";
 
 const groupHeader = (
   title = "",

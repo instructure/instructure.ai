@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { permissionLevelsStrings as snapshotStrings } from "../tests/__snapshots__/permissionLevelsStrings";
-import  { type Entry, type Result } from "../types";
+import { type Entry, type Result } from "../types";
 
 var backing: typeof snapshotStrings.en = snapshotStrings.en;
 

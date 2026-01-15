@@ -44,13 +44,13 @@ const importSubject = async () => {
 };
 
 const spyAll = () => ({
-    error: vi.spyOn(console, "error").mockImplementation(() => {}),
-    group: vi.spyOn(console, "group").mockImplementation(() => {}),
-    groupEnd: vi.spyOn(console, "groupEnd").mockImplementation(() => {}),
-    info: vi.spyOn(console, "info").mockImplementation(() => {}),
-    log: vi.spyOn(console, "log").mockImplementation(() => {}),
-    warn: vi.spyOn(console, "warn").mockImplementation(() => {}),
-  });
+  error: vi.spyOn(console, "error").mockImplementation(() => {}),
+  group: vi.spyOn(console, "group").mockImplementation(() => {}),
+  groupEnd: vi.spyOn(console, "groupEnd").mockImplementation(() => {}),
+  info: vi.spyOn(console, "info").mockImplementation(() => {}),
+  log: vi.spyOn(console, "log").mockImplementation(() => {}),
+  warn: vi.spyOn(console, "warn").mockImplementation(() => {}),
+});
 
 describe("log utility", () => {
   beforeEach(() => {

@@ -1,5 +1,5 @@
 import { permissionLevelsStrings } from "../strings";
-import  { type Entry, type Result } from "../types";
+import { type Entry, type Result } from "../types";
 
 function entryToPermissionLevels(entry: Entry): Result {
   try {
@@ -8,7 +8,7 @@ function entryToPermissionLevels(entry: Entry): Result {
     if (!strings.data || !Array.isArray(strings.data)) {
       throw new Error("permissionLevelsStrings.en.data is undefined or not an array");
     }
-    const {data} = strings;
+    const { data } = strings;
     let highlightId: string | undefined;
 
     const permStr = String(permissions);
@@ -20,7 +20,13 @@ function entryToPermissionLevels(entry: Entry): Result {
     if (typeof permissions === "number") {
       // Numeric permissions should never be highlighted.
     }
-    const mapped = data.map((d) => (Object.assign(d, {highlighted:!!(d.level.endsWith(permStr)&&highlightId===d.level.replace(`LEVEL `,`L`))})));
+    const mapped = data.map((d) =>
+      Object.assign(d, {
+        highlighted: !!(
+          d.level.endsWith(permStr) && highlightId === d.level.replace(`LEVEL `, `L`)
+        ),
+      }),
+    );
     return {
       ...strings,
       currentFeature: feature?.name ?? "",

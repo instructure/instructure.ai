@@ -1,6 +1,6 @@
 // Oxc-ignore-all assist/source/useSortedKeys: Required order for Strings
 
-import  { type NutritionFactsStrings } from "../types";
+import { type NutritionFactsStrings } from "../types";
 
 const strings: { en: NutritionFactsStrings } = {
   en: {

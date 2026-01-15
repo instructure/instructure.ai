@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import  { type ChangedEntry } from "../types";
+import { type ChangedEntry } from "../types";
 import { writeChangelog } from "./writeChangelog";
-import  { type Entry } from "../types";
+import { type Entry } from "../types";
 
 const existsSync = vi.spyOn(fs, "existsSync");
 const readFileSync = vi.spyOn(fs, "readFileSync");
