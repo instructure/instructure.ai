@@ -44,7 +44,7 @@ interface LogObject {
 
 type LogProps = LogObject | message;
 
-type Entry = {
+interface Entry {
   uid: string;
   revision: string;
   feature: {
@@ -77,7 +77,9 @@ type Entry = {
   };
   group: string;
   permissions: "1" | "2" | "3" | "4";
-} & ({ linkURL: string; linkTitle: string } | { linkURL?: undefined; linkTitle?: undefined });
+  privacyNoticeText: string;
+  privacyNoticeUrl: string;
+}
 
 type LangCode = Lowercase<string> | `${Lowercase<string>}_${Uppercase<string>}`;
 
@@ -97,8 +99,6 @@ type AiInformationStrings = Omit<
     permissionLevelsModalTriggerText: string;
     modelNameText: string;
     nutritionFactsModalTriggerText: string;
-    privacyNoticeText: string;
-    privacyNoticeUrl: string;
   };
   title: string;
   dataPermissionLevelsTitle: string;
