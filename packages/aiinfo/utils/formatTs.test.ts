@@ -98,8 +98,6 @@ const v=1`;
       return { default: mockTS };
     });
     const formatTs = await importSubject();
-    expect(() => formatTs("const x=1")).toThrow(
-      /Error formatting TypeScript code: Error: Boom/,
-    );
+    expect(() => formatTs("const x=1")).toThrow(/Error formatting TypeScript code: Error: Boom/);
   });
 });

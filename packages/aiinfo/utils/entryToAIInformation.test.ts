@@ -95,10 +95,7 @@ describe("entryToAIInformation", () => {
     expect(item.permissionLevelsModalTriggerText).toBe("Permission Levels");
     expect(item.permissionLevelText).toBe("Permission Level");
 
-    expect(result.nutritionFactsData).toStrictEqual([
-      { calories: 0 },
-      { tokens: 123 },
-    ]);
+    expect(result.nutritionFactsData).toStrictEqual([{ calories: 0 }, { tokens: 123 }]);
     expect(result.nutritionFactsFeatureName).toBe("CoolFeature");
     expect(result.dataPermissionLevelsCurrentFeature).toBe("Current Feature");
     expect(result.dataPermissionLevelsData).toStrictEqual([

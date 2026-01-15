@@ -1,9 +1,9 @@
-import type {
-  AiInformationProps,
-  DataPermissionLevelsProps,
-  NutritionFactsProps,
+import {
+  type AiInformationProps,
+  type DataPermissionLevelsProps,
+  type NutritionFactsProps,
 } from "@instructure/ui-instructure";
-import type { AiInfoFeatureProps } from "../../types";
+import { type AiInfoFeatureProps } from "../../types";
 const FEATURE_NAME = "Agent";
 const UID = "igniteagent";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
@@ -45,7 +45,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "Base Model",
         value: "Haiku 3, Sonnet 3.7",
         valueDescription:
-          "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+          "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
       },
       {
         description:
@@ -103,13 +103,13 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
-          "The agent only takes action based on human requests, and all write actions must be confirmed by the user.",
+          "The Agent only takes action based on human requests, and all write actions must be confirmed by the user.",
       },
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
         value:
-          "Access to the agent is limited to users with an Admin- or Teacher-based role. Data access and functions are scoped to the permissions available to the chat user.",
+          "Access to the Agent is limited to users with an Admin- or Teacher-based role. Data access and functions are scoped to the permissions available to the chat user.",
       },
       {
         description: "Any risks the model may pose to the user.",
@@ -156,6 +156,8 @@ const aiInformation: AiInformationProps = {
       permissionLevel: "LEVEL 2",
       permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      privacyNoticeText: "AI Privacy Policy",
+      privacyNoticeUrl: "https://www.instructure.com/policies/artificial-intelligence-privacy",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",
@@ -182,7 +184,7 @@ const igniteagent: AiInfoFeatureProps = {
   group: "IgniteAI",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2025.09.10",
+  revision: "2026.01.14",
   uid: UID,
 };
 export { igniteagent, nutritionFacts, dataPermissionLevels, aiInformation };

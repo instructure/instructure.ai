@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import type { ChangedEntry } from "../types";
+import { type ChangedEntry } from "../types";
 
 function getObjectDiffs(
   objA: unknown,
@@ -14,12 +14,7 @@ function getObjectDiffs(
   for (const key of keys) {
     const valA = (objA as Record<string, unknown>)[key];
     const valB = (objB as Record<string, unknown>)[key];
-    if (
-      typeof valA === "object" &&
-      valA !== null &&
-      typeof valB === "object" &&
-      valB !== null
-    ) {
+    if (typeof valA === "object" && valA !== null && typeof valB === "object" && valB !== null) {
       diffs.push(...getObjectDiffs(valA, valB, [...path, key]));
     } else if (valA !== valB) {
       diffs.push({ newValue: valB, oldValue: valA, path: [...path, key] });
@@ -47,7 +42,7 @@ const writeChangelog = ({
         const toRecord = <T extends object>(obj: T): Record<string, unknown> =>
           obj as unknown as Record<string, unknown>;
         let diffText = `### ${e.uid}\n`;
-        if (e.newEntry && (e.oldEntry === undefined || e.oldEntry === null)) {
+        if (e.newEntry && e.oldEntry === null) {
           const newObj = toRecord(e.newEntry);
           for (const key of Object.keys(newObj)) {
             const value = newObj[key];
@@ -80,9 +75,7 @@ const writeChangelog = ({
         lines.unshift("# Changelog");
       }
       // Prepend new changelog after header
-      const newContent = [lines[0], changelog.trim(), ...lines.slice(1)].join(
-        "\n",
-      );
+      const newContent = [lines[0], changelog.trim(), ...lines.slice(1)].join("\n");
       fs.writeFileSync(changelogPath, newContent);
       return { changelog, success: true };
     } catch (error) {

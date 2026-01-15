@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import type { WriteEntries as WriteEntriesType } from "./writeEntries.mts";
+import { type WriteEntries as WriteEntriesType } from "./writeEntries.mts";
 
 const sampleCSV = "uid1,name1,desc1\nuid2,name2,desc2";
 
@@ -23,10 +23,9 @@ describe("writeEntries.mts", () => {
       existsSync: () => true,
       readFileSync: () => sampleCSV,
     }));
-    const { WriteEntries } = (await vi.importActual("./writeEntries.mts")) as {
-      WriteEntries: typeof WriteEntriesType;
-    };
-    await WriteEntries();
+    const { WriteEntries } = await vi.importActual("./writeEntries.mts");
+    const typedWriteEntries = WriteEntries as typeof WriteEntriesType;
+    await typedWriteEntries();
     expect(mockWriteEntry).toHaveBeenCalledTimes(2);
     expect(mockWriteBarrel).toHaveBeenCalledTimes(1);
     expect(mockLog).toHaveBeenCalledWith({
@@ -58,14 +57,13 @@ describe("writeEntries.mts", () => {
       existsSync: () => true,
       readFileSync: () => "",
     }));
-    const { WriteEntries } = (await vi.importActual("./writeEntries.mts")) as {
-      WriteEntries: typeof WriteEntriesType;
-    };
+    const { WriteEntries } = await vi.importActual("./writeEntries.mts");
+    const typedWriteEntries = WriteEntries as typeof WriteEntriesType;
     const arr = [
       ["uidA", "nA", "dA"],
       ["uidB", "nB", "dB"],
     ];
-    await WriteEntries(arr);
+    await typedWriteEntries(arr);
     expect(mockWriteEntry).toHaveBeenCalledTimes(2);
     expect(mockWriteEntry).toHaveBeenCalledWith({
       raw: ["uidA", "nA", "dA"],
@@ -97,15 +95,62 @@ describe("writeEntries.mts", () => {
       existsSync: () => true,
       readFileSync: () => "",
     }));
-    const { WriteEntries } = (await vi.importActual("./writeEntries.mts")) as {
-      WriteEntries: typeof WriteEntriesType;
-    };
-    await WriteEntries();
+    const { WriteEntries } = await vi.importActual("./writeEntries.mts");
+    const typedWriteEntries = WriteEntries as typeof WriteEntriesType;
+    await typedWriteEntries();
     expect(mockWriteEntry).not.toHaveBeenCalled();
     expect(mockWriteBarrel).not.toHaveBeenCalled();
     expect(mockLog).toHaveBeenCalledWith({
       color: "yellow",
       message: ["No entries to write."],
     });
+  });
+
+  it("includes privacy notice fields", async () => {
+    vi.resetModules();
+    const mockWriteEntry = vi.fn();
+    const mockWriteBarrel = vi.fn();
+    const mockLog = vi.fn();
+    vi.doMock("../utils", () => ({
+      Log: mockLog,
+      entryToObj: (arr: string[]) => ({
+        privacyNoticeText: "",
+        privacyNoticeUrl: "",
+        raw: arr,
+        uid: arr[0],
+      }),
+      writeBarrel: mockWriteBarrel,
+      writeEntry: mockWriteEntry,
+    }));
+    vi.doMock("node:fs", () => ({
+      default: {
+        existsSync: () => true,
+        readFileSync: () => "",
+      },
+      existsSync: () => true,
+      readFileSync: () => "",
+    }));
+    const { WriteEntries } = await vi.importActual("./writeEntries.mts");
+    const typedWriteEntries = WriteEntries as typeof WriteEntriesType;
+    const arr = [
+      ["uidA", "nA", "dA"],
+      ["uidB", "nB", "dB"],
+    ];
+    await typedWriteEntries(arr);
+    expect(mockWriteEntry).toHaveBeenCalledTimes(2);
+    expect(mockWriteEntry).toHaveBeenCalledWith(
+      expect.objectContaining({
+        privacyNoticeText: "",
+        privacyNoticeUrl: "",
+        uid: "uidA",
+      }),
+    );
+    expect(mockWriteEntry).toHaveBeenCalledWith(
+      expect.objectContaining({
+        privacyNoticeText: "",
+        privacyNoticeUrl: "",
+        uid: "uidB",
+      }),
+    );
   });
 });

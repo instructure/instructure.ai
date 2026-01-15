@@ -1,6 +1,6 @@
-// oxc-ignore-all assist/source/useSortedKeys: Required order for Strings
+// Oxc-ignore-all assist/source/useSortedKeys: Required order for Strings
 
-import type { NutritionFactsStrings } from "../types";
+import { type NutritionFactsStrings } from "../types";
 
 const strings: { en: NutritionFactsStrings } = {
   en: {
@@ -21,8 +21,7 @@ const strings: { en: NutritionFactsStrings } = {
             segmentTitle: "Trained with User Data",
           },
           {
-            description:
-              "Indicates which training or operational content was given to the model.",
+            description: "Indicates which training or operational content was given to the model.",
             segmentTitle: "Data Shared with Model",
           },
         ],
@@ -35,18 +34,15 @@ const strings: { en: NutritionFactsStrings } = {
             segmentTitle: "Data Retention",
           },
           {
-            description:
-              "Recording the AI's performance for auditing, analysis, and improvement.",
+            description: "Recording the AI's performance for auditing, analysis, and improvement.",
             segmentTitle: "Data Logging",
           },
           {
-            description:
-              "The locations where the AI model is officially available and supported.",
+            description: "The locations where the AI model is officially available and supported.",
             segmentTitle: "Regions Supported",
           },
           {
-            description:
-              "Sensitive data that can be used to identify an individual.",
+            description: "Sensitive data that can be used to identify an individual.",
             segmentTitle: "PII",
           },
         ],
@@ -55,18 +51,15 @@ const strings: { en: NutritionFactsStrings } = {
         blockTitle: "Outputs",
         segmentData: [
           {
-            description:
-              "The ability to turn the AI on or off within the product.",
+            description: "The ability to turn the AI on or off within the product.",
             segmentTitle: "AI Settings Control",
           },
           {
-            description:
-              "Indicates if a human is involved in the AI's process or output.",
+            description: "Indicates if a human is involved in the AI's process or output.",
             segmentTitle: "Human in the Loop",
           },
           {
-            description:
-              "Preventative safety mechanisms or limitations built into the AI model.",
+            description: "Preventative safety mechanisms or limitations built into the AI model.",
             segmentTitle: "Guardrails",
           },
           {
@@ -74,8 +67,7 @@ const strings: { en: NutritionFactsStrings } = {
             segmentTitle: "Expected Risks",
           },
           {
-            description:
-              "The specific results the AI model is meant to achieve.",
+            description: "The specific results the AI model is meant to achieve.",
             segmentTitle: "Intended Outcomes",
           },
         ],

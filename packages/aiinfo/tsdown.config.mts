@@ -1,7 +1,6 @@
-import baseConfig from "@instructure.ai/shared-configs/tsdown";
-import { mergeConfig } from "tsdown";
+import { defineConfig } from "tsdown";
 
-export default mergeConfig(baseConfig, {
+export default defineConfig({
   clean: true,
   dts: true,
   entry: "node/index.ts",

@@ -1,7 +1,7 @@
 import { InstUISettingsProvider } from "@instructure/ui";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import type { Root } from "react-dom/client";
+import { type Root } from "react-dom/client";
 import App from "./app";
 
 const mountApp = () => {

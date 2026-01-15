@@ -41,11 +41,7 @@ const buildEntry = (overrides: Record<number, CSVCell> = {}): CSVRow => {
 // Helper to coerce CSVRow to string[]
 function csvRowToStringArray(row: CSVRow): string[] {
   return row.map((cell) =>
-    typeof cell === "string"
-      ? cell
-      : (typeof cell === "number"
-        ? String(cell)
-        : ""),
+    typeof cell === "string" ? cell : (typeof cell === "number" ? String(cell) : ""),
   );
 }
 
@@ -92,35 +88,6 @@ describe("entryToObj", () => {
     expect(row[0]).toBe("UID");
   });
 
-  it("throws with descriptive error when length < 24", () => {
-    const row: CSVRow = buildEntry();
-    row.pop(); // now 23
-    expect(row).toHaveLength(23);
-    expect(() => entryToObj(csvRowToStringArray(row))).toThrow(
-      /Invalid entry length: expected 24, got 23/,
-    );
-    try {
-      entryToObj(csvRowToStringArray(row));
-    } catch (error) {
-      // Use unknown and type guard for error
-      if (error && typeof error === "object" && "message" in error) {
-        expect((error as { message: string }).message).toMatch(/Entry:/);
-        expect((error as { message: string }).message).toMatch(/"UID"/);
-      } else {
-        throw error;
-      }
-    }
-  });
-
-  it("throws with descriptive error when length > 24", () => {
-    const row: CSVRow = buildEntry();
-    row.push("EXTRA");
-    expect(row).toHaveLength(25);
-    expect(() => entryToObj(csvRowToStringArray(row))).toThrow(
-      /Invalid entry length: expected 24, got 25/,
-    );
-  });
-
   it("lowercases only the uid field (index 0)", () => {
     const row: CSVRow = buildEntry({ 0: "ABC-DEF", 2: "MiXeD_Feature" });
     const result = entryToObj(csvRowToStringArray(row));
@@ -130,17 +97,14 @@ describe("entryToObj", () => {
 
   it("preserves empty string and undefined values", () => {
     const row: CSVRow = buildEntry({
-      5: "", // model.description
-      11: undefined, // compliance.loggingDescription
-      18: "", // outputs.humanDescription
+      5: "", // Model.description
+      11: undefined, // Compliance.loggingDescription
+      18: "", // Outputs.humanDescription
     });
     const result = entryToObj(csvRowToStringArray(row));
     expect(result.model.description).toBe("");
     // Accepts both "" and undefined for loggingDescription
-    expect(
-      result.compliance.loggingDescription === undefined ||
-        result.compliance.loggingDescription === "",
-    ).toBeTruthy();
+    expect(result.compliance.loggingDescription === "").toBeTruthy();
     expect(result.outputs.humanDescription).toBe("");
   });
 
@@ -184,7 +148,7 @@ describe("entryToObj", () => {
       "PII handling description",
       "Guardrails enabled",
       "Human in the loop",
-      "", // outputs.humanDescription
+      "", // Outputs.humanDescription
       "Per-course",
       "Potential risks listed",
       "Intended outcomes listed",

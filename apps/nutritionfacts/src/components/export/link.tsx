@@ -1,6 +1,6 @@
 import { IconLinkLine } from "@instructure/ui";
-import type { SVGIconProps } from "@instructure/ui";
-import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
+import { type SVGIconProps } from "@instructure/ui";
+import { type AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { baseUrl } from "../../assets";
 import { ControlButton } from "./";
 

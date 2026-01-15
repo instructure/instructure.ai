@@ -1,5 +1,5 @@
-import type { AiInfoFeatureProps, AiInfoProps } from "@instructure.ai/aiinfo";
-import type { ExtendedNutritionFactsProps } from "../../types";
+import { type AiInfoFeatureProps } from "@instructure.ai/aiinfo";
+import { type ExtendedNutritionFactsProps } from "../../types";
 
 const extendedNutritionFacts = (product: AiInfoFeatureProps): ExtendedNutritionFactsProps => {
   const firstData =
@@ -25,7 +25,9 @@ const extendedNutritionFacts = (product: AiInfoFeatureProps): ExtendedNutritionF
   const dataArray = Array.isArray(nutritionFacts.data) ? nutritionFacts.data : [];
 
   return {
-    description: product.description as unknown as AiInfoProps["description"],
+    description: product.description,
+    linkText: product.aiInformation.data[0].privacyNoticeText,
+    linkUrl: product.aiInformation.data[0].privacyNoticeUrl,
     ...nutritionFacts,
     data: [...dataArray, permissionsSegment],
   };

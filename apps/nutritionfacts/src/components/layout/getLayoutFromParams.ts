@@ -1,4 +1,4 @@
-import type { PageLayout } from "../../types";
+import { type PageLayout } from "../../types";
 
 export function getLayoutFromParams(defaultLayout: PageLayout) {
   const params = new URLSearchParams(window.location.search);

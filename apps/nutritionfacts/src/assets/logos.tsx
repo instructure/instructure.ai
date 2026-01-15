@@ -1,6 +1,6 @@
 import { InlineSVG } from "@instructure/ui";
-import type { InlineSVGProps } from "@instructure/ui";
-import type { FC, ReactNode } from "react";
+import { type InlineSVGProps } from "@instructure/ui";
+import { type FC, type ReactNode } from "react";
 import { useId } from "react";
 import { colors } from "./";
 

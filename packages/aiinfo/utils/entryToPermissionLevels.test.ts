@@ -1,15 +1,13 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { permissionLevelsStrings as snapshotStrings } from "../tests/__snapshots__/permissionLevelsStrings";
-import type { Entry, Result } from "../types";
+import { type Entry, type Result } from "../types";
 
 var backing: typeof snapshotStrings.en = snapshotStrings.en;
 
 vi.mock("../strings", () => ({
   get permissionLevelsStrings() {
     const source =
-      typeof backing !== "undefined" && backing !== null
-        ? backing
-        : snapshotStrings.en;
+      typeof backing !== "undefined" && backing !== null ? backing : snapshotStrings.en;
     const normalized =
       source.data?.map((d) => ({
         description: d.description,
@@ -54,9 +52,7 @@ describe("entryToPermissionLevels", () => {
     const entryToPermissionLevels = await importSubject();
     const result = entryToPermissionLevels(buildEntry({ permissions: "2" }));
     expect(result.closeButtonText).toBe(snap.closeButtonText);
-    expect(result.closeIconButtonScreenReaderLabel).toBe(
-      snap.closeIconButtonScreenReaderLabel,
-    );
+    expect(result.closeIconButtonScreenReaderLabel).toBe(snap.closeIconButtonScreenReaderLabel);
     expect(result.currentFeatureText).toBe(snap.currentFeatureText);
     expect(result.modalLabel).toBe(snap.modalLabel);
     expect(result.title).toBe(snap.title);
@@ -70,11 +66,7 @@ describe("entryToPermissionLevels", () => {
   it('highlights first index when permissions "1"', async () => {
     const entryToPermissionLevels = await importSubject();
     const result = entryToPermissionLevels(buildEntry({ permissions: "1" }));
-    expect(result.data.map((d) => !!d.highlighted)).toStrictEqual([
-      true,
-      false,
-      false,
-    ]);
+    expect(result.data.map((d) => Boolean(d.highlighted))).toStrictEqual([true, false, false]);
   });
 
   it("does not accept numeric permissions (3) and does not highlight any level", async () => {
@@ -104,9 +96,7 @@ describe("entryToPermissionLevels", () => {
 
   it("no highlight when permissions missing (undefined)", async () => {
     const entryToPermissionLevels = await importSubject();
-    const result = entryToPermissionLevels(
-      buildEntry({ permissions: undefined }),
-    );
+    const result = entryToPermissionLevels(buildEntry({ permissions: undefined }));
     expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
   });
 
@@ -155,9 +145,7 @@ describe("entryToPermissionLevels", () => {
       entryToPermissionLevels(buildEntry({ permissions: "1" }));
     } catch (error) {
       threw = true;
-      expect((error as Error).message).toMatch(
-        /Error in entryToPermissionLevels:/,
-      );
+      expect((error as Error).message).toMatch(/Error in entryToPermissionLevels:/);
     }
     expect(threw).toBeTruthy();
   });
@@ -166,9 +154,7 @@ describe("entryToPermissionLevels", () => {
 
   it("returns empty string for currentFeature if feature is missing", async () => {
     const entryToPermissionLevels = await importSubject();
-    const result = entryToPermissionLevels(
-      buildEntry({ feature: undefined, permissions: "1" }),
-    );
+    const result = entryToPermissionLevels(buildEntry({ feature: undefined, permissions: "1" }));
     expect(result.currentFeature).toBe("");
   });
 
@@ -177,9 +163,7 @@ describe("entryToPermissionLevels", () => {
     const entryToPermissionLevels = await importSubject();
     const result = entryToPermissionLevels(buildEntry({ permissions: "1" }));
     expect(result.closeButtonText).toBe(snap.closeButtonText);
-    expect(result.closeIconButtonScreenReaderLabel).toBe(
-      snap.closeIconButtonScreenReaderLabel,
-    );
+    expect(result.closeIconButtonScreenReaderLabel).toBe(snap.closeIconButtonScreenReaderLabel);
     expect(result.currentFeatureText).toBe(snap.currentFeatureText);
     expect(result.modalLabel).toBe(snap.modalLabel);
     expect(result.title).toBe(snap.title);
@@ -196,9 +180,7 @@ describe("entryToPermissionLevels", () => {
 
   it("does not highlight if permissions is an empty string", async () => {
     const entryToPermissionLevels = await importSubject();
-    const result = entryToPermissionLevels(
-      buildEntry({ permissions: "" as Entry["permissions"] }),
-    );
+    const result = entryToPermissionLevels(buildEntry({ permissions: "" as Entry["permissions"] }));
     expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
   });
 });
@@ -238,9 +220,7 @@ describe("entryToPermissionLevels edge cases", () => {
       entryToPermissionLevels(buildEntry({ permissions: "1" }));
     } catch (error) {
       threw = true;
-      expect((error as Error).message).toMatch(
-        /Error in entryToPermissionLevels:/,
-      );
+      expect((error as Error).message).toMatch(/Error in entryToPermissionLevels:/);
     }
     expect(threw).toBeFalsy(); // The implementation does not throw
   });
@@ -323,9 +303,7 @@ describe("entryToPermissionLevels edge cases", () => {
   });
 
   it("returns all highlighted false if permissions is undefined", () => {
-    const result = entryToPermissionLevels(
-      buildEntry({ permissions: undefined }),
-    );
+    const result = entryToPermissionLevels(buildEntry({ permissions: undefined }));
     expect(result.data.every((d) => !d.highlighted)).toBeTruthy();
   });
 

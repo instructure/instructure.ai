@@ -70,9 +70,7 @@ describe("nutritionFacts strings", () => {
 
   it("ensures all segment titles are unique and capitalized", () => {
     const nf = nutritionFactsStrings.en;
-    const titles = nf.data.flatMap((b) =>
-      b.segmentData.map((s) => s.segmentTitle),
-    );
+    const titles = nf.data.flatMap((b) => b.segmentData.map((s) => s.segmentTitle));
     const set = new Set(titles);
     expect(set.size).toBe(titles.length);
     titles.forEach((t) => {
@@ -105,10 +103,7 @@ describe("nutritionFacts strings", () => {
   it("blocks have only expected keys", () => {
     const nf = nutritionFactsStrings.en;
     nf.data.forEach((block) => {
-      expect(Object.keys(block).toSorted()).toStrictEqual([
-        "blockTitle",
-        "segmentData",
-      ]);
+      expect(Object.keys(block).toSorted()).toStrictEqual(["blockTitle", "segmentData"]);
     });
   });
 
@@ -116,10 +111,7 @@ describe("nutritionFacts strings", () => {
     const nf = nutritionFactsStrings.en;
     nf.data.forEach((block) => {
       block.segmentData.forEach((seg) => {
-        expect(Object.keys(seg).toSorted()).toStrictEqual([
-          "description",
-          "segmentTitle",
-        ]);
+        expect(Object.keys(seg).toSorted()).toStrictEqual(["description", "segmentTitle"]);
       });
     });
   });

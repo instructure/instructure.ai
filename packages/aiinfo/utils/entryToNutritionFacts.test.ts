@@ -32,20 +32,11 @@ const happyBacking = () => ({
   data: [
     {
       blockTitle: "Model Info",
-      segmentData: [
-        { id: "modelName" },
-        { id: "modelTrained" },
-        { id: "modelDataDesc" },
-      ],
+      segmentData: [{ id: "modelName" }, { id: "modelTrained" }, { id: "modelDataDesc" }],
     },
     {
       blockTitle: "Compliance",
-      segmentData: [
-        { id: "retention" },
-        { id: "logging" },
-        { id: "regions" },
-        { id: "pii" },
-      ],
+      segmentData: [{ id: "retention" }, { id: "logging" }, { id: "regions" }, { id: "pii" }],
     },
     {
       blockTitle: "Outputs",
@@ -76,13 +67,7 @@ const shuffledBacking = () => ({
     },
     {
       blockTitle: "SHUFFLED 3",
-      segmentData: [
-        { id: "h" },
-        { id: "i" },
-        { id: "j" },
-        { id: "k" },
-        { id: "l" },
-      ],
+      segmentData: [{ id: "h" }, { id: "i" }, { id: "j" }, { id: "k" }, { id: "l" }],
     },
   ],
 });
@@ -223,9 +208,7 @@ describe("entryToNutritionFacts", () => {
     const result = entryToNutritionFacts(entry);
     expect(result.data[0].segmentData[0].value).toBe(entry.model.name);
     expect(result.data[1].segmentData[1].value).toBe(entry.compliance.logging);
-    expect(result.data[2].segmentData[1].valueDescription).toBe(
-      entry.outputs.humanDescription,
-    );
+    expect(result.data[2].segmentData[1].valueDescription).toBe(entry.outputs.humanDescription);
   });
 
   it("wraps and rethrows errors from setData when segment counts mismatch", async () => {

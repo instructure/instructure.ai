@@ -1,4 +1,5 @@
 # @instructure.ai/aiinfo
+
 ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Finstructure%2Finstructure.ai%2Frefs%2Fheads%2Fmain%2Fpackages%2Faiinfo%2Fpackage.json&query=%24.version&label=version&labelColor=%230e1721&color=%234279B6) ![coverage](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Finstructure%2Finstructure.ai%2Frefs%2Fheads%2Fmain%2Fpackages%2Faiinfo%2Fcoverage%2Fcoverage.yml&query=coverage.totals.total&logo=vitest&label=coverage&labelColor=%230E1721&color=%234279B6)
 
 A TypeScript package providing [IgniteAI](https://www.instructure.com/igniteai) feature metadata, nutrition facts, and data permission levels for Instructure products. This package is designed to help developers and product teams understand, display, and manage information about AI features.
@@ -8,7 +9,7 @@ A TypeScript package providing [IgniteAI](https://www.instructure.com/igniteai) 
 
 ## Migrating to v2 from v1
 
-`AiInformation.trigger` is now `undefined`, you must bring your own `Renderable` trigger.  The default value of `undefined` will pass typechecks but you may have unexpected outputs.
+`AiInformation.trigger` is now `undefined`, you must bring your own `Renderable` trigger. The default value of `undefined` will pass typechecks but you may have unexpected outputs.
 
 ```jsx
 //V1
@@ -32,18 +33,18 @@ If you were not using @instructure/ui's AiInformation component, then there are 
 ### 1. Entries
 
 - **Entries** are keyed by their lowercase `uid` (as defined in the Nutrition Facts Generator) and represent individual AI-powered features. Each entry contains:
-	- **AI Information**: Model details, feature name, permission level, and descriptions.
-	- **Nutrition Facts**: Transparency about data usage and model training.
-	- **Data Permission Levels**: Describes how data is used at different levels of access.
+  - **AI Information**: Model details, feature name, permission level, and descriptions.
+  - **Nutrition Facts**: Transparency about data usage and model training.
+  - **Data Permission Levels**: Describes how data is used at different levels of access.
 
 This structure makes it easy to access all relevant metadata for a specific feature in one place.
 
 ### 2. Features by INSTUI Component
 
 - **Features** are also exported as objects keyed by INSTUI AI component type, allowing you to access and render metadata for all features using standardized UI components from [INSTUI](https://instructure.design/):
-	- [`AiInformation`](https://instructure.design/#AiInformation): Model details, feature name, permission level, and descriptions for each feature.
-	- [`DataPermissionLevels`](https://instructure.design/#DataPermissionLevels): Data usage at different permission levels, supporting transparency and compliance.
-	- [`NutritionFacts`](https://instructure.design/#NutritionFacts): Summary of data usage, model training, and privacy for each feature.
+  - [`AiInformation`](https://instructure.design/#AiInformation): Model details, feature name, permission level, and descriptions for each feature.
+  - [`DataPermissionLevels`](https://instructure.design/#DataPermissionLevels): Data usage at different permission levels, supporting transparency and compliance.
+  - [`NutritionFacts`](https://instructure.design/#NutritionFacts): Summary of data usage, model training, and privacy for each feature.
 
 These exports are designed for direct use with INSTUI components, enabling consistent, accessible, and informative display of AI feature details in your application.
 

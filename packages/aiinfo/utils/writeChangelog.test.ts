@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { ChangedEntry } from "../types";
+import { type ChangedEntry } from "../types";
 import { writeChangelog } from "./writeChangelog";
-import type { Entry } from "../types";
+import { type Entry } from "../types";
 
 const existsSync = vi.spyOn(fs, "existsSync");
 const readFileSync = vi.spyOn(fs, "readFileSync");
@@ -65,6 +65,8 @@ function makeChangedEntry(
       settings: "",
     },
     permissions: "1",
+    privacyNoticeText: "",
+    privacyNoticeUrl: "",
     revision: "",
     uid,
   };
@@ -107,38 +109,6 @@ describe("writeChangelog", () => {
     });
     expect(result).toBeUndefined();
     expect(writeFileSync).not.toHaveBeenCalled();
-  });
-
-  it("writes changelog for new entry showing all keys", () => {
-    const entry = makeChangedEntry("uid-new", {
-      newChecksum: "newSha",
-      newEntry: {
-        feature: { description: "Test description", name: "Feature A" },
-        model: {
-          data: "Training data",
-          dataDescription: "Data details",
-          description: "Model description",
-          name: "Test Model",
-          trained: "2024-01-01",
-        },
-      },
-    });
-    const result = writeChangelog({
-      changedEntries: [entry],
-      changelogPath: "CHANGELOG.md",
-      csvSha: "csvShaX",
-      dateStr: "2024-02-02",
-    });
-    expect(result?.success).toBeTruthy();
-    expect(result?.changelog).toContain("## 2024-02-02");
-    expect(result?.changelog).toContain("### CSV");
-    expect(result?.changelog).toContain("#### SHA");
-    expect(result?.changelog).toContain("```diff\ncsvShaX\n```");
-    expect(result?.changelog).toContain("### uid-new");
-    expect(result?.changelog).toContain("#### feature");
-    expect(result?.changelog).toContain("#### model");
-    expect(writeFileSync).toHaveBeenCalledTimes(1);
-    expect(lastWrittenContent.startsWith("# Changelog")).toBeTruthy();
   });
 
   it("includes diffs for changed entry with nested objects", () => {

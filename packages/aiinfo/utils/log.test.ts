@@ -43,16 +43,14 @@ const importSubject = async () => {
   return mod.Log as (c: unknown) => void;
 };
 
-const spyAll = () => {
-  return {
-    error: vi.spyOn(console, "error").mockImplementation(() => {}),
-    group: vi.spyOn(console, "group").mockImplementation(() => {}),
-    groupEnd: vi.spyOn(console, "groupEnd").mockImplementation(() => {}),
-    info: vi.spyOn(console, "info").mockImplementation(() => {}),
-    log: vi.spyOn(console, "log").mockImplementation(() => {}),
-    warn: vi.spyOn(console, "warn").mockImplementation(() => {}),
-  };
-};
+const spyAll = () => ({
+  error: vi.spyOn(console, "error").mockImplementation(() => {}),
+  group: vi.spyOn(console, "group").mockImplementation(() => {}),
+  groupEnd: vi.spyOn(console, "groupEnd").mockImplementation(() => {}),
+  info: vi.spyOn(console, "info").mockImplementation(() => {}),
+  log: vi.spyOn(console, "log").mockImplementation(() => {}),
+  warn: vi.spyOn(console, "warn").mockImplementation(() => {}),
+});
 
 describe("log utility", () => {
   beforeEach(() => {
@@ -68,7 +66,7 @@ describe("log utility", () => {
     const header = spies.group.mock.calls[0][0];
     expect(header).toMatch(/^<bold><red>╔/);
     expect(header).toContain("Title");
-    expect(header).toMatch(/╚/); // bottom border
+    expect(header).toMatch(/╚/); // Bottom border
     // Verify 38 line chars between borders in top line
     const topLine = header.match(/╔(═+)╗/)?.[1];
     expect(topLine?.length).toBe(38);
@@ -84,10 +82,9 @@ describe("log utility", () => {
     expect(spies.log).toHaveBeenCalledTimes(1);
     const footerCall = spies.log.mock.calls[0][0];
     expect(footerCall).toMatch(/<red>═{40}<\/red>\n$/);
-    // groupEnd should be called before log footer
+    // GroupEnd should be called before log footer
     const groupEndIndex = spies.groupEnd.mock.invocationCallOrder[0];
-    const logIndex = (spies.log.mock as { invocationCallOrder: number[] })
-      .invocationCallOrder[0];
+    const logIndex = (spies.log.mock as { invocationCallOrder: number[] }).invocationCallOrder[0];
     expect(groupEndIndex).toBeLessThan(logIndex);
   });
 
@@ -165,13 +162,9 @@ describe("log utility", () => {
     const spies = spyAll();
     Log({ message: "X", type: "nonexistent" });
     expect(spies.error).toHaveBeenCalled();
-    expect(
-      spies.error.mock.calls.some((c) => String(c[0]).includes("Error in Log")),
-    ).toBeTruthy();
+    expect(spies.error.mock.calls.some((c) => String(c[0]).includes("Error in Log"))).toBeTruthy();
     expect(spies.log).toHaveBeenCalled();
-    expect(
-      spies.log.mock.calls.some((c) => c[0] === "Error logging message"),
-    ).toBeTruthy();
+    expect(spies.log.mock.calls.some((c) => c[0] === "Error logging message")).toBeTruthy();
   });
 
   it("logs numeric primitive content", async () => {
@@ -187,9 +180,7 @@ describe("log utility", () => {
     const spies = spyAll();
     Log({ color: "cyan", message: ["A", 7], style: "underline", type: "log" });
     expect(spies.log).toHaveBeenCalledTimes(2);
-    expect(spies.log.mock.calls[0][0]).toBe(
-      formatWith("underline", "cyan", "A"),
-    );
+    expect(spies.log.mock.calls[0][0]).toBe(formatWith("underline", "cyan", "A"));
     expect(spies.log.mock.calls[1][0]).toBe(7);
   });
 

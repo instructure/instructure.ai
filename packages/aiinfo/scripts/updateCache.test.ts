@@ -8,9 +8,7 @@ const mockWriteChangelog = vi.fn();
 const mockFetch = vi.fn();
 
 function hashValue(data: string) {
-  return createHash("shake128", { outputLength: 32 })
-    .update(JSON.stringify(data))
-    .digest("hex");
+  return createHash("shake128", { outputLength: 32 }).update(JSON.stringify(data)).digest("hex");
 }
 function hashEntry(entry: string[]) {
   return hashValue(JSON.stringify(entry));
@@ -55,13 +53,7 @@ function simulateDirectInvocation() {
 }
 
 function applyMocks(opts: MockOptions) {
-  const {
-    oldCSV,
-    newCSV,
-    sideEffect = false,
-    ci = false,
-    fetchThrows = false,
-  } = opts;
+  const { oldCSV, newCSV, sideEffect = false, ci = false, fetchThrows = false } = opts;
 
   // Derive entries as arrays (split lines & commas)
   const parseRaw = (raw: string) =>
@@ -82,9 +74,7 @@ function applyMocks(opts: MockOptions) {
   cacheState.checksum = oldChecksums;
 
   mockLog.mockImplementation(() => {});
-  mockWriteChangelog.mockImplementation(() => {
-    return { success: true };
-  });
+  mockWriteChangelog.mockImplementation(() => ({ success: true }));
 
   vi.mock("../utils", () => ({
     CSVURL: "https://example.com/cache.csv",
@@ -119,7 +109,7 @@ function applyMocks(opts: MockOptions) {
       text: async () => newCSV,
     };
   });
-  global.fetch = mockFetch;
+  globalThis.fetch = mockFetch;
 
   if (sideEffect) {
     process.env.UPDATE = "1";
@@ -169,9 +159,7 @@ describe("side-effect import with UPDATE env", () => {
     await import("./updateCache.mts");
     await flushMicrotasks();
     expect(exitSpy).toHaveBeenCalledWith(0);
-    expect(
-      logSpy.mock.calls.some((c) => c[0].includes('"cacheUpdated":true')),
-    ).toBeTruthy();
+    expect(logSpy.mock.calls.some((c) => c[0].includes('"cacheUpdated":true'))).toBeTruthy();
     exitSpy.mockRestore();
     logSpy.mockRestore();
   });
@@ -186,13 +174,8 @@ describe("checksum structural assertions", () => {
     applyMocks({ newCSV, oldCSV });
     const { main } = await import("./updateCache.mts");
     await main();
-    const checksumCall = mockFsWrite.mock.calls.find((c) =>
-      String(c[0]).endsWith("checksum.json"),
-    );
-    const parsed = JSON.parse(checksumCall?.[1] as string) as Record<
-      string,
-      string
-    >;
+    const checksumCall = mockFsWrite.mock.calls.find((c) => String(c[0]).endsWith("checksum.json"));
+    const parsed = JSON.parse(checksumCall?.[1] as string) as Record<string, string>;
     for (const [_k, v] of Object.entries(parsed)) {
       expect(typeof v).toBe("string");
       expect(v).toHaveLength(64);

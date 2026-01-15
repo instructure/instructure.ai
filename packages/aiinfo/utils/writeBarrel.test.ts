@@ -38,9 +38,7 @@ const resetFsConfig = (cfg: FSConfig) => {
   });
   fsMocks.existsSync.mockImplementation((p: string) =>
     cfg.withIndex.some(
-      (d) =>
-        p ===
-        path.join(path.resolve(CWD, "node", "components"), d, "index.tsx"),
+      (d) => p === path.join(path.resolve(CWD, "node", "components"), d, "index.tsx"),
     ),
   );
   fsMocks.writeFileSync.mockImplementation(() => {});
@@ -60,8 +58,7 @@ const getWritten = (): string => {
   }
   return v;
 };
-const getWrittenPath = () =>
-  fsMocks.writeFileSync.mock.calls[0]?.[0] as string | undefined;
+const getWrittenPath = () => fsMocks.writeFileSync.mock.calls[0]?.[0] as string | undefined;
 
 describe("writeBarrel", () => {
   beforeEach(() => {
@@ -109,9 +106,7 @@ describe("writeBarrel", () => {
     const iBeta = out.indexOf("import { beta }");
     expect(iZeta).toBeLessThan(iAlpha);
     expect(iAlpha).toBeLessThan(iBeta);
-    expect(out).toMatch(
-      /const AiInfo: AiInfoProps = {\s+zeta,\s+alpha,\s+beta,\s+};/,
-    );
+    expect(out).toMatch(/const AiInfo: AiInfoProps = {\s+zeta,\s+alpha,\s+beta,\s+};/);
   });
 
   it("uses custom outFileName option", async () => {
@@ -133,9 +128,7 @@ describe("writeBarrel", () => {
       withIndex: ["alpha", "invalid-name", "beta"], // All have index.tsx so invalid-name is included
     });
     const writeBarrel = await importSubject();
-    expect(() => writeBarrel()).toThrow(
-      /These uids are not valid TS identifiers: invalid-name/,
-    );
+    expect(() => writeBarrel()).toThrow(/These uids are not valid TS identifiers: invalid-name/);
     expect(fsMocks.writeFileSync).not.toHaveBeenCalled();
   });
 
@@ -177,9 +170,7 @@ describe("writeBarrel", () => {
       throw new Error("boom");
     });
     const writeBarrel = await importSubject();
-    expect(() => writeBarrel()).toThrow(
-      /Failed to read directory .*node.*components.*boom/,
-    );
+    expect(() => writeBarrel()).toThrow(/Failed to read directory .*node.*components.*boom/);
     expect(fsMocks.writeFileSync).not.toHaveBeenCalled();
   });
 
@@ -193,9 +184,7 @@ describe("writeBarrel", () => {
       throw new Error("fmt fail");
     });
     const writeBarrel = await importSubject();
-    expect(() => writeBarrel()).toThrow(
-      /Failed to format TypeScript code: fmt fail/,
-    );
+    expect(() => writeBarrel()).toThrow(/Failed to format TypeScript code: fmt fail/);
     expect(fsMocks.writeFileSync).not.toHaveBeenCalled();
   });
 
@@ -209,9 +198,7 @@ describe("writeBarrel", () => {
       throw new Error("disk full");
     });
     const writeBarrel = await importSubject();
-    expect(() => writeBarrel()).toThrow(
-      /Failed to write barrel file .*disk full/,
-    );
+    expect(() => writeBarrel()).toThrow(/Failed to write barrel file .*disk full/);
   });
 
   it("output includes pluck helper, types import, and exports for each uid", async () => {
@@ -223,7 +210,7 @@ describe("writeBarrel", () => {
     const writeBarrel = await importSubject();
     writeBarrel();
     const out = getWritten();
-    expect(out).toContain("import type {");
+    expect(out).toContain("import {\n  type AiInfoAiInformationProps,");
     expect(out).toContain("AiInfoProps,");
     expect(out).toContain("const pluck = <");
     expect(out).toContain("const nutritionFacts:");
@@ -251,9 +238,7 @@ describe("writeBarrel", () => {
     const codePassed = formatTsMock.mock.calls[0][0];
     // Only check for import statements if features are present
     if (codePassed.includes("import { alpha")) {
-      expect(codePassed).toContain(
-        'import { alpha } from "./components/alpha";',
-      );
+      expect(codePassed).toContain('import { alpha } from "./components/alpha";');
     }
     if (codePassed.includes("import { beta")) {
       expect(codePassed).toContain('import { beta } from "./components/beta";');

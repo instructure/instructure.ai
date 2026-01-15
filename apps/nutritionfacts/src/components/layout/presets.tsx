@@ -1,7 +1,7 @@
 import { ScreenReaderContent, SimpleSelect, View } from "@instructure/ui";
-import type { SelectOptionProps } from "@instructure/ui";
+import { type SelectOptionProps } from "@instructure/ui";
 import { AiInfo } from "@instructure.ai/aiinfo";
-import type { AiInfoFeatureProps, AiInfoProps } from "@instructure.ai/aiinfo";
+import { type AiInfoFeatureProps, type AiInfoProps } from "@instructure.ai/aiinfo";
 import { useCallback, useEffect, useState } from "react";
 import { brands } from "../../assets";
 

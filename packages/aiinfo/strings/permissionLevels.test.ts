@@ -33,11 +33,7 @@ describe("permissionLevels strings", () => {
     expect(Array.isArray(pl.data)).toBeTruthy();
     expect(pl.data).toHaveLength(4);
     pl.data.forEach((entry) => {
-      expect(Object.keys(entry).toSorted()).toStrictEqual([
-        "description",
-        "level",
-        "title",
-      ]);
+      expect(Object.keys(entry).toSorted()).toStrictEqual(["description", "level", "title"]);
       expect(typeof entry.description).toBe("string");
       expect(entry.description.length).toBeGreaterThan(40);
       expect(typeof entry.level).toBe("string");
@@ -67,7 +63,7 @@ describe("permissionLevels strings", () => {
   });
 
   it("first and last titles are correct", () => {
-    const data = permissionLevelsStrings.en.data;
+    const { data } = permissionLevelsStrings.en;
     expect(data[0].title).toBe("Descriptive Analytics and Research");
     expect(data[data.length - 1].title).toBe("Collaborative AI Consortium");
   });
@@ -79,9 +75,7 @@ describe("permissionLevels strings", () => {
   });
 
   it("at least one description mentions AI", () => {
-    const hasAI = permissionLevelsStrings.en.data.some((d) =>
-      d.description.includes("AI"),
-    );
+    const hasAI = permissionLevelsStrings.en.data.some((d) => d.description.includes("AI"));
     expect(hasAI).toBeTruthy();
   });
 

@@ -23,12 +23,8 @@ describe("consts.ts TEMPLATE_PACKAGE", () => {
   });
 
   it("contains required import lines with correct modules and specifiers", () => {
-    expect(TEMPLATE_PACKAGE).toContain(
-      'import { Button } from "@instructure/ui";',
-    );
-    expect(TEMPLATE_PACKAGE).toContain(
-      'import type { AiInfoFeatureProps } from "../types";',
-    );
+    expect(TEMPLATE_PACKAGE).toContain('import { Button } from "@instructure/ui";');
+    expect(TEMPLATE_PACKAGE).toContain('import type { AiInfoFeatureProps } from "../types";');
     expect(TEMPLATE_PACKAGE).toContain(
       'import type { AiInformationProps, DataPermissionLevelsProps, NutritionFactsProps } from "@instructure/ui";',
     );
@@ -44,13 +40,10 @@ describe("consts.ts TEMPLATE_PACKAGE", () => {
     const count = (ph: string) =>
       (
         TEMPLATE_PACKAGE.match(
-          new RegExp(
-            ph.replace(/\\/g, "\\\\").replace(/[<>]/g, String.raw`\$&`),
-            "g",
-          ),
+          new RegExp(ph.replace(/\\/g, String.raw`\\`).replace(/[<>]/g, String.raw`\$&`), "g"),
         ) || []
       ).length;
-    expect(count("<<uid>>")).toBe(3); // declaration + named export + default export
+    expect(count("<<uid>>")).toBe(3); // Declaration + named export + default export
     expect(count("<<data>>")).toBe(1);
     expect(count("<<nutritionFacts>>")).toBe(1);
     expect(count("<<dataPermissionLevels>>")).toBe(1);
@@ -73,9 +66,7 @@ describe("consts.ts TEMPLATE_PACKAGE", () => {
   });
 
   it("has expected variable declarations with placeholders", () => {
-    expect(TEMPLATE_PACKAGE).toContain(
-      "const <<uid>>: AiInfoFeatureProps = <<data>>;",
-    );
+    expect(TEMPLATE_PACKAGE).toContain("const <<uid>>: AiInfoFeatureProps = <<data>>;");
     expect(TEMPLATE_PACKAGE).toContain(
       "const nutritionFacts: NutritionFactsProps = <<nutritionFacts>>;",
     );
@@ -115,9 +106,7 @@ describe("consts.ts TEMPLATE_PACKAGE", () => {
   });
 
   it("ends with newline after default export (stable ending)", () => {
-    expect(
-      TEMPLATE_PACKAGE.trimEnd().endsWith("export default <<uid>>;"),
-    ).toBeTruthy();
+    expect(TEMPLATE_PACKAGE.trimEnd().endsWith("export default <<uid>>;")).toBeTruthy();
   });
 
   // Replaced brittle inline snapshot with explicit normalized comparison

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { PageLayout } from "../types";
+import { type PageLayout } from "../types";
 import { DefaultLayout, Layout } from "./layout";
 
 describe("layout", () => {

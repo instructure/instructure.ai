@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { parse } from "papaparse";
 import { cache, checksum } from "../cache";
-import type { CSVFetchResult, ChangedEntry, Entry, Hash } from "../types";
+import { type CSVFetchResult, type ChangedEntry, type Entry, type Hash } from "../types";
 import { CSVURL, Log, entryToObj, writeChangelog } from "../utils";
 import { WriteEntries } from "./writeEntries.mts";
 
@@ -35,7 +35,7 @@ const updateCache = async (data: CSVFetchResult): Promise<void> => {
   if (fs.existsSync(cacheCSVPath)) {
     oldCacheRaw = fs.readFileSync(cacheCSVPath, "utf8");
   } else if (cache) {
-    // fallback to in-memory cache if file doesn't exist
+    // Fallback to in-memory cache if file doesn't exist
     oldCacheRaw = cache;
   }
   const oldEntries = parseCSV(oldCacheRaw);
@@ -96,31 +96,24 @@ const updateCache = async (data: CSVFetchResult): Promise<void> => {
     const changedParsed = changedEntries
       .map((e) =>
         data.parsed.find(
-          (arr) =>
-            Array.isArray(arr) &&
-            arr[0]?.toLowerCase() === e.uid?.toLowerCase(),
+          (arr) => Array.isArray(arr) && arr[0]?.toLowerCase() === e.uid?.toLowerCase(),
         ),
       )
       .filter((arr): arr is string[] => Array.isArray(arr));
     if (changedParsed.length > 0) {
-      await WriteEntries(changedParsed as string[][]);
+      await WriteEntries(changedParsed);
     }
   }
 
   try {
     const sortedChecksums = Object.keys(checksums)
-      .toSorted((a, b) => {
-        return a.localeCompare(b);
-      })
+      .toSorted((a, b) => a.localeCompare(b))
       .reduce<Record<string, Hash>>((acc, key) => {
         acc[key] = checksums[key];
         return acc;
       }, {});
 
-    fs.writeFileSync(
-      checksumPath,
-      `${JSON.stringify(sortedChecksums, undefined, 2)}\n`,
-    );
+    fs.writeFileSync(checksumPath, `${JSON.stringify(sortedChecksums, undefined, 2)}\n`);
   } catch (error) {
     Log(["Failed to update checksum.json:", error]);
   }
