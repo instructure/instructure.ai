@@ -1,11 +1,28 @@
-import { Flex, Heading, IconAiLine, Text, View } from "@instructure/ui";
-import type { NutritionFactsProps } from "@instructure/ui";
-import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
-import type { Dispatch, FC, SetStateAction } from "react";
-import type { ExtendedNutritionFactsProps, PageLayout } from "../../types";
-import { Divider } from "./";
+// oxlint-disable prefer-default-export
+// oxlint-disable no-named-export
+// oxlint-disable jsx-max-depth
+// oxlint-disable no-ternary
+import { type Dispatch, type FC, type SetStateAction } from "react";
+import { Divider, Presets } from "./";
+import { type ExtendedNutritionFactsProps, type PageLayout } from "../../types";
+import {
+  Flex,
+  Heading,
+  IconAiLine,
+  IconExternalLinkLine,
+  Link,
+  type NutritionFactsProps,
+  Text,
+  View,
+} from "@instructure/ui";
+import { type AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { extendedNutritionFacts } from "./extendedNutritionFacts";
-import { Presets } from "./";
+
+const isNutritionFacts = (obj: unknown): obj is NutritionFactsProps =>
+  typeof obj === "object" &&
+  obj !== null &&
+  "modalLabel" in obj &&
+  typeof (obj as { modalLabel?: unknown }).modalLabel === "string";
 
 const NutritionFactsForm: FC<{
   product: AiInfoFeatureProps | undefined;
@@ -14,17 +31,10 @@ const NutritionFactsForm: FC<{
   isNarrow?: boolean;
   isInIframe?: boolean;
 }> = ({ product, layout, setProduct, isNarrow, isInIframe }) => {
-  function isNutritionFacts(obj: unknown): obj is NutritionFactsProps {
-    return (
-      typeof obj === "object" &&
-      obj !== null &&
-      typeof (obj as NutritionFactsProps).modalLabel === "string"
-    );
-  }
-
-  let Feature: ExtendedNutritionFactsProps | undefined;
+  let Feature: ExtendedNutritionFactsProps | undefined = undefined;
   if (product && isNutritionFacts(product?.nutritionFacts)) {
     Feature = extendedNutritionFacts(product);
+    console.log(typeof Feature.description);
   }
 
   return (
@@ -48,9 +58,24 @@ const NutritionFactsForm: FC<{
         {Feature ? (
           <>
             <Flex.Item>
-              <Heading level="h2" variant="titleCardSection">
-                {Feature.featureName}
-              </Heading>
+              <View>
+                <Heading level="h2" variant="titleCardSection">
+                  {Feature.featureName}
+                </Heading>
+                <Text as="p">{Feature.description}</Text>
+                {Feature.linkText && Feature.linkUrl && (
+                  <Text as="p" variant="contentSmall">
+                    <Link
+                      renderIcon={IconExternalLinkLine}
+                      href={Feature.linkUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {Feature.linkText}
+                    </Link>
+                  </Text>
+                )}
+              </View>
               {Feature.data.map(({ blockTitle, segmentData }) => (
                 <View as="div" key={blockTitle} margin="sectionElements 0">
                   <Heading level="h3" variant="titleModule">

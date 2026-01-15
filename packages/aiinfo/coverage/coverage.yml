@@ -1,10 +1,10 @@
 coverage:
   totals:
-    statements: 87.23%
-    branches: 78.94%
-    functions: 94.91%
-    lines: 86.98%
-    total: 87.02%
+    statements: 85.98%
+    branches: 79.02%
+    functions: 93.22%
+    lines: 85.71%
+    total: 85.98%
   scripts:
     totals:
       statements: 85.69%
@@ -21,7 +21,7 @@ coverage:
       branches: 51.06%
       functions: 84.61%
       lines: 77.06%
-      uncovered_line_numbers: "37-245"
+      uncovered_line_numbers: "37-238"
     "writeEntries.mts":
       statements: 80%
       branches: 84.61%
@@ -51,10 +51,10 @@ coverage:
       lines: 100%
   utils:
     totals:
-      statements: 95.65%
-      branches: 90.61%
-      functions: 100%
-      lines: 95.51%
+      statements: 94.6%
+      branches: 91.03%
+      functions: 97.73%
+      lines: 94.48%
     "consts.ts":
       statements: 100%
       branches: 100%
@@ -62,10 +62,10 @@ coverage:
       lines: 100%
     "entryToAIInformation.ts":
       statements: 91.66%
-      branches: 68.18%
+      branches: 73.07%
       functions: 100%
       lines: 91.66%
-      uncovered_line_numbers: "27"
+      uncovered_line_numbers: "26"
     "entryToNutritionFacts.ts":
       statements: 100%
       branches: 83.33%
@@ -80,7 +80,7 @@ coverage:
       statements: 93.75%
       branches: 94.11%
       functions: 100%
-      lines: 92.85%
+      lines: 93.33%
       uncovered_line_numbers: "9"
     "formatTs.ts":
       statements: 100%
@@ -92,13 +92,13 @@ coverage:
       branches: 81.08%
       functions: 100%
       lines: 76.71%
-      uncovered_line_numbers: "20-158"
+      uncovered_line_numbers: "20-149"
     "toTsObjectLiteral.ts":
       statements: 92.5%
       branches: 93.1%
       functions: 100%
-      lines: 92.1%
-      uncovered_line_numbers: "15-67"
+      lines: 91.89%
+      uncovered_line_numbers: "15-64"
     "writeBarrel.ts":
       statements: 97.56%
       branches: 86.95%
@@ -106,10 +106,11 @@ coverage:
       lines: 97.29%
       uncovered_line_numbers: "20"
     "writeChangelog.ts":
-      statements: 100%
-      branches: 90%
-      functions: 100%
-      lines: 100%
+      statements: 88.37%
+      branches: 89.65%
+      functions: 75%
+      lines: 88.37%
+      uncovered_line_numbers: "43-49"
     "writeEntry.ts":
       statements: 100%
       branches: 100%

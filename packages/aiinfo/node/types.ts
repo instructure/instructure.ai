@@ -1,3 +1,4 @@
+// oxlint-disable no-named-export
 import {
   type AiInformationProps,
   type DataPermissionLevelsProps,
@@ -13,6 +14,8 @@ interface AiInfoFeatureProps {
   group: string;
   name: string;
   description: string;
+  linkText?: string;
+  linkUrl?: string;
 }
 
 type AiInfoProps = Record<string, AiInfoFeatureProps>;

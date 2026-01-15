@@ -22,7 +22,9 @@ function entryToPermissionLevels(entry: Entry): Result {
     }
     const mapped = data.map((d) =>
       Object.assign(d, {
-        highlighted: Boolean(d.level.endsWith(permStr) && highlightId === d.level.replace(`LEVEL `, `L`)),
+        highlighted: Boolean(
+          d.level.endsWith(permStr) && highlightId === d.level.replace(`LEVEL `, `L`),
+        ),
       }),
     );
     return {

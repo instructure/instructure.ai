@@ -113,7 +113,12 @@ describe("writeEntries.mts", () => {
     const mockLog = vi.fn();
     vi.doMock("../utils", () => ({
       Log: mockLog,
-      entryToObj: (arr: string[]) => ({ raw: arr, uid: arr[0] }),
+      entryToObj: (arr: string[]) => ({
+        privacyNoticeText: "",
+        privacyNoticeUrl: "",
+        raw: arr,
+        uid: arr[0],
+      }),
       writeBarrel: mockWriteBarrel,
       writeEntry: mockWriteEntry,
     }));

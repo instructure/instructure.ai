@@ -210,7 +210,7 @@ describe("writeBarrel", () => {
     const writeBarrel = await importSubject();
     writeBarrel();
     const out = getWritten();
-    expect(out).toContain("import type {");
+    expect(out).toContain("import {\n  type AiInfoAiInformationProps,");
     expect(out).toContain("AiInfoProps,");
     expect(out).toContain("const pluck = <");
     expect(out).toContain("const nutritionFacts:");

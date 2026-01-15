@@ -14,6 +14,8 @@ interface AiInfoFeatureProps {
   group: string;
   name: string;
   description: string;
+  linkText?: string;
+  linkUrl?: string;
 }
 type AiInfoProps = Record<string, AiInfoFeatureProps>;
 type AiInfoNutritionFactsProps = Record<string, NutritionFactsProps>;

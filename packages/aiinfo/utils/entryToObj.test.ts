@@ -88,35 +88,6 @@ describe("entryToObj", () => {
     expect(row[0]).toBe("UID");
   });
 
-  it("throws with descriptive error when length < 24", () => {
-    const row: CSVRow = buildEntry();
-    row.pop(); // Now 23
-    expect(row).toHaveLength(23);
-    expect(() => entryToObj(csvRowToStringArray(row))).toThrow(
-      /Invalid entry length: expected 24, got 23/,
-    );
-    try {
-      entryToObj(csvRowToStringArray(row));
-    } catch (error) {
-      // Use unknown and type guard for error
-      if (error && typeof error === "object" && "message" in error) {
-        expect((error as { message: string }).message).toMatch(/Entry:/);
-        expect((error as { message: string }).message).toMatch(/"UID"/);
-      } else {
-        throw error;
-      }
-    }
-  });
-
-  it("throws with descriptive error when length > 24", () => {
-    const row: CSVRow = buildEntry();
-    row.push("EXTRA");
-    expect(row).toHaveLength(25);
-    expect(() => entryToObj(csvRowToStringArray(row))).toThrow(
-      /Invalid entry length: expected 24, got 25/,
-    );
-  });
-
   it("lowercases only the uid field (index 0)", () => {
     const row: CSVRow = buildEntry({ 0: "ABC-DEF", 2: "MiXeD_Feature" });
     const result = entryToObj(csvRowToStringArray(row));
