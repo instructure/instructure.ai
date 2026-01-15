@@ -3,11 +3,6 @@
 import { type CSV, type Entry } from "../types";
 
 const entryToObj = (entry: CSV[number]): Entry => {
-  if (entry.length !== 26) {
-    throw new Error(
-      `Invalid entry length: expected 26, got ${entry.length}. Entry: ${JSON.stringify(entry)}`,
-    );
-  }
   const obj: Entry = {
     compliance: {
       logging: entry[10],
