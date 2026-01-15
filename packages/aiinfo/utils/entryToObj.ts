@@ -18,8 +18,8 @@ const entryToObj = (entry: CSV[number]): Entry => {
       name: entry[2],
     },
     group: entry[22],
-    linkTitle: entry[25],
-    linkURL: entry[24],
+    linkTitle: entry[25] ?? "",
+    linkURL: entry[24] ?? "",
     model: {
       data: entry[7],
       dataDescription: entry[8],
