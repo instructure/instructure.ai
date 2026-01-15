@@ -1,10 +1,10 @@
-import type {
-  AiInformationProps,
-  DataPermissionLevelsProps,
-  NutritionFactsProps,
+import {
+  type AiInformationProps,
+  type DataPermissionLevelsProps,
+  type NutritionFactsProps,
 } from "@instructure/ui-instructure";
-import type { AnsiColors, AnsiStyles } from "ansis";
-import type { ParseResult } from "papaparse";
+import { type AnsiColors, type AnsiStyles } from "ansis";
+import { type ParseResult } from "papaparse";
 
 interface CSVFetchResult {
   parsed: CSV;
@@ -29,9 +29,7 @@ type CSV = ParseResult<string[]>["data"];
 
 type Hash = string;
 
-interface Checksum {
-  [feature: FeatureName]: Hash;
-}
+type Checksum = Record<FeatureName, Hash>;
 
 type message = number | string | unknown[];
 
@@ -46,7 +44,7 @@ interface LogObject {
 
 type LogProps = LogObject | message;
 
-interface Entry {
+type Entry = {
   uid: string;
   revision: string;
   feature: {
@@ -79,16 +77,11 @@ interface Entry {
   };
   group: string;
   permissions: "1" | "2" | "3" | "4";
-}
+} & ({ linkURL: string; linkTitle: string } | { linkURL?: undefined; linkTitle?: undefined });
 
-type LangCode =
-  | `${Lowercase<string>}`
-  | `${Lowercase<string>}_${Uppercase<string>}`;
+type LangCode = Lowercase<string> | `${Lowercase<string>}_${Uppercase<string>}`;
 
-type DataPermissionLevelsStrings = Omit<
-  AiInfoFeature["dataPermissionLevels"],
-  "currentFeature"
->;
+type DataPermissionLevelsStrings = Omit<AiInfoFeature["dataPermissionLevels"], "currentFeature">;
 
 /* TODO: Omit based on INSTUI NutritionFactsOwnProps.BlockType[] */
 type AiInformationStrings = Omit<
@@ -104,6 +97,8 @@ type AiInformationStrings = Omit<
     permissionLevelsModalTriggerText: string;
     modelNameText: string;
     nutritionFactsModalTriggerText: string;
+    privacyNoticeText: string;
+    privacyNoticeUrl: string;
   };
   title: string;
   dataPermissionLevelsTitle: string;
@@ -133,12 +128,10 @@ interface NutritionFactsSegmentDataStrings {
   description: string;
 }
 
-type Strings = {
-  [langcode in LangCode]:
-    | DataPermissionLevelsStrings
-    | AiInformationStrings
-    | NutritionFactsStrings;
-};
+type Strings = Record<
+  LangCode,
+  DataPermissionLevelsStrings | AiInformationStrings | NutritionFactsStrings
+>;
 
 interface ChangedEntry {
   uid: string;
@@ -166,6 +159,7 @@ interface Result {
   data: PermissionLevel[];
 }
 
+// oxlint-disable-next-line import/no-named-export
 export type {
   CSV,
   ChangedEntry,
