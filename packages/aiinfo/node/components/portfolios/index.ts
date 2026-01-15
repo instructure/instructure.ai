@@ -126,73 +126,64 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
     ],
   },
 ];
-const nutritionFacts: NutritionFactsProps = {
-  ...{
-    closeButtonText: "Close",
-    closeIconButtonScreenReaderLabel: "Close",
-    featureName: FEATURE_NAME,
-    modalLabel: "This is a modal for AI facts",
-    title: "AI Nutrition Facts",
-    triggerText: "Nutrition Facts",
-  },
-  data: NUTRITION_FACTS_DATA,
-};
-const dataPermissionLevels: DataPermissionLevelsProps = {
-  ...{
-    closeButtonText: "Close",
-    closeIconButtonScreenReaderLabel: "Close dialog",
-    currentFeature: FEATURE_NAME,
-    currentFeatureText: "Current Feature:",
-    modalLabel: "Data Permission Levels modal",
-    title: "Data Permission Levels",
-    triggerText: "Data Permission Levels",
-  },
-  data: DATA_PERMISSION_LEVELS,
-};
-const aiInformation: AiInformationProps = {
-  ...{
-    data: [
-      {
-        description:
-          "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-        featureName: "Portfolios",
-        modelName: "Haiku 3",
-        modelNameText: "Base Model",
-        nutritionFactsModalTriggerText: "AI Nutrition Facts",
-        permissionLevel: "LEVEL 2",
-        permissionLevelsModalTriggerText: "Data Permission Levels",
-        permissionLevelText: "Permission Level:",
-        privacyNoticeText: undefined,
-        privacyNoticeUrl: undefined,
-      },
-    ],
-    dataPermissionLevelsCloseButtonText: "Close",
-    dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-    dataPermissionLevelsCurrentFeature: "Portfolios",
-    dataPermissionLevelsCurrentFeatureText: "Current Feature:",
-    dataPermissionLevelsModalLabel: "Data Permission Levels modal",
-    dataPermissionLevelsTitle: "Data Permission Levels",
-    nutritionFactsCloseButtonText: "Close",
-    nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
-    nutritionFactsFeatureName: "Portfolios",
-    nutritionFactsModalLabel: "This is a modal for AI facts",
-    nutritionFactsTitle: "AI Nutrition Facts",
-    title: "Features",
-  },
-  dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-  nutritionFactsData: NUTRITION_FACTS_DATA,
-  trigger: undefined,
-};
+const nutritionFacts: NutritionFactsProps = ({
+	closeButtonText: 'Close',
+	closeIconButtonScreenReaderLabel: 'Close',
+	featureName: FEATURE_NAME,
+	modalLabel: 'This is a modal for AI facts',
+	title: 'AI Nutrition Facts',
+	triggerText: 'Nutrition Facts',
+	data: NUTRITION_FACTS_DATA
+});
+const dataPermissionLevels: DataPermissionLevelsProps = ({
+	closeButtonText: 'Close',
+	closeIconButtonScreenReaderLabel: 'Close dialog',
+	currentFeature: FEATURE_NAME,
+	currentFeatureText: 'Current Feature:',
+	modalLabel: 'Data Permission Levels modal',
+	title: 'Data Permission Levels',
+	triggerText: 'Data Permission Levels',
+	data: DATA_PERMISSION_LEVELS
+});
+const aiInformation: AiInformationProps = ({
+	data: [{
+		description: 'We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.',
+		featureName: 'Portfolios',
+		modelName: 'Haiku 3',
+		modelNameText: 'Base Model',
+		nutritionFactsModalTriggerText: 'AI Nutrition Facts',
+		permissionLevel: 'LEVEL 2',
+		permissionLevelsModalTriggerText: 'Data Permission Levels',
+		permissionLevelText: 'Permission Level:',
+		privacyNoticeText: '',
+		privacyNoticeUrl: ''
+	}],
+	dataPermissionLevelsCloseButtonText: 'Close',
+	dataPermissionLevelsCloseIconButtonScreenReaderLabel: 'Close dialog',
+	dataPermissionLevelsCurrentFeature: 'Portfolios',
+	dataPermissionLevelsCurrentFeatureText: 'Current Feature:',
+	dataPermissionLevelsModalLabel: 'Data Permission Levels modal',
+	dataPermissionLevelsTitle: 'Data Permission Levels',
+	nutritionFactsCloseButtonText: 'Close',
+	nutritionFactsCloseIconButtonScreenReaderLabel: 'Close',
+	nutritionFactsFeatureName: 'Portfolios',
+	nutritionFactsModalLabel: 'This is a modal for AI facts',
+	nutritionFactsTitle: 'AI Nutrition Facts',
+	title: 'Features',
+	dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
+	nutritionFactsData: NUTRITION_FACTS_DATA,
+	trigger: undefined
+});
 const portfolios: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
+  description:
+    "AI Assistant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation.",
+  group: "Canvas",
+  name: FEATURE_NAME,
   nutritionFacts,
   revision: "2025.10.27",
   uid: UID,
-  group: "Canvas",
-  name: FEATURE_NAME,
-  description:
-    "AI Assistant for teachers to improve portfolio level and evidence level instructions improvement, skill extraction and reflection question generation.",
 };
 export { portfolios, nutritionFacts, dataPermissionLevels, aiInformation };
 export default portfolios;
