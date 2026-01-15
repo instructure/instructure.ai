@@ -1,10 +1,10 @@
 coverage:
   totals:
-    statements: 7.51%
-    branches: 3.06%
+    statements: 7.38%
+    branches: 2.99%
     functions: 8.33%
-    lines: 7.78%
-    total: 6.67%
+    lines: 7.64%
+    total: 6.59%
   src:
     totals:
       statements: 30.63%
@@ -84,7 +84,7 @@ coverage:
           branches: 0%
           functions: 0%
           lines: 0%
-          uncovered_line_numbers: "16-61"
+          uncovered_line_numbers: "21-86"
         "presets.tsx":
           statements: 0%
           branches: 0%
