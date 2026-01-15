@@ -4,9 +4,7 @@ import { raw, toTsObjectLiteral } from "./toTsObjectLiteral";
 describe("toTsObjectLiteral", () => {
   it("serializes basic primitives", () => {
     expect(toTsObjectLiteral("hello")).toBe(JSON.stringify("hello"));
-    expect(toTsObjectLiteral("line\nbreak")).toBe(
-      JSON.stringify("line\nbreak"),
-    );
+    expect(toTsObjectLiteral("line\nbreak")).toBe(JSON.stringify("line\nbreak"));
     expect(toTsObjectLiteral(42)).toBe("42");
     expect(toTsObjectLiteral(true)).toBe("true");
     expect(toTsObjectLiteral(false)).toBe("false");
@@ -30,9 +28,7 @@ describe("toTsObjectLiteral", () => {
 
   it("serializes Date", () => {
     const d = new Date("2024-01-01T00:00:00.000Z");
-    expect(toTsObjectLiteral(d)).toBe(
-      `new Date(${JSON.stringify(d.toISOString())})`,
-    );
+    expect(toTsObjectLiteral(d)).toBe(`new Date(${JSON.stringify(d.toISOString())})`);
   });
 
   it("serializes RegExp", () => {
@@ -60,9 +56,7 @@ describe("toTsObjectLiteral", () => {
       ["two", 2],
       [true, false],
     ]);
-    expect(toTsObjectLiteral(m)).toBe(
-      'new Map([[1, "one"], ["two", 2], [true, false]])',
-    );
+    expect(toTsObjectLiteral(m)).toBe('new Map([[1, "one"], ["two", 2], [true, false]])');
     expect(toTsObjectLiteral(new Map())).toBe("new Map([])");
   });
 
@@ -137,9 +131,7 @@ describe("toTsObjectLiteral", () => {
   it("wraps errors for circular structures", () => {
     const circ: Record<string, unknown> = {};
     (circ as { self?: unknown }).self = circ;
-    expect(() => toTsObjectLiteral(circ)).toThrow(
-      /Error in toTsObjectLiteral:/,
-    );
+    expect(() => toTsObjectLiteral(circ)).toThrow(/Error in toTsObjectLiteral:/);
   });
 
   it("rawTs constructor assigns code", () => {

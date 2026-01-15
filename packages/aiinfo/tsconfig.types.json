@@ -1,22 +1,22 @@
 {
-	"compilerOptions": {
-		"declaration": true,
-		"emitDeclarationOnly": true,
-		"jsx": "react-jsx",
-		"moduleResolution": "Bundler",
-		"outDir": "src",
-		"rootDir": "node",
-		"skipLibCheck": true
-	},
-	"exclude": [
-		"**/*.test.*",
-		"**/__tests__/**",
-		"scripts/**",
-		"utils/**",
-		"src/**",
-		"**/*.config.*",
-		"vite.config.*"
-	],
-	"extends": "./tsconfig.json",
-	"include": ["node"]
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "Bundler",
+    "outDir": "src",
+    "rootDir": "node",
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "**/*.test.*",
+    "**/__tests__/**",
+    "scripts/**",
+    "utils/**",
+    "src/**",
+    "**/*.config.*",
+    "vite.config.*"
+  ],
+  "extends": "./tsconfig.json",
+  "include": ["node"]
 }

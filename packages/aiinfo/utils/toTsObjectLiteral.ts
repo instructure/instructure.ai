@@ -1,4 +1,4 @@
-// src/utils/toTsObjectLiteral.ts
+// Src/utils/toTsObjectLiteral.ts
 
 /**
  * Helper for embedding raw TypeScript/TS code in generated output.
@@ -31,10 +31,7 @@ interface ToTsObjectLiteralOptions {
  * @param options - Optional configuration
  * @param options.replaceStrings - Array of string values that should be replaced with unquoted identifiers
  */
-export function toTsObjectLiteral(
-  value: unknown,
-  options?: ToTsObjectLiteralOptions,
-): string {
+export function toTsObjectLiteral(value: unknown, options?: ToTsObjectLiteralOptions): string {
   const { replaceStrings = [] } = options ?? {};
 
   try {
@@ -74,15 +71,12 @@ export function toTsObjectLiteral(
         }
         if (value instanceof Map) {
           const entries = [...value.entries()].map(
-            ([k, v]) =>
-              `[${toTsObjectLiteral(k, options)}, ${toTsObjectLiteral(v, options)}]`,
+            ([k, v]) => `[${toTsObjectLiteral(k, options)}, ${toTsObjectLiteral(v, options)}]`,
           );
           return `new Map([${entries.join(", ")}])`;
         }
         if (value instanceof Set) {
-          const items = [...value.values()].map((v) =>
-            toTsObjectLiteral(v, options),
-          );
+          const items = [...value.values()].map((v) => toTsObjectLiteral(v, options));
           return `new Set([${items.join(", ")}])`;
         }
         if (Array.isArray(value)) {

@@ -1,6 +1,6 @@
 import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { Entry } from "../types";
+import  { type Entry } from "../types";
 
 const mkdirSyncSpy = vi.fn();
 const writeFileSyncSpy = vi.fn();
@@ -10,11 +10,7 @@ const entryToPermissionLevelsSpy = vi.fn();
 const formatTsSpy = vi.fn();
 const toTsObjectLiteralSpy = vi.fn<(value: unknown) => string>();
 
-function makeEntry(
-  uid: string,
-  featureName = "FeatureName",
-  revision = "rev-1",
-): Entry {
+function makeEntry(uid: string, featureName = "FeatureName", revision = "rev-1"): Entry {
   return {
     compliance: {
       logging: "Enabled",
@@ -91,9 +87,7 @@ function mockUtils({
       return String(obj);
     }
     const entries = Object.entries(obj)
-      .map(([k, v]) =>
-        v === undefined ? `${k}: undefined` : `${k}: ${JSON.stringify(v)}`,
-      )
+      .map(([k, v]) => (v === undefined ? `${k}: undefined` : `${k}: ${JSON.stringify(v)}`))
       .join(", ");
     return `/*OBJ*/ {${entries}${entries ? "," : ""}}`;
   });
@@ -148,13 +142,7 @@ describe("writeEntry", () => {
     const entry = makeEntry("abc123", "My Feature", "rev-42");
     await writeEntry(entry);
 
-    const expectedPath = path.resolve(
-      process.cwd(),
-      "node",
-      "components",
-      entry.uid,
-      "index.ts",
-    );
+    const expectedPath = path.resolve(process.cwd(), "node", "components", entry.uid, "index.ts");
     expect(mkdirSyncSpy).toHaveBeenCalledTimes(1);
     expect(mkdirSyncSpy.mock.calls[0][0]).toBe(path.dirname(expectedPath));
     expect(mkdirSyncSpy.mock.calls[0][1]).toStrictEqual({ recursive: true });
@@ -183,12 +171,8 @@ describe("writeEntry", () => {
     expect(args[3]).toMatchObject({ title: "DPLTitle" });
     expect((args[3] as Record<string, unknown>).data).toBeUndefined();
     expect(args[4]).toMatchObject({ something: "x" });
-    expect(
-      (args[4] as Record<string, unknown>).dataPermissionLevelsData,
-    ).toBeUndefined();
-    expect(
-      (args[4] as Record<string, unknown>).nutritionFactsData,
-    ).toBeUndefined();
+    expect((args[4] as Record<string, unknown>).dataPermissionLevelsData).toBeUndefined();
+    expect((args[4] as Record<string, unknown>).nutritionFactsData).toBeUndefined();
   });
 
   it("writes multiple entries distinctly", async () => {
@@ -197,12 +181,8 @@ describe("writeEntry", () => {
     await writeEntry(makeEntry("uid2"));
     expect(writeFileSyncSpy).toHaveBeenCalledTimes(2);
     const paths = writeFileSyncSpy.mock.calls.map((c) => c[0]);
-    expect(paths[0]).toContain(
-      path.join("node", "components", "uid1", "index.ts"),
-    );
-    expect(paths[1]).toContain(
-      path.join("node", "components", "uid2", "index.ts"),
-    );
+    expect(paths[0]).toContain(path.join("node", "components", "uid1", "index.ts"));
+    expect(paths[1]).toContain(path.join("node", "components", "uid2", "index.ts"));
   });
 
   it("formatTs output is used and trigger is undefined", async () => {

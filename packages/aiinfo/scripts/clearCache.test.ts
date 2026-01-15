@@ -100,9 +100,7 @@ describe("scripts/clearCache.mts", () => {
     const [arg] = mockLog.mock.calls[0];
     expect(arg.color).toBe("redBright");
     expect(Array.isArray(arg.message)).toBeTruthy();
-    expect(
-      (arg.message as unknown[]).some((m) => String(m).includes("write fail")),
-    ).toBeTruthy();
+    expect((arg.message as unknown[]).some((m) => String(m).includes("write fail"))).toBeTruthy();
     expect(exitSpy).toHaveBeenCalledWith(2);
     exitSpy.mockRestore();
   });

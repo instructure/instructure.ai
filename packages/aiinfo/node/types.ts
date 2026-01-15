@@ -1,7 +1,7 @@
-import type {
-  AiInformationProps,
-  DataPermissionLevelsProps,
-  NutritionFactsProps,
+import  {
+  type AiInformationProps,
+  type DataPermissionLevelsProps,
+  type NutritionFactsProps,
 } from "@instructure/ui-instructure";
 
 interface AiInfoFeatureProps {
@@ -15,21 +15,13 @@ interface AiInfoFeatureProps {
   description: string;
 }
 
-interface AiInfoProps {
-  [uid: string]: AiInfoFeatureProps;
-}
+type AiInfoProps = Record<string, AiInfoFeatureProps>;
 
-interface AiInfoNutritionFactsProps {
-  [uid: string]: NutritionFactsProps;
-}
+type AiInfoNutritionFactsProps = Record<string, NutritionFactsProps>;
 
-interface AiInfoDataPermissionLevelsProps {
-  [uid: string]: DataPermissionLevelsProps;
-}
+type AiInfoDataPermissionLevelsProps = Record<string, DataPermissionLevelsProps>;
 
-interface AiInfoAiInformationProps {
-  [uid: string]: AiInformationProps;
-}
+type AiInfoAiInformationProps = Record<string, AiInformationProps>;
 
 export type {
   AiInfoProps,

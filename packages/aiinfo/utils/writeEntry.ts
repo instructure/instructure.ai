@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
-import type { Entry } from "../types";
+import  { type Entry } from "../types";
 import {
   entryToAIInformation,
   entryToNutritionFacts,
@@ -16,10 +16,7 @@ import {
  *
  * @param entry - The Entry object to serialize and write.
  */
-function omit<T extends object, K extends keyof T>(
-  obj: T,
-  keys: K[],
-): Omit<T, K> {
+function omit<T extends object, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> {
   const clone = { ...obj };
   for (const key of keys) {
     delete clone[key];
@@ -28,13 +25,7 @@ function omit<T extends object, K extends keyof T>(
 }
 
 export async function writeEntry(entry: Entry) {
-  const file = resolve(
-    process.cwd(),
-    "node",
-    "components",
-    entry.uid,
-    "index.ts",
-  );
+  const file = resolve(process.cwd(), "node", "components", entry.uid, "index.ts");
 
   const UID = entry.uid;
   const FEATURE_NAME = entry.feature.name;
@@ -59,11 +50,7 @@ export async function writeEntry(entry: Entry) {
   };
 
   const aiInformationWithConstants = {
-    ...omit(aiInformation, [
-      "dataPermissionLevelsData",
-      "nutritionFactsData",
-      "trigger",
-    ]),
+    ...omit(aiInformation, ["dataPermissionLevelsData", "nutritionFactsData", "trigger"]),
   };
 
   const code = `import type {

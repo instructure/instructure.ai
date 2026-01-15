@@ -1,14 +1,14 @@
 import ansis from "ansis";
-import type { LogObject, LogProps } from "../types";
+import  { type LogObject, type LogProps } from "../types";
 
 const groupHeader = (
-  title: string = "",
+  title = "",
   color: LogObject["color"] = "cyan",
   style: LogObject["style"] = "bold",
 ): string => {
   try {
     const line = "═".repeat(38);
-    let header: string = `╔${line}╗\n║ ${title.padEnd(37)}║\n╚${line}╝`;
+    let header = `╔${line}╗\n║ ${title.padEnd(37)}║\n╚${line}╝`;
     if (color && typeof color === "string" && color in ansis) {
       header = ansis[color](header);
     }
@@ -60,9 +60,7 @@ const Log = (content: LogProps): void => {
       }
     };
     if (start) {
-      console.group(
-        groupHeader(typeof message === "string" ? message : undefined, color),
-      );
+      console.group(groupHeader(typeof message === "string" ? message : undefined, color));
       return;
     }
     if (end) {
@@ -75,11 +73,7 @@ const Log = (content: LogProps): void => {
       }
       return;
     }
-    if (
-      typeof content === "number" ||
-      typeof content === "string" ||
-      Array.isArray(content)
-    ) {
+    if (typeof content === "number" || typeof content === "string" || Array.isArray(content)) {
       if (Array.isArray(content)) {
         content.forEach((msg) => {
           console.log(format(msg));
@@ -90,10 +84,7 @@ const Log = (content: LogProps): void => {
       return;
     }
 
-    const logMethod =
-      typeof console[type] === "function"
-        ? console[type].bind(console)
-        : undefined;
+    const logMethod = typeof console[type] === "function" ? console[type].bind(console) : undefined;
 
     if (Array.isArray(message)) {
       for (const item of message) {

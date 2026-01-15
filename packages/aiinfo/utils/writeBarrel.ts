@@ -27,8 +27,7 @@ const writeBarrel = (opts: Options = {}) => {
   let uids: string[];
   try {
     uids = readdirSync(SRC_DIR).filter(
-      (name) =>
-        isDir(join(SRC_DIR, name)) && hasIndexTsOrTsx(join(SRC_DIR, name)),
+      (name) => isDir(join(SRC_DIR, name)) && hasIndexTsOrTsx(join(SRC_DIR, name)),
     );
   } catch (error) {
     throw new Error(
@@ -48,9 +47,7 @@ const writeBarrel = (opts: Options = {}) => {
     if (opts.skipInvalidIdentifiers) {
       uids = uids.filter((u) => isValidIdentifier(u));
     } else {
-      throw new Error(
-        `These uids are not valid TS identifiers: ${invalid.join(", ")}`,
-      );
+      throw new Error(`These uids are not valid TS identifiers: ${invalid.join(", ")}`);
     }
   }
 
@@ -116,9 +113,7 @@ export default AiInfo;`.trim();
     formatted = formatTs(code, "index.ts");
   } catch (error) {
     throw new Error(
-      `Failed to format TypeScript code: ${
-        error instanceof Error ? error.message : String(error)
-      }`,
+      `Failed to format TypeScript code: ${error instanceof Error ? error.message : String(error)}`,
       { cause: error },
     );
   }

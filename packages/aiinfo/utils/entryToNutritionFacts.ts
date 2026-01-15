@@ -1,5 +1,5 @@
 import { nutritionFactsStrings } from "../strings/index.js";
-import type { AiInfoFeature, Entry, NutritionFactsStrings } from "../types.js";
+import  { type AiInfoFeature, type Entry, type NutritionFactsStrings } from "../types.js";
 
 const setData = (
   data: NutritionFactsStrings["data"],
@@ -56,9 +56,7 @@ const setData = (
   }
 };
 
-const entryToNutritionFacts = (
-  entry: Entry,
-): AiInfoFeature["nutritionFacts"] => {
+const entryToNutritionFacts = (entry: Entry): AiInfoFeature["nutritionFacts"] => {
   try {
     const { en: s } = nutritionFactsStrings as { en: NutritionFactsStrings };
     const { feature } = entry;

@@ -19,9 +19,7 @@ describe("aiInformation strings", () => {
     const nutrition = nutritionFactsStrings.en;
     expect(ai.data.permissionLevelText).toBe("Permission Level:");
     expect(ai.data.permissionLevelsModalTriggerText).toBe(perm.title);
-    expect(ai.data.modelNameText).toBe(
-      nutrition.data[0].segmentData[0].segmentTitle,
-    );
+    expect(ai.data.modelNameText).toBe(nutrition.data[0].segmentData[0].segmentTitle);
     expect(ai.data.nutritionFactsModalTriggerText).toBe(nutrition.title);
   });
 

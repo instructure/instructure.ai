@@ -1,9 +1,9 @@
-import type {
-  AiInformationProps,
-  DataPermissionLevelsProps,
-  NutritionFactsProps,
+import  {
+  type AiInformationProps,
+  type DataPermissionLevelsProps,
+  type NutritionFactsProps,
 } from "@instructure/ui-instructure";
-import type { AiInfoFeatureProps } from "../../types";
+import  { type AiInfoFeatureProps } from "../../types";
 const FEATURE_NAME = "Grading Assistance";
 const UID = "canvasgradingassistance";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
@@ -154,8 +154,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelsModalTriggerText: "Data Permission Levels",
       permissionLevelText: "Permission Level:",
+      permissionLevelsModalTriggerText: "Data Permission Levels",
     },
   ],
   dataPermissionLevelsCloseButtonText: "Close",

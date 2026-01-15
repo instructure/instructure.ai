@@ -1,9 +1,9 @@
-import type {
-  AiInformationProps,
-  DataPermissionLevelsProps,
-  NutritionFactsProps,
+import  {
+  type AiInformationProps,
+  type DataPermissionLevelsProps,
+  type NutritionFactsProps,
 } from "@instructure/ui-instructure";
-import type { AiInfoFeatureProps } from "../../types";
+import  { type AiInfoFeatureProps } from "../../types";
 const FEATURE_NAME = "Suggestions for Quick Reassess";
 const UID = "quickreassess";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
