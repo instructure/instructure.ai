@@ -15,18 +15,10 @@ interface AiInfoFeatureProps {
   name: string;
   description: string;
 }
-interface AiInfoProps {
-  [uid: string]: AiInfoFeatureProps;
-}
-interface AiInfoNutritionFactsProps {
-  [uid: string]: NutritionFactsProps;
-}
-interface AiInfoDataPermissionLevelsProps {
-  [uid: string]: DataPermissionLevelsProps;
-}
-interface AiInfoAiInformationProps {
-  [uid: string]: AiInformationProps;
-}
+type AiInfoProps = Record<string, AiInfoFeatureProps>;
+type AiInfoNutritionFactsProps = Record<string, NutritionFactsProps>;
+type AiInfoDataPermissionLevelsProps = Record<string, DataPermissionLevelsProps>;
+type AiInfoAiInformationProps = Record<string, AiInformationProps>;
 //#endregion
 //#region node/components/aiexperiences/index.d.ts
 declare const aiexperiences: AiInfoFeatureProps;
