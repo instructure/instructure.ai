@@ -18,8 +18,8 @@ const setData = (
         permissionLevel: `LEVEL ${entry.permissions ?? "Unknown"}`,
         permissionLevelText: data.permissionLevelText ?? "Error",
         permissionLevelsModalTriggerText: data.permissionLevelsModalTriggerText ?? "Error",
-        privacyNoticeText: data.privacyNoticeText,
-        privacyNoticeUrl: data.privacyNoticeUrl,
+        privacyNoticeText: entry.privacyNoticeText ?? "",
+        privacyNoticeUrl: entry.privacyNoticeUrl ?? "",
       },
     ];
   } catch (error) {
