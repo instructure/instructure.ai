@@ -1,5 +1,5 @@
+import { type AiInfoFeature, type AiInformationStrings, type Entry } from "../types";
 import { aiInformationStrings, permissionLevelsStrings } from "../strings";
-import type { AiInfoFeature, AiInformationStrings, Entry } from "../types";
 import { entryToNutritionFacts, entryToPermissionLevels } from "./";
 
 const setData = (
@@ -10,17 +10,16 @@ const setData = (
     return [
       {
         description:
-          permissionLevelsStrings.en.data[Number(entry.permissions) - 1]
-            ?.description ?? "Unknown",
+          permissionLevelsStrings.en.data[Number(entry.permissions) - 1]?.description ?? "Unknown",
         featureName: entry.feature?.name ?? "Unknown",
         modelName: entry.model?.name ?? "Unknown",
         modelNameText: data.modelNameText ?? "Error",
-        nutritionFactsModalTriggerText:
-          data.nutritionFactsModalTriggerText ?? "Error",
+        nutritionFactsModalTriggerText: data.nutritionFactsModalTriggerText ?? "Error",
         permissionLevel: `LEVEL ${entry.permissions ?? "Unknown"}`,
         permissionLevelText: data.permissionLevelText ?? "Error",
-        permissionLevelsModalTriggerText:
-          data.permissionLevelsModalTriggerText ?? "Error",
+        permissionLevelsModalTriggerText: data.permissionLevelsModalTriggerText ?? "Error",
+        privacyNoticeText: data.privacyNoticeText ?? undefined,
+        privacyNoticeUrl: data.privacyNoticeUrl ?? undefined,
       },
     ];
   } catch (error) {
