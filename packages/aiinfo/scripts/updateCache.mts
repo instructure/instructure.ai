@@ -77,7 +77,7 @@ const updateCache = async (data: CSVFetchResult): Promise<void> => {
             typeof e[0] === "string" &&
             e[0].toLowerCase() === EntryObj.uid.toLowerCase(),
         );
-        if (oldEntryArr?.length > 0) {
+        if (oldEntryArr && oldEntryArr.length > 0) {
           oldEntryObj = entryToObj(oldEntryArr);
         }
 
