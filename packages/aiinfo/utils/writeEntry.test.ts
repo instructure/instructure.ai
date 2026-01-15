@@ -42,6 +42,8 @@ function makeEntry(uid: string, featureName = "FeatureName", revision = "rev-1")
       settings: "Per-course",
     },
     permissions: "1",
+    privacyNoticeText: "This is the privacy notice text.",
+    privacyNoticeUrl: "https://www.example.com/privacy-notice",
     revision,
     uid,
   };

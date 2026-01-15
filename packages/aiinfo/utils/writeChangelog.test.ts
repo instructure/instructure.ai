@@ -65,6 +65,8 @@ function makeChangedEntry(
       settings: "",
     },
     permissions: "1",
+    privacyNoticeText: "",
+    privacyNoticeUrl: "",
     revision: "",
     uid,
   };
