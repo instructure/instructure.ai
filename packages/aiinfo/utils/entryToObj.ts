@@ -1,11 +1,11 @@
-// oxc-ignore-all assist/source/useSortedKeys: Sane ordering for CSV columns
+// Oxc-ignore-all assist/source/useSortedKeys: Sane ordering for CSV columns
 
-import type { CSV, Entry } from "../types";
+import { type CSV, type Entry } from "../types";
 
 const entryToObj = (entry: CSV[number]): Entry => {
-  if (entry.length !== 24) {
+  if (entry.length !== 26) {
     throw new Error(
-      `Invalid entry length: expected 24, got ${entry.length}. Entry: ${JSON.stringify(entry)}`,
+      `Invalid entry length: expected 26, got ${entry.length}. Entry: ${JSON.stringify(entry)}`,
     );
   }
   const obj: Entry = {
@@ -23,6 +23,8 @@ const entryToObj = (entry: CSV[number]): Entry => {
       name: entry[2],
     },
     group: entry[22],
+    linkTitle: entry[25],
+    linkURL: entry[24],
     model: {
       data: entry[7],
       dataDescription: entry[8],
@@ -38,6 +40,7 @@ const entryToObj = (entry: CSV[number]): Entry => {
       risks: entry[20],
       settings: entry[16],
     },
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion
     permissions: entry[23] as Entry["permissions"],
     revision: entry[1],
     uid: entry[0].toLowerCase(),
