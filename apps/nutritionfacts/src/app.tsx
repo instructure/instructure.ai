@@ -1,9 +1,9 @@
 import "./app.css";
 import { Flex, InlineSVG, Link, Text, View } from "@instructure/ui";
 import AiInfo from "@instructure.ai/aiinfo";
-import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
+import { type AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { useEffect, useState } from "react";
-import type { FC } from "react";
+import { type FC } from "react";
 import { DefaultLayout, Logo, LogoDark, colors, copyright, disclaimer } from "./assets";
 import { EmbedControl, LinkControl } from "./components/export";
 import { NutritionFactsForm, getLayoutFromParams } from "./components/layout";
@@ -31,7 +31,7 @@ const App: FC = () => {
 
   useEffect(() => {
     if (id && id.toLowerCase() in AiInfo) {
-      setProduct(AiInfo[id.toLowerCase() as keyof typeof AiInfo]);
+      setProduct(AiInfo[id.toLowerCase()]);
     }
   }, [id]);
 

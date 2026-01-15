@@ -1,5 +1,5 @@
 import { IconButton, Tooltip } from "@instructure/ui";
-import type { SVGIconProps } from "@instructure/ui";
+import { type SVGIconProps } from "@instructure/ui";
 
 interface ControlButtonProps {
   label: string;

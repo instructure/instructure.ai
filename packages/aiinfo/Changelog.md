@@ -1,217 +1,294 @@
 # Changelog
+
 ## 2026-01-15T16:20:16.119Z
+
 ### CSV
+
 #### SHA
+
 ```diff
 efe50b60419bf433e14b99ce3063c634256ec55219c99a594fbd0dff851a31fa
 ```
+
 ### canvasinboxtranslation
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""
 ```
 
 ### canvascoursetranslation
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""
 ```
 
 ### igniteagent
+
 #### linkTitle
+
 ```diff
 - undefined
 + "AI Privacy Policy"
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + "https://www.instructure.com/policies/artificial-intelligence-privacy"
 ```
+
 #### model.description
+
 ```diff
 - "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs)."
 + "Anthropic Claude models are provided via Instructure's in-house AI Platform."
 ```
+
 #### outputs.guardrails
+
 ```diff
 - "Access to the agent is limited to users with an Admin- or Teacher-based role. Data access and functions are scoped to the permissions available to the chat user."
 + "Access to the Agent is limited to users with an Admin- or Teacher-based role. Data access and functions are scoped to the permissions available to the chat user."
 ```
+
 #### outputs.humanDescription
+
 ```diff
 - "The agent only takes action based on human requests, and all write actions must be confirmed by the user."
 + "The Agent only takes action based on human requests, and all write actions must be confirmed by the user."
 ```
+
 #### revision
+
 ```diff
 - "2025.09.10"
 + "2026.01.14"
 ```
 
 ### rubricgenerator
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""
 ```
 
 ### canvasgradingassistance
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""
 ```
 
 ### discussioninsights
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""
 ```
 
 ### smartsearch
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""
 ```
 
 ### askyourdata
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""
 ```
 
 ### canvasdiscussionsummaries
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""
 ```
 
 ### itemauthoringassistance
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""
 ```
 
 ### assessmentauthoringassistance
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""
 ```
 
 ### quickreassess
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""
 ```
 
 ### conversionalignment
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""
 ```
 
 ### bcealttext
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""
 ```
 
 ### aiexperiences
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""
 ```
 
 ### portfolios
+
 #### linkTitle
+
 ```diff
 - undefined
 + ""
 ```
+
 #### linkURL
+
 ```diff
 - undefined
 + ""

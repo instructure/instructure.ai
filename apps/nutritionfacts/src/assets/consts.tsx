@@ -1,9 +1,9 @@
 import { Link } from "@instructure/ui";
-import type { LinkProps } from "@instructure/ui";
-import type { AiInfoFeatureProps } from "@instructure.ai/aiinfo";
+import { type LinkProps } from "@instructure/ui";
+import { type AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { colors } from "./colors";
 import { CanvasBug, IgniteBug, InstructureBug, MasteryBug, ParchmentBug } from "./logos";
-import type { SVGWrapperProps } from "./";
+import { type SVGWrapperProps } from "./";
 
 const baseUrl =
   typeof window !== "undefined"
