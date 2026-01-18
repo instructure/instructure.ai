@@ -30,5 +30,5 @@
     "type": "git",
     "url": "https://github.com/instructure/instructure.ai",
     "directory": "packages/<<cliname>>"
-  },
+  }
 }
