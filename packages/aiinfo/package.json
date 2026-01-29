@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@instructure.ai/shared-configs": "workspace:^",
-    "@instructure/ui-instructure": "^10.29.0",
+    "@instructure/ui-instructure": "^11.4.0",
     "@types/papaparse": "^5.5.2",
     "ansis": "^4.2.0",
     "papaparse": "^5.5.3",
