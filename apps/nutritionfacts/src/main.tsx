@@ -23,7 +23,7 @@ const mountApp = () => {
   );
 };
 
-if (typeof window !== "undefined" && import.meta.env?.MODE !== "test") {
+if (typeof globalThis.window !== "undefined" && import.meta.env?.MODE !== "test") {
   mountApp();
 }
 

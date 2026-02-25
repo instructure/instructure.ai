@@ -18,10 +18,7 @@ A TypeScript package providing [IgniteAI](https://www.instructure.com/igniteai) 
 
 ```jsx
 //V2
-<AiInformation
-  {...aiInformation}
-  trigger={<Button>AI Information</Button>}
-/>
+<AiInformation {...aiInformation} trigger={<Button>AI Information</Button>} />
 ```
 
 If you were not using @instructure/ui's AiInformation component, then there are no changes needed. This does not effect NutritionFacts or DataPermissionLevels
@@ -93,26 +90,26 @@ Helper types are included for managing or passing imports from `AiInfo`
 
 ```typescript
 type AiInfoFeatureProps = {
-	nutritionFacts: NutritionFactsProps; // INSTUI type definition
-	dataPermissionLevels: DataPermissionLevelsProps; // INSTUI type definition
-	aiInformation: AiInformationProps; // INSTUI type definition
-	uid: string;
-	revision: string;
-	group: string;
-	name: string;
-	description: string;
+  nutritionFacts: NutritionFactsProps; // INSTUI type definition
+  dataPermissionLevels: DataPermissionLevelsProps; // INSTUI type definition
+  aiInformation: AiInformationProps; // INSTUI type definition
+  uid: string;
+  revision: string;
+  group: string;
+  name: string;
+  description: string;
 };
 
 type AiInfoNutritionFactsProps = {
-	[uid: string]: NutritionFactsProps;  // INSTUI type definition
+  [uid: string]: NutritionFactsProps; // INSTUI type definition
 };
 
 type AiInfoDataPermissionLevelsProps = {
-	[uid: string]: DataPermissionLevelsProps;  // INSTUI type definition
+  [uid: string]: DataPermissionLevelsProps; // INSTUI type definition
 };
 
 type AiInfoAiInformationProps = {
-	[uid: string]: AiInformationProps;  // INSTUI type definition
+  [uid: string]: AiInformationProps; // INSTUI type definition
 };
 ```
 
@@ -149,16 +146,12 @@ const React = require("react");
 const { DataPermissionLevels, InstUISettingsProvider } = require("@instructure/ui");
 const { smartsearch } = require("@instructure.ai/aiinfo");
 
-const App = () => (
-	React.createElement(
-		InstUISettingsProvider,
-		null,
-		React.createElement(
-			DataPermissionLevels,
-			{ ...smartsearch.dataPermissionLevels }
-		)
-	)
-);
+const App = () =>
+  React.createElement(
+    InstUISettingsProvider,
+    null,
+    React.createElement(DataPermissionLevels, { ...smartsearch.dataPermissionLevels }),
+  );
 
 module.exports = App;
 ```

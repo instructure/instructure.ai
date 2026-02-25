@@ -4,8 +4,8 @@ import {
   type NutritionFactsProps,
 } from "@instructure/ui-instructure";
 import { type AiInfoFeatureProps } from "../../types";
-const FEATURE_NAME = "Block Content Editor Alt Text Generator";
-const UID = "bcealttext";
+const FEATURE_NAME = "Learner Assist";
+const UID = "careerassistant";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
   {
     description:
@@ -43,9 +43,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
-        value: "Haiku 3",
+        value: "Claude 3.5 Haiku, Cohere multi-language v3",
         valueDescription:
-          "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+          "Anthropic Claude and Cohere models are provided via Instructure's in-house AI Platform.",
       },
       {
         description:
@@ -56,7 +56,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
-        value: "Content Editor Images.",
+        value: "",
       },
     ],
   },
@@ -66,14 +66,13 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "How long the model stores customer data.",
         segmentTitle: "Data Retention",
-        value: "Model responses are stored for debugging purposes.",
+        value: "",
       },
       {
         description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Logs data",
-        valueDescription:
-          "Request, response, and feedback data is logged to assist in troubleshooting.",
+        valueDescription: "Chat logs are retained for 30 days for troubleshooting and debugging",
       },
       {
         description: "The locations where the AI model is officially available and supported.",
@@ -101,22 +100,24 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
-        valueDescription: "User initiated, User must confirm output.",
+        valueDescription: "",
       },
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
-        value: "",
+        value: "Content is restricted to the course content.",
       },
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
-        value: "Alt text might not always be accurate. ",
+        value:
+          "AI Generated content may contain mistakes or inaccurate information and should always be verified",
       },
       {
         description: "The specific results the AI model is meant to achieve.",
         segmentTitle: "Intended Outcomes",
-        value: "An accessible Alt Text description of the image is generated.",
+        value:
+          "The intended outcome is to provide quicker and more efficient feedback to learners. ",
       },
     ],
   },
@@ -145,8 +146,8 @@ const aiInformation: AiInformationProps = {
     {
       description:
         "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-      featureName: "Block Content Editor Alt Text Generator",
-      modelName: "Haiku 3",
+      featureName: "Learner Assist",
+      modelName: "Claude 3.5 Haiku, Cohere multi-language v3",
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
@@ -158,7 +159,7 @@ const aiInformation: AiInformationProps = {
   ],
   dataPermissionLevelsCloseButtonText: "Close",
   dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeature: "Block Content Editor Alt Text Generator",
+  dataPermissionLevelsCurrentFeature: "Learner Assist",
   dataPermissionLevelsCurrentFeatureText: "Current Feature:",
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
   dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -166,21 +167,22 @@ const aiInformation: AiInformationProps = {
   nutritionFactsCloseButtonText: "Close",
   nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
   nutritionFactsData: NUTRITION_FACTS_DATA,
-  nutritionFactsFeatureName: "Block Content Editor Alt Text Generator",
+  nutritionFactsFeatureName: "Learner Assist",
   nutritionFactsModalLabel: "This is a modal for AI facts",
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: undefined,
 };
-const bcealttext: AiInfoFeatureProps = {
+const careerassistant: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description: "",
-  group: "Canvas",
+  description:
+    "The Learner Assist provides immediate responses and suggested prompts that can aid learning, such as practice quizzes, flashcards, summaries, and key takeaways. ",
+  group: "Canvas Career",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2025.10.01",
+  revision: "2026.02.25",
   uid: UID,
 };
-export { bcealttext, nutritionFacts, dataPermissionLevels, aiInformation };
-export default bcealttext;
+export { careerassistant, nutritionFacts, dataPermissionLevels, aiInformation };
+export default careerassistant;

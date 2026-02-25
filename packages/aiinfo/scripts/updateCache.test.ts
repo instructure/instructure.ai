@@ -48,7 +48,7 @@ beforeEach(() => {
 // Helper to force direct invocation semantics for side‑effect cases
 function simulateDirectInvocation() {
   // Absolute path the module will compare against
-  const modulePath = new URL("./updateCache.mts", import.meta.url).pathname;
+  const modulePath = new URL("updateCache.mts", import.meta.url).pathname;
   process.argv[1] = modulePath;
 }
 

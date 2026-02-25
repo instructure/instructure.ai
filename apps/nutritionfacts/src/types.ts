@@ -4,11 +4,8 @@
 import { type Dispatch, type SetStateAction } from "react";
 import { type NutritionFactsProps } from "@instructure/ui";
 
-type StateProp<Type, Key extends string> = {
-  [key in Key]: Type;
-} & {
-  [key in `set${Capitalize<Key>}`]: Dispatch<SetStateAction<Type>>;
-};
+type StateProp<Type, Key extends string> = Record<Key, Type> &
+  Record<`set${Capitalize<Key>}`, Dispatch<SetStateAction<Type>>>;
 
 interface PageLayout {
   disclaimer: boolean;
