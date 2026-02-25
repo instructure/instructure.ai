@@ -1,11 +1,13 @@
 import { aiexperiences } from "./components/aiexperiences";
 import { askyourdata } from "./components/askyourdata";
 import { assessmentauthoringassistance } from "./components/assessmentauthoringassistance";
-import { bcealttext } from "./components/bcealttext";
+import { canvasa11ycheckeralttextgenerator } from "./components/canvasa11ycheckeralttextgenerator";
+import { canvasa11ycheckertablecaptions } from "./components/canvasa11ycheckertablecaptions";
 import { canvascoursetranslation } from "./components/canvascoursetranslation";
 import { canvasdiscussionsummaries } from "./components/canvasdiscussionsummaries";
 import { canvasgradingassistance } from "./components/canvasgradingassistance";
 import { canvasinboxtranslation } from "./components/canvasinboxtranslation";
+import { careerassistant } from "./components/careerassistant";
 import { conversionalignment } from "./components/conversionalignment";
 import { discussioninsights } from "./components/discussioninsights";
 import { igniteagent } from "./components/igniteagent";
@@ -38,11 +40,13 @@ const AiInfo: AiInfoProps = {
   aiexperiences,
   askyourdata,
   assessmentauthoringassistance,
-  bcealttext,
+  canvasa11ycheckeralttextgenerator,
+  canvasa11ycheckertablecaptions,
   canvascoursetranslation,
   canvasdiscussionsummaries,
   canvasgradingassistance,
   canvasinboxtranslation,
+  careerassistant,
   conversionalignment,
   discussioninsights,
   igniteagent,
@@ -63,11 +67,13 @@ export {
   aiexperiences,
   askyourdata,
   assessmentauthoringassistance,
-  bcealttext,
+  canvasa11ycheckeralttextgenerator,
+  canvasa11ycheckertablecaptions,
   canvascoursetranslation,
   canvasdiscussionsummaries,
   canvasgradingassistance,
   canvasinboxtranslation,
+  careerassistant,
   conversionalignment,
   discussioninsights,
   igniteagent,

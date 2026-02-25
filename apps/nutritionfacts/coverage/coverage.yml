@@ -1,10 +1,10 @@
 coverage:
   totals:
-    statements: 7.38%
+    statements: 7.9%
     branches: 2.99%
     functions: 8.33%
-    lines: 7.64%
-    total: 6.59%
+    lines: 8.18%
+    total: 6.85%
   src:
     totals:
       statements: 30.63%
