@@ -9,7 +9,7 @@ import { EmbedControl, LinkControl } from "./components/export";
 import { NutritionFactsForm, getLayoutFromParams } from "./components/layout";
 
 const App: FC = () => {
-  const searchParams = new URLSearchParams(window.location.search);
+  const searchParams = new URLSearchParams(globalThis.location.search);
   const id = searchParams.get("id")?.toLowerCase();
 
   const [product, setProduct] = useState<AiInfoFeatureProps | undefined>(undefined);
@@ -41,11 +41,11 @@ const App: FC = () => {
   const [isInIframe, setIsInIframe] = useState(false);
 
   useEffect(() => {
-    setIsInIframe(window.self !== window.top);
+    setIsInIframe(globalThis.self !== window.top);
   }, []);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const mediaQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
     setIsDark(mediaQuery.matches);
 
     const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
