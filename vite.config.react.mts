@@ -5,14 +5,6 @@ import react from "@vitejs/plugin-react";
 export default mergeConfig(
   baseConfig,
   defineConfig({
-    build: {
-      chunkSizeWarningLimit: 1000,
-      rolldownOptions: {
-        output: {
-          codeSplitting: true,
-        },
-      },
-    },
     plugins: [
       react({
         babel: {

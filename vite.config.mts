@@ -17,8 +17,14 @@ if (!isSite) {
 export default defineConfig({
   base: basePath,
   build: {
+    chunkSizeWarningLimit: 1000,
     cssMinify: "lightningcss",
     outDir,
+    rolldownOptions: {
+      output: {
+        codeSplitting: true,
+      },
+    },
     sourcemap: true,
     target: "esnext",
   },
