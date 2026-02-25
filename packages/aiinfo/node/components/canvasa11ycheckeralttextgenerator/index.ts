@@ -113,7 +113,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
         value:
-          "While the model can fairly accurately desicribe what's on a picture, it might not calways convey what the picture is meant to convey in the given context. ",
+          "While the model can fairly accurately describe what's on a picture, it might not always convey what the picture is meant to convey in the given context. ",
       },
       {
         description: "The specific results the AI model is meant to achieve.",
@@ -152,8 +152,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
       privacyNoticeText: "",
       privacyNoticeUrl: "",
     },
@@ -182,7 +182,7 @@ const canvasa11ycheckeralttextgenerator: AiInfoFeatureProps = {
   group: "Canvas",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2026.02.19",
+  revision: "2026.02.25",
   uid: UID,
 };
 export { canvasa11ycheckeralttextgenerator, nutritionFacts, dataPermissionLevels, aiInformation };
