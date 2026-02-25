@@ -1,6 +1,6 @@
 {
   "name": "@instructure.ai/aiinfo",
-  "version": "2.10.0",
+  "version": "2.10.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure.ai",
@@ -37,7 +37,8 @@
   },
   "devDependencies": {
     "@instructure.ai/shared-configs": "workspace:^",
-    "@instructure/ui-instructure": "^10.29.0",
+    "@instructure/ui": "11.6.0",
+    "@instructure/ui-instructure": "^10.30.0",
     "@types/papaparse": "^5.5.2",
     "ansis": "^4.2.0",
     "papaparse": "^5.5.3",
