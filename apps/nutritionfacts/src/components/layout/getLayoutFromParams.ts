@@ -1,7 +1,7 @@
 import { type PageLayout } from "../../types";
 
 export function getLayoutFromParams(defaultLayout: PageLayout) {
-  const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(globalThis.location.search);
   const newLayout = { ...defaultLayout };
 
   const keys: (keyof PageLayout)[] = ["copyright", "disclaimer", "revision", "permissions"];

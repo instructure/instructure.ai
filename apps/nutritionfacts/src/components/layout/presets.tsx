@@ -70,9 +70,9 @@ const Presets = ({ setProduct, product }: PresetsProps) => {
     }
     if (data.id && products[data.id]) {
       setProduct(products[data.id]);
-      const url = new URL(window.location.href);
+      const url = new URL(globalThis.location.href);
       url.searchParams.set("id", data.id);
-      window.history.replaceState({}, "", url.toString());
+      globalThis.history.replaceState({}, "", url.toString());
     }
   };
 

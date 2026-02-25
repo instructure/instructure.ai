@@ -4,8 +4,8 @@ import {
   type NutritionFactsProps,
 } from "@instructure/ui-instructure";
 import { type AiInfoFeatureProps } from "../../types";
-const FEATURE_NAME = "Grading Assistance";
-const UID = "canvasgradingassistance";
+const FEATURE_NAME = "Course Accessibility Checker: Table caption generation";
+const UID = "canvasa11ycheckertablecaptions";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
   {
     description:
@@ -56,7 +56,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
-        value: "Assignment information, rubric, and student submissions.",
+        value:
+          "Table to be generated caption for, along with some context (surrounding content) from the resource it's in.",
       },
     ],
   },
@@ -66,14 +67,13 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "How long the model stores customer data.",
         segmentTitle: "Data Retention",
-        value: "Transactional data is retained for the life of the request.",
+        value: "Data is not stored or reused by the model.",
       },
       {
         description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Logs data",
-        valueDescription:
-          "Complete response from the LLM is retained in the Canvas database for auditing purposes.",
+        valueDescription: "Usage data is logged to improve the product.",
       },
       {
         description: "The locations where the AI model is officially available and supported.",
@@ -86,7 +86,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "PII",
         value: "Not Exposed",
         valueDescription:
-          "No PII is intentionally sent to the model. If there is incidental PII in any of the shared data, such as in the submission body, it will be sent to the model.",
+          "PII in source material may be sent to the model if included in the analyzed content, but no PII is intentionally sent to the model.",
       },
     ],
   },
@@ -103,24 +103,22 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
-          "Grade suggestion is displayed and selected by default, but the instructor must make the final decision to edit or accept the suggestions.",
+          "Users can edit the generated table caption, and they have the option to save it or not.",
       },
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
-        value: "The Claude Haiku model has inherent guardrails built in.",
+        value: "",
       },
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
-        value:
-          "Grading Assistance does not flag unsafe content, verify facts or sources, enforce formatting or quantitative requirements, or reliably grade objective or single-answer questions. Results are based only on rubric criteria.",
+        value: "It may not always accurately capture the point of the table.",
       },
       {
         description: "The specific results the AI model is meant to achieve.",
         segmentTitle: "Intended Outcomes",
-        value:
-          "Reduced bias in grading, fairness, and consistency. Grading efficiency, saving teachers time.",
+        value: "Reduce time spent on writing table captions. ",
       },
     ],
   },
@@ -149,7 +147,7 @@ const aiInformation: AiInformationProps = {
     {
       description:
         "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-      featureName: "Grading Assistance",
+      featureName: "Course Accessibility Checker: Table caption generation",
       modelName: "Haiku 3",
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
@@ -162,7 +160,7 @@ const aiInformation: AiInformationProps = {
   ],
   dataPermissionLevelsCloseButtonText: "Close",
   dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeature: "Grading Assistance",
+  dataPermissionLevelsCurrentFeature: "Course Accessibility Checker: Table caption generation",
   dataPermissionLevelsCurrentFeatureText: "Current Feature:",
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
   dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -170,22 +168,22 @@ const aiInformation: AiInformationProps = {
   nutritionFactsCloseButtonText: "Close",
   nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
   nutritionFactsData: NUTRITION_FACTS_DATA,
-  nutritionFactsFeatureName: "Grading Assistance",
+  nutritionFactsFeatureName: "Course Accessibility Checker: Table caption generation",
   nutritionFactsModalLabel: "This is a modal for AI facts",
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: undefined,
 };
-const canvasgradingassistance: AiInfoFeatureProps = {
+const canvasa11ycheckertablecaptions: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
   description:
-    "AI powered automatic grading and feedback suggestions to enable more consistent, fair, and efficient grading workflows.",
+    "A button to genereate table captions (based on the contents and immediate context of the table) for tables that don't have one.",
   group: "Canvas",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2025.10.22",
+  revision: "2026.02.19",
   uid: UID,
 };
-export { canvasgradingassistance, nutritionFacts, dataPermissionLevels, aiInformation };
-export default canvasgradingassistance;
+export { canvasa11ycheckertablecaptions, nutritionFacts, dataPermissionLevels, aiInformation };
+export default canvasa11ycheckertablecaptions;

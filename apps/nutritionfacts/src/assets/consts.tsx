@@ -6,8 +6,8 @@ import { CanvasBug, IgniteBug, InstructureBug, MasteryBug, ParchmentBug } from "
 import { type SVGWrapperProps } from "./";
 
 const baseUrl =
-  typeof window !== "undefined"
-    ? `${window.location.origin}${window.location.pathname}`
+  typeof globalThis.window !== "undefined"
+    ? `${globalThis.location.origin}${globalThis.location.pathname}`
     : "https://instructure.ai/nutritionfacts";
 
 const brands: Record<

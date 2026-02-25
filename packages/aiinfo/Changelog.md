@@ -1,5 +1,42 @@
 # Changelog
 
+## 2026-02-25T19:27:11.739Z
+
+### CSV
+
+#### SHA
+
+```diff
+7bde9b66ebce018ce8279def8dd1cf998ad0ecdd4c00cd4f3600700beb696f39
+```
+
+### canvasgradingassistance
+
+#### compliance.retention
+
+```diff
+- "Transactional data is retained for the life of the requestCanvas"
++ "Transactional data is retained for the life of the request."
+```
+
+### canvasa11ycheckertablecaptions
+
+#### feature.name
+
+```diff
+- "Table caption generation"
++ "Course Accessibility Checker: Table caption generation"
+```
+
+### canvasa11ycheckeralttextgenerator
+
+#### feature.name
+
+```diff
+- "Alt text generation"
++ "Course Accessibility Checker: Image alt text generation"
+```
+
 ## 2026-01-15T16:20:16.119Z
 
 ### CSV
