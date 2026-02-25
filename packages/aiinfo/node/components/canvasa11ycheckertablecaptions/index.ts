@@ -178,11 +178,11 @@ const canvasa11ycheckertablecaptions: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
   description:
-    "A button to genereate table captions (based on the contents and immediate context of the table) for tables that don't have one.",
+    "A button to generate table captions (based on the contents and immediate context of the table) for tables that don't have one.",
   group: "Canvas",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2026.02.19",
+  revision: "2026.02.25",
   uid: UID,
 };
 export { canvasa11ycheckertablecaptions, nutritionFacts, dataPermissionLevels, aiInformation };

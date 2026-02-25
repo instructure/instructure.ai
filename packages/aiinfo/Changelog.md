@@ -1,5 +1,47 @@
 # Changelog
 
+## 2026-02-25T21:52:22.088Z
+
+### CSV
+
+#### SHA
+
+```diff
+8e7bcd63477a5917ac64ce5bf6cd2e3ae10fa087955aa49bceda3fa6071651a2
+```
+
+### canvasa11ycheckertablecaptions
+
+#### feature.description
+
+```diff
+- "A button to genereate table captions (based on the contents and immediate context of the table) for tables that don't have one."
++ "A button to generate table captions (based on the contents and immediate context of the table) for tables that don't have one."
+```
+
+#### revision
+
+```diff
+- "2026.02.19"
++ "2026.02.25"
+```
+
+### canvasa11ycheckeralttextgenerator
+
+#### outputs.risks
+
+```diff
+- "While the model can fairly accurately desicribe what's on a picture, it might not calways convey what the picture is meant to convey in the given context. "
++ "While the model can fairly accurately describe what's on a picture, it might not always convey what the picture is meant to convey in the given context. "
+```
+
+#### revision
+
+```diff
+- "2026.02.19"
++ "2026.02.25"
+```
+
 ## 2026-02-25T19:27:11.739Z
 
 ### CSV
