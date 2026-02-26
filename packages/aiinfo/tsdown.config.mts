@@ -10,6 +10,9 @@ export default defineConfig({
   format: ["esm", "cjs"],
   minify: true,
   outDir: "src",
+  outputOptions: {
+    exports: "named",
+  },
   target: "node20",
   treeshake: {
     moduleSideEffects: false,
