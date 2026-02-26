@@ -96,8 +96,8 @@ export type * from "./types";
 export default AiInfo;`.trim();
 
   const code = [
-    imports,
     typesImport,
+    imports,
     pluckHelper,
     AiInfo,
     nutritionFacts,
