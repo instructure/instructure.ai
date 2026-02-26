@@ -14,5 +14,8 @@ export default defineConfig({
     exports: "named",
   },
   target: "node20",
+  treeshake: {
+    moduleSideEffects: false,
+  },
   tsconfig: "./tsconfig.json",
 });
