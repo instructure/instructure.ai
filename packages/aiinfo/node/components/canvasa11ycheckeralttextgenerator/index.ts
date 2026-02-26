@@ -124,66 +124,72 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
   },
 ];
 const nutritionFacts: NutritionFactsProps = {
-  closeButtonText: "Close",
-  closeIconButtonScreenReaderLabel: "Close",
+  ...{
+    closeButtonText: "Close",
+    closeIconButtonScreenReaderLabel: "Close",
+    featureName: FEATURE_NAME,
+    modalLabel: "This is a modal for AI facts",
+    title: "AI Nutrition Facts",
+    triggerText: "Nutrition Facts",
+  },
   data: NUTRITION_FACTS_DATA,
-  featureName: FEATURE_NAME,
-  modalLabel: "This is a modal for AI facts",
-  title: "AI Nutrition Facts",
-  triggerText: "Nutrition Facts",
 };
 const dataPermissionLevels: DataPermissionLevelsProps = {
-  closeButtonText: "Close",
-  closeIconButtonScreenReaderLabel: "Close dialog",
-  currentFeature: FEATURE_NAME,
-  currentFeatureText: "Current Feature:",
+  ...{
+    closeButtonText: "Close",
+    closeIconButtonScreenReaderLabel: "Close dialog",
+    currentFeature: FEATURE_NAME,
+    currentFeatureText: "Current Feature:",
+    modalLabel: "Data Permission Levels modal",
+    title: "Data Permission Levels",
+    triggerText: "Data Permission Levels",
+  },
   data: DATA_PERMISSION_LEVELS,
-  modalLabel: "Data Permission Levels modal",
-  title: "Data Permission Levels",
-  triggerText: "Data Permission Levels",
 };
 const aiInformation: AiInformationProps = {
-  data: [
-    {
-      description:
-        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-      featureName: "Course Accessibility Checker: Image alt text generation",
-      modelName: "Haiku 3",
-      modelNameText: "Base Model",
-      nutritionFactsModalTriggerText: "AI Nutrition Facts",
-      permissionLevel: "LEVEL 2",
-      permissionLevelsModalTriggerText: "Data Permission Levels",
-      permissionLevelText: "Permission Level:",
-      privacyNoticeText: "",
-      privacyNoticeUrl: "",
-    },
-  ],
-  dataPermissionLevelsCloseButtonText: "Close",
-  dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeature: "Course Accessibility Checker: Image alt text generation",
-  dataPermissionLevelsCurrentFeatureText: "Current Feature:",
+  ...{
+    data: [
+      {
+        description:
+          "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
+        featureName: "Course Accessibility Checker: Image alt text generation",
+        modelName: "Haiku 3",
+        modelNameText: "Base Model",
+        nutritionFactsModalTriggerText: "AI Nutrition Facts",
+        permissionLevel: "LEVEL 2",
+        permissionLevelsModalTriggerText: "Data Permission Levels",
+        permissionLevelText: "Permission Level:",
+        privacyNoticeText: "",
+        privacyNoticeUrl: "",
+      },
+    ],
+    dataPermissionLevelsCloseButtonText: "Close",
+    dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
+    dataPermissionLevelsCurrentFeature: "Course Accessibility Checker: Image alt text generation",
+    dataPermissionLevelsCurrentFeatureText: "Current Feature:",
+    dataPermissionLevelsModalLabel: "Data Permission Levels modal",
+    dataPermissionLevelsTitle: "Data Permission Levels",
+    nutritionFactsCloseButtonText: "Close",
+    nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
+    nutritionFactsFeatureName: "Course Accessibility Checker: Image alt text generation",
+    nutritionFactsModalLabel: "This is a modal for AI facts",
+    nutritionFactsTitle: "AI Nutrition Facts",
+    title: "Features",
+  },
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-  dataPermissionLevelsModalLabel: "Data Permission Levels modal",
-  dataPermissionLevelsTitle: "Data Permission Levels",
-  nutritionFactsCloseButtonText: "Close",
-  nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
   nutritionFactsData: NUTRITION_FACTS_DATA,
-  nutritionFactsFeatureName: "Course Accessibility Checker: Image alt text generation",
-  nutritionFactsModalLabel: "This is a modal for AI facts",
-  nutritionFactsTitle: "AI Nutrition Facts",
-  title: "Features",
   trigger: undefined,
 };
 const canvasa11ycheckeralttextgenerator: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
-  description:
-    "A button that generates alt text for images that don't have alt text, or there was a problem identified with it (it's too long or it's just the filename.)",
-  group: "Canvas",
-  name: FEATURE_NAME,
   nutritionFacts,
   revision: "2026.02.25",
   uid: UID,
+  group: "Canvas",
+  name: FEATURE_NAME,
+  description:
+    "A button that generates alt text for images that don't have alt text, or there was a problem identified with it (it's too long or it's just the filename.)",
 };
 export { canvasa11ycheckeralttextgenerator, nutritionFacts, dataPermissionLevels, aiInformation };
 export default canvasa11ycheckeralttextgenerator;
