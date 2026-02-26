@@ -1,6 +1,6 @@
 {
   "name": "@instructure.ai/nutritionfacts",
-  "version": "2.0.16",
+  "version": "2.0.18",
   "private": true,
   "repository": {
     "type": "git",
@@ -18,10 +18,10 @@
     "update-cache": "vite-node ./scripts/updateCache.mts"
   },
   "dependencies": {
+    "@instructure/ui": "^11.2.0",
     "@instructure.ai/aiinfo": "workspace:^",
-    "@instructure/ui": "^11.6.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
     "@instructure.ai/shared-configs": "workspace:^"
