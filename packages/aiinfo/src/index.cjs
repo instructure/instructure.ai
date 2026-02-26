@@ -1,8 +1,7 @@
-(Object.defineProperties(exports, {
+Object.defineProperties(exports, {
   __esModule: { value: !0 },
   [Symbol.toStringTag]: { value: `Module` },
-}),
-  require(`@instructure/ui-instructure`));
+});
 const e = `AI Experiences`,
   t = [
     {

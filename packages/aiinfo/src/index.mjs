@@ -1,4 +1,3 @@
-import "@instructure/ui-instructure";
 const e = `AI Experiences`,
   t = [
     {
