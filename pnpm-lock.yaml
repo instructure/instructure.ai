@@ -80,12 +80,12 @@ importers:
 
   apps/nutritionfacts:
     dependencies:
+      '@instructure.ai/aiinfo':
+        specifier: workspace:^
+        version: link:../../packages/aiinfo
       '@instructure/ui':
         specifier: ^11.2.0
         version: 11.6.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@instructure/ui-color-utils':
-        specifier: ^11.2.0
-        version: 11.6.0
       react:
         specifier: ^19.2.3
         version: 19.2.4
