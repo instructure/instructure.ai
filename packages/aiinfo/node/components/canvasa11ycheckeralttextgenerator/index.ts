@@ -1,9 +1,9 @@
 import {
+  type AiInfoFeatureProps,
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
-} from "@instructure/ui-instructure";
-import { type AiInfoFeatureProps } from "../../types";
+} from "../../types";
 const FEATURE_NAME = "Course Accessibility Checker: Image alt text generation";
 const UID = "canvasa11ycheckeralttextgenerator";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
@@ -185,5 +185,4 @@ const canvasa11ycheckeralttextgenerator: AiInfoFeatureProps = {
   revision: "2026.02.25",
   uid: UID,
 };
-export { canvasa11ycheckeralttextgenerator, nutritionFacts, dataPermissionLevels, aiInformation };
 export default canvasa11ycheckeralttextgenerator;
