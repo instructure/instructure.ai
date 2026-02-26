@@ -40,11 +40,23 @@
   },
   "devDependencies": {
     "@instructure.ai/shared-configs": "workspace:^",
-    "@instructure/ui-instructure": "^11.4.0",
+    "@instructure/ui-instructure": "^11.6.0",
     "@types/papaparse": "^5.5.2",
     "ansis": "^4.2.0",
     "papaparse": "^5.5.3",
     "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "@instructure/ui": "^10.29.0 || ^11.4.0",
+    "@instructure/ui-instructure": "^10.29.0 || ^11.4.0"
+  },
+  "peerDependenciesMeta": {
+    "@instructure/ui": {
+      "optional": true
+    },
+    "@instructure/ui-instructure": {
+      "optional": true
+    }
   },
   "engines": {
     "node": ">=20"

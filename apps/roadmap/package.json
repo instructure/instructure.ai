@@ -23,8 +23,8 @@
     "typecheck": "tsgo --noEmit"
   },
   "dependencies": {
-    "@instructure/ui": "^11.4.0",
-    "@instructure/ui-color-utils": "^11.4.0",
+    "@instructure/ui": "^11.6.0",
+    "@instructure/ui-color-utils": "^11.6.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
