@@ -1,8 +1,8 @@
 {
   "devDependencies": {
-    "@instructure/browserslist-config-instui": "^11.6.0",
-    "@testing-library/react": "^16.3.2",
-    "@types/react": "^19.2.14",
+    "@instructure/browserslist-config-instui": "^11.2.0",
+    "@testing-library/react": "^16.3.1",
+    "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@typescript/native-preview": "7.0.0-dev.20260226.1",
     "@vitejs/plugin-react": "^5.1.4",
@@ -31,9 +31,9 @@
       }
     }
   },
-  "version": "3.0.1",
+  "version": "3.0.2",
   "name": "@instructure.ai/shared-configs",
-  "packageManager": "pnpm@10.30.2",
+  "packageManager": "pnpm@10.27.0",
   "private": true,
   "type": "module",
   "scripts": {
