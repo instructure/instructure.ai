@@ -4,8 +4,8 @@ import {
   type NutritionFactsProps,
 } from "@instructure/ui-instructure";
 import { type AiInfoFeatureProps } from "../../types";
-const FEATURE_NAME = "Grading Assistance";
-const UID = "canvasgradingassistance";
+const FEATURE_NAME = "Course Accessibility Checker: Image alt text generation";
+const UID = "canvasa11ycheckeralttextgenerator";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
   {
     description:
@@ -56,7 +56,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
-        value: "Assignment information, rubric, and student submissions.",
+        value: "Images uploaded to Canvas via RCX",
       },
     ],
   },
@@ -66,14 +66,13 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "How long the model stores customer data.",
         segmentTitle: "Data Retention",
-        value: "Transactional data is retained for the life of the request.",
+        value: "Data is not stored or reused by the model.",
       },
       {
         description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Logs data",
-        valueDescription:
-          "Complete response from the LLM is retained in the Canvas database for auditing purposes.",
+        valueDescription: "Usage data is logged to improve the product.",
       },
       {
         description: "The locations where the AI model is officially available and supported.",
@@ -86,7 +85,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "PII",
         value: "Not Exposed",
         valueDescription:
-          "No PII is intentionally sent to the model. If there is incidental PII in any of the shared data, such as in the submission body, it will be sent to the model.",
+          "PII in source material may be sent to the model if included in the analyzed image, but no PII is intentionally sent to the model.",
       },
     ],
   },
@@ -103,24 +102,23 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
-          "Grade suggestion is displayed and selected by default, but the instructor must make the final decision to edit or accept the suggestions.",
+          "Users can edit the generated alt text, and they have the option to save it or not.",
       },
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
-        value: "The Claude Haiku model has inherent guardrails built in.",
+        value: "",
       },
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
         value:
-          "Grading Assistance does not flag unsafe content, verify facts or sources, enforce formatting or quantitative requirements, or reliably grade objective or single-answer questions. Results are based only on rubric criteria.",
+          "While the model can fairly accurately describe what's on a picture, it might not always convey what the picture is meant to convey in the given context. ",
       },
       {
         description: "The specific results the AI model is meant to achieve.",
         segmentTitle: "Intended Outcomes",
-        value:
-          "Reduced bias in grading, fairness, and consistency. Grading efficiency, saving teachers time.",
+        value: "Reduce time spent on writing alt text. ",
       },
     ],
   },
@@ -147,7 +145,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = ({
 const aiInformation: AiInformationProps = ({
 	data: [{
 		description: 'We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.',
-		featureName: 'Grading Assistance',
+		featureName: 'Course Accessibility Checker: Image alt text generation',
 		modelName: 'Haiku 3',
 		modelNameText: 'Base Model',
 		nutritionFactsModalTriggerText: 'AI Nutrition Facts',
@@ -159,13 +157,13 @@ const aiInformation: AiInformationProps = ({
 	}],
 	dataPermissionLevelsCloseButtonText: 'Close',
 	dataPermissionLevelsCloseIconButtonScreenReaderLabel: 'Close dialog',
-	dataPermissionLevelsCurrentFeature: 'Grading Assistance',
+	dataPermissionLevelsCurrentFeature: 'Course Accessibility Checker: Image alt text generation',
 	dataPermissionLevelsCurrentFeatureText: 'Current Feature:',
 	dataPermissionLevelsModalLabel: 'Data Permission Levels modal',
 	dataPermissionLevelsTitle: 'Data Permission Levels',
 	nutritionFactsCloseButtonText: 'Close',
 	nutritionFactsCloseIconButtonScreenReaderLabel: 'Close',
-	nutritionFactsFeatureName: 'Grading Assistance',
+	nutritionFactsFeatureName: 'Course Accessibility Checker: Image alt text generation',
 	nutritionFactsModalLabel: 'This is a modal for AI facts',
 	nutritionFactsTitle: 'AI Nutrition Facts',
 	title: 'Features',
@@ -173,16 +171,16 @@ const aiInformation: AiInformationProps = ({
 	nutritionFactsData: NUTRITION_FACTS_DATA,
 	trigger: undefined
 });
-const canvasgradingassistance: AiInfoFeatureProps = {
+const canvasa11ycheckeralttextgenerator: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
   description:
-    "AI powered automatic grading and feedback suggestions to enable more consistent, fair, and efficient grading workflows.",
+    "A button that generates alt text for images that don't have alt text, or there was a problem identified with it (it's too long or it's just the filename.)",
   group: "Canvas",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2025.10.22",
+  revision: "2026.02.25",
   uid: UID,
 };
-export { canvasgradingassistance, nutritionFacts, dataPermissionLevels, aiInformation };
-export default canvasgradingassistance;
+export { canvasa11ycheckeralttextgenerator, nutritionFacts, dataPermissionLevels, aiInformation };
+export default canvasa11ycheckeralttextgenerator;

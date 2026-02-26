@@ -31,8 +31,11 @@ declare const askyourdata: AiInfoFeatureProps;
 //#region node/components/assessmentauthoringassistance/index.d.ts
 declare const assessmentauthoringassistance: AiInfoFeatureProps;
 //#endregion
-//#region node/components/bcealttext/index.d.ts
-declare const bcealttext: AiInfoFeatureProps;
+//#region node/components/canvasa11ycheckeralttextgenerator/index.d.ts
+declare const canvasa11ycheckeralttextgenerator: AiInfoFeatureProps;
+//#endregion
+//#region node/components/canvasa11ycheckertablecaptions/index.d.ts
+declare const canvasa11ycheckertablecaptions: AiInfoFeatureProps;
 //#endregion
 //#region node/components/canvascoursetranslation/index.d.ts
 declare const canvascoursetranslation: AiInfoFeatureProps;
@@ -45,6 +48,9 @@ declare const canvasgradingassistance: AiInfoFeatureProps;
 //#endregion
 //#region node/components/canvasinboxtranslation/index.d.ts
 declare const canvasinboxtranslation: AiInfoFeatureProps;
+//#endregion
+//#region node/components/careerassistant/index.d.ts
+declare const careerassistant: AiInfoFeatureProps;
 //#endregion
 //#region node/components/conversionalignment/index.d.ts
 declare const conversionalignment: AiInfoFeatureProps;
@@ -88,11 +94,13 @@ export {
   aiexperiences,
   askyourdata,
   assessmentauthoringassistance,
-  bcealttext,
+  canvasa11ycheckeralttextgenerator,
+  canvasa11ycheckertablecaptions,
   canvascoursetranslation,
   canvasdiscussionsummaries,
   canvasgradingassistance,
   canvasinboxtranslation,
+  careerassistant,
   conversionalignment,
   dataPermissionLevels,
   discussioninsights,

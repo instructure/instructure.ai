@@ -1,5 +1,30 @@
 # Changelog
 
+## 2026-02-26T01:47:20.935Z
+
+### CSV
+
+#### SHA
+
+```diff
+8e7bcd63477a5917ac64ce5bf6cd2e3ae10fa087955aa49bceda3fa6071651a2
+```
+
+### canvasa11ycheckertablecaptions
+
+### canvasa11ycheckeralttextgenerator
+
+### canvasgradingassistance
+
+#### compliance.retention
+
+```diff
+- "Transactional data is retained for the life of the requestCanvas"
++ "Transactional data is retained for the life of the request."
+```
+
+### careerassistant
+
 ## 2026-01-15T16:20:16.119Z
 
 ### CSV
