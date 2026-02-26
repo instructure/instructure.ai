@@ -1,27 +1,27 @@
-import { aiexperiences } from "./components/aiexperiences";
-import { askyourdata } from "./components/askyourdata";
-import { assessmentauthoringassistance } from "./components/assessmentauthoringassistance";
-import { canvasa11ycheckeralttextgenerator } from "./components/canvasa11ycheckeralttextgenerator";
-import { canvasa11ycheckertablecaptions } from "./components/canvasa11ycheckertablecaptions";
-import { canvascoursetranslation } from "./components/canvascoursetranslation";
-import { canvasdiscussionsummaries } from "./components/canvasdiscussionsummaries";
-import { canvasgradingassistance } from "./components/canvasgradingassistance";
-import { canvasinboxtranslation } from "./components/canvasinboxtranslation";
-import { careerassistant } from "./components/careerassistant";
-import { conversionalignment } from "./components/conversionalignment";
-import { discussioninsights } from "./components/discussioninsights";
-import { igniteagent } from "./components/igniteagent";
-import { itemauthoringassistance } from "./components/itemauthoringassistance";
-import { portfolios } from "./components/portfolios";
-import { quickreassess } from "./components/quickreassess";
-import { rubricgenerator } from "./components/rubricgenerator";
-import { smartsearch } from "./components/smartsearch";
 import {
   type AiInfoAiInformationProps,
   type AiInfoDataPermissionLevelsProps,
   type AiInfoNutritionFactsProps,
   type AiInfoProps,
 } from "./types";
+import aiexperiences from "./components/aiexperiences";
+import askyourdata from "./components/askyourdata";
+import assessmentauthoringassistance from "./components/assessmentauthoringassistance";
+import canvasa11ycheckeralttextgenerator from "./components/canvasa11ycheckeralttextgenerator";
+import canvasa11ycheckertablecaptions from "./components/canvasa11ycheckertablecaptions";
+import canvascoursetranslation from "./components/canvascoursetranslation";
+import canvasdiscussionsummaries from "./components/canvasdiscussionsummaries";
+import canvasgradingassistance from "./components/canvasgradingassistance";
+import canvasinboxtranslation from "./components/canvasinboxtranslation";
+import careerassistant from "./components/careerassistant";
+import conversionalignment from "./components/conversionalignment";
+import discussioninsights from "./components/discussioninsights";
+import igniteagent from "./components/igniteagent";
+import itemauthoringassistance from "./components/itemauthoringassistance";
+import portfolios from "./components/portfolios";
+import quickreassess from "./components/quickreassess";
+import rubricgenerator from "./components/rubricgenerator";
+import smartsearch from "./components/smartsearch";
 const pluck = <TRecord extends Record<string, object>, K extends keyof TRecord[keyof TRecord]>(
   obj: TRecord,
   key: K,
@@ -59,6 +59,7 @@ const AiInfo: AiInfoProps = {
 const nutritionFacts: AiInfoNutritionFactsProps = pluck(AiInfo, "nutritionFacts");
 const dataPermissionLevels: AiInfoDataPermissionLevelsProps = pluck(AiInfo, "dataPermissionLevels");
 const aiInformation: AiInfoAiInformationProps = pluck(AiInfo, "aiInformation");
+// oxlint-disable-next-line import/no-named-export
 export {
   AiInfo,
   nutritionFacts,
@@ -83,5 +84,6 @@ export {
   rubricgenerator,
   smartsearch,
 };
+// oxlint-disable-next-line import/no-named-export
 export type * from "./types";
 export default AiInfo;

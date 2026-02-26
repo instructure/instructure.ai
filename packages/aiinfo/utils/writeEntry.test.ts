@@ -169,12 +169,14 @@ describe("writeEntry", () => {
     expect(args[0]).toStrictEqual(dplData);
     expect(args[1]).toStrictEqual(nfData);
     expect(args[2]).toMatchObject({ modalLabel: "Modal" });
-    expect((args[2] as Record<string, unknown>).data).toBeUndefined();
+    expect((args[2] as Record<string, unknown>).data).toBe("NUTRITION_FACTS_DATA");
     expect(args[3]).toMatchObject({ title: "DPLTitle" });
-    expect((args[3] as Record<string, unknown>).data).toBeUndefined();
+    expect((args[3] as Record<string, unknown>).data).toBe("DATA_PERMISSION_LEVELS");
     expect(args[4]).toMatchObject({ something: "x" });
-    expect((args[4] as Record<string, unknown>).dataPermissionLevelsData).toBeUndefined();
-    expect((args[4] as Record<string, unknown>).nutritionFactsData).toBeUndefined();
+    expect((args[4] as Record<string, unknown>).dataPermissionLevelsData).toBe(
+      "DATA_PERMISSION_LEVELS",
+    );
+    expect((args[4] as Record<string, unknown>).nutritionFactsData).toBe("NUTRITION_FACTS_DATA");
   });
 
   it("writes multiple entries distinctly", async () => {
@@ -204,7 +206,7 @@ describe("writeEntry", () => {
     const { writeEntry } = await import("./writeEntry");
     await writeEntry(makeEntry("uidExport"));
     const content = getWrittenContent();
-    expect(content).toMatch(/export\s*\{[\s\S]*uidExport/);
+    expect(content).toMatch(/export\s+default\s+uidExport/);
   });
 
   it("creates expected variable declarations", async () => {

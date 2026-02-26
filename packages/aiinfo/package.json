@@ -1,14 +1,19 @@
 {
   "name": "@instructure.ai/aiinfo",
-  "version": "2.11.0",
+  "version": "2.11.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure.ai",
     "directory": "packages/aiinfo"
   },
-  "sideEffects": false,
+  "files": [
+    "src"
+  ],
   "type": "module",
+  "sideEffects": false,
   "main": "./src/index.mjs",
+  "module": "./src/index.mjs",
+  "types": "./src/index.d.ts",
   "exports": {
     ".": {
       "types": "./src/index.d.ts",
@@ -17,11 +22,9 @@
       "default": "./src/index.mjs"
     }
   },
-  "module": "./src/index.mjs",
-  "types": "./src/index.d.ts",
-  "files": [
-    "src"
-  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "pnpm cache:update && pnpm typecheck && pnpm build:lib && pnpm lint && pnpm package",
     "build:lib": "tsdown",
@@ -37,7 +40,7 @@
   },
   "devDependencies": {
     "@instructure.ai/shared-configs": "workspace:^",
-    "@instructure/ui-instructure": "^10.29.0",
+    "@instructure/ui-instructure": "^11.6.0",
     "@types/papaparse": "^5.5.2",
     "ansis": "^4.2.0",
     "papaparse": "^5.5.3",
@@ -45,8 +48,5 @@
   },
   "engines": {
     "node": ">=20"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

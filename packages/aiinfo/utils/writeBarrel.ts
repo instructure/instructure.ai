@@ -52,7 +52,7 @@ const writeBarrel = (opts: Options = {}) => {
   }
 
   const imports =
-    uids.map((u) => `import { ${u} } from "./components/${u}";`).join("\n") ||
+    uids.map((u) => `import ${u} from "./components/${u}";`).join("\n") ||
     "// no feature folders found";
 
   const typesImport = `import {
@@ -96,8 +96,8 @@ export type * from "./types";
 export default AiInfo;`.trim();
 
   const code = [
-    imports,
     typesImport,
+    imports,
     pluckHelper,
     AiInfo,
     nutritionFacts,

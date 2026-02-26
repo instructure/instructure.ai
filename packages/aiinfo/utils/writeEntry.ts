@@ -1,6 +1,4 @@
-import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
-import { type Entry } from "../types";
 import {
   entryToAIInformation,
   entryToNutritionFacts,
@@ -8,6 +6,8 @@ import {
   formatTs,
   toTsObjectLiteral,
 } from "../utils";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { type Entry } from "../types";
 
 /**
  * Writes a TypeScript entry file for the given Entry object.
@@ -53,12 +53,12 @@ export async function writeEntry(entry: Entry) {
     ...omit(aiInformation, ["dataPermissionLevelsData", "nutritionFactsData", "trigger"]),
   };
 
-  const code = `import {
-  type AiInformationProps,
-  type DataPermissionLevelsProps,
-  type NutritionFactsProps,
-} from "@instructure/ui-instructure";
-import  {type AiInfoFeatureProps } from "../../types";
+  const code = `import type {
+  AiInformationProps,
+  DataPermissionLevelsProps,
+  NutritionFactsProps,
+  AiInfoFeatureProps,
+} from "../../types";
 
 const FEATURE_NAME = ${JSON.stringify(FEATURE_NAME)};
 const UID = ${JSON.stringify(UID)};
@@ -66,40 +66,22 @@ const UID = ${JSON.stringify(UID)};
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = ${toTsObjectLiteral(DPL)};
 const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = ${toTsObjectLiteral(NF)};
 
-const nutritionFacts: NutritionFactsProps = {
-  ...${toTsObjectLiteral(nutritionFactsWithConstants, { replaceStrings: ["FEATURE_NAME"] })},
-  data: NUTRITION_FACTS_DATA,
-};
+const nutritionFacts: NutritionFactsProps = ${toTsObjectLiteral({ ...nutritionFactsWithConstants, data: "NUTRITION_FACTS_DATA" }, { replaceStrings: ["FEATURE_NAME", "NUTRITION_FACTS_DATA"] })};
 
-const dataPermissionLevels: DataPermissionLevelsProps = {
-  ...${toTsObjectLiteral(dataPermissionLevelsWithConstants, { replaceStrings: ["FEATURE_NAME"] })},
-  data: DATA_PERMISSION_LEVELS,
-};
+const dataPermissionLevels: DataPermissionLevelsProps = ${toTsObjectLiteral({ ...dataPermissionLevelsWithConstants, data: "DATA_PERMISSION_LEVELS" }, { replaceStrings: ["FEATURE_NAME", "DATA_PERMISSION_LEVELS"] })};
 
-const aiInformation: AiInformationProps = {
-  ...${toTsObjectLiteral(aiInformationWithConstants)},
-  dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
-  nutritionFactsData: NUTRITION_FACTS_DATA,
-  trigger: undefined,
-};
+const aiInformation: AiInformationProps = ${toTsObjectLiteral({ ...aiInformationWithConstants, dataPermissionLevelsData: "DATA_PERMISSION_LEVELS", nutritionFactsData: "NUTRITION_FACTS_DATA", trigger: undefined }, { replaceStrings: ["DATA_PERMISSION_LEVELS", "NUTRITION_FACTS_DATA"] })};
 
 const ${UID}: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
+  description: ${JSON.stringify(DESCRIPTION)},
+  group: ${JSON.stringify(entry.group)},
+  name: FEATURE_NAME,
   nutritionFacts,
   revision: ${JSON.stringify(REVISION)},
   uid: UID,
-  group: ${JSON.stringify(entry.group)},
-  name: FEATURE_NAME,
-  description: ${JSON.stringify(DESCRIPTION)},
 }
-
-export {
-  ${UID},
-  nutritionFacts,
-  dataPermissionLevels,
-  aiInformation,
-};
 
 export default ${UID};
 `;

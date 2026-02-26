@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "isolatedDeclarations": true,
     "paths": {
       "@instructure.ai/aiinfo": ["./node/index.ts"]
     }

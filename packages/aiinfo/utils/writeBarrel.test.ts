@@ -76,10 +76,10 @@ describe("writeBarrel", () => {
     writeBarrel();
     expect(fsMocks.writeFileSync).toHaveBeenCalledTimes(1);
     const out = getWritten();
-    expect(out).toContain('import { alpha } from "./components/alpha";');
-    expect(out).toContain('import { beta } from "./components/beta";');
-    const iAlpha = out.indexOf("import { alpha }");
-    const iBeta = out.indexOf("import { beta }");
+    expect(out).toContain('import alpha from "./components/alpha";');
+    expect(out).toContain('import beta from "./components/beta";');
+    const iAlpha = out.indexOf("import alpha from");
+    const iBeta = out.indexOf("import beta from");
     expect(iAlpha).toBeLessThan(iBeta);
     expect(out).toMatch(/const AiInfo: AiInfoProps = {\s+alpha,\s+beta,\s+};/);
     expect(out).toContain("const nutritionFacts");
@@ -101,9 +101,9 @@ describe("writeBarrel", () => {
     const writeBarrel = await importSubject();
     writeBarrel({ sort: false });
     const out = getWritten();
-    const iZeta = out.indexOf("import { zeta }");
-    const iAlpha = out.indexOf("import { alpha }");
-    const iBeta = out.indexOf("import { beta }");
+    const iZeta = out.indexOf("import zeta from");
+    const iAlpha = out.indexOf("import alpha from");
+    const iBeta = out.indexOf("import beta from");
     expect(iZeta).toBeLessThan(iAlpha);
     expect(iAlpha).toBeLessThan(iBeta);
     expect(out).toMatch(/const AiInfo: AiInfoProps = {\s+zeta,\s+alpha,\s+beta,\s+};/);
@@ -141,8 +141,8 @@ describe("writeBarrel", () => {
     const writeBarrel = await importSubject();
     writeBarrel({ skipInvalidIdentifiers: true });
     const out = getWritten();
-    expect(out).toContain('import { alpha } from "./components/alpha";');
-    expect(out).toContain('import { beta } from "./components/beta";');
+    expect(out).toContain('import alpha from "./components/alpha";');
+    expect(out).toContain('import beta from "./components/beta";');
     expect(out).not.toContain("invalid-name");
     expect(out).toMatch(/const AiInfo: AiInfoProps = {\s+alpha,\s+beta,\s+};/);
   });
@@ -237,11 +237,11 @@ describe("writeBarrel", () => {
     expect(fsMocks.writeFileSync).toHaveBeenCalledTimes(1);
     const codePassed = formatTsMock.mock.calls[0][0];
     // Only check for import statements if features are present
-    if (codePassed.includes("import { alpha")) {
-      expect(codePassed).toContain('import { alpha } from "./components/alpha";');
+    if (codePassed.includes("import alpha from")) {
+      expect(codePassed).toContain('import alpha from "./components/alpha";');
     }
-    if (codePassed.includes("import { beta")) {
-      expect(codePassed).toContain('import { beta } from "./components/beta";');
+    if (codePassed.includes("import beta from")) {
+      expect(codePassed).toContain('import beta from "./components/beta";');
     }
     expect(codePassed).toContain("const AiInfo: AiInfoProps = {");
   });
