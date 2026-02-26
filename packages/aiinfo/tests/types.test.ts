@@ -9,7 +9,6 @@ import {
   type NutritionFactsProps as LocalNutritionFactsProps,
 } from "../node/types";
 import { describe, expect, it } from "vitest";
-import { type Renderable } from "@instructure/shared-types";
 
 describe("Type compatibility with @instructure/ui-instructure", () => {
   describe("NutritionFactsProps", () => {
@@ -213,10 +212,8 @@ describe("Type compatibility with @instructure/ui-instructure", () => {
           nutritionFactsModalLabel: props.nutritionFactsModalLabel,
           nutritionFactsTitle: props.nutritionFactsTitle,
           title: props.title,
-          // Renderable is a JSX element or string, which is compatible with Instructure's expected type for trigger (ReactNode).
-          // We assert it as Renderable to satisfy our local type, and it should be compatible with Instructure's type.
           // oxlint-disable-next-line typescript/no-unsafe-type-assertion
-          trigger: props.trigger as Renderable,
+          trigger: props.trigger as InstructureAiInformationProps["trigger"],
         };
         return instructureCompatible;
       };
