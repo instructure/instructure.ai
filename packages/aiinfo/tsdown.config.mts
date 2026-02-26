@@ -3,7 +3,7 @@ import { defineConfig } from "tsdown";
 export default defineConfig({
   clean: true,
   deps: {
-    neverBundle: ["@instructure/ui-instructure"],
+    onlyAllowBundle: false,
   },
   dts: true,
   entry: "node/index.ts",
