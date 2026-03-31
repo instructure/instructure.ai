@@ -59,7 +59,6 @@ const AiInfo: AiInfoProps = {
 const nutritionFacts: AiInfoNutritionFactsProps = pluck(AiInfo, "nutritionFacts");
 const dataPermissionLevels: AiInfoDataPermissionLevelsProps = pluck(AiInfo, "dataPermissionLevels");
 const aiInformation: AiInfoAiInformationProps = pluck(AiInfo, "aiInformation");
-// oxlint-disable-next-line import/no-named-export
 export {
   AiInfo,
   nutritionFacts,
@@ -84,6 +83,5 @@ export {
   rubricgenerator,
   smartsearch,
 };
-// oxlint-disable-next-line import/no-named-export
 export type * from "./types";
 export default AiInfo;
