@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-04-14T17:32:10.363Z
+
+### CSV
+
+#### SHA
+
+```diff
+46cc42abb4c2e74ec317905d153603d119118905b4911989ee57d9dc51d7b49c
+```
+
+### igniteagent
+
+#### model.name
+
+```diff
+- "Haiku 3, Haiku 3.5, Haiku 4.5, Sonnet 3.7"
++ "Haiku 4.5"
+```
+
 ## 2026-03-31T17:27:34.751Z
 
 ### CSV
