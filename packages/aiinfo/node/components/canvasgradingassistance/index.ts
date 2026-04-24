@@ -1,8 +1,8 @@
-import  {
-  type AiInformationProps,
-  type DataPermissionLevelsProps,
-  type NutritionFactsProps,
-  type AiInfoFeatureProps,
+import type {
+  AiInformationProps,
+  DataPermissionLevelsProps,
+  NutritionFactsProps,
+  AiInfoFeatureProps,
 } from "../../types";
 const FEATURE_NAME = "Grading Assistance";
 const UID = "canvasgradingassistance";
@@ -78,8 +78,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
-        value: "Global",
-        valueDescription: "Available in all regions except for Singapre and Canada ",
+        value: "Virginia, Oregon, Dublin, Frankfurt, Sydney",
+        valueDescription: "",
       },
       {
         description: "Sensitive data that can be used to identify an individual.",
@@ -154,8 +154,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
       privacyNoticeText: "",
       privacyNoticeUrl: "",
     },
@@ -184,7 +184,7 @@ const canvasgradingassistance: AiInfoFeatureProps = {
   group: "Canvas",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2026.04.22",
+  revision: "2026.04.24",
   uid: UID,
 };
 export default canvasgradingassistance;

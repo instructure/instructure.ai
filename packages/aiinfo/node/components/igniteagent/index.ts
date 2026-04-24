@@ -1,8 +1,8 @@
-import  {
-  type AiInformationProps,
-  type DataPermissionLevelsProps,
-  type NutritionFactsProps,
-  type AiInfoFeatureProps,
+import type {
+  AiInformationProps,
+  DataPermissionLevelsProps,
+  NutritionFactsProps,
+  AiInfoFeatureProps,
 } from "../../types";
 const FEATURE_NAME = "Agent";
 const UID = "igniteagent";
@@ -86,7 +86,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "PII",
         value: "Exposed",
         valueDescription:
-          "If requested during the the chat, user, course, and student identifiers or metadata may be shared with the model.",
+          "If requested during the chat, user, course, and student identifiers or metadata may be shared with the model.",
       },
     ],
   },
@@ -154,8 +154,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
       privacyNoticeText: "AI Privacy Policy",
       privacyNoticeUrl: "https://www.instructure.com/policies/artificial-intelligence-privacy",
     },
@@ -184,7 +184,7 @@ const igniteagent: AiInfoFeatureProps = {
   group: "IgniteAI",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2026.04.22",
+  revision: "2026.04.24",
   uid: UID,
 };
 export default igniteagent;
