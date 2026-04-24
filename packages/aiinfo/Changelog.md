@@ -1,4 +1,87 @@
 # Changelog
+## 2026-04-24T12:19:25.704Z
+### CSV
+#### SHA
+```diff
+f4ad49ebae33ce95d33c1b2be8e0b5d0c4a7e0e9861a6454ec25767b39792685
+```
+### igniteagent
+#### compliance.piiDescription
+```diff
+- "If requested during the the chat, user, course, and student identifiers or metadata may be shared with the model."
++ "If requested during the chat, user, course, and student identifiers or metadata may be shared with the model."
+```
+#### revision
+```diff
+- "2026.04.22"
++ "2026.04.24"
+```
+
+### canvasgradingassistance
+#### compliance.regions
+```diff
+- "Global"
++ "Virginia, Oregon, Dublin, Frankfurt, Sydney"
+```
+#### compliance.regionsDescription
+```diff
+- "Available in all regions except for Singapre and Canada "
++ ""
+```
+#### revision
+```diff
+- "2026.04.22"
++ "2026.04.24"
+```
+
+## 2026-04-24T12:03:17.179Z
+
+### CSV
+
+#### SHA
+
+```diff
+9ce383cc4c4feba02aa7162783d376022b5de5fbcd039b28341de10d57ce1a91
+```
+
+### igniteagent
+
+#### compliance.regions
+
+```diff
+- "Virginia, Oregon"
++ "Virginia, Oregon, Frankfurt, Dublin, Sydney"
+```
+
+#### revision
+
+```diff
+- "2026.01.14"
++ "2026.04.22"
+```
+
+### canvasgradingassistance
+
+#### compliance.regionsDescription
+
+```diff
+- ""
++ "Available in all regions except for Singapre and Canada "
+```
+
+#### model.name
+
+```diff
+- "Haiku 3"
++ "Haiku 4.5"
+```
+
+#### revision
+
+```diff
+- "2025.10.22"
++ "2026.04.22"
+```
 
 ## 2026-04-14T17:32:10.363Z
 
