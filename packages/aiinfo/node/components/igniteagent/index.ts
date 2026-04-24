@@ -1,8 +1,8 @@
-import {
-  type AiInfoFeatureProps,
+import  {
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
+  type AiInfoFeatureProps,
 } from "../../types";
 const FEATURE_NAME = "Agent";
 const UID = "igniteagent";
@@ -78,7 +78,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
-        value: "Virginia, Oregon",
+        value: "Virginia, Oregon, Frankfurt, Dublin, Sydney",
         valueDescription: "",
       },
       {
@@ -184,7 +184,7 @@ const igniteagent: AiInfoFeatureProps = {
   group: "IgniteAI",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2026.01.14",
+  revision: "2026.04.22",
   uid: UID,
 };
 export default igniteagent;

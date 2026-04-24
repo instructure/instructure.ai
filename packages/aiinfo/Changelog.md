@@ -1,5 +1,54 @@
 # Changelog
 
+## 2026-04-24T12:03:17.179Z
+
+### CSV
+
+#### SHA
+
+```diff
+9ce383cc4c4feba02aa7162783d376022b5de5fbcd039b28341de10d57ce1a91
+```
+
+### igniteagent
+
+#### compliance.regions
+
+```diff
+- "Virginia, Oregon"
++ "Virginia, Oregon, Frankfurt, Dublin, Sydney"
+```
+
+#### revision
+
+```diff
+- "2026.01.14"
++ "2026.04.22"
+```
+
+### canvasgradingassistance
+
+#### compliance.regionsDescription
+
+```diff
+- ""
++ "Available in all regions except for Singapre and Canada "
+```
+
+#### model.name
+
+```diff
+- "Haiku 3"
++ "Haiku 4.5"
+```
+
+#### revision
+
+```diff
+- "2025.10.22"
++ "2026.04.22"
+```
+
 ## 2026-04-14T17:32:10.363Z
 
 ### CSV
