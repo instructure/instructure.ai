@@ -1,34 +1,49 @@
 # Changelog
+
 ## 2026-04-24T12:19:25.704Z
+
 ### CSV
+
 #### SHA
+
 ```diff
 f4ad49ebae33ce95d33c1b2be8e0b5d0c4a7e0e9861a6454ec25767b39792685
 ```
+
 ### igniteagent
+
 #### compliance.piiDescription
+
 ```diff
 - "If requested during the the chat, user, course, and student identifiers or metadata may be shared with the model."
 + "If requested during the chat, user, course, and student identifiers or metadata may be shared with the model."
 ```
+
 #### revision
+
 ```diff
 - "2026.04.22"
 + "2026.04.24"
 ```
 
 ### canvasgradingassistance
+
 #### compliance.regions
+
 ```diff
 - "Global"
 + "Virginia, Oregon, Dublin, Frankfurt, Sydney"
 ```
+
 #### compliance.regionsDescription
+
 ```diff
 - "Available in all regions except for Singapre and Canada "
 + ""
 ```
+
 #### revision
+
 ```diff
 - "2026.04.22"
 + "2026.04.24"
