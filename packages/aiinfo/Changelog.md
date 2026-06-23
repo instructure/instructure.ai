@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-06-23T17:40:09.483Z
+
+### CSV
+
+#### SHA
+
+```diff
+17bda9fb3866cda71562613104200c295d62d17b80d4e06cc608c4b1171545fa
+```
+
+### careerassistant
+
+#### model.name
+
+```diff
+- "Claude 3.5 Haiku, Cohere multi-language v3"
++ "Claude 3 Haiku, Cohere multi-language v3"
+```
+
 ## 2026-04-24T12:19:25.704Z
 
 ### CSV

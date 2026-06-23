@@ -1,8 +1,8 @@
-import {
-  type AiInfoFeatureProps,
+import  {
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
+  type AiInfoFeatureProps,
 } from "../../types";
 const FEATURE_NAME = "Learner Assist";
 const UID = "careerassistant";
@@ -43,7 +43,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
-        value: "Claude 3.5 Haiku, Cohere multi-language v3",
+        value: "Claude 3 Haiku, Cohere multi-language v3",
         valueDescription:
           "Anthropic Claude and Cohere models are provided via Instructure's in-house AI Platform.",
       },
@@ -147,7 +147,7 @@ const aiInformation: AiInformationProps = {
       description:
         "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
       featureName: "Learner Assist",
-      modelName: "Claude 3.5 Haiku, Cohere multi-language v3",
+      modelName: "Claude 3 Haiku, Cohere multi-language v3",
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
