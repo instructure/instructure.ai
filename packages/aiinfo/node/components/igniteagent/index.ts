@@ -1,8 +1,8 @@
-import {
-  type AiInfoFeatureProps,
-  type AiInformationProps,
-  type DataPermissionLevelsProps,
-  type NutritionFactsProps,
+import type {
+  AiInformationProps,
+  DataPermissionLevelsProps,
+  NutritionFactsProps,
+  AiInfoFeatureProps,
 } from "../../types";
 const FEATURE_NAME = "Agent";
 const UID = "igniteagent";
@@ -78,7 +78,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
-        value: "Virginia, Oregon, Frankfurt, Dublin, Sydney",
+        value: "Virginia, Oregon, Frankfurt, Dublin, Sydney, Montreal",
         valueDescription: "",
       },
       {
@@ -154,8 +154,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
       privacyNoticeText: "AI Privacy Policy",
       privacyNoticeUrl: "https://www.instructure.com/policies/artificial-intelligence-privacy",
     },
@@ -184,7 +184,7 @@ const igniteagent: AiInfoFeatureProps = {
   group: "IgniteAI",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2026.04.24",
+  revision: "2026.07.07",
   uid: UID,
 };
 export default igniteagent;
