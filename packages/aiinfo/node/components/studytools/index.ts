@@ -17,7 +17,7 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
   {
     description:
       "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-    highlighted: false,
+    highlighted: true,
     level: "LEVEL 2",
     title: "AI-Powered Features Without Data Training",
   },
