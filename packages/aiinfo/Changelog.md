@@ -187,6 +187,32 @@ fe1ecece8a55ab7f4ab289e7c8e4e277559807a92eea039618e61a9f8aec9770
 + "2026.07.07"
 ```
 
+## 2026-07-07T20:36:03.843Z
+
+### CSV
+
+#### SHA
+
+```diff
+fe1ecece8a55ab7f4ab289e7c8e4e277559807a92eea039618e61a9f8aec9770
+```
+
+### igniteagent
+
+#### compliance.regions
+
+```diff
+- "Virginia, Oregon, Frankfurt, Dublin, Sydney"
++ "Virginia, Oregon, Frankfurt, Dublin, Sydney, Montreal"
+```
+
+#### revision
+
+```diff
+- "2026.04.24"
++ "2026.07.07"
+```
+
 ## 2026-06-23T17:40:09.483Z
 
 ### CSV
