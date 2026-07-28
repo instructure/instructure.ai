@@ -1,8 +1,8 @@
-import {
-  type AiInfoFeatureProps,
-  type AiInformationProps,
-  type DataPermissionLevelsProps,
-  type NutritionFactsProps,
+import type {
+  AiInformationProps,
+  DataPermissionLevelsProps,
+  NutritionFactsProps,
+  AiInfoFeatureProps,
 } from "../../types";
 const FEATURE_NAME = "Grading Assistance";
 const UID = "canvasgradingassistance";
@@ -154,8 +154,8 @@ const aiInformation: AiInformationProps = {
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
       privacyNoticeText: "",
       privacyNoticeUrl: "",
     },
@@ -184,7 +184,7 @@ const canvasgradingassistance: AiInfoFeatureProps = {
   group: "Canvas",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2026.04.24",
+  revision: "2026.07.27",
   uid: UID,
 };
 export default canvasgradingassistance;

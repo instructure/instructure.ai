@@ -4,8 +4,8 @@ import type {
   NutritionFactsProps,
   AiInfoFeatureProps,
 } from "../../types";
-const FEATURE_NAME = "Course Accessibility Checker: Image alt text generation";
-const UID = "canvasa11ycheckeralttextgenerator";
+const FEATURE_NAME = "Learner Study Tools";
+const UID = "studytools";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
   {
     description:
@@ -56,7 +56,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
-        value: "Images uploaded to Canvas via RCX",
+        value: "Page content is sent to the model to generate study materials.",
       },
     ],
   },
@@ -72,7 +72,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Logs data",
-        valueDescription: "Usage data is logged to improve the product.",
+        valueDescription:
+          "Request, response, and feedback data is logged to assist in troubleshooting.",
       },
       {
         description: "The locations where the AI model is officially available and supported.",
@@ -85,7 +86,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "PII",
         value: "Not Exposed",
         valueDescription:
-          "PII in source material may be sent to the model if included in the analyzed image, but no PII is intentionally sent to the model.",
+          "PII in page content may be included, but no PII is intentionally sent to the model.",
       },
     ],
   },
@@ -102,23 +103,24 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
-          "Users can edit the generated alt text, and they have the option to save it or not.",
+          "Setting is available at the account and course level. Students cannot currently turn the feature on or off unless it's enabled by a teacher or admin.",
       },
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
-        value: "",
+        value: "Content is restricted to the course content.",
       },
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
         value:
-          "While the model can fairly accurately describe what's on a picture, it might not always convey what the picture is meant to convey in the given context. ",
+          "AI Generated content may contain mistakes or inaccurate information and should always be verified",
       },
       {
         description: "The specific results the AI model is meant to achieve.",
         segmentTitle: "Intended Outcomes",
-        value: "Reduce time spent on writing alt text. ",
+        value:
+          "Students are able to efficiently study course material through AI-generated summaries, quizzes, and flashcards.",
       },
     ],
   },
@@ -145,13 +147,12 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 const aiInformation: AiInformationProps = {
   data: [
     {
-      description:
-        "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-      featureName: "Course Accessibility Checker: Image alt text generation",
+      description: "Unknown",
+      featureName: "Learner Study Tools",
       modelName: "Haiku 3, Haiku 4.5",
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
-      permissionLevel: "LEVEL 2",
+      permissionLevel: "LEVEL ",
       permissionLevelsModalTriggerText: "Data Permission Levels",
       permissionLevelText: "Permission Level:",
       privacyNoticeText: "",
@@ -160,7 +161,7 @@ const aiInformation: AiInformationProps = {
   ],
   dataPermissionLevelsCloseButtonText: "Close",
   dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeature: "Course Accessibility Checker: Image alt text generation",
+  dataPermissionLevelsCurrentFeature: "Learner Study Tools",
   dataPermissionLevelsCurrentFeatureText: "Current Feature:",
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
   dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -168,21 +169,21 @@ const aiInformation: AiInformationProps = {
   nutritionFactsCloseButtonText: "Close",
   nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
   nutritionFactsData: NUTRITION_FACTS_DATA,
-  nutritionFactsFeatureName: "Course Accessibility Checker: Image alt text generation",
+  nutritionFactsFeatureName: "Learner Study Tools",
   nutritionFactsModalLabel: "This is a modal for AI facts",
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: undefined,
 };
-const canvasa11ycheckeralttextgenerator: AiInfoFeatureProps = {
+const studytools: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
   description:
-    "A button that generates alt text for images that don't have alt text, or there was a problem identified with it (it's too long or it's just the filename.)",
+    "The Study Tools provide tools to aid learning, such as practice quizzes, flashcards, summaries, and key takeaways. \n",
   group: "Canvas",
   name: FEATURE_NAME,
   nutritionFacts,
   revision: "2026.07.27",
   uid: UID,
 };
-export default canvasa11ycheckeralttextgenerator;
+export default studytools;

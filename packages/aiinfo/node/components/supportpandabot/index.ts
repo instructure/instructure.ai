@@ -4,8 +4,8 @@ import type {
   NutritionFactsProps,
   AiInfoFeatureProps,
 } from "../../types";
-const FEATURE_NAME = "Course Accessibility Checker: Image alt text generation";
-const UID = "canvasa11ycheckeralttextgenerator";
+const FEATURE_NAME = "Panda Bot";
+const UID = "supportpandabot";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
   {
     description:
@@ -43,9 +43,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
-        value: "Haiku 3, Haiku 4.5",
+        value: "Ada CX Unified Reasoning Engine",
         valueDescription:
-          "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
+          "Orchestrates models from multiple providers — OpenAI (incl. GPT-4o) as primary, plus Anthropic, Microsoft Azure OpenAI Service, and Amazon Bedrock",
       },
       {
         description:
@@ -56,7 +56,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
-        value: "Images uploaded to Canvas via RCX",
+        value:
+          "User's name, email, institution uuid, and Canvas role, plus up to 8 institution-specific KB articles",
       },
     ],
   },
@@ -66,13 +67,15 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "How long the model stores customer data.",
         segmentTitle: "Data Retention",
-        value: "Data is not stored or reused by the model.",
+        value:
+          "Conversations remain in the conversations library for 6 months before becoming archived",
       },
       {
         description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Logs data",
-        valueDescription: "Usage data is logged to improve the product.",
+        valueDescription:
+          "Conversations are logged; a select few individuals on the Panda Bot team have access. Transcripts are shared with a human agent if a conversation escalates",
       },
       {
         description: "The locations where the AI model is officially available and supported.",
@@ -83,9 +86,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "Sensitive data that can be used to identify an individual.",
         segmentTitle: "PII",
-        value: "Not Exposed",
-        valueDescription:
-          "PII in source material may be sent to the model if included in the analyzed image, but no PII is intentionally sent to the model.",
+        value: "Exposed",
+        valueDescription: "Name, email, institution, and Canvas role",
       },
     ],
   },
@@ -102,23 +104,25 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
-          "Users can edit the generated alt text, and they have the option to save it or not.",
+          "Panda Bot cannot take action and instead provides guidance to user questions. Conversations that a user wishes to go to a human or that Panda Bot cannot solve can escalate to a human agent, who receives transcript as part of case details.",
       },
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
-        value: "",
+        value:
+          "Will not answer questions outside Instructure topics; will not assist with coursework (e.g., completing assignments or submissions)",
       },
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
         value:
-          "While the model can fairly accurately describe what's on a picture, it might not always convey what the picture is meant to convey in the given context. ",
+          "No access to the user's actual session or Site Admin data, cannot confirm/deny specific Canvas setup, relies on what the user reports",
       },
       {
         description: "The specific results the AI model is meant to achieve.",
         segmentTitle: "Intended Outcomes",
-        value: "Reduce time spent on writing alt text. ",
+        value:
+          "Users get fast, accurate first-line support without needing to open a case, using Community Guides and institution-specific KB content",
       },
     ],
   },
@@ -147,8 +151,8 @@ const aiInformation: AiInformationProps = {
     {
       description:
         "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-      featureName: "Course Accessibility Checker: Image alt text generation",
-      modelName: "Haiku 3, Haiku 4.5",
+      featureName: "Panda Bot",
+      modelName: "Ada CX Unified Reasoning Engine",
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
@@ -160,7 +164,7 @@ const aiInformation: AiInformationProps = {
   ],
   dataPermissionLevelsCloseButtonText: "Close",
   dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeature: "Course Accessibility Checker: Image alt text generation",
+  dataPermissionLevelsCurrentFeature: "Panda Bot",
   dataPermissionLevelsCurrentFeatureText: "Current Feature:",
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
   dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -168,21 +172,21 @@ const aiInformation: AiInformationProps = {
   nutritionFactsCloseButtonText: "Close",
   nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
   nutritionFactsData: NUTRITION_FACTS_DATA,
-  nutritionFactsFeatureName: "Course Accessibility Checker: Image alt text generation",
+  nutritionFactsFeatureName: "Panda Bot",
   nutritionFactsModalLabel: "This is a modal for AI facts",
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: undefined,
 };
-const canvasa11ycheckeralttextgenerator: AiInfoFeatureProps = {
+const supportpandabot: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
   description:
-    "A button that generates alt text for images that don't have alt text, or there was a problem identified with it (it's too long or it's just the filename.)",
+    "First-stop virtual assistant that helps support users, primarily using Community Guides and Tier 1 institution-specific KB articles",
   group: "Canvas",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2026.07.27",
+  revision: "2026.07.08",
   uid: UID,
 };
-export default canvasa11ycheckeralttextgenerator;
+export default supportpandabot;

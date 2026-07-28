@@ -1,8 +1,8 @@
-import {
-  type AiInfoFeatureProps,
-  type AiInformationProps,
-  type DataPermissionLevelsProps,
-  type NutritionFactsProps,
+import type {
+  AiInformationProps,
+  DataPermissionLevelsProps,
+  NutritionFactsProps,
+  AiInfoFeatureProps,
 } from "../../types";
 const FEATURE_NAME = "AI Experiences";
 const UID = "aiexperiences";
@@ -43,9 +43,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
-        value: "Haiku 3",
+        value: "Haiku 3, Haiku 4.5",
         valueDescription:
-          "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs).",
+          "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
       },
       {
         description:
@@ -149,12 +149,12 @@ const aiInformation: AiInformationProps = {
       description:
         "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
       featureName: "AI Experiences",
-      modelName: "Haiku 3",
+      modelName: "Haiku 3, Haiku 4.5",
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
-      permissionLevelText: "Permission Level:",
       permissionLevelsModalTriggerText: "Data Permission Levels",
+      permissionLevelText: "Permission Level:",
       privacyNoticeText: "",
       privacyNoticeUrl: "",
     },
@@ -183,7 +183,7 @@ const aiexperiences: AiInfoFeatureProps = {
   group: "Canvas",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2025.11.25",
+  revision: "2026.07.27",
   uid: UID,
 };
 export default aiexperiences;
