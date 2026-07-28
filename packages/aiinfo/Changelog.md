@@ -1,4 +1,174 @@
 # Changelog
+## 2026-07-27T19:29:17.794Z
+### CSV
+#### SHA
+```diff
+dcbabb118a179d20a0e174967bee0833a876923ce1d9722a59dbd9d1ee8d2a45
+```
+### canvasa11ycheckertablecaptions
+#### model.name
+```diff
+- "Haiku 3"
++ "Haiku 3, Haiku 4.5"
+```
+#### revision
+```diff
+- "2026.02.19"
++ "2026.07.27"
+```
+
+### canvasa11ycheckeralttextgenerator
+#### model.name
+```diff
+- "Haiku 3"
++ "Haiku 3, Haiku 4.5"
+```
+#### revision
+```diff
+- "2026.02.25"
++ "2026.07.27"
+```
+
+### canvascoursetranslation
+#### model.name
+```diff
+- "Haiku 3"
++ "Haiku 4.5"
+```
+#### revision
+```diff
+- "2025.09.10"
++ "2026.07.27"
+```
+
+### igniteagent
+#### revision
+```diff
+- "2026.07.07"
++ "2026.07.27"
+```
+
+### rubricgenerator
+#### model.description
+```diff
+- "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs)."
++ "Anthropic Claude models are provided via Instructure's in-house AI Platform."
+```
+#### model.name
+```diff
+- "Haiku 3"
++ "Haiku 3, Haiku 4.5"
+```
+#### revision
+```diff
+- "2025.10.09"
++ "2026.07.27"
+```
+
+### canvasgradingassistance
+#### revision
+```diff
+- "2026.04.24"
++ "2026.07.27"
+```
+
+### discussioninsights
+#### model.description
+```diff
+- "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs)."
++ "Anthropic Claude models are provided via Instructure's in-house AI Platform."
+```
+#### model.name
+```diff
+- "Haiku 3"
++ "Haiku 3, Haiku 4.5"
+```
+#### revision
+```diff
+- "2025.10.02"
++ "2026.07.27"
+```
+
+### canvasdiscussionsummaries
+#### model.description
+```diff
+- "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs)."
++ "Anthropic Claude models are provided via Instructure's in-house AI Platform."
+```
+#### model.name
+```diff
+- "Haiku 3"
++ "Haiku 3, Haiku 4.5"
+```
+#### revision
+```diff
+- "2025.09.12"
++ "2026.07.27"
+```
+
+### itemauthoringassistance
+#### model.name
+```diff
+- "Haiku 3"
++ "Haiku 4.5"
+```
+#### revision
+```diff
+- "2025.11.18"
++ "2026.07.27"
+```
+
+### assessmentauthoringassistance
+#### model.name
+```diff
+- "Haiku 3"
++ "Haiku 4.5"
+```
+#### revision
+```diff
+- "2025.11.18"
++ "2026.07.27"
+```
+
+### quickreassess
+#### model.name
+```diff
+- "Haiku 3"
++ "Haiku 4.5"
+```
+#### revision
+```diff
+- "2025.11.19"
++ "2026.07.27"
+```
+
+### aiexperiences
+#### model.description
+```diff
+- "Anthropic Claude models are provided via Amazon Bedrock Foundation Models (FMs)."
++ "Anthropic Claude models are provided via Instructure's in-house AI Platform."
+```
+#### model.name
+```diff
+- "Haiku 3"
++ "Haiku 3, Haiku 4.5"
+```
+#### revision
+```diff
+- "2025.11.25"
++ "2026.07.27"
+```
+
+### portfolios
+#### model.name
+```diff
+- "Haiku 3"
++ "Haiku 3, Haiku 4.5"
+```
+
+### studytools
+
+### supportpandabot
 ## 2026-07-07T20:36:03.843Z
 ### CSV
 #### SHA

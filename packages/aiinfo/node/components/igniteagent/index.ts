@@ -184,7 +184,7 @@ const igniteagent: AiInfoFeatureProps = {
   group: "IgniteAI",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2026.07.07",
+  revision: "2026.07.27",
   uid: UID,
 };
 export default igniteagent;

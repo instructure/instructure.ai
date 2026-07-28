@@ -22,6 +22,8 @@ import portfolios from "./components/portfolios";
 import quickreassess from "./components/quickreassess";
 import rubricgenerator from "./components/rubricgenerator";
 import smartsearch from "./components/smartsearch";
+import studytools from "./components/studytools";
+import supportpandabot from "./components/supportpandabot";
 const pluck = <TRecord extends Record<string, object>, K extends keyof TRecord[keyof TRecord]>(
   obj: TRecord,
   key: K,
@@ -55,6 +57,8 @@ const AiInfo: AiInfoProps = {
   quickreassess,
   rubricgenerator,
   smartsearch,
+  studytools,
+  supportpandabot,
 };
 const nutritionFacts: AiInfoNutritionFactsProps = pluck(AiInfo, "nutritionFacts");
 const dataPermissionLevels: AiInfoDataPermissionLevelsProps = pluck(AiInfo, "dataPermissionLevels");
@@ -82,6 +86,8 @@ export {
   quickreassess,
   rubricgenerator,
   smartsearch,
+  studytools,
+  supportpandabot,
 };
 export type * from "./types";
 export default AiInfo;
