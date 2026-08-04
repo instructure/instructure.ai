@@ -135,6 +135,12 @@ declare const rubricgenerator: AiInfoFeatureProps;
 //#region node/components/smartsearch/index.d.ts
 declare const smartsearch: AiInfoFeatureProps;
 //#endregion
+//#region node/components/studytools/index.d.ts
+declare const studytools: AiInfoFeatureProps;
+//#endregion
+//#region node/components/supportpandabot/index.d.ts
+declare const supportpandabot: AiInfoFeatureProps;
+//#endregion
 //#region node/index.d.ts
 declare const AiInfo: AiInfoProps;
 declare const nutritionFacts: AiInfoNutritionFactsProps;
@@ -173,4 +179,6 @@ export {
   quickreassess,
   rubricgenerator,
   smartsearch,
+  studytools,
+  supportpandabot,
 };
