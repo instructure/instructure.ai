@@ -1,8 +1,8 @@
-import  {
+import {
+  type AiInfoFeatureProps,
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
-  type AiInfoFeatureProps,
 } from "../../types";
 const FEATURE_NAME = "Course Accessibility Checker: Table caption generation";
 const UID = "canvasa11ycheckertablecaptions";
