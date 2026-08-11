@@ -1,8 +1,8 @@
-import  {
+import {
+  type AiInfoFeatureProps,
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
-  type AiInfoFeatureProps,
 } from "../../types";
 const FEATURE_NAME = "Agent";
 const UID = "igniteagent";
