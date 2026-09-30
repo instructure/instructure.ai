@@ -15,8 +15,11 @@ import canvasgradingassistance from "./components/canvasgradingassistance";
 import canvasinboxtranslation from "./components/canvasinboxtranslation";
 import careeragent from "./components/careeragent";
 import careerassistant from "./components/careerassistant";
+import careercontentgeneration from "./components/careercontentgeneration";
+import careerflashcards from "./components/careerflashcards";
 import careerkeytakeaways from "./components/careerkeytakeaways";
 import careerlearnerchat from "./components/careerlearnerchat";
+import careerquizzes from "./components/careerquizzes";
 import careersummarization from "./components/careersummarization";
 import conversionalignment from "./components/conversionalignment";
 import discussioninsights from "./components/discussioninsights";
@@ -54,8 +57,11 @@ const AiInfo: AiInfoProps = {
   canvasinboxtranslation,
   careeragent,
   careerassistant,
+  careercontentgeneration,
+  careerflashcards,
   careerkeytakeaways,
   careerlearnerchat,
+  careerquizzes,
   careersummarization,
   conversionalignment,
   discussioninsights,
@@ -87,8 +93,11 @@ export {
   canvasinboxtranslation,
   careeragent,
   careerassistant,
+  careercontentgeneration,
+  careerflashcards,
   careerkeytakeaways,
   careerlearnerchat,
+  careerquizzes,
   careersummarization,
   conversionalignment,
   discussioninsights,
