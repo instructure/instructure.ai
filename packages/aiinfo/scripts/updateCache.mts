@@ -147,7 +147,12 @@ const parseCSV = (data: string): CSVFetchResult => {
 
 const fetchCSVFromURL = async (): Promise<CSVFetchResult> => {
   try {
-    const response = await fetch(CSVURL);
+    const url = new URL(CSVURL);
+    url.searchParams.set("cb", Date.now().toString());
+    const response = await fetch(url, {
+      cache: "no-store",
+      headers: { "Cache-Control": "no-cache" },
+    });
     return parseCSV(await response.text());
   } catch (error) {
     Log({ color: "redBright", message: ["Error fetching CSV:", error] });

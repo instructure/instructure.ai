@@ -1,5 +1,33 @@
 # Changelog
 
+## 2026-09-30T21:55:41.507Z
+
+### CSV
+
+#### SHA
+
+```diff
+7b0c6185159078fec5108f5767da4d5e7ecb519dd845c5139b64d830339aa6b1
+```
+
+### careerlearnerchat
+
+#### model.description
+
+```diff
+- "Anthropic Claude and Cohere models are provided via Instructure's in-house AI Platform."
++ "Anthropic Claude models are provided via Instructure's in-house AI Platform."
+```
+
+### careeragent
+
+#### outputs.humanDescription
+
+```diff
+- "When chat experience interpets the user's desire to create content, it surfaces a confirmation modal which allows the user to modify the generated content prior to creation"
++ "When chat experience interprets the user's desire to create content, it surfaces a confirmation modal which allows the user to modify the generated content prior to creation"
+```
+
 ## 2026-09-30T21:50:01.738Z
 
 ### CSV

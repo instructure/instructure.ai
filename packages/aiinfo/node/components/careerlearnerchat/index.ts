@@ -1,8 +1,8 @@
 import {
-  type AiInfoFeatureProps,
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
+  type AiInfoFeatureProps,
 } from "../../types";
 const FEATURE_NAME = "Learner Chat";
 const UID = "careerlearnerchat";
@@ -45,7 +45,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "Base Model",
         value: "Haiku 4.5",
         valueDescription:
-          "Anthropic Claude and Cohere models are provided via Instructure's in-house AI Platform.",
+          "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
       },
       {
         description:

@@ -1,8 +1,8 @@
 import {
-  type AiInfoFeatureProps,
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
+  type AiInfoFeatureProps,
 } from "../../types";
 const FEATURE_NAME = "Learning Provider Chat Experience";
 const UID = "careeragent";
@@ -101,7 +101,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
-          "When chat experience interpets the user's desire to create content, it surfaces a confirmation modal which allows the user to modify the generated content prior to creation",
+          "When chat experience interprets the user's desire to create content, it surfaces a confirmation modal which allows the user to modify the generated content prior to creation",
       },
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
