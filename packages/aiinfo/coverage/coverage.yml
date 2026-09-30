@@ -1,27 +1,27 @@
 coverage:
   totals:
-    statements: 85.98%
-    branches: 79.02%
+    statements: 86.05%
+    branches: 80.14%
     functions: 93.22%
-    lines: 85.71%
-    total: 85.98%
+    lines: 85.78%
+    total: 86.3%
   scripts:
     totals:
-      statements: 85.69%
-      branches: 78.56%
+      statements: 85.82%
+      branches: 80.68%
       functions: 83.76%
-      lines: 85.69%
+      lines: 85.82%
     "clearCache.mts":
       statements: 100%
       branches: 100%
       functions: 100%
       lines: 100%
     "updateCache.mts":
-      statements: 77.06%
-      branches: 51.06%
+      statements: 77.47%
+      branches: 57.44%
       functions: 84.61%
-      lines: 77.06%
-      uncovered_line_numbers: "37-238"
+      lines: 77.47%
+      uncovered_line_numbers: "37-243"
     "writeEntries.mts":
       statements: 80%
       branches: 84.61%

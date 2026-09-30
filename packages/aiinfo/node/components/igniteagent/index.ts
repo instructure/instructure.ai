@@ -67,7 +67,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "How long the model stores customer data.",
         segmentTitle: "Data Retention",
-        value: "Chat logs are retained indefinitely for troubleshooting and debugging.",
+        value: "Chat logs are retained for 90 days for troubleshooting and debugging.",
       },
       {
         description: "Recording the AI's performance for auditing, analysis, and improvement.",

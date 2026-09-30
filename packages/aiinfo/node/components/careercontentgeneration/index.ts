@@ -4,8 +4,8 @@ import {
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
 } from "../../types";
-const FEATURE_NAME = "AI Study Tools";
-const UID = "careerassistant";
+const FEATURE_NAME = "Course Content Generation";
+const UID = "careercontentgeneration";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
   {
     description:
@@ -43,9 +43,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
-        value: "Claude 3 Haiku, Cohere multi-language v3",
+        value: "Claude Sonnet 4.5",
         valueDescription:
-          "Anthropic Claude and Cohere models are provided via Instructure's in-house AI Platform.",
+          "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
       },
       {
         description:
@@ -56,7 +56,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
-        value: "",
+        value:
+          "Files uploaded to the chat or selected from the Source Material library, course module information.",
       },
     ],
   },
@@ -77,7 +78,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
-        value: "Global",
+        value: "Virginia, Oregon, Sydney",
         valueDescription: "",
       },
       {
@@ -94,30 +95,31 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The ability to turn the AI on or off within the product.",
         segmentTitle: "AI Settings Control",
-        value: "No",
+        value: "Yes",
       },
       {
         description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
-        valueDescription: "",
+        valueDescription:
+          "Course creation modal, multi step process to first create a notion of module learning objectives.  Using those objectives agent presents the user with learning objects to create within the course.  User can add/remove those learning objects.  They can also generate content for those learning objects within the course creation loop experience. On conclusion, course is created and populated with the content from the previous stage.",
       },
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
-        value: "Content is restricted to the course content.",
+        value:
+          "Generated content still passes through filter stages to ensure malicious code could not be injected in the creation process",
       },
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
         value:
-          "AI Generated content may contain mistakes or inaccurate information and should always be verified",
+          "AI Generated content may contain mistakes or inaccurate information and should always be reviewed",
       },
       {
         description: "The specific results the AI model is meant to achieve.",
         segmentTitle: "Intended Outcomes",
-        value:
-          "The intended outcome is to provide quicker and more efficient feedback to learners. ",
+        value: "Generate and update learning materials from provided inputs.",
       },
     ],
   },
@@ -146,8 +148,8 @@ const aiInformation: AiInformationProps = {
     {
       description:
         "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-      featureName: "AI Study Tools",
-      modelName: "Claude 3 Haiku, Cohere multi-language v3",
+      featureName: "Course Content Generation",
+      modelName: "Claude Sonnet 4.5",
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
@@ -159,7 +161,7 @@ const aiInformation: AiInformationProps = {
   ],
   dataPermissionLevelsCloseButtonText: "Close",
   dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeature: "AI Study Tools",
+  dataPermissionLevelsCurrentFeature: "Course Content Generation",
   dataPermissionLevelsCurrentFeatureText: "Current Feature:",
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
   dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -167,21 +169,21 @@ const aiInformation: AiInformationProps = {
   nutritionFactsCloseButtonText: "Close",
   nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
   nutritionFactsData: NUTRITION_FACTS_DATA,
-  nutritionFactsFeatureName: "AI Study Tools",
+  nutritionFactsFeatureName: "Course Content Generation",
   nutritionFactsModalLabel: "This is a modal for AI facts",
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: undefined,
 };
-const careerassistant: AiInfoFeatureProps = {
+const careercontentgeneration: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
   description:
-    "The learner AI Study Tools provides immediate responses and suggested prompts that can aid learning, such as practice quizzes, flashcards, summaries, and key takeaways. ",
+    "During the course creation process the career agent can receive explicit instructions for creating nested learning content",
   group: "Canvas Career",
   name: FEATURE_NAME,
   nutritionFacts,
   revision: "2026.09.30",
   uid: UID,
 };
-export default careerassistant;
+export default careercontentgeneration;

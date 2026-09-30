@@ -145,6 +145,23 @@ describe("updateCache.mts parseCSV", () => {
   });
 });
 
+describe("upstream CSV fetch", () => {
+  it("bypasses cached published CSV responses", async () => {
+    const csv = "uid1,name1,desc1";
+    applyMocks({ newCSV: csv, oldCSV: csv });
+    const { main } = await import("./updateCache.mts");
+
+    await main();
+
+    const [requestURL, requestOptions] = mockFetch.mock.calls[0];
+    expect(new URL(String(requestURL)).searchParams.has("cb")).toBeTruthy();
+    expect(requestOptions).toMatchObject({
+      cache: "no-store",
+      headers: { "Cache-Control": "no-cache" },
+    });
+  });
+});
+
 // Removed: main behavior without side-effect tests (writeEntries/barrel logic)
 
 describe("side-effect import with UPDATE env", () => {

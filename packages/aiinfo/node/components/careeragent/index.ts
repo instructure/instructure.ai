@@ -1,11 +1,11 @@
 import {
-  type AiInfoFeatureProps,
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
+  type AiInfoFeatureProps,
 } from "../../types";
-const FEATURE_NAME = "AI Study Tools";
-const UID = "careerassistant";
+const FEATURE_NAME = "Learning Provider Chat Experience";
+const UID = "careeragent";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
   {
     description:
@@ -43,9 +43,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
-        value: "Claude 3 Haiku, Cohere multi-language v3",
+        value: "Claude 4.5 Sonnet",
         valueDescription:
-          "Anthropic Claude and Cohere models are provided via Instructure's in-house AI Platform.",
+          "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
       },
       {
         description:
@@ -72,12 +72,12 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Logs data",
-        valueDescription: "Chat logs are retained for 30 days for troubleshooting and debugging",
+        valueDescription: "Request, response for service",
       },
       {
         description: "The locations where the AI model is officially available and supported.",
         segmentTitle: "Regions Supported",
-        value: "Global",
+        value: "Virginia, Oregon, Sydney, Montreal, Dublin, Frankfurt",
         valueDescription: "",
       },
       {
@@ -100,24 +100,24 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
-        valueDescription: "",
+        valueDescription:
+          "When chat experience interprets the user's desire to create content, it surfaces a confirmation modal which allows the user to modify the generated content prior to creation",
       },
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
-        value: "Content is restricted to the course content.",
+        value:
+          "Service strips html content to ensure it doesn't violate security requirements.  Content is generated via user scope, so user can't create content in instances where that permission is not available",
       },
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
-        value:
-          "AI Generated content may contain mistakes or inaccurate information and should always be verified",
+        value: "Proposed content may contain inaccuracies",
       },
       {
         description: "The specific results the AI model is meant to achieve.",
         segmentTitle: "Intended Outcomes",
-        value:
-          "The intended outcome is to provide quicker and more efficient feedback to learners. ",
+        value: "Shorten loop for authoring content within a course",
       },
     ],
   },
@@ -146,8 +146,8 @@ const aiInformation: AiInformationProps = {
     {
       description:
         "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-      featureName: "AI Study Tools",
-      modelName: "Claude 3 Haiku, Cohere multi-language v3",
+      featureName: "Learning Provider Chat Experience",
+      modelName: "Claude 4.5 Sonnet",
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
@@ -159,7 +159,7 @@ const aiInformation: AiInformationProps = {
   ],
   dataPermissionLevelsCloseButtonText: "Close",
   dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeature: "AI Study Tools",
+  dataPermissionLevelsCurrentFeature: "Learning Provider Chat Experience",
   dataPermissionLevelsCurrentFeatureText: "Current Feature:",
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
   dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -167,21 +167,21 @@ const aiInformation: AiInformationProps = {
   nutritionFactsCloseButtonText: "Close",
   nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
   nutritionFactsData: NUTRITION_FACTS_DATA,
-  nutritionFactsFeatureName: "AI Study Tools",
+  nutritionFactsFeatureName: "Learning Provider Chat Experience",
   nutritionFactsModalLabel: "This is a modal for AI facts",
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: undefined,
 };
-const careerassistant: AiInfoFeatureProps = {
+const careeragent: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
   description:
-    "The learner AI Study Tools provides immediate responses and suggested prompts that can aid learning, such as practice quizzes, flashcards, summaries, and key takeaways. ",
+    "Generate courses, assignments, pages.  Manipulates content within human-in-the-loop experience.  Ability to create/update courses and learning objects within an account/course.",
   group: "Canvas Career",
   name: FEATURE_NAME,
   nutritionFacts,
   revision: "2026.09.30",
   uid: UID,
 };
-export default careerassistant;
+export default careeragent;

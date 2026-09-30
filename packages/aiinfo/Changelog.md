@@ -1,5 +1,99 @@
 # Changelog
 
+## 2026-09-30T21:55:41.507Z
+
+### CSV
+
+#### SHA
+
+```diff
+7b0c6185159078fec5108f5767da4d5e7ecb519dd845c5139b64d830339aa6b1
+```
+
+### careerlearnerchat
+
+#### model.description
+
+```diff
+- "Anthropic Claude and Cohere models are provided via Instructure's in-house AI Platform."
++ "Anthropic Claude models are provided via Instructure's in-house AI Platform."
+```
+
+### careeragent
+
+#### outputs.humanDescription
+
+```diff
+- "When chat experience interpets the user's desire to create content, it surfaces a confirmation modal which allows the user to modify the generated content prior to creation"
++ "When chat experience interprets the user's desire to create content, it surfaces a confirmation modal which allows the user to modify the generated content prior to creation"
+```
+
+## 2026-09-30T21:50:01.738Z
+
+### CSV
+
+#### SHA
+
+```diff
+b22edec88a271acd66b70978e14b835549d870dbb68176d1766579e825ca2133
+```
+
+### careerquizzes
+
+### careercontentgeneration
+
+### careerflashcards
+
+## 2026-09-30T21:43:26.867Z
+
+### CSV
+
+#### SHA
+
+```diff
+285733bc62bcffc9dcba89f06781c5adf0d480fb87e77249769f07fc53f4ee38
+```
+
+### igniteagent
+
+#### compliance.retention
+
+```diff
+- "Chat logs are retained indefinitely for troubleshooting and debugging."
++ "Chat logs are retained for 90 days for troubleshooting and debugging."
+```
+
+### careerassistant
+
+#### feature.description
+
+```diff
+- "The Learner Assist provides immediate responses and suggested prompts that can aid learning, such as practice quizzes, flashcards, summaries, and key takeaways. "
++ "The learner AI Study Tools provides immediate responses and suggested prompts that can aid learning, such as practice quizzes, flashcards, summaries, and key takeaways. "
+```
+
+#### feature.name
+
+```diff
+- "Learner Assist"
++ "AI Study Tools"
+```
+
+#### revision
+
+```diff
+- "2026.02.25"
++ "2026.09.30"
+```
+
+### careerlearnerchat
+
+### careersummarization
+
+### careerkeytakeaways
+
+### careeragent
+
 ## 2026-07-27T19:29:17.794Z
 
 ### CSV
