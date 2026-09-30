@@ -4,8 +4,8 @@ import  {
   type NutritionFactsProps,
   type AiInfoFeatureProps,
 } from "../../types";
-const FEATURE_NAME = "AI Study Tools";
-const UID = "careerassistant";
+const FEATURE_NAME = "Learner Chat";
+const UID = "careerlearnerchat";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
   {
     description:
@@ -43,7 +43,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
-        value: "Claude 3 Haiku, Cohere multi-language v3",
+        value: "Haiku 4.5",
         valueDescription:
           "Anthropic Claude and Cohere models are provided via Instructure's in-house AI Platform.",
       },
@@ -56,7 +56,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
-        value: "",
+        value: "The learner's typed message, plus course pages and files the learner can access.",
       },
     ],
   },
@@ -72,7 +72,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Logs data",
-        valueDescription: "Chat logs are retained for 30 days for troubleshooting and debugging",
+        valueDescription:
+          "Logs request metadata only: account, user ID, feature, and duration. Journey doesn't log prompts or responses.",
       },
       {
         description: "The locations where the AI model is officially available and supported.",
@@ -84,7 +85,8 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         description: "Sensitive data that can be used to identify an individual.",
         segmentTitle: "PII",
         value: "Not Exposed",
-        valueDescription: "",
+        valueDescription:
+          "The model doesn't get names or emails. Learners can type personal details into a message, and it's sent as written.",
       },
     ],
   },
@@ -100,24 +102,24 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         description: "Indicates if a human is involved in the AI's process or output.",
         segmentTitle: "Human in the Loop",
         value: "Yes",
-        valueDescription: "",
+        valueDescription:
+          "Learners read the answer and can check the cited sources. Nothing is saved.",
       },
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
-        value: "Content is restricted to the course content.",
+        value:
+          "Answers draw only on course content the learner can access in Canvas. Rate limits apply.",
       },
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
-        value:
-          "AI Generated content may contain mistakes or inaccurate information and should always be verified",
+        value: "Answers may be wrong or incomplete. Verify against the source.",
       },
       {
         description: "The specific results the AI model is meant to achieve.",
         segmentTitle: "Intended Outcomes",
-        value:
-          "The intended outcome is to provide quicker and more efficient feedback to learners. ",
+        value: "Give learners quick answers with sources from their course.",
       },
     ],
   },
@@ -146,8 +148,8 @@ const aiInformation: AiInformationProps = {
     {
       description:
         "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-      featureName: "AI Study Tools",
-      modelName: "Claude 3 Haiku, Cohere multi-language v3",
+      featureName: "Learner Chat",
+      modelName: "Haiku 4.5",
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
@@ -159,7 +161,7 @@ const aiInformation: AiInformationProps = {
   ],
   dataPermissionLevelsCloseButtonText: "Close",
   dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeature: "AI Study Tools",
+  dataPermissionLevelsCurrentFeature: "Learner Chat",
   dataPermissionLevelsCurrentFeatureText: "Current Feature:",
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
   dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -167,21 +169,21 @@ const aiInformation: AiInformationProps = {
   nutritionFactsCloseButtonText: "Close",
   nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
   nutritionFactsData: NUTRITION_FACTS_DATA,
-  nutritionFactsFeatureName: "AI Study Tools",
+  nutritionFactsFeatureName: "Learner Chat",
   nutritionFactsModalLabel: "This is a modal for AI facts",
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: undefined,
 };
-const careerassistant: AiInfoFeatureProps = {
+const careerlearnerchat: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
   description:
-    "The learner AI Study Tools provides immediate responses and suggested prompts that can aid learning, such as practice quizzes, flashcards, summaries, and key takeaways. ",
+    "Answers learner questions about their course content and cites the source pages and files.",
   group: "Canvas Career",
   name: FEATURE_NAME,
   nutritionFacts,
   revision: "2026.09.30",
   uid: UID,
 };
-export default careerassistant;
+export default careerlearnerchat;

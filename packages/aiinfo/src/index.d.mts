@@ -108,8 +108,20 @@ declare const canvasgradingassistance: AiInfoFeatureProps;
 //#region node/components/canvasinboxtranslation/index.d.ts
 declare const canvasinboxtranslation: AiInfoFeatureProps;
 //#endregion
+//#region node/components/careeragent/index.d.ts
+declare const careeragent: AiInfoFeatureProps;
+//#endregion
 //#region node/components/careerassistant/index.d.ts
 declare const careerassistant: AiInfoFeatureProps;
+//#endregion
+//#region node/components/careerkeytakeaways/index.d.ts
+declare const careerkeytakeaways: AiInfoFeatureProps;
+//#endregion
+//#region node/components/careerlearnerchat/index.d.ts
+declare const careerlearnerchat: AiInfoFeatureProps;
+//#endregion
+//#region node/components/careersummarization/index.d.ts
+declare const careersummarization: AiInfoFeatureProps;
 //#endregion
 //#region node/components/conversionalignment/index.d.ts
 declare const conversionalignment: AiInfoFeatureProps;
@@ -168,7 +180,11 @@ export {
   canvasdiscussionsummaries,
   canvasgradingassistance,
   canvasinboxtranslation,
+  careeragent,
   careerassistant,
+  careerkeytakeaways,
+  careerlearnerchat,
+  careersummarization,
   conversionalignment,
   dataPermissionLevels,
   discussioninsights,

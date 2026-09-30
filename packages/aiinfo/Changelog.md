@@ -1,5 +1,55 @@
 # Changelog
 
+## 2026-09-30T21:43:26.867Z
+
+### CSV
+
+#### SHA
+
+```diff
+285733bc62bcffc9dcba89f06781c5adf0d480fb87e77249769f07fc53f4ee38
+```
+
+### igniteagent
+
+#### compliance.retention
+
+```diff
+- "Chat logs are retained indefinitely for troubleshooting and debugging."
++ "Chat logs are retained for 90 days for troubleshooting and debugging."
+```
+
+### careerassistant
+
+#### feature.description
+
+```diff
+- "The Learner Assist provides immediate responses and suggested prompts that can aid learning, such as practice quizzes, flashcards, summaries, and key takeaways. "
++ "The learner AI Study Tools provides immediate responses and suggested prompts that can aid learning, such as practice quizzes, flashcards, summaries, and key takeaways. "
+```
+
+#### feature.name
+
+```diff
+- "Learner Assist"
++ "AI Study Tools"
+```
+
+#### revision
+
+```diff
+- "2026.02.25"
++ "2026.09.30"
+```
+
+### careerlearnerchat
+
+### careersummarization
+
+### careerkeytakeaways
+
+### careeragent
+
 ## 2026-07-27T19:29:17.794Z
 
 ### CSV
