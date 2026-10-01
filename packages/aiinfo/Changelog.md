@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-10-01T14:09:12.011Z
+
+### CSV
+
+#### SHA
+
+```diff
+046f8d336ed6e2bcb9a0b83642d4fe4bb4c7810d9b46d1414c9c1ffe91fc1824
+```
+
+### careerskillsextraction
+
+### careeragent
+
+#### outputs.risks
+
+```diff
+- "Proposed content may contain inaccuracies"
++ "Needs human review to validate suggested skills before relying on them"
+```
+
 ## 2026-09-30T21:55:41.507Z
 
 ### CSV

@@ -1,4 +1,4 @@
-import {
+import  {
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
@@ -112,7 +112,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
-        value: "Proposed content may contain inaccuracies",
+        value: "Needs human review to validate suggested skills before relying on them",
       },
       {
         description: "The specific results the AI model is meant to achieve.",

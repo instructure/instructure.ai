@@ -1,11 +1,11 @@
-import {
-  type AiInfoFeatureProps,
+import  {
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
+  type AiInfoFeatureProps,
 } from "../../types";
-const FEATURE_NAME = "Learner Chat";
-const UID = "careerlearnerchat";
+const FEATURE_NAME = "Skill Extraction";
+const UID = "careerskillsextraction";
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
   {
     description:
@@ -43,7 +43,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
-        value: "Haiku 4.5",
+        value: "Claude Haiku 4.5",
         valueDescription:
           "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
       },
@@ -56,7 +56,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "Indicates which training or operational content was given to the model.",
         segmentTitle: "Data Shared with Model",
-        value: "The learner's typed message, plus course pages and files the learner can access.",
+        value: "Canvas learning objects on the account",
       },
     ],
   },
@@ -66,14 +66,14 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "How long the model stores customer data.",
         segmentTitle: "Data Retention",
-        value: "",
+        value: "The model does not retain any data",
       },
       {
         description: "Recording the AI's performance for auditing, analysis, and improvement.",
         segmentTitle: "Data Logging",
         value: "Logs data",
         valueDescription:
-          "Logs request metadata only: account, user ID, feature, and duration. Journey doesn't log prompts or responses.",
+          "Structured logs via logging service. Prompts and responses are not logged.",
       },
       {
         description: "The locations where the AI model is officially available and supported.",
@@ -85,8 +85,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         description: "Sensitive data that can be used to identify an individual.",
         segmentTitle: "PII",
         value: "Not Exposed",
-        valueDescription:
-          "The model doesn't get names or emails. Learners can type personal details into a message, and it's sent as written.",
+        valueDescription: "Instructor-authored course content only",
       },
     ],
   },
@@ -103,23 +102,23 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
         segmentTitle: "Human in the Loop",
         value: "Yes",
         valueDescription:
-          "Learners read the answer and can check the cited sources. Nothing is saved.",
+          "Review is post-hoc curation, not gated approval. If nothing is reviewed, extracted skills remain aligned.",
       },
       {
         description: "Preventative safety mechanisms or limitations built into the AI model.",
         segmentTitle: "Guardrails",
-        value:
-          "Answers draw only on course content the learner can access in Canvas. Rate limits apply.",
+        value: "",
       },
       {
         description: "Any risks the model may pose to the user.",
         segmentTitle: "Expected Risks",
-        value: "Answers may be wrong or incomplete. Verify against the source.",
+        value:
+          "Needs human review to validate suggested skills before relying on them\nPrompt injection via assignment HTML (no sanitization before Cedar).",
       },
       {
         description: "The specific results the AI model is meant to achieve.",
         segmentTitle: "Intended Outcomes",
-        value: "Give learners quick answers with sources from their course.",
+        value: "Assist learning providers in creating a skill taxonomy for thier learning content",
       },
     ],
   },
@@ -148,8 +147,8 @@ const aiInformation: AiInformationProps = {
     {
       description:
         "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
-      featureName: "Learner Chat",
-      modelName: "Haiku 4.5",
+      featureName: "Skill Extraction",
+      modelName: "Claude Haiku 4.5",
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
@@ -161,7 +160,7 @@ const aiInformation: AiInformationProps = {
   ],
   dataPermissionLevelsCloseButtonText: "Close",
   dataPermissionLevelsCloseIconButtonScreenReaderLabel: "Close dialog",
-  dataPermissionLevelsCurrentFeature: "Learner Chat",
+  dataPermissionLevelsCurrentFeature: "Skill Extraction",
   dataPermissionLevelsCurrentFeatureText: "Current Feature:",
   dataPermissionLevelsData: DATA_PERMISSION_LEVELS,
   dataPermissionLevelsModalLabel: "Data Permission Levels modal",
@@ -169,21 +168,21 @@ const aiInformation: AiInformationProps = {
   nutritionFactsCloseButtonText: "Close",
   nutritionFactsCloseIconButtonScreenReaderLabel: "Close",
   nutritionFactsData: NUTRITION_FACTS_DATA,
-  nutritionFactsFeatureName: "Learner Chat",
+  nutritionFactsFeatureName: "Skill Extraction",
   nutritionFactsModalLabel: "This is a modal for AI facts",
   nutritionFactsTitle: "AI Nutrition Facts",
   title: "Features",
   trigger: undefined,
 };
-const careerlearnerchat: AiInfoFeatureProps = {
+const careerskillsextraction: AiInfoFeatureProps = {
   aiInformation,
   dataPermissionLevels,
   description:
-    "Answers learner questions about their course content and cites the source pages and files.",
+    "Use AI to automatically identify skills in learning content to create a clearer picture of learner capabilities.",
   group: "Canvas Career",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2026.09.30",
+  revision: "2026.10.01",
   uid: UID,
 };
-export default careerlearnerchat;
+export default careerskillsextraction;

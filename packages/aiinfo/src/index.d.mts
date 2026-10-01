@@ -129,6 +129,9 @@ declare const careerlearnerchat: AiInfoFeatureProps;
 //#region node/components/careerquizzes/index.d.ts
 declare const careerquizzes: AiInfoFeatureProps;
 //#endregion
+//#region node/components/careerskillsextraction/index.d.ts
+declare const careerskillsextraction: AiInfoFeatureProps;
+//#endregion
 //#region node/components/careersummarization/index.d.ts
 declare const careersummarization: AiInfoFeatureProps;
 //#endregion
@@ -196,6 +199,7 @@ export {
   careerkeytakeaways,
   careerlearnerchat,
   careerquizzes,
+  careerskillsextraction,
   careersummarization,
   conversionalignment,
   dataPermissionLevels,
