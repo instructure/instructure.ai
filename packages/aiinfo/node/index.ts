@@ -20,6 +20,7 @@ import careerflashcards from "./components/careerflashcards";
 import careerkeytakeaways from "./components/careerkeytakeaways";
 import careerlearnerchat from "./components/careerlearnerchat";
 import careerquizzes from "./components/careerquizzes";
+import careerskillsextraction from "./components/careerskillsextraction";
 import careersummarization from "./components/careersummarization";
 import conversionalignment from "./components/conversionalignment";
 import discussioninsights from "./components/discussioninsights";
@@ -62,6 +63,7 @@ const AiInfo: AiInfoProps = {
   careerkeytakeaways,
   careerlearnerchat,
   careerquizzes,
+  careerskillsextraction,
   careersummarization,
   conversionalignment,
   discussioninsights,
@@ -98,6 +100,7 @@ export {
   careerkeytakeaways,
   careerlearnerchat,
   careerquizzes,
+  careerskillsextraction,
   careersummarization,
   conversionalignment,
   discussioninsights,
