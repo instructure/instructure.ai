@@ -53,14 +53,14 @@ jobs:
       # Only set up Node/pnpm + caching if we actually have tags to release
       - name: Install pnpm
         if: steps.find_tags.outputs.tags != ''
-        run: npm install -g pnpm
+        uses: pnpm/action-setup@v4
 
       - uses: actions/setup-node@v4
         if: steps.find_tags.outputs.tags != ''
         with:
-          node-version: '24'
-          registry-url: 'https://registry.npmjs.org'
-          cache: 'pnpm'
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          cache: "pnpm"
           cache-dependency-path: |
             pnpm-lock.yaml
             **/pnpm-lock.yaml
@@ -77,7 +77,7 @@ jobs:
       - name: Release each package tag
         if: steps.find_tags.outputs.tags != ''
         env:
-          tags: ${{ env.tags }}    # comes from $GITHUB_ENV we set above
+          tags: ${{ env.tags }} # comes from $GITHUB_ENV we set above
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         run: |
@@ -95,6 +95,7 @@ jobs:
 
             # Install deps
             pnpm install --frozen-lockfile
+            pnpm typecheck
 
             # Enable vite-node loader using the register() API
             export NODE_OPTIONS="--import=${{ github.workspace }}/plugins/vite-node.plugin.loader.mjs"

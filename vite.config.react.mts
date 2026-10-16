@@ -1,16 +1,11 @@
 import { defineConfig, mergeConfig } from "vite";
 import baseConfig from "./vite.config.mts";
-import react from "@vitejs/plugin-react";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
+import babel from "@rolldown/plugin-babel";
 
 export default mergeConfig(
-  baseConfig,
-  defineConfig({
-    plugins: [
-      react({
-        babel: {
-          plugins: [["babel-plugin-react-compiler", { target: "19" }]],
-        },
-      }),
-    ],
-  }),
+	baseConfig,
+	defineConfig({
+		plugins: [react(), babel({ presets: [reactCompilerPreset({ target: "19" })] })],
+	}),
 );

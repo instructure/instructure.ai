@@ -5,8 +5,8 @@ packages:
 
 linkWorkspacePackages: true
 
-onlyBuiltDependencies:
-  - esbuild
-  - instructure-ui
+allowBuilds:
+  esbuild: true
+  instructure-ui: true
 
 recursiveInstall: true

@@ -11,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: true
 
 env:
@@ -31,36 +31,41 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check for changes in ./apps
+      - name: Check for changes affecting apps
         id: changes
         shell: bash
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
-          BEFORE_SHA="${{ github.event.before }}"
-          AFTER_SHA="${{ github.sha }}"
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "skip_steps=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           if git cat-file -e "$BEFORE_SHA" 2>/dev/null; then
             DIFF_RANGE="$BEFORE_SHA $AFTER_SHA"
           else
             DIFF_RANGE="HEAD~1 HEAD"
           fi
-          if ! git diff --name-only $DIFF_RANGE | grep '^apps/' ; then
-            echo "No changes in ./apps directory. Exiting early."
+          if ! git diff --name-only $DIFF_RANGE | grep -E '^(apps/|packages/|plugins/|scripts/|public/|package.json$|pnpm-.*|tsconfig.*|vite.*|\.github/workflows/deploy-apps.yml$)' ; then
+            echo "No changes affecting apps. Exiting early."
             echo "skip_steps=true" >> "$GITHUB_OUTPUT"
           else
             echo "skip_steps=false" >> "$GITHUB_OUTPUT"
           fi
 
-
       - name: Install pnpm
         if: steps.changes.outputs.skip_steps != 'true'
-        run: npm install -g pnpm
+        uses: pnpm/action-setup@v4
 
       - name: Set up Node (v24) with pnpm cache
         if: steps.changes.outputs.skip_steps != 'true'
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
-          registry-url: 'https://registry.npmjs.org'
-          cache: 'pnpm'
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          cache: "pnpm"
           cache-dependency-path: |
             pnpm-lock.yaml
             **/pnpm-lock.yaml
@@ -83,6 +88,10 @@ jobs:
           NODE_OPTIONS: --import=${{ github.workspace }}/plugins/vite-node.plugin.loader.mjs
         run: pnpm build apps
 
+      - name: Typecheck
+        if: steps.changes.outputs.skip_steps != 'true'
+        run: pnpm typecheck
+
       - name: Setup Pages
         if: steps.changes.outputs.skip_steps != 'true'
         uses: actions/configure-pages@v5
@@ -91,7 +100,7 @@ jobs:
         if: steps.changes.outputs.skip_steps != 'true'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: "./dist"
 
       - name: Deploy to GitHub Pages
         if: steps.changes.outputs.skip_steps != 'true'

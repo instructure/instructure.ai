@@ -1,22 +1,22 @@
 {
-	"devDependencies": {
-		"@instructure.ai/shared-configs": "workspace:^"
-	},
 	"name": "@instructure.ai/site",
+	"version": "0.1.0",
 	"private": true,
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/instructure/instructure.ai",
 		"directory": "apps/site"
 	},
+	"type": "module",
 	"scripts": {
 		"build": "vite build",
 		"dev": "vite",
 		"lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
 		"preview": "vite preview",
 		"test": "pnpm vitest run",
-		"typecheck": "tsgo --noEmit"
+		"typecheck": "tsc --noEmit"
 	},
-	"type": "module",
-	"version": "0.1.0"
+	"devDependencies": {
+		"@instructure.ai/shared-configs": "workspace:^"
+	}
 }

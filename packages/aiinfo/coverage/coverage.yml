@@ -1,10 +1,10 @@
 coverage:
   totals:
-    statements: 86.05%
-    branches: 80.14%
-    functions: 93.22%
-    lines: 85.78%
-    total: 86.3%
+    statements: 86.11%
+    branches: 80.29%
+    functions: 93.33%
+    lines: 85.81%
+    total: 86.39%
   scripts:
     totals:
       statements: 85.82%

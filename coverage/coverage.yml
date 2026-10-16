@@ -1,19 +1,19 @@
 coverage:
   totals:
-    statements: 2.06%
-    branches: 0.79%
+    statements: 2.88%
+    branches: 0.99%
     functions: 2.96%
-    lines: 2.11%
-    total: 1.98%
+    lines: 2.95%
+    total: 2.45%
   plugins:
     totals:
       statements: 33.33%
-      branches: 33.33%
+      branches: 27.78%
       functions: 33.33%
       lines: 33.33%
     "vite-node.plugin.loader.mjs":
       statements: 100%
-      branches: 100%
+      branches: 83.33%
       functions: 100%
       lines: 100%
     "vite.plugin.multiPreview.mts":
@@ -21,7 +21,7 @@ coverage:
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "7-79"
+      uncovered_line_numbers: "7-77"
     "vitest.plugin.coverageReporter.cjs":
       statements: 0%
       branches: 0%
@@ -68,7 +68,7 @@ coverage:
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "15-223"
+      uncovered_line_numbers: "12-191"
     "preview.mts":
       statements: 0%
       branches: 0%

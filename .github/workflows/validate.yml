@@ -1,0 +1,35 @@
+name: Validate Workspace
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - name: Report root lint findings
+        continue-on-error: true
+        run: pnpm exec oxlint --type-aware --config .oxlintrc.json --disable-nested-config
+      - name: Report workspace lint findings
+        continue-on-error: true
+        run: pnpm -r --no-bail exec oxlint --type-aware
+      - name: Test root and all workspaces
+        run: pnpm test all
+      - name: Build library without refreshing remote data
+        run: pnpm --filter @instructure.ai/aiinfo build:lib
+      - name: Build apps
+        env:
+          NODE_OPTIONS: --import=${{ github.workspace }}/plugins/vite-node.plugin.loader.mjs
+        run: pnpm build apps
