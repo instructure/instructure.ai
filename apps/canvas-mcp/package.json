@@ -9,7 +9,7 @@
 	},
 	"type": "module",
 	"scripts": {
-		"build": "vite build",
+		"build": "vite build && vite-node scripts/optimizeStyles.mts",
 		"dev": "vite",
 		"preview": "vite preview",
 		"typecheck": "tsc --noEmit",
@@ -17,9 +17,17 @@
 		"lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions"
 	},
 	"devDependencies": {
-		"@instructure.ai/shared-configs": "workspace:^"
+		"@instructure.ai/shared-configs": "workspace:^",
+		"@pantoken/plugin-props-minify": "0.1.4",
+		"postcss": "8.5.30"
 	},
 	"engines": {
 		"node": ">=24.15.0"
+	},
+	"dependencies": {
+		"@pantoken/components": "2.1.1",
+		"@pantoken/css": "0.4.5",
+		"@pantoken/plugin-custom-theme-colors": "0.3.5",
+		"@pantoken/plugin-logos": "0.5.5"
 	}
 }

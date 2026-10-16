@@ -10,3 +10,13 @@ allowBuilds:
   instructure-ui: true
 
 recursiveInstall: true
+
+minimumReleaseAgeExclude:
+  - '@pantoken/components@2.1.1'
+  - '@pantoken/plugin-kit@0.3.6'
+  - '@pantoken/plugin-layouts@0.5.5'
+  - '@pantoken/plugin-logos@0.5.5'
+  - '@pantoken/scaffold-base@0.3.8'
+  - '@pantoken/utils@1.4.0'
+  - '@pantoken/plugin-custom-theme-colors@0.3.5'
+  - '@pantoken/css@0.4.5'

@@ -13,7 +13,9 @@ pnpm --filter @instructure.ai/canvas-mcp typecheck
 pnpm --filter @instructure.ai/canvas-mcp build
 ```
 
-The app validates Canvas tenant domains, builds production or beta server URLs, and stores only the selected domain, client, key type, and region in localStorage. Share links can include a domain, region, client, key type, and public Client ID. Client secrets and access tokens are never requested or stored.
+The app validates Canvas tenant domains and builds production or beta server URLs. The selected tab is stored as `page=connect` or `page=admin`; switching tabs preserves the domain, client, key type, region, and optional public Client ID in the query string. Those setup preferences may also be saved in localStorage. Client secrets and access tokens are never requested or stored.
+
+The UI uses Pantoken components, themes, logos, and custom colors. The production build prunes unused Pantoken token properties and shortens the remaining property names after CSS imports are bundled.
 
 Canvas automatically populates the region-specific Maple Allowed Audience during production developer-key creation (confirmed in production). The user setup page still asks for a region because the MCP endpoint itself is region-qualified. The app does not make requests to Canvas or Maple and does not use a proxy.
 
