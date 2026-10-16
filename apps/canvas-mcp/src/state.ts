@@ -34,13 +34,22 @@ export interface StorageLike {
 	setItem(key: string, value: string): void;
 }
 
-const STORAGE_KEY = "canvas-mcp:v1";
-const DOMAIN_PATTERN = /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.(?:beta\.)?instructure\.com$/u;
-const CLIENT_ID_PATTERN = /^\d+$/u;
+interface SavedPreferences {
+	domain: string;
+	client: Client | null;
+	key: KeyType | null;
+	region: Region | "";
+}
+
+const STORAGE_KEY = "canvas-mcp:v1",
+	DOMAIN_PATTERN = /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.(?:beta\.)?instructure\.com$/u,
+	CLIENT_ID_PATTERN = /^\d+$/u;
 
 export function normalizeCanvasDomain(value: string): string | null {
 	const input = value.trim();
-	if (!input) return null;
+	if (!input) {
+		return null;
+	}
 
 	let parsed: URL;
 	try {
@@ -67,59 +76,63 @@ export function isBetaDomain(domain: string): boolean {
 }
 
 export function deriveUrls(state: Pick<AppState, "domain" | "region">) {
-	const tenant = state.domain.replace(/\.beta\.instructure\.com$/u, ".instructure.com");
-	const tenantName = tenant.slice(0, -".instructure.com".length);
-	const environment = isBetaDomain(state.domain) ? "maple-beta" : "maple";
-	const region = state.region || "<region>";
+	const tenant = state.domain.replace(/\.beta\.instructure\.com$/u, ".instructure.com"),
+		tenantName = tenant.slice(0, -".instructure.com".length),
+		environment = isBetaDomain(state.domain) ? "maple-beta" : "maple",
+		region = state.region || "<region>";
 
 	return {
-		mcp: `https://${tenantName}.${environment}.${region}.core.inseng.io/mcp`,
 		auth: `https://${state.domain}/login/oauth2/auth`,
-		token: `https://${state.domain}/login/oauth2/token`,
+		mcp: `https://${tenantName}.${environment}.${region}.core.inseng.io/mcp`,
 		scope: "https://sso.canvaslms.com/all-client-scopes",
+		token: `https://${state.domain}/login/oauth2/token`,
 	};
 }
 
 export function readState(search: string, storage: StorageLike | null): AppState {
-	const params = new URLSearchParams(search);
-	let saved: Partial<AppState> = {};
-	try {
-		const raw = storage?.getItem(STORAGE_KEY);
-		if (raw) saved = JSON.parse(raw) as Partial<AppState>;
-	} catch {
-		saved = {};
-	}
+	const params = new URLSearchParams(search),
+	 saved = readPreferences(storage),
 
-	const domain = normalizeCanvasDomain(params.get("domain") ?? "") ??
-		normalizeCanvasDomain(saved.domain ?? "") ?? "";
-	const queryClient = params.get("client");
-	const savedClient = saved.client;
-	const client = isClient(queryClient)
-		? queryClient
-		: isClient(savedClient)
-			? savedClient
-			: "claude-code";
-	const queryKey = params.get("key");
-	const key = queryKey === "private" || queryKey === "public"
-		? queryKey
-		: saved.key === "private"
-			? "private"
-			: "public";
-	const queryRegion = params.get("region");
-	const region = isRegion(queryRegion)
-		? queryRegion
-		: isRegion(saved.region)
-			? saved.region
-			: "";
-	const clientId = params.get("clientId") ?? "";
+	 domain =
+			normalizeCanvasDomain(params.get("domain") ?? "") ??
+			normalizeCanvasDomain(saved.domain) ??
+			"",
+		queryClient = params.get("client"),
+		client = isClient(queryClient) ? queryClient : (saved.client ?? "claude-code"),
+	 queryKey = params.get("key"),
+		key = queryKey === "private" || queryKey === "public" ? queryKey : (saved.key ?? "public"),
+	 queryRegion = params.get("region"),
+		region = isRegion(queryRegion) ? queryRegion : saved.region,
+	 clientId = params.get("clientId") ?? "";
 
 	return {
-		domain,
 		client,
+		clientId: CLIENT_ID_PATTERN.test(clientId) ? clientId : "",
+		domain,
 		key,
 		region,
-		clientId: CLIENT_ID_PATTERN.test(clientId) ? clientId : "",
 	};
+}
+
+function readPreferences(storage: StorageLike | null): SavedPreferences {
+	try {
+		const raw = storage?.getItem(STORAGE_KEY);
+		if (!raw) {
+			return { client: null, domain: "", key: null, region: "" };
+		}
+		const saved: unknown = JSON.parse(raw);
+		if (!isRecord(saved)) {
+			return { client: null, domain: "", key: null, region: "" };
+		}
+		return {
+			client: isClient(saved.client) ? saved.client : null,
+			domain: typeof saved.domain === "string" ? saved.domain : "",
+			key: saved.key === "public" || saved.key === "private" ? saved.key : null,
+			region: isRegion(saved.region) ? saved.region : "",
+		};
+	} catch {
+		return { client: null, domain: "", key: null, region: "" };
+	}
 }
 
 export function savePreferences(state: AppState, storage: StorageLike | null): void {
@@ -127,8 +140,8 @@ export function savePreferences(state: AppState, storage: StorageLike | null): v
 		storage?.setItem(
 			STORAGE_KEY,
 			JSON.stringify({
-				domain: normalizeCanvasDomain(state.domain) ?? "",
 				client: state.client,
+				domain: normalizeCanvasDomain(state.domain) ?? "",
 				key: state.key,
 				region: isRegion(state.region) ? state.region : "",
 			}),
@@ -140,10 +153,14 @@ export function savePreferences(state: AppState, storage: StorageLike | null): v
 
 export function stateQuery(state: AppState, includeClientId = true): string {
 	const params = new URLSearchParams();
-	if (state.domain) params.set("domain", state.domain);
+	if (state.domain) {
+		params.set("domain", state.domain);
+	}
 	params.set("client", state.client);
 	params.set("key", state.key);
-	if (state.region) params.set("region", state.region);
+	if (state.region) {
+		params.set("region", state.region);
+	}
 	if (includeClientId && CLIENT_ID_PATTERN.test(state.clientId)) {
 		params.set("clientId", state.clientId);
 	}
@@ -156,4 +173,8 @@ export function isClient(value: unknown): value is Client {
 
 export function isRegion(value: unknown): value is Region {
 	return typeof value === "string" && REGIONS.includes(value as Region);
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+	return typeof value === "object" && value !== null && !Array.isArray(value);
 }

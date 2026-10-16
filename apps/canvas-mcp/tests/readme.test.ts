@@ -2,16 +2,13 @@ import { readFile } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
 import { name } from "../package.json" with { type: "json" };
 
-const pkgRoot = new URL("..", import.meta.url);
-
-const readReadme = async () => {
-	return readFile(new URL("./readme.md", pkgRoot), "utf8");
-};
+const pkgRoot = new URL("..", import.meta.url),
+	readReadme = async () => readFile(new URL("readme.md", pkgRoot), "utf8");
 
 describe("README.md", () => {
 	it('starts with "# <package name>"', async () => {
-		const readme = await readReadme();
-		const firstLine = readme.split(/\r?\n/, 1)[0].replace(/^\uFEFF/, "");
+		const readme = await readReadme(),
+			firstLine = readme.split(/\r?\n/, 1)[0].replace(/^\uFEFF/, "");
 		expect(firstLine).toBe(`# ${name}`);
 	});
 

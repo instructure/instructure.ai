@@ -6,5 +6,5 @@ import baseConfig from "@instructure.ai/shared-configs/vitest";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default mergeConfig(baseConfig, {
-  root: __dirname,
+	root: __dirname,
 });

@@ -2,13 +2,13 @@
 
 import { describe, expect, it } from "vitest";
 import {
+	type AppState,
+	type StorageLike,
 	deriveUrls,
 	normalizeCanvasDomain,
 	readState,
 	savePreferences,
 	stateQuery,
-	type AppState,
-	type StorageLike,
 } from "../src/state";
 
 describe("normalizeCanvasDomain", () => {
@@ -34,13 +34,11 @@ describe("normalizeCanvasDomain", () => {
 
 describe("deriveUrls", () => {
 	it("builds production URLs for a selected region", () => {
-		expect(
-			deriveUrls({ domain: "utah.instructure.com", region: "us-east-1" }),
-		).toEqual({
-			mcp: "https://utah.maple.us-east-1.core.inseng.io/mcp",
+		expect(deriveUrls({ domain: "utah.instructure.com", region: "us-east-1" })).toEqual({
 			auth: "https://utah.instructure.com/login/oauth2/auth",
-			token: "https://utah.instructure.com/login/oauth2/token",
+			mcp: "https://utah.maple.us-east-1.core.inseng.io/mcp",
 			scope: "https://sso.canvaslms.com/all-client-scopes",
+			token: "https://utah.instructure.com/login/oauth2/token",
 		});
 	});
 
@@ -55,55 +53,62 @@ describe("deriveUrls", () => {
 	});
 
 	it("uses a non-copyable placeholder until a region is selected", () => {
-		expect(deriveUrls({ domain: "utah.instructure.com", region: "" }).mcp).toContain(
-			".<region>.",
-		);
+		expect(deriveUrls({ domain: "utah.instructure.com", region: "" }).mcp).toContain(".<region>.");
 	});
 });
 
 describe("app state", () => {
 	it("uses URL values before saved preferences and validates untrusted values", () => {
 		const storage = memoryStorage({
-			domain: "saved.instructure.com",
 			client: "codex",
+			domain: "saved.instructure.com",
 			key: "private",
 			region: "eu-west-1",
 		});
 
 		expect(readState("?domain=utah.instructure.com&client=generic&region=nope", storage)).toEqual({
-			domain: "utah.instructure.com",
 			client: "generic",
+			clientId: "",
+			domain: "utah.instructure.com",
 			key: "private",
 			region: "eu-west-1",
-			clientId: "",
 		});
 	});
 
 	it("ignores unavailable or malformed storage", () => {
 		expect(readState("", null)).toMatchObject({
-			domain: "",
 			client: "claude-code",
+			domain: "",
 			key: "public",
 			region: "",
 		});
 		expect(readState("", memoryStorageRaw("not json"))).toMatchObject({ domain: "" });
+		expect(
+			readState(
+				"",
+				memoryStorage({ client: [], domain: { host: "evil" }, key: "bad", region: {} }),
+			),
+		).toMatchObject({ client: "claude-code", domain: "", key: "public", region: "" });
 	});
 
 	it("does not persist client IDs or secrets and serializes only public values", () => {
-		const storage = memoryStorage();
-		const state: AppState = {
-			domain: "utah.instructure.com",
-			client: "codex",
-			key: "private",
-			region: "us-west-2",
-			clientId: "12345",
-		};
+		const storage = memoryStorage(),
+			state: AppState = {
+				client: "codex",
+				clientId: "12345",
+				domain: "utah.instructure.com",
+				key: "private",
+				region: "us-west-2",
+			};
 
 		savePreferences(state, storage);
 
-		expect(storage.getItem("canvas-mcp:v1")).toBe(
-			'{"domain":"utah.instructure.com","client":"codex","key":"private","region":"us-west-2"}',
-		);
+		expect(JSON.parse(storage.getItem("canvas-mcp:v1") ?? "")).toEqual({
+			client: "codex",
+			domain: "utah.instructure.com",
+			key: "private",
+			region: "us-west-2",
+		});
 		expect(stateQuery(state)).toBe(
 			"domain=utah.instructure.com&client=codex&key=private&region=us-west-2&clientId=12345",
 		);
@@ -113,7 +118,9 @@ describe("app state", () => {
 
 function memoryStorage(initial?: Record<string, unknown>): StorageLike {
 	const data = new Map<string, string>();
-	if (initial) data.set("canvas-mcp:v1", JSON.stringify(initial));
+	if (initial) {
+		data.set("canvas-mcp:v1", JSON.stringify(initial));
+	}
 	return {
 		getItem: (key) => data.get(key) ?? null,
 		setItem: (key, value) => data.set(key, value),

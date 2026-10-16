@@ -1,7 +1,42 @@
 coverage:
   totals:
-    statements: 0%
-    branches: 0%
-    functions: 0%
-    lines: 0%
-    total: 0%
+    statements: 72.09%
+    branches: 74.85%
+    functions: 74.5%
+    lines: 71.59%
+    total: 73.26%
+  src:
+    totals:
+      statements: 51.6%
+      branches: 41.46%
+      functions: 93.16%
+      lines: 51.45%
+    "admin.ts":
+      statements: 0%
+      branches: 0%
+      functions: 100%
+      lines: 0%
+      uncovered_line_numbers: "3-4"
+    "app.ts":
+      statements: 59.81%
+      branches: 68.42%
+      functions: 65.78%
+      lines: 59.04%
+      uncovered_line_numbers: "22-321"
+    "clients.ts":
+      statements: 100%
+      branches: 50%
+      functions: 100%
+      lines: 100%
+    "main.ts":
+      statements: 0%
+      branches: 0%
+      functions: 100%
+      lines: 0%
+      uncovered_line_numbers: "3-4"
+    "state.ts":
+      statements: 98.21%
+      branches: 88.88%
+      functions: 100%
+      lines: 98.21%
+      uncovered_line_numbers: "125"
