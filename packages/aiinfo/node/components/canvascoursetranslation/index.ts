@@ -1,8 +1,8 @@
-import {
-  type AiInfoFeatureProps,
+import  {
   type AiInformationProps,
   type DataPermissionLevelsProps,
   type NutritionFactsProps,
+  type AiInfoFeatureProps,
 } from "../../types";
 const FEATURE_NAME = "Translations for Discussions & Announcements";
 const UID = "canvascoursetranslation";
@@ -43,7 +43,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
       {
         description: "The foundational AI on which further training and customizations are built.",
         segmentTitle: "Base Model",
-        value: "Haiku 4.5",
+        value: "Haiku 4.5, Sonnet 5",
         valueDescription:
           "Anthropic Claude models are provided via Instructure's in-house AI Platform.",
       },
@@ -147,7 +147,7 @@ const aiInformation: AiInformationProps = {
       description:
         "We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
       featureName: "Translations for Discussions & Announcements",
-      modelName: "Haiku 4.5",
+      modelName: "Haiku 4.5, Sonnet 5",
       modelNameText: "Base Model",
       nutritionFactsModalTriggerText: "AI Nutrition Facts",
       permissionLevel: "LEVEL 2",
@@ -181,7 +181,7 @@ const canvascoursetranslation: AiInfoFeatureProps = {
   group: "Canvas",
   name: FEATURE_NAME,
   nutritionFacts,
-  revision: "2026.07.27",
+  revision: "2026.10.16",
   uid: UID,
 };
 export default canvascoursetranslation;
