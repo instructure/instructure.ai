@@ -254,6 +254,12 @@ importers:
         specifier: ^2.9.1
         version: 2.9.1
 
+  apps/canvas-mcp:
+    devDependencies:
+      '@instructure.ai/shared-configs':
+        specifier: workspace:^
+        version: link:../..
+
   apps/nutritionfacts:
     dependencies:
       '@instructure.ai/aiinfo':

@@ -1,0 +1,25 @@
+{
+	"name": "@instructure.ai/canvas-mcp",
+	"version": "0.0.0",
+	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/instructure/instructure.ai",
+		"directory": "apps/canvas-mcp"
+	},
+	"type": "module",
+	"scripts": {
+		"build": "vite build",
+		"dev": "vite",
+		"preview": "vite preview",
+		"typecheck": "tsc --noEmit",
+		"test": "pnpm vitest run",
+		"lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions"
+	},
+	"devDependencies": {
+		"@instructure.ai/shared-configs": "workspace:^"
+	},
+	"engines": {
+		"node": ">=24.15.0"
+	}
+}
