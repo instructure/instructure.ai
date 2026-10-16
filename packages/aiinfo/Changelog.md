@@ -1,5 +1,127 @@
 # Changelog
 
+## 2026-10-16T19:15:27.698Z
+
+### CSV
+
+#### SHA
+
+```diff
+de1aa2159e78c91ec345d50045020330b8b7876f956f1ccd8adbc5f43f3bcbdd
+```
+
+### canvasa11ycheckertablecaptions
+
+#### model.name
+
+```diff
+- "Haiku 3, Haiku 4.5"
++ "Haiku 3, Haiku 4.5, Sonnet 5"
+```
+
+#### revision
+
+```diff
+- "2026.07.27"
++ "2026.10.16"
+```
+
+### canvasa11ycheckeralttextgenerator
+
+#### model.name
+
+```diff
+- "Haiku 3, Haiku 4.5"
++ "Haiku 3, Haiku 4.5, Sonnet 5"
+```
+
+#### revision
+
+```diff
+- "2026.07.27"
++ "2026.10.16"
+```
+
+### canvascoursetranslation
+
+#### model.name
+
+```diff
+- "Haiku 4.5"
++ "Haiku 4.5, Sonnet 5"
+```
+
+#### revision
+
+```diff
+- "2026.07.27"
++ "2026.10.16"
+```
+
+### rubricgenerator
+
+#### model.name
+
+```diff
+- "Haiku 3, Haiku 4.5"
++ "Haiku 3, Haiku 4.5, Sonnet 5"
+```
+
+#### revision
+
+```diff
+- "2026.07.27"
++ "2026.10.16"
+```
+
+### discussioninsights
+
+#### model.name
+
+```diff
+- "Haiku 3, Haiku 4.5"
++ "Haiku 3, Haiku 4.5, Sonnet 5"
+```
+
+#### revision
+
+```diff
+- "2026.07.27"
++ "2026.10.16"
+```
+
+### canvasdiscussionsummaries
+
+#### model.name
+
+```diff
+- "Haiku 3, Haiku 4.5"
++ "Haiku 3, Haiku 4.5, Sonnet 5"
+```
+
+#### revision
+
+```diff
+- "2026.07.27"
++ "2026.10.16"
+```
+
+### itemauthoringassistance
+
+#### model.name
+
+```diff
+- "Haiku 4.5"
++ "Haiku 4.5, Sonnet 5"
+```
+
+#### revision
+
+```diff
+- "2026.07.27"
++ "2026.10.16"
+```
+
 ## 2026-10-01T14:09:12.011Z
 
 ### CSV
