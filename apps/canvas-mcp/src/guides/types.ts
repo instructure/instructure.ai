@@ -9,6 +9,7 @@ export type GuideStep =
 			id: string;
 			kind: "provider" | "verify";
 			key?: "public" | "private";
+			audience?: "server" | "client";
 			title: string;
 			content: StructuredContent[];
 	  };

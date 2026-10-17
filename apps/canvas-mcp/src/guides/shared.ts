@@ -26,6 +26,17 @@ export function clientGuide(client: ClientDefinition, install: "personal" | "ent
 		}
 	);
 }
+// Server setup includes Canvas and organization provisioning only. Verification is
+// a client action unless a guide explicitly identifies an administrator-only check.
+export function serverSetupSteps(guide: Guide, install: "personal" | "enterprise") {
+	return guide.steps.filter(
+		(step) =>
+			step.kind === "canvas-key" ||
+			(install === "enterprise" &&
+				step.audience !== "client" &&
+				(step.kind !== "verify" || step.audience === "server")),
+	);
+}
 // A client page follows the server's selected install mode. Enterprise guides declare
 // whether members wire a local connection or only sign in to a provisioned connector.
 export function clientSetup(client: ClientDefinition, install: "personal" | "enterprise") {
@@ -33,7 +44,7 @@ export function clientSetup(client: ClientDefinition, install: "personal" | "ent
 	return (
 		guide.clientSetup ?? {
 			requiresServerDetails: true,
-			steps: guide.steps.filter((step) => step.kind !== "canvas-key"),
+			steps: guide.steps.filter((step) => step.kind !== "canvas-key" && step.audience !== "server"),
 		}
 	);
 }

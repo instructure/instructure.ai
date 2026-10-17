@@ -50,13 +50,10 @@ export function antigravityEnterpriseGuide(personal: Guide): Guide {
 						kind: "list",
 						items: [
 							"Assign users a Gemini Enterprise Standard or Plus license in the organization's Google Cloud project.",
-							"In the Antigravity app or CLI, choose Sign in → Business account → Continue with Google Cloud.",
-							"Select the licensed project in the License Selector, then configure the Canvas MCP connection below.",
 						],
 					},
 				],
 			},
-			...personal.steps.filter((step) => step.kind !== "canvas-key"),
 		],
 	};
 }

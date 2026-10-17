@@ -111,7 +111,7 @@ export const claudeAi = {
 								"Name it Canvas MCP and enter {mcpUrl}. Continue through authentication settings.",
 								"Choose Sign in when needed and Use your own OAuth client.",
 								"Enter Client ID {clientId}. Leave the secret blank for a public key; enter the Canvas secret for a private key.",
-								"Choose Add. Members then open Customize → Connectors → Canvas MCP → Connect and sign in to Canvas.",
+								"Choose Add to make the connector available to organization members.",
 							],
 						},
 					],

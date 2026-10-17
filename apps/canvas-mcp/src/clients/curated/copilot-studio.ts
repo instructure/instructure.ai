@@ -87,13 +87,14 @@ export const copilotStudio = {
 					],
 				},
 				{
-					id: "provider-verify",
-					kind: "verify",
-					title: "Copilot Studio — complete OAuth and verify",
+					id: "provider-add-tool",
+					kind: "provider",
+					audience: "server",
+					title: "Copilot Studio — add the connector to the agent",
 					content: [
 						{
 							kind: "paragraph",
-							text: "After saving the generated redirect URI on the Canvas key, add the connector as a tool to the agent and test with “List my Canvas courses.” Complete Canvas sign-in when prompted.",
+							text: "After saving the generated redirect URI on the Canvas key, add the connector as a tool to the agent.",
 						},
 					],
 				},

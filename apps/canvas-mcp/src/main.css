@@ -577,23 +577,102 @@ pre {
         break-inside: avoid;
     }
 }
-.guide-surfaces, .install-modes { margin: 0 0 18px; }
-.guide-pending { font-size: 0.875rem; line-height: 1.5; }
-.guide-surface[hidden] { display: none; }
-.guide-fields { margin-top: 20px; }
-.guide-fields td, .guide-fields code { overflow-wrap: anywhere; }
-.guide-surface pre { overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
-.workflow-step { margin: 20px 0; padding-top: 16px; border-top: 1px solid var(--instui-color-border-base); }
-.workflow-label { font-weight: 700; }
-.oauth-facts, .shared-troubleshooting { margin-top: 24px; }
-.oauth-facts summary, .shared-troubleshooting summary { cursor: pointer; }
-.oauth-facts dt { margin-top: 12px; font-weight: 700; }
-.oauth-facts dd { margin-left: 0; }
-.print-context { display: none; }
+
+.guide-surfaces,
+.install-modes {
+    margin: 0 0 18px;
+}
+
+.guide-pending {
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.guide-surface[hidden] {
+    display: none;
+}
+
+.guide-fields {
+    margin-top: 20px;
+}
+
+.guide-fields td,
+.guide-fields code {
+    overflow-wrap: anywhere;
+}
+
+.guide-surface pre {
+    overflow: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.workflow-step {
+    margin: 20px 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--instui-color-border-base);
+}
+
+.workflow-label {
+    font-weight: 700;
+}
+
+.oauth-facts,
+.shared-troubleshooting {
+    margin-top: 24px;
+}
+
+.oauth-facts summary,
+.shared-troubleshooting summary {
+    cursor: pointer;
+}
+
+.oauth-facts dt {
+    margin-top: 12px;
+    font-weight: 700;
+}
+
+.oauth-facts dd {
+    margin-left: 0;
+}
+
+.print-context {
+    display: none;
+}
+
 @media print {
-  .guide-surfaces, .install-modes, .controls-panel { display: none !important; }
-  .guide-surface[hidden] { display: block !important; }
-  .guide-surface { margin: 16px 0; }
-  .print-context { display: block; overflow-wrap: anywhere; }
-  .guide-section, .admin-steps .guide-section { break-inside: auto; }
+
+    .guide-surfaces,
+    .install-modes,
+    .controls-panel {
+        display: none !important;
+    }
+
+    .guide-surface[hidden] {
+        display: block !important;
+    }
+
+    .guide-surface {
+        margin: 16px 0;
+    }
+
+    .print-context {
+        display: block;
+        overflow-wrap: anywhere;
+    }
+
+    .guide-section,
+    .admin-steps .guide-section {
+        break-inside: auto;
+    }
+}
+
+.instui-img {
+    border-radius: 1rem;
+    border: 1px solid transparent;
+}
+
+
+[data-pantoken-scheme="light"] .instui-img {
+    border-color: var(--instui-component-view-border-color-primary);
 }

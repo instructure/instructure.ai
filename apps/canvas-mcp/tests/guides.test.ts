@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { mountApp } from "../src/app";
-import { renderContent, validateGuide } from "../src/guides/render";
+import { renderContent, renderGuide, validateGuide } from "../src/guides/render";
 import { clientGuide } from "../src/guides/shared";
 import { clientDefinition } from "../src/clients";
 import { readState } from "../src/state";
@@ -14,24 +14,49 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 describe("composable client guides", () => {
-	it("refreshes copyable configuration when a Client ID is entered", () => {
+	it("offers the client registration command after entering the server's Client ID", () => {
+		vi.stubGlobal("scrollTo", vi.fn());
 		history.replaceState(
 			null,
 			"",
 			"/canvas-mcp/?client=codex&domain=example.instructure.com&region=us-east-1",
 		);
 		mountApp("admin");
+		expect(document.querySelector('button[data-copy-template*="mcp add"]')).toBeNull();
+		const input = document.querySelector<HTMLInputElement>("#client-id-input")!;
+		input.value = "12345000000000001";
+		input.dispatchEvent(new Event("input", { bubbles: true }));
+		document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")!.click();
 		const command = document.querySelector<HTMLButtonElement>(
 			'button[data-copy-template*="mcp add"]',
 		);
-		expect(command?.disabled).toBe(true);
-		const input = document.querySelector<HTMLInputElement>("#client-id-input")!;
-		input.value = "12345";
-		input.dispatchEvent(new Event("input", { bubbles: true }));
 		expect(command?.disabled).toBe(false);
-		expect(command?.dataset.copy).toContain('--oauth-client-id "12345"');
+		expect(command?.dataset.copy).toContain('--oauth-client-id "12345000000000001"');
 		expect(command?.dataset.copy).not.toContain("Enter the Client ID");
 	});
+	it("keeps Codex sign-in and validation exclusively on the client page", () => {
+		const client = clientDefinition("codex");
+		const state = readState(
+			"?client=codex&install=enterprise&surface=provider&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001",
+			null,
+		);
+		document.body.innerHTML = renderGuide(client, state, true);
+		expect(document.querySelector('[data-guide-step="provider-register"]')).not.toBeNull();
+		expect(document.querySelector('[data-guide-step="provider-manage"]')).not.toBeNull();
+		expect(
+			document.querySelector('[data-guide-step="provider-login"], [data-guide-step="verify"]'),
+		).toBeNull();
+		expect(document.querySelector("#configure-client-button-bottom")).not.toBeNull();
+		document.body.innerHTML = renderGuide(client, state, false);
+		expect(document.querySelector('[data-guide-step="provider-login"]')?.textContent).toContain(
+			"Sign in to Canvas",
+		);
+		expect(document.querySelector('[data-guide-step="verify"]')?.textContent).toContain(
+			"Validate the configuration",
+		);
+		expect(document.querySelector('[data-guide-step="provider-manage"]')).toBeNull();
+	});
+
 	it("ignores stale callback work after a region change", async () => {
 		const client = clientDefinition("codex"),
 			old = client.facts.redirectUri;
@@ -90,7 +115,7 @@ describe("composable client guides", () => {
 			"provider-save",
 			"canvas-update-redirect",
 			"provider-policy",
-			"provider-verify",
+			"provider-add-tool",
 		]);
 		expect(document.querySelector('[data-guide-step="canvas-create"]')?.textContent).toContain(
 			"Leave Redirect URIs blank",

@@ -6,7 +6,7 @@ import { renderKeyCreation } from "../admin/key-settings";
 import { type KeySettingsModel, resolveKeySettings } from "../admin/key-settings-model";
 import { escapeHtml } from "../ui/html";
 import { renderEvidence } from "../ui/oauth-facts";
-import { clientGuide, clientSetup, sharedTroubleshooting } from "./shared";
+import { clientGuide, clientSetup, serverSetupSteps, sharedTroubleshooting } from "./shared";
 import { type Guide, type GuideStep, type StructuredContent } from "./types";
 
 export function guideValues(
@@ -156,9 +156,9 @@ export function renderGuide(
 		!editable && guide.status === "pending"
 			? '<p class="guide-pending">Provider instructions are awaiting source verification. The connection fields and workflow below are provisional.</p>'
 			: "";
-	const steps = (editable ? guide.steps : clientSetup(client, state.install).steps).filter(
-		(step) => step.kind === "canvas-key" || !step.key || step.key === state.key,
-	);
+	const steps = (
+		editable ? serverSetupSteps(guide, state.install) : clientSetup(client, state.install).steps
+	).filter((step) => step.kind === "canvas-key" || !step.key || step.key === state.key);
 	const surfaceControl = splitEnterprise
 		? `<fieldset class="instui-segmented-control guide-surfaces" aria-label="Setup instructions"><div class="viewport"><div class="track">${(["canvas", "provider"] as const).map((surface) => `<label><input id="guide-surface-${surface}" type="radio" name="guide-surface" value="${surface}" data-guide-surface="${surface}" aria-controls="guide-${surface}" ${activeSurface === surface ? "checked" : ""}>${surface === "canvas" ? "1. Canvas" : `2. ${escapeHtml(provider)}`}</label>`).join("")}</div></div></fieldset>`
 		: "";
@@ -167,7 +167,7 @@ export function renderGuide(
 		: guide.presentation === "interleaved"
 			? `<div class="interleaved-guide">${steps.map((step, index) => `<div class="workflow-step"><p class="workflow-label">Step ${index + 1} · ${step.kind === "canvas-key" ? "Canvas" : escapeHtml(client.name)}</p>${renderStep(step, client, state, editable, model)}</div>`).join("")}</div>${editable ? renderAdminAction(client, state, "client") : ""}`
 			: surfaceControl +
-				(["canvas", "provider"] as const)
+				(splitEnterprise ? (["canvas", "provider"] as const) : (["canvas"] as const))
 					.map(
 						(surface) =>
 							`<section id="guide-${surface}" class="guide-surface" aria-label="${surface === "canvas" ? "Canvas setup" : `${escapeHtml(provider)} setup`}" ${activeSurface !== surface ? "hidden" : ""}>${surface === "provider" ? renderFields(client, state, model, editable) : ""}${steps

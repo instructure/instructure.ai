@@ -63,6 +63,7 @@ const codexPersonalGuide: Guide = {
 		{
 			id: "provider-login",
 			kind: "provider",
+			audience: "client",
 			title: "Sign in to Canvas",
 			content: [
 				{

@@ -14,8 +14,8 @@ describe("updated curated guidance", () => {
 	it.each([
 		["codex", "Codex managed configuration", "requirements.toml"],
 		["chatgpt", "ChatGPT workspace settings", "Configure Access"],
-		["antigravity", "Google Cloud console", "License Selector"],
-		["antigravity-cli", "Google Cloud console", "License Selector"],
+		["antigravity", "Google Cloud console", "Assign users"],
+		["antigravity-cli", "Google Cloud console", "Assign users"],
 	])(
 		"switches %s between personal Canvas setup and enterprise provider instructions",
 		(id, surface, instruction) => {
@@ -183,6 +183,16 @@ describe("updated curated guidance", () => {
 				const state = readState(`?client=${client.id}&install=${install}`, null);
 				document.body.innerHTML = renderGuide(client, state, true);
 				expect(document.querySelector(".guide-pending")).toBeNull();
+				const guide = client.guides?.[install];
+				for (const step of guide?.steps ?? []) {
+					if (
+						step.kind !== "canvas-key" &&
+						(step.audience === "client" || (step.kind === "verify" && step.audience !== "server"))
+					) {
+						expect(document.querySelector(`[data-guide-step="${step.id}"]`)).toBeNull();
+					}
+				}
+				if (install === "personal") expect(document.querySelector("#guide-provider")).toBeNull();
 				expect(document.body.textContent).not.toMatch(
 					/awaiting verification|source verification|Scope list awaiting|Security warning|instructions are not available/iu,
 				);
