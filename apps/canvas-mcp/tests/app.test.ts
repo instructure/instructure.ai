@@ -298,14 +298,21 @@ describe("Canvas MCP pages", () => {
 		privateKey = document.querySelector<HTMLInputElement>("#private-key-input");
 		expect(privateKey?.checked).toBe(true);
 		expect(new URLSearchParams(globalThis.location.search).get("key")).toBe("private");
-		expect(document.querySelector(".shared-key-save-steps")?.getAttribute("start")).toBe("4");
+		expect(document.querySelector(".shared-key-save-steps")?.getAttribute("start")).toBe("2");
 		const privateSaveBanner = document.querySelector(".private-key-save-steps");
 		expect(privateSaveBanner?.classList.contains("instui-banner")).toBe(true);
 		expect(privateSaveBanner?.classList.contains("-icon-key")).toBe(true);
 		expect(privateSaveBanner?.classList.contains("-size-compact")).toBe(true);
 		expect(privateSaveBanner?.getAttribute("role")).toBe("status");
 		expect(privateSaveBanner?.querySelector("h4")?.textContent).toBe("Private key setup");
-		expect(privateSaveBanner?.querySelector(".secret-warning")).toBeNull();
+		expect(privateSaveBanner?.textContent).toContain("store it securely");
+		expect(privateSaveBanner?.querySelector("ol")).toBeNull();
+		expect(
+			privateSaveBanner?.querySelector<HTMLImageElement>(
+				'img[src$="/images/server-canvas-save_private_key.png"]',
+			),
+		).not.toBeNull();
+		expect(document.querySelector(".private-key-save-step")?.textContent).toContain("Save");
 		expect(document.querySelector(".public-key-save-steps")).toBeNull();
 		expect(document.querySelector(".shared-key-save-steps")).not.toBeNull();
 		expect(document.querySelector("#client-id-reference-input")).toBeNull();
@@ -482,13 +489,8 @@ describe("Canvas MCP pages", () => {
 			?.querySelector<HTMLInputElement>("input");
 		expect(testClusterCheckbox?.checked).toBe(true);
 		expect(document.querySelector(".private-key-save-steps")?.textContent).toContain(
-			"Developer Key Created",
+			"store it securely",
 		);
-		expect(document.querySelector(".private-key-save-steps")?.textContent).toContain(
-			"API Key Secret",
-		);
-		expect(document.querySelector(".private-key-save-steps .secret-warning")).toBeNull();
-		expect(document.querySelector(".private-key-save-steps")?.textContent).toContain("Close");
 		const betaRows = [
 			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
 		];
