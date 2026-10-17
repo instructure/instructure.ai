@@ -15,6 +15,8 @@ Out of scope: Rulesync-only clients, the Generic client, Maple region routing, n
 
 One file per client group. Each has ordered steps with real UI labels, roles, redirect URI behavior, `SCREENSHOT: <name> — <what it shows>` markers, source URLs, the date checked, a conflicts list against the current repo, and a "Not documented" list. **Write guides from these files; do not re-research.**
 
+Treat the research as an evidence ledger, not as blanket approval to publish every claim: use vendor documentation or source code for documented behavior, and preserve qualifiers for search snippets, inaccessible pages, internal guidance, and maintainer tests. Keep items marked "Not documented" out of guide instructions. Recheck a cited source when its supplied claim conflicts with another source or the live product; record any change in the relevant research file before updating guide text.
+
 | Client | Research file | Modes |
 | --- | --- | --- |
 | Claude.ai / Claude Desktop | [research/claude.md](canvas-mcp-phase3/research/claude.md) section A | personal, enterprise |
@@ -144,6 +146,26 @@ Ask the vendor or confirm in a browser before the real screenshots are taken.
 7. **Copilot Studio**: PKCE, token endpoint auth method, and whether tool sign-in works inside Teams or M365 Copilot.
 8. **Claude redirect**: third-party guides also register `https://claude.com/api/mcp/auth_callback`; the vendor does not. Keep to the vendor URI unless a live test shows otherwise.
 9. Whether the Instructure internal guidance may be cited by label; keep internal sources as "Instructure setup guidance" with no URL, as in phase 2.
+
+## 6.1 Client validation status (admin and client pages)
+
+When a client is selected in the admin Configuration panel, show a status pill directly below its selector:
+
+- **Validated** (success, check icon): at least one maintainer-performed end-to-end Canvas MCP connection test is recorded in the internal test log. Vendor documentation and source inspection alone are not validation. The pill does not imply every key type, install mode, or version was tested.
+- **Untested** (default color, question/info icon): no successful end-to-end test is recorded, and no active known issue applies to the selected install mode.
+- **Known issue** (danger, warning icon): an active, evidenced blocker or product limitation applies. Show a danger alert on both Configure a Server and Connect a Client, with the specific issue when known. Do not show alerts for Validated or Untested.
+
+Initial classifications from the evidence currently in this plan:
+
+| Client / mode | Status | Basis |
+| --- | --- | --- |
+| Claude Code / personal | Validated | Internal log records a successful end-to-end test; version and key type were not recorded. |
+| ChatGPT / personal or enterprise | Known issue | Canvas MCP authentication bug; setup remains blocked pending a successful retest. |
+| Gemini CLI / personal | Known issue | Deprecated for non-Enterprise use; direct users to Antigravity CLI. |
+| Gemini CLI / enterprise | Untested | Research says Enterprise is expected to continue working; it is not a validation result. |
+| All other clients and modes | Untested | No end-to-end result is recorded. |
+
+Do not infer validation from `Fact.status === "documented"` or from a guide's `status === "documented"`. Keep status data separate from guide evidence and keep the internal test log out of public guide copy.
 
 ## 7. Data handling
 
