@@ -499,7 +499,7 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector("h1")?.textContent).toContain("Connect Canvas");
 	});
 
-	it("requires a Client ID for every supported OAuth client", () => {
+	it("requires a Client ID limited to 17 characters for every supported OAuth client", () => {
 		globalThis.history.replaceState(null, "", "/canvas-mcp/?page=admin");
 		mountApp("admin");
 
@@ -514,6 +514,8 @@ describe("Canvas MCP pages", () => {
 			currentSelect.dispatchEvent(new Event("change", { bubbles: true }));
 
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.required).toBe(true);
+			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.maxLength).toBe(17);
+			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.pattern).toBe("[0-9]{17}");
 			expect(document.querySelector(".details-panel #client-id-input")).not.toBeNull();
 			expect(document.querySelector("#client-id-reference-input")).toBeNull();
 			expect(document.querySelector("#client-id-hint")?.textContent).toContain(
@@ -524,6 +526,20 @@ describe("Canvas MCP pages", () => {
 			);
 			expect(document.querySelector(".optional")).toBeNull();
 		}
+	});
+
+	it.each([
+		["12345000000000001", true],
+		["1234500000000000", false],
+		["123450000000000012", false],
+		["1234500000000000a", false],
+		["", false],
+	])("validates Client ID %s as exactly 17 digits", (value, valid) => {
+		mountApp("admin");
+		const input = document.querySelector<HTMLInputElement>("#client-id-input");
+		if (!input) throw new Error("Client ID input not found");
+		input.value = value;
+		expect(input.checkValidity()).toBe(valid);
 	});
 
 	it("enables Connect a Client when admin state completes the query-provided region", () => {
