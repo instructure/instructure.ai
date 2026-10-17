@@ -1,3 +1,4 @@
+// Unknown callback values remain non-copyable; research status belongs in client facts.
 import { type CallbackResolution } from "../oauth/codex-callback";
 import { type ClientDefinition } from "../clients/types";
 import { type AppState, isBetaDomain } from "../state";
@@ -24,15 +25,11 @@ export function resolveKeySettings(
 			copyable = true;
 			break;
 		case "computed":
-			if (redirect.mode === "unknown")
-				redirectText =
-					"Confirm this client's callback mode and exact redirect URI before registering it. Computed output is awaiting verification.";
+			if (redirect.mode === "unknown") redirectText = "Client callback URI";
 			else if (callback?.status === "ready") {
 				redirectText = callback.uri;
 				copyable = true;
-			} else if (callback?.status === "error")
-				redirectText =
-					"The callback URI could not be computed. Confirm the exact URI with your client.";
+			} else if (callback?.status === "error") redirectText = "Client callback URI";
 			else
 				redirectText =
 					state.domain && state.region
@@ -40,8 +37,7 @@ export function resolveKeySettings(
 						: "Select a Canvas domain and region to compute the callback URI.";
 			break;
 		case "unverified":
-			redirectText =
-				"Not yet verified for this client. Confirm its callback URI before creating the key.";
+			redirectText = "Client callback URI";
 			break;
 	}
 	return {

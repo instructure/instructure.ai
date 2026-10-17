@@ -198,9 +198,7 @@ describe("Canvas MCP pages", () => {
 		const pasteScopesHeading = document.querySelector(".scope-manifest-title");
 		expect(pasteScopesHeading?.textContent).toBe("Paste Scopes");
 		expect(pasteScopesHeading?.closest(".settings-table")).toBeNull();
-		expect(pasteScopesHeading?.nextElementSibling?.textContent).toBe(
-			"Scope list awaiting Maple review. Do not use this list to create a production key.",
-		);
+		expect(pasteScopesHeading?.nextElementSibling?.classList.contains("scope-card")).toBe(true);
 		expect(document.querySelector(".details-panel h2")?.classList.contains("--mb-2xl")).toBe(true);
 		expect(document.querySelector(".site-header")).toBeNull();
 		expect(document.querySelectorAll(".page-heading-actions button")).toHaveLength(5);
@@ -265,16 +263,14 @@ describe("Canvas MCP pages", () => {
 		privateKey = document.querySelector<HTMLInputElement>("#private-key-input");
 		expect(privateKey?.checked).toBe(true);
 		expect(new URLSearchParams(globalThis.location.search).get("key")).toBe("private");
-		expect(document.querySelector(".shared-key-save-steps")?.getAttribute("start")).toBe("5");
+		expect(document.querySelector(".shared-key-save-steps")?.getAttribute("start")).toBe("4");
 		const privateSaveBanner = document.querySelector(".private-key-save-steps");
 		expect(privateSaveBanner?.classList.contains("instui-banner")).toBe(true);
 		expect(privateSaveBanner?.classList.contains("-icon-key")).toBe(true);
 		expect(privateSaveBanner?.classList.contains("-size-compact")).toBe(true);
 		expect(privateSaveBanner?.getAttribute("role")).toBe("status");
 		expect(privateSaveBanner?.querySelector("h4")?.textContent).toBe("Private key setup");
-		expect(
-			privateSaveBanner?.querySelector(".secret-warning")?.classList.contains("instui-alert"),
-		).toBe(false);
+		expect(privateSaveBanner?.querySelector(".secret-warning")).toBeNull();
 		expect(document.querySelector(".public-key-save-steps")).toBeNull();
 		expect(document.querySelector(".shared-key-save-steps")).not.toBeNull();
 		expect(document.querySelector("#client-id-reference-input")).toBeNull();
@@ -346,12 +342,12 @@ describe("Canvas MCP pages", () => {
 			[...document.querySelectorAll(".settings-table tbody tr")]
 				.find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs")
 				?.querySelector("td")?.textContent,
-		).toBe("Not yet verified for this client. Confirm its callback URI before creating the key.");
+		).toBe("Client callback URI");
 		const cursorRedirect = [
 			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
 		].find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs");
 		expect(cursorRedirect?.querySelector(".setting-value-muted")?.textContent).toBe(
-			"Not yet verified for this client. Confirm its callback URI before creating the key.",
+			"Client callback URI",
 		);
 		expect(cursorRedirect?.querySelector("pre, button")).toBeNull();
 
@@ -361,7 +357,7 @@ describe("Canvas MCP pages", () => {
 			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
 		].find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs");
 		expect(codexRedirect?.querySelector(".setting-value-muted")?.textContent).toBe(
-			"Confirm this client's callback mode and exact redirect URI before registering it. Computed output is awaiting verification.",
+			"Client callback URI",
 		);
 		expect(codexRedirect?.querySelector("pre, button")).toBeNull();
 	});
@@ -466,7 +462,7 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector(".private-key-save-steps")?.textContent).toContain(
 			"API Key Secret",
 		);
-		expect(document.querySelector(".private-key-save-steps .secret-warning")).not.toBeNull();
+		expect(document.querySelector(".private-key-save-steps .secret-warning")).toBeNull();
 		expect(document.querySelector(".private-key-save-steps")?.textContent).toContain("Close");
 		const betaRows = [
 			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),

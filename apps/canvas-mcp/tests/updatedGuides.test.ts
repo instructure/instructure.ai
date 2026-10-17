@@ -17,7 +17,7 @@ describe("updated curated guidance", () => {
 			"/canvas-mcp/?client=chatgpt&domain=example.instructure.com&region=us-east-1&clientId=12345&page=connect",
 		);
 		mountApp("user");
-		expect(document.querySelector('[role="status"]')?.textContent).toContain("Canvas MCP bug");
+		expect(document.querySelector(".details-panel")?.textContent).not.toContain("Canvas MCP bug");
 		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
 		expect(document.querySelector("#client-id-input")).toBeNull();
 		expect(clientDefinition("chatgpt").facts.registration.value).toBe("unknown");
