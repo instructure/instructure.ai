@@ -3,6 +3,7 @@
 @import "@pantoken/components/base.css";
 @import "@pantoken/components/components.css";
 @import "@pantoken/components/tabs.css";
+@import "@pantoken/plugin-logos/canvas-icon-color.css";
 @import "@pantoken/plugin-custom-components/custom-components.css";
 @import "@pantoken/components/component-icons.css";
 @import "@pantoken/components/icons/copy.css";
@@ -130,6 +131,16 @@ h1 {
 
 .workspace-grid--single {
     grid-template-columns: minmax(0, 1fr);
+}
+
+.instructions-column {
+    min-width: 0;
+    display: grid;
+    gap: 22px;
+}
+
+.gemini-deprecation-notice {
+    margin: 0;
 }
 
 .admin-footer-action {
@@ -421,6 +432,18 @@ pre {
     font-size: 12px;
 }
 
+.shiki-code-group {
+    margin-top: 12px;
+}
+
+.shiki-code-group .shiki-block {
+    margin-top: 8px;
+}
+
+.shiki-code-group [data-code-platform][hidden] {
+    display: none;
+}
+
 .shiki-block.language-prompt {
     border-color: transparent;
     background:
@@ -551,6 +574,7 @@ pre {
     .instui-button,
     .text-button,
     .instui-tabs .list,
+    .code-platform-toggle,
     .page-heading-actions,
     .page-footer a {
         display: none !important;
@@ -647,7 +671,21 @@ pre {
 }
 
 .workflow-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-weight: 700;
+}
+
+.workflow-logo {
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+    object-fit: contain;
+}
+
+.workflow-logo--canvas {
+    background: var(--instui-logo-canvas-icon-color) center / contain no-repeat;
 }
 
 .print-context {

@@ -1,5 +1,6 @@
 import { type Client, type KeyType, type InstallMode, isClient } from "./clients/ids";
 import { normalizeInstall, normalizeKeyType } from "./clients";
+import { type PlatformPreference, isPlatformPreference } from "./platform";
 export { CLIENTS, isClient, type Client, type KeyType, type InstallMode } from "./clients/ids";
 
 export const REGIONS = [
@@ -22,6 +23,7 @@ export interface AppState {
 	clientId: string;
 	install: InstallMode;
 	surface: "canvas" | "provider";
+	platform: PlatformPreference;
 }
 
 export interface StorageLike {
@@ -30,6 +32,7 @@ export interface StorageLike {
 }
 
 interface SavedPreferences {
+	platform: PlatformPreference;
 	domain: string;
 	client: Client | null;
 	install: InstallMode | null;
@@ -99,8 +102,10 @@ export function readState(search: string, storage: StorageLike | null): AppState
 		queryRegion = params.get("region"),
 		region = isRegion(queryRegion) ? queryRegion : saved.region,
 		clientId = params.get("clientId") ?? "";
+	const queryPlatform = params.get("platform");
 
 	return {
+		platform: isPlatformPreference(queryPlatform) ? queryPlatform : saved.platform,
 		client,
 		clientId: CLIENT_ID_PATTERN.test(clientId) ? clientId : "",
 		domain,
@@ -120,13 +125,14 @@ function readPreferences(storage: StorageLike | null): SavedPreferences {
 	try {
 		const raw = storage?.getItem(STORAGE_KEY);
 		if (!raw) {
-			return { client: null, domain: "", key: null, region: "", install: null };
+			return { client: null, domain: "", key: null, region: "", install: null, platform: "auto" };
 		}
 		const saved: unknown = JSON.parse(raw);
 		if (!isRecord(saved)) {
-			return { client: null, domain: "", key: null, region: "", install: null };
+			return { client: null, domain: "", key: null, region: "", install: null, platform: "auto" };
 		}
 		return {
+			platform: isPlatformPreference(saved.platform) ? saved.platform : "auto",
 			client: isClient(saved.client) ? saved.client : null,
 			install:
 				saved.install === "personal" || saved.install === "enterprise" ? saved.install : null,
@@ -135,7 +141,7 @@ function readPreferences(storage: StorageLike | null): SavedPreferences {
 			region: isRegion(saved.region) ? saved.region : "",
 		};
 	} catch {
-		return { client: null, domain: "", key: null, region: "", install: null };
+		return { client: null, domain: "", key: null, region: "", install: null, platform: "auto" };
 	}
 }
 
@@ -144,6 +150,7 @@ export function savePreferences(state: AppState, storage: StorageLike | null): v
 		storage?.setItem(
 			STORAGE_KEY,
 			JSON.stringify({
+				platform: state.platform,
 				client: state.client,
 				install: normalizeInstall(state.client, state.install),
 				domain: normalizeCanvasDomain(state.domain) ?? "",
@@ -164,6 +171,7 @@ export function stateQuery(state: AppState, includeClientId = true): string {
 	params.set("client", state.client);
 	params.set("key", normalizeKeyType(state.client, state.key));
 	params.set("install", normalizeInstall(state.client, state.install));
+	params.set("platform", state.platform);
 	if (state.surface === "provider") params.set("surface", "provider");
 	if (state.region) {
 		params.set("region", state.region);

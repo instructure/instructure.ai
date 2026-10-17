@@ -70,6 +70,7 @@ describe("app state", () => {
 			client: "generic",
 			install: "personal",
 			surface: "canvas",
+			platform: "auto",
 			clientId: "",
 			domain: "utah.instructure.com",
 			key: "private",
@@ -99,6 +100,7 @@ describe("app state", () => {
 				client: "codex",
 				install: "personal",
 				surface: "canvas",
+				platform: "mac",
 				clientId: "12345",
 				domain: "utah.instructure.com",
 				key: "private",
@@ -108,6 +110,7 @@ describe("app state", () => {
 		savePreferences(state, storage);
 
 		expect(JSON.parse(storage.getItem("canvas-mcp:v1") ?? "")).toEqual({
+			platform: "mac",
 			client: "codex",
 			install: "personal",
 			domain: "utah.instructure.com",
@@ -115,9 +118,32 @@ describe("app state", () => {
 			region: "us-west-2",
 		});
 		expect(stateQuery(state)).toBe(
-			"domain=utah.instructure.com&client=codex&key=private&install=personal&region=us-west-2&clientId=12345",
+			"domain=utah.instructure.com&client=codex&key=private&install=personal&platform=mac&region=us-west-2&clientId=12345",
 		);
 		expect(stateQuery({ ...state, clientId: "x%26secret=abc" })).not.toContain("secret");
+	});
+
+	it.each([
+		["", "windows", "windows"],
+		["?platform=mac", "windows", "mac"],
+		["?platform=auto", "windows", "auto"],
+		["?platform=windows", "mac", "windows"],
+		["?platform=invalid", "mac", "mac"],
+		["?platform=invalid", "invalid", "auto"],
+		["", null, "auto"],
+	])("resolves platform preference for %s over saved %s", (search, saved, expected) => {
+		const state = readState(search, memoryStorage({ platform: saved }));
+		expect(state.platform).toBe(expected);
+		expect(new URLSearchParams(stateQuery(state)).get("platform")).toBe(expected);
+	});
+
+	it("round-trips Auto without pinning the detected platform", () => {
+		const storage = memoryStorage();
+		const state = readState("?platform=auto", null);
+		savePreferences(state, storage);
+		expect(readState("", storage).platform).toBe("auto");
+		expect(readState("", memoryStorageRaw("[]")).platform).toBe("auto");
+		expect(readState("", memoryStorageRaw("not json")).platform).toBe("auto");
 	});
 });
 

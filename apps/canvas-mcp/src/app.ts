@@ -7,6 +7,7 @@ import { clientDefinition, normalizeKeyType } from "./clients";
 import { renderPage, type PageMode } from "./page";
 import { copyToClipboard } from "./ui/copy";
 import { applyTheme, setTheme } from "./ui/theme";
+import { commandPlatform, isPlatformPreference } from "./platform";
 import {
 	type AppState,
 	type StorageLike,
@@ -208,6 +209,30 @@ export function mountApp(mode: PageMode): void {
 		appRoot.querySelectorAll<HTMLButtonElement>("[data-theme-choice]").forEach((button) => {
 			button.addEventListener("click", () => setTheme(button.dataset.themeChoice ?? "system"));
 		});
+		appRoot.querySelectorAll<HTMLButtonElement>("[data-platform-choice]").forEach((button) => {
+			button.addEventListener("click", () => {
+				const choice = button.dataset.platformChoice;
+				if (!isPlatformPreference(choice)) throw new Error("Unknown command platform");
+				state.platform = choice;
+				persist();
+				const selected = commandPlatform(choice);
+				appRoot.querySelectorAll<HTMLElement>("[data-code-platform]").forEach((panel) => {
+					panel.hidden = panel.dataset.codePlatform !== selected;
+				});
+				appRoot.querySelectorAll<HTMLButtonElement>("[data-platform-choice]").forEach((control) => {
+					control.setAttribute(
+						"aria-pressed",
+						String(
+							control.dataset.platformChoice ===
+								(control.closest(".shiki-code-group") ? selected : choice),
+						),
+					);
+				});
+				const permalink = appRoot.querySelector<HTMLElement>(".print-permalink");
+				if (permalink) permalink.textContent = globalThis.location.href;
+				updatePrintPageBreaks(appRoot);
+			});
+		});
 		appRoot
 			.querySelector<HTMLButtonElement>('[data-action="print"]')
 			?.addEventListener("click", () => globalThis.print());
@@ -257,9 +282,11 @@ export function mountApp(mode: PageMode): void {
 }
 
 function updatePrintPageBreaks(root: HTMLElement): void {
-	const cards = [...root.querySelectorAll<HTMLElement>(".workspace-grid > .instui-card")].filter(
-		(card) => !card.classList.contains("is-hidden"),
-	);
+	const cards = [
+		...root.querySelectorAll<HTMLElement>(
+			".workspace-grid > .instui-card, .workspace-grid > .instructions-column > .instui-card",
+		),
+	].filter((card) => !card.classList.contains("is-hidden"));
 	cards.forEach((card, index) =>
 		card.classList.toggle("print-page-break-after", index < cards.length - 1),
 	);

@@ -152,6 +152,27 @@ describe("composable client guides", () => {
 			"provider-policy",
 			"provider-add-tool",
 		]);
+		const labels = [...document.querySelectorAll(".workflow-label")];
+		expect(labels.map((label) => label.textContent)).toEqual([
+			"Step 1 · Canvas",
+			"Step 2 · Copilot Studio",
+			"Step 3 · Canvas",
+			"Step 4 · Copilot Studio",
+			"Step 5 · Copilot Studio",
+		]);
+		expect(document.querySelector(".workflow-label .instui-pill")).toBeNull();
+		for (const [index, label] of labels.entries()) {
+			const canvas = index === 0 || index === 2;
+			const logo = label.firstElementChild;
+			expect(logo?.classList.contains("workflow-logo")).toBe(true);
+			if (canvas) {
+				expect(logo?.classList.contains("workflow-logo--canvas")).toBe(true);
+				expect(logo?.getAttribute("aria-hidden")).toBe("true");
+			} else {
+				expect(logo?.getAttribute("src")).toBe("/canvas-mcp/images/CopilotStudio.svg");
+				expect(logo?.getAttribute("alt")).toBe("");
+			}
+		}
 		expect(document.querySelector('[data-guide-step="canvas-create"]')?.textContent).toContain(
 			"Leave Redirect URIs blank",
 		);

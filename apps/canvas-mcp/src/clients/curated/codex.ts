@@ -56,9 +56,17 @@ const codexPersonalGuide: Guide = {
 					text: "Set CANVAS_CLIENT_SECRET in your terminal to the Canvas key secret, then run:",
 				},
 				{
-					kind: "code",
-					language: "bash",
-					text: `codex -c mcp_oauth_callback_port=8081 -c 'mcp_oauth_callback_url="http://localhost:8081/callback"' mcp add canvas-mcp --url "{mcpUrl}" --oauth-client-id "{clientId}" --oauth-client-secret "$CANVAS_CLIENT_SECRET"`,
+					kind: "code-group",
+					variants: {
+						mac: {
+							language: "bash",
+							text: `codex -c mcp_oauth_callback_port=8081 -c 'mcp_oauth_callback_url="http://localhost:8081/callback"' mcp add canvas-mcp --url "{mcpUrl}" --oauth-client-id "{clientId}" --oauth-client-secret "$CANVAS_CLIENT_SECRET"`,
+						},
+						windows: {
+							language: "powershell",
+							text: `codex -c mcp_oauth_callback_port=8081 -c 'mcp_oauth_callback_url="http://localhost:8081/callback"' mcp add canvas-mcp --url "{mcpUrl}" --oauth-client-id "{clientId}" --oauth-client-secret "$env:CANVAS_CLIENT_SECRET"`,
+						},
+					},
 				},
 			],
 		},

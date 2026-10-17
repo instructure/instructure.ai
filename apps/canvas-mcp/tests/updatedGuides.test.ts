@@ -16,6 +16,8 @@ describe("updated curated guidance", () => {
 		["chatgpt", "ChatGPT workspace settings", "Configure Access"],
 		["antigravity", "Google Cloud console", "Assign users"],
 		["antigravity-cli", "Google Cloud console", "Assign users"],
+		["claude-code", "Claude Code managed configuration", "allowedMcpServers"],
+		["gemini-cli", "Gemini CLI enterprise controls", "Approve Canvas MCP"],
 	])(
 		"switches %s between personal Canvas setup and enterprise provider instructions",
 		(id, surface, instruction) => {
@@ -52,6 +54,7 @@ describe("updated curated guidance", () => {
 		["claude-ai", "Connect to the organization connector"],
 		["gemini-enterprise", "Use the Canvas connector"],
 		["copilot-studio", "Use the configured agent"],
+		["claude-code", "Sign in to your organization's Canvas MCP server"],
 	])("shows only member instructions for provisioned %s connections", (id, heading) => {
 		history.replaceState(
 			null,
@@ -73,7 +76,7 @@ describe("updated curated guidance", () => {
 			/create the data store|Policies|Use your own OAuth client|Developer Keys/iu,
 		);
 	});
-	it.each(["codex", "antigravity", "antigravity-cli"])(
+	it.each(["codex", "antigravity", "antigravity-cli", "gemini-cli"])(
 		"retains connection fields for enterprise %s users who configure their client",
 		(id) => {
 			history.replaceState(
@@ -124,6 +127,247 @@ describe("updated curated guidance", () => {
 		);
 		expect(document.querySelector(".install-modes, [data-install]")).toBeNull();
 		expect(new URLSearchParams(location.search).get("install")).toBe("personal");
+	});
+
+	it("deploys Claude Code public OAuth through managed settings and keeps client setup sign-in-only", () => {
+		vi.stubGlobal("scrollTo", vi.fn());
+		history.replaceState(
+			null,
+			"",
+			"/canvas-mcp/?client=claude-code&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=admin",
+		);
+		mountApp("admin");
+		const enterprise = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
+		expect(enterprise.disabled).toBe(false);
+		expect(enterprise.checked).toBe(false);
+		expect(enterprise.closest("label")?.nextElementSibling?.textContent).toBe(
+			"Configured through managed settings or device management.",
+		);
+		enterprise.checked = true;
+		enterprise.dispatchEvent(new Event("change", { bubbles: true }));
+		document.querySelector<HTMLButtonElement>("#configure-provider-button-bottom")!.click();
+		const copy = document.querySelector<HTMLButtonElement>(
+			'[data-guide-step="provider-deploy-public"] [data-copy]',
+		)!;
+		expect(copy.disabled).toBe(false);
+		const config = JSON.parse(copy.dataset.copy!);
+		expect(config.managedMcpServers["canvas-mcp"]).toEqual({
+			type: "http",
+			url: "https://example.maple.us-east-1.core.inseng.io/mcp",
+			oauth: {
+				clientId: "12345000000000001",
+				callbackPort: 8081,
+				scopes: "https://sso.canvaslms.com/all-client-scopes",
+			},
+		});
+		expect(copy.dataset.copy).not.toMatch(/secret|token|headers/iu);
+		expect(
+			document.querySelector('[data-guide-step="provider-deploy-public"]')?.textContent,
+		).toContain("v2.1.259");
+		expect(document.querySelector('[data-guide-step="provider-approve-private"]')).toBeNull();
+		expect(document.querySelector('[data-guide-step="client-managed"]')).toBeNull();
+		document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")!.click();
+		expect(document.querySelectorAll("#guide-provider [data-guide-step]")).toHaveLength(2);
+		expect(document.querySelector('[data-guide-step="client-managed"]')).not.toBeNull();
+		expect(document.querySelector("#guide-provider [data-copy-template]")).toBeNull();
+		expect(document.querySelector("#guide-provider")?.textContent).not.toMatch(
+			/managed-settings\.json|managed-mcp\.json|allowedMcpServers|Developer Keys/iu,
+		);
+		expect(new URLSearchParams(location.search).get("install")).toBe("enterprise");
+		expect(JSON.parse(localStorage.getItem("canvas-mcp:v1")!)).toMatchObject({
+			install: "enterprise",
+			client: "claude-code",
+		});
+
+		history.replaceState(null, "", "/canvas-mcp/?page=connect&clientId=12345000000000001");
+		mountApp("user");
+		expect(document.querySelector('[data-guide-step="client-managed"]')).not.toBeNull();
+		document.querySelector<HTMLButtonElement>("#tab-admin")!.click();
+		const personal = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
+		personal.checked = false;
+		personal.dispatchEvent(new Event("change", { bubbles: true }));
+		document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
+		expect(
+			document.querySelector('[data-guide-step="provider-public"] .shiki-code-group'),
+		).not.toBeNull();
+		expect(document.querySelector('[data-guide-step="client-managed"]')).toBeNull();
+		expect(new URLSearchParams(location.search).get("install")).toBe("personal");
+	});
+
+	it("uses an approved catalog and per-user secret prompt for private Claude Code enterprise keys", () => {
+		const state = readState(
+			"?client=claude-code&install=enterprise&key=private&surface=provider&platform=windows&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001",
+			null,
+		);
+		const client = clientDefinition("claude-code");
+		document.body.innerHTML = renderGuide(client, state, true);
+		expect(document.querySelector('[data-guide-step="provider-deploy-public"]')).toBeNull();
+		const copy = document.querySelector<HTMLButtonElement>(
+			'[data-guide-step="provider-approve-private"] [data-copy]',
+		)!;
+		expect(JSON.parse(copy.dataset.copy!)).toEqual({
+			allowManagedMcpServersOnly: true,
+			allowedMcpServers: [{ serverUrl: "https://example.maple.us-east-1.core.inseng.io/mcp" }],
+		});
+		expect(copy.dataset.copy).not.toMatch(/clientSecret|MCP_CLIENT_SECRET/iu);
+		document.body.innerHTML = renderGuide(client, state, false);
+		expect(document.querySelector('[data-guide-step="client-managed"]')).toBeNull();
+		expect(document.querySelector('[data-guide-step="provider-approve-private"]')).toBeNull();
+		expect(document.querySelector('[data-guide-step="client-private-login"]')).not.toBeNull();
+		expect(document.querySelector('[data-code-platform="windows"]')?.hasAttribute("hidden")).toBe(
+			false,
+		);
+		const command = document.querySelector<HTMLButtonElement>(
+			'[data-code-platform="windows"] [data-copy]',
+		)!;
+		expect(command.dataset.copy).toContain("--client-secret");
+		expect(command.dataset.copy).toContain("12345000000000001");
+		expect(command.dataset.copy).not.toContain("CANVAS_CLIENT_SECRET");
+	});
+
+	it.each(["public", "private"])(
+		"supports Gemini CLI enterprise policy and matching %s client configuration",
+		(key) => {
+			vi.stubGlobal("scrollTo", vi.fn());
+			history.replaceState(
+				null,
+				"",
+				`/canvas-mcp/?client=gemini-cli&key=${key}&install=personal&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=admin`,
+			);
+			mountApp("admin");
+			const enterprise = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
+			expect(enterprise.checked).toBe(false);
+			expect(enterprise.disabled).toBe(false);
+			expect(enterprise.closest("label")?.nextElementSibling?.textContent).toContain(
+				"Gemini CLI enterprise controls",
+			);
+			enterprise.checked = true;
+			enterprise.dispatchEvent(new Event("change", { bubbles: true }));
+			document.querySelector<HTMLButtonElement>("#configure-provider-button-bottom")!.click();
+			const policyCopy = document.querySelector<HTMLButtonElement>(
+				'[data-guide-step="provider-allowlist"] [data-copy]',
+			)!;
+			expect(policyCopy.disabled).toBe(false);
+			expect(JSON.parse(policyCopy.dataset.copy!)).toEqual({
+				mcpServers: {
+					"canvas-mcp": {
+						url: "https://example.maple.us-east-1.core.inseng.io/mcp",
+						type: "http",
+						trust: false,
+					},
+				},
+			});
+			expect(policyCopy.dataset.copy).not.toMatch(/secret|oauth|token|requiredMcpServers/iu);
+			expect(
+				document.querySelector('[data-guide-step="provider-allowlist"]')?.textContent,
+			).toContain("does not accept redirectUri");
+			expect(document.querySelector('[data-guide-step="provider-private-secret"]') !== null).toBe(
+				key === "private",
+			);
+			expect(document.querySelector('[data-guide-step="client-enterprise"]')).toBeNull();
+			document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")!.click();
+			expect(document.querySelector('[data-guide-step="client-enterprise"]')).not.toBeNull();
+			expect(document.querySelector('[data-guide-step="client-private-secret"]') !== null).toBe(
+				key === "private",
+			);
+			expect(document.querySelector('[data-guide-step="provider-allowlist"]')).toBeNull();
+			expect(document.querySelector('[data-guide-step="provider-distribute"]')).toBeNull();
+			const clientCopy = document.querySelector<HTMLButtonElement>(
+				`[data-guide-step="provider-register-${key}"] [data-copy]`,
+			)!;
+			expect(clientCopy.disabled).toBe(false);
+			expect(document.querySelectorAll("#guide-provider [data-copy-template]")).toHaveLength(1);
+			const config = JSON.parse(clientCopy.dataset.copy!).mcpServers["canvas-mcp"];
+			expect(config.httpUrl).toBe("https://example.maple.us-east-1.core.inseng.io/mcp");
+			expect(config.oauth).toEqual({
+				enabled: true,
+				clientId: "12345000000000001",
+				authorizationUrl: "https://example.instructure.com/login/oauth2/auth",
+				tokenUrl: "https://example.instructure.com/login/oauth2/token",
+				scopes: ["https://sso.canvaslms.com/all-client-scopes"],
+				redirectUri: "http://localhost:8081/oauth/callback",
+				...(key === "private" ? { clientSecret: "<CANVAS_CLIENT_SECRET>" } : {}),
+			});
+			expect(document.querySelector('[data-guide-step="verify"]')?.textContent).toContain(
+				"/mcp auth canvas-mcp",
+			);
+			expect(new URLSearchParams(location.search).get("install")).toBe("enterprise");
+			expect(JSON.parse(localStorage.getItem("canvas-mcp:v1")!)).toMatchObject({
+				client: "gemini-cli",
+				install: "enterprise",
+				key,
+			});
+			history.replaceState(null, "", "/canvas-mcp/?page=connect&clientId=12345000000000001");
+			mountApp("user");
+			expect(document.querySelector('[data-guide-step="client-enterprise"]')).not.toBeNull();
+			document.querySelector<HTMLButtonElement>("#tab-admin")!.click();
+			const personal = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
+			personal.checked = false;
+			personal.dispatchEvent(new Event("change", { bubbles: true }));
+			document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
+			expect(document.querySelector('[data-guide-step="client-enterprise"]')).toBeNull();
+			expect(
+				document.querySelector(`[data-guide-step="provider-register-${key}"] [data-copy]`),
+			).not.toBeNull();
+			expect(new URLSearchParams(location.search).get("install")).toBe("personal");
+		},
+	);
+
+	it("keeps Gemini CLI enterprise configuration non-copyable without a complete endpoint", () => {
+		const client = clientDefinition("gemini-cli");
+		const state = readState("?client=gemini-cli&install=enterprise&surface=provider", null);
+		document.body.innerHTML = renderGuide(client, state, true);
+		expect(
+			document.querySelector<HTMLButtonElement>(
+				'[data-guide-step="provider-allowlist"] [data-copy]',
+			)?.disabled,
+		).toBe(true);
+	});
+
+	it("shows mode-specific Gemini CLI migration notices above the admin instructions only", () => {
+		history.replaceState(
+			null,
+			"",
+			"/canvas-mcp/?client=gemini-cli&install=personal&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=admin",
+		);
+		mountApp("admin");
+		const notice = () => document.querySelector(".gemini-deprecation-notice");
+		expect(notice()?.textContent).toBe(
+			"Gemini CLI is deprecated for non-Enterprise use. Google announced the transition to Antigravity CLI in May 2026. Use Antigravity CLI instead.",
+		);
+		expect(notice()?.classList.contains("-color-danger")).toBe(true);
+		expect(notice()?.classList.contains("-color-warning")).toBe(false);
+		expect(notice()?.getAttribute("role")).toBe("status");
+		expect(notice()?.closest(".details-panel")).toBeNull();
+		expect(notice()?.nextElementSibling?.classList.contains("details-panel")).toBe(true);
+		expect(document.querySelector(".workspace-grid")?.children).toHaveLength(2);
+		expect(
+			document.querySelector(".controls-panel")?.classList.contains("print-page-break-after"),
+		).toBe(true);
+		expect(
+			document.querySelector(".details-panel")?.classList.contains("print-page-break-after"),
+		).toBe(false);
+		const enterprise = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
+		enterprise.checked = true;
+		enterprise.dispatchEvent(new Event("change", { bubbles: true }));
+		expect(notice()?.textContent).toBe(
+			"Google announced the transition from Gemini CLI to Antigravity CLI in May 2026. Gemini CLI is expected to continue working for Gemini Enterprise customers, so these connection instructions remain available. Plan your migration to Antigravity CLI.",
+		);
+		expect(notice()?.classList.contains("-color-warning")).toBe(true);
+		expect(notice()?.classList.contains("-color-danger")).toBe(false);
+		document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
+		expect(notice()).toBeNull();
+		expect(document.querySelector(".instructions-column")).toBeNull();
+		document.querySelector<HTMLButtonElement>("#tab-admin")!.click();
+		const personal = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
+		personal.checked = false;
+		personal.dispatchEvent(new Event("change", { bubbles: true }));
+		expect(notice()?.textContent).toContain("deprecated for non-Enterprise");
+		expect(notice()?.classList.contains("-color-danger")).toBe(true);
+		const client = document.querySelector<HTMLSelectElement>("#client-select")!;
+		client.value = "claude-code";
+		client.dispatchEvent(new Event("change", { bubbles: true }));
+		expect(notice()).toBeNull();
 	});
 
 	it("blocks ChatGPT authentication without claiming DCR-only behavior", () => {

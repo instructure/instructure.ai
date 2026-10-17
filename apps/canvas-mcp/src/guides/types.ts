@@ -1,8 +1,14 @@
 import { type Evidence } from "../clients/types";
+import { type CommandPlatform } from "../platform";
 export type CodeLanguage = "bash" | "json" | "markdown" | "prompt" | "powershell" | "toml";
+export interface CodeSnippet {
+	text: string;
+	language: CodeLanguage;
+}
 export type StructuredContent =
 	| { kind: "paragraph"; text: string }
-	| { kind: "code"; text: string; language: CodeLanguage }
+	| ({ kind: "code" } & CodeSnippet)
+	| { kind: "code-group"; variants: Record<CommandPlatform, CodeSnippet> }
 	| { kind: "list"; items: string[] }
 	| { kind: "link"; label: string; url: string };
 export type GuideStep =

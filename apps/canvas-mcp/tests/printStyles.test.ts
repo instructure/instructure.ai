@@ -49,6 +49,7 @@ describe("print styles", () => {
 
 	it("hides tab navigation while retaining its printable panel", () => {
 		expect(declarations(".instui-tabs .list").get("display")).toBe("none");
+		expect(declarations(".code-platform-toggle").get("display")).toBe("none");
 	});
 
 	it("adds page breaks after cards marked for print pagination", () => {

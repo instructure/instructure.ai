@@ -199,7 +199,10 @@ describe("Canvas MCP pages", () => {
 		expect(pasteScopesHeading?.textContent).toBe("Paste Scopes");
 		expect(pasteScopesHeading?.closest(".settings-table")).toBeNull();
 		expect(pasteScopesHeading?.nextElementSibling?.classList.contains("scope-card")).toBe(true);
-		expect(document.querySelector(".instructions-heading")?.textContent).toBe("Instructions");
+		expect(document.querySelector(".instructions-heading")).toBeNull();
+		expect(document.querySelector(".details-panel h2")?.textContent).toBe(
+			"Key settings for Claude Code",
+		);
 		expect(document.querySelector(".site-header")).toBeNull();
 		expect(document.querySelectorAll(".page-heading-actions button")).toHaveLength(1);
 		expect(document.querySelector(".instui-tray")?.hasAttribute("popover")).toBe(true);
@@ -230,10 +233,20 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector<HTMLButtonElement>('[data-page="connect"]')?.disabled).toBe(true);
 		expect(
 			document.querySelector('[data-action="copy-link"]')?.classList.contains("-icon-send"),
-		).toBe(true);
+		).toBe(false);
 		expect(
 			document.querySelector('[data-action="print"]')?.classList.contains("-icon-printer"),
-		).toBe(true);
+		).toBe(false);
+		expect(
+			document
+				.querySelector('[data-action="copy-link"] > span.instui-icon.-icon-send')
+				?.getAttribute("aria-hidden"),
+		).toBe("true");
+		expect(
+			document
+				.querySelector('[data-action="print"] > span.instui-icon.-icon-printer')
+				?.getAttribute("aria-hidden"),
+		).toBe("true");
 		expect(document.querySelector('[data-action="print"]')?.textContent).toBe("Print this page");
 		expect(document.querySelector('[data-action="copy-link"]')?.textContent).toBe("Copy this link");
 		expect(document.querySelector(".theme-toggle")?.classList.contains("instui-button-set")).toBe(
