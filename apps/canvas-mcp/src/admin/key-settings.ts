@@ -8,9 +8,9 @@ export function renderKeyCreation(
 	client: ReturnType<typeof clientDefinition>,
 	state: AppState,
 	editable = true,
+	model = resolveKeySettings(client, state),
 ): string {
-	const model = resolveKeySettings(client, state),
-		productionDomain = model.productionDomain,
+	const productionDomain = model.productionDomain,
 		redirects = model.redirect.text,
 		canConfigureClient = connectionReadiness(state, client).ready,
 		keyTypeSaveSteps =

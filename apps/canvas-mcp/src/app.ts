@@ -1,6 +1,7 @@
+import { CallbackCache, type CallbackResolution } from "./oauth/codex-callback";
 import { connectionReadiness, normalizeSetup } from "./setup";
 import "./main.css";
-import { normalizeKeyType } from "./clients";
+import { clientDefinition, normalizeKeyType } from "./clients";
 import { renderPage, type PageMode } from "./page";
 import { copyToClipboard } from "./ui/copy";
 import { applyTheme, setTheme } from "./ui/theme";
@@ -8,10 +9,13 @@ import {
 	type AppState,
 	type StorageLike,
 	normalizeCanvasDomain,
+	deriveUrls,
 	readState,
 	savePreferences,
 	stateQuery,
 } from "./state";
+const mounts = new WeakMap<HTMLElement, symbol>();
+
 export function mountApp(mode: PageMode): void {
 	const root = document.querySelector<HTMLElement>("#root");
 	if (!root) {
@@ -19,7 +23,9 @@ export function mountApp(mode: PageMode): void {
 	}
 	const appRoot = root,
 		state = readState(globalThis.location.search, getStorage());
-	let pageMode = pageModeFromQuery(globalThis.location.search) ?? mode;
+	const mount = Symbol();
+mounts.set(appRoot,mount);
+let pageMode = pageModeFromQuery(globalThis.location.search) ?? mode;
 	normalizeSetup(state);
 	function isConnectionReady(): boolean {
 		return connectionReadiness(state).ready;
@@ -31,6 +37,26 @@ export function mountApp(mode: PageMode): void {
 		state.surface = pageMode === "user" ? "provider" : "canvas";
 	normalizeSetup(state);
 	const viewState = { domainInputValue: state.domain };
+	const callbacks = new CallbackCache();
+	let activeCallbackKey = "";
+	function callbackResolution(): CallbackResolution | undefined {
+		const redirect = clientDefinition(state.client).facts.redirectUri;
+		if (
+			redirect.kind !== "computed" ||
+			redirect.mode === "unknown" ||
+			!state.domain ||
+			!state.region
+		) {
+			activeCallbackKey = "";
+			return;
+		}
+		const url = deriveUrls(state).mcp,
+			key = JSON.stringify([url, redirect.base, redirect.mode]);
+		activeCallbackKey = key;
+		return callbacks.request(url, redirect.base, redirect.mode, () => {
+			if (activeCallbackKey === key && appRoot.isConnected && mounts.get(appRoot) === mount) persistAndRender();
+		});
+	}
 
 	function render() {
 		appRoot.innerHTML = renderPage(
@@ -38,6 +64,7 @@ export function mountApp(mode: PageMode): void {
 			pageMode,
 			viewState.domainInputValue,
 			isConnectionReady(),
+			callbackResolution(),
 		);
 		updatePrintPageBreaks(appRoot);
 		bindEvents();

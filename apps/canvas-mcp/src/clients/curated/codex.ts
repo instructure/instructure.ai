@@ -8,7 +8,7 @@ export const codex = {
 			recipe: "codex-callback-id",
 			base: "http://localhost:8081/callback",
 			mode: "unknown",
-			evidence: [],
+			evidence: [{method: "source", label: "Codex callback algorithm; Canvas mode awaiting verification", url: "https://github.com/openai/codex/blob/9be8d6e1c3dbb145d2d7ac3ba46729340e6d8d40/codex-rs/rmcp-client/src/oauth_callback.rs", version: "9be8d6e1c3dbb145d2d7ac3ba46729340e6d8d40", verifiedAt: "2026-10-17"}],
 		}),
 		remoteHttp: documented("yes"),
 		staticClientId: documented("yes"),
