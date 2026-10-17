@@ -96,7 +96,6 @@ export function mountApp(mode: PageMode): void {
 							<label class="field-label" for="client-select">MCP client</label>
 							<select id="client-select" class="instui-simple-select text-input">${clientOptions(state.client)}</select>
 							<label class="instui-checkbox -variant-toggle private-key-toggle"><input id="private-key-input" type="checkbox" name="private-key" ${state.key === "private" ? "checked" : ""} ${client.keyTypes.length === 1 ? "disabled" : ""}>Private key</label>
-							${client.oauthMetadataVerified === false ? `<p id="mcp-oauth-metadata-warning" class="field-hint">Rulesync confirms MCP configuration support only. Confirm whether this client accepts public or requires private OAuth, and verify its callback URI with the client documentation.</p>` : ""}
 							</div>
 						</aside>${serverDetailsCard(urls, state, canConnect, true)}</div>` : ""}
 						${pageMode === "user" ? serverDetailsCard(urls, state, canConnect, false) : ""}
