@@ -515,10 +515,6 @@ describe("Canvas MCP pages", () => {
 			currentSelect.value = clientId;
 			currentSelect.dispatchEvent(new Event("change", { bubbles: true }));
 
-			if (clientId === "chatgpt") {
-				expect(document.querySelector("#client-id-input")).toBeNull();
-				continue;
-			}
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.required).toBe(true);
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.maxLength).toBe(17);
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.pattern).toBe(

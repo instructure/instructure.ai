@@ -150,7 +150,8 @@ export function renderGuide(
 		editable && state.install === "enterprise" && guide.presentation === "by-surface";
 	const provider = client.enterpriseSurface ?? client.name;
 	const heading = `<h2 class="instui-heading -level-h2 --mb-2xl">${editable && guide.presentation === "by-surface" && activeSurface === "canvas" ? "Key settings for " : ""}${escapeHtml(client.name)}</h2>`;
-	if (client.blocker) return heading + (editable ? "" : renderEvidence(client.blocker.evidence));
+	// A connection blocker does not hide the administrator's provisioning instructions.
+	if (client.blocker && !editable) return heading + renderEvidence(client.blocker.evidence);
 	const install =
 		!editable && client.installModes.length > 1
 			? `<div class="instui-button-set -toggle install-modes" role="group" aria-label="Install mode">${client.installModes.map((mode) => `<button id="install-${mode}" class="instui-button -color-secondary" type="button" data-install="${mode}" aria-pressed="${state.install === mode}">${mode === "personal" ? "Personal" : "Enterprise"}</button>`).join("")}</div>`
