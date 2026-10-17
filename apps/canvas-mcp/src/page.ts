@@ -54,7 +54,7 @@ export function renderPage(
 						${pageMode === "user" ? serverDetailsCard(urls, state, canConnect, false) : ""}
 						<section class="instui-card -variant-base details-panel" ><div class="content">${renderGuide(client, state, pageMode === "admin")}${renderOAuthFacts(client)}</div></section>
 					</div>
-					<footer class="page-footer"><p>Copyright &copy; ${new Date().getFullYear()} Instructure, Inc.</p><p class="print-context">${escapeHtml(client.name)} · ${escapeHtml(state.install)} · ${new Date().toISOString().slice(0, 10)}<br />${escapeHtml("/canvas-mcp/?" + new URLSearchParams({ domain: state.domain, client: state.client, key: state.key, install: state.install, region: state.region, clientId: state.clientId, page: pageMode === "admin" ? "admin" : "connect" }).toString())}</p></footer>
+					<footer class="page-footer"><p>Copyright &copy; ${new Date().getFullYear()} Instructure, Inc.</p><p class="print-context">${escapeHtml(client.name)} · ${escapeHtml(state.install)} · ${new Date().toISOString().slice(0, 10)}<br /><span class="print-permalink">${escapeHtml("/canvas-mcp/?" + new URLSearchParams({ domain: state.domain, client: state.client, key: state.key, install: state.install, region: state.region, clientId: state.clientId, page: pageMode === "admin" ? "admin" : "connect" }).toString())}</span></p></footer>
 					</section>
 					</div>
 				</main>

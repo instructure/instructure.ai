@@ -5,7 +5,13 @@ export type StructuredContent =
 	| { kind: "link"; label: string; url: string };
 export type GuideStep =
 	| { id: string; kind: "canvas-key"; action: "create" | "update-redirect" }
-	| { id: string; kind: "provider" | "verify"; title: string; content: StructuredContent[] };
+	| {
+			id: string;
+			kind: "provider" | "verify";
+			key?: "public" | "private";
+			title: string;
+			content: StructuredContent[];
+	  };
 export interface Guide {
 	status: "pending" | "documented";
 	presentation: "by-surface" | "interleaved";

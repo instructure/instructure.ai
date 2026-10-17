@@ -25,7 +25,13 @@ describe("composable client guides", () => {
 			[...document.querySelectorAll("[data-guide-step]")].map((step) =>
 				step.getAttribute("data-guide-step"),
 			),
-		).toEqual(["canvas-create", "provider-save", "canvas-update-redirect", "provider-verify"]);
+		).toEqual([
+			"canvas-create",
+			"provider-save",
+			"canvas-update-redirect",
+			"provider-policy",
+			"provider-verify",
+		]);
 		expect(document.querySelector('[data-guide-step="canvas-create"]')?.textContent).toContain(
 			"Leave Redirect URIs blank",
 		);
@@ -51,7 +57,7 @@ describe("composable client guides", () => {
 		expect(JSON.parse(localStorage.getItem("canvas-mcp:v1") ?? "{}")).toMatchObject({
 			install: "enterprise",
 		});
-		expect(document.querySelector(".guide-pending")).not.toBeNull();
+		expect(document.querySelector(".guide-pending")).toBeNull();
 	});
 	it("supports keyboard navigation of top-level tabs", () => {
 		history.replaceState(

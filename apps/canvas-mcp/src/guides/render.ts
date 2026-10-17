@@ -29,7 +29,11 @@ export function renderContent(
 	content: StructuredContent[],
 	values: Record<string, string>,
 ): string {
-	const text = (value: string) => escapeHtml(interpolate(value, values));
+	const text = (value: string) =>
+		escapeHtml(value).replace(/\{([a-zA-Z][a-zA-Z0-9]*)\}/gu, (_, token: string) => {
+			if (!Object.hasOwn(values, token)) throw new Error(`Unknown guide token: ${token}`);
+			return `<span data-guide-token="${token}">${escapeHtml(values[token])}</span>`;
+		});
 	return content
 		.map((block) => {
 			switch (block.kind) {
@@ -70,7 +74,7 @@ function renderFields(client: ClientDefinition, state: AppState): string {
 			["Scope", values.scope],
 			["PKCE", client.facts.pkce.value],
 		];
-	return `<section class="guide-fields"><h3 class="instui-heading -level-h3">Connection fields</h3><table class="instui-table"><thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody>${fields.map(([name, value]) => `<tr><th scope="row">${escapeHtml(name)}</th><td><code>${escapeHtml(value)}</code></td></tr>`).join("")}</tbody></table>${state.key === "private" ? "<p>Enter the key secret directly in the provider's secret field. Never paste it into this guide or a setup link.</p>" : "<p>A public key uses the Client ID without a client secret. Public is preferred when the client supports both key types.</p>"}</section>`;
+	return `<section class="guide-fields"><h3 class="instui-heading -level-h3">Connection fields</h3><table class="instui-table"><thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody>${fields.map(([name, value]) => `<tr><th scope="row">${escapeHtml(name)}</th><td><code${name === "Client ID" ? ' data-guide-token="clientId"' : ""}>${escapeHtml(value)}</code></td></tr>`).join("")}</tbody></table>${state.key === "private" ? "<p>Enter the key secret directly in the provider's secret field. Never paste it into this guide or a setup link.</p>" : "<p>A public key uses the Client ID without a client secret. Public is preferred when the client supports both key types.</p>"}</section>`;
 }
 function renderStep(
 	step: GuideStep,
@@ -98,15 +102,18 @@ export function renderGuide(client: ClientDefinition, state: AppState, editable:
 		guide.status === "pending"
 			? '<p class="guide-pending">Provider instructions are awaiting source verification. The connection fields and workflow below are provisional.</p>'
 			: "";
+	const steps = guide.steps.filter(
+		(step) => step.kind === "canvas-key" || !step.key || step.key === state.key,
+	);
 	const body =
 		guide.presentation === "interleaved"
-			? `<div class="interleaved-guide">${guide.steps.map((step, index) => `<div class="workflow-step"><p class="workflow-label">Step ${index + 1} · ${step.kind === "canvas-key" ? "Canvas" : escapeHtml(client.name)}</p>${renderStep(step, client, state, editable)}</div>`).join("")}</div>`
+			? `<div class="interleaved-guide">${steps.map((step, index) => `<div class="workflow-step"><p class="workflow-label">Step ${index + 1} · ${step.kind === "canvas-key" ? "Canvas" : escapeHtml(client.name)}</p>${renderStep(step, client, state, editable)}</div>`).join("")}</div>`
 			: `<div class="instui-button-set -toggle guide-surfaces" role="group" aria-label="Setup surface">${(["canvas", "provider"] as const).map((surface) => `<button id="guide-surface-${surface}" class="instui-button -color-secondary" type="button" data-guide-surface="${surface}" aria-pressed="${state.surface === surface}" aria-controls="guide-${surface}">${surface === "canvas" ? "Canvas" : "Provider"}</button>`).join("")}</div>${(
 					["canvas", "provider"] as const
 				)
 					.map(
 						(surface) =>
-							`<section id="guide-${surface}" class="guide-surface" aria-label="${surface === "canvas" ? "Canvas setup" : "Provider setup"}" ${state.surface !== surface ? "hidden" : ""}>${surface === "provider" ? renderFields(client, state) : ""}${guide.steps
+							`<section id="guide-${surface}" class="guide-surface" aria-label="${surface === "canvas" ? "Canvas setup" : "Provider setup"}" ${state.surface !== surface ? "hidden" : ""}>${surface === "provider" ? renderFields(client, state) : ""}${steps
 								.filter((step) =>
 									surface === "canvas" ? step.kind === "canvas-key" : step.kind !== "canvas-key",
 								)

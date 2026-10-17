@@ -139,6 +139,14 @@ export function mountApp(mode: PageMode): void {
 					.replace(/\D/gu, "")
 					.slice(0, 17);
 				persist();
+				appRoot
+					.querySelectorAll<HTMLElement>('[data-guide-token="clientId"]')
+					.forEach(
+						(element) =>
+							(element.textContent = state.clientId || "Enter the Client ID from your Canvas key"),
+					);
+				const permalink = appRoot.querySelector<HTMLElement>(".print-permalink");
+				if (permalink) permalink.textContent = globalThis.location.href;
 				const generatedClientIdInput =
 						appRoot.querySelector<HTMLInputElement>("#generated-client-id"),
 					generatedClientIdCopy = appRoot.querySelector<HTMLButtonElement>(
