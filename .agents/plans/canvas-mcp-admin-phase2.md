@@ -1,9 +1,9 @@
 # Plan: canvas-mcp Admin Phase 2 (client OAuth facts, enterprise installs)
 
-Status: revised draft for approval, reviewed against `canvas-mcp` HEAD `f0af496` on October 17, 2026. Phase 2 implementation has not begun. Approval requested for the sequence in section 5; production publication remains subject to the release gates.
-App: `apps/canvas-mcp` (instructure.ai/canvas-mcp). Historical parent plan: `.agents/plans/canvas-mcp-docs-app.md` at git `HEAD` (currently deleted in the working tree; not restored by this review). Its "Phase 2" means the later Maple region route; this plan is "Admin Phase 2". The current source and this revision supersede its old multi-page layout and implementation status.
+Status: implementation approved and core work committed on `canvas-mcp` on October 17, 2026. Source-backed guides, shared components, typed facts/state, probe tooling and CI checks are implemented. Production release validation and remaining evidence/content gaps are tracked in section 10.
+App: `apps/canvas-mcp` (instructure.ai/canvas-mcp). Historical parent plan: `.agents/plans/canvas-mcp-docs-app.md` at git `f0af496` (subsequently removed; not restored). Its "Phase 2" means the later Maple region route; this plan is "Admin Phase 2". The current source and this revision supersede its old multi-page layout and implementation status.
 
-## 1. Where the app is now
+## 1. Planning baseline (`f0af496`; implementation progress in section 10)
 
 Current baseline (`f0af496`, including `dc2c5a3`), two tabs on one page, state in the query string and localStorage:
 
@@ -347,7 +347,7 @@ Work directly on the existing `canvas-mcp` branch after approval. Use reviewable
 5. **Install controls and guides**: remaining D and E, Generic fields/shared troubleshooting first, then source-backed personal and enterprise guides using shared Canvas blocks. Add per-guide by-surface or interleaved composition, including the continuous Copilot flow. ChatGPT and Superhuman Go guides and facts are implemented together from supplied instructions or checked vendor documentation; do not assume both modes are supported merely because they are expected. Missing content gets an explicit pending state and no fabricated steps. Optional Rulesync snippets follow the compatibility spike.
 6. **Hardening and release readiness**: F, print, focus/keyboard behavior, readme, built-path checks and deployment enforcement. Complete independent work while external gates are pending, then report exactly which content/compatibility checks prevent production release.
 
-Approval authorizes implementation of steps 1–6 on `canvas-mcp`; it does not assert that inherited OAuth facts have been verified or that publication gates have been satisfied. No implementation begins during this planning turn. After approval, model/state/renderer work can proceed without external research inputs; shipping computed Codex output and definitive vendor instructions depends on their evidence.
+Implementation of steps 1–6 on `canvas-mcp` was approved on October 17, 2026. Approval does not assert that inherited OAuth facts are verified or that publication gates are satisfied. The implemented work and evidence-dependent items are tracked in section 10.
 
 ### External inputs and acceptance criteria
 
@@ -395,3 +395,24 @@ The harness uses synthetic inputs and records normalized OAuth observations. Raw
 - Follow-up decisions: prefer public by default when a client supports both key types; include Superhuman Go in the same phase and catalog/guide workstreams as ChatGPT.
 - Follow-up confirmation (October 17, 2026): Canvas accepts keys with no Redirect URIs; Copilot Studio bootstrap ordering is resolved and removed from the external-input gates.
 - Maintenance recommendation: extract shared page/admin components and colocate each curated client's typed facts/settings/guide exports; compose ordinary guides with Canvas/Provider views and Copilot Studio as a continuous interleaved walkthrough using the same Canvas blocks.
+
+## 10. Implementation progress (October 17, 2026)
+
+Core implementation was completed in incremental conventional commits beginning at `c0e7de4`, on top of `253a298`. Product release remains subject to the checks below.
+
+| Workstream | Implemented | Remaining |
+| --- | --- | --- |
+| Components | Shared `page`, `admin/config`, `admin/server-details`, `admin/key-settings`, pure key-settings resolver and UI helpers; curated client modules with shared contracts. | Further decomposition only when a concrete maintenance need appears. |
+| Facts/state | Per-fact evidence and unknown values, explicit aliases, public preferred when both types work, explicit private selections preserved, enterprise normalization, validated `install`/`surface`, shared readiness, blocked-client notices. | More source/probe evidence for unverified clients. |
+| Guides | Source-backed Claude personal/Code, Codex, Copilot, Gemini Enterprise, Antigravity CLI and Generic content. Shared Canvas/Provider sections and one continuous Copilot flow. Corrected October instructions incorporated; Bash/Zsh and PowerShell commands provided for Claude Code. | Claude organization instructions are explicitly unavailable in the updated source, so that mode is pending. Superhuman Go is included with unknown facts/pending guidance, as the maintainer has no guide. Antigravity IDE remains separate from CLI. Gemini CLI guidance stays provisional because its key-type and secret details conflict. |
+| ChatGPT | Included in the selector and query state. Updated guidance's Canvas MCP authentication bug is shown as an explicit connection blocker, without inventing a DCR limitation. | Upstream bug fix and confirmed setup instructions. |
+| Redirects | Typed fixed/computed/generated/configurable/unknown rendering, confirmed blank-URI Copilot bootstrap, pinned Codex derivation helper, asynchronous cache and stale-result/error handling. | A real Canvas/Codex mode check and known-good callback URI are still needed before changing Codex's mode from unknown; computed copying remains disabled. Independent test vectors are not represented as real runs. |
+| Scope manifest | Regenerated 121 lines using the supplied clean Maple checkout at `6368cd5b58b7a3f9d4c004c46f8779712cdb0d14`. Generator and provenance committed; `mcp-limited` excluded. | Product/Security release review; copying remains disabled while unreviewed. |
+| Probe/evidence | Loopback-only synthetic public/private/DCR server; discovery, PKCE, single-use expiring codes, refresh and MCP initialization; sanitized observations, fixture instructions, evidence-age report and correction issue template. Pure request tests and a real local HTTP discovery smoke check passed. | No vendor-client probe runs or beta-tenant end-to-end runs are recorded. Tier 2 clients retain explicit unverified fallbacks until research batches occur. Optional Rulesync snippets remain omitted pending the configuration spike. |
+| Hardening | Keyboard tab navigation, focus restoration, live Client ID/configuration updates, safe guide interpolation/links, copy controls, print surface expansion and pagination fixes, app tests required before Pages deployment. | Real screen-reader and Letter/A4 print checks; full embed support remains deferred. |
+
+Evidence inputs were the supplied setup DOCX, corrected October Markdown guides, local Maple source and the pinned upstream Codex callback file. Private source files/paths and internal links were not added to the public app. The newer Microsoft authorization-URL typo was corrected against Maple and the original setup guide; source editor UI debris was omitted.
+
+Verification: **11 test files / 66 tests pass**, app typecheck (including scripts) passes, production build passes, and Pages workflow YAML parses with the app test step. Lint reports no errors but retains warnings. Browser inspection confirmed the selected install/surface and no horizontal overflow at the inspected desktop size. The evidence report has two advisory entries: Antigravity IDE and Superhuman Go lack evidence.
+
+Accessibility tooling: `npx --yes --prefer-online automatica11y@latest guide skill` returned its guide. The subsequent required version check failed with `ENOTFOUND registry.npmjs.org`; no audit, report, results or fixtures were generated. Browser AX/keyboard checks do not replace that audit or real assistive-technology testing.

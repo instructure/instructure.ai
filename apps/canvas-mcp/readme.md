@@ -28,3 +28,41 @@ Canvas automatically populates the region-specific Maple Allowed Audience during
 The admin guide displays an unreviewed scope list containing read/write/delete and introspection scopes. Its provenance is not established; the UI labels it awaiting review and disables copying. The customer-key default excludes `mcp-limited`. Do not use it to create a production developer key until the complete per-tool scope manifest has been generated from a reviewed Maple revision and verified by Product/Security. The committed manifest was generated from Maple revision `6368cd5b58b7a3f9d4c004c46f8779712cdb0d14`; Product/Security release review is still pending. Regenerate it from a clean Maple checkout with `node apps/canvas-mcp/scripts/updateScopes.mts /path/to/maple`. The script writes scope names and provenance only, and resets review status to unreviewed.
 
 Client setup descriptions are intentionally generic where vendor-specific OAuth behavior has not yet been verified. Confirm each client's current connection fields and redirect URI before publishing the guide as final instructions.
+
+## Maintenance structure
+
+`src/app.ts` owns state, events and persistence. `src/page.ts` composes the page. Shared admin components live in `src/admin/config.ts`, `server-details.ts`, and `key-settings.ts`; `key-settings-model.ts` resolves client facts into the same Canvas fields in every guide.
+
+Each `src/clients/curated/<name>.ts` exports a typed definition with its own facts, evidence, supported install modes and guides. Add the definition to `clients/index.ts` and add a new ID to `clients/ids.ts` when needed. Existing Rulesync IDs remain accepted aliases. The IDE and CLI variants of Antigravity have separate evidence; CLI instructions must not be applied to the IDE.
+
+`src/guides/types.ts` defines structured text/code and reusable Canvas create/update steps. Ordinary guides use Canvas/Provider views; Copilot Studio uses one ordered guide that creates a key with Redirect URIs blank, saves the connector, adds its generated URI to the key, then completes OAuth. Print expands both surface sections for the selected install mode. Full iframe/embed support is deferred.
+
+Query state includes `install=personal|enterprise` and optional `surface=canvas|provider`. Install mode is saved with preferences; surface and Client ID are not. Enterprise-only clients normalize to enterprise even when an incoming link requests personal. When both key types work, public is preferred; explicit valid private selections remain valid.
+
+Requirements are `documented`, `verified` (source/probe), or `unverified`, per fact. Unknown public/private support remains selectable with a warning. Known incompatibilities block connection actions. Guide source labels/dates are public-facing; private document paths, internal titles, links and source files are not published. The provided guidance was summarized into the client modules; it is not synchronized automatically.
+
+## Evidence and probes
+
+Run `pnpm --filter @instructure.ai/canvas-mcp evidence:check` for a non-blocking 180-day evidence report. New supported assertions need dated evidence; one observed callback does not verify all a client's behavior. Use the Canvas MCP client-requirements issue template for corrections.
+
+The dev-only probe binds to loopback and uses fake credentials (`probe-client`, and `probe-secret` for confidential scenarios). Start it with an explicitly registered synthetic callback:
+
+```sh
+pnpm --filter @instructure.ai/canvas-mcp probe http://localhost:8081/callback
+PROBE_AUTH_METHOD=client_secret_post pnpm --filter @instructure.ai/canvas-mcp probe http://localhost:8081/callback
+PROBE_AUTH_METHOD=client_secret_basic pnpm --filter @instructure.ai/canvas-mcp probe http://localhost:8081/callback
+PROBE_DCR=1 pnpm --filter @instructure.ai/canvas-mcp probe http://localhost:8081/callback
+```
+
+Its MCP URL is `http://127.0.0.1:8765/mcp` (`PROBE_PORT` can override the port). It advertises discovery metadata and exercises authorization, PKCE, token exchange, refresh and minimal MCP initialization. Run public, confidential and DCR cases separately. It prints only normalized observations; raw state, headers, codes, verifiers, secrets and tokens are excluded. Review sanitized fixtures before adding them under `scripts/probe/results/`; raw captures are ignored. No vendor-client run is recorded yet, and a stub run is not an end-to-end Canvas compatibility claim. Cloud probing/public tunnels remain deferred.
+
+## Remaining verification
+
+- Scope generation is pinned and reproducible, but Product/Security release review is pending. Copying stays disabled until provenance is marked reviewed with a review date.
+- Codex callback derivation matches pinned upstream source and independent test vectors. Canvas callback mode and a known-good URI from a real Codex run still need confirmation; computed copying stays disabled until then. The browser makes no metadata requests.
+- Updated guidance reports a Canvas MCP authentication bug for ChatGPT, so the app blocks that connection flow without claiming a registration limitation.
+- Superhuman Go and Antigravity IDE lack source-backed guides. Gemini CLI's supplied key-type/secret instructions conflict; its guide stays provisional. Missing enterprise instructions are not inferred.
+- Corrected Anthropic/Microsoft files were incorporated after the initial duplicate content was replaced. Updated Claude organization steps are explicitly unavailable, so that mode stays pending. The Microsoft authorization-URL typo was corrected using the Maple endpoint and the original setup guide (`/login/oauth2/auth`). Public/private Claude support remains attributed to the original setup guide; the updated guide emphasizes public setup.
+- Browser layout/AX inspection and keyboard regression checks are separate from a complete accessibility audit. The automatica11y version check could not reach the npm registry (`ENOTFOUND registry.npmjs.org`); no audit report was produced. Real screen-reader, Letter/A4 print and vendor beta-tenant checks remain release tasks.
+
+The Pages deployment workflow runs the app tests before publishing. Unreviewed scope copying and known-incompatible connection actions remain disabled in built output.
