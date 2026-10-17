@@ -110,7 +110,9 @@ describe("composable client guides", () => {
 		document.querySelector<HTMLButtonElement>("#guide-surface-provider")?.click();
 		expect(document.activeElement?.id).toBe("guide-surface-provider");
 		expect(document.querySelector("#guide-provider")?.hasAttribute("hidden")).toBe(false);
-		document.querySelector<HTMLButtonElement>("#install-enterprise")?.click();
+		const enterprise = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
+		enterprise.checked = true;
+		enterprise.dispatchEvent(new Event("change", { bubbles: true }));
 		const params = new URLSearchParams(location.search);
 		expect(params.get("surface")).toBe("provider");
 		expect(params.get("install")).toBe("enterprise");
