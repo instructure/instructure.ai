@@ -14,6 +14,7 @@ const supported = { value: "yes", status: "documented", evidence: [geminiOAuth] 
 export const geminiCli = {
 	id: "gemini-cli",
 	name: "Gemini CLI",
+	provider: "Google",
 	group: "Curated",
 	installModes: ["personal"],
 	facts: {

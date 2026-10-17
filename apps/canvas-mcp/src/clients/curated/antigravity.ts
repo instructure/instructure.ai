@@ -3,6 +3,7 @@ import { inheritedFacts } from "../facts";
 export const antigravity = {
 	facts: inheritedFacts(["public", "private"], { kind: "unverified" }),
 	installModes: ["personal"],
+	provider: "Google",
 	group: "Curated",
 	id: "antigravity",
 	name: "Antigravity",

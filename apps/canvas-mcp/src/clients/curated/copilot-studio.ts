@@ -84,6 +84,7 @@ export const copilotStudio = {
 	},
 	installModes: ["enterprise"],
 	enterpriseSurface: "Copilot Studio",
+	provider: "Microsoft",
 	group: "Curated",
 	id: "copilot-studio",
 	name: "Copilot Studio",

@@ -131,6 +131,7 @@ export const claudeCode = {
 		},
 	},
 	installModes: ["personal"],
+	provider: "Anthropic",
 	group: "Curated",
 	id: "claude-code",
 	rulesyncTarget: "claudecode",

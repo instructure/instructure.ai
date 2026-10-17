@@ -4,6 +4,7 @@ import { updatedGuidance, updatedFact } from "../evidence";
 export const antigravityCli = {
 	id: "antigravity-cli",
 	name: "Antigravity CLI",
+	provider: "Google",
 	group: "Curated",
 	installModes: ["personal"],
 	facts: {

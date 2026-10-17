@@ -40,6 +40,7 @@ export interface ClientFacts {
 export interface ClientDefinition {
 	id: Client;
 	name: string;
+	provider?: string;
 	group: "Curated" | "Other";
 	facts: ClientFacts;
 	installModes: InstallMode[];

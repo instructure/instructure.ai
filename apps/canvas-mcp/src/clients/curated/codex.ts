@@ -124,6 +124,7 @@ export const codex = {
 		},
 	},
 	installModes: ["personal"],
+	provider: "OpenAI",
 	group: "Curated",
 	id: "codex",
 	rulesyncTarget: "codexcli",

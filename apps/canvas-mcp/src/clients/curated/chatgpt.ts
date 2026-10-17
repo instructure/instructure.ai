@@ -3,7 +3,8 @@ import { type ClientDefinition } from "../types";
 import { unknownFacts } from "../facts";
 export const chatgpt = {
 	id: "chatgpt",
-	name: "ChatGPT (chatgpt.com and ChatGPT Desktop)",
+	name: "ChatGPT",
+	provider: "OpenAI",
 	group: "Curated",
 	facts: unknownFacts(),
 	blocker: {

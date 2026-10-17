@@ -303,16 +303,16 @@ describe("Canvas MCP pages", () => {
 		const groups = [...clientSelect.querySelectorAll("optgroup")];
 		expect(groups.map((group) => group.label)).toEqual(["Curated", "Other"]);
 		expect([...groups[0].children].map((option) => option.textContent)).toEqual([
-			"Antigravity",
-			"Antigravity CLI",
-			"ChatGPT (chatgpt.com and ChatGPT Desktop)",
-			"Claude.ai / Claude Desktop",
-			"Claude Code",
-			"Codex",
-			"Copilot Studio",
-			"Gemini CLI",
-			"Gemini Enterprise",
-			"Superhuman Go",
+			"Anthropic · Claude.ai / Claude Desktop",
+			"Anthropic · Claude Code",
+			"Google · Antigravity",
+			"Google · Antigravity CLI",
+			"Google · Gemini CLI",
+			"Google · Gemini Enterprise",
+			"Microsoft · Copilot Studio",
+			"OpenAI · ChatGPT",
+			"OpenAI · Codex",
+			"Superhuman · Go",
 		]);
 		const otherOptions = [...groups[1].children] as HTMLOptionElement[];
 		expect(otherOptions[0].value).toBe("generic");
@@ -331,7 +331,7 @@ describe("Canvas MCP pages", () => {
 		expect(clientSelect.querySelector('option[value="codexcli"]')).toBeNull();
 		expect(clientSelect.querySelector('option[value="antigravity-ide"]')).toBeNull();
 		expect(clientSelect.querySelector('option[value="antigravity"]')?.textContent).toBe(
-			"Antigravity",
+			"Google · Antigravity",
 		);
 
 		clientSelect.value = "cursor";

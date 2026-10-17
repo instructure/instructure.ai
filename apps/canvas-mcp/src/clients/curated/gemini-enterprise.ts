@@ -64,6 +64,7 @@ export const geminiEnterprise = {
 	},
 	installModes: ["enterprise"],
 	enterpriseSurface: "Google Cloud console",
+	provider: "Google",
 	group: "Curated",
 	id: "gemini-enterprise",
 	name: "Gemini Enterprise",

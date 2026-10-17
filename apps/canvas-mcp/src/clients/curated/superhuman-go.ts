@@ -7,7 +7,8 @@ import { type ClientDefinition } from "../types";
 import { unknownFacts } from "../facts";
 export const superhumanGo = {
 	id: "superhuman-go",
-	name: "Superhuman Go",
+	name: "Go",
+	provider: "Superhuman",
 	group: "Curated",
 	facts: unknownFacts(),
 	installModes: ["personal"],

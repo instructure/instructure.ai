@@ -101,6 +101,7 @@ export const claudeAi = {
 	},
 	installModes: ["personal", "enterprise"],
 	enterpriseSurface: "Claude organization settings",
+	provider: "Anthropic",
 	group: "Curated",
 	id: "claude-ai",
 	name: "Claude.ai / Claude Desktop",

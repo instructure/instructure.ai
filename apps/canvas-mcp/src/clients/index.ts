@@ -27,8 +27,8 @@ const CURATED_CLIENTS: ClientDefinition[] = [
 ];
 CURATED_CLIENTS.sort((left, right) =>
 	new Intl.Collator("en", { sensitivity: "base", ignorePunctuation: true }).compare(
-		left.name,
-		right.name,
+		clientLabel(left),
+		clientLabel(right),
 	),
 );
 
@@ -57,4 +57,8 @@ export function normalizeKeyType(client: Client, key: string): KeyType {
 export function normalizeInstall(client: Client, install: string): InstallMode {
 	const modes = clientDefinition(client).installModes;
 	return modes.find((mode) => mode === install) ?? modes[0] ?? "personal";
+}
+
+export function clientLabel(client: ClientDefinition): string {
+	return client.provider ? `${client.provider} · ${client.name}` : client.name;
 }

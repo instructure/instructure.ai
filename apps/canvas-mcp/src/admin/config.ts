@@ -1,5 +1,5 @@
 // Unverified client facts are tracked in clients/*.ts, not displayed as admin warnings.
-import { CLIENTS, clientDefinition, allowedKeyTypes } from "../clients";
+import { CLIENTS, clientDefinition, clientLabel, allowedKeyTypes } from "../clients";
 import { type AppState } from "../state";
 import { escapeHtml } from "../ui/html";
 export function renderConfig(state: AppState, domainInputValue: string): string {
@@ -48,7 +48,7 @@ function clientOptions(selected: string): string {
 				`<optgroup label="${escapeHtml(group)}">${CLIENTS.filter((client) => client.group === group)
 					.map(
 						(client) =>
-							`<option value="${client.id}" ${selected === client.id ? "selected" : ""}>${escapeHtml(client.name)}</option>`,
+							`<option value="${client.id}" ${selected === client.id ? "selected" : ""}>${escapeHtml(clientLabel(client))}</option>`,
 					)
 					.join("")}</optgroup>`,
 		)
