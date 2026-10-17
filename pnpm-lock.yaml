@@ -262,9 +262,9 @@ importers:
       '@pantoken/css':
         specifier: 0.4.5
         version: 0.4.5
-      '@pantoken/plugin-custom-theme-colors':
-        specifier: 0.3.5
-        version: 0.3.5
+      '@pantoken/plugin-custom-components':
+        specifier: 0.7.2
+        version: 0.7.2(bingo-fs@0.6.0)(bingo-systems@0.7.0)(bingo@0.13.2)
       '@pantoken/plugin-logos':
         specifier: 0.5.5
         version: 0.5.5
@@ -1491,8 +1491,8 @@ packages:
     resolution: {integrity: sha512-MiXJOiTW3ozzTVLkADwtyLyBXBvB0QqQU7tgbtqveSJM9TXo8f2JHlce48lyTGT37LIzYtyTEfmT3dz+lPMhDg==}
     engines: {node: '>=22.18.0'}
 
-  '@pantoken/plugin-custom-theme-colors@0.3.5':
-    resolution: {integrity: sha512-atOU4xzLJVi8usShNNdJmOQnmxyhIks8AHwciLDdXq1xRxtgaqrUu8aJDmx84/NWV5zQi966Fh6FBoRqwG1qPQ==}
+  '@pantoken/plugin-custom-components@0.7.2':
+    resolution: {integrity: sha512-8qFSd8QMwu9Ba9i0uR4VEKbhMihKy23LNO+bbSYSz0XntyYnGHXQiX2QZKbUhaxkYbAh9lHlbE72qxBSixyr7Q==}
     engines: {node: '>=22.18.0'}
 
   '@pantoken/plugin-flatten-property@0.1.3':
@@ -5455,11 +5455,15 @@ snapshots:
 
   '@pantoken/model@0.5.0': {}
 
-  '@pantoken/plugin-custom-theme-colors@0.3.5':
+  '@pantoken/plugin-custom-components@0.7.2(bingo-fs@0.6.0)(bingo-systems@0.7.0)(bingo@0.13.2)':
     dependencies:
+      '@pantoken/components': 2.1.1(bingo-fs@0.6.0)(bingo-systems@0.7.0)(bingo@0.13.2)
       '@pantoken/model': 0.5.0
       '@pantoken/plugin-kit': 0.3.6
-      '@pantoken/tokens': 0.8.2
+    transitivePeerDependencies:
+      - bingo
+      - bingo-fs
+      - bingo-systems
 
   '@pantoken/plugin-flatten-property@0.1.3': {}
 

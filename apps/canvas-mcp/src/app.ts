@@ -45,15 +45,23 @@ export function mountApp(mode: PageMode): void {
 
 		appRoot.innerHTML = `
 			<div class="site-shell" data-mode="${pageMode}">
-				<header class="site-header" data-print="hidden">
-					<a class="wordmark" href="${basePath()}" aria-label="Canvas MCP setup home"><img class="wordmark-logo" alt="" src="${canvasLogoUri()}" /><span class="wordmark-name">MCP setup</span></a>
-					<nav class="header-actions" aria-label="Main navigation">
-						<label class="theme-control"><span class="instui-screen-reader-content">Color theme</span><select class="instui-simple-select" id="theme-select" aria-label="Color theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
-						<button class="instui-button -color-tertiary -size-sm button-quiet" type="button" data-action="print">Print</button>
-					</nav>
-				</header>
 				<main class="page-content">
-					<div class="page-heading"><div><p class="eyebrow">CANVAS MCP · ${pageMode === "user" ? "CLIENT SETUP" : "ADMIN SETUP"}</p><h1 class="instui-heading -variant-title-page">${pageMode === "user" ? "Connect Canvas to your MCP client" : "Create a Canvas developer key"}</h1><p class="lede">${pageMode === "user" ? "Build the connection details for your Canvas environment." : "Configure one developer key for the client you are setting up."}</p></div>${pageMode === "user" ? `<button class="instui-button -color-secondary button-outline" type="button" data-action="copy-link">Copy setup link</button>` : ""}</div>
+					<div class="page-heading">
+						<div class="page-heading-copy">
+							<div class="eyebrow"><img class="eyebrow-logo" alt="Canvas" src="${canvasLogoUri()}" /></div>
+							<h1 class="instui-heading -variant-title-page">${pageMode === "user" ? "Connect Canvas to your MCP client" : "Create a Canvas developer key"}</h1>
+							<p class="lede">${pageMode === "user" ? "Build the connection details for your Canvas environment." : "Configure one developer key for the client you are setting up."}</p>
+						</div>
+						<div class="page-heading-actions" role="group" aria-label="Page actions">
+							<button class="instui-button -color-tertiary -shape-square -icon-copy -size-sm" type="button" data-action="copy-link" aria-label="Copy setup link" title="Copy setup link"></button>
+							<div class="instui-button-set -color-secondary -toggle -size-sm theme-toggle" role="group" aria-label="Color theme">
+								${themeButton("system", "monitor", "Use system theme")}
+								${themeButton("light", "sun", "Use light theme")}
+								${themeButton("dark", "moon", "Use dark theme")}
+							</div>
+							<button class="instui-button -color-tertiary -shape-square -icon-printer -size-sm" type="button" data-action="print" aria-label="Print setup guide" title="Print"></button>
+						</div>
+					</div>
 					<div class="instui-tabs page-tabs --mb-md">
 						<div class="list" role="tablist" aria-label="Canvas MCP setup pages">
 							<button id="tab-connect" class="tab ${pageMode === "user" ? "-selected" : ""}" type="button" role="tab" aria-selected="${pageMode === "user"}" aria-controls="setup-panel" data-page="connect">Connect a Client</button>
@@ -135,11 +143,9 @@ export function mountApp(mode: PageMode): void {
 				state.clientId = (event.currentTarget as HTMLInputElement).value.replace(/\D/gu, "");
 				persist();
 			});
-		appRoot
-			.querySelector<HTMLSelectElement>("#theme-select")
-			?.addEventListener("change", (event) =>
-				setTheme((event.currentTarget as HTMLSelectElement).value),
-			);
+		appRoot.querySelectorAll<HTMLButtonElement>("[data-theme-choice]").forEach((button) => {
+			button.addEventListener("click", () => setTheme(button.dataset.themeChoice ?? "system"));
+		});
 		appRoot
 			.querySelector<HTMLButtonElement>('[data-action="print"]')
 			?.addEventListener("click", () => globalThis.print());
@@ -148,7 +154,7 @@ export function mountApp(mode: PageMode): void {
 			?.addEventListener("click", async () => {
 				await copyToClipboard(
 					new URL(
-						`${globalThis.location.pathname}?${pageQuery(state, pageMode)}`,
+						`${globalThis.location.pathname}?${pageQuery(state, "user")}`,
 						globalThis.location.origin,
 					).toString(),
 					"Setup link copied",
@@ -289,6 +295,11 @@ function keyTypeButton(key: "public" | "private", selected: string, allowed: str
 	return `<label class="instui-radio -variant-toggle"><input type="radio" name="key-type" value="${key}" ${selected === key ? "checked" : ""} ${allowed.includes(key) ? "" : "disabled"}>${title}</label>`;
 }
 
+function themeButton(theme: string, icon: string, label: string): string {
+	const selected = activeTheme() === theme;
+	return `<button class="instui-button -shape-square -icon-${icon}" type="button" data-theme-choice="${theme}" aria-label="${label}" title="${label}" aria-pressed="${selected}"></button>`;
+}
+
 function escapeHtml(value: string): string {
 	return value.replace(
 		/[&<>"']/gu,
@@ -306,10 +317,14 @@ function getStorage(): StorageLike | null {
 	}
 }
 
-const basePath = (): string => {
-	const baseUrl = import.meta.env.BASE_URL;
-	return baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
-};
+function activeTheme(): string {
+	try {
+		const stored = globalThis.localStorage.getItem("canvas-mcp:theme");
+		return stored === "light" || stored === "dark" ? stored : "system";
+	} catch {
+		return "system";
+	}
+}
 
 function canvasLogoUri(): string {
 	const scheme = document.documentElement.dataset.pantokenScheme;
@@ -326,21 +341,13 @@ function toSvgDataUri(svg: string | undefined): string {
 }
 
 function applyTheme(): void {
-	let theme = "system";
-	try {
-		theme = globalThis.localStorage.getItem("canvas-mcp:theme") ?? "system";
-	} catch {
-		theme = "system";
-	}
+	const theme = activeTheme();
 	if (theme === "light" || theme === "dark") {
 		document.documentElement.dataset.pantokenScheme = theme;
 	} else {
 		delete document.documentElement.dataset.pantokenScheme;
 	}
-	const select = document.querySelector<HTMLSelectElement>("#theme-select");
-	if (select) {
-		select.value = theme;
-	}
+	syncThemeButtons(theme);
 	syncCanvasLogo();
 }
 
@@ -351,6 +358,7 @@ function setTheme(theme: string): void {
 	} else {
 		delete document.documentElement.dataset.pantokenScheme;
 	}
+	syncThemeButtons(selected);
 	syncCanvasLogo();
 	try {
 		globalThis.localStorage.setItem("canvas-mcp:theme", selected);
@@ -359,8 +367,14 @@ function setTheme(theme: string): void {
 	}
 }
 
+function syncThemeButtons(selected: string): void {
+	document.querySelectorAll<HTMLButtonElement>("[data-theme-choice]").forEach((button) => {
+		button.setAttribute("aria-pressed", String(button.dataset.themeChoice === selected));
+	});
+}
+
 function syncCanvasLogo(): void {
-	const image = document.querySelector<HTMLImageElement>(".wordmark-logo");
+	const image = document.querySelector<HTMLImageElement>(".eyebrow-logo");
 	if (image) {
 		image.src = canvasLogoUri();
 	}

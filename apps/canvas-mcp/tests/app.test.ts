@@ -27,17 +27,39 @@ describe("Canvas MCP pages", () => {
 				?.classList.contains("instui-simple-select"),
 		).toBe(true);
 		expect(document.querySelectorAll('input[name="key-type"]')).toHaveLength(2);
-		const logo = document.querySelector<HTMLImageElement>(".wordmark-logo");
+		expect(document.querySelector(".site-header")).toBeNull();
+		expect(document.querySelectorAll(".page-heading-actions button")).toHaveLength(5);
+		expect(
+			document.querySelector('[data-action="copy-link"]')?.classList.contains("-icon-copy"),
+		).toBe(true);
+		expect(
+			document.querySelector('[data-action="print"]')?.classList.contains("-icon-printer"),
+		).toBe(true);
+		expect(document.querySelector(".theme-toggle")?.classList.contains("instui-button-set")).toBe(
+			true,
+		);
+		expect(
+			document.querySelector('[data-theme-choice="system"]')?.classList.contains("-icon-monitor"),
+		).toBe(true);
+		expect(
+			document.querySelector('[data-theme-choice="light"]')?.classList.contains("-icon-sun"),
+		).toBe(true);
+		expect(
+			document.querySelector('[data-theme-choice="dark"]')?.classList.contains("-icon-moon"),
+		).toBe(true);
+		expect(document.querySelector(".eyebrow")?.textContent?.trim()).toBe("");
+
+		const logo = document.querySelector<HTMLImageElement>(".eyebrow-logo");
 		const lightLogo = logo?.getAttribute("src");
 		expect(lightLogo).toContain("data:image/svg+xml");
 
-		const theme = document.querySelector<HTMLSelectElement>("#theme-select");
-		if (!theme) throw new Error("Theme selector not found");
-		theme.value = "dark";
-		theme.dispatchEvent(new Event("change", { bubbles: true }));
+		const theme = document.querySelector<HTMLButtonElement>('[data-theme-choice="dark"]');
+		if (!theme) throw new Error("Dark theme button not found");
+		theme.click();
 
 		expect(document.documentElement.dataset.pantokenScheme).toBe("dark");
 		expect(logo?.getAttribute("src")).not.toBe(lightLogo);
+		expect(theme.getAttribute("aria-pressed")).toBe("true");
 	});
 
 	it("uses Canvas-populated audience guidance without an admin region picker", () => {
@@ -56,12 +78,16 @@ describe("Canvas MCP pages", () => {
 		).toHaveLength(1);
 		expect((document.querySelector(".copy-block button") as HTMLButtonElement).disabled).toBe(true);
 		expect(document.querySelector('[role="tablist"]')).not.toBeNull();
-		expect(document.querySelector(".page-heading")?.nextElementSibling?.classList.contains("page-tabs")).toBe(true);
+		expect(
+			document.querySelector(".page-heading")?.nextElementSibling?.classList.contains("page-tabs"),
+		).toBe(true);
 		expect(document.querySelector(".page-tabs > .list[role='tablist']")).not.toBeNull();
 		expect(document.querySelector(".page-tabs > .panel[role='tabpanel']")).not.toBeNull();
 		expect(document.querySelector(".page-tabs")?.classList.contains("--mb-md")).toBe(true);
 		expect(document.querySelector(".page-tabs > .list")?.classList.contains("--mb-md")).toBe(false);
-		expect(document.querySelector('[data-page="admin"]')?.getAttribute("aria-selected")).toBe("true");
+		expect(document.querySelector('[data-page="admin"]')?.getAttribute("aria-selected")).toBe(
+			"true",
+		);
 	});
 
 	it("switches setup tabs through the page query parameter and preserves setup state", () => {
@@ -91,7 +117,9 @@ describe("Canvas MCP pages", () => {
 		mountApp("user");
 
 		expect(document.querySelector("h1")?.textContent).toContain("Create a Canvas developer key");
-		expect(document.querySelector('[data-page="admin"]')?.getAttribute("aria-selected")).toBe("true");
+		expect(document.querySelector('[data-page="admin"]')?.getAttribute("aria-selected")).toBe(
+			"true",
+		);
 	});
 
 	it("builds a regional user URL and includes the region in a shareable setup link", () => {
@@ -115,8 +143,8 @@ describe("Canvas MCP pages", () => {
 		);
 		mountApp("user");
 
-		expect(document.querySelector("img:not(.wordmark-logo)")).toBeNull();
-		expect(document.querySelector<HTMLImageElement>(".wordmark-logo")?.src).toContain(
+		expect(document.querySelector("img:not(.eyebrow-logo)")).toBeNull();
+		expect(document.querySelector<HTMLImageElement>(".eyebrow-logo")?.src).toContain(
 			"data:image/svg+xml",
 		);
 		expect(document.querySelector<HTMLInputElement>("#domain-input")?.value).toBe("");

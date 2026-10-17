@@ -1,10 +1,10 @@
 coverage:
   totals:
-    statements: 76.16%
-    branches: 80.58%
-    functions: 83.05%
-    lines: 75.96%
-    total: 78.94%
+    statements: 76.38%
+    branches: 80.19%
+    functions: 84.12%
+    lines: 76.07%
+    total: 79.19%
   scripts:
     totals:
       statements: 0%
@@ -19,10 +19,10 @@ coverage:
       uncovered_line_numbers: "6-21"
   src:
     totals:
-      statements: 54.57%
-      branches: 44.37%
-      functions: 96%
-      lines: 54.42%
+      statements: 54.64%
+      branches: 44.22%
+      functions: 96.33%
+      lines: 54.46%
     "admin.ts":
       statements: 0%
       branches: 0%
@@ -30,11 +30,11 @@ coverage:
       lines: 0%
       uncovered_line_numbers: "3-4"
     "app.ts":
-      statements: 74.63%
-      branches: 77.41%
-      functions: 80%
-      lines: 73.88%
-      uncovered_line_numbers: "25-385"
+      statements: 75%
+      branches: 76.66%
+      functions: 81.63%
+      lines: 74.07%
+      uncovered_line_numbers: "25-399"
     "clients.ts":
       statements: 100%
       branches: 50%
