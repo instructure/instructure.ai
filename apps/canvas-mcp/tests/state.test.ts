@@ -68,6 +68,8 @@ describe("app state", () => {
 
 		expect(readState("?domain=utah.instructure.com&client=generic&region=nope", storage)).toEqual({
 			client: "generic",
+			install: "personal",
+			surface: "canvas",
 			clientId: "",
 			domain: "utah.instructure.com",
 			key: "private",
@@ -95,6 +97,8 @@ describe("app state", () => {
 		const storage = memoryStorage(),
 			state: AppState = {
 				client: "codex",
+				install: "personal",
+				surface: "canvas",
 				clientId: "12345",
 				domain: "utah.instructure.com",
 				key: "private",
@@ -105,12 +109,13 @@ describe("app state", () => {
 
 		expect(JSON.parse(storage.getItem("canvas-mcp:v1") ?? "")).toEqual({
 			client: "codex",
+			install: "personal",
 			domain: "utah.instructure.com",
-			key: "private",
+			key: "public",
 			region: "us-west-2",
 		});
 		expect(stateQuery(state)).toBe(
-			"domain=utah.instructure.com&client=codex&key=private&region=us-west-2&clientId=12345",
+			"domain=utah.instructure.com&client=codex&key=public&install=personal&region=us-west-2&clientId=12345",
 		);
 		expect(stateQuery({ ...state, clientId: "x%26secret=abc" })).not.toContain("secret");
 	});

@@ -32,7 +32,7 @@ describe("Canvas MCP pages", () => {
 		).toBe(true);
 		expect(document.querySelectorAll('input[name="private-key"]')).toHaveLength(1);
 		expect(document.querySelector<HTMLInputElement>("#private-key-input")?.checked).toBe(false);
-		expect(document.querySelector<HTMLInputElement>("#private-key-input")?.disabled).toBe(true);
+		expect(document.querySelector<HTMLInputElement>("#private-key-input")?.disabled).toBe(false);
 		expect(document.querySelector<HTMLSelectElement>("#region-select")?.disabled).toBe(false);
 		expect(document.querySelector<HTMLInputElement>("#client-id-input")?.required).toBe(true);
 		expect(document.querySelector(".details-panel #client-id-input")).not.toBeNull();
@@ -308,11 +308,13 @@ describe("Canvas MCP pages", () => {
 		expect(groups.map((group) => group.label)).toEqual(["Curated", "Other"]);
 		expect([...groups[0].children].map((option) => option.textContent)).toEqual([
 			"Antigravity",
+			"ChatGPT (chatgpt.com and ChatGPT Desktop)",
 			"Claude.ai / Claude Desktop",
 			"Claude Code",
 			"Codex",
 			"Copilot Studio",
 			"Gemini Enterprise",
+			"Superhuman Go",
 		]);
 		const otherOptions = [...groups[1].children] as HTMLOptionElement[];
 		expect(otherOptions[0].value).toBe("generic");
@@ -342,12 +344,12 @@ describe("Canvas MCP pages", () => {
 			[...document.querySelectorAll(".settings-table tbody tr")]
 				.find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs")
 				?.querySelector("td")?.textContent,
-		).toBe("Confirm the OAuth callback URI with this client");
+		).toBe("Not yet verified for this client. Confirm its callback URI before creating the key.");
 		const cursorRedirect = [
 			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
 		].find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs");
 		expect(cursorRedirect?.querySelector(".setting-value-muted")?.textContent).toBe(
-			"Confirm the OAuth callback URI with this client",
+			"Not yet verified for this client. Confirm its callback URI before creating the key.",
 		);
 		expect(cursorRedirect?.querySelector("pre, button")).toBeNull();
 
@@ -357,7 +359,7 @@ describe("Canvas MCP pages", () => {
 			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
 		].find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs");
 		expect(codexRedirect?.querySelector(".setting-value-muted")?.textContent).toBe(
-			"http://localhost:8081/callback/<callbackId>",
+			"Confirm this client's callback mode and exact redirect URI before registering it. Computed output is awaiting verification.",
 		);
 		expect(codexRedirect?.querySelector("pre, button")).toBeNull();
 	});

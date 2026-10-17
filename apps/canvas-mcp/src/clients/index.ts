@@ -1,6 +1,8 @@
-import { type Client, type KeyType } from "../state";
-import { RULESYNC_TARGETS } from "../rulesyncTargets";
-import type { ClientDefinition } from "./types";
+import { type Client, type KeyType, type InstallMode, CLIENT_ALIASES } from "./ids";
+import { type ClientDefinition } from "./types";
+import { rulesyncClients } from "./rulesync";
+import { chatgpt } from "./curated/chatgpt";
+import { superhumanGo } from "./curated/superhuman-go";
 import { claudeAi } from "./curated/claude-ai";
 import { claudeCode } from "./curated/claude-code";
 import { codex } from "./curated/codex";
@@ -15,6 +17,8 @@ const CURATED_CLIENTS: ClientDefinition[] = [
 	copilotStudio,
 	geminiEnterprise,
 	antigravity,
+	chatgpt,
+	superhumanGo,
 	generic,
 ];
 CURATED_CLIENTS.sort((left, right) =>
@@ -24,39 +28,29 @@ CURATED_CLIENTS.sort((left, right) =>
 	),
 );
 
-const curatedRulesyncTargets = new Set(
-	CURATED_CLIENTS.flatMap((client) => (client.rulesyncTarget ? [client.rulesyncTarget] : [])),
-);
-
-const RULESYNC_CLIENTS: ClientDefinition[] = RULESYNC_TARGETS.filter(
-	(target) => !curatedRulesyncTargets.has(target.id),
-)
-	.map((target) => ({
-		group: "Other",
-		id: target.id,
-		keyTypes: ["public", "private"] as KeyType[],
-		name: target.name,
-		requiresClientId: true,
-		redirectUris: ["Confirm the OAuth callback URI with this client"],
-		setupNote:
-			"Rulesync lists this client as MCP-capable; verify its remote HTTP and OAuth requirements before configuring it.",
-		verify: "Confirm the client completes OAuth and can connect to the Canvas MCP server.",
-		rulesyncTarget: target.id,
-		oauthMetadataVerified: false,
-		redirectUriKnown: false,
-	}))
-	.sort((left, right) => left.name.localeCompare(right.name));
-
-export const CLIENTS: ClientDefinition[] = [...CURATED_CLIENTS, ...RULESYNC_CLIENTS];
-
+export const CLIENTS: ClientDefinition[] = [
+	...CURATED_CLIENTS,
+	...rulesyncClients(CURATED_CLIENTS),
+];
 export function clientDefinition(id: Client): ClientDefinition {
-	return (
-		CLIENTS.find((client) => client.id === id) ??
-		CURATED_CLIENTS.find((client) => client.id === "claude-code")!
+	const canonical = CLIENT_ALIASES[id] ?? id;
+	return CLIENTS.find((client) => client.id === canonical) ?? claudeCode;
+}
+export function allowedKeyTypes(client: ClientDefinition): KeyType[] {
+	return (["public", "private"] as const).filter(
+		(key) => client.facts.keyTypes[key].value !== "no",
 	);
 }
-
 export function normalizeKeyType(client: Client, key: string): KeyType {
-	const definition = clientDefinition(client);
-	return definition.keyTypes.includes(key as KeyType) ? (key as KeyType) : definition.keyTypes[0];
+	const types = allowedKeyTypes(clientDefinition(client));
+	if ((key === "public" || key === "private") && types.includes(key)) return key;
+	return (
+		types.find((type) => clientDefinition(client).facts.keyTypes[type].value === "yes") ??
+		types[0] ??
+		"public"
+	);
+}
+export function normalizeInstall(client: Client, install: string): InstallMode {
+	const modes = clientDefinition(client).installModes;
+	return modes.find((mode) => mode === install) ?? modes[0] ?? "personal";
 }

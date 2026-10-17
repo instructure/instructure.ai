@@ -1,3 +1,4 @@
+import { renderOAuthFacts } from "./ui/oauth-facts";
 import { clientDefinition } from "./clients";
 import { type AppState, deriveUrls } from "./state";
 import { renderConfig } from "./admin/config";
@@ -51,7 +52,7 @@ export function renderPage(
 					<div class="workspace-grid --mt-xl">
 						${pageMode === "admin" ? `<div class="configuration-stack">${renderConfig(state, domainInputValue)}${serverDetailsCard(urls, state, canConnect, true)}</div>` : ""}
 						${pageMode === "user" ? serverDetailsCard(urls, state, canConnect, false) : ""}
-						<section class="instui-card -variant-base details-panel" aria-live="polite"><div class="content">${pageMode === "user" ? userDetails(client) : adminDetails(client, hasValidDomain, state, copiedLabel)}</div></section>
+						<section class="instui-card -variant-base details-panel" aria-live="polite"><div class="content">${pageMode === "user" ? userDetails(client) : adminDetails(client, hasValidDomain, state, copiedLabel)}${renderOAuthFacts(client)}</div></section>
 					</div>
 					<footer class="page-footer"><p>Copyright &copy; ${new Date().getFullYear()} Instructure, Inc.</p></footer>
 					</section>

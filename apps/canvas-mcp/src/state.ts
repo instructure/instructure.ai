@@ -1,4 +1,6 @@
-import { RULESYNC_TARGETS, type RulesyncTargetId } from "./rulesyncTargets";
+import { type Client, type KeyType, type InstallMode, isClient } from "./clients/ids";
+import { normalizeInstall, normalizeKeyType } from "./clients";
+export { CLIENTS, isClient, type Client, type KeyType, type InstallMode } from "./clients/ids";
 
 export const REGIONS = [
 	"us-east-1",
@@ -10,19 +12,7 @@ export const REGIONS = [
 	"ap-southeast-2",
 ] as const;
 
-export const CLIENTS = [
-	"claude-ai",
-	"claude-code",
-	"codex",
-	"copilot-studio",
-	"gemini-enterprise",
-	"antigravity",
-	"generic",
-] as const;
-
 export type Region = (typeof REGIONS)[number];
-export type Client = (typeof CLIENTS)[number] | RulesyncTargetId;
-export type KeyType = "public" | "private";
 
 export interface AppState {
 	domain: string;
@@ -30,6 +20,8 @@ export interface AppState {
 	key: KeyType;
 	region: Region | "";
 	clientId: string;
+	install: InstallMode;
+	surface: "canvas" | "provider";
 }
 
 export interface StorageLike {
@@ -40,13 +32,14 @@ export interface StorageLike {
 interface SavedPreferences {
 	domain: string;
 	client: Client | null;
+	install: InstallMode | null;
 	key: KeyType | null;
 	region: Region | "";
 }
 
 const STORAGE_KEY = "canvas-mcp:v1",
 	DOMAIN_PATTERN = /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.(?:beta\.)?instructure\.com$/u,
-	CLIENT_ID_PATTERN = /^\d+$/u;
+	CLIENT_ID_PATTERN = /^\d{1,17}$/u;
 
 export function normalizeCanvasDomain(value: string): string | null {
 	const input = value.trim();
@@ -111,7 +104,14 @@ export function readState(search: string, storage: StorageLike | null): AppState
 		client,
 		clientId: CLIENT_ID_PATTERN.test(clientId) ? clientId : "",
 		domain,
-		key,
+		key: normalizeKeyType(client, key),
+		install: normalizeInstall(
+			client,
+			params.get("install") === "personal" || params.get("install") === "enterprise"
+				? params.get("install")!
+				: (saved.install ?? "personal"),
+		),
+		surface: params.get("surface") === "provider" ? "provider" : "canvas",
 		region,
 	};
 }
@@ -120,20 +120,22 @@ function readPreferences(storage: StorageLike | null): SavedPreferences {
 	try {
 		const raw = storage?.getItem(STORAGE_KEY);
 		if (!raw) {
-			return { client: null, domain: "", key: null, region: "" };
+			return { client: null, domain: "", key: null, region: "", install: null };
 		}
 		const saved: unknown = JSON.parse(raw);
 		if (!isRecord(saved)) {
-			return { client: null, domain: "", key: null, region: "" };
+			return { client: null, domain: "", key: null, region: "", install: null };
 		}
 		return {
 			client: isClient(saved.client) ? saved.client : null,
+			install:
+				saved.install === "personal" || saved.install === "enterprise" ? saved.install : null,
 			domain: typeof saved.domain === "string" ? saved.domain : "",
 			key: saved.key === "public" || saved.key === "private" ? saved.key : null,
 			region: isRegion(saved.region) ? saved.region : "",
 		};
 	} catch {
-		return { client: null, domain: "", key: null, region: "" };
+		return { client: null, domain: "", key: null, region: "", install: null };
 	}
 }
 
@@ -143,8 +145,9 @@ export function savePreferences(state: AppState, storage: StorageLike | null): v
 			STORAGE_KEY,
 			JSON.stringify({
 				client: state.client,
+				install: normalizeInstall(state.client, state.install),
 				domain: normalizeCanvasDomain(state.domain) ?? "",
-				key: state.key,
+				key: normalizeKeyType(state.client, state.key),
 				region: isRegion(state.region) ? state.region : "",
 			}),
 		);
@@ -159,7 +162,9 @@ export function stateQuery(state: AppState, includeClientId = true): string {
 		params.set("domain", state.domain);
 	}
 	params.set("client", state.client);
-	params.set("key", state.key);
+	params.set("key", normalizeKeyType(state.client, state.key));
+	params.set("install", normalizeInstall(state.client, state.install));
+	if (state.surface === "provider") params.set("surface", "provider");
 	if (state.region) {
 		params.set("region", state.region);
 	}
@@ -167,14 +172,6 @@ export function stateQuery(state: AppState, includeClientId = true): string {
 		params.set("clientId", state.clientId);
 	}
 	return params.toString();
-}
-
-export function isClient(value: unknown): value is Client {
-	return (
-		typeof value === "string" &&
-		(CLIENTS.includes(value as (typeof CLIENTS)[number]) ||
-			RULESYNC_TARGETS.some((target) => target.id === value))
-	);
 }
 
 export function isRegion(value: unknown): value is Region {

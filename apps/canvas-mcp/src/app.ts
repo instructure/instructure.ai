@@ -1,3 +1,4 @@
+import { connectionReadiness, normalizeSetup } from "./setup";
 import "./main.css";
 import { normalizeKeyType } from "./clients";
 import { renderPage, type PageMode } from "./page";
@@ -19,14 +20,9 @@ export function mountApp(mode: PageMode): void {
 	const appRoot = root,
 		state = readState(globalThis.location.search, getStorage());
 	let pageMode = pageModeFromQuery(globalThis.location.search) ?? mode;
-	state.key = normalizeKeyType(state.client, state.key);
+	normalizeSetup(state);
 	function isConnectionReady(): boolean {
-		return (
-			Boolean(normalizeCanvasDomain(state.domain)) &&
-			Boolean(state.region) &&
-			Boolean(state.client) &&
-			Boolean(state.clientId)
-		);
+		return connectionReadiness(state).ready;
 	}
 	if (pageMode === "user" && !isConnectionReady()) {
 		pageMode = "admin";
@@ -57,6 +53,14 @@ export function mountApp(mode: PageMode): void {
 	}
 
 	function bindEvents() {
+		appRoot
+			.querySelector<HTMLInputElement>("#enterprise-install-input")
+			?.addEventListener("change", (event) => {
+				state.install = (event.currentTarget as HTMLInputElement).checked
+					? "enterprise"
+					: "personal";
+				persistAndRender();
+			});
 		appRoot.querySelectorAll<HTMLButtonElement>("[data-page]").forEach((tab) => {
 			tab.addEventListener("click", () => {
 				if (tab.hasAttribute("data-configure-client")) {
@@ -98,7 +102,9 @@ export function mountApp(mode: PageMode): void {
 		appRoot
 			.querySelector<HTMLInputElement>("#client-id-input")
 			?.addEventListener("input", (event) => {
-				state.clientId = (event.currentTarget as HTMLInputElement).value.replace(/\D/gu, "");
+				state.clientId = (event.currentTarget as HTMLInputElement).value
+					.replace(/\D/gu, "")
+					.slice(0, 17);
 				persist();
 				const generatedClientIdInput =
 						appRoot.querySelector<HTMLInputElement>("#generated-client-id"),
@@ -143,6 +149,7 @@ export function mountApp(mode: PageMode): void {
 	}
 
 	function persist() {
+		normalizeSetup(state);
 		savePreferences(state, getStorage());
 		const search = pageQuery(state, pageMode);
 		globalThis.history.replaceState(
@@ -158,12 +165,7 @@ export function mountApp(mode: PageMode): void {
 	}
 
 	render();
-	if (
-		!new URLSearchParams(globalThis.location.search).has("page") ||
-		pageModeFromQuery(globalThis.location.search) !== pageMode
-	) {
-		persist();
-	}
+	persist();
 }
 
 function updatePrintPageBreaks(root: HTMLElement): void {
