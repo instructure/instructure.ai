@@ -357,7 +357,7 @@ describe("Canvas MCP pages", () => {
 			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
 		].find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs");
 		expect(codexRedirect?.querySelector(".setting-value-muted")?.textContent).toBe(
-			"Client callback URI",
+			"Select a Canvas domain and region to compute the callback URI.",
 		);
 		expect(codexRedirect?.querySelector("pre, button")).toBeNull();
 	});

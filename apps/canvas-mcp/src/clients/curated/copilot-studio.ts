@@ -1,3 +1,5 @@
+// The Accept-header policy is the workaround supplied in the September setup guidance.
+// Recheck its necessity against Copilot releases; keep that maintenance note out of the guide.
 import { documented, setupGuidance, updatedGuidance } from "../evidence";
 import { type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
@@ -53,10 +55,6 @@ export const copilotStudio = {
 					kind: "provider",
 					title: "Copilot Studio — check the temporary Accept-header workaround",
 					content: [
-						{
-							kind: "paragraph",
-							text: "The September 2026 setup guidance describes a temporary workaround. Verify it is still needed before applying it.",
-						},
 						{
 							kind: "list",
 							items: [

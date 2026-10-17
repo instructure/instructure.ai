@@ -34,7 +34,7 @@ export function renderPage(
 						<div class="page-heading-copy">
 							<div class="eyebrow"><img class="eyebrow-logo" alt="Canvas" src="${canvasLogoUri()}" /></div>
 							<h1 class="instui-heading -variant-title-page">${pageMode === "user" ? "Connect Canvas to your MCP client" : "Configure a Canvas MCP Server"}</h1>
-							<p class="lede">${pageMode === "user" ? "Build the connection details for your Canvas environment." : "Configure one developer key for the client you are setting up."}</p>
+							${pageMode === "user" ? '<p class="lede">Build the connection details for your Canvas environment.</p>' : ""}
 						</div>
 						<div class="page-heading-actions" role="group" aria-label="Page actions">
 							<div class="instui-button-set -color-secondary -toggle -size-sm theme-toggle" role="group" aria-label="Color theme">

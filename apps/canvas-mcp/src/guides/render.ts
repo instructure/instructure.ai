@@ -81,7 +81,12 @@ export function validateGuide(guide: Guide): void {
 	if (guide.status === "documented" && (!guide.lastVerified || !guide.sources.length))
 		throw new Error("Documented guides require dated evidence");
 }
-function renderFields(client: ClientDefinition, state: AppState, model: KeySettingsModel): string {
+function renderFields(
+	client: ClientDefinition,
+	state: AppState,
+	model: KeySettingsModel,
+	editable: boolean,
+): string {
 	const values = guideValues(client, state, model),
 		fields = [
 			["MCP server URL", values.mcpUrl],
@@ -98,7 +103,7 @@ function renderFields(client: ClientDefinition, state: AppState, model: KeySetti
 						: "Optional for a Canvas private key",
 			],
 		];
-	return `<section class="guide-fields"><h3 class="instui-heading -level-h3">Connection fields</h3><table class="instui-table"><thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody>${fields.map(([name, value]) => `<tr><th scope="row">${escapeHtml(name)}</th><td><code${name === "Client ID" ? ' data-guide-token="clientId"' : ""}>${escapeHtml(value)}</code></td></tr>`).join("")}</tbody></table>${state.key === "private" ? "<p>Enter the key secret directly in the provider's secret field. Never paste it into this guide or a setup link.</p>" : "<p>A public key uses the Client ID without a client secret. Public is preferred when the client supports both key types.</p>"}</section>`;
+	return `<section class="guide-fields"><h3 class="instui-heading -level-h3">Connection fields</h3><table class="instui-table"><thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody>${fields.map(([name, value]) => `<tr><th scope="row">${escapeHtml(name)}</th><td><code${name === "Client ID" ? ' data-guide-token="clientId"' : ""}>${escapeHtml(value)}</code></td></tr>`).join("")}</tbody></table>${editable ? "" : state.key === "private" ? "<p>Enter the key secret directly in the provider's secret field. Never paste it into this guide or a setup link.</p>" : "<p>A public key uses the Client ID without a client secret. Public is preferred when the client supports both key types.</p>"}</section>`;
 }
 function renderStep(
 	step: GuideStep,
@@ -167,7 +172,7 @@ export function renderGuide(
 				(["canvas", "provider"] as const)
 					.map(
 						(surface) =>
-							`<section id="guide-${surface}" class="guide-surface" aria-label="${surface === "canvas" ? "Canvas setup" : `${escapeHtml(provider)} setup`}" ${activeSurface !== surface ? "hidden" : ""}>${surface === "provider" ? renderFields(client, state, model) : ""}${steps
+							`<section id="guide-${surface}" class="guide-surface" aria-label="${surface === "canvas" ? "Canvas setup" : `${escapeHtml(provider)} setup`}" ${activeSurface !== surface ? "hidden" : ""}>${surface === "provider" ? renderFields(client, state, model, editable) : ""}${steps
 								.filter((step) =>
 									surface === "canvas" ? step.kind === "canvas-key" : step.kind !== "canvas-key",
 								)

@@ -1,6 +1,14 @@
 import { documented, setupGuidance, updatedGuidance } from "../evidence";
-import { type ClientDefinition } from "../types";
+import { type Evidence, type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
+const claudeConnectors: Evidence = {
+	method: "vendor-doc",
+	label: "Claude custom connectors — individual and organization setup",
+	url: "https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp",
+	verifiedAt: "2026-10-17",
+};
+// Current vendor instructions supersede the supplied guide's missing corporate section.
+// Canvas uses a pre-registered client: select "Use your own OAuth client", not automatic registration.
 export const claudeAi = {
 	facts: {
 		...inheritedFacts(["public", "private"], {
@@ -19,7 +27,7 @@ export const claudeAi = {
 			presentation: "by-surface",
 			status: "documented",
 			prerequisites: ["Claude Pro or Max with custom connector access."],
-			sources: [updatedGuidance, setupGuidance],
+			sources: [updatedGuidance, setupGuidance, claudeConnectors],
 			lastVerified: "2026-10-17",
 			steps: [
 				{
@@ -35,10 +43,11 @@ export const claudeAi = {
 						{
 							kind: "list",
 							items: [
-								"Open Customize → Connectors, choose +, then Add custom connector.",
-								"Enter the MCP server URL: {mcpUrl}.",
-								"Open Advanced settings and enter Client ID {clientId}. Public is preferred: leave Client Secret blank. If using the private-key alternative from the setup guidance, enter the secret directly in Claude.",
-								"Choose Add and complete Canvas sign-in when prompted.",
+								"In Customize → Connectors, choose + Add → Add custom connector.",
+								"Name it Canvas MCP, enter {mcpUrl}, then Continue.",
+								"Review authentication, continue, and choose Sign in when needed.",
+								"Choose Use your own OAuth client. Enter Client ID {clientId}; leave the secret blank for a public key, or enter the Canvas secret for a private key.",
+								"Choose Add, then connect and sign in to Canvas.",
 							],
 						},
 					],
@@ -58,11 +67,12 @@ export const claudeAi = {
 		},
 		enterprise: {
 			presentation: "by-surface",
-			status: "pending",
+			status: "documented",
 			prerequisites: [
 				"On Team and Enterprise, an organization Owner adds the connector before members connect.",
 			],
-			sources: [updatedGuidance],
+			sources: [updatedGuidance, claudeConnectors],
+			lastVerified: "2026-10-17",
 			steps: [
 				{
 					id: "canvas-create",
@@ -70,13 +80,19 @@ export const claudeAi = {
 					action: "create",
 				},
 				{
-					id: "provider-pending",
+					id: "provider-configure",
 					kind: "provider",
 					title: "Claude organization setup",
 					content: [
 						{
-							kind: "paragraph",
-							text: "Detailed corporate setup instructions are not available in the updated guidance yet. Confirm the organization connector flow with your administrator before connecting.",
+							kind: "list",
+							items: [
+								"In Organization settings → Connectors, choose Add → Custom → Web.",
+								"Name it Canvas MCP and enter {mcpUrl}. Continue through authentication settings.",
+								"Choose Sign in when needed and Use your own OAuth client.",
+								"Enter Client ID {clientId}. Leave the secret blank for a public key; enter the Canvas secret for a private key.",
+								"Choose Add. Members then open Customize → Connectors → Canvas MCP → Connect and sign in to Canvas.",
+							],
 						},
 					],
 				},

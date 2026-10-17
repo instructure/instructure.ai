@@ -1,11 +1,16 @@
 // @vitest-environment node
 import { describe, expect, it, vi } from "vitest";
+import { clientDefinition } from "../src/clients";
 import { CallbackCache, codexCallbackUri } from "../src/oauth/codex-callback";
 
 const server = "https://example.maple.us-east-1.core.inseng.io/mcp",
 	base = "http://localhost:8081/callback";
 describe("Codex callback derivation from pinned source", () => {
 	it("matches an independently computed SHA-256 vector (not a real Codex run)", async () => {
+		expect(clientDefinition("codex").facts.redirectUri).toMatchObject({
+			kind: "computed",
+			mode: "per-server",
+		});
 		expect(await codexCallbackUri(server, base, "per-server")).toBe(base + "/hvafq6QNzdo1");
 		expect(await codexCallbackUri(server + "#fragment", base, "per-server")).toBe(
 			base + "/hvafq6QNzdo1",

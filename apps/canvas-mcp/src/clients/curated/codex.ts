@@ -1,19 +1,36 @@
 import { documented, updatedGuidance } from "../evidence";
-import { type ClientDefinition } from "../types";
+import { type Evidence, type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
+const codexOAuth: Evidence = {
+	method: "vendor-doc",
+	label: "Codex OAuth registration and callbacks",
+	url: "https://learn.chatgpt.com/docs/extend/mcp",
+	verifiedAt: "2026-10-17",
+};
+// Maple 6368cd5b58b7a3f9d4c004c46f8779712cdb0d14, src/controllers/well-known.controller.ts:
+// authorization-server metadata omits authorization_response_iss_parameter_supported.
+// Codex therefore appends the server-specific callback ID. Recheck if Maple adds RFC 9207.
+// This is source/documentation evidence, not a successful live Canvas OAuth probe.
 export const codex = {
 	facts: {
-		...inheritedFacts(["public"], {
+		...inheritedFacts(["public", "private"], {
 			kind: "computed",
 			recipe: "codex-callback-id",
 			base: "http://localhost:8081/callback",
-			mode: "unknown",
+			mode: "per-server",
 			evidence: [
 				{
 					method: "source",
-					label: "Codex callback algorithm; Canvas mode awaiting verification",
+					label: "Codex callback ID algorithm",
 					url: "https://github.com/openai/codex/blob/9be8d6e1c3dbb145d2d7ac3ba46729340e6d8d40/codex-rs/rmcp-client/src/oauth_callback.rs",
 					version: "9be8d6e1c3dbb145d2d7ac3ba46729340e6d8d40",
+					verifiedAt: "2026-10-17",
+				},
+				codexOAuth,
+				{
+					method: "source",
+					label: "Maple authorization-server metadata (no RFC 9207 flag)",
+					version: "6368cd5b58b7a3f9d4c004c46f8779712cdb0d14",
 					verifiedAt: "2026-10-17",
 				},
 			],
@@ -21,7 +38,10 @@ export const codex = {
 		remoteHttp: documented("yes"),
 		staticClientId: documented("yes"),
 		registration: documented("static"),
-		keyTypes: { public: documented("yes"), private: documented("no") },
+		keyTypes: {
+			public: documented("yes"),
+			private: { value: "yes", status: "documented", evidence: [codexOAuth] },
+		},
 	},
 	guides: {
 		personal: {
@@ -30,7 +50,7 @@ export const codex = {
 			prerequisites: [
 				"Codex CLI or IDE extension installed and signed in; public Canvas key and callback port 8081.",
 			],
-			sources: [updatedGuidance],
+			sources: [updatedGuidance, codexOAuth],
 			lastVerified: "2026-10-17",
 			steps: [
 				{
@@ -41,15 +61,32 @@ export const codex = {
 				{
 					id: "provider-register",
 					kind: "provider",
+					key: "public",
 					title: "Codex — register the server",
 					content: [
 						{
 							kind: "paragraph",
-							text: "The CLI and IDE extension share this configuration. Confirm the complete registered callback URI before signing in.",
+							text: "The CLI and IDE extension share this configuration.",
 						},
 						{
 							kind: "code",
 							text: 'codex -c mcp_oauth_callback_port=8081 -c \'mcp_oauth_callback_url="http://localhost:8081/callback"\' mcp add canvas-mcp --url "{mcpUrl}" --oauth-client-id "{clientId}"',
+						},
+					],
+				},
+				{
+					id: "provider-register-private",
+					kind: "provider",
+					key: "private",
+					title: "Codex — register the server",
+					content: [
+						{
+							kind: "paragraph",
+							text: "Set CANVAS_CLIENT_SECRET in your terminal to the Canvas key secret, then run:",
+						},
+						{
+							kind: "code",
+							text: `codex -c mcp_oauth_callback_port=8081 -c 'mcp_oauth_callback_url="http://localhost:8081/callback"' mcp add canvas-mcp --url "{mcpUrl}" --oauth-client-id "{clientId}" --oauth-client-secret "$CANVAS_CLIENT_SECRET"`,
 						},
 					],
 				},
@@ -91,7 +128,6 @@ export const codex = {
 	id: "codex",
 	rulesyncTarget: "codexcli",
 	name: "Codex",
-	setupNote:
-		"Add the remote MCP server in Codex. Confirm the exact callback URI and callback mode before registering it.",
+	setupNote: "Add the remote MCP server in Codex and complete Canvas sign-in.",
 	verify: "Complete OAuth and confirm the Canvas MCP server is enabled in Codex.",
 } satisfies ClientDefinition;

@@ -14,7 +14,7 @@ describe("typed client requirements", () => {
 		expect(clientDefinition("antigravity-cli")).not.toBe(clientDefinition("antigravity"));
 	});
 	it("prefers public for both-capable clients and retains an explicit private choice", () => {
-		for (const id of ["claude-ai", "claude-code"] as const) {
+		for (const id of ["claude-ai", "claude-code", "codex", "gemini-cli"] as const) {
 			expect(normalizeKeyType(id, "")).toBe("public");
 			expect(normalizeKeyType(id, "private")).toBe("private");
 		}
