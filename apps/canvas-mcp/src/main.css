@@ -12,6 +12,9 @@
 @import "@pantoken/components/icons/moon.css";
 @import "@pantoken/components/icons/printer.css";
 @import "@pantoken/components/icons/sun.css";
+@import "@pantoken/components/icons/sliders-horizontal.css";
+@import "@pantoken/components/tray.css";
+@import "@pantoken/components/close-button.css";
 @import "@pantoken/components/fonts.css";
 @import "@pantoken/components/utilities.css";
 
@@ -54,18 +57,41 @@ body {
 
 .page-heading-actions {
     margin-left: auto;
-    display: grid;
-    grid-template-columns: repeat(2, auto);
+    display: flex;
     align-items: start;
-    justify-items: end;
     justify-content: end;
     gap: 8px;
     flex: 0 0 auto;
 }
 
-.theme-toggle {
-    grid-column: 1 / -1;
-    justify-self: end;
+.settings-tray-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.settings-tray-header h2,
+.settings-tray-section h3,
+.instructions-heading {
+    margin: 0 0 14px;
+}
+
+.settings-tray-section {
+    margin-top: 24px;
+}
+
+.settings-tray-section .theme-toggle {
+    justify-content: flex-start;
+}
+
+.settings-tray-actions {
+    display: grid;
+    gap: 8px;
+}
+
+.server-details-card {
+    margin-top: 24px;
 }
 
 .eyebrow {
@@ -106,13 +132,6 @@ h1 {
     grid-template-columns: minmax(0, 1fr);
 }
 
-.configuration-stack {
-    min-width: 0;
-    display: grid;
-    align-content: start;
-    gap: 22px;
-}
-
 .admin-footer-action {
     margin-top: 18px;
     display: flex;
@@ -123,10 +142,6 @@ h1 {
 .details-panel,
 .generated-panel {
     min-width: 0;
-}
-
-.server-details-card.is-hidden {
-    display: none;
 }
 
 .generated-panel h2 {
@@ -380,29 +395,47 @@ pre {
     margin: 18px 0 8px;
 }
 
-.copy-block {
+.shiki-block {
+    position: relative;
     margin-top: 12px;
     border: 1px solid color-mix(in srgb, var(--instui-color-text-base) 18%, transparent);
     border-radius: 4px;
     overflow: hidden;
 }
 
-.copy-block-heading {
-    padding: 7px 11px;
-    background: color-mix(in srgb, var(--instui-color-text-base) 5%, var(--instui-color-background-page));
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 11px;
-    font-weight: 700;
+.shiki-block .shiki-copy {
+    position: absolute;
+    top: 8px;
+    right: 8px;
 }
 
-.copy-block pre {
+.shiki-block pre {
     margin: 0;
     padding: 12px;
+    padding-right: 48px;
     overflow-x: auto;
-    color: var(--instui-color-text-base);
     line-height: 1.6;
+}
+
+.shiki-block pre code {
+    font-size: 12px;
+}
+
+.shiki-block.language-prompt {
+    border-color: transparent;
+    background:
+        linear-gradient(
+                to right,
+                var(--instui-component-shared-tokens-background-ai-top-gradient-color) 0%,
+                var(--instui-component-shared-tokens-background-ai-bottom-gradient-color) 100%
+            )
+            padding-box,
+        linear-gradient(
+                to right,
+                var(--instui-component-shared-tokens-background-ai-bottom-gradient-color) 0%,
+                var(--instui-component-shared-tokens-background-ai-top-gradient-color) 100%
+            )
+            border-box;
 }
 
 .scope-card {
@@ -617,25 +650,6 @@ pre {
     font-weight: 700;
 }
 
-.oauth-facts,
-.shared-troubleshooting {
-    margin-top: 24px;
-}
-
-.oauth-facts summary,
-.shared-troubleshooting summary {
-    cursor: pointer;
-}
-
-.oauth-facts dt {
-    margin-top: 12px;
-    font-weight: 700;
-}
-
-.oauth-facts dd {
-    margin-left: 0;
-}
-
 .print-context {
     display: none;
 }
@@ -671,7 +685,6 @@ pre {
     border-radius: 1rem;
     border: 1px solid transparent;
 }
-
 
 [data-pantoken-scheme="light"] .instui-img {
     border-color: var(--instui-component-view-border-color-primary);

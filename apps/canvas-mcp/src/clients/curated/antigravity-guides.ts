@@ -85,6 +85,7 @@ export const antigravityAppGuide: Guide = {
 			content: [
 				{
 					kind: "code" as const,
+					language: "json" as const,
 					text: JSON.stringify(
 						{
 							mcpServers: {

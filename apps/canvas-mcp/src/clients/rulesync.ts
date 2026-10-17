@@ -14,7 +14,7 @@ export function rulesyncClients(curated: ClientDefinition[]): ClientDefinition[]
 			installModes: ["personal"] as ClientDefinition["installModes"],
 			rulesyncTarget: target.id,
 			setupNote:
-				"Rulesync confirms MCP configuration support only. Remote HTTP and OAuth requirements are unverified.",
+				"Rulesync confirms MCP configuration support only. Confirm remote connection support with the client vendor.",
 			verify: "Confirm the client completes OAuth and can list the server tools.",
 		}))
 		.sort((a, b) => a.name.localeCompare(b.name));

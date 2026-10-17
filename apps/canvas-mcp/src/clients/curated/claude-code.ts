@@ -34,6 +34,7 @@ export const claudeCode = {
 					content: [
 						{
 							kind: "code",
+							language: "bash",
 							text: 'claude mcp add-json canvas-mcp \\\n  \'{"type":"http","url":"{mcpUrl}","oauth":{"clientId":"{clientId}","callbackPort":8081,"scopes":"{scope}"}}\' \\\n  --scope local',
 						},
 					],
@@ -46,6 +47,7 @@ export const claudeCode = {
 					content: [
 						{
 							kind: "code",
+							language: "powershell",
 							text: 'claude mcp add-json canvas-mcp `\n  \'{"type":"http","url":"{mcpUrl}","oauth":{"clientId":"{clientId}","callbackPort":8081,"scopes":"{scope}"}}\' `\n  --scope local',
 						},
 					],
@@ -62,6 +64,7 @@ export const claudeCode = {
 						},
 						{
 							kind: "code",
+							language: "bash",
 							text: 'claude mcp add-json canvas-mcp \\\n  \'{"type":"http","url":"{mcpUrl}","oauth":{"clientId":"{clientId}","callbackPort":8081,"scopes":"{scope}"}}\' \\\n  --scope local --client-secret',
 						},
 					],
@@ -78,6 +81,7 @@ export const claudeCode = {
 						},
 						{
 							kind: "code",
+							language: "powershell",
 							text: 'claude mcp add-json canvas-mcp `\n  \'{"type":"http","url":"{mcpUrl}","oauth":{"clientId":"{clientId}","callbackPort":8081,"scopes":"{scope}"}}\' `\n  --scope local --client-secret',
 						},
 					],
@@ -105,6 +109,7 @@ export const claudeCode = {
 					content: [
 						{
 							kind: "code",
+							language: "bash",
 							text: "claude mcp get canvas-mcp",
 						},
 						{

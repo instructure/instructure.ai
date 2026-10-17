@@ -199,9 +199,29 @@ describe("Canvas MCP pages", () => {
 		expect(pasteScopesHeading?.textContent).toBe("Paste Scopes");
 		expect(pasteScopesHeading?.closest(".settings-table")).toBeNull();
 		expect(pasteScopesHeading?.nextElementSibling?.classList.contains("scope-card")).toBe(true);
-		expect(document.querySelector(".details-panel h2")?.classList.contains("--mb-2xl")).toBe(true);
+		expect(document.querySelector(".instructions-heading")?.textContent).toBe("Instructions");
 		expect(document.querySelector(".site-header")).toBeNull();
-		expect(document.querySelectorAll(".page-heading-actions button")).toHaveLength(5);
+		expect(document.querySelectorAll(".page-heading-actions button")).toHaveLength(1);
+		expect(document.querySelector(".instui-tray")?.hasAttribute("popover")).toBe(true);
+		expect(document.querySelector<HTMLElement>("#settings-tray")?.style.padding).not.toBe("");
+		expect(document.querySelector("#settings-appearance-heading")?.textContent).toBe("Appearance");
+		expect(document.querySelector("#settings-sharing-heading")?.textContent).toBe("Sharing");
+		expect(document.querySelector("#tray-server-details-heading")?.textContent).toBe(
+			"Server details",
+		);
+		expect(document.querySelector(".controls-panel")).not.toBeNull();
+		expect(document.querySelector(".details-panel")).not.toBeNull();
+		expect(document.querySelector(".workspace-grid")?.children).toHaveLength(2);
+		expect(
+			document
+				.querySelector<HTMLButtonElement>(".page-heading-actions button")
+				?.classList.contains("-icon-sliders-horizontal"),
+		).toBe(true);
+		expect(
+			document
+				.querySelector<HTMLButtonElement>(".settings-tray-header button")
+				?.getAttribute("popovertargetaction"),
+		).toBe("hide");
 		expect(
 			[...document.querySelectorAll<HTMLButtonElement>('.page-tabs [role="tab"]')].map(
 				(tab) => tab.textContent,
@@ -214,6 +234,8 @@ describe("Canvas MCP pages", () => {
 		expect(
 			document.querySelector('[data-action="print"]')?.classList.contains("-icon-printer"),
 		).toBe(true);
+		expect(document.querySelector('[data-action="print"]')?.textContent).toBe("Print this page");
+		expect(document.querySelector('[data-action="copy-link"]')?.textContent).toBe("Copy this link");
 		expect(document.querySelector(".theme-toggle")?.classList.contains("instui-button-set")).toBe(
 			true,
 		);
@@ -366,9 +388,7 @@ describe("Canvas MCP pages", () => {
 		mountApp("admin");
 		const domainInput = document.querySelector<HTMLInputElement>("#domain-input");
 		if (!domainInput) throw new Error("Canvas domain input not found");
-		expect(document.querySelector(".server-details-card")?.classList.contains("is-hidden")).toBe(
-			true,
-		);
+		expect(document.querySelector(".server-details-card")).not.toBeNull();
 
 		expect((document.querySelector("#region-select") as HTMLSelectElement).disabled).toBe(false);
 		expect(document.querySelector("#region-field")?.classList.contains("is-hidden")).toBe(false);
@@ -393,17 +413,14 @@ describe("Canvas MCP pages", () => {
 		);
 		domainInput.value = "utah.instructure.com";
 		domainInput.dispatchEvent(new Event("change", { bubbles: true }));
-		expect(document.querySelector(".server-details-card h2")?.textContent).toBe("Server Details");
-		expect(document.querySelector(".server-details-card")?.classList.contains("is-hidden")).toBe(
-			true,
+		expect(document.querySelector("#tray-server-details-heading")?.textContent).toBe(
+			"Server details",
 		);
 		const regionSelect = document.querySelector<HTMLSelectElement>("#region-select");
 		if (!regionSelect) throw new Error("Canvas region selector not found");
 		regionSelect.value = "us-east-1";
 		regionSelect.dispatchEvent(new Event("change", { bubbles: true }));
-		expect(document.querySelector(".server-details-card")?.classList.contains("is-hidden")).toBe(
-			true,
-		);
+		expect(document.querySelector(".server-details-card")).not.toBeNull();
 		expect(document.querySelector<HTMLInputElement>("#generated-mcp-url")?.value).toBe(
 			"https://utah.maple.us-east-1.core.inseng.io/mcp",
 		);
@@ -427,16 +444,11 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector<HTMLButtonElement>("#generated-client-id-copy")?.disabled).toBe(
 			true,
 		);
-		expect(document.querySelector<HTMLButtonElement>("#configure-client-button")?.disabled).toBe(
-			true,
-		);
+		expect(document.querySelector("#configure-client-button")).toBeNull();
 		const clientIdInput = document.querySelector<HTMLInputElement>("#client-id-input");
 		if (!clientIdInput) throw new Error("Client ID input not found");
 		clientIdInput.value = "12345000000000001";
 		clientIdInput.dispatchEvent(new Event("input", { bubbles: true }));
-		expect(document.querySelector(".server-details-card")?.classList.contains("is-hidden")).toBe(
-			false,
-		);
 		expect(document.querySelector<HTMLInputElement>("#generated-client-id")?.value).toBe(
 			"12345000000000001",
 		);
@@ -578,13 +590,7 @@ describe("Canvas MCP pages", () => {
 		expect(
 			document.querySelector("#generated-client-id-field")?.classList.contains("is-hidden"),
 		).toBe(false);
-		const configureClientButton = document.querySelector<HTMLButtonElement>(
-			"#configure-client-button",
-		);
-		expect(configureClientButton?.classList.contains("instui-link")).toBe(true);
-		expect(configureClientButton?.classList.contains("instui-button")).toBe(true);
-		expect(configureClientButton?.classList.contains("-color-primary")).toBe(true);
-		expect(configureClientButton?.disabled).toBe(false);
+		expect(document.querySelector("#configure-client-button")).toBeNull();
 		expect(bottomConfigureButton?.classList.contains("-color-primary")).toBe(true);
 		expect(bottomConfigureButton?.disabled).toBe(false);
 		expect(document.querySelector("#client-id-reference-input")).toBeNull();
@@ -627,8 +633,10 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector("#client-id-input")).toBeNull();
 		expect(
 			document.querySelector(".workspace-grid")?.classList.contains("workspace-grid--single"),
-		).toBe(false);
-		expect(document.querySelector(".server-details-card h2")?.textContent).toBe("Server Details");
+		).toBe(true);
+		expect(document.querySelector("#tray-server-details-heading")?.textContent).toBe(
+			"Server details",
+		);
 		expect(document.querySelector<HTMLInputElement>("#generated-auth-url")?.value).toBe(
 			"https://utah.instructure.com/login/oauth2/auth",
 		);
@@ -642,9 +650,12 @@ describe("Canvas MCP pages", () => {
 			"12345000000000001",
 		);
 		expect(document.querySelectorAll(".server-details-card input[readonly]")).toHaveLength(5);
-		expect(document.querySelector(".details-panel h2")?.textContent).toBe("Codex");
+		expect(document.querySelector(".details-panel h2")?.textContent).toBe("Instructions");
 		expect(document.querySelector(".details-panel h2")?.classList.contains("instui-heading")).toBe(
 			true,
+		);
+		expect(document.querySelector("#guide-provider")?.getAttribute("aria-label")).toBe(
+			"Codex setup",
 		);
 		expect(document.querySelector("#guide-provider")?.hasAttribute("hidden")).toBe(false);
 		expect(document.querySelector("#guide-provider .guide-fields")).toBeNull();

@@ -1,5 +1,7 @@
+// @vitest-environment jsdom
 import { describe, expect, it } from "vitest";
 import { CLIENTS, clientDefinition, normalizeKeyType } from "../src/clients";
+import { renderPage } from "../src/page";
 import { connectionReadiness } from "../src/setup";
 import { readState, stateQuery, savePreferences } from "../src/state";
 
@@ -57,6 +59,21 @@ describe("typed client requirements", () => {
 			]) {
 				if (fact.status !== "unverified") expect(fact.evidence.length).toBeGreaterThan(0);
 			}
+		}
+	});
+	it("omits source notes, the FAQ, and OAuth requirement details from all client settings pages", () => {
+		for (const { id } of CLIENTS) {
+			const state = readState(
+				`?client=${id}&domain=example.instructure.com&region=us-east-1&clientId=12345`,
+				null,
+			);
+			const page = renderPage(state, "user", state.domain, true);
+			expect(page).not.toContain("Troubleshooting and OAuth FAQ");
+			expect(page).not.toContain("Last checked:");
+			expect(page).not.toContain("Instructure setup guidance");
+			expect(page, id).not.toContain("OAuth requirements");
+			expect(page).not.toContain('class="shared-troubleshooting"');
+			expect(page).not.toContain('class="oauth-facts"');
 		}
 	});
 });

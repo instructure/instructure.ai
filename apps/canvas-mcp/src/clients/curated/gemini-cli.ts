@@ -59,6 +59,7 @@ export const geminiCli = {
 						},
 						{
 							kind: "code",
+							language: "json",
 							text: '{\n  "mcpServers": {\n    "canvas-mcp": {\n      "httpUrl": "{mcpUrl}",\n      "oauth": {\n        "enabled": true,\n        "clientId": "{clientId}",\n        "authorizationUrl": "{authUrl}",\n        "tokenUrl": "{tokenUrl}",\n        "scopes": ["{scope}"],\n        "redirectUri": "http://localhost:8081/oauth/callback"\n      }\n    }\n  }\n}',
 						},
 					],
@@ -75,6 +76,7 @@ export const geminiCli = {
 						},
 						{
 							kind: "code",
+							language: "json",
 							text: '{\n  "mcpServers": {\n    "canvas-mcp": {\n      "httpUrl": "{mcpUrl}",\n      "oauth": {\n        "enabled": true,\n        "clientId": "{clientId}",\n        "clientSecret": "<CANVAS_CLIENT_SECRET>",\n        "authorizationUrl": "{authUrl}",\n        "tokenUrl": "{tokenUrl}",\n        "scopes": ["{scope}"],\n        "redirectUri": "http://localhost:8081/oauth/callback"\n      }\n    }\n  }\n}',
 						},
 						{

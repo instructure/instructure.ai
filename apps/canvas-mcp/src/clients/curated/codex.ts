@@ -40,6 +40,7 @@ const codexPersonalGuide: Guide = {
 				},
 				{
 					kind: "code",
+					language: "bash",
 					text: 'codex -c mcp_oauth_callback_port=8081 -c \'mcp_oauth_callback_url="http://localhost:8081/callback"\' mcp add canvas-mcp --url "{mcpUrl}" --oauth-client-id "{clientId}"',
 				},
 			],
@@ -56,6 +57,7 @@ const codexPersonalGuide: Guide = {
 				},
 				{
 					kind: "code",
+					language: "bash",
 					text: `codex -c mcp_oauth_callback_port=8081 -c 'mcp_oauth_callback_url="http://localhost:8081/callback"' mcp add canvas-mcp --url "{mcpUrl}" --oauth-client-id "{clientId}" --oauth-client-secret "$CANVAS_CLIENT_SECRET"`,
 				},
 			],
@@ -72,6 +74,7 @@ const codexPersonalGuide: Guide = {
 				},
 				{
 					kind: "code",
+					language: "bash",
 					text: 'codex -c mcp_oauth_callback_port=8081 -c \'mcp_oauth_callback_url="http://localhost:8081/callback"\' mcp login canvas-mcp --scopes "{scope}"',
 				},
 			],
@@ -83,6 +86,7 @@ const codexPersonalGuide: Guide = {
 			content: [
 				{
 					kind: "code",
+					language: "bash",
 					text: "codex mcp get canvas-mcp",
 				},
 				{
@@ -149,7 +153,11 @@ export const codex = {
 							kind: "paragraph",
 							text: "Add this entry to your existing MCP allowlist in the organization's requirements.toml and deploy it through Agent Security, system policy, or macOS MDM:",
 						},
-						{ kind: "code", text: '[mcp_servers.canvas-mcp]\nidentity = { url = "{mcpUrl}" }' },
+						{
+							kind: "code",
+							language: "toml",
+							text: '[mcp_servers.canvas-mcp]\nidentity = { url = "{mcpUrl}" }',
+						},
 						{
 							kind: "paragraph",
 							text: "Distribute the registration command below to managed devices. Each user completes their own Canvas sign-in.",

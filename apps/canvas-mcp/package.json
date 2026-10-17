@@ -22,8 +22,10 @@
 	"dependencies": {
 		"@pantoken/components": "2.1.1",
 		"@pantoken/css": "0.4.5",
+		"@pantoken/interactions": "0.5.1",
 		"@pantoken/plugin-custom-components": "0.7.2",
-		"@pantoken/plugin-logos": "0.5.5"
+		"@pantoken/plugin-logos": "0.5.5",
+		"shiki": "^4.5.0"
 	},
 	"devDependencies": {
 		"@instructure.ai/shared-configs": "workspace:^",

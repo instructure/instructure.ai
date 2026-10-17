@@ -5,8 +5,8 @@ import { type AppState, deriveUrls } from "../state";
 import { renderKeyCreation } from "../admin/key-settings";
 import { type KeySettingsModel, resolveKeySettings } from "../admin/key-settings-model";
 import { escapeHtml } from "../ui/html";
-import { renderEvidence } from "../ui/oauth-facts";
-import { clientGuide, clientSetup, serverSetupSteps, sharedTroubleshooting } from "./shared";
+import { highlightCode } from "./highlight";
+import { clientGuide, clientSetup, serverSetupSteps } from "./shared";
 import { type Guide, type GuideStep, type StructuredContent } from "./types";
 
 export function guideValues(
@@ -56,7 +56,17 @@ export function renderContent(
 					return `<p>${text(block.text)}</p>`;
 				case "code": {
 					const { text: resolved, ready } = resolveCodeBlock(block.text, values);
-					return `<div class="copy-block"><div class="copy-block-heading">Configuration<button class="instui-button -color-tertiary -size-sm" type="button" data-copy-template="${escapeHtml(block.text)}" data-copy="${escapeHtml(resolved)}" data-label="Configuration" ${ready ? "" : "disabled"}>Copy</button></div><pre><code>${text(block.text)}</code></pre></div>`;
+					const highlighted = [...block.text.matchAll(/\{([a-zA-Z][a-zA-Z0-9]*)\}/gu)].reduce(
+						(html, [, token]) => {
+							if (!Object.hasOwn(values, token)) throw new Error(`Unknown guide token: ${token}`);
+							return html.replaceAll(
+								`{${token}}`,
+								`<span data-guide-token="${token}">${escapeHtml(values[token])}</span>`,
+							);
+						},
+						highlightCode(block.text, block.language),
+					);
+					return `<div class="shiki-block language-${block.language}"><button class="instui-button -color-tertiary -shape-square -icon-copy -size-sm shiki-copy" type="button" data-copy-template="${escapeHtml(block.text)}" data-copy="${escapeHtml(resolved)}" data-label="Configuration" aria-label="Copy configuration" title="Copy configuration" ${ready ? "" : "disabled"}></button>${highlighted}</div>`;
 				}
 				case "list":
 					return `<ol class="instui-list -ordered">${block.items.map((item) => `<li>${text(item)}</li>`).join("")}</ol>`;
@@ -151,7 +161,7 @@ export function renderGuide(
 	const provider = client.enterpriseSurface ?? client.name;
 	const heading = `<h2 class="instui-heading -level-h2 --mb-2xl">${editable && guide.presentation === "by-surface" && activeSurface === "canvas" ? "Key settings for " : ""}${escapeHtml(client.name)}</h2>`;
 	// A connection blocker does not hide the administrator's provisioning instructions.
-	if (client.blocker && !editable) return heading + renderEvidence(client.blocker.evidence);
+	if (client.blocker && !editable) return heading;
 	const pending =
 		!editable && guide.status === "pending"
 			? '<p class="guide-pending">Provider instructions are awaiting source verification. The connection fields and workflow below are provisional.</p>'
@@ -187,11 +197,6 @@ export function renderGuide(
 		(!editable && !guide.clientSetup && guide.prerequisites.length
 			? `<ul>${guide.prerequisites.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
 			: "") +
-		body +
-		(editable
-			? ""
-			: `<details class="shared-troubleshooting"><summary>Troubleshooting and OAuth FAQ</summary><p>Public keys use PKCE without a secret; confidential keys use the provider's supported secret authentication. Always select the key's pre-populated Maple audience, including when the client does not send a resource parameter.</p>${sharedTroubleshooting.map((item) => `<h3 class="instui-heading -level-h3">${escapeHtml(item.symptom)}</h3><p>${escapeHtml(item.fix)}</p>`).join("")}</details>` +
-				(guide.lastVerified ? `<p>Last checked: ${escapeHtml(guide.lastVerified)}</p>` : "") +
-				renderEvidence(guide.sources))
+		body
 	);
 }

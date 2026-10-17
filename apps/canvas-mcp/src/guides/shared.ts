@@ -48,22 +48,3 @@ export function clientSetup(client: ClientDefinition, install: "personal" | "ent
 		}
 	);
 }
-
-export const sharedTroubleshooting = [
-	{
-		symptom: "invalid_target",
-		fix: "Check that the developer key includes the pre-populated Maple Allowed Audience for your Canvas region.",
-	},
-	{
-		symptom: "Region or environment mismatch",
-		fix: "Use the region from the key's Maple audience. Beta tenants use the beta Canvas authorization/token URLs and maple-beta MCP server URL.",
-	},
-	{
-		symptom: "Redirect URI mismatch",
-		fix: "Register the exact callback URI required by the client, including its scheme, port and path.",
-	},
-	{
-		symptom: "Missing content fields",
-		fix: "Check Allow Include Parameters and whether a limited-access key is being used. Customer-created keys exclude mcp-limited by default.",
-	},
-];

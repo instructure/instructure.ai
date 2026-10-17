@@ -28,6 +28,7 @@ const antigravityCliGuide: Guide = {
 				},
 				{
 					kind: "code",
+					language: "json",
 					text: '{\n  "mcpServers": {\n    "canvas-mcp": {\n      "serverUrl": "{mcpUrl}",\n      "oauth": {\n        "clientId": "{clientId}",\n        "clientSecret": "<ENTER_CLIENT_SECRET_LOCALLY>"\n      }\n    }\n  }\n}',
 				},
 				{
@@ -77,7 +78,7 @@ export const antigravityCli = {
 		personal: antigravityCliGuide,
 		enterprise: antigravityEnterpriseGuide(antigravityCliGuide),
 	},
-	setupNote: "Use the source-backed CLI guide and confirm any unverified OAuth requirements.",
+	setupNote: "Use the source-backed CLI guide.",
 	verify: "Authenticate and confirm the server in /mcp.",
 	rulesyncTarget: "antigravity-cli",
 } satisfies ClientDefinition;

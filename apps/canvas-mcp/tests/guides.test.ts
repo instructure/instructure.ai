@@ -14,6 +14,38 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 describe("composable client guides", () => {
+	it("renders highlighted configuration with a copy button and live values", () => {
+		const html = renderContent(
+			[
+				{
+					kind: "code",
+					language: "json",
+					text: '{\n  "url": "{mcpUrl}",\n  "clientId": "{clientId}"\n}',
+				},
+			],
+			{ mcpUrl: "https://example.test/mcp", clientId: "12345" },
+		);
+		document.body.innerHTML = html;
+		expect(document.querySelector(".shiki-block.language-json pre.shiki")).not.toBeNull();
+		expect(document.querySelector(".shiki-copy")?.getAttribute("aria-label")).toBe(
+			"Copy configuration",
+		);
+		expect(document.querySelector('[data-guide-token="clientId"]')?.textContent).toBe("12345");
+		expect(document.querySelector<HTMLButtonElement>(".shiki-copy")?.dataset.copy).toContain(
+			"https://example.test/mcp",
+		);
+		expect(html).toContain("--shiki-dark");
+	});
+
+	it("supports prompt as a Markdown highlighting alias", () => {
+		const html = renderContent(
+			[{ kind: "code", language: "prompt", text: "## Instructions\n\nFollow the steps." }],
+			{},
+		);
+		expect(html).toContain("shiki-block language-prompt");
+		expect(html).toContain('class="shiki');
+	});
+
 	it("offers the client registration command after entering the server's Client ID", () => {
 		vi.stubGlobal("scrollTo", vi.fn());
 		history.replaceState(
@@ -33,6 +65,9 @@ describe("composable client guides", () => {
 		expect(command?.disabled).toBe(false);
 		expect(command?.dataset.copy).toContain('--oauth-client-id "12345000000000001"');
 		expect(command?.dataset.copy).not.toContain("Enter the Client ID");
+		expect(document.querySelector('[data-guide-token="clientId"]')?.textContent).toBe(
+			"12345000000000001",
+		);
 	});
 	it("keeps Codex sign-in and validation exclusively on the client page", () => {
 		const client = clientDefinition("codex");
@@ -207,9 +242,9 @@ describe("composable client guides", () => {
 		});
 		expect(html).not.toContain("<img");
 		expect(html).toContain("&lt;img");
-		expect(() => renderContent([{ kind: "code", text: "{clientSecret}" }], {})).toThrow(
-			"Unknown guide token",
-		);
+		expect(() =>
+			renderContent([{ kind: "code", language: "json", text: "{clientSecret}" }], {}),
+		).toThrow("Unknown guide token");
 		expect(() =>
 			renderContent([{ kind: "link", label: "bad", url: "javascript:bad()" }], {}),
 		).toThrow("HTTPS");

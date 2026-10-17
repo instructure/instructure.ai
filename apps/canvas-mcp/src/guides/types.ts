@@ -1,6 +1,8 @@
 import { type Evidence } from "../clients/types";
+export type CodeLanguage = "bash" | "json" | "markdown" | "prompt" | "powershell" | "toml";
 export type StructuredContent =
-	| { kind: "paragraph" | "code"; text: string }
+	| { kind: "paragraph"; text: string }
+	| { kind: "code"; text: string; language: CodeLanguage }
 	| { kind: "list"; items: string[] }
 	| { kind: "link"; label: string; url: string };
 export type GuideStep =

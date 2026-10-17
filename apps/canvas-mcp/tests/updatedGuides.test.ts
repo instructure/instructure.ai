@@ -62,7 +62,7 @@ describe("updated curated guidance", () => {
 		expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("user");
 		expect(
 			document.querySelector(
-				".server-details-card, .guide-fields, #guide-canvas, .admin-steps, .install-modes, [data-install]",
+				".guide-fields, #guide-canvas, .admin-steps, .install-modes, [data-install]",
 			),
 		).toBeNull();
 		expect(
@@ -82,7 +82,7 @@ describe("updated curated guidance", () => {
 				`/canvas-mcp/?client=${id}&install=enterprise&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=connect`,
 			);
 			mountApp("user");
-			expect(document.querySelector(".server-details-card")).not.toBeNull();
+			expect(document.querySelector("#settings-tray .server-details-card")).not.toBeNull();
 			expect(document.querySelector("#generated-mcp-url")?.getAttribute("value")).toBe(
 				"https://example.maple.us-east-1.core.inseng.io/mcp",
 			);
@@ -106,7 +106,7 @@ describe("updated curated guidance", () => {
 		enterprise.checked = true;
 		enterprise.dispatchEvent(new Event("change", { bubbles: true }));
 		document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
-		expect(document.querySelector(".server-details-card")).toBeNull();
+		expect(document.querySelector("#settings-tray .server-details-card")).not.toBeNull();
 		expect(document.querySelector("#guide-provider")?.textContent).toContain(
 			"organization connector",
 		);
@@ -115,7 +115,7 @@ describe("updated curated guidance", () => {
 		personal.checked = false;
 		personal.dispatchEvent(new Event("change", { bubbles: true }));
 		document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
-		expect(document.querySelector(".server-details-card")).not.toBeNull();
+		expect(document.querySelector("#settings-tray .server-details-card")).not.toBeNull();
 		expect(document.querySelector("#guide-provider")?.textContent).toContain(
 			"Add custom connector",
 		);

@@ -2,6 +2,7 @@ import { guideValues, resolveCodeBlock } from "./guides/render";
 import { CallbackCache, type CallbackResolution } from "./oauth/codex-callback";
 import { connectionReadiness, normalizeSetup } from "./setup";
 import "./main.css";
+import { applySpacing } from "@pantoken/interactions";
 import { clientDefinition, normalizeKeyType } from "./clients";
 import { renderPage, type PageMode } from "./page";
 import { copyToClipboard } from "./ui/copy";
@@ -69,6 +70,8 @@ export function mountApp(mode: PageMode): void {
 			isConnectionReady(),
 			callbackResolution(),
 		);
+		const tray = appRoot.querySelector<HTMLElement>(".instui-tray");
+		if (tray) applySpacing(tray);
 		updatePrintPageBreaks(appRoot);
 		bindEvents();
 		applyTheme();
@@ -199,9 +202,6 @@ export function mountApp(mode: PageMode): void {
 					generatedClientIdCopy.dataset.copy = state.clientId;
 					generatedClientIdCopy.disabled = !state.clientId;
 				}
-				appRoot
-					.querySelector(".server-details-card")
-					?.classList.toggle("is-hidden", !isConnectionReady());
 				updatePrintPageBreaks(appRoot);
 				syncConnectTab();
 			});
@@ -257,11 +257,9 @@ export function mountApp(mode: PageMode): void {
 }
 
 function updatePrintPageBreaks(root: HTMLElement): void {
-	const cards = [
-		...root.querySelectorAll<HTMLElement>(
-			".workspace-grid > .instui-card, .configuration-stack > .server-details-card",
-		),
-	].filter((card) => !card.classList.contains("is-hidden"));
+	const cards = [...root.querySelectorAll<HTMLElement>(".workspace-grid > .instui-card")].filter(
+		(card) => !card.classList.contains("is-hidden"),
+	);
 	cards.forEach((card, index) =>
 		card.classList.toggle("print-page-break-after", index < cards.length - 1),
 	);

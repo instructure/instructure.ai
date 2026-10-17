@@ -1,11 +1,9 @@
 import { connectionReadiness } from "./setup";
 import { type CallbackResolution } from "./oauth/codex-callback";
-import { renderOAuthFacts } from "./ui/oauth-facts";
 import { clientDefinition } from "./clients";
 import { type AppState, deriveUrls } from "./state";
 import { renderConfig } from "./admin/config";
 import { serverDetailsCard } from "./admin/server-details";
-import { clientSetup } from "./guides/shared";
 import { renderGuide } from "./guides/render";
 import { escapeHtml } from "./ui/html";
 import { activeTheme, canvasLogoUri } from "./ui/theme";
@@ -19,8 +17,6 @@ export function renderPage(
 ): string {
 	const client = clientDefinition(state.client),
 		hasValidDomain = Boolean(state.domain),
-		needsServerDetails =
-			pageMode === "admin" || clientSetup(client, state.install).requiresServerDetails,
 		copiedLabel = "",
 		urls = hasValidDomain
 			? deriveUrls(state)
@@ -40,13 +36,7 @@ export function renderPage(
 							${pageMode === "user" ? '<p class="lede">Follow the setup instructions for your MCP client.</p>' : ""}
 						</div>
 						<div class="page-heading-actions" role="group" aria-label="Page actions">
-							<div class="instui-button-set -color-secondary -toggle -size-sm theme-toggle" role="group" aria-label="Color theme">
-								${themeButton("system", "monitor", "Use system theme")}
-								${themeButton("light", "sun", "Use light theme")}
-								${themeButton("dark", "moon", "Use dark theme")}
-							</div>
-              <button class="instui-button -color-tertiary -shape-square -icon-send -size-md" type="button" data-action="copy-link" aria-label="Copy setup link" title="Copy setup link"></button>
-							<button class="instui-button -color-tertiary -shape-square -icon-printer -size-md" type="button" data-action="print" aria-label="Print setup guide" title="Print"></button>
+							<button class="instui-button -color-tertiary -shape-square -icon-sliders-horizontal -size-md" type="button" popovertarget="settings-tray" aria-controls="settings-tray" aria-label="Open appearance, sharing, and server details" title="Settings"></button>
 						</div>
 					</div>
 					<div class="instui-tabs page-tabs --mb-md">
@@ -55,15 +45,36 @@ export function renderPage(
 							<button id="tab-connect" class="tab ${pageMode === "user" ? "-selected" : ""}" type="button" role="tab" aria-selected="${pageMode === "user"}" aria-controls="setup-panel" data-page="connect" tabindex="${pageMode === "user" ? "0" : "-1"}" ${pageMode === "admin" && !canConnect ? "disabled" : ""}>Connect a Client</button>
 						</div>
 						<section id="setup-panel" class="panel" role="tabpanel" aria-labelledby="${pageMode === "user" ? "tab-connect" : "tab-admin"}">
-					<div class="workspace-grid${needsServerDetails ? "" : " workspace-grid--single"} --mt-xl">
-						${pageMode === "admin" ? `<div class="configuration-stack">${renderConfig(state, domainInputValue)}${serverDetailsCard(urls, state, canConnect, true)}</div>` : ""}
-						${pageMode === "user" && needsServerDetails ? serverDetailsCard(urls, state, canConnect, false) : ""}
-						<section class="instui-card -variant-base details-panel" ><div class="content">${pageMode === "user" && connectionReadiness(state, client).blocked ? `<p class="instui-alert -color-warning -inline" role="status">${escapeHtml(connectionReadiness(state, client).reason)}</p>` : ""}${renderGuide(client, state, pageMode === "admin", callback)}${pageMode === "user" && needsServerDetails ? renderOAuthFacts(client) : ""}</div></section>
+					<div class="workspace-grid${pageMode === "admin" ? "" : " workspace-grid--single"} --mt-xl">
+						${pageMode === "admin" ? renderConfig(state, domainInputValue) : ""}
+						<section class="instui-card -variant-base details-panel" ><div class="content">${pageMode === "user" && connectionReadiness(state, client).blocked ? `<p class="instui-alert -color-warning -inline" role="status">${escapeHtml(connectionReadiness(state, client).reason)}</p>` : ""}<h2 class="instui-heading -variant-title-card-regular instructions-heading">Instructions</h2>${renderGuide(client, state, pageMode === "admin", callback)}</div></section>
 					</div>
 					<footer class="page-footer"><p>Copyright &copy; ${new Date().getFullYear()} Instructure, Inc.</p><p class="print-context">${escapeHtml(client.name)} · ${escapeHtml(state.install)} · ${new Date().toISOString().slice(0, 10)}<br /><span class="print-permalink">${escapeHtml("/canvas-mcp/?" + new URLSearchParams({ domain: state.domain, client: state.client, key: state.key, install: state.install, region: state.region, clientId: state.clientId, page: pageMode === "admin" ? "admin" : "connect" }).toString())}</span></p></footer>
 					</section>
 					</div>
 				</main>
+				<aside id="settings-tray" class="instui-tray -placement-end -size-md" popover role="region" aria-label="Appearance, sharing, and server details" padding="var(--instui-spacing-space-md)">
+					<div class="settings-tray-header">
+						<h2 class="instui-heading -variant-title-card-regular">Settings</h2>
+						<button class="instui-close-button -size-sm" type="button" popovertarget="settings-tray" popovertargetaction="hide" aria-label="Close settings"></button>
+					</div>
+					<section class="settings-tray-section" aria-labelledby="settings-appearance-heading">
+						<h3 id="settings-appearance-heading" class="instui-heading -level-h3">Appearance</h3>
+						<div class="instui-button-set -color-secondary -toggle -size-sm theme-toggle" role="group" aria-label="Color theme">
+							${themeButton("system", "monitor", "Use system theme")}
+							${themeButton("light", "sun", "Use light theme")}
+							${themeButton("dark", "moon", "Use dark theme")}
+						</div>
+					</section>
+					<section class="settings-tray-section" aria-labelledby="settings-sharing-heading">
+						<h3 id="settings-sharing-heading" class="instui-heading -level-h3">Sharing</h3>
+						<div class="settings-tray-actions">
+							<button class="instui-button -color-secondary -icon-printer" type="button" data-action="print">Print this page</button>
+							<button class="instui-button -color-secondary -icon-send" type="button" data-action="copy-link">Copy this link</button>
+						</div>
+					</section>
+					${serverDetailsCard(urls, state)}
+				</aside>
 				<div class="instui-screen-reader-content toast" role="status" aria-live="polite">${escapeHtml(copiedLabel)}</div>
 			</div>
 		`;
