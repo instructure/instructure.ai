@@ -17,7 +17,7 @@ The app validates Canvas tenant domains and builds production or beta server URL
 
 The Client ID input is limited to 17 characters to prevent pasting a full API Key Secret, which is longer than a Client ID.
 
-The MCP Client selector combines curated clients with the MCP-enabled target list from Rulesync 36.0.2, pinned at commit `67c5ff341c325305d9759bf749f2708f5fc395c4`. Rulesync publishes target names and MCP support, but not each client's OAuth key-type or callback requirements. Curated entries retain verified metadata; other Rulesync targets are marked for OAuth verification in the admin setup.
+The MCP Client selector combines curated clients with the MCP-enabled target list from Rulesync 36.0.2, pinned at commit `67c5ff341c325305d9759bf749f2708f5fc395c4`. Rulesync publishes target names and MCP support, but not each client's OAuth key-type or callback requirements. Curated entries carry per-fact evidence. The September 11, 2026 Instructure setup guidance was checked on October 17, 2026; documented requirements are distinguished from probed behavior. Rulesync targets without evidence retain explicit unknown facts.
 
 The UI uses Pantoken components, themes, logos, and custom colors. The production build prunes unused Pantoken token properties and shortens the remaining property names after CSS imports are bundled.
 
@@ -25,6 +25,6 @@ Canvas automatically populates the region-specific Maple Allowed Audience during
 
 ## Release Blocker
 
-The admin guide displays an unreviewed scope list containing read/write/delete and introspection scopes. Its provenance is not established; the UI labels it awaiting review and disables copying. The customer-key default excludes `mcp-limited`. Do not use it to create a production developer key until the complete per-tool scope manifest has been generated from a reviewed Maple revision and verified by Product/Security. The internal Maple source is not available in this repository, so the manifest must be supplied by a maintainer with access.
+The admin guide displays an unreviewed scope list containing read/write/delete and introspection scopes. Its provenance is not established; the UI labels it awaiting review and disables copying. The customer-key default excludes `mcp-limited`. Do not use it to create a production developer key until the complete per-tool scope manifest has been generated from a reviewed Maple revision and verified by Product/Security. The committed manifest was generated from Maple revision `6368cd5b58b7a3f9d4c004c46f8779712cdb0d14`; Product/Security release review is still pending. Regenerate it from a clean Maple checkout with `node apps/canvas-mcp/scripts/updateScopes.mts /path/to/maple`. The script writes scope names and provenance only, and resets review status to unreviewed.
 
 Client setup descriptions are intentionally generic where vendor-specific OAuth behavior has not yet been verified. Confirm each client's current connection fields and redirect URI before publishing the guide as final instructions.
