@@ -647,8 +647,8 @@ describe("Canvas MCP pages", () => {
 			true,
 		);
 		expect(document.querySelector("#guide-provider")?.hasAttribute("hidden")).toBe(false);
-		expect(document.querySelector("#guide-provider .guide-fields")).not.toBeNull();
-		expect(document.querySelector("#guide-canvas")?.hasAttribute("hidden")).toBe(true);
+		expect(document.querySelector("#guide-provider .guide-fields")).toBeNull();
+		expect(document.querySelector("#guide-canvas")).toBeNull();
 	});
 
 	it("opens admin configuration when the consumer route is missing required setup state", () => {

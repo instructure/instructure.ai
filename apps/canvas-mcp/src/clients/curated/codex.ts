@@ -132,6 +132,10 @@ export const codex = {
 		personal: codexPersonalGuide,
 		enterprise: {
 			...codexPersonalGuide,
+			clientSetup: {
+				requiresServerDetails: true,
+				steps: codexPersonalGuide.steps.filter((step) => step.kind !== "canvas-key"),
+			},
 			sources: [...codexPersonalGuide.sources, codexManaged],
 			steps: [
 				{ id: "canvas-create", kind: "canvas-key", action: "create" },

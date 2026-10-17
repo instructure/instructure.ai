@@ -6,7 +6,7 @@ import { renderKeyCreation } from "../admin/key-settings";
 import { type KeySettingsModel, resolveKeySettings } from "../admin/key-settings-model";
 import { escapeHtml } from "../ui/html";
 import { renderEvidence } from "../ui/oauth-facts";
-import { clientGuide, sharedTroubleshooting } from "./shared";
+import { clientGuide, clientSetup, sharedTroubleshooting } from "./shared";
 import { type Guide, type GuideStep, type StructuredContent } from "./types";
 
 export function guideValues(
@@ -152,22 +152,19 @@ export function renderGuide(
 	const heading = `<h2 class="instui-heading -level-h2 --mb-2xl">${editable && guide.presentation === "by-surface" && activeSurface === "canvas" ? "Key settings for " : ""}${escapeHtml(client.name)}</h2>`;
 	// A connection blocker does not hide the administrator's provisioning instructions.
 	if (client.blocker && !editable) return heading + renderEvidence(client.blocker.evidence);
-	const install =
-		!editable && client.installModes.length > 1
-			? `<div class="instui-button-set -toggle install-modes" role="group" aria-label="Install mode">${client.installModes.map((mode) => `<button id="install-${mode}" class="instui-button -color-secondary" type="button" data-install="${mode}" aria-pressed="${state.install === mode}">${mode === "personal" ? "Personal" : "Enterprise"}</button>`).join("")}</div>`
-			: "";
 	const pending =
 		!editable && guide.status === "pending"
 			? '<p class="guide-pending">Provider instructions are awaiting source verification. The connection fields and workflow below are provisional.</p>'
 			: "";
-	const steps = guide.steps.filter(
+	const steps = (editable ? guide.steps : clientSetup(client, state.install).steps).filter(
 		(step) => step.kind === "canvas-key" || !step.key || step.key === state.key,
 	);
 	const surfaceControl = splitEnterprise
 		? `<fieldset class="instui-segmented-control guide-surfaces" aria-label="Setup instructions"><div class="viewport"><div class="track">${(["canvas", "provider"] as const).map((surface) => `<label><input id="guide-surface-${surface}" type="radio" name="guide-surface" value="${surface}" data-guide-surface="${surface}" aria-controls="guide-${surface}" ${activeSurface === surface ? "checked" : ""}>${surface === "canvas" ? "1. Canvas" : `2. ${escapeHtml(provider)}`}</label>`).join("")}</div></div></fieldset>`
 		: "";
-	const body =
-		guide.presentation === "interleaved"
+	const body = !editable
+		? `<section id="guide-provider" class="guide-surface" aria-label="${escapeHtml(client.name)} setup">${steps.map((step) => renderStep(step, client, state, false, model)).join("")}</section>`
+		: guide.presentation === "interleaved"
 			? `<div class="interleaved-guide">${steps.map((step, index) => `<div class="workflow-step"><p class="workflow-label">Step ${index + 1} · ${step.kind === "canvas-key" ? "Canvas" : escapeHtml(client.name)}</p>${renderStep(step, client, state, editable, model)}</div>`).join("")}</div>${editable ? renderAdminAction(client, state, "client") : ""}`
 			: surfaceControl +
 				(["canvas", "provider"] as const)
@@ -186,9 +183,8 @@ export function renderGuide(
 
 	return (
 		heading +
-		install +
 		pending +
-		(!editable && guide.prerequisites.length
+		(!editable && !guide.clientSetup && guide.prerequisites.length
 			? `<ul>${guide.prerequisites.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
 			: "") +
 		body +

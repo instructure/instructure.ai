@@ -12,11 +12,13 @@ export type GuideStep =
 			title: string;
 			content: StructuredContent[];
 	  };
+export type ClientGuideStep = Exclude<GuideStep, { kind: "canvas-key" }>;
 export interface Guide {
 	status: "pending" | "documented";
 	presentation: "by-surface" | "interleaved";
 	prerequisites: string[];
 	steps: GuideStep[];
+	clientSetup?: { requiresServerDetails: boolean; steps: ClientGuideStep[] };
 	sources: Evidence[];
 	lastVerified?: string;
 }

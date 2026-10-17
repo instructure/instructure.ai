@@ -5,6 +5,7 @@ import { clientDefinition } from "./clients";
 import { type AppState, deriveUrls } from "./state";
 import { renderConfig } from "./admin/config";
 import { serverDetailsCard } from "./admin/server-details";
+import { clientSetup } from "./guides/shared";
 import { renderGuide } from "./guides/render";
 import { escapeHtml } from "./ui/html";
 import { activeTheme, canvasLogoUri } from "./ui/theme";
@@ -18,6 +19,8 @@ export function renderPage(
 ): string {
 	const client = clientDefinition(state.client),
 		hasValidDomain = Boolean(state.domain),
+		needsServerDetails =
+			pageMode === "admin" || clientSetup(client, state.install).requiresServerDetails,
 		copiedLabel = "",
 		urls = hasValidDomain
 			? deriveUrls(state)
@@ -34,7 +37,7 @@ export function renderPage(
 						<div class="page-heading-copy">
 							<div class="eyebrow"><img class="eyebrow-logo" alt="Canvas" src="${canvasLogoUri()}" /></div>
 							<h1 class="instui-heading -variant-title-page">${pageMode === "user" ? "Connect Canvas to your MCP client" : "Configure a Canvas MCP Server"}</h1>
-							${pageMode === "user" ? '<p class="lede">Build the connection details for your Canvas environment.</p>' : ""}
+							${pageMode === "user" ? '<p class="lede">Follow the setup instructions for your MCP client.</p>' : ""}
 						</div>
 						<div class="page-heading-actions" role="group" aria-label="Page actions">
 							<div class="instui-button-set -color-secondary -toggle -size-sm theme-toggle" role="group" aria-label="Color theme">
@@ -52,10 +55,10 @@ export function renderPage(
 							<button id="tab-connect" class="tab ${pageMode === "user" ? "-selected" : ""}" type="button" role="tab" aria-selected="${pageMode === "user"}" aria-controls="setup-panel" data-page="connect" tabindex="${pageMode === "user" ? "0" : "-1"}" ${pageMode === "admin" && !canConnect ? "disabled" : ""}>Connect a Client</button>
 						</div>
 						<section id="setup-panel" class="panel" role="tabpanel" aria-labelledby="${pageMode === "user" ? "tab-connect" : "tab-admin"}">
-					<div class="workspace-grid --mt-xl">
+					<div class="workspace-grid${needsServerDetails ? "" : " workspace-grid--single"} --mt-xl">
 						${pageMode === "admin" ? `<div class="configuration-stack">${renderConfig(state, domainInputValue)}${serverDetailsCard(urls, state, canConnect, true)}</div>` : ""}
-						${pageMode === "user" ? serverDetailsCard(urls, state, canConnect, false) : ""}
-						<section class="instui-card -variant-base details-panel" ><div class="content">${pageMode === "user" && connectionReadiness(state, client).blocked ? `<p class="instui-alert -color-warning -inline" role="status">${escapeHtml(connectionReadiness(state, client).reason)}</p>` : ""}${renderGuide(client, state, pageMode === "admin", callback)}${pageMode === "user" ? renderOAuthFacts(client) : ""}</div></section>
+						${pageMode === "user" && needsServerDetails ? serverDetailsCard(urls, state, canConnect, false) : ""}
+						<section class="instui-card -variant-base details-panel" ><div class="content">${pageMode === "user" && connectionReadiness(state, client).blocked ? `<p class="instui-alert -color-warning -inline" role="status">${escapeHtml(connectionReadiness(state, client).reason)}</p>` : ""}${renderGuide(client, state, pageMode === "admin", callback)}${pageMode === "user" && needsServerDetails ? renderOAuthFacts(client) : ""}</div></section>
 					</div>
 					<footer class="page-footer"><p>Copyright &copy; ${new Date().getFullYear()} Instructure, Inc.</p><p class="print-context">${escapeHtml(client.name)} · ${escapeHtml(state.install)} · ${new Date().toISOString().slice(0, 10)}<br /><span class="print-permalink">${escapeHtml("/canvas-mcp/?" + new URLSearchParams({ domain: state.domain, client: state.client, key: state.key, install: state.install, region: state.region, clientId: state.clientId, page: pageMode === "admin" ? "admin" : "connect" }).toString())}</span></p></footer>
 					</section>

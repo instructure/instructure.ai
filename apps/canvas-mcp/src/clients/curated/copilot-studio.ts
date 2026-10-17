@@ -17,6 +17,26 @@ export const copilotStudio = {
 	},
 	guides: {
 		enterprise: {
+			clientSetup: {
+				requiresServerDetails: false,
+				steps: [
+					{
+						id: "client-connect",
+						kind: "provider",
+						title: "Use the configured agent",
+						content: [
+							{
+								kind: "list",
+								items: [
+									"Open the agent that your organization configured with the Canvas MCP tools.",
+									"Ask the agent to list your Canvas courses.",
+									"Complete Canvas sign-in when prompted.",
+								],
+							},
+						],
+					},
+				],
+			},
 			presentation: "interleaved",
 			status: "documented",
 			prerequisites: [

@@ -17,6 +17,26 @@ export const geminiEnterprise = {
 	},
 	guides: {
 		enterprise: {
+			clientSetup: {
+				requiresServerDetails: false,
+				steps: [
+					{
+						id: "client-connect",
+						kind: "provider",
+						title: "Use the Canvas connector",
+						content: [
+							{
+								kind: "list",
+								items: [
+									"Open Gemini Enterprise in your organization account.",
+									"Ask Gemini to list your Canvas courses using the Canvas connector.",
+									"Complete Canvas sign-in when prompted.",
+								],
+							},
+						],
+					},
+				],
+			},
 			presentation: "by-surface",
 			status: "documented",
 			prerequisites: [

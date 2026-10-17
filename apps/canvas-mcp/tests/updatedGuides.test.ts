@@ -48,6 +48,84 @@ describe("updated curated guidance", () => {
 			expect(document.querySelector<HTMLElement>("#guide-canvas")?.hidden).toBe(false);
 		},
 	);
+	it.each([
+		["claude-ai", "Connect to the organization connector"],
+		["gemini-enterprise", "Use the Canvas connector"],
+		["copilot-studio", "Use the configured agent"],
+	])("shows only member instructions for provisioned %s connections", (id, heading) => {
+		history.replaceState(
+			null,
+			"",
+			`/canvas-mcp/?client=${id}&install=enterprise&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=connect`,
+		);
+		mountApp("user");
+		expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("user");
+		expect(
+			document.querySelector(
+				".server-details-card, .guide-fields, #guide-canvas, .admin-steps, .install-modes, [data-install]",
+			),
+		).toBeNull();
+		expect(
+			document.querySelector(".workspace-grid")?.classList.contains("workspace-grid--single"),
+		).toBe(true);
+		expect(document.querySelector("#guide-provider")?.textContent).toContain(heading);
+		expect(document.querySelector("#guide-provider")?.textContent).not.toMatch(
+			/create the data store|Policies|Use your own OAuth client|Developer Keys/iu,
+		);
+	});
+	it.each(["codex", "antigravity", "antigravity-cli"])(
+		"retains connection fields for enterprise %s users who configure their client",
+		(id) => {
+			history.replaceState(
+				null,
+				"",
+				`/canvas-mcp/?client=${id}&install=enterprise&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=connect`,
+			);
+			mountApp("user");
+			expect(document.querySelector(".server-details-card")).not.toBeNull();
+			expect(document.querySelector("#generated-mcp-url")?.getAttribute("value")).toBe(
+				"https://example.maple.us-east-1.core.inseng.io/mcp",
+			);
+			expect(
+				document.querySelector(".guide-fields, #guide-canvas, .install-modes, [data-install]"),
+			).toBeNull();
+			expect(document.querySelector("#guide-provider")?.textContent).not.toMatch(
+				/requirements.toml|Assign users a Gemini Enterprise/iu,
+			);
+		},
+	);
+	it("uses the server Configuration toggle as the only source of client install mode", () => {
+		vi.stubGlobal("scrollTo", vi.fn());
+		history.replaceState(
+			null,
+			"",
+			"/canvas-mcp/?client=claude-ai&install=personal&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=admin",
+		);
+		mountApp("admin");
+		const enterprise = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
+		enterprise.checked = true;
+		enterprise.dispatchEvent(new Event("change", { bubbles: true }));
+		document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
+		expect(document.querySelector(".server-details-card")).toBeNull();
+		expect(document.querySelector("#guide-provider")?.textContent).toContain(
+			"organization connector",
+		);
+		document.querySelector<HTMLButtonElement>("#tab-admin")!.click();
+		const personal = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
+		personal.checked = false;
+		personal.dispatchEvent(new Event("change", { bubbles: true }));
+		document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
+		expect(document.querySelector(".server-details-card")).not.toBeNull();
+		expect(document.querySelector("#guide-provider")?.textContent).toContain(
+			"Add custom connector",
+		);
+		expect(document.querySelector("#guide-provider")?.textContent).not.toContain(
+			"organization connector",
+		);
+		expect(document.querySelector(".install-modes, [data-install]")).toBeNull();
+		expect(new URLSearchParams(location.search).get("install")).toBe("personal");
+	});
+
 	it("blocks ChatGPT authentication without claiming DCR-only behavior", () => {
 		history.replaceState(
 			null,

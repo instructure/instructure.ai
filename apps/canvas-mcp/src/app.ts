@@ -100,12 +100,6 @@ export function mountApp(mode: PageMode): void {
 					}
 				});
 			});
-		appRoot.querySelectorAll<HTMLButtonElement>("[data-install]").forEach((button) =>
-			button.addEventListener("click", () => {
-				state.install = button.dataset.install === "enterprise" ? "enterprise" : "personal";
-				persistAndRender();
-			}),
-		);
 		appRoot.querySelector('[role="tablist"]')?.addEventListener("keydown", (event) => {
 			const key = (event as KeyboardEvent).key;
 			if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(key)) return;

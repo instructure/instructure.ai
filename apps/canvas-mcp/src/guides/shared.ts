@@ -26,6 +26,18 @@ export function clientGuide(client: ClientDefinition, install: "personal" | "ent
 		}
 	);
 }
+// A client page follows the server's selected install mode. Enterprise guides declare
+// whether members wire a local connection or only sign in to a provisioned connector.
+export function clientSetup(client: ClientDefinition, install: "personal" | "enterprise") {
+	const guide = clientGuide(client, install);
+	return (
+		guide.clientSetup ?? {
+			requiresServerDetails: true,
+			steps: guide.steps.filter((step) => step.kind !== "canvas-key"),
+		}
+	);
+}
+
 export const sharedTroubleshooting = [
 	{
 		symptom: "invalid_target",

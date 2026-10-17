@@ -18,6 +18,26 @@ const antigravityEnterprise: Evidence = {
 export function antigravityEnterpriseGuide(personal: Guide): Guide {
 	return {
 		...personal,
+		clientSetup: {
+			requiresServerDetails: true,
+			steps: [
+				{
+					id: "client-enterprise-signin",
+					kind: "provider",
+					title: "Sign in to your organization",
+					content: [
+						{
+							kind: "list",
+							items: [
+								"In the Antigravity app or CLI, choose Sign in → Business account → Continue with Google Cloud.",
+								"Select your organization's licensed project in the License Selector, then configure Canvas MCP below.",
+							],
+						},
+					],
+				},
+				...personal.steps.filter((step) => step.kind !== "canvas-key"),
+			],
+		},
 		sources: [...personal.sources, antigravityEnterprise],
 		steps: [
 			{ id: "canvas-create", kind: "canvas-key", action: "create" },

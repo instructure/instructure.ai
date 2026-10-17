@@ -11,6 +11,30 @@ const chatgptApps: Evidence = {
 function chatgptGuide(enterprise: boolean): Guide {
 	return {
 		presentation: "by-surface",
+		...(enterprise
+			? {
+					clientSetup: {
+						requiresServerDetails: false,
+						steps: [
+							{
+								id: "client-connect",
+								kind: "provider" as const,
+								title: "Use the workspace Canvas app",
+								content: [
+									{
+										kind: "list" as const,
+										items: [
+											"In a new ChatGPT conversation, select the Canvas MCP app published by your workspace.",
+											"Connect the app and complete Canvas sign-in when prompted.",
+											"Ask ChatGPT to list your Canvas courses.",
+										],
+									},
+								],
+							},
+						],
+					},
+				}
+			: {}),
 		status: "documented",
 		prerequisites: [],
 		sources: [chatgptApps],

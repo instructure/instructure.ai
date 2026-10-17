@@ -66,6 +66,26 @@ export const claudeAi = {
 			],
 		},
 		enterprise: {
+			clientSetup: {
+				requiresServerDetails: false,
+				steps: [
+					{
+						id: "client-connect",
+						kind: "provider",
+						title: "Connect to the organization connector",
+						content: [
+							{
+								kind: "list",
+								items: [
+									"Open Customize \u2192 Connectors and find the Canvas MCP connector added by your organization.",
+									"Choose Connect and complete Canvas sign-in.",
+									"Start a new chat and ask Claude to list your Canvas courses.",
+								],
+							},
+						],
+					},
+				],
+			},
 			presentation: "by-surface",
 			status: "documented",
 			prerequisites: [
