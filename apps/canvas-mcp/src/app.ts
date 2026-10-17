@@ -109,6 +109,7 @@ export function mountApp(mode: PageMode): void {
 				<div class="instui-screen-reader-content toast" role="status" aria-live="polite">${escapeHtml(copiedLabel)}</div>
 			</div>
 		`;
+		updatePrintPageBreaks(appRoot);
 		bindEvents();
 		applyTheme();
 	}
@@ -178,6 +179,7 @@ export function mountApp(mode: PageMode): void {
 				appRoot
 					.querySelector(".server-details-card")
 					?.classList.toggle("is-hidden", !isConnectionReady());
+				updatePrintPageBreaks(appRoot);
 				syncConnectTab();
 			});
 		appRoot.querySelectorAll<HTMLButtonElement>("[data-theme-choice]").forEach((button) => {
@@ -226,6 +228,15 @@ export function mountApp(mode: PageMode): void {
 	) {
 		persist();
 	}
+}
+
+function updatePrintPageBreaks(root: HTMLElement): void {
+	const cards = [...root.querySelectorAll<HTMLElement>(".instui-card:not(.controls-panel)")].filter(
+		(card) => !card.classList.contains("is-hidden"),
+	);
+	cards.forEach((card, index) =>
+		card.classList.toggle("print-page-break-after", index < cards.length - 1),
+	);
 }
 
 function pageModeFromQuery(search: string): PageMode | null {

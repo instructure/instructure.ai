@@ -160,6 +160,12 @@ describe("Canvas MCP pages", () => {
 			(document.querySelector(".scope-card-header button") as HTMLButtonElement).dataset.copy,
 		).toBe(scopeManifest);
 		expect(document.querySelector(".scope-card")?.classList.contains("instui-card")).toBe(true);
+		expect(document.querySelector(".details-panel")?.classList.contains("print-page-break-after")).toBe(
+			true,
+		);
+		expect(document.querySelector(".scope-card")?.classList.contains("print-page-break-after")).toBe(
+			false,
+		);
 		expect(document.querySelector(".scope-card-header h4")?.textContent).toBe(
 			"Per-tool scope manifest",
 		);

@@ -502,9 +502,23 @@ pre {
 
 @media print {
 
-    .controls-panel,
+    html {
+        color-scheme: light !important;
+        --instui-color-text-base: #000 !important;
+        --instui-color-background-page: #fff !important;
+    }
+
+    body {
+        color: #000 !important;
+        background: #fff !important;
+    }
+
+    #domain-hint,
+    .field-hint,
+    #mcp-oauth-metadata-warning,
     .instui-button,
     .text-button,
+    .instui-tabs .list,
     .page-heading-actions,
     .page-footer a {
         display: none !important;
@@ -515,6 +529,27 @@ pre {
         padding: 0;
     }
 
+    .instui-card {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        background: #fff !important;
+        box-shadow: none !important;
+    }
+
+    .instui-card>.content {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        box-shadow: none !important;
+    }
+
+    input,
+    select,
+    textarea {
+        border-color: #fff !important;
+    }
+
     .workspace-grid {
         display: block;
     }
@@ -523,6 +558,19 @@ pre {
         padding: 0;
         border: 0;
         box-shadow: none;
+    }
+
+    .print-page-break-after {
+        break-after: page !important;
+        page-break-after: always !important;
+    }
+
+    .scope-manifest {
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
     }
 
     .guide-section,
