@@ -6,7 +6,9 @@
 @import "@pantoken/plugin-custom-components/custom-components.css";
 @import "@pantoken/components/component-icons.css";
 @import "@pantoken/components/icons/copy.css";
+@import "@pantoken/components/icons/key.css";
 @import "@pantoken/components/icons/monitor.css";
+@import "@pantoken/components/icons/send.css";
 @import "@pantoken/components/icons/moon.css";
 @import "@pantoken/components/icons/printer.css";
 @import "@pantoken/components/icons/sun.css";
@@ -40,7 +42,7 @@ body {
 .page-heading {
     margin-bottom: 28px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 22px;
 }
 
@@ -52,11 +54,18 @@ body {
 
 .page-heading-actions {
     margin-left: auto;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    align-items: start;
+    justify-items: end;
+    justify-content: end;
     gap: 8px;
     flex: 0 0 auto;
+}
+
+.theme-toggle {
+    grid-column: 1 / -1;
+    justify-self: end;
 }
 
 .eyebrow {
@@ -93,9 +102,51 @@ h1 {
     gap: 22px;
 }
 
-.controls-panel,
-.details-panel {
+.workspace-grid--single {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.configuration-stack {
     min-width: 0;
+    display: grid;
+    align-content: start;
+    gap: 22px;
+}
+
+.admin-footer-action {
+    margin-top: 18px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.controls-panel,
+.details-panel,
+.generated-panel {
+    min-width: 0;
+}
+
+.server-details-card.is-hidden {
+    display: none;
+}
+
+.generated-panel h2 {
+    margin-bottom: 18px;
+}
+
+.generated-value-row {
+    margin-bottom: 16px;
+}
+
+.generated-value-control {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.generated-value-control input {
+    min-width: 0;
+    flex: 1;
 }
 
 .controls-panel h2,
@@ -125,12 +176,6 @@ h1 {
     display: none;
 }
 
-.rule {
-    margin: 22px 0;
-    border: 0;
-    border-top: 1px solid color-mix(in srgb, var(--instui-color-text-base) 18%, transparent);
-}
-
 .optional {
     margin-left: 5px;
     color: color-mix(in srgb, var(--instui-color-text-base) 62%, transparent);
@@ -138,17 +183,8 @@ h1 {
     font-weight: 400;
 }
 
-.key-type-control {
-    min-width: 0;
-    margin: 17px 0 0;
-    padding: 0;
-    border: 0;
-}
-
-.key-type-control legend {
-    margin-bottom: 7px;
-    font-size: 13px;
-    font-weight: 700;
+.private-key-toggle {
+    margin-top: 17px;
 }
 
 .details-panel>.content>.section-heading:first-child {
@@ -271,8 +307,7 @@ pre {
     line-height: 1.55;
 }
 
-.step-number,
-.step-kicker {
+.step-number {
     flex: 0 0 auto;
     justify-content: center;
 }
@@ -292,48 +327,57 @@ pre {
 .admin-steps .guide-section {
     margin-top: 0;
     padding: 20px 0;
-    display: grid;
-    grid-template-columns: 38px minmax(0, 1fr);
-    gap: 14px;
+    border-top: 0;
 }
 
 .admin-steps .guide-section:first-child {
     padding-top: 0;
-    border-top: 0;
 }
 
 .admin-steps h3 {
-    margin: 2px 0 10px;
+    margin: 0 0 10px;
 }
 
-.settings-table {
+.settings-table td {
+    overflow-wrap: anywhere;
+}
+
+.settings-table pre {
     margin: 0;
-    border-top: 1px solid color-mix(in srgb, var(--instui-color-text-base) 18%, transparent);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
 }
 
-.setting-row {
-    padding: 9px 0;
-    border-bottom: 1px solid color-mix(in srgb, var(--instui-color-text-base) 18%, transparent);
-    display: grid;
-    grid-template-columns: minmax(150px, 0.7fr) minmax(0, 1.3fr);
-    gap: 12px;
-    font-size: 12px;
+.setting-helper {
+    margin: 8px 0 0;
 }
 
-.setting-row dt {
-    color: color-mix(in srgb, var(--instui-color-text-base) 62%, transparent);
-    font-weight: 700;
-}
-
-.setting-row dd {
-    margin: 0;
+.table-copy-cell {
     min-width: 0;
-    line-height: 1.5;
-    word-break: break-word;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
 }
 
-.setting-row dd code {
-    margin-right: 8px;
+.table-copy-cell pre {
+    min-width: 0;
+    margin: 0;
+    flex: 1;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.table-copy-cell button {
+    margin-left: auto;
+    flex: 0 0 auto;
+}
+
+.setting-value-muted {
+    color: color-mix(in srgb, var(--instui-color-text-base) 62%, transparent);
+}
+
+.scope-manifest-title {
+    margin: 18px 0 8px;
 }
 
 .copy-block {
@@ -359,6 +403,35 @@ pre {
     overflow-x: auto;
     color: var(--instui-color-text-base);
     line-height: 1.6;
+}
+
+.scope-card {
+    margin-top: 12px;
+}
+
+.scope-card>.content {
+    padding: 0;
+}
+
+.scope-card-header {
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.scope-card-header h4 {
+    margin: 0;
+}
+
+.scope-manifest {
+    max-height: min(24rem, 60vh);
+    margin: 0;
+    padding: 12px;
+    overflow: auto;
+    overscroll-behavior: contain;
+    white-space: pre;
 }
 
 .inline-status {
@@ -401,19 +474,22 @@ pre {
     .page-heading {
         align-items: flex-start;
         flex-direction: column;
+        gap: 14px;
+    }
+
+    .page-heading-copy {
+        width: 100%;
+        flex: 0 1 auto;
     }
 
     .page-heading-actions {
-        flex-wrap: wrap;
+        order: -1;
+        align-self: flex-start;
+        margin-left: 0;
     }
 }
 
 @media (max-width: 480px) {
-    .setting-row {
-        grid-template-columns: 1fr;
-        gap: 4px;
-    }
-
     .page-footer {
         align-items: flex-start;
         flex-direction: column;

@@ -1,10 +1,10 @@
 coverage:
   totals:
-    statements: 76.38%
-    branches: 80.19%
-    functions: 84.12%
-    lines: 76.07%
-    total: 79.19%
+    statements: 84.18%
+    branches: 85.12%
+    functions: 91.66%
+    lines: 84.08%
+    total: 86.26%
   scripts:
     totals:
       statements: 0%
@@ -19,10 +19,10 @@ coverage:
       uncovered_line_numbers: "6-21"
   src:
     totals:
-      statements: 54.64%
-      branches: 44.22%
-      functions: 96.33%
-      lines: 54.46%
+      statements: 68.94%
+      branches: 66.09%
+      functions: 97.62%
+      lines: 68.86%
     "admin.ts":
       statements: 0%
       branches: 0%
@@ -30,14 +30,14 @@ coverage:
       lines: 0%
       uncovered_line_numbers: "3-4"
     "app.ts":
-      statements: 75%
-      branches: 76.66%
-      functions: 81.63%
-      lines: 74.07%
-      uncovered_line_numbers: "25-399"
+      statements: 86.06%
+      branches: 83.43%
+      functions: 92.45%
+      lines: 85.53%
+      uncovered_line_numbers: "26-447"
     "clients.ts":
       statements: 100%
-      branches: 50%
+      branches: 83.33%
       functions: 100%
       lines: 100%
     "main.ts":
@@ -46,9 +46,19 @@ coverage:
       functions: 100%
       lines: 0%
       uncovered_line_numbers: "3-4"
-    "state.ts":
-      statements: 98.21%
-      branches: 94.44%
+    "rulesyncTargets.ts":
+      statements: 100%
+      branches: 100%
       functions: 100%
-      lines: 98.21%
-      uncovered_line_numbers: "124"
+      lines: 100%
+    "scopes.ts":
+      statements: 100%
+      branches: 100%
+      functions: 100%
+      lines: 100%
+    "state.ts":
+      statements: 96.49%
+      branches: 95.89%
+      functions: 90.9%
+      lines: 96.49%
+      uncovered_line_numbers: "127-176"

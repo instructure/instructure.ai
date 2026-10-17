@@ -1,3 +1,5 @@
+import { RULESYNC_TARGETS, type RulesyncTargetId } from "./rulesyncTargets";
+
 export const REGIONS = [
 	"us-east-1",
 	"us-west-2",
@@ -14,11 +16,12 @@ export const CLIENTS = [
 	"codex",
 	"copilot-studio",
 	"gemini-enterprise",
+	"antigravity",
 	"generic",
 ] as const;
 
 export type Region = (typeof REGIONS)[number];
-export type Client = (typeof CLIENTS)[number];
+export type Client = (typeof CLIENTS)[number] | RulesyncTargetId;
 export type KeyType = "public" | "private";
 
 export interface AppState {
@@ -91,19 +94,18 @@ export function deriveUrls(state: Pick<AppState, "domain" | "region">) {
 
 export function readState(search: string, storage: StorageLike | null): AppState {
 	const params = new URLSearchParams(search),
-	 saved = readPreferences(storage),
-
-	 domain =
+		saved = readPreferences(storage),
+		domain =
 			normalizeCanvasDomain(params.get("domain") ?? "") ??
 			normalizeCanvasDomain(saved.domain) ??
 			"",
 		queryClient = params.get("client"),
 		client = isClient(queryClient) ? queryClient : (saved.client ?? "claude-code"),
-	 queryKey = params.get("key"),
+		queryKey = params.get("key"),
 		key = queryKey === "private" || queryKey === "public" ? queryKey : (saved.key ?? "public"),
-	 queryRegion = params.get("region"),
+		queryRegion = params.get("region"),
 		region = isRegion(queryRegion) ? queryRegion : saved.region,
-	 clientId = params.get("clientId") ?? "";
+		clientId = params.get("clientId") ?? "";
 
 	return {
 		client,
@@ -168,7 +170,11 @@ export function stateQuery(state: AppState, includeClientId = true): string {
 }
 
 export function isClient(value: unknown): value is Client {
-	return typeof value === "string" && CLIENTS.includes(value as Client);
+	return (
+		typeof value === "string" &&
+		(CLIENTS.includes(value as (typeof CLIENTS)[number]) ||
+			RULESYNC_TARGETS.some((target) => target.id === value))
+	);
 }
 
 export function isRegion(value: unknown): value is Region {

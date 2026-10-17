@@ -1,9 +1,11 @@
 import "./main.css";
 import { getLogoSvg } from "@pantoken/plugin-logos";
 import { CLIENTS, clientDefinition, normalizeKeyType } from "./clients";
+import { SCOPE_MANIFEST } from "./scopes";
 import {
 	type AppState,
 	type StorageLike,
+	REGIONS,
 	deriveUrls,
 	isBetaDomain,
 	normalizeCanvasDomain,
@@ -15,7 +17,6 @@ import {
 type PageMode = "user" | "admin";
 
 const BASE_SCOPE = "https://sso.canvaslms.com/all-client-scopes",
-	INTROSPECT_SCOPE = "url:POST|/api/v1/oauth2/introspect",
 	CANVAS_LOGO_FULL_COLOR = toSvgDataUri(getLogoSvg("canvas", "horizontal", "full-color")),
 	CANVAS_LOGO_REVERSED = toSvgDataUri(getLogoSvg("canvas", "horizontal", "reversed"));
 
@@ -28,12 +29,24 @@ export function mountApp(mode: PageMode): void {
 		state = readState(globalThis.location.search, getStorage());
 	let pageMode = pageModeFromQuery(globalThis.location.search) ?? mode;
 	state.key = normalizeKeyType(state.client, state.key);
+	function isConnectionReady(): boolean {
+		return (
+			Boolean(normalizeCanvasDomain(state.domain)) &&
+			Boolean(state.region) &&
+			Boolean(state.client) &&
+			Boolean(state.clientId)
+		);
+	}
+	if (pageMode === "user" && !isConnectionReady()) {
+		pageMode = "admin";
+	}
 	const viewState = { domainInputValue: state.domain },
 		copiedLabel = "";
 
 	function render() {
 		const client = clientDefinition(state.client),
 			hasValidDomain = Boolean(normalizeCanvasDomain(state.domain)),
+			canConnect = isConnectionReady(),
 			urls = hasValidDomain
 				? deriveUrls(state)
 				: {
@@ -49,51 +62,47 @@ export function mountApp(mode: PageMode): void {
 					<div class="page-heading">
 						<div class="page-heading-copy">
 							<div class="eyebrow"><img class="eyebrow-logo" alt="Canvas" src="${canvasLogoUri()}" /></div>
-							<h1 class="instui-heading -variant-title-page">${pageMode === "user" ? "Connect Canvas to your MCP client" : "Create a Canvas developer key"}</h1>
+							<h1 class="instui-heading -variant-title-page">${pageMode === "user" ? "Connect Canvas to your MCP client" : "Configure a Canvas MCP Server"}</h1>
 							<p class="lede">${pageMode === "user" ? "Build the connection details for your Canvas environment." : "Configure one developer key for the client you are setting up."}</p>
 						</div>
 						<div class="page-heading-actions" role="group" aria-label="Page actions">
-							<button class="instui-button -color-tertiary -shape-square -icon-copy -size-sm" type="button" data-action="copy-link" aria-label="Copy setup link" title="Copy setup link"></button>
 							<div class="instui-button-set -color-secondary -toggle -size-sm theme-toggle" role="group" aria-label="Color theme">
 								${themeButton("system", "monitor", "Use system theme")}
 								${themeButton("light", "sun", "Use light theme")}
 								${themeButton("dark", "moon", "Use dark theme")}
 							</div>
-							<button class="instui-button -color-tertiary -shape-square -icon-printer -size-sm" type="button" data-action="print" aria-label="Print setup guide" title="Print"></button>
+              <button class="instui-button -color-tertiary -shape-square -icon-send -size-md" type="button" data-action="copy-link" aria-label="Copy setup link" title="Copy setup link"></button>
+							<button class="instui-button -color-tertiary -shape-square -icon-printer -size-md" type="button" data-action="print" aria-label="Print setup guide" title="Print"></button>
 						</div>
 					</div>
 					<div class="instui-tabs page-tabs --mb-md">
 						<div class="list" role="tablist" aria-label="Canvas MCP setup pages">
-							<button id="tab-connect" class="tab ${pageMode === "user" ? "-selected" : ""}" type="button" role="tab" aria-selected="${pageMode === "user"}" aria-controls="setup-panel" data-page="connect">Connect a Client</button>
-							<button id="tab-admin" class="tab ${pageMode === "admin" ? "-selected" : ""}" type="button" role="tab" aria-selected="${pageMode === "admin"}" aria-controls="setup-panel" data-page="admin">Developer Key</button>
+							<button id="tab-admin" class="tab ${pageMode === "admin" ? "-selected" : ""}" type="button" role="tab" aria-selected="${pageMode === "admin"}" aria-controls="setup-panel" data-page="admin">Configure a Server</button>
+							<button id="tab-connect" class="tab ${pageMode === "user" ? "-selected" : ""}" type="button" role="tab" aria-selected="${pageMode === "user"}" aria-controls="setup-panel" data-page="connect" ${pageMode === "admin" && !canConnect ? "disabled" : ""}>Connect a Client</button>
 						</div>
 						<section id="setup-panel" class="panel" role="tabpanel" aria-labelledby="${pageMode === "user" ? "tab-connect" : "tab-admin"}">
-					${pageMode === "admin" ? adminIntro() : ""}
-					<div class="workspace-grid">
-						<aside class="instui-card -variant-base controls-panel" aria-label="Setup options">
+					<div class="workspace-grid --mt-xl">
+						${pageMode === "admin" ? `<div class="configuration-stack"><aside class="instui-card -variant-base controls-panel" aria-label="Setup options">
 							<div class="content">
-							<h2 class="instui-heading -level-h2">Environment</h2>
+							<h2 class="instui-heading -variant-title-card-regular">Configuration</h2>
 							<label class="field-label" for="domain-input">Canvas domain</label>
 							<input id="domain-input" class="instui-text-input text-input" type="url" inputmode="url" autocomplete="url" placeholder="school.instructure.com" value="${escapeHtml(viewState.domainInputValue)}" aria-describedby="domain-hint" />
 							<p class="field-hint" id="domain-hint">Use your school's instructure.com address. Beta domains end in .beta.instructure.com.</p>
-							<div id="region-field" class="field-group ${pageMode === "admin" ? "is-hidden" : ""}">
+							<div id="region-field" class="field-group">
 								<label class="field-label" for="region-select">Canvas region</label>
-								<select id="region-select" class="instui-simple-select text-input" ${pageMode === "admin" ? "disabled" : ""}><option value="">Select a region</option>${regionOptions(state.region)}</select>
+								<select id="region-select" class="instui-simple-select text-input"><option value="">Select a region</option>${regionOptions(state.region)}</select>
 								<p class="field-hint">Use the region in your Canvas developer key's automatically populated Maple audience.</p>
 							</div>
-							<hr class="rule" />
-							<h2 class="instui-heading -level-h2">Client</h2>
 							<label class="field-label" for="client-select">MCP client</label>
 							<select id="client-select" class="instui-simple-select text-input">${clientOptions(state.client)}</select>
-							<p class="field-hint">${escapeHtml(client.group)} · ${escapeHtml(client.name)}</p>
-							<fieldset class="instui-radio-input-group -variant-toggle key-type-control"><legend>Developer key type</legend>${keyTypeButton("public", state.key, client.keyTypes)}${keyTypeButton("private", state.key, client.keyTypes)}</fieldset>
-							<p class="field-hint">${client.keyTypes.length === 1 ? (client.keyTypes[0] === "private" ? "This client requires a confidential key." : "This client uses a public key with PKCE.") : "Choose the key type required by your client."}</p>
-							${pageMode === "user" ? `<label class="field-label" for="client-id-input">Client ID <span class="optional">Optional</span></label><input id="client-id-input" class="instui-text-input text-input" inputmode="numeric" autocomplete="off" placeholder="Numeric ID from Developer Keys" value="${escapeHtml(state.clientId)}" /><p class="field-hint">Client IDs are public identifiers. Never enter a client secret here.</p>` : ""}
+							<label class="instui-checkbox -variant-toggle private-key-toggle"><input id="private-key-input" type="checkbox" name="private-key" ${state.key === "private" ? "checked" : ""} ${client.keyTypes.length === 1 ? "disabled" : ""}>Private key</label>
+							${client.oauthMetadataVerified === false ? `<p id="mcp-oauth-metadata-warning" class="field-hint">Rulesync confirms MCP configuration support only. Confirm whether this client accepts public or requires private OAuth, and verify its callback URI with the client documentation.</p>` : ""}
 							</div>
-						</aside>
-						<section class="instui-card -variant-base details-panel" aria-live="polite"><div class="content">${pageMode === "user" ? userDetails(client, urls, hasValidDomain, state, copiedLabel) : adminDetails(client, urls, hasValidDomain, state, copiedLabel)}</div></section>
+						</aside>${serverDetailsCard(urls, state, canConnect, true)}</div>` : ""}
+						${pageMode === "user" ? serverDetailsCard(urls, state, canConnect, false) : ""}
+						<section class="instui-card -variant-base details-panel" aria-live="polite"><div class="content">${pageMode === "user" ? userDetails(client) : adminDetails(client, hasValidDomain, state, copiedLabel)}</div></section>
 					</div>
-					<footer class="page-footer"><p>No Canvas credentials or client secrets are collected. Domain, client, key type, and region preferences may be saved in this browser.</p><a href="https://developerdocs.instructure.com/services/canvas/oauth2/file.developer_keys.md" target="_blank" rel="noreferrer">Canvas developer key documentation</a></footer>
+					<footer class="page-footer"><p>Copyright &copy; ${new Date().getFullYear()} Instructure, Inc.</p></footer>
 					</section>
 					</div>
 				</main>
@@ -104,9 +113,23 @@ export function mountApp(mode: PageMode): void {
 		applyTheme();
 	}
 
+	function syncConnectTab(): void {
+		const connectTab = appRoot.querySelector<HTMLButtonElement>('[data-page="connect"]');
+		if (pageMode === "admin" && connectTab) {
+			const ready = isConnectionReady();
+			connectTab.disabled = !ready;
+			appRoot
+				.querySelectorAll<HTMLButtonElement>("[data-configure-client]")
+				.forEach((button) => (button.disabled = !ready));
+		}
+	}
+
 	function bindEvents() {
 		appRoot.querySelectorAll<HTMLButtonElement>("[data-page]").forEach((tab) => {
 			tab.addEventListener("click", () => {
+				if (tab.hasAttribute("data-configure-client")) {
+					globalThis.scrollTo({ top: 0, behavior: "smooth" });
+				}
 				pageMode = tab.dataset.page === "admin" ? "admin" : "user";
 				persistAndRender();
 			});
@@ -128,20 +151,34 @@ export function mountApp(mode: PageMode): void {
 			.querySelector<HTMLSelectElement>("#client-select")
 			?.addEventListener("change", (event) => {
 				state.client = (event.currentTarget as HTMLSelectElement).value as AppState["client"];
-				state.key = normalizeKeyType(state.client, state.key);
+				state.key = normalizeKeyType(state.client, "public");
 				persistAndRender();
 			});
-		appRoot.querySelectorAll<HTMLInputElement>('input[name="key-type"]').forEach((radio) => {
-			radio.addEventListener("change", () => {
-				state.key = radio.value as AppState["key"];
-				persistAndRender();
-			});
+		appRoot.querySelector<HTMLInputElement>("#private-key-input")?.addEventListener("change", (event) => {
+			state.key = normalizeKeyType(
+				state.client,
+				(event.currentTarget as HTMLInputElement).checked ? "private" : "public",
+			);
+			persistAndRender();
 		});
 		appRoot
 			.querySelector<HTMLInputElement>("#client-id-input")
 			?.addEventListener("input", (event) => {
 				state.clientId = (event.currentTarget as HTMLInputElement).value.replace(/\D/gu, "");
 				persist();
+				const generatedClientIdInput = appRoot.querySelector<HTMLInputElement>("#generated-client-id"),
+					generatedClientIdCopy = appRoot.querySelector<HTMLButtonElement>("#generated-client-id-copy");
+				if (generatedClientIdInput) {
+					generatedClientIdInput.value = state.clientId;
+				}
+				if (generatedClientIdCopy) {
+					generatedClientIdCopy.dataset.copy = state.clientId;
+					generatedClientIdCopy.disabled = !state.clientId;
+				}
+				appRoot
+					.querySelector(".server-details-card")
+					?.classList.toggle("is-hidden", !isConnectionReady());
+				syncConnectTab();
 			});
 		appRoot.querySelectorAll<HTMLButtonElement>("[data-theme-choice]").forEach((button) => {
 			button.addEventListener("click", () => setTheme(button.dataset.themeChoice ?? "system"));
@@ -183,7 +220,10 @@ export function mountApp(mode: PageMode): void {
 	}
 
 	render();
-	if (!new URLSearchParams(globalThis.location.search).has("page")) {
+	if (
+		!new URLSearchParams(globalThis.location.search).has("page") ||
+		pageModeFromQuery(globalThis.location.search) !== pageMode
+	) {
 		persist();
 	}
 }
@@ -201,60 +241,76 @@ function pageQuery(state: AppState, pageMode: PageMode): string {
 	return params.toString();
 }
 
-function userDetails(
-	client: ReturnType<typeof clientDefinition>,
+function userDetails(client: ReturnType<typeof clientDefinition>): string {
+	return `<h2 class="instui-heading -level-h2">${escapeHtml(client.name)}</h2>`;
+}
+
+function serverDetailsCard(
 	urls: ReturnType<typeof deriveUrls>,
-	hasValidDomain: boolean,
 	state: AppState,
-	copiedLabel: string,
+	canConfigureClient: boolean,
+	showConfigureClient: boolean,
 ): string {
-	const copyableMcp = hasValidDomain && Boolean(state.region),
-		mcpUrl = copyableMcp ? urls.mcp : "Select a Canvas domain and region to build this URL";
-	return `
-		<div class="section-heading"><div><p class="eyebrow">CONNECTION VALUES</p><h2 class="instui-heading -level-h2">Your server details</h2></div><span class="instui-pill -size-x-small -color-${copyableMcp ? "success" : "warning"} status-pill">${copyableMcp ? "Ready to configure" : "Needs environment details"}</span></div>
-		<div class="value-list">${valueRow("MCP server URL", mcpUrl, copyableMcp)}${valueRow("Authorization URL", urls.auth, hasValidDomain)}${valueRow("Token URL", urls.token, hasValidDomain)}${valueRow("Scope", urls.scope, true)}</div>
-		<section class="guide-section"><div class="section-heading"><div><p class="eyebrow">${escapeHtml(client.group.toUpperCase())}</p><h2 class="instui-heading -level-h2">${escapeHtml(client.name)}</h2></div></div><p>${escapeHtml(client.setupNote)}</p>
-			<h3 class="instui-heading -level-h3">Register this redirect URI on the developer key</h3><ul class="uri-list">${client.redirectUris.map((uri) => `<li><code>${escapeHtml(uri)}</code><button class="instui-button -color-tertiary -size-sm text-button" type="button" data-copy="${escapeHtml(uri)}" data-label="Redirect URI">Copy</button></li>`).join("")}</ul>
-			<div class="steps-list"><div><span class="instui-pill -color-info step-number">1</span><p>Ask your Canvas administrator to create a ${state.key === "private" ? "confidential" : "public"} developer key for this client and register the redirect URI above.</p></div><div><span class="instui-pill -color-info step-number">2</span><p>In ${escapeHtml(client.name)}, add the remote MCP URL and the Canvas authorization and token URLs shown above. Enter your Client ID in the client; keep any client secret there and never share it in a setup link.</p></div><div><span class="instui-pill -color-info step-number">3</span><p>${escapeHtml(client.verify)}</p></div></div>
-			${isBetaDomain(state.domain) ? `<p class="instui-alert -color-warning -inline notice notice-warm" role="status"><b>Beta environment.</b> Use the beta MCP URL and beta Canvas OAuth URLs. Your administrator creates the key in production Canvas with Test Cluster Only enabled.</p>` : ""}
-		</section><p class="inline-status">${escapeHtml(copiedLabel)}</p>`;
+	const client = clientDefinition(state.client),
+		canCopyMcpUrl = Boolean(state.region),
+		mcpUrl = canCopyMcpUrl ? urls.mcp : "Select a Canvas region to build this URL";
+	return `<section class="instui-card -variant-base server-details-card${canConfigureClient ? "" : " is-hidden"}" aria-label="Server Details"><div class="content"><h2 class="instui-heading -variant-title-card-regular">Server Details</h2>${generatedValueRow("generated-mcp-url", "MCP server URL", mcpUrl, "generated-mcp-url-copy", canCopyMcpUrl)}${generatedValueRow("generated-auth-url", "Canvas authorization URL", urls.auth)}${generatedValueRow("generated-token-url", "Canvas token URL", urls.token)}${generatedValueRow("generated-scope-url", "Scope", urls.scope)}${client.requiresClientId ? `<div id="generated-client-id-field" class="generated-client-id-field">${generatedValueRow("generated-client-id", "Client ID", state.clientId, "generated-client-id-copy", Boolean(state.clientId))}</div>` : ""}${showConfigureClient ? `<button id="configure-client-button" class="instui-link instui-button -color-primary" type="button" data-page="connect" data-configure-client ${canConfigureClient ? "" : "disabled"}>Configure a client</button>` : ""}</div></section>`;
 }
 
 function adminDetails(
 	client: ReturnType<typeof clientDefinition>,
-	urls: ReturnType<typeof deriveUrls>,
 	hasValidDomain: boolean,
 	state: AppState,
 	copiedLabel: string,
 ): string {
 	const productionDomain = state.domain.replace(".beta.instructure.com", ".instructure.com"),
 		redirects = client.redirectUris.join("\n"),
-		scopes = `${BASE_SCOPE}\n${INTROSPECT_SCOPE}`;
+		canConfigureClient = hasValidDomain && Boolean(state.region) && (!client.requiresClientId || Boolean(state.clientId)),
+		keyTypeSaveSteps =
+			state.key === "private"
+				? `<div class="instui-banner -color-sea -size-compact -icon-key private-key-save-steps" role="status"><h4 class="instui-heading -level-h4">Private key setup</h4><ol class="instui-list -ordered"><li>Click <b>Save</b>.</li><li>In the <b>Developer Key Created</b> modal, copy the <b>API Key Secret</b> and store it securely.</li><li><p class="secret-warning"><b>Security warning:</b> This secret is shown only once. Store it in a trusted secrets manager; never commit it to source code, add it to a setup link, or share it.</p></li><li>Click <b>Close</b> on the modal.</li></ol></div>`
+				: `<ol class="instui-list -ordered public-key-save-steps"><li>Click <b>Save</b>.</li></ol>`,
+		sharedKeySaveSteps = `<ol start="${state.key === "private" ? 5 : 2}" class="instui-list -ordered shared-key-save-steps"><li>In the <b>Developer Keys</b> table, under the <b>State</b> column, toggle your new key to <b>on</b>.</li><li>Copy the Client ID from the <b>Details</b> column and paste it below. Do not copy or paste the API Key Secret; never share or store it in this setup.</li></ol>`;
 	return `
-		<div class="section-heading"><div><p class="eyebrow">DEVELOPER KEY</p><h2 class="instui-heading -level-h2">Key settings for ${escapeHtml(client.name)}</h2></div><span class="instui-pill -size-x-small -color-${hasValidDomain ? "success" : "warning"} status-pill">${hasValidDomain ? "Environment set" : "Add a Canvas domain"}</span></div>
-		<p class="intro-copy">Create one key for this client. If another client requires a different key type or callback, create a separate key.</p>
+		<h2 class="instui-heading -level-h2 --mb-2xl">Key settings for ${escapeHtml(client.name)}</h2>
 		<div class="admin-steps">
-			<section class="guide-section"><span class="instui-pill -color-info step-kicker">01</span><div><h3 class="instui-heading -level-h3">Open Developer Keys</h3><p>In the Canvas root account, open Account → Developer Keys. Create an API key named <b>Canvas MCP — ${escapeHtml(client.name)}</b>.</p></div></section>
-			<section class="guide-section"><span class="instui-pill -color-info step-kicker">02</span><div><h3 class="instui-heading -level-h3">Set OAuth details</h3><dl class="settings-table">${settingRow("Owner Email", "An administrator or team mailbox")}${settingRow("Client Credentials Audience", "Canvas")}${settingRow("Allowed Audiences", "Use the region-specific Maple audience Canvas automatically populates. Keep the Canvas-provided value; do not type or guess a region.")}${settingRow("Redirect URIs", redirects, true)}${settingRow("Authorized Flows", state.key === "private" ? "Token Exchange" : "None / null")}${settingRow("Client Type", state.key === "private" ? "Confidential (private key)" : "Public (PKCE)")}${settingRow("Enforce Scopes", "On")}${settingRow("Allow Include Parameters", "On")}${settingRow("Linked Partner App / Vendor Code", "Leave blank")}</dl></div></section>
-			<section class="guide-section"><span class="instui-pill -color-info step-kicker">03</span><div><h3 class="instui-heading -level-h3">Paste scopes</h3><p>Paste each scope on its own line. This app currently contains only the baseline scopes; it is not a complete production scope list.</p><div class="instui-alert -color-warning -inline notice notice-warm" role="alert"><b>Not ready for key creation:</b> add the per-tool scope manifest from a reviewed Maple revision before using this block. Do not omit the required tool scopes.</div>${copyBlock("Known baseline scopes (incomplete)", scopes, "Baseline scopes")}</div></section>
-			<section class="guide-section"><span class="instui-pill -color-info step-kicker">04</span><div><h3 class="instui-heading -level-h3">Save and verify</h3><p>Turn the key on. Copy its numeric Client ID from the Developer Keys list. A private key also has a secret; enter that only in the client that needs it.</p>${isBetaDomain(state.domain) ? `<p class="instui-alert -color-info -inline notice" role="status"><b>Beta tenant:</b> sign in to production Canvas at <code>${escapeHtml(productionDomain || "<tenant>.instructure.com")}</code>, enable Test Cluster Only, and create the key there. Canvas copies it to beta.</p>` : ""}${valueRow("Canvas authorization URL", urls.auth, hasValidDomain)}${valueRow("Canvas token URL", urls.token, hasValidDomain)}</div></section>
-		</div><p class="inline-status">${escapeHtml(copiedLabel)}</p>`;
+			<section class="guide-section"><div><h3 class="instui-heading -level-h3">Open Developer Keys</h3><ol class="instui-list -ordered"><li>In the Canvas root account, open Account → Developer Keys.</li><li>Select <b>+ Developer Key</b>, open its menu, then choose <b>+ API Key</b>.</li></ol></div></section>
+			<section class="guide-section"><div><h3 class="instui-heading -level-h3">Key Settings</h3>${settingsTable("Setting", `${settingRow("Key name", `Canvas MCP — ${client.name}`)}${settingRow("Owner Email", "An administrator or team mailbox")}${client.redirectUriKnown === false ? settingRow("Redirect URIs", redirects, true) : settingCodeRow("Redirect URIs", redirects, true)}${settingRow("Linked Partner App", "Leave blank")}${settingRow("Vendor Code (LTI 2):", "Leave blank")}${settingRow("Icon URL:", "Leave blank")}${settingRow("Notes", "Leave blank")}${settingCheckboxRow("Test Cluster Only", isBetaDomain(state.domain), false)}${settingRow("Client Credentials Audience", "Canvas")}${allowedAudiencesRow()}${settingRow("Authorized Flows", state.key === "private" ? "Token Exchange" : "Leave blank")}${settingRow("Client Type", state.key === "private" ? "Confidential" : "Public")}`)}</div></section>
+			<section class="guide-section"><div><h3 class="instui-heading -level-h3">Scopes</h3>${settingsTable("Option", `${settingCheckboxRow("Enforce Scopes", true)}${settingRow("Method", "Paste scopes")}${settingCheckboxRow("Allow Include Parameters", true, false)}`)}<h4 class="instui-heading -level-h4 scope-manifest-title">Paste Scopes</h4><p>Paste the complete per-tool scope list, one scope per line.</p><div class="instui-card -variant-nested scope-card"><div class="content"><div class="scope-card-header"><h4 class="instui-heading -variant-title-card-regular">Per-tool scope manifest</h4><button class="instui-button -color-tertiary -shape-square -icon-copy -size-sm" type="button" aria-label="Copy scope manifest" title="Copy scope manifest" data-copy="${escapeHtml(SCOPE_MANIFEST)}" data-label="Scope manifest"></button></div><pre class="scope-manifest" tabindex="0" role="region" aria-label="Full Canvas scope manifest"><code>${escapeHtml(SCOPE_MANIFEST)}</code></pre></div></div></div></section>
+			<section class="guide-section"><div><h3 class="instui-heading -level-h3">Save</h3>${keyTypeSaveSteps}${sharedKeySaveSteps}${client.requiresClientId ? `<label class="field-label" for="client-id-input">Client ID</label><input id="client-id-input" class="instui-text-input text-input" inputmode="numeric" autocomplete="off" placeholder="12345000000000001" value="${escapeHtml(state.clientId)}" required aria-describedby="client-id-hint" /><p class="field-hint" id="client-id-hint">Required by the Canvas OAuth flow. Enter the numeric ID from the Canvas Developer Keys page.</p>` : ""}${isBetaDomain(state.domain) ? `<p class="instui-alert -color-info -inline notice" role="status"><b>Beta tenant:</b> sign in to production Canvas at <code>${escapeHtml(productionDomain || "<tenant>.instructure.com")}</code>, enable Test Cluster Only, and create the key there. Canvas copies it to beta.</p>` : ""}</div></section>
+		</div><p class="inline-status">${escapeHtml(copiedLabel)}</p><div class="admin-footer-action"><button id="configure-client-button-bottom" class="instui-link instui-button -color-primary" type="button" data-page="connect" data-configure-client ${canConfigureClient ? "" : "disabled"}>Configure a client</button></div>`;
 }
 
-function adminIntro(): string {
-	return `<p class="instui-alert -color-info -inline notice notice-cool" role="status"><b>Audience behavior:</b> Canvas automatically populates the tenant's region-specific Maple audience in production. Use the value Canvas provides; this guide does not ask you to select or enter a region.</p>`;
+function generatedValueRow(
+	id: string,
+	label: string,
+	value: string,
+	copyButtonId = `${id}-copy`,
+	canCopy = true,
+): string {
+	return `<div class="generated-value-row"><label class="field-label" for="${id}">${escapeHtml(label)}</label><div class="generated-value-control"><input id="${id}" class="instui-text-input text-input" type="text" value="${escapeHtml(value)}" readonly aria-readonly="true" /><button id="${copyButtonId}" class="instui-button -color-tertiary -shape-square -icon-copy -size-sm" type="button" aria-label="Copy ${escapeHtml(label)}" title="Copy ${escapeHtml(label)}" data-copy="${escapeHtml(value)}" data-label="${escapeHtml(label)}" ${canCopy ? "" : "disabled"}></button></div></div>`;
 }
 
-function valueRow(label: string, value: string, canCopy: boolean): string {
-	return `<div class="value-row"><div><span class="value-label">${escapeHtml(label)}</span><code>${escapeHtml(value)}</code></div><button class="instui-button -color-secondary -size-sm" type="button" data-copy="${escapeHtml(value)}" data-label="${escapeHtml(label)}" ${canCopy ? "" : "disabled"}>Copy</button></div>`;
+function settingsTable(heading: string, rows: string): string {
+	return `<table class="instui-table settings-table"><thead><tr><th scope="col">${escapeHtml(heading)}</th><th scope="col">Value</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-function copyBlock(label: string, value: string, copyLabel: string): string {
-	return `<div class="copy-block"><div class="copy-block-heading"><span>${escapeHtml(label)}</span><button class="instui-button -color-tertiary -size-sm" type="button" data-copy="${escapeHtml(value)}" data-label="${escapeHtml(copyLabel)}" disabled>Copy</button></div><pre><code>${escapeHtml(value)}</code></pre></div>`;
+function settingRow(label: string, value: string, muted = false): string {
+	muted ||= value === "Leave blank" || value === "An administrator or team mailbox";
+	return `<tr><th scope="row">${escapeHtml(label)}</th><td>${muted ? `<span class="setting-value-muted">${escapeHtml(value)}</span>` : escapeHtml(value)}</td></tr>`;
 }
 
-function settingRow(label: string, value: string, copy = false): string {
-	return `<div class="setting-row"><dt>${escapeHtml(label)}</dt><dd>${copy ? `<code>${escapeHtml(value)}</code><button class="instui-button -color-tertiary -size-sm text-button" type="button" data-copy="${escapeHtml(value)}" data-label="${escapeHtml(label)}">Copy</button>` : escapeHtml(value)}</dd></div>`;
+function settingCodeRow(label: string, value: string, canCopy: boolean): string {
+	return `<tr><th scope="row">${escapeHtml(label)}</th><td><div class="table-copy-cell"><pre><code>${escapeHtml(value)}</code></pre><button class="instui-button -color-tertiary -shape-square -icon-copy -size-sm" type="button" aria-label="Copy ${escapeHtml(label)}" title="Copy ${escapeHtml(label)}" data-copy="${escapeHtml(value)}" data-label="${escapeHtml(label)}" ${canCopy ? "" : "disabled"}></button></div></td></tr>`;
+}
+
+function allowedAudiencesRow(): string {
+	const regions = REGIONS.map((region) => `<li><code>${escapeHtml(region)}</code></li>`).join("");
+	return `<tr><th scope="row">Allowed Audiences</th><td><pre><code>https://{{tenant_name}}.maple.&lt;region&gt;.core.inseng.io/</code></pre><p class="setting-helper audience-region-lead"><code>&lt;region&gt;</code> will be one of:</p><ul class="instui-list audience-regions">${regions}</ul><p class="setting-helper audience-tenant-note"><code>{{tenant_name}}</code> is a literal string in the Audiences list.</p></td></tr>`;
+}
+
+function settingCheckboxRow(label: string, checked: boolean, toggle = true): string {
+	return `<tr><th scope="row">${escapeHtml(label)}</th><td><label class="instui-checkbox${toggle ? " -variant-toggle" : ""} setting-checkbox"><input type="checkbox" aria-label="${escapeHtml(label)}" ${checked ? "checked" : ""} disabled>${checked ? "Checked" : "Unchecked"}</label></td></tr>`;
 }
 
 function regionOptions(selected: string): string {
@@ -288,11 +344,6 @@ function clientOptions(selected: string): string {
 					.join("")}</optgroup>`,
 		)
 		.join("");
-}
-
-function keyTypeButton(key: "public" | "private", selected: string, allowed: string[]): string {
-	const title = key === "public" ? "Public · PKCE" : "Private · secret";
-	return `<label class="instui-radio -variant-toggle"><input type="radio" name="key-type" value="${key}" ${selected === key ? "checked" : ""} ${allowed.includes(key) ? "" : "disabled"}>${title}</label>`;
 }
 
 function themeButton(theme: string, icon: string, label: string): string {
