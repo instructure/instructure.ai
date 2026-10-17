@@ -158,7 +158,7 @@ export function renderGuide(
 		(step) => step.kind === "canvas-key" || !step.key || step.key === state.key,
 	);
 	const surfaceControl = splitEnterprise
-		? `<fieldset class="instui-radio-input-group -variant-toggle guide-surfaces"><legend class="instui-screen-reader-content">Setup instructions</legend>${(["canvas", "provider"] as const).map((surface) => `<label class="instui-radio -variant-toggle"><input id="guide-surface-${surface}" type="radio" name="guide-surface" value="${surface}" data-guide-surface="${surface}" aria-controls="guide-${surface}" ${activeSurface === surface ? "checked" : ""}>${surface === "canvas" ? "1. Canvas" : `2. ${escapeHtml(provider)}`}</label>`).join("")}</fieldset>`
+		? `<fieldset class="instui-segmented-control guide-surfaces" aria-label="Setup instructions"><div class="viewport"><div class="track">${(["canvas", "provider"] as const).map((surface) => `<label><input id="guide-surface-${surface}" type="radio" name="guide-surface" value="${surface}" data-guide-surface="${surface}" aria-controls="guide-${surface}" ${activeSurface === surface ? "checked" : ""}>${surface === "canvas" ? "1. Canvas" : `2. ${escapeHtml(provider)}`}</label>`).join("")}</div></div></fieldset>`
 		: "";
 	const body =
 		guide.presentation === "interleaved"

@@ -115,10 +115,12 @@ describe("composable client guides", () => {
 		enterprise.checked = true;
 		enterprise.dispatchEvent(new Event("change", { bubbles: true }));
 		expect(
-			document.querySelector(".guide-surfaces")?.classList.contains("instui-radio-input-group"),
+			document.querySelector(".guide-surfaces")?.classList.contains("instui-segmented-control"),
 		).toBe(true);
 		expect(
-			[...document.querySelectorAll(".guide-surfaces label")].map((label) => label.textContent),
+			[...document.querySelectorAll(".guide-surfaces > .viewport > .track > label")].map(
+				(label) => label.textContent,
+			),
 		).toEqual(["1. Canvas", "2. Claude organization settings"]);
 		const next = document.querySelector<HTMLButtonElement>("#configure-provider-button-bottom")!;
 		expect(next.textContent).toBe("Configure Claude organization settings");
