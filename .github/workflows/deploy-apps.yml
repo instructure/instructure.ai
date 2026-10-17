@@ -92,6 +92,10 @@ jobs:
         if: steps.changes.outputs.skip_steps != 'true'
         run: pnpm typecheck
 
+      - name: Test Canvas MCP
+        if: steps.changes.outputs.skip_steps != 'true'
+        run: pnpm --filter @instructure.ai/canvas-mcp test
+
       - name: Setup Pages
         if: steps.changes.outputs.skip_steps != 'true'
         uses: actions/configure-pages@v5
