@@ -676,6 +676,7 @@ describe("Canvas MCP pages", () => {
 			),
 		).toEqual([
 			"/images/server-canvas-open_developer_keys.png",
+			"/images/server-canvas-allowed_audiences.png",
 			"/images/server-canvas-enable_public_key.png",
 		]);
 		expect(document.querySelector<HTMLImageElement>(".eyebrow-logo")?.src).toContain(

@@ -41,7 +41,7 @@ function settingCodeRow(label: string, value: string, canCopy: boolean): string 
 
 function allowedAudiencesRow(): string {
 	const regions = REGIONS.map((region) => `<li><code>${escapeHtml(region)}</code></li>`).join("");
-	return `<tr><th scope="row">Allowed Audiences</th><td><pre><code>https://{{tenant_name}}.maple.&lt;region&gt;.core.inseng.io/</code></pre><p class="setting-helper audience-region-lead"><code>&lt;region&gt;</code> will be one of:</p><ul class="instui-list audience-regions">${regions}</ul><p class="setting-helper audience-tenant-note"><code>{{tenant_name}}</code> is a literal string in the Audiences list.</p></td></tr>`;
+	return `<tr><th scope="row">Allowed Audiences</th><td><pre><code>https://{{tenant_name}}.maple.&lt;region&gt;.core.inseng.io/</code></pre><p class="setting-helper audience-region-lead"><code>&lt;region&gt;</code> will be one of:</p><ul class="instui-list audience-regions">${regions}</ul><p class="setting-helper audience-tenant-note"><code>{{tenant_name}}</code> is a literal string in the Audiences list.</p>${canvasStepImage("allowed_audiences", "Canvas Allowed Audiences dropdown with the https://{{tenant_name}}.maple.us-east-1.core.inseng.io/ option selected.", 320, 231)}</td></tr>`;
 }
 
 function settingCheckboxRow(label: string, checked: boolean, toggle = true): string {
