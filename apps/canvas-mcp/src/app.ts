@@ -27,6 +27,9 @@ export function mountApp(mode: PageMode): void {
 	if (pageMode === "user" && !isConnectionReady()) {
 		pageMode = "admin";
 	}
+	if (!new URLSearchParams(globalThis.location.search).has("surface"))
+		state.surface = pageMode === "user" ? "provider" : "canvas";
+	normalizeSetup(state);
 	const viewState = { domainInputValue: state.domain };
 
 	function render() {
@@ -53,6 +56,34 @@ export function mountApp(mode: PageMode): void {
 	}
 
 	function bindEvents() {
+		appRoot.querySelectorAll<HTMLButtonElement>("[data-guide-surface]").forEach((button) =>
+			button.addEventListener("click", () => {
+				state.surface = button.dataset.guideSurface === "provider" ? "provider" : "canvas";
+				persistAndRender();
+			}),
+		);
+		appRoot.querySelectorAll<HTMLButtonElement>("[data-install]").forEach((button) =>
+			button.addEventListener("click", () => {
+				state.install = button.dataset.install === "enterprise" ? "enterprise" : "personal";
+				persistAndRender();
+			}),
+		);
+		appRoot.querySelector('[role="tablist"]')?.addEventListener("keydown", (event) => {
+			const key = (event as KeyboardEvent).key;
+			if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(key)) return;
+			const tabs = [...appRoot.querySelectorAll<HTMLButtonElement>('[role="tab"]:not(:disabled)')];
+			const index = tabs.indexOf(document.activeElement as HTMLButtonElement);
+			if (index < 0) return;
+			event.preventDefault();
+			const next =
+				key === "Home"
+					? 0
+					: key === "End"
+						? tabs.length - 1
+						: (index + (key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+			tabs.forEach((tab, i) => (tab.tabIndex = i === next ? 0 : -1));
+			tabs[next]?.focus();
+		});
 		appRoot
 			.querySelector<HTMLInputElement>("#enterprise-install-input")
 			?.addEventListener("change", (event) => {
@@ -67,6 +98,7 @@ export function mountApp(mode: PageMode): void {
 					globalThis.scrollTo({ top: 0, behavior: "smooth" });
 				}
 				pageMode = tab.dataset.page === "admin" ? "admin" : "user";
+				state.surface = pageMode === "user" ? "provider" : "canvas";
 				persistAndRender();
 			});
 		});
@@ -88,6 +120,7 @@ export function mountApp(mode: PageMode): void {
 			?.addEventListener("change", (event) => {
 				state.client = (event.currentTarget as HTMLSelectElement).value as AppState["client"];
 				state.key = normalizeKeyType(state.client, "public");
+				state.surface = "canvas";
 				persistAndRender();
 			});
 		appRoot
@@ -160,8 +193,14 @@ export function mountApp(mode: PageMode): void {
 	}
 
 	function persistAndRender() {
+		const focusedId = document.activeElement?.id;
 		persist();
 		render();
+		if (focusedId) {
+			const target = document.getElementById(focusedId);
+			if (target instanceof HTMLElement && !target.closest("[hidden]"))
+				target.focus({ preventScroll: true });
+		}
 	}
 
 	render();
@@ -169,9 +208,11 @@ export function mountApp(mode: PageMode): void {
 }
 
 function updatePrintPageBreaks(root: HTMLElement): void {
-	const cards = [...root.querySelectorAll<HTMLElement>(".instui-card:not(.controls-panel)")].filter(
-		(card) => !card.classList.contains("is-hidden"),
-	);
+	const cards = [
+		...root.querySelectorAll<HTMLElement>(
+			".workspace-grid > .instui-card, .configuration-stack > .server-details-card",
+		),
+	].filter((card) => !card.classList.contains("is-hidden"));
 	cards.forEach((card, index) =>
 		card.classList.toggle("print-page-break-after", index < cards.length - 1),
 	);

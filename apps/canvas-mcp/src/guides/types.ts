@@ -7,6 +7,7 @@ export type GuideStep =
 	| { id: string; kind: "canvas-key"; action: "create" | "update-redirect" }
 	| { id: string; kind: "provider" | "verify"; title: string; content: StructuredContent[] };
 export interface Guide {
+	status: "pending" | "documented";
 	presentation: "by-surface" | "interleaved";
 	prerequisites: string[];
 	steps: GuideStep[];

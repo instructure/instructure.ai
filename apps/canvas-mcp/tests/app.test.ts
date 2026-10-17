@@ -163,7 +163,7 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector(".scope-card")?.classList.contains("instui-card")).toBe(true);
 		expect(
 			document.querySelector(".details-panel")?.classList.contains("print-page-break-after"),
-		).toBe(true);
+		).toBe(false);
 		expect(
 			document.querySelector(".scope-card")?.classList.contains("print-page-break-after"),
 		).toBe(false);
@@ -230,7 +230,7 @@ describe("Canvas MCP pages", () => {
 		).toBe(true);
 		expect(document.querySelector(".eyebrow")?.textContent?.trim()).toBe("");
 		expect(document.querySelector(".page-footer a")).toBeNull();
-		expect(document.querySelector(".page-footer")?.textContent.trim()).toMatch(
+		expect(document.querySelector(".page-footer > p")?.textContent.trim()).toMatch(
 			/^Copyright © \d{4} Instructure, Inc\.$/u,
 		);
 
@@ -648,8 +648,9 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector(".details-panel h2")?.classList.contains("instui-heading")).toBe(
 			true,
 		);
-		expect(document.querySelector(".details-panel .guide-section")).toBeNull();
-		expect(document.querySelector(".details-panel ol")).toBeNull();
+		expect(document.querySelector("#guide-provider")?.hasAttribute("hidden")).toBe(false);
+		expect(document.querySelector("#guide-provider .guide-fields")).not.toBeNull();
+		expect(document.querySelector("#guide-canvas")?.hasAttribute("hidden")).toBe(true);
 	});
 
 	it("opens admin configuration when the consumer route is missing required setup state", () => {
