@@ -14,7 +14,10 @@
 		"preview": "vite preview",
 		"typecheck": "tsc --noEmit",
 		"test": "pnpm vitest run",
-		"lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions"
+		"lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
+		"probe": "node scripts/probe/server.mts",
+		"evidence:check": "vite-node scripts/checkEvidence.mts",
+		"scopes:update": "node scripts/updateScopes.mts"
 	},
 	"dependencies": {
 		"@pantoken/components": "2.1.1",
