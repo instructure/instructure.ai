@@ -673,7 +673,15 @@ describe("Canvas MCP pages", () => {
 		);
 		mountApp("user");
 
-		expect(document.querySelector("img:not(.eyebrow-logo)")).toBeNull();
+		expect(document.querySelector('img[src="x"], img[onerror]')).toBeNull();
+		expect(
+			[...document.querySelectorAll<HTMLImageElement>(".admin-steps img")].map((image) =>
+				image.getAttribute("src"),
+			),
+		).toEqual([
+			"/images/server-canvas-open_developer_keys.png",
+			"/images/server-canvas-enable_public_key.png",
+		]);
 		expect(document.querySelector<HTMLImageElement>(".eyebrow-logo")?.src).toContain(
 			"data:image/svg+xml",
 		);
