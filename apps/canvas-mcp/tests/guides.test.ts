@@ -2,6 +2,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { mountApp } from "../src/app";
 import { renderContent, renderGuide, validateGuide } from "../src/guides/render";
+import { screenshot, screenshotSource } from "../src/guides/screenshots";
 import { clientGuide } from "../src/guides/shared";
 import { clientDefinition } from "../src/clients";
 import { readState } from "../src/state";
@@ -14,6 +15,43 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 describe("composable client guides", () => {
+	it("renders manifest screenshots as accessible lazy images and sizes terminal captures", () => {
+		const content = screenshot("chatgpt_plugins_add_custom_mcp", "Add a custom MCP server."),
+			html = renderContent([content], {});
+		document.body.innerHTML = html;
+		const image = document.querySelector<HTMLImageElement>(".guide-screenshot");
+		expect(image?.getAttribute("src")).toBe(
+			"https://placehold.co/960x540/png?text=chatgpt_plugins_add_custom_mcp",
+		);
+		expect(image?.getAttribute("alt")).toBe("Add a custom MCP server.");
+		expect(image?.getAttribute("width")).toBe("960");
+		expect(image?.getAttribute("height")).toBe("540");
+		expect(image?.getAttribute("loading")).toBe("lazy");
+		expect(image?.getAttribute("decoding")).toBe("async");
+		expect(image?.dataset.placeholder).toBe("true");
+
+		const terminal = screenshot("claude_code_mcp_add_command", "Terminal output.");
+		expect(terminal).toMatchObject({ width: 960, height: 360, placeholder: true });
+		expect(renderContent([terminal], {})).toContain(
+			"https://placehold.co/960x360/png?text=claude_code_mcp_add_command",
+		);
+	});
+
+	it("rejects unregistered screenshots and escapes screenshot alt text", () => {
+		expect(() => screenshot("unregistered_capture", "Capture")).toThrow(
+			"missing from the manifest",
+		);
+		expect(() => screenshotSource("chatgpt_plugins_add_custom_mcp", false)).toThrow(
+			"does not match the manifest",
+		);
+		const html = renderContent(
+			[screenshot("chatgpt_plugins_add_custom_mcp", '<img src=x onerror="bad()">')],
+			{},
+		);
+		expect(html).not.toContain("<img src=x");
+		expect(html).toContain("&lt;img src=x");
+	});
+
 	it("renders highlighted configuration with a copy button and live values", () => {
 		const html = renderContent(
 			[

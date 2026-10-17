@@ -7,6 +7,7 @@ import { type KeySettingsModel, resolveKeySettings } from "../admin/key-settings
 import { escapeHtml } from "../ui/html";
 import { type PlatformPreference, commandPlatform } from "../platform";
 import { highlightCode } from "./highlight";
+import { screenshotSource } from "./screenshots";
 import { clientGuide, clientSetup, serverSetupSteps } from "./shared";
 import { type CodeSnippet, type Guide, type GuideStep, type StructuredContent } from "./types";
 
@@ -79,6 +80,14 @@ export function renderContent(
 				}
 				case "list":
 					return `<ol class="instui-list -ordered">${block.items.map((item) => `<li>${text(item)}</li>`).join("")}</ol>`;
+				case "image": {
+					if (!Number.isInteger(block.width) || block.width <= 0)
+						throw new Error("Guide image width must be a positive integer");
+					if (!Number.isInteger(block.height) || block.height <= 0)
+						throw new Error("Guide image height must be a positive integer");
+					const source = screenshotSource(block.name, block.placeholder);
+					return `<img class="guide-screenshot instui-img" src="${escapeHtml(source)}" alt="${escapeHtml(block.alt)}" width="${block.width}" height="${block.height}" loading="lazy" decoding="async" data-placeholder="${block.placeholder}" />`;
+				}
 				case "link": {
 					const url = new URL(interpolate(block.url, values));
 					if (url.protocol !== "https:") throw new Error("Guide links must use HTTPS");

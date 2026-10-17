@@ -1,5 +1,6 @@
 import { CLIENTS } from "../src/clients";
 import { type Evidence } from "../src/clients/types";
+import { SCREENSHOT_MANIFEST } from "../src/guides/screenshot-manifest";
 
 const today = Date.now(),
 	staleAfter = 180 * 86_400_000;
@@ -40,3 +41,10 @@ for (const client of CLIENTS.filter((client) => client.group === "Curated")) {
 process.stdout.write(
 	`Evidence review: ${warnings} advisory item(s). Staleness does not fail the build.\n`,
 );
+const screenshotPlaceholders = Object.entries(SCREENSHOT_MANIFEST)
+	.filter(([, asset]) => !asset.file)
+	.map(([name]) => name);
+process.stdout.write(
+	`Screenshot placeholders (${screenshotPlaceholders.length}); advisory only:\n`,
+);
+for (const name of screenshotPlaceholders) process.stdout.write(`- ${name}\n`);

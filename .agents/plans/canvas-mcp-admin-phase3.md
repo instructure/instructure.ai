@@ -106,6 +106,7 @@ Add one content kind to `StructuredContent` in `src/guides/types.ts`:
 - Add an `evidence:check`-style script check that lists names still on placeholders so admins and docs owners can track them. Print the list in CI as non-blocking.
 - `alt` text describes what the final screenshot shows (copy from the marker text), not "placeholder".
 - Check that the page CSP and the print stylesheet allow the placehold.co host; if not, ship local SVG placeholders in `public/images/placeholders/` instead and keep the same helper.
+- The checked-in `apps/canvas-mcp/index.html` has no CSP declaration. A hosting-level policy may still restrict images from placehold.co; verify it before deployment.
 - Do not put real tenant data, names, client secrets or Client IDs in final screenshots. Redact secrets. Use synthetic tenants. Screenshots from a customer environment need review for FERPA/PII before they ship.
 
 Screenshot counts from research: Claude 19, Codex/ChatGPT 12, Gemini 22, Antigravity 14, Copilot/Superhuman 16 (83 marker lines; a few repeat across modes).

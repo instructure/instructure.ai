@@ -657,6 +657,12 @@ pre {
         overflow-wrap: anywhere;
     }
 
+    .guide-screenshot {
+        max-width: 100% !important;
+        height: auto !important;
+        break-inside: avoid;
+    }
+
     .guide-section,
     .admin-steps .guide-section {
         break-inside: avoid;
@@ -679,6 +685,12 @@ pre {
 
 .guide-fields {
     margin-top: 20px;
+}
+
+.guide-screenshot {
+    max-width: 100%;
+    height: auto;
+    margin: 16px 0;
 }
 
 .guide-fields td,

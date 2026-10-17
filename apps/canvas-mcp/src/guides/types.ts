@@ -10,6 +10,14 @@ export type StructuredContent =
 	| ({ kind: "code" } & CodeSnippet)
 	| { kind: "code-group"; variants: Record<CommandPlatform, CodeSnippet> }
 	| { kind: "list"; items: string[] }
+	| {
+			kind: "image";
+			name: string;
+			alt: string;
+			width: number;
+			height: number;
+			placeholder: boolean;
+	  }
 	| { kind: "link"; label: string; url: string };
 export type GuideStep =
 	| { id: string; kind: "canvas-key"; action: "create" | "update-redirect" }

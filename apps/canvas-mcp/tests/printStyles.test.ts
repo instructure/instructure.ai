@@ -62,4 +62,10 @@ describe("print styles", () => {
 		expect(declarations(".scope-manifest").get("max-height")).toBe("none");
 		expect(declarations(".scope-manifest").get("overflow")).toBe("visible");
 	});
+
+	it("prints guide screenshots within the page without splitting them", () => {
+		expect(declarations(".guide-screenshot").get("max-width")).toBe("100%");
+		expect(declarations(".guide-screenshot").get("height")).toBe("auto");
+		expect(declarations(".guide-screenshot").get("break-inside")).toBe("avoid");
+	});
 });
