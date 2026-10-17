@@ -1,5 +1,4 @@
 export const SCOPE_MANIFEST = `https://sso.canvaslms.com/all-client-scopes
-https://sso.canvaslms.com/mcp-limited
 url:GET|/api/quiz/v1/courses/:course_id/quizzes
 url:GET|/api/quiz/v1/courses/:course_id/quizzes/:assignment_id/items
 url:GET|/api/v1/accounts
@@ -105,3 +104,16 @@ url:DELETE|/api/v1/courses/:course_id/rubrics/:id
 url:DELETE|/api/v1/groups/:group_id
 url:DELETE|/api/v1/groups/:group_id/users/:user_id
 url:POST|/api/v1/oauth2/introspect`;
+
+// A maintainer with Maple access must supply provenance before production use.
+export const SCOPE_PROVENANCE: {
+	status: "unreviewed" | "reviewed";
+	mapleRevision: string | null;
+	generatedAt: string | null;
+	reviewedAt: string | null;
+} = { status: "unreviewed", mapleRevision: null, generatedAt: null, reviewedAt: null };
+
+export function scopeManifestReady(): boolean {
+	const { status, mapleRevision, generatedAt, reviewedAt } = SCOPE_PROVENANCE;
+	return status === "reviewed" && Boolean(mapleRevision && generatedAt && reviewedAt);
+}

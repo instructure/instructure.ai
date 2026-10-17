@@ -188,8 +188,8 @@ describe("Canvas MCP pages", () => {
 		);
 		expect(
 			(document.querySelector(".scope-card-header button") as HTMLButtonElement).disabled,
-		).toBe(false);
-		expect(scopeManifest.split("\n")).toHaveLength(107);
+		).toBe(true);
+		expect(scopeManifest).not.toContain("https://sso.canvaslms.com/mcp-limited");
 		expect(scopeManifest.startsWith("https://sso.canvaslms.com/all-client-scopes\n")).toBe(true);
 		expect(scopeManifest).toContain(
 			"url:PATCH|/api/quiz/v1/courses/:course_id/quizzes/:assignment_id/items/:item_id",
@@ -199,7 +199,7 @@ describe("Canvas MCP pages", () => {
 		expect(pasteScopesHeading?.textContent).toBe("Paste Scopes");
 		expect(pasteScopesHeading?.closest(".settings-table")).toBeNull();
 		expect(pasteScopesHeading?.nextElementSibling?.textContent).toBe(
-			"Paste the complete per-tool scope list, one scope per line.",
+			"Scope list awaiting Maple review. Do not use this list to create a production key.",
 		);
 		expect(document.querySelector(".details-panel h2")?.classList.contains("--mb-2xl")).toBe(true);
 		expect(document.querySelector(".site-header")).toBeNull();
