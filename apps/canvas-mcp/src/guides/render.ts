@@ -1,3 +1,4 @@
+import { connectionReadiness } from "../setup";
 import { type CallbackResolution } from "../oauth/codex-callback";
 import { type ClientDefinition } from "../clients/types";
 import { type AppState, deriveUrls } from "../state";
@@ -114,6 +115,18 @@ function renderStep(
 	}
 	return `<section class="guide-section" data-guide-step="${step.id}" data-surface="provider"><h3 class="instui-heading -level-h3">${escapeHtml(step.title)}</h3>${renderContent(step.content, guideValues(client, state, model))}</section>`;
 }
+function renderAdminAction(
+	client: ClientDefinition,
+	state: AppState,
+	target: "provider" | "client",
+): string {
+	const provider = client.enterpriseSurface ?? client.name;
+	return `<div class="admin-footer-action">${
+		target === "provider"
+			? `<button id="configure-provider-button-bottom" class="instui-button -color-primary" type="button" data-guide-surface="provider" data-scroll-guide>Configure ${escapeHtml(provider)}</button>`
+			: `<button id="configure-client-button-bottom" class="instui-button -color-primary" type="button" data-page="connect" data-configure-client ${connectionReadiness(state, client).ready ? "" : "disabled"}>Configure a Client</button>`
+	}</div>`;
+}
 export function renderGuide(
 	client: ClientDefinition,
 	state: AppState,
@@ -123,7 +136,15 @@ export function renderGuide(
 	const model = resolveKeySettings(client, state, callback);
 	const guide = clientGuide(client, state.install);
 	validateGuide(guide);
-	const heading = `<h2 class="instui-heading -level-h2 --mb-2xl">${editable && guide.presentation === "by-surface" && state.surface === "canvas" ? "Key settings for " : ""}${escapeHtml(client.name)}</h2>`;
+	const activeSurface = editable
+		? state.install === "enterprise"
+			? state.surface
+			: "canvas"
+		: "provider";
+	const splitEnterprise =
+		editable && state.install === "enterprise" && guide.presentation === "by-surface";
+	const provider = client.enterpriseSurface ?? client.name;
+	const heading = `<h2 class="instui-heading -level-h2 --mb-2xl">${editable && guide.presentation === "by-surface" && activeSurface === "canvas" ? "Key settings for " : ""}${escapeHtml(client.name)}</h2>`;
 	if (client.blocker) return heading + (editable ? "" : renderEvidence(client.blocker.evidence));
 	const install =
 		!editable && client.installModes.length > 1
@@ -136,22 +157,27 @@ export function renderGuide(
 	const steps = guide.steps.filter(
 		(step) => step.kind === "canvas-key" || !step.key || step.key === state.key,
 	);
+	const surfaceControl = splitEnterprise
+		? `<fieldset class="instui-radio-input-group -variant-toggle guide-surfaces"><legend class="instui-screen-reader-content">Setup instructions</legend>${(["canvas", "provider"] as const).map((surface) => `<label class="instui-radio -variant-toggle"><input id="guide-surface-${surface}" type="radio" name="guide-surface" value="${surface}" data-guide-surface="${surface}" aria-controls="guide-${surface}" ${activeSurface === surface ? "checked" : ""}>${surface === "canvas" ? "1. Canvas" : `2. ${escapeHtml(provider)}`}</label>`).join("")}</fieldset>`
+		: "";
 	const body =
 		guide.presentation === "interleaved"
-			? `<div class="interleaved-guide">${steps.map((step, index) => `<div class="workflow-step"><p class="workflow-label">Step ${index + 1} · ${step.kind === "canvas-key" ? "Canvas" : escapeHtml(client.name)}</p>${renderStep(step, client, state, editable, model)}</div>`).join("")}</div>`
-			: `<div class="instui-button-set -toggle guide-surfaces" role="group" aria-label="Setup surface">${(["canvas", "provider"] as const).map((surface) => `<button id="guide-surface-${surface}" class="instui-button -color-secondary" type="button" data-guide-surface="${surface}" aria-pressed="${state.surface === surface}" aria-controls="guide-${surface}">${surface === "canvas" ? "Canvas" : "Provider"}</button>`).join("")}</div>${(
-					["canvas", "provider"] as const
-				)
+			? `<div class="interleaved-guide">${steps.map((step, index) => `<div class="workflow-step"><p class="workflow-label">Step ${index + 1} · ${step.kind === "canvas-key" ? "Canvas" : escapeHtml(client.name)}</p>${renderStep(step, client, state, editable, model)}</div>`).join("")}</div>${editable ? renderAdminAction(client, state, "client") : ""}`
+			: surfaceControl +
+				(["canvas", "provider"] as const)
 					.map(
 						(surface) =>
-							`<section id="guide-${surface}" class="guide-surface" aria-label="${surface === "canvas" ? "Canvas setup" : "Provider setup"}" ${state.surface !== surface ? "hidden" : ""}>${surface === "provider" ? renderFields(client, state, model) : ""}${steps
+							`<section id="guide-${surface}" class="guide-surface" aria-label="${surface === "canvas" ? "Canvas setup" : `${escapeHtml(provider)} setup`}" ${activeSurface !== surface ? "hidden" : ""}>${surface === "provider" ? renderFields(client, state, model) : ""}${steps
 								.filter((step) =>
 									surface === "canvas" ? step.kind === "canvas-key" : step.kind !== "canvas-key",
 								)
 								.map((step) => renderStep(step, client, state, editable, model))
-								.join("")}</section>`,
+								.join(
+									"",
+								)}${editable && (surface === "canvas" || splitEnterprise) ? renderAdminAction(client, state, surface === "canvas" && splitEnterprise ? "provider" : "client") : ""}</section>`,
 					)
-					.join("")}`;
+					.join("");
+
 	return (
 		heading +
 		install +

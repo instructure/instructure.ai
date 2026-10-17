@@ -103,24 +103,61 @@ describe("composable client guides", () => {
 		);
 		expect(new URLSearchParams(location.search).get("install")).toBe("enterprise");
 	});
-	it("switches surfaces and install modes independently, persists them and restores focus", () => {
-		history.replaceState(null, "", "/canvas-mcp/?client=claude-ai");
+	it("uses an enterprise-only Pantoken control and advances Canvas → provider → client", () => {
+		history.replaceState(
+			null,
+			"",
+			"/canvas-mcp/?client=claude-ai&domain=example.instructure.com&region=us-east-1&clientId=12345",
+		);
 		mountApp("admin");
-		document.querySelector<HTMLButtonElement>("#guide-surface-provider")?.focus();
-		document.querySelector<HTMLButtonElement>("#guide-surface-provider")?.click();
-		expect(document.activeElement?.id).toBe("guide-surface-provider");
-		expect(document.querySelector("#guide-provider")?.hasAttribute("hidden")).toBe(false);
+		expect(document.querySelector(".guide-surfaces")).toBeNull();
 		const enterprise = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
 		enterprise.checked = true;
 		enterprise.dispatchEvent(new Event("change", { bubbles: true }));
+		expect(
+			document.querySelector(".guide-surfaces")?.classList.contains("instui-radio-input-group"),
+		).toBe(true);
+		expect(
+			[...document.querySelectorAll(".guide-surfaces label")].map((label) => label.textContent),
+		).toEqual(["1. Canvas", "2. Claude organization settings"]);
+		const next = document.querySelector<HTMLButtonElement>("#configure-provider-button-bottom")!;
+		expect(next.textContent).toBe("Configure Claude organization settings");
+		const scrollTo = vi.fn();
+		vi.stubGlobal("scrollTo", scrollTo);
+		next.click();
+		expect(scrollTo).toHaveBeenCalledWith({ top: 0, behavior: "smooth" });
+		expect(document.querySelector<HTMLInputElement>("#guide-surface-provider")?.checked).toBe(true);
+		expect(document.activeElement?.id).toBe("guide-surface-provider");
+		expect(document.querySelector("#guide-provider")?.hasAttribute("hidden")).toBe(false);
 		const params = new URLSearchParams(location.search);
-		expect(params.get("surface")).toBe("provider");
 		expect(params.get("install")).toBe("enterprise");
+		expect(params.get("surface")).toBe("provider");
 		expect(JSON.parse(localStorage.getItem("canvas-mcp:v1") ?? "{}")).toMatchObject({
 			install: "enterprise",
 		});
-		expect(document.querySelector(".guide-pending")).not.toBeNull();
+		const connect = document.querySelector<HTMLButtonElement>(
+			"#guide-provider #configure-client-button-bottom",
+		)!;
+		expect(connect.textContent).toBe("Configure a Client");
+		connect.click();
+		expect(new URLSearchParams(location.search).get("page")).toBe("connect");
+		expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("user");
 	});
+	it("returns to Canvas when Enterprise install is unchecked", () => {
+		history.replaceState(
+			null,
+			"",
+			"/canvas-mcp/?client=claude-ai&install=enterprise&surface=provider",
+		);
+		mountApp("admin");
+		const enterprise = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
+		enterprise.checked = false;
+		enterprise.dispatchEvent(new Event("change", { bubbles: true }));
+		expect(document.querySelector(".guide-surfaces")).toBeNull();
+		expect(document.querySelector("#guide-canvas")?.hasAttribute("hidden")).toBe(false);
+		expect(new URLSearchParams(location.search).get("surface")).toBeNull();
+	});
+
 	it("supports keyboard navigation of top-level tabs", () => {
 		history.replaceState(
 			null,

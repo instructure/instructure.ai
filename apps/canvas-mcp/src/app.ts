@@ -61,6 +61,7 @@ export function mountApp(mode: PageMode): void {
 	}
 
 	function render() {
+		if (pageMode === "admin" && state.install !== "enterprise") state.surface = "canvas";
 		appRoot.innerHTML = renderPage(
 			state,
 			pageMode,
@@ -85,12 +86,20 @@ export function mountApp(mode: PageMode): void {
 	}
 
 	function bindEvents() {
-		appRoot.querySelectorAll<HTMLButtonElement>("[data-guide-surface]").forEach((button) =>
-			button.addEventListener("click", () => {
-				state.surface = button.dataset.guideSurface === "provider" ? "provider" : "canvas";
-				persistAndRender();
-			}),
-		);
+		appRoot
+			.querySelectorAll<HTMLInputElement | HTMLButtonElement>("[data-guide-surface]")
+			.forEach((control) => {
+				control.addEventListener(control instanceof HTMLInputElement ? "change" : "click", () => {
+					state.surface = control.dataset.guideSurface === "provider" ? "provider" : "canvas";
+					persistAndRender();
+					if (control.hasAttribute("data-scroll-guide")) {
+						appRoot
+							.querySelector<HTMLElement>("#guide-surface-provider")
+							?.focus({ preventScroll: true });
+						globalThis.scrollTo({ top: 0, behavior: "smooth" });
+					}
+				});
+			});
 		appRoot.querySelectorAll<HTMLButtonElement>("[data-install]").forEach((button) =>
 			button.addEventListener("click", () => {
 				state.install = button.dataset.install === "enterprise" ? "enterprise" : "personal";
@@ -228,6 +237,7 @@ export function mountApp(mode: PageMode): void {
 
 	function persist() {
 		normalizeSetup(state);
+		if (pageMode === "admin" && state.install !== "enterprise") state.surface = "canvas";
 		savePreferences(state, getStorage());
 		const search = pageQuery(state, pageMode);
 		globalThis.history.replaceState(
