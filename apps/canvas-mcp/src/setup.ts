@@ -11,20 +11,33 @@ export function normalizeSetup(state: AppState): void {
 export function connectionReadiness(
 	state: AppState,
 	client: ClientDefinition = clientDefinition(state.client),
-): { ready: boolean; reason: string } {
+): { ready: boolean; reason: string; blocked?: boolean } {
 	const facts = client.facts;
-	if (client.blocker) return { ready: false, reason: client.blocker.reason };
+	if (client.blocker) return { ready: false, blocked: true, reason: client.blocker.reason };
 	if (facts.remoteHttp.value === "no")
-		return { ready: false, reason: "This client does not support remote MCP over HTTP." };
+		return {
+			ready: false,
+			blocked: true,
+			reason: "This client does not support remote MCP over HTTP.",
+		};
 	if (facts.registration.value === "dcr-only")
 		return {
 			ready: false,
+			blocked: true,
 			reason: "This client requires dynamic registration, which Canvas does not support.",
 		};
 	if (facts.staticClientId.value === "no")
-		return { ready: false, reason: "This client cannot use a preconfigured Canvas Client ID." };
+		return {
+			ready: false,
+			blocked: true,
+			reason: "This client cannot use a preconfigured Canvas Client ID.",
+		};
 	if (facts.keyTypes[state.key].value === "no")
-		return { ready: false, reason: "This client does not support the selected key type." };
+		return {
+			ready: false,
+			blocked: true,
+			reason: "This client does not support the selected key type.",
+		};
 	if (!normalizeCanvasDomain(state.domain))
 		return { ready: false, reason: "Enter a supported Canvas domain." };
 	if (!state.region) return { ready: false, reason: "Select your Canvas region." };

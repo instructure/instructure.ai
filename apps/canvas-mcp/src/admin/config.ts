@@ -17,6 +17,7 @@ export function renderConfig(state: AppState, domainInputValue: string): string 
 							<label class="field-label" for="client-select">MCP client</label>
 							<select id="client-select" class="instui-simple-select text-input">${clientOptions(client.id)}</select>
 							<label class="instui-checkbox -variant-toggle private-key-toggle"><input id="private-key-input" type="checkbox" name="private-key" ${state.key === "private" ? "checked" : ""} ${allowedKeyTypes(client).length < 2 ? "disabled" : ""}>Private key</label>
+${client.facts.keyTypes[state.key].value === "unknown" ? '<p class="field-hint" id="key-support-warning">Support for the selected key type is unverified. Confirm it with the client before creating a key.</p>' : ""}
 							${client.installModes.length > 1 || client.installModes[0] === "enterprise" ? `<label class="instui-checkbox -variant-toggle"><input id="enterprise-install-input" type="checkbox" ${state.install === "enterprise" ? "checked" : ""} ${client.installModes.length === 1 ? "disabled" : ""}>Enterprise install</label><p class="field-hint">${client.installModes.length === 1 ? "This client is configured by an organization administrator." : "Configured in the provider's admin console."}</p>` : ""}
 </div>
 						</aside>`;

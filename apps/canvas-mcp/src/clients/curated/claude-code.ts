@@ -1,4 +1,4 @@
-import { documented, setupGuidance } from "../evidence";
+import { documented, setupGuidance, updatedGuidance } from "../evidence";
 import { type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
 export const claudeCode = {
@@ -19,6 +19,8 @@ export const claudeCode = {
 			presentation: "by-surface",
 			status: "documented",
 			prerequisites: ["Claude Code installed and signed in; callback port 8081 available."],
+			sources: [updatedGuidance, setupGuidance],
+			lastVerified: "2026-10-17",
 			steps: [
 				{
 					id: "canvas-create",
@@ -26,9 +28,9 @@ export const claudeCode = {
 					action: "create",
 				},
 				{
-					id: "provider-public",
+					id: "provider-public-bash",
 					kind: "provider",
-					title: "Claude Code — register the public client",
+					title: "macOS / Linux — register a public client",
 					content: [
 						{
 							kind: "code",
@@ -38,13 +40,25 @@ export const claudeCode = {
 					key: "public",
 				},
 				{
-					id: "provider-private",
+					id: "provider-public-powershell",
 					kind: "provider",
-					title: "Claude Code — register the private client",
+					title: "Windows PowerShell — register a public client",
+					content: [
+						{
+							kind: "code",
+							text: 'claude mcp add-json canvas-mcp `\n  \'{"type":"http","url":"{mcpUrl}","oauth":{"clientId":"{clientId}","callbackPort":8081,"scopes":"{scope}"}}\' `\n  --scope local',
+						},
+					],
+					key: "public",
+				},
+				{
+					id: "provider-private-bash",
+					kind: "provider",
+					title: "macOS / Linux — private-key alternative",
 					content: [
 						{
 							kind: "paragraph",
-							text: "The --client-secret flag prompts for the secret so it does not appear in command history.",
+							text: "The original setup guidance supports private keys too. The --client-secret flag prompts for the secret.",
 						},
 						{
 							kind: "code",
@@ -54,9 +68,40 @@ export const claudeCode = {
 					key: "private",
 				},
 				{
+					id: "provider-private-powershell",
+					kind: "provider",
+					title: "Windows PowerShell — private-key alternative",
+					content: [
+						{
+							kind: "paragraph",
+							text: "Enter the secret at the prompt so it is not included in command history.",
+						},
+						{
+							kind: "code",
+							text: 'claude mcp add-json canvas-mcp `\n  \'{"type":"http","url":"{mcpUrl}","oauth":{"clientId":"{clientId}","callbackPort":8081,"scopes":"{scope}"}}\' `\n  --scope local --client-secret',
+						},
+					],
+					key: "private",
+				},
+				{
+					id: "provider-scopes",
+					kind: "provider",
+					title: "Choose the configuration scope",
+					content: [
+						{
+							kind: "list",
+							items: [
+								"local: private to you in this project.",
+								"user: private to you across projects.",
+								"project: shares the server configuration in .mcp.json; each user still authenticates individually.",
+							],
+						},
+					],
+				},
+				{
 					id: "provider-login",
 					kind: "provider",
-					title: "Sign in from Claude Code",
+					title: "Validate and authenticate",
 					content: [
 						{
 							kind: "code",
@@ -65,9 +110,8 @@ export const claudeCode = {
 						{
 							kind: "list",
 							items: [
-								"Start a Claude Code session in this project and type /mcp.",
-								"Choose canvas-mcp → Needs Auth. Sign in to Canvas in the browser and approve access.",
-								"Use --scope user instead of --scope local if you want the server available in all your projects.",
+								"Start a new Claude Code session with claude. The server shows Needs authentication until you sign in.",
+								"Open /mcp, select canvas-mcp → Needs Auth, then sign in to Canvas in the browser and approve access.",
 							],
 						},
 					],
@@ -75,17 +119,15 @@ export const claudeCode = {
 				{
 					id: "verify",
 					kind: "verify",
-					title: "Verify the server",
+					title: "Verify the connection",
 					content: [
 						{
 							kind: "paragraph",
-							text: "Type /mcp to check that the server is connected, then ask Claude Code to list your Canvas courses.",
+							text: "Reopen /mcp to check the connection and ask Claude to list your Canvas courses.",
 						},
 					],
 				},
 			],
-			sources: [setupGuidance],
-			lastVerified: "2026-10-17",
 		},
 	},
 	installModes: ["personal"],

@@ -595,5 +595,5 @@ pre {
   .guide-surface[hidden] { display: block !important; }
   .guide-surface { margin: 16px 0; }
   .print-context { display: block; overflow-wrap: anywhere; }
-  .guide-section { break-inside: auto; }
+  .guide-section, .admin-steps .guide-section { break-inside: auto; }
 }

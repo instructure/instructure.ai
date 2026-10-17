@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { mountApp } from "../src/app";
 import { renderContent, validateGuide } from "../src/guides/render";
 import { clientGuide } from "../src/guides/shared";
@@ -12,7 +12,67 @@ beforeEach(() => {
 	history.replaceState(null, "", "/canvas-mcp/");
 	document.body.innerHTML = '<div id="root"></div>';
 });
+afterEach(() => vi.unstubAllGlobals());
 describe("composable client guides", () => {
+	it("refreshes copyable configuration when a Client ID is entered", () => {
+		history.replaceState(
+			null,
+			"",
+			"/canvas-mcp/?client=codex&domain=example.instructure.com&region=us-east-1",
+		);
+		mountApp("admin");
+		const command = document.querySelector<HTMLButtonElement>(
+			'button[data-copy-template*="mcp add"]',
+		);
+		expect(command?.disabled).toBe(true);
+		const input = document.querySelector<HTMLInputElement>("#client-id-input")!;
+		input.value = "12345";
+		input.dispatchEvent(new Event("input", { bubbles: true }));
+		expect(command?.disabled).toBe(false);
+		expect(command?.dataset.copy).toContain('--oauth-client-id "12345"');
+		expect(command?.dataset.copy).not.toContain("Enter the Client ID");
+	});
+	it("ignores stale callback work after a region change", async () => {
+		const client = clientDefinition("codex"),
+			old = client.facts.redirectUri;
+		if (old.kind !== "computed") throw new Error("Expected computed callback");
+		const complete: ((value: ArrayBuffer) => void)[] = [];
+		vi.stubGlobal("crypto", {
+			subtle: {
+				digest: vi.fn(() => new Promise<ArrayBuffer>((resolve) => complete.push(resolve))),
+			},
+		});
+		client.facts.redirectUri = { ...old, mode: "per-server" };
+		try {
+			history.replaceState(
+				null,
+				"",
+				"/canvas-mcp/?client=codex&domain=example.instructure.com&region=us-east-1",
+			);
+			mountApp("admin");
+			const region = document.querySelector<HTMLSelectElement>("#region-select")!;
+			region.value = "us-west-2";
+			region.dispatchEvent(new Event("change", { bubbles: true }));
+			expect(complete).toHaveLength(2);
+			complete[1](new Uint8Array(32).buffer);
+			await new Promise((resolve) => setTimeout(resolve, 0));
+			const redirect = () =>
+				[...document.querySelectorAll(".settings-table tr")].find(
+					(row) => row.querySelector("th")?.textContent === "Redirect URIs",
+				);
+			expect(redirect()?.querySelector("code")?.textContent).toBe(
+				"http://localhost:8081/callback/AAAAAAAAAAAA",
+			);
+			complete[0](new Uint8Array(32).fill(1).buffer);
+			await new Promise((resolve) => setTimeout(resolve, 0));
+			expect(redirect()?.querySelector("code")?.textContent).toBe(
+				"http://localhost:8081/callback/AAAAAAAAAAAA",
+			);
+		} finally {
+			client.facts.redirectUri = old;
+		}
+	});
+
 	it("presents Copilot's full ordering before a Client ID exists", () => {
 		history.replaceState(
 			null,
@@ -57,7 +117,7 @@ describe("composable client guides", () => {
 		expect(JSON.parse(localStorage.getItem("canvas-mcp:v1") ?? "{}")).toMatchObject({
 			install: "enterprise",
 		});
-		expect(document.querySelector(".guide-pending")).toBeNull();
+		expect(document.querySelector(".guide-pending")).not.toBeNull();
 	});
 	it("supports keyboard navigation of top-level tabs", () => {
 		history.replaceState(

@@ -1,3 +1,4 @@
+import { connectionReadiness } from "./setup";
 import { type CallbackResolution } from "./oauth/codex-callback";
 import { renderOAuthFacts } from "./ui/oauth-facts";
 import { clientDefinition } from "./clients";
@@ -54,7 +55,7 @@ export function renderPage(
 					<div class="workspace-grid --mt-xl">
 						${pageMode === "admin" ? `<div class="configuration-stack">${renderConfig(state, domainInputValue)}${serverDetailsCard(urls, state, canConnect, true)}</div>` : ""}
 						${pageMode === "user" ? serverDetailsCard(urls, state, canConnect, false) : ""}
-						<section class="instui-card -variant-base details-panel" ><div class="content">${client.blocker ? `<p class="instui-alert -color-warning -inline" role="status">${escapeHtml(client.blocker.reason)}</p>` : ""}${renderGuide(client, state, pageMode === "admin", callback)}${renderOAuthFacts(client)}</div></section>
+						<section class="instui-card -variant-base details-panel" ><div class="content">${connectionReadiness(state, client).blocked ? `<p class="instui-alert -color-warning -inline" role="status">${escapeHtml(connectionReadiness(state, client).reason)}</p>` : ""}${renderGuide(client, state, pageMode === "admin", callback)}${renderOAuthFacts(client)}</div></section>
 					</div>
 					<footer class="page-footer"><p>Copyright &copy; ${new Date().getFullYear()} Instructure, Inc.</p><p class="print-context">${escapeHtml(client.name)} · ${escapeHtml(state.install)} · ${new Date().toISOString().slice(0, 10)}<br /><span class="print-permalink">${escapeHtml("/canvas-mcp/?" + new URLSearchParams({ domain: state.domain, client: state.client, key: state.key, install: state.install, region: state.region, clientId: state.clientId, page: pageMode === "admin" ? "admin" : "connect" }).toString())}</span></p></footer>
 					</section>

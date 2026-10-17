@@ -1,3 +1,4 @@
+import { guideValues, resolveCodeBlock } from "./guides/render";
 import { CallbackCache, type CallbackResolution } from "./oauth/codex-callback";
 import { connectionReadiness, normalizeSetup } from "./setup";
 import "./main.css";
@@ -173,6 +174,14 @@ export function mountApp(mode: PageMode): void {
 						(element) =>
 							(element.textContent = state.clientId || "Enter the Client ID from your Canvas key"),
 					);
+				appRoot.querySelectorAll<HTMLButtonElement>("[data-copy-template]").forEach((button) => {
+					const resolved = resolveCodeBlock(
+						button.dataset.copyTemplate!,
+						guideValues(clientDefinition(state.client), state),
+					);
+					button.dataset.copy = resolved.text;
+					button.disabled = !resolved.ready;
+				});
 				const permalink = appRoot.querySelector<HTMLElement>(".print-permalink");
 				if (permalink) permalink.textContent = globalThis.location.href;
 				const generatedClientIdInput =

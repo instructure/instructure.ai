@@ -1,4 +1,4 @@
-import { documented, setupGuidance } from "../evidence";
+import { documented, setupGuidance, updatedGuidance } from "../evidence";
 import { type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
 export const claudeAi = {
@@ -18,7 +18,9 @@ export const claudeAi = {
 		personal: {
 			presentation: "by-surface",
 			status: "documented",
-			prerequisites: ["A Claude account with custom connector access."],
+			prerequisites: ["Claude Pro or Max with custom connector access."],
+			sources: [updatedGuidance, setupGuidance],
+			lastVerified: "2026-10-17",
 			steps: [
 				{
 					id: "canvas-create",
@@ -33,10 +35,10 @@ export const claudeAi = {
 						{
 							kind: "list",
 							items: [
-								"Open Customize → Connectors, select +, then Add custom connector.",
+								"Open Customize → Connectors, choose +, then Add custom connector.",
 								"Enter the MCP server URL: {mcpUrl}.",
-								"Open Advanced settings and enter Client ID {clientId}. Leave Client Secret blank for a public key; for a private key enter the secret directly in Claude.",
-								"Choose Add, then Connect. Sign in to Canvas and approve access.",
+								"Open Advanced settings and enter Client ID {clientId}. Public is preferred: leave Client Secret blank. If using the private-key alternative from the setup guidance, enter the secret directly in Claude.",
+								"Choose Add and complete Canvas sign-in when prompted.",
 							],
 						},
 					],
@@ -53,13 +55,14 @@ export const claudeAi = {
 					],
 				},
 			],
-			sources: [setupGuidance],
-			lastVerified: "2026-10-17",
 		},
 		enterprise: {
 			presentation: "by-surface",
-			status: "documented",
-			prerequisites: ["An organization Owner adds the connector before members connect."],
+			status: "pending",
+			prerequisites: [
+				"On Team and Enterprise, an organization Owner adds the connector before members connect.",
+			],
+			sources: [updatedGuidance],
 			steps: [
 				{
 					id: "canvas-create",
@@ -67,35 +70,17 @@ export const claudeAi = {
 					action: "create",
 				},
 				{
-					id: "provider-configure",
+					id: "provider-pending",
 					kind: "provider",
-					title: "Claude organization — configure the connector",
-					content: [
-						{
-							kind: "list",
-							items: [
-								"An organization Owner opens Organization settings → Connectors and chooses Add → Custom → Web.",
-								"Enter the MCP server URL: {mcpUrl}, open Advanced settings and enter Client ID {clientId}.",
-								"For a public key leave Client Secret blank. For a private key only the Owner enters the secret; members never need it.",
-								"Choose Add. Members then open Customize → Connectors and choose Connect to sign in to Canvas.",
-							],
-						},
-					],
-				},
-				{
-					id: "verify",
-					kind: "verify",
-					title: "Verify as a member",
+					title: "Claude organization setup",
 					content: [
 						{
 							kind: "paragraph",
-							text: "In a new chat, ask Claude to list your Canvas courses. Each member uses their own Canvas account and permissions.",
+							text: "Detailed corporate setup instructions are not available in the updated guidance yet. Confirm the organization connector flow with your administrator before connecting.",
 						},
 					],
 				},
 			],
-			sources: [setupGuidance],
-			lastVerified: "2026-10-17",
 		},
 	},
 	installModes: ["personal", "enterprise"],

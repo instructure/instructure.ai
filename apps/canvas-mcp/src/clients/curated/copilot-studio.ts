@@ -1,4 +1,4 @@
-import { documented, setupGuidance } from "../evidence";
+import { documented, setupGuidance, updatedGuidance } from "../evidence";
 import { type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
 export const copilotStudio = {
@@ -60,7 +60,7 @@ export const copilotStudio = {
 						{
 							kind: "list",
 							items: [
-								"In Tools, open the connector → Edit → 3. Definition → Policies → New policy.",
+								"In Tools, open the connector → Edit → Definition → Policies → New policy.",
 								"Choose Set HTTP Header; select InvokeServer under Operations.",
 								"Set header name accept and value text/event-stream. Choose append if the header exists and run the policy on Request.",
 								"Choose Update Connector to save.",
@@ -80,7 +80,7 @@ export const copilotStudio = {
 					],
 				},
 			],
-			sources: [setupGuidance],
+			sources: [updatedGuidance],
 			lastVerified: "2026-10-17",
 		},
 	},
