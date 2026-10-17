@@ -49,5 +49,5 @@ function settingCheckboxRow(label: string, checked: boolean, toggle = true): str
 }
 
 function canvasStepImage(name: string, alt: string, width: number, height: number): string {
-	return `<img class="instui-img -display-block --my-md" src="${import.meta.env.BASE_URL.replace(/\/$/u, "")}/images/server-canvas-${name}.png" alt="${escapeHtml(alt)}" width="${width}" height="${height}" loading="lazy" decoding="async" />`;
+	return `<img class="instui-img -display-block --my-md --mx-auto" src="${import.meta.env.BASE_URL.replace(/\/$/u, "")}/images/server-canvas-${name}.png" alt="${escapeHtml(alt)}" width="${width}" height="${height}" loading="lazy" decoding="async" />`;
 }
