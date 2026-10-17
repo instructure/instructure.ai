@@ -124,7 +124,7 @@ export function renderGuide(
 	const guide = clientGuide(client, state.install);
 	validateGuide(guide);
 	const heading = `<h2 class="instui-heading -level-h2 --mb-2xl">${editable && guide.presentation === "by-surface" && state.surface === "canvas" ? "Key settings for " : ""}${escapeHtml(client.name)}</h2>`;
-	if (client.blocker) return heading + renderEvidence(client.blocker.evidence);
+	if (client.blocker) return heading + (editable ? "" : renderEvidence(client.blocker.evidence));
 	const install =
 		client.installModes.length > 1
 			? `<div class="instui-button-set -toggle install-modes" role="group" aria-label="Install mode">${client.installModes.map((mode) => `<button id="install-${mode}" class="instui-button -color-secondary" type="button" data-install="${mode}" aria-pressed="${state.install === mode}">${mode === "personal" ? "Personal" : "Enterprise"}</button>`).join("")}</div>`
@@ -160,8 +160,10 @@ export function renderGuide(
 			? `<ul>${guide.prerequisites.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
 			: "") +
 		body +
-		`<details class="shared-troubleshooting"><summary>Troubleshooting and OAuth FAQ</summary><p>Public keys use PKCE without a secret; confidential keys use the provider's supported secret authentication. Always select the key's pre-populated Maple audience, including when the client does not send a resource parameter.</p>${sharedTroubleshooting.map((item) => `<h3 class="instui-heading -level-h3">${escapeHtml(item.symptom)}</h3><p>${escapeHtml(item.fix)}</p>`).join("")}</details>` +
-		(guide.lastVerified ? `<p>Last checked: ${escapeHtml(guide.lastVerified)}</p>` : "") +
-		renderEvidence(guide.sources)
+		(editable
+			? ""
+			: `<details class="shared-troubleshooting"><summary>Troubleshooting and OAuth FAQ</summary><p>Public keys use PKCE without a secret; confidential keys use the provider's supported secret authentication. Always select the key's pre-populated Maple audience, including when the client does not send a resource parameter.</p>${sharedTroubleshooting.map((item) => `<h3 class="instui-heading -level-h3">${escapeHtml(item.symptom)}</h3><p>${escapeHtml(item.fix)}</p>`).join("")}</details>` +
+				(guide.lastVerified ? `<p>Last checked: ${escapeHtml(guide.lastVerified)}</p>` : "") +
+				renderEvidence(guide.sources))
 	);
 }
