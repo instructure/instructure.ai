@@ -95,15 +95,17 @@ function chatgptGuide(enterprise: boolean): Guide {
 // The supplied Instructure guidance records a Canvas authentication bug; keep the
 // connection action blocked until a successful retest, while showing admin setup.
 // Exact redirect URI and key compatibility remain unknown, not inferred from Codex.
+const canvasAuthBlocker =
+	"ChatGPT cannot currently complete Canvas MCP authentication because of a Canvas MCP bug. Setup instructions are pending a fix.";
 export const chatgpt = {
 	id: "chatgpt",
 	name: "ChatGPT",
 	provider: "OpenAI",
 	group: "Curated",
 	facts: unknownFacts(),
+	status: { kind: "known-issue", reason: canvasAuthBlocker },
 	blocker: {
-		reason:
-			"ChatGPT cannot currently complete Canvas MCP authentication because of a Canvas MCP bug. Setup instructions are pending a fix.",
+		reason: canvasAuthBlocker,
 		evidence: [updatedGuidance],
 	},
 	guides: { personal: chatgptGuide(false), enterprise: chatgptGuide(true) },

@@ -272,6 +272,12 @@ export const claudeCode = {
 	id: "claude-code",
 	rulesyncTarget: "claudecode",
 	name: "Claude Code",
+	status: {
+		kind: "validated",
+		testedAt: "2026-10-17",
+		installModes: ["personal"],
+		note: "The tested key type and Claude Code version were not recorded.",
+	},
 	setupNote: "Add the remote HTTP MCP server using Claude Code's current MCP configuration flow.",
 	verify: "Complete the browser sign-in and confirm the server is listed as connected.",
 } satisfies ClientDefinition;

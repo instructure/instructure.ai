@@ -213,6 +213,34 @@ h1 {
     margin-top: 17px;
 }
 
+.client-health-status {
+    margin-top: 7px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: color-mix(in srgb, var(--instui-color-text-base) 62%, transparent);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.client-health-status svg {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+}
+
+.client-health-status--validated {
+    color: var(--instui-color-icon-success);
+}
+
+.client-health-status--known-issue {
+    color: var(--instui-color-icon-error);
+}
+
+.known-issue-alert {
+    margin: 0;
+}
+
 .details-panel>.content>.section-heading:first-child {
     margin-bottom: 18px;
 }

@@ -11,6 +11,10 @@ export type Evidence = {
 export type Fact<T> =
 	| { value: T; status: "verified" | "documented"; evidence: [Evidence, ...Evidence[]] }
 	| { value: T | "unknown"; status: "unverified"; evidence: Evidence[] };
+export type ClientStatus =
+	| { kind: "validated"; testedAt: string; installModes?: InstallMode[]; note?: string }
+	| { kind: "untested" }
+	| { kind: "known-issue"; reason: string; installModes?: InstallMode[] };
 export type RedirectUri =
 	| {
 			kind: "fixed";
@@ -43,6 +47,7 @@ export interface ClientDefinition {
 	provider?: string;
 	group: "Curated" | "Other";
 	facts: ClientFacts;
+	status?: ClientStatus;
 	installModes: InstallMode[];
 	enterpriseSurface?: string;
 	guides?: Partial<Record<InstallMode, Guide>>;

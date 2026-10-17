@@ -5,6 +5,7 @@ import { type AppState, deriveUrls } from "./state";
 import { renderConfig } from "./admin/config";
 import { serverDetailsCard } from "./admin/server-details";
 import { renderGuide } from "./guides/render";
+import { clientStatus } from "./clients/status";
 import { escapeHtml } from "./ui/html";
 import { activeTheme, canvasLogoUri } from "./ui/theme";
 export type PageMode = "user" | "admin";
@@ -16,7 +17,9 @@ export function renderPage(
 	callback?: CallbackResolution,
 ): string {
 	const client = clientDefinition(state.client),
-		showGeminiNotice = pageMode === "admin" && client.id === "gemini-cli",
+		status = clientStatus(client, state.install),
+		knownIssue = status.kind === "known-issue" ? status.reason : "",
+		isGeminiNotice = client.id === "gemini-cli" && Boolean(knownIssue),
 		hasValidDomain = Boolean(state.domain),
 		copiedLabel = "",
 		urls = hasValidDomain
@@ -48,9 +51,9 @@ export function renderPage(
 						<section id="setup-panel" class="panel" role="tabpanel" aria-labelledby="${pageMode === "user" ? "tab-connect" : "tab-admin"}">
 					<div class="workspace-grid${pageMode === "admin" ? "" : " workspace-grid--single"} --mt-xl">
 						${pageMode === "admin" ? renderConfig(state, domainInputValue) : ""}
-						${showGeminiNotice ? `<div class="instructions-column"><p class="instui-alert -color-${state.install === "enterprise" ? "warning" : "danger"} gemini-deprecation-notice" role="status">${state.install === "enterprise" ? "Google announced the transition from Gemini CLI to Antigravity CLI in May 2026. Gemini CLI is expected to continue working for Gemini Enterprise customers, so these connection instructions remain available. Plan your migration to Antigravity CLI." : "Gemini CLI is deprecated for non-Enterprise use. Google announced the transition to Antigravity CLI in May 2026. Use Antigravity CLI instead."}</p>` : ""}
-						<section class="instui-card -variant-base details-panel" ><div class="content">${pageMode === "user" && connectionReadiness(state, client).blocked ? `<p class="instui-alert -color-warning -inline" role="status">${escapeHtml(connectionReadiness(state, client).reason)}</p>` : ""}${pageMode === "user" ? '<h2 class="instui-heading -variant-title-card-regular instructions-heading">Instructions</h2>' : ""}${renderGuide(client, state, pageMode === "admin", callback)}</div></section>
-						${showGeminiNotice ? "</div>" : ""}
+						${knownIssue ? `<div class="instructions-column"><p class="instui-alert -color-danger -inline known-issue-alert${isGeminiNotice ? " gemini-deprecation-notice" : ""}" role="alert"><b>Known issue:</b> ${escapeHtml(knownIssue)}</p>` : ""}
+						<section class="instui-card -variant-base details-panel" ><div class="content">${pageMode === "user" && connectionReadiness(state, client).blocked && status.kind !== "known-issue" ? `<p class="instui-alert -color-warning -inline" role="status">${escapeHtml(connectionReadiness(state, client).reason)}</p>` : ""}${pageMode === "user" ? '<h2 class="instui-heading -variant-title-card-regular instructions-heading">Instructions</h2>' : ""}${renderGuide(client, state, pageMode === "admin", callback)}</div></section>
+						${knownIssue ? "</div>" : ""}
 					</div>
 					<footer class="page-footer"><p>Copyright &copy; ${new Date().getFullYear()} Instructure, Inc.</p><p class="print-context">${escapeHtml(client.name)} · ${escapeHtml(state.install)} · ${new Date().toISOString().slice(0, 10)}<br /><span class="print-permalink">${escapeHtml("/canvas-mcp/?" + new URLSearchParams({ domain: state.domain, client: state.client, key: state.key, install: state.install, platform: state.platform, region: state.region, clientId: state.clientId, page: pageMode === "admin" ? "admin" : "connect" }).toString())}</span></p></footer>
 					</section>

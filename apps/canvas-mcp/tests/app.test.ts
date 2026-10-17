@@ -38,6 +38,10 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector(".details-panel #client-id-input")).not.toBeNull();
 		expect(document.querySelector("#client-id-reference-input")).toBeNull();
 		expect(document.querySelector(".controls-panel h2")?.textContent).toBe("Configuration");
+		expect(document.querySelector(".client-health-status")?.textContent).toContain("Validated");
+		expect(document.querySelector(".client-health-status svg")?.getAttribute("aria-hidden")).toBe(
+			"true",
+		);
 		expect(document.querySelectorAll(".controls-panel h2")).toHaveLength(1);
 		expect(document.querySelector(".controls-panel .rule")).toBeNull();
 		expect(document.querySelector("#client-select + .field-hint")).toBeNull();
@@ -500,6 +504,42 @@ describe("Canvas MCP pages", () => {
 				?.querySelector("td")?.textContent;
 		expect(valueFor("Authorized Flows")).toBe("Token Exchange");
 		expect(valueFor("Client Type")).toBe("Confidential");
+	});
+
+	it("shows known client issues on both admin and client pages", () => {
+		globalThis.history.replaceState(null, "", "/canvas-mcp/?client=chatgpt&page=admin");
+		mountApp("admin");
+		expect(document.querySelector(".client-health-status")?.textContent).toContain("Known issue");
+		const adminAlert = document.querySelector(".known-issue-alert");
+		expect(adminAlert?.classList.contains("-color-danger")).toBe(true);
+		expect(adminAlert?.textContent).toContain("Canvas MCP authentication");
+		expect(adminAlert?.getAttribute("role")).toBe("alert");
+
+		globalThis.history.replaceState(null, "", "/canvas-mcp/?client=chatgpt&page=connect");
+		mountApp("user");
+		expect(document.querySelector(".known-issue-alert")?.textContent).toContain(
+			"Canvas MCP authentication",
+		);
+		expect(document.querySelector(".details-panel .known-issue-alert")).toBeNull();
+	});
+
+	it("defaults client selections without recorded end-to-end tests to untested", () => {
+		globalThis.history.replaceState(null, "", "/canvas-mcp/?client=codex&page=admin");
+		mountApp("admin");
+
+		const clientSelect = document.querySelector("#client-select");
+		expect(clientSelect?.nextElementSibling?.classList.contains("client-health-status")).toBe(true);
+		expect(document.querySelector(".client-health-status")?.textContent).toContain("Untested");
+		expect(document.querySelector(".client-health-status svg")).not.toBeNull();
+		expect(document.querySelector(".known-issue-alert")).toBeNull();
+
+		globalThis.history.replaceState(
+			null,
+			"",
+			"/canvas-mcp/?client=claude-code&install=enterprise&page=admin",
+		);
+		mountApp("admin");
+		expect(document.querySelector(".client-health-status")?.textContent).toContain("Untested");
 	});
 
 	it("switches setup tabs through the page query parameter and preserves setup state", () => {

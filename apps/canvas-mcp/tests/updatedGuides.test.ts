@@ -324,7 +324,7 @@ describe("updated curated guidance", () => {
 		).toBe(true);
 	});
 
-	it("shows mode-specific Gemini CLI migration notices above the admin instructions only", () => {
+	it("shows Gemini CLI's known issue only for personal installs on both pages", () => {
 		history.replaceState(
 			null,
 			"",
@@ -333,11 +333,12 @@ describe("updated curated guidance", () => {
 		mountApp("admin");
 		const notice = () => document.querySelector(".gemini-deprecation-notice");
 		expect(notice()?.textContent).toBe(
-			"Gemini CLI is deprecated for non-Enterprise use. Google announced the transition to Antigravity CLI in May 2026. Use Antigravity CLI instead.",
+			"Known issue: Gemini CLI was replaced by Antigravity CLI for unpaid-tier and Google One users on June 18, 2026. Use Antigravity CLI unless your account is eligible for Gemini CLI Enterprise.",
 		);
 		expect(notice()?.classList.contains("-color-danger")).toBe(true);
 		expect(notice()?.classList.contains("-color-warning")).toBe(false);
-		expect(notice()?.getAttribute("role")).toBe("status");
+		expect(notice()?.getAttribute("role")).toBe("alert");
+		expect(document.querySelector(".client-health-status")?.textContent).toContain("Known issue");
 		expect(notice()?.closest(".details-panel")).toBeNull();
 		expect(notice()?.nextElementSibling?.classList.contains("details-panel")).toBe(true);
 		expect(document.querySelector(".workspace-grid")?.children).toHaveLength(2);
@@ -350,19 +351,17 @@ describe("updated curated guidance", () => {
 		const enterprise = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
 		enterprise.checked = true;
 		enterprise.dispatchEvent(new Event("change", { bubbles: true }));
-		expect(notice()?.textContent).toBe(
-			"Google announced the transition from Gemini CLI to Antigravity CLI in May 2026. Gemini CLI is expected to continue working for Gemini Enterprise customers, so these connection instructions remain available. Plan your migration to Antigravity CLI.",
-		);
-		expect(notice()?.classList.contains("-color-warning")).toBe(true);
-		expect(notice()?.classList.contains("-color-danger")).toBe(false);
-		document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
 		expect(notice()).toBeNull();
+		expect(document.querySelector(".client-health-status")?.textContent).toContain("Untested");
+		document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
+		expect(document.querySelector(".known-issue-alert")).toBeNull();
 		expect(document.querySelector(".instructions-column")).toBeNull();
+		expect(document.querySelector(".client-health-status")).toBeNull();
 		document.querySelector<HTMLButtonElement>("#tab-admin")!.click();
 		const personal = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
 		personal.checked = false;
 		personal.dispatchEvent(new Event("change", { bubbles: true }));
-		expect(notice()?.textContent).toContain("deprecated for non-Enterprise");
+		expect(notice()?.textContent).toContain("replaced by Antigravity CLI");
 		expect(notice()?.classList.contains("-color-danger")).toBe(true);
 		const client = document.querySelector<HTMLSelectElement>("#client-select")!;
 		client.value = "claude-code";
