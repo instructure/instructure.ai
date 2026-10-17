@@ -1,6 +1,6 @@
 # @instructure.ai/canvas-mcp
 
-Static setup guide for connecting Canvas to supported MCP clients. The app is served at `/canvas-mcp/` and the developer-key guide at `/canvas-mcp/admin/`.
+Single-page setup guide for connecting Canvas to supported MCP clients, served at `/canvas-mcp/`. Configure a server and connect a client from the tabs in the app; the selected tab is represented by `page=admin` or `page=connect` in the query string.
 
 ## Development
 

@@ -99,11 +99,13 @@ const CURATED_CLIENTS: ClientDefinition[] = [
 			"Use a client that supports remote MCP over HTTP and OAuth 2.1. Enter the values shown below.",
 		verify: "Complete OAuth and confirm the client can list the server's tools.",
 	},
-].sort((left, right) =>
-		new Intl.Collator("en", { sensitivity: "base", ignorePunctuation: true }).compare(
-			left.name,
-			right.name,
-		),
+];
+
+CURATED_CLIENTS.sort((left, right) =>
+	new Intl.Collator("en", { sensitivity: "base", ignorePunctuation: true }).compare(
+		left.name,
+		right.name,
+	),
 );
 
 const curatedRulesyncTargets = new Set(
