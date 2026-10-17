@@ -10,18 +10,19 @@ const printStyles = stylesheet.nodes.find(
 );
 
 function declarations(selector: string): Map<string, string> {
-	const normalize = (value: string) => value.replace(/\s*>\s*/gu, ">").replace(/\s+/gu, " ").trim();
+	const normalize = (value: string) =>
+		value
+			.replace(/\s*>\s*/gu, ">")
+			.replace(/\s+/gu, " ")
+			.trim();
 	const rule = printStyles?.nodes?.find(
 		(node) =>
 			node.type === "rule" &&
-			node.selector
-				.split(",")
-				.some((part) => normalize(part) === normalize(selector)),
+			node.selector.split(",").some((part) => normalize(part) === normalize(selector)),
 	);
 	return new Map(
-		rule?.nodes
-			?.filter((node) => node.type === "decl")
-			.map((node) => [node.prop, node.value]) ?? [],
+		rule?.nodes?.filter((node) => node.type === "decl").map((node) => [node.prop, node.value]) ??
+			[],
 	);
 }
 
@@ -46,8 +47,8 @@ describe("print styles", () => {
 		expect(declarations("input").get("border-color")).toBe("#fff");
 	});
 
-	it("hides the tabs component when printing", () => {
-		expect(declarations(".instui-tabs").get("display")).toBe("none");
+	it("hides tab navigation while retaining its printable panel", () => {
+		expect(declarations(".instui-tabs .list").get("display")).toBe("none");
 	});
 
 	it("adds page breaks after cards marked for print pagination", () => {
