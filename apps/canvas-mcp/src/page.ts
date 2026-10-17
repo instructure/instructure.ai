@@ -21,6 +21,7 @@ export function renderPage(
 		knownIssue = status.kind === "known-issue" ? status.reason : "",
 		isGeminiNotice = client.id === "gemini-cli" && Boolean(knownIssue),
 		hasValidDomain = Boolean(state.domain),
+		installLabel = client.installModes.length === 0 ? "install flow unverified" : state.install,
 		copiedLabel = "",
 		urls = hasValidDomain
 			? deriveUrls(state)
@@ -55,7 +56,7 @@ export function renderPage(
 						<section class="instui-card -variant-base details-panel" ><div class="content">${pageMode === "user" && connectionReadiness(state, client).blocked && status.kind !== "known-issue" ? `<p class="instui-alert -color-warning -inline" role="status">${escapeHtml(connectionReadiness(state, client).reason)}</p>` : ""}${pageMode === "user" ? '<h2 class="instui-heading -variant-title-card-regular instructions-heading">Instructions</h2>' : ""}${renderGuide(client, state, pageMode === "admin", callback)}</div></section>
 						${knownIssue ? "</div>" : ""}
 					</div>
-					<footer class="page-footer"><p>Copyright &copy; ${new Date().getFullYear()} Instructure, Inc.</p><p class="print-context">${escapeHtml(client.name)} · ${escapeHtml(state.install)} · ${new Date().toISOString().slice(0, 10)}<br /><span class="print-permalink">${escapeHtml("/canvas-mcp/?" + new URLSearchParams({ domain: state.domain, client: state.client, key: state.key, install: state.install, platform: state.platform, region: state.region, clientId: state.clientId, page: pageMode === "admin" ? "admin" : "connect" }).toString())}</span></p></footer>
+					<footer class="page-footer"><p>Copyright &copy; ${new Date().getFullYear()} Instructure, Inc.</p><p class="print-context">${escapeHtml(client.name)} · ${escapeHtml(installLabel)} · ${new Date().toISOString().slice(0, 10)}<br /><span class="print-permalink">${escapeHtml("/canvas-mcp/?" + new URLSearchParams({ domain: state.domain, client: state.client, key: state.key, ...(client.installModes.length ? { install: state.install } : {}), platform: state.platform, region: state.region, clientId: state.clientId, page: pageMode === "admin" ? "admin" : "connect" }).toString())}</span></p></footer>
 					</section>
 					</div>
 				</main>

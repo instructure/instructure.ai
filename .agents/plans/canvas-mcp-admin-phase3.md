@@ -1,6 +1,6 @@
 # Plan: canvas-mcp Admin Phase 3 (curated client guides)
 
-Status: research complete (checked October 17, 2026); implementation not started.
+Status: research complete (checked October 17, 2026); implementation in progress.
 App: `apps/canvas-mcp`. Builds on `.agents/plans/canvas-mcp-admin-phase2.md` (section 10 lists what phase 2 shipped and the research it left open).
 
 Location note: this plan lives in the repo's `.agents/plans/` next to phase 2. `~/.agents/plans/` does not exist.
@@ -55,7 +55,7 @@ Treat the research as an evidence ledger, not as blanket approval to publish eve
 | Gemini Enterprise | Add org-policy override (Organization Policy Administrator), egress FQDN allowlist, `custom_mcp` data source, second Continue, Actions > Reload custom actions > Enable actions. Fix the PKCE claim. |
 | Antigravity | IDE verify uses `…` > `MCP Servers`, not the app/2.0 flow. CLI verify needs the pasted auth code. CLI `registration` is "static"; the app is "both". Add `~/.gemini/config/mcp_config.json`. Enterprise needs the admin allow-list (Gemini Enterprise > Settings > AI developer tools > Security > MCP Servers > Allowed server configuration), or Canvas shows "Blocked by Admin Policy". Only a Google codelab documents it. |
 | Copilot Studio | Drop the unsourced "classic experience" claim. Labels are "Manual", "Token URL template", "Server name", "callback URL". The Accept-header policy has no official source; keep it labeled as an Instructure workaround. Add Teams / M365 publishing (agent-level "Authenticate with Microsoft") and the Power Platform data policy notes. |
-| Superhuman Go | Remove `installModes: ["personal"]` and the "MCP server connection fields" setup note. Keep facts unknown. |
+| Superhuman Go | No install mode is confirmed: use an empty `installModes` list and do not label its print context or share link as personal. Replace the false "MCP server connection fields" note with the verified developer-Pack limitation. Keep facts unknown and guides pending. |
 
 ## 3. Code design (not monolithic)
 
@@ -116,6 +116,7 @@ Each row is one commit and one reviewable change. Rows 2 to 6 are independent on
 
 | # | Task | Files |
 | --- | --- | --- |
+| 0 | Add the evidence-based client status pill and known-issue alerts on admin and client pages. | `clients/types.ts`, `clients/status.ts`, admin/page rendering, tests |
 | 1 | Add `image` content kind, `screenshot()` helper, manifest, renderer and print support, tests. Convert one small client (Generic or Copilot Studio) to the folder layout as the reference. | `guides/types.ts`, `guides/render.ts`, `guides/screenshots.ts`, `guides/screenshot-manifest.ts`, tests |
 | 2 | Claude.ai / Desktop and Claude Code (personal and enterprise). | `clients/curated/claude-ai/`, `claude-code/` |
 | 3 | Codex and ChatGPT (personal and enterprise). Keep the ChatGPT connection blocker. | `codex/`, `chatgpt/` |

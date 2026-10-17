@@ -12,6 +12,13 @@ describe("typed client requirements", () => {
 			expect(readState(`?${stateQuery(readState(`?client=${id}`, null))}`, null).client).toBe(id);
 			expect(clientDefinition(id).facts.remoteHttp.value).toBe("unknown");
 		}
+		expect(clientDefinition("superhuman-go").installModes).toEqual([]);
+		expect(clientDefinition("superhuman-go").setupNote).not.toContain(
+			"connection fields to configure",
+		);
+		const superhumanPage = renderPage(readState("?client=superhuman-go", null), "user", "", false);
+		expect(superhumanPage).toContain("install flow unverified");
+		expect(superhumanPage).not.toContain("install=personal");
 		expect(clientDefinition("codexcli")).toBe(clientDefinition("codex"));
 		expect(clientDefinition("antigravity-cli")).not.toBe(clientDefinition("antigravity"));
 	});

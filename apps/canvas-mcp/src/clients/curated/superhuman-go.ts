@@ -11,8 +11,9 @@ export const superhumanGo = {
 	provider: "Superhuman",
 	group: "Curated",
 	facts: unknownFacts(),
-	installModes: ["personal"],
+	installModes: [],
 	setupNote:
-		"Use the MCP server connection fields to configure a custom connector in Superhuman Go.",
-	verify: "Complete OAuth and confirm the Canvas MCP tools are available.",
+		"A supported Canvas MCP setup flow for Go has not been verified. Research documents a developer-built Coda Pack workflow, not a direct Go form for entering an MCP URL and OAuth credentials.",
+	verify:
+		"Verification instructions are pending confirmation of a supported Canvas MCP setup flow.",
 } satisfies ClientDefinition;
