@@ -1,3 +1,5 @@
+import { antigravityCli } from "./curated/antigravity-cli";
+import { geminiCli } from "./curated/gemini-cli";
 import { type Client, type KeyType, type InstallMode, CLIENT_ALIASES } from "./ids";
 import { type ClientDefinition } from "./types";
 import { rulesyncClients } from "./rulesync";
@@ -11,6 +13,8 @@ import { geminiEnterprise } from "./curated/gemini-enterprise";
 import { antigravity } from "./curated/antigravity";
 import { generic } from "./curated/generic";
 const CURATED_CLIENTS: ClientDefinition[] = [
+	antigravityCli,
+	geminiCli,
 	claudeAi,
 	claudeCode,
 	codex,

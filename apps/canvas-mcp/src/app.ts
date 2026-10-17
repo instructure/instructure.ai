@@ -24,8 +24,8 @@ export function mountApp(mode: PageMode): void {
 	const appRoot = root,
 		state = readState(globalThis.location.search, getStorage());
 	const mount = Symbol();
-mounts.set(appRoot,mount);
-let pageMode = pageModeFromQuery(globalThis.location.search) ?? mode;
+	mounts.set(appRoot, mount);
+	let pageMode = pageModeFromQuery(globalThis.location.search) ?? mode;
 	normalizeSetup(state);
 	function isConnectionReady(): boolean {
 		return connectionReadiness(state).ready;
@@ -54,7 +54,8 @@ let pageMode = pageModeFromQuery(globalThis.location.search) ?? mode;
 			key = JSON.stringify([url, redirect.base, redirect.mode]);
 		activeCallbackKey = key;
 		return callbacks.request(url, redirect.base, redirect.mode, () => {
-			if (activeCallbackKey === key && appRoot.isConnected && mounts.get(appRoot) === mount) persistAndRender();
+			if (activeCallbackKey === key && appRoot.isConnected && mounts.get(appRoot) === mount)
+				persistAndRender();
 		});
 	}
 
@@ -146,7 +147,7 @@ let pageMode = pageModeFromQuery(globalThis.location.search) ?? mode;
 			.querySelector<HTMLSelectElement>("#client-select")
 			?.addEventListener("change", (event) => {
 				state.client = (event.currentTarget as HTMLSelectElement).value as AppState["client"];
-				state.key = normalizeKeyType(state.client, "public");
+				state.key = normalizeKeyType(state.client, "");
 				state.surface = "canvas";
 				persistAndRender();
 			});

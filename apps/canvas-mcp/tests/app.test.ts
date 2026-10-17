@@ -308,11 +308,13 @@ describe("Canvas MCP pages", () => {
 		expect(groups.map((group) => group.label)).toEqual(["Curated", "Other"]);
 		expect([...groups[0].children].map((option) => option.textContent)).toEqual([
 			"Antigravity",
+			"Antigravity CLI",
 			"ChatGPT (chatgpt.com and ChatGPT Desktop)",
 			"Claude.ai / Claude Desktop",
 			"Claude Code",
 			"Codex",
 			"Copilot Studio",
+			"Gemini CLI",
 			"Gemini Enterprise",
 			"Superhuman Go",
 		]);
@@ -320,7 +322,7 @@ describe("Canvas MCP pages", () => {
 		expect(otherOptions[0].value).toBe("generic");
 		expect(otherOptions[0].textContent).toBe("Generic MCP client");
 		const rulesyncNames = otherOptions.slice(1).map((option) => option.textContent ?? "");
-		expect(rulesyncNames).toHaveLength(56);
+		expect(rulesyncNames).toHaveLength(55);
 		expect(rulesyncNames).toEqual(
 			[...rulesyncNames].sort((left, right) => left.localeCompare(right)),
 		);
@@ -517,6 +519,10 @@ describe("Canvas MCP pages", () => {
 			currentSelect.value = clientId;
 			currentSelect.dispatchEvent(new Event("change", { bubbles: true }));
 
+			if (clientId === "chatgpt") {
+				expect(document.querySelector("#client-id-input")).toBeNull();
+				continue;
+			}
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.required).toBe(true);
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.maxLength).toBe(17);
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.pattern).toBe(

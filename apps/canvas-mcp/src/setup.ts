@@ -13,6 +13,7 @@ export function connectionReadiness(
 	client: ClientDefinition = clientDefinition(state.client),
 ): { ready: boolean; reason: string } {
 	const facts = client.facts;
+	if (client.blocker) return { ready: false, reason: client.blocker.reason };
 	if (facts.remoteHttp.value === "no")
 		return { ready: false, reason: "This client does not support remote MCP over HTTP." };
 	if (facts.registration.value === "dcr-only")

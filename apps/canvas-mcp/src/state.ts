@@ -95,7 +95,7 @@ export function readState(search: string, storage: StorageLike | null): AppState
 		queryClient = params.get("client"),
 		client = isClient(queryClient) ? queryClient : (saved.client ?? "claude-code"),
 		queryKey = params.get("key"),
-		key = queryKey === "private" || queryKey === "public" ? queryKey : (saved.key ?? "public"),
+		key = queryKey === "private" || queryKey === "public" ? queryKey : (saved.key ?? ""),
 		queryRegion = params.get("region"),
 		region = isRegion(queryRegion) ? queryRegion : saved.region,
 		clientId = params.get("clientId") ?? "";

@@ -45,6 +45,7 @@ export interface ClientDefinition {
 	installModes: InstallMode[];
 	enterpriseSurface?: string;
 	guides?: Partial<Record<InstallMode, Guide>>;
+	blocker?: { reason: string; evidence: Evidence[] };
 	setupNote: string;
 	verify: string;
 	rulesyncTarget?: RulesyncTargetId;

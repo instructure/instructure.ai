@@ -1,4 +1,4 @@
-import { documented, setupGuidance } from "../evidence";
+import { documented, updatedGuidance } from "../evidence";
 import { type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
 export const codex = {
@@ -8,7 +8,15 @@ export const codex = {
 			recipe: "codex-callback-id",
 			base: "http://localhost:8081/callback",
 			mode: "unknown",
-			evidence: [{method: "source", label: "Codex callback algorithm; Canvas mode awaiting verification", url: "https://github.com/openai/codex/blob/9be8d6e1c3dbb145d2d7ac3ba46729340e6d8d40/codex-rs/rmcp-client/src/oauth_callback.rs", version: "9be8d6e1c3dbb145d2d7ac3ba46729340e6d8d40", verifiedAt: "2026-10-17"}],
+			evidence: [
+				{
+					method: "source",
+					label: "Codex callback algorithm; Canvas mode awaiting verification",
+					url: "https://github.com/openai/codex/blob/9be8d6e1c3dbb145d2d7ac3ba46729340e6d8d40/codex-rs/rmcp-client/src/oauth_callback.rs",
+					version: "9be8d6e1c3dbb145d2d7ac3ba46729340e6d8d40",
+					verifiedAt: "2026-10-17",
+				},
+			],
 		}),
 		remoteHttp: documented("yes"),
 		staticClientId: documented("yes"),
@@ -19,7 +27,11 @@ export const codex = {
 		personal: {
 			presentation: "by-surface",
 			status: "documented",
-			prerequisites: ["Codex CLI or IDE extension installed and signed in; a public Canvas key."],
+			prerequisites: [
+				"Codex CLI or IDE extension installed and signed in; public Canvas key and callback port 8081.",
+			],
+			sources: [updatedGuidance],
+			lastVerified: "2026-10-17",
 			steps: [
 				{
 					id: "canvas-create",
@@ -27,47 +39,39 @@ export const codex = {
 					action: "create",
 				},
 				{
-					id: "provider-callback",
+					id: "provider-register",
 					kind: "provider",
-					title: "Codex — configure the callback",
+					title: "Codex — register the server",
 					content: [
 						{
 							kind: "paragraph",
-							text: "Confirm the complete redirect URI and callback mode before signing in. The callback can depend on the exact MCP URL; computed output is not enabled until that behavior is verified.",
+							text: "The CLI and IDE extension share this configuration. Confirm the complete registered callback URI before signing in.",
 						},
 						{
 							kind: "code",
-							text: 'mcp_oauth_callback_port = 8081\nmcp_oauth_callback_url = "http://localhost:8081/callback"',
+							text: 'codex -c mcp_oauth_callback_port=8081 -c \'mcp_oauth_callback_url="http://localhost:8081/callback"\' mcp add canvas-mcp --url "{mcpUrl}" --oauth-client-id "{clientId}"',
 						},
 					],
 				},
 				{
-					id: "provider-register",
+					id: "provider-login",
 					kind: "provider",
-					title: "Register and sign in",
+					title: "Sign in to Canvas",
 					content: [
 						{
 							kind: "paragraph",
-							text: "Add the two callback settings at the top level of ~/.codex/config.toml, then register the server:",
+							text: "If sign-in does not start automatically, run:",
 						},
 						{
 							kind: "code",
-							text: 'codex mcp add canvas-mcp \\\n  --url "{mcpUrl}" \\\n  --oauth-client-id "{clientId}"',
-						},
-						{
-							kind: "paragraph",
-							text: "If the browser does not open automatically, start sign-in explicitly:",
-						},
-						{
-							kind: "code",
-							text: 'codex mcp login canvas-mcp --scopes "{scope}"',
+							text: 'codex -c mcp_oauth_callback_port=8081 -c \'mcp_oauth_callback_url="http://localhost:8081/callback"\' mcp login canvas-mcp --scopes "{scope}"',
 						},
 					],
 				},
 				{
 					id: "verify",
 					kind: "verify",
-					title: "Verify Codex",
+					title: "Validate the configuration",
 					content: [
 						{
 							kind: "code",
@@ -75,13 +79,11 @@ export const codex = {
 						},
 						{
 							kind: "paragraph",
-							text: "In a Codex session, type /mcp to check sign-in status. If the server URL changes, recheck the registered callback URI.",
+							text: "In a Codex session, open /mcp to confirm the server and its sign-in status.",
 						},
 					],
 				},
 			],
-			sources: [setupGuidance],
-			lastVerified: "2026-10-17",
 		},
 	},
 	installModes: ["personal"],

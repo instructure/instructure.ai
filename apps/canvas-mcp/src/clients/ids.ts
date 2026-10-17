@@ -8,6 +8,7 @@ export const CLIENTS = [
 	"antigravity",
 	"chatgpt",
 	"superhuman-go",
+	"gemini-cli",
 	"generic",
 ] as const;
 

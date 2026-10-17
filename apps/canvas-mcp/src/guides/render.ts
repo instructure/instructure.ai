@@ -76,7 +76,14 @@ function renderFields(client: ClientDefinition, state: AppState, model: KeySetti
 			["Token URL", values.tokenUrl],
 			["Client ID", values.clientId],
 			["Scope", values.scope],
-			["PKCE", client.facts.pkce.value],
+			[
+				"PKCE",
+				state.key === "public"
+					? "Required (S256) for a Canvas public key"
+					: client.facts.pkce.value === "off"
+						? "Leave disabled for this client"
+						: "Optional for a Canvas private key; confirm client support",
+			],
 		];
 	return `<section class="guide-fields"><h3 class="instui-heading -level-h3">Connection fields</h3><table class="instui-table"><thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody>${fields.map(([name, value]) => `<tr><th scope="row">${escapeHtml(name)}</th><td><code${name === "Client ID" ? ' data-guide-token="clientId"' : ""}>${escapeHtml(value)}</code></td></tr>`).join("")}</tbody></table>${state.key === "private" ? "<p>Enter the key secret directly in the provider's secret field. Never paste it into this guide or a setup link.</p>" : "<p>A public key uses the Client ID without a client secret. Public is preferred when the client supports both key types.</p>"}</section>`;
 }
@@ -105,6 +112,7 @@ export function renderGuide(
 	const guide = clientGuide(client, state.install);
 	validateGuide(guide);
 	const heading = `<h2 class="instui-heading -level-h2 --mb-2xl">${editable ? "Key settings for " : ""}${escapeHtml(client.name)}</h2>`;
+	if (client.blocker) return heading + renderEvidence(client.blocker.evidence);
 	const install =
 		client.installModes.length > 1
 			? `<div class="instui-button-set -toggle install-modes" role="group" aria-label="Install mode">${client.installModes.map((mode) => `<button id="install-${mode}" class="instui-button -color-secondary" type="button" data-install="${mode}" aria-pressed="${state.install === mode}">${mode === "personal" ? "Personal" : "Enterprise"}</button>`).join("")}</div>`
