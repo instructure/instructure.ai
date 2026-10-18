@@ -44,7 +44,7 @@ describe("Canvas MCP pages", () => {
 		expect(validatedPill?.parentElement?.nextElementSibling?.id).toBe("client-select");
 		expect(validatedPill?.classList.contains("instui-pill")).toBe(true);
 		expect(validatedPill?.classList.contains("-color-success")).toBe(true);
-		expect(validatedPill?.classList.contains("-icon-badge-check")).toBe(true);
+		expect(validatedPill?.classList.contains("-icon-check")).toBe(true);
 		expect(validatedPill?.textContent).toBe("Validated");
 		const enterpriseToggle = document.querySelector("#enterprise-install-input");
 		expect(enterpriseToggle?.parentElement?.textContent).toBe("Enterprise install");
@@ -519,7 +519,7 @@ describe("Canvas MCP pages", () => {
 		const issuePill = document.querySelector(".client-status-pill");
 		expect(issuePill?.classList.contains("instui-pill")).toBe(true);
 		expect(issuePill?.classList.contains("-color-danger")).toBe(true);
-		expect(issuePill?.classList.contains("-icon-badge-alert")).toBe(true);
+		expect(issuePill?.classList.contains("-icon-triangle-alert")).toBe(true);
 		expect(issuePill?.textContent).toBe("Known issue");
 		const adminAlert = document.querySelector(".known-issue-alert");
 		expect(adminAlert?.classList.contains("-color-danger")).toBe(true);
@@ -545,7 +545,7 @@ describe("Canvas MCP pages", () => {
 		const untestedPill = document.querySelector(".client-status-pill");
 		expect(untestedPill?.classList.contains("-color-success")).toBe(false);
 		expect(untestedPill?.classList.contains("-color-danger")).toBe(false);
-		expect(untestedPill?.classList.contains("-icon-badge-question-mark")).toBe(true);
+		expect(untestedPill?.classList.contains("-icon-info")).toBe(true);
 		expect(untestedPill?.textContent).toBe("Untested");
 		expect(document.querySelector(".known-issue-alert")).toBeNull();
 

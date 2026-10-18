@@ -33,10 +33,10 @@ function clientStatusPill(status: ReturnType<typeof clientStatus>): string {
 					: "",
 		icon =
 			status.kind === "validated"
-				? "-icon-badge-check"
+				? "-icon-check"
 				: status.kind === "known-issue"
-					? "-icon-badge-alert"
-					: "-icon-badge-question-mark",
+					? "-icon-triangle-alert"
+					: "-icon-info",
 		label =
 			status.kind === "validated"
 				? "Validated"
