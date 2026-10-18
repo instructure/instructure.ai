@@ -38,6 +38,9 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector(".details-panel #client-id-input")).not.toBeNull();
 		expect(document.querySelector("#client-id-reference-input")).toBeNull();
 		expect(document.querySelector(".controls-panel h2")?.textContent).toBe("Configuration");
+		expect(document.querySelector("#domain-hint")?.textContent).toBe(
+			"Use your instructure.com address. Beta domains end in .beta.instructure.com.",
+		);
 		const validatedPill = document.querySelector(".client-status-pill");
 		expect(validatedPill?.parentElement?.classList.contains("client-select-label-row")).toBe(true);
 		expect(validatedPill?.previousElementSibling?.textContent).toBe("MCP Client");

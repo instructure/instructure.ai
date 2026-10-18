@@ -11,7 +11,7 @@ export function renderConfig(state: AppState, domainInputValue: string): string 
 							<h2 class="instui-heading -variant-title-card-regular">Configuration</h2>
 							<label class="field-label" for="domain-input">Canvas domain</label>
 							<input id="domain-input" class="instui-text-input text-input" type="url" inputmode="url" autocomplete="url" placeholder="school.instructure.com" value="${escapeHtml(domainInputValue)}" aria-describedby="domain-hint" />
-							<p class="field-hint" id="domain-hint">Use your school's instructure.com address. Beta domains end in .beta.instructure.com.</p>
+							<p class="field-hint" id="domain-hint">Use your instructure.com address. Beta domains end in .beta.instructure.com.</p>
 							<div id="region-field" class="field-group">
 								<label class="field-label" for="region-select">Canvas region</label>
 								<select id="region-select" class="instui-simple-select text-input"><option value="">Select a region</option>${regionOptions(state.region)}</select>
