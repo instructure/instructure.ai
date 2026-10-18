@@ -46,6 +46,9 @@ describe("Canvas MCP pages", () => {
 		expect(validatedPill?.classList.contains("-color-success")).toBe(true);
 		expect(validatedPill?.classList.contains("-icon-badge-check")).toBe(true);
 		expect(validatedPill?.textContent).toBe("Validated");
+		const enterpriseToggle = document.querySelector("#enterprise-install-input");
+		expect(enterpriseToggle?.parentElement?.textContent).toBe("Enterprise install");
+		expect(enterpriseToggle?.parentElement?.nextElementSibling).toBeNull();
 		expect(document.querySelectorAll(".controls-panel h2")).toHaveLength(1);
 		expect(document.querySelector(".controls-panel .rule")).toBeNull();
 		expect(document.querySelector("#client-select + .field-hint")).toBeNull();

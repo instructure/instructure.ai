@@ -20,7 +20,7 @@ export function renderConfig(state: AppState, domainInputValue: string): string 
 							<div class="client-select-label-row"><label class="field-label" for="client-select">MCP Client</label>${clientStatusPill(status)}</div>
 							<select id="client-select" class="instui-simple-select text-input">${clientOptions(client.id)}</select>
 							<label class="instui-checkbox -variant-toggle private-key-toggle"><input id="private-key-input" type="checkbox" name="private-key" ${state.key === "private" ? "checked" : ""} ${allowedKeyTypes(client).length < 2 ? "disabled" : ""}>Private key</label>
-							${client.installModes.length > 1 || client.installModes[0] === "enterprise" ? `<label class="instui-checkbox -variant-toggle"><input id="enterprise-install-input" type="checkbox" ${state.install === "enterprise" ? "checked" : ""} ${client.installModes.length === 1 ? "disabled" : ""}>Enterprise install</label><p class="field-hint">${client.installModes.length === 1 ? "This client is configured by an organization administrator." : client.id === "claude-code" ? "Configured through managed settings or device management." : client.id === "gemini-cli" ? "Approved through Gemini CLI enterprise controls, with local client configuration." : "Configured in the provider's admin console."}</p>` : ""}
+							${client.installModes.length > 1 || client.installModes[0] === "enterprise" ? `<label class="instui-checkbox -variant-toggle"><input id="enterprise-install-input" type="checkbox" ${state.install === "enterprise" ? "checked" : ""} ${client.installModes.length === 1 ? "disabled" : ""}>Enterprise install</label>` : ""}
 </div>
 						</aside>`;
 }
