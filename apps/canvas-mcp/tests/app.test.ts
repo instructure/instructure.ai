@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { readFile } from "node:fs/promises";
 import { mountApp } from "../src/app";
 
 describe("Canvas MCP pages", () => {
@@ -13,6 +14,22 @@ describe("Canvas MCP pages", () => {
 	afterEach(() => {
 		vi.unstubAllGlobals();
 	});
+
+	it.each(["claude-code", "chatgpt", "codex"])(
+		"imports the status pill glyph for %s",
+		async (client) => {
+			globalThis.history.replaceState(null, "", `/canvas-mcp/?client=${client}&page=admin`);
+			mountApp("admin");
+
+			const pill = document.querySelector(".client-status-pill");
+			const icon = Array.from(pill?.classList ?? []).find((name) => name.startsWith("-icon-"));
+			expect(icon).toBeDefined();
+			const stylesheet = await readFile("src/main.css", "utf8");
+			expect(stylesheet).toContain(
+				`@import "@pantoken/components/icons/${icon?.slice("-icon-".length)}.css";`,
+			);
+		},
+	);
 
 	it("uses Pantoken components and switches the Canvas logo with the scheme", () => {
 		mountApp("admin");

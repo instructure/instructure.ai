@@ -17,9 +17,9 @@
 @import "@pantoken/components/tray.css";
 @import "@pantoken/components/close-button.css";
 @import "@pantoken/components/pill.css";
-@import "@pantoken/components/icons/badge-alert.css";
-@import "@pantoken/components/icons/badge-check.css";
-@import "@pantoken/components/icons/badge-question-mark.css";
+@import "@pantoken/components/icons/triangle-alert.css";
+@import "@pantoken/components/icons/check.css";
+@import "@pantoken/components/icons/info.css";
 @import "@pantoken/components/fonts.css";
 @import "@pantoken/components/utilities.css";
 
