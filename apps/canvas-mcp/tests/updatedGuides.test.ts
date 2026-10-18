@@ -338,7 +338,7 @@ describe("updated curated guidance", () => {
 		expect(notice()?.classList.contains("-color-danger")).toBe(true);
 		expect(notice()?.classList.contains("-color-warning")).toBe(false);
 		expect(notice()?.getAttribute("role")).toBe("alert");
-		expect(document.querySelector(".client-health-status")?.textContent).toContain("Known issue");
+		expect(document.querySelector(".client-status-pill")?.textContent).toBe("Known issue");
 		expect(notice()?.closest(".details-panel")).toBeNull();
 		expect(notice()?.nextElementSibling?.classList.contains("details-panel")).toBe(true);
 		expect(document.querySelector(".workspace-grid")?.children).toHaveLength(2);
@@ -352,11 +352,11 @@ describe("updated curated guidance", () => {
 		enterprise.checked = true;
 		enterprise.dispatchEvent(new Event("change", { bubbles: true }));
 		expect(notice()).toBeNull();
-		expect(document.querySelector(".client-health-status")?.textContent).toContain("Untested");
+		expect(document.querySelector(".client-status-pill")?.textContent).toBe("Untested");
 		document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
 		expect(document.querySelector(".known-issue-alert")).toBeNull();
 		expect(document.querySelector(".instructions-column")).toBeNull();
-		expect(document.querySelector(".client-health-status")).toBeNull();
+		expect(document.querySelector(".client-status-pill")).toBeNull();
 		document.querySelector<HTMLButtonElement>("#tab-admin")!.click();
 		const personal = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
 		personal.checked = false;

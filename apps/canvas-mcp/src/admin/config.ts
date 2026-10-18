@@ -26,22 +26,25 @@ export function renderConfig(state: AppState, domainInputValue: string): string 
 						</aside>`;
 }
 function clientStatusPill(status: ReturnType<typeof clientStatus>): string {
-	const label =
-		status.kind === "validated"
-			? "Validated"
-			: status.kind === "known-issue"
-				? "Known issue"
-				: "Untested";
-	return `<div class="client-health-status client-health-status--${status.kind}" role="status">${statusIcon(status.kind)}<span>${label}</span></div>`;
-}
-function statusIcon(kind: ReturnType<typeof clientStatus>["kind"]): string {
-	if (kind === "validated") {
-		return '<svg aria-hidden="true" viewBox="0 0 20 20" focusable="false"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m6 10 2.5 2.5L14 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-	}
-	if (kind === "known-issue") {
-		return '<svg aria-hidden="true" viewBox="0 0 20 20" focusable="false"><path d="M10 2.2 19 18H1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 7v5m0 2.5v.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
-	}
-	return '<svg aria-hidden="true" viewBox="0 0 20 20" focusable="false"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 7.5a2.1 2.1 0 1 1 3.5 1.6c-.9.7-1.5 1-1.5 2.4m0 2.1v.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+	const color =
+			status.kind === "validated"
+				? " -color-success"
+				: status.kind === "known-issue"
+					? " -color-danger"
+					: "",
+		icon =
+			status.kind === "validated"
+				? "-icon-badge-check"
+				: status.kind === "known-issue"
+					? "-icon-badge-alert"
+					: "-icon-badge-question-mark",
+		label =
+			status.kind === "validated"
+				? "Validated"
+				: status.kind === "known-issue"
+					? "Known issue"
+					: "Untested";
+	return `<span class="instui-pill${color} ${icon} client-status-pill" role="status">${label}</span>`;
 }
 function regionOptions(selected: string): string {
 	const regions = [

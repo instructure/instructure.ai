@@ -151,11 +151,11 @@ Ask the vendor or confirm in a browser before the real screenshots are taken.
 
 ## 6.1 Client validation status (admin and client pages)
 
-When a client is selected in the admin Configuration panel, show a status pill directly below its selector:
+When a client is selected in the admin Configuration panel, show the Pantoken `instui-pill` component directly below its selector:
 
-- **Validated** (success, check icon): at least one maintainer-performed end-to-end Canvas MCP connection test is recorded in the internal test log. Vendor documentation and source inspection alone are not validation. The pill does not imply every key type, install mode, or version was tested.
-- **Untested** (default color, question/info icon): no successful end-to-end test is recorded, and no active known issue applies to the selected install mode.
-- **Known issue** (danger, warning icon): an active, evidenced blocker or product limitation applies. Show a danger alert on both Configure a Server and Connect a Client, with the specific issue when known. Do not show alerts for Validated or Untested.
+- **Validated** (success variant, badge-check icon): at least one maintainer-performed end-to-end Canvas MCP connection test is recorded in the internal test log. Vendor documentation and source inspection alone are not validation. The pill does not imply every key type, install mode, or version was tested.
+- **Untested** (default/neutral variant, badge-question-mark icon): no successful end-to-end test is recorded, and no active known issue applies to the selected install mode.
+- **Known issue** (danger variant, badge-alert icon): an active, evidenced blocker or product limitation applies. Show a danger alert on both Configure a Server and Connect a Client, with the specific issue when known. Do not show alerts for Validated or Untested.
 
 Initial classifications from the evidence currently in this plan:
 

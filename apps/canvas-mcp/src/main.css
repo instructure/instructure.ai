@@ -16,6 +16,10 @@
 @import "@pantoken/components/icons/sliders-horizontal.css";
 @import "@pantoken/components/tray.css";
 @import "@pantoken/components/close-button.css";
+@import "@pantoken/components/pill.css";
+@import "@pantoken/components/icons/badge-alert.css";
+@import "@pantoken/components/icons/badge-check.css";
+@import "@pantoken/components/icons/badge-question-mark.css";
 @import "@pantoken/components/fonts.css";
 @import "@pantoken/components/utilities.css";
 
@@ -213,28 +217,8 @@ h1 {
     margin-top: 17px;
 }
 
-.client-health-status {
+.client-status-pill {
     margin-top: 7px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: color-mix(in srgb, var(--instui-color-text-base) 62%, transparent);
-    font-size: 12px;
-    line-height: 1.4;
-}
-
-.client-health-status svg {
-    width: 16px;
-    height: 16px;
-    flex: 0 0 auto;
-}
-
-.client-health-status--validated {
-    color: var(--instui-color-icon-success);
-}
-
-.client-health-status--known-issue {
-    color: var(--instui-color-icon-error);
 }
 
 .known-issue-alert {

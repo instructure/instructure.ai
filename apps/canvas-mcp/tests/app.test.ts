@@ -38,10 +38,11 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector(".details-panel #client-id-input")).not.toBeNull();
 		expect(document.querySelector("#client-id-reference-input")).toBeNull();
 		expect(document.querySelector(".controls-panel h2")?.textContent).toBe("Configuration");
-		expect(document.querySelector(".client-health-status")?.textContent).toContain("Validated");
-		expect(document.querySelector(".client-health-status svg")?.getAttribute("aria-hidden")).toBe(
-			"true",
-		);
+		const validatedPill = document.querySelector(".client-status-pill");
+		expect(validatedPill?.classList.contains("instui-pill")).toBe(true);
+		expect(validatedPill?.classList.contains("-color-success")).toBe(true);
+		expect(validatedPill?.classList.contains("-icon-badge-check")).toBe(true);
+		expect(validatedPill?.textContent).toBe("Validated");
 		expect(document.querySelectorAll(".controls-panel h2")).toHaveLength(1);
 		expect(document.querySelector(".controls-panel .rule")).toBeNull();
 		expect(document.querySelector("#client-select + .field-hint")).toBeNull();
@@ -509,7 +510,11 @@ describe("Canvas MCP pages", () => {
 	it("shows known client issues on both admin and client pages", () => {
 		globalThis.history.replaceState(null, "", "/canvas-mcp/?client=chatgpt&page=admin");
 		mountApp("admin");
-		expect(document.querySelector(".client-health-status")?.textContent).toContain("Known issue");
+		const issuePill = document.querySelector(".client-status-pill");
+		expect(issuePill?.classList.contains("instui-pill")).toBe(true);
+		expect(issuePill?.classList.contains("-color-danger")).toBe(true);
+		expect(issuePill?.classList.contains("-icon-badge-alert")).toBe(true);
+		expect(issuePill?.textContent).toBe("Known issue");
 		const adminAlert = document.querySelector(".known-issue-alert");
 		expect(adminAlert?.classList.contains("-color-danger")).toBe(true);
 		expect(adminAlert?.textContent).toContain("Canvas MCP authentication");
@@ -528,9 +533,12 @@ describe("Canvas MCP pages", () => {
 		mountApp("admin");
 
 		const clientSelect = document.querySelector("#client-select");
-		expect(clientSelect?.nextElementSibling?.classList.contains("client-health-status")).toBe(true);
-		expect(document.querySelector(".client-health-status")?.textContent).toContain("Untested");
-		expect(document.querySelector(".client-health-status svg")).not.toBeNull();
+		expect(clientSelect?.nextElementSibling?.classList.contains("instui-pill")).toBe(true);
+		const untestedPill = document.querySelector(".client-status-pill");
+		expect(untestedPill?.classList.contains("-color-success")).toBe(false);
+		expect(untestedPill?.classList.contains("-color-danger")).toBe(false);
+		expect(untestedPill?.classList.contains("-icon-badge-question-mark")).toBe(true);
+		expect(untestedPill?.textContent).toBe("Untested");
 		expect(document.querySelector(".known-issue-alert")).toBeNull();
 
 		globalThis.history.replaceState(
@@ -539,7 +547,7 @@ describe("Canvas MCP pages", () => {
 			"/canvas-mcp/?client=claude-code&install=enterprise&page=admin",
 		);
 		mountApp("admin");
-		expect(document.querySelector(".client-health-status")?.textContent).toContain("Untested");
+		expect(document.querySelector(".client-status-pill")?.textContent).toBe("Untested");
 	});
 
 	it("switches setup tabs through the page query parameter and preserves setup state", () => {
