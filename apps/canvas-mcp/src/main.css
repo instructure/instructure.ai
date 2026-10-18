@@ -217,8 +217,16 @@ h1 {
     margin-top: 17px;
 }
 
+.client-select-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.client-select-label-row .field-label,
 .client-status-pill {
-    margin-top: 7px;
+    margin: 17px 0 7px;
 }
 
 .known-issue-alert {

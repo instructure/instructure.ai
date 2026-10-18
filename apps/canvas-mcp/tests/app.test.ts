@@ -39,6 +39,9 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector("#client-id-reference-input")).toBeNull();
 		expect(document.querySelector(".controls-panel h2")?.textContent).toBe("Configuration");
 		const validatedPill = document.querySelector(".client-status-pill");
+		expect(validatedPill?.parentElement?.classList.contains("client-select-label-row")).toBe(true);
+		expect(validatedPill?.previousElementSibling?.textContent).toBe("MCP Client");
+		expect(validatedPill?.parentElement?.nextElementSibling?.id).toBe("client-select");
 		expect(validatedPill?.classList.contains("instui-pill")).toBe(true);
 		expect(validatedPill?.classList.contains("-color-success")).toBe(true);
 		expect(validatedPill?.classList.contains("-icon-badge-check")).toBe(true);
@@ -533,7 +536,9 @@ describe("Canvas MCP pages", () => {
 		mountApp("admin");
 
 		const clientSelect = document.querySelector("#client-select");
-		expect(clientSelect?.nextElementSibling?.classList.contains("instui-pill")).toBe(true);
+		expect(
+			clientSelect?.previousElementSibling?.classList.contains("client-select-label-row"),
+		).toBe(true);
 		const untestedPill = document.querySelector(".client-status-pill");
 		expect(untestedPill?.classList.contains("-color-success")).toBe(false);
 		expect(untestedPill?.classList.contains("-color-danger")).toBe(false);
