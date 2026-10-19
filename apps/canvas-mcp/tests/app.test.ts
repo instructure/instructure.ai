@@ -438,7 +438,7 @@ describe("Canvas MCP pages", () => {
 			[...document.querySelectorAll<HTMLButtonElement>('.page-tabs [role="tab"]')].map(
 				(tab) => tab.textContent,
 			),
-		).toEqual(["Configure a Server", "Connect a Client"]);
+		).toEqual(["Configure a Server", "Connect a Client", "Help"]);
 		expect(document.querySelector<HTMLButtonElement>('[data-page="connect"]')?.disabled).toBe(true);
 		expect(
 			document.querySelector('[data-action="copy-link"]')?.classList.contains("-icon-send"),

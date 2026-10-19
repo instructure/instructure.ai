@@ -84,7 +84,7 @@ Use a semantic table with two-level column headers:
 - Preserve install-mode scope and existing reasons, notes, and test dates. Explain that current statuses are recorded per install mode, not separate tests of each key type.
 - Present existing key-support facts alongside those statuses; explicitly incompatible key types display Known issue. Unknown support remains visibly qualified.
 - For explicitly unavailable install modes, display **Not applicable** as a non-status marker with an explanation, not a false Untested result. An empty/unknown mode list is not proof of incompatibility: show Untested with "install flow unverified."
-- If a key type is explicitly incompatible, show Known issue with the recorded reason/evidence. Unknown key support remains Untested.
+- If a key type is explicitly incompatible, show Known issue with the recorded reason. Qualify unknown key support without changing the source install-mode status.
 - Keep facts, compatibility results, and issues in existing curated client definitions.
 
 ## 4. Implementation sequence

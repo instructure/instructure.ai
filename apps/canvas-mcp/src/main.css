@@ -143,6 +143,53 @@ h1 {
     gap: 22px;
 }
 
+.help-panel {
+    margin-top: 24px;
+}
+
+.help-sections {
+    margin-bottom: 24px;
+}
+
+.help-entry {
+    margin: 24px 0;
+}
+
+.help-entry h3 {
+    margin-bottom: 8px;
+}
+
+.help-entry p {
+    margin: 0;
+}
+
+.help-matrix-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.help-panel .help-matrix-content {
+    max-width: none;
+    margin-inline: 0;
+}
+
+.help-matrix {
+    width: 100%;
+    min-width: 640px;
+    table-layout: fixed;
+}
+
+.help-matrix th,
+.help-matrix td {
+    vertical-align: top;
+    overflow-wrap: anywhere;
+}
+
+.help-matrix td p {
+    margin: 8px 0 0;
+    font-size: 12px;
+}
+
 .gemini-deprecation-notice {
     margin: 0;
 }
@@ -575,6 +622,18 @@ pre {
 }
 
 @media print {
+    .help-sections {
+        display: none;
+    }
+
+    .help-matrix-scroll {
+        overflow: visible;
+    }
+
+    .help-matrix {
+        min-width: 0;
+        table-layout: fixed;
+    }
 
     html {
         color-scheme: light !important;

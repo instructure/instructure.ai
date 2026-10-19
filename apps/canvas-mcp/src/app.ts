@@ -8,6 +8,7 @@ import { renderPage, type PageMode } from "./page";
 import { copyToClipboard } from "./ui/copy";
 import { applyTheme, setTheme } from "./ui/theme";
 import { commandPlatform, isPlatformPreference } from "./platform";
+import { helpSectionFromQuery, type HelpSection } from "./help/content";
 import {
 	type AppState,
 	type StorageLike,
@@ -30,6 +31,7 @@ export function mountApp(mode: PageMode): void {
 	const mount = Symbol();
 	mounts.set(appRoot, mount);
 	let pageMode = pageModeFromQuery(globalThis.location.search) ?? mode;
+	let helpSection = helpSectionFromQuery(globalThis.location.search);
 	normalizeSetup(state);
 	function isConnectionReady(): boolean {
 		return connectionReadiness(state).ready;
@@ -70,7 +72,8 @@ export function mountApp(mode: PageMode): void {
 			pageMode,
 			viewState.domainInputValue,
 			isConnectionReady(),
-			callbackResolution(),
+			pageMode === "help" ? undefined : callbackResolution(),
+			helpSection,
 		);
 		const tray = appRoot.querySelector<HTMLElement>(".instui-tray");
 		if (tray) applySpacing(tray);
@@ -81,7 +84,7 @@ export function mountApp(mode: PageMode): void {
 
 	function syncConnectTab(): void {
 		const connectTab = appRoot.querySelector<HTMLButtonElement>('[data-page="connect"]');
-		if (pageMode === "admin" && connectTab) {
+		if (pageMode !== "user" && connectTab) {
 			const ready = isConnectionReady();
 			connectTab.disabled = !ready;
 			appRoot
@@ -91,6 +94,13 @@ export function mountApp(mode: PageMode): void {
 	}
 
 	function bindEvents() {
+		appRoot.querySelectorAll<HTMLInputElement>("[data-help-section]").forEach((control) => {
+			control.addEventListener("change", () => {
+				helpSection = helpSectionFromQuery(`?help=${encodeURIComponent(control.value)}`);
+				persistAndRender();
+				document.getElementById(`help-section-${helpSection}`)?.focus({ preventScroll: true });
+			});
+		});
 		appRoot
 			.querySelectorAll<HTMLInputElement | HTMLButtonElement>("[data-guide-surface]")
 			.forEach((control) => {
@@ -134,10 +144,14 @@ export function mountApp(mode: PageMode): void {
 				if (tab.hasAttribute("data-configure-client")) {
 					globalThis.scrollTo({ top: 0, behavior: "smooth" });
 				}
-				pageMode = tab.dataset.page === "admin" ? "admin" : "user";
-				state.surface = pageMode === "user" ? "provider" : "canvas";
+				pageMode =
+					tab.dataset.page === "help" ? "help" : tab.dataset.page === "admin" ? "admin" : "user";
+				if (pageMode !== "help") state.surface = pageMode === "user" ? "provider" : "canvas";
 				persistAndRender();
 			});
+		});
+		appRoot.querySelector<HTMLInputElement>("#domain-input")?.addEventListener("input", (event) => {
+			viewState.domainInputValue = (event.currentTarget as HTMLInputElement).value;
 		});
 		appRoot
 			.querySelector<HTMLInputElement>("#domain-input")
@@ -262,10 +276,10 @@ export function mountApp(mode: PageMode): void {
 			?.addEventListener("click", async () => {
 				await copyToClipboard(
 					new URL(
-						`${globalThis.location.pathname}?${pageQuery(state, "user")}`,
+						`${globalThis.location.pathname}?${pageQuery(state, pageMode === "help" ? "help" : "user", helpSection)}`,
 						globalThis.location.origin,
 					).toString(),
-					"Setup link copied",
+					pageMode === "help" ? "Help link copied" : "Setup link copied",
 				);
 			});
 		appRoot.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((button) => {
@@ -279,7 +293,7 @@ export function mountApp(mode: PageMode): void {
 		normalizeSetup(state);
 		if (pageMode === "admin" && state.install !== "enterprise") state.surface = "canvas";
 		savePreferences(state, getStorage());
-		const search = pageQuery(state, pageMode);
+		const search = pageQuery(state, pageMode, helpSection);
 		globalThis.history.replaceState(
 			null,
 			"",
@@ -317,12 +331,14 @@ function pageModeFromQuery(search: string): PageMode | null {
 	const page = new URLSearchParams(search).get("page");
 	if (page === "connect") return "user";
 	if (page === "admin") return "admin";
+	if (page === "help") return "help";
 	return null;
 }
 
-function pageQuery(state: AppState, pageMode: PageMode): string {
+function pageQuery(state: AppState, pageMode: PageMode, helpSection: HelpSection): string {
 	const params = new URLSearchParams(stateQuery(state));
-	params.set("page", pageMode === "admin" ? "admin" : "connect");
+	params.set("page", pageMode === "help" ? "help" : pageMode === "admin" ? "admin" : "connect");
+	if (pageMode === "help") params.set("help", helpSection);
 	if (new URLSearchParams(globalThis.location.search).has("dev")) params.set("dev", "");
 	return params.toString();
 }

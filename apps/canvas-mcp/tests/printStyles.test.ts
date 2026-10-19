@@ -67,6 +67,13 @@ describe("print styles", () => {
 		expect(declarations(".code-platform-toggle").get("display")).toBe("none");
 	});
 
+	it("prints the selected Help section and all matrix columns without scroll clipping", () => {
+		expect(declarations(".help-sections").get("display")).toBe("none");
+		expect(declarations(".help-matrix-scroll").get("overflow")).toBe("visible");
+		expect(declarations(".help-matrix").get("min-width")).toBe("0");
+		expect(declarations(".help-matrix").get("table-layout")).toBe("fixed");
+	});
+
 	it("adds page breaks after cards marked for print pagination", () => {
 		expect(declarations(".print-page-break-after").get("break-after")).toBe("page");
 		expect(declarations(".print-page-break-after").get("page-break-after")).toBe("always");

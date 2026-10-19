@@ -9,7 +9,7 @@ export function renderHelp(section: HelpSection): string {
 	const label = HELP_SECTIONS.find(({ id }) => id === section)!.label;
 	return `<section class="instui-card -variant-base help-panel"><div class="content">
 		<fieldset class="instui-segmented-control help-sections" aria-label="Help topics"><div class="viewport"><div class="track">${HELP_SECTIONS.map(({ id, label }) => `<label><input id="help-section-${id}" type="radio" name="help-section" value="${id}" data-help-section="${id}" aria-controls="help-content" ${section === id ? "checked" : ""}>${label}</label>`).join("")}</div></div></fieldset>
-		<section id="help-content" aria-labelledby="help-content-heading"><h2 id="help-content-heading" class="instui-heading -level-h2">${label}</h2>
+		<section id="help-content" class="${section === "clients" ? "help-matrix-content" : ""}" aria-labelledby="help-content-heading"><h2 id="help-content-heading" class="instui-heading -level-h2">${label}</h2>
 		${section === "clients" ? renderClientMatrix() : renderEntries(section === "faqs" ? FAQS : COMMON_ISSUES)}
 		${section === "issues" ? renderClientIssues() : ""}
 		</section></div></section>`;

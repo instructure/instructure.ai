@@ -1,8 +1,14 @@
 # @instructure.ai/canvas-mcp
 
-Single-page setup guide for connecting Canvas to supported MCP clients, served at `/canvas-mcp/`. Configure a server and connect a client from the tabs in the app; the selected tab is represented by `page=admin` or `page=connect` in the query string.
+Single-page setup guide for connecting Canvas to supported MCP clients, served at `/canvas-mcp/`. Configure a server, connect a client, or open Help from the tabs in the app; the selected tab is represented by `page=admin`, `page=connect`, or `page=help` in the query string.
 
 Search indexing is discouraged with a `noindex, nofollow` robots meta tag. Both the site-root and app-local `robots.txt` disallow all crawling. Crawlers only consult `/robots.txt` at the origin root, so standalone deployments must serve the app's copy there. These directives are advisory, not access controls.
+
+## Help
+
+Help follows Connect a Client and remains available without completing setup. Its Pantoken segmented control switches between FAQs, Common Issues, and Supported Clients. Deep links use `page=help&help=faqs|issues|clients`; an absent or invalid section defaults to FAQs. Sharing and printing retain the selected Help section, while setup preferences remain intact. Help navigation is not saved in localStorage.
+
+The Supported Clients table presents the existing curated registry, `clientStatus(client, install)`, and public/private key-support facts for enterprise and personal installs. Existing Validated statuses display as Verified; statuses are scoped by install mode, not separate tests of each key type. Recorded dates, notes, and issue reasons remain visible. Explicitly incompatible key types display Known issue, unavailable install modes display Not applicable, and unknown flows/support are qualified as unverified. Generic MCP and Rulesync-only entries belong to Other and are not included. Maintain statuses in the client definitions, not in a separate table dataset.
 
 ## Development
 
