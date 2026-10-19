@@ -65,6 +65,20 @@ describe("composable client guides", () => {
 		);
 	});
 
+	it("handles long unterminated bold text containing repeated code spans without backtracking", () => {
+		const text = `**${"`)`".repeat(20_000)}`;
+		const start = performance.now();
+		const html = renderContent([{ kind: "paragraph", text }], {});
+		expect(performance.now() - start).toBeLessThan(1_000);
+		expect(html).toBe(`<p>**${"<code>)</code>".repeat(20_000)}</p>`);
+	});
+
+	it("supports asterisks inside code spans nested in bold", () => {
+		expect(renderContent([{ kind: "paragraph", text: "**Run `**literal**` now**" }], {})).toBe(
+			"<p><strong>Run <code>**literal**</code> now</strong></p>",
+		);
+	});
+
 	it("renders the untitled Claude Code introduction as a paragraph without a heading", () => {
 		const state = readState("?client=claude-code", null);
 		document.body.innerHTML = renderGuide(clientDefinition(state.client), state, false);
@@ -132,9 +146,14 @@ describe("composable client guides", () => {
 		expect(image?.dataset.placeholder).toBe("true");
 
 		const terminal = screenshot("claude_code_mcp_needs_auth", "Terminal output.");
-		expect(terminal).toMatchObject({ width: 960, height: 360, placeholder: true });
+		expect(terminal).toMatchObject({ width: 600, height: 360, placeholder: false });
 		expect(renderContent([terminal], {})).toContain(
-			"https://placehold.co/960x360/png?text=claude_code_mcp_needs_auth",
+			`${import.meta.env.BASE_URL.replace(/\/$/u, "")}/images/client-claude_code-start_auth.png`,
+		);
+		const terminalPlaceholder = screenshot("cli_auth_url_and_code_prompt", "Terminal prompt.");
+		expect(terminalPlaceholder).toMatchObject({ width: 600, height: 360, placeholder: true });
+		expect(renderContent([terminalPlaceholder], {})).toContain(
+			"https://placehold.co/600x360/png?text=cli_auth_url_and_code_prompt",
 		);
 	});
 
@@ -157,9 +176,9 @@ describe("composable client guides", () => {
 		}
 	});
 
-	it("uses the captured Claude Code registration image at its native aspect ratio", () => {
+	it("uses the captured Claude Code registration image at the standard terminal size", () => {
 		const image = screenshot("claude_code_mcp_add_command", "Claude Code registration output.");
-		expect(image).toMatchObject({ width: 759, height: 666, placeholder: false });
+		expect(image).toMatchObject({ width: 600, height: 360, placeholder: false });
 		expect(screenshotSource(image.name, image.placeholder)).toBe(
 			`${import.meta.env.BASE_URL.replace(/\/$/u, "")}/images/client-claude_code-mcp_add_command.png`,
 		);

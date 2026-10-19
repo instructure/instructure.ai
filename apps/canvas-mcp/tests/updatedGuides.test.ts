@@ -140,9 +140,8 @@ describe("updated curated guidance", () => {
 		const enterprise = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
 		expect(enterprise.disabled).toBe(false);
 		expect(enterprise.checked).toBe(false);
-		expect(enterprise.closest("label")?.nextElementSibling?.textContent).toBe(
-			"Configured through managed settings or device management.",
-		);
+		expect(enterprise.closest("label")?.textContent).toBe("Enterprise install");
+		expect(enterprise.closest("label")?.nextElementSibling).toBeNull();
 		enterprise.checked = true;
 		enterprise.dispatchEvent(new Event("change", { bubbles: true }));
 		document.querySelector<HTMLButtonElement>("#configure-provider-button-bottom")!.click();
@@ -238,9 +237,8 @@ describe("updated curated guidance", () => {
 			const enterprise = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
 			expect(enterprise.checked).toBe(false);
 			expect(enterprise.disabled).toBe(false);
-			expect(enterprise.closest("label")?.nextElementSibling?.textContent).toContain(
-				"Gemini CLI enterprise controls",
-			);
+			expect(enterprise.closest("label")?.textContent).toBe("Enterprise install");
+			expect(enterprise.closest("label")?.nextElementSibling).toBeNull();
 			enterprise.checked = true;
 			enterprise.dispatchEvent(new Event("change", { bubbles: true }));
 			document.querySelector<HTMLButtonElement>("#configure-provider-button-bottom")!.click();

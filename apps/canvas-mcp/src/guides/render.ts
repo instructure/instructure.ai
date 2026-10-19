@@ -59,7 +59,7 @@ function renderCode(block: CodeSnippet, values: Record<string, string>): string 
 
 function inlineMarkup(text: string): string {
 	return text.replace(
-		/`([^`\n]+)`|\*\*((?:`[^`\n]+`|[^*\n])+)\*\*/gu,
+		/`([^`\n]+)`|\*\*((?:`[^`\n]+`|[^*`\n])+)\*\*/gu,
 		(_, code: string | undefined, strong: string | undefined) =>
 			code !== undefined ? `<code>${code}</code>` : `<strong>${inlineMarkup(strong!)}</strong>`,
 	);
