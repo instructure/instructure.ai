@@ -2,7 +2,7 @@ import { type Guide } from "../../guides/types";
 import { documented, updatedGuidance } from "../evidence";
 import { type Evidence, type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
-import { screenshot } from "../../guides/screenshots";
+import { canvasAuthorizationScreenshot, screenshot } from "../../guides/screenshots";
 const codexOAuth: Evidence = {
 	method: "vendor-doc",
 	label: "Codex OAuth registration and callbacks",
@@ -92,6 +92,7 @@ const codexPersonalGuide: Guide = {
 					language: "bash",
 					text: 'codex -c mcp_oauth_callback_port=8081 -c \'mcp_oauth_callback_url="http://localhost:8081/callback"\' mcp login canvas-mcp --scopes "{scope}"',
 				},
+				canvasAuthorizationScreenshot(),
 			],
 		},
 		{

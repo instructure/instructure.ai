@@ -2,7 +2,7 @@ import { type Guide } from "../../guides/types";
 import { updatedGuidance } from "../evidence";
 import { type Evidence, type ClientDefinition } from "../types";
 import { unknownFacts } from "../facts";
-import { screenshot } from "../../guides/screenshots";
+import { canvasAuthorizationScreenshot, screenshot } from "../../guides/screenshots";
 const chatgptApps: Evidence = {
 	method: "vendor-doc",
 	label: "ChatGPT custom MCP apps and workspace administration",
@@ -30,6 +30,7 @@ function chatgptGuide(enterprise: boolean): Guide {
 											"Ask ChatGPT to list your Canvas courses.",
 										],
 									},
+									canvasAuthorizationScreenshot(),
 								],
 							},
 						],
@@ -74,6 +75,7 @@ function chatgptGuide(enterprise: boolean): Guide {
 						"chatgpt_risk_warning_create",
 						"risk warning checkbox/button and Create as a plugin button.",
 					),
+					canvasAuthorizationScreenshot(),
 				],
 			},
 			...(enterprise

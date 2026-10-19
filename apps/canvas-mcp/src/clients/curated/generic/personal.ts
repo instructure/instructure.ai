@@ -1,5 +1,6 @@
 import { type Guide } from "../../../guides/types";
 import { genericSources } from "./sources";
+import { canvasAuthorizationScreenshot } from "../../../guides/screenshots";
 
 export const genericPersonalGuide: Guide = {
 	presentation: "by-surface",
@@ -29,6 +30,7 @@ export const genericPersonalGuide: Guide = {
 					kind: "paragraph",
 					text: "Complete Canvas sign-in and confirm the client can list the Canvas MCP tools.",
 				},
+				canvasAuthorizationScreenshot(),
 			],
 		},
 	],

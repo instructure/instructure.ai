@@ -1,6 +1,6 @@
 import { type Guide } from "../../guides/types";
 import { type Evidence } from "../types";
-import { screenshot } from "../../guides/screenshots";
+import { canvasAuthorizationScreenshot, screenshot } from "../../guides/screenshots";
 
 export const antigravityMcp: Evidence = {
 	method: "vendor-doc",
@@ -150,6 +150,7 @@ export const antigravityAppGuide: Guide = {
 					"ide_user_settings_customizations",
 					"Customizations tab with Installed MCP Servers and Refresh.",
 				),
+				canvasAuthorizationScreenshot(),
 				screenshot(
 					"ide_authenticate_paste_code",
 					"Authenticate button and paste-code field with Submit.",

@@ -1,5 +1,6 @@
 import { type ClientDefinition } from "../clients/types";
 import { type Guide } from "./types";
+import { canvasAuthorizationScreenshot } from "./screenshots";
 
 export function clientGuide(client: ClientDefinition, install: "personal" | "enterprise"): Guide {
 	return (
@@ -20,7 +21,7 @@ export function clientGuide(client: ClientDefinition, install: "personal" | "ent
 					id: "verify",
 					kind: "verify",
 					title: "Verify the connection",
-					content: [{ kind: "paragraph", text: client.verify }],
+					content: [{ kind: "paragraph", text: client.verify }, canvasAuthorizationScreenshot()],
 				},
 			],
 		}

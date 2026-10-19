@@ -3,7 +3,7 @@
 import { documented, setupGuidance, updatedGuidance } from "../evidence";
 import { type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
-import { screenshot } from "../../guides/screenshots";
+import { canvasAuthorizationScreenshot, screenshot } from "../../guides/screenshots";
 export const copilotStudio = {
 	facts: {
 		...inheritedFacts(["private"], {
@@ -34,6 +34,7 @@ export const copilotStudio = {
 									"Complete Canvas sign-in when prompted.",
 								],
 							},
+							canvasAuthorizationScreenshot(),
 						],
 					},
 				],
@@ -126,7 +127,7 @@ export const copilotStudio = {
 							kind: "paragraph",
 							text: "After saving the generated redirect URI on the Canvas key, add the connector as a tool to the agent.",
 						},
-						screenshot("copilot_canvas_signin", "Canvas OAuth consent popup."),
+						canvasAuthorizationScreenshot(),
 						screenshot("copilot_tool_added", "MCP tool listed under agent Tools."),
 					],
 				},

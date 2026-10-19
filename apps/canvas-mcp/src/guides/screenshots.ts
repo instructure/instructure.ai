@@ -10,7 +10,12 @@ export function screenshot(
 ): Extract<StructuredContent, { kind: "image" }> {
 	const asset = SCREENSHOT_MANIFEST[name];
 	if (!asset) throw new Error(`Screenshot is missing from the manifest: ${name}`);
-	const size = asset.size === "terminal" ? terminalSize : standardSize;
+	const size =
+		typeof asset.size === "object"
+			? asset.size
+			: asset.size === "terminal"
+				? terminalSize
+				: standardSize;
 	return {
 		kind: "image",
 		name,
@@ -18,6 +23,13 @@ export function screenshot(
 		...size,
 		placeholder: !asset.file,
 	};
+}
+
+export function canvasAuthorizationScreenshot(): Extract<StructuredContent, { kind: "image" }> {
+	return screenshot(
+		"canvas_consent_screen",
+		"Canvas OAuth authorization screen prompting you to approve access for the MCP client.",
+	);
 }
 
 export function screenshotSource(name: string, placeholder?: boolean): string {

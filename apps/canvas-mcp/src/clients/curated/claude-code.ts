@@ -2,7 +2,7 @@ import { documented, setupGuidance, updatedGuidance } from "../evidence";
 import { type ClientDefinition, type Evidence } from "../types";
 import { type ClientGuideStep, type Guide } from "../../guides/types";
 import { inheritedFacts } from "../facts";
-import { screenshot } from "../../guides/screenshots";
+import { canvasAuthorizationScreenshot, screenshot } from "../../guides/screenshots";
 const managedMcp: Evidence = {
 	method: "vendor-doc",
 	label: "Claude Code managed MCP deployment and access policies",
@@ -117,10 +117,7 @@ const personalGuide: Guide = {
 					"claude_code_mcp_needs_auth",
 					'`/mcp` panel with canvas-mcp showing "Needs authentication".',
 				),
-				screenshot(
-					"claude_code_canvas_browser_authorize",
-					"Canvas authorize screen with localhost callback.",
-				),
+				canvasAuthorizationScreenshot(),
 			],
 		},
 		{
@@ -267,6 +264,7 @@ export const claudeCode = {
 								"claude_code_mcp_managed_section",
 								'`/mcp` showing canvas-mcp under "Managed MCPs".',
 							),
+							canvasAuthorizationScreenshot(),
 						],
 					},
 					...personalGuide.steps.filter(
@@ -290,6 +288,7 @@ export const claudeCode = {
 								"claude_code_doctor_managed_settings",
 								'`claude doctor` output line "Managed settings (remote)".',
 							),
+							canvasAuthorizationScreenshot(),
 						],
 					},
 					{

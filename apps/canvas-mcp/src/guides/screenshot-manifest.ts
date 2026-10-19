@@ -1,10 +1,13 @@
 export interface ScreenshotAsset {
 	file?: string;
-	size?: "terminal";
+	size?: "terminal" | { width: number; height: number };
 }
 
 export const SCREENSHOT_MANIFEST: Record<string, ScreenshotAsset> = {
-	canvas_consent_screen: {},
+	canvas_consent_screen: {
+		file: "images/client-canvas-oauth_authorize.png",
+		size: { width: 732, height: 400 },
+	},
 	canvas_key_redirect_uri: {},
 	canvas_key_redirect_uri_gemini: {},
 	chatgpt_admin_configure_actions_access: {},

@@ -1,7 +1,7 @@
 import { documented, setupGuidance } from "../evidence";
 import { type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
-import { screenshot } from "../../guides/screenshots";
+import { canvasAuthorizationScreenshot, screenshot } from "../../guides/screenshots";
 export const geminiEnterprise = {
 	facts: {
 		...inheritedFacts(["private"], {
@@ -39,7 +39,7 @@ export const geminiEnterprise = {
 								"ge_chat_toggle_connector",
 								"Enable the Canvas data store/connector in the chat input area (label unverified).",
 							),
-							screenshot("ge_user_oauth_prompt", "Complete Canvas sign-in prompt."),
+							canvasAuthorizationScreenshot(),
 							screenshot("ge_chat_canvas_result", "Canvas courses result in chat."),
 						],
 					},

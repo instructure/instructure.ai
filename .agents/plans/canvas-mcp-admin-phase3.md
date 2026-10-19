@@ -105,6 +105,7 @@ Add one content kind to `StructuredContent` in `src/guides/types.ts`:
 - `screenshot()` resolves the URL from a single manifest, `src/guides/screenshot-manifest.ts`, mapping name to `{ file?: string }`. If `file` is missing the helper returns the placehold.co URL and sets `placeholder: true`; once a real file is added, only the manifest changes.
 - Add an `evidence:check`-style script check that lists names still on placeholders so admins and docs owners can track them. Print the list in CI as non-blocking.
 - `alt` text describes what the final screenshot shows (copy from the marker text), not "placeholder".
+- Client Canvas sign-in/authorization steps share the real `public/images/client-canvas-oauth_authorize.png` capture (732x400) through `canvasAuthorizationScreenshot()`, replacing equivalent consent placeholders. Blocked flows remain blocked; Go research previews do not imply a supported sign-in flow.
 - Check that the page CSP and the print stylesheet allow the placehold.co host; if not, ship local SVG placeholders in `public/images/placeholders/` instead and keep the same helper.
 - The checked-in `apps/canvas-mcp/index.html` has no CSP declaration. A hosting-level policy may still restrict images from placehold.co; verify it before deployment.
 - Do not put real tenant data, names, client secrets or Client IDs in final screenshots. Redact secrets. Use synthetic tenants. Screenshots from a customer environment need review for FERPA/PII before they ship.

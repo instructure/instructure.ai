@@ -1,7 +1,7 @@
 import { documented, setupGuidance, updatedGuidance } from "../evidence";
 import { type Evidence, type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
-import { screenshot } from "../../guides/screenshots";
+import { canvasAuthorizationScreenshot, screenshot } from "../../guides/screenshots";
 const claudeConnectors: Evidence = {
 	method: "vendor-doc",
 	label: "Claude custom connectors — individual and organization setup",
@@ -71,6 +71,7 @@ export const claudeAi = {
 							"claude_personal_connect_button",
 							'the added connector row with the "Connect" button.',
 						),
+						canvasAuthorizationScreenshot(),
 					],
 				},
 				{
@@ -111,10 +112,7 @@ export const claudeAi = {
 								"claude_member_custom_connector_connect",
 								'member\'s Customize > Connectors showing the org "Custom" connector and "Connect" button.',
 							),
-							screenshot(
-								"claude_member_canvas_signin_consent",
-								"Canvas sign-in/authorize screen after Connect.",
-							),
+							canvasAuthorizationScreenshot(),
 						],
 					},
 				],

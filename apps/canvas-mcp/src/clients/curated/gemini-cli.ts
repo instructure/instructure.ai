@@ -2,7 +2,7 @@ import { type Evidence, type ClientDefinition } from "../types";
 import { type Guide } from "../../guides/types";
 import { unknownFacts } from "../facts";
 import { updatedGuidance } from "../evidence";
-import { screenshot } from "../../guides/screenshots";
+import { canvasAuthorizationScreenshot, screenshot } from "../../guides/screenshots";
 const geminiOAuth: Evidence = {
 	method: "vendor-doc",
 	label: "Gemini CLI MCP OAuth configuration",
@@ -102,7 +102,7 @@ const personalGuide: Guide = {
 					"gemini_cli_mcp_auth",
 					"terminal after `/mcp auth canvas-mcp` showing browser prompt.",
 				),
-				screenshot("canvas_consent_screen", "Canvas authorize page."),
+				canvasAuthorizationScreenshot(),
 				screenshot("gemini_cli_mcp_list", "/mcp output with canvas-mcp and tool list."),
 			],
 		},

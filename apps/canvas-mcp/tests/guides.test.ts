@@ -4,7 +4,7 @@ import { mountApp } from "../src/app";
 import { renderContent, renderGuide, validateGuide } from "../src/guides/render";
 import { screenshot, screenshotSource } from "../src/guides/screenshots";
 import { clientGuide } from "../src/guides/shared";
-import { clientDefinition } from "../src/clients";
+import { allowedKeyTypes, CLIENTS, clientDefinition } from "../src/clients";
 import { readState } from "../src/state";
 import { resolveKeySettings } from "../src/admin/key-settings-model";
 
@@ -15,6 +15,28 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 describe("composable client guides", () => {
+	it("uses the shared Canvas authorization image in every available client sign-in flow", () => {
+		for (const client of CLIENTS)
+			for (const install of client.installModes)
+				for (const key of allowedKeyTypes(client)) {
+					const state = readState(`?client=${client.id}&install=${install}&key=${key}`, null);
+					document.body.innerHTML = renderGuide(client, state, false);
+					const images = document.querySelectorAll<HTMLImageElement>(
+						'img[src$="/images/client-canvas-oauth_authorize.png"]',
+					);
+					if (client.blocker) {
+						expect(images).toHaveLength(0);
+						continue;
+					}
+					expect(images, `${client.id}/${install}/${key}`).toHaveLength(1);
+					expect(images[0].closest("[data-guide-step]")).not.toBeNull();
+					expect(images[0].dataset.placeholder).toBe("false");
+					expect(images[0].width).toBe(732);
+					expect(images[0].height).toBe(400);
+					expect(images[0].alt).toContain("Canvas OAuth authorization");
+				}
+	});
+
 	it.each(["codex", "claude-ai", "claude-code", "gemini-cli"])(
 		"omits prerequisite preambles from the %s client preview",
 		(id) => {

@@ -3,7 +3,7 @@ import { antigravityEnterpriseGuide } from "./antigravity-guides";
 import { type ClientDefinition } from "../types";
 import { unknownFacts, unverified } from "../facts";
 import { updatedGuidance, updatedFact } from "../evidence";
-import { screenshot } from "../../guides/screenshots";
+import { canvasAuthorizationScreenshot, screenshot } from "../../guides/screenshots";
 const antigravityCliGuide: Guide = {
 	presentation: "by-surface",
 	status: "documented",
@@ -60,6 +60,7 @@ const antigravityCliGuide: Guide = {
 					"overlay listing canvas-mcp with status Auth Needed.",
 				),
 				screenshot("cli_mcp_authenticate_option", "server detail with Authenticate selected."),
+				canvasAuthorizationScreenshot(),
 				screenshot("cli_auth_url_and_code_prompt", "terminal showing URL and code prompt."),
 			],
 		},
