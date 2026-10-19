@@ -17,7 +17,8 @@
 		"lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
 		"probe": "node scripts/probe/server.mts",
 		"evidence:check": "vite-node scripts/checkEvidence.mts",
-		"scopes:update": "node scripts/updateScopes.mts"
+		"scopes:update": "node scripts/updateScopes.mts",
+		"tools:update": "vite-node scripts/updateTools.mts"
 	},
 	"dependencies": {
 		"@pantoken/components": "2.1.1",

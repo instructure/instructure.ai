@@ -81,17 +81,20 @@ describe("Help navigation", () => {
 		expect(document.querySelector("#help-content")?.textContent).toContain("What is Canvas MCP?");
 	});
 
-	it.each(["faqs", "issues", "clients"])("supports %s deep links without setup", (section) => {
-		history.replaceState(null, "", `?page=help&help=${section}&client=chatgpt`);
-		mountApp("admin");
-		expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("help");
-		expect(document.querySelector<HTMLInputElement>(`#help-section-${section}`)?.checked).toBe(
-			true,
-		);
-		expect(document.querySelector(".known-issue-alert")).toBeNull();
-		expect(document.querySelector(".print-permalink")?.textContent).toContain("page=help");
-		expect(document.querySelector(".print-permalink")?.textContent).toContain(`help=${section}`);
-	});
+	it.each(["faqs", "issues", "clients", "tools"])(
+		"supports %s deep links without setup",
+		(section) => {
+			history.replaceState(null, "", `?page=help&help=${section}&client=chatgpt`);
+			mountApp("admin");
+			expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("help");
+			expect(document.querySelector<HTMLInputElement>(`#help-section-${section}`)?.checked).toBe(
+				true,
+			);
+			expect(document.querySelector(".known-issue-alert")).toBeNull();
+			expect(document.querySelector(".print-permalink")?.textContent).toContain("page=help");
+			expect(document.querySelector(".print-permalink")?.textContent).toContain(`help=${section}`);
+		},
+	);
 
 	it("defaults invalid sections and restores focus after changing sections", () => {
 		history.replaceState(null, "", "?page=help&help=bad");
@@ -105,6 +108,65 @@ describe("Help navigation", () => {
 		expect(document.activeElement?.id).toBe("help-section-issues");
 		expect(document.querySelector("table")).toBeNull();
 		expect(document.querySelector(".print-context")?.textContent).toContain("Help · Common Issues");
+	});
+
+	it("opens Available Tools after Supported Clients and wires its filters", () => {
+		history.replaceState(null, "", "?page=help&help=clients");
+		mountApp("admin");
+		choose("tools");
+		expect(document.activeElement?.id).toBe("help-section-tools");
+		expect(new URLSearchParams(location.search).get("help")).toBe("tools");
+		const search = document.querySelector<HTMLInputElement>("#tool-search")!;
+		search.value = "no-such-tool-xyz";
+		search.dispatchEvent(new Event("input", { bubbles: true }));
+		expect(document.querySelector("#tool-results")?.textContent).toBe("0 of 141 tools");
+		expect(document.querySelector(".print-context")?.textContent).toContain(
+			"Help · Available Tools",
+		);
+		expect(document.querySelector(".print-permalink")?.textContent).toContain("help=tools");
+	});
+
+	it("copies the example prompt from a tool card without setup", async () => {
+		const writeText = vi.fn().mockResolvedValue(undefined);
+		vi.stubGlobal("navigator", { clipboard: { writeText } });
+		history.replaceState(null, "", "?page=help&help=tools");
+		mountApp("admin");
+		const button = document.querySelector<HTMLButtonElement>("#tool-list [data-copy]")!;
+		const prompt = button.closest(".shiki-block")!.querySelector("code")!.textContent;
+		button.click();
+		await vi.waitFor(() => expect(writeText).toHaveBeenCalledWith(prompt));
+	});
+
+	it("restores, shares, and prints tool filters while retaining them across Help navigation", async () => {
+		const writeText = vi.fn().mockResolvedValue(undefined);
+		vi.stubGlobal("navigator", { clipboard: { writeText } });
+		history.replaceState(
+			null,
+			"",
+			"?page=help&help=tools&toolResource=quiz&toolAccess=read&toolRole=student&toolRole=teacher&toolSearch=quiz",
+		);
+		mountApp("admin");
+		expect(document.querySelector<HTMLSelectElement>("#tool-resource-filter")?.value).toBe("quiz");
+		expect(document.querySelector<HTMLInputElement>("#tool-search")?.value).toBe("quiz");
+		const search = document.querySelector<HTMLInputElement>("#tool-search")!;
+		search.value = "question";
+		search.dispatchEvent(new Event("input"));
+		expect(new URLSearchParams(location.search).get("toolSearch")).toBe("question");
+		expect(document.querySelector(".print-permalink")?.textContent).toContain(
+			"toolSearch=question",
+		);
+		document.querySelector<HTMLButtonElement>('[data-action="copy-link"]')!.click();
+		await vi.waitFor(() => expect(writeText).toHaveBeenCalledOnce());
+		const shared = new URL(writeText.mock.calls[0]![0]).searchParams;
+		expect(shared.get("toolResource")).toBe("quiz");
+		expect(shared.getAll("toolRole")).toEqual(["student", "teacher"]);
+		expect(shared.get("toolSearch")).toBe("question");
+		choose("faqs");
+		expect(new URLSearchParams(location.search).has("toolResource")).toBe(false);
+		choose("tools");
+		expect(document.querySelector<HTMLInputElement>("#tool-search")?.value).toBe("question");
+		expect(document.querySelector<HTMLSelectElement>("#tool-resource-filter")?.value).toBe("quiz");
+		expect(localStorage.getItem("canvas-mcp:v1")).not.toContain("toolResource");
 	});
 
 	it("preserves setup preferences, surface, incomplete input, and the Help section", () => {

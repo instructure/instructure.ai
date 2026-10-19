@@ -159,6 +159,53 @@ h1 {
     margin: 24px 0;
 }
 
+.tool-list {
+    list-style: none;
+    padding: 0;
+}
+
+.tool-list > li {
+    margin-block: 24px;
+    overflow-wrap: anywhere;
+}
+
+.tool-access {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tool-access > .instui-pill.-color-info,
+.tool-access-pill {
+    margin-right: 12px;
+}
+
+.tool-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.tool-filters > div {
+    flex: 1 1 180px;
+}
+
+.tool-role-filter {
+    flex: 1 1 240px;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.tool-role-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+}
+
 .help-entry h3 {
     margin-bottom: 8px;
 }
@@ -530,6 +577,12 @@ pre {
             var(--instui-component-shared-tokens-background-ai-top-gradient-color) 100%) border-box;
 }
 
+.shiki-block.language-prompt pre,
+.shiki-block.language-prompt pre code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
 .scope-card {
     margin-top: 12px;
 }
@@ -626,6 +679,10 @@ pre {
 }
 
 @media print {
+    .tool-filter-controls {
+        display: none;
+    }
+
     .help-sections {
         display: none;
     }
