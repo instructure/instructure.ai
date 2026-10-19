@@ -209,12 +209,5 @@ export function renderGuide(
 					)
 					.join("");
 
-	return (
-		heading +
-		pending +
-		(!editable && !guide.clientSetup && guide.prerequisites.length
-			? `<ul>${guide.prerequisites.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
-			: "") +
-		body
-	);
+	return heading + pending + body;
 }

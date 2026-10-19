@@ -15,6 +15,22 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 describe("composable client guides", () => {
+	it.each(["codex", "claude-ai", "claude-code", "gemini-cli"])(
+		"omits prerequisite preambles from the %s client preview",
+		(id) => {
+			const state = readState(`?client=${id}`, null);
+			const client = clientDefinition(state.client);
+			const guide = clientGuide(client, state.install);
+			expect(guide.prerequisites.length).toBeGreaterThan(0);
+
+			document.body.innerHTML = renderGuide(client, state, false);
+
+			for (const prerequisite of guide.prerequisites)
+				expect(document.body.textContent).not.toContain(prerequisite);
+			expect(document.querySelector("#guide-provider [data-guide-step]")).not.toBeNull();
+		},
+	);
+
 	it("renders manifest screenshots as accessible lazy images and sizes terminal captures", () => {
 		const content = screenshot("chatgpt_plugins_add_custom_mcp", "Add a custom MCP server."),
 			html = renderContent([content], {});
