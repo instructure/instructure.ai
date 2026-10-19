@@ -38,10 +38,20 @@ function curatedClients(): ClientDefinition[] {
 	return CLIENTS.filter(({ group }) => group === "Curated");
 }
 
+function unavailableInstallReason(client: ClientDefinition, install: InstallMode): string {
+	if (client.installModes.length && !client.installModes.includes(install))
+		return "This install mode is not available.";
+	if (client.id === "gemini-cli" && install === "personal") {
+		const status = clientStatus(client, install);
+		if (status.kind === "known-issue") return status.reason;
+	}
+	return "";
+}
+
 function renderClientIssues(): string {
 	const issues = curatedClients().flatMap((client) =>
 		(["enterprise", "personal"] as const).flatMap((install) => {
-			if (client.installModes.length && !client.installModes.includes(install)) return [];
+			if (unavailableInstallReason(client, install)) return [];
 			const status = clientStatus(client, install);
 			const reason = client.blocker?.reason ?? (status.kind === "known-issue" ? status.reason : "");
 			return reason ? [{ title: `${clientLabel(client)} (${install})`, text: reason }] : [];
@@ -51,7 +61,7 @@ function renderClientIssues(): string {
 }
 
 function renderClientMatrix(): string {
-	return `<p id="client-matrix-legend">Verified = existing Validated status; Untested = no recorded validation; Known issue = recorded blocker or incompatible key type. Not applicable = unavailable install mode. Statuses are scoped to install mode, not separate public/private tests. This is not vendor certification.</p>
+	return `<p id="client-matrix-legend">Verified = existing Validated status; Untested = no recorded validation; Known issue = recorded connection blocker. Not applicable = unsupported key type or unavailable install mode, including discontinued Gemini CLI personal access. Statuses are scoped to install mode, not separate public/private tests. This is not vendor certification.</p>
 		<div class="help-matrix-scroll" role="region" aria-label="Supported client compatibility matrix" tabindex="0">
 		<table class="instui-table help-matrix" aria-describedby="client-matrix-legend">
 		<caption>Curated Canvas MCP clients</caption>
@@ -67,17 +77,13 @@ function renderClientMatrix(): string {
 }
 
 function renderStatus(client: ClientDefinition, install: InstallMode, key: KeyType): string {
-	if (client.installModes.length && !client.installModes.includes(install))
-		return "<span>Not applicable</span><p>This install mode is not available.</p>";
+	const unavailable = unavailableInstallReason(client, install);
+	if (unavailable) return `<span>Not applicable</span><p>${escapeHtml(unavailable)}</p>`;
 	const status = clientStatus(client, install);
 	const support = client.facts.keyTypes[key];
-	const reason =
-		client.blocker?.reason ??
-		(status.kind === "known-issue"
-			? status.reason
-			: support.value === "no"
-				? `This client does not support ${key} keys.`
-				: "");
+	if (support.value === "no")
+		return `<span>Not applicable</span><p>This client does not support ${key} keys.</p>`;
+	const reason = client.blocker?.reason ?? (status.kind === "known-issue" ? status.reason : "");
 	const label = reason ? "Known issue" : status.kind === "validated" ? "Verified" : "Untested";
 	const style = reason
 		? "-color-danger -icon-triangle-alert"

@@ -35,7 +35,7 @@ export const FAQS: HelpGroup[] = [
 			},
 			{
 				title: "What do the client statuses mean?",
-				text: "Verified presents the existing Validated client status. Untested means no validation status is recorded for that install mode. Known issue identifies an existing blocker or an explicitly incompatible key type. Statuses are recorded per install mode, not as separate tests of every key type; the table preserves recorded notes and dates.",
+				text: "Verified presents the existing Validated client status. Untested means no validation status is recorded for that install mode. Known issue identifies an existing connection blocker. Not applicable means the key type or install mode is unavailable, including discontinued Gemini CLI personal access. Statuses are recorded per install mode, not as separate tests of every key type; the table preserves recorded notes and dates.",
 			},
 		],
 	},

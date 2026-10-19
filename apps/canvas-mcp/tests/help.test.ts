@@ -42,15 +42,16 @@ describe("Help content", () => {
 				for (const [j, key] of (["public", "private"] as const).entries()) {
 					const cell = cells[i * 2 + j]!;
 					expect(cell.getAttribute("headers")).toContain(`matrix-${install}-${key}`);
-					if (client.installModes.length && !client.installModes.includes(install)) {
+					if (
+						(client.installModes.length && !client.installModes.includes(install)) ||
+						client.facts.keyTypes[key].value === "no" ||
+						(client.id === "gemini-cli" && install === "personal")
+					) {
 						expect(cell.textContent).toContain("Not applicable");
 						continue;
 					}
 					const status = clientStatus(client, install);
-					const issue =
-						client.blocker ||
-						status.kind === "known-issue" ||
-						client.facts.keyTypes[key].value === "no";
+					const issue = client.blocker || status.kind === "known-issue";
 					expect(cell.querySelector(".instui-pill")?.textContent).toBe(
 						issue ? "Known issue" : status.kind === "validated" ? "Verified" : "Untested",
 					);
@@ -119,8 +120,7 @@ describe("Help content", () => {
 		const geminiIssues = [
 			...document.querySelectorAll('[aria-labelledby="known-issues-heading"] details'),
 		].filter((entry) => entry.querySelector("summary")?.textContent?.includes("Gemini CLI"));
-		expect(geminiIssues).toHaveLength(1);
-		expect(geminiIssues[0]?.textContent).toContain("(personal)");
+		expect(geminiIssues).toHaveLength(0);
 		expect(document.querySelector("#known-issues-heading")?.textContent).toBe("Known Issues");
 		expect(document.querySelector("#known-issues-heading")?.className).toBe(
 			document.querySelector("#issue-general")?.className,
@@ -133,6 +133,27 @@ describe("Help content", () => {
 			details.querySelector("summary")!.click();
 			expect(details.open).toBe(true);
 		}
+	});
+
+	it("marks unsupported public keys and Gemini CLI personal installs as Not applicable, not Known issue", () => {
+		document.body.innerHTML = renderHelp("clients");
+		for (const id of ["gemini-enterprise", "copilot-studio"]) {
+			const row = document.querySelector(`[data-matrix-client="${id}"]`)!;
+			expect(row.querySelector("td")?.textContent).toContain("Not applicable");
+			expect(row.querySelector("td")?.textContent).not.toContain("Known issue");
+			expect(row.querySelectorAll("td")[1]?.textContent).toContain("Untested");
+		}
+		const gemini = document.querySelector('[data-matrix-client="gemini-cli"]')!;
+		for (const cell of [...gemini.querySelectorAll("td")].slice(2)) {
+			expect(cell.textContent).toContain("Not applicable");
+			expect(cell.textContent).toContain("replaced by Antigravity CLI");
+			expect(cell.textContent).not.toContain("Known issue");
+		}
+		for (const cell of [...gemini.querySelectorAll("td")].slice(0, 2))
+			expect(cell.textContent).toContain("Untested");
+		const chatgpt = document.querySelector('[data-matrix-client="chatgpt"]')!;
+		for (const cell of chatgpt.querySelectorAll("td"))
+			expect(cell.textContent).toContain("Known issue");
 	});
 
 	it("escapes source status reasons and notes", () => {
