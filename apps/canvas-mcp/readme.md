@@ -10,6 +10,8 @@ Help follows Connect a Client and remains available without completing setup. It
 
 FAQs and Common Issues are grouped under General, Admins, and Users. Each question or issue uses a Pantoken toggle-details disclosure, initially collapsed, with native keyboard and expand/collapse behavior. Common Issues also includes a peer-level Known Issues heading for source-backed client issues.
 
+User troubleshooting covers `invalid_scope`, callback URI mismatches, and duplicate local `canvas-mcp` entries, with rationale, self-service steps, admin escalation, and conditions for reporting to Instructure. Support reports must omit credentials and sensitive OAuth values.
+
 The Supported Clients table presents the existing curated registry, `clientStatus(client, install)`, and public/private key-support facts for enterprise and personal installs. Existing Validated statuses display as Verified; statuses are scoped by install mode, not separate tests of each key type. Recorded dates, notes, and issue reasons remain visible. Unsupported key types and unavailable install modes display Not applicable, including discontinued Gemini CLI personal access; that retirement is not listed as a Known Issue. Actual connection blockers retain Known issue, and unknown flows/support are qualified as unverified. Setup blocking behavior is unchanged. Generic MCP and Rulesync-only entries belong to Other and are not included. Maintain statuses in the client definitions, not in a separate table dataset.
 
 ## Development

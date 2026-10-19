@@ -89,10 +89,6 @@ export const COMMON_ISSUES: HelpGroup[] = [
 		title: "Admins",
 		entries: [
 			{
-				title: "redirect_uri does not match client settings",
-				text: "Compare the redirect_uri sent by the client with the Canvas developer key's Redirect URIs. Register the exact URI, including scheme, hostname, port, path, and any trailing slash. Use the callback for the correct client and install flow, not the MCP server URL. Computed or client-generated callbacks need confirmation from that client before retrying OAuth.",
-			},
-			{
 				title: "The organization blocks the connection",
 				text: "Ask an administrator to follow the selected client's enterprise guide and check server allowlists, connector permissions, and publication requirements. Personal setup does not bypass organization policy.",
 			},
@@ -106,8 +102,16 @@ export const COMMON_ISSUES: HelpGroup[] = [
 		title: "Users",
 		entries: [
 			{
+				title: "OAuth provider returned `invalid_scope`",
+				text: "Why: the OAuth provider rejected a requested scope. The client may have requested a discovered or default scope instead of the Canvas scope, or the developer key may not permit the requested scope. Fix it yourself: follow this client's setup instructions and request https://sso.canvaslms.com/all-client-scopes exactly; for Codex, save the configured scope before login and use the guide's explicit login command rather than relying on automatic scope discovery. Report to your admin if the correct scope still fails or your configuration is managed; ask them to verify the developer key's allowed scopes. Do not add permissions or use the unreviewed scope manifest as a workaround. Report to Instructure through your admin's support channel if the admin confirms the requested scope and key configuration are correct and the rejection persists. Include the client/version, error text, time, and requested scope, but no tokens, secrets, or full authorization URL.",
+			},
+			{
+				title: "redirect_uri does not match client settings",
+				text: 'Why: {"error":"invalid_request","error_description":"redirect_uri does not match client settings"} means the callback URI sent during sign-in does not match the Canvas developer key configuration. Fix it yourself: confirm you selected the correct client and install flow and used its documented callback settings. Do not substitute the MCP server URL for the callback. Report to your admin to compare the actual redirect_uri with the key\'s Redirect URIs, including scheme, hostname, port, path, and trailing slash, and register the exact approved callback. Computed or client-generated callbacks must be confirmed in the client. If you manage the key yourself, make that correction there. Report to Instructure through your admin\'s support channel if an exact approved match still fails after retrying sign-in. Include the client/version, error text, time, and a sanitized callback URI; do not send tokens, secrets, authorization codes, state values, or the full authorization URL.',
+			},
+			{
 				title: "MCP server canvas-mcp already exists in local config",
-				text: "Inspect the existing canvas-mcp entry in your client's configuration before adding it again. Update that entry or use the client's documented remove-and-add workflow. Preserve other servers and settings; do not delete the whole configuration file.",
+				text: "Why: your client already has a local server entry named canvas-mcp; adding the same name again would duplicate or overwrite configuration. This is a local configuration conflict, not evidence of a Canvas service failure. Fix it yourself: inspect and update the existing entry using the guide's manual configuration, or use the client's documented remove-and-add workflow, then sign in again. Preserve other servers and settings; do not delete the whole configuration file. Report to your admin if the entry is organization-managed or you do not have permission to change it. This message alone does not need to be reported to Instructure. If an Instructure-provided setup command still fails after the duplicate entry is resolved, report the command, client/version, and sanitized error through your admin's support channel; never include secrets or tokens.",
 			},
 		],
 	},

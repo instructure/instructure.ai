@@ -156,6 +156,37 @@ describe("Help content", () => {
 			expect(cell.textContent).toContain("Known issue");
 	});
 
+	it("gives users rationale, self-service fixes, and admin/Instructure escalation for reported errors", () => {
+		document.body.innerHTML = renderHelp("issues");
+		const users = document.querySelector('[aria-labelledby="issue-users"]')!;
+		for (const title of [
+			"OAuth provider returned `invalid_scope`",
+			"redirect_uri does not match client settings",
+			"MCP server canvas-mcp already exists in local config",
+		]) {
+			const entries = [...users.querySelectorAll("details")].filter(
+				(entry) => entry.querySelector("summary")?.textContent === title,
+			);
+			expect(entries).toHaveLength(1);
+			const text = entries[0]!.querySelector("p")!.textContent!;
+			expect(text).toContain("Why:");
+			expect(text).toContain("Fix it yourself:");
+			expect(text).toContain("Report to your admin");
+			expect(text).toContain("Instructure");
+			expect(text).toContain("secrets");
+			expect(text).toContain("tokens");
+		}
+		expect(users.textContent).toContain(
+			'{"error":"invalid_request","error_description":"redirect_uri does not match client settings"}',
+		);
+		expect(users.textContent).toContain("https://sso.canvaslms.com/all-client-scopes");
+		expect(users.textContent).toContain("does not need to be reported to Instructure");
+		expect(users.textContent).toContain("unreviewed scope manifest");
+		expect(document.querySelector('[aria-labelledby="issue-admins"]')?.textContent).not.toContain(
+			"redirect_uri does not match client settings",
+		);
+	});
+
 	it("escapes source status reasons and notes", () => {
 		const client = CLIENTS.find(({ id }) => id === "claude-code")!;
 		const original = client.status;
