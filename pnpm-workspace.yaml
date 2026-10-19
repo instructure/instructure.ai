@@ -5,8 +5,18 @@ packages:
 
 linkWorkspacePackages: true
 
-onlyBuiltDependencies:
-  - esbuild
-  - instructure-ui
+allowBuilds:
+  esbuild: true
+  instructure-ui: true
 
 recursiveInstall: true
+
+minimumReleaseAgeExclude:
+  - "@pantoken/components@2.1.1"
+  - "@pantoken/plugin-kit@0.3.6"
+  - "@pantoken/plugin-layouts@0.5.5"
+  - "@pantoken/plugin-logos@0.5.5"
+  - "@pantoken/scaffold-base@0.3.8"
+  - "@pantoken/utils@1.4.0"
+  - "@pantoken/css@0.4.5"
+  - "@pantoken/plugin-custom-components@0.7.2"

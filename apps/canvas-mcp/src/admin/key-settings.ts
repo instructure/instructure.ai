@@ -1,0 +1,53 @@
+// Scope provenance and copy readiness are maintained in scopes.ts and scopes.generated.json.
+import { resolveKeySettings } from "./key-settings-model";
+import { clientDefinition } from "../clients";
+import { SCOPE_MANIFEST, scopeManifestReady } from "../scopes";
+import { type AppState, REGIONS, isBetaDomain } from "../state";
+import { escapeHtml } from "../ui/html";
+export function renderKeyCreation(
+	client: ReturnType<typeof clientDefinition>,
+	state: AppState,
+	editable = true,
+	model = resolveKeySettings(client, state),
+): string {
+	const productionDomain = model.productionDomain,
+		redirects = model.redirect.text,
+		keyTypeSaveSteps =
+			state.key === "private"
+				? `<div class="instui-banner -color-sea -size-compact -icon-key private-key-save-steps" role="status"><h4 class="instui-heading -level-h4">Private key setup</h4><p>In the <b>Developer Key Created</b> modal, copy the <b>API Key Secret</b> and store it securely. This secret is shown only once. Store it in a trusted secrets manager; never commit it to source code, add it to a setup link, or share it.</p>${canvasStepImage("save_private_key", "Canvas Developer Key Created modal showing the API Key Secret and its one-time warning.", 838, 374)}</div>`
+				: `<ol class="instui-list -ordered public-key-save-steps"><li>Click <b>Save</b>.</li></ol>`,
+		sharedKeySaveSteps = `<ol start="2" class="instui-list -ordered shared-key-save-steps"><li>In the <b>Developer Keys</b> table, under the <b>State</b> column, toggle your new key to <b>on</b>.</li><li>Copy the Client ID from the <b>Details</b> column and paste it below.</li></ol>`;
+	return `
+		<div class="admin-steps">
+			<section class="guide-section"><div><h3 class="instui-heading -level-h3">Open Developer Keys</h3><ol class="instui-list -ordered"><li>In the Canvas root account, open Account → Developer Keys.</li><li>Select <b>+ Developer Key</b>, open its menu, then choose <b>+ API Key</b>.</li></ol>${canvasStepImage("open_developer_keys", "Canvas Developer Key menu open with API Key highlighted.", 207, 216)}</div></section>
+			<section class="guide-section"><div><h3 class="instui-heading -level-h3">Key Settings</h3>${settingsTable("Setting", `${settingRow("Key name", model.name)}${settingRow("Owner Email", "An administrator or team mailbox")}${!model.redirect.copyable ? settingRow("Redirect URIs", redirects, true) : settingCodeRow("Redirect URIs", redirects, true)}${settingRow("Linked Partner App", "Leave blank")}${settingRow("Vendor Code (LTI 2):", "Leave blank")}${settingRow("Icon URL:", "Leave blank")}${settingRow("Notes", "Leave blank")}${settingCheckboxRow("Test Cluster Only", model.beta, false)}${settingRow("Client Credentials Audience", "Canvas")}${allowedAudiencesRow()}${settingRow("Authorized Flows", model.authorizedFlows)}${settingRow("Client Type", model.clientType)}`)}</div></section>
+			<section class="guide-section"><div><h3 class="instui-heading -level-h3">Scopes</h3>${settingsTable("Option", `${settingCheckboxRow("Enforce Scopes", true)}${settingRow("Method", "Paste scopes")}${settingCheckboxRow("Allow Include Parameters", true, false)}`)}<h4 class="instui-heading -level-h4 scope-manifest-title">Paste Scopes</h4>${editable ? "" : `<p>${scopeManifestReady() ? "Paste the reviewed per-tool scope list, one scope per line." : "Scope list awaiting Maple review. Do not use this list to create a production key."}</p>`}<div class="instui-card -variant-nested scope-card"><div class="content"><div class="scope-card-header"><h4 class="instui-heading -variant-title-card-regular">Per-tool scope manifest</h4><button class="instui-button -color-tertiary -shape-square -icon-copy -size-sm" type="button" aria-label="Copy scope manifest" title="Copy scope manifest" data-copy="${escapeHtml(SCOPE_MANIFEST)}" data-label="Scope manifest" ${scopeManifestReady() ? "" : "disabled"}></button></div><pre class="scope-manifest" tabindex="0" role="region" aria-label="Full Canvas scope manifest"><code>${escapeHtml(SCOPE_MANIFEST)}</code></pre></div></div></div></section>
+			<section class="guide-section"><div><h3 class="instui-heading -level-h3">Save</h3>${state.key === "private" ? `<ol class="instui-list -ordered private-key-save-step"><li>Click <b>Save</b>.</li></ol>` : ""}${keyTypeSaveSteps}${sharedKeySaveSteps}${canvasStepImage(`enable_${state.key}_key`, `Canvas Developer Keys table showing an enabled ${state.key} MCP key, its Client ID in Details, and the green State toggle switched on.`, 1055, 156)}${editable && client.facts.staticClientId.value !== "no" ? `<label class="field-label" for="client-id-input">Client ID</label><input id="client-id-input" class="instui-text-input text-input" inputmode="numeric" autocomplete="off" maxlength="17" pattern="[0-9]{17}" placeholder="12345000000000001" value="${escapeHtml(state.clientId)}" required aria-describedby="client-id-hint" /><p class="field-hint" id="client-id-hint">Required by the Canvas OAuth flow. Enter the 17-digit ID from the Canvas Developer Keys page.</p>` : ""}${isBetaDomain(state.domain) ? `<p class="instui-alert -color-info -inline notice" role="status"><b>Beta tenant:</b> sign in to production Canvas at <code>${escapeHtml(productionDomain || "<tenant>.instructure.com")}</code>, enable Test Cluster Only, and create the key there. Canvas copies it to beta.</p>` : ""}</div></section>
+		</div>`;
+}
+
+function settingsTable(heading: string, rows: string): string {
+	return `<table class="instui-table settings-table"><thead><tr><th scope="col">${escapeHtml(heading)}</th><th scope="col">Value</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function settingRow(label: string, value: string, muted = false): string {
+	muted ||= value === "Leave blank" || value === "An administrator or team mailbox";
+	return `<tr><th scope="row">${escapeHtml(label)}</th><td>${muted ? `<span class="setting-value-muted">${escapeHtml(value)}</span>` : escapeHtml(value)}</td></tr>`;
+}
+
+function settingCodeRow(label: string, value: string, canCopy: boolean): string {
+	return `<tr><th scope="row">${escapeHtml(label)}</th><td><div class="table-copy-cell"><pre><code>${escapeHtml(value)}</code></pre><button class="instui-button -color-tertiary -shape-square -icon-copy -size-sm" type="button" aria-label="Copy ${escapeHtml(label)}" title="Copy ${escapeHtml(label)}" data-copy="${escapeHtml(value)}" data-label="${escapeHtml(label)}" ${canCopy ? "" : "disabled"}></button></div></td></tr>`;
+}
+
+function allowedAudiencesRow(): string {
+	const regions = REGIONS.map((region) => `<li><code>${escapeHtml(region)}</code></li>`).join("");
+	return `<tr><th scope="row">Allowed Audiences</th><td><pre><code>https://{{tenant_name}}.maple.&lt;region&gt;.core.inseng.io/</code></pre><p class="setting-helper audience-region-lead"><code>&lt;region&gt;</code> will be one of:</p><ul class="instui-list audience-regions">${regions}</ul><p class="setting-helper audience-tenant-note"><code>{{tenant_name}}</code> is a literal string in the Audiences list.</p>${canvasStepImage("allowed_audiences", "Canvas Allowed Audiences dropdown with the https://{{tenant_name}}.maple.us-east-1.core.inseng.io/ option selected.", 320, 231)}</td></tr>`;
+}
+
+function settingCheckboxRow(label: string, checked: boolean, toggle = true): string {
+	return `<tr><th scope="row">${escapeHtml(label)}</th><td><label class="instui-checkbox${toggle ? " -variant-toggle" : ""} setting-checkbox"><input type="checkbox" aria-label="${escapeHtml(label)}" ${checked ? "checked" : ""} disabled>${checked ? "Checked" : "Unchecked"}</label></td></tr>`;
+}
+
+function canvasStepImage(name: string, alt: string, width: number, height: number): string {
+	return `<img class="instui-img -display-block --my-md --mx-auto" src="${import.meta.env.BASE_URL.replace(/\/$/u, "")}/images/server-canvas-${name}.png" alt="${escapeHtml(alt)}" width="${width}" height="${height}" loading="lazy" decoding="async" />`;
+}

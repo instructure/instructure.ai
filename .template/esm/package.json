@@ -1,34 +1,43 @@
 {
-  "name": "<<packagename>>",
-  "version": "0.0.0",
-  "type": "module",
-  "main": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./src/index.mjs",
-      "types": "./src/index.d.ts"
-    }
-  },
-  "files": [
-    "src"
-  ],
-  "scripts": {
-    "build": "tsdown && pnpm pack --pack-destination ./src",
-    "typecheck": "tsgo --noEmit",
-    "lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
-    "test": "pnpm vitest run",
-    "<<cliname>>": "vite-node ./src/index.mjs"
-  },
-  "bin": {
-    "<<cliname>>": "./src/index.mjs"
-  },
-  "devDependencies": {
-    "@instructure.ai/shared-configs": "workspace:^"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/instructure/instructure.ai",
-    "directory": "packages/<<cliname>>"
-  },
+	"name": "<<packagename>>",
+	"version": "0.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/instructure/instructure.ai",
+		"directory": "packages/<<cliname>>"
+	},
+	"bin": {
+		"<<cliname>>": "./src/index.mjs"
+	},
+	"files": [
+		"src"
+	],
+	"type": "module",
+	"main": "./src/index.mjs",
+	"types": "./src/index.d.mts",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./src/index.d.mts",
+				"default": "./src/index.mjs"
+			},
+			"require": {
+				"types": "./src/index.d.cts",
+				"default": "./src/index.cjs"
+			}
+		}
+	},
+	"scripts": {
+		"build": "tsdown && pnpm pack --pack-destination ./src",
+		"typecheck": "tsc --noEmit",
+		"lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
+		"test": "pnpm vitest run",
+		"<<cliname>>": "vite-node ./src/index.mjs"
+	},
+	"devDependencies": {
+		"@instructure.ai/shared-configs": "workspace:^"
+	},
+	"engines": {
+		"node": ">=24.15.0"
+	}
 }

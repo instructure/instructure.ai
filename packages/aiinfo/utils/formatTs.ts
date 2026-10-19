@@ -1,22 +1,18 @@
-import ts from "typescript";
+import { format } from "oxfmt";
 
-export function formatTs(code: string, fileName = "index.tsx"): string {
-  try {
-    const sourceFile = ts.createSourceFile(
-      fileName,
-      code,
-      ts.ScriptTarget.Latest,
-      true,
-      ts.ScriptKind.TS,
-    );
-    const printer = ts.createPrinter({
-      newLine: ts.NewLineKind.LineFeed,
-      removeComments: false,
-    });
-    return printer.printFile(sourceFile);
-  } catch (error) {
-    throw new Error(`Error formatting TypeScript code: ${String(error)}`, {
-      cause: error,
-    });
-  }
+export async function formatTs(code: string, fileName = "index.tsx"): Promise<string> {
+	try {
+		const result = await format(fileName, code, {
+			arrowParens: "avoid",
+			endOfLine: "lf",
+		});
+		if (result.errors.length) {
+			throw new Error(result.errors.map((error) => error.message).join("\n"));
+		}
+		return result.code;
+	} catch (error) {
+		throw new Error(`Error formatting TypeScript code: ${String(error)}`, {
+			cause: error,
+		});
+	}
 }

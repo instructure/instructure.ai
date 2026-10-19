@@ -4,6 +4,13 @@ This is a monorepo of apps and packages. Apps are served on the [instructure.ai]
 
 Configs and dev dependencies are shared from the root package `@instructure.ai/shared-configs` and extended in workspace packages in `/apps` and `/packages`.
 
+## Development Requirements
+
+Use Node.js 24.15.0 or newer and pnpm 12.14.0 (pinned in `package.json`). Run `pnpm install --frozen-lockfile`, `pnpm typecheck`, and `pnpm test all` from the workspace root. `pnpm build apps` builds the deployed site; `pnpm build:root` builds its root page.
+
+The workspace uses TypeScript 7 through `tsc`, including root scripts and shared build configurations. Library declarations are generated separately from maintenance scripts. Validate the library with `pnpm --filter @instructure.ai/aiinfo build:lib`; its full build also refreshes remote feature data.
+
+TypeScript 7.0.2 and YAML 2 are retained for build-tool peer compatibility; Node type declarations follow the supported Node 24 runtime. Ansis 5 is an explicitly pinned beta. CI lint reporting is advisory while existing source findings are addressed separately; compiler, test, and build checks are blocking.
 
 ## @instructure.ai/shared-configs
 
@@ -35,13 +42,13 @@ pnpm workspace [info]
 
 Global `option`s provided by `workspace` are:
 
-* all
-* apps
-* packages
-* root
-* app `<name>`
-* package `<name>`
-* `<name>`
+- all
+- apps
+- packages
+- root
+- app `<name>`
+- package `<name>`
+- `<name>`
 
 Though individual scripts may only support a subset of options, and will throw an error when an unsupported option is passed. Any args can be passed and will be used against each package in the options list.
 
@@ -52,7 +59,7 @@ Though individual scripts may only support a subset of options, and will throw a
 pnpm lint apps --jsx-a11y-plugin && pnpm build apps
 ```
 
-Package names can be passed with or without the workspace prefix.  `pnpm release @instructure.ai/aiinfo` is the same as `pnpm release aiinfo`.
+Package names can be passed with or without the workspace prefix. `pnpm release @instructure.ai/aiinfo` is the same as `pnpm release aiinfo`.
 
 ### Base Configurations
 
@@ -60,13 +67,13 @@ Configuration files are provided and where possible use inheritance. There are a
 
 #### Dev Experience
 
-* Recommended vscode plugins will be prompted when this repo is opened `./vscode/extensions.json`
-* VScode project settings for things like lint-on-save `./vscode/settings.json`
-* Github copilot instructions when using an [instui](https://instructure.design/) package `./template/instui/.github/copilot-instructions.md`
+- Recommended vscode plugins will be prompted when this repo is opened `./vscode/extensions.json`
+- VScode project settings for things like lint-on-save `./vscode/settings.json`
+- Github copilot instructions when using an [instui](https://instructure.design/) package `./template/instui/.github/copilot-instructions.md`
 
 #### Vite
 
-Vite is only used for Apps and uses shared configs to provide a baseline setup for each package.  Settings can be overwritten using [mergeConfig](https://vite.dev/guide/api-javascript.html#mergeconfig).
+Vite is only used for Apps and uses shared configs to provide a baseline setup for each package. Settings can be overwritten using [mergeConfig](https://vite.dev/guide/api-javascript.html#mergeconfig).
 `mergeConfig(baseconfig, {...opts})`
 
 ```shell
@@ -82,11 +89,11 @@ Vite is only used for Apps and uses shared configs to provide a baseline setup f
         └── 📂 aiinfo/
             └── ❌ # Packages do not use Vite (ESM)
 ```
-  
+
 #### Typescript
 
 > [!NOTE]
-> This project uses the experimental [@typescript/native-preview](https://www.npmjs.com/package/@typescript/native-preview)
+> This project uses [TypeScript 7](https://www.npmjs.com/package/typescript), including its native compiler, through `tsc`.
 
 Typescript uses shared configs to provide a baseline setup for each package. Settings can be overwritten by re-declaring them in the package's `tsconfig.json`. See [tsconfig extends](https://www.typescriptlang.org/tsconfig/#extends).
 
@@ -123,7 +130,7 @@ tsdown is used for type-aware rolldown builds of ESM modules. It is not used for
 
 #### Vitest
 
-Vitest uses shared configs to provide a baseline setup for each package.  Settings can be overwritten using [mergeConfig](https://vitest.dev/config/).
+Vitest uses shared configs to provide a baseline setup for each package. Settings can be overwritten using [mergeConfig](https://vitest.dev/config/).
 `mergeConfig(baseconfig, {...opts})`
 
 ```shell
@@ -175,7 +182,7 @@ The root workspace package.json defines workspace exports and shares workspace `
 
 ##### devDependencies
 
-The following `devDependencies` are provided.  No `dependencies` are included.
+The following `devDependencies` are provided. No `dependencies` are included.
 
 ```json
   "devDependencies": {
@@ -183,7 +190,7 @@ The following `devDependencies` are provided.  No `dependencies` are included.
     "@testing-library/react": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "@typescript/native-preview": "latest",
+    "typescript": "^7.0.2",
     "@vitejs/plugin-react": "latest",
     "@vitest/coverage-istanbul": "latest",
     "@vitest/coverage-v8": "latest",
@@ -197,10 +204,8 @@ The following `devDependencies` are provided.  No `dependencies` are included.
     "oxlint": "latest",
     "oxlint-tsgolint": "latest",
     "react-compiler-runtime": "latest",
-    "vite": "npm:rolldown-vite@latest",
+    "vite": "^8.3.4",
     "vite-node": "latest",
-    "vite-plugin-dts": "latest",
-    "vite-tsconfig-paths": "latest",
     "vitest": "latest",
     "yaml": "latest"
   },
@@ -218,22 +223,22 @@ This import is included in the template when using the workspace script `new`.
 
 ## Contributing
 
-This repo uses github rules to protect the `main` branch.  Requirements:
+This repo uses github rules to protect the `main` branch. Requirements:
 
-* Must be a PR
-* Must be a squash merge
-* Branch name must start with a valid App or Package path or `shared-configs` followed by branch purpose
+- Must be a PR
+- Must be a squash merge
+- Branch name must start with a valid App or Package path or `shared-configs` followed by branch purpose
 
 ### Valid
 
-* shared-configs/refactorTypes
-* apps/site/simplify
-* packages/widget/create
+- shared-configs/refactorTypes
+- apps/site/simplify
+- packages/widget/create
 
 ### Invalid
 
-* site/simplify
-* widget/create
-* refactorWidget
+- site/simplify
+- widget/create
+- refactorWidget
 
-In general, try to only touch files in the app or package your PR is associated with.  Don't add a dependency to the root `./package.json` when it will only be used by your package.  Don't update root configs, etc. If there's a rationale for changing a root setup which will affect multiple packages, then each package needs to be released in your PR.
+In general, try to only touch files in the app or package your PR is associated with. Don't add a dependency to the root `./package.json` when it will only be used by your package. Don't update root configs, etc. If there's a rationale for changing a root setup which will affect multiple packages, then each package needs to be released in your PR.

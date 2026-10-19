@@ -1,22 +1,18 @@
 {
-  "compilerOptions": {
-    "paths": {
-      "<<packagename>>": [
-        "./node/index.ts"
-      ]
-    },
-    "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "outDir": "src",
-    "rootDir": "node",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true
-  },
-  "extends": "../../tsconfig.json",
-  "include": [
-    "node"
-  ]
+	"compilerOptions": {
+		"paths": {
+			"<<packagename>>": ["./node/index.mts"]
+		},
+		"target": "ES2024",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"outDir": "src",
+		"rootDir": "node",
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"skipLibCheck": true
+	},
+	"extends": "../../tsconfig.json",
+	"include": ["node"]
 }

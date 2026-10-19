@@ -1,26 +1,29 @@
 {
-  "name": "<<packagename>>",
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/instructure/instructure.ai",
-    "directory": "apps/<<cliname>>"
-  },
-  "scripts": {
-    "build": "vite build",
-    "dev": "vite",
-    "preview": "vite preview",
-    "typecheck": "tsgo --noEmit",
-    "test": "pnpm vitest run",
-    "lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions"
-  },
-  "type": "module",
-  "version": "0.0.0",
-  "devDependencies": {
-    "@instructure.ai/shared-configs": "workspace:^"
-  },
-  "dependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
-  }
+	"name": "<<packagename>>",
+	"version": "0.0.0",
+	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/instructure/instructure.ai",
+		"directory": "apps/<<cliname>>"
+	},
+	"type": "module",
+	"scripts": {
+		"build": "vite build",
+		"dev": "vite",
+		"preview": "vite preview",
+		"typecheck": "tsc --noEmit",
+		"test": "pnpm vitest run",
+		"lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions"
+	},
+	"dependencies": {
+		"react": "^19.3.1",
+		"react-dom": "^19.3.1"
+	},
+	"devDependencies": {
+		"@instructure.ai/shared-configs": "workspace:^"
+	},
+	"engines": {
+		"node": ">=24.15.0"
+	}
 }

@@ -4,6 +4,12 @@
 
 A TypeScript package providing [IgniteAI](https://www.instructure.com/igniteai) feature metadata, nutrition facts, and data permission levels for Instructure products. This package is designed to help developers and product teams understand, display, and manage information about AI features.
 
+## Runtime Requirements
+
+The next release requires Node.js 24.15.0 or newer. Raising the Node.js minimum from 20 is a breaking change and must be released as a new major version. This migration does not publish or bump the package version.
+
+Development uses TypeScript 7. Both ESM imports and CommonJS requires are supported, with matching `.d.mts` and `.d.cts` declarations selected through package exports.
+
 > [!WARNING]
 > v2.x has breaking changes from 1.x
 
@@ -18,7 +24,10 @@ A TypeScript package providing [IgniteAI](https://www.instructure.com/igniteai) 
 
 ```jsx
 //V2
-<AiInformation {...aiInformation} trigger={<Button>AI Information</Button>} />
+<AiInformation
+	{...aiInformation}
+	trigger={<Button>AI Information</Button>}
+/>
 ```
 
 If you were not using @instructure/ui's AiInformation component, then there are no changes needed. This does not effect NutritionFacts or DataPermissionLevels
@@ -90,26 +99,26 @@ Helper types are included for managing or passing imports from `AiInfo`
 
 ```typescript
 type AiInfoFeatureProps = {
-  nutritionFacts: NutritionFactsProps; // INSTUI type definition
-  dataPermissionLevels: DataPermissionLevelsProps; // INSTUI type definition
-  aiInformation: AiInformationProps; // INSTUI type definition
-  uid: string;
-  revision: string;
-  group: string;
-  name: string;
-  description: string;
+	nutritionFacts: NutritionFactsProps; // INSTUI type definition
+	dataPermissionLevels: DataPermissionLevelsProps; // INSTUI type definition
+	aiInformation: AiInformationProps; // INSTUI type definition
+	uid: string;
+	revision: string;
+	group: string;
+	name: string;
+	description: string;
 };
 
 type AiInfoNutritionFactsProps = {
-  [uid: string]: NutritionFactsProps; // INSTUI type definition
+	[uid: string]: NutritionFactsProps; // INSTUI type definition
 };
 
 type AiInfoDataPermissionLevelsProps = {
-  [uid: string]: DataPermissionLevelsProps; // INSTUI type definition
+	[uid: string]: DataPermissionLevelsProps; // INSTUI type definition
 };
 
 type AiInfoAiInformationProps = {
-  [uid: string]: AiInformationProps; // INSTUI type definition
+	[uid: string]: AiInformationProps; // INSTUI type definition
 };
 ```
 
@@ -147,11 +156,11 @@ const { DataPermissionLevels, InstUISettingsProvider } = require("@instructure/u
 const { smartsearch } = require("@instructure.ai/aiinfo");
 
 const App = () =>
-  React.createElement(
-    InstUISettingsProvider,
-    null,
-    React.createElement(DataPermissionLevels, { ...smartsearch.dataPermissionLevels }),
-  );
+	React.createElement(
+		InstUISettingsProvider,
+		null,
+		React.createElement(DataPermissionLevels, { ...smartsearch.dataPermissionLevels }),
+	);
 
 module.exports = App;
 ```

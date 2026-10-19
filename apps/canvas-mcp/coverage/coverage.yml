@@ -1,0 +1,64 @@
+coverage:
+  totals:
+    statements: 84.18%
+    branches: 85.12%
+    functions: 91.66%
+    lines: 84.08%
+    total: 86.26%
+  scripts:
+    totals:
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+    "optimizeStyles.mts":
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "6-21"
+  src:
+    totals:
+      statements: 68.94%
+      branches: 66.09%
+      functions: 97.62%
+      lines: 68.86%
+    "admin.ts":
+      statements: 0%
+      branches: 0%
+      functions: 100%
+      lines: 0%
+      uncovered_line_numbers: "3-4"
+    "app.ts":
+      statements: 86.06%
+      branches: 83.43%
+      functions: 92.45%
+      lines: 85.53%
+      uncovered_line_numbers: "26-447"
+    "clients.ts":
+      statements: 100%
+      branches: 83.33%
+      functions: 100%
+      lines: 100%
+    "main.ts":
+      statements: 0%
+      branches: 0%
+      functions: 100%
+      lines: 0%
+      uncovered_line_numbers: "3-4"
+    "rulesyncTargets.ts":
+      statements: 100%
+      branches: 100%
+      functions: 100%
+      lines: 100%
+    "scopes.ts":
+      statements: 100%
+      branches: 100%
+      functions: 100%
+      lines: 100%
+    "state.ts":
+      statements: 96.49%
+      branches: 95.89%
+      functions: 90.9%
+      lines: 96.49%
+      uncovered_line_numbers: "127-176"

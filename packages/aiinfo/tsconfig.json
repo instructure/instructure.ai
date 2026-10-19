@@ -1,12 +1,11 @@
 {
-  "compilerOptions": {
-    "declaration": true,
-    "isolatedDeclarations": true,
-    "paths": {
-      "@instructure.ai/aiinfo": ["./node/index.ts"]
-    }
-  },
-  "exclude": ["src"],
-  "extends": "../../tsconfig.json",
-  "include": ["node", "utils", "scripts", "vite.config.mts"]
+	"compilerOptions": {
+		"declaration": true,
+		"paths": {
+			"@instructure.ai/aiinfo": ["./node/index.ts"]
+		}
+	},
+	"exclude": ["src"],
+	"extends": "../../tsconfig.json",
+	"include": ["node", "utils", "scripts", "vite.config.mts"]
 }
