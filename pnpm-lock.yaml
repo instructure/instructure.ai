@@ -271,6 +271,9 @@ importers:
       '@pantoken/plugin-logos':
         specifier: 0.5.5
         version: 0.5.5
+      '@pantoken/plugin-simple-icons':
+        specifier: 0.3.14
+        version: 0.3.14(simple-icons@16.35.0)
       shiki:
         specifier: ^4.5.0
         version: 4.5.0
@@ -1532,6 +1535,12 @@ packages:
   '@pantoken/plugin-prune-custom-props@0.1.6':
     resolution: {integrity: sha512-vathsQFjf4qO4n79C9PfPT2J5v9BZmJsnj0n5e508sRhRXqecRzXQzCWFzvaLTQwDyTSSDEEQ2vd3Cj1JbSZSg==}
     engines: {node: '>=22.18.0'}
+
+  '@pantoken/plugin-simple-icons@0.3.14':
+    resolution: {integrity: sha512-RL6IzVAB30Ex0t8OqNB+cn/taAWYDhXPCaa+6dzSJwoN6JunDYEMBYPZoipP0b8gvtny+O8aM7hMnJi8GBS0Lg==}
+    engines: {node: '>=22.18.0'}
+    peerDependencies:
+      simple-icons: '>=13'
 
   '@pantoken/scaffold-base@0.3.8':
     resolution: {integrity: sha512-cpigzw4scdNWkUQcvgnqsGs8CTOvJsw5IFpSiRCNp3ZOSR4WCTUls0ixoN6kLKgpVrV2t3KjY7452ldYFiBRzQ==}
@@ -2947,6 +2956,10 @@ packages:
   signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
+
+  simple-icons@16.35.0:
+    resolution: {integrity: sha512-TCfl/2+GTrx0nCo4pEWGvxhOb8c6NsqOU1OpwjtF4lwJAthB8IYVD0fuIMjLMg6JFuG1YBO0t1iETQqJLqkoJA==}
+    engines: {node: '>=0.12.18'}
 
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
@@ -5651,6 +5664,12 @@ snapshots:
 
   '@pantoken/plugin-prune-custom-props@0.1.6': {}
 
+  '@pantoken/plugin-simple-icons@0.3.14(simple-icons@16.35.0)':
+    dependencies:
+      '@pantoken/model': 0.5.0
+      '@pantoken/plugin-kit': 0.3.6
+      simple-icons: 16.35.0
+
   '@pantoken/scaffold-base@0.3.8(bingo-fs@0.6.0)(bingo-systems@0.7.0)(bingo@0.13.2)':
     dependencies:
       '@pantoken/plugin-layouts': 0.5.5
@@ -6941,6 +6960,8 @@ snapshots:
       '@types/hast': 3.0.5
 
   signal-exit@4.1.0: {}
+
+  simple-icons@16.35.0: {}
 
   sisteransi@1.0.5: {}
 

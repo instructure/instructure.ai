@@ -12,6 +12,96 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals());
 describe("updated curated guidance", () => {
 	it.each([
+		["personal", "public"],
+		["personal", "private"],
+		["enterprise", "public"],
+		["enterprise", "private"],
+	])("blocks Antigravity CLI connections and shows the top alert for %s/%s", (install, key) => {
+		vi.stubGlobal("scrollTo", vi.fn());
+		history.replaceState(
+			null,
+			"",
+			`?client=antigravity-cli&install=${install}&key=${key}&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=connect`,
+		);
+		mountApp("user");
+		expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("admin");
+		const alert = document.querySelector('.known-issue-alert[role="alert"]')!;
+		expect(alert.textContent).toContain("Unauthorized");
+		expect(alert.querySelector(".shiki-block.language-text pre.shiki > code")?.textContent).toBe(
+			'✗ canvas-mcp  error: calling "initialize": sending "initialize": No authorization header provided: rejected by transport: Unauthorized',
+		);
+		expect(alert.querySelector<HTMLButtonElement>(".shiki-copy")?.dataset.copy).toBe(
+			alert.querySelector("pre.shiki code")?.textContent,
+		);
+		expect(alert.classList.contains("-color-danger")).toBe(true);
+		expect(alert.nextElementSibling?.classList.contains("details-panel")).toBe(true);
+		expect(document.querySelector(".client-status-pill")?.textContent).toBe("Known issue");
+		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+		expect(document.querySelector("#client-id-input")).not.toBeNull();
+		if (install === "enterprise") {
+			document.querySelector<HTMLButtonElement>("#configure-provider-button-bottom")!.click();
+			expect(document.querySelector("#guide-provider")?.textContent).toContain("Assign users");
+		}
+		expect(
+			document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")?.disabled,
+		).toBe(true);
+		const state = readState(location.search, null);
+		document.body.innerHTML = renderGuide(clientDefinition(state.client), state, false);
+		expect(document.querySelector('[data-guide-step="verify"], [data-copy-template]')).toBeNull();
+	});
+
+	it.each([
+		["personal", "public"],
+		["personal", "private"],
+		["enterprise", "public"],
+		["enterprise", "private"],
+	])("uses key-specific Antigravity CLI configuration for %s/%s", (install, key) => {
+		const state = readState(
+			`?client=antigravity-cli&install=${install}&key=${key}&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001`,
+			null,
+		);
+		document.body.innerHTML = renderGuide(
+			{ ...clientDefinition(state.client), blocker: undefined },
+			state,
+			false,
+		);
+		const step = document.querySelector(`[data-guide-step="provider-configure-${key}"]`)!;
+		expect(step).not.toBeNull();
+		expect(
+			document.querySelector(
+				`[data-guide-step="provider-configure-${key === "public" ? "private" : "public"}"]`,
+			),
+		).toBeNull();
+		const copy = step.querySelector<HTMLButtonElement>(".language-json [data-copy]")!;
+		expect(copy.disabled).toBe(false);
+		for (const platform of ["mac", "windows"]) {
+			const command = step.querySelector<HTMLButtonElement>(
+				`[data-code-platform="${platform}"] [data-copy]`,
+			)!;
+			expect(command.disabled).toBe(false);
+			expect(command.dataset.copy).toContain("https://example.maple.us-east-1.core.inseng.io/mcp");
+			expect(command.dataset.copy).toContain("12345000000000001");
+			expect(command.dataset.copy).not.toMatch(/\{mcpUrl\}|\{clientId\}/u);
+			expect(command.dataset.copy).not.toContain("<ENTER_CLIENT_SECRET_LOCALLY>");
+		}
+		expect(JSON.parse(copy.dataset.copy!).mcpServers["canvas-mcp"]).toEqual({
+			serverUrl: "https://example.maple.us-east-1.core.inseng.io/mcp",
+			oauth: {
+				clientId: "12345000000000001",
+				...(key === "private" ? { clientSecret: "<ENTER_CLIENT_SECRET_LOCALLY>" } : {}),
+			},
+		});
+		if (key === "public") {
+			expect(document.body.textContent).not.toContain("Enter the secret only");
+			expect(copy.dataset.copy).not.toContain("clientSecret");
+		} else expect(step.textContent).toContain("Keep the file out of source control");
+		expect(document.querySelector('[data-guide-step="verify"]')).not.toBeNull();
+		expect(Boolean(document.querySelector('[data-guide-step="client-enterprise-signin"]'))).toBe(
+			install === "enterprise",
+		);
+	});
+
+	it.each([
 		["codex", "Codex managed configuration", "requirements.toml"],
 		["chatgpt", "ChatGPT workspace settings", "Configure Access"],
 		["antigravity", "Google Cloud console", "Assign users"],
@@ -76,7 +166,7 @@ describe("updated curated guidance", () => {
 			/create the data store|Policies|Use your own OAuth client|Developer Keys/iu,
 		);
 	});
-	it.each(["codex", "antigravity", "antigravity-cli", "gemini-cli"])(
+	it.each(["codex", "antigravity", "gemini-cli"])(
 		"retains connection fields for enterprise %s users who configure their client",
 		(id) => {
 			history.replaceState(

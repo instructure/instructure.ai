@@ -15,6 +15,184 @@ describe("Canvas MCP pages", () => {
 		vi.unstubAllGlobals();
 	});
 
+	it("marks empty callback URIs invalid and updates validation while typing", () => {
+		history.replaceState(null, "", "/canvas-mcp/?client=generic");
+		mountApp("admin");
+		const input = document.querySelector<HTMLTextAreaElement>("#redirect-uris-input")!;
+		expect(input.checkValidity()).toBe(false);
+		expect(input.classList.contains("-invalid")).toBe(true);
+		expect(input.getAttribute("aria-invalid")).toBe("true");
+		input.value = "http://localhost:8081/callback";
+		input.dispatchEvent(new Event("input", { bubbles: true }));
+		expect(input.checkValidity()).toBe(true);
+		expect(input.classList.contains("-invalid")).toBe(false);
+		expect(input.getAttribute("aria-invalid")).toBe("false");
+		for (const value of ["", " \n "]) {
+			input.value = value;
+			input.dispatchEvent(new Event("input", { bubbles: true }));
+			expect(input.checkValidity()).toBe(false);
+			expect(input.classList.contains("-invalid")).toBe(true);
+			expect(input.getAttribute("aria-invalid")).toBe("true");
+		}
+		input.dispatchEvent(new Event("change", { bubbles: true }));
+		expect(document.querySelector("#redirect-uris-input")?.getAttribute("aria-invalid")).toBe(
+			"true",
+		);
+	});
+
+	it.each(["", "12345", "12345000000000001"])(
+		"mirrors Client ID constraint validity in its initial and live error state: %s",
+		(clientId) => {
+			history.replaceState(null, "", `?client=claude-code&clientId=${clientId}`);
+			mountApp("admin");
+			const input = document.querySelector<HTMLInputElement>("#client-id-input")!;
+			const initialInvalid = clientId.length !== 17;
+			expect(input.checkValidity()).toBe(!initialInvalid);
+			expect(input.classList.contains("-invalid")).toBe(initialInvalid);
+			expect(input.getAttribute("aria-invalid")).toBe(String(initialInvalid));
+			for (const value of ["12345000000000001", "", " ", "12345", "abc12345000000000001"]) {
+				input.value = value;
+				input.dispatchEvent(new Event("input", { bubbles: true }));
+				const invalid = input.value.length !== 17;
+				expect(input.checkValidity()).toBe(!invalid);
+				expect(input.classList.contains("-invalid")).toBe(invalid);
+				expect(input.getAttribute("aria-invalid")).toBe(String(invalid));
+				expect(input.value).toMatch(/^\d*$/u);
+			}
+		},
+	);
+
+	it.each([
+		["public", "http://localhost:8081/callback"],
+		["private", "http://localhost:8081/callback"],
+		["public", "http://localhost:8081/callback\nhttps://client.example/callback"],
+		["private", "http://localhost:8081/callback\nhttps://client.example/callback"],
+	])(
+		"keeps generic %s callback URIs synchronized across setup, client, reload, and links: %s",
+		(key, uris) => {
+			vi.stubGlobal("scrollTo", vi.fn());
+			history.replaceState(
+				null,
+				"",
+				`/canvas-mcp/?client=generic&key=${key}&domain=example.instructure.com&region=us-east-1&clientId=12345`,
+			);
+			mountApp("admin");
+			expect(
+				[...document.querySelectorAll(".workflow-label")].map((label) => label.textContent),
+			).toEqual(["Step 1 · Generic MCP client", "Step 2 · Canvas"]);
+			expect(document.querySelector(".workflow-label .-icon-modelcontextprotocol")).not.toBeNull();
+			expect(document.querySelector('.workflow-label img[src*="CopilotStudio"]')).toBeNull();
+			expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+			expect(document.querySelector('[data-guide-token="redirectUri"]')?.textContent).toBe(
+				"Enter callback URIs in step 1 first",
+			);
+
+			const input = document.querySelector<HTMLTextAreaElement>(
+				'[data-guide-step="provider-callback"] #redirect-uris-input',
+			)!;
+			expect(input.labels?.[0].textContent).toBe("Callback URIs");
+			expect(input.required).toBe(true);
+			expect(document.querySelector("#settings-tray #redirect-uris-input")).toBeNull();
+			expect(
+				document.querySelector<HTMLButtonElement>("#generated-redirect-uris-copy")?.disabled,
+			).toBe(true);
+			input.value = ` ${uris.replaceAll("\n", " \r\n ")} \n`;
+			input.dispatchEvent(new Event("change", { bubbles: true }));
+			expect(document.querySelector<HTMLTextAreaElement>("#redirect-uris-input")?.value).toBe(uris);
+			const readonlyCallbacks = document.querySelector<HTMLTextAreaElement>(
+				"#settings-tray .server-details-card #generated-redirect-uris",
+			)!;
+			expect(readonlyCallbacks.value).toBe(uris);
+			expect(readonlyCallbacks.readOnly).toBe(true);
+			expect(readonlyCallbacks.getAttribute("aria-readonly")).toBe("true");
+			expect(
+				document.querySelector<HTMLButtonElement>("#generated-redirect-uris-copy")?.dataset.copy,
+			).toBe(uris);
+			expect(
+				document.querySelector<HTMLButtonElement>("#generated-redirect-uris-copy")?.disabled,
+			).toBe(false);
+			const canvasRow = [...document.querySelectorAll(".settings-table tbody tr")].find(
+				(row) => row.querySelector("th")?.textContent === "Redirect URIs",
+			)!;
+			expect(canvasRow.querySelector("pre code")?.textContent).toBe(uris);
+			expect(canvasRow.querySelector<HTMLButtonElement>("button")?.dataset.copy).toBe(uris);
+			expect(document.querySelector('[data-guide-token="redirectUri"]')?.textContent).toBe(uris);
+			expect(new URLSearchParams(location.search).get("redirectUris")).toBe(uris);
+			expect(document.querySelector(".print-permalink")?.textContent).toContain("redirectUris=");
+			expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(false);
+
+			document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
+			expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("user");
+			expect(document.querySelector('[data-guide-token="redirectUri"]')?.textContent).toBe(uris);
+			expect(document.querySelector('[data-guide-step="provider-callback"]')).toBeNull();
+			expect(document.querySelector(`[data-guide-step="provider-${key}"]`)).not.toBeNull();
+			mountApp("user");
+			expect(document.querySelector('[data-guide-token="redirectUri"]')?.textContent).toBe(uris);
+			expect(document.querySelector("#redirect-uris-input")).toBeNull();
+			expect(document.querySelector<HTMLTextAreaElement>("#generated-redirect-uris")?.value).toBe(
+				uris,
+			);
+			document.querySelector<HTMLButtonElement>("#tab-admin")!.click();
+			const updated = "client-app://oauth/callback";
+			const callbackInput = document.querySelector<HTMLTextAreaElement>("#redirect-uris-input")!;
+			callbackInput.value = updated;
+			callbackInput.dispatchEvent(new Event("change", { bubbles: true }));
+			expect(document.querySelector('[data-guide-token="redirectUri"]')?.textContent).toBe(updated);
+			expect(document.querySelector<HTMLTextAreaElement>("#generated-redirect-uris")?.value).toBe(
+				updated,
+			);
+			expect(document.querySelector(".settings-table [data-copy]")?.getAttribute("data-copy")).toBe(
+				updated,
+			);
+
+			const clear = document.querySelector<HTMLTextAreaElement>("#redirect-uris-input")!;
+			clear.value = "";
+			clear.dispatchEvent(new Event("change", { bubbles: true }));
+			expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+			expect(new URLSearchParams(location.search).has("redirectUris")).toBe(false);
+			expect(document.querySelector<HTMLTextAreaElement>("#generated-redirect-uris")?.value).toBe(
+				"",
+			);
+			expect(
+				document.querySelector<HTMLButtonElement>("#generated-redirect-uris-copy")?.disabled,
+			).toBe(true);
+			history.replaceState(null, "", "/canvas-mcp/?client=generic");
+			mountApp("admin");
+			expect(document.querySelector<HTMLTextAreaElement>("#redirect-uris-input")?.value).toBe("");
+		},
+	);
+
+	it("escapes generic callback values and leaves other clients' fixed callbacks unchanged", () => {
+		const uri = 'https://client.example/<img src=x>?q="bad"&x=1';
+		history.replaceState(null, "", `?client=generic&redirectUris=${encodeURIComponent(uri)}`);
+		mountApp("admin");
+		expect(
+			document.querySelector(".instui-table [data-guide-token='redirectUri']")?.textContent,
+		).toBe(uri);
+		expect(document.querySelector("img[src=x]")).toBeNull();
+		const select = document.querySelector<HTMLSelectElement>("#client-select")!;
+		select.value = "claude-code";
+		select.dispatchEvent(new Event("change", { bubbles: true }));
+		expect(document.querySelector("#redirect-uris-input")).toBeNull();
+		expect(document.querySelector("#generated-redirect-uris")).toBeNull();
+		expect(document.querySelector(".settings-table [data-copy]")?.getAttribute("data-copy")).toBe(
+			"http://localhost:8081/callback",
+		);
+		document.querySelector<HTMLSelectElement>("#client-select")!.value = "generic";
+		document
+			.querySelector<HTMLSelectElement>("#client-select")!
+			.dispatchEvent(new Event("change", { bubbles: true }));
+		expect(document.querySelector<HTMLTextAreaElement>("#redirect-uris-input")?.value).toBe(uri);
+	});
+
+	it("imports Pantoken's MCP icon stylesheet", async () => {
+		const stylesheet = await readFile("src/main.css", "utf8");
+		expect(stylesheet).toContain(
+			'@import "@pantoken/plugin-simple-icons/icons/modelcontextprotocol.css";',
+		);
+		expect(stylesheet).toContain('[data-guide-token="redirectUri"]');
+	});
+
 	it.each(["claude-code", "chatgpt", "codex"])(
 		"imports the status pill glyph for %s",
 		async (client) => {

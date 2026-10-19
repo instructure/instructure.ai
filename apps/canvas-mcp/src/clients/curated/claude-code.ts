@@ -183,6 +183,11 @@ const personalGuide: Guide = {
 					kind: "paragraph",
 					text: "You're now connected to the Canvas MCP and ready to begin prompting. Try asking Claude to list your Canvas courses.",
 				},
+				{
+					kind: "code",
+					language: "prompt",
+					text: "List my Canvas courses",
+				},
 				screenshot("claude_code_mcp_list_courses", "terminal showing the list of Canvas courses."),
 			],
 		},

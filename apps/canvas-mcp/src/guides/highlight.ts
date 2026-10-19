@@ -23,6 +23,7 @@ const languageAlias: Record<CodeLanguage, string> = {
 	prompt: "markdown",
 	powershell: "powershell",
 	toml: "toml",
+	text: "text",
 };
 
 export function highlightCode(source: string, language: CodeLanguage): string {

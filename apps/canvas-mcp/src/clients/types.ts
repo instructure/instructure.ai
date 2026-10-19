@@ -14,7 +14,7 @@ export type Fact<T> =
 export type ClientStatus =
 	| { kind: "validated"; testedAt: string; installModes?: InstallMode[]; note?: string }
 	| { kind: "untested" }
-	| { kind: "known-issue"; reason: string; installModes?: InstallMode[] };
+	| { kind: "known-issue"; reason: string; diagnostic?: string; installModes?: InstallMode[] };
 export type RedirectUri =
 	| {
 			kind: "fixed";

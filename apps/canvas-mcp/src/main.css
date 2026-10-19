@@ -4,6 +4,7 @@
 @import "@pantoken/components/components.css";
 @import "@pantoken/components/tabs.css";
 @import "@pantoken/plugin-logos/canvas-icon-color.css";
+@import "@pantoken/plugin-simple-icons/icons/modelcontextprotocol.css";
 @import "@pantoken/plugin-custom-components/custom-components.css";
 @import "@pantoken/components/component-icons.css";
 @import "@pantoken/components/icons/copy.css";
@@ -173,7 +174,8 @@ h1 {
     gap: 8px;
 }
 
-.generated-value-control input {
+.generated-value-control input,
+.generated-value-control textarea {
     min-width: 0;
     flex: 1;
 }
@@ -230,6 +232,11 @@ h1 {
 
 .known-issue-alert {
     margin: 0;
+}
+
+.known-issue-alert pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
 }
 
 .details-panel>.content>.section-heading:first-child {
@@ -683,6 +690,11 @@ pre {
 
 .guide-fields td,
 .guide-fields code {
+    overflow-wrap: anywhere;
+}
+
+[data-guide-token="redirectUri"] {
+    white-space: pre-wrap;
     overflow-wrap: anywhere;
 }
 

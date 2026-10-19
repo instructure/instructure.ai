@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { mountApp } from "../src/app";
 import { commandPlatform } from "../src/platform";
 import { renderContent } from "../src/guides/render";
+import * as clients from "../src/clients";
 
 beforeEach(() => {
 	localStorage.clear();
@@ -10,7 +11,10 @@ beforeEach(() => {
 	document.body.innerHTML = '<div id="root"></div>';
 });
 
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => {
+	vi.unstubAllGlobals();
+	vi.restoreAllMocks();
+});
 
 describe("command platform detection", () => {
 	it.each([
@@ -36,6 +40,63 @@ describe("command platform detection", () => {
 });
 
 describe("platform code groups", () => {
+	it.each([
+		["personal", "public"],
+		["personal", "private"],
+		["enterprise", "public"],
+		["enterprise", "private"],
+	])(
+		"keeps Antigravity CLI descriptions and prompts scoped to platform and key for %s/%s",
+		(install, key) => {
+			const definition = clients.clientDefinition("antigravity-cli");
+			const original = clients.clientDefinition;
+			vi.spyOn(clients, "clientDefinition").mockImplementation((id) =>
+				id === "antigravity-cli" ? { ...definition, blocker: undefined } : original(id),
+			);
+			vi.stubGlobal("navigator", { platform: "Win32" });
+			history.replaceState(
+				null,
+				"",
+				`?client=antigravity-cli&install=${install}&key=${key}&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=connect`,
+			);
+			mountApp("user");
+			for (const platform of ["windows", "mac", "windows"]) {
+				document
+					.querySelector<HTMLButtonElement>(
+						`.code-platform-toggle [data-platform-choice="${platform}"]`,
+					)!
+					.click();
+				const panel = document.querySelector<HTMLElement>("[data-code-platform]:not([hidden])")!;
+				const description = panel.querySelector("p")!.textContent!;
+				const script = panel.querySelector<HTMLButtonElement>("[data-copy]")!.dataset.copy!;
+				expect(description).toContain("Run this command from your project directory");
+				if (platform === "windows") {
+					expect(description).toContain("Windows PowerShell");
+					expect(description).not.toMatch(/Bash|jq|macOS|Linux/u);
+					expect(script.includes("Read-Host")).toBe(key === "private");
+				} else {
+					expect(description).toContain("Requires Bash and jq");
+					expect(description).not.toMatch(/Windows|PowerShell/u);
+					expect(script.includes('read -r -s -p "Canvas client secret: "')).toBe(key === "private");
+				}
+				expect(description.includes("prompted")).toBe(key === "private");
+				if (key === "public") {
+					expect(description).not.toContain("source control");
+					expect(script).not.toContain("Client secret is required");
+					expect(
+						document.querySelector(`[data-guide-step="provider-configure-${key}"]`)?.textContent,
+					).not.toContain("private");
+				}
+			}
+			document
+				.querySelector<HTMLButtonElement>('.platform-toggle [data-platform-choice="auto"]')!
+				.click();
+			expect(
+				document.querySelector("[data-code-platform]:not([hidden]) > p")?.textContent,
+			).toContain("Windows PowerShell");
+		},
+	);
+
 	it.each(["public", "private"])("groups the %s Claude Code registration commands", (key) => {
 		vi.stubGlobal("navigator", { platform: "Win32" });
 		openClient(`&key=${key}`);

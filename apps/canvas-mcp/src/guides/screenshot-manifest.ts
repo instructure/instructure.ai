@@ -60,6 +60,7 @@ export const SCREENSHOT_MANIFEST: Record<string, ScreenshotAsset> = {
 	cli_auth_url_and_code_prompt: { size: "terminal" },
 	cli_mcp_authenticate_option: {},
 	cli_mcp_config_canvas_entry: { size: "terminal" },
+	agy_cli_mcp_config_canvas_entry: { file: "images/client-antigravity_cli-mcp_config.png",size: "terminal" },
 	cli_mcp_manager_overlay: {},
 	cli_signin_business_account: { size: "terminal" },
 	codex_agent_security_requirements: {},

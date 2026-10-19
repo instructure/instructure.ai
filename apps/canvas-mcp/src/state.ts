@@ -21,6 +21,7 @@ export interface AppState {
 	key: KeyType;
 	region: Region | "";
 	clientId: string;
+	redirectUris: string;
 	install: InstallMode;
 	surface: "canvas" | "provider";
 	platform: PlatformPreference;
@@ -38,6 +39,7 @@ interface SavedPreferences {
 	install: InstallMode | null;
 	key: KeyType | null;
 	region: Region | "";
+	redirectUris: string;
 }
 
 const STORAGE_KEY = "canvas-mcp:v1",
@@ -74,6 +76,14 @@ export function isBetaDomain(domain: string): boolean {
 	return domain.toLowerCase().endsWith(".beta.instructure.com");
 }
 
+export function normalizeRedirectUris(value: string): string {
+	return value
+		.split(/\r\n?|\n/u)
+		.map((line) => line.trim())
+		.filter(Boolean)
+		.join("\n");
+}
+
 export function deriveUrls(state: Pick<AppState, "domain" | "region">) {
 	const tenant = state.domain.replace(/\.beta\.instructure\.com$/u, ".instructure.com"),
 		tenantName = tenant.slice(0, -".instructure.com".length),
@@ -108,6 +118,7 @@ export function readState(search: string, storage: StorageLike | null): AppState
 		platform: isPlatformPreference(queryPlatform) ? queryPlatform : saved.platform,
 		client,
 		clientId: CLIENT_ID_PATTERN.test(clientId) ? clientId : "",
+		redirectUris: normalizeRedirectUris(params.get("redirectUris") ?? saved.redirectUris),
 		domain,
 		key: normalizeKeyType(client, key),
 		install: normalizeInstall(
@@ -125,11 +136,27 @@ function readPreferences(storage: StorageLike | null): SavedPreferences {
 	try {
 		const raw = storage?.getItem(STORAGE_KEY);
 		if (!raw) {
-			return { client: null, domain: "", key: null, region: "", install: null, platform: "auto" };
+			return {
+				client: null,
+				domain: "",
+				key: null,
+				region: "",
+				install: null,
+				platform: "auto",
+				redirectUris: "",
+			};
 		}
 		const saved: unknown = JSON.parse(raw);
 		if (!isRecord(saved)) {
-			return { client: null, domain: "", key: null, region: "", install: null, platform: "auto" };
+			return {
+				client: null,
+				domain: "",
+				key: null,
+				region: "",
+				install: null,
+				platform: "auto",
+				redirectUris: "",
+			};
 		}
 		return {
 			platform: isPlatformPreference(saved.platform) ? saved.platform : "auto",
@@ -139,9 +166,19 @@ function readPreferences(storage: StorageLike | null): SavedPreferences {
 			domain: typeof saved.domain === "string" ? saved.domain : "",
 			key: saved.key === "public" || saved.key === "private" ? saved.key : null,
 			region: isRegion(saved.region) ? saved.region : "",
+			redirectUris:
+				typeof saved.redirectUris === "string" ? normalizeRedirectUris(saved.redirectUris) : "",
 		};
 	} catch {
-		return { client: null, domain: "", key: null, region: "", install: null, platform: "auto" };
+		return {
+			client: null,
+			domain: "",
+			key: null,
+			region: "",
+			install: null,
+			platform: "auto",
+			redirectUris: "",
+		};
 	}
 }
 
@@ -156,6 +193,7 @@ export function savePreferences(state: AppState, storage: StorageLike | null): v
 				domain: normalizeCanvasDomain(state.domain) ?? "",
 				key: normalizeKeyType(state.client, state.key),
 				region: isRegion(state.region) ? state.region : "",
+				redirectUris: normalizeRedirectUris(state.redirectUris),
 			}),
 		);
 	} catch {
@@ -178,6 +216,9 @@ export function stateQuery(state: AppState, includeClientId = true): string {
 	}
 	if (includeClientId && CLIENT_ID_PATTERN.test(state.clientId)) {
 		params.set("clientId", state.clientId);
+	}
+	if (state.client === "generic" && state.redirectUris) {
+		params.set("redirectUris", normalizeRedirectUris(state.redirectUris));
 	}
 	return params.toString();
 }

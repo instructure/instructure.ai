@@ -27,12 +27,13 @@ export function clientGuide(client: ClientDefinition, install: "personal" | "ent
 		}
 	);
 }
-// Server setup includes Canvas and organization provisioning only. Verification is
+// Server setup includes Canvas and explicitly marked server steps. Verification is
 // a client action unless a guide explicitly identifies an administrator-only check.
 export function serverSetupSteps(guide: Guide, install: "personal" | "enterprise") {
 	return guide.steps.filter(
 		(step) =>
 			step.kind === "canvas-key" ||
+			step.audience === "server" ||
 			(install === "enterprise" &&
 				step.audience !== "client" &&
 				(step.kind !== "verify" || step.audience === "server")),

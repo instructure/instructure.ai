@@ -1,5 +1,6 @@
 import { type Guide } from "../../guides/types";
 import { antigravityEnterpriseGuide } from "./antigravity-guides";
+import { antigravityCliCommands } from "./antigravity-cli-commands";
 import { type ClientDefinition } from "../types";
 import { unknownFacts, unverified } from "../facts";
 import { updatedGuidance, updatedFact } from "../evidence";
@@ -21,27 +22,67 @@ const antigravityCliGuide: Guide = {
 		{
 			id: "provider-configure",
 			kind: "provider",
-			title: "Antigravity CLI — configure the server",
 			content: [
 				{
 					kind: "paragraph",
-					text: "Edit .agents/mcp_config.json. If it already contains other servers, merge the canvas-mcp entry into the existing mcpServers object.",
+					text: "Configure `.agents/mcp_config.json` with the command or manual JSON below. If it already contains other servers, preserve them when adding the canvas-mcp entry.",
 				},
-				{
-					kind: "code",
-					language: "json",
-					text: '{\n  "mcpServers": {\n    "canvas-mcp": {\n      "serverUrl": "{mcpUrl}",\n      "oauth": {\n        "clientId": "{clientId}",\n        "clientSecret": "<ENTER_CLIENT_SECRET_LOCALLY>"\n      }\n    }\n  }\n}',
-				},
-				screenshot(
-					"cli_mcp_config_canvas_entry",
-					"terminal editor showing the entry, secret redacted.",
-				),
 				{
 					kind: "paragraph",
-					text: "Enter the secret only in your local configuration. Keep the file out of source control. Antigravity discovers OAuth endpoints from the MCP server metadata.",
+					text: "Antigravity discovers OAuth endpoints from the MCP server metadata.",
 				},
 			],
 		},
+		...(["public", "private"] as const).map((key) => ({
+			id: `provider-configure-${key}`,
+			kind: "provider" as const,
+			key,
+			content: [
+				antigravityCliCommands(key),
+				{
+					kind: "paragraph" as const,
+					text:
+						"Manual alternative (no extra tools): merge this entry into your configuration instead. Do not replace existing servers." +
+						(key === "private" ? " Keep private-key configuration out of source control." : ""),
+				},
+				{
+					kind: "code" as const,
+					language: "json" as const,
+					text: JSON.stringify(
+						{
+							mcpServers: {
+								"canvas-mcp": {
+									serverUrl: "{mcpUrl}",
+									oauth: {
+										clientId: "{clientId}",
+										...(key === "private" ? { clientSecret: "<ENTER_CLIENT_SECRET_LOCALLY>" } : {}),
+									},
+								},
+							},
+						},
+						null,
+						2,
+					),
+				},
+				screenshot(
+					"agy_cli_mcp_config_canvas_entry",
+					key === "private"
+						? "terminal editor showing the entry, secret redacted."
+						: "terminal editor showing the public-client entry without a client secret.",
+				),
+				{
+					kind: "paragraph" as const,
+					text:
+						key === "private"
+							? "Enter the secret only in your local configuration. Keep the file out of source control."
+							: "",
+				},
+				{
+					kind: "paragraph" as const,
+					text: "A successful run will output `Updated .agents/mcp_config.json` to the terminal.",
+				},
+			],
+		})),
 		{
 			id: "verify",
 			kind: "verify",
@@ -66,6 +107,8 @@ const antigravityCliGuide: Guide = {
 		},
 	],
 };
+const canvasAuthBlocker =
+	"Antigravity CLI (agy) currently fails to connect to Canvas MCP: initialization returns Unauthorized (No authorization header provided).";
 export const antigravityCli = {
 	id: "antigravity-cli",
 	name: "Antigravity CLI",
@@ -73,6 +116,24 @@ export const antigravityCli = {
 	group: "Curated",
 	installModes: ["personal", "enterprise"],
 	enterpriseSurface: "Google Cloud console",
+	status: {
+		kind: "known-issue",
+		reason: canvasAuthBlocker,
+		diagnostic:
+			'✗ canvas-mcp  error: calling "initialize": sending "initialize": No authorization header provided: rejected by transport: Unauthorized',
+	},
+	blocker: {
+		reason: canvasAuthBlocker,
+		evidence: [
+			{
+				method: "probe",
+				label:
+					"Reported agy initialization failure and unauthenticated Canvas MCP response; OAuth root cause unconfirmed",
+				version: "agy 1.4.2",
+				verifiedAt: "2026-10-19",
+			},
+		],
+	},
 	facts: {
 		...unknownFacts(),
 		redirectUri: {

@@ -12,6 +12,7 @@ import {
 	type AppState,
 	type StorageLike,
 	normalizeCanvasDomain,
+	normalizeRedirectUris,
 	deriveUrls,
 	readState,
 	savePreferences,
@@ -146,6 +147,23 @@ export function mountApp(mode: PageMode): void {
 				persistAndRender();
 			});
 		appRoot
+			.querySelector<HTMLTextAreaElement>("#redirect-uris-input")
+			?.addEventListener("input", (event) => {
+				const input = event.currentTarget as HTMLTextAreaElement;
+				const invalid = !normalizeRedirectUris(input.value);
+				input.classList.toggle("-invalid", invalid);
+				input.setAttribute("aria-invalid", String(invalid));
+				input.setCustomValidity(invalid ? "Enter at least one callback URI." : "");
+			});
+		appRoot
+			.querySelector<HTMLTextAreaElement>("#redirect-uris-input")
+			?.addEventListener("change", (event) => {
+				state.redirectUris = normalizeRedirectUris(
+					(event.currentTarget as HTMLTextAreaElement).value,
+				);
+				persistAndRender();
+			});
+		appRoot
 			.querySelector<HTMLSelectElement>("#region-select")
 			?.addEventListener("change", (event) => {
 				state.region = (event.currentTarget as HTMLSelectElement).value as AppState["region"];
@@ -171,9 +189,12 @@ export function mountApp(mode: PageMode): void {
 		appRoot
 			.querySelector<HTMLInputElement>("#client-id-input")
 			?.addEventListener("input", (event) => {
-				state.clientId = (event.currentTarget as HTMLInputElement).value
-					.replace(/\D/gu, "")
-					.slice(0, 17);
+				const input = event.currentTarget as HTMLInputElement;
+				state.clientId = input.value.replace(/\D/gu, "").slice(0, 17);
+				input.value = state.clientId;
+				const invalid = !input.validity.valid;
+				input.classList.toggle("-invalid", invalid);
+				input.setAttribute("aria-invalid", String(invalid));
 				persist();
 				appRoot
 					.querySelectorAll<HTMLElement>('[data-guide-token="clientId"]')
