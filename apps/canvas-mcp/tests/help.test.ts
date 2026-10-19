@@ -24,8 +24,28 @@ describe("Help content", () => {
 		]);
 		expect(items[0]?.textContent).toBe("Generic MCP Untested");
 		for (const item of items)
-			expect(item.querySelector(".instui-pill")?.textContent).toBe("Untested");
+			expect(item.querySelector(".instui-pill")?.textContent).toBe(
+				item.getAttribute("data-other-client") === "copilot" ? "Known issue" : "Untested",
+			);
+		const copilot = group.querySelector('[data-other-client="copilot"]')!;
+		expect(copilot.textContent).toBe("GitHub Copilot Known issue");
+		expect(copilot.querySelector(".instui-pill.-color-danger")).not.toBeNull();
+		expect(copilot.querySelector("p")).toBeNull();
 		expect(document.querySelector('[data-matrix-client="generic"]')).toBeNull();
+	});
+
+	it("documents the VS Code discovery failure under Users common issues", () => {
+		document.body.innerHTML = renderHelp("issues");
+		const users = document.querySelector('[aria-labelledby="issue-users"]')!;
+		const issue = [...users.querySelectorAll("details")].find((entry) =>
+			entry.querySelector("summary")?.textContent?.includes("VS Code"),
+		)!;
+		expect(issue.textContent).toContain(
+			"Failed to fetch authorization server metadata from all attempted URLs",
+		);
+		expect(issue.textContent).toContain("not evidence that a public client needs a secret");
+		expect(issue.textContent).toContain("do not establish why VS Code");
+		expect(issue.textContent).toContain("Developer: Show Logs");
 	});
 
 	it("shows Claude Code personal validation version without repeating header key types", () => {
@@ -35,6 +55,11 @@ describe("Help content", () => {
 			const cell = row.querySelector(`td[headers~="matrix-personal-${key}"]`)!;
 			expect(cell.querySelector(".instui-pill")?.textContent).toBe("Verified");
 			expect(cell.textContent).toContain("Version: 2.1.303 (Claude Code)");
+			expect([...cell.querySelectorAll("p")].map((entry) => entry.textContent)).toEqual([
+				"Tested: 2026-10-17",
+				"Version: 2.1.303 (Claude Code)",
+				"Platform: macOS",
+			]);
 			expect(cell.textContent).not.toContain("not recorded");
 			expect(cell.textContent?.toLowerCase()).not.toContain(key);
 		}
@@ -97,6 +122,7 @@ describe("Help content", () => {
 							cell.querySelector(".instui-pill.-color-info.-icon-equal-approximately-not")
 								?.textContent,
 						).toBe("Not applicable");
+						expect(cell.querySelector("p")).toBeNull();
 						continue;
 					}
 					const status = clientStatus(client, install);
@@ -107,6 +133,10 @@ describe("Help content", () => {
 					if (status.kind === "validated") {
 						expect(cell.textContent).toContain(status.testedAt);
 						if (status.note) expect(cell.textContent).toContain(status.note);
+					}
+					if (!issue && status.kind === "untested") {
+						expect(cell.textContent).toBe("Untested");
+						expect(cell.querySelector("p")).toBeNull();
 					}
 				}
 			}
@@ -195,7 +225,7 @@ describe("Help content", () => {
 		const gemini = document.querySelector('[data-matrix-client="gemini-cli"]')!;
 		for (const cell of [...gemini.querySelectorAll("td")].slice(2)) {
 			expect(cell.textContent).toContain("Not applicable");
-			expect(cell.textContent).toContain("replaced by Antigravity CLI");
+			expect(cell.textContent).toBe("Not applicable");
 			expect(cell.textContent).not.toContain("Known issue");
 		}
 		for (const cell of [...gemini.querySelectorAll("td")].slice(0, 2))

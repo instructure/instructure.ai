@@ -57,6 +57,8 @@ Claude Code personal public/private validation records version `2.1.303 (Claude 
 
 Supported Clients includes a collapsed Pantoken toggle-group below the curated table. It lists Generic MCP first, then the remaining Rulesync clients alphabetically, with their recorded personal-install statuses. Rulesync configuration support does not establish a verified Canvas connection.
 
+The existing Rulesync GitHub Copilot entry records the VS Code OAuth metadata discovery failure as Known issue. Its list item shows only the status pill; the reported diagnostic, endpoint observations, and troubleshooting guidance are under Common Issues > Users. No separate VS Code entry is added.
+
 Codex personal and enterprise client setup has key-specific copyable Bash/PowerShell commands and descriptions. Public setup uses a single `codex mcp add` command with callback settings and the static client ID. Private setup prompts for the secret before invoking the same command with `--oauth-client-secret`. No `jq`, custom config-writing script, or manual configuration alternative is required. Codex handles saving configuration and starts sign-in.
 
 `codex mcp add` has no scope flag and may request discovered `openid`. If automatic login returns `invalid_scope`, the server is already saved: use the explicit `mcp login --scopes "https://sso.canvaslms.com/all-client-scopes"` command with the same callback overrides instead of repeating add. If scoped login also fails, the Canvas administrator must check the developer key's permitted scopes. Integration tests use an isolated `CODEX_HOME` and loopback discovery server advertising `openid` to verify the installed CLI requests the Canvas scope with the explicit login flag.

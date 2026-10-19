@@ -377,6 +377,7 @@ export const claudeCode = {
 		testedAt: "2026-10-17",
 		installModes: ["personal"],
 		note: "Version: 2.1.303 (Claude Code)",
+		platform: "macOS",
 	},
 	setupNote: "Add the remote HTTP MCP server using Claude Code's current MCP configuration flow.",
 	verify: "Complete the browser sign-in and confirm the server is listed as connected.",

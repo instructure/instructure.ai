@@ -1,0 +1,11 @@
+{
+    "servers": {
+        "canvas-mcp": {
+            "type": "http",
+            "url": "https://danny.maple.us-east-1.core.inseng.io/mcp",
+            "oauth": {
+                "clientId": "71700000000000105"
+            }
+        }
+    }
+}
