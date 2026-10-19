@@ -3,6 +3,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { readFile } from "node:fs/promises";
 import { mountApp } from "../src/app";
+import { SCOPE_MANIFEST } from "../src/scopes";
 
 describe("Canvas MCP pages", () => {
 	beforeEach(() => {
@@ -13,6 +14,21 @@ describe("Canvas MCP pages", () => {
 
 	afterEach(() => {
 		vi.unstubAllGlobals();
+	});
+
+	it.each([
+		"?client=codex",
+		"?client=codex&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001",
+	])("copies the full scope manifest regardless of setup completeness: %s", async (search) => {
+		const writeText = vi.fn().mockResolvedValue(undefined);
+		vi.stubGlobal("navigator", { clipboard: { writeText } });
+		history.replaceState(null, "", search);
+		mountApp("admin");
+		const button = document.querySelector<HTMLButtonElement>('[aria-label="Copy scope manifest"]')!;
+		expect(button.disabled).toBe(false);
+		button.click();
+		await vi.waitFor(() => expect(writeText).toHaveBeenCalledExactlyOnceWith(SCOPE_MANIFEST));
+		expect(document.querySelector(".toast")?.textContent).toBe("Scope manifest copied");
 	});
 
 	it("marks empty callback URIs invalid and updates validation while typing", () => {
@@ -397,7 +413,7 @@ describe("Canvas MCP pages", () => {
 		);
 		expect(
 			(document.querySelector(".scope-card-header button") as HTMLButtonElement).disabled,
-		).toBe(true);
+		).toBe(false);
 		expect(scopeManifest).not.toContain("https://sso.canvaslms.com/mcp-limited");
 		expect(scopeManifest.startsWith("https://sso.canvaslms.com/all-client-scopes\n")).toBe(true);
 		expect(scopeManifest).toContain(
@@ -653,6 +669,19 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector<HTMLInputElement>("#generated-mcp-url")?.value).toBe(
 			"https://utah.maple.us-east-1.core.inseng.io/mcp",
 		);
+		const audiencesRow = [
+			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
+		].find((row) => row.querySelector('th[scope="row"]')?.textContent === "Allowed Audiences");
+		expect(audiencesRow?.querySelector("pre code")?.textContent).toBe(
+			"https://{{tenant_name}}.maple.us-east-1.core.inseng.io/",
+		);
+		expect(audiencesRow?.querySelector(".audience-region-lead, .audience-regions")).toBeNull();
+		expect(audiencesRow?.querySelector(".audience-tenant-note")?.textContent).toBe(
+			"{{tenant_name}} is a literal string in the Audiences list.",
+		);
+		expect(audiencesRow?.querySelector(".audience-tenant-note")?.nextElementSibling?.tagName).toBe(
+			"IMG",
+		);
 		expect(document.querySelector<HTMLInputElement>("#generated-mcp-url")?.readOnly).toBe(true);
 		expect(document.querySelector<HTMLInputElement>("#generated-auth-url")?.readOnly).toBe(true);
 		expect(document.querySelector<HTMLInputElement>("#generated-auth-url")?.value).toBe(
@@ -733,7 +762,11 @@ describe("Canvas MCP pages", () => {
 	});
 
 	it("defaults client selections without recorded end-to-end tests to untested", () => {
-		globalThis.history.replaceState(null, "", "/canvas-mcp/?client=codex&page=admin");
+		globalThis.history.replaceState(
+			null,
+			"",
+			"/canvas-mcp/?client=claude-code&install=enterprise&page=admin",
+		);
 		mountApp("admin");
 
 		const clientSelect = document.querySelector("#client-select");
@@ -888,7 +921,7 @@ describe("Canvas MCP pages", () => {
 		globalThis.history.replaceState(
 			null,
 			"",
-			"/canvas-mcp/?domain=utah.instructure.com&clientId=12345000000000001&client=codex&region=us-east-1",
+			"/canvas-mcp/?domain=utah.instructure.com&clientId=12345000000000001&client=claude-code&install=personal&region=us-east-1",
 		);
 		mountApp("user");
 
@@ -920,12 +953,12 @@ describe("Canvas MCP pages", () => {
 		);
 		expect(document.querySelectorAll(".server-details-card input[readonly]")).toHaveLength(5);
 		expect(document.querySelector(".instructions-heading")).toBeNull();
-		expect(document.querySelector(".details-panel h2")?.textContent).toBe("Codex");
+		expect(document.querySelector(".details-panel h2")?.textContent).toBe("Claude Code");
 		expect(document.querySelector(".details-panel h2")?.classList.contains("instui-heading")).toBe(
 			true,
 		);
 		expect(document.querySelector("#guide-provider")?.getAttribute("aria-label")).toBe(
-			"Codex setup",
+			"Claude Code setup",
 		);
 		expect(document.querySelector("#guide-provider")?.hasAttribute("hidden")).toBe(false);
 		expect(document.querySelector("#guide-provider .guide-fields")).toBeNull();

@@ -11,6 +11,33 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 describe("updated curated guidance", () => {
+	it.each([
+		["personal", "public"],
+		["personal", "private"],
+		["enterprise", "public"],
+		["enterprise", "private"],
+	])("blocks %s Codex connections for %s keys", (install, key) => {
+		history.replaceState(
+			null,
+			"",
+			`?client=codex&install=${install}&key=${key}&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=connect`,
+		);
+		mountApp("user");
+		expect(clientDefinition("codex").status).toMatchObject({
+			kind: "known-issue",
+			installModes: ["personal", "enterprise"],
+		});
+		expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("admin");
+		expect(document.querySelector('.known-issue-alert[role="alert"]')?.textContent).toContain(
+			"invalid_target",
+		);
+		expect(document.querySelector(".client-status-pill")?.textContent).toBe("Known issue");
+		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+		expect(
+			document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")?.disabled,
+		).toBe(true);
+	});
+
 	it.each(["public", "private"])(
 		"blocks direct personal Gemini CLI client links for %s keys",
 		(key) => {
@@ -184,7 +211,7 @@ describe("updated curated guidance", () => {
 			/create the data store|Policies|Use your own OAuth client|Developer Keys/iu,
 		);
 	});
-	it.each(["codex", "antigravity", "gemini-cli"])(
+	it.each(["claude-code", "antigravity", "gemini-cli"])(
 		"retains connection fields for enterprise %s users who configure their client",
 		(id) => {
 			history.replaceState(

@@ -7,11 +7,56 @@ import { COMMON_ISSUES, FAQS, helpSectionFromQuery } from "../src/help/content";
 import { renderHelp } from "../src/help/render";
 
 describe("Help content", () => {
+	it("lists Generic MCP then all other Rulesync clients alphabetically in a collapsed toggle group below the table", () => {
+		document.body.innerHTML = renderHelp("clients");
+		const matrix = document.querySelector(".help-matrix-scroll")!;
+		const group = matrix.nextElementSibling as HTMLDetailsElement;
+		expect(group.matches("details.instui-toggle-group")).toBe(true);
+		expect(group.open).toBe(false);
+		expect(group.querySelector("summary")?.textContent).toBe("Other MCP clients");
+		const expected = CLIENTS.filter(({ group, id }) => group === "Other" && id !== "generic").sort(
+			(left, right) => left.name.localeCompare(right.name, "en"),
+		);
+		const items = [...group.querySelectorAll("li")];
+		expect(items.map((item) => item.getAttribute("data-other-client"))).toEqual([
+			"generic",
+			...expected.map(({ id }) => id),
+		]);
+		expect(items[0]?.textContent).toBe("Generic MCP Untested");
+		for (const item of items)
+			expect(item.querySelector(".instui-pill")?.textContent).toBe("Untested");
+		expect(document.querySelector('[data-matrix-client="generic"]')).toBeNull();
+	});
+
+	it("shows Claude Code personal validation version without repeating header key types", () => {
+		document.body.innerHTML = renderHelp("clients");
+		const row = document.querySelector('[data-matrix-client="claude-code"]')!;
+		for (const key of ["public", "private"]) {
+			const cell = row.querySelector(`td[headers~="matrix-personal-${key}"]`)!;
+			expect(cell.querySelector(".instui-pill")?.textContent).toBe("Verified");
+			expect(cell.textContent).toContain("Version: 2.1.303 (Claude Code)");
+			expect(cell.textContent).not.toContain("not recorded");
+			expect(cell.textContent?.toLowerCase()).not.toContain(key);
+		}
+	});
+
 	it("normalizes section URLs", () => {
 		for (const section of ["faqs", "issues", "clients"])
 			expect(helpSectionFromQuery(`?help=${section}`)).toBe(section);
 		expect(helpSectionFromQuery("")).toBe("faqs");
 		expect(helpSectionFromQuery("?help=invalid")).toBe("faqs");
+	});
+
+	it("allows scope copying without implying production approval", () => {
+		document.body.innerHTML = renderHelp("faqs");
+		const admins = document.querySelector('[aria-labelledby="faq-admins"]')!;
+		expect(admins.textContent).toContain(
+			"You can copy the list regardless of setup completeness or review status.",
+		);
+		expect(admins.textContent).toContain("Copying does not indicate production approval.");
+		expect(admins.textContent).toContain(
+			"Do not use the unreviewed list to create a production developer key.",
+		);
 	});
 
 	it("uses the segmented-control component and renders only the selected content", () => {
@@ -48,6 +93,10 @@ describe("Help content", () => {
 						(client.id === "gemini-cli" && install === "personal")
 					) {
 						expect(cell.textContent).toContain("Not applicable");
+						expect(
+							cell.querySelector(".instui-pill.-color-info.-icon-equal-approximately-not")
+								?.textContent,
+						).toBe("Not applicable");
 						continue;
 					}
 					const status = clientStatus(client, install);

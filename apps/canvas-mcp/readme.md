@@ -37,7 +37,7 @@ Canvas automatically populates the region-specific Maple Allowed Audience during
 
 ## Release Blocker
 
-The admin guide displays an unreviewed scope list containing read/write/delete and introspection scopes. Its Maple revision is recorded; the review note stays in code and copying remains disabled. The customer-key default excludes `mcp-limited`. Do not use it to create a production developer key until the complete per-tool scope manifest has been generated from a reviewed Maple revision and verified by Product/Security. The committed manifest was generated from Maple revision `6368cd5b58b7a3f9d4c004c46f8779712cdb0d14`; Product/Security release review is still pending. Regenerate it from a clean Maple checkout with `node apps/canvas-mcp/scripts/updateScopes.mts /path/to/maple`. The script writes scope names and provenance only, and resets review status to unreviewed.
+The admin guide displays an unreviewed scope list containing read/write/delete and introspection scopes. Its Maple revision is recorded; the review note stays in code. The scope manifest copy button is always enabled, independent of setup completeness and review status; copying does not indicate production approval. The customer-key default excludes `mcp-limited`. Do not use it to create a production developer key until the complete per-tool scope manifest has been generated from a reviewed Maple revision and verified by Product/Security. The committed manifest was generated from Maple revision `6368cd5b58b7a3f9d4c004c46f8779712cdb0d14`; Product/Security release review is still pending. Regenerate it from a clean Maple checkout with `node apps/canvas-mcp/scripts/updateScopes.mts /path/to/maple`. The script writes scope names and provenance only, and resets review status to unreviewed.
 
 Client setup descriptions are intentionally generic where vendor-specific OAuth behavior has not yet been verified. Confirm each client's current connection fields and redirect URI before publishing the guide as final instructions.
 
@@ -48,6 +48,16 @@ Guide paragraph text, list items, table fields/values, and link labels support i
 `src/app.ts` owns state, events and persistence. `src/page.ts` composes the page. Shared admin components live in `src/admin/config.ts`, `server-details.ts`, and `key-settings.ts`; `key-settings-model.ts` resolves client facts into the same Canvas fields in every guide.
 
 Required inline fields expose invalid styling and `aria-invalid` immediately and update while typing: Callback URIs requires a nonblank value, and Client ID uses its existing 17-digit constraint.
+
+Codex is marked as a known issue for both installation modes and key types after personal Canvas OAuth returned `invalid_target` even with an explicit Canvas scope; the cause remains unconfirmed. Enterprise uses the same OAuth flow and is blocked pending verification, not independently confirmed failing. Both modes show the alert and disable connection actions.
+
+Claude Code personal public/private validation records version `2.1.303 (Claude Code)`. The compatibility table headers identify the key types without repeating them in the validation note.
+
+Supported Clients includes a collapsed Pantoken toggle-group below the curated table. It lists Generic MCP first, then the remaining Rulesync clients alphabetically, with their recorded personal-install statuses. Rulesync configuration support does not establish a verified Canvas connection.
+
+Codex personal and enterprise client setup has key-specific copyable Bash/PowerShell commands and descriptions. Public setup uses a single `codex mcp add` command with callback settings and the static client ID. Private setup prompts for the secret before invoking the same command with `--oauth-client-secret`. No `jq`, custom config-writing script, or manual configuration alternative is required. Codex handles saving configuration and starts sign-in.
+
+`codex mcp add` has no scope flag and may request discovered `openid`. If automatic login returns `invalid_scope`, the server is already saved: use the explicit `mcp login --scopes "https://sso.canvaslms.com/all-client-scopes"` command with the same callback overrides instead of repeating add. If scoped login also fails, the Canvas administrator must check the developer key's permitted scopes. Integration tests use an isolated `CODEX_HOME` and loopback discovery server advertising `openid` to verify the installed CLI requests the Canvas scope with the explicit login flag.
 
 Antigravity CLI personal and enterprise client instructions follow the selected Canvas key type: public configuration omits `clientSecret` and calls out the S256 PKCE requirement; private configuration includes a local-only secret placeholder and source-control warning. Public-key compatibility remains unverified, and the default remains the documented private key.
 

@@ -73,30 +73,53 @@ function renderClientMatrix(): string {
 					`<tr data-matrix-client="${client.id}"><th id="matrix-row-${client.id}" scope="row">${escapeHtml(clientLabel(client))}</th>${(["enterprise", "personal"] as const).map((install) => (["public", "private"] as const).map((key) => `<td headers="matrix-row-${client.id} matrix-${install} matrix-${install}-${key}">${renderStatus(client, install, key)}</td>`).join("")).join("")}</tr>`,
 			)
 			.join("")}</tbody>
-		</table></div>`;
+		</table></div>${renderOtherClients()}`;
 }
 
-function renderStatus(client: ClientDefinition, install: InstallMode, key: KeyType): string {
-	const unavailable = unavailableInstallReason(client, install);
-	if (unavailable) return `<span>Not applicable</span><p>${escapeHtml(unavailable)}</p>`;
+function renderOtherClients(): string {
+	const clients = CLIENTS.filter(({ group, id }) => group === "Other" && id !== "generic").sort(
+		(left, right) => left.name.localeCompare(right.name, "en"),
+	);
+	const generic = CLIENTS.find(({ id }) => id === "generic")!;
+	return `<details class="instui-toggle-group other-clients"><summary>Other MCP clients</summary><div><ul class="instui-list">${[
+		generic,
+		...clients,
+	]
+		.map(
+			(client) =>
+				`<li data-other-client="${client.id}">${escapeHtml(client.id === "generic" ? "Generic MCP" : client.name)} ${renderStatusPill(client, "personal")}</li>`,
+		)
+		.join("")}</ul></div></details>`;
+}
+
+function renderStatusPill(client: ClientDefinition, install: InstallMode): string {
 	const status = clientStatus(client, install);
-	const support = client.facts.keyTypes[key];
-	if (support.value === "no")
-		return `<span>Not applicable</span><p>This client does not support ${key} keys.</p>`;
-	const reason = client.blocker?.reason ?? (status.kind === "known-issue" ? status.reason : "");
-	const label = reason ? "Known issue" : status.kind === "validated" ? "Verified" : "Untested";
-	const style = reason
+	const issue = client.blocker || status.kind === "known-issue";
+	const label = issue ? "Known issue" : status.kind === "validated" ? "Verified" : "Untested";
+	const style = issue
 		? "-color-danger -icon-triangle-alert"
 		: status.kind === "validated"
 			? "-color-success -icon-check"
 			: "-icon-info";
+	return `<span class="instui-pill ${style}">${label}</span>`;
+}
+
+function renderStatus(client: ClientDefinition, install: InstallMode, key: KeyType): string {
+	const unavailable = unavailableInstallReason(client, install);
+	if (unavailable)
+		return `<span class="instui-pill -color-info -icon-equal-approximately-not">Not applicable</span><p>${escapeHtml(unavailable)}</p>`;
+	const status = clientStatus(client, install);
+	const support = client.facts.keyTypes[key];
+	if (support.value === "no")
+		return `<span class="instui-pill -color-info -icon-equal-approximately-not">Not applicable</span><p>This client does not support ${key} keys.</p>`;
+	const reason = client.blocker?.reason ?? (status.kind === "known-issue" ? status.reason : "");
 	const notes = [
 		reason,
 		...(status.kind === "validated" ? [`Tested: ${status.testedAt}`, status.note ?? ""] : []),
 		...(client.installModes.length === 0 ? ["Install flow unverified."] : []),
 		...(support.value === "unknown" ? ["Key support unverified."] : []),
 	];
-	return `<span class="instui-pill ${style}">${label}</span>${notes
+	return `${renderStatusPill(client, install)}${notes
 		.filter(Boolean)
 		.map((note) => `<p>${escapeHtml(note)}</p>`)
 		.join("")}`;

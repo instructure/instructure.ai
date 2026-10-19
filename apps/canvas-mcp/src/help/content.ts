@@ -52,7 +52,7 @@ export const FAQS: HelpGroup[] = [
 			},
 			{
 				title: "Is the developer-key scope list approved for production?",
-				text: "The scope manifest is still awaiting Product/Security release review. Scope copying remains disabled. Do not use the unreviewed list to create a production developer key.",
+				text: "The scope manifest is still awaiting Product/Security release review. You can copy the list regardless of setup completeness or review status. Copying does not indicate production approval. Do not use the unreviewed list to create a production developer key.",
 			},
 		],
 	},

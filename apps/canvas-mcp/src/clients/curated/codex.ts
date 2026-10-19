@@ -3,6 +3,7 @@ import { documented, updatedGuidance } from "../evidence";
 import { type Evidence, type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
 import { canvasAuthorizationScreenshot, screenshot } from "../../guides/screenshots";
+import { codexCallbackOptions, codexCommands } from "./codex-commands";
 const codexOAuth: Evidence = {
 	method: "vendor-doc",
 	label: "Codex OAuth registration and callbacks",
@@ -18,9 +19,7 @@ const codexManaged: Evidence = {
 const codexPersonalGuide: Guide = {
 	presentation: "by-surface",
 	status: "documented",
-	prerequisites: [
-		"Codex CLI or IDE extension installed and signed in; public Canvas key and callback port 8081.",
-	],
+	prerequisites: ["Codex CLI installed and signed in; a Canvas OAuth key and callback port 8081."],
 	sources: [updatedGuidance, codexOAuth],
 	lastVerified: "2026-10-17",
 	steps: [
@@ -33,17 +32,8 @@ const codexPersonalGuide: Guide = {
 			id: "provider-register",
 			kind: "provider",
 			key: "public",
-			title: "Codex — register the server",
 			content: [
-				{
-					kind: "paragraph",
-					text: "The CLI and IDE extension share this configuration.",
-				},
-				{
-					kind: "code",
-					language: "bash",
-					text: 'codex -c mcp_oauth_callback_port=8081 -c \'mcp_oauth_callback_url="http://localhost:8081/callback"\' mcp add canvas-mcp --url "{mcpUrl}" --oauth-client-id "{clientId}"',
-				},
+				codexCommands("public", "personal"),
 				screenshot(
 					"codex_desktop_mcp_servers_add",
 					"Settings > MCP servers with Add server and Streamable HTTP selected, Canvas MCP URL entered.",
@@ -57,25 +47,7 @@ const codexPersonalGuide: Guide = {
 			kind: "provider",
 			key: "private",
 			title: "Codex — register the server",
-			content: [
-				{
-					kind: "paragraph",
-					text: "Set CANVAS_CLIENT_SECRET in your terminal to the Canvas key secret, then run:",
-				},
-				{
-					kind: "code-group",
-					variants: {
-						mac: {
-							language: "bash",
-							text: `codex -c mcp_oauth_callback_port=8081 -c 'mcp_oauth_callback_url="http://localhost:8081/callback"' mcp add canvas-mcp --url "{mcpUrl}" --oauth-client-id "{clientId}" --oauth-client-secret "$CANVAS_CLIENT_SECRET"`,
-						},
-						windows: {
-							language: "powershell",
-							text: `codex -c mcp_oauth_callback_port=8081 -c 'mcp_oauth_callback_url="http://localhost:8081/callback"' mcp add canvas-mcp --url "{mcpUrl}" --oauth-client-id "{clientId}" --oauth-client-secret "$env:CANVAS_CLIENT_SECRET"`,
-						},
-					},
-				},
-			],
+			content: [codexCommands("private", "personal")],
 		},
 		{
 			id: "provider-login",
@@ -85,12 +57,16 @@ const codexPersonalGuide: Guide = {
 			content: [
 				{
 					kind: "paragraph",
-					text: "If sign-in does not start automatically, run:",
+					text: "If the add command returns `invalid_scope` or requests `openid`, run this command instead of adding the server again. Codex has already saved the server; this login explicitly requests the Canvas scope. Register the exact callback URI shown in the Canvas key settings first. If sign-in already succeeded, continue to validation.",
 				},
 				{
 					kind: "code",
 					language: "bash",
-					text: 'codex -c mcp_oauth_callback_port=8081 -c \'mcp_oauth_callback_url="http://localhost:8081/callback"\' mcp login canvas-mcp --scopes "{scope}"',
+					text: `codex ${codexCallbackOptions} mcp login canvas-mcp --scopes "{scope}"`,
+				},
+				{
+					kind: "paragraph",
+					text: "If this scoped login also returns `invalid_scope`, have the Canvas administrator check that the developer key permits the requested Canvas scope.",
 				},
 				canvasAuthorizationScreenshot(),
 			],
@@ -113,11 +89,30 @@ const codexPersonalGuide: Guide = {
 		},
 	],
 };
+const codexEnterpriseSteps = codexPersonalGuide.steps
+	.filter((step) => step.kind !== "canvas-key")
+	.map((step) => {
+		const key = step.key;
+		return key
+			? {
+					...step,
+					content: step.content.map((content) =>
+						content.kind === "code-group" ? codexCommands(key, "enterprise") : content,
+					),
+				}
+			: step;
+	});
 // Maple 6368cd5b58b7a3f9d4c004c46f8779712cdb0d14, src/controllers/well-known.controller.ts:
 // authorization-server metadata omits authorization_response_iss_parameter_supported.
 // Codex therefore appends the server-specific callback ID. Recheck if Maple adds RFC 9207.
 // This is source/documentation evidence, not a successful live Canvas OAuth probe.
 export const codex = {
+	status: {
+		kind: "known-issue",
+		installModes: ["personal", "enterprise"],
+		reason:
+			"Codex Canvas sign-in is blocked by an OAuth invalid_target response in personal testing, including with an explicit Canvas scope. Enterprise uses the same OAuth flow and is also marked as a known issue pending verification. The cause is not yet confirmed.",
+	},
 	facts: {
 		...inheritedFacts(["public", "private"], {
 			kind: "computed",
@@ -155,7 +150,7 @@ export const codex = {
 			...codexPersonalGuide,
 			clientSetup: {
 				requiresServerDetails: true,
-				steps: codexPersonalGuide.steps.filter((step) => step.kind !== "canvas-key"),
+				steps: codexEnterpriseSteps,
 			},
 			sources: [...codexPersonalGuide.sources, codexManaged],
 			steps: [
@@ -180,11 +175,11 @@ export const codex = {
 						),
 						{
 							kind: "paragraph",
-							text: "Distribute the registration command below to managed devices. Each user completes their own Canvas sign-in.",
+							text: "Distribute the configuration below to managed devices. Each user completes their own Canvas sign-in.",
 						},
 					],
 				},
-				...codexPersonalGuide.steps.filter((step) => step.kind !== "canvas-key"),
+				...codexEnterpriseSteps,
 			],
 		},
 	},

@@ -5,6 +5,7 @@ import { renderContent, renderGuide, validateGuide } from "../src/guides/render"
 import { screenshot, screenshotSource } from "../src/guides/screenshots";
 import { clientGuide } from "../src/guides/shared";
 import { allowedKeyTypes, CLIENTS, clientDefinition } from "../src/clients";
+import * as clients from "../src/clients";
 import { readState } from "../src/state";
 import { resolveKeySettings } from "../src/admin/key-settings-model";
 
@@ -14,6 +15,7 @@ beforeEach(() => {
 	document.body.innerHTML = '<div id="root"></div>';
 });
 afterEach(() => {
+	vi.restoreAllMocks();
 	vi.unstubAllGlobals();
 	vi.unstubAllEnvs();
 });
@@ -329,20 +331,28 @@ describe("composable client guides", () => {
 	});
 
 	it("offers the client registration command after entering the server's Client ID", () => {
+		const definition = clientDefinition("codex");
+		const original = clients.clientDefinition;
+		vi.spyOn(clients, "clientDefinition").mockImplementation((id) =>
+			id === "codex" ? { ...definition, status: { kind: "untested" } } : original(id),
+		);
 		vi.stubGlobal("scrollTo", vi.fn());
 		history.replaceState(
 			null,
 			"",
-			"/canvas-mcp/?client=codex&domain=example.instructure.com&region=us-east-1",
+			"/canvas-mcp/?client=codex&install=enterprise&domain=example.instructure.com&region=us-east-1",
 		);
 		mountApp("admin");
-		expect(document.querySelector('button[data-copy-template*="mcp add"]')).toBeNull();
+		expect(
+			document.querySelector<HTMLButtonElement>('[data-guide-step="provider-register"] [data-copy]')
+				?.disabled,
+		).toBe(true);
 		const input = document.querySelector<HTMLInputElement>("#client-id-input")!;
 		input.value = "12345000000000001";
 		input.dispatchEvent(new Event("input", { bubbles: true }));
 		document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")!.click();
 		const command = document.querySelector<HTMLButtonElement>(
-			'button[data-copy-template*="mcp add"]',
+			'[data-guide-step="provider-register"] [data-copy]',
 		);
 		expect(command?.disabled).toBe(false);
 		expect(command?.dataset.copy).toContain('--oauth-client-id "12345000000000001"');

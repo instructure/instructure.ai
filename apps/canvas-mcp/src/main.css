@@ -4,6 +4,7 @@
 @import "@pantoken/components/components.css";
 @import "@pantoken/components/tabs.css";
 @import "@pantoken/components/toggle-details.css";
+@import "@pantoken/components/toggle-group.css";
 @import "@pantoken/components/icons/chevron-right.css";
 @import "@pantoken/plugin-logos/canvas-icon-color.css";
 @import "@pantoken/plugin-simple-icons/icons/modelcontextprotocol.css";
@@ -23,6 +24,7 @@
 @import "@pantoken/components/icons/triangle-alert.css";
 @import "@pantoken/components/icons/check.css";
 @import "@pantoken/components/icons/info.css";
+@import "@pantoken/components/icons/equal-approximately-not.css";
 @import "@pantoken/components/fonts.css";
 @import "@pantoken/components/utilities.css";
 
@@ -797,6 +799,10 @@ pre {
 .content>.guide-heading {
     max-width: 75ch;
     margin: 0 auto;
+}
+
+.other-clients {
+    margin-top: 1.25rem;
 }
 
 @media print {
