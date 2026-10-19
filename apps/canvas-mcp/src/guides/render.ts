@@ -54,7 +54,21 @@ function renderCode(block: CodeSnippet, values: Record<string, string>): string 
 		},
 		highlightCode(block.text, block.language),
 	);
-	return `<div class="shiki-block language-${block.language}"><button class="instui-button -color-tertiary -shape-square -icon-copy -size-sm shiki-copy" type="button" data-copy-template="${escapeHtml(block.text)}" data-copy="${escapeHtml(resolved)}" data-label="Configuration" aria-label="Copy configuration" title="Copy configuration" ${ready ? "" : "disabled"}></button>${highlighted}</div>`;
+	return renderCodeSample(resolved, block.language, "Configuration", {
+		highlighted,
+		template: block.text,
+		ready,
+	});
+}
+
+export function renderCodeSample(
+	source: string,
+	language: CodeSnippet["language"],
+	label: string,
+	options?: { highlighted: string; template: string; ready: boolean },
+): string {
+	const copyLabel = `Copy ${label.toLowerCase()}`;
+	return `<div class="shiki-block language-${language}"><button class="instui-button -color-tertiary -shape-square -icon-copy -size-sm shiki-copy" type="button" ${options ? `data-copy-template="${escapeHtml(options.template)}"` : ""} data-copy="${escapeHtml(source)}" data-label="${escapeHtml(label)}" aria-label="${escapeHtml(copyLabel)}" title="${escapeHtml(copyLabel)}" ${options?.ready === false ? "disabled" : ""}></button>${options?.highlighted ?? highlightCode(source, language)}</div>`;
 }
 
 function inlineMarkup(text: string): string {
@@ -65,13 +79,17 @@ function inlineMarkup(text: string): string {
 	);
 }
 
+export function renderInlineText(text: string): string {
+	return inlineMarkup(escapeHtml(text));
+}
+
 export function renderContent(
 	content: StructuredContent[],
 	values: Record<string, string>,
 	platform: PlatformPreference = "auto",
 ): string {
 	const text = (value: string) =>
-		inlineMarkup(escapeHtml(value)).replace(/\{([a-zA-Z][a-zA-Z0-9]*)\}/gu, (_, token: string) => {
+		renderInlineText(value).replace(/\{([a-zA-Z][a-zA-Z0-9]*)\}/gu, (_, token: string) => {
 			if (!Object.hasOwn(values, token)) throw new Error(`Unknown guide token: ${token}`);
 			return `<span data-guide-token="${token}">${escapeHtml(values[token])}</span>`;
 		});

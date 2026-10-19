@@ -9,6 +9,8 @@ import { copyToClipboard } from "./ui/copy";
 import { applyTheme, setTheme } from "./ui/theme";
 import { commandPlatform, isPlatformPreference } from "./platform";
 import { helpSectionFromQuery, type HelpSection } from "./help/content";
+import { bindToolFilters, toolFilterQuery } from "./help/tools";
+import { bindSegmentedControls } from "./ui/segmented-controls";
 import {
 	type AppState,
 	type StorageLike,
@@ -21,6 +23,7 @@ import {
 } from "./state";
 const mounts = new WeakMap<HTMLElement, symbol>();
 const printCleanups = new WeakMap<HTMLElement, () => void>();
+const segmentedCleanups = new WeakMap<HTMLElement, () => void>();
 
 export function mountApp(mode: PageMode): void {
 	const root = document.querySelector<HTMLElement>("#root");
@@ -35,6 +38,7 @@ export function mountApp(mode: PageMode): void {
 	mounts.set(appRoot, mount);
 	let pageMode = pageModeFromQuery(globalThis.location.search) ?? mode;
 	let helpSection = helpSectionFromQuery(globalThis.location.search);
+	let toolFilters = toolFilterQuery(globalThis.location.search).toString();
 	normalizeSetup(state);
 	function isConnectionReady(): boolean {
 		return connectionReadiness(state).ready;
@@ -69,6 +73,7 @@ export function mountApp(mode: PageMode): void {
 	}
 
 	function render() {
+		segmentedCleanups.get(appRoot)?.();
 		if (pageMode === "admin" && state.install !== "enterprise") state.surface = "canvas";
 		appRoot.innerHTML = renderPage(
 			state,
@@ -83,6 +88,8 @@ export function mountApp(mode: PageMode): void {
 		updatePrintPageBreaks(appRoot);
 		bindEvents();
 		applyTheme();
+		segmentedCleanups.set(appRoot, bindSegmentedControls(appRoot));
+		updatePrintPermalink();
 	}
 
 	function syncConnectTab(): void {
@@ -97,6 +104,10 @@ export function mountApp(mode: PageMode): void {
 	}
 
 	function bindEvents() {
+		bindToolFilters(appRoot, toolFilters, (query) => {
+			toolFilters = query;
+			persist();
+		});
 		appRoot.querySelectorAll<HTMLInputElement>("[data-help-section]").forEach((control) => {
 			control.addEventListener("change", () => {
 				helpSection = helpSectionFromQuery(`?help=${encodeURIComponent(control.value)}`);
@@ -279,7 +290,7 @@ export function mountApp(mode: PageMode): void {
 			?.addEventListener("click", async () => {
 				await copyToClipboard(
 					new URL(
-						`${globalThis.location.pathname}?${pageQuery(state, pageMode === "help" ? "help" : "user", helpSection)}`,
+						`${globalThis.location.pathname}?${pageQuery(state, pageMode === "help" ? "help" : "user", helpSection, toolFilters)}`,
 						globalThis.location.origin,
 					).toString(),
 					pageMode === "help" ? "Help link copied" : "Setup link copied",
@@ -296,12 +307,19 @@ export function mountApp(mode: PageMode): void {
 		normalizeSetup(state);
 		if (pageMode === "admin" && state.install !== "enterprise") state.surface = "canvas";
 		savePreferences(state, getStorage());
-		const search = pageQuery(state, pageMode, helpSection);
+		const search = pageQuery(state, pageMode, helpSection, toolFilters);
 		globalThis.history.replaceState(
 			null,
 			"",
 			`${globalThis.location.pathname}${search ? `?${search}` : ""}`,
 		);
+		updatePrintPermalink();
+	}
+
+	function updatePrintPermalink() {
+		const permalink = appRoot.querySelector<HTMLElement>(".print-permalink");
+		if (permalink)
+			permalink.textContent = `${globalThis.location.pathname}?${pageQuery(state, pageMode, helpSection, toolFilters)}`;
 	}
 
 	function persistAndRender() {
@@ -361,10 +379,17 @@ function pageModeFromQuery(search: string): PageMode | null {
 	return null;
 }
 
-function pageQuery(state: AppState, pageMode: PageMode, helpSection: HelpSection): string {
+function pageQuery(
+	state: AppState,
+	pageMode: PageMode,
+	helpSection: HelpSection,
+	toolFilters = "",
+): string {
 	const params = new URLSearchParams(stateQuery(state));
 	params.set("page", pageMode === "help" ? "help" : pageMode === "admin" ? "admin" : "connect");
 	if (pageMode === "help") params.set("help", helpSection);
+	if (pageMode === "help" && helpSection === "tools")
+		toolFilterQuery(toolFilters).forEach((value, key) => params.append(key, value));
 	if (new URLSearchParams(globalThis.location.search).has("dev")) params.set("dev", "");
 	return params.toString();
 }

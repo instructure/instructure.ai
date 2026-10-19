@@ -4,13 +4,14 @@ import { type InstallMode, type KeyType } from "../clients/ids";
 import { type ClientDefinition } from "../clients/types";
 import { escapeHtml } from "../ui/html";
 import { COMMON_ISSUES, FAQS, HELP_SECTIONS, type HelpGroup, type HelpSection } from "./content";
+import { renderTools } from "./tools";
 
 export function renderHelp(section: HelpSection): string {
 	const label = HELP_SECTIONS.find(({ id }) => id === section)!.label;
 	return `<section class="instui-card -variant-base help-panel"><div class="content">
 		<fieldset class="instui-segmented-control help-sections" aria-label="Help topics"><div class="viewport"><div class="track">${HELP_SECTIONS.map(({ id, label }) => `<label><input id="help-section-${id}" type="radio" name="help-section" value="${id}" data-help-section="${id}" aria-controls="help-content" ${section === id ? "checked" : ""}>${label}</label>`).join("")}</div></div></fieldset>
 		<section id="help-content" class="${section === "clients" ? "help-matrix-content" : ""}" aria-labelledby="help-content-heading"><h2 id="help-content-heading" class="instui-heading -level-h2">${label}</h2>
-		${section === "clients" ? renderClientMatrix() : renderGroups(section === "faqs" ? FAQS : COMMON_ISSUES, section)}
+		${section === "clients" ? renderClientMatrix() : section === "tools" ? renderTools() : renderGroups(section === "faqs" ? FAQS : COMMON_ISSUES, section)}
 		${section === "issues" ? renderClientIssues() : ""}
 		</section></div></section>`;
 }
