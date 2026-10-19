@@ -16,7 +16,12 @@ interface HelpEntry {
 	text: string;
 }
 
-export const FAQS: { title: "General" | "Admins" | "Users"; entries: HelpEntry[] }[] = [
+export interface HelpGroup {
+	title: "General" | "Admins" | "Users";
+	entries: HelpEntry[];
+}
+
+export const FAQS: HelpGroup[] = [
 	{
 		title: "General",
 		entries: [
@@ -66,29 +71,44 @@ export const FAQS: { title: "General" | "Admins" | "Users"; entries: HelpEntry[]
 	},
 ];
 
-export const COMMON_ISSUES: HelpEntry[] = [
+export const COMMON_ISSUES: HelpGroup[] = [
 	{
-		title: "Connect a Client is disabled",
-		text: "Return to Configure a Server and check the Canvas domain, region, and Client ID. Generic MCP also requires at least one callback URI. A recorded client blocker can disable connection even when those fields are complete; see the client issues below.",
+		title: "General",
+		entries: [
+			{
+				title: "Connect a Client is disabled",
+				text: "Return to Configure a Server and check the Canvas domain, region, and Client ID. Generic MCP also requires at least one callback URI. A recorded client blocker can disable connection even when those fields are complete; see the client issues below.",
+			},
+			{
+				title: "The client cannot reach the server",
+				text: "Check that the Canvas domain, region, and production or beta environment match the developer key. Verify your organization's network and client policies. An unreachable endpoint alone does not establish an OAuth defect.",
+			},
+		],
 	},
 	{
-		title: "MCP server canvas-mcp already exists in local config",
-		text: "Inspect the existing canvas-mcp entry in your client's configuration before adding it again. Update that entry or use the client's documented remove-and-add workflow. Preserve other servers and settings; do not delete the whole configuration file.",
+		title: "Admins",
+		entries: [
+			{
+				title: "redirect_uri does not match client settings",
+				text: "Compare the redirect_uri sent by the client with the Canvas developer key's Redirect URIs. Register the exact URI, including scheme, hostname, port, path, and any trailing slash. Use the callback for the correct client and install flow, not the MCP server URL. Computed or client-generated callbacks need confirmation from that client before retrying OAuth.",
+			},
+			{
+				title: "The organization blocks the connection",
+				text: "Ask an administrator to follow the selected client's enterprise guide and check server allowlists, connector permissions, and publication requirements. Personal setup does not bypass organization policy.",
+			},
+			{
+				title: "The key type or PKCE configuration does not match",
+				text: "Use a key type supported by your client and follow its PKCE instructions. A public client must not depend on a secret. Do not change key type merely to work around an unexplained authentication error.",
+			},
+		],
 	},
 	{
-		title: "redirect_uri does not match client settings",
-		text: "Compare the redirect_uri sent by the client with the Canvas developer key's Redirect URIs. Register the exact URI, including scheme, hostname, port, path, and any trailing slash. Use the callback for the correct client and install flow, not the MCP server URL. Computed or client-generated callbacks need confirmation from that client before retrying OAuth.",
-	},
-	{
-		title: "The client cannot reach the server",
-		text: "Check that the Canvas domain, region, and production or beta environment match the developer key. Verify your organization's network and client policies. An unreachable endpoint alone does not establish an OAuth defect.",
-	},
-	{
-		title: "The organization blocks the connection",
-		text: "Ask an administrator to follow the selected client's enterprise guide and check server allowlists, connector permissions, and publication requirements. Personal setup does not bypass organization policy.",
-	},
-	{
-		title: "The key type or PKCE configuration does not match",
-		text: "Use a key type supported by your client and follow its PKCE instructions. A public client must not depend on a secret. Do not change key type merely to work around an unexplained authentication error.",
+		title: "Users",
+		entries: [
+			{
+				title: "MCP server canvas-mcp already exists in local config",
+				text: "Inspect the existing canvas-mcp entry in your client's configuration before adding it again. Update that entry or use the client's documented remove-and-add workflow. Preserve other servers and settings; do not delete the whole configuration file.",
+			},
+		],
 	},
 ];

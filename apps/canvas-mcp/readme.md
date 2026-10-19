@@ -8,7 +8,7 @@ Search indexing is discouraged with a `noindex, nofollow` robots meta tag. Both 
 
 Help follows Connect a Client and remains available without completing setup. Its Pantoken segmented control switches between FAQs, Common Issues, and Supported Clients. Deep links use `page=help&help=faqs|issues|clients`; an absent or invalid section defaults to FAQs. Sharing and printing retain the selected Help section, while setup preferences remain intact. Help navigation is not saved in localStorage.
 
-FAQs are grouped under General, Admins, and Users. Each question uses a Pantoken toggle-details disclosure, initially collapsed, with native keyboard and expand/collapse behavior.
+FAQs and Common Issues are grouped under General, Admins, and Users. Each question or issue uses a Pantoken toggle-details disclosure, initially collapsed, with native keyboard and expand/collapse behavior. Common Issues also includes a peer-level Known Issues heading for source-backed client issues.
 
 The Supported Clients table presents the existing curated registry, `clientStatus(client, install)`, and public/private key-support facts for enterprise and personal installs. Existing Validated statuses display as Verified; statuses are scoped by install mode, not separate tests of each key type. Recorded dates, notes, and issue reasons remain visible. Explicitly incompatible key types display Known issue, unavailable install modes display Not applicable, and unknown flows/support are qualified as unverified. Generic MCP and Rulesync-only entries belong to Other and are not included. Maintain statuses in the client definitions, not in a separate table dataset.
 

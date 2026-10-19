@@ -3,30 +3,33 @@ import { clientStatus } from "../clients/status";
 import { type InstallMode, type KeyType } from "../clients/ids";
 import { type ClientDefinition } from "../clients/types";
 import { escapeHtml } from "../ui/html";
-import { COMMON_ISSUES, FAQS, HELP_SECTIONS, type HelpSection } from "./content";
+import { COMMON_ISSUES, FAQS, HELP_SECTIONS, type HelpGroup, type HelpSection } from "./content";
 
 export function renderHelp(section: HelpSection): string {
 	const label = HELP_SECTIONS.find(({ id }) => id === section)!.label;
 	return `<section class="instui-card -variant-base help-panel"><div class="content">
 		<fieldset class="instui-segmented-control help-sections" aria-label="Help topics"><div class="viewport"><div class="track">${HELP_SECTIONS.map(({ id, label }) => `<label><input id="help-section-${id}" type="radio" name="help-section" value="${id}" data-help-section="${id}" aria-controls="help-content" ${section === id ? "checked" : ""}>${label}</label>`).join("")}</div></div></fieldset>
 		<section id="help-content" class="${section === "clients" ? "help-matrix-content" : ""}" aria-labelledby="help-content-heading"><h2 id="help-content-heading" class="instui-heading -level-h2">${label}</h2>
-		${section === "clients" ? renderClientMatrix() : section === "faqs" ? renderFaqs() : renderEntries(COMMON_ISSUES)}
+		${section === "clients" ? renderClientMatrix() : renderGroups(section === "faqs" ? FAQS : COMMON_ISSUES, section)}
 		${section === "issues" ? renderClientIssues() : ""}
 		</section></div></section>`;
 }
 
-function renderFaqs(): string {
-	return FAQS.map(
-		({ title, entries }) =>
-			`<section class="help-entry" aria-labelledby="faq-${title.toLowerCase()}"><h3 id="faq-${title.toLowerCase()}" class="instui-heading -level-h3">${title}</h3>${entries.map(({ title, text }) => `<details class="instui-toggle-details"><summary>${escapeHtml(title)}</summary><div><p>${escapeHtml(text)}</p></div></details>`).join("")}</section>`,
-	).join("");
+function renderGroups(groups: HelpGroup[], section: "faqs" | "issues"): string {
+	const prefix = section === "faqs" ? "faq" : "issue";
+	return groups
+		.map(
+			({ title, entries }) =>
+				`<section class="help-entry" aria-labelledby="${prefix}-${title.toLowerCase()}"><h3 id="${prefix}-${title.toLowerCase()}" class="instui-heading -level-h3">${title}</h3>${renderEntries(entries)}</section>`,
+		)
+		.join("");
 }
 
 function renderEntries(entries: { title: string; text: string }[]): string {
 	return entries
 		.map(
 			({ title, text }) =>
-				`<section class="help-entry"><h3 class="instui-heading -level-h3">${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p></section>`,
+				`<details class="instui-toggle-details"><summary>${escapeHtml(title)}</summary><div><p>${escapeHtml(text)}</p></div></details>`,
 		)
 		.join("");
 }
@@ -44,7 +47,7 @@ function renderClientIssues(): string {
 			return reason ? [{ title: `${clientLabel(client)} (${install})`, text: reason }] : [];
 		}),
 	);
-	return `<h3 class="instui-heading -level-h3">Recorded client issues</h3>${renderEntries(issues)}`;
+	return `<section class="help-entry" aria-labelledby="known-issues-heading"><h3 id="known-issues-heading" class="instui-heading -level-h3">Known Issues</h3>${renderEntries(issues)}</section>`;
 }
 
 function renderClientMatrix(): string {

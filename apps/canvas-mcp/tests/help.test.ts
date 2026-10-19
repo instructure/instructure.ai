@@ -3,7 +3,7 @@
 import { describe, expect, it } from "vitest";
 import { CLIENTS } from "../src/clients";
 import { clientStatus } from "../src/clients/status";
-import { FAQS, helpSectionFromQuery } from "../src/help/content";
+import { COMMON_ISSUES, FAQS, helpSectionFromQuery } from "../src/help/content";
 import { renderHelp } from "../src/help/render";
 
 describe("Help content", () => {
@@ -67,31 +67,47 @@ describe("Help content", () => {
 		);
 	});
 
-	it("groups every FAQ under General, Admins, or Users using Pantoken toggle-details", () => {
-		document.body.innerHTML = renderHelp("faqs");
-		expect(
-			[...document.querySelectorAll("#help-content h3")].map((heading) => heading.textContent),
-		).toEqual(["General", "Admins", "Users"]);
-		expect(document.querySelectorAll("details.instui-toggle-details")).toHaveLength(
-			FAQS.reduce((total, group) => total + group.entries.length, 0),
-		);
-		for (const group of FAQS) {
-			const section = document.querySelector(
-				`[aria-labelledby="faq-${group.title.toLowerCase()}"]`,
-			)!;
+	it.each([
+		["faqs", "faq", FAQS],
+		["issues", "issue", COMMON_ISSUES],
+	] as const)(
+		"groups %s under General, Admins, or Users using Pantoken toggle-details",
+		(topic, prefix, groups) => {
+			document.body.innerHTML = renderHelp(topic);
 			expect(
-				[...section.querySelectorAll("details > summary")].map((summary) => summary.textContent),
-			).toEqual(group.entries.map(({ title }) => title));
-			for (const [index, details] of [...section.querySelectorAll("details")].entries()) {
-				expect(details.open).toBe(false);
-				expect(details.querySelector("div > p")?.textContent).toBe(group.entries[index]?.text);
-				details.querySelector("summary")!.click();
-				expect(details.open).toBe(true);
-				details.querySelector("summary")!.click();
-				expect(details.open).toBe(false);
+				[...document.querySelectorAll("#help-content h3")].map((heading) => heading.textContent),
+			).toEqual(
+				topic === "issues"
+					? ["General", "Admins", "Users", "Known Issues"]
+					: ["General", "Admins", "Users"],
+			);
+			expect(
+				document.querySelectorAll(
+					'.help-entry:not([aria-labelledby="known-issues-heading"]) > details.instui-toggle-details',
+				),
+			).toHaveLength(groups.reduce((total, group) => total + group.entries.length, 0));
+			for (const group of groups) {
+				const section = document.querySelector(
+					`[aria-labelledby="${prefix}-${group.title.toLowerCase()}"]`,
+				)!;
+				expect(
+					[...section.querySelectorAll("details > summary")]
+						.slice(0, group.entries.length)
+						.map((summary) => summary.textContent),
+				).toEqual(group.entries.map(({ title }) => title));
+				for (const [index, details] of [...section.querySelectorAll("details")]
+					.slice(0, group.entries.length)
+					.entries()) {
+					expect(details.open).toBe(false);
+					expect(details.querySelector("div > p")?.textContent).toBe(group.entries[index]?.text);
+					details.querySelector("summary")!.click();
+					expect(details.open).toBe(true);
+					details.querySelector("summary")!.click();
+					expect(details.open).toBe(false);
+				}
 			}
-		}
-	});
+		},
+	);
 
 	it("includes the reported configuration errors and source-scoped client issues", () => {
 		document.body.innerHTML = renderHelp("issues");
@@ -100,11 +116,23 @@ describe("Help content", () => {
 		);
 		expect(document.body.textContent).toContain("redirect_uri does not match client settings");
 		expect(document.body.textContent).toContain("Do not change key type");
-		const geminiIssues = [...document.querySelectorAll(".help-entry")].filter((entry) =>
-			entry.querySelector("h3")?.textContent?.includes("Gemini CLI"),
-		);
+		const geminiIssues = [
+			...document.querySelectorAll('[aria-labelledby="known-issues-heading"] details'),
+		].filter((entry) => entry.querySelector("summary")?.textContent?.includes("Gemini CLI"));
 		expect(geminiIssues).toHaveLength(1);
 		expect(geminiIssues[0]?.textContent).toContain("(personal)");
+		expect(document.querySelector("#known-issues-heading")?.textContent).toBe("Known Issues");
+		expect(document.querySelector("#known-issues-heading")?.className).toBe(
+			document.querySelector("#issue-general")?.className,
+		);
+		for (const details of document.querySelectorAll<HTMLDetailsElement>(
+			'[aria-labelledby="known-issues-heading"] details',
+		)) {
+			expect(details.classList.contains("instui-toggle-details")).toBe(true);
+			expect(details.open).toBe(false);
+			details.querySelector("summary")!.click();
+			expect(details.open).toBe(true);
+		}
 	});
 
 	it("escapes source status reasons and notes", () => {
