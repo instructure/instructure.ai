@@ -26,7 +26,10 @@ export const SCREENSHOT_MANIFEST: Record<string, ScreenshotAsset> = {
 	claude_code_blocked_by_policy: { size: "terminal" },
 	claude_code_canvas_browser_authorize: {},
 	claude_code_doctor_managed_settings: { size: "terminal" },
-	claude_code_mcp_add_command: { size: "terminal" },
+	claude_code_mcp_add_command: {
+		file: "images/client-claude_code-mcp_add_command.png",
+		size: { width: 759, height: 666 },
+	},
 	claude_code_mcp_connected: { size: "terminal" },
 	claude_code_mcp_managed_section: { size: "terminal" },
 	claude_code_mcp_needs_auth: { size: "terminal" },

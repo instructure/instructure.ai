@@ -68,11 +68,20 @@ describe("composable client guides", () => {
 		expect(image?.getAttribute("decoding")).toBe("async");
 		expect(image?.dataset.placeholder).toBe("true");
 
-		const terminal = screenshot("claude_code_mcp_add_command", "Terminal output.");
+		const terminal = screenshot("claude_code_mcp_needs_auth", "Terminal output.");
 		expect(terminal).toMatchObject({ width: 960, height: 360, placeholder: true });
 		expect(renderContent([terminal], {})).toContain(
-			"https://placehold.co/960x360/png?text=claude_code_mcp_add_command",
+			"https://placehold.co/960x360/png?text=claude_code_mcp_needs_auth",
 		);
+	});
+
+	it("uses the captured Claude Code registration image at its native aspect ratio", () => {
+		const image = screenshot("claude_code_mcp_add_command", "Claude Code registration output.");
+		expect(image).toMatchObject({ width: 759, height: 666, placeholder: false });
+		expect(screenshotSource(image.name, image.placeholder)).toBe(
+			`${import.meta.env.BASE_URL.replace(/\/$/u, "")}/images/client-claude_code-mcp_add_command.png`,
+		);
+		expect(renderContent([image], {})).not.toContain("placehold.co");
 	});
 
 	it("rejects unregistered screenshots and escapes screenshot alt text", () => {
