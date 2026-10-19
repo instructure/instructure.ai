@@ -81,6 +81,7 @@ describe("print styles", () => {
 	it("prints guide screenshots within the page without splitting them", () => {
 		expect(declarations(".guide-screenshot").get("max-width")).toBe("100%");
 		expect(declarations(".guide-screenshot").get("height")).toBe("auto");
-		expect(declarations(".guide-screenshot").get("break-inside")).toBe("avoid");
+		expect(declarations("img").get("break-inside")).toBe("avoid");
+		expect(declarations("img").get("page-break-inside")).toBe("avoid");
 	});
 });

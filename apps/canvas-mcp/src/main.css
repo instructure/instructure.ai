@@ -643,7 +643,11 @@ pre {
     .guide-screenshot {
         max-width: 100% !important;
         height: auto !important;
-        break-inside: avoid;
+    }
+
+    img {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
     }
 
     .guide-section,
