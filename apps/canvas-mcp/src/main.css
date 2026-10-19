@@ -679,9 +679,10 @@ pre {
 }
 
 .guide-screenshot {
+    display: block;
     max-width: 100%;
     height: auto;
-    margin: 16px 0;
+    margin: 16px auto;
 }
 
 .guide-fields td,

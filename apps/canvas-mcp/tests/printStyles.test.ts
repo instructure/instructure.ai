@@ -27,6 +27,21 @@ function declarations(selector: string): Map<string, string> {
 }
 
 describe("print styles", () => {
+	it("centers responsive guide screenshots on screen and in print", () => {
+		const rule = stylesheet.nodes.find(
+			(node) => node.type === "rule" && node.selector === ".guide-screenshot",
+		);
+		const styles = new Map(
+			rule?.type === "rule"
+				? rule.nodes.filter((node) => node.type === "decl").map((node) => [node.prop, node.value])
+				: [],
+		);
+		expect(styles.get("display")).toBe("block");
+		expect(styles.get("margin")).toBe("16px auto");
+		expect(styles.get("max-width")).toBe("100%");
+		expect(styles.get("height")).toBe("auto");
+	});
+
 	it("uses a light scheme with black text on a white page", () => {
 		expect(declarations("html").get("color-scheme")).toBe("light");
 		expect(declarations("html").get("--instui-color-text-base")).toBe("#000");
