@@ -14,6 +14,19 @@ describe("package.json", () => {
 	});
 });
 
+describe("Canvas MCP crawler directives", () => {
+	it("disallows crawling and marks the app as noindex and nofollow", async () => {
+		const [robots, rootRobots, html] = await Promise.all([
+			readFile(new URL("../public/robots.txt", import.meta.url), "utf8"),
+			readFile(new URL("../../../public/robots.txt", import.meta.url), "utf8"),
+			readFile(new URL("../index.html", import.meta.url), "utf8"),
+		]);
+		for (const directives of [robots, rootRobots])
+			expect(directives.trim()).toBe("User-agent: *\nDisallow: /");
+		expect(html).toMatch(/<meta\s+name="robots"\s+content="noindex, nofollow"\s*\/>/u);
+	});
+});
+
 describe("Canvas MCP favicon", () => {
 	it("uses the Instructure three-dot favicon in the SPA", async () => {
 		const [html, favicon] = await Promise.all([

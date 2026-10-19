@@ -2,6 +2,8 @@
 
 Single-page setup guide for connecting Canvas to supported MCP clients, served at `/canvas-mcp/`. Configure a server and connect a client from the tabs in the app; the selected tab is represented by `page=admin` or `page=connect` in the query string.
 
+Search indexing is discouraged with a `noindex, nofollow` robots meta tag. Both the site-root and app-local `robots.txt` disallow all crawling. Crawlers only consult `/robots.txt` at the origin root, so standalone deployments must serve the app's copy there. These directives are advisory, not access controls.
+
 ## Development
 
 From the repository root:
