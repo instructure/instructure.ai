@@ -3,6 +3,7 @@ import { antigravityEnterpriseGuide } from "./antigravity-guides";
 import { type ClientDefinition } from "../types";
 import { unknownFacts, unverified } from "../facts";
 import { updatedGuidance, updatedFact } from "../evidence";
+import { screenshot } from "../../guides/screenshots";
 const antigravityCliGuide: Guide = {
 	presentation: "by-surface",
 	status: "documented",
@@ -31,6 +32,10 @@ const antigravityCliGuide: Guide = {
 					language: "json",
 					text: '{\n  "mcpServers": {\n    "canvas-mcp": {\n      "serverUrl": "{mcpUrl}",\n      "oauth": {\n        "clientId": "{clientId}",\n        "clientSecret": "<ENTER_CLIENT_SECRET_LOCALLY>"\n      }\n    }\n  }\n}',
 				},
+				screenshot(
+					"cli_mcp_config_canvas_entry",
+					"terminal editor showing the entry, secret redacted.",
+				),
 				{
 					kind: "paragraph",
 					text: "Enter the secret only in your local configuration. Keep the file out of source control. Antigravity discovers OAuth endpoints from the MCP server metadata.",
@@ -50,6 +55,12 @@ const antigravityCliGuide: Guide = {
 						"Sign in to Canvas in the browser and approve access. Reopen /mcp to confirm the connection.",
 					],
 				},
+				screenshot(
+					"cli_mcp_manager_overlay",
+					"overlay listing canvas-mcp with status Auth Needed.",
+				),
+				screenshot("cli_mcp_authenticate_option", "server detail with Authenticate selected."),
+				screenshot("cli_auth_url_and_code_prompt", "terminal showing URL and code prompt."),
 			],
 		},
 	],

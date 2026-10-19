@@ -3,6 +3,7 @@
 import { documented, setupGuidance, updatedGuidance } from "../evidence";
 import { type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
+import { screenshot } from "../../guides/screenshots";
 export const copilotStudio = {
 	facts: {
 		...inheritedFacts(["private"], {
@@ -63,6 +64,19 @@ export const copilotStudio = {
 								"Save the connector and copy its generated redirect URI. Add it to the Canvas key in the next step before signing in.",
 							],
 						},
+						screenshot("copilot_tools_page", 'agent Tools page with "Add a tool" button visible.'),
+						screenshot("copilot_new_tool_menu", 'Add a tool panel with "New tool" option.'),
+						screenshot(
+							"copilot_mcp_wizard_blank",
+							"wizard with Server name, Server description, Server URL, authentication type.",
+						),
+						screenshot("copilot_mcp_wizard_basics", "three basic fields filled in."),
+						screenshot("copilot_oauth_type_manual", "OAuth 2.0 with Type = Manual selected."),
+						screenshot("copilot_manual_oauth_fields", "all six fields filled (secret masked)."),
+						screenshot(
+							"copilot_callback_url",
+							"callback URL shown after Create, with copy control.",
+						),
 					],
 				},
 				{
@@ -84,6 +98,22 @@ export const copilotStudio = {
 								"Choose Update Connector to save.",
 							],
 						},
+						screenshot(
+							"ppac_data_policy_list",
+							"PPAC Security > Data and privacy > Data policy list.",
+						),
+						screenshot(
+							"ppac_assign_connectors",
+							"Assign connectors page with custom connector in Business group.",
+						),
+						screenshot(
+							"copilot_channels_teams",
+							"Channels page with Teams and Microsoft Copilot tile and Add channel.",
+						),
+						screenshot(
+							"copilot_agent_auth_settings",
+							"Settings > Security > Authentication with Authenticate with Microsoft.",
+						),
 					],
 				},
 				{
@@ -96,6 +126,8 @@ export const copilotStudio = {
 							kind: "paragraph",
 							text: "After saving the generated redirect URI on the Canvas key, add the connector as a tool to the agent.",
 						},
+						screenshot("copilot_canvas_signin", "Canvas OAuth consent popup."),
+						screenshot("copilot_tool_added", "MCP tool listed under agent Tools."),
 					],
 				},
 			],

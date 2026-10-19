@@ -2,6 +2,7 @@ import { type Guide } from "../../guides/types";
 import { documented, updatedGuidance } from "../evidence";
 import { type Evidence, type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
+import { screenshot } from "../../guides/screenshots";
 const codexOAuth: Evidence = {
 	method: "vendor-doc",
 	label: "Codex OAuth registration and callbacks",
@@ -43,6 +44,12 @@ const codexPersonalGuide: Guide = {
 					language: "bash",
 					text: 'codex -c mcp_oauth_callback_port=8081 -c \'mcp_oauth_callback_url="http://localhost:8081/callback"\' mcp add canvas-mcp --url "{mcpUrl}" --oauth-client-id "{clientId}"',
 				},
+				screenshot(
+					"codex_desktop_mcp_servers_add",
+					"Settings > MCP servers with Add server and Streamable HTTP selected, Canvas MCP URL entered.",
+				),
+				screenshot("codex_desktop_authenticate", "server row showing the Authenticate button."),
+				screenshot("codex_ide_mcp_servers_add", "IDE gear menu > MCP servers > Add server form."),
 			],
 		},
 		{
@@ -166,6 +173,10 @@ export const codex = {
 							language: "toml",
 							text: '[mcp_servers.canvas-mcp]\nidentity = { url = "{mcpUrl}" }',
 						},
+						screenshot(
+							"codex_agent_security_requirements",
+							"Admin Console Agent Security page with the requirements editor.",
+						),
 						{
 							kind: "paragraph",
 							text: "Distribute the registration command below to managed devices. Each user completes their own Canvas sign-in.",

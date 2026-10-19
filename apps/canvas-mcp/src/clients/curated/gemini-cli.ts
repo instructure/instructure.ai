@@ -2,6 +2,7 @@ import { type Evidence, type ClientDefinition } from "../types";
 import { type Guide } from "../../guides/types";
 import { unknownFacts } from "../facts";
 import { updatedGuidance } from "../evidence";
+import { screenshot } from "../../guides/screenshots";
 const geminiOAuth: Evidence = {
 	method: "vendor-doc",
 	label: "Gemini CLI MCP OAuth configuration",
@@ -53,6 +54,14 @@ const personalGuide: Guide = {
 					language: "json",
 					text: '{\n  "mcpServers": {\n    "canvas-mcp": {\n      "httpUrl": "{mcpUrl}",\n      "oauth": {\n        "enabled": true,\n        "clientId": "{clientId}",\n        "authorizationUrl": "{authUrl}",\n        "tokenUrl": "{tokenUrl}",\n        "scopes": ["{scope}"],\n        "redirectUri": "http://localhost:8081/oauth/callback"\n      }\n    }\n  }\n}',
 				},
+				screenshot(
+					"canvas_key_redirect_uri",
+					"Canvas developer key with the localhost callback in Redirect URIs.",
+				),
+				screenshot(
+					"gemini_cli_settings_json",
+					"settings.json with the canvas-mcp entry (secret redacted).",
+				),
 			],
 		},
 		{
@@ -89,6 +98,12 @@ const personalGuide: Guide = {
 						"Open /mcp to confirm the connection.",
 					],
 				},
+				screenshot(
+					"gemini_cli_mcp_auth",
+					"terminal after `/mcp auth canvas-mcp` showing browser prompt.",
+				),
+				screenshot("canvas_consent_screen", "Canvas authorize page."),
+				screenshot("gemini_cli_mcp_list", "/mcp output with canvas-mcp and tool list."),
 			],
 		},
 	],
@@ -152,6 +167,8 @@ export const geminiCli = {
 							language: "json",
 							text: '{\n  "mcpServers": {\n    "canvas-mcp": {\n      "url": "{mcpUrl}",\n      "type": "http",\n      "trust": false\n    }\n  }\n}',
 						},
+						screenshot("gemini_cli_console_mcp_toggle", "MCP setting enabled)."),
+						screenshot("gemini_cli_console_allowlist", "allowlist entry)."),
 						{
 							kind: "paragraph",
 							text: "The allowlist approves the server but does not install it. Each user's local configuration supplies the Canvas OAuth Client ID, endpoints, scopes, and fixed redirect URI. Keep trust false so tool execution still requires user approval.",

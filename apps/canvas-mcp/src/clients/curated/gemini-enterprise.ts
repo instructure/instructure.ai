@@ -1,6 +1,7 @@
 import { documented, setupGuidance } from "../evidence";
 import { type ClientDefinition } from "../types";
 import { inheritedFacts } from "../facts";
+import { screenshot } from "../../guides/screenshots";
 export const geminiEnterprise = {
 	facts: {
 		...inheritedFacts(["private"], {
@@ -33,6 +34,13 @@ export const geminiEnterprise = {
 									"Complete Canvas sign-in when prompted.",
 								],
 							},
+							screenshot("ge_chat_home", "Open the Gemini Enterprise app, start a chat."),
+							screenshot(
+								"ge_chat_toggle_connector",
+								"Enable the Canvas data store/connector in the chat input area (label unverified).",
+							),
+							screenshot("ge_user_oauth_prompt", "Complete Canvas sign-in prompt."),
+							screenshot("ge_chat_canvas_result", "Canvas courses result in chat."),
 						],
 					},
 				],
@@ -64,6 +72,18 @@ export const geminiEnterprise = {
 								"Open Actions on the new data store and enable the Canvas tools; no tools are enabled by default.",
 							],
 						},
+						screenshot("gcp_orgpolicy_override", "constraint set to Not enforced."),
+						screenshot(
+							"canvas_key_redirect_uri_gemini",
+							"Canvas key with the vertexaisearch redirect.",
+						),
+						screenshot("ge_data_stores_list", "Data stores page with Create data store."),
+						screenshot("ge_select_custom_mcp", "the card."),
+						screenshot("ge_mcp_oauth_form", "filled form, secret masked."),
+						screenshot("ge_verify_auth", "success state."),
+						screenshot("ge_connector_name_region", "connector name and region selection."),
+						screenshot("ge_data_store_active", "data store state active."),
+						screenshot("ge_actions_enable", "action list with Enable actions."),
 					],
 				},
 				{

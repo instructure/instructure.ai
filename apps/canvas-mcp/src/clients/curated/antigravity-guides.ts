@@ -1,5 +1,6 @@
 import { type Guide } from "../../guides/types";
 import { type Evidence } from "../types";
+import { screenshot } from "../../guides/screenshots";
 
 export const antigravityMcp: Evidence = {
 	method: "vendor-doc",
@@ -33,6 +34,11 @@ export function antigravityEnterpriseGuide(personal: Guide): Guide {
 								"Select your organization's licensed project in the License Selector, then configure Canvas MCP below.",
 							],
 						},
+						screenshot("cli_signin_business_account", "sign-in prompt with Business account."),
+						screenshot(
+							"ide_signin_business_license_selector",
+							"Business account option and License Selector.",
+						),
 					],
 				},
 				...personal.steps.filter((step) => step.kind !== "canvas-key"),
@@ -52,6 +58,18 @@ export function antigravityEnterpriseGuide(personal: Guide): Guide {
 							"Assign users a Gemini Enterprise Standard or Plus license in the organization's Google Cloud project.",
 						],
 					},
+					screenshot(
+						"ge_ai_developer_tools_toggle",
+						"AI developer tools page with toggle Enabled.",
+					),
+					screenshot(
+						"ge_security_mcp_allowed_config",
+						"Security edit panel with MCP Servers on and the Allowed server configuration field containing the Canvas entry.",
+					),
+					screenshot(
+						"ide_blocked_by_admin_policy",
+						"Customizations list showing the blocked state (for troubleshooting).",
+					),
 				],
 			},
 		],
@@ -75,6 +93,14 @@ export const antigravityAppGuide: Guide = {
 					kind: "paragraph",
 					text: "Merge the Canvas entry into mcpServers in ~/.gemini/config/mcp_config.json, or .agents/mcp_config.json for the current workspace.",
 				},
+				screenshot(
+					"ide_agent_panel_menu",
+					"agent side panel header with the `…` menu open and `MCP Servers` highlighted.",
+				),
+				screenshot(
+					"ide_manage_mcp_raw_config",
+					"MCP Servers view with `Manage MCP Servers` and `View raw config`.",
+				),
 			],
 		},
 		...(["public", "private"] as const).map((key) => ({
@@ -102,6 +128,10 @@ export const antigravityAppGuide: Guide = {
 						2,
 					),
 				},
+				screenshot(
+					"ide_raw_config_canvas_entry",
+					"raw config with the canvas-mcp entry, secret redacted.",
+				),
 			],
 		})),
 		{
@@ -116,6 +146,14 @@ export const antigravityAppGuide: Guide = {
 						"Sign in to Canvas in the browser. Copy the returned authorization code, paste it into the settings panel, and choose Submit.",
 					],
 				},
+				screenshot(
+					"ide_user_settings_customizations",
+					"Customizations tab with Installed MCP Servers and Refresh.",
+				),
+				screenshot(
+					"ide_authenticate_paste_code",
+					"Authenticate button and paste-code field with Submit.",
+				),
 			],
 		},
 	],

@@ -2,6 +2,7 @@ import { type Guide } from "../../guides/types";
 import { updatedGuidance } from "../evidence";
 import { type Evidence, type ClientDefinition } from "../types";
 import { unknownFacts } from "../facts";
+import { screenshot } from "../../guides/screenshots";
 const chatgptApps: Evidence = {
 	method: "vendor-doc",
 	label: "ChatGPT custom MCP apps and workspace administration",
@@ -57,6 +58,22 @@ function chatgptGuide(enterprise: boolean): Guide {
 							"Choose Scan Tools, complete Canvas sign-in, then choose Create to save the draft.",
 						],
 					},
+					screenshot(
+						"chatgpt_plugins_add_custom_mcp",
+						"Plugins page with plus button menu showing Add custom MCP server.",
+					),
+					screenshot(
+						"chatgpt_custom_mcp_connection",
+						"form with name, description, Server URL filled with the Canvas MCP URL.",
+					),
+					screenshot(
+						"chatgpt_oauth_advanced_settings",
+						"OAuth selected, advanced settings expanded showing registration method, Client ID, Client Secret, token auth method, and the displayed callback URL.",
+					),
+					screenshot(
+						"chatgpt_risk_warning_create",
+						"risk warning checkbox/button and Create as a plugin button.",
+					),
 				],
 			},
 			...(enterprise
@@ -73,6 +90,18 @@ function chatgptGuide(enterprise: boolean): Guide {
 										"Use Configure Actions to select the Canvas tools and Configure Access to select the workspace groups, then publish the app.",
 									],
 								},
+								screenshot(
+									"chatgpt_admin_drafts_publish",
+									"Workspace settings > Apps > Drafts with Publish for the Canvas MCP draft.",
+								),
+								screenshot(
+									"chatgpt_admin_configure_actions_access",
+									"Configure Actions and Configure Access dialogs.",
+								),
+								screenshot(
+									"chatgpt_admin_permissions_create_mcp",
+									"Permissions & roles showing the Create plugins with MCPs toggle.",
+								),
 							],
 						},
 					]
@@ -86,6 +115,10 @@ function chatgptGuide(enterprise: boolean): Guide {
 						kind: "paragraph",
 						text: "Select the Canvas MCP app in a new chat and ask it to list your Canvas courses.",
 					},
+					screenshot(
+						"chatgpt_plugin_tools_list",
+						"plugin details page listing discovered Canvas tools with toggles and Refresh.",
+					),
 				],
 			},
 		],

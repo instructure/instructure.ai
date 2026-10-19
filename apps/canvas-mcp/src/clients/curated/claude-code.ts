@@ -2,6 +2,7 @@ import { documented, setupGuidance, updatedGuidance } from "../evidence";
 import { type ClientDefinition, type Evidence } from "../types";
 import { type ClientGuideStep, type Guide } from "../../guides/types";
 import { inheritedFacts } from "../facts";
+import { screenshot } from "../../guides/screenshots";
 const managedMcp: Evidence = {
 	method: "vendor-doc",
 	label: "Claude Code managed MCP deployment and access policies",
@@ -44,6 +45,10 @@ const personalGuide: Guide = {
 						},
 					},
 				},
+				screenshot(
+					"claude_code_mcp_add_command",
+					"terminal after `claude mcp add-json ... canvas-mcp` with success output.",
+				),
 			],
 			key: "public",
 		},
@@ -69,6 +74,10 @@ const personalGuide: Guide = {
 						},
 					},
 				},
+				screenshot(
+					"claude_code_mcp_add_command",
+					"terminal after `claude mcp add-json ... canvas-mcp` with success output.",
+				),
 			],
 			key: "private",
 		},
@@ -104,6 +113,14 @@ const personalGuide: Guide = {
 						"Open /mcp, select canvas-mcp → Needs Auth, then sign in to Canvas in the browser and approve access.",
 					],
 				},
+				screenshot(
+					"claude_code_mcp_needs_auth",
+					'`/mcp` panel with canvas-mcp showing "Needs authentication".',
+				),
+				screenshot(
+					"claude_code_canvas_browser_authorize",
+					"Canvas authorize screen with localhost callback.",
+				),
 			],
 		},
 		{
@@ -115,6 +132,7 @@ const personalGuide: Guide = {
 					kind: "paragraph",
 					text: "Reopen /mcp to check the connection and ask Claude to list your Canvas courses.",
 				},
+				screenshot("claude_code_mcp_connected", "`/mcp` showing canvas-mcp connected with tools."),
 			],
 		},
 	],
@@ -160,6 +178,10 @@ export const claudeCode = {
 							language: "json",
 							text: '{\n  "managedMcpServers": {\n    "canvas-mcp": {\n      "type": "http",\n      "url": "{mcpUrl}",\n      "oauth": {\n        "clientId": "{clientId}",\n        "callbackPort": 8081,\n        "scopes": "{scope}"\n      }\n    }\n  }\n}',
 						},
+						screenshot(
+							"claude_admin_managed_settings_page",
+							"Organization settings > Claude Code > Managed settings JSON editor with the managedMcpServers block.",
+						),
 						{
 							kind: "paragraph",
 							text: "Use a public Canvas developer key with no client secret. Merge with existing managed servers rather than replacing the organization's settings. Existing denylist policies can still block this server.",
@@ -189,6 +211,10 @@ export const claudeCode = {
 							language: "json",
 							text: '{\n  "allowManagedMcpServersOnly": true,\n  "allowedMcpServers": [\n    { "serverUrl": "{mcpUrl}" }\n  ]\n}',
 						},
+						screenshot(
+							"claude_code_blocked_by_policy",
+							'terminal showing the "not allowed by enterprise policy" message.',
+						),
 						{
 							kind: "paragraph",
 							text: "Deploy the policy through an administrator-controlled managed settings source. Use Claude Code v2.1.273 or later when combining managed policy sources. Distribute the Canvas secret through your organization's approved secret-delivery process, never in this setup link or a shared JSON file.",
@@ -208,6 +234,14 @@ export const claudeCode = {
 								"Have the pilot user complete their own Canvas sign-in and verify Canvas tools before distributing the client setup link.",
 							],
 						},
+						screenshot(
+							"claude_code_mcp_managed_section",
+							'`/mcp` showing canvas-mcp under "Managed MCPs".',
+						),
+						screenshot(
+							"claude_code_doctor_managed_settings",
+							'`claude doctor` output line "Managed settings (remote)".',
+						),
 					],
 				},
 			],
@@ -229,6 +263,10 @@ export const claudeCode = {
 									"If canvas-mcp is missing or blocked, ask your administrator to check device deployment and policy rather than adding a duplicate server.",
 								],
 							},
+							screenshot(
+								"claude_code_mcp_managed_section",
+								'`/mcp` showing canvas-mcp under "Managed MCPs".',
+							),
 						],
 					},
 					...personalGuide.steps.filter(
@@ -248,6 +286,10 @@ export const claudeCode = {
 									"If registration is blocked by policy, contact your administrator. Do not bypass the managed policy.",
 								],
 							},
+							screenshot(
+								"claude_code_doctor_managed_settings",
+								'`claude doctor` output line "Managed settings (remote)".',
+							),
 						],
 					},
 					{
