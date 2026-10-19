@@ -1,7 +1,7 @@
 // Unknown callback values remain non-copyable; research status belongs in client facts.
 import { type CallbackResolution } from "../oauth/codex-callback";
 import { type ClientDefinition } from "../clients/types";
-import { type AppState, isBetaDomain } from "../state";
+import { type AppState, isBetaDomain, normalizeRedirectUris } from "../state";
 
 export function resolveKeySettings(
 	client: ClientDefinition,
@@ -37,7 +37,11 @@ export function resolveKeySettings(
 						: "Select a Canvas domain and region to compute the callback URI.";
 			break;
 		case "unverified":
-			redirectText = "Client callback URI";
+			if (client.id === "generic") {
+				redirectText =
+					normalizeRedirectUris(state.redirectUris) || "Enter callback URIs in step 1 first";
+				copyable = Boolean(normalizeRedirectUris(state.redirectUris));
+			} else redirectText = "Client callback URI";
 			break;
 	}
 	return {

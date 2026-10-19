@@ -5,6 +5,7 @@ import { renderContent, renderGuide, validateGuide } from "../src/guides/render"
 import { screenshot, screenshotSource } from "../src/guides/screenshots";
 import { clientGuide } from "../src/guides/shared";
 import { allowedKeyTypes, CLIENTS, clientDefinition } from "../src/clients";
+import * as clients from "../src/clients";
 import { readState } from "../src/state";
 import { resolveKeySettings } from "../src/admin/key-settings-model";
 
@@ -14,10 +15,107 @@ beforeEach(() => {
 	document.body.innerHTML = '<div id="root"></div>';
 });
 afterEach(() => {
+	vi.restoreAllMocks();
 	vi.unstubAllGlobals();
 	vi.unstubAllEnvs();
 });
 describe("composable client guides", () => {
+	it("escapes and interpolates platform-specific command descriptions", () => {
+		document.body.innerHTML = renderContent(
+			[
+				{
+					kind: "code-group",
+					variants: {
+						mac: {
+							language: "bash",
+							text: "echo safe",
+							description: "Use **Bash** with `{clientId}`. <script>bad()</script>",
+						},
+						windows: {
+							language: "powershell",
+							text: "Write-Output safe",
+							description: "Use Windows.",
+						},
+					},
+				},
+			],
+			{ clientId: "<img src=x>" },
+			"mac",
+		);
+		const panel = document.querySelector('[data-code-platform="mac"]')!;
+		expect(panel.querySelector("p strong")?.textContent).toBe("Bash");
+		expect(panel.querySelector("p code")?.textContent).toBe("<img src=x>");
+		expect(panel.querySelector("script, img")).toBeNull();
+		expect(document.querySelector('[data-code-platform="windows"]')?.hasAttribute("hidden")).toBe(
+			true,
+		);
+	});
+
+	it("renders field tables with accessible headers, inline markup, and escaped values", () => {
+		document.body.innerHTML = renderContent(
+			[
+				{
+					kind: "table",
+					rows: [
+						["**Client ID**", "`{clientId}`"],
+						["<b>Field</b>", "<img src=x>"],
+					],
+				},
+			],
+			{ clientId: "<script>bad()</script>" },
+		);
+		expect(document.querySelectorAll('thead th[scope="col"]')).toHaveLength(2);
+		expect(document.querySelector('tbody th[scope="row"] strong')?.textContent).toBe("Client ID");
+		expect(document.querySelector('td code [data-guide-token="clientId"]')?.textContent).toBe(
+			"<script>bad()</script>",
+		);
+		expect(document.querySelector("script, b, img")).toBeNull();
+		expect(document.querySelectorAll("tbody tr")[1].textContent).toBe("<b>Field</b><img src=x>");
+		expect(() => renderContent([{ kind: "table", rows: [["Field", "{missing}"]] }], {})).toThrow(
+			"Unknown guide token: missing",
+		);
+	});
+
+	it.each(["public", "private"] as const)(
+		"shows the generic %s connection fields and only the matching key instructions",
+		(key) => {
+			const state = readState(
+				`?client=generic&key=${key}&domain=example.instructure.com&region=us-east-1&clientId=12345&redirectUris=${encodeURIComponent("http://localhost:8081/callback\nhttps://client.example/callback")}`,
+				null,
+			);
+			document.body.innerHTML = renderGuide(clientDefinition(state.client), state, false);
+			const step = document.querySelector(`[data-guide-step="provider-${key}"]`)!;
+			expect(step).not.toBeNull();
+			expect(
+				document.querySelector(
+					`[data-guide-step="provider-${key === "public" ? "private" : "public"}"]`,
+				),
+			).toBeNull();
+			const rows = Object.fromEntries(
+				[...step.querySelectorAll("tbody tr")].map((row) => [
+					row.querySelector("th")!.textContent,
+					row.querySelector("td")!.textContent,
+				]),
+			);
+			expect(rows).toMatchObject({
+				Transport: "Remote HTTP (Streamable HTTP)",
+				"MCP server URL": "https://example.maple.us-east-1.core.inseng.io/mcp",
+				"Authorization URL": "https://example.instructure.com/login/oauth2/auth",
+				"Token URL": "https://example.instructure.com/login/oauth2/token",
+				"Client ID": "12345",
+				Scope: "https://sso.canvaslms.com/all-client-scopes",
+				"Redirect URI(s)": "http://localhost:8081/callback\nhttps://client.example/callback",
+				PKCE: key === "public" ? "Required; use S256." : "Optional for a Canvas private key.",
+			});
+			expect(rows["Client secret"]).toBe(
+				key === "public"
+					? "Do not send a client secret for a public key."
+					: "Required; enter the Canvas key secret directly in your client's secret field.",
+			);
+			if (key === "private") expect(step.textContent).toContain("never paste it into this guide");
+		},
+	);
+
 	it("supports inline code and bold in paragraphs, lists, and link labels", () => {
 		document.body.innerHTML = renderContent(
 			[
@@ -233,20 +331,28 @@ describe("composable client guides", () => {
 	});
 
 	it("offers the client registration command after entering the server's Client ID", () => {
+		const definition = clientDefinition("codex");
+		const original = clients.clientDefinition;
+		vi.spyOn(clients, "clientDefinition").mockImplementation((id) =>
+			id === "codex" ? { ...definition, status: { kind: "untested" } } : original(id),
+		);
 		vi.stubGlobal("scrollTo", vi.fn());
 		history.replaceState(
 			null,
 			"",
-			"/canvas-mcp/?client=codex&domain=example.instructure.com&region=us-east-1",
+			"/canvas-mcp/?client=codex&install=enterprise&domain=example.instructure.com&region=us-east-1",
 		);
 		mountApp("admin");
-		expect(document.querySelector('button[data-copy-template*="mcp add"]')).toBeNull();
+		expect(
+			document.querySelector<HTMLButtonElement>('[data-guide-step="provider-register"] [data-copy]')
+				?.disabled,
+		).toBe(true);
 		const input = document.querySelector<HTMLInputElement>("#client-id-input")!;
 		input.value = "12345000000000001";
 		input.dispatchEvent(new Event("input", { bubbles: true }));
 		document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")!.click();
 		const command = document.querySelector<HTMLButtonElement>(
-			'button[data-copy-template*="mcp add"]',
+			'[data-guide-step="provider-register"] [data-copy]',
 		);
 		expect(command?.disabled).toBe(false);
 		expect(command?.dataset.copy).toContain('--oauth-client-id "12345000000000001"');

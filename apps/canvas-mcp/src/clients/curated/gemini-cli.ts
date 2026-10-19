@@ -116,7 +116,7 @@ export const geminiCli = {
 	status: {
 		kind: "known-issue",
 		reason:
-			"Gemini CLI was replaced by Antigravity CLI for unpaid-tier and Google One users on June 18, 2026. Use Antigravity CLI unless your account is eligible for Gemini CLI Enterprise.",
+			"Gemini CLI was replaced by Antigravity CLI for unpaid-tier and Google One users on June 18, 2026. Use Antigravity CLI.",
 		installModes: ["personal"],
 	},
 	installModes: ["personal", "enterprise"],

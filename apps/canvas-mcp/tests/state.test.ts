@@ -6,6 +6,7 @@ import {
 	type StorageLike,
 	deriveUrls,
 	normalizeCanvasDomain,
+	normalizeRedirectUris,
 	readState,
 	savePreferences,
 	stateQuery,
@@ -58,6 +59,31 @@ describe("deriveUrls", () => {
 });
 
 describe("app state", () => {
+	it("normalizes callback URIs one per line without rewriting their exact values", () => {
+		expect(
+			normalizeRedirectUris(
+				" \r\n http://localhost:8081/callback \r\n\n client-app://oauth/callback?x=1 \n",
+			),
+		).toBe("http://localhost:8081/callback\nclient-app://oauth/callback?x=1");
+	});
+
+	it("round-trips generic callback URIs through preferences and setup links", () => {
+		const storage = memoryStorage();
+		const state = readState("?client=generic", null);
+		state.redirectUris = "http://localhost:8081/callback\nhttps://client.example/callback";
+		savePreferences(state, storage);
+		expect(readState("", storage).redirectUris).toBe(state.redirectUris);
+		expect(readState(`?${stateQuery(state)}`, null).redirectUris).toBe(state.redirectUris);
+		expect(readState("?client=generic&redirectUris=", storage).redirectUris).toBe("");
+		expect(
+			readState("?client=generic&redirectUris=client-app%3A%2F%2Fcallback", storage).redirectUris,
+		).toBe("client-app://callback");
+		expect(
+			new URLSearchParams(stateQuery({ ...state, client: "claude-code" })).has("redirectUris"),
+		).toBe(false);
+		expect(readState("", memoryStorage({ redirectUris: [] })).redirectUris).toBe("");
+	});
+
 	it("uses URL values before saved preferences and validates untrusted values", () => {
 		const storage = memoryStorage({
 			client: "codex",
@@ -72,6 +98,7 @@ describe("app state", () => {
 			surface: "canvas",
 			platform: "auto",
 			clientId: "",
+			redirectUris: "",
 			domain: "utah.instructure.com",
 			key: "private",
 			region: "eu-west-1",
@@ -102,6 +129,7 @@ describe("app state", () => {
 				surface: "canvas",
 				platform: "mac",
 				clientId: "12345",
+				redirectUris: "",
 				domain: "utah.instructure.com",
 				key: "private",
 				region: "us-west-2",
@@ -116,6 +144,7 @@ describe("app state", () => {
 			domain: "utah.instructure.com",
 			key: "private",
 			region: "us-west-2",
+			redirectUris: "",
 		});
 		expect(stateQuery(state)).toBe(
 			"domain=utah.instructure.com&client=codex&key=private&install=personal&platform=mac&region=us-west-2&clientId=12345",

@@ -1,6 +1,7 @@
 import { clientDefinition, normalizeInstall, normalizeKeyType } from "./clients";
 import { type ClientDefinition } from "./clients/types";
-import { type AppState, normalizeCanvasDomain } from "./state";
+import { clientStatus } from "./clients/status";
+import { type AppState, normalizeCanvasDomain, normalizeRedirectUris } from "./state";
 
 export function normalizeSetup(state: AppState): void {
 	state.key = normalizeKeyType(state.client, state.key);
@@ -14,6 +15,8 @@ export function connectionReadiness(
 ): { ready: boolean; reason: string; blocked?: boolean } {
 	const facts = client.facts;
 	if (client.blocker) return { ready: false, blocked: true, reason: client.blocker.reason };
+	const status = clientStatus(client, state.install);
+	if (status.kind === "known-issue") return { ready: false, blocked: true, reason: status.reason };
 	if (facts.remoteHttp.value === "no")
 		return {
 			ready: false,
@@ -41,6 +44,8 @@ export function connectionReadiness(
 	if (!normalizeCanvasDomain(state.domain))
 		return { ready: false, reason: "Enter a supported Canvas domain." };
 	if (!state.region) return { ready: false, reason: "Select your Canvas region." };
+	if (client.id === "generic" && !normalizeRedirectUris(state.redirectUris))
+		return { ready: false, reason: "Enter your MCP client's callback URIs in step 1." };
 	if (!state.clientId) return { ready: false, reason: "Enter the Canvas developer key Client ID." };
 	return { ready: true, reason: "" };
 }

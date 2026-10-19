@@ -8,16 +8,19 @@ import { renderPage, type PageMode } from "./page";
 import { copyToClipboard } from "./ui/copy";
 import { applyTheme, setTheme } from "./ui/theme";
 import { commandPlatform, isPlatformPreference } from "./platform";
+import { helpSectionFromQuery, type HelpSection } from "./help/content";
 import {
 	type AppState,
 	type StorageLike,
 	normalizeCanvasDomain,
+	normalizeRedirectUris,
 	deriveUrls,
 	readState,
 	savePreferences,
 	stateQuery,
 } from "./state";
 const mounts = new WeakMap<HTMLElement, symbol>();
+const printCleanups = new WeakMap<HTMLElement, () => void>();
 
 export function mountApp(mode: PageMode): void {
 	const root = document.querySelector<HTMLElement>("#root");
@@ -26,9 +29,12 @@ export function mountApp(mode: PageMode): void {
 	}
 	const appRoot = root,
 		state = readState(globalThis.location.search, getStorage());
+	printCleanups.get(appRoot)?.();
+	printCleanups.set(appRoot, bindPrintDetails(appRoot));
 	const mount = Symbol();
 	mounts.set(appRoot, mount);
 	let pageMode = pageModeFromQuery(globalThis.location.search) ?? mode;
+	let helpSection = helpSectionFromQuery(globalThis.location.search);
 	normalizeSetup(state);
 	function isConnectionReady(): boolean {
 		return connectionReadiness(state).ready;
@@ -69,7 +75,8 @@ export function mountApp(mode: PageMode): void {
 			pageMode,
 			viewState.domainInputValue,
 			isConnectionReady(),
-			callbackResolution(),
+			pageMode === "help" ? undefined : callbackResolution(),
+			helpSection,
 		);
 		const tray = appRoot.querySelector<HTMLElement>(".instui-tray");
 		if (tray) applySpacing(tray);
@@ -80,7 +87,7 @@ export function mountApp(mode: PageMode): void {
 
 	function syncConnectTab(): void {
 		const connectTab = appRoot.querySelector<HTMLButtonElement>('[data-page="connect"]');
-		if (pageMode === "admin" && connectTab) {
+		if (pageMode !== "user" && connectTab) {
 			const ready = isConnectionReady();
 			connectTab.disabled = !ready;
 			appRoot
@@ -90,6 +97,13 @@ export function mountApp(mode: PageMode): void {
 	}
 
 	function bindEvents() {
+		appRoot.querySelectorAll<HTMLInputElement>("[data-help-section]").forEach((control) => {
+			control.addEventListener("change", () => {
+				helpSection = helpSectionFromQuery(`?help=${encodeURIComponent(control.value)}`);
+				persistAndRender();
+				document.getElementById(`help-section-${helpSection}`)?.focus({ preventScroll: true });
+			});
+		});
 		appRoot
 			.querySelectorAll<HTMLInputElement | HTMLButtonElement>("[data-guide-surface]")
 			.forEach((control) => {
@@ -133,16 +147,37 @@ export function mountApp(mode: PageMode): void {
 				if (tab.hasAttribute("data-configure-client")) {
 					globalThis.scrollTo({ top: 0, behavior: "smooth" });
 				}
-				pageMode = tab.dataset.page === "admin" ? "admin" : "user";
-				state.surface = pageMode === "user" ? "provider" : "canvas";
+				pageMode =
+					tab.dataset.page === "help" ? "help" : tab.dataset.page === "admin" ? "admin" : "user";
+				if (pageMode !== "help") state.surface = pageMode === "user" ? "provider" : "canvas";
 				persistAndRender();
 			});
+		});
+		appRoot.querySelector<HTMLInputElement>("#domain-input")?.addEventListener("input", (event) => {
+			viewState.domainInputValue = (event.currentTarget as HTMLInputElement).value;
 		});
 		appRoot
 			.querySelector<HTMLInputElement>("#domain-input")
 			?.addEventListener("change", (event) => {
 				viewState.domainInputValue = (event.currentTarget as HTMLInputElement).value;
 				state.domain = normalizeCanvasDomain(viewState.domainInputValue) ?? "";
+				persistAndRender();
+			});
+		appRoot
+			.querySelector<HTMLTextAreaElement>("#redirect-uris-input")
+			?.addEventListener("input", (event) => {
+				const input = event.currentTarget as HTMLTextAreaElement;
+				const invalid = !normalizeRedirectUris(input.value);
+				input.classList.toggle("-invalid", invalid);
+				input.setAttribute("aria-invalid", String(invalid));
+				input.setCustomValidity(invalid ? "Enter at least one callback URI." : "");
+			});
+		appRoot
+			.querySelector<HTMLTextAreaElement>("#redirect-uris-input")
+			?.addEventListener("change", (event) => {
+				state.redirectUris = normalizeRedirectUris(
+					(event.currentTarget as HTMLTextAreaElement).value,
+				);
 				persistAndRender();
 			});
 		appRoot
@@ -171,9 +206,12 @@ export function mountApp(mode: PageMode): void {
 		appRoot
 			.querySelector<HTMLInputElement>("#client-id-input")
 			?.addEventListener("input", (event) => {
-				state.clientId = (event.currentTarget as HTMLInputElement).value
-					.replace(/\D/gu, "")
-					.slice(0, 17);
+				const input = event.currentTarget as HTMLInputElement;
+				state.clientId = input.value.replace(/\D/gu, "").slice(0, 17);
+				input.value = state.clientId;
+				const invalid = !input.validity.valid;
+				input.classList.toggle("-invalid", invalid);
+				input.setAttribute("aria-invalid", String(invalid));
 				persist();
 				appRoot
 					.querySelectorAll<HTMLElement>('[data-guide-token="clientId"]')
@@ -241,10 +279,10 @@ export function mountApp(mode: PageMode): void {
 			?.addEventListener("click", async () => {
 				await copyToClipboard(
 					new URL(
-						`${globalThis.location.pathname}?${pageQuery(state, "user")}`,
+						`${globalThis.location.pathname}?${pageQuery(state, pageMode === "help" ? "help" : "user", helpSection)}`,
 						globalThis.location.origin,
 					).toString(),
-					"Setup link copied",
+					pageMode === "help" ? "Help link copied" : "Setup link copied",
 				);
 			});
 		appRoot.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((button) => {
@@ -258,7 +296,7 @@ export function mountApp(mode: PageMode): void {
 		normalizeSetup(state);
 		if (pageMode === "admin" && state.install !== "enterprise") state.surface = "canvas";
 		savePreferences(state, getStorage());
-		const search = pageQuery(state, pageMode);
+		const search = pageQuery(state, pageMode, helpSection);
 		globalThis.history.replaceState(
 			null,
 			"",
@@ -281,6 +319,29 @@ export function mountApp(mode: PageMode): void {
 	persist();
 }
 
+function bindPrintDetails(root: HTMLElement): () => void {
+	const closedDetails = new Set<HTMLDetailsElement>();
+	function expand(): void {
+		root
+			.querySelectorAll<HTMLDetailsElement>("details.instui-toggle-details:not([open])")
+			.forEach((details) => {
+				closedDetails.add(details);
+				details.open = true;
+			});
+	}
+	function restore(): void {
+		closedDetails.forEach((details) => (details.open = false));
+		closedDetails.clear();
+	}
+	globalThis.addEventListener("beforeprint", expand);
+	globalThis.addEventListener("afterprint", restore);
+	return () => {
+		globalThis.removeEventListener("beforeprint", expand);
+		globalThis.removeEventListener("afterprint", restore);
+		restore();
+	};
+}
+
 function updatePrintPageBreaks(root: HTMLElement): void {
 	const cards = [
 		...root.querySelectorAll<HTMLElement>(
@@ -296,12 +357,14 @@ function pageModeFromQuery(search: string): PageMode | null {
 	const page = new URLSearchParams(search).get("page");
 	if (page === "connect") return "user";
 	if (page === "admin") return "admin";
+	if (page === "help") return "help";
 	return null;
 }
 
-function pageQuery(state: AppState, pageMode: PageMode): string {
+function pageQuery(state: AppState, pageMode: PageMode, helpSection: HelpSection): string {
 	const params = new URLSearchParams(stateQuery(state));
-	params.set("page", pageMode === "admin" ? "admin" : "connect");
+	params.set("page", pageMode === "help" ? "help" : pageMode === "admin" ? "admin" : "connect");
+	if (pageMode === "help") params.set("help", helpSection);
 	if (new URLSearchParams(globalThis.location.search).has("dev")) params.set("dev", "");
 	return params.toString();
 }

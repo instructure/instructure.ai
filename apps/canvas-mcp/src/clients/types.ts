@@ -12,9 +12,15 @@ export type Fact<T> =
 	| { value: T; status: "verified" | "documented"; evidence: [Evidence, ...Evidence[]] }
 	| { value: T | "unknown"; status: "unverified"; evidence: Evidence[] };
 export type ClientStatus =
-	| { kind: "validated"; testedAt: string; installModes?: InstallMode[]; note?: string }
+	| {
+			kind: "validated";
+			testedAt: string;
+			installModes?: InstallMode[];
+			note?: string;
+			platform?: string;
+	  }
 	| { kind: "untested" }
-	| { kind: "known-issue"; reason: string; installModes?: InstallMode[] };
+	| { kind: "known-issue"; reason: string; diagnostic?: string; installModes?: InstallMode[] };
 export type RedirectUri =
 	| {
 			kind: "fixed";

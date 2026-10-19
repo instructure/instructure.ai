@@ -1,6 +1,6 @@
 import { type Evidence } from "../clients/types";
 import { type CommandPlatform } from "../platform";
-export type CodeLanguage = "bash" | "json" | "markdown" | "prompt" | "powershell" | "toml";
+export type CodeLanguage = "bash" | "json" | "markdown" | "prompt" | "powershell" | "toml" | "text";
 export interface CodeSnippet {
 	text: string;
 	language: CodeLanguage;
@@ -8,8 +8,12 @@ export interface CodeSnippet {
 export type StructuredContent =
 	| { kind: "paragraph"; text: string }
 	| ({ kind: "code" } & CodeSnippet)
-	| { kind: "code-group"; variants: Record<CommandPlatform, CodeSnippet> }
+	| {
+			kind: "code-group";
+			variants: Record<CommandPlatform, CodeSnippet & { description?: string }>;
+	  }
 	| { kind: "list"; items: string[] }
+	| { kind: "table"; rows: [field: string, value: string][] }
 	| {
 			kind: "image";
 			name: string;

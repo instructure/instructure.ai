@@ -4,22 +4,28 @@ import { clientDefinition } from "./clients";
 import { type AppState, deriveUrls } from "./state";
 import { renderConfig } from "./admin/config";
 import { serverDetailsCard } from "./admin/server-details";
-import { renderGuide } from "./guides/render";
+import { renderContent, renderGuide } from "./guides/render";
 import { clientStatus } from "./clients/status";
 import { escapeHtml } from "./ui/html";
 import { activeTheme, canvasLogoUri } from "./ui/theme";
-export type PageMode = "user" | "admin";
+import { renderHelp } from "./help/render";
+import { HELP_SECTIONS, type HelpSection } from "./help/content";
+export type PageMode = "user" | "admin" | "help";
 export function renderPage(
 	state: AppState,
 	pageMode: PageMode,
 	domainInputValue: string,
 	canConnect: boolean,
 	callback?: CallbackResolution,
+	helpSection: HelpSection = "faqs",
 ): string {
 	const client = clientDefinition(state.client),
 		status = clientStatus(client, state.install),
 		knownIssue = status.kind === "known-issue" ? status.reason : "",
 		isGeminiNotice = client.id === "gemini-cli" && Boolean(knownIssue),
+		enterpriseTransition =
+			pageMode === "admin" && client.id === "gemini-cli" && state.install === "enterprise",
+		hasNotice = Boolean(knownIssue) || enterpriseTransition,
 		hasValidDomain = Boolean(state.domain),
 		installLabel = client.installModes.length === 0 ? "install flow unverified" : state.install,
 		copiedLabel = "",
@@ -37,7 +43,7 @@ export function renderPage(
 					<div class="page-heading">
 						<div class="page-heading-copy">
 							<div class="eyebrow"><img class="eyebrow-logo" alt="Canvas" src="${canvasLogoUri()}" /></div>
-							<h1 class="instui-heading -variant-title-page">${pageMode === "user" ? "Connect Canvas to your MCP client" : "Configure a Canvas MCP Server"}</h1>
+							<h1 class="instui-heading -variant-title-page">${pageMode === "help" ? "Canvas MCP Help" : pageMode === "user" ? "Connect Canvas to your MCP client" : "Configure a Canvas MCP Server"}</h1>
 							${pageMode === "user" ? '<p class="lede">Follow the setup instructions for your MCP client.</p>' : ""}
 						</div>
 						<div class="page-heading-actions" role="group" aria-label="Page actions">
@@ -47,16 +53,22 @@ export function renderPage(
 					<div class="instui-tabs page-tabs --mb-md">
 						<div class="list" role="tablist" aria-label="Canvas MCP setup pages">
 							<button id="tab-admin" class="tab ${pageMode === "admin" ? "-selected" : ""}" type="button" role="tab" aria-selected="${pageMode === "admin"}" aria-controls="setup-panel" data-page="admin" tabindex="${pageMode === "admin" ? "0" : "-1"}">Configure a Server</button>
-							<button id="tab-connect" class="tab ${pageMode === "user" ? "-selected" : ""}" type="button" role="tab" aria-selected="${pageMode === "user"}" aria-controls="setup-panel" data-page="connect" tabindex="${pageMode === "user" ? "0" : "-1"}" ${pageMode === "admin" && !canConnect ? "disabled" : ""}>Connect a Client</button>
+							<button id="tab-connect" class="tab ${pageMode === "user" ? "-selected" : ""}" type="button" role="tab" aria-selected="${pageMode === "user"}" aria-controls="setup-panel" data-page="connect" tabindex="${pageMode === "user" ? "0" : "-1"}" ${pageMode !== "user" && !canConnect ? "disabled" : ""}>Connect a Client</button>
+							<button id="tab-help" class="tab ${pageMode === "help" ? "-selected" : ""}" type="button" role="tab" aria-selected="${pageMode === "help"}" aria-controls="setup-panel" data-page="help" tabindex="${pageMode === "help" ? "0" : "-1"}">Help</button>
 						</div>
-						<section id="setup-panel" class="panel" role="tabpanel" aria-labelledby="${pageMode === "user" ? "tab-connect" : "tab-admin"}">
-					<div class="workspace-grid${pageMode === "admin" ? "" : " workspace-grid--single"} --mt-xl">
+						<section id="setup-panel" class="panel" role="tabpanel" aria-labelledby="${pageMode === "help" ? "tab-help" : pageMode === "user" ? "tab-connect" : "tab-admin"}">
+					${
+						pageMode === "help"
+							? renderHelp(helpSection)
+							: `<div class="workspace-grid${pageMode === "admin" ? "" : " workspace-grid--single"} --mt-xl">
 						${pageMode === "admin" ? renderConfig(state, domainInputValue) : ""}
-						${knownIssue ? `<div class="instructions-column"><p class="instui-alert -color-danger -inline known-issue-alert${isGeminiNotice ? " gemini-deprecation-notice" : ""}" role="alert"><b>Known issue:</b> ${escapeHtml(knownIssue)}</p>` : ""}
+						${knownIssue ? `<div class="instructions-column"><div class="instui-alert -color-danger -inline known-issue-alert${isGeminiNotice ? " gemini-deprecation-notice" : ""}" role="alert"><b>Known issue:</b> ${escapeHtml(knownIssue)}${isGeminiNotice ? ' <a href="https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/" target="_blank" rel="noopener noreferrer">Read Google\'s announcement</a>.' : ""}${status.kind === "known-issue" && status.diagnostic ? renderContent([{ kind: "code", language: "text", text: status.diagnostic }], {}, state.platform) : ""}</div>` : ""}
+						${enterpriseTransition ? `<div class="instructions-column"><div class="instui-alert -color-warning -inline gemini-deprecation-notice" role="status"><b>Transition to Antigravity CLI:</b> Google is consolidating development around Antigravity, but Gemini Code Assist Standard or Enterprise access remains unchanged and supported. Administrators can evaluate Antigravity CLI with Google Cloud projects; feature parity is not yet complete. <a href="https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/" target="_blank" rel="noopener noreferrer">Read Google's announcement</a>.</div>` : ""}
 						<section class="instui-card -variant-base details-panel" ><div class="content">${pageMode === "user" && connectionReadiness(state, client).blocked && status.kind !== "known-issue" ? `<p class="instui-alert -color-warning -inline" role="status">${escapeHtml(connectionReadiness(state, client).reason)}</p>` : ""}${renderGuide(client, state, pageMode === "admin", callback)}</div></section>
-						${knownIssue ? "</div>" : ""}
-					</div>
-					<footer class="page-footer"><p>Copyright &copy; ${new Date().getFullYear()} Instructure, Inc.</p><p class="print-context">${escapeHtml(client.name)} · ${escapeHtml(installLabel)} · ${new Date().toISOString().slice(0, 10)}<br /><span class="print-permalink">${escapeHtml("/canvas-mcp/?" + new URLSearchParams({ domain: state.domain, client: state.client, key: state.key, ...(client.installModes.length ? { install: state.install } : {}), platform: state.platform, region: state.region, clientId: state.clientId, page: pageMode === "admin" ? "admin" : "connect" }).toString())}</span></p></footer>
+						${hasNotice ? "</div>" : ""}
+					</div>`
+					}
+					<footer class="page-footer"><p>Copyright &copy; ${new Date().getFullYear()} Instructure, Inc.</p><p class="print-context">${pageMode === "help" ? `Help · ${HELP_SECTIONS.find(({ id }) => id === helpSection)!.label}` : `${escapeHtml(client.name)} · ${escapeHtml(installLabel)}`} · ${new Date().toISOString().slice(0, 10)}<br /><span class="print-permalink">${escapeHtml("/canvas-mcp/?" + new URLSearchParams({ domain: state.domain, client: state.client, key: state.key, ...(client.installModes.length ? { install: state.install } : {}), platform: state.platform, region: state.region, clientId: state.clientId, ...(client.id === "generic" && state.redirectUris ? { redirectUris: state.redirectUris } : {}), page: pageMode === "help" ? "help" : pageMode === "admin" ? "admin" : "connect", ...(pageMode === "help" ? { help: helpSection } : {}) }).toString())}</span></p></footer>
 					</section>
 					</div>
 				</main>

@@ -12,6 +12,141 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals());
 describe("updated curated guidance", () => {
 	it.each([
+		["personal", "public"],
+		["personal", "private"],
+		["enterprise", "public"],
+		["enterprise", "private"],
+	])("blocks %s Codex connections for %s keys", (install, key) => {
+		history.replaceState(
+			null,
+			"",
+			`?client=codex&install=${install}&key=${key}&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=connect`,
+		);
+		mountApp("user");
+		expect(clientDefinition("codex").status).toMatchObject({
+			kind: "known-issue",
+			installModes: ["personal", "enterprise"],
+		});
+		expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("admin");
+		expect(document.querySelector('.known-issue-alert[role="alert"]')?.textContent).toContain(
+			"invalid_target",
+		);
+		expect(document.querySelector(".client-status-pill")?.textContent).toBe("Known issue");
+		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+		expect(
+			document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")?.disabled,
+		).toBe(true);
+	});
+
+	it.each(["public", "private"])(
+		"blocks direct personal Gemini CLI client links for %s keys",
+		(key) => {
+			history.replaceState(
+				null,
+				"",
+				`?client=gemini-cli&install=personal&key=${key}&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=connect`,
+			);
+			mountApp("user");
+			expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("admin");
+			expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+			expect(
+				document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")?.disabled,
+			).toBe(true);
+			expect(document.querySelector("#client-id-input")).not.toBeNull();
+		},
+	);
+
+	it.each([
+		["personal", "public"],
+		["personal", "private"],
+		["enterprise", "public"],
+		["enterprise", "private"],
+	])("blocks Antigravity CLI connections and shows the top alert for %s/%s", (install, key) => {
+		vi.stubGlobal("scrollTo", vi.fn());
+		history.replaceState(
+			null,
+			"",
+			`?client=antigravity-cli&install=${install}&key=${key}&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=connect`,
+		);
+		mountApp("user");
+		expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("admin");
+		const alert = document.querySelector('.known-issue-alert[role="alert"]')!;
+		expect(alert.textContent).toContain("Unauthorized");
+		expect(alert.querySelector(".shiki-block.language-text pre.shiki > code")?.textContent).toBe(
+			'✗ canvas-mcp  error: calling "initialize": sending "initialize": No authorization header provided: rejected by transport: Unauthorized',
+		);
+		expect(alert.querySelector<HTMLButtonElement>(".shiki-copy")?.dataset.copy).toBe(
+			alert.querySelector("pre.shiki code")?.textContent,
+		);
+		expect(alert.classList.contains("-color-danger")).toBe(true);
+		expect(alert.nextElementSibling?.classList.contains("details-panel")).toBe(true);
+		expect(document.querySelector(".client-status-pill")?.textContent).toBe("Known issue");
+		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+		expect(document.querySelector("#client-id-input")).not.toBeNull();
+		if (install === "enterprise") {
+			document.querySelector<HTMLButtonElement>("#configure-provider-button-bottom")!.click();
+			expect(document.querySelector("#guide-provider")?.textContent).toContain("Assign users");
+		}
+		expect(
+			document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")?.disabled,
+		).toBe(true);
+		const state = readState(location.search, null);
+		document.body.innerHTML = renderGuide(clientDefinition(state.client), state, false);
+		expect(document.querySelector('[data-guide-step="verify"], [data-copy-template]')).toBeNull();
+	});
+
+	it.each([
+		["personal", "public"],
+		["personal", "private"],
+		["enterprise", "public"],
+		["enterprise", "private"],
+	])("uses key-specific Antigravity CLI configuration for %s/%s", (install, key) => {
+		const state = readState(
+			`?client=antigravity-cli&install=${install}&key=${key}&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001`,
+			null,
+		);
+		document.body.innerHTML = renderGuide(
+			{ ...clientDefinition(state.client), blocker: undefined },
+			state,
+			false,
+		);
+		const step = document.querySelector(`[data-guide-step="provider-configure-${key}"]`)!;
+		expect(step).not.toBeNull();
+		expect(
+			document.querySelector(
+				`[data-guide-step="provider-configure-${key === "public" ? "private" : "public"}"]`,
+			),
+		).toBeNull();
+		const copy = step.querySelector<HTMLButtonElement>(".language-json [data-copy]")!;
+		expect(copy.disabled).toBe(false);
+		for (const platform of ["mac", "windows"]) {
+			const command = step.querySelector<HTMLButtonElement>(
+				`[data-code-platform="${platform}"] [data-copy]`,
+			)!;
+			expect(command.disabled).toBe(false);
+			expect(command.dataset.copy).toContain("https://example.maple.us-east-1.core.inseng.io/mcp");
+			expect(command.dataset.copy).toContain("12345000000000001");
+			expect(command.dataset.copy).not.toMatch(/\{mcpUrl\}|\{clientId\}/u);
+			expect(command.dataset.copy).not.toContain("<ENTER_CLIENT_SECRET_LOCALLY>");
+		}
+		expect(JSON.parse(copy.dataset.copy!).mcpServers["canvas-mcp"]).toEqual({
+			serverUrl: "https://example.maple.us-east-1.core.inseng.io/mcp",
+			oauth: {
+				clientId: "12345000000000001",
+				...(key === "private" ? { clientSecret: "<ENTER_CLIENT_SECRET_LOCALLY>" } : {}),
+			},
+		});
+		if (key === "public") {
+			expect(document.body.textContent).not.toContain("Enter the secret only");
+			expect(copy.dataset.copy).not.toContain("clientSecret");
+		} else expect(step.textContent).toContain("Keep the file out of source control");
+		expect(document.querySelector('[data-guide-step="verify"]')).not.toBeNull();
+		expect(Boolean(document.querySelector('[data-guide-step="client-enterprise-signin"]'))).toBe(
+			install === "enterprise",
+		);
+	});
+
+	it.each([
 		["codex", "Codex managed configuration", "requirements.toml"],
 		["chatgpt", "ChatGPT workspace settings", "Configure Access"],
 		["antigravity", "Google Cloud console", "Assign users"],
@@ -76,7 +211,7 @@ describe("updated curated guidance", () => {
 			/create the data store|Policies|Use your own OAuth client|Developer Keys/iu,
 		);
 	});
-	it.each(["codex", "antigravity", "antigravity-cli", "gemini-cli"])(
+	it.each(["claude-code", "antigravity", "gemini-cli"])(
 		"retains connection fields for enterprise %s users who configure their client",
 		(id) => {
 			history.replaceState(
@@ -306,7 +441,9 @@ describe("updated curated guidance", () => {
 			expect(document.querySelector('[data-guide-step="client-enterprise"]')).toBeNull();
 			expect(
 				document.querySelector(`[data-guide-step="provider-register-${key}"] [data-copy]`),
-			).not.toBeNull();
+			).toBeNull();
+			expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+			expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("admin");
 			expect(new URLSearchParams(location.search).get("install")).toBe("personal");
 		},
 	);
@@ -322,7 +459,7 @@ describe("updated curated guidance", () => {
 		).toBe(true);
 	});
 
-	it("shows Gemini CLI's known issue only for personal installs on both pages", () => {
+	it("shows Gemini CLI's personal error and enterprise admin transition warning", () => {
 		history.replaceState(
 			null,
 			"",
@@ -331,11 +468,19 @@ describe("updated curated guidance", () => {
 		mountApp("admin");
 		const notice = () => document.querySelector(".gemini-deprecation-notice");
 		expect(notice()?.textContent).toBe(
-			"Known issue: Gemini CLI was replaced by Antigravity CLI for unpaid-tier and Google One users on June 18, 2026. Use Antigravity CLI unless your account is eligible for Gemini CLI Enterprise.",
+			"Known issue: Gemini CLI was replaced by Antigravity CLI for unpaid-tier and Google One users on June 18, 2026. Use Antigravity CLI. Read Google's announcement.",
+		);
+		expect(notice()?.textContent).not.toContain("Enterprise");
+		expect(notice()?.querySelector("a")?.href).toBe(
+			"https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/",
 		);
 		expect(notice()?.classList.contains("-color-danger")).toBe(true);
 		expect(notice()?.classList.contains("-color-warning")).toBe(false);
 		expect(notice()?.getAttribute("role")).toBe("alert");
+		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+		expect(
+			document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")?.disabled,
+		).toBe(true);
 		expect(document.querySelector(".client-status-pill")?.textContent).toBe("Known issue");
 		expect(notice()?.closest(".details-panel")).toBeNull();
 		expect(notice()?.nextElementSibling?.classList.contains("details-panel")).toBe(true);
@@ -349,9 +494,21 @@ describe("updated curated guidance", () => {
 		const enterprise = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
 		enterprise.checked = true;
 		enterprise.dispatchEvent(new Event("change", { bubbles: true }));
-		expect(notice()).toBeNull();
+		expect(notice()?.classList.contains("-color-warning")).toBe(true);
+		expect(notice()?.classList.contains("-color-danger")).toBe(false);
+		expect(notice()?.getAttribute("role")).toBe("status");
+		expect(notice()?.textContent).toContain("access remains unchanged");
+		expect(notice()?.textContent).toContain("Gemini Code Assist Standard or Enterprise");
+		expect(notice()?.textContent?.split(/\s+/u).length).toBeLessThanOrEqual(50);
+		expect(notice()?.textContent).toContain("feature parity is not yet complete");
+		expect(notice()?.querySelector("a")?.href).toBe(
+			"https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/",
+		);
+		expect(notice()?.nextElementSibling?.classList.contains("details-panel")).toBe(true);
+		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(false);
 		expect(document.querySelector(".client-status-pill")?.textContent).toBe("Untested");
 		document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
+		expect(notice()).toBeNull();
 		expect(document.querySelector(".known-issue-alert")).toBeNull();
 		expect(document.querySelector(".instructions-column")).toBeNull();
 		expect(document.querySelector(".client-status-pill")).toBeNull();

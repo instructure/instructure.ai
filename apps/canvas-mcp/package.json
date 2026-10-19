@@ -25,6 +25,7 @@
 		"@pantoken/interactions": "0.5.1",
 		"@pantoken/plugin-custom-components": "0.7.2",
 		"@pantoken/plugin-logos": "0.5.5",
+		"@pantoken/plugin-simple-icons": "0.3.14",
 		"shiki": "^4.5.0"
 	},
 	"devDependencies": {
