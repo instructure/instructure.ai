@@ -3,7 +3,7 @@
 import { describe, expect, it } from "vitest";
 import { CLIENTS } from "../src/clients";
 import { clientStatus } from "../src/clients/status";
-import { helpSectionFromQuery } from "../src/help/content";
+import { FAQS, helpSectionFromQuery } from "../src/help/content";
 import { renderHelp } from "../src/help/render";
 
 describe("Help content", () => {
@@ -65,6 +65,32 @@ describe("Help content", () => {
 		expect(document.querySelector("#client-matrix-legend")?.textContent).toContain(
 			"not separate public/private tests",
 		);
+	});
+
+	it("groups every FAQ under General, Admins, or Users using Pantoken toggle-details", () => {
+		document.body.innerHTML = renderHelp("faqs");
+		expect(
+			[...document.querySelectorAll("#help-content h3")].map((heading) => heading.textContent),
+		).toEqual(["General", "Admins", "Users"]);
+		expect(document.querySelectorAll("details.instui-toggle-details")).toHaveLength(
+			FAQS.reduce((total, group) => total + group.entries.length, 0),
+		);
+		for (const group of FAQS) {
+			const section = document.querySelector(
+				`[aria-labelledby="faq-${group.title.toLowerCase()}"]`,
+			)!;
+			expect(
+				[...section.querySelectorAll("details > summary")].map((summary) => summary.textContent),
+			).toEqual(group.entries.map(({ title }) => title));
+			for (const [index, details] of [...section.querySelectorAll("details")].entries()) {
+				expect(details.open).toBe(false);
+				expect(details.querySelector("div > p")?.textContent).toBe(group.entries[index]?.text);
+				details.querySelector("summary")!.click();
+				expect(details.open).toBe(true);
+				details.querySelector("summary")!.click();
+				expect(details.open).toBe(false);
+			}
+		}
 	});
 
 	it("includes the reported configuration errors and source-scoped client issues", () => {

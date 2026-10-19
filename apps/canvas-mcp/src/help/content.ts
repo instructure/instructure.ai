@@ -16,38 +16,53 @@ interface HelpEntry {
 	text: string;
 }
 
-export const FAQS: HelpEntry[] = [
+export const FAQS: { title: "General" | "Admins" | "Users"; entries: HelpEntry[] }[] = [
 	{
-		title: "What is Canvas MCP?",
-		text: "Canvas MCP lets an MCP-enabled client connect to Canvas tools. This guide helps administrators configure a Canvas developer key and users connect their client. The guide itself does not make requests to Canvas or Maple.",
+		title: "General",
+		entries: [
+			{
+				title: "What is Canvas MCP?",
+				text: "Canvas MCP lets an MCP-enabled client connect to Canvas tools. This guide helps administrators configure a Canvas developer key and users connect their client. The guide itself does not make requests to Canvas or Maple.",
+			},
+			{
+				title: "What does this guide store?",
+				text: "Setup preferences may be saved in this browser, and setup links include configuration such as the domain and Client ID. Client secrets and access tokens are never requested or stored. Review configuration before sharing a link.",
+			},
+			{
+				title: "What do the client statuses mean?",
+				text: "Verified presents the existing Validated client status. Untested means no validation status is recorded for that install mode. Known issue identifies an existing blocker or an explicitly incompatible key type. Statuses are recorded per install mode, not as separate tests of every key type; the table preserves recorded notes and dates.",
+			},
+		],
 	},
 	{
-		title: "Should I use personal or enterprise setup?",
-		text: "Personal setup configures your own client connection. Enterprise setup includes organization-managed configuration, permissions, or publication steps where documented. Each user still signs in with their own Canvas account.",
+		title: "Admins",
+		entries: [
+			{
+				title: "What do public and private keys mean?",
+				text: "These are OAuth client types, not the visibility of your Canvas content. Public clients use a Client ID without a client secret; private clients also use a secret. Follow the selected client's instructions, including any PKCE requirement.",
+			},
+			{
+				title: "Where do Client IDs, secrets, and callback URIs belong?",
+				text: "Enter the Canvas developer key Client ID in the setup guide. Register the client's exact callback URI in the key's Redirect URIs. Enter a private client secret only in your approved client configuration, never in this guide, a shared URL, or source control.",
+			},
+			{
+				title: "Is the developer-key scope list approved for production?",
+				text: "The scope manifest is still awaiting Product/Security release review. Scope copying remains disabled. Do not use the unreviewed list to create a production developer key.",
+			},
+		],
 	},
 	{
-		title: "What do public and private keys mean?",
-		text: "These are OAuth client types, not the visibility of your Canvas content. Public clients use a Client ID without a client secret; private clients also use a secret. Follow the selected client's instructions, including any PKCE requirement.",
-	},
-	{
-		title: "Which domain and region should I use?",
-		text: "Use your school's instructure.com domain, or its beta.instructure.com domain for beta. Use the region in the Maple audience automatically populated on the Canvas developer key. The MCP endpoint is region-specific.",
-	},
-	{
-		title: "Where do Client IDs, secrets, and callback URIs belong?",
-		text: "Enter the Canvas developer key Client ID in the setup guide. Register the client's exact callback URI in the key's Redirect URIs. Enter a private client secret only in your approved client configuration, never in this guide, a shared URL, or source control.",
-	},
-	{
-		title: "What does this guide store?",
-		text: "Setup preferences may be saved in this browser, and setup links include configuration such as the domain and Client ID. Client secrets and access tokens are never requested or stored. Review configuration before sharing a link.",
-	},
-	{
-		title: "What do the client statuses mean?",
-		text: "Verified presents the existing Validated client status. Untested means no validation status is recorded for that install mode. Known issue identifies an existing blocker or an explicitly incompatible key type. Statuses are recorded per install mode, not as separate tests of every key type; the table preserves recorded notes and dates.",
-	},
-	{
-		title: "Is the developer-key scope list approved for production?",
-		text: "The scope manifest is still awaiting Product/Security release review. Scope copying remains disabled. Do not use the unreviewed list to create a production developer key.",
+		title: "Users",
+		entries: [
+			{
+				title: "Should I use personal or enterprise setup?",
+				text: "Personal setup configures your own client connection. Enterprise setup includes organization-managed configuration, permissions, or publication steps where documented. Each user still signs in with their own Canvas account.",
+			},
+			{
+				title: "Which domain and region should I use?",
+				text: "Use your school's instructure.com domain, or its beta.instructure.com domain for beta. Use the region in the Maple audience automatically populated on the Canvas developer key. The MCP endpoint is region-specific.",
+			},
+		],
 	},
 ];
 
