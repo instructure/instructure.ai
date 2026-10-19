@@ -33,6 +33,8 @@ Client setup descriptions are intentionally generic where vendor-specific OAuth 
 
 ## Maintenance structure
 
+Guide paragraph text, list items, and link labels support inline code with backticks and bold with `**text**` (including code inside bold). Raw HTML is escaped, and `{token}` values remain literal text inside formatting. Titles, image alt text, and code blocks do not use this inline syntax.
+
 `src/app.ts` owns state, events and persistence. `src/page.ts` composes the page. Shared admin components live in `src/admin/config.ts`, `server-details.ts`, and `key-settings.ts`; `key-settings-model.ts` resolves client facts into the same Canvas fields in every guide.
 
 Each `src/clients/curated/<name>.ts` exports a typed definition with its own facts, evidence, supported install modes and guides. Add the definition to `clients/index.ts` and add a new ID to `clients/ids.ts` when needed. Existing Rulesync IDs remain accepted aliases. The IDE and CLI variants of Antigravity have separate evidence; CLI instructions must not be applied to the IDE.

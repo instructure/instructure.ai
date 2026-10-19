@@ -26,7 +26,7 @@ export type GuideStep =
 			kind: "provider" | "verify";
 			key?: "public" | "private";
 			audience?: "server" | "client";
-			title: string;
+			title?: string;
 			content: StructuredContent[];
 	  };
 export type ClientGuideStep = Exclude<GuideStep, { kind: "canvas-key" }>;

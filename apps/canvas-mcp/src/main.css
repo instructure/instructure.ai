@@ -299,10 +299,8 @@ pre {
 .guide-section {
     margin-top: 26px;
     padding-top: 22px;
-    border-top: 1px solid color-mix(in srgb, var(--instui-color-text-base) 18%, transparent);
 }
 
-.guide-section>p,
 .intro-copy {
     color: color-mix(in srgb, var(--instui-color-text-base) 62%, transparent);
     font-size: 14px;
@@ -466,18 +464,12 @@ pre {
 .shiki-block.language-prompt {
     border-color: transparent;
     background:
-        linear-gradient(
-                to right,
-                var(--instui-component-shared-tokens-background-ai-top-gradient-color) 0%,
-                var(--instui-component-shared-tokens-background-ai-bottom-gradient-color) 100%
-            )
-            padding-box,
-        linear-gradient(
-                to right,
-                var(--instui-component-shared-tokens-background-ai-bottom-gradient-color) 0%,
-                var(--instui-component-shared-tokens-background-ai-top-gradient-color) 100%
-            )
-            border-box;
+        linear-gradient(to right,
+            var(--instui-component-shared-tokens-background-ai-top-gradient-color) 0%,
+            var(--instui-component-shared-tokens-background-ai-bottom-gradient-color) 100%) padding-box,
+        linear-gradient(to right,
+            var(--instui-component-shared-tokens-background-ai-bottom-gradient-color) 0%,
+            var(--instui-component-shared-tokens-background-ai-top-gradient-color) 100%) border-box;
 }
 
 .scope-card {
@@ -722,6 +714,12 @@ pre {
 
 .print-context {
     display: none;
+}
+
+.content>section,
+.content>.guide-heading {
+    max-width: 75ch;
+    margin: 0 auto;
 }
 
 @media print {

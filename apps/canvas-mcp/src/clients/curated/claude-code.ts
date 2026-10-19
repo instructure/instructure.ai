@@ -28,6 +28,31 @@ const personalGuide: Guide = {
 			action: "create",
 		},
 		{
+			id: "intro",
+			kind: "verify",
+			content: [
+				{
+					kind: "paragraph",
+					text: 'Configuring claude code requires you to choose the configuration scope first. In the example below we use `local`, but you can select `user` or `project` depending on your needs.',
+				},
+			],
+		},
+		{
+			id: "provider-scopes",
+			kind: "provider",
+			title: "Choose the configuration scope",
+			content: [
+				{
+					kind: "list",
+					items: [
+						"**local**: private to you in this project.",
+						"**user**: private to you across projects.",
+						"**project**: shares the server configuration in .mcp.json; each user still authenticates individually.",
+					],
+				},
+			],
+		},
+		{
 			id: "provider-public",
 			kind: "provider",
 			title: "Register a public client",
@@ -55,11 +80,11 @@ const personalGuide: Guide = {
 		{
 			id: "provider-private",
 			kind: "provider",
-			title: "Private-key alternative",
+			title: "Register a private client",
 			content: [
 				{
 					kind: "paragraph",
-					text: "The --client-secret flag prompts for the secret. Enter it at the prompt so it is not included in command history.",
+					text: "The `--client-secret` flag prompts for the secret. Enter it at the prompt so it is not included in command history.",
 				},
 				{
 					kind: "code-group",
@@ -75,24 +100,19 @@ const personalGuide: Guide = {
 					},
 				},
 				screenshot(
-					"claude_code_mcp_add_command",
+					"claude_code_mcp_add_command_private",
 					"terminal after `claude mcp add-json ... canvas-mcp` with success output.",
 				),
 			],
 			key: "private",
 		},
 		{
-			id: "provider-scopes",
-			kind: "provider",
-			title: "Choose the configuration scope",
+			id: "added",
+			kind: "verify",
 			content: [
 				{
-					kind: "list",
-					items: [
-						"local: private to you in this project.",
-						"user: private to you across projects.",
-						"project: shares the server configuration in .mcp.json; each user still authenticates individually.",
-					],
+					kind: "paragraph",
+					text: 'After you run the initial command you should see a confirmation that the Canvas MCP has been added successfully.',
 				},
 			],
 		},
@@ -101,22 +121,51 @@ const personalGuide: Guide = {
 			kind: "provider",
 			title: "Validate and authenticate",
 			content: [
+        {
+          kind: "paragraph",
+          text: "Validate that the Canvas MCP has been added successfully by retrieving its details. Claude will return the active configuration and the status will show '! Needs authentication' until you sign in.",
+        },
 				{
 					kind: "code",
 					language: "bash",
 					text: "claude mcp get canvas-mcp",
 				},
+				screenshot(
+					"claude_code_mcp_get",
+					"terminal after `claude mcp get canvas-mcp` showing the MCP details.",
+				),
 				{
-					kind: "list",
-					items: [
-						"Start a new Claude Code session with claude. The server shows Needs authentication until you sign in.",
-						"Open /mcp, select canvas-mcp → Needs Auth, then sign in to Canvas in the browser and approve access.",
-					],
-				},
+					kind: "paragraph",
+          text: "Start a new Claude Code session with `claude`. The terminal shows that an MCP server needs authentication.",
+        },
+				screenshot(
+					"claude_code_needs_auth",
+					"terminal after starting a new Claude Code session showing the MCP needs authentication.",
+				),
+        {
+          kind: "paragraph",
+          text: "Open `/mcp`, select **canvas-mcp**.",
+        },
 				screenshot(
 					"claude_code_mcp_needs_auth",
-					'`/mcp` panel with canvas-mcp showing "Needs authentication".',
+					"`/mcp` panel with canvas-mcp showing \"Needs authentication\".",
 				),
+        {
+          kind: "paragraph",
+          text: "You will be taken to the mcp settings for the Canvas MCP in Claude.",
+        },
+        screenshot(
+          "claude_code_mcp_authorize",
+          "`/mcp` panel with canvas-mcp showing the authorization page.",
+        ),
+        {
+          kind: "paragraph",
+          text: "Selecting **Authenticate** will automatically open your default browser for Canvas sign-in and authorization. If you haven't allowed claude to open the browser, it will provide a copyable URL.",
+        },
+        {
+          kind: "paragraph",
+          text: "Canvas will present you with a modal to authorize the **MCP Test** server for your user account. You may be required to sign in to Canvas first if you are not already signed in.",
+        },
 				canvasAuthorizationScreenshot(),
 			],
 		},
@@ -127,9 +176,14 @@ const personalGuide: Guide = {
 			content: [
 				{
 					kind: "paragraph",
-					text: "Reopen /mcp to check the connection and ask Claude to list your Canvas courses.",
+					text: "After authenticating, you can close the browser tab and return to Claude. You should see an **Authentication successful** message.",
 				},
-				screenshot("claude_code_mcp_connected", "`/mcp` showing canvas-mcp connected with tools."),
+				screenshot("claude_code_mcp_connected", "terminal showing canvas-mcp connected with tools."),
+				{
+					kind: "paragraph",
+					text: "You're now connected to the Canvas MCP and ready to begin prompting. Try asking Claude to list your Canvas courses.",
+				},
+				screenshot("claude_code_mcp_list_courses", "terminal showing the list of Canvas courses."),
 			],
 		},
 	],

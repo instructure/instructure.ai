@@ -28,11 +28,28 @@ export const SCREENSHOT_MANIFEST: Record<string, ScreenshotAsset> = {
 	claude_code_doctor_managed_settings: { size: "terminal" },
 	claude_code_mcp_add_command: {
 		file: "images/client-claude_code-mcp_add_command.png",
-		size: { width: 759, height: 666 },
+		size: "terminal",
 	},
-	claude_code_mcp_connected: { size: "terminal" },
+	claude_code_mcp_authorize: {
+		file: "images/client-claude_code-authorize-mcp.png",
+		size: "terminal",
+	},
+	claude_code_mcp_get: {
+		file: "images/client-claude_code-get_mcp.png",
+		size: "terminal",
+	},
+	claude_code_needs_auth: {
+		file: "images/client-claude_code-needs-auth.png",
+		size: "terminal",
+	},
+	claude_code_mcp_add_command_private: { file:"images/client-claude_code-mcp_add_private_command.png",size: "terminal"},
+	claude_code_mcp_connected: { file: "images/client-claude_code-mcp_connected.png",size: "terminal" },
+	claude_code_mcp_list_courses: { file: "images/client-claude_code-list-courses.png",size: "terminal" },
 	claude_code_mcp_managed_section: { size: "terminal" },
-	claude_code_mcp_needs_auth: { size: "terminal" },
+	claude_code_mcp_needs_auth: {
+		file: "images/client-claude_code-start_auth.png",
+		size: "terminal",
+	},
 	claude_member_canvas_signin_consent: {},
 	claude_member_custom_connector_connect: {},
 	claude_personal_add_custom_connector_url: {},

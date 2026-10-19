@@ -15,6 +15,66 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 describe("composable client guides", () => {
+	it("supports inline code and bold in paragraphs, lists, and link labels", () => {
+		document.body.innerHTML = renderContent(
+			[
+				{ kind: "paragraph", text: "Open `/mcp`, then **Needs Auth** or **run `claude`**." },
+				{ kind: "list", items: ["Choose **Connect** for `canvas-mcp`."] },
+				{ kind: "link", label: "**Read** the `guide`", url: "https://example.test/" },
+			],
+			{},
+		);
+		expect(document.querySelector("p > code")?.textContent).toBe("/mcp");
+		expect(document.querySelector("p > strong")?.textContent).toBe("Needs Auth");
+		expect(document.querySelector("strong > code")?.textContent).toBe("claude");
+		expect(document.querySelector("li > strong")?.textContent).toBe("Connect");
+		expect(document.querySelector("li > code")?.textContent).toBe("canvas-mcp");
+		expect(document.querySelector("a > strong")?.textContent).toBe("Read");
+		expect(document.querySelector("a > code")?.textContent).toBe("guide");
+	});
+
+	it("escapes HTML and treats code contents and interpolated values as literal text", () => {
+		const value = '<img src=x onerror="bad()"> **not bold** `not code`';
+		document.body.innerHTML = renderContent(
+			[
+				{
+					kind: "paragraph",
+					text: "<script>bad()</script> **<b>safe</b>** `**literal** <em>code</em>` **`{clientId}`**",
+				},
+			],
+			{ clientId: value },
+		);
+		expect(document.querySelector("script, b, em, img")).toBeNull();
+		expect(document.querySelector("p > code")?.textContent).toBe("**literal** <em>code</em>");
+		const token = document.querySelector('[data-guide-token="clientId"]');
+		expect(token?.textContent).toBe(value);
+		expect(token?.children).toHaveLength(0);
+		expect(token?.parentElement?.tagName).toBe("CODE");
+		expect(token?.parentElement?.parentElement?.tagName).toBe("STRONG");
+	});
+
+	it("keeps unmatched inline markers literal and rejects unknown tokens", () => {
+		expect(renderContent([{ kind: "paragraph", text: "Plain `code and **bold" }], {})).toBe(
+			"<p>Plain `code and **bold</p>",
+		);
+		expect(() => renderContent([{ kind: "paragraph", text: "**`{missing}`**" }], {})).toThrow(
+			"Unknown guide token: missing",
+		);
+	});
+
+	it("renders the untitled Claude Code introduction as a paragraph without a heading", () => {
+		const state = readState("?client=claude-code", null);
+		document.body.innerHTML = renderGuide(clientDefinition(state.client), state, false);
+
+		const introduction = document.querySelector('[data-guide-step="intro"]');
+		expect(introduction?.querySelector("h3")).toBeNull();
+		expect(introduction?.firstElementChild?.tagName).toBe("P");
+		expect(introduction?.textContent).toContain("configuration scope first");
+		expect(document.querySelector('[data-guide-step="provider-scopes"] h3')?.textContent).toBe(
+			"Choose the configuration scope",
+		);
+	});
+
 	it("uses the shared Canvas authorization image in every available client sign-in flow", () => {
 		for (const client of CLIENTS)
 			for (const install of client.installModes)

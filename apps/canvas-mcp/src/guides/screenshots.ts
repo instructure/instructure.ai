@@ -2,7 +2,7 @@ import { SCREENSHOT_MANIFEST } from "./screenshot-manifest";
 import { type StructuredContent } from "./types";
 
 const standardSize = { width: 960, height: 540 } as const,
-	terminalSize = { width: 960, height: 360 } as const;
+	terminalSize = { width: 600, height: 360 } as const;
 
 export function screenshot(
 	name: string,
