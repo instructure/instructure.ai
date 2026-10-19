@@ -160,6 +160,7 @@ describe("Help content", () => {
 		document.body.innerHTML = renderHelp("issues");
 		const users = document.querySelector('[aria-labelledby="issue-users"]')!;
 		for (const title of [
+			"OAuth provider returned `invalid_target`",
 			"OAuth provider returned `invalid_scope`",
 			"redirect_uri does not match client settings",
 			"MCP server canvas-mcp already exists in local config",
@@ -182,6 +183,12 @@ describe("Help content", () => {
 		expect(users.textContent).toContain("https://sso.canvaslms.com/all-client-scopes");
 		expect(users.textContent).toContain("does not need to be reported to Instructure");
 		expect(users.textContent).toContain("unreviewed scope manifest");
+		expect(users.textContent).toContain(
+			"The+requested+resource+is+invalid,+missing,+unknown,+or+malformed.",
+		);
+		expect(users.textContent).toContain("Maple Allowed Audience");
+		expect(users.textContent).toContain("Do not remove or spoof the resource parameter");
+		expect(users.textContent).toContain("does not establish a Codex-wide root cause");
 		expect(document.querySelector('[aria-labelledby="issue-admins"]')?.textContent).not.toContain(
 			"redirect_uri does not match client settings",
 		);
