@@ -22,6 +22,43 @@ describe("Help navigation", () => {
 
 	afterEach(() => vi.unstubAllGlobals());
 
+	it.each(["faqs", "issues"])(
+		"expands all %s disclosures for printing and restores their state",
+		(section) => {
+			history.replaceState(null, "", `?page=help&help=${section}`);
+			mountApp("admin");
+			const details = [
+				...document.querySelectorAll<HTMLDetailsElement>("details.instui-toggle-details"),
+			];
+			expect(details.length).toBeGreaterThan(1);
+			details[0]!.open = true;
+			const original = details.map((entry) => entry.open);
+			globalThis.dispatchEvent(new Event("beforeprint"));
+			expect(details.every((entry) => entry.open)).toBe(true);
+			globalThis.dispatchEvent(new Event("beforeprint"));
+			globalThis.dispatchEvent(new Event("afterprint"));
+			expect(details.map((entry) => entry.open)).toEqual(original);
+			globalThis.dispatchEvent(new Event("afterprint"));
+			expect(details.map((entry) => entry.open)).toEqual(original);
+		},
+	);
+
+	it("cleans up print handlers when the same app root is mounted again", () => {
+		history.replaceState(null, "", "?page=help");
+		mountApp("admin");
+		const previous = document.querySelector<HTMLDetailsElement>("details")!;
+		globalThis.dispatchEvent(new Event("beforeprint"));
+		expect(previous.open).toBe(true);
+		mountApp("admin");
+		expect(previous.open).toBe(false);
+		const current = document.querySelector<HTMLDetailsElement>("details")!;
+		globalThis.dispatchEvent(new Event("beforeprint"));
+		expect(previous.open).toBe(false);
+		expect(current.open).toBe(true);
+		globalThis.dispatchEvent(new Event("afterprint"));
+		expect(current.open).toBe(false);
+	});
+
 	it("is always available after Connect and skips the disabled tab with the keyboard", () => {
 		mountApp("admin");
 		expect([...document.querySelectorAll("[role=tab]")].map((tab) => tab.textContent)).toEqual([

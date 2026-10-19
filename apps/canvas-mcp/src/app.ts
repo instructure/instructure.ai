@@ -20,6 +20,7 @@ import {
 	stateQuery,
 } from "./state";
 const mounts = new WeakMap<HTMLElement, symbol>();
+const printCleanups = new WeakMap<HTMLElement, () => void>();
 
 export function mountApp(mode: PageMode): void {
 	const root = document.querySelector<HTMLElement>("#root");
@@ -28,6 +29,8 @@ export function mountApp(mode: PageMode): void {
 	}
 	const appRoot = root,
 		state = readState(globalThis.location.search, getStorage());
+	printCleanups.get(appRoot)?.();
+	printCleanups.set(appRoot, bindPrintDetails(appRoot));
 	const mount = Symbol();
 	mounts.set(appRoot, mount);
 	let pageMode = pageModeFromQuery(globalThis.location.search) ?? mode;
@@ -314,6 +317,29 @@ export function mountApp(mode: PageMode): void {
 
 	render();
 	persist();
+}
+
+function bindPrintDetails(root: HTMLElement): () => void {
+	const closedDetails = new Set<HTMLDetailsElement>();
+	function expand(): void {
+		root
+			.querySelectorAll<HTMLDetailsElement>("details.instui-toggle-details:not([open])")
+			.forEach((details) => {
+				closedDetails.add(details);
+				details.open = true;
+			});
+	}
+	function restore(): void {
+		closedDetails.forEach((details) => (details.open = false));
+		closedDetails.clear();
+	}
+	globalThis.addEventListener("beforeprint", expand);
+	globalThis.addEventListener("afterprint", restore);
+	return () => {
+		globalThis.removeEventListener("beforeprint", expand);
+		globalThis.removeEventListener("afterprint", restore);
+		restore();
+	};
 }
 
 function updatePrintPageBreaks(root: HTMLElement): void {
