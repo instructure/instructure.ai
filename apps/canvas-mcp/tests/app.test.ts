@@ -381,7 +381,7 @@ describe("Canvas MCP pages", () => {
 			"Google · Antigravity",
 			"Google · Antigravity CLI",
 			"Google · Gemini CLI",
-			"Google · Gemini Enterprise",
+			"Google · Gemini Web / Desktop",
 			"Microsoft · Copilot Studio",
 			"OpenAI · ChatGPT",
 			"OpenAI · Codex",
