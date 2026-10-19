@@ -1,18 +1,16 @@
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import baseConfig from "@instructure.ai/shared-configs/vitest";
 import { mergeConfig } from "vitest/config";
 
-const __dir = path.dirname(fileURLToPath(import.meta.url));
-const __cdir = path.resolve(__dir, "coverage");
+const __cdir = path.resolve(import.meta.dirname, "coverage");
 
 export default mergeConfig(baseConfig, {
-  root: __dirname,
-  test: {
-    coverage: {
-      reportsDirectory: __cdir,
-    },
-    environment: "jsdom",
-    include: ["index.test.{ts,tsx}"],
-  },
+	root: import.meta.dirname,
+	test: {
+		coverage: {
+			reportsDirectory: __cdir,
+		},
+		environment: "jsdom",
+		include: ["index.test.{ts,tsx}"],
+	},
 });
