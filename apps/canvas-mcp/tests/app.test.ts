@@ -741,7 +741,8 @@ describe("Canvas MCP pages", () => {
 			"12345000000000001",
 		);
 		expect(document.querySelectorAll(".server-details-card input[readonly]")).toHaveLength(5);
-		expect(document.querySelector(".details-panel h2")?.textContent).toBe("Instructions");
+		expect(document.querySelector(".instructions-heading")).toBeNull();
+		expect(document.querySelector(".details-panel h2")?.textContent).toBe("Codex");
 		expect(document.querySelector(".details-panel h2")?.classList.contains("instui-heading")).toBe(
 			true,
 		);
