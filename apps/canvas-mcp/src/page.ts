@@ -20,6 +20,9 @@ export function renderPage(
 		status = clientStatus(client, state.install),
 		knownIssue = status.kind === "known-issue" ? status.reason : "",
 		isGeminiNotice = client.id === "gemini-cli" && Boolean(knownIssue),
+		enterpriseTransition =
+			pageMode === "admin" && client.id === "gemini-cli" && state.install === "enterprise",
+		hasNotice = Boolean(knownIssue) || enterpriseTransition,
 		hasValidDomain = Boolean(state.domain),
 		installLabel = client.installModes.length === 0 ? "install flow unverified" : state.install,
 		copiedLabel = "",
@@ -52,9 +55,10 @@ export function renderPage(
 						<section id="setup-panel" class="panel" role="tabpanel" aria-labelledby="${pageMode === "user" ? "tab-connect" : "tab-admin"}">
 					<div class="workspace-grid${pageMode === "admin" ? "" : " workspace-grid--single"} --mt-xl">
 						${pageMode === "admin" ? renderConfig(state, domainInputValue) : ""}
-						${knownIssue ? `<div class="instructions-column"><div class="instui-alert -color-danger -inline known-issue-alert${isGeminiNotice ? " gemini-deprecation-notice" : ""}" role="alert"><b>Known issue:</b> ${escapeHtml(knownIssue)}${status.kind === "known-issue" && status.diagnostic ? renderContent([{ kind: "code", language: "text", text: status.diagnostic }], {}, state.platform) : ""}</div>` : ""}
+						${knownIssue ? `<div class="instructions-column"><div class="instui-alert -color-danger -inline known-issue-alert${isGeminiNotice ? " gemini-deprecation-notice" : ""}" role="alert"><b>Known issue:</b> ${escapeHtml(knownIssue)}${isGeminiNotice ? ' <a href="https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/" target="_blank" rel="noopener noreferrer">Read Google\'s announcement</a>.' : ""}${status.kind === "known-issue" && status.diagnostic ? renderContent([{ kind: "code", language: "text", text: status.diagnostic }], {}, state.platform) : ""}</div>` : ""}
+						${enterpriseTransition ? `<div class="instructions-column"><div class="instui-alert -color-warning -inline gemini-deprecation-notice" role="status"><b>Transition to Antigravity CLI:</b> Google is consolidating development around Antigravity, but Gemini Code Assist Standard or Enterprise access remains unchanged and supported. Administrators can evaluate Antigravity CLI with Google Cloud projects; feature parity is not yet complete. <a href="https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/" target="_blank" rel="noopener noreferrer">Read Google's announcement</a>.</div>` : ""}
 						<section class="instui-card -variant-base details-panel" ><div class="content">${pageMode === "user" && connectionReadiness(state, client).blocked && status.kind !== "known-issue" ? `<p class="instui-alert -color-warning -inline" role="status">${escapeHtml(connectionReadiness(state, client).reason)}</p>` : ""}${renderGuide(client, state, pageMode === "admin", callback)}</div></section>
-						${knownIssue ? "</div>" : ""}
+						${hasNotice ? "</div>" : ""}
 					</div>
 					<footer class="page-footer"><p>Copyright &copy; ${new Date().getFullYear()} Instructure, Inc.</p><p class="print-context">${escapeHtml(client.name)} · ${escapeHtml(installLabel)} · ${new Date().toISOString().slice(0, 10)}<br /><span class="print-permalink">${escapeHtml("/canvas-mcp/?" + new URLSearchParams({ domain: state.domain, client: state.client, key: state.key, ...(client.installModes.length ? { install: state.install } : {}), platform: state.platform, region: state.region, clientId: state.clientId, ...(client.id === "generic" && state.redirectUris ? { redirectUris: state.redirectUris } : {}), page: pageMode === "admin" ? "admin" : "connect" }).toString())}</span></p></footer>
 					</section>

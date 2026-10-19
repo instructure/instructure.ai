@@ -1,5 +1,6 @@
 import { clientDefinition, normalizeInstall, normalizeKeyType } from "./clients";
 import { type ClientDefinition } from "./clients/types";
+import { clientStatus } from "./clients/status";
 import { type AppState, normalizeCanvasDomain, normalizeRedirectUris } from "./state";
 
 export function normalizeSetup(state: AppState): void {
@@ -14,6 +15,8 @@ export function connectionReadiness(
 ): { ready: boolean; reason: string; blocked?: boolean } {
 	const facts = client.facts;
 	if (client.blocker) return { ready: false, blocked: true, reason: client.blocker.reason };
+	const status = clientStatus(client, state.install);
+	if (status.kind === "known-issue") return { ready: false, blocked: true, reason: status.reason };
 	if (facts.remoteHttp.value === "no")
 		return {
 			ready: false,

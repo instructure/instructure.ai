@@ -11,6 +11,24 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 describe("updated curated guidance", () => {
+	it.each(["public", "private"])(
+		"blocks direct personal Gemini CLI client links for %s keys",
+		(key) => {
+			history.replaceState(
+				null,
+				"",
+				`?client=gemini-cli&install=personal&key=${key}&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=connect`,
+			);
+			mountApp("user");
+			expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("admin");
+			expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+			expect(
+				document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")?.disabled,
+			).toBe(true);
+			expect(document.querySelector("#client-id-input")).not.toBeNull();
+		},
+	);
+
 	it.each([
 		["personal", "public"],
 		["personal", "private"],
@@ -396,7 +414,9 @@ describe("updated curated guidance", () => {
 			expect(document.querySelector('[data-guide-step="client-enterprise"]')).toBeNull();
 			expect(
 				document.querySelector(`[data-guide-step="provider-register-${key}"] [data-copy]`),
-			).not.toBeNull();
+			).toBeNull();
+			expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+			expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("admin");
 			expect(new URLSearchParams(location.search).get("install")).toBe("personal");
 		},
 	);
@@ -412,7 +432,7 @@ describe("updated curated guidance", () => {
 		).toBe(true);
 	});
 
-	it("shows Gemini CLI's known issue only for personal installs on both pages", () => {
+	it("shows Gemini CLI's personal error and enterprise admin transition warning", () => {
 		history.replaceState(
 			null,
 			"",
@@ -421,11 +441,19 @@ describe("updated curated guidance", () => {
 		mountApp("admin");
 		const notice = () => document.querySelector(".gemini-deprecation-notice");
 		expect(notice()?.textContent).toBe(
-			"Known issue: Gemini CLI was replaced by Antigravity CLI for unpaid-tier and Google One users on June 18, 2026. Use Antigravity CLI unless your account is eligible for Gemini CLI Enterprise.",
+			"Known issue: Gemini CLI was replaced by Antigravity CLI for unpaid-tier and Google One users on June 18, 2026. Use Antigravity CLI. Read Google's announcement.",
+		);
+		expect(notice()?.textContent).not.toContain("Enterprise");
+		expect(notice()?.querySelector("a")?.href).toBe(
+			"https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/",
 		);
 		expect(notice()?.classList.contains("-color-danger")).toBe(true);
 		expect(notice()?.classList.contains("-color-warning")).toBe(false);
 		expect(notice()?.getAttribute("role")).toBe("alert");
+		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+		expect(
+			document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")?.disabled,
+		).toBe(true);
 		expect(document.querySelector(".client-status-pill")?.textContent).toBe("Known issue");
 		expect(notice()?.closest(".details-panel")).toBeNull();
 		expect(notice()?.nextElementSibling?.classList.contains("details-panel")).toBe(true);
@@ -439,9 +467,21 @@ describe("updated curated guidance", () => {
 		const enterprise = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
 		enterprise.checked = true;
 		enterprise.dispatchEvent(new Event("change", { bubbles: true }));
-		expect(notice()).toBeNull();
+		expect(notice()?.classList.contains("-color-warning")).toBe(true);
+		expect(notice()?.classList.contains("-color-danger")).toBe(false);
+		expect(notice()?.getAttribute("role")).toBe("status");
+		expect(notice()?.textContent).toContain("access remains unchanged");
+		expect(notice()?.textContent).toContain("Gemini Code Assist Standard or Enterprise");
+		expect(notice()?.textContent?.split(/\s+/u).length).toBeLessThanOrEqual(50);
+		expect(notice()?.textContent).toContain("feature parity is not yet complete");
+		expect(notice()?.querySelector("a")?.href).toBe(
+			"https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/",
+		);
+		expect(notice()?.nextElementSibling?.classList.contains("details-panel")).toBe(true);
+		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(false);
 		expect(document.querySelector(".client-status-pill")?.textContent).toBe("Untested");
 		document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
+		expect(notice()).toBeNull();
 		expect(document.querySelector(".known-issue-alert")).toBeNull();
 		expect(document.querySelector(".instructions-column")).toBeNull();
 		expect(document.querySelector(".client-status-pill")).toBeNull();
