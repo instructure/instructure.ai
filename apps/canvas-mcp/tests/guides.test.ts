@@ -13,7 +13,10 @@ beforeEach(() => {
 	history.replaceState(null, "", "/canvas-mcp/");
 	document.body.innerHTML = '<div id="root"></div>';
 });
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => {
+	vi.unstubAllGlobals();
+	vi.unstubAllEnvs();
+});
 describe("composable client guides", () => {
 	it("supports inline code and bold in paragraphs, lists, and link labels", () => {
 		document.body.innerHTML = renderContent(
@@ -133,6 +136,25 @@ describe("composable client guides", () => {
 		expect(renderContent([terminal], {})).toContain(
 			"https://placehold.co/960x360/png?text=claude_code_mcp_needs_auth",
 		);
+	});
+
+	it("hides placeholder images in production unless the dev query flag is present", () => {
+		vi.stubEnv("DEV", false);
+		const placeholder = screenshot("chatgpt_plugins_add_custom_mcp", "Add a custom MCP server.");
+		document.body.innerHTML = renderContent(
+			[{ kind: "paragraph", text: "Run the setup command." }, placeholder],
+			{},
+		);
+		expect(document.body.textContent).toContain("Run the setup command.");
+		expect(document.querySelector(".guide-screenshot")).toBeNull();
+
+		for (const search of ["?dev", "?client=claude-code&dev"]) {
+			history.replaceState(null, "", `/canvas-mcp/${search}`);
+			document.body.innerHTML = renderContent([placeholder], {});
+			expect(
+				document.querySelector<HTMLImageElement>(".guide-screenshot")?.dataset.placeholder,
+			).toBe("true");
+		}
 	});
 
 	it("uses the captured Claude Code registration image at its native aspect ratio", () => {

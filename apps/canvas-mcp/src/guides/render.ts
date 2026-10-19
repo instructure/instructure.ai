@@ -75,6 +75,8 @@ export function renderContent(
 			if (!Object.hasOwn(values, token)) throw new Error(`Unknown guide token: ${token}`);
 			return `<span data-guide-token="${token}">${escapeHtml(values[token])}</span>`;
 		});
+	const showPlaceholders =
+		import.meta.env.DEV || new URLSearchParams(globalThis.location.search).has("dev");
 	return content
 		.map((block) => {
 			switch (block.kind) {
@@ -89,6 +91,7 @@ export function renderContent(
 				case "list":
 					return `<ol class="instui-list -ordered">${block.items.map((item) => `<li>${text(item)}</li>`).join("")}</ol>`;
 				case "image": {
+					if (block.placeholder && !showPlaceholders) return "";
 					if (!Number.isInteger(block.width) || block.width <= 0)
 						throw new Error("Guide image width must be a positive integer");
 					if (!Number.isInteger(block.height) || block.height <= 0)

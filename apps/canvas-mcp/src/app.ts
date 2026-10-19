@@ -302,6 +302,7 @@ function pageModeFromQuery(search: string): PageMode | null {
 function pageQuery(state: AppState, pageMode: PageMode): string {
 	const params = new URLSearchParams(stateQuery(state));
 	params.set("page", pageMode === "admin" ? "admin" : "connect");
+	if (new URLSearchParams(globalThis.location.search).has("dev")) params.set("dev", "");
 	return params.toString();
 }
 
