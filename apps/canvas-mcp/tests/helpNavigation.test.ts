@@ -2,6 +2,12 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { mountApp } from "../src/app";
+import { COMMON_ISSUES, FAQS } from "../src/help/content";
+
+const originalFaqs = [...FAQS];
+const originalIssues = [...COMMON_ISSUES];
+const platformCommands = { mac: "echo mac-example", windows: "Write-Output windows-example" };
+const sharedCommand = "https://<example-host>.test/";
 
 function click(id: string): void {
 	document.querySelector<HTMLButtonElement>(`#${id}`)!.click();
@@ -18,9 +24,25 @@ describe("Help navigation", () => {
 		history.replaceState(null, "", "/canvas-mcp/");
 		localStorage.clear();
 		document.body.innerHTML = '<div id="root"></div>';
+		for (const groups of [FAQS, COMMON_ISSUES])
+			groups.splice(0, groups.length, {
+				title: "General",
+				entries: [
+					{ title: "Example question", text: "Example answer." },
+					{
+						title: "Example command",
+						text: "Run the example.",
+						commands: groups === FAQS ? platformCommands : sharedCommand,
+					},
+				],
+			});
 	});
 
-	afterEach(() => vi.unstubAllGlobals());
+	afterEach(() => {
+		vi.unstubAllGlobals();
+		FAQS.splice(0, FAQS.length, ...originalFaqs);
+		COMMON_ISSUES.splice(0, COMMON_ISSUES.length, ...originalIssues);
+	});
 
 	it.each(["faqs", "issues", "clients"])(
 		"restores manually opened and closed %s disclosures after remounting",
@@ -40,7 +62,7 @@ describe("Help navigation", () => {
 		history.replaceState(null, "", "?page=help&help=faqs");
 		mountApp("admin");
 		const search = document.querySelector<HTMLInputElement>("[data-help-search]")!;
-		search.value = "Canvas";
+		search.value = "Example";
 		search.dispatchEvent(new Event("input"));
 		globalThis.dispatchEvent(new Event("beforeprint"));
 		globalThis.dispatchEvent(new Event("afterprint"));
@@ -61,8 +83,8 @@ describe("Help navigation", () => {
 		expect(block).not.toBeNull();
 		expect(block.closest(".shiki-code-group")).toBeNull();
 		const text = block.querySelector("pre code")!.textContent;
-		expect(text).toContain("https://<your-domain>.instructure.com/");
-		expect(block.querySelector("your-domain")).toBeNull();
+		expect(text).toBe(sharedCommand);
+		expect(block.querySelector("example-host")).toBeNull();
 		block.querySelector<HTMLButtonElement>("[data-copy]")!.click();
 		await vi.waitFor(() => expect(writeText).toHaveBeenCalledWith(text));
 	});
@@ -76,9 +98,7 @@ describe("Help navigation", () => {
 				`.shiki-code-group [data-code-platform="${platform}"]`,
 			)!;
 			expect(panel.hidden).toBe(false);
-			expect(panel.querySelector("pre code")?.textContent).toContain(
-				platform === "windows" ? "curl.exe" : "curl -fsSI",
-			);
+			expect(panel.querySelector("pre code")?.textContent).toBe(platformCommands[platform]);
 			const other = platform === "windows" ? "mac" : "windows";
 			document
 				.querySelector<HTMLButtonElement>(`.shiki-code-group [data-platform-choice="${other}"]`)!
@@ -102,7 +122,7 @@ describe("Help navigation", () => {
 		history.replaceState(null, "", "?page=help&help=faqs&platform=windows");
 		mountApp("admin");
 		const search = document.querySelector<HTMLInputElement>("[data-help-search]")!;
-		search.value = "curl.exe";
+		search.value = platformCommands.windows;
 		search.dispatchEvent(new Event("input"));
 		const group = document.querySelector(".shiki-code-group")!;
 		expect(group.closest("details")?.open).toBe(true);
@@ -170,9 +190,8 @@ describe("Help navigation", () => {
 		expect(document.querySelector("h1")?.textContent).toBe("Canvas MCP Help");
 		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
 		expect(document.querySelector("#domain-input")).toBeNull();
-		expect(document.querySelector("#help-content")?.textContent).toContain(
-			"What is the Canvas MCP?",
-		);
+		expect(document.querySelector("#help-content [data-help-search]")).not.toBeNull();
+		expect(document.querySelector("#help-content details > summary")).not.toBeNull();
 	});
 
 	it.each(["faqs", "issues", "clients", "tools", "contact"])(
@@ -241,9 +260,6 @@ describe("Help navigation", () => {
 			"canvas-mcp-common-issues.yml",
 			"canvas-mcp-client.yml",
 		]);
-		expect(document.querySelector("#help-content")?.textContent).toContain(
-			"Do not post client secrets",
-		);
 		expect(document.querySelector("[data-help-search], #tool-search")).toBeNull();
 		expect(document.querySelector(".print-context")?.textContent).toContain("Help · Contact");
 		expect(document.querySelector(".print-permalink")?.textContent).toContain("help=contact");

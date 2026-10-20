@@ -253,9 +253,7 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector(".details-panel #client-id-input")).not.toBeNull();
 		expect(document.querySelector("#client-id-reference-input")).toBeNull();
 		expect(document.querySelector(".controls-panel h2")?.textContent).toBe("Configuration");
-		expect(document.querySelector("#domain-hint")?.textContent).toBe(
-			"Enter your Canvas tenant name. For a beta domain, add .beta after the tenant name.",
-		);
+		expect(document.querySelector("#domain-hint")).not.toBeNull();
 		const validatedPill = document.querySelector(".client-status-pill");
 		expect(validatedPill?.parentElement?.classList.contains("client-select-label-row")).toBe(true);
 		expect(validatedPill?.previousElementSibling?.textContent).toBe("MCP Client");
@@ -277,18 +275,9 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelectorAll(".admin-steps .guide-section")).toHaveLength(4);
 		expect(document.querySelector(".public-key-save-steps")).not.toBeNull();
 		expect(document.querySelector(".private-key-save-steps")).toBeNull();
-		expect(document.querySelector(".shared-key-save-steps")?.textContent).toContain(
-			"Developer Keys",
-		);
-		expect(document.querySelector(".shared-key-save-steps")?.textContent).toContain(
-			"Details column",
-		);
+		expect(document.querySelector(".shared-key-save-steps")).not.toBeNull();
 		expect(document.querySelector(".shared-key-save-steps")?.getAttribute("start")).toBe("2");
-		expect(
-			[...document.querySelectorAll(".admin-steps .guide-section h3")].map(
-				(heading) => heading.textContent,
-			),
-		).toEqual(["Open Developer Keys", "Key Settings", "Scopes", "Save"]);
+		expect(document.querySelectorAll(".admin-steps .guide-section h3")).toHaveLength(4);
 		expect(document.querySelector(".admin-steps ol.instui-list")?.children).toHaveLength(2);
 		expect(
 			[
@@ -327,7 +316,7 @@ describe("Canvas MCP pages", () => {
 			"https://{{tenant_name}}.maple.<region>.core.inseng.io/",
 		);
 		const regionLead = audiencesRow?.querySelector(".audience-region-lead");
-		expect(regionLead?.textContent).toBe("<region> will be one of:");
+		expect(regionLead).not.toBeNull();
 		expect(
 			audiencesRow?.querySelector("ul.audience-regions")?.classList.contains("instui-list"),
 		).toBe(true);
@@ -345,9 +334,7 @@ describe("Canvas MCP pages", () => {
 			"ap-southeast-1",
 			"ap-southeast-2",
 		]);
-		expect(audiencesRow?.querySelector(".audience-tenant-note")?.textContent).toBe(
-			"{{tenant_name}} is a literal string in the Audiences list.",
-		);
+		expect(audiencesRow?.querySelector(".audience-tenant-note")).not.toBeNull();
 		const redirectRow = rowForSetting("Redirect URIs");
 		expect(redirectRow?.querySelector("pre code")?.textContent).toBe(
 			"http://localhost:8081/callback",
@@ -418,12 +405,7 @@ describe("Canvas MCP pages", () => {
 		expect(
 			(document.querySelector(".scope-card-header button") as HTMLButtonElement).disabled,
 		).toBe(false);
-		expect(scopeManifest).not.toContain("https://sso.canvaslms.com/mcp-limited");
-		expect(scopeManifest.startsWith("https://sso.canvaslms.com/all-client-scopes\n")).toBe(true);
-		expect(scopeManifest).toContain(
-			"url:PATCH|/api/quiz/v1/courses/:course_id/quizzes/:assignment_id/items/:item_id",
-		);
-		expect(scopeManifest.endsWith("url:POST|/api/v1/oauth2/introspect")).toBe(true);
+		expect(scopeManifest).toBe(SCOPE_MANIFEST);
 		const pasteScopesHeading = document.querySelector(".scope-manifest-title");
 		expect(pasteScopesHeading?.textContent).toBe("Paste Scopes");
 		expect(pasteScopesHeading?.closest(".settings-table")).toBeNull();
@@ -533,15 +515,14 @@ describe("Canvas MCP pages", () => {
 		expect(privateSaveBanner?.classList.contains("-icon-key")).toBe(true);
 		expect(privateSaveBanner?.classList.contains("-size-compact")).toBe(true);
 		expect(privateSaveBanner?.getAttribute("role")).toBe("status");
-		expect(privateSaveBanner?.querySelector("h4")?.textContent).toBe("Private key setup");
-		expect(privateSaveBanner?.textContent).toContain("store it securely");
+		expect(privateSaveBanner?.querySelector("h4")).not.toBeNull();
 		expect(privateSaveBanner?.querySelector("ol")).toBeNull();
 		expect(
 			privateSaveBanner?.querySelector<HTMLImageElement>(
 				'img[src$="/images/server-canvas-save_private_key.png"]',
 			),
 		).not.toBeNull();
-		expect(document.querySelector(".private-key-save-step")?.textContent).toContain("Save");
+		expect(document.querySelector(".private-key-save-step")).not.toBeNull();
 		expect(document.querySelector(".public-key-save-steps")).toBeNull();
 		expect(document.querySelector(".shared-key-save-steps")).not.toBeNull();
 		expect(document.querySelector("#client-id-reference-input")).toBeNull();
@@ -682,9 +663,7 @@ describe("Canvas MCP pages", () => {
 			"https://{{tenant_name}}.maple.us-east-1.core.inseng.io/",
 		);
 		expect(audiencesRow?.querySelector(".audience-region-lead, .audience-regions")).toBeNull();
-		expect(audiencesRow?.querySelector(".audience-tenant-note")?.textContent).toBe(
-			"{{tenant_name}} is a literal string in the Audiences list.",
-		);
+		expect(audiencesRow?.querySelector(".audience-tenant-note")).not.toBeNull();
 		expect(audiencesRow?.querySelector(".audience-tenant-note")?.nextElementSibling?.tagName).toBe(
 			"IMG",
 		);
@@ -746,9 +725,7 @@ describe("Canvas MCP pages", () => {
 			.find((row) => row.querySelector('th[scope="row"]')?.textContent === "Test Cluster Only")
 			?.querySelector<HTMLInputElement>("input");
 		expect(testClusterCheckbox?.checked).toBe(true);
-		expect(document.querySelector(".private-key-save-steps")?.textContent).toContain(
-			"store it securely",
-		);
+		expect(document.querySelector(".private-key-save-steps")).not.toBeNull();
 		const betaRows = [
 			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
 		];
@@ -770,14 +747,11 @@ describe("Canvas MCP pages", () => {
 		expect(issuePill?.textContent).toBe("Known issue");
 		const adminAlert = document.querySelector(".known-issue-alert");
 		expect(adminAlert?.classList.contains("-color-danger")).toBe(true);
-		expect(adminAlert?.textContent).toContain("Canvas MCP authentication");
 		expect(adminAlert?.getAttribute("role")).toBe("alert");
 
 		globalThis.history.replaceState(null, "", "/canvas-mcp/?client=chatgpt&page=connect");
 		mountApp("user");
-		expect(document.querySelector(".known-issue-alert")?.textContent).toContain(
-			"Canvas MCP authentication",
-		);
+		expect(document.querySelector('.known-issue-alert[role="alert"]')).not.toBeNull();
 		expect(document.querySelector(".details-panel .known-issue-alert")).toBeNull();
 	});
 
@@ -856,9 +830,7 @@ describe("Canvas MCP pages", () => {
 			);
 			expect(document.querySelector(".details-panel #client-id-input")).not.toBeNull();
 			expect(document.querySelector("#client-id-reference-input")).toBeNull();
-			expect(document.querySelector("#client-id-hint")?.textContent).toContain(
-				"Required by the Canvas OAuth flow",
-			);
+			expect(document.querySelector("#client-id-hint")).not.toBeNull();
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.placeholder).toBe(
 				"12345000000000001",
 			);

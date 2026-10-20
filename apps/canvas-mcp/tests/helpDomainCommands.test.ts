@@ -32,17 +32,24 @@ curl() {
 }
 
 describe("Help domain and region commands", () => {
-	it.each(["bash", "zsh"])("supports prompting and lookup in %s", (shell) => {
-		const result = runLookup(
-			"canvas.valpo.edu",
-			`${policy}\nx-canvas-meta: q=1;z=us-west-2b;`,
-			0,
-			shell,
+	for (const shell of ["bash", "zsh"]) {
+		const { error } = spawnSync(shell, ["--version"]);
+		it.skipIf(error && "code" in error && error.code === "ENOENT")(
+			`supports prompting and lookup in ${shell}`,
+			() => {
+				const result = runLookup(
+					"canvas.valpo.edu",
+					`${policy}\nx-canvas-meta: q=1;z=us-west-2b;`,
+					0,
+					shell,
+				);
+				expect(result.error).toBeUndefined();
+				expect(result.stderr).toBe("Canvas hostname: ");
+				expect(result.status).toBe(0);
+				expect(result.stdout).toBe("valpo.instructure.com\nus-west-2\n");
+			},
 		);
-		expect(result.stderr).toBe("Canvas hostname: ");
-		expect(result.status).toBe(0);
-		expect(result.stdout).toBe("valpo.instructure.com\nus-west-2\n");
-	});
+	}
 
 	it.each(["canvas.valpo.edu", "valpo.instructure.com", "VALPO.INSTRUCTURE.COM."])(
 		"prints exactly the hostname and region for %s",

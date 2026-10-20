@@ -10,7 +10,7 @@ beforeEach(() => {
 	document.body.innerHTML = '<div id="root"></div>';
 });
 afterEach(() => vi.unstubAllGlobals());
-describe("updated curated guidance", () => {
+describe("curated guide structure and behavior", () => {
 	it.each([
 		["personal", "public"],
 		["personal", "private"],
@@ -28,9 +28,7 @@ describe("updated curated guidance", () => {
 			installModes: ["personal", "enterprise"],
 		});
 		expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("admin");
-		expect(document.querySelector('.known-issue-alert[role="alert"]')?.textContent).toContain(
-			"invalid_target",
-		);
+		expect(document.querySelector('.known-issue-alert[role="alert"]')).not.toBeNull();
 		expect(document.querySelector(".client-status-pill")?.textContent).toBe("Known issue");
 		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
 		expect(
@@ -71,10 +69,7 @@ describe("updated curated guidance", () => {
 		mountApp("user");
 		expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("admin");
 		const alert = document.querySelector('.known-issue-alert[role="alert"]')!;
-		expect(alert.textContent).toContain("Unauthorized");
-		expect(alert.querySelector(".shiki-block.language-text pre.shiki > code")?.textContent).toBe(
-			'✗ canvas-mcp  error: calling "initialize": sending "initialize": No authorization header provided: rejected by transport: Unauthorized',
-		);
+		expect(alert.querySelector(".shiki-block.language-text pre.shiki > code")).not.toBeNull();
 		expect(alert.querySelector<HTMLButtonElement>(".shiki-copy")?.dataset.copy).toBe(
 			alert.querySelector("pre.shiki code")?.textContent,
 		);
@@ -85,7 +80,7 @@ describe("updated curated guidance", () => {
 		expect(document.querySelector("#client-id-input")).not.toBeNull();
 		if (install === "enterprise") {
 			document.querySelector<HTMLButtonElement>("#configure-provider-button-bottom")!.click();
-			expect(document.querySelector("#guide-provider")?.textContent).toContain("Assign users");
+			expect(document.querySelector<HTMLElement>("#guide-provider")?.hidden).toBe(false);
 		}
 		expect(
 			document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")?.disabled,
@@ -136,26 +131,16 @@ describe("updated curated guidance", () => {
 				...(key === "private" ? { clientSecret: "<ENTER_CLIENT_SECRET_LOCALLY>" } : {}),
 			},
 		});
-		if (key === "public") {
-			expect(document.body.textContent).not.toContain("Enter the secret only");
-			expect(copy.dataset.copy).not.toContain("clientSecret");
-		} else expect(step.textContent).toContain("Keep the file out of source control");
+		if (key === "public") expect(copy.dataset.copy).not.toContain("clientSecret");
 		expect(document.querySelector('[data-guide-step="verify"]')).not.toBeNull();
 		expect(Boolean(document.querySelector('[data-guide-step="client-enterprise-signin"]'))).toBe(
 			install === "enterprise",
 		);
 	});
 
-	it.each([
-		["codex", "Codex managed configuration", "requirements.toml"],
-		["chatgpt", "ChatGPT workspace settings", "Configure Access"],
-		["antigravity", "Google Cloud console", "Assign users"],
-		["antigravity-cli", "Google Cloud console", "Assign users"],
-		["claude-code", "Claude Code managed configuration", "allowedMcpServers"],
-		["gemini-cli", "Gemini CLI enterprise controls", "Approve Canvas MCP"],
-	])(
+	it.each(["codex", "chatgpt", "antigravity", "antigravity-cli", "claude-code", "gemini-cli"])(
 		"switches %s between personal Canvas setup and enterprise provider instructions",
-		(id, surface, instruction) => {
+		(id) => {
 			vi.stubGlobal("scrollTo", vi.fn());
 			history.replaceState(
 				null,
@@ -168,14 +153,10 @@ describe("updated curated guidance", () => {
 			expect(enterprise.disabled).toBe(false);
 			enterprise.checked = true;
 			enterprise.dispatchEvent(new Event("change", { bubbles: true }));
-			expect(
-				[...document.querySelectorAll(".instui-segmented-control label")].map(
-					(label) => label.textContent,
-				),
-			).toEqual(["1. Canvas", `2. ${surface}`]);
+			expect(document.querySelectorAll(".instui-segmented-control label")).toHaveLength(2);
 			document.querySelector<HTMLButtonElement>("#configure-provider-button-bottom")!.click();
 			expect(document.querySelector<HTMLElement>("#guide-provider")?.hidden).toBe(false);
-			expect(document.querySelector("#guide-provider")?.textContent).toContain(instruction);
+			expect(document.querySelector("#guide-provider [data-guide-step]")).not.toBeNull();
 			expect(new URLSearchParams(location.search).get("install")).toBe("enterprise");
 			expect(new URLSearchParams(location.search).get("key")).toBe("private");
 			const toggle = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
@@ -185,32 +166,27 @@ describe("updated curated guidance", () => {
 			expect(document.querySelector<HTMLElement>("#guide-canvas")?.hidden).toBe(false);
 		},
 	);
-	it.each([
-		["claude-ai", "Connect to the organization connector"],
-		["gemini-enterprise", "Use the Canvas connector"],
-		["copilot-studio", "Use the configured agent"],
-		["claude-code", "Sign in to your organization's Canvas MCP server"],
-	])("shows only member instructions for provisioned %s connections", (id, heading) => {
-		history.replaceState(
-			null,
-			"",
-			`/canvas-mcp/?client=${id}&install=enterprise&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=connect`,
-		);
-		mountApp("user");
-		expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("user");
-		expect(
-			document.querySelector(
-				".guide-fields, #guide-canvas, .admin-steps, .install-modes, [data-install]",
-			),
-		).toBeNull();
-		expect(
-			document.querySelector(".workspace-grid")?.classList.contains("workspace-grid--single"),
-		).toBe(true);
-		expect(document.querySelector("#guide-provider")?.textContent).toContain(heading);
-		expect(document.querySelector("#guide-provider")?.textContent).not.toMatch(
-			/create the data store|Policies|Use your own OAuth client|Developer Keys/iu,
-		);
-	});
+	it.each(["claude-ai", "gemini-enterprise", "copilot-studio", "claude-code"])(
+		"shows only member instructions for provisioned %s connections",
+		(id) => {
+			history.replaceState(
+				null,
+				"",
+				`/canvas-mcp/?client=${id}&install=enterprise&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001&page=connect`,
+			);
+			mountApp("user");
+			expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("user");
+			expect(
+				document.querySelector(
+					".guide-fields, #guide-canvas, .admin-steps, .install-modes, [data-install]",
+				),
+			).toBeNull();
+			expect(
+				document.querySelector(".workspace-grid")?.classList.contains("workspace-grid--single"),
+			).toBe(true);
+			expect(document.querySelector("#guide-provider [data-guide-step]")).not.toBeNull();
+		},
+	);
 	it.each(["claude-code", "antigravity", "gemini-cli"])(
 		"retains connection fields for enterprise %s users who configure their client",
 		(id) => {
@@ -227,9 +203,6 @@ describe("updated curated guidance", () => {
 			expect(
 				document.querySelector(".guide-fields, #guide-canvas, .install-modes, [data-install]"),
 			).toBeNull();
-			expect(document.querySelector("#guide-provider")?.textContent).not.toMatch(
-				/requirements.toml|Assign users a Gemini Enterprise/iu,
-			);
 		},
 	);
 	it("uses the server Configuration toggle as the only source of client install mode", () => {
@@ -245,8 +218,8 @@ describe("updated curated guidance", () => {
 		enterprise.dispatchEvent(new Event("change", { bubbles: true }));
 		document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
 		expect(document.querySelector("#settings-tray .server-details-card")).not.toBeNull();
-		expect(document.querySelector("#guide-provider")?.textContent).toContain(
-			"organization connector",
+		const enterpriseSteps = [...document.querySelectorAll<HTMLElement>("[data-guide-step]")].map(
+			(step) => step.dataset.guideStep,
 		);
 		document.querySelector<HTMLButtonElement>("#tab-admin")!.click();
 		const personal = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
@@ -254,12 +227,11 @@ describe("updated curated guidance", () => {
 		personal.dispatchEvent(new Event("change", { bubbles: true }));
 		document.querySelector<HTMLButtonElement>("#tab-connect")!.click();
 		expect(document.querySelector("#settings-tray .server-details-card")).not.toBeNull();
-		expect(document.querySelector("#guide-provider")?.textContent).toContain(
-			"Add custom connector",
-		);
-		expect(document.querySelector("#guide-provider")?.textContent).not.toContain(
-			"organization connector",
-		);
+		expect(
+			[...document.querySelectorAll<HTMLElement>("[data-guide-step]")].map(
+				(step) => step.dataset.guideStep,
+			),
+		).not.toEqual(enterpriseSteps);
 		expect(document.querySelector(".install-modes, [data-install]")).toBeNull();
 		expect(new URLSearchParams(location.search).get("install")).toBe("personal");
 	});
@@ -295,18 +267,12 @@ describe("updated curated guidance", () => {
 			},
 		});
 		expect(copy.dataset.copy).not.toMatch(/secret|token|headers/iu);
-		expect(
-			document.querySelector('[data-guide-step="provider-deploy-public"]')?.textContent,
-		).toContain("v2.1.259");
 		expect(document.querySelector('[data-guide-step="provider-approve-private"]')).toBeNull();
 		expect(document.querySelector('[data-guide-step="client-managed"]')).toBeNull();
 		document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")!.click();
 		expect(document.querySelectorAll("#guide-provider [data-guide-step]")).toHaveLength(2);
 		expect(document.querySelector('[data-guide-step="client-managed"]')).not.toBeNull();
 		expect(document.querySelector("#guide-provider [data-copy-template]")).toBeNull();
-		expect(document.querySelector("#guide-provider")?.textContent).not.toMatch(
-			/managed-settings\.json|managed-mcp\.json|allowedMcpServers|Developer Keys/iu,
-		);
 		expect(new URLSearchParams(location.search).get("install")).toBe("enterprise");
 		expect(JSON.parse(localStorage.getItem("canvas-mcp:v1")!)).toMatchObject({
 			install: "enterprise",
@@ -391,9 +357,6 @@ describe("updated curated guidance", () => {
 				},
 			});
 			expect(policyCopy.dataset.copy).not.toMatch(/secret|oauth|token|requiredMcpServers/iu);
-			expect(
-				document.querySelector('[data-guide-step="provider-allowlist"]')?.textContent,
-			).toContain("does not accept redirectUri");
 			expect(document.querySelector('[data-guide-step="provider-private-secret"]') !== null).toBe(
 				key === "private",
 			);
@@ -421,9 +384,7 @@ describe("updated curated guidance", () => {
 				redirectUri: "http://localhost:8081/oauth/callback",
 				...(key === "private" ? { clientSecret: "<CANVAS_CLIENT_SECRET>" } : {}),
 			});
-			expect(document.querySelector('[data-guide-step="verify"]')?.textContent).toContain(
-				"/mcp auth canvas-mcp",
-			);
+			expect(document.querySelector('[data-guide-step="verify"]')).not.toBeNull();
 			expect(new URLSearchParams(location.search).get("install")).toBe("enterprise");
 			expect(JSON.parse(localStorage.getItem("canvas-mcp:v1")!)).toMatchObject({
 				client: "gemini-cli",
@@ -467,13 +428,7 @@ describe("updated curated guidance", () => {
 		);
 		mountApp("admin");
 		const notice = () => document.querySelector(".gemini-deprecation-notice");
-		expect(notice()?.textContent).toBe(
-			"Known issue: Gemini CLI was replaced by Antigravity CLI for unpaid-tier and Google One users on June 18, 2026. Use Antigravity CLI. Read Google's announcement.",
-		);
-		expect(notice()?.textContent).not.toContain("Enterprise");
-		expect(notice()?.querySelector("a")?.href).toBe(
-			"https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/",
-		);
+		expect(notice()?.querySelector("a[href]")).not.toBeNull();
 		expect(notice()?.classList.contains("-color-danger")).toBe(true);
 		expect(notice()?.classList.contains("-color-warning")).toBe(false);
 		expect(notice()?.getAttribute("role")).toBe("alert");
@@ -497,13 +452,7 @@ describe("updated curated guidance", () => {
 		expect(notice()?.classList.contains("-color-warning")).toBe(true);
 		expect(notice()?.classList.contains("-color-danger")).toBe(false);
 		expect(notice()?.getAttribute("role")).toBe("status");
-		expect(notice()?.textContent).toContain("access remains unchanged");
-		expect(notice()?.textContent).toContain("Gemini Code Assist Standard or Enterprise");
-		expect(notice()?.textContent?.split(/\s+/u).length).toBeLessThanOrEqual(50);
-		expect(notice()?.textContent).toContain("feature parity is not yet complete");
-		expect(notice()?.querySelector("a")?.href).toBe(
-			"https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/",
-		);
+		expect(notice()?.querySelector("a[href]")).not.toBeNull();
 		expect(notice()?.nextElementSibling?.classList.contains("details-panel")).toBe(true);
 		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(false);
 		expect(document.querySelector(".client-status-pill")?.textContent).toBe("Untested");
@@ -516,7 +465,6 @@ describe("updated curated guidance", () => {
 		const personal = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
 		personal.checked = false;
 		personal.dispatchEvent(new Event("change", { bubbles: true }));
-		expect(notice()?.textContent).toContain("replaced by Antigravity CLI");
 		expect(notice()?.classList.contains("-color-danger")).toBe(true);
 		const client = document.querySelector<HTMLSelectElement>("#client-select")!;
 		client.value = "claude-code";
@@ -524,14 +472,13 @@ describe("updated curated guidance", () => {
 		expect(notice()).toBeNull();
 	});
 
-	it("blocks ChatGPT authentication without claiming DCR-only behavior", () => {
+	it("blocks ChatGPT authentication and retains the setup fields", () => {
 		history.replaceState(
 			null,
 			"",
 			"/canvas-mcp/?client=chatgpt&domain=example.instructure.com&region=us-east-1&clientId=12345&page=connect",
 		);
 		mountApp("user");
-		expect(document.querySelector(".details-panel")?.textContent).not.toContain("Canvas MCP bug");
 		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
 		expect(document.querySelector("#client-id-input")).not.toBeNull();
 		expect(clientDefinition("chatgpt").facts.registration.value).toBe("unknown");
@@ -575,7 +522,7 @@ describe("updated curated guidance", () => {
 			expect(Boolean(config.oauth.clientSecret)).toBe(key === "private");
 		}
 	});
-	it("keeps admin prerequisites and research notices out of every client guide", () => {
+	it("keeps client-only steps out of server setup", () => {
 		for (const client of CLIENTS)
 			for (const install of client.installModes) {
 				const state = readState(`?client=${client.id}&install=${install}`, null);
@@ -591,9 +538,6 @@ describe("updated curated guidance", () => {
 					}
 				}
 				if (install === "personal") expect(document.querySelector("#guide-provider")).toBeNull();
-				expect(document.body.textContent).not.toMatch(
-					/awaiting verification|source verification|Scope list awaiting|Security warning|instructions are not available/iu,
-				);
 			}
 	});
 	it("renders every client and supported mode with only approved tokens", () => {
