@@ -68,6 +68,46 @@ function assertNoHelpSearchResults(search: HTMLInputElement, total: number): voi
 }
 
 describe("Help rendering", () => {
+	it.each([
+		["faqs", "faq", FAQS, originalFaqs],
+		["issues", "issue", COMMON_ISSUES, originalIssues],
+	] as const)(
+		"renders the published %s collection using the supported entry structure",
+		(section, prefix, groups, published) => {
+			groups.splice(0, groups.length, ...published);
+			expect(new Set(groups.map(({ title }) => title)).size).toBe(groups.length);
+			const titles = groups.flatMap(({ entries }) =>
+				entries.map(({ title }) => title.trim().toLowerCase()),
+			);
+			expect(titles.every(Boolean)).toBe(true);
+			expect(new Set(titles).size).toBe(titles.length);
+
+			document.body.innerHTML = renderHelp(section);
+			for (const group of groups) {
+				const container = document.querySelector(
+					`[aria-labelledby="${prefix}-${group.title.toLowerCase()}"]`,
+				)!;
+				expect(container).not.toBeNull();
+				expect(container.querySelector("h3")).not.toBeNull();
+				const disclosures = [...container.querySelectorAll<HTMLDetailsElement>("details")];
+				expect(disclosures).toHaveLength(group.entries.length);
+				for (const [index, disclosure] of disclosures.entries()) {
+					expect(disclosure.querySelector(":scope > summary")).not.toBeNull();
+					expect(disclosure.open).toBe(false);
+					const entry = group.entries[index]!;
+					if (entry.type === "list") {
+						expect(entry.text.length).toBeGreaterThan(0);
+						expect(disclosure.querySelectorAll(":scope > div > ul > li")).toHaveLength(
+							entry.text.length,
+						);
+					} else {
+						expect(disclosure.querySelectorAll(":scope > div > p").length).toBeGreaterThan(0);
+					}
+				}
+			}
+		},
+	);
+
 	it("renders the Clients section from Common Issues", () => {
 		document.body.innerHTML = renderHelp("issues");
 		const clients = document.querySelector('[aria-labelledby="issue-clients"]')!;
@@ -132,7 +172,7 @@ describe("Help rendering", () => {
 		"filters %s disclosures and provides an input-group search",
 		(section, id, query, title) => {
 			const { search, total, visible } = applyHelpSearch(section, id, query);
-			expect(search.labels[0]?.classList.contains("instui-screen-reader-content")).toBe(true);
+			expect(search.labels?.[0]?.classList.contains("instui-screen-reader-content")).toBe(true);
 			expect(
 				search.closest(".instui-input-group")?.querySelector(".before .-icon-search"),
 			).not.toBeNull();
