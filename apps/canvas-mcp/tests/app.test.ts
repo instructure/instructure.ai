@@ -231,6 +231,10 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector(".controls-panel")?.classList.contains("instui-card")).toBe(true);
 		expect(document.querySelector(".controls-panel > .content")).not.toBeNull();
 		expect(document.querySelector(".details-panel > .content")).not.toBeNull();
+		expect(document.querySelector("#domain-input")?.closest(".instui-input-group")).not.toBeNull();
+		expect(
+			document.querySelector("#domain-input")?.parentElement?.querySelector(".after")?.textContent,
+		).toBe(".instructure.com");
 		expect(
 			document
 				.querySelector<HTMLInputElement>("#domain-input")
@@ -250,7 +254,7 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector("#client-id-reference-input")).toBeNull();
 		expect(document.querySelector(".controls-panel h2")?.textContent).toBe("Configuration");
 		expect(document.querySelector("#domain-hint")?.textContent).toBe(
-			"Use your instructure.com address. Beta domains end in .beta.instructure.com.",
+			"Enter your Canvas tenant name. For a beta domain, add .beta after the tenant name.",
 		);
 		const validatedPill = document.querySelector(".client-status-pill");
 		expect(validatedPill?.parentElement?.classList.contains("client-select-label-row")).toBe(true);
@@ -656,8 +660,10 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector('[data-page="admin"]')?.getAttribute("aria-selected")).toBe(
 			"true",
 		);
-		domainInput.value = "utah.instructure.com";
+		domainInput.value = "utah";
 		domainInput.dispatchEvent(new Event("change", { bubbles: true }));
+		expect(domainInput.value).toBe("utah");
+		expect(new URLSearchParams(location.search).get("domain")).toBe("utah.instructure.com");
 		expect(document.querySelector("#tray-server-details-heading")?.textContent).toBe(
 			"Server details",
 		);
@@ -716,9 +722,23 @@ describe("Canvas MCP pages", () => {
 		globalThis.history.replaceState(
 			null,
 			"",
-			"/canvas-mcp/?domain=utah.beta.instructure.com&client=gemini-enterprise&key=private&page=admin",
+			"/canvas-mcp/?domain=utah.beta.instructure.com&client=gemini-enterprise&key=private&region=us-east-1&page=admin",
 		);
 		mountApp("admin");
+
+		const domainInput = document.querySelector<HTMLInputElement>("#domain-input")!;
+		expect(domainInput.value).toBe("utah.beta");
+		expect(domainInput.parentElement?.querySelector(".after")?.textContent).toBe(
+			".instructure.com",
+		);
+		domainInput.value = "canvas-beta.beta";
+		domainInput.dispatchEvent(new Event("change", { bubbles: true }));
+		expect(new URLSearchParams(location.search).get("domain")).toBe(
+			"canvas-beta.beta.instructure.com",
+		);
+		expect(document.querySelector<HTMLInputElement>("#generated-mcp-url")?.value).toBe(
+			"https://canvas-beta.maple-beta.us-east-1.core.inseng.io/mcp",
+		);
 
 		const testClusterCheckbox = [
 			...document.querySelectorAll<HTMLElement>(".settings-table tbody tr"),

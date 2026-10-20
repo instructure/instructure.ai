@@ -1,0 +1,100 @@
+name: Canvas MCP — Other issue or bug
+description: Report a Canvas MCP bug or another issue not covered by the guide, validation, FAQ, or Common Issues forms.
+title: "[Canvas MCP issue]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for Canvas MCP bugs and other issues not covered by the dedicated guide, validation, FAQ, or Common Issues forms.
+        Do not include client secrets, access or refresh tokens, authorization codes, full authorization URLs, raw OAuth captures, student records, or private customer details. Use synthetic tenant names and redact text, logs, and screenshots.
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue summary
+      description: Describe the problem and which part of Canvas MCP is affected.
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: Client and exact version
+      description: Name the MCP client and version, or enter "Not applicable" for a guide-only issue.
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Operating system and version
+      description: Include the browser and version for issues with the setup guide.
+    validations:
+      required: true
+  - type: textarea
+    id: server
+    attributes:
+      label: Canvas and MCP server details
+      description: Include the Canvas region, hosted or self-hosted deployment, Canvas/MCP server versions if known, and a sanitized MCP URL or endpoint pattern. Replace tenant names with synthetic values and omit credentials and URL query parameters. Enter "Not applicable" for a guide-only issue.
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Canvas environment
+      options:
+        - Production
+        - Beta
+        - Test
+        - Other
+        - Not known / not applicable
+    validations:
+      required: true
+  - type: dropdown
+    id: key
+    attributes:
+      label: Configured key type
+      description: Report only the type, not the developer key secret.
+      options:
+        - Public
+        - Private
+        - Not known / not applicable
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: Install mode
+      options:
+        - Personal
+        - Enterprise
+        - Not known / not applicable
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Provide the steps, affected guide page or tool, and sanitized configuration needed to reproduce the issue.
+      placeholder: |
+        1. Open…
+        2. Configure…
+        3. Observe…
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Describe what should happen.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Describe what happened instead, including sanitized error messages and whether it happens consistently.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context, logs, or screenshots
+      description: Add sanitized evidence, relevant documentation, related issues, and any troubleshooting already attempted. For OAuth issues, include the redirect URI pattern, PKCE behavior, or authentication method if relevant, but never credentials.

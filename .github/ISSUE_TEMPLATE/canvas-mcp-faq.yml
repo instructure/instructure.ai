@@ -1,0 +1,50 @@
+name: Canvas MCP — FAQ
+description: Suggest or correct an entry in apps/canvas-mcp/src/help/faqs.json.
+title: "[Canvas MCP FAQ]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form is for FAQs in the Canvas MCP setup guide's Help tab.
+        Use synthetic examples. Do not include secrets, tokens, student records, or private customer details.
+  - type: dropdown
+    id: change
+    attributes:
+      label: Change type
+      options:
+        - New question
+        - Correct an existing answer
+    validations:
+      required: true
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Audience
+      options:
+        - General
+        - Admins
+        - Users
+        - Clients
+    validations:
+      required: true
+  - type: input
+    id: question
+    attributes:
+      label: Question
+      description: For a correction, identify the existing question.
+    validations:
+      required: true
+  - type: textarea
+    id: answer
+    attributes:
+      label: Proposed answer
+      description: Include any list items or commands. Specify Windows and macOS/Linux variants if commands differ.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Context and sources
+      description: Explain why the answer is needed or incorrect, and link supporting documentation or sanitized evidence.
+    validations:
+      required: true

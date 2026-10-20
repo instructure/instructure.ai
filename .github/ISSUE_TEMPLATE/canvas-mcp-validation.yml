@@ -1,0 +1,70 @@
+name: Canvas MCP — Client validation
+description: Report validation results for the client status and evidence records in apps/canvas-mcp.
+title: "[Canvas MCP validation]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form updates the Canvas MCP setup guide's client status and evidence records, not a separate validation manifest.
+        Do not include secrets, tokens, authorization codes, raw OAuth captures, student records, or private customer details.
+  - type: input
+    id: client
+    attributes:
+      label: Client and exact version
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Operating system and version
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: Test date
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: Install mode tested
+      options:
+        - Personal
+        - Enterprise
+    validations:
+      required: true
+  - type: dropdown
+    id: key
+    attributes:
+      label: Key type tested
+      options:
+        - Public
+        - Private
+    validations:
+      required: true
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Outcome
+      options:
+        - Configuration, authentication, and tool call succeeded
+        - Configuration or authentication succeeded; tool call not tested
+        - Failed or blocked
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps and results
+      description: Include production/beta environment, configuration scope, authentication result, and a safe tool call with sanitized results. Report each tested configuration separately; identify any untested combinations.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence
+      description: Provide documentation links, sanitized diagnostics/screenshots, and the proposed status or fact corrections. Separate observed failures from suspected causes.
+    validations:
+      required: true

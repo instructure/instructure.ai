@@ -2,37 +2,114 @@ import { CLIENTS, clientLabel } from "../clients";
 import { clientStatus } from "../clients/status";
 import { type InstallMode, type KeyType } from "../clients/ids";
 import { type ClientDefinition } from "../clients/types";
-import { escapeHtml } from "../ui/html";
-import { COMMON_ISSUES, FAQS, HELP_SECTIONS, type HelpGroup, type HelpSection } from "./content";
+import { renderHelpInlineText as renderInlineText } from "./inline";
+import { renderCodeSample, renderContent } from "../guides/render";
+import { type PlatformPreference } from "../platform";
+import {
+	COMMON_ISSUES,
+	FAQS,
+	HELP_SECTIONS,
+	type HelpEntry,
+	type HelpGroup,
+	type HelpSection,
+} from "./content";
 import { renderTools } from "./tools";
 
-export function renderHelp(section: HelpSection): string {
+export function renderHelp(section: HelpSection, platform: PlatformPreference = "auto"): string {
 	const label = HELP_SECTIONS.find(({ id }) => id === section)!.label;
 	return `<section class="instui-card -variant-base help-panel"><div class="content">
 		<fieldset class="instui-segmented-control help-sections" aria-label="Help topics"><div class="viewport"><div class="track">${HELP_SECTIONS.map(({ id, label }) => `<label><input id="help-section-${id}" type="radio" name="help-section" value="${id}" data-help-section="${id}" aria-controls="help-content" ${section === id ? "checked" : ""}>${label}</label>`).join("")}</div></div></fieldset>
 		<section id="help-content" class="${section === "clients" ? "help-matrix-content" : ""}" aria-labelledby="help-content-heading"><h2 id="help-content-heading" class="instui-heading -level-h2">${label}</h2>
-		${section === "clients" ? renderClientMatrix() : section === "tools" ? renderTools() : renderGroups(section === "faqs" ? FAQS : COMMON_ISSUES, section)}
-		${section === "issues" ? renderClientIssues() : ""}
+		${section === "clients" ? renderClientMatrix() : section === "tools" ? renderTools() : `<div id="help-search-area">${renderHelpSearch(section)}<p id="help-search-results" role="status" aria-live="polite" hidden></p><p id="help-search-empty" hidden>No matching questions or issues.</p><div id="help-entries">${renderGroups(section === "faqs" ? FAQS : COMMON_ISSUES, section, platform)}${section === "issues" ? renderClientIssues() : ""}</div></div>`}
 		</section></div></section>`;
 }
 
-function renderGroups(groups: HelpGroup[], section: "faqs" | "issues"): string {
+function renderHelpSearch(section: "faqs" | "issues"): string {
+	const label = section === "faqs" ? "Search FAQs" : "Search Common Issues";
+	const placeholder =
+		section === "faqs" ? "Search questions and answers" : "Search issues and explanations";
+	return `<div class="help-search"><label class="field-label instui-screen-reader-content" for="${section}-search">${label}</label><div class="instui-input-group"><span class="before"><span class="instui-icon -icon-search" aria-hidden="true"></span></span><input id="${section}-search" data-help-search type="search" class="instui-text-input text-input" placeholder="${placeholder}" aria-controls="help-entries" /></div></div>`;
+}
+
+export function bindHelpSearch(root: HTMLElement): void {
+	const search = root.querySelector<HTMLInputElement>("[data-help-search]");
+	const entries = [...root.querySelectorAll<HTMLElement>("#help-entries .help-entry")];
+	const disclosures = entries.flatMap((entry) => [
+		...entry.querySelectorAll<HTMLDetailsElement>("details.instui-toggle-details"),
+	]);
+	if (!search || !entries.length) return;
+	const results = root.querySelector<HTMLElement>("#help-search-results");
+	const empty = root.querySelector<HTMLElement>("#help-search-empty");
+	let previousOpenStates: boolean[] | undefined;
+	const filter = (): void => {
+		const terms = search.value
+			.replace(/\+/gu, " ")
+			.trim()
+			.toLowerCase()
+			.split(/\s+/u)
+			.filter(Boolean);
+		if (terms.length > 0 && !previousOpenStates)
+			previousOpenStates = disclosures.map((disclosure) => disclosure.open);
+		let count = 0;
+		for (const entry of entries) {
+			const matches = [
+				...entry.querySelectorAll<HTMLDetailsElement>("details.instui-toggle-details"),
+			];
+			for (const disclosure of matches) {
+				const searchable = (disclosure.textContent ?? "").replace(/\+/gu, " ").toLowerCase();
+				const matchesSearch = terms.every((term) => searchable.includes(term));
+				disclosure.hidden = !matchesSearch;
+				if (terms.length > 0) disclosure.open = matchesSearch;
+				if (!disclosure.hidden) count++;
+			}
+			entry.hidden = matches.every((disclosure) => disclosure.hidden);
+		}
+		if (terms.length === 0 && previousOpenStates) {
+			disclosures.forEach((disclosure, index) => {
+				disclosure.open = previousOpenStates![index]!;
+			});
+			previousOpenStates = undefined;
+		}
+		if (results) {
+			results.hidden = terms.length === 0;
+			results.textContent = `${count} of ${disclosures.length} results`;
+		}
+		if (empty) empty.hidden = count !== 0;
+	};
+	search.addEventListener("input", filter);
+	filter();
+}
+
+function renderGroups(
+	groups: HelpGroup[],
+	section: "faqs" | "issues",
+	platform: PlatformPreference,
+): string {
 	const prefix = section === "faqs" ? "faq" : "issue";
 	return groups
 		.map(
 			({ title, entries }) =>
-				`<section class="help-entry" aria-labelledby="${prefix}-${title.toLowerCase()}"><h3 id="${prefix}-${title.toLowerCase()}" class="instui-heading -level-h3">${title}</h3>${renderEntries(entries)}</section>`,
+				`<section class="help-entry" aria-labelledby="${prefix}-${title.toLowerCase()}"><h3 id="${prefix}-${title.toLowerCase()}" class="instui-heading -level-h3">${title}</h3>${renderEntries(entries, platform)}</section>`,
 		)
 		.join("");
 }
 
-function renderEntries(entries: { title: string; text: string }[]): string {
+function renderEntries(entries: HelpEntry[], platform: PlatformPreference = "auto"): string {
 	return entries
 		.map(
-			({ title, text }) =>
-				`<details class="instui-toggle-details"><summary>${escapeHtml(title)}</summary><div><p>${escapeHtml(text)}</p></div></details>`,
+			(entry) =>
+				`<details class="instui-toggle-details"><summary>${renderInlineText(entry.title)}</summary><div>${entry.type === "list" ? `<ul class="instui-list">${entry.text.map((text) => `<li>${renderHelpParagraphs(text)}</li>`).join("")}</ul>` : renderHelpParagraphs(entry.text)}${typeof entry.commands === "string" ? renderCodeSample(entry.commands, "text", "Command") : entry.commands ? renderContent([{ kind: "code-group", variants: { windows: { text: entry.commands.windows, language: "powershell" }, mac: { text: entry.commands.mac, language: "bash" } } }], {}, platform) : ""}</div></details>`,
 		)
 		.join("");
+}
+
+function renderHelpParagraphs(text: string): string {
+	return text
+		.split(/\r\n?|\n/u)
+		.map((paragraph) => paragraph.trim())
+		.filter(Boolean)
+		.map((paragraph) => `<p>${renderInlineText(paragraph)}</p>`)
+		.join("\n");
 }
 
 function curatedClients(): ClientDefinition[] {
@@ -71,7 +148,7 @@ function renderClientMatrix(): string {
 		<tbody>${curatedClients()
 			.map(
 				(client) =>
-					`<tr data-matrix-client="${client.id}"><th id="matrix-row-${client.id}" scope="row">${escapeHtml(clientLabel(client))}</th>${(["enterprise", "personal"] as const).map((install) => (["public", "private"] as const).map((key) => `<td headers="matrix-row-${client.id} matrix-${install} matrix-${install}-${key}">${renderStatus(client, install, key)}</td>`).join("")).join("")}</tr>`,
+					`<tr data-matrix-client="${client.id}"><th id="matrix-row-${client.id}" scope="row">${renderInlineText(clientLabel(client))}</th>${(["enterprise", "personal"] as const).map((install) => (["public", "private"] as const).map((key) => `<td headers="matrix-row-${client.id} matrix-${install} matrix-${install}-${key}">${renderStatus(client, install, key)}</td>`).join("")).join("")}</tr>`,
 			)
 			.join("")}</tbody>
 		</table></div>${renderOtherClients()}`;
@@ -88,7 +165,7 @@ function renderOtherClients(): string {
 	]
 		.map(
 			(client) =>
-				`<li data-other-client="${client.id}">${escapeHtml(client.id === "generic" ? "Generic MCP" : client.name)} ${renderStatusPill(client, "personal")}</li>`,
+				`<li data-other-client="${client.id}">${renderInlineText(client.id === "generic" ? "Generic MCP" : client.name)} ${renderStatusPill(client, "personal")}</li>`,
 		)
 		.join("")}</ul></div></details>`;
 }
@@ -129,6 +206,6 @@ function renderStatus(client: ClientDefinition, install: InstallMode, key: KeyTy
 	];
 	return `${renderStatusPill(client, install)}${notes
 		.filter(Boolean)
-		.map((note) => `<p>${escapeHtml(note)}</p>`)
+		.map((note) => `<p>${renderInlineText(note)}</p>`)
 		.join("")}`;
 }

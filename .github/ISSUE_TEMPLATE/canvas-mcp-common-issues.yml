@@ -1,0 +1,53 @@
+name: Canvas MCP — Common issue
+description: Add or correct troubleshooting in apps/canvas-mcp/src/help/common-issues.json.
+title: "[Canvas MCP common issue]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form is for Common Issues in the Canvas MCP setup guide's Help tab.
+        Redact credentials, tokens, authorization codes, full authorization URLs, student records, and private customer details.
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Section
+      options:
+        - General
+        - Admins
+        - Users
+        - Clients
+    validations:
+      required: true
+  - type: input
+    id: symptom
+    attributes:
+      label: Issue title or symptom
+      description: Identify an existing entry if this is a correction.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Affected configuration
+      description: Include client/version, OS, personal/enterprise install, public/private key, and production/beta environment as applicable. Use synthetic hostnames.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction and diagnostic
+      description: Give the steps, expected behavior, and observed behavior or sanitized error.
+    validations:
+      required: true
+  - type: textarea
+    id: resolution
+    attributes:
+      label: Explanation, troubleshooting, and escalation
+      description: Distinguish confirmed causes from hypotheses. Include safe self-service steps and when to contact an administrator or Instructure; note if no workaround is known.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sources and related validation
+      description: Link supporting documentation, related issues, or sanitized test results. Note whether client status or blocker records also need updating.

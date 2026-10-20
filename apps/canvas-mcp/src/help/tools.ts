@@ -1,6 +1,7 @@
 import catalog from "./tools.generated.json";
 import { escapeHtml } from "../ui/html";
-import { renderCodeSample, renderInlineText } from "../guides/render";
+import { renderCodeSample } from "../guides/render";
+import { renderHelpInlineText as renderInlineText } from "./inline";
 
 export interface AvailableTool {
 	title: string;
@@ -18,7 +19,7 @@ function roleLabel(role: string): string {
 export function renderTool(tool: AvailableTool): string {
 	const roles = tool.roles.map(roleLabel).sort((left, right) => left.localeCompare(right, "en"));
 	return `<li class="instui-card -variant-nested" data-tool-card><div class="content">
-		<h3 class="instui-heading -variant-title-card-regular">${escapeHtml(tool.title)}</h3>
+		<h3 class="instui-heading -variant-title-card-regular">${renderInlineText(tool.title)}</h3>
 		<p class="tool-access"><span class="instui-pill -color-info">${escapeHtml(roleLabel(tool.resource))}</span><span class="instui-pill tool-access-pill ${tool.readOnly ? "-color-success" : "-color-warning"}">${tool.readOnly ? "Read only" : "Write access"}</span>${roles.map((role) => `<span class="instui-pill">${escapeHtml(role)}</span>`).join(" ")}</p>
 		<p class="tool-description">${renderInlineText(tool.description)}</p>
 		${tool.example ? `<h4 class="instui-heading -level-h4">Example</h4>${renderCodeSample(tool.example, "prompt", "Example")}` : ""}
@@ -31,7 +32,7 @@ export function renderTools(): string {
 	);
 	const resources = [...new Set(catalog.tools.map((tool) => tool.resource))].sort();
 	return `<p id="tool-catalog-description">Catalog date: <time datetime="${catalog.catalog}">${catalog.catalog}</time></p><p>Availability depends on your Canvas permissions and developer-key scopes. Roles describe intended use, not access enforcement.</p>
-		<div class="controls tool-filter-controls instui-card -variant-nested --bg-secondary --pb-2xl"><label class="field-label" for="tool-search">Filter tools</label><input id="tool-search" class="instui-text-input text-input" type="search" placeholder="Search titles, descriptions, resources, roles, or examples" aria-controls="tool-list" />
+		<div class="controls tool-filter-controls instui-card -variant-nested --bg-secondary --pb-2xl"><label class="field-label instui-screen-reader-content" for="tool-search">Filter tools</label><div class="instui-input-group"><span class="before"><span class="instui-icon -icon-search" aria-hidden="true"></span></span><input id="tool-search" class="instui-text-input text-input" type="search" placeholder="Search titles, descriptions, resources, roles, or examples" aria-controls="tool-list" /></div>
 		<div class="tool-filters">
 		<div><label class="field-label" for="tool-resource-filter">Resource</label><select id="tool-resource-filter" class="instui-simple-select text-input" aria-controls="tool-list"><option value="">All resources</option>${resources.map((resource) => `<option value="${escapeHtml(resource)}">${escapeHtml(roleLabel(resource))}</option>`).join("")}</select></div>
 		<div><label class="field-label" for="tool-access-filter">Access</label><select id="tool-access-filter" class="instui-simple-select text-input" aria-controls="tool-list"><option value="">All access</option><option value="read">Read only</option><option value="write">Write access</option></select></div>

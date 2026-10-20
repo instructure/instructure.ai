@@ -9,6 +9,8 @@ import { copyToClipboard } from "./ui/copy";
 import { applyTheme, setTheme } from "./ui/theme";
 import { commandPlatform, isPlatformPreference } from "./platform";
 import { helpSectionFromQuery, type HelpSection } from "./help/content";
+import { bindHelpSearch } from "./help/render";
+import { bindHelpDisclosures } from "./help/disclosures";
 import { bindToolFilters, toolFilterQuery } from "./help/tools";
 import { bindSegmentedControls } from "./ui/segmented-controls";
 import {
@@ -24,6 +26,14 @@ import {
 const mounts = new WeakMap<HTMLElement, symbol>();
 const printCleanups = new WeakMap<HTMLElement, () => void>();
 const segmentedCleanups = new WeakMap<HTMLElement, () => void>();
+
+function canvasDomainInputValue(domain: string): string {
+	return normalizeCanvasDomain(domain)?.replace(/\.instructure\.com$/u, "") ?? domain;
+}
+
+function canvasDomainFromInput(value: string): string {
+	return normalizeCanvasDomain(value) ?? normalizeCanvasDomain(`${value}.instructure.com`) ?? "";
+}
 
 export function mountApp(mode: PageMode): void {
 	const root = document.querySelector<HTMLElement>("#root");
@@ -49,7 +59,7 @@ export function mountApp(mode: PageMode): void {
 	if (!new URLSearchParams(globalThis.location.search).has("surface"))
 		state.surface = pageMode === "user" ? "provider" : "canvas";
 	normalizeSetup(state);
-	const viewState = { domainInputValue: state.domain };
+	const viewState = { domainInputValue: canvasDomainInputValue(state.domain) };
 	const callbacks = new CallbackCache();
 	let activeCallbackKey = "";
 	function callbackResolution(): CallbackResolution | undefined {
@@ -108,6 +118,8 @@ export function mountApp(mode: PageMode): void {
 			toolFilters = query;
 			persist();
 		});
+		if (pageMode === "help") bindHelpDisclosures(appRoot, helpSection, getStorage());
+		bindHelpSearch(appRoot);
 		appRoot.querySelectorAll<HTMLInputElement>("[data-help-section]").forEach((control) => {
 			control.addEventListener("change", () => {
 				helpSection = helpSectionFromQuery(`?help=${encodeURIComponent(control.value)}`);
@@ -170,8 +182,9 @@ export function mountApp(mode: PageMode): void {
 		appRoot
 			.querySelector<HTMLInputElement>("#domain-input")
 			?.addEventListener("change", (event) => {
-				viewState.domainInputValue = (event.currentTarget as HTMLInputElement).value;
-				state.domain = normalizeCanvasDomain(viewState.domainInputValue) ?? "";
+				const value = (event.currentTarget as HTMLInputElement).value.trim();
+				state.domain = canvasDomainFromInput(value);
+				viewState.domainInputValue = canvasDomainInputValue(state.domain) || value;
 				persistAndRender();
 			});
 		appRoot

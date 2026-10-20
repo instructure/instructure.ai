@@ -4,9 +4,57 @@ import { describe, expect, it } from "vitest";
 import { CLIENTS } from "../src/clients";
 import { clientStatus } from "../src/clients/status";
 import { COMMON_ISSUES, FAQS, helpSectionFromQuery } from "../src/help/content";
-import { renderHelp } from "../src/help/render";
+import { bindHelpSearch, renderHelp } from "../src/help/render";
+import { renderHelpInlineText } from "../src/help/inline";
+import faqs from "../src/help/faqs.json";
+import commonIssues from "../src/help/common-issues.json";
+
+function formattedHelpText(text: string): string {
+	const element = document.createElement("span");
+	element.innerHTML = renderHelpInlineText(text);
+	return element.textContent!;
+}
+
+function applyHelpSearch(
+	section: "faqs" | "issues",
+	id: string,
+	query: string,
+): { search: HTMLInputElement; total: number; visible: HTMLDetailsElement[] } {
+	document.body.innerHTML = renderHelp(section);
+	bindHelpSearch(document.body);
+	const search = document.querySelector<HTMLInputElement>(`#${id}`)!;
+	const total = document.querySelectorAll("#help-entries details").length;
+	search.value = query;
+	search.dispatchEvent(new Event("input"));
+	const visible = [
+		...document.querySelectorAll<HTMLDetailsElement>("#help-entries details"),
+	].filter((disclosure) => !disclosure.hidden);
+	return { search, total, visible };
+}
+
+function assertNoHelpSearchResults(search: HTMLInputElement, total: number): void {
+	search.value = "no matching entry";
+	search.dispatchEvent(new Event("input"));
+	expect(document.querySelector("#help-search-results")?.textContent).toBe(`0 of ${total} results`);
+	expect(document.querySelector<HTMLElement>("#help-search-empty")?.hidden).toBe(false);
+}
 
 describe("Help content", () => {
+	it("renders the Clients section from Common Issues", () => {
+		document.body.innerHTML = renderHelp("issues");
+		const clients = document.querySelector('[aria-labelledby="issue-clients"]')!;
+		expect(clients.querySelector("h3")?.textContent).toBe("Clients");
+		expect(clients.querySelectorAll("details")).toHaveLength(
+			COMMON_ISSUES.find(({ title }) => title === "Clients")!.entries.length,
+		);
+		expect(clients.textContent).toContain("Cannot fetch authorization server metadata");
+	});
+
+	it("exports the FAQ and Common Issues JSON content without changing entries or order", () => {
+		expect(FAQS).toEqual(faqs);
+		expect(COMMON_ISSUES).toEqual(commonIssues);
+	});
+
 	it("lists Generic MCP then all other Rulesync clients alphabetically in a collapsed toggle group below the table", () => {
 		document.body.innerHTML = renderHelp("clients");
 		const matrix = document.querySelector(".help-matrix-scroll")!;
@@ -87,16 +135,76 @@ describe("Help content", () => {
 	it("uses the segmented-control component and renders only the selected content", () => {
 		document.body.innerHTML = renderHelp("faqs");
 		expect(document.querySelector("fieldset.instui-segmented-control")).not.toBeNull();
-		expect([...document.querySelectorAll("label")].map((label) => label.textContent)).toEqual([
-			"FAQs",
-			"Common Issues",
-			"Supported Clients",
-			"Available Tools",
-		]);
+		expect(
+			[...document.querySelectorAll("fieldset.help-sections label")].map(
+				(label) => label.textContent,
+			),
+		).toEqual(["FAQs", "Common Issues", "Supported Clients", "Available Tools"]);
 		expect(document.querySelector<HTMLInputElement>("#help-section-faqs")?.checked).toBe(true);
-		expect(document.querySelector("#help-content")?.textContent).toContain("What is Canvas MCP?");
+		expect(document.querySelector("#help-content")?.textContent).toContain(
+			"What is the Canvas MCP?",
+		);
 		expect(document.querySelector("table")).toBeNull();
 	});
+
+	it.each([
+		["faqs", "faqs-search", "browser", "What does this guide store?"],
+		[
+			"issues",
+			"issues-search",
+			"cannot fetch authorization server metadata",
+			"VS Code cannot fetch authorization server metadata",
+		],
+	] as const)(
+		"filters %s disclosures and provides an input-group search",
+		(section, id, query, title) => {
+			const { search, total, visible } = applyHelpSearch(section, id, query);
+			expect(search.labels[0]?.classList.contains("instui-screen-reader-content")).toBe(true);
+			expect(
+				search.closest(".instui-input-group")?.querySelector(".before .-icon-search"),
+			).not.toBeNull();
+			expect(visible).toHaveLength(1);
+			expect(visible[0]?.querySelector("summary")?.textContent).toBe(title);
+			expect(visible[0]?.open).toBe(true);
+			expect(document.querySelector("#help-search-results")?.textContent).toBe(
+				`1 of ${total} results`,
+			);
+			expect(document.querySelector<HTMLElement>("#help-search-empty")?.hidden).toBe(true);
+			assertNoHelpSearchResults(search, total);
+			search.value = "";
+			search.dispatchEvent(new Event("input"));
+			expect(visible[0]?.open).toBe(false);
+		},
+	);
+
+	it("matches plus-delimited diagnostics when searching with spaces", () => {
+		const { total, visible } = applyHelpSearch("issues", "issues-search", "The following scopes");
+
+		expect(visible).toHaveLength(1);
+		expect(visible[0]?.querySelector("summary")?.textContent).toBe(
+			"OAuth provider returned invalid_scope",
+		);
+		expect(document.querySelector("#help-search-results")?.textContent).toBe(
+			`1 of ${total} results`,
+		);
+	});
+
+	it.each(["faqs", "issues"] as const)(
+		"shows the %s result count only while actively filtering",
+		(section) => {
+			document.body.innerHTML = renderHelp(section);
+			const results = document.querySelector<HTMLElement>("#help-search-results")!;
+			expect(results.hidden).toBe(true);
+			bindHelpSearch(document.body);
+			const search = document.querySelector<HTMLInputElement>("[data-help-search]")!;
+			expect(results.hidden).toBe(true);
+			for (const value of ["Canvas", "no-such-result", "", " \t "]) {
+				search.value = value;
+				search.dispatchEvent(new Event("input"));
+				expect(results.hidden).toBe(value.trim() === "");
+			}
+		},
+	);
 
 	it("presents every curated client and all four combinations from existing source statuses", () => {
 		document.body.innerHTML = renderHelp("clients");
@@ -159,7 +267,7 @@ describe("Help content", () => {
 				[...document.querySelectorAll("#help-content h3")].map((heading) => heading.textContent),
 			).toEqual(
 				topic === "issues"
-					? ["General", "Admins", "Users", "Known Issues"]
+					? ["General", "Admins", "Users", "Clients", "Known Issues"]
 					: ["General", "Admins", "Users"],
 			);
 			expect(
@@ -175,12 +283,29 @@ describe("Help content", () => {
 					[...section.querySelectorAll("details > summary")]
 						.slice(0, group.entries.length)
 						.map((summary) => summary.textContent),
-				).toEqual(group.entries.map(({ title }) => title));
+				).toEqual(group.entries.map(({ title }) => formattedHelpText(title)));
 				for (const [index, details] of [...section.querySelectorAll("details")]
 					.slice(0, group.entries.length)
 					.entries()) {
 					expect(details.open).toBe(false);
-					expect(details.querySelector("div > p")?.textContent).toBe(group.entries[index]?.text);
+					const entry = group.entries[index]!;
+					if (entry.type === "list") {
+						expect(
+							[...details.querySelectorAll("ul > li")].map((item) => item.textContent),
+						).toEqual(entry.text.map(formattedHelpText));
+					} else {
+						expect(
+							[...details.querySelectorAll(":scope > div > p")].map(
+								(paragraph) => paragraph.textContent,
+							),
+						).toEqual(
+							entry.text
+								.split(/\r\n?|\n/u)
+								.map((paragraph) => paragraph.trim())
+								.filter(Boolean)
+								.map(formattedHelpText),
+						);
+					}
 					details.querySelector("summary")!.click();
 					expect(details.open).toBe(true);
 					details.querySelector("summary")!.click();
@@ -240,8 +365,8 @@ describe("Help content", () => {
 		document.body.innerHTML = renderHelp("issues");
 		const users = document.querySelector('[aria-labelledby="issue-users"]')!;
 		for (const title of [
-			"OAuth provider returned `invalid_target`",
-			"OAuth provider returned `invalid_scope`",
+			"OAuth provider returned invalid_target",
+			"OAuth provider returned invalid_scope",
 			"redirect_uri does not match client settings",
 			"MCP server canvas-mcp already exists in local config",
 		]) {
@@ -274,14 +399,122 @@ describe("Help content", () => {
 		);
 	});
 
-	it("escapes source status reasons and notes", () => {
+	it.each([
+		["faqs", FAQS],
+		["issues", COMMON_ISSUES],
+	] as const)("formats %s titles and answers while escaping source HTML", (section, groups) => {
+		const entry = groups[0]!.entries[0]!;
+		const original = { ...entry };
+		try {
+			entry.title = "Use **Canvas** with `client_id`";
+			entry.text = 'Keep **`<secret>` private**. <img src=x onerror="alert(1)">';
+			document.body.innerHTML = renderHelp(section);
+			const disclosure = document.querySelector("#help-entries details")!;
+			expect(disclosure.querySelector("summary strong")?.textContent).toBe("Canvas");
+			expect(disclosure.querySelector("summary code")?.textContent).toBe("client_id");
+			expect(disclosure.querySelector("p strong code")?.textContent).toBe("<secret>");
+			expect(disclosure.querySelector("img, secret")).toBeNull();
+		} finally {
+			Object.assign(entry, original);
+		}
+	});
+
+	it("formats source status reasons in Supported Clients and Known Issues without allowing HTML", () => {
 		const client = CLIENTS.find(({ id }) => id === "claude-code")!;
 		const original = client.status;
 		try {
-			client.status = { kind: "known-issue", reason: '<img src=x onerror="alert(1)">' };
+			client.status = {
+				kind: "known-issue",
+				reason: '**Retry** with `client_id`. <img src=x onerror="alert(1)">',
+			};
 			document.body.innerHTML = renderHelp("clients") + renderHelp("issues");
 			expect(document.querySelector("img")).toBeNull();
 			expect(document.body.textContent).toContain('<img src=x onerror="alert(1)">');
+			for (const selector of [
+				'[data-matrix-client="claude-code"] td',
+				'[aria-labelledby="known-issues-heading"] details',
+			]) {
+				expect(document.querySelector(`${selector} strong`)?.textContent).toBe("Retry");
+				expect(document.querySelector(`${selector} code`)?.textContent).toBe("client_id");
+			}
+		} finally {
+			client.status = original;
+		}
+	});
+
+	it.each([
+		["faqs", FAQS],
+		["issues", COMMON_ISSUES],
+	] as const)(
+		"renders %s list entries with inline formatting and searchable text",
+		(section, groups) => {
+			const entries = groups[0]!.entries;
+			entries.push({
+				title: "List example",
+				type: "list",
+				text: ["Use **Canvas**.", "Keep `<secret>` private. <img src=x>"],
+			});
+			try {
+				document.body.innerHTML = renderHelp(section);
+				bindHelpSearch(document.body);
+				const list = document.querySelector("#help-entries ul.instui-list")!;
+				expect(list.querySelectorAll(":scope > li")).toHaveLength(2);
+				expect(list.querySelector("strong")?.textContent).toBe("Canvas");
+				expect(list.querySelector("code")?.textContent).toBe("<secret>");
+				expect(list.querySelector("img")).toBeNull();
+				const search = document.querySelector<HTMLInputElement>("[data-help-search]")!;
+				search.value = "private";
+				search.dispatchEvent(new Event("input"));
+				expect(list.closest("details")?.hidden).toBe(false);
+				expect(list.closest("details")?.open).toBe(true);
+			} finally {
+				entries.pop();
+			}
+		},
+	);
+
+	it.each(["faqs", "issues"] as const)(
+		"renders newline-separated paragraphs in %s answers and list items",
+		(section) => {
+			const groups = section === "faqs" ? FAQS : COMMON_ISSUES;
+			const entries = groups[0]!.entries;
+			const text = "{{icon:check}} **First**.\n\nSecond `paragraph`.\r\n<img src=x>";
+			entries.push(
+				{ title: "Paragraph example", text },
+				{ title: "List paragraph example", type: "list", text: [text] },
+			);
+			try {
+				document.body.innerHTML = renderHelp(section);
+				for (const title of ["Paragraph example", "List paragraph example"]) {
+					const details = [...document.querySelectorAll("details")].find(
+						(entry) => entry.querySelector("summary")?.textContent === title,
+					)!;
+					expect(details.querySelectorAll("p")).toHaveLength(3);
+					expect(details.querySelector("p strong")?.textContent).toBe("First");
+					expect(details.querySelector("p .-icon-check")).not.toBeNull();
+					expect(details.querySelector("p code")?.textContent).toBe("paragraph");
+					expect(details.querySelector("img")).toBeNull();
+					expect(details.querySelectorAll("li")).toHaveLength(title.startsWith("List") ? 1 : 0);
+				}
+			} finally {
+				entries.splice(-2);
+			}
+		},
+	);
+
+	it("formats validation notes in Supported Clients", () => {
+		const client = CLIENTS.find(({ id }) => id === "claude-code")!;
+		const original = client.status;
+		try {
+			client.status = {
+				kind: "validated",
+				testedAt: "2026-10-20",
+				note: "Tested **public** keys with `client_id`.",
+			};
+			document.body.innerHTML = renderHelp("clients");
+			const row = document.querySelector('[data-matrix-client="claude-code"]')!;
+			expect(row.querySelector("td strong")?.textContent).toBe("public");
+			expect(row.querySelector("td code")?.textContent).toBe("client_id");
 		} finally {
 			client.status = original;
 		}
