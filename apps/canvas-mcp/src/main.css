@@ -861,6 +861,10 @@ pre {
     background: var(--instui-logo-canvas-icon-color) center / contain no-repeat;
 }
 
+#setup-panel[aria-labelledby="tab-connect"] .guide-heading {
+    margin-top: 2rem;
+}
+
 .print-context {
     display: none;
 }
