@@ -6,17 +6,28 @@
 				"title": "What is the Canvas MCP?",
 				"text": "The Canvas MCP lets an MCP-enabled client connect to Canvas tools. This guide helps administrators configure a Canvas developer key and users connect their client. The guide itself does not make requests to Canvas or store configuration details."
 			},
-      {
-        "title": "Who can use the Canvas MCP?",
-        "text": "Any user with an MCP-enabled client and access to a Canvas instance can use the Canvas MCP if their administrator has configured it. Administrators will need to configure developer keys for their institution."
-      },
-      {
-        "title": "What roles and functions are supported?",
-        "text": "The Canvas MCP server authenticates users based on their Canvas account and enforces the roles and permissions defined by the Canvas instance. It supports the roles and functions available to the authenticated user within the Canvas environment. Administrators can configure scopes that determine the permissions granted to the client."
-      },
+			{
+				"title": "Who can use the Canvas MCP?",
+				"text": "Any user with an MCP-enabled client and access to a Canvas instance can use the Canvas MCP if their administrator has configured it. Administrators will need to configure developer keys for their institution."
+			},
+			{
+				"title": "What roles and functions are supported?",
+				"text": "The Canvas MCP server authenticates users based on their Canvas account and enforces the roles and permissions defined by the Canvas instance. It supports the roles and functions available to the authenticated user within the Canvas environment. Administrators can configure scopes that determine the permissions granted to the client."
+			},
 			{
 				"title": "What does this guide store?",
 				"text": "Setup preferences may be saved in this browser, and setup links include configuration such as the domain and Client ID. Client secrets and access tokens are never requested or stored. Review configuration before sharing a link. This guide itself does not make requests to Canvas or store configuration details."
+			},
+			{
+				"title": "What should I include when asking for help?",
+				"type": "list",
+				"text": [
+					"Start with your Canvas administrator for institution-managed setup. Use **Contact** for the available community and issue-reporting options; your administrator can escalate service problems through their Instructure support channel.",
+					"Include the client name and version, operating system, personal or enterprise install mode, public or private key type, and which setup instructions you followed.",
+					"Describe the expected result, the action that failed, the time and time zone, and whether the failure occurred during sign-in, token exchange, or a tool call. Include sanitized error text, error_description, and HTTP status when available.",
+					"Provide the relevant Canvas domain, MCP endpoint, region, and production or beta environment through the appropriate support channel. Redact private tenant details from public reports.",
+					"Never include client secrets, access or refresh tokens, authorization codes, PKCE verifiers, state values, full authorization URLs, student records, or other private data."
+				]
 			}
 		]
 	},
@@ -25,7 +36,19 @@
 		"entries": [
 			{
 				"title": "What do public and private keys mean?",
-				"text": "These are OAuth client types, not the visibility of your Canvas content. Public clients use a Client ID without a client secret; private clients also use a secret. Follow the selected client's instructions, including any PKCE requirement.\n Some clients support only public or private keys while others support both. For clients that support both, public keys are preferred whenever possible."
+				"text": "These are OAuth client types, not the visibility of your Canvas content. Public clients use a Client ID without a client secret; private clients also use a secret. Follow the selected client's instructions, including any PKCE requirement.\nSome clients support only public or private keys while others support both. For clients that support both, public keys are preferred whenever possible.\nTo identify your key type, check the Canvas developer-key configuration or ask the administrator who manages it. Not receiving a secret does not by itself establish that a key is public."
+			},
+			{
+				"title": "Why do public keys require PKCE? Can private keys use it too?",
+				"text": "PKCE binds an authorization code to the client sign-in attempt that created it. The client generates a code_verifier, sends its SHA256-derived, unpadded base64url code_challenge with code_challenge_method=S256 during authorization, and sends the original verifier during token exchange.\nPublic Canvas keys require PKCE rather than a client secret. Private clients can also use PKCE, but must still authenticate with their client secret; PKCE and client authentication are separate checks. Follow the selected client's guide rather than constructing sign-in URLs by hand. See **Common Issues** for PKCE, invalid_client, or invalid_grant errors."
+			},
+			{
+				"title": "How do resource, audience, callback URI, and scope differ?",
+				"text": "The OAuth resource identifies the service the client wants to access, such as the Canvas MCP service. The developer key's Allowed Audiences determine which resources are approved. Audience configuration is administrator-controlled; use the endpoint and audience settings from this guide rather than substituting a Client ID or callback URI.\nThe callback URI is where the client receives the sign-in response and must match an approved Redirect URI. The scope describes requested permissions; follow the client's instructions for https://sso.canvaslms.com/all-client-scopes. These values have different purposes and are not interchangeable."
+			},
+			{
+				"title": "Can one developer key be used with multiple AI clients?",
+				"text": "A key can be shared across compatible clients when each client's exact approved callback URI is registered and the key type, scopes, audience settings, and institution policies support each configuration. Registering another callback does not make an unsupported client compatible or resolve a recorded blocker.\nAsk the key administrator to review the clients and install modes you plan to use. Use each client's documented callback, including any computed identifier, rather than reusing another client's callback."
 			},
 			{
 				"title": "Where do Client IDs, secrets, and callback URIs belong?",
@@ -59,18 +82,22 @@
 	{
 		"title": "Users",
 		"entries": [
-      {
-        "title": "What is the difference between Canvas MCP and a client?",
-        "text": "Canvas MCP is part of Canvas and manages the connection to a client. A client is an external AI Agent or application such as ChatGPT or Claude that connects to Canvas through the MCP."
-      },
+			{
+				"title": "What is the difference between Canvas MCP and a client?",
+				"text": "Canvas MCP is part of Canvas and manages the connection to a client. A client is an external AI Agent or application such as ChatGPT or Claude that connects to Canvas through the MCP."
+			},
 			{
 				"title": "Should I use personal or enterprise setup?",
 				"text": "Your administrator should provide you with pre-configured setup instructions that indicate which setup to use. Personal setup is for individual users managing their own client connections, while enterprise setup involves organization-managed configuration, permissions, or publication steps as documented by your administrator."
 			},
-      {
-        "title": "What can I do with the Canvas MCP?",
-        "text": "Canvas MCP gives your AI client tools to work with Canvas, such as finding courses, viewing assignments, and managing course content. Click **Available Tools** above to browse the tools, see example prompts, and filter by resource, read or write access, and role. The tools you can use depend on your Canvas permissions."
-      }
+			{
+				"title": "What do users need to do after their administrator configures the connection?",
+				"text": "Follow the client instructions supplied by your administrator, sign in to Canvas when prompted, and review the access request before approving it. Validate the connection with a safe action you are permitted to perform, such as listing your courses; completing sign-in alone does not prove tool calls work.\nSome clients refresh credentials automatically, but you may need to sign in again after credentials expire or access is revoked. The client and Canvas configuration determine this behavior. Canvas MCP does not give you permissions beyond those your Canvas account already has."
+			},
+			{
+				"title": "What can I do with the Canvas MCP?",
+				"text": "Canvas MCP gives your AI client tools to work with Canvas, such as finding courses, viewing assignments, and managing course content. Click **Available Tools** above to browse the tools, see example prompts, and filter by resource, read or write access, and role. The tools you can use depend on your Canvas permissions."
+			}
 		]
 	}
 ]
