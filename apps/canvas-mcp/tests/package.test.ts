@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import { readFile } from "node:fs/promises";
 import { name } from "../package.json" with { type: "json" };
 import { name as workspaceName } from "../../../package.json" with { type: "json" };
+import { getLogoSvg } from "@pantoken/plugin-logos";
 
 describe("package.json", () => {
 	const PREFIX_INDEX = 0,
@@ -15,15 +16,53 @@ describe("package.json", () => {
 });
 
 describe("Canvas MCP crawler directives", () => {
-	it("disallows crawling and marks the app as noindex and nofollow", async () => {
-		const [robots, rootRobots, html] = await Promise.all([
-			readFile(new URL("../public/robots.txt", import.meta.url), "utf8"),
+	it("allows unfurling the app without indexing it", async () => {
+		const [rootRobots, html] = await Promise.all([
 			readFile(new URL("../../../public/robots.txt", import.meta.url), "utf8"),
 			readFile(new URL("../index.html", import.meta.url), "utf8"),
 		]);
-		for (const directives of [robots, rootRobots])
-			expect(directives.trim()).toBe("User-agent: *\nDisallow: /");
+		expect(rootRobots.trim()).toBe("User-agent: *\nDisallow: /\nAllow: /canvas-mcp/");
 		expect(html).toMatch(/<meta\s+name="robots"\s+content="noindex, nofollow"\s*\/>/u);
+	});
+});
+
+describe("Canvas MCP URL unfurling metadata", () => {
+	it("publishes Open Graph, Twitter Card, and Schema.org metadata", async () => {
+		const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+		expect(html).toContain('property="og:title"');
+		expect(html).toContain('property="og:description"');
+		expect(html).toContain('property="og:url"');
+		expect(html).toContain('property="og:image"\n\t\t\tcontent="https://instructure.ai/canvas-mcp/og.png"');
+		expect(html).toContain('name="twitter:card"\n\t\t\tcontent="summary_large_image"');
+		expect(html).toContain('name="twitter:image"\n\t\t\tcontent="https://instructure.ai/canvas-mcp/og.png"');
+
+		const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/u)?.[1];
+		expect(jsonLd).toBeDefined();
+		expect(JSON.parse(jsonLd ?? "")).toMatchObject({
+			"@context": "https://schema.org",
+			"@type": "WebApplication",
+			name: "Canvas MCP setup",
+			url: "https://instructure.ai/canvas-mcp/",
+			image: "https://instructure.ai/canvas-mcp/og.png",
+		});
+	});
+
+	it("uses the centered Pantoken Canvas logo, specified color rails, and a 1200 by 630 PNG", async () => {
+		const [image, svg] = await Promise.all([
+			readFile(new URL("../public/og.png", import.meta.url)),
+			readFile(new URL("../public/og.svg", import.meta.url), "utf8"),
+		]);
+		const logo = getLogoSvg("canvas", "horizontal", "reversed")?.replace(/^<svg\b[^>]*>/u, "").replace(/<\/svg>\s*$/u, "");
+		const embeddedLogo = svg.match(/<g transform="translate\(300 [\d.]+\) scale\([\d.]+\)">([\s\S]*?)<\/g>\n\t<rect y="540"/u)?.[1];
+
+		expect(image.subarray(0, 8)).toEqual(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+		expect(image.readUInt32BE(16)).toBe(1200);
+		expect(image.readUInt32BE(20)).toBe(630);
+		expect(svg).toContain('<rect width="1200" height="630" fill="#0b1722"/>');
+		expect(svg).toContain('<rect y="540" width="1200" height="30" fill="#c01b1d"/>');
+		expect(svg).toContain('<rect y="570" width="1200" height="30" fill="#d31f21"/>');
+		expect(svg).toContain('<rect y="600" width="1200" height="30" fill="#e91c1c"/>');
+		expect(embeddedLogo).toBe(logo);
 	});
 });
 

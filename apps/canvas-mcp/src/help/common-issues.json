@@ -1,0 +1,66 @@
+[
+	{
+		"title": "General",
+		"entries": [
+		]
+	},
+	{
+		"title": "Admins",
+		"entries": [
+			{
+				"title": "The organization blocks the connection",
+				"text": "Ask an administrator to follow the selected client's enterprise guide and check server allowlists, connector permissions, and publication requirements. Personal setup does not bypass organization policy."
+			},
+			{
+				"title": "The key type or PKCE configuration does not match",
+				"text": "Use a key type supported by your client and follow its PKCE instructions. A public client must not depend on a secret. Do not change key type merely to work around an unexplained authentication error."
+			},
+			{
+				"title": "The Connect a Client tab in this guide is disabled",
+				"text": "Return to Configure a Server and check the Canvas domain, region, and Client ID. Generic MCP also requires at least one callback URI. A recorded client blocker can disable connection even when those fields are complete; see the client issues below."
+			}
+		]
+	},
+  {
+    "title": "Users",
+    "entries": [
+      {
+        "title": "Cannot sign in",
+        "text": "Ensure your Canvas credentials are correct and that your account has the necessary permissions. If the issue persists, contact your administrator for assistance."
+      },
+      {
+        "title": "Prompting Canvas doesn't work as expected",
+        "text": "Ensure that your client is correctly configured, and that you are authenticated to Canvas. The MCP only facilitates the connection to Canvas, it does not grant additional permissions or access beyond what your Canvas account allows.\nCheck that the activity you are attempting to perform is in the **Available Tools** list above and that you have permission in Canvas to perform those actions. If the issue persists, contact your administrator for assistance."
+      }
+    ]
+  },
+	{
+		"title": "Clients",
+		"entries": [
+			{
+				"title": "The client cannot reach the server",
+				"text": "Check that the Canvas domain, region, and production or beta environment match the developer key. Verify your organization's network and client policies. An unreachable endpoint alone does not establish an OAuth defect."
+			},
+			{
+				"title": "Cannot fetch authorization server metadata",
+				"text": "`[AgentHost] Failed to create MCP auth provider for https://<your-domain>.instructure.com/. Failed to fetch authorization server metadata from all attempted URLs.`\n**Why:** This is an OAuth discovery failure before Canvas sign-in. The advertised Canvas authorization server's OAuth metadata endpoint returned 404; The MCP's OAuth metadata endpoint returned 200, and Canvas's OpenID metadata endpoint returned 200 but advertised openid. The client did not attempt OpenID fallback.\n**Try:** Confirm the MCP URL matches your Canvas domain, environment, and region. Do not add a client secret to a public key, change the callback, or replace the MCP URL with a metadata URL as a workaround.\n**Escalate:** Report persistent failures through your Canvas administrator to Instructure, including the client version, error text, time, and attempted metadata URLs or HTTP errors if available. Do not include secrets, tokens, authorization codes, state values, or full authorization URLs."
+			},
+			{
+				"title": "OAuth provider returned `invalid_target`",
+				"text": "`invalid_target: The+requested+resource+is+invalid,+missing,+unknown,+or+malformed`\n**Why:** The provider rejected the target resource for the OAuth request.\n**Try:** Check that your configured MCP server URL exactly matches the guide for your Canvas domain, production or beta environment, and region, then retry the guide's sign-in command. The resource identifies the MCP service, not the OAuth callback URI or scope. Do not remove or spoof the resource parameter, change scopes, or disable audience validation as a workaround.\n**Escalate:** Report to your admin if the error persists or the configuration is managed; ask them to compare the requested resource with the developer key's Allowed Audience and confirm the correct tenant, environment, and region. Report to Instructure through your admin's support channel if those values are confirmed correct and sign-in still fails. Include the client/version, error text, time, configured MCP URL, and sanitized resource value if available."
+			},
+			{
+				"title": "OAuth provider returned `invalid_scope`",
+				"text": "`invalid_scope: A+requested+scope+is+invalid,+unknown,+malformed,+or+exceeds+the+scope+granted+by+the+resource+owner.+The+following+scopes+were+requested,+but+not+granted`\n**Why:** The OAuth provider rejected a requested scope. The client may have requested a discovered or default scope instead of the Canvas scope, or the developer key may not permit the requested scope.\n**Try:** Follow this client's setup instructions and request `https://sso.canvaslms.com/all-client-scopes` exactly; Save the configured scope before login and use the guide's explicit login command rather than relying on automatic scope discovery.\n**Escalate:** Report to Instructure through your admin's support channel if the admin confirms the requested scope and key configuration are correct and the rejection persists. Include the client/version, error text, time, and requested scope."
+			},
+			{
+				"title": "redirect_uri does not match client settings",
+				"text": "`{\"error\":\"invalid_request\",\"error_description\":\"redirect_uri does not match client settings\"}`\n**Why:** The callback URI sent during sign-in does not match the Canvas developer key configuration.\n**Try:** Confirm you selected the correct client and install flow and used its documented callback settings. Do not substitute the MCP server URL for the callback.\n**Escalate:** Report to your admin to compare the actual `redirect_uri` with the developer key's Redirect URIs, including scheme, hostname, port, path, and trailing slash, and register the exact approved callback. Computed or client-generated callbacks must be confirmed in the client. If you manage the key yourself, make that correction there. Report to Instructure through your admin's support channel if an exact approved match still fails after retrying sign-in. Include the client/version, error text, time, and a sanitized callback URI."
+			},
+			{
+				"title": "MCP server canvas-mcp already exists in local config",
+				"text": "**Why:** Your client already has a local server entry named canvas-mcp; adding the same name again would duplicate or overwrite configuration. This is a local configuration conflict.\n**Try:** Inspect and update the existing entry using the guide's manual configuration, or use the client's documented remove-and-add workflow, then sign in again. Preserve other servers and settings; do not delete the whole configuration file.\n**Escalate:** Report to your admin if the entry is organization-managed or you do not have permission to change it. This message alone does not need to be reported to Instructure."
+			}
+		]
+	}
+]

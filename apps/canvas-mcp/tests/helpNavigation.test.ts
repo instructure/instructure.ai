@@ -2,6 +2,12 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { mountApp } from "../src/app";
+import { COMMON_ISSUES, FAQS } from "../src/help/content";
+
+const originalFaqs = [...FAQS];
+const originalIssues = [...COMMON_ISSUES];
+const platformCommands = { mac: "echo mac-example", windows: "Write-Output windows-example" };
+const sharedCommand = "https://<example-host>.test/";
 
 function click(id: string): void {
 	document.querySelector<HTMLButtonElement>(`#${id}`)!.click();
@@ -18,9 +24,115 @@ describe("Help navigation", () => {
 		history.replaceState(null, "", "/canvas-mcp/");
 		localStorage.clear();
 		document.body.innerHTML = '<div id="root"></div>';
+		for (const groups of [FAQS, COMMON_ISSUES])
+			groups.splice(0, groups.length, {
+				title: "General",
+				entries: [
+					{ title: "Example question", text: "Example answer." },
+					{
+						title: "Example command",
+						text: "Run the example.",
+						commands: groups === FAQS ? platformCommands : sharedCommand,
+					},
+				],
+			});
 	});
 
-	afterEach(() => vi.unstubAllGlobals());
+	afterEach(() => {
+		vi.unstubAllGlobals();
+		FAQS.splice(0, FAQS.length, ...originalFaqs);
+		COMMON_ISSUES.splice(0, COMMON_ISSUES.length, ...originalIssues);
+	});
+
+	it.each(["faqs", "issues", "clients"])(
+		"restores manually opened and closed %s disclosures after remounting",
+		(section) => {
+			history.replaceState(null, "", `?page=help&help=${section}`);
+			mountApp("admin");
+			document.querySelector<HTMLElement>("#help-content details > summary")!.click();
+			mountApp("admin");
+			expect(document.querySelector<HTMLDetailsElement>("#help-content details")?.open).toBe(true);
+			document.querySelector<HTMLElement>("#help-content details > summary")!.click();
+			mountApp("admin");
+			expect(document.querySelector<HTMLDetailsElement>("#help-content details")?.open).toBe(false);
+		},
+	);
+
+	it("does not persist automatic search or print expansion", () => {
+		history.replaceState(null, "", "?page=help&help=faqs");
+		mountApp("admin");
+		const search = document.querySelector<HTMLInputElement>("[data-help-search]")!;
+		search.value = "Example";
+		search.dispatchEvent(new Event("input"));
+		globalThis.dispatchEvent(new Event("beforeprint"));
+		globalThis.dispatchEvent(new Event("afterprint"));
+		mountApp("admin");
+		expect(
+			[...document.querySelectorAll<HTMLDetailsElement>("#help-content details")].every(
+				(details) => !details.open,
+			),
+		).toBe(true);
+	});
+
+	it("renders and copies a shared Common Issues command without a platform switch", async () => {
+		const writeText = vi.fn().mockResolvedValue(undefined);
+		vi.stubGlobal("navigator", { clipboard: { writeText } });
+		history.replaceState(null, "", "?page=help&help=issues");
+		mountApp("admin");
+		const block = document.querySelector(".help-entry .shiki-block.language-text")!;
+		expect(block).not.toBeNull();
+		expect(block.closest(".shiki-code-group")).toBeNull();
+		const text = block.querySelector("pre code")!.textContent;
+		expect(text).toBe(sharedCommand);
+		expect(block.querySelector("example-host")).toBeNull();
+		block.querySelector<HTMLButtonElement>("[data-copy]")!.click();
+		await vi.waitFor(() => expect(writeText).toHaveBeenCalledWith(text));
+	});
+
+	it.each(["windows", "mac"] as const)(
+		"restores the %s FAQ command and persists platform switching",
+		(platform) => {
+			history.replaceState(null, "", `?page=help&help=faqs&platform=${platform}`);
+			mountApp("admin");
+			const panel = document.querySelector<HTMLElement>(
+				`.shiki-code-group [data-code-platform="${platform}"]`,
+			)!;
+			expect(panel.hidden).toBe(false);
+			expect(panel.querySelector("pre code")?.textContent).toBe(platformCommands[platform]);
+			const other = platform === "windows" ? "mac" : "windows";
+			document
+				.querySelector<HTMLButtonElement>(`.shiki-code-group [data-platform-choice="${other}"]`)!
+				.click();
+			expect(panel.hidden).toBe(true);
+			expect(document.querySelector<HTMLElement>(`[data-code-platform="${other}"]`)?.hidden).toBe(
+				false,
+			);
+			expect(new URLSearchParams(location.search).get("platform")).toBe(other);
+			choose("issues");
+			choose("faqs");
+			expect(document.querySelector<HTMLElement>(`[data-code-platform="${other}"]`)?.hidden).toBe(
+				false,
+			);
+		},
+	);
+
+	it("copies the FAQ command and finds it through Help search", async () => {
+		const writeText = vi.fn().mockResolvedValue(undefined);
+		vi.stubGlobal("navigator", { clipboard: { writeText } });
+		history.replaceState(null, "", "?page=help&help=faqs&platform=windows");
+		mountApp("admin");
+		const search = document.querySelector<HTMLInputElement>("[data-help-search]")!;
+		search.value = platformCommands.windows;
+		search.dispatchEvent(new Event("input"));
+		const group = document.querySelector(".shiki-code-group")!;
+		expect(group.closest("details")?.open).toBe(true);
+		expect(group.closest("details")?.hidden).toBe(false);
+		const button = group.querySelector<HTMLButtonElement>(
+			'[data-code-platform="windows"] [data-copy]',
+		)!;
+		button.click();
+		await vi.waitFor(() => expect(writeText).toHaveBeenCalledWith(button.dataset.copy));
+	});
 
 	it.each(["faqs", "issues"])(
 		"expands all %s disclosures for printing and restores their state",
@@ -78,10 +190,11 @@ describe("Help navigation", () => {
 		expect(document.querySelector("h1")?.textContent).toBe("Canvas MCP Help");
 		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
 		expect(document.querySelector("#domain-input")).toBeNull();
-		expect(document.querySelector("#help-content")?.textContent).toContain("What is Canvas MCP?");
+		expect(document.querySelector("#help-content [data-help-search]")).not.toBeNull();
+		expect(document.querySelector("#help-content details > summary")).not.toBeNull();
 	});
 
-	it.each(["faqs", "issues", "clients", "tools"])(
+	it.each(["faqs", "issues", "clients", "tools", "contact"])(
 		"supports %s deep links without setup",
 		(section) => {
 			history.replaceState(null, "", `?page=help&help=${section}&client=chatgpt`);
@@ -124,6 +237,35 @@ describe("Help navigation", () => {
 			"Help · Available Tools",
 		);
 		expect(document.querySelector(".print-permalink")?.textContent).toContain("help=tools");
+	});
+
+	it("opens Contact with community and issue form links without setup", () => {
+		history.replaceState(null, "", "?page=help&help=tools");
+		mountApp("admin");
+		choose("contact");
+		expect(document.activeElement?.id).toBe("help-section-contact");
+		expect(new URLSearchParams(location.search).get("help")).toBe("contact");
+		expect(document.querySelector("#help-content-heading")?.textContent).toBe("Contact");
+		expect(document.querySelector<HTMLAnchorElement>("#help-content a")?.href).toBe(
+			"https://community.instructure.com/en/group/70-canvas-mcp",
+		);
+		expect(
+			[...document.querySelectorAll<HTMLAnchorElement>("#contact-issues + p + ul a")].map((link) =>
+				new URL(link.href).searchParams.get("template"),
+			),
+		).toEqual([
+			"canvas-mcp-guides.yml",
+			"canvas-mcp-validation.yml",
+			"canvas-mcp-faq.yml",
+			"canvas-mcp-common-issues.yml",
+			"canvas-mcp-client.yml",
+		]);
+		expect(document.querySelector("[data-help-search], #tool-search")).toBeNull();
+		expect(document.querySelector(".print-context")?.textContent).toContain("Help · Contact");
+		expect(document.querySelector(".print-permalink")?.textContent).toContain("help=contact");
+		choose("faqs");
+		expect(document.querySelector("#contact-community")).toBeNull();
+		expect(document.querySelector("[data-help-search]")).not.toBeNull();
 	});
 
 	it("copies the example prompt from a tool card without setup", async () => {

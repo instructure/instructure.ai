@@ -40,11 +40,11 @@ describe("segmented-control interactions", () => {
 		for (let index = 0; index < 2; index++) {
 			const first = document.querySelector<HTMLInputElement>("#help-section-faqs")!;
 			first.dispatchEvent(new KeyboardEvent("keydown", { key: "End", bubbles: true }));
-			expect(document.querySelector<HTMLInputElement>("#help-section-tools")?.checked).toBe(true);
-			expect(document.activeElement?.id).toBe("help-section-tools");
+			expect(document.querySelector<HTMLInputElement>("#help-section-contact")?.checked).toBe(true);
+			expect(document.activeElement?.id).toBe("help-section-contact");
 			expect(document.querySelectorAll(".overflow-end")).toHaveLength(1);
 			mountApp("admin");
-			const last = document.querySelector<HTMLInputElement>("#help-section-tools")!;
+			const last = document.querySelector<HTMLInputElement>("#help-section-contact")!;
 			last.dispatchEvent(new KeyboardEvent("keydown", { key: "Home", bubbles: true }));
 			expect(document.querySelector<HTMLInputElement>("#help-section-faqs")?.checked).toBe(true);
 		}

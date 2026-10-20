@@ -1,0 +1,57 @@
+name: Canvas MCP — Guides and screenshots
+description: Add or correct a setup guide or screenshot in apps/canvas-mcp.
+title: "[Canvas MCP guide]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form is for the Canvas MCP setup guide in apps/canvas-mcp.
+        Do not include secrets, tokens, authorization codes, student records, or private customer details. Redact screenshots and logs.
+  - type: input
+    id: client
+    attributes:
+      label: Client and version
+      description: Include the operating system and whether this is a new or existing guide.
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: Install mode
+      options:
+        - Personal
+        - Enterprise
+        - Both
+        - Shared Canvas steps
+    validations:
+      required: true
+  - type: dropdown
+    id: key
+    attributes:
+      label: Key type
+      options:
+        - Public
+        - Private
+        - Both
+        - Not applicable
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Guide change
+      description: Identify the step or source file, current behavior, and proposed instructions. Include platform-specific differences.
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Attach sanitized images or identify missing/outdated screenshots. Include the step, suggested alt text, and manifest key if known.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sources and verification
+      description: Link documentation and give the date and outcome of any hands-on check. Distinguish documented instructions from tested behavior.
+    validations:
+      required: true

@@ -29,6 +29,17 @@ describe("Available Tools", () => {
 		const date = document.querySelector("time")!;
 		expect(date.textContent).toBe(catalog.catalog);
 		expect(date.compareDocumentPosition(document.querySelector("#tool-search")!) & 4).toBe(4);
+		expect(
+			document
+				.querySelector<HTMLLabelElement>('label[for="tool-search"]')
+				?.classList.contains("instui-screen-reader-content"),
+		).toBe(true);
+		expect(
+			document
+				.querySelector("#tool-search")
+				?.closest(".instui-input-group")
+				?.querySelector(".before .-icon-search"),
+		).not.toBeNull();
 		const cards = [...document.querySelectorAll("[data-tool-card]")];
 		expect(cards).toHaveLength(141);
 		expect(
@@ -73,7 +84,7 @@ describe("Available Tools", () => {
 
 	it("formats inline text and escapes HTML without interpolating placeholders", () => {
 		document.body.innerHTML = `<ul>${renderTool({
-			title: "<script>bad()</script>",
+			title: "**Tool** for `course_id` <script>bad()</script>",
 			description: "Use `course_id` and **the course** with `{value}`. <img src=x>",
 			roles: ["<teacher>"],
 			readOnly: true,
@@ -81,6 +92,8 @@ describe("Available Tools", () => {
 			resource: "quiz",
 		})}</ul>`;
 		expect(document.querySelector("script, img")).toBeNull();
+		expect(document.querySelector("h3 strong")?.textContent).toBe("Tool");
+		expect(document.querySelector("h3 code")?.textContent).toBe("course_id");
 		expect(
 			[...document.querySelectorAll(".tool-description code")].map((code) => code.textContent),
 		).toEqual(["course_id", "{value}"]);

@@ -1,0 +1,76 @@
+[
+	{
+		"title": "General",
+		"entries": [
+			{
+				"title": "What is the Canvas MCP?",
+				"text": "The Canvas MCP lets an MCP-enabled client connect to Canvas tools. This guide helps administrators configure a Canvas developer key and users connect their client. The guide itself does not make requests to Canvas or store configuration details."
+			},
+      {
+        "title": "Who can use the Canvas MCP?",
+        "text": "Any user with an MCP-enabled client and access to a Canvas instance can use the Canvas MCP if their administrator has configured it. Administrators will need to configure developer keys for their institution."
+      },
+      {
+        "title": "What roles and functions are supported?",
+        "text": "The Canvas MCP server authenticates users based on their Canvas account and enforces the roles and permissions defined by the Canvas instance. It supports the roles and functions available to the authenticated user within the Canvas environment. Administrators can configure scopes that determine the permissions granted to the client."
+      },
+			{
+				"title": "What does this guide store?",
+				"text": "Setup preferences may be saved in this browser, and setup links include configuration such as the domain and Client ID. Client secrets and access tokens are never requested or stored. Review configuration before sharing a link. This guide itself does not make requests to Canvas or store configuration details."
+			}
+		]
+	},
+	{
+		"title": "Admins",
+		"entries": [
+			{
+				"title": "What do public and private keys mean?",
+				"text": "These are OAuth client types, not the visibility of your Canvas content. Public clients use a Client ID without a client secret; private clients also use a secret. Follow the selected client's instructions, including any PKCE requirement.\n Some clients support only public or private keys while others support both. For clients that support both, public keys are preferred whenever possible."
+			},
+			{
+				"title": "Where do Client IDs, secrets, and callback URIs belong?",
+				"text": "Client IDs and secrets are generated and managed within the Canvas developer key configuration. Enter the Canvas developer key Client ID in the setup guide. Callback URIs are provided by the client and must match the registered URIs. Register the client's exact callback URI in the key's Redirect URIs. Enter a private client secret only in your approved client configuration, never in this guide, a shared URL, or source control."
+			},
+			{
+				"title": "Is the developer-key scope list approved for production?",
+				"text": "The scope manifest is approved for production and non-production use within the Canvas MCP setup. It defines the permissions required by the client and ensures proper access control for the configured scopes. The default scope list should be used unless specific adjustments are necessary for your setup."
+			},
+			{
+				"title": "What do the client statuses mean?",
+				"type": "list",
+				"text": [
+					"{{icon:check}} **Validated** means that the Canvas MCP has been successfully configured for that client configuration.",
+					"{{icon:info}} **Untested** means that the Canvas MCP configuration has not been tried for that client configuration.",
+					"{{icon:triangle-alert}} **Known issue** identifies an existing connection blocker.",
+					"{{icon:equal-approximately-not}} **Not applicable** means the key type or install mode is unavailable for that client.",
+					"Statuses are recorded per install mode, not as separate tests of every key type; the table preserves recorded notes and dates."
+				]
+			},
+			{
+				"title": "Which domain and region should I use?",
+				"text": "Use your school's `.instructure.com` domain, or its `.beta.instructure.com` domain for beta. The MCP endpoint is region-specific.\nRun the command below and enter your Canvas hostname, either a vanity domain or an `.instructure.com` domain, without a URL scheme or path. A single header request to `/login/canvas` finds the production `.instructure.com` hostname in `Content-Security-Policy` and the region in the `x-canvas-meta` header's `z` availability zone, with the final zone letter removed. The hostname and region are printed on separate lines. For beta setup, use the corresponding `.beta.instructure.com` hostname.",
+				"commands": {
+					"windows": "& {\n    $ErrorActionPreference = 'Stop'\n    $canvasHost = (Read-Host 'Canvas hostname').Trim().TrimEnd('.').ToLowerInvariant()\n    if ($canvasHost -notmatch '^[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?$') { throw 'Enter a hostname without a scheme or path.' }\n    $headers = & curl.exe -fsSIL --max-time 30 --proto '=https' --proto-redir '=https' \"https://$canvasHost/login/canvas\"\n    if ($LASTEXITCODE -ne 0) { throw 'Could not retrieve Canvas headers.' }\n    $domains = @()\n    $region = $null\n    foreach ($line in $headers) {\n        if ($line -match '(?i)^content-security-policy:\\s*(.*)$') {\n            foreach ($source in ($Matches[1] -split '[\\s;]+')) {\n                if ($source -match '^(?:https://)?([a-z0-9-]+\\.instructure\\.com)\\.?/?$' -and $Matches[1] -notmatch '-vanity\\.instructure\\.com$') {\n                    $domains += $Matches[1].ToLowerInvariant()\n                }\n            }\n        }\n        if ($line -match '(?i)^x-canvas-meta:.*;z=([a-z]{2}(?:-[a-z]+)+-\\d+)[a-z](?:;|$)') { $region = $Matches[1] }\n    }\n    $domains = @($domains | Sort-Object -Unique)\n    if ($domains.Count -ne 1) { throw 'Expected one production Canvas hostname in Content-Security-Policy.' }\n    if (-not $region) { throw 'No region found in the x-canvas-meta header.' }\n    $domains[0]\n    $region\n}",
+					"mac": "(\n    set -euo pipefail\n    printf 'Canvas hostname: ' >&2\n    read -r canvas_host\n    canvas_host=$(printf '%s' \"$canvas_host\" | tr '[:upper:]' '[:lower:]' | sed 's/\\.$//')\n    if ! [[ \"$canvas_host\" =~ ^[a-z0-9]([a-z0-9.-]*[a-z0-9])?$ ]]; then\n        echo 'Enter a hostname without a scheme or path.' >&2\n        exit 1\n    fi\n    headers=$(curl -fsSIL --max-time 30 --proto '=https' --proto-redir '=https' \"https://$canvas_host/login/canvas\")\n    domain=$(printf '%s\\n' \"$headers\" | tr -d '\\r' | awk '\n        tolower($1) == \"content-security-policy:\" {\n            for (i = 2; i <= NF; i++) {\n                source = tolower($i)\n                sub(/;$/, \"\", source)\n                sub(/^https:\\/\\//, \"\", source)\n                sub(/\\/$/, \"\", source)\n                sub(/\\.$/, \"\", source)\n                if (source ~ /^[a-z0-9-]+\\.instructure\\.com$/ && source !~ /-vanity\\.instructure\\.com$/) print source\n            }\n        }' | sort -u)\n    if ! [[ \"$domain\" =~ ^[a-z0-9-]+\\.instructure\\.com$ ]]; then\n        echo 'Expected one production Canvas hostname in Content-Security-Policy.' >&2\n        exit 1\n    fi\n    region=$(printf '%s\\n' \"$headers\" | tr -d '\\r' | sed -nE '/^[Xx]-[Cc][Aa][Nn][Vv][Aa][Ss]-[Mm][Ee][Tt][Aa]:/s/.*;z=([a-z]{2}(-[a-z]+)+-[0-9]+)[a-z](;.*)?$/\\1/p' | head -n 1)\n    if [ -z \"$region\" ]; then\n        echo 'No region found in the x-canvas-meta header.' >&2\n        exit 1\n    fi\n    printf '%s\\n%s\\n' \"$domain\" \"$region\"\n)"
+				}
+			}
+		]
+	},
+	{
+		"title": "Users",
+		"entries": [
+      {
+        "title": "What is the difference between Canvas MCP and a client?",
+        "text": "Canvas MCP is part of Canvas and manages the connection to a client. A client is an external AI Agent or application such as ChatGPT or Claude that connects to Canvas through the MCP."
+      },
+			{
+				"title": "Should I use personal or enterprise setup?",
+				"text": "Your administrator should provide you with pre-configured setup instructions that indicate which setup to use. Personal setup is for individual users managing their own client connections, while enterprise setup involves organization-managed configuration, permissions, or publication steps as documented by your administrator."
+			},
+      {
+        "title": "What can I do with the Canvas MCP?",
+        "text": "Canvas MCP gives your AI client tools to work with Canvas, such as finding courses, viewing assignments, and managing course content. Click **Available Tools** above to browse the tools, see example prompts, and filter by resource, read or write access, and role. The tools you can use depend on your Canvas permissions."
+      }
+		]
+	}
+]

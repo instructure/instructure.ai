@@ -44,7 +44,6 @@ export function renderPage(
 						<div class="page-heading-copy">
 							<div class="eyebrow"><img class="eyebrow-logo" alt="Canvas" src="${canvasLogoUri()}" /></div>
 							<h1 class="instui-heading -variant-title-page">${pageMode === "help" ? "Canvas MCP Help" : pageMode === "user" ? "Connect Canvas to your MCP client" : "Configure a Canvas MCP Server"}</h1>
-							${pageMode === "user" ? '<p class="lede">Follow the setup instructions for your MCP client.</p>' : ""}
 						</div>
 						<div class="page-heading-actions" role="group" aria-label="Page actions">
 							<button class="instui-button -color-tertiary -shape-square -icon-sliders-horizontal -size-md" type="button" popovertarget="settings-tray" aria-controls="settings-tray" aria-label="Open settings" title="Settings"></button>
@@ -59,7 +58,7 @@ export function renderPage(
 						<section id="setup-panel" class="panel" role="tabpanel" aria-labelledby="${pageMode === "help" ? "tab-help" : pageMode === "user" ? "tab-connect" : "tab-admin"}">
 					${
 						pageMode === "help"
-							? renderHelp(helpSection)
+							? renderHelp(helpSection, state.platform)
 							: `<div class="workspace-grid${pageMode === "admin" ? "" : " workspace-grid--single"} --mt-xl">
 						${pageMode === "admin" ? renderConfig(state, domainInputValue) : ""}
 						${knownIssue ? `<div class="instructions-column"><div class="instui-alert -color-danger -inline known-issue-alert${isGeminiNotice ? " gemini-deprecation-notice" : ""}" role="alert"><b>Known issue:</b> ${escapeHtml(knownIssue)}${isGeminiNotice ? ' <a href="https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/" target="_blank" rel="noopener noreferrer">Read Google\'s announcement</a>.' : ""}${status.kind === "known-issue" && status.diagnostic ? renderContent([{ kind: "code", language: "text", text: status.diagnostic }], {}, state.platform) : ""}</div>` : ""}

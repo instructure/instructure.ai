@@ -16,6 +16,7 @@
 @import "@pantoken/components/icons/send.css";
 @import "@pantoken/components/icons/moon.css";
 @import "@pantoken/components/icons/printer.css";
+@import "@pantoken/components/icons/search.css";
 @import "@pantoken/components/icons/sun.css";
 @import "@pantoken/components/icons/sliders-horizontal.css";
 @import "@pantoken/components/tray.css";
@@ -159,12 +160,16 @@ h1 {
     margin: 24px 0;
 }
 
+.help-search {
+    margin: 24px 0 0;
+}
+
 .tool-list {
     list-style: none;
     padding: 0;
 }
 
-.tool-list > li {
+.tool-list>li {
     margin-block: 24px;
     overflow-wrap: anywhere;
 }
@@ -176,7 +181,7 @@ h1 {
     gap: 6px;
 }
 
-.tool-access > .instui-pill.-color-info,
+.tool-access>.instui-pill.-color-info,
 .tool-access-pill {
     margin-right: 12px;
 }
@@ -188,7 +193,7 @@ h1 {
     margin-top: 12px;
 }
 
-.tool-filters > div {
+.tool-filters>div {
     flex: 1 1 180px;
 }
 
@@ -212,6 +217,10 @@ h1 {
 
 .help-entry p {
     margin: 0;
+}
+
+.help-entry p+p {
+    margin-top: 12px;
 }
 
 .help-matrix-scroll {
@@ -536,10 +545,14 @@ pre {
     overflow: hidden;
 }
 
-.shiki-block .shiki-copy {
+.shiki-block .shiki-copy,
+.shiki-block .shiki-copy:focus,
+.shiki-block .shiki-copy:active,
+.shiki-block .shiki-copy:hover {
     position: absolute;
     top: 8px;
     right: 8px;
+    background: var(--instui-color-background-container);
 }
 
 .shiki-block pre {
@@ -846,6 +859,10 @@ pre {
 
 .workflow-logo--canvas {
     background: var(--instui-logo-canvas-icon-color) center / contain no-repeat;
+}
+
+#setup-panel[aria-labelledby="tab-connect"] .guide-heading {
+    margin-top: 2rem;
 }
 
 .print-context {
