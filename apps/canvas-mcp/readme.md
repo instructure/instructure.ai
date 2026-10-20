@@ -2,8 +2,6 @@
 
 Single-page setup guide for connecting Canvas to supported MCP clients, served at `/canvas-mcp/`. Configure a server, connect a client, or open Help from the tabs in the app; the selected tab is represented by `page=admin`, `page=connect`, or `page=help` in the query string.
 
-Help includes a **Contact** segment (`page=help&help=contact`) linking to the [Instructure Community Canvas MCP group](https://community.instructure.com/en/group/70-canvas-mcp) and the issue forms below.
-
 ## Contributing
 
 Open an issue using the relevant template below, or submit a pull request with the affected client, install mode, and supporting evidence. Use synthetic examples and redact secrets, tokens, authorization codes, student records, and private details from text, logs, and screenshots.
