@@ -44,7 +44,6 @@ export function renderPage(
 						<div class="page-heading-copy">
 							<div class="eyebrow"><img class="eyebrow-logo" alt="Canvas" src="${canvasLogoUri()}" /></div>
 							<h1 class="instui-heading -variant-title-page">${pageMode === "help" ? "Canvas MCP Help" : pageMode === "user" ? "Connect Canvas to your MCP client" : "Configure a Canvas MCP Server"}</h1>
-							${pageMode === "user" ? '<p class="lede">Follow the setup instructions for your MCP client.</p>' : ""}
 						</div>
 						<div class="page-heading-actions" role="group" aria-label="Page actions">
 							<button class="instui-button -color-tertiary -shape-square -icon-sliders-horizontal -size-md" type="button" popovertarget="settings-tray" aria-controls="settings-tray" aria-label="Open settings" title="Settings"></button>
