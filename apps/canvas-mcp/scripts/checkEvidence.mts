@@ -5,7 +5,7 @@ import { SCREENSHOT_MANIFEST } from "../src/guides/screenshot-manifest";
 const today = Date.now(),
 	staleAfter = 180 * 86_400_000;
 let warnings = 0;
-for (const client of CLIENTS.filter((client) => client.group === "Curated")) {
+for (const client of CLIENTS) {
 	const sources: Evidence[] = [
 		...[
 			client.facts.remoteHttp,
@@ -16,8 +16,13 @@ for (const client of CLIENTS.filter((client) => client.group === "Curated")) {
 			...Object.values(client.facts.keyTypes),
 		].flatMap((fact) => fact.evidence),
 		...(client.facts.redirectUri.kind === "unverified" ? [] : client.facts.redirectUri.evidence),
+		...Object.values(client.redirectUriOverrides ?? {}).flatMap((redirect) =>
+			redirect.kind === "unverified" ? [] : redirect.evidence,
+		),
 		...Object.values(client.guides ?? {}).flatMap((guide) => guide?.sources ?? []),
 		...(client.blocker?.evidence ?? []),
+		...(client.research?.sources ?? []),
+		...Object.values(client.research?.installSupport ?? {}).flatMap((fact) => fact.evidence),
 	];
 	const seen = new Set<string>();
 	if (!sources.length) {

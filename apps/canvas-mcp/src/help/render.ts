@@ -142,7 +142,7 @@ function unavailableInstallReason(client: ClientDefinition, install: InstallMode
 }
 
 function renderClientIssues(): string {
-	const issues = curatedClients().flatMap((client) =>
+	const issues = CLIENTS.flatMap((client) =>
 		(["enterprise", "personal"] as const).flatMap((install) => {
 			if (unavailableInstallReason(client, install)) return [];
 			const status = clientStatus(client, install);
@@ -201,26 +201,8 @@ function renderStatus(client: ClientDefinition, install: InstallMode, key: KeyTy
 	const unavailable = unavailableInstallReason(client, install);
 	if (unavailable)
 		return `<span class="instui-pill -color-info -icon-equal-approximately-not">Not applicable</span>`;
-	const status = clientStatus(client, install);
 	const support = client.facts.keyTypes[key];
 	if (support.value === "no")
 		return `<span class="instui-pill -color-info -icon-equal-approximately-not">Not applicable</span>`;
-	const reason = client.blocker?.reason ?? (status.kind === "known-issue" ? status.reason : "");
-	if (!reason && status.kind === "untested") return renderStatusPill(client, install);
-	const notes = [
-		reason,
-		...(status.kind === "validated"
-			? [
-					`Tested: ${status.testedAt}`,
-					status.note ?? "",
-					...(status.platform ? [`Platform: ${status.platform}`] : []),
-				]
-			: []),
-		...(client.installModes.length === 0 ? ["Install flow unverified."] : []),
-		...(support.value === "unknown" ? ["Key support unverified."] : []),
-	];
-	return `${renderStatusPill(client, install)}${notes
-		.filter(Boolean)
-		.map((note) => `<p>${renderInlineText(note)}</p>`)
-		.join("")}`;
+	return renderStatusPill(client, install);
 }

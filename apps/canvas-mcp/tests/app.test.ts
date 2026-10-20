@@ -4,6 +4,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { readFile } from "node:fs/promises";
 import { mountApp } from "../src/app";
 import { SCOPE_MANIFEST } from "../src/scopes";
+import { clientDefinition } from "../src/clients";
+import { type Client } from "../src/clients/ids";
 
 describe("Canvas MCP pages", () => {
 	beforeEach(() => {
@@ -570,7 +572,7 @@ describe("Canvas MCP pages", () => {
 		expect(otherOptions[0].value).toBe("generic");
 		expect(otherOptions[0].textContent).toBe("Generic MCP client");
 		const rulesyncNames = otherOptions.slice(1).map((option) => option.textContent ?? "");
-		expect(rulesyncNames).toHaveLength(55);
+		expect(rulesyncNames).toHaveLength(56);
 		expect(rulesyncNames).toEqual(
 			[...rulesyncNames].sort((left, right) => left.localeCompare(right)),
 		);
@@ -594,14 +596,14 @@ describe("Canvas MCP pages", () => {
 			[...document.querySelectorAll(".settings-table tbody tr")]
 				.find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs")
 				?.querySelector("td")?.textContent,
-		).toBe("Client callback URI");
+		).toBe("https://www.cursor.com/agents/mcp/oauth/callback\nhttp://localhost:8787/callback");
 		const cursorRedirect = [
 			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
 		].find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs");
-		expect(cursorRedirect?.querySelector(".setting-value-muted")?.textContent).toBe(
-			"Client callback URI",
+		expect(cursorRedirect?.querySelector(".setting-value-muted")).toBeNull();
+		expect(cursorRedirect?.querySelector("button")?.getAttribute("data-copy")).toContain(
+			"http://localhost:8787/callback",
 		);
-		expect(cursorRedirect?.querySelector("pre, button")).toBeNull();
 
 		clientSelect.value = "codex";
 		clientSelect.dispatchEvent(new Event("change", { bubbles: true }));
@@ -823,6 +825,10 @@ describe("Canvas MCP pages", () => {
 			currentSelect.value = clientId;
 			currentSelect.dispatchEvent(new Event("change", { bubbles: true }));
 
+			if (clientDefinition(clientId as Client).facts.staticClientId.value === "no") {
+				expect(document.querySelector("#client-id-input")).toBeNull();
+				continue;
+			}
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.required).toBe(true);
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.maxLength).toBe(17);
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.pattern).toBe(

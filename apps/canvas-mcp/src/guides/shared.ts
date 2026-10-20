@@ -14,14 +14,56 @@ export function clientGuide(client: ClientDefinition, install: "personal" | "ent
 				{
 					id: "provider-configure",
 					kind: "provider",
+					...(client.research ? { audience: "client" as const } : {}),
 					title: "Configure your MCP client",
-					content: [{ kind: "paragraph", text: client.setupNote }],
+					content: [
+						{
+							kind: "paragraph",
+							text: client.research
+								? "Use the connection fields in your MCP client's supported configuration. Follow the client's documentation for the configuration format and authentication controls."
+								: client.setupNote,
+						},
+						...(client.configurationUrl
+							? [
+									{
+										kind: "link" as const,
+										label: `Open ${client.name} MCP configuration documentation`,
+										url: client.configurationUrl,
+									},
+								]
+							: []),
+					],
+				},
+				{
+					id: "authorize",
+					kind: "provider",
+					audience: "client",
+					title: "Authorize Canvas access",
+					content: [
+						{
+							kind: "paragraph",
+							text: "Start authentication in your MCP client. Open the authorization link in your browser if it does not open automatically, then sign in to Canvas with your own account if prompted.",
+						},
+						{
+							kind: "paragraph",
+							text: "On the Canvas authorization screen, click **Authorize** to allow the MCP client to access Canvas on your behalf.",
+						},
+						canvasAuthorizationScreenshot(),
+					],
 				},
 				{
 					id: "verify",
 					kind: "verify",
 					title: "Verify the connection",
-					content: [{ kind: "paragraph", text: client.verify }, canvasAuthorizationScreenshot()],
+					content: [
+						{
+							kind: "paragraph",
+							text: "Return to your MCP client after authorizing Canvas access.",
+						},
+						{ kind: "paragraph", text: client.verify },
+						{ kind: "paragraph", text: "Try a prompt:" },
+						{ kind: "code", language: "prompt", text: "list my Canvas courses" },
+					],
 				},
 			],
 		}

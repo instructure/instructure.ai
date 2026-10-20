@@ -115,9 +115,24 @@ export const geminiCli = {
 	group: "Curated",
 	status: {
 		kind: "known-issue",
+		category: "lifecycle",
 		reason:
 			"Gemini CLI was replaced by Antigravity CLI for unpaid-tier and Google One users on June 18, 2026. Use Antigravity CLI.",
 		installModes: ["personal"],
+	},
+	lifecycleNotices: {
+		personal: {
+			title: "Gemini CLI has been replaced for personal access",
+			message:
+				"Gemini CLI was replaced by Antigravity CLI for unpaid-tier and Google One users on June 18, 2026. Use Antigravity CLI.",
+			url: "https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/",
+		},
+		enterprise: {
+			title: "Transition to Antigravity CLI",
+			message:
+				"Google is consolidating development around Antigravity, but Gemini Code Assist Standard or Enterprise access remains unchanged and supported. Administrators can evaluate Antigravity CLI with Google Cloud projects; feature parity is not yet complete.",
+			url: "https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/",
+		},
 	},
 	installModes: ["personal", "enterprise"],
 	enterpriseSurface: "Gemini CLI enterprise controls",

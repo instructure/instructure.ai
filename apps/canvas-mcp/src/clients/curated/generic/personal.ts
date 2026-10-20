@@ -57,23 +57,36 @@ const clientSteps: ClientGuideStep[] = [
 		],
 	},
 	{
+		id: "authorize",
+		kind: "provider",
+		audience: "client",
+		title: "Authorize Canvas access",
+		content: [
+			{
+				kind: "paragraph",
+				text: "Start authentication in your MCP client. Open the authorization link in your browser if it does not open automatically, then sign in to Canvas with your own account if prompted.",
+			},
+			{
+				kind: "paragraph",
+				text: "On the Canvas authorization screen, click **Authorize** to allow the MCP client to access Canvas on your behalf.",
+			},
+			canvasAuthorizationScreenshot(),
+		],
+	},
+	{
 		id: "verify",
 		kind: "verify",
 		title: "Verify the connection",
 		content: [
 			{
 				kind: "paragraph",
-        text: "Canvas will present you with a modal to authorize the **MCP Test** server for your user account. You may be required to sign in to Canvas first if you are not already signed in.",
+				text: "Return to your MCP client after authorizing Canvas access and confirm the server is connected and its tools are available.",
 			},
-			canvasAuthorizationScreenshot(),
-      {
-				kind: "paragraph",
-        text: "Once authorized, return to your client and verify it works by asking it to list your Canvas courses.",
-			},
-      {
+			{ kind: "paragraph", text: "Try a prompt:" },
+			{
 				kind: "code",
 				language: "prompt",
-				text: "List my Canvas courses",
+				text: "list my Canvas courses",
 			},
 		],
 	},
