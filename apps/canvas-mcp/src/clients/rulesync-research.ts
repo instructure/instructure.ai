@@ -12,10 +12,12 @@ import {
 // Reviewed against vendor documentation/source on this date. These are capability
 // findings, not successful Canvas sign-ins. Missing documentation is not a "no".
 const checkedAt = "2026-10-20";
-function source(label: string, url: string): Evidence {
-	const version = url.match(/\/blob\/([^/]+)/u)?.[1];
+export function source(label: string, url: string): Evidence {
+	const parsedUrl = new URL(url);
+	const isGitHub = parsedUrl.protocol === "https:" && parsedUrl.hostname === "github.com";
+	const version = isGitHub ? parsedUrl.pathname.match(/\/blob\/([^/]+)/u)?.[1] : undefined;
 	return {
-		method: url.includes("github.com/") ? "source" : "vendor-doc",
+		method: isGitHub ? "source" : "vendor-doc",
 		label,
 		url,
 		...(version && !["main", "main-v2", "master"].includes(version) ? { version } : {}),

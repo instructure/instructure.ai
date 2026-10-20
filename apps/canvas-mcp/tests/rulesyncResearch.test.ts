@@ -7,8 +7,51 @@ import { readState } from "../src/state";
 import { connectionReadiness } from "../src/setup";
 import { renderHelp } from "../src/help/render";
 import { RULESYNC_COMMIT, RULESYNC_TARGETS, RULESYNC_VERSION } from "../src/rulesyncTargets";
+import { source } from "../src/clients/rulesync-research";
 
 const configured = "domain=example.instructure.com&region=us-east-1&clientId=12345000000000001";
+
+describe("research evidence URLs", () => {
+	it.each([
+		"https://github.com/owner/repo/blob/abc123/file.ts",
+		"https://GITHUB.COM/owner/repo/blob/abc123/file.ts",
+	])("recognizes the exact HTTPS GitHub host: %s", (url) => {
+		expect(source("Example", url)).toMatchObject({ method: "source", version: "abc123", url });
+	});
+
+	it.each([
+		"https://vendor.example/docs/github.com/owner/repo/blob/abc123/file.ts",
+		"https://github.com.example/owner/repo/blob/abc123/file.ts",
+		"https://notgithub.com/owner/repo/blob/abc123/file.ts",
+		"https://github.com@vendor.example/owner/repo/blob/abc123/file.ts",
+		"https://vendor.example/?url=https://github.com/owner/repo/blob/abc123/file.ts",
+		"https://vendor.example/#https://github.com/owner/repo/blob/abc123/file.ts",
+		"http://github.com/owner/repo/blob/abc123/file.ts",
+	])("does not classify a non-HTTPS-GitHub URL as source evidence: %s", (url) => {
+		const evidence = source("Example", url);
+		expect(evidence.method).toBe("vendor-doc");
+		expect(evidence).not.toHaveProperty("version");
+	});
+
+	it.each(["main", "main-v2", "master"])(
+		"does not record mutable branch %s as a version",
+		(branch) => {
+			expect(
+				source("Example", `https://github.com/owner/repo/blob/${branch}/file.ts`),
+			).not.toHaveProperty("version");
+		},
+	);
+
+	it("does not extract a version from a query parameter on GitHub", () => {
+		expect(
+			source("Example", "https://github.com/owner/repo?path=/blob/abc123/file.ts"),
+		).not.toHaveProperty("version");
+	});
+
+	it("rejects malformed evidence URLs", () => {
+		expect(() => source("Example", "not a URL")).toThrow(TypeError);
+	});
+});
 
 describe("researched Rulesync clients", () => {
 	it("shows detailed admin issue alerts for blockers without an explicit status", () => {
