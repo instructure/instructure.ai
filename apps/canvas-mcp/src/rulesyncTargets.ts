@@ -1,5 +1,8 @@
-export const RULESYNC_VERSION = "36.0.2";
-export const RULESYNC_COMMIT = "67c5ff341c325305d9759bf749f2708f5fc395c4";
+export const RULESYNC_VERSION = "38.0.0";
+export const RULESYNC_COMMIT = "335de85dbd42b5df255ff55148a325ce9d95d0e0";
+
+// MCP-capable targets from the pinned upstream tuple. claudecode-legacy is
+// represented by the curated Claude Code client rather than a duplicate option.
 
 export const RULESYNC_TARGETS = [
 	{ id: "amp", name: "Amp" },
@@ -20,6 +23,7 @@ export const RULESYNC_TARGETS = [
 	{ id: "deepagents", name: "deepagents-cli" },
 	{ id: "factorydroid", name: "Factory Droid" },
 	{ id: "opencode", name: "OpenCode" },
+	{ id: "openclaw", name: "OpenClaw" },
 	{ id: "mimocode", name: "MiMo Code" },
 	{ id: "gitlabduo", name: "GitLab Duo CLI" },
 	{ id: "cline", name: "Cline" },
@@ -30,7 +34,7 @@ export const RULESYNC_TARGETS = [
 	{ id: "rovodev", name: "Rovodev (Atlassian)" },
 	{ id: "takt", name: "Takt" },
 	{ id: "trae", name: "Trae" },
-	{ id: "tabnine", name: "Tabnine CLI" },
+	{ id: "tabnine", name: "Tabnine CLI (Legacy)" },
 	{ id: "continue", name: "Continue" },
 	{ id: "cortexcode", name: "Snowflake Cortex Code" },
 	{ id: "vibe", name: "Vibe Code" },
@@ -40,7 +44,7 @@ export const RULESYNC_TARGETS = [
 	{ id: "musecode", name: "Meta Muse Code" },
 	{ id: "reasonix", name: "Reasonix" },
 	{ id: "codebuff", name: "Codebuff (Freebuff)" },
-	{ id: "kiro", name: "Kiro" },
+	{ id: "kiro", name: "Kiro (deprecated alias)" },
 	{ id: "kiro-cli", name: "Kiro CLI" },
 	{ id: "kiro-ide", name: "Kiro IDE" },
 	{ id: "antigravity-ide", name: "Google Antigravity IDE" },

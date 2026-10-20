@@ -8,7 +8,7 @@ export function resolveKeySettings(
 	state: AppState,
 	callback?: CallbackResolution,
 ) {
-	const redirect = client.facts.redirectUri;
+	const redirect = client.redirectUriOverrides?.[state.install] ?? client.facts.redirectUri;
 	let redirectText: string,
 		copyable = false;
 	switch (redirect.kind) {
@@ -19,6 +19,9 @@ export function resolveKeySettings(
 		case "client-generated":
 			redirectText =
 				"Leave Redirect URIs blank when creating the key. Add the generated URI after saving the connector.";
+			break;
+		case "runtime":
+			redirectText = redirect.description;
 			break;
 		case "configurable":
 			redirectText = redirect.defaultUri;
@@ -46,7 +49,11 @@ export function resolveKeySettings(
 	}
 	return {
 		name: `Canvas MCP — ${client.name}`,
-		redirect: { text: redirectText, copyable },
+		redirect: {
+			text: redirectText,
+			copyable,
+			note: redirect.kind === "configurable" ? redirect.note : "",
+		},
 		productionDomain: state.domain.replace(".beta.instructure.com", ".instructure.com"),
 		beta: isBetaDomain(state.domain),
 		clientType: state.key === "private" ? "Confidential" : "Public",

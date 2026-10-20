@@ -5,7 +5,9 @@ import { type AppState } from "../state";
 import { escapeHtml } from "../ui/html";
 export function renderConfig(state: AppState, domainInputValue: string): string {
 	const client = clientDefinition(state.client),
-		status = clientStatus(client, state.install);
+		status = client.blocker
+			? { kind: "known-issue" as const, reason: client.blocker.reason }
+			: clientStatus(client, state.install);
 	return `<aside class="instui-card -variant-base controls-panel" aria-label="Setup options">
 							<div class="content">
 							<h2 class="instui-heading -variant-title-card-regular">Configuration</h2>

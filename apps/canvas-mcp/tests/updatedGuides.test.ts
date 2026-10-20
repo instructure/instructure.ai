@@ -420,7 +420,7 @@ describe("curated guide structure and behavior", () => {
 		).toBe(true);
 	});
 
-	it("shows Gemini CLI's personal error and enterprise admin transition warning", () => {
+	it("shows Gemini CLI's personal replacement and enterprise admin transition warnings", () => {
 		history.replaceState(
 			null,
 			"",
@@ -429,9 +429,9 @@ describe("curated guide structure and behavior", () => {
 		mountApp("admin");
 		const notice = () => document.querySelector(".gemini-deprecation-notice");
 		expect(notice()?.querySelector("a[href]")).not.toBeNull();
-		expect(notice()?.classList.contains("-color-danger")).toBe(true);
-		expect(notice()?.classList.contains("-color-warning")).toBe(false);
-		expect(notice()?.getAttribute("role")).toBe("alert");
+		expect(notice()?.classList.contains("-color-warning")).toBe(true);
+		expect(notice()?.classList.contains("-color-danger")).toBe(false);
+		expect(notice()?.getAttribute("role")).toBe("status");
 		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
 		expect(
 			document.querySelector<HTMLButtonElement>("#configure-client-button-bottom")?.disabled,
@@ -465,7 +465,7 @@ describe("curated guide structure and behavior", () => {
 		const personal = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
 		personal.checked = false;
 		personal.dispatchEvent(new Event("change", { bubbles: true }));
-		expect(notice()?.classList.contains("-color-danger")).toBe(true);
+		expect(notice()?.classList.contains("-color-warning")).toBe(true);
 		const client = document.querySelector<HTMLSelectElement>("#client-select")!;
 		client.value = "claude-code";
 		client.dispatchEvent(new Event("change", { bubbles: true }));

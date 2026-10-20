@@ -21,11 +21,15 @@ export function renderPage(
 ): string {
 	const client = clientDefinition(state.client),
 		status = clientStatus(client, state.install),
-		knownIssue = status.kind === "known-issue" ? status.reason : "",
-		isGeminiNotice = client.id === "gemini-cli" && Boolean(knownIssue),
-		enterpriseTransition =
-			pageMode === "admin" && client.id === "gemini-cli" && state.install === "enterprise",
-		hasNotice = Boolean(knownIssue) || enterpriseTransition,
+		lifecycleNotice =
+			pageMode === "admin" || (status.kind === "known-issue" && status.category === "lifecycle")
+				? client.lifecycleNotices?.[state.install]
+				: undefined,
+		knownIssue =
+			status.kind === "known-issue" && status.category === "lifecycle" && lifecycleNotice
+				? ""
+				: (client.blocker?.reason ?? (status.kind === "known-issue" ? status.reason : "")),
+		hasNotice = Boolean(knownIssue || lifecycleNotice),
 		hasValidDomain = Boolean(state.domain),
 		installLabel = client.installModes.length === 0 ? "install flow unverified" : state.install,
 		copiedLabel = "",
@@ -61,9 +65,10 @@ export function renderPage(
 							? renderHelp(helpSection, state.platform)
 							: `<div class="workspace-grid${pageMode === "admin" ? "" : " workspace-grid--single"} --mt-xl">
 						${pageMode === "admin" ? renderConfig(state, domainInputValue) : ""}
-						${knownIssue ? `<div class="instructions-column"><div class="instui-alert -color-danger -inline known-issue-alert${isGeminiNotice ? " gemini-deprecation-notice" : ""}" role="alert"><b>Known issue:</b> ${escapeHtml(knownIssue)}${isGeminiNotice ? ' <a href="https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/" target="_blank" rel="noopener noreferrer">Read Google\'s announcement</a>.' : ""}${status.kind === "known-issue" && status.diagnostic ? renderContent([{ kind: "code", language: "text", text: status.diagnostic }], {}, state.platform) : ""}</div>` : ""}
-						${enterpriseTransition ? `<div class="instructions-column"><div class="instui-alert -color-warning -inline gemini-deprecation-notice" role="status"><b>Transition to Antigravity CLI:</b> Google is consolidating development around Antigravity, but Gemini Code Assist Standard or Enterprise access remains unchanged and supported. Administrators can evaluate Antigravity CLI with Google Cloud projects; feature parity is not yet complete. <a href="https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/" target="_blank" rel="noopener noreferrer">Read Google's announcement</a>.</div>` : ""}
-						<section class="instui-card -variant-base details-panel" ><div class="content">${pageMode === "user" && connectionReadiness(state, client).blocked && status.kind !== "known-issue" ? `<p class="instui-alert -color-warning -inline" role="status">${escapeHtml(connectionReadiness(state, client).reason)}</p>` : ""}${renderGuide(client, state, pageMode === "admin", callback)}</div></section>
+						${hasNotice ? '<div class="instructions-column">' : ""}
+						${knownIssue ? `<div class="instui-alert -color-danger -inline known-issue-alert" role="alert"><b>Known issue:</b> ${escapeHtml(knownIssue)}${status.kind === "known-issue" && status.diagnostic ? renderContent([{ kind: "code", language: "text", text: status.diagnostic }], {}, state.platform) : ""}</div>` : ""}
+						${lifecycleNotice ? `<div class="instui-alert -color-warning -inline lifecycle-notice${client.id === "gemini-cli" ? " gemini-deprecation-notice" : ""}" role="status"><b>${escapeHtml(lifecycleNotice.title)}:</b> ${escapeHtml(lifecycleNotice.message)}${lifecycleNotice.url ? ` <a href="${escapeHtml(lifecycleNotice.url)}" target="_blank" rel="noopener noreferrer">Read the announcement</a>.` : ""}</div>` : ""}
+						<section class="instui-card -variant-base details-panel" ><div class="content">${pageMode === "user" && connectionReadiness(state, client).blocked && !hasNotice ? `<p class="instui-alert -color-warning -inline" role="status">${escapeHtml(connectionReadiness(state, client).reason)}</p>` : ""}${renderGuide(client, state, pageMode === "admin", callback)}</div></section>
 						${hasNotice ? "</div>" : ""}
 					</div>`
 					}

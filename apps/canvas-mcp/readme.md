@@ -20,6 +20,10 @@ Open an issue using the relevant template below, or submit a pull request with t
 
 The validation record lives in the [client definitions](src/clients/curated/). Record the client version, operating system, test date, install mode, key type, and observed outcome. Use the [client status and evidence types](src/clients/types.ts) for `status`, supported facts, source links, and blockers.
 
+Research for Rulesync's **Other** clients lives in [rulesync-research.ts](src/clients/rulesync-research.ts). Those records populate server settings, shared client connection fields, and Help status indicators without adding client-specific guides. The shared “Configure your MCP client” step links to the client configuration documentation; research notes and sources remain in the data records. Attach dated vendor documentation or pinned source evidence to capabilities and callbacks. Enterprise support means organization-managed configuration, a shared catalog, or policy controls; an enterprise subscription or a checked-in project file alone does not establish it. Keep missing evidence **Unverified**, distinct from explicit **Unsupported** findings and live Canvas validation. Configurable callbacks must include the matching client setting; runtime-dependent callbacks remain non-copyable. Plugin targets inherit host OAuth facts, while plugin enterprise distribution requires separate evidence.
+
+The current target snapshot uses Rulesync **v38.0.0**. See the [upgrade review](docs/rulesync-v38-review.md) for target membership changes, configuration changes, and their impact on the app.
+
 A successful configuration or sign-in alone does not prove that tools work: include the result of a safe, permitted tool call. Do not mark untested configurations as validated or generalize one result to other versions, install modes, or key types. For failures, provide sanitized reproduction steps and distinguish observations from suspected causes.
 
 ### FAQs

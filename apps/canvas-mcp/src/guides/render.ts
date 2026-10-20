@@ -153,6 +153,18 @@ function renderFields(
 			["Token URL", values.tokenUrl],
 			["Client ID", values.clientId],
 			["Scope", values.scope],
+			...(client.research
+				? [
+						["Callback URIs", model.redirect.text],
+						["Client type", model.clientType],
+						[
+							"Client secret",
+							state.key === "private"
+								? "Enter the Canvas key secret directly in the client"
+								: "Omit (public key)",
+						],
+					]
+				: []),
 			[
 				"PKCE",
 				state.key === "public"
@@ -162,7 +174,7 @@ function renderFields(
 						: "Optional for a Canvas private key",
 			],
 		];
-	return `<section class="guide-fields"><h3 class="instui-heading -level-h3">Connection fields</h3><table class="instui-table"><thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody>${fields.map(([name, value]) => `<tr><th scope="row">${escapeHtml(name)}</th><td><code${name === "Client ID" ? ' data-guide-token="clientId"' : ""}>${escapeHtml(value)}</code></td></tr>`).join("")}</tbody></table>${editable ? "" : state.key === "private" ? "<p>Enter the key secret directly in the provider's secret field. Never paste it into this guide or a setup link.</p>" : "<p>A public key uses the Client ID without a client secret. Public is preferred when the client supports both key types.</p>"}</section>`;
+	return `<section class="guide-fields"><h3 class="instui-heading -level-h3">Connection fields</h3><table class="instui-table"><thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody>${fields.map(([name, value]) => `<tr><th scope="row">${escapeHtml(name)}</th><td><code${name === "Client ID" ? ' data-guide-token="clientId"' : ""}>${escapeHtml(value)}</code></td></tr>`).join("")}</tbody></table>${model.redirect.note ? `<p>${escapeHtml(model.redirect.note)}</p>` : ""}${editable ? "" : state.key === "private" ? "<p>Enter the key secret directly in the provider's secret field. Never paste it into this guide or a setup link.</p>" : "<p>A public key uses the Client ID without a client secret. Public is preferred when the client supports both key types.</p>"}</section>`;
 }
 function renderStep(
 	step: GuideStep,
@@ -216,7 +228,7 @@ export function renderGuide(
 	// A connection blocker does not hide the administrator's provisioning instructions.
 	if (client.blocker && !editable) return heading;
 	const pending =
-		!editable && guide.status === "pending"
+		!editable && guide.status === "pending" && !client.research
 			? '<p class="guide-pending">Provider instructions are awaiting source verification. The connection fields and workflow below are provisional.</p>'
 			: "";
 	const steps = (
@@ -226,7 +238,7 @@ export function renderGuide(
 		? `<fieldset class="instui-segmented-control guide-surfaces" aria-label="Setup instructions"><div class="viewport"><div class="track">${(["canvas", "provider"] as const).map((surface) => `<label><input id="guide-surface-${surface}" type="radio" name="guide-surface" value="${surface}" data-guide-surface="${surface}" aria-controls="guide-${surface}" ${activeSurface === surface ? "checked" : ""}>${surface === "canvas" ? "1. Canvas" : `2. ${escapeHtml(provider)}`}</label>`).join("")}</div></div></fieldset>`
 		: "";
 	const body = !editable
-		? `<section id="guide-provider" class="guide-surface" aria-label="${escapeHtml(client.name)} setup">${steps.map((step) => renderStep(step, client, state, false, model)).join("")}</section>`
+		? `<section id="guide-provider" class="guide-surface" aria-label="${escapeHtml(client.name)} setup">${client.research ? renderFields(client, state, model, false) : ""}${steps.map((step) => renderStep(step, client, state, false, model)).join("")}</section>`
 		: guide.presentation === "interleaved"
 			? `<div class="interleaved-guide">${steps.map((step, index) => `<div class="workflow-step"><p class="workflow-label">${step.kind === "canvas-key" ? '<span class="workflow-logo workflow-logo--canvas" aria-hidden="true"></span>' : client.id === "generic" ? '<span class="instui-icon -icon-modelcontextprotocol workflow-logo" aria-hidden="true"></span>' : '<img class="workflow-logo" src="/canvas-mcp/images/CopilotStudio.svg" alt="" />'}Step ${index + 1} · ${step.kind === "canvas-key" ? "Canvas" : escapeHtml(client.name)}</p>${renderStep(step, client, state, editable, model)}</div>`).join("")}</div>${editable ? renderAdminAction(client, state, "client") : ""}`
 			: surfaceControl +

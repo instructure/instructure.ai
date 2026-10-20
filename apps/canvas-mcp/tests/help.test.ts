@@ -133,14 +133,18 @@ describe("Help rendering", () => {
 			...expected.map(({ id }) => id),
 		]);
 		expect(items[0]?.textContent).toBe("Generic MCP Untested");
-		for (const item of items)
+		for (const item of items) {
+			const client = CLIENTS.find(({ id }) => id === item.getAttribute("data-other-client"))!;
 			expect(item.querySelector(".instui-pill")?.textContent).toBe(
-				item.getAttribute("data-other-client") === "copilot" ? "Known issue" : "Untested",
+				client.blocker || clientStatus(client, "personal").kind === "known-issue"
+					? "Known issue"
+					: "Untested",
 			);
+		}
 		const copilot = group.querySelector('[data-other-client="copilot"]')!;
-		expect(copilot.textContent).toBe("GitHub Copilot Known issue");
+		expect(copilot.textContent).toContain("GitHub Copilot Known issue");
 		expect(copilot.querySelector(".instui-pill.-color-danger")).not.toBeNull();
-		expect(copilot.querySelector("p")).toBeNull();
+		expect(copilot.querySelector("details, p, a, table")).toBeNull();
 		expect(document.querySelector('[data-matrix-client="generic"]')).toBeNull();
 	});
 
@@ -220,7 +224,7 @@ describe("Help rendering", () => {
 	it("presents every curated client and all four combinations from existing source statuses", () => {
 		document.body.innerHTML = renderHelp("clients");
 		const curated = CLIENTS.filter(({ group }) => group === "Curated");
-		expect(document.querySelectorAll("tbody tr")).toHaveLength(curated.length);
+		expect(document.querySelectorAll(".help-matrix tbody tr")).toHaveLength(curated.length);
 		expect(
 			[...document.querySelectorAll("thead th[scope=colgroup]")].map((th) => th.textContent),
 		).toEqual(["Enterprise", "Personal"]);
@@ -250,10 +254,7 @@ describe("Help rendering", () => {
 					expect(cell.querySelector(".instui-pill")?.textContent).toBe(
 						issue ? "Known issue" : status.kind === "validated" ? "Verified" : "Untested",
 					);
-					if (status.kind === "validated") {
-						expect(cell.textContent).toContain(status.testedAt);
-						if (status.note) expect(cell.textContent).toContain(status.note);
-					}
+					expect(cell.querySelector("p")).toBeNull();
 					if (!issue && status.kind === "untested") {
 						expect(cell.textContent).toBe("Untested");
 						expect(cell.querySelector("p")).toBeNull();
@@ -380,7 +381,7 @@ describe("Help rendering", () => {
 		}
 	});
 
-	it("formats source status reasons in Supported Clients and Known Issues without allowing HTML", () => {
+	it("keeps reasons in Known Issues and shows only status in Supported Clients", () => {
 		const client = CLIENTS.find(({ id }) => id === "claude-code")!;
 		const original = client.status;
 		try {
@@ -391,13 +392,12 @@ describe("Help rendering", () => {
 			document.body.innerHTML = renderHelp("clients") + renderHelp("issues");
 			expect(document.querySelector("img")).toBeNull();
 			expect(document.body.textContent).toContain('<img src=x onerror="alert(1)">');
-			for (const selector of [
-				'[data-matrix-client="claude-code"] td',
-				'[aria-labelledby="known-issues-heading"] details',
-			]) {
-				expect(document.querySelector(`${selector} strong`)?.textContent).toBe("Retry");
-				expect(document.querySelector(`${selector} code`)?.textContent).toBe("client_id");
-			}
+			const cell = document.querySelector('[data-matrix-client="claude-code"] td')!;
+			expect(cell.textContent).toBe("Known issue");
+			expect(cell.querySelector("p, strong, code")).toBeNull();
+			const selector = '[aria-labelledby="known-issues-heading"] details';
+			expect(document.querySelector(`${selector} strong`)?.textContent).toBe("Retry");
+			expect(document.querySelector(`${selector} code`)?.textContent).toBe("client_id");
 		} finally {
 			client.status = original;
 		}
@@ -463,7 +463,7 @@ describe("Help rendering", () => {
 		},
 	);
 
-	it("formats validation notes in Supported Clients", () => {
+	it("shows Verified without validation notes in Supported Clients", () => {
 		const client = CLIENTS.find(({ id }) => id === "claude-code")!;
 		const original = client.status;
 		try {
@@ -474,8 +474,13 @@ describe("Help rendering", () => {
 			};
 			document.body.innerHTML = renderHelp("clients");
 			const row = document.querySelector('[data-matrix-client="claude-code"]')!;
-			expect(row.querySelector("td strong")?.textContent).toBe("public");
-			expect(row.querySelector("td code")?.textContent).toBe("client_id");
+			expect([...row.querySelectorAll("td")].map((cell) => cell.textContent)).toEqual([
+				"Verified",
+				"Verified",
+				"Verified",
+				"Verified",
+			]);
+			expect(row.querySelector("td strong, td code, td p")).toBeNull();
 		} finally {
 			client.status = original;
 		}

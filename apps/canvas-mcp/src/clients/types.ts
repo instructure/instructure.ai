@@ -20,7 +20,18 @@ export type ClientStatus =
 			platform?: string;
 	  }
 	| { kind: "untested" }
-	| { kind: "known-issue"; reason: string; diagnostic?: string; installModes?: InstallMode[] };
+	| {
+			kind: "known-issue";
+			reason: string;
+			category?: "lifecycle";
+			diagnostic?: string;
+			installModes?: InstallMode[];
+	  };
+export type LifecycleNotice = {
+	title: string;
+	message: string;
+	url?: string;
+};
 export type RedirectUri =
 	| {
 			kind: "fixed";
@@ -37,6 +48,7 @@ export type RedirectUri =
 	  }
 	| { kind: "client-generated"; where: string; evidence: Evidence[] }
 	| { kind: "configurable"; defaultUri: string; note: string; evidence: Evidence[] }
+	| { kind: "runtime"; description: string; evidence: Evidence[] }
 	| { kind: "unverified"; docsUrl?: string };
 export interface ClientFacts {
 	redirectUri: RedirectUri;
@@ -54,8 +66,17 @@ export interface ClientDefinition {
 	group: "Curated" | "Other";
 	facts: ClientFacts;
 	status?: ClientStatus;
+	lifecycleNotices?: Partial<Record<InstallMode, LifecycleNotice>>;
 	installModes: InstallMode[];
 	enterpriseSurface?: string;
+	configurationUrl?: string;
+	redirectUriOverrides?: Partial<Record<InstallMode, RedirectUri>>;
+	research?: {
+		checkedAt: string;
+		installSupport: Record<InstallMode, Fact<"yes" | "no">>;
+		sources: Evidence[];
+		note: string;
+	};
 	guides?: Partial<Record<InstallMode, Guide>>;
 	blocker?: { reason: string; evidence: Evidence[] };
 	setupNote: string;
