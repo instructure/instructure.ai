@@ -175,7 +175,7 @@ describe("Help navigation", () => {
 		);
 	});
 
-	it.each(["faqs", "issues", "clients", "tools"])(
+	it.each(["faqs", "issues", "clients", "tools", "contact"])(
 		"supports %s deep links without setup",
 		(section) => {
 			history.replaceState(null, "", `?page=help&help=${section}&client=chatgpt`);
@@ -218,6 +218,38 @@ describe("Help navigation", () => {
 			"Help · Available Tools",
 		);
 		expect(document.querySelector(".print-permalink")?.textContent).toContain("help=tools");
+	});
+
+	it("opens Contact with community and issue form links without setup", () => {
+		history.replaceState(null, "", "?page=help&help=tools");
+		mountApp("admin");
+		choose("contact");
+		expect(document.activeElement?.id).toBe("help-section-contact");
+		expect(new URLSearchParams(location.search).get("help")).toBe("contact");
+		expect(document.querySelector("#help-content-heading")?.textContent).toBe("Contact");
+		expect(document.querySelector<HTMLAnchorElement>("#help-content a")?.href).toBe(
+			"https://community.instructure.com/en/group/70-canvas-mcp",
+		);
+		expect(
+			[...document.querySelectorAll<HTMLAnchorElement>("#contact-issues + p + ul a")].map((link) =>
+				new URL(link.href).searchParams.get("template"),
+			),
+		).toEqual([
+			"canvas-mcp-guides.yml",
+			"canvas-mcp-validation.yml",
+			"canvas-mcp-faq.yml",
+			"canvas-mcp-common-issues.yml",
+			"canvas-mcp-client.yml",
+		]);
+		expect(document.querySelector("#help-content")?.textContent).toContain(
+			"Do not post client secrets",
+		);
+		expect(document.querySelector("[data-help-search], #tool-search")).toBeNull();
+		expect(document.querySelector(".print-context")?.textContent).toContain("Help · Contact");
+		expect(document.querySelector(".print-permalink")?.textContent).toContain("help=contact");
+		choose("faqs");
+		expect(document.querySelector("#contact-community")).toBeNull();
+		expect(document.querySelector("[data-help-search]")).not.toBeNull();
 	});
 
 	it("copies the example prompt from a tool card without setup", async () => {

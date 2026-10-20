@@ -20,8 +20,23 @@ export function renderHelp(section: HelpSection, platform: PlatformPreference = 
 	return `<section class="instui-card -variant-base help-panel"><div class="content">
 		<fieldset class="instui-segmented-control help-sections" aria-label="Help topics"><div class="viewport"><div class="track">${HELP_SECTIONS.map(({ id, label }) => `<label><input id="help-section-${id}" type="radio" name="help-section" value="${id}" data-help-section="${id}" aria-controls="help-content" ${section === id ? "checked" : ""}>${label}</label>`).join("")}</div></div></fieldset>
 		<section id="help-content" class="${section === "clients" ? "help-matrix-content" : ""}" aria-labelledby="help-content-heading"><h2 id="help-content-heading" class="instui-heading -level-h2">${label}</h2>
-		${section === "clients" ? renderClientMatrix() : section === "tools" ? renderTools() : `<div id="help-search-area">${renderHelpSearch(section)}<p id="help-search-results" role="status" aria-live="polite" hidden></p><p id="help-search-empty" hidden>No matching questions or issues.</p><div id="help-entries">${renderGroups(section === "faqs" ? FAQS : COMMON_ISSUES, section, platform)}${section === "issues" ? renderClientIssues() : ""}</div></div>`}
+		${section === "clients" ? renderClientMatrix() : section === "tools" ? renderTools() : section === "contact" ? renderContact() : `<div id="help-search-area">${renderHelpSearch(section)}<p id="help-search-results" role="status" aria-live="polite" hidden></p><p id="help-search-empty" hidden>No matching questions or issues.</p><div id="help-entries">${renderGroups(section === "faqs" ? FAQS : COMMON_ISSUES, section, platform)}${section === "issues" ? renderClientIssues() : ""}</div></div>`}
 		</section></div></section>`;
+}
+
+function renderContact(): string {
+	const forms = [
+		["canvas-mcp-guides.yml", "Request or correct a guide or screenshot"],
+		["canvas-mcp-validation.yml", "Report a client validation result"],
+		["canvas-mcp-faq.yml", "Suggest or correct an FAQ"],
+		["canvas-mcp-common-issues.yml", "Report or correct a common issue"],
+		["canvas-mcp-client.yml", "Report another type of issue or bug"],
+	];
+	return `<p>Ask questions and share experiences in the <a href="https://community.instructure.com/en/group/70-canvas-mcp">Instructure Community Canvas MCP group</a>.</p></section>
+		<section aria-labelledby="contact-issues"><h3 id="contact-issues" class="instui-heading -level-h3">Report an issue</h3>
+		<p>Use the relevant link below to report a problem or suggest an improvement.</p>
+		<ul class="instui-list">${forms.map(([template, label]) => `<li><a href="https://github.com/instructure/instructure.ai/issues/new?template=${template}">${label}</a></li>`).join("")}</ul>
+		<p>Do not post client secrets, access or refresh tokens, authorization codes, full authorization URLs, student records, or private customer details. Redact text, logs, and screenshots before sharing.</p></section>`;
 }
 
 function renderHelpSearch(section: "faqs" | "issues"): string {

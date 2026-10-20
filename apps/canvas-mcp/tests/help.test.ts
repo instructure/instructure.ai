@@ -114,7 +114,7 @@ describe("Help content", () => {
 	});
 
 	it("normalizes section URLs", () => {
-		for (const section of ["faqs", "issues", "clients", "tools"])
+		for (const section of ["faqs", "issues", "clients", "tools", "contact"])
 			expect(helpSectionFromQuery(`?help=${section}`)).toBe(section);
 		expect(helpSectionFromQuery("")).toBe("faqs");
 		expect(helpSectionFromQuery("?help=invalid")).toBe("faqs");
@@ -139,7 +139,7 @@ describe("Help content", () => {
 			[...document.querySelectorAll("fieldset.help-sections label")].map(
 				(label) => label.textContent,
 			),
-		).toEqual(["FAQs", "Common Issues", "Supported Clients", "Available Tools"]);
+		).toEqual(["FAQs", "Common Issues", "Supported Clients", "Available Tools", "Contact"]);
 		expect(document.querySelector<HTMLInputElement>("#help-section-faqs")?.checked).toBe(true);
 		expect(document.querySelector("#help-content")?.textContent).toContain(
 			"What is the Canvas MCP?",

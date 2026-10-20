@@ -7,6 +7,7 @@ export const HELP_SECTIONS = [
 	{ id: "issues", label: "Common Issues" },
 	{ id: "clients", label: "Supported Clients" },
 	{ id: "tools", label: "Available Tools" },
+	{ id: "contact", label: "Contact" },
 ] as const;
 
 export type HelpSection = (typeof HELP_SECTIONS)[number]["id"];
