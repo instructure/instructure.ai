@@ -2,8 +2,10 @@ import { ScreenReaderContent, SimpleSelect, View } from "@instructure/ui";
 import { type SelectOptionProps } from "@instructure/ui";
 import { AiInfo } from "@instructure.ai/aiinfo";
 import { type AiInfoFeatureProps, type AiInfoProps } from "@instructure.ai/aiinfo";
-import { useCallback, useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { brands } from "../../assets";
+
+const NON_PRODUCT_KEYS = new Set(["nutritionFacts", "dataPermissionLevels", "aiInformation"]);
 
 interface PresetsProps {
   product: AiInfoFeatureProps | undefined;
@@ -11,55 +13,46 @@ interface PresetsProps {
 }
 
 const Presets = ({ setProduct, product }: PresetsProps) => {
-  const [products, setProducts] = useState<AiInfoProps>({});
-  const [groupedOptions, setGroupedOptions] = useState<
-    Record<string, { renderLabel: React.ReactNode; options: SelectOptionProps[] }>
-  >({});
+  const products = useMemo(
+    () =>
+      Object.fromEntries(
+        Object.entries(AiInfo).filter(([key]) => !NON_PRODUCT_KEYS.has(key)),
+      ) as Omit<AiInfoProps, "nutritionFacts" | "dataPermissionLevels" | "aiInformation">,
+    [],
+  );
+  const groupedOptions = useMemo(() => {
+    const grouped: Record<
+      string,
+      { renderLabel: React.ReactNode; options: SelectOptionProps[] }
+    > = {};
+    Object.keys(products).forEach((id) => {
+      const rawGroup = products[id].group ?? "Other";
+      const group = rawGroup.toLowerCase().trim();
+      const brand = brands[group as keyof typeof brands] ?? brands.other;
+      if (!grouped[brand.name]) {
+        grouped[brand.name] = {
+          options: [],
+          renderLabel: (
+            <>
+              <brand.icon color={brand.color} /> {brand.name}
+            </>
+          ),
+        };
+      }
+      grouped[brand.name].options.push({
+        id,
+        label: products[id].name,
+        value: id,
+      });
+    });
+
+    Object.values(grouped).forEach((group) => {
+      group.options.sort((a, b) => (a.label ?? "").localeCompare(b.label ?? ""));
+    });
+    return grouped;
+  }, [products]);
   const placeholder = "Select a feature";
   const [value, setValue] = useState<string>(product ? product.name : placeholder);
-
-  const fetchProducts = useCallback(() => {
-    if (Object.keys(products).length === 0) {
-      // oxlint-disable-next-line no-unused-vars
-      const { nutritionFacts, dataPermissionLevels, aiInformation, ...productEntries } = AiInfo;
-
-      setProducts(productEntries);
-      const grouped: Record<
-        string,
-        { renderLabel: React.ReactNode; options: SelectOptionProps[] }
-      > = {};
-      Object.keys(productEntries).forEach((id) => {
-        const rawGroup = productEntries[id].group ?? "Other";
-        const group = rawGroup.toLowerCase().trim();
-        const brand = brands[group as keyof typeof brands] ?? brands.other;
-        if (!grouped[brand.name]) {
-          grouped[brand.name] = {
-            options: [],
-            renderLabel: (
-              <>
-                <brand.icon color={brand.color} /> {brand.name}
-              </>
-            ),
-          };
-        }
-        grouped[brand.name].options.push({
-          id,
-          label: productEntries[id].name,
-          value: id,
-        });
-      });
-
-      Object.values(grouped).forEach((group) => {
-        group.options.sort((a, b) => (a.label ?? "").localeCompare(b.label ?? ""));
-      });
-
-      setGroupedOptions(grouped);
-    }
-  }, [products]);
-
-  useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
 
   const handleSelect = (
     _event: React.SyntheticEvent,

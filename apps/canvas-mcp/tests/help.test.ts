@@ -4,7 +4,8 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { CLIENTS } from "../src/clients";
 import { clientStatus } from "../src/clients/status";
 import { COMMON_ISSUES, FAQS, helpSectionFromQuery } from "../src/help/content";
-import { bindHelpSearch, renderHelp } from "../src/help/render";
+import { allIssueLabels } from "../src/help/labels";
+import { bindHelpSearch, contactIssueUrl, renderHelp } from "../src/help/render";
 import { renderHelpInlineText } from "../src/help/inline";
 import type { HelpGroup } from "../src/help/content";
 
@@ -484,5 +485,47 @@ describe("Help rendering", () => {
 		} finally {
 			client.status = original;
 		}
+	});
+});
+
+describe("contact issue links", () => {
+	const context = { client: "claude-code", key: "public", install: "personal" } as const;
+
+	it("prefills validation reports", () => {
+		const url = new URL(
+			contactIssueUrl("canvas-mcp-validation.yml", "windows", context, "2026-01-02"),
+		);
+		expect(url.searchParams.get("template")).toBe("canvas-mcp-validation.yml");
+		expect(url.searchParams.get("client")).toContain("Claude Code");
+		expect(url.searchParams.get("platform")).toBe("Windows");
+		expect(url.searchParams.get("labels")).toBe("client: claude-code,provider: anthropic");
+		expect(url.searchParams.get("date")).toBe("2026-01-02");
+		expect(url.searchParams.get("key")).toBe("Public");
+		expect(url.searchParams.get("install")).toBe("Personal");
+	});
+
+	it("leaves FAQ and common issue templates unfilled", () => {
+		for (const template of ["canvas-mcp-faq.yml", "canvas-mcp-common-issues.yml"])
+			expect([...new URL(contactIssueUrl(template, "mac", context)).searchParams.keys()]).toEqual([
+				"template",
+			]);
+	});
+
+	it("renders prefilled links in the contact section", () => {
+		const html = renderHelp("contact", "mac", context);
+		expect(html).toContain("template=canvas-mcp-client.yml&amp;client=");
+	});
+});
+
+describe("issue labels", () => {
+	it("defines unique GitHub-valid labels for every client and provider", () => {
+		const labels = allIssueLabels();
+		expect(new Set(labels.map(({ name }) => name)).size).toBe(labels.length);
+		for (const { name, description } of labels) {
+			expect(name.length).toBeLessThanOrEqual(50);
+			expect(description.length).toBeLessThanOrEqual(100);
+		}
+		for (const client of CLIENTS)
+			expect(labels.map(({ name }) => name)).toContain(`client: ${client.id}`);
 	});
 });

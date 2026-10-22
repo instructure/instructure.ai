@@ -12,8 +12,14 @@ const App: FC = () => {
   const searchParams = new URLSearchParams(globalThis.location.search);
   const id = searchParams.get("id")?.toLowerCase();
 
-  const [product, setProduct] = useState<AiInfoFeatureProps | undefined>(undefined);
+  const [product, setProduct] = useState<AiInfoFeatureProps | undefined>(() =>
+    id && id in AiInfo ? AiInfo[id] : undefined,
+  );
   const [width, setWidth] = useState(() => window.innerWidth);
+  const isInIframe = globalThis.self !== window.top;
+  const [isDark, setIsDark] = useState(() =>
+    globalThis.matchMedia("(prefers-color-scheme: dark)").matches,
+  );
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -29,24 +35,10 @@ const App: FC = () => {
     }
   }, [product?.uid, product?.name]);
 
-  useEffect(() => {
-    if (id && id.toLowerCase() in AiInfo) {
-      setProduct(AiInfo[id.toLowerCase()]);
-    }
-  }, [id]);
-
   const { layout } = getLayoutFromParams(DefaultLayout);
-
-  const [isDark, setIsDark] = useState(false);
-  const [isInIframe, setIsInIframe] = useState(false);
-
-  useEffect(() => {
-    setIsInIframe(globalThis.self !== window.top);
-  }, []);
 
   useEffect(() => {
     const mediaQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
-    setIsDark(mediaQuery.matches);
 
     const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
     mediaQuery.addEventListener("change", handler);

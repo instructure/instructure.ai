@@ -185,7 +185,7 @@ const IgniteBug: FC<SVGProps> = ({
   height = "1rem",
   width = "auto",
   inline = false,
-  color = undefined,
+  color,
   valign = "top",
 }) => (
   <ColorSVG

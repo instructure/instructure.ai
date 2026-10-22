@@ -58,20 +58,27 @@ describe("Canvas MCP pages", () => {
 		);
 	});
 
-	it.each(["", "12345", "12345000000000001"])(
+	it.each(["", "12345", "12345000000000001", "123450000000000012"])(
 		"mirrors Client ID constraint validity in its initial and live error state: %s",
 		(clientId) => {
 			history.replaceState(null, "", `?client=claude-code&clientId=${clientId}`);
 			mountApp("admin");
 			const input = document.querySelector<HTMLInputElement>("#client-id-input")!;
-			const initialInvalid = clientId.length !== 17;
+			const initialInvalid = clientId.length < 17 || clientId.length > 18;
 			expect(input.checkValidity()).toBe(!initialInvalid);
 			expect(input.classList.contains("-invalid")).toBe(initialInvalid);
 			expect(input.getAttribute("aria-invalid")).toBe(String(initialInvalid));
-			for (const value of ["12345000000000001", "", " ", "12345", "abc12345000000000001"]) {
+			for (const value of [
+				"12345000000000001",
+				"123450000000000012",
+				"",
+				" ",
+				"12345",
+				"abc12345000000000001",
+			]) {
 				input.value = value;
 				input.dispatchEvent(new Event("input", { bubbles: true }));
-				const invalid = input.value.length !== 17;
+				const invalid = input.value.length < 17 || input.value.length > 18;
 				expect(input.checkValidity()).toBe(!invalid);
 				expect(input.classList.contains("-invalid")).toBe(invalid);
 				expect(input.getAttribute("aria-invalid")).toBe(String(invalid));
@@ -132,8 +139,11 @@ describe("Canvas MCP pages", () => {
 			const canvasRow = [...document.querySelectorAll(".settings-table tbody tr")].find(
 				(row) => row.querySelector("th")?.textContent === "Redirect URIs",
 			)!;
-			expect(canvasRow.querySelector("pre code")?.textContent).toBe(uris);
-			expect(canvasRow.querySelector<HTMLButtonElement>("button")?.dataset.copy).toBe(uris);
+			for (const uri of uris.split("\n"))
+				expect(canvasRow.querySelector("pre code")?.textContent).toContain(uri);
+			expect(canvasRow.querySelector<HTMLButtonElement>("button")?.dataset.copy).toBe(
+				canvasRow.querySelector("pre code")?.textContent,
+			);
 			expect(document.querySelector('[data-guide-token="redirectUri"]')?.textContent).toBe(uris);
 			expect(new URLSearchParams(location.search).get("redirectUris")).toBe(uris);
 			expect(document.querySelector(".print-permalink")?.textContent).toContain("redirectUris=");
@@ -159,9 +169,9 @@ describe("Canvas MCP pages", () => {
 			expect(document.querySelector<HTMLTextAreaElement>("#generated-redirect-uris")?.value).toBe(
 				updated,
 			);
-			expect(document.querySelector(".settings-table [data-copy]")?.getAttribute("data-copy")).toBe(
-				updated,
-			);
+			expect(
+				document.querySelector(".settings-table [data-copy]")?.getAttribute("data-copy"),
+			).toContain(updated);
 
 			const clear = document.querySelector<HTMLTextAreaElement>("#redirect-uris-input")!;
 			clear.value = "";
@@ -193,9 +203,9 @@ describe("Canvas MCP pages", () => {
 		select.dispatchEvent(new Event("change", { bubbles: true }));
 		expect(document.querySelector("#redirect-uris-input")).toBeNull();
 		expect(document.querySelector("#generated-redirect-uris")).toBeNull();
-		expect(document.querySelector(".settings-table [data-copy]")?.getAttribute("data-copy")).toBe(
-			"http://localhost:8081/callback",
-		);
+		expect(
+			document.querySelector(".settings-table [data-copy]")?.getAttribute("data-copy"),
+		).toContain("http://localhost:8081/callback");
 		document.querySelector<HTMLSelectElement>("#client-select")!.value = "generic";
 		document
 			.querySelector<HTMLSelectElement>("#client-select")!
@@ -227,7 +237,7 @@ describe("Canvas MCP pages", () => {
 		},
 	);
 
-	it("uses Pantoken components and switches the Canvas logo with the scheme", () => {
+	it("uses Pantoken components and switches the Canvas logo with the scheme", async () => {
 		mountApp("admin");
 
 		expect(document.querySelector(".controls-panel")?.classList.contains("instui-card")).toBe(true);
@@ -338,7 +348,7 @@ describe("Canvas MCP pages", () => {
 		]);
 		expect(audiencesRow?.querySelector(".audience-tenant-note")).not.toBeNull();
 		const redirectRow = rowForSetting("Redirect URIs");
-		expect(redirectRow?.querySelector("pre code")?.textContent).toBe(
+		expect(redirectRow?.querySelector("pre code")?.textContent).toContain(
 			"http://localhost:8081/callback",
 		);
 		const redirectCopy = redirectRow?.querySelector<HTMLButtonElement>("button");
@@ -419,7 +429,8 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector(".site-header")).toBeNull();
 		expect(document.querySelectorAll(".page-heading-actions button")).toHaveLength(1);
 		expect(document.querySelector(".instui-tray")?.hasAttribute("popover")).toBe(true);
-		expect(document.querySelector<HTMLElement>("#settings-tray")?.style.padding).not.toBe("");
+		const stylesheet = await readFile("src/main.css", "utf8");
+		expect(stylesheet).toContain('@import "@pantoken/components/tray.css";');
 		expect(document.querySelector("#settings-appearance-heading")?.textContent).toBe("Appearance");
 		expect(document.querySelector("#settings-sharing-heading")?.textContent).toBe("Sharing");
 		expect(document.querySelector("#tray-server-details-heading")?.textContent).toBe(
@@ -596,7 +607,7 @@ describe("Canvas MCP pages", () => {
 			[...document.querySelectorAll(".settings-table tbody tr")]
 				.find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs")
 				?.querySelector("td")?.textContent,
-		).toBe("https://www.cursor.com/agents/mcp/oauth/callback\nhttp://localhost:8787/callback");
+		).toContain("https://www.cursor.com/agents/mcp/oauth/callback");
 		const cursorRedirect = [
 			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
 		].find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs");
@@ -610,10 +621,39 @@ describe("Canvas MCP pages", () => {
 		const codexRedirect = [
 			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
 		].find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs");
-		expect(codexRedirect?.querySelector(".setting-value-muted")?.textContent).toBe(
-			"Select a Canvas domain and region to compute the callback URI.",
+		expect(document.querySelector(".admin-steps")?.textContent).toContain(
+			"Select a Canvas domain and region to include Codex's generated callback URI.",
 		);
-		expect(codexRedirect?.querySelector("pre, button")).toBeNull();
+		expect(codexRedirect?.querySelector("pre code")?.textContent).toContain(
+			"http://localhost:8081/callback",
+		);
+		expect(codexRedirect?.querySelector("button")?.disabled).toBe(true);
+	});
+
+	it("aggregates distinct callback URIs and includes the generated Codex callback", async () => {
+		history.replaceState(
+			null,
+			"",
+			"/canvas-mcp/?client=claude-code&domain=example.instructure.com&region=us-east-1",
+		);
+		mountApp("admin");
+		const redirectRow = () =>
+			[...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr")].find(
+				(row) => row.querySelector("th")?.textContent === "Redirect URIs",
+			)!;
+		await vi.waitFor(() =>
+			expect(redirectRow().querySelector("pre code")?.textContent).toContain(
+				"http://localhost:8081/callback/",
+			),
+		);
+		const code = redirectRow().querySelector("pre code")?.textContent ?? "",
+			uris = code.split("\n");
+		expect(new Set(uris).size).toBe(uris.length);
+		expect(uris).toHaveLength(35);
+		expect(redirectRow().querySelector<HTMLButtonElement>("button")?.dataset.copy).toBe(code);
+		expect(redirectRow().querySelector<HTMLButtonElement>("button")?.disabled).toBe(false);
+		const stylesheet = await readFile("src/main.css", "utf8");
+		expect(stylesheet).toMatch(/\.table-copy-cell pre\s*\{[^}]*max-height:\s*6em/su);
 	});
 
 	it("provides a region picker in admin configuration", () => {
@@ -699,6 +739,43 @@ describe("Canvas MCP pages", () => {
 		);
 	});
 
+	it.each([
+		[new Date(2026, 9, 22, 12), "Sunday, October 25, 2026"],
+		[new Date(2026, 9, 24, 12), "Sunday, October 25, 2026"],
+		[new Date(2026, 9, 25, 12), "Sunday, November 1, 2026"],
+		[new Date(2026, 9, 31, 12), "Sunday, November 1, 2026"],
+		[new Date(2026, 11, 31, 12), "Sunday, January 3, 2027"],
+	])("shows the next Sunday above Test Cluster Only for beta on %s", (today, expectedDate) => {
+		vi.useFakeTimers({ toFake: ["Date"] });
+		vi.setSystemTime(today);
+		try {
+			history.replaceState(null, "", "/canvas-mcp/?domain=utah.beta.instructure.com");
+			mountApp("admin");
+			const alert = document.querySelector(".beta-availability-alert");
+			expect(alert?.classList.contains("instui-alert")).toBe(true);
+			expect(alert?.getAttribute("role")).toBe("status");
+			expect(alert?.textContent).toContain(expectedDate);
+			expect(
+				alert?.nextElementSibling?.querySelector<HTMLInputElement>(
+					'input[aria-label="Test Cluster Only"]',
+				)?.checked,
+			).toBe(true);
+			expect(alert?.parentElement?.tagName).toBe("TD");
+			expect(alert?.closest("tr")?.querySelector("th")?.textContent).toBe("Test Cluster Only");
+
+			const domainInput = document.querySelector<HTMLInputElement>("#domain-input")!;
+			domainInput.value = "utah";
+			domainInput.dispatchEvent(new Event("change", { bubbles: true }));
+			expect(document.querySelector(".beta-availability-alert")).toBeNull();
+			expect(document.querySelector(".beta-tenant-alert")).toBeNull();
+			expect(
+				document.querySelector<HTMLInputElement>('input[aria-label="Test Cluster Only"]')?.checked,
+			).toBe(false);
+		} finally {
+			vi.useRealTimers();
+		}
+	});
+
 	it("checks Test Cluster Only for a beta tenant", () => {
 		globalThis.history.replaceState(
 			null,
@@ -706,6 +783,18 @@ describe("Canvas MCP pages", () => {
 			"/canvas-mcp/?domain=utah.beta.instructure.com&client=gemini-enterprise&key=private&region=us-east-1&page=admin",
 		);
 		mountApp("admin");
+
+		const betaNotice = document.querySelector(".beta-tenant-alert");
+		expect(document.querySelector(".admin-steps")?.firstElementChild).toBe(betaNotice);
+		expect(document.querySelectorAll(".beta-tenant-alert")).toHaveLength(1);
+		expect(betaNotice?.classList.contains("instui-alert")).toBe(true);
+		expect(betaNotice?.classList.contains("-color-warning")).toBe(true);
+		expect(betaNotice?.classList.contains("-color-info")).toBe(false);
+		expect(betaNotice?.getAttribute("role")).toBe("status");
+		expect(betaNotice?.querySelector("code")?.textContent).toBe("utah.instructure.com");
+		expect(betaNotice?.nextElementSibling?.querySelector("h3")?.textContent).toBe(
+			"Open Developer Keys",
+		);
 
 		const domainInput = document.querySelector<HTMLInputElement>("#domain-input")!;
 		expect(domainInput.value).toBe("utah.beta");
@@ -811,7 +900,7 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector("h1")?.textContent).toContain("Connect Canvas");
 	});
 
-	it("requires a Client ID limited to 17 characters for every supported OAuth client", () => {
+	it("requires a Client ID limited to 18 characters for every supported OAuth client", () => {
 		globalThis.history.replaceState(null, "", "/canvas-mcp/?page=admin");
 		mountApp("admin");
 
@@ -830,9 +919,9 @@ describe("Canvas MCP pages", () => {
 				continue;
 			}
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.required).toBe(true);
-			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.maxLength).toBe(17);
+			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.maxLength).toBe(18);
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.pattern).toBe(
-				"[0-9]{17}",
+				"[0-9]{17,18}",
 			);
 			expect(document.querySelector(".details-panel #client-id-input")).not.toBeNull();
 			expect(document.querySelector("#client-id-reference-input")).toBeNull();
@@ -846,11 +935,12 @@ describe("Canvas MCP pages", () => {
 
 	it.each([
 		["12345000000000001", true],
+		["123450000000000012", true],
 		["1234500000000000", false],
-		["123450000000000012", false],
+		["1234500000000000123", false],
 		["1234500000000000a", false],
 		["", false],
-	])("validates Client ID %s as exactly 17 digits", (value, valid) => {
+	])("validates Client ID %s as 17 or 18 digits", (value, valid) => {
 		mountApp("admin");
 		const input = document.querySelector<HTMLInputElement>("#client-id-input");
 		if (!input) throw new Error("Client ID input not found");

@@ -123,7 +123,7 @@ const main = async () => {
 
   const releasePackage = ({
     pkg,
-    args = [],
+    args,
   }: {
     pkg: FullPackageName;
     args: WorkspaceCommand["args"];

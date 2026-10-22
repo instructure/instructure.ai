@@ -4,7 +4,8 @@ import { type InstallMode, type KeyType } from "../clients/ids";
 import { type ClientDefinition } from "../clients/types";
 import { renderHelpInlineText as renderInlineText } from "./inline";
 import { renderCodeSample, renderContent } from "../guides/render";
-import { type PlatformPreference } from "../platform";
+import { commandPlatform, type PlatformPreference } from "../platform";
+import { type AppState } from "../state";
 import {
 	COMMON_ISSUES,
 	FAQS,
@@ -14,17 +15,55 @@ import {
 	type HelpSection,
 } from "./content";
 import { renderTools } from "./tools";
+import { clientIssueLabels } from "./labels";
+import { escapeHtml } from "../ui/html";
 
-export function renderHelp(section: HelpSection, platform: PlatformPreference = "auto"): string {
+export function renderHelp(
+	section: HelpSection,
+	platform: PlatformPreference = "auto",
+	context?: Pick<AppState, "client" | "key" | "install">,
+): string {
 	const label = HELP_SECTIONS.find(({ id }) => id === section)!.label;
 	return `<section class="instui-card -variant-base help-panel"><div class="content">
 		<fieldset class="instui-segmented-control help-sections" aria-label="Help topics"><div class="viewport"><div class="track">${HELP_SECTIONS.map(({ id, label }) => `<label><input id="help-section-${id}" type="radio" name="help-section" value="${id}" data-help-section="${id}" aria-controls="help-content" ${section === id ? "checked" : ""}>${label}</label>`).join("")}</div></div></fieldset>
 		<section id="help-content" class="${section === "clients" ? "help-matrix-content" : ""}" aria-labelledby="help-content-heading"><h2 id="help-content-heading" class="instui-heading -level-h2">${label}</h2>
-		${section === "clients" ? renderClientMatrix() : section === "tools" ? renderTools() : section === "contact" ? renderContact() : `<div id="help-search-area">${renderHelpSearch(section)}<p id="help-search-results" role="status" aria-live="polite" hidden></p><p id="help-search-empty" hidden>No matching questions or issues.</p><div id="help-entries">${renderGroups(section === "faqs" ? FAQS : COMMON_ISSUES, section, platform)}${section === "issues" ? renderClientIssues() : ""}</div></div>`}
+		${section === "clients" ? renderClientMatrix() : section === "tools" ? renderTools() : section === "contact" ? renderContact(platform, context) : `<div id="help-search-area">${renderHelpSearch(section)}<p id="help-search-results" role="status" aria-live="polite" hidden></p><p id="help-search-empty" hidden>No matching questions or issues.</p><div id="help-entries">${renderGroups(section === "faqs" ? FAQS : COMMON_ISSUES, section, platform)}${section === "issues" ? renderClientIssues() : ""}</div></div>`}
 		</section></div></section>`;
 }
 
-function renderContact(): string {
+const ISSUE_URL = "https://github.com/instructure/instructure.ai/issues/new";
+const capitalize = (value: string): string => value.charAt(0).toUpperCase() + value.slice(1);
+
+export function contactIssueUrl(
+	template: string,
+	platform: PlatformPreference = "auto",
+	context?: Pick<AppState, "client" | "key" | "install">,
+	today: string = new Date().toISOString().slice(0, 10),
+): string {
+	const client = CLIENTS.find(({ id }) => id === context?.client);
+	const params = new URLSearchParams({ template });
+	const clientName = client ? clientLabel(client) : "";
+	const os = commandPlatform(platform) === "windows" ? "Windows" : "macOS";
+	const key = context?.key ? capitalize(context.key) : "";
+	const install = client?.installModes.length && context ? capitalize(context.install) : "";
+	if (template !== "canvas-mcp-faq.yml" && template !== "canvas-mcp-common-issues.yml") {
+		if (client) {
+			params.set("client", clientName);
+			params.set("labels", clientIssueLabels(client).join(","));
+		}
+		if (key) params.set("key", key);
+		if (install) params.set("install", install);
+	}
+	if (template === "canvas-mcp-validation.yml" || template === "canvas-mcp-client.yml")
+		params.set("platform", os);
+	if (template === "canvas-mcp-validation.yml") params.set("date", today);
+	return `${ISSUE_URL}?${params.toString()}`;
+}
+
+function renderContact(
+	platform: PlatformPreference,
+	context?: Pick<AppState, "client" | "key" | "install">,
+): string {
 	const forms = [
 		["canvas-mcp-guides.yml", "Request or correct a guide or screenshot"],
 		["canvas-mcp-validation.yml", "Report a client validation result"],
@@ -35,7 +74,7 @@ function renderContact(): string {
 	return `<p>Ask questions and share experiences in the <a href="https://community.instructure.com/en/group/70-canvas-mcp">Instructure Community Canvas MCP group</a>.</p></section>
 		<section aria-labelledby="contact-issues"><h3 id="contact-issues" class="instui-heading -level-h3">Report an issue</h3>
 		<p>Use the relevant link below to report a problem or suggest an improvement.</p>
-		<ul class="instui-list">${forms.map(([template, label]) => `<li><a href="https://github.com/instructure/instructure.ai/issues/new?template=${template}">${label}</a></li>`).join("")}</ul>
+		<ul class="instui-list">${forms.map(([template, label]) => `<li><a href="${escapeHtml(contactIssueUrl(template, platform, context))}">${label}</a></li>`).join("")}</ul>
 		<p>Do not post client secrets, access or refresh tokens, authorization codes, full authorization URLs, student records, or private customer details. Redact text, logs, and screenshots before sharing.</p></section>`;
 }
 

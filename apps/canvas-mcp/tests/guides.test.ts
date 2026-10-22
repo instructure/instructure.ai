@@ -400,12 +400,12 @@ describe("composable client guides", () => {
 				[...document.querySelectorAll(".settings-table tr")].find(
 					(row) => row.querySelector("th")?.textContent === "Redirect URIs",
 				);
-			expect(redirect()?.querySelector("code")?.textContent).toBe(
+			expect(redirect()?.querySelector("code")?.textContent).toContain(
 				"http://localhost:8081/callback/AAAAAAAAAAAA",
 			);
 			complete[0](new Uint8Array(32).fill(1).buffer);
 			await new Promise((resolve) => setTimeout(resolve, 0));
-			expect(redirect()?.querySelector("code")?.textContent).toBe(
+			expect(redirect()?.querySelector("code")?.textContent).toContain(
 				"http://localhost:8081/callback/AAAAAAAAAAAA",
 			);
 		} finally {

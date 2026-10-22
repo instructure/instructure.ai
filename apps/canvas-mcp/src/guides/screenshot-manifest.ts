@@ -42,9 +42,18 @@ export const SCREENSHOT_MANIFEST: Record<string, ScreenshotAsset> = {
 		file: "images/client-claude_code-needs-auth.png",
 		size: "terminal",
 	},
-	claude_code_mcp_add_command_private: { file:"images/client-claude_code-mcp_add_private_command.png",size: "terminal"},
-	claude_code_mcp_connected: { file: "images/client-claude_code-mcp_connected.png",size: "terminal" },
-	claude_code_mcp_list_courses: { file: "images/client-claude_code-list-courses.png",size: "terminal" },
+	claude_code_mcp_add_command_private: {
+		file: "images/client-claude_code-mcp_add_private_command.png",
+		size: "terminal",
+	},
+	claude_code_mcp_connected: {
+		file: "images/client-claude_code-mcp_connected.png",
+		size: "terminal",
+	},
+	claude_code_mcp_list_courses: {
+		file: "images/client-claude_code-list-courses.png",
+		size: "terminal",
+	},
 	claude_code_mcp_managed_section: { size: "terminal" },
 	claude_code_mcp_needs_auth: {
 		file: "images/client-claude_code-start_auth.png",
@@ -60,7 +69,10 @@ export const SCREENSHOT_MANIFEST: Record<string, ScreenshotAsset> = {
 	cli_auth_url_and_code_prompt: { size: "terminal" },
 	cli_mcp_authenticate_option: {},
 	cli_mcp_config_canvas_entry: { size: "terminal" },
-	agy_cli_mcp_config_canvas_entry: { file: "images/client-antigravity_cli-mcp_config.png",size: "terminal" },
+	agy_cli_mcp_config_canvas_entry: {
+		file: "images/client-antigravity_cli-mcp_config.png",
+		size: "terminal",
+	},
 	cli_mcp_manager_overlay: {},
 	cli_signin_business_account: { size: "terminal" },
 	codex_agent_security_requirements: {},

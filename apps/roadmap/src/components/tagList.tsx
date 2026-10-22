@@ -4,7 +4,7 @@ import { getLinkType } from "../utils";
 
 const TagList: FC<{ entry: PendoAPIFeature; isNarrow: boolean }> = ({
   entry,
-  isNarrow = false,
+  isNarrow,
 }) => {
   const { feature, product } = entry;
   return (

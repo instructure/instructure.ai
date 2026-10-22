@@ -62,7 +62,7 @@ export function renderPage(
 						<section id="setup-panel" class="panel" role="tabpanel" aria-labelledby="${pageMode === "help" ? "tab-help" : pageMode === "user" ? "tab-connect" : "tab-admin"}">
 					${
 						pageMode === "help"
-							? renderHelp(helpSection, state.platform)
+							? renderHelp(helpSection, state.platform, state)
 							: `<div class="workspace-grid${pageMode === "admin" ? "" : " workspace-grid--single"} --mt-xl">
 						${pageMode === "admin" ? renderConfig(state, domainInputValue) : ""}
 						${hasNotice ? '<div class="instructions-column">' : ""}
@@ -76,7 +76,7 @@ export function renderPage(
 					</section>
 					</div>
 				</main>
-				<aside id="settings-tray" class="instui-tray -placement-end -size-md" popover role="region" aria-label="Settings" padding="var(--instui-spacing-space-md)">
+				<aside id="settings-tray" class="instui-tray -placement-end -size-md" popover role="region" aria-label="Settings">
 					<div class="settings-tray-header">
 						<h2 class="instui-heading -variant-title-card-regular">Settings</h2>
 						<button class="instui-close-button -size-sm" type="button" popovertarget="settings-tray" popovertargetaction="hide" aria-label="Close settings"></button>

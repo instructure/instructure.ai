@@ -63,7 +63,11 @@ export function mountApp(mode: PageMode): void {
 	const callbacks = new CallbackCache();
 	let activeCallbackKey = "";
 	function callbackResolution(): CallbackResolution | undefined {
-		const redirect = clientDefinition(state.client).facts.redirectUri;
+		if (pageMode !== "admin" && clientDefinition(state.client).id !== "codex") {
+			activeCallbackKey = "";
+			return;
+		}
+		const redirect = clientDefinition("codex").facts.redirectUri;
 		if (
 			redirect.kind !== "computed" ||
 			redirect.mode === "unknown" ||
@@ -231,7 +235,7 @@ export function mountApp(mode: PageMode): void {
 			.querySelector<HTMLInputElement>("#client-id-input")
 			?.addEventListener("input", (event) => {
 				const input = event.currentTarget as HTMLInputElement;
-				state.clientId = input.value.replace(/\D/gu, "").slice(0, 17);
+				state.clientId = input.value.replace(/\D/gu, "").slice(0, 18);
 				input.value = state.clientId;
 				const invalid = !input.validity.valid;
 				input.classList.toggle("-invalid", invalid);

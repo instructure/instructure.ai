@@ -44,7 +44,7 @@ interface SavedPreferences {
 
 const STORAGE_KEY = "canvas-mcp:v1",
 	DOMAIN_PATTERN = /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.(?:beta\.)?instructure\.com$/u,
-	CLIENT_ID_PATTERN = /^\d{1,17}$/u;
+	CLIENT_ID_PATTERN = /^\d{1,18}$/u;
 
 export function normalizeCanvasDomain(value: string): string | null {
 	const input = value.trim();
