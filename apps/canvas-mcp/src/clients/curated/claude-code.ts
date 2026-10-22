@@ -33,7 +33,7 @@ const personalGuide: Guide = {
 			content: [
 				{
 					kind: "paragraph",
-					text: 'Configuring claude code requires you to choose the configuration scope first. In the example below we use `local`, but you can select `user` or `project` depending on your needs.',
+					text: "Configuring claude code requires you to choose the configuration scope first. In the example below we use `local`, but you can select `user` or `project` depending on your needs.",
 				},
 			],
 		},
@@ -112,7 +112,7 @@ const personalGuide: Guide = {
 			content: [
 				{
 					kind: "paragraph",
-					text: 'After you run the initial command you should see a confirmation that the Canvas MCP has been added successfully.',
+					text: "After you run the initial command you should see a confirmation that the Canvas MCP has been added successfully.",
 				},
 			],
 		},
@@ -121,10 +121,10 @@ const personalGuide: Guide = {
 			kind: "provider",
 			title: "Validate and authenticate",
 			content: [
-        {
-          kind: "paragraph",
-          text: "Validate that the Canvas MCP has been added successfully by retrieving its details. Claude will return the active configuration and the status will show '! Needs authentication' until you sign in.",
-        },
+				{
+					kind: "paragraph",
+					text: "Validate that the Canvas MCP has been added successfully by retrieving its details. Claude will return the active configuration and the status will show '! Needs authentication' until you sign in.",
+				},
 				{
 					kind: "code",
 					language: "bash",
@@ -136,36 +136,36 @@ const personalGuide: Guide = {
 				),
 				{
 					kind: "paragraph",
-          text: "Start a new Claude Code session with `claude`. The terminal shows that an MCP server needs authentication.",
-        },
+					text: "Start a new Claude Code session with `claude`. The terminal shows that an MCP server needs authentication.",
+				},
 				screenshot(
 					"claude_code_needs_auth",
 					"terminal after starting a new Claude Code session showing the MCP needs authentication.",
 				),
-        {
-          kind: "paragraph",
-          text: "Open `/mcp`, select **canvas-mcp**.",
-        },
+				{
+					kind: "paragraph",
+					text: "Open `/mcp`, select **canvas-mcp**.",
+				},
 				screenshot(
 					"claude_code_mcp_needs_auth",
-					"`/mcp` panel with canvas-mcp showing \"Needs authentication\".",
+					'`/mcp` panel with canvas-mcp showing "Needs authentication".',
 				),
-        {
-          kind: "paragraph",
-          text: "You will be taken to the mcp settings for the Canvas MCP in Claude.",
-        },
-        screenshot(
-          "claude_code_mcp_authorize",
-          "`/mcp` panel with canvas-mcp showing the authorization page.",
-        ),
-        {
-          kind: "paragraph",
-          text: "Selecting **Authenticate** will automatically open your default browser for Canvas sign-in and authorization. If you haven't allowed claude to open the browser, it will provide a copyable URL.",
-        },
-        {
-          kind: "paragraph",
-          text: "Canvas will present you with a modal to authorize the **MCP Test** server for your user account. You may be required to sign in to Canvas first if you are not already signed in.",
-        },
+				{
+					kind: "paragraph",
+					text: "You will be taken to the mcp settings for the Canvas MCP in Claude.",
+				},
+				screenshot(
+					"claude_code_mcp_authorize",
+					"`/mcp` panel with canvas-mcp showing the authorization page.",
+				),
+				{
+					kind: "paragraph",
+					text: "Selecting **Authenticate** will automatically open your default browser for Canvas sign-in and authorization. If you haven't allowed claude to open the browser, it will provide a copyable URL.",
+				},
+				{
+					kind: "paragraph",
+					text: "Canvas will present you with a modal to authorize the **MCP Test** server for your user account. You may be required to sign in to Canvas first if you are not already signed in.",
+				},
 				canvasAuthorizationScreenshot(),
 			],
 		},
@@ -178,7 +178,10 @@ const personalGuide: Guide = {
 					kind: "paragraph",
 					text: "After authenticating, you can close the browser tab and return to Claude. You should see an **Authentication successful** message.",
 				},
-				screenshot("claude_code_mcp_connected", "terminal showing canvas-mcp connected with tools."),
+				screenshot(
+					"claude_code_mcp_connected",
+					"terminal showing canvas-mcp connected with tools.",
+				),
 				{
 					kind: "paragraph",
 					text: "You're now connected to the Canvas MCP and ready to begin prompting. Try asking Claude to list your Canvas courses.",

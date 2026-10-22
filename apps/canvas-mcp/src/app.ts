@@ -63,7 +63,11 @@ export function mountApp(mode: PageMode): void {
 	const callbacks = new CallbackCache();
 	let activeCallbackKey = "";
 	function callbackResolution(): CallbackResolution | undefined {
-		const redirect = clientDefinition(state.client).facts.redirectUri;
+		if (pageMode !== "admin" && clientDefinition(state.client).id !== "codex") {
+			activeCallbackKey = "";
+			return;
+		}
+		const redirect = clientDefinition("codex").facts.redirectUri;
 		if (
 			redirect.kind !== "computed" ||
 			redirect.mode === "unknown" ||

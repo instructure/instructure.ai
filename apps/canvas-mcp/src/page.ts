@@ -62,7 +62,7 @@ export function renderPage(
 						<section id="setup-panel" class="panel" role="tabpanel" aria-labelledby="${pageMode === "help" ? "tab-help" : pageMode === "user" ? "tab-connect" : "tab-admin"}">
 					${
 						pageMode === "help"
-							? renderHelp(helpSection, state.platform)
+							? renderHelp(helpSection, state.platform, state)
 							: `<div class="workspace-grid${pageMode === "admin" ? "" : " workspace-grid--single"} --mt-xl">
 						${pageMode === "admin" ? renderConfig(state, domainInputValue) : ""}
 						${hasNotice ? '<div class="instructions-column">' : ""}

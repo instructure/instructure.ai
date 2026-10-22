@@ -1,1726 +1,1133 @@
 {
-  "catalog": "2026-09-29",
-  "tools": [
-    {
-      "title": "Add All Course Members to Differentiation Tag",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "group",
-      "description": "Adds every student in the course to a differentiation tag in a single Canvas call. Only works for differentiation tags (non-collaborative groups), not regular collaborative groups.",
-      "readOnly": false,
-      "example": "Add all students to the 'Enrichment Track' differentiation tag, but exclude Jane and Marcus."
-    },
-    {
-      "title": "Add All Course Members to Group",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "group",
-      "description": "Adds every student in the enclosing course to a differentiation tag (non-collaborative group) in a single Canvas call. Use this to populate a differentiation tag with the whole class without iterating per user. Note: this only works for differentiation tags — for regular collaborative groups, use canvas-add_users_to_group instead, since Canvas's `all_in_group_course` endpoint rejects collaborative groups with a 400.",
-      "readOnly": false,
-      "example": "Add every student in the course to the \"Support Track\" differentiation tag."
-    },
-    {
-      "title": "Add Assignment to Module",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Adds an existing assignment to a course module as a new module item. PREREQUISITE: call canvas-find_assignments_by_name first to resolve the assignment_id — never guess it.",
-      "readOnly": false,
-      "example": "Add the 'Essay 1' assignment to Module 1 as the first item."
-    },
-    {
-      "title": "Add Conversation Message",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "conversation",
-      "description": "Adds a message to an existing inbox conversation.",
-      "readOnly": false,
-      "example": "In my latest conversation with Owen, please reply with 'Thank you, I will look into it.'"
-    },
-    {
-      "title": "Add Conversation Recipients",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "conversation",
-      "description": "Adds one or more people (recipients) to an existing conversation. Use this when a user wants to include additional participants in a conversation thread.",
-      "readOnly": false,
-      "example": "Add Owen and everyone in the Coastal Ecology 101 course to my conversation with Jane."
-    },
-    {
-      "title": "Add Discussion to Module",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Adds an existing discussion topic to a course module. ⚠️ This creates a new module item immediately.",
-      "readOnly": false,
-      "example": "Add discussion 789 to module 456 in course 123."
-    },
-    {
-      "title": "Add File to Module",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Adds an existing file to a course module. ⚠️ This creates a new module item immediately.",
-      "readOnly": false,
-      "example": "Add file 202 to module 456 in course 123."
-    },
-    {
-      "title": "Add Item to Module",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Adds an item of any type to a course module (Assignment, Page, Discussion, Quiz, File, ExternalUrl, ExternalTool, or SubHeader). ⚠️ This creates a new module item immediately.",
-      "readOnly": false,
-      "example": "Add assignment 789 to module 456 in course 123."
-    },
-    {
-      "title": "Add Wiki Page to Module",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Adds an existing wiki page to a course module. ⚠️ This creates a new module item immediately.",
-      "readOnly": false,
-      "example": "Add the 'syllabus' page to module 456 in course 123."
-    },
-    {
-      "title": "Add New Quiz to Module",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Adds an existing New Quiz to a course module. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use canvas-list_new_quizzes to find the assignment_id. ⚠️ This creates a new module item immediately.",
-      "readOnly": false,
-      "example": "Add the Midterm Exam quiz to the Assessments module."
-    },
-    {
-      "title": "Add Users to Differentiation Tag",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "group",
-      "description": "Adds one or more users to a differentiation tag (non-collaborative group) in a single bulk Canvas call.",
-      "readOnly": false,
-      "example": "Add Jane, Marcus, and Maria to the \"Enrichment Track\" differentiation tag."
-    },
-    {
-      "title": "Add Users to Group",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "group",
-      "description": "Adds one or more users to a regular (collaborative) group. Use this to assign students into groups — including 'randomly assign students to groups', 'put students into their lab groups', or 'move student X into group Y'.",
-      "readOnly": false,
-      "example": "Add users 123, 456 and 789 to group 111."
-    },
-    {
-      "title": "Batch Create Assignment Overrides",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "assignment",
-      "description": "Creates multiple assignment overrides for students, groups, or sections across one or more assignments in a single Canvas call. Use this for granting extensions or differentiated due dates in bulk.",
-      "readOnly": false,
-      "example": "In the History 101 course give Jane an extension on Essay 1 to Nov 15th, and also give Paul an extension on the Midterm Project to Nov 20th."
-    },
-    {
-      "title": "Batch Create Course Sections",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "section",
-      "description": "Creates multiple course sections in a single operation. Each section can have its own name, SIS ID, integration ID, and date restrictions.",
-      "readOnly": false,
-      "example": "Create three sections in course 123: Morning Lab, Afternoon Lab, and Evening Lab."
-    },
-    {
-      "title": "Batch Create Quiz Questions",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "quiz",
-      "description": "Creates multiple New Quiz questions (items) on an existing quiz in one tool call. Use this for adding question batches — for Classic Quizzes use the classic-quiz tools instead.",
-      "readOnly": false,
-      "example": "Add a multiple choice question to the History Quiz: \"Who was the first president?\" worth 5 points, choices Washington (correct), Jefferson, Lincoln."
-    },
-    {
-      "title": "Batch Delete Course Sections",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "section",
-      "description": "Permanently deletes one or more course sections. Only sections without enrollments can be deleted. Returns deleted section details for each successfully deleted section.",
-      "readOnly": false,
-      "example": "Delete section 12345 from the course."
-    },
-    {
-      "title": "Batch Update Assignment Overrides",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "assignment",
-      "description": "Updates multiple existing assignment overrides in a single, atomic Canvas call. Use this for bulk-editing existing extensions, differentiated due dates, or override titles across one or more assignments.",
-      "readOnly": false,
-      "example": "Change Jane's extension on Essay 1 to November 20th, and update Paul's extension on the Midterm to November 25th."
-    },
-    {
-      "title": "Update Sections",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "section",
-      "description": "Modifies one or more existing course sections in a single operation. Can update section names, SIS identifiers, date restrictions, and enrollment date boundaries.",
-      "readOnly": false,
-      "example": "Rename section 789 to 'Advanced Physics Lab'."
-    },
-    {
-      "title": "Bulk Edit Quiz Settings",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "quiz",
-      "description": "Updates quiz settings for all New Quizzes in a course. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use this when you need to apply the same settings (time limits, multiple attempts, IP filters, etc.) to all quizzes in a course at once.",
-      "readOnly": false,
-      "example": "Set a 90 minute time limit on all quizzes in Coastal Ecology 101."
-    },
-    {
-      "title": "Bulk Enroll Users into Courses",
-      "roles": [
-        "admin"
-      ],
-      "resource": "enrollment",
-      "description": "Enrolls many users into many courses in a single account-level operation. ⚠️ This creates enrollments immediately for every user/course pair.",
-      "readOnly": false,
-      "example": "Enroll users 10 and 11 as students into courses 100 and 101 in account 1."
-    },
-    {
-      "title": "Bulk Manage Differentiation Tags",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "group",
-      "description": "Creates, renames, and deletes differentiation tags inside a group category in a single Canvas call. Use this when you need to author or rearrange a category's tags in bulk — Canvas runs the whole batch atomically.",
-      "readOnly": false,
-      "example": "Create two new differentiation tags 'Pair 1' and 'Pair 2' in a new category 'My Tag Category', rename tag 5 to 'Updated Tag Name', and delete tag 8."
-    },
-    {
-      "title": "Bulk Publish or Unpublish Course Modules",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Publishes or unpublishes all modules in a course in a single operation. ⚠️ This modifies all modules immediately.",
-      "readOnly": false,
-      "example": "Publish all modules in course 123."
-    },
-    {
-      "title": "Copy Due Date Pattern",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "assignment",
-      "description": "Copies assignment due dates (due_at, unlock_at, lock_at) from a source course to a target course, optionally shifting every date by a fixed number of days. Use this when transferring a schedule between sections or terms instead of editing assignments one by one.",
-      "readOnly": false,
-      "example": "Copy the due date pattern from my Fall section (course 123) to my Spring section (course 456) but shift everything 14 days later."
-    },
-    {
-      "title": "Copy Quiz Question",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "quiz",
-      "description": "Copies one or more quiz questions from a source quiz to a destination quiz within the same course. Supports both Classic Quizzes and New Quizzes (New Quizzes/Quizzes.Next) - set quiz_type per entry to match the quiz system the source and destination quiz both use.",
-      "readOnly": false,
-      "example": "Copy question 55 from the Classic Quiz 100 to Classic Quiz 200 in course 10."
-    },
-    {
-      "title": "Create Course Enrollments",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "enrollment",
-      "description": "Creates one or more enrollments in a single Canvas course. ⚠️ This immediately creates or invites enrollments.",
-      "readOnly": false,
-      "example": "Enroll user 55 as a student in course 123."
-    },
-    {
-      "title": "Create Assignment",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "assignment",
-      "description": "Create a new assignment in a course. Supports homework, quizzes, projects, exams, and graded discussions (set submission_types: ['discussion_topic']).",
-      "readOnly": false,
-      "example": "Create an assignment in Syntax II called 'Lab Report 1'. It should be worth 50 points and due on October 1st, 2025. (User timezone: America/New_York)"
-    },
-    {
-      "title": "Create Assignment Override",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "assignment",
-      "description": "Creates a single assignment override that gives a set of students, a section, or a group different due/lock/unlock dates than the assignment default.",
-      "readOnly": false,
-      "example": "Give students 789 and 790 until the new year to submit assignment 456 in course 123."
-    },
-    {
-      "title": "Create Community Group",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "group",
-      "description": "Creates a new account-level community group. Community groups are not tied to a specific course and users can join as many as they want.",
-      "readOnly": false,
-      "example": "Create a public community group named 'Chess Club' with description 'For chess enthusiasts' that anyone can join."
-    },
-    {
-      "title": "Create Conversation",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "conversation",
-      "description": "Creates a conversation in the Canvas INBOX — it lands in recipients' inbox, NOT on the course homepage. For a public announcement use canvas-create_or_update_announcement.",
-      "readOnly": false,
-      "example": "Send a message to Marcus Webb and Jane Doe about the assignment update."
-    },
-    {
-      "title": "Create Course Export",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "course",
-      "description": "Initiates a content export for a Canvas course. Can create a full course export or selective content export in various formats.",
-      "readOnly": false,
-      "example": "Create a full export of my Coastal Ecology 101 course so I can back up all the content."
-    },
-    {
-      "title": "Create Discussion Topic",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "discussion",
-      "description": "Creates a new discussion topic in a course. Accepts title, message (HTML), discussion_type, published, require_initial_post and other settings. ⚠️ This operation is not idempotent — each call creates a new topic.",
-      "readOnly": false,
-      "example": "Start a threaded discussion 'Week 1 Intro' in course 123, published."
-    },
-    {
-      "title": "Create External Tool",
-      "roles": [
-        "teacher",
-        "admin"
-      ],
-      "resource": "external",
-      "description": "Create an external tool in the specified course or account. This tool can be used to integrate external applications or services with Canvas.",
-      "readOnly": false,
-      "example": "Create an external tool called \"Turnitin\" in English Composition 101 with privacy level \"public\", using the consumer key and shared secret I provide."
-    },
-    {
-      "title": "Create Group",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "group",
-      "description": "Creates a single new group within an existing group category.",
-      "readOnly": false,
-      "example": "Create a group called 'Team Nautilus' in the Peer Groups category."
-    },
-    {
-      "title": "Create Group Category",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "group",
-      "description": "Creates a new group category for collaborative student groups within a course.",
-      "readOnly": false,
-      "example": "Create a new group category called 'Peer Groups' in my Coastal Ecology 101 course."
-    },
-    {
-      "title": "Create Course Module",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Creates a new module in a course. ⚠️ This operation is not idempotent — each call creates a new module.",
-      "readOnly": false,
-      "example": "Create a module 'Unit 1: Orientation' in course 123."
-    },
-    {
-      "title": "Create Module External URL",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Adds an external URL item to a course module. ⚠️ This creates a new module item immediately.",
-      "readOnly": false,
-      "example": "Add a link to https://example.com titled 'Resource' to module 456 in course 123, opening in a new tab."
-    },
-    {
-      "title": "Create Module Sub-Header",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Adds a text sub-header item to a course module (a non-link heading used to group items). ⚠️ This creates a new module item immediately.",
-      "readOnly": false,
-      "example": "Add a 'Readings' sub-header to module 456 in course 123."
-    },
-    {
-      "title": "Create or Update Announcement",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "announcement",
-      "description": "Posts a PUBLIC announcement on the course homepage. Announcements are visible to all enrolled students. For private inbox messages use canvas-send_message instead.",
-      "readOnly": false,
-      "example": "Post an exam reminder announcement to my Coastal Ecology 101 course."
-    },
-    {
-      "title": "Create Wiki Page",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "page",
-      "description": "Creates a new wiki page in a course. The page is created in draft state by default unless published: true is passed. ⚠️ This operation is not idempotent — each call creates a new page.",
-      "readOnly": false,
-      "example": "Create a published 'Course Roadmap' page in course 123 with a short intro."
-    },
-    {
-      "title": "Create Rubric",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "rubric",
-      "description": "Creates a new rubric in a course with the specified criteria and ratings, optionally associating it with the course or an assignment in the same request.",
-      "readOnly": false,
-      "example": "Create a Lab Report rubric and attach it to assignment 200 for grading in course 123."
-    },
-    {
-      "title": "Create Rubric Association",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "rubric",
-      "description": "Links an existing rubric to multiple courses, assignments, or accounts for grading or bookmarking.",
-      "readOnly": false,
-      "example": "Attach rubric 99 to assignments 200, 201, and 202 for grading in course 123."
-    },
-    {
-      "title": "Decline Student Enrollment Request",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "enrollment",
-      "description": "Use this tool when a user requests to enroll students, teachers, TAs, or any other role in a course. This feature is not yet available through the assistant, and this tool provides guidance on how to perform the enrollment manually through the Canvas UI.",
-      "readOnly": true,
-      "example": "Enroll Jessica Martinez and Owen Williams as students in my course"
-    },
-    {
-      "title": "Delete Announcement",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "announcement",
-      "description": "Permanently deletes an announcement from a course. This action is irreversible.",
-      "readOnly": false,
-      "example": "Yes, please go ahead and delete the exam cancellation announcement from my English 101 course."
-    },
-    {
-      "title": "Delete Assignment Override",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "assignment",
-      "description": "Deletes a specific assignment override, removing a custom due date that applies to a specific student or students, group, or course section.",
-      "readOnly": false,
-      "example": "Please remove the extension you gave to Jane and Paul on the 'Final Reflection' in the 'Art History' course."
-    },
-    {
-      "title": "Delete Assignments",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "assignment",
-      "description": "Permanently deletes one or more assignments from courses. ⚠️ This is irreversible.",
-      "readOnly": false,
-      "example": "Delete assignment 789 from course 123"
-    },
-    {
-      "title": "Delete Conversation",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "conversation",
-      "description": "Deletes a conversation from the current user's view. This action does not affect other participants.",
-      "readOnly": false,
-      "example": "Yes, go ahead and delete my conversation with Owen."
-    },
-    {
-      "title": "Delete Conversation Messages",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "conversation",
-      "description": "Deletes specific messages from a conversation for the current user. This does not affect other participants' views.",
-      "readOnly": false,
-      "example": "Please remove the last two messages from my conversation with Owen."
-    },
-    {
-      "title": "Delete Discussion Topic",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "discussion",
-      "description": "Permanently deletes a discussion topic from a course. If the discussion is an assignment discussion, this also deletes the associated assignment. ⚠️ This is irreversible.",
-      "readOnly": false,
-      "example": "Delete discussion topic 343 in course 123."
-    },
-    {
-      "title": "Delete Files",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "file",
-      "description": "Permanently deletes one or more files. ⚠️ This is irreversible.",
-      "readOnly": false,
-      "example": "Delete file 12345 from the course"
-    },
-    {
-      "title": "Delete Group",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "group",
-      "description": "Permanently deletes a group and removes all its members. Works for any group type: course groups, peer groups, community groups, or differentiation tags.",
-      "readOnly": false,
-      "example": "Delete Group 1 from the Monday Peer Groups category."
-    },
-    {
-      "title": "Delete Course Module",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Permanently deletes a module and its item associations from a course. The underlying content (assignments, pages, etc.) is not deleted. ⚠️ This is irreversible.",
-      "readOnly": false,
-      "example": "Delete module 456 in course 123."
-    },
-    {
-      "title": "Delete Module Item",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Permanently removes an item from a module. The underlying content (assignment, page, etc.) is not deleted — only the module-item association. ⚠️ This is irreversible.",
-      "readOnly": false,
-      "example": "Remove item 789 from module 456 in course 123."
-    },
-    {
-      "title": "Delete New Quiz",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "quiz",
-      "description": "Deletes a New Quiz from a specific course. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use canvas-list_new_quizzes to find the assignment_id for New Quizzes.",
-      "readOnly": false,
-      "example": "Delete the Chapter 1 Practice Quiz from my Coastal Ecology course."
-    },
-    {
-      "title": "Delete New Quiz Question",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "quiz",
-      "description": "Deletes an item (question) from a New Quiz. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use canvas-list_new_quizzes to find the assignment_id, then canvas-list_quiz_questions to find the item_id.",
-      "readOnly": false,
-      "example": "Delete the third question from the Midterm Quiz."
-    },
-    {
-      "title": "Delete Rubric",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "rubric",
-      "description": "Permanently deletes a rubric from a course. This action is irreversible.",
-      "readOnly": false,
-      "example": "Delete rubric 99 from course 123."
-    },
-    {
-      "title": "Delete Rubric Association",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "rubric",
-      "description": "Removes the link between a rubric and an assignment, course, or account. The rubric itself is not deleted.",
-      "readOnly": false,
-      "example": "Remove rubric association 55 from course 123."
-    },
-    {
-      "title": "Duplicate Assignment",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "assignment",
-      "description": "Duplicate an existing assignment in a course.",
-      "readOnly": false,
-      "example": "Duplicate the \"Midterm Reflection\" assignment in English Literature 101."
-    },
-    {
-      "title": "Duplicate Discussion Topic",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "discussion",
-      "description": "Duplicates an existing discussion topic within the same course, creating a copy with the same settings and content. ⚠️ This creates a new discussion immediately.",
-      "readOnly": false,
-      "example": "Duplicate discussion topic 343 in course 123."
-    },
-    {
-      "title": "Duplicate Wiki Page",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "page",
-      "description": "Duplicates an existing wiki page within the same course, creating a copy with the same content and settings. ⚠️ This creates a new page immediately.",
-      "readOnly": false,
-      "example": "Duplicate the 'course-syllabus' page in course 123."
-    },
-    {
-      "title": "Edit Assignment",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "assignment",
-      "description": "Modifies an existing assignment in a specified course.",
-      "readOnly": false,
-      "example": "Update the last lab report in Advanced Phonology. Change its name to 'Final Lab Report' and extend the due date to October 15th, 2025. (User timezone: America/New_York)"
-    },
-    {
-      "title": "Edit Conversation",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "conversation",
-      "description": "Updates attributes for a single conversation, such as its state (read, unread) or starred status.",
-      "readOnly": false,
-      "example": "Archive my conversation with Jane and star it."
-    },
-    {
-      "title": "Edit Group",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "group",
-      "description": "Modifies an existing group.",
-      "readOnly": false,
-      "example": "Rename the Study Group to 'Final Project Collaborators' and make it invitation only."
-    },
-    {
-      "title": "Edit New Quiz",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "quiz",
-      "description": "Modifies an existing New Quiz for a course. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use canvas-list_new_quizzes to find the assignment_id for New Quizzes.",
-      "readOnly": false,
-      "example": "Change the title of the Chapter 1 quiz to \"Chapter 1 Final Review\"."
-    },
-    {
-      "title": "Find Assignments by Name",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "assignment",
-      "description": "Search for assignments by name or title within a course, and return the matching assignments together with their numeric Canvas IDs. Use this when the user refers to an assignment by name rather than by ID.",
-      "readOnly": true,
-      "example": "Find all assignments that have 'Final Project' in their title for the Graphic Design course."
-    },
-    {
-      "title": "Find Courses by Name",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "course",
-      "description": "Search for courses by name with typo tolerance. Handles spelling variations and minor errors (e.g., 'Costal Ecology' matches 'Coastal Ecology'). Returns matching courses or all courses if no close matches found. Use this when you need to find a course by name rather than by ID.",
-      "readOnly": true,
-      "example": "Find my Coastal Ecology 101 course."
-    },
-    {
-      "title": "Find Course Users by Name",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "user",
-      "description": "Retrieves a comprehensive list of all users within a course matching a specific name with their ID and optional additional details.",
-      "readOnly": true,
-      "example": "Find a student named 'Marcos Webb' in History 101 and show me his enrollment details."
-    },
-    {
-      "title": "Find Recipients",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "conversation",
-      "description": "Search for messageable recipients (users, courses, groups) using the Canvas messaging search API. Returns recipient IDs, names, and membership counts. Always call this before canvas-create_conversation to resolve names to Canvas recipient IDs.",
-      "readOnly": true,
-      "example": "Send a message to all students in course 42"
-    },
-    {
-      "title": "Find Student in Course by Name",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "user",
-      "description": "Searches for students by name within a course. Use this to find a student ID when you only know their name. The search matches partial names and returns matching students enrolled in the specified course.",
-      "readOnly": true,
-      "example": "Find student Marcus Webb in Coastal Ecology 101"
-    },
-    {
-      "title": "Find User by Name",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "admin"
-      ],
-      "resource": "user",
-      "description": "Searches for users within an account by name, SIS ID, login ID, or email address. Returns users that match the search term. Use this tool when you need to find a specific user by their name or identifier within an account-wide context.",
-      "readOnly": true,
-      "example": "Find user Jane Doe in the Main Campus account"
-    },
-    {
-      "title": "Get Announcement by ID",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student",
-        "observer"
-      ],
-      "resource": "announcement",
-      "description": "Retrieves the full details of a single, specific announcement by its ID.",
-      "readOnly": true,
-      "example": "Show me the details of announcement 8991 in course 456."
-    },
-    {
-      "title": "Get Assignment",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "assignment",
-      "description": "Retrieves a single assignment from a specified course.",
-      "readOnly": true,
-      "example": "Get the details for assignment 456 in course 123, including the submission data."
-    },
-    {
-      "title": "Get Bulk User Progress",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "user",
-      "description": "Gets module-progress information for every student enrolled in a course in a single paginated call. Use this for whole-class progress reporting and completion statistics.",
-      "readOnly": true,
-      "example": "Show me the progress of all students in my Coastal Ecology 101 course."
-    },
-    {
-      "title": "Get Conversation",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "conversation",
-      "description": "Retrieves a single conversation, including its messages and participants.",
-      "readOnly": true,
-      "example": "Can you show me the full thread for my conversation with Owen?"
-    },
-    {
-      "title": "Get Detailed Course Information",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "course",
-      "description": "Returns detailed information about a specific course including syllabus, course settings, grading schemes, and metadata.",
-      "readOnly": true,
-      "example": "Show me the details and syllabus of course 123."
-    },
-    {
-      "title": "Get Course Export",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "course",
-      "description": "Retrieves detailed status information for a specific content export, including progress, download link, and completion status.",
-      "readOnly": true,
-      "example": "Check the status of my course export."
-    },
-    {
-      "title": "Get Course Settings",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "course",
-      "description": "Retrieves the configuration settings for a specific course.",
-      "readOnly": true,
-      "example": "What are the settings for my Coastal Ecology 101 course? Can students create discussion topics?"
-    },
-    {
-      "title": "Get Discussion Topic Details",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "discussion",
-      "description": "Returns detailed information about a specific discussion topic including title, message, discussion type, publication status, and metadata.",
-      "readOnly": true,
-      "example": "Show me discussion topic 343 in course 123."
-    },
-    {
-      "title": "Get Outcome Results Rollups",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "outcome",
-      "description": "Returns outcome rollups for a course with per-student (or aggregate) mastery data. Useful for standards-based grading and competency tracking.",
-      "readOnly": true,
-      "example": "Show outcome mastery for course 123 with outcome and user details."
-    },
-    {
-      "title": "Get Single Module",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "module",
-      "description": "Returns the details of a single course module, optionally including its items and completion requirements.",
-      "readOnly": true,
-      "example": "Show module 456 in course 123 with its items."
-    },
-    {
-      "title": "Get Single Module Item",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "module",
-      "description": "Returns the details of a single module item, optionally with content details and per-student completion info.",
-      "readOnly": true,
-      "example": "Show item 789 in module 456 of course 123."
-    },
-    {
-      "title": "List Course Modules",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "module",
-      "description": "Returns a paginated list of course modules including their structure and completion requirements.",
-      "readOnly": true,
-      "example": "List all modules with their items in course 123."
-    },
-    {
-      "title": "Get Outcome Results",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "outcome",
-      "description": "Gets the outcome results for users and outcomes in a specific course.",
-      "readOnly": true,
-      "example": "Get the outcome results for Jane Smith in Coastal Ecology 101 and include the outcome details."
-    },
-    {
-      "title": "Get Wiki Page Details",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "page",
-      "description": "Retrieves the content and details of a specific wiki page including title, body (HTML content), url, publication status, and metadata.",
-      "readOnly": true,
-      "example": "Show me the course syllabus page in course 123."
-    },
-    {
-      "title": "List Course Pages",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "page",
-      "description": "Returns a paginated list of wiki pages in a course including page titles, URLs, and publication status.",
-      "readOnly": true,
-      "example": "List all the pages in course 123."
-    },
-    {
-      "title": "Get New Quiz",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "quiz",
-      "description": "Gets details for a single New Quiz in a course. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use canvas-list_new_quizzes to find the assignment_id for New Quizzes.",
-      "readOnly": true,
-      "example": "Show me the details for quiz 45 in course 101."
-    },
-    {
-      "title": "Get Classic Quiz Statistics",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "quiz",
-      "description": "Retrieves statistics for a Classic Quiz including student analysis and item analysis. NOTE: This tool is for Classic Quizzes only, NOT New Quizzes. Use canvas-list_quizzes to find the quiz_id for Classic Quizzes.",
-      "readOnly": true,
-      "example": "Show me the statistics for the Midterm Exam quiz."
-    },
-    {
-      "title": "Get Rubric",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "rubric",
-      "description": "Retrieves a single rubric from a course, including its full criteria and ratings.",
-      "readOnly": true,
-      "example": "Show me the details of rubric 99 in course 123."
-    },
-    {
-      "title": "Get Rubric Used Locations",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "rubric",
-      "description": "Returns all courses and assignments that are currently using a specific rubric.",
-      "readOnly": true,
-      "example": "Which assignments use rubric 99 in course 123?"
-    },
-    {
-      "title": "Get Session Context For User",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "user",
-      "description": "Returns the caller's identity, time zone, and active course list in one call — the session bootstrap other tools rely on instead of guessing.",
-      "readOnly": true,
-      "example": "What courses am I in right now, and what time zone am I in?"
-    },
-    {
-      "title": "Get Course Students with Enrollment Data",
-      "roles": [
-        "teacher",
-        "ta"
-      ],
-      "resource": "user",
-      "description": "Returns the list of students enrolled in a course along with their enrollment data. Use this for class rosters and per-student performance context.",
-      "readOnly": true,
-      "example": "Who are the students in my Coastal Ecology 101 course?"
-    },
-    {
-      "title": "Get Student Submissions",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "submission",
-      "description": "Returns submissions for students in a section, optionally filtered by students, assignments, workflow state, and other criteria. Supports grouped responses and various filtering options.",
-      "readOnly": true,
-      "example": "Show me all submitted assignments for students in section 456"
-    },
-    {
-      "title": "List Enrolled Students",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "enrollment",
-      "description": "Lists a course's ENROLLMENTS - one row per enrollment record, every role, not only students. Use it whenever the user asks for a course's ENROLLMENTS, enrollment state, pending invitations, section membership, or anyone holding two roles. For the PEOPLE in a course - the roster, who is in it - use canvas-search_course_roster.",
-      "readOnly": true,
-      "example": "Which sections is each student in for course 123?"
-    },
-    {
-      "title": "Get User Profile Information",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "user",
-      "description": "Returns profile information for a user, including name, bio, avatar, and contact details.",
-      "readOnly": true,
-      "example": "Get my Canvas profile."
-    },
-    {
-      "title": "Grant Classic Quiz Extension",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "quiz",
-      "description": "Grants time extensions on a Classic Quiz to the given students (user_ids), or to every currently enrolled student (all_students), without affecting anyone else's quiz settings. IMPORTANT: Only use this for quizzes found via canvas-list_quizzes (which have quiz_type in the response). For quizzes found via canvas-list_new_quizzes (New Quizzes), use canvas-grant_new_quiz_accommodation instead.",
-      "readOnly": false,
-      "example": "Give Marcus Webb double time on the History Quiz. The quiz is 20 minutes."
-    },
-    {
-      "title": "Grant New Quiz Accommodation",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "quiz",
-      "description": "Grants time accommodations on a New Quiz (Quizzes 2) to the given students (user_ids), or to every currently enrolled student (all_students), without affecting anyone else's quiz settings. IMPORTANT: Only use this for quizzes found via canvas-list_new_quizzes (which have quiz_settings in the response). For quizzes found via canvas-list_quizzes (Classic Quizzes), use canvas-grant_classic_quiz_extension instead.",
-      "readOnly": false,
-      "example": "Give Marcus Webb double time on the Introduction to Philosophy Quiz. The quiz is 30 minutes."
-    },
-    {
-      "title": "List Account Groups",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "group",
-      "description": "Lists the groups and differentiation tags available in a specific account.",
-      "readOnly": true,
-      "example": "Show me all groups in account 22."
-    },
-    {
-      "title": "List Accounts",
-      "roles": [
-        "admin"
-      ],
-      "resource": "account",
-      "description": "Lists all accounts that the current user can view or manage. Returns accounts and sub-account count visible to the user. Typically only account admins can view accounts. Sub accounts can be retrieved with the canvas-list_sub_accounts tool.",
-      "readOnly": true,
-      "example": "List all available accounts in the Canvas instance."
-    },
-    {
-      "title": "List Announcements",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "announcement",
-      "description": "Retrieves a complete list of all announcements for a specific course.",
-      "readOnly": true,
-      "example": "Show me the announcements for 'Art History 101'."
-    },
-    {
-      "title": "List Assignment Groups",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "assignment",
-      "description": "Lists all assignment groups for a given course. Assignment groups are used to organize assignments and can have different weights for grade calculation.",
-      "readOnly": true,
-      "example": "List all assignment groups for the Introduction to Psychology course."
-    },
-    {
-      "title": "List Assignment Submissions",
-      "roles": [
-        "teacher",
-        "ta"
-      ],
-      "resource": "submission",
-      "description": "Lists all submissions for a specific assignment in a course.",
-      "readOnly": true,
-      "example": "List all submissions for assignment 456 in course 123."
-    },
-    {
-      "title": "List Assignments for Course",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "assignment",
-      "description": "Lists assignments for a given course.",
-      "readOnly": true,
-      "example": "Show me all the upcoming assignments for Introduction to Coastal Ecology"
-    },
-    {
-      "title": "List Conversations",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "conversation",
-      "description": "Lists conversations for the current user, with options to filter by scope (e.g., unread, archived) or context (e.g., a specific course or user).",
-      "readOnly": true,
-      "example": "Show me all my unread messages from Owen."
-    },
-    {
-      "title": "List Course Exports",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "course",
-      "description": "Lists all content exports for a Canvas course, showing their status, creation time, and download information if available.",
-      "readOnly": true,
-      "example": "Check the status of my course export and let me know if it's ready to download."
-    },
-    {
-      "title": "List Course Files",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "file",
-      "description": "Lists the files in a specific course. Optionally filter by file name using a search term.",
-      "readOnly": true,
-      "example": "Show me all the PDF files in Modern Ceramics class."
-    },
-    {
-      "title": "List Course Groups",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "group",
-      "description": "Lists the groups available in a specific course. Pass user_id to get just the groups one student belongs to, or include=['users'] to get every group's member list inline — that is the intended way to answer 'which students are not in any group?'.",
-      "readOnly": true,
-      "example": "List all of my groups in course Introduction to Modern Ceramics."
-    },
-    {
-      "title": "List Course Templates",
-      "roles": [
-        "teacher",
-        "designer",
-        "admin"
-      ],
-      "resource": "course",
-      "description": "Lists all course templates available in the specified account. Do not use this tool to list blueprints, it is only for templates.",
-      "readOnly": true,
-      "example": "Show me all available course templates so I can see what I can use for my new course."
-    },
-    {
-      "title": "List Courses",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "course",
-      "description": "Lists courses for a specific user or the current user, with many options for filtering and including additional data.",
-      "readOnly": true,
-      "example": "Show me all my active courses where I'm a teacher."
-    },
-    {
-      "title": "List Deadlines Across Courses",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "assignment",
-      "description": "Get a unified list of all upcoming due dates across all of the current user's enrolled courses, including assignments, quizzes, discussions, and announcements. Canvas resolves per-student due-date overrides on the server, so the returned due dates already account for the current user's extensions or overrides. Use this to answer questions like 'What's due next week?' or 'Show me all deadlines in March' without needing to query each course individually.",
-      "readOnly": true,
-      "example": "What assignments are due next week?"
-    },
-    {
-      "title": "List Discussion Entry Replies",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "discussion",
-      "description": "Returns a paginated list of all replies to a specific top-level discussion entry.",
-      "readOnly": true,
-      "example": "Show me all replies to entry 12345 in discussion topic 343 of course 34672."
-    },
-    {
-      "title": "List Discussion Topic Entries",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "discussion",
-      "description": "Returns a paginated list of entries (top-level posts and replies) within a specific discussion topic in a Canvas course.",
-      "readOnly": true,
-      "example": "Show me all entries within the Student Introductions discussion (topic 343) in course 34672."
-    },
-    {
-      "title": "List Discussion Topics",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "discussion",
-      "description": "Returns a paginated list of discussion topics in a course. Announcements are not included; use the canvas-list_announcements tool for those. Supports filtering by scope (locked, unlocked, pinned, unpinned), search_term, and filter_by (all, unread).",
-      "readOnly": true,
-      "example": "List all discussions in course 123."
-    },
-    {
-      "title": "List Group Categories",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "group",
-      "description": "Lists all group categories within a specified course.",
-      "readOnly": true,
-      "example": "List all differentiation tags in Introduction to Psychology II."
-    },
-    {
-      "title": "List Groups",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "group",
-      "description": "Lists the active groups in a given course or account that are visible to the user. ALSO usable to find differentiation tags, as these exist as non-collaborative groups. When searching for differentiation tags, set collaboration_state to non_collaborative.",
-      "readOnly": true,
-      "example": "Show me all groups in Introduction to Coastal Ecology"
-    },
-    {
-      "title": "List Module Assignment Overrides",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Returns the paginated list of assignment overrides that apply to a module (the sections/groups/students the module is assigned to).",
-      "readOnly": true,
-      "example": "List the assignment overrides for module 456 in course 123."
-    },
-    {
-      "title": "List Module Items",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "module",
-      "description": "Returns a paginated list of items within a course module (assignments, pages, quizzes, files, discussions, external URLs, sub-headers).",
-      "readOnly": true,
-      "example": "List the items in module 456 of course 123."
-    },
-    {
-      "title": "List New Quizzes",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "quiz",
-      "description": "Get a list of New Quizzes for a given course, with each quiz's title and its numeric assignment_id. Use this when the user refers to a New Quiz by title rather than by ID. NOTE: This tool ONLY lists New Quizzes, NOT Classic Quizzes. Canvas has two quiz engines: New Quizzes (modern) and Classic Quizzes (legacy). If you need to find Classic Quizzes, use canvas-list_quizzes instead. When the user asks about quizzes without specifying which type, you may need to check both tools to get a complete picture.",
-      "readOnly": true,
-      "example": "Show me the new quizzes in Coastal Ecology 101."
-    },
-    {
-      "title": "List Outcome Groups",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "outcome",
-      "description": "Lists the outcome groups for a specific course.",
-      "readOnly": true,
-      "example": "Show me all the outcome groups in Modern Ceramics class."
-    },
-    {
-      "title": "List New Quiz Questions",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "quiz",
-      "description": "Lists all items (questions) in a New Quiz. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use canvas-list_new_quizzes to find the assignment_id for New Quizzes.",
-      "readOnly": true,
-      "example": "What are the questions in quiz 987 in course 456?"
-    },
-    {
-      "title": "List Classic Quizzes",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "quiz",
-      "description": "Returns the paginated list of Classic Quizzes in a course. NOTE: This tool ONLY lists Classic Quizzes, NOT New Quizzes. Canvas has two quiz engines: Classic Quizzes (legacy) and New Quizzes (modern). If you need to find New Quizzes, use canvas-list_new_quizzes instead. When the user asks about quizzes without specifying which type, you may need to check both tools to get a complete picture.",
-      "readOnly": true,
-      "example": "Show me all quizzes in Coastal Ecology 101"
-    },
-    {
-      "title": "List Rubrics for Account",
-      "roles": [
-        "admin"
-      ],
-      "resource": "rubric",
-      "description": "Retrieves a list of all active rubrics in an account.",
-      "readOnly": true,
-      "example": "Show me the rubrics defined in account 1."
-    },
-    {
-      "title": "List Rubrics for Course",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "rubric",
-      "description": "Retrieves a list of all active rubrics in a course.",
-      "readOnly": true,
-      "example": "Show me the rubrics in my Coastal Ecology 101 course."
-    },
-    {
-      "title": "List Student Submissions",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "submission",
-      "description": "List all assignment submissions in a course for a given set of student ids.",
-      "readOnly": true,
-      "example": "Show me all submissions for Alice and Bob in Introduction to Computer Science"
-    },
-    {
-      "title": "List Sub-Accounts",
-      "roles": [
-        "admin"
-      ],
-      "resource": "account",
-      "description": "Lists sub-accounts of a given parent account. Can retrieve direct children only or the entire account tree recursively.",
-      "readOnly": true,
-      "example": "List all sub-accounts under account 1."
-    },
-    {
-      "title": "Mark Module Item as Done",
-      "roles": [
-        "student",
-        "teacher",
-        "ta"
-      ],
-      "resource": "module",
-      "description": "Marks a module item as done for the current user (for items whose completion requirement is 'must mark done').",
-      "readOnly": false,
-      "example": "Mark item 789 in module 456 of course 123 as done."
-    },
-    {
-      "title": "Migrate Quiz to New Quizzes",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "content",
-      "description": "Migrates a classic Canvas quiz to New Quizzes. This triggers an asynchronous migration job and returns a content export object with an ID and workflow_state to track progress.",
-      "readOnly": false,
-      "example": "Migrate the Chapter 1 Review classic quiz to New Quizzes in Coastal Ecology 101."
-    },
-    {
-      "title": "Relock Module",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Relocks a module and recalculates the locked state of its items and downstream modules based on the current unlock/prerequisite settings. ⚠️ This re-evaluates student progression.",
-      "readOnly": false,
-      "example": "Relock module 456 in course 123."
-    },
-    {
-      "title": "Remove User From Group",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer",
-        "student"
-      ],
-      "resource": "group",
-      "description": "Removes a student or user from a group or differentiation tag. Use this to kick someone out of a peer group, remove a student from a collaborative group, or remove a differentiation tag from a user.",
-      "readOnly": false,
-      "example": "Remove Grace Whitfield from Group 1 in my course."
-    },
-    {
-      "title": "Search Course Roster",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "user",
-      "description": "Lists ALL users in a course (students, teachers, TAs, designers, observers). Returns user profile information (name, email, avatar). Use this to see \"everyone enrolled\", \"who is in the course\", \"class roster\", or to search users by name.",
-      "readOnly": true,
-      "example": "Show me everyone enrolled in my History 301 course."
-    },
-    {
-      "title": "Send Canvas Inbox Message",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "conversation",
-      "description": "Sends a message to one or more recipients in the Canvas INBOX. Messages go to recipients' inbox, NOT the course homepage. For public course announcements, use canvas-create_or_update_announcement instead.",
-      "readOnly": false,
-      "example": "Message students 123 and 456 with feedback on the last assignment."
-    },
-    {
-      "title": "Set Assignment Due Dates",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "assignment",
-      "description": "Sets the due date for one or more assignments to a specific new date. This is the preferred tool for changing assignment due dates — use it instead of editing assignments one by one.",
-      "readOnly": false,
-      "example": "Set the due date for Essay 1 and Midterm Project to December 15th, 2025."
-    },
-    {
-      "title": "Set Student Overrides",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "assignment",
-      "description": "Sets a new due date for a specific list of students across one or more assignments. Intelligently handles conflicts with existing override groups by splitting them so unaffected students keep their original extension.",
-      "readOnly": false,
-      "example": "For 'Essay 1', set the due date for Marcus and Paul to November 15th. Make sure Jane's separate extension is not affected."
-    },
-    {
-      "title": "Shift Assignment Due Dates",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "assignment",
-      "description": "Shifts assignment due dates forward or backward by a fixed number of days using Canvas's bulk_update endpoint. Use this in preference to editing assignments one by one when the change is a relative shift (push back, move forward, postpone).",
-      "readOnly": false,
-      "example": "Push back the due dates for 'Essay 1' and 'Midterm Project' by 7 days."
-    },
-    {
-      "title": "Sync Calendar Across Courses",
-      "roles": [
-        "teacher",
-        "student",
-        "ta",
-        "designer",
-        "observer"
-      ],
-      "resource": "assignment",
-      "description": "Export Canvas deadlines and events across courses as JSON or an importable ICS calendar resource. Stable event UIDs let consumers match entries across exports. This tool only reads Canvas; it does not write to or sync an external calendar.",
-      "readOnly": true,
-      "example": "Export my Canvas deadlines for next week."
-    },
-    {
-      "title": "Update Assignment Due Date",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "assignment",
-      "description": "Updates an existing assignment, most commonly its due/lock/unlock dates. Other assignment attributes (name, description, points, published state) can also be changed.",
-      "readOnly": false,
-      "example": "Push the due date for assignment 456 in course 123 to the end of the year."
-    },
-    {
-      "title": "Update Discussion Topic",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "discussion",
-      "description": "Updates an existing discussion topic. Accepts title, message, discussion_type, published, delayed_post_at, lock_at, require_initial_post, pinned and other settings. ⚠️ This modifies the discussion immediately.",
-      "readOnly": false,
-      "example": "Publish discussion 343 in course 123 and pin it."
-    },
-    {
-      "title": "Update Course Module",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Updates an existing course module (name, position, publication state, prerequisites, and unlock settings). ⚠️ This modifies the module immediately.",
-      "readOnly": false,
-      "example": "Publish module 456 in course 123."
-    },
-    {
-      "title": "Update Module Assignment Overrides",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Bulk-sets the assignment overrides for a module (which sections, groups, or students it is assigned to). The provided list fully replaces the existing overrides. ⚠️ Overrides not included are removed.",
-      "readOnly": false,
-      "example": "Assign module 456 in course 123 to students 111 and 222 only."
-    },
-    {
-      "title": "Update a Module Item",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "module",
-      "description": "Updates a module item (title, position, indent, publication, completion requirement, external URL) or moves it to another module. ⚠️ This modifies the item immediately.",
-      "readOnly": false,
-      "example": "Publish item 789 in module 456 of course 123 and move it to position 2."
-    },
-    {
-      "title": "Update Wiki Page",
-      "roles": [
-        "teacher",
-        "designer"
-      ],
-      "resource": "page",
-      "description": "Updates an existing wiki page. Note: changing a page's title will change its URL. ⚠️ This modifies the page immediately.",
-      "readOnly": false,
-      "example": "Update the 'course-syllabus' page in course 123 with new content and publish it."
-    },
-    {
-      "title": "Update New Quiz Question",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "quiz",
-      "description": "Updates an existing item (question) in a New Quiz. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use canvas-list_new_quizzes to find the assignment_id, then canvas-list_quiz_questions to find the item_id.",
-      "readOnly": false,
-      "example": "Change the title of the first question in the History Quiz to \"US Presidents 1-4\"."
-    },
-    {
-      "title": "Update Rubric",
-      "roles": [
-        "teacher",
-        "ta",
-        "designer"
-      ],
-      "resource": "rubric",
-      "description": "Updates an existing rubric in a course. Providing criteria replaces all existing criteria.",
-      "readOnly": false,
-      "example": "Rename rubric 99 in course 123 to \"Updated Essay Rubric\"."
-    }
-  ]
+	"catalog": "2026-09-29",
+	"tools": [
+		{
+			"title": "Add All Course Members to Differentiation Tag",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "group",
+			"description": "Adds every student in the course to a differentiation tag in a single Canvas call. Only works for differentiation tags (non-collaborative groups), not regular collaborative groups.",
+			"readOnly": false,
+			"example": "Add all students to the 'Enrichment Track' differentiation tag, but exclude Jane and Marcus."
+		},
+		{
+			"title": "Add All Course Members to Group",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "group",
+			"description": "Adds every student in the enclosing course to a differentiation tag (non-collaborative group) in a single Canvas call. Use this to populate a differentiation tag with the whole class without iterating per user. Note: this only works for differentiation tags — for regular collaborative groups, use canvas-add_users_to_group instead, since Canvas's `all_in_group_course` endpoint rejects collaborative groups with a 400.",
+			"readOnly": false,
+			"example": "Add every student in the course to the \"Support Track\" differentiation tag."
+		},
+		{
+			"title": "Add Assignment to Module",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Adds an existing assignment to a course module as a new module item. PREREQUISITE: call canvas-find_assignments_by_name first to resolve the assignment_id — never guess it.",
+			"readOnly": false,
+			"example": "Add the 'Essay 1' assignment to Module 1 as the first item."
+		},
+		{
+			"title": "Add Conversation Message",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "conversation",
+			"description": "Adds a message to an existing inbox conversation.",
+			"readOnly": false,
+			"example": "In my latest conversation with Owen, please reply with 'Thank you, I will look into it.'"
+		},
+		{
+			"title": "Add Conversation Recipients",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "conversation",
+			"description": "Adds one or more people (recipients) to an existing conversation. Use this when a user wants to include additional participants in a conversation thread.",
+			"readOnly": false,
+			"example": "Add Owen and everyone in the Coastal Ecology 101 course to my conversation with Jane."
+		},
+		{
+			"title": "Add Discussion to Module",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Adds an existing discussion topic to a course module. ⚠️ This creates a new module item immediately.",
+			"readOnly": false,
+			"example": "Add discussion 789 to module 456 in course 123."
+		},
+		{
+			"title": "Add File to Module",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Adds an existing file to a course module. ⚠️ This creates a new module item immediately.",
+			"readOnly": false,
+			"example": "Add file 202 to module 456 in course 123."
+		},
+		{
+			"title": "Add Item to Module",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Adds an item of any type to a course module (Assignment, Page, Discussion, Quiz, File, ExternalUrl, ExternalTool, or SubHeader). ⚠️ This creates a new module item immediately.",
+			"readOnly": false,
+			"example": "Add assignment 789 to module 456 in course 123."
+		},
+		{
+			"title": "Add Wiki Page to Module",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Adds an existing wiki page to a course module. ⚠️ This creates a new module item immediately.",
+			"readOnly": false,
+			"example": "Add the 'syllabus' page to module 456 in course 123."
+		},
+		{
+			"title": "Add New Quiz to Module",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Adds an existing New Quiz to a course module. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use canvas-list_new_quizzes to find the assignment_id. ⚠️ This creates a new module item immediately.",
+			"readOnly": false,
+			"example": "Add the Midterm Exam quiz to the Assessments module."
+		},
+		{
+			"title": "Add Users to Differentiation Tag",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "group",
+			"description": "Adds one or more users to a differentiation tag (non-collaborative group) in a single bulk Canvas call.",
+			"readOnly": false,
+			"example": "Add Jane, Marcus, and Maria to the \"Enrichment Track\" differentiation tag."
+		},
+		{
+			"title": "Add Users to Group",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "group",
+			"description": "Adds one or more users to a regular (collaborative) group. Use this to assign students into groups — including 'randomly assign students to groups', 'put students into their lab groups', or 'move student X into group Y'.",
+			"readOnly": false,
+			"example": "Add users 123, 456 and 789 to group 111."
+		},
+		{
+			"title": "Batch Create Assignment Overrides",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "assignment",
+			"description": "Creates multiple assignment overrides for students, groups, or sections across one or more assignments in a single Canvas call. Use this for granting extensions or differentiated due dates in bulk.",
+			"readOnly": false,
+			"example": "In the History 101 course give Jane an extension on Essay 1 to Nov 15th, and also give Paul an extension on the Midterm Project to Nov 20th."
+		},
+		{
+			"title": "Batch Create Course Sections",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "section",
+			"description": "Creates multiple course sections in a single operation. Each section can have its own name, SIS ID, integration ID, and date restrictions.",
+			"readOnly": false,
+			"example": "Create three sections in course 123: Morning Lab, Afternoon Lab, and Evening Lab."
+		},
+		{
+			"title": "Batch Create Quiz Questions",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "quiz",
+			"description": "Creates multiple New Quiz questions (items) on an existing quiz in one tool call. Use this for adding question batches — for Classic Quizzes use the classic-quiz tools instead.",
+			"readOnly": false,
+			"example": "Add a multiple choice question to the History Quiz: \"Who was the first president?\" worth 5 points, choices Washington (correct), Jefferson, Lincoln."
+		},
+		{
+			"title": "Batch Delete Course Sections",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "section",
+			"description": "Permanently deletes one or more course sections. Only sections without enrollments can be deleted. Returns deleted section details for each successfully deleted section.",
+			"readOnly": false,
+			"example": "Delete section 12345 from the course."
+		},
+		{
+			"title": "Batch Update Assignment Overrides",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "assignment",
+			"description": "Updates multiple existing assignment overrides in a single, atomic Canvas call. Use this for bulk-editing existing extensions, differentiated due dates, or override titles across one or more assignments.",
+			"readOnly": false,
+			"example": "Change Jane's extension on Essay 1 to November 20th, and update Paul's extension on the Midterm to November 25th."
+		},
+		{
+			"title": "Update Sections",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "section",
+			"description": "Modifies one or more existing course sections in a single operation. Can update section names, SIS identifiers, date restrictions, and enrollment date boundaries.",
+			"readOnly": false,
+			"example": "Rename section 789 to 'Advanced Physics Lab'."
+		},
+		{
+			"title": "Bulk Edit Quiz Settings",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "quiz",
+			"description": "Updates quiz settings for all New Quizzes in a course. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use this when you need to apply the same settings (time limits, multiple attempts, IP filters, etc.) to all quizzes in a course at once.",
+			"readOnly": false,
+			"example": "Set a 90 minute time limit on all quizzes in Coastal Ecology 101."
+		},
+		{
+			"title": "Bulk Enroll Users into Courses",
+			"roles": ["admin"],
+			"resource": "enrollment",
+			"description": "Enrolls many users into many courses in a single account-level operation. ⚠️ This creates enrollments immediately for every user/course pair.",
+			"readOnly": false,
+			"example": "Enroll users 10 and 11 as students into courses 100 and 101 in account 1."
+		},
+		{
+			"title": "Bulk Manage Differentiation Tags",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "group",
+			"description": "Creates, renames, and deletes differentiation tags inside a group category in a single Canvas call. Use this when you need to author or rearrange a category's tags in bulk — Canvas runs the whole batch atomically.",
+			"readOnly": false,
+			"example": "Create two new differentiation tags 'Pair 1' and 'Pair 2' in a new category 'My Tag Category', rename tag 5 to 'Updated Tag Name', and delete tag 8."
+		},
+		{
+			"title": "Bulk Publish or Unpublish Course Modules",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Publishes or unpublishes all modules in a course in a single operation. ⚠️ This modifies all modules immediately.",
+			"readOnly": false,
+			"example": "Publish all modules in course 123."
+		},
+		{
+			"title": "Copy Due Date Pattern",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "assignment",
+			"description": "Copies assignment due dates (due_at, unlock_at, lock_at) from a source course to a target course, optionally shifting every date by a fixed number of days. Use this when transferring a schedule between sections or terms instead of editing assignments one by one.",
+			"readOnly": false,
+			"example": "Copy the due date pattern from my Fall section (course 123) to my Spring section (course 456) but shift everything 14 days later."
+		},
+		{
+			"title": "Copy Quiz Question",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "quiz",
+			"description": "Copies one or more quiz questions from a source quiz to a destination quiz within the same course. Supports both Classic Quizzes and New Quizzes (New Quizzes/Quizzes.Next) - set quiz_type per entry to match the quiz system the source and destination quiz both use.",
+			"readOnly": false,
+			"example": "Copy question 55 from the Classic Quiz 100 to Classic Quiz 200 in course 10."
+		},
+		{
+			"title": "Create Course Enrollments",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "enrollment",
+			"description": "Creates one or more enrollments in a single Canvas course. ⚠️ This immediately creates or invites enrollments.",
+			"readOnly": false,
+			"example": "Enroll user 55 as a student in course 123."
+		},
+		{
+			"title": "Create Assignment",
+			"roles": ["teacher", "designer"],
+			"resource": "assignment",
+			"description": "Create a new assignment in a course. Supports homework, quizzes, projects, exams, and graded discussions (set submission_types: ['discussion_topic']).",
+			"readOnly": false,
+			"example": "Create an assignment in Syntax II called 'Lab Report 1'. It should be worth 50 points and due on October 1st, 2025. (User timezone: America/New_York)"
+		},
+		{
+			"title": "Create Assignment Override",
+			"roles": ["teacher", "designer"],
+			"resource": "assignment",
+			"description": "Creates a single assignment override that gives a set of students, a section, or a group different due/lock/unlock dates than the assignment default.",
+			"readOnly": false,
+			"example": "Give students 789 and 790 until the new year to submit assignment 456 in course 123."
+		},
+		{
+			"title": "Create Community Group",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "group",
+			"description": "Creates a new account-level community group. Community groups are not tied to a specific course and users can join as many as they want.",
+			"readOnly": false,
+			"example": "Create a public community group named 'Chess Club' with description 'For chess enthusiasts' that anyone can join."
+		},
+		{
+			"title": "Create Conversation",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "conversation",
+			"description": "Creates a conversation in the Canvas INBOX — it lands in recipients' inbox, NOT on the course homepage. For a public announcement use canvas-create_or_update_announcement.",
+			"readOnly": false,
+			"example": "Send a message to Marcus Webb and Jane Doe about the assignment update."
+		},
+		{
+			"title": "Create Course Export",
+			"roles": ["teacher", "designer"],
+			"resource": "course",
+			"description": "Initiates a content export for a Canvas course. Can create a full course export or selective content export in various formats.",
+			"readOnly": false,
+			"example": "Create a full export of my Coastal Ecology 101 course so I can back up all the content."
+		},
+		{
+			"title": "Create Discussion Topic",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "discussion",
+			"description": "Creates a new discussion topic in a course. Accepts title, message (HTML), discussion_type, published, require_initial_post and other settings. ⚠️ This operation is not idempotent — each call creates a new topic.",
+			"readOnly": false,
+			"example": "Start a threaded discussion 'Week 1 Intro' in course 123, published."
+		},
+		{
+			"title": "Create External Tool",
+			"roles": ["teacher", "admin"],
+			"resource": "external",
+			"description": "Create an external tool in the specified course or account. This tool can be used to integrate external applications or services with Canvas.",
+			"readOnly": false,
+			"example": "Create an external tool called \"Turnitin\" in English Composition 101 with privacy level \"public\", using the consumer key and shared secret I provide."
+		},
+		{
+			"title": "Create Group",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "group",
+			"description": "Creates a single new group within an existing group category.",
+			"readOnly": false,
+			"example": "Create a group called 'Team Nautilus' in the Peer Groups category."
+		},
+		{
+			"title": "Create Group Category",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "group",
+			"description": "Creates a new group category for collaborative student groups within a course.",
+			"readOnly": false,
+			"example": "Create a new group category called 'Peer Groups' in my Coastal Ecology 101 course."
+		},
+		{
+			"title": "Create Course Module",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Creates a new module in a course. ⚠️ This operation is not idempotent — each call creates a new module.",
+			"readOnly": false,
+			"example": "Create a module 'Unit 1: Orientation' in course 123."
+		},
+		{
+			"title": "Create Module External URL",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Adds an external URL item to a course module. ⚠️ This creates a new module item immediately.",
+			"readOnly": false,
+			"example": "Add a link to https://example.com titled 'Resource' to module 456 in course 123, opening in a new tab."
+		},
+		{
+			"title": "Create Module Sub-Header",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Adds a text sub-header item to a course module (a non-link heading used to group items). ⚠️ This creates a new module item immediately.",
+			"readOnly": false,
+			"example": "Add a 'Readings' sub-header to module 456 in course 123."
+		},
+		{
+			"title": "Create or Update Announcement",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "announcement",
+			"description": "Posts a PUBLIC announcement on the course homepage. Announcements are visible to all enrolled students. For private inbox messages use canvas-send_message instead.",
+			"readOnly": false,
+			"example": "Post an exam reminder announcement to my Coastal Ecology 101 course."
+		},
+		{
+			"title": "Create Wiki Page",
+			"roles": ["teacher", "designer"],
+			"resource": "page",
+			"description": "Creates a new wiki page in a course. The page is created in draft state by default unless published: true is passed. ⚠️ This operation is not idempotent — each call creates a new page.",
+			"readOnly": false,
+			"example": "Create a published 'Course Roadmap' page in course 123 with a short intro."
+		},
+		{
+			"title": "Create Rubric",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "rubric",
+			"description": "Creates a new rubric in a course with the specified criteria and ratings, optionally associating it with the course or an assignment in the same request.",
+			"readOnly": false,
+			"example": "Create a Lab Report rubric and attach it to assignment 200 for grading in course 123."
+		},
+		{
+			"title": "Create Rubric Association",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "rubric",
+			"description": "Links an existing rubric to multiple courses, assignments, or accounts for grading or bookmarking.",
+			"readOnly": false,
+			"example": "Attach rubric 99 to assignments 200, 201, and 202 for grading in course 123."
+		},
+		{
+			"title": "Decline Student Enrollment Request",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "enrollment",
+			"description": "Use this tool when a user requests to enroll students, teachers, TAs, or any other role in a course. This feature is not yet available through the assistant, and this tool provides guidance on how to perform the enrollment manually through the Canvas UI.",
+			"readOnly": true,
+			"example": "Enroll Jessica Martinez and Owen Williams as students in my course"
+		},
+		{
+			"title": "Delete Announcement",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "announcement",
+			"description": "Permanently deletes an announcement from a course. This action is irreversible.",
+			"readOnly": false,
+			"example": "Yes, please go ahead and delete the exam cancellation announcement from my English 101 course."
+		},
+		{
+			"title": "Delete Assignment Override",
+			"roles": ["teacher", "designer"],
+			"resource": "assignment",
+			"description": "Deletes a specific assignment override, removing a custom due date that applies to a specific student or students, group, or course section.",
+			"readOnly": false,
+			"example": "Please remove the extension you gave to Jane and Paul on the 'Final Reflection' in the 'Art History' course."
+		},
+		{
+			"title": "Delete Assignments",
+			"roles": ["teacher", "designer"],
+			"resource": "assignment",
+			"description": "Permanently deletes one or more assignments from courses. ⚠️ This is irreversible.",
+			"readOnly": false,
+			"example": "Delete assignment 789 from course 123"
+		},
+		{
+			"title": "Delete Conversation",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "conversation",
+			"description": "Deletes a conversation from the current user's view. This action does not affect other participants.",
+			"readOnly": false,
+			"example": "Yes, go ahead and delete my conversation with Owen."
+		},
+		{
+			"title": "Delete Conversation Messages",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "conversation",
+			"description": "Deletes specific messages from a conversation for the current user. This does not affect other participants' views.",
+			"readOnly": false,
+			"example": "Please remove the last two messages from my conversation with Owen."
+		},
+		{
+			"title": "Delete Discussion Topic",
+			"roles": ["teacher", "designer"],
+			"resource": "discussion",
+			"description": "Permanently deletes a discussion topic from a course. If the discussion is an assignment discussion, this also deletes the associated assignment. ⚠️ This is irreversible.",
+			"readOnly": false,
+			"example": "Delete discussion topic 343 in course 123."
+		},
+		{
+			"title": "Delete Files",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "file",
+			"description": "Permanently deletes one or more files. ⚠️ This is irreversible.",
+			"readOnly": false,
+			"example": "Delete file 12345 from the course"
+		},
+		{
+			"title": "Delete Group",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "group",
+			"description": "Permanently deletes a group and removes all its members. Works for any group type: course groups, peer groups, community groups, or differentiation tags.",
+			"readOnly": false,
+			"example": "Delete Group 1 from the Monday Peer Groups category."
+		},
+		{
+			"title": "Delete Course Module",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Permanently deletes a module and its item associations from a course. The underlying content (assignments, pages, etc.) is not deleted. ⚠️ This is irreversible.",
+			"readOnly": false,
+			"example": "Delete module 456 in course 123."
+		},
+		{
+			"title": "Delete Module Item",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Permanently removes an item from a module. The underlying content (assignment, page, etc.) is not deleted — only the module-item association. ⚠️ This is irreversible.",
+			"readOnly": false,
+			"example": "Remove item 789 from module 456 in course 123."
+		},
+		{
+			"title": "Delete New Quiz",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "quiz",
+			"description": "Deletes a New Quiz from a specific course. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use canvas-list_new_quizzes to find the assignment_id for New Quizzes.",
+			"readOnly": false,
+			"example": "Delete the Chapter 1 Practice Quiz from my Coastal Ecology course."
+		},
+		{
+			"title": "Delete New Quiz Question",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "quiz",
+			"description": "Deletes an item (question) from a New Quiz. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use canvas-list_new_quizzes to find the assignment_id, then canvas-list_quiz_questions to find the item_id.",
+			"readOnly": false,
+			"example": "Delete the third question from the Midterm Quiz."
+		},
+		{
+			"title": "Delete Rubric",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "rubric",
+			"description": "Permanently deletes a rubric from a course. This action is irreversible.",
+			"readOnly": false,
+			"example": "Delete rubric 99 from course 123."
+		},
+		{
+			"title": "Delete Rubric Association",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "rubric",
+			"description": "Removes the link between a rubric and an assignment, course, or account. The rubric itself is not deleted.",
+			"readOnly": false,
+			"example": "Remove rubric association 55 from course 123."
+		},
+		{
+			"title": "Duplicate Assignment",
+			"roles": ["teacher", "designer"],
+			"resource": "assignment",
+			"description": "Duplicate an existing assignment in a course.",
+			"readOnly": false,
+			"example": "Duplicate the \"Midterm Reflection\" assignment in English Literature 101."
+		},
+		{
+			"title": "Duplicate Discussion Topic",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "discussion",
+			"description": "Duplicates an existing discussion topic within the same course, creating a copy with the same settings and content. ⚠️ This creates a new discussion immediately.",
+			"readOnly": false,
+			"example": "Duplicate discussion topic 343 in course 123."
+		},
+		{
+			"title": "Duplicate Wiki Page",
+			"roles": ["teacher", "designer"],
+			"resource": "page",
+			"description": "Duplicates an existing wiki page within the same course, creating a copy with the same content and settings. ⚠️ This creates a new page immediately.",
+			"readOnly": false,
+			"example": "Duplicate the 'course-syllabus' page in course 123."
+		},
+		{
+			"title": "Edit Assignment",
+			"roles": ["teacher", "designer"],
+			"resource": "assignment",
+			"description": "Modifies an existing assignment in a specified course.",
+			"readOnly": false,
+			"example": "Update the last lab report in Advanced Phonology. Change its name to 'Final Lab Report' and extend the due date to October 15th, 2025. (User timezone: America/New_York)"
+		},
+		{
+			"title": "Edit Conversation",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "conversation",
+			"description": "Updates attributes for a single conversation, such as its state (read, unread) or starred status.",
+			"readOnly": false,
+			"example": "Archive my conversation with Jane and star it."
+		},
+		{
+			"title": "Edit Group",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "group",
+			"description": "Modifies an existing group.",
+			"readOnly": false,
+			"example": "Rename the Study Group to 'Final Project Collaborators' and make it invitation only."
+		},
+		{
+			"title": "Edit New Quiz",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "quiz",
+			"description": "Modifies an existing New Quiz for a course. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use canvas-list_new_quizzes to find the assignment_id for New Quizzes.",
+			"readOnly": false,
+			"example": "Change the title of the Chapter 1 quiz to \"Chapter 1 Final Review\"."
+		},
+		{
+			"title": "Find Assignments by Name",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "assignment",
+			"description": "Search for assignments by name or title within a course, and return the matching assignments together with their numeric Canvas IDs. Use this when the user refers to an assignment by name rather than by ID.",
+			"readOnly": true,
+			"example": "Find all assignments that have 'Final Project' in their title for the Graphic Design course."
+		},
+		{
+			"title": "Find Courses by Name",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "course",
+			"description": "Search for courses by name with typo tolerance. Handles spelling variations and minor errors (e.g., 'Costal Ecology' matches 'Coastal Ecology'). Returns matching courses or all courses if no close matches found. Use this when you need to find a course by name rather than by ID.",
+			"readOnly": true,
+			"example": "Find my Coastal Ecology 101 course."
+		},
+		{
+			"title": "Find Course Users by Name",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "user",
+			"description": "Retrieves a comprehensive list of all users within a course matching a specific name with their ID and optional additional details.",
+			"readOnly": true,
+			"example": "Find a student named 'Marcos Webb' in History 101 and show me his enrollment details."
+		},
+		{
+			"title": "Find Recipients",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "conversation",
+			"description": "Search for messageable recipients (users, courses, groups) using the Canvas messaging search API. Returns recipient IDs, names, and membership counts. Always call this before canvas-create_conversation to resolve names to Canvas recipient IDs.",
+			"readOnly": true,
+			"example": "Send a message to all students in course 42"
+		},
+		{
+			"title": "Find Student in Course by Name",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "user",
+			"description": "Searches for students by name within a course. Use this to find a student ID when you only know their name. The search matches partial names and returns matching students enrolled in the specified course.",
+			"readOnly": true,
+			"example": "Find student Marcus Webb in Coastal Ecology 101"
+		},
+		{
+			"title": "Find User by Name",
+			"roles": ["teacher", "ta", "designer", "admin"],
+			"resource": "user",
+			"description": "Searches for users within an account by name, SIS ID, login ID, or email address. Returns users that match the search term. Use this tool when you need to find a specific user by their name or identifier within an account-wide context.",
+			"readOnly": true,
+			"example": "Find user Jane Doe in the Main Campus account"
+		},
+		{
+			"title": "Get Announcement by ID",
+			"roles": ["teacher", "ta", "designer", "student", "observer"],
+			"resource": "announcement",
+			"description": "Retrieves the full details of a single, specific announcement by its ID.",
+			"readOnly": true,
+			"example": "Show me the details of announcement 8991 in course 456."
+		},
+		{
+			"title": "Get Assignment",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "assignment",
+			"description": "Retrieves a single assignment from a specified course.",
+			"readOnly": true,
+			"example": "Get the details for assignment 456 in course 123, including the submission data."
+		},
+		{
+			"title": "Get Bulk User Progress",
+			"roles": ["teacher", "ta", "designer", "observer"],
+			"resource": "user",
+			"description": "Gets module-progress information for every student enrolled in a course in a single paginated call. Use this for whole-class progress reporting and completion statistics.",
+			"readOnly": true,
+			"example": "Show me the progress of all students in my Coastal Ecology 101 course."
+		},
+		{
+			"title": "Get Conversation",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "conversation",
+			"description": "Retrieves a single conversation, including its messages and participants.",
+			"readOnly": true,
+			"example": "Can you show me the full thread for my conversation with Owen?"
+		},
+		{
+			"title": "Get Detailed Course Information",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "course",
+			"description": "Returns detailed information about a specific course including syllabus, course settings, grading schemes, and metadata.",
+			"readOnly": true,
+			"example": "Show me the details and syllabus of course 123."
+		},
+		{
+			"title": "Get Course Export",
+			"roles": ["teacher", "designer"],
+			"resource": "course",
+			"description": "Retrieves detailed status information for a specific content export, including progress, download link, and completion status.",
+			"readOnly": true,
+			"example": "Check the status of my course export."
+		},
+		{
+			"title": "Get Course Settings",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "course",
+			"description": "Retrieves the configuration settings for a specific course.",
+			"readOnly": true,
+			"example": "What are the settings for my Coastal Ecology 101 course? Can students create discussion topics?"
+		},
+		{
+			"title": "Get Discussion Topic Details",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "discussion",
+			"description": "Returns detailed information about a specific discussion topic including title, message, discussion type, publication status, and metadata.",
+			"readOnly": true,
+			"example": "Show me discussion topic 343 in course 123."
+		},
+		{
+			"title": "Get Outcome Results Rollups",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "outcome",
+			"description": "Returns outcome rollups for a course with per-student (or aggregate) mastery data. Useful for standards-based grading and competency tracking.",
+			"readOnly": true,
+			"example": "Show outcome mastery for course 123 with outcome and user details."
+		},
+		{
+			"title": "Get Single Module",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "module",
+			"description": "Returns the details of a single course module, optionally including its items and completion requirements.",
+			"readOnly": true,
+			"example": "Show module 456 in course 123 with its items."
+		},
+		{
+			"title": "Get Single Module Item",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "module",
+			"description": "Returns the details of a single module item, optionally with content details and per-student completion info.",
+			"readOnly": true,
+			"example": "Show item 789 in module 456 of course 123."
+		},
+		{
+			"title": "List Course Modules",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "module",
+			"description": "Returns a paginated list of course modules including their structure and completion requirements.",
+			"readOnly": true,
+			"example": "List all modules with their items in course 123."
+		},
+		{
+			"title": "Get Outcome Results",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "outcome",
+			"description": "Gets the outcome results for users and outcomes in a specific course.",
+			"readOnly": true,
+			"example": "Get the outcome results for Jane Smith in Coastal Ecology 101 and include the outcome details."
+		},
+		{
+			"title": "Get Wiki Page Details",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "page",
+			"description": "Retrieves the content and details of a specific wiki page including title, body (HTML content), url, publication status, and metadata.",
+			"readOnly": true,
+			"example": "Show me the course syllabus page in course 123."
+		},
+		{
+			"title": "List Course Pages",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "page",
+			"description": "Returns a paginated list of wiki pages in a course including page titles, URLs, and publication status.",
+			"readOnly": true,
+			"example": "List all the pages in course 123."
+		},
+		{
+			"title": "Get New Quiz",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "quiz",
+			"description": "Gets details for a single New Quiz in a course. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use canvas-list_new_quizzes to find the assignment_id for New Quizzes.",
+			"readOnly": true,
+			"example": "Show me the details for quiz 45 in course 101."
+		},
+		{
+			"title": "Get Classic Quiz Statistics",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "quiz",
+			"description": "Retrieves statistics for a Classic Quiz including student analysis and item analysis. NOTE: This tool is for Classic Quizzes only, NOT New Quizzes. Use canvas-list_quizzes to find the quiz_id for Classic Quizzes.",
+			"readOnly": true,
+			"example": "Show me the statistics for the Midterm Exam quiz."
+		},
+		{
+			"title": "Get Rubric",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "rubric",
+			"description": "Retrieves a single rubric from a course, including its full criteria and ratings.",
+			"readOnly": true,
+			"example": "Show me the details of rubric 99 in course 123."
+		},
+		{
+			"title": "Get Rubric Used Locations",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "rubric",
+			"description": "Returns all courses and assignments that are currently using a specific rubric.",
+			"readOnly": true,
+			"example": "Which assignments use rubric 99 in course 123?"
+		},
+		{
+			"title": "Get Session Context For User",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "user",
+			"description": "Returns the caller's identity, time zone, and active course list in one call — the session bootstrap other tools rely on instead of guessing.",
+			"readOnly": true,
+			"example": "What courses am I in right now, and what time zone am I in?"
+		},
+		{
+			"title": "Get Course Students with Enrollment Data",
+			"roles": ["teacher", "ta"],
+			"resource": "user",
+			"description": "Returns the list of students enrolled in a course along with their enrollment data. Use this for class rosters and per-student performance context.",
+			"readOnly": true,
+			"example": "Who are the students in my Coastal Ecology 101 course?"
+		},
+		{
+			"title": "Get Student Submissions",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "submission",
+			"description": "Returns submissions for students in a section, optionally filtered by students, assignments, workflow state, and other criteria. Supports grouped responses and various filtering options.",
+			"readOnly": true,
+			"example": "Show me all submitted assignments for students in section 456"
+		},
+		{
+			"title": "List Enrolled Students",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "enrollment",
+			"description": "Lists a course's ENROLLMENTS - one row per enrollment record, every role, not only students. Use it whenever the user asks for a course's ENROLLMENTS, enrollment state, pending invitations, section membership, or anyone holding two roles. For the PEOPLE in a course - the roster, who is in it - use canvas-search_course_roster.",
+			"readOnly": true,
+			"example": "Which sections is each student in for course 123?"
+		},
+		{
+			"title": "Get User Profile Information",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "user",
+			"description": "Returns profile information for a user, including name, bio, avatar, and contact details.",
+			"readOnly": true,
+			"example": "Get my Canvas profile."
+		},
+		{
+			"title": "Grant Classic Quiz Extension",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "quiz",
+			"description": "Grants time extensions on a Classic Quiz to the given students (user_ids), or to every currently enrolled student (all_students), without affecting anyone else's quiz settings. IMPORTANT: Only use this for quizzes found via canvas-list_quizzes (which have quiz_type in the response). For quizzes found via canvas-list_new_quizzes (New Quizzes), use canvas-grant_new_quiz_accommodation instead.",
+			"readOnly": false,
+			"example": "Give Marcus Webb double time on the History Quiz. The quiz is 20 minutes."
+		},
+		{
+			"title": "Grant New Quiz Accommodation",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "quiz",
+			"description": "Grants time accommodations on a New Quiz (Quizzes 2) to the given students (user_ids), or to every currently enrolled student (all_students), without affecting anyone else's quiz settings. IMPORTANT: Only use this for quizzes found via canvas-list_new_quizzes (which have quiz_settings in the response). For quizzes found via canvas-list_quizzes (Classic Quizzes), use canvas-grant_classic_quiz_extension instead.",
+			"readOnly": false,
+			"example": "Give Marcus Webb double time on the Introduction to Philosophy Quiz. The quiz is 30 minutes."
+		},
+		{
+			"title": "List Account Groups",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "group",
+			"description": "Lists the groups and differentiation tags available in a specific account.",
+			"readOnly": true,
+			"example": "Show me all groups in account 22."
+		},
+		{
+			"title": "List Accounts",
+			"roles": ["admin"],
+			"resource": "account",
+			"description": "Lists all accounts that the current user can view or manage. Returns accounts and sub-account count visible to the user. Typically only account admins can view accounts. Sub accounts can be retrieved with the canvas-list_sub_accounts tool.",
+			"readOnly": true,
+			"example": "List all available accounts in the Canvas instance."
+		},
+		{
+			"title": "List Announcements",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "announcement",
+			"description": "Retrieves a complete list of all announcements for a specific course.",
+			"readOnly": true,
+			"example": "Show me the announcements for 'Art History 101'."
+		},
+		{
+			"title": "List Assignment Groups",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "assignment",
+			"description": "Lists all assignment groups for a given course. Assignment groups are used to organize assignments and can have different weights for grade calculation.",
+			"readOnly": true,
+			"example": "List all assignment groups for the Introduction to Psychology course."
+		},
+		{
+			"title": "List Assignment Submissions",
+			"roles": ["teacher", "ta"],
+			"resource": "submission",
+			"description": "Lists all submissions for a specific assignment in a course.",
+			"readOnly": true,
+			"example": "List all submissions for assignment 456 in course 123."
+		},
+		{
+			"title": "List Assignments for Course",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "assignment",
+			"description": "Lists assignments for a given course.",
+			"readOnly": true,
+			"example": "Show me all the upcoming assignments for Introduction to Coastal Ecology"
+		},
+		{
+			"title": "List Conversations",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "conversation",
+			"description": "Lists conversations for the current user, with options to filter by scope (e.g., unread, archived) or context (e.g., a specific course or user).",
+			"readOnly": true,
+			"example": "Show me all my unread messages from Owen."
+		},
+		{
+			"title": "List Course Exports",
+			"roles": ["teacher", "designer"],
+			"resource": "course",
+			"description": "Lists all content exports for a Canvas course, showing their status, creation time, and download information if available.",
+			"readOnly": true,
+			"example": "Check the status of my course export and let me know if it's ready to download."
+		},
+		{
+			"title": "List Course Files",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "file",
+			"description": "Lists the files in a specific course. Optionally filter by file name using a search term.",
+			"readOnly": true,
+			"example": "Show me all the PDF files in Modern Ceramics class."
+		},
+		{
+			"title": "List Course Groups",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "group",
+			"description": "Lists the groups available in a specific course. Pass user_id to get just the groups one student belongs to, or include=['users'] to get every group's member list inline — that is the intended way to answer 'which students are not in any group?'.",
+			"readOnly": true,
+			"example": "List all of my groups in course Introduction to Modern Ceramics."
+		},
+		{
+			"title": "List Course Templates",
+			"roles": ["teacher", "designer", "admin"],
+			"resource": "course",
+			"description": "Lists all course templates available in the specified account. Do not use this tool to list blueprints, it is only for templates.",
+			"readOnly": true,
+			"example": "Show me all available course templates so I can see what I can use for my new course."
+		},
+		{
+			"title": "List Courses",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "course",
+			"description": "Lists courses for a specific user or the current user, with many options for filtering and including additional data.",
+			"readOnly": true,
+			"example": "Show me all my active courses where I'm a teacher."
+		},
+		{
+			"title": "List Deadlines Across Courses",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "assignment",
+			"description": "Get a unified list of all upcoming due dates across all of the current user's enrolled courses, including assignments, quizzes, discussions, and announcements. Canvas resolves per-student due-date overrides on the server, so the returned due dates already account for the current user's extensions or overrides. Use this to answer questions like 'What's due next week?' or 'Show me all deadlines in March' without needing to query each course individually.",
+			"readOnly": true,
+			"example": "What assignments are due next week?"
+		},
+		{
+			"title": "List Discussion Entry Replies",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "discussion",
+			"description": "Returns a paginated list of all replies to a specific top-level discussion entry.",
+			"readOnly": true,
+			"example": "Show me all replies to entry 12345 in discussion topic 343 of course 34672."
+		},
+		{
+			"title": "List Discussion Topic Entries",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "discussion",
+			"description": "Returns a paginated list of entries (top-level posts and replies) within a specific discussion topic in a Canvas course.",
+			"readOnly": true,
+			"example": "Show me all entries within the Student Introductions discussion (topic 343) in course 34672."
+		},
+		{
+			"title": "List Discussion Topics",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "discussion",
+			"description": "Returns a paginated list of discussion topics in a course. Announcements are not included; use the canvas-list_announcements tool for those. Supports filtering by scope (locked, unlocked, pinned, unpinned), search_term, and filter_by (all, unread).",
+			"readOnly": true,
+			"example": "List all discussions in course 123."
+		},
+		{
+			"title": "List Group Categories",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "group",
+			"description": "Lists all group categories within a specified course.",
+			"readOnly": true,
+			"example": "List all differentiation tags in Introduction to Psychology II."
+		},
+		{
+			"title": "List Groups",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "group",
+			"description": "Lists the active groups in a given course or account that are visible to the user. ALSO usable to find differentiation tags, as these exist as non-collaborative groups. When searching for differentiation tags, set collaboration_state to non_collaborative.",
+			"readOnly": true,
+			"example": "Show me all groups in Introduction to Coastal Ecology"
+		},
+		{
+			"title": "List Module Assignment Overrides",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "module",
+			"description": "Returns the paginated list of assignment overrides that apply to a module (the sections/groups/students the module is assigned to).",
+			"readOnly": true,
+			"example": "List the assignment overrides for module 456 in course 123."
+		},
+		{
+			"title": "List Module Items",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "module",
+			"description": "Returns a paginated list of items within a course module (assignments, pages, quizzes, files, discussions, external URLs, sub-headers).",
+			"readOnly": true,
+			"example": "List the items in module 456 of course 123."
+		},
+		{
+			"title": "List New Quizzes",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "quiz",
+			"description": "Get a list of New Quizzes for a given course, with each quiz's title and its numeric assignment_id. Use this when the user refers to a New Quiz by title rather than by ID. NOTE: This tool ONLY lists New Quizzes, NOT Classic Quizzes. Canvas has two quiz engines: New Quizzes (modern) and Classic Quizzes (legacy). If you need to find Classic Quizzes, use canvas-list_quizzes instead. When the user asks about quizzes without specifying which type, you may need to check both tools to get a complete picture.",
+			"readOnly": true,
+			"example": "Show me the new quizzes in Coastal Ecology 101."
+		},
+		{
+			"title": "List Outcome Groups",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "outcome",
+			"description": "Lists the outcome groups for a specific course.",
+			"readOnly": true,
+			"example": "Show me all the outcome groups in Modern Ceramics class."
+		},
+		{
+			"title": "List New Quiz Questions",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "quiz",
+			"description": "Lists all items (questions) in a New Quiz. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use canvas-list_new_quizzes to find the assignment_id for New Quizzes.",
+			"readOnly": true,
+			"example": "What are the questions in quiz 987 in course 456?"
+		},
+		{
+			"title": "List Classic Quizzes",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "quiz",
+			"description": "Returns the paginated list of Classic Quizzes in a course. NOTE: This tool ONLY lists Classic Quizzes, NOT New Quizzes. Canvas has two quiz engines: Classic Quizzes (legacy) and New Quizzes (modern). If you need to find New Quizzes, use canvas-list_new_quizzes instead. When the user asks about quizzes without specifying which type, you may need to check both tools to get a complete picture.",
+			"readOnly": true,
+			"example": "Show me all quizzes in Coastal Ecology 101"
+		},
+		{
+			"title": "List Rubrics for Account",
+			"roles": ["admin"],
+			"resource": "rubric",
+			"description": "Retrieves a list of all active rubrics in an account.",
+			"readOnly": true,
+			"example": "Show me the rubrics defined in account 1."
+		},
+		{
+			"title": "List Rubrics for Course",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "rubric",
+			"description": "Retrieves a list of all active rubrics in a course.",
+			"readOnly": true,
+			"example": "Show me the rubrics in my Coastal Ecology 101 course."
+		},
+		{
+			"title": "List Student Submissions",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "submission",
+			"description": "List all assignment submissions in a course for a given set of student ids.",
+			"readOnly": true,
+			"example": "Show me all submissions for Alice and Bob in Introduction to Computer Science"
+		},
+		{
+			"title": "List Sub-Accounts",
+			"roles": ["admin"],
+			"resource": "account",
+			"description": "Lists sub-accounts of a given parent account. Can retrieve direct children only or the entire account tree recursively.",
+			"readOnly": true,
+			"example": "List all sub-accounts under account 1."
+		},
+		{
+			"title": "Mark Module Item as Done",
+			"roles": ["student", "teacher", "ta"],
+			"resource": "module",
+			"description": "Marks a module item as done for the current user (for items whose completion requirement is 'must mark done').",
+			"readOnly": false,
+			"example": "Mark item 789 in module 456 of course 123 as done."
+		},
+		{
+			"title": "Migrate Quiz to New Quizzes",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "content",
+			"description": "Migrates a classic Canvas quiz to New Quizzes. This triggers an asynchronous migration job and returns a content export object with an ID and workflow_state to track progress.",
+			"readOnly": false,
+			"example": "Migrate the Chapter 1 Review classic quiz to New Quizzes in Coastal Ecology 101."
+		},
+		{
+			"title": "Relock Module",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Relocks a module and recalculates the locked state of its items and downstream modules based on the current unlock/prerequisite settings. ⚠️ This re-evaluates student progression.",
+			"readOnly": false,
+			"example": "Relock module 456 in course 123."
+		},
+		{
+			"title": "Remove User From Group",
+			"roles": ["teacher", "ta", "designer", "student"],
+			"resource": "group",
+			"description": "Removes a student or user from a group or differentiation tag. Use this to kick someone out of a peer group, remove a student from a collaborative group, or remove a differentiation tag from a user.",
+			"readOnly": false,
+			"example": "Remove Grace Whitfield from Group 1 in my course."
+		},
+		{
+			"title": "Search Course Roster",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "user",
+			"description": "Lists ALL users in a course (students, teachers, TAs, designers, observers). Returns user profile information (name, email, avatar). Use this to see \"everyone enrolled\", \"who is in the course\", \"class roster\", or to search users by name.",
+			"readOnly": true,
+			"example": "Show me everyone enrolled in my History 301 course."
+		},
+		{
+			"title": "Send Canvas Inbox Message",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "conversation",
+			"description": "Sends a message to one or more recipients in the Canvas INBOX. Messages go to recipients' inbox, NOT the course homepage. For public course announcements, use canvas-create_or_update_announcement instead.",
+			"readOnly": false,
+			"example": "Message students 123 and 456 with feedback on the last assignment."
+		},
+		{
+			"title": "Set Assignment Due Dates",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "assignment",
+			"description": "Sets the due date for one or more assignments to a specific new date. This is the preferred tool for changing assignment due dates — use it instead of editing assignments one by one.",
+			"readOnly": false,
+			"example": "Set the due date for Essay 1 and Midterm Project to December 15th, 2025."
+		},
+		{
+			"title": "Set Student Overrides",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "assignment",
+			"description": "Sets a new due date for a specific list of students across one or more assignments. Intelligently handles conflicts with existing override groups by splitting them so unaffected students keep their original extension.",
+			"readOnly": false,
+			"example": "For 'Essay 1', set the due date for Marcus and Paul to November 15th. Make sure Jane's separate extension is not affected."
+		},
+		{
+			"title": "Shift Assignment Due Dates",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "assignment",
+			"description": "Shifts assignment due dates forward or backward by a fixed number of days using Canvas's bulk_update endpoint. Use this in preference to editing assignments one by one when the change is a relative shift (push back, move forward, postpone).",
+			"readOnly": false,
+			"example": "Push back the due dates for 'Essay 1' and 'Midterm Project' by 7 days."
+		},
+		{
+			"title": "Sync Calendar Across Courses",
+			"roles": ["teacher", "student", "ta", "designer", "observer"],
+			"resource": "assignment",
+			"description": "Export Canvas deadlines and events across courses as JSON or an importable ICS calendar resource. Stable event UIDs let consumers match entries across exports. This tool only reads Canvas; it does not write to or sync an external calendar.",
+			"readOnly": true,
+			"example": "Export my Canvas deadlines for next week."
+		},
+		{
+			"title": "Update Assignment Due Date",
+			"roles": ["teacher", "designer"],
+			"resource": "assignment",
+			"description": "Updates an existing assignment, most commonly its due/lock/unlock dates. Other assignment attributes (name, description, points, published state) can also be changed.",
+			"readOnly": false,
+			"example": "Push the due date for assignment 456 in course 123 to the end of the year."
+		},
+		{
+			"title": "Update Discussion Topic",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "discussion",
+			"description": "Updates an existing discussion topic. Accepts title, message, discussion_type, published, delayed_post_at, lock_at, require_initial_post, pinned and other settings. ⚠️ This modifies the discussion immediately.",
+			"readOnly": false,
+			"example": "Publish discussion 343 in course 123 and pin it."
+		},
+		{
+			"title": "Update Course Module",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Updates an existing course module (name, position, publication state, prerequisites, and unlock settings). ⚠️ This modifies the module immediately.",
+			"readOnly": false,
+			"example": "Publish module 456 in course 123."
+		},
+		{
+			"title": "Update Module Assignment Overrides",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Bulk-sets the assignment overrides for a module (which sections, groups, or students it is assigned to). The provided list fully replaces the existing overrides. ⚠️ Overrides not included are removed.",
+			"readOnly": false,
+			"example": "Assign module 456 in course 123 to students 111 and 222 only."
+		},
+		{
+			"title": "Update a Module Item",
+			"roles": ["teacher", "designer"],
+			"resource": "module",
+			"description": "Updates a module item (title, position, indent, publication, completion requirement, external URL) or moves it to another module. ⚠️ This modifies the item immediately.",
+			"readOnly": false,
+			"example": "Publish item 789 in module 456 of course 123 and move it to position 2."
+		},
+		{
+			"title": "Update Wiki Page",
+			"roles": ["teacher", "designer"],
+			"resource": "page",
+			"description": "Updates an existing wiki page. Note: changing a page's title will change its URL. ⚠️ This modifies the page immediately.",
+			"readOnly": false,
+			"example": "Update the 'course-syllabus' page in course 123 with new content and publish it."
+		},
+		{
+			"title": "Update New Quiz Question",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "quiz",
+			"description": "Updates an existing item (question) in a New Quiz. NOTE: This tool is for New Quizzes only, NOT Classic Quizzes. Use canvas-list_new_quizzes to find the assignment_id, then canvas-list_quiz_questions to find the item_id.",
+			"readOnly": false,
+			"example": "Change the title of the first question in the History Quiz to \"US Presidents 1-4\"."
+		},
+		{
+			"title": "Update Rubric",
+			"roles": ["teacher", "ta", "designer"],
+			"resource": "rubric",
+			"description": "Updates an existing rubric in a course. Providing criteria replaces all existing criteria.",
+			"readOnly": false,
+			"example": "Rename rubric 99 in course 123 to \"Updated Essay Rubric\"."
+		}
+	]
 }

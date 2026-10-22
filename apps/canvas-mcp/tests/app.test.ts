@@ -139,8 +139,11 @@ describe("Canvas MCP pages", () => {
 			const canvasRow = [...document.querySelectorAll(".settings-table tbody tr")].find(
 				(row) => row.querySelector("th")?.textContent === "Redirect URIs",
 			)!;
-			expect(canvasRow.querySelector("pre code")?.textContent).toBe(uris);
-			expect(canvasRow.querySelector<HTMLButtonElement>("button")?.dataset.copy).toBe(uris);
+			for (const uri of uris.split("\n"))
+				expect(canvasRow.querySelector("pre code")?.textContent).toContain(uri);
+			expect(canvasRow.querySelector<HTMLButtonElement>("button")?.dataset.copy).toBe(
+				canvasRow.querySelector("pre code")?.textContent,
+			);
 			expect(document.querySelector('[data-guide-token="redirectUri"]')?.textContent).toBe(uris);
 			expect(new URLSearchParams(location.search).get("redirectUris")).toBe(uris);
 			expect(document.querySelector(".print-permalink")?.textContent).toContain("redirectUris=");
@@ -166,9 +169,9 @@ describe("Canvas MCP pages", () => {
 			expect(document.querySelector<HTMLTextAreaElement>("#generated-redirect-uris")?.value).toBe(
 				updated,
 			);
-			expect(document.querySelector(".settings-table [data-copy]")?.getAttribute("data-copy")).toBe(
-				updated,
-			);
+			expect(
+				document.querySelector(".settings-table [data-copy]")?.getAttribute("data-copy"),
+			).toContain(updated);
 
 			const clear = document.querySelector<HTMLTextAreaElement>("#redirect-uris-input")!;
 			clear.value = "";
@@ -200,9 +203,9 @@ describe("Canvas MCP pages", () => {
 		select.dispatchEvent(new Event("change", { bubbles: true }));
 		expect(document.querySelector("#redirect-uris-input")).toBeNull();
 		expect(document.querySelector("#generated-redirect-uris")).toBeNull();
-		expect(document.querySelector(".settings-table [data-copy]")?.getAttribute("data-copy")).toBe(
-			"http://localhost:8081/callback",
-		);
+		expect(
+			document.querySelector(".settings-table [data-copy]")?.getAttribute("data-copy"),
+		).toContain("http://localhost:8081/callback");
 		document.querySelector<HTMLSelectElement>("#client-select")!.value = "generic";
 		document
 			.querySelector<HTMLSelectElement>("#client-select")!
@@ -345,7 +348,7 @@ describe("Canvas MCP pages", () => {
 		]);
 		expect(audiencesRow?.querySelector(".audience-tenant-note")).not.toBeNull();
 		const redirectRow = rowForSetting("Redirect URIs");
-		expect(redirectRow?.querySelector("pre code")?.textContent).toBe(
+		expect(redirectRow?.querySelector("pre code")?.textContent).toContain(
 			"http://localhost:8081/callback",
 		);
 		const redirectCopy = redirectRow?.querySelector<HTMLButtonElement>("button");
@@ -603,7 +606,7 @@ describe("Canvas MCP pages", () => {
 			[...document.querySelectorAll(".settings-table tbody tr")]
 				.find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs")
 				?.querySelector("td")?.textContent,
-		).toBe("https://www.cursor.com/agents/mcp/oauth/callback\nhttp://localhost:8787/callback");
+		).toContain("https://www.cursor.com/agents/mcp/oauth/callback");
 		const cursorRedirect = [
 			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
 		].find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs");
@@ -617,10 +620,39 @@ describe("Canvas MCP pages", () => {
 		const codexRedirect = [
 			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
 		].find((row) => row.querySelector('th[scope="row"]')?.textContent === "Redirect URIs");
-		expect(codexRedirect?.querySelector(".setting-value-muted")?.textContent).toBe(
-			"Select a Canvas domain and region to compute the callback URI.",
+		expect(document.querySelector(".admin-steps")?.textContent).toContain(
+			"Select a Canvas domain and region to include Codex's generated callback URI.",
 		);
-		expect(codexRedirect?.querySelector("pre, button")).toBeNull();
+		expect(codexRedirect?.querySelector("pre code")?.textContent).toContain(
+			"http://localhost:8081/callback",
+		);
+		expect(codexRedirect?.querySelector("button")?.disabled).toBe(true);
+	});
+
+	it("aggregates distinct callback URIs and includes the generated Codex callback", async () => {
+		history.replaceState(
+			null,
+			"",
+			"/canvas-mcp/?client=claude-code&domain=example.instructure.com&region=us-east-1",
+		);
+		mountApp("admin");
+		const redirectRow = () =>
+			[...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr")].find(
+				(row) => row.querySelector("th")?.textContent === "Redirect URIs",
+			)!;
+		await vi.waitFor(() =>
+			expect(redirectRow().querySelector("pre code")?.textContent).toContain(
+				"http://localhost:8081/callback/",
+			),
+		);
+		const code = redirectRow().querySelector("pre code")?.textContent ?? "",
+			uris = code.split("\n");
+		expect(new Set(uris).size).toBe(uris.length);
+		expect(uris).toHaveLength(35);
+		expect(redirectRow().querySelector<HTMLButtonElement>("button")?.dataset.copy).toBe(code);
+		expect(redirectRow().querySelector<HTMLButtonElement>("button")?.disabled).toBe(false);
+		const stylesheet = await readFile("src/main.css", "utf8");
+		expect(stylesheet).toMatch(/\.table-copy-cell pre\s*\{[^}]*max-height:\s*6em/su);
 	});
 
 	it("provides a region picker in admin configuration", () => {
@@ -706,6 +738,42 @@ describe("Canvas MCP pages", () => {
 		);
 	});
 
+	it.each([
+		[new Date(2026, 9, 22, 12), "Sunday, October 25, 2026"],
+		[new Date(2026, 9, 24, 12), "Sunday, October 25, 2026"],
+		[new Date(2026, 9, 25, 12), "Sunday, November 1, 2026"],
+		[new Date(2026, 9, 31, 12), "Sunday, November 1, 2026"],
+		[new Date(2026, 11, 31, 12), "Sunday, January 3, 2027"],
+	])("shows the next Sunday above Test Cluster Only for beta on %s", (today, expectedDate) => {
+		vi.useFakeTimers({ toFake: ["Date"] });
+		vi.setSystemTime(today);
+		try {
+			history.replaceState(null, "", "/canvas-mcp/?domain=utah.beta.instructure.com");
+			mountApp("admin");
+			const alert = document.querySelector(".beta-availability-alert");
+			expect(alert?.classList.contains("instui-alert")).toBe(true);
+			expect(alert?.getAttribute("role")).toBe("status");
+			expect(
+				alert?.nextElementSibling?.querySelector<HTMLInputElement>(
+					'input[aria-label="Test Cluster Only"]',
+				)?.checked,
+			).toBe(true);
+			expect(alert?.parentElement?.tagName).toBe("TD");
+			expect(alert?.closest("tr")?.querySelector("th")?.textContent).toBe("Test Cluster Only");
+
+			const domainInput = document.querySelector<HTMLInputElement>("#domain-input")!;
+			domainInput.value = "utah";
+			domainInput.dispatchEvent(new Event("change", { bubbles: true }));
+			expect(document.querySelector(".beta-availability-alert")).toBeNull();
+			expect(document.querySelector(".beta-tenant-alert")).toBeNull();
+			expect(
+				document.querySelector<HTMLInputElement>('input[aria-label="Test Cluster Only"]')?.checked,
+			).toBe(false);
+		} finally {
+			vi.useRealTimers();
+		}
+	});
+
 	it("checks Test Cluster Only for a beta tenant", () => {
 		globalThis.history.replaceState(
 			null,
@@ -713,6 +781,18 @@ describe("Canvas MCP pages", () => {
 			"/canvas-mcp/?domain=utah.beta.instructure.com&client=gemini-enterprise&key=private&region=us-east-1&page=admin",
 		);
 		mountApp("admin");
+
+		const betaNotice = document.querySelector(".beta-tenant-alert");
+		expect(document.querySelector(".admin-steps")?.firstElementChild).toBe(betaNotice);
+		expect(document.querySelectorAll(".beta-tenant-alert")).toHaveLength(1);
+		expect(betaNotice?.classList.contains("instui-alert")).toBe(true);
+		expect(betaNotice?.classList.contains("-color-warning")).toBe(true);
+		expect(betaNotice?.classList.contains("-color-info")).toBe(false);
+		expect(betaNotice?.getAttribute("role")).toBe("status");
+		expect(betaNotice?.querySelector("code")?.textContent).toBe("utah.instructure.com");
+		expect(betaNotice?.nextElementSibling?.querySelector("h3")?.textContent).toBe(
+			"Open Developer Keys",
+		);
 
 		const domainInput = document.querySelector<HTMLInputElement>("#domain-input")!;
 		expect(domainInput.value).toBe("utah.beta");
