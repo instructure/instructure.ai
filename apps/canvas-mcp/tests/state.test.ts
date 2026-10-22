@@ -105,6 +105,15 @@ describe("app state", () => {
 		});
 	});
 
+	it("accepts Client IDs up to 18 digits in setup links", () => {
+		const clientId = "123450000000000012";
+		const state = readState(`?clientId=${clientId}`, null);
+
+		expect(state.clientId).toBe(clientId);
+		expect(new URLSearchParams(stateQuery(state)).get("clientId")).toBe(clientId);
+		expect(readState(`?clientId=${clientId}3`, null).clientId).toBe("");
+	});
+
 	it("ignores unavailable or malformed storage", () => {
 		expect(readState("", null)).toMatchObject({
 			client: "claude-code",

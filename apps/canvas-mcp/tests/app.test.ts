@@ -58,20 +58,27 @@ describe("Canvas MCP pages", () => {
 		);
 	});
 
-	it.each(["", "12345", "12345000000000001"])(
+	it.each(["", "12345", "12345000000000001", "123450000000000012"])(
 		"mirrors Client ID constraint validity in its initial and live error state: %s",
 		(clientId) => {
 			history.replaceState(null, "", `?client=claude-code&clientId=${clientId}`);
 			mountApp("admin");
 			const input = document.querySelector<HTMLInputElement>("#client-id-input")!;
-			const initialInvalid = clientId.length !== 17;
+			const initialInvalid = clientId.length < 17 || clientId.length > 18;
 			expect(input.checkValidity()).toBe(!initialInvalid);
 			expect(input.classList.contains("-invalid")).toBe(initialInvalid);
 			expect(input.getAttribute("aria-invalid")).toBe(String(initialInvalid));
-			for (const value of ["12345000000000001", "", " ", "12345", "abc12345000000000001"]) {
+			for (const value of [
+				"12345000000000001",
+				"123450000000000012",
+				"",
+				" ",
+				"12345",
+				"abc12345000000000001",
+			]) {
 				input.value = value;
 				input.dispatchEvent(new Event("input", { bubbles: true }));
-				const invalid = input.value.length !== 17;
+				const invalid = input.value.length < 17 || input.value.length > 18;
 				expect(input.checkValidity()).toBe(!invalid);
 				expect(input.classList.contains("-invalid")).toBe(invalid);
 				expect(input.getAttribute("aria-invalid")).toBe(String(invalid));
@@ -811,7 +818,7 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector("h1")?.textContent).toContain("Connect Canvas");
 	});
 
-	it("requires a Client ID limited to 17 characters for every supported OAuth client", () => {
+	it("requires a Client ID limited to 18 characters for every supported OAuth client", () => {
 		globalThis.history.replaceState(null, "", "/canvas-mcp/?page=admin");
 		mountApp("admin");
 
@@ -830,9 +837,9 @@ describe("Canvas MCP pages", () => {
 				continue;
 			}
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.required).toBe(true);
-			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.maxLength).toBe(17);
+			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.maxLength).toBe(18);
 			expect(document.querySelector<HTMLInputElement>("#client-id-input")?.pattern).toBe(
-				"[0-9]{17}",
+				"[0-9]{17,18}",
 			);
 			expect(document.querySelector(".details-panel #client-id-input")).not.toBeNull();
 			expect(document.querySelector("#client-id-reference-input")).toBeNull();
@@ -846,11 +853,12 @@ describe("Canvas MCP pages", () => {
 
 	it.each([
 		["12345000000000001", true],
+		["123450000000000012", true],
 		["1234500000000000", false],
-		["123450000000000012", false],
+		["1234500000000000123", false],
 		["1234500000000000a", false],
 		["", false],
-	])("validates Client ID %s as exactly 17 digits", (value, valid) => {
+	])("validates Client ID %s as 17 or 18 digits", (value, valid) => {
 		mountApp("admin");
 		const input = document.querySelector<HTMLInputElement>("#client-id-input");
 		if (!input) throw new Error("Client ID input not found");

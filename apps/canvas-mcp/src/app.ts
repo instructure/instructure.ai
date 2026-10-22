@@ -231,7 +231,7 @@ export function mountApp(mode: PageMode): void {
 			.querySelector<HTMLInputElement>("#client-id-input")
 			?.addEventListener("input", (event) => {
 				const input = event.currentTarget as HTMLInputElement;
-				state.clientId = input.value.replace(/\D/gu, "").slice(0, 17);
+				state.clientId = input.value.replace(/\D/gu, "").slice(0, 18);
 				input.value = state.clientId;
 				const invalid = !input.validity.valid;
 				input.classList.toggle("-invalid", invalid);
