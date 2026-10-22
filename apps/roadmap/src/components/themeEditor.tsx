@@ -94,6 +94,18 @@ const ColorRow = ({ label, color }: { label: string; color: string }) => (
   </>
 );
 
+function LinkDisplay({ ext, href }: { ext: string; href: string }) {
+  switch (ext) {
+    case "svg":
+    case "png": {
+      return <Img src={href} width={28} height="auto" />;
+    }
+    default: {
+      return <IconDocumentLine title={`${ext.toUpperCase()} File`} />;
+    }
+  }
+}
+
 const LinkRow = ({ href, label, name }: { href: string; label: string; name: string }) => {
   const allowedTypes = ["svg", "png", "ico", "css", "js"] as const;
   const ext = name.split(".").pop();
@@ -106,25 +118,13 @@ const LinkRow = ({ href, label, name }: { href: string; label: string; name: str
     type = ext;
   }
 
-  const Display = ({ ext }: { ext: string }) => {
-    switch (ext) {
-      case "svg":
-      case "png": {
-        return <Img src={href} width={28} height="auto" />;
-      }
-      default: {
-        return <IconDocumentLine title={`${ext.toUpperCase()} File`} />;
-      }
-    }
-  };
-
   return (
     <>
       <Flex.Item width={200}>{label}</Flex.Item>
       <Flex.Item width={32}>
         <View as="div" margin="0 0 0 xx-small">
           {/* oxlint-disable-next-line jsx-max-depth */}
-          <Display ext={ext ?? ""} />
+          <LinkDisplay ext={ext ?? ""} href={href} />
         </View>
       </Flex.Item>
       <Flex.Item width={240}>

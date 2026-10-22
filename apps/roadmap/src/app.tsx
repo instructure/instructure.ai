@@ -1,6 +1,6 @@
 import "./app.css";
 import { Card, CardOverlay, Loading } from "./components";
-import { type FC, useEffect, useMemo, useState } from "react";
+import { type FC, useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { Flex, InstUISettingsProvider, type Theme, canvas } from "@instructure/ui";
 import {
   frameResize,
@@ -16,43 +16,66 @@ type ThemeOrOverride = Theme | Record<string, unknown>;
 
 const LOADING_DELAY_MS = 1000;
 
+const createStore = <Value,>(initialValue: Value) => {
+  const listeners = new Set<() => void>();
+  let snapshot = initialValue;
+  return {
+    getSnapshot: () => snapshot,
+    set: (value: Value) => {
+      snapshot = value;
+      listeners.forEach((listener) => listener());
+    },
+    subscribe: (listener: () => void) => {
+      listeners.add(listener);
+      return () => listeners.delete(listener);
+    },
+  };
+};
+
+const brandConfigStore = createStore<ThemeOrOverride | undefined>(undefined);
+const roadmapStore = createStore<RoadmapFeatures | undefined>(undefined);
+
 const useBrandConfig = () => {
-  const [brandConfig, setBrandConfig] = useState<ThemeOrOverride>();
+  const brandConfig = useSyncExternalStore(
+    brandConfigStore.subscribe,
+    brandConfigStore.getSnapshot,
+    brandConfigStore.getSnapshot,
+  );
   useEffect(() => {
     void getBrandConfig().then((config) => {
-      setBrandConfig(config);
+      brandConfigStore.set(config);
     });
   }, []);
   return brandConfig;
 };
 
 const useRoadmap = () => {
-  const [roadmap, setRoadmap] = useState<RoadmapFeatures | undefined>(undefined);
+  const roadmap = useSyncExternalStore(
+    roadmapStore.subscribe,
+    roadmapStore.getSnapshot,
+    roadmapStore.getSnapshot,
+  );
   useEffect(() => {
     void getRoadmap().then((data) => {
-      setRoadmap(data ?? undefined);
+      roadmapStore.set(data ?? undefined);
     });
   }, []);
   return roadmap;
 };
 
 const useShowLoading = (roadmap: RoadmapFeatures | undefined) => {
-  const [showLoading, setShowLoading] = useState(false);
+  const [loadingStore] = useState(() => createStore(false));
+  const showLoading = useSyncExternalStore(
+    loadingStore.subscribe,
+    loadingStore.getSnapshot,
+    loadingStore.getSnapshot,
+  );
   useEffect(() => {
-    let timeout: NodeJS.Timeout | undefined = undefined;
-    if (!roadmap) {
-      setShowLoading(false);
-      timeout = setTimeout(() => setShowLoading(true), LOADING_DELAY_MS);
-    } else {
-      setShowLoading(false);
-    }
-    return () => {
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-    };
-  }, [roadmap]);
-  return showLoading;
+    if (roadmap) return;
+    const timeout = setTimeout(() => loadingStore.set(true), LOADING_DELAY_MS);
+    return () => clearTimeout(timeout);
+  }, [loadingStore, roadmap]);
+  return showLoading && !roadmap;
 };
 
 const useSendHeightOnChange = (roadmap: RoadmapFeatures | undefined) => {

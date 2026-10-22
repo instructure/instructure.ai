@@ -27,7 +27,7 @@ const CardOverlayContent: FC<{
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isNarrow: boolean;
   isDark: boolean;
-}> = ({ entry, isOpen, setOpen, isNarrow = false, isDark = false }) => {
+}> = ({ entry, isOpen, setOpen, isNarrow, isDark }) => {
   const { feature, product } = entry;
   const { links } = feature;
 
@@ -286,7 +286,7 @@ const CardOverlay: FC<{
   isOpen: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isDark: boolean;
-}> = ({ entry, isOpen, setOpen, isDark = false }) => (
+}> = ({ entry, isOpen, setOpen, isDark }) => (
   <Responsive
     query={{ large: { minWidth: "50rem" }, small: { maxWidth: "50rem" } }}
     render={(_props, matches) => {

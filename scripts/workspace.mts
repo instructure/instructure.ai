@@ -512,7 +512,7 @@ const exec = (
       });
     }
   } catch (error) {
-    exitWithError(`Error executing command: ${error}`);
+    exitWithError(`Error executing command: ${String(error)}`);
   }
 };
 

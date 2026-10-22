@@ -50,7 +50,7 @@ function makeEntry(uid: string, featureName = "FeatureName", revision = "rev-1")
 }
 
 function mockUtils({
-	trigger = undefined,
+	trigger,
 	nutritionData = [{ seg: 1 }],
 	dplData = [{ level: 1 }],
 	aiInfoBase = { something: "x" } as Record<string, unknown>,

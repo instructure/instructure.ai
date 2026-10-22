@@ -237,7 +237,7 @@ describe("Canvas MCP pages", () => {
 		},
 	);
 
-	it("uses Pantoken components and switches the Canvas logo with the scheme", () => {
+	it("uses Pantoken components and switches the Canvas logo with the scheme", async () => {
 		mountApp("admin");
 
 		expect(document.querySelector(".controls-panel")?.classList.contains("instui-card")).toBe(true);
@@ -429,7 +429,8 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector(".site-header")).toBeNull();
 		expect(document.querySelectorAll(".page-heading-actions button")).toHaveLength(1);
 		expect(document.querySelector(".instui-tray")?.hasAttribute("popover")).toBe(true);
-		expect(document.querySelector<HTMLElement>("#settings-tray")?.style.padding).not.toBe("");
+		const stylesheet = await readFile("src/main.css", "utf8");
+		expect(stylesheet).toContain('@import "@pantoken/components/tray.css";');
 		expect(document.querySelector("#settings-appearance-heading")?.textContent).toBe("Appearance");
 		expect(document.querySelector("#settings-sharing-heading")?.textContent).toBe("Sharing");
 		expect(document.querySelector("#tray-server-details-heading")?.textContent).toBe(
@@ -753,6 +754,7 @@ describe("Canvas MCP pages", () => {
 			const alert = document.querySelector(".beta-availability-alert");
 			expect(alert?.classList.contains("instui-alert")).toBe(true);
 			expect(alert?.getAttribute("role")).toBe("status");
+			expect(alert?.textContent).toContain(expectedDate);
 			expect(
 				alert?.nextElementSibling?.querySelector<HTMLInputElement>(
 					'input[aria-label="Test Cluster Only"]',
