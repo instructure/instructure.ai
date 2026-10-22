@@ -76,7 +76,7 @@ export function renderPage(
 					</section>
 					</div>
 				</main>
-				<aside id="settings-tray" class="instui-tray -placement-end -size-md" popover role="region" aria-label="Settings" padding="var(--instui-spacing-space-md)">
+				<aside id="settings-tray" class="instui-tray -placement-end -size-md" popover role="region" aria-label="Settings">
 					<div class="settings-tray-header">
 						<h2 class="instui-heading -variant-title-card-regular">Settings</h2>
 						<button class="instui-close-button -size-sm" type="button" popovertarget="settings-tray" popovertargetaction="hide" aria-label="Close settings"></button>
