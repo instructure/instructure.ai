@@ -53,6 +53,10 @@ Use this form for bugs or other issues not covered by the templates above. Inclu
 
 ### Checking changes
 
+Setup alerts use persistent, atomic live regions: errors are assertive and informational notices are polite. Visible alerts remain available for reading and keyboard navigation, but their own live announcements are disabled to avoid duplicates. Only new or changed messages are announced; rerendering an unchanged notice does not repeat it. When changing alerts, test initial setup links, live domain validation, client changes, and tab changes with a screen reader.
+
+The MCP Client selector references its status pill as an accessible description. The pill is not a separate live region: changes to Validated or Untested are announced with the client name through the persistent polite region, while Known issue uses the existing main notice. Initial status and returning to Configuration are not announced separately, and unrelated rerenders do not repeat a status announcement.
+
 Run commands from the repository root:
 
 ```sh

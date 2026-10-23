@@ -114,15 +114,53 @@ describe("researched Rulesync clients", () => {
 		expect(item?.textContent).toBe("Continue Known issue");
 		expect(item?.querySelector("p, a, details, table")).toBeNull();
 	});
-	it("tracks v38 MCP membership without adding non-MCP tools or a duplicate legacy client", () => {
-		expect(RULESYNC_VERSION).toBe("38.0.0");
-		expect(RULESYNC_COMMIT).toBe("335de85dbd42b5df255ff55148a325ce9d95d0e0");
+	it("tracks v40.2 MCP membership without adding non-MCP tools or a duplicate legacy client", () => {
+		expect(RULESYNC_VERSION).toBe("40.2.0");
+		expect(RULESYNC_COMMIT).toBe("4094b14918f6d4bb418447df41c7fa638f31939a");
 		const ids = RULESYNC_TARGETS.map(({ id }) => id);
-		expect(ids).toHaveLength(60);
-		expect(new Set(ids).size).toBe(60);
+		expect(ids).toHaveLength(62);
+		expect(new Set(ids).size).toBe(62);
 		expect(ids).toContain("openclaw");
+		expect(ids).toContain("firebender");
+		expect(ids).toContain("xum");
 		expect(ids).not.toContain("lettacode");
 		expect(ids).not.toContain("claudecode-legacy");
+		for (const id of ["continue", "roo", "kiro", "tabnine", "rovodev"] as const) {
+			expect(ids, id).toContain(id);
+		}
+	});
+	it("records documented remote OAuth support while leaving undocumented Canvas setup facts unverified", () => {
+		const firebender = clientDefinition("firebender");
+		expect(firebender.name).toBe("Firebender");
+		expect(firebender.installModes).toEqual(["personal"]);
+		expect(firebender.facts.remoteHttp.value).toBe("yes");
+		expect(firebender.facts.staticClientId.value).toBe("unknown");
+		expect(firebender.facts.keyTypes.public.value).toBe("unknown");
+		expect(firebender.facts.keyTypes.private.value).toBe("unknown");
+		expect(firebender.facts.redirectUri.kind).toBe("unverified");
+		expect(firebender.research?.installSupport.enterprise.value).toBe("unknown");
+		expect(firebender.research?.checkedAt).toBe("2026-10-23");
+		expect(firebender.research?.sources.map(({ url }) => url)).toEqual(
+			expect.arrayContaining([
+				"https://docs.firebender.com/context/mcp/overview.md",
+				"https://docs.firebender.com/context/mcp/revenuecat.md",
+				"https://docs.firebender.com/api-reference/syntax.md",
+			]),
+		);
+		expect(firebender.setupNote).toContain("callback URI");
+
+		const xum = clientDefinition("xum");
+		expect(xum.name).toBe("Xum");
+		expect(xum.installModes).toEqual(["personal"]);
+		expect(xum.facts.remoteHttp.value).toBe("yes");
+		expect(xum.facts.staticClientId.value).toBe("unknown");
+		expect(xum.facts.keyTypes.public.value).toBe("unknown");
+		expect(xum.facts.keyTypes.private.value).toBe("unknown");
+		expect(xum.facts.redirectUri.kind).toBe("unverified");
+		expect(xum.research?.installSupport.enterprise.value).toBe("unknown");
+		expect(xum.research?.checkedAt).toBe("2026-10-23");
+		expect(xum.setupNote).toContain("over stdio");
+		expect(xum.setupNote).toContain("OAuth sign-in");
 	});
 	it("distinguishes OpenClaw Gateway callbacks from shared login and unknown Canvas key support", () => {
 		const client = clientDefinition("openclaw");
@@ -152,9 +190,11 @@ describe("researched Rulesync clients", () => {
 	});
 	it("covers every Other target with dated sources without adding bespoke guides or validation", () => {
 		const clients = CLIENTS.filter(({ group, id }) => group === "Other" && id !== "generic");
-		expect(clients).toHaveLength(56);
+		expect(clients).toHaveLength(58);
 		for (const client of clients) {
-			expect(client.research?.checkedAt, client.id).toBe("2026-10-20");
+			expect(client.research?.checkedAt, client.id).toBe(
+				["firebender", "xum"].includes(client.id) ? "2026-10-23" : "2026-10-20",
+			);
 			expect(client.research?.sources.length, client.id).toBeGreaterThan(0);
 			expect(client.guides, client.id).toBeUndefined();
 			expect(client.status?.kind, client.id).not.toBe("validated");

@@ -71,11 +71,10 @@ function renderContact(
 		["canvas-mcp-common-issues.yml", "Report or correct a common issue"],
 		["canvas-mcp-client.yml", "Report another type of issue or bug"],
 	];
-	return `<p>Ask questions and share experiences in the <a href="https://community.instructure.com/en/group/70-canvas-mcp">Instructure Community Canvas MCP group</a>.</p></section>
-		<section aria-labelledby="contact-issues"><h3 id="contact-issues" class="instui-heading -level-h3">Report an issue</h3>
+	return `
 		<p>Use the relevant link below to report a problem or suggest an improvement.</p>
 		<ul class="instui-list">${forms.map(([template, label]) => `<li><a href="${escapeHtml(contactIssueUrl(template, platform, context))}">${label}</a></li>`).join("")}</ul>
-		<p>Do not post client secrets, access or refresh tokens, authorization codes, full authorization URLs, student records, or private customer details. Redact text, logs, and screenshots before sharing.</p></section>`;
+		<p>Do not post client secrets, access or refresh tokens, authorization codes, full authorization URLs, student records, or private customer details. Redact text, logs, and screenshots before sharing.</p>`;
 }
 
 function renderHelpSearch(section: "faqs" | "issues"): string {

@@ -1,7 +1,7 @@
 import { connectionReadiness } from "./setup";
 import { type CallbackResolution } from "./oauth/codex-callback";
 import { clientDefinition } from "./clients";
-import { type AppState, deriveUrls } from "./state";
+import { type AppState, deriveUrls, isBetaDomain, isTestDomain } from "./state";
 import { renderConfig } from "./admin/config";
 import { serverDetailsCard } from "./admin/server-details";
 import { renderContent, renderGuide } from "./guides/render";
@@ -30,6 +30,7 @@ export function renderPage(
 				? ""
 				: (client.blocker?.reason ?? (status.kind === "known-issue" ? status.reason : "")),
 		hasNotice = Boolean(knownIssue || lifecycleNotice),
+		hasInstructionsColumn = hasNotice || pageMode === "admin",
 		hasValidDomain = Boolean(state.domain),
 		installLabel = client.installModes.length === 0 ? "install flow unverified" : state.install,
 		copiedLabel = "",
@@ -65,11 +66,13 @@ export function renderPage(
 							? renderHelp(helpSection, state.platform, state)
 							: `<div class="workspace-grid${pageMode === "admin" ? "" : " workspace-grid--single"} --mt-xl">
 						${pageMode === "admin" ? renderConfig(state, domainInputValue) : ""}
-						${hasNotice ? '<div class="instructions-column">' : ""}
-						${knownIssue ? `<div class="instui-alert -color-danger -inline known-issue-alert" role="alert"><b>Known issue:</b> ${escapeHtml(knownIssue)}${status.kind === "known-issue" && status.diagnostic ? renderContent([{ kind: "code", language: "text", text: status.diagnostic }], {}, state.platform) : ""}</div>` : ""}
-						${lifecycleNotice ? `<div class="instui-alert -color-warning -inline lifecycle-notice${client.id === "gemini-cli" ? " gemini-deprecation-notice" : ""}" role="status"><b>${escapeHtml(lifecycleNotice.title)}:</b> ${escapeHtml(lifecycleNotice.message)}${lifecycleNotice.url ? ` <a href="${escapeHtml(lifecycleNotice.url)}" target="_blank" rel="noopener noreferrer">Read the announcement</a>.` : ""}</div>` : ""}
+						${hasInstructionsColumn ? '<div class="instructions-column">' : ""}
+						${pageMode === "admin" ? `<div id="test-domain-alert" class="instui-alert -color-danger" role="alert" ${isTestDomain(domainInputValue) ? "" : "hidden"}><b>Test instance:</b> Test instances are not supported. Use the beta instance instead (add .beta after the tenant name).</div>` : ""}
+						${pageMode === "admin" && isBetaDomain(state.domain) ? `<p class="instui-alert -color-warning notice beta-tenant-alert" role="status"><b>Beta instance:</b> sign in to production Canvas at <code>${escapeHtml(state.domain.replace(/\.beta\.instructure\.com$/u, ".instructure.com"))}</code> and create the key there. Do not create the key in beta, Canvas copies it from production automatically.</p>` : ""}
+						${knownIssue ? `<div class="instui-alert -color-danger known-issue-alert" role="alert"><b>Known issue:</b> ${escapeHtml(knownIssue)}${status.kind === "known-issue" && status.diagnostic ? renderContent([{ kind: "code", language: "text", text: status.diagnostic }], {}, state.platform) : ""}</div>` : ""}
+						${lifecycleNotice ? `<div class="instui-alert -color-warning lifecycle-notice${client.id === "gemini-cli" ? " gemini-deprecation-notice" : ""}" role="status"><b>${escapeHtml(lifecycleNotice.title)}:</b> ${escapeHtml(lifecycleNotice.message)}${lifecycleNotice.url ? ` <a href="${escapeHtml(lifecycleNotice.url)}" target="_blank" rel="noopener noreferrer">Read the announcement</a>.` : ""}</div>` : ""}
 						<section class="instui-card -variant-base details-panel" ><div class="content">${pageMode === "user" && connectionReadiness(state, client).blocked && !hasNotice ? `<p class="instui-alert -color-warning -inline" role="status">${escapeHtml(connectionReadiness(state, client).reason)}</p>` : ""}${renderGuide(client, state, pageMode === "admin", callback)}</div></section>
-						${hasNotice ? "</div>" : ""}
+						${hasInstructionsColumn ? "</div>" : ""}
 					</div>`
 					}
 					<footer class="page-footer"><p>Copyright &copy; ${new Date().getFullYear()} Instructure, Inc.</p><p class="print-context">${pageMode === "help" ? `Help · ${HELP_SECTIONS.find(({ id }) => id === helpSection)!.label}` : `${escapeHtml(client.name)} · ${escapeHtml(installLabel)}`} · ${new Date().toISOString().slice(0, 10)}<br /><span class="print-permalink">${escapeHtml("/canvas-mcp/?" + new URLSearchParams({ domain: state.domain, client: state.client, key: state.key, ...(client.installModes.length ? { install: state.install } : {}), platform: state.platform, region: state.region, clientId: state.clientId, ...(client.id === "generic" && state.redirectUris ? { redirectUris: state.redirectUris } : {}), page: pageMode === "help" ? "help" : pageMode === "admin" ? "admin" : "connect", ...(pageMode === "help" ? { help: helpSection } : {}) }).toString())}</span></p></footer>

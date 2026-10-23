@@ -19,6 +19,105 @@ describe("Canvas MCP pages", () => {
 	});
 
 	it.each([
+		"school.test",
+		"school.test.instructure.com",
+		" https://SCHOOL.TEST.instructure.com/courses/1 ",
+	])("blocks test instances while typing and after blur: %s", (domain) => {
+		history.replaceState(
+			null,
+			"",
+			"?client=claude-code&domain=school.instructure.com&region=us-east-1&clientId=12345000000000001",
+		);
+		mountApp("admin");
+		const controls = [
+			"#region-select",
+			"#client-select",
+			"#enterprise-install-input",
+			"#private-key-input",
+			"#client-id-input",
+		];
+		const assertTestState = () => {
+			const input = document.querySelector<HTMLInputElement>("#domain-input")!;
+			expect(input.checkValidity()).toBe(false);
+			expect(input.classList.contains("-invalid")).toBe(true);
+			expect(input.getAttribute("aria-invalid")).toBe("true");
+			const alert = document.querySelector<HTMLElement>("#test-domain-alert")!;
+			expect(alert.closest(".controls-panel")).toBeNull();
+			expect(alert.parentElement?.classList.contains("instructions-column")).toBe(true);
+			expect(alert.nextElementSibling?.classList.contains("details-panel")).toBe(true);
+			expect(alert.hidden).toBe(false);
+			expect(alert.classList.contains("-color-danger")).toBe(true);
+			expect(alert.getAttribute("role")).toBe("alert");
+			expect(alert.textContent).toContain("Test instances are not supported");
+			expect(alert.textContent).toContain("Use the beta instance");
+			for (const selector of controls)
+				expect(document.querySelector<HTMLInputElement>(selector)?.disabled).toBe(true);
+			expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+		};
+		const input = document.querySelector<HTMLInputElement>("#domain-input")!;
+		input.value = domain;
+		input.dispatchEvent(new Event("input", { bubbles: true }));
+		assertTestState();
+		input.dispatchEvent(new Event("change", { bubbles: true }));
+		assertTestState();
+		expect(document.querySelector<HTMLInputElement>("#domain-input")?.value).toBe(domain.trim());
+		const corrected = document.querySelector<HTMLInputElement>("#domain-input")!;
+		corrected.value = "school.beta";
+		corrected.dispatchEvent(new Event("input", { bubbles: true }));
+		expect(corrected.checkValidity()).toBe(true);
+		expect(corrected.getAttribute("aria-invalid")).toBe("false");
+		expect(corrected.classList.contains("-invalid")).toBe(false);
+		expect(document.querySelector<HTMLElement>("#test-domain-alert")?.hidden).toBe(true);
+		for (const selector of controls)
+			expect(document.querySelector<HTMLInputElement>(selector)?.disabled).toBe(false);
+		corrected.dispatchEvent(new Event("change", { bubbles: true }));
+		expect(new URLSearchParams(location.search).get("domain")).toBe("school.beta.instructure.com");
+		expect(document.querySelector<HTMLSelectElement>("#region-select")?.value).toBe("us-east-1");
+		expect(document.querySelector<HTMLInputElement>("#client-id-input")?.value).toBe(
+			"12345000000000001",
+		);
+		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(false);
+	});
+
+	it.each(["school.test.instructure.com", "school.test.instructure.com."])(
+		"rejects a test-domain setup link instead of using a saved production domain: %s",
+		(domain) => {
+			localStorage.setItem("canvas-mcp:v1", JSON.stringify({ domain: "saved.instructure.com" }));
+			history.replaceState(
+				null,
+				"",
+				`?domain=${domain}&region=us-east-1&clientId=12345000000000001&page=connect`,
+			);
+			mountApp("user");
+			expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("admin");
+			expect(document.querySelector<HTMLInputElement>("#domain-input")?.value).toBe(domain);
+			expect(document.querySelector<HTMLInputElement>("#domain-input")?.checkValidity()).toBe(
+				false,
+			);
+			expect(document.querySelector<HTMLElement>("#test-domain-alert")?.hidden).toBe(false);
+			expect(document.querySelector<HTMLSelectElement>("#client-select")?.disabled).toBe(true);
+			expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+			expect(document.body.innerHTML).not.toContain("saved.maple");
+		},
+	);
+
+	it("preserves client-specific disabled toggles when a test domain is corrected", () => {
+		history.replaceState(null, "", "?client=gemini-enterprise");
+		mountApp("admin");
+		const input = document.querySelector<HTMLInputElement>("#domain-input")!;
+		for (const domain of ["school.test", "school.beta"]) {
+			input.value = domain;
+			input.dispatchEvent(new Event("input", { bubbles: true }));
+			expect(document.querySelector<HTMLInputElement>("#private-key-input")?.disabled).toBe(true);
+			expect(document.querySelector<HTMLInputElement>("#enterprise-install-input")?.disabled).toBe(
+				true,
+			);
+		}
+		expect(document.querySelector<HTMLSelectElement>("#region-select")?.disabled).toBe(false);
+		expect(document.querySelector<HTMLSelectElement>("#client-select")?.disabled).toBe(false);
+	});
+
+	it.each([
 		"?client=codex",
 		"?client=codex&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001",
 	])("copies the full scope manifest regardless of setup completeness: %s", async (search) => {
@@ -265,7 +364,18 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector(".details-panel #client-id-input")).not.toBeNull();
 		expect(document.querySelector("#client-id-reference-input")).toBeNull();
 		expect(document.querySelector(".controls-panel h2")?.textContent).toBe("Configuration");
+		expect(document.querySelector(".controls-panel")?.getAttribute("aria-labelledby")).toBe(
+			"configuration-heading",
+		);
+		expect(document.querySelector("#configuration-heading")?.textContent).toBe("Configuration");
 		expect(document.querySelector("#domain-hint")).not.toBeNull();
+		expect(document.querySelector("#domain-input")?.getAttribute("aria-describedby")).toBe(
+			"domain-hint",
+		);
+		expect(document.querySelector("#region-select")?.getAttribute("aria-describedby")).toBe(
+			"region-hint",
+		);
+		expect(document.querySelector("#region-hint")?.textContent).toContain("Maple audience");
 		const validatedPill = document.querySelector(".client-status-pill");
 		expect(validatedPill?.parentElement?.classList.contains("client-select-label-row")).toBe(true);
 		expect(validatedPill?.previousElementSibling?.textContent).toBe("MCP Client");
@@ -583,7 +693,7 @@ describe("Canvas MCP pages", () => {
 		expect(otherOptions[0].value).toBe("generic");
 		expect(otherOptions[0].textContent).toBe("Generic MCP client");
 		const rulesyncNames = otherOptions.slice(1).map((option) => option.textContent ?? "");
-		expect(rulesyncNames).toHaveLength(56);
+		expect(rulesyncNames).toHaveLength(58);
 		expect(rulesyncNames).toEqual(
 			[...rulesyncNames].sort((left, right) => left.localeCompare(right)),
 		);
@@ -652,6 +762,10 @@ describe("Canvas MCP pages", () => {
 		expect(uris).toHaveLength(35);
 		expect(redirectRow().querySelector<HTMLButtonElement>("button")?.dataset.copy).toBe(code);
 		expect(redirectRow().querySelector<HTMLButtonElement>("button")?.disabled).toBe(false);
+		const scrollRegion = redirectRow().querySelector("pre");
+		expect(scrollRegion?.getAttribute("tabindex")).toBe("0");
+		expect(scrollRegion?.getAttribute("role")).toBe("region");
+		expect(scrollRegion?.getAttribute("aria-label")).toBe("Redirect URIs");
 		const stylesheet = await readFile("src/main.css", "utf8");
 		expect(stylesheet).toMatch(/\.table-copy-cell pre\s*\{[^}]*max-height:\s*6em/su);
 	});
@@ -785,16 +899,17 @@ describe("Canvas MCP pages", () => {
 		mountApp("admin");
 
 		const betaNotice = document.querySelector(".beta-tenant-alert");
-		expect(document.querySelector(".admin-steps")?.firstElementChild).toBe(betaNotice);
+		expect(betaNotice?.parentElement?.classList.contains("instructions-column")).toBe(true);
+		expect(betaNotice?.previousElementSibling?.id).toBe("test-domain-alert");
+		expect(betaNotice?.closest(".details-panel")).toBeNull();
 		expect(document.querySelectorAll(".beta-tenant-alert")).toHaveLength(1);
 		expect(betaNotice?.classList.contains("instui-alert")).toBe(true);
 		expect(betaNotice?.classList.contains("-color-warning")).toBe(true);
 		expect(betaNotice?.classList.contains("-color-info")).toBe(false);
 		expect(betaNotice?.getAttribute("role")).toBe("status");
 		expect(betaNotice?.querySelector("code")?.textContent).toBe("utah.instructure.com");
-		expect(betaNotice?.nextElementSibling?.querySelector("h3")?.textContent).toBe(
-			"Open Developer Keys",
-		);
+		expect(betaNotice?.nextElementSibling?.classList.contains("details-panel")).toBe(true);
+		expect(document.querySelector(".admin-steps h3")?.textContent).toBe("Open Developer Keys");
 
 		const domainInput = document.querySelector<HTMLInputElement>("#domain-input")!;
 		expect(domainInput.value).toBe("utah.beta");

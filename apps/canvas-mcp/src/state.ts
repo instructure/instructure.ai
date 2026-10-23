@@ -76,6 +76,19 @@ export function isBetaDomain(domain: string): boolean {
 	return domain.toLowerCase().endsWith(".beta.instructure.com");
 }
 
+export function isTestDomain(value: string): boolean {
+	const input = value.trim();
+	try {
+		// Strip a terminal DNS root dot so "school.test.instructure.com." is still detected.
+		const hostname = new URL(
+			/^[a-z][a-z\d+.-]*:\/\//iu.test(input) ? input : `https://${input}`,
+		).hostname.replace(/\.$/u, "");
+		return hostname.endsWith(".test") || hostname.endsWith(".test.instructure.com");
+	} catch {
+		return false;
+	}
+}
+
 export function normalizeRedirectUris(value: string): string {
 	return value
 		.split(/\r\n?|\n/u)

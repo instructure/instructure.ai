@@ -194,6 +194,34 @@ describe("Help navigation", () => {
 		expect(document.querySelector("#help-content details > summary")).not.toBeNull();
 	});
 
+	it.each([false, true])("supports manual tab navigation with Connect enabled: %s", (ready) => {
+		if (ready)
+			history.replaceState(
+				null,
+				"",
+				"?client=claude-code&domain=example.instructure.com&region=us-east-1&clientId=12345000000000001",
+			);
+		mountApp("admin");
+		document.querySelector<HTMLButtonElement>("#tab-admin")!.focus();
+		const press = (key: string) => {
+			document.activeElement?.dispatchEvent(
+				new KeyboardEvent("keydown", { key, bubbles: true, cancelable: true }),
+			);
+		};
+		press("ArrowRight");
+		expect(document.activeElement?.id).toBe(ready ? "tab-connect" : "tab-help");
+		expect(document.querySelector("#tab-admin")?.getAttribute("aria-selected")).toBe("true");
+		press("End");
+		expect(document.activeElement?.id).toBe("tab-help");
+		press("ArrowRight");
+		expect(document.activeElement?.id).toBe("tab-admin");
+		press("ArrowLeft");
+		expect(document.activeElement?.id).toBe("tab-help");
+		press("Home");
+		expect(document.activeElement?.id).toBe("tab-admin");
+		expect(document.querySelectorAll('[role="tab"][tabindex="0"]')).toHaveLength(1);
+	});
+
 	it.each(["faqs", "issues", "clients", "tools", "contact"])(
 		"supports %s deep links without setup",
 		(section) => {
@@ -239,21 +267,30 @@ describe("Help navigation", () => {
 		expect(document.querySelector(".print-permalink")?.textContent).toContain("help=tools");
 	});
 
-	it("opens Contact with community and issue form links without setup", () => {
+	it("opens Contact with an issue form list without setup", () => {
 		history.replaceState(null, "", "?page=help&help=tools");
 		mountApp("admin");
 		choose("contact");
 		expect(document.activeElement?.id).toBe("help-section-contact");
 		expect(new URLSearchParams(location.search).get("help")).toBe("contact");
 		expect(document.querySelector("#help-content-heading")?.textContent).toBe("Contact");
-		expect(document.querySelector<HTMLAnchorElement>("#help-content a")?.href).toBe(
-			"https://community.instructure.com/en/group/70-canvas-mcp",
-		);
 		expect(
-			[...document.querySelectorAll<HTMLAnchorElement>("#contact-issues + p + ul a")].map((link) =>
-				new URL(link.href).searchParams.get("template"),
-			),
-		).toEqual([
+			[...document.querySelectorAll("#help-content > *")].map((element) => element.tagName),
+		).toEqual(["H2", "P", "UL", "P"]);
+		expect(document.querySelector("#help-content > p")?.textContent).toBe(
+			"Use the relevant link below to report a problem or suggest an improvement.",
+		);
+		const formLinks = [
+			...document.querySelectorAll<HTMLAnchorElement>("#help-content > ul > li > a"),
+		];
+		expect(document.querySelectorAll("#help-content a")).toHaveLength(5);
+		for (const link of formLinks) {
+			const url = new URL(link.href);
+			expect(`${url.origin}${url.pathname}`).toBe(
+				"https://github.com/instructure/instructure.ai/issues/new",
+			);
+		}
+		expect(formLinks.map((link) => new URL(link.href).searchParams.get("template"))).toEqual([
 			"canvas-mcp-guides.yml",
 			"canvas-mcp-validation.yml",
 			"canvas-mcp-faq.yml",
@@ -264,7 +301,7 @@ describe("Help navigation", () => {
 		expect(document.querySelector(".print-context")?.textContent).toContain("Help · Contact");
 		expect(document.querySelector(".print-permalink")?.textContent).toContain("help=contact");
 		choose("faqs");
-		expect(document.querySelector("#contact-community")).toBeNull();
+		expect(document.querySelector('#help-content a[href*="template="]')).toBeNull();
 		expect(document.querySelector("[data-help-search]")).not.toBeNull();
 	});
 

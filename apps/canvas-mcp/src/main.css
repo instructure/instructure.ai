@@ -127,7 +127,7 @@ h1 {
 
 .lede {
 	margin: 0;
-	color: color-mix(in srgb, var(--instui-color-text-base) 62%, transparent);
+	color: var(--instui-color-text-muted);
 	font-size: 16px;
 }
 
@@ -301,7 +301,7 @@ h1 {
 
 .field-hint {
 	margin: 7px 0 0;
-	color: color-mix(in srgb, var(--instui-color-text-base) 62%, transparent);
+	color: var(--instui-color-text-muted);
 	font-size: 12px;
 	line-height: 1.45;
 }
@@ -316,7 +316,7 @@ h1 {
 
 .optional {
 	margin-left: 5px;
-	color: color-mix(in srgb, var(--instui-color-text-base) 62%, transparent);
+	color: var(--instui-color-text-muted);
 	font-size: 11px;
 	font-weight: 400;
 }
@@ -390,7 +390,7 @@ h1 {
 .value-label {
 	margin-bottom: 5px;
 	display: block;
-	color: color-mix(in srgb, var(--instui-color-text-base) 62%, transparent);
+	color: var(--instui-color-text-muted);
 	font-size: 11px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -416,7 +416,7 @@ pre {
 }
 
 .intro-copy {
-	color: color-mix(in srgb, var(--instui-color-text-base) 62%, transparent);
+	color: var(--instui-color-text-muted);
 	font-size: 14px;
 	line-height: 1.6;
 }
@@ -459,7 +459,7 @@ pre {
 
 .steps-list p {
 	margin: 0;
-	color: color-mix(in srgb, var(--instui-color-text-base) 62%, transparent);
+	color: var(--instui-color-text-muted);
 	font-size: 13px;
 	line-height: 1.55;
 }
@@ -533,7 +533,18 @@ pre {
 }
 
 .setting-value-muted {
-	color: color-mix(in srgb, var(--instui-color-text-base) 62%, transparent);
+	color: var(--instui-color-text-muted);
+}
+
+.settings-table .setting-checkbox {
+	--instui-component-checkbox-label-disabled-color: var(--instui-color-text-base);
+}
+
+.table-copy-cell pre:focus-visible,
+.shiki-block pre:focus-visible,
+.scope-manifest:focus-visible {
+	outline: 2px solid var(--instui-color-text-info);
+	outline-offset: -2px;
 }
 
 .scope-manifest-title {
@@ -645,7 +656,7 @@ pre {
 	margin-top: 22px;
 	padding: 16px 2px;
 	border-top: 1px solid color-mix(in srgb, var(--instui-color-text-base) 18%, transparent);
-	color: color-mix(in srgb, var(--instui-color-text-base) 62%, transparent);
+	color: var(--instui-color-text-muted);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -659,6 +670,18 @@ pre {
 
 .page-footer a {
 	flex: 0 0 auto;
+}
+
+@media (forced-colors: active) {
+	/* Mask fills otherwise become the background color and hide the icon. */
+	.site-shell :is(.instui-button, .instui-close-button)::before {
+		forced-color-adjust: none;
+		background-color: ButtonText;
+	}
+
+	.site-shell :is(.instui-button, .instui-close-button):disabled::before {
+		background-color: GrayText;
+	}
 }
 
 @media (max-width: 800px) {

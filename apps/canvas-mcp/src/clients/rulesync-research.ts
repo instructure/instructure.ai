@@ -9,10 +9,10 @@ import {
 	type LifecycleNotice,
 } from "./types";
 
-// Reviewed against vendor documentation/source on this date. These are capability
-// findings, not successful Canvas sign-ins. Missing documentation is not a "no".
+// Default source-review date. Later additions carry their own review date.
+// These are capability findings, not successful Canvas sign-ins; missing documentation is not a "no".
 const checkedAt = "2026-10-20";
-export function source(label: string, url: string): Evidence {
+export function source(label: string, url: string, verifiedAt = checkedAt): Evidence {
 	const parsedUrl = new URL(url);
 	const isGitHub = parsedUrl.protocol === "https:" && parsedUrl.hostname === "github.com";
 	const version = isGitHub ? parsedUrl.pathname.match(/\/blob\/([^/]+)/u)?.[1] : undefined;
@@ -21,7 +21,7 @@ export function source(label: string, url: string): Evidence {
 		label,
 		url,
 		...(version && !["main", "main-v2", "master"].includes(version) ? { version } : {}),
-		verifiedAt: checkedAt,
+		verifiedAt,
 	};
 }
 function fact<T>(value: T, evidence: Evidence): Fact<T> {
@@ -38,6 +38,7 @@ function runtime(evidence: Evidence, description: string): RedirectUri {
 }
 type Research = {
 	source: Evidence;
+	checkedAt?: string;
 	additionalSources?: Evidence[];
 	lifecycleNotice?: LifecycleNotice;
 	status?: ClientDefinition["status"];
@@ -181,8 +182,29 @@ const rovoLifecycle = source(
 	"https://www.atlassian.com/licensing/rovo-dev",
 );
 const targetCaveats = source(
-	"Rulesync target lifecycle, alias, and plugin packaging caveats (reviewed main)",
-	"https://github.com/dyoshikawa/rulesync/blob/52ec6c88ff7c72313050474f2400565e16822fa4/README.md#target-and-deprecation-notes",
+	"Rulesync target lifecycle, alias, and plugin packaging caveats (v40.2.0)",
+	"https://github.com/dyoshikawa/rulesync/blob/4094b14918f6d4bb418447df41c7fa638f31939a/README.md#target-and-deprecation-notes",
+	"2026-10-23",
+);
+const firebender = source(
+	"Firebender MCP transports, OAuth, and authentication",
+	"https://docs.firebender.com/context/mcp/overview.md",
+	"2026-10-23",
+);
+const firebenderConfig = source(
+	"Firebender MCP server configuration fields and scopes",
+	"https://docs.firebender.com/api-reference/syntax.md",
+	"2026-10-23",
+);
+const firebenderOAuth = source(
+	"Firebender OAuth sign-in flow for remote MCP",
+	"https://docs.firebender.com/context/mcp/revenuecat.md",
+	"2026-10-23",
+);
+const xum = source(
+	"Xum MCP configuration, remote plugin OAuth, and workspace scope",
+	"https://xum.cdr.dev/config/mcp-servers.md",
+	"2026-10-23",
 );
 const cortex = source(
 	"Cortex Code MCP OAuth configuration",
@@ -802,6 +824,21 @@ const research: Partial<Record<RulesyncTargetId, Research>> = {
 		personal: true,
 		note: "The first-party MCP client must be distinguished from third-party OAuth manager plugins. Native static Canvas credentials, callbacks, and enterprise provisioning remain unverified.",
 	},
+	firebender: {
+		source: firebender,
+		checkedAt: "2026-10-23",
+		additionalSources: [firebenderConfig, firebenderOAuth],
+		personal: true,
+		remote: true,
+		note: "Firebender documents remote HTTP/SSE OAuth sign-in and secure token handling, plus URL/headers in project and personal configuration. Its docs do not specify static Client ID/secret fields for custom MCP servers or an exact callback URI, so Canvas key types and redirect URI remain unverified. Business teams are documented, but centrally managed MCP server provisioning is not.",
+	},
+	xum: {
+		source: xum,
+		checkedAt: "2026-10-23",
+		personal: true,
+		remote: true,
+		note: "Xum's user-configured mcp.jsonc entries launch local MCP processes over stdio. Separately, Xum supports OAuth sign-in for remote Agent Plugin MCP servers, with client, scopes, and authorization server metadata. The docs do not specify static Canvas Client ID/secret support or an exact callback URI; Canvas key types and redirect URI remain unverified. Global and repo configuration are documented, but centrally managed enterprise provisioning is not.",
+	},
 };
 
 // Plugin targets are packaging formats, not independent OAuth clients. Reuse only
@@ -899,7 +936,7 @@ export function researchedClient(
 			: {}),
 		setupNote: entry.note,
 		research: {
-			checkedAt,
+			checkedAt: entry.checkedAt ?? checkedAt,
 			installSupport,
 			sources: [
 				...new Set([

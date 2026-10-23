@@ -5,6 +5,7 @@ import {
 	type AppState,
 	type StorageLike,
 	deriveUrls,
+	isTestDomain,
 	normalizeCanvasDomain,
 	normalizeRedirectUris,
 	readState,
@@ -23,6 +24,7 @@ describe("normalizeCanvasDomain", () => {
 
 	it.each([
 		"school.edu",
+		"utah.test.instructure.com",
 		"https://utah.instructure.com.evil.test",
 		"https://user@utah.instructure.com",
 		"utah.instructure.com:8443",
@@ -30,6 +32,34 @@ describe("normalizeCanvasDomain", () => {
 		"https://foo.bar.instructure.com",
 	])("rejects unsupported domain input %s", (input) => {
 		expect(normalizeCanvasDomain(input)).toBeNull();
+	});
+});
+
+describe("isTestDomain", () => {
+	it.each([
+		"school.test",
+		"school.test.instructure.com",
+		" https://SCHOOL.TEST.instructure.com/courses/1 ",
+		"http://school.test/",
+		"school.test.",
+		"school.test.instructure.com.",
+		"https://school.test.instructure.com./courses/1",
+	])("identifies test instances: %s", (input) => {
+		expect(isTestDomain(input)).toBe(true);
+	});
+
+	it.each([
+		"",
+		"school",
+		"school.beta",
+		"school.instructure.com",
+		"school.beta.instructure.com",
+		"test.instructure.com",
+		"school-test",
+		"not a domain.test",
+		"school.instructure.com.",
+	])("does not flag non-test input: %s", (input) => {
+		expect(isTestDomain(input)).toBe(false);
 	});
 });
 
