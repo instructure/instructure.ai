@@ -359,7 +359,18 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector(".details-panel #client-id-input")).not.toBeNull();
 		expect(document.querySelector("#client-id-reference-input")).toBeNull();
 		expect(document.querySelector(".controls-panel h2")?.textContent).toBe("Configuration");
+		expect(document.querySelector(".controls-panel")?.getAttribute("aria-labelledby")).toBe(
+			"configuration-heading",
+		);
+		expect(document.querySelector("#configuration-heading")?.textContent).toBe("Configuration");
 		expect(document.querySelector("#domain-hint")).not.toBeNull();
+		expect(document.querySelector("#domain-input")?.getAttribute("aria-describedby")).toBe(
+			"domain-hint",
+		);
+		expect(document.querySelector("#region-select")?.getAttribute("aria-describedby")).toBe(
+			"region-hint",
+		);
+		expect(document.querySelector("#region-hint")?.textContent).toContain("Maple audience");
 		const validatedPill = document.querySelector(".client-status-pill");
 		expect(validatedPill?.parentElement?.classList.contains("client-select-label-row")).toBe(true);
 		expect(validatedPill?.previousElementSibling?.textContent).toBe("MCP Client");
@@ -746,6 +757,10 @@ describe("Canvas MCP pages", () => {
 		expect(uris).toHaveLength(35);
 		expect(redirectRow().querySelector<HTMLButtonElement>("button")?.dataset.copy).toBe(code);
 		expect(redirectRow().querySelector<HTMLButtonElement>("button")?.disabled).toBe(false);
+		const scrollRegion = redirectRow().querySelector("pre");
+		expect(scrollRegion?.getAttribute("tabindex")).toBe("0");
+		expect(scrollRegion?.getAttribute("role")).toBe("region");
+		expect(scrollRegion?.getAttribute("aria-label")).toBe("Redirect URIs");
 		const stylesheet = await readFile("src/main.css", "utf8");
 		expect(stylesheet).toMatch(/\.table-copy-cell pre\s*\{[^}]*max-height:\s*6em/su);
 	});

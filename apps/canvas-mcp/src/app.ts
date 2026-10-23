@@ -90,6 +90,8 @@ export function mountApp(mode: PageMode): void {
 	normalizeSetup(state);
 	const callbacks = new CallbackCache();
 	let activeCallbackKey = "";
+	let previousClientStatus: string | undefined;
+	let clientStatusMessage = "";
 	function callbackResolution(): CallbackResolution | undefined {
 		if (pageMode !== "admin" && clientDefinition(state.client).id !== "codex") {
 			activeCallbackKey = "";
@@ -136,10 +138,21 @@ export function mountApp(mode: PageMode): void {
 	}
 
 	function syncNoticeAnnouncements(): void {
+		const pill = content.querySelector<HTMLElement>("#client-status");
+		const statusKey = pill ? `${state.client}:${pill.dataset.clientStatus}` : undefined;
+		if (statusKey !== previousClientStatus) {
+			clientStatusMessage =
+				previousClientStatus && pill && pill.dataset.clientStatus !== "known-issue"
+					? `${clientDefinition(state.client).name}: ${pill.textContent?.trim()}`
+					: "";
+			previousClientStatus = statusKey;
+		}
 		for (const announcement of announcements) {
 			const role = announcement.priority === "assertive" ? "alert" : "status";
 			const notices = content.querySelectorAll<HTMLElement>(`.instui-alert[role="${role}"]`);
 			const messages = new Set<string>();
+			if (announcement.priority === "polite" && clientStatusMessage)
+				messages.add(clientStatusMessage);
 			for (const notice of notices) {
 				// The persistent region announces changes; the visible notice stays navigable.
 				notice.setAttribute("aria-live", "off");
@@ -179,6 +192,10 @@ export function mountApp(mode: PageMode): void {
 		if (input) {
 			input.classList.toggle("-invalid", testDomain);
 			input.setAttribute("aria-invalid", String(testDomain));
+			input.setAttribute(
+				"aria-describedby",
+				testDomain ? "domain-hint test-domain-alert" : "domain-hint",
+			);
 			input.setCustomValidity(
 				testDomain ? "Test instances are not supported. Use the beta instance instead." : "",
 			);

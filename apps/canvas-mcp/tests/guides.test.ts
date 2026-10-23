@@ -303,6 +303,7 @@ describe("composable client guides", () => {
 		);
 		document.body.innerHTML = html;
 		expect(document.querySelector(".shiki-block.language-json pre.shiki")).not.toBeNull();
+		expect(document.querySelector(".shiki-block pre")?.getAttribute("tabindex")).toBe("0");
 		expect(document.querySelector(".shiki-copy")?.getAttribute("aria-label")).toBe(
 			"Copy configuration",
 		);

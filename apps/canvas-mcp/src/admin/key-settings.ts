@@ -36,7 +36,7 @@ function settingRow(label: string, value: string, muted = false): string {
 }
 
 function settingCodeRow(label: string, value: string, canCopy: boolean): string {
-	return `<tr><th scope="row">${escapeHtml(label)}</th><td><div class="table-copy-cell"><pre><code>${escapeHtml(value)}</code></pre><button class="instui-button -color-tertiary -shape-square -icon-copy -size-sm" type="button" aria-label="Copy ${escapeHtml(label)}" title="Copy ${escapeHtml(label)}" data-copy="${escapeHtml(value)}" data-label="${escapeHtml(label)}" ${canCopy ? "" : "disabled"}></button></div></td></tr>`;
+	return `<tr><th scope="row">${escapeHtml(label)}</th><td><div class="table-copy-cell"><pre tabindex="0" role="region" aria-label="${escapeHtml(label)}"><code>${escapeHtml(value)}</code></pre><button class="instui-button -color-tertiary -shape-square -icon-copy -size-sm" type="button" aria-label="Copy ${escapeHtml(label)}" title="Copy ${escapeHtml(label)}" data-copy="${escapeHtml(value)}" data-label="${escapeHtml(label)}" ${canCopy ? "" : "disabled"}></button></div></td></tr>`;
 }
 
 function allowedAudiencesRow(region: AppState["region"]): string {

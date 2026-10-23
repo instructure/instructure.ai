@@ -26,6 +26,112 @@ describe("setup alert announcements", () => {
 		input.dispatchEvent(new Event(event, { bubbles: true }));
 	}
 
+	function chooseClient(client: string): void {
+		const select = document.querySelector<HTMLSelectElement>("#client-select")!;
+		select.value = client;
+		select.dispatchEvent(new Event("change", { bubbles: true }));
+	}
+
+	function toggleEnterprise(): void {
+		const input = document.querySelector<HTMLInputElement>("#enterprise-install-input")!;
+		input.checked = !input.checked;
+		input.dispatchEvent(new Event("change", { bubbles: true }));
+	}
+
+	it("describes the client status without a separate pill live region or initial announcement", () => {
+		mountApp("admin");
+		expect(document.querySelector("#client-select")?.getAttribute("aria-describedby")).toBe(
+			"client-status",
+		);
+		const pill = document.querySelector("#client-status")!;
+		expect(pill.textContent).toBe("Validated");
+		expect(pill.hasAttribute("role")).toBe(false);
+		expect(pill.hasAttribute("aria-live")).toBe(false);
+		vi.runOnlyPendingTimers();
+		expect(region("polite").textContent).toBe("");
+	});
+
+	it("announces install-mode status changes once through the persistent polite region", () => {
+		mountApp("admin");
+		const live = region("polite");
+		toggleEnterprise();
+		expect(live.textContent).toBe("");
+		enterDomain("school", "change");
+		vi.runOnlyPendingTimers();
+		expect(region("polite")).toBe(live);
+		expect(live.textContent).toBe("Claude Code: Untested");
+		const observer = new MutationObserver(() => {});
+		observer.observe(live, { childList: true, subtree: true, characterData: true });
+		enterDomain("school", "change");
+		vi.runOnlyPendingTimers();
+		expect(observer.takeRecords()).toHaveLength(0);
+		observer.disconnect();
+		toggleEnterprise();
+		vi.runOnlyPendingTimers();
+		expect(live.textContent).toBe("Claude Code: Validated");
+	});
+
+	it("cancels stale status messages when a known issue replaces them without duplication", () => {
+		mountApp("admin");
+		toggleEnterprise();
+		chooseClient("copilot");
+		vi.runOnlyPendingTimers();
+		expect(region("polite").textContent).toBe("");
+		expect(region("assertive").textContent).toContain(
+			document.querySelector(".known-issue-alert")?.textContent,
+		);
+		expect(document.querySelector("#client-status")?.textContent).toBe("Known issue");
+	});
+
+	it("announces the selected client when moving away from a known issue", () => {
+		mountApp("admin");
+		chooseClient("copilot");
+		vi.runOnlyPendingTimers();
+		chooseClient("claude-code");
+		vi.runOnlyPendingTimers();
+		expect(region("assertive").textContent).toBe("");
+		expect(region("polite").textContent).toBe("Claude Code: Validated");
+	});
+
+	it("keeps client status and other polite notices in the same announcement", () => {
+		mountApp("admin");
+		toggleEnterprise();
+		enterDomain("school.beta", "change");
+		vi.runOnlyPendingTimers();
+		expect(region("polite").textContent).toContain("Claude Code: Untested");
+		expect(region("polite").textContent).toContain("Beta instance:");
+	});
+
+	it("clears pending client status on Help and does not announce it on returning", () => {
+		mountApp("admin");
+		toggleEnterprise();
+		document.querySelector<HTMLButtonElement>("#tab-help")!.click();
+		vi.runOnlyPendingTimers();
+		expect(region("polite").textContent).toBe("");
+		document.querySelector<HTMLButtonElement>("#tab-admin")!.click();
+		vi.runOnlyPendingTimers();
+		expect(region("polite").textContent).toBe("");
+		expect(document.querySelector("#client-status")?.textContent).toBe("Untested");
+	});
+
+	it("describes only current domain errors while preserving live announcements", () => {
+		mountApp("admin");
+		const input = () => document.querySelector<HTMLInputElement>("#domain-input")!;
+		expect(input().getAttribute("aria-describedby")).toBe("domain-hint");
+		enterDomain("school.test");
+		expect(input().getAttribute("aria-describedby")).toBe("domain-hint test-domain-alert");
+		vi.runOnlyPendingTimers();
+		expect(region("assertive").textContent).toContain("Test instances are not supported");
+		enterDomain("school", "input");
+		expect(input().getAttribute("aria-describedby")).toBe("domain-hint");
+		expect(region("assertive").textContent).toBe("");
+		expect(document.querySelector<HTMLElement>("#test-domain-alert")?.hidden).toBe(true);
+		enterDomain("school", "change");
+		expect(input().getAttribute("aria-describedby")).toBe("domain-hint");
+		enterDomain("school.test", "change");
+		expect(input().getAttribute("aria-describedby")).toBe("domain-hint test-domain-alert");
+	});
+
 	it("mounts empty, exposed, atomic live regions before adding initial messages", () => {
 		history.replaceState(null, "", "?client=claude-code&domain=school.test");
 		mountApp("admin");
