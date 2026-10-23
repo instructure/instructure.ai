@@ -53,6 +53,8 @@ Use this form for bugs or other issues not covered by the templates above. Inclu
 
 ### Checking changes
 
+Setup alerts use persistent, atomic live regions: errors are assertive and informational notices are polite. Visible alerts remain available for reading and keyboard navigation, but their own live announcements are disabled to avoid duplicates. Only new or changed messages are announced; rerendering an unchanged notice does not repeat it. When changing alerts, test initial setup links, live domain validation, client changes, and tab changes with a screen reader.
+
 Run commands from the repository root:
 
 ```sh

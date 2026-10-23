@@ -1,5 +1,5 @@
-export const RULESYNC_VERSION = "38.0.0";
-export const RULESYNC_COMMIT = "335de85dbd42b5df255ff55148a325ce9d95d0e0";
+export const RULESYNC_VERSION = "40.2.0";
+export const RULESYNC_COMMIT = "4094b14918f6d4bb418447df41c7fa638f31939a";
 
 // MCP-capable targets from the pinned upstream tuple. claudecode-legacy is
 // represented by the curated Claude Code client rather than a duplicate option.
@@ -22,6 +22,7 @@ export const RULESYNC_TARGETS = [
 	{ id: "cursor", name: "Cursor" },
 	{ id: "deepagents", name: "deepagents-cli" },
 	{ id: "factorydroid", name: "Factory Droid" },
+	{ id: "firebender", name: "Firebender" },
 	{ id: "opencode", name: "OpenCode" },
 	{ id: "openclaw", name: "OpenClaw" },
 	{ id: "mimocode", name: "MiMo Code" },
@@ -65,6 +66,7 @@ export const RULESYNC_TARGETS = [
 	{ id: "zcode-plugin", name: "ZCode plugin" },
 	{ id: "pool", name: "Pool (Poolside)" },
 	{ id: "dsh", name: "DeepSeek Harness" },
+	{ id: "xum", name: "Xum" },
 ] as const;
 
 export type RulesyncTargetId = (typeof RULESYNC_TARGETS)[number]["id"];

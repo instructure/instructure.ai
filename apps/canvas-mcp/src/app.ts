@@ -3,7 +3,7 @@ import { CallbackCache, type CallbackResolution } from "./oauth/codex-callback";
 import { connectionReadiness, normalizeSetup } from "./setup";
 import "./main.css";
 import { applySpacing } from "@pantoken/interactions";
-import { clientDefinition, normalizeKeyType } from "./clients";
+import { allowedKeyTypes, clientDefinition, normalizeKeyType } from "./clients";
 import { renderPage, type PageMode } from "./page";
 import { copyToClipboard } from "./ui/copy";
 import { applyTheme, setTheme } from "./ui/theme";
@@ -17,6 +17,7 @@ import {
 	type AppState,
 	type StorageLike,
 	normalizeCanvasDomain,
+	isTestDomain,
 	normalizeRedirectUris,
 	deriveUrls,
 	readState,
@@ -42,6 +43,27 @@ export function mountApp(mode: PageMode): void {
 	}
 	const appRoot = root,
 		state = readState(globalThis.location.search, getStorage());
+	const content = document.createElement("div");
+	const announcements = (["assertive", "polite"] as const).map(
+		(
+			priority,
+		): {
+			region: HTMLDivElement;
+			priority: typeof priority;
+			messages: Set<string>;
+			pending: Set<string>;
+			timer?: ReturnType<typeof globalThis.setTimeout>;
+		} => {
+			const region = document.createElement("div");
+			region.className = "instui-screen-reader-content";
+			region.dataset.noticeRegion = priority;
+			region.setAttribute("role", priority === "assertive" ? "alert" : "status");
+			region.setAttribute("aria-live", priority);
+			region.setAttribute("aria-atomic", "true");
+			return { region, priority, messages: new Set<string>(), pending: new Set<string>() };
+		},
+	);
+	appRoot.replaceChildren(content, ...announcements.map(({ region }) => region));
 	printCleanups.get(appRoot)?.();
 	printCleanups.set(appRoot, bindPrintDetails(appRoot));
 	const mount = Symbol();
@@ -49,9 +71,16 @@ export function mountApp(mode: PageMode): void {
 	let pageMode = pageModeFromQuery(globalThis.location.search) ?? mode;
 	let helpSection = helpSectionFromQuery(globalThis.location.search);
 	let toolFilters = toolFilterQuery(globalThis.location.search).toString();
+	const queryDomain = new URLSearchParams(globalThis.location.search).get("domain") ?? "";
+	const viewState = {
+		domainInputValue: isTestDomain(queryDomain)
+			? queryDomain
+			: canvasDomainInputValue(state.domain),
+	};
+	if (isTestDomain(viewState.domainInputValue)) state.domain = "";
 	normalizeSetup(state);
 	function isConnectionReady(): boolean {
-		return connectionReadiness(state).ready;
+		return !isTestDomain(viewState.domainInputValue) && connectionReadiness(state).ready;
 	}
 	if (pageMode === "user" && !isConnectionReady()) {
 		pageMode = "admin";
@@ -59,7 +88,6 @@ export function mountApp(mode: PageMode): void {
 	if (!new URLSearchParams(globalThis.location.search).has("surface"))
 		state.surface = pageMode === "user" ? "provider" : "canvas";
 	normalizeSetup(state);
-	const viewState = { domainInputValue: canvasDomainInputValue(state.domain) };
 	const callbacks = new CallbackCache();
 	let activeCallbackKey = "";
 	function callbackResolution(): CallbackResolution | undefined {
@@ -89,7 +117,7 @@ export function mountApp(mode: PageMode): void {
 	function render() {
 		segmentedCleanups.get(appRoot)?.();
 		if (pageMode === "admin" && state.install !== "enterprise") state.surface = "canvas";
-		appRoot.innerHTML = renderPage(
+		content.innerHTML = renderPage(
 			state,
 			pageMode,
 			viewState.domainInputValue,
@@ -101,9 +129,74 @@ export function mountApp(mode: PageMode): void {
 		if (tray) applySpacing(tray);
 		updatePrintPageBreaks(appRoot);
 		bindEvents();
+		syncDomainValidation();
 		applyTheme();
 		segmentedCleanups.set(appRoot, bindSegmentedControls(appRoot));
 		updatePrintPermalink();
+	}
+
+	function syncNoticeAnnouncements(): void {
+		for (const announcement of announcements) {
+			const role = announcement.priority === "assertive" ? "alert" : "status";
+			const notices = content.querySelectorAll<HTMLElement>(`.instui-alert[role="${role}"]`);
+			const messages = new Set<string>();
+			for (const notice of notices) {
+				// The persistent region announces changes; the visible notice stays navigable.
+				notice.setAttribute("aria-live", "off");
+				if (!notice.closest("[hidden]")) {
+					const text = notice.textContent?.replace(/\s+/gu, " ").trim();
+					if (text) messages.add(text);
+				}
+			}
+			if (
+				messages.size === announcement.messages.size &&
+				[...messages].every((message) => announcement.messages.has(message))
+			)
+				continue;
+			const added = [...messages].filter(
+				(message) => !announcement.messages.has(message) || announcement.pending.has(message),
+			);
+			announcement.messages = messages;
+			announcement.pending = new Set(added);
+			globalThis.clearTimeout(announcement.timer);
+			announcement.region.textContent = "";
+			if (added.length) {
+				// Populate an already-mounted, empty live region in a separate task.
+				announcement.timer = globalThis.setTimeout(() => {
+					if (appRoot.isConnected && mounts.get(appRoot) === mount) {
+						announcement.region.textContent = added.join("\n");
+						announcement.pending.clear();
+					}
+				}, 100);
+			}
+		}
+	}
+
+	function syncDomainValidation(): void {
+		const testDomain = isTestDomain(viewState.domainInputValue),
+			client = clientDefinition(state.client),
+			input = appRoot.querySelector<HTMLInputElement>("#domain-input");
+		if (input) {
+			input.classList.toggle("-invalid", testDomain);
+			input.setAttribute("aria-invalid", String(testDomain));
+			input.setCustomValidity(
+				testDomain ? "Test instances are not supported. Use the beta instance instead." : "",
+			);
+		}
+		const alert = appRoot.querySelector<HTMLElement>("#test-domain-alert");
+		if (alert) alert.hidden = !testDomain;
+		syncNoticeAnnouncements();
+		for (const [id, disabled] of [
+			["region-select", testDomain],
+			["client-select", testDomain],
+			["enterprise-install-input", testDomain || client.installModes.length === 1],
+			["private-key-input", testDomain || allowedKeyTypes(client).length < 2],
+			["client-id-input", testDomain],
+		] as const) {
+			const control = appRoot.querySelector<HTMLInputElement | HTMLSelectElement>(`#${id}`);
+			if (control) control.disabled = disabled;
+		}
+		syncConnectTab();
 	}
 
 	function syncConnectTab(): void {
@@ -181,7 +274,11 @@ export function mountApp(mode: PageMode): void {
 			});
 		});
 		appRoot.querySelector<HTMLInputElement>("#domain-input")?.addEventListener("input", (event) => {
+			const wasTestDomain = isTestDomain(viewState.domainInputValue);
 			viewState.domainInputValue = (event.currentTarget as HTMLInputElement).value;
+			if (isTestDomain(viewState.domainInputValue)) state.domain = "";
+			else if (wasTestDomain) state.domain = canvasDomainFromInput(viewState.domainInputValue);
+			syncDomainValidation();
 		});
 		appRoot
 			.querySelector<HTMLInputElement>("#domain-input")

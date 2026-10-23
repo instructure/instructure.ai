@@ -76,6 +76,18 @@ export function isBetaDomain(domain: string): boolean {
 	return domain.toLowerCase().endsWith(".beta.instructure.com");
 }
 
+export function isTestDomain(value: string): boolean {
+	const input = value.trim();
+	try {
+		const { hostname } = new URL(
+			/^[a-z][a-z\d+.-]*:\/\//iu.test(input) ? input : `https://${input}`,
+		);
+		return hostname.endsWith(".test") || hostname.endsWith(".test.instructure.com");
+	} catch {
+		return false;
+	}
+}
+
 export function normalizeRedirectUris(value: string): string {
 	return value
 		.split(/\r\n?|\n/u)
