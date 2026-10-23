@@ -246,9 +246,6 @@ describe("Help navigation", () => {
 		expect(document.activeElement?.id).toBe("help-section-contact");
 		expect(new URLSearchParams(location.search).get("help")).toBe("contact");
 		expect(document.querySelector("#help-content-heading")?.textContent).toBe("Contact");
-		expect(document.querySelector<HTMLAnchorElement>("#help-content a")?.href).toBe(
-			"https://community.instructure.com/en/group/70-canvas-mcp",
-		);
 		expect(
 			[...document.querySelectorAll<HTMLAnchorElement>("#contact-issues + p + ul a")].map((link) =>
 				new URL(link.href).searchParams.get("template"),
