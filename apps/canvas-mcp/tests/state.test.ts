@@ -41,6 +41,9 @@ describe("isTestDomain", () => {
 		"school.test.instructure.com",
 		" https://SCHOOL.TEST.instructure.com/courses/1 ",
 		"http://school.test/",
+		"school.test.",
+		"school.test.instructure.com.",
+		"https://school.test.instructure.com./courses/1",
 	])("identifies test instances: %s", (input) => {
 		expect(isTestDomain(input)).toBe(true);
 	});
@@ -54,6 +57,7 @@ describe("isTestDomain", () => {
 		"test.instructure.com",
 		"school-test",
 		"not a domain.test",
+		"school.instructure.com.",
 	])("does not flag non-test input: %s", (input) => {
 		expect(isTestDomain(input)).toBe(false);
 	});

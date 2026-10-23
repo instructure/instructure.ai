@@ -79,22 +79,27 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(false);
 	});
 
-	it("rejects a test-domain setup link instead of using a saved production domain", () => {
-		localStorage.setItem("canvas-mcp:v1", JSON.stringify({ domain: "saved.instructure.com" }));
-		history.replaceState(
-			null,
-			"",
-			"?domain=school.test.instructure.com&region=us-east-1&clientId=12345000000000001&page=connect",
-		);
-		mountApp("user");
-		expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("admin");
-		expect(document.querySelector<HTMLInputElement>("#domain-input")?.value).toBe(
-			"school.test.instructure.com",
-		);
-		expect(document.querySelector<HTMLInputElement>("#domain-input")?.checkValidity()).toBe(false);
-		expect(document.querySelector<HTMLSelectElement>("#client-select")?.disabled).toBe(true);
-		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
-	});
+	it.each(["school.test.instructure.com", "school.test.instructure.com."])(
+		"rejects a test-domain setup link instead of using a saved production domain: %s",
+		(domain) => {
+			localStorage.setItem("canvas-mcp:v1", JSON.stringify({ domain: "saved.instructure.com" }));
+			history.replaceState(
+				null,
+				"",
+				`?domain=${domain}&region=us-east-1&clientId=12345000000000001&page=connect`,
+			);
+			mountApp("user");
+			expect(document.querySelector(".site-shell")?.getAttribute("data-mode")).toBe("admin");
+			expect(document.querySelector<HTMLInputElement>("#domain-input")?.value).toBe(domain);
+			expect(document.querySelector<HTMLInputElement>("#domain-input")?.checkValidity()).toBe(
+				false,
+			);
+			expect(document.querySelector<HTMLElement>("#test-domain-alert")?.hidden).toBe(false);
+			expect(document.querySelector<HTMLSelectElement>("#client-select")?.disabled).toBe(true);
+			expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
+			expect(document.body.innerHTML).not.toContain("saved.maple");
+		},
+	);
 
 	it("preserves client-specific disabled toggles when a test domain is corrected", () => {
 		history.replaceState(null, "", "?client=gemini-enterprise");
