@@ -24,3 +24,5 @@ coverage/*
 .turbo
 # Raw OAuth captures must never be committed.
 scripts/probe/raw/
+
+a11y-report/
