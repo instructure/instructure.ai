@@ -1,8 +1,8 @@
-import { InstUISettingsProvider } from "@instructure/ui/latest";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { type Root } from "react-dom/client";
 import App from "./app";
+import { ColorSchemeProvider } from "./components/colorScheme";
 
 const mountApp = () => {
 	const foundRoot = document.getElementById("root");
@@ -13,12 +13,13 @@ const mountApp = () => {
 		})();
 
 	const appRoot: Root = createRoot(root);
+	const isInIframe = globalThis.self !== globalThis.top;
 
 	appRoot.render(
 		<StrictMode>
-			<InstUISettingsProvider>
+			<ColorSchemeProvider forced={isInIframe ? "light" : undefined}>
 				<App />
-			</InstUISettingsProvider>
+			</ColorSchemeProvider>
 		</StrictMode>,
 	);
 };

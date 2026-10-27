@@ -8,11 +8,11 @@ vi.mock("react-dom/client", () => ({
 	createRoot: createRootMock,
 }));
 
-// Mock InstUISettingsProvider and App
-vi.mock("@instructure/ui/latest", () => ({
-	InstUISettingsProvider: ({ children }: { children: React.ReactNode }) => (
-		<div data-testid="instui-provider">{children}</div>
-	),
+// Mock ColorSchemeProvider and App
+vi.mock("./components/colorScheme", () => ({
+	ColorSchemeProvider: function ColorSchemeProvider({ children }: { children: React.ReactNode }) {
+		return <div data-testid="color-scheme-provider">{children}</div>;
+	},
 }));
 vi.mock("./app", () => ({
 	default: function App() {
@@ -75,7 +75,7 @@ describe("Main.tsx", () => {
 		expect(createRootMock).toHaveBeenCalledWith(rootElem);
 	});
 
-	it("renders StrictMode > InstUISettingsProvider > App", async () => {
+	it("renders StrictMode > ColorSchemeProvider > App", async () => {
 		const { mountApp } = await import("./main");
 		mountApp();
 		expect(renderSpy).toHaveBeenCalledTimes(1);
@@ -86,13 +86,14 @@ describe("Main.tsx", () => {
 		expect(React.isValidElement(rendered)).toBeTruthy();
 		expect(rendered.type).toBe(React.StrictMode);
 
-		// Should contain InstUISettingsProvider
+		// Should contain ColorSchemeProvider (not forced outside of an iframe)
 		const provider = React.Children.only(rendered.props.children);
 		expect(
 			provider.type.name ||
 				provider.type.displayName ||
 				(typeof provider.type === "string" ? provider.type : ""),
-		).toMatch(/InstUISettingsProvider/);
+		).toMatch(/ColorSchemeProvider/);
+		expect(provider.props.forced).toBeUndefined();
 
 		// Should contain App
 		const app = React.Children.only(provider.props.children);

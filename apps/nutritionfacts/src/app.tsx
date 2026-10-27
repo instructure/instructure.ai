@@ -5,6 +5,7 @@ import { type AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { useEffect, useState } from "react";
 import { type FC } from "react";
 import { DefaultLayout, Logo, LogoDark, colors, copyright, disclaimer } from "./assets";
+import { useColorSchemeContext } from "./components/colorScheme";
 import { EmbedControl, LinkControl } from "./components/export";
 import { NutritionFactsForm, getLayoutFromParams } from "./components/layout";
 
@@ -17,9 +18,7 @@ const App: FC = () => {
 	);
 	const [width, setWidth] = useState(() => window.innerWidth);
 	const isInIframe = globalThis.self !== window.top;
-	const [isDark, setIsDark] = useState(
-		() => globalThis.matchMedia("(prefers-color-scheme: dark)").matches,
-	);
+	const isDark = useColorSchemeContext().resolved === "dark";
 
 	useEffect(() => {
 		const handleResize = () => setWidth(window.innerWidth);
@@ -36,15 +35,6 @@ const App: FC = () => {
 	}, [product?.uid, product?.name]);
 
 	const { layout } = getLayoutFromParams(DefaultLayout);
-
-	useEffect(() => {
-		const mediaQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
-
-		const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
-		mediaQuery.addEventListener("change", handler);
-
-		return () => mediaQuery.removeEventListener("change", handler);
-	}, []);
 
 	return (
 		<View

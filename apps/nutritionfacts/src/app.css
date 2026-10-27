@@ -1,5 +1,13 @@
 /* oxc-ignore-all lint/complexity/noImportantStyles: Important needed to override INSTUI */
 
+:root[data-color-scheme="light"] {
+	color-scheme: light;
+}
+
+:root[data-color-scheme="dark"] {
+	color-scheme: dark;
+}
+
 html,
 body {
 	margin: 0;

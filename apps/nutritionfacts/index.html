@@ -20,6 +20,20 @@
 			content="%VITE_PACKAGE_NAME%"
 		/>
 		<title>IgniteAI Nutrition Facts</title>
+		<script>
+			// Applies the resolved color scheme before first paint; kept in sync with src/components/colorScheme.
+			(() => {
+				let scheme = "light";
+				try {
+					if (window.self === window.top) {
+						const stored = localStorage.getItem("nutritionfacts:color-scheme");
+						const system = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+						scheme = stored === "light" || stored === "dark" ? stored : system;
+					}
+				} catch {}
+				document.documentElement.dataset.colorScheme = scheme;
+			})();
+		</script>
 	</head>
 
 	<body>
