@@ -12,9 +12,9 @@ body:
       options:
         - shared-configs
         - aiinfo
+        - canvas-mcp
         - nutritionfacts
         - roadmap
-        - canvas-mcp
         - site
       default: 0
       validations:

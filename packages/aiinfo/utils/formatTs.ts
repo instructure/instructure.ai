@@ -1,10 +1,12 @@
-import { format } from "oxfmt";
+import { format } from "vite-plus/fmt";
 
 export async function formatTs(code: string, fileName = "index.tsx"): Promise<string> {
 	try {
 		const result = await format(fileName, code, {
-			arrowParens: "avoid",
+			arrowParens: "always",
 			endOfLine: "lf",
+			useTabs: true,
+			tabWidth: 2,
 		});
 		if (result.errors.length) {
 			throw new Error(result.errors.map((error) => error.message).join("\n"));

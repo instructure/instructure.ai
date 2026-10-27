@@ -14,13 +14,13 @@ Current baseline (`f0af496`, including `dc2c5a3`), two tabs on one page, state i
 
 Gaps this plan closes:
 
-| # | Gap | Where |
-| --- | --- | --- |
-| 1 | Rulesync has no callback URIs or OAuth facts, so about 55 clients show placeholder text. | `clients.ts` |
-| 2 | Three kinds of "unknown" callback are flattened into strings: Codex's computed path, Copilot Studio's generated URL, and genuinely unverified. | `clients.ts`, `adminDetails` |
-| 3 | Key type support is hand-set, unverified for most clients, and inconsistent with the Google Doc: Claude.ai and Claude Code are `["public"]` in the current app, but the Doc says a private key also works for both. Some clients support both public and private keys; when both are supported, public is the preferred default and private remains selectable. | `clients.ts` |
-| 4 | Configure covers only Canvas. Most admins use an enterprise LLM subscription and configure the connector in a vendor admin console. | `adminDetails` |
-| 5 | Connect has no personal vs enterprise split. | `userDetails` |
+| #   | Gap                                                                                                                                                                                                                                                                                                                                                             | Where                        |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| 1   | Rulesync has no callback URIs or OAuth facts, so about 55 clients show placeholder text.                                                                                                                                                                                                                                                                        | `clients.ts`                 |
+| 2   | Three kinds of "unknown" callback are flattened into strings: Codex's computed path, Copilot Studio's generated URL, and genuinely unverified.                                                                                                                                                                                                                  | `clients.ts`, `adminDetails` |
+| 3   | Key type support is hand-set, unverified for most clients, and inconsistent with the Google Doc: Claude.ai and Claude Code are `["public"]` in the current app, but the Doc says a private key also works for both. Some clients support both public and private keys; when both are supported, public is the preferred default and private remains selectable. | `clients.ts`                 |
+| 4   | Configure covers only Canvas. Most admins use an enterprise LLM subscription and configure the connector in a vendor admin console.                                                                                                                                                                                                                             | `adminDetails`               |
+| 5   | Connect has no personal vs enterprise split.                                                                                                                                                                                                                                                                                                                    | `userDetails`                |
 
 Two existing items to fix alongside, because they affect the admin page:
 
@@ -29,16 +29,16 @@ Two existing items to fix alongside, because they affect the admin page:
 
 ### Phase 1 audit and carry-forward work (October 17, 2026)
 
-| Area | Observed status | Phase 2 consequence |
-| --- | --- | --- |
-| Shell and state | Implemented: domain validation, seven manual regions, production/beta URL derivation, tabs, public Client ID in shared links, optional localStorage. Client ID is deliberately **not** saved in preferences. | Preserve existing URL and storage behavior while adding `install`. |
-| Routing/build | `src/main.ts` mounts the SPA; `vite.config.mts` produces `dist/canvas-mcp/index.html`. `admin/` is empty; no admin HTML entry is built. | Canonical links use `/canvas-mcp/?page=admin` or `page=connect`. Do not reintroduce multi-page routing from the parent plan. |
-| Client catalog | Seven hand-defined entries including Generic; 59 pinned Rulesync targets, three overlaid by curated entries, leaving 56 other Rulesync entries (63 selectable clients total). | Add ChatGPT and Superhuman Go together as an explicit implementation step. Preserve accepted IDs such as `codexcli`/`claudecode`/`antigravity-ide` when resolving them to curated facts. Never reuse IDE evidence for a CLI/plugin without evidence. |
-| Admin content | Key/settings/scope/save sections exist, including beta instructions and private-secret handling. | Extend shared renderers; replace obsolete assertions deliberately rather than retaining duplicate metadata to keep tests green. |
-| Connect content | Only a client heading; server details exist alongside it. `setupNote` and `verify` are not rendered as a guide. | Treat personal guides, generic fields, troubleshooting and FAQ as new implementation work. |
-| Rulesync generation | Pinned target data exists; no config generation spike results or snippet renderer exist. | Snippets require a recorded compatibility matrix; generic guidance is the fallback. |
-| Print/embed | Print button and basic print CSS exist; scope list is height-limited. No embed detection, copy-embed control, resize messaging or print permalink/date exists. | Finish print for this phase. Full embed support is explicitly deferred, so do not claim it is complete. |
-| Verification | App tests: **4 files / 31 tests passed**. App typecheck and production build passed during this review. | This is a code/build baseline, not confirmation of OAuth behavior, accessibility, or scope completeness. |
+| Area                | Observed status                                                                                                                                                                                              | Phase 2 consequence                                                                                                                                                                                                                                  |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Shell and state     | Implemented: domain validation, seven manual regions, production/beta URL derivation, tabs, public Client ID in shared links, optional localStorage. Client ID is deliberately **not** saved in preferences. | Preserve existing URL and storage behavior while adding `install`.                                                                                                                                                                                   |
+| Routing/build       | `src/main.ts` mounts the SPA; `vite.config.mts` produces `dist/canvas-mcp/index.html`. `admin/` is empty; no admin HTML entry is built.                                                                      | Canonical links use `/canvas-mcp/?page=admin` or `page=connect`. Do not reintroduce multi-page routing from the parent plan.                                                                                                                         |
+| Client catalog      | Seven hand-defined entries including Generic; 59 pinned Rulesync targets, three overlaid by curated entries, leaving 56 other Rulesync entries (63 selectable clients total).                                | Add ChatGPT and Superhuman Go together as an explicit implementation step. Preserve accepted IDs such as `codexcli`/`claudecode`/`antigravity-ide` when resolving them to curated facts. Never reuse IDE evidence for a CLI/plugin without evidence. |
+| Admin content       | Key/settings/scope/save sections exist, including beta instructions and private-secret handling.                                                                                                             | Extend shared renderers; replace obsolete assertions deliberately rather than retaining duplicate metadata to keep tests green.                                                                                                                      |
+| Connect content     | Only a client heading; server details exist alongside it. `setupNote` and `verify` are not rendered as a guide.                                                                                              | Treat personal guides, generic fields, troubleshooting and FAQ as new implementation work.                                                                                                                                                           |
+| Rulesync generation | Pinned target data exists; no config generation spike results or snippet renderer exist.                                                                                                                     | Snippets require a recorded compatibility matrix; generic guidance is the fallback.                                                                                                                                                                  |
+| Print/embed         | Print button and basic print CSS exist; scope list is height-limited. No embed detection, copy-embed control, resize messaging or print permalink/date exists.                                               | Finish print for this phase. Full embed support is explicitly deferred, so do not claim it is complete.                                                                                                                                              |
+| Verification        | App tests: **4 files / 31 tests passed**. App typecheck and production build passed during this review.                                                                                                      | This is a code/build baseline, not confirmation of OAuth behavior, accessibility, or scope completeness.                                                                                                                                             |
 
 This review used repository sources, tests and the historical parent plan. The Google Doc body, Maple source and separate internal instructions were not available in the working tree and were not independently revalidated. Existing external OAuth claims below are research leads or inherited guidance until their source/version is captured. No product code was changed during this planning review.
 
@@ -128,13 +128,13 @@ Components receive a resolved view model and return markup using shared escaping
 
 ```ts
 type GuideStep =
-  | { id: string; kind: "canvas-key"; action: "create" | "update-redirect" }
-  | { id: string; kind: "provider"; content: StructuredContent[] }
-  | { id: string; kind: "verify"; content: StructuredContent[] };
+	| { id: string; kind: "canvas-key"; action: "create" | "update-redirect" }
+	| { id: string; kind: "provider"; content: StructuredContent[] }
+	| { id: string; kind: "verify"; content: StructuredContent[] };
 
 type GuideFlow =
-  | { presentation: "by-surface"; steps: GuideStep[] }
-  | { presentation: "interleaved"; steps: GuideStep[] };
+	| { presentation: "by-surface"; steps: GuideStep[] }
+	| { presentation: "interleaved"; steps: GuideStep[] };
 ```
 
 `StructuredContent` is a small typed collection of paragraphs, lists, safe links and code blocks using the existing approved tokens. It is content, not executable client-supplied rendering logic. The `canvas-key` references invoke shared `admin/key-settings` blocks with the same resolved values as today's admin view; the create action preserves the current Key Settings → Scopes → Save display. The update action renders only the relevant redirect edit instructions. Validate unique step IDs, valid block references and supported tokens. Add block variants only when a real guide requires them.
@@ -152,33 +152,33 @@ Replace the booleans in `ClientDefinition` with typed facts owned by each client
 
 ```ts
 type Evidence = {
-  method: "probe" | "source" | "vendor-doc" | "instructure" | "instructure-internal";
-  url?: string;            // public vendor/source link; omit for non-referenceable sources
-  label: string;           // public display label; no internal document titles
-  sourceRevision?: string; // immutable source commit or document revision
-  version?: string;        // client version or doc revision checked
-  verifiedAt: string;      // ISO date of the actual check, not the date the entry was created
+	method: "probe" | "source" | "vendor-doc" | "instructure" | "instructure-internal";
+	url?: string; // public vendor/source link; omit for non-referenceable sources
+	label: string; // public display label; no internal document titles
+	sourceRevision?: string; // immutable source commit or document revision
+	version?: string; // client version or doc revision checked
+	verifiedAt: string; // ISO date of the actual check, not the date the entry was created
 };
 
 type RedirectUri =
-  | { kind: "fixed"; uris: string[]; evidence: Evidence }
-  | { kind: "computed"; recipe: "codex-callback-id"; base: string; evidence: Evidence }
-  | { kind: "client-generated"; where: string; evidence: Evidence }   // Copilot Studio
-  | { kind: "configurable"; defaultUri: string; note: string; evidence: Evidence } // port or path set by the user
-  | { kind: "unverified"; docsUrl?: string };
+	| { kind: "fixed"; uris: string[]; evidence: Evidence }
+	| { kind: "computed"; recipe: "codex-callback-id"; base: string; evidence: Evidence }
+	| { kind: "client-generated"; where: string; evidence: Evidence } // Copilot Studio
+	| { kind: "configurable"; defaultUri: string; note: string; evidence: Evidence } // port or path set by the user
+	| { kind: "unverified"; docsUrl?: string };
 
 type Fact<T> =
-  | { value: T; status: "verified" | "documented"; evidence: Evidence[] }
-  | { value: "unknown"; status: "unverified"; evidence?: Evidence[] };
+	| { value: T; status: "verified" | "documented"; evidence: Evidence[] }
+	| { value: "unknown"; status: "unverified"; evidence?: Evidence[] };
 
 type ClientFacts = {
-  redirectUri: RedirectUri;
-  remoteHttp: Fact<"yes" | "no">;
-  keyTypes: { public: Fact<"yes" | "no">; private: Fact<"yes" | "no"> };
-  pkce: Fact<"required" | "optional" | "off">;
-  sendsResource: Fact<"yes" | "no">;
-  staticClientId: Fact<"yes" | "no">; // accepts preconfigured credentials
-  registration: Fact<"static" | "dcr-only" | "both">;
+	redirectUri: RedirectUri;
+	remoteHttp: Fact<"yes" | "no">;
+	keyTypes: { public: Fact<"yes" | "no">; private: Fact<"yes" | "no"> };
+	pkce: Fact<"required" | "optional" | "off">;
+	sendsResource: Fact<"yes" | "no">;
+	staticClientId: Fact<"yes" | "no">; // accepts preconfigured credentials
+	registration: Fact<"static" | "dcr-only" | "both">;
 };
 ```
 
@@ -197,13 +197,13 @@ Migration: facts become the single source of truth. Temporary derived adapters m
 
 Triage by effort and certainty:
 
-| Tier | Clients | Method | Result |
-| --- | --- | --- | --- |
-| 1a | Curated, local or personal: Claude Code, Codex, Antigravity | Probe with the stub (localhost), plus the vendor doc link | `status: "verified"`, `evidence.method: "probe"` |
-| 1b | Curated, enterprise-hosted: Claude.ai/Desktop (Team and Enterprise), Copilot Studio, Gemini Enterprise | **Not probed for now.** The enterprise setup instructions and the facts (redirect URIs, key types) are already in the Instructure setup Google Doc (sections 2, 3a, 5, 6). Port them from the Doc; no separate vendor research is needed. Vendor docs are linked as `sources` only. | `status: "documented"`, `evidence.method: "instructure"` |
-| 1c | New curated clients: ChatGPT and Superhuman Go | Facts from supplied instructions or checked vendor documentation; probes are deferred until their connection surfaces and test requirements are established. | `status` per fact: `documented` if stated by the instructions, otherwise `unverified` |
-| 2 | Open-source rulesync targets (for example Codex CLI, OpenCode, Goose, Cline, Roo/Zoo Code, Kilo, Continue, Zed, Qwen Code, Crush) | Read the source: search for redirect URI construction, `code_challenge`, `client_secret` handling | `evidence.method: "source"`, with the file link and version |
-| 3 | Closed-source or unknown | Vendor doc link only; otherwise `unverified` | Page links to the doc and says what is unconfirmed |
+| Tier | Clients                                                                                                                           | Method                                                                                                                                                                                                                                                                              | Result                                                                                |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| 1a   | Curated, local or personal: Claude Code, Codex, Antigravity                                                                       | Probe with the stub (localhost), plus the vendor doc link                                                                                                                                                                                                                           | `status: "verified"`, `evidence.method: "probe"`                                      |
+| 1b   | Curated, enterprise-hosted: Claude.ai/Desktop (Team and Enterprise), Copilot Studio, Gemini Enterprise                            | **Not probed for now.** The enterprise setup instructions and the facts (redirect URIs, key types) are already in the Instructure setup Google Doc (sections 2, 3a, 5, 6). Port them from the Doc; no separate vendor research is needed. Vendor docs are linked as `sources` only. | `status: "documented"`, `evidence.method: "instructure"`                              |
+| 1c   | New curated clients: ChatGPT and Superhuman Go                                                                                    | Facts from supplied instructions or checked vendor documentation; probes are deferred until their connection surfaces and test requirements are established.                                                                                                                        | `status` per fact: `documented` if stated by the instructions, otherwise `unverified` |
+| 2    | Open-source rulesync targets (for example Codex CLI, OpenCode, Goose, Cline, Roo/Zoo Code, Kilo, Continue, Zed, Qwen Code, Crush) | Read the source: search for redirect URI construction, `code_challenge`, `client_secret` handling                                                                                                                                                                                   | `evidence.method: "source"`, with the file link and version                           |
+| 3    | Closed-source or unknown                                                                                                          | Vendor doc link only; otherwise `unverified`                                                                                                                                                                                                                                        | Page links to the doc and says what is unconfirmed                                    |
 
 Source reading works well: the Codex finding in 3.1 took one file. Start with the clients that use the same MCP SDKs (TypeScript SDK and `rmcp`), since the redirect URI is usually a client-side setting there, then handle the rest.
 
@@ -222,13 +222,13 @@ Source reading works well: the Codex finding in 3.1 took one file. Start with th
 
 Replace the single "Redirect URIs" row logic in `adminDetails` with a renderer per `RedirectUri.kind`:
 
-| Kind | Configure tab shows | Connect tab shows |
-| --- | --- | --- |
-| `fixed` | Copyable block, as now. | Not needed. |
-| `computed` (Codex) | The URI computed from domain, region and the MCP URL, with a note: "Derived from your MCP Server URL. If the URL changes, update the key." Disabled until domain and region are set. | A line confirming the same URI. |
+| Kind                                | Configure tab shows                                                                                                                                                                                                                                                                      | Connect tab shows                                                                                                                                  |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fixed`                             | Copyable block, as now.                                                                                                                                                                                                                                                                  | Not needed.                                                                                                                                        |
+| `computed` (Codex)                  | The URI computed from domain, region and the MCP URL, with a note: "Derived from your MCP Server URL. If the URL changes, update the key." Disabled until domain and region are set.                                                                                                     | A line confirming the same URI.                                                                                                                    |
 | `client-generated` (Copilot Studio) | "Leave Redirect URIs blank when creating the key. Add the generated URI after saving the connector." Link back to the key's edit page on production Canvas (`https://<production-canvas-domain>/accounts/self/developer_keys`, including for beta setup). Does not block the Save steps. | Configure and save the connector using the private key, copy its generated redirect URI, add it to the Canvas key, then complete OAuth and verify. |
-| `configurable` | Default URI plus the note (for example a port the user can change). | The matching config line. |
-| `unverified` | "Not yet verified for this client." Link to `docsUrl` if known, and the "Report a client" link. Keep the existing key-type warning. | Same notice. |
+| `configurable`                      | Default URI plus the note (for example a port the user can change).                                                                                                                                                                                                                      | The matching config line.                                                                                                                          |
+| `unverified`                        | "Not yet verified for this client." Link to `docsUrl` if known, and the "Report a client" link. Keep the existing key-type warning.                                                                                                                                                      | Same notice.                                                                                                                                       |
 
 Add a `sha256-base64url` helper only after pinning the upstream algorithm, with a unit test using the pair from the real Codex run (3.1). Include production/beta, region changes, URL serialization, fragment removal and trailing-slash/query distinctions. Model shared versus per-server callback mode explicitly; when Canvas mode is unconfirmed, show guidance and no copyable computed URI. Do not fetch metadata from the browser.
 
@@ -246,18 +246,19 @@ Add a `sha256-base64url` helper only after pinning the upstream algorithm, with 
   - Enterprise-specific key notes appear in the Key Settings (for example Copilot Studio and Gemini Enterprise: Private key required; Claude Team and Enterprise: public or private, only the Owner enters the secret).
 - Per curated client, with the source for each:
 
-| Client | Enterprise surface (from the Google Doc unless noted) |
-| --- | --- |
-| Claude.ai / Desktop | **From the Doc (section 3a).** Team and Enterprise: an organization Owner adds a custom connector under Organization settings > Connectors; members then connect from their own settings. |
-| Copilot Studio | **From the Doc (section 5).** Enterprise by nature: agent Tools > Add a tool > New tool > Model Context Protocol; OAuth 2.0 manual discovery; redirect URL generated on save; the Accept header policy workaround (Doc marks it temporary, so keep it behind a "verify this is still needed" note). |
-| Gemini Enterprise | **From the Doc (section 6).** Enterprise by nature: Google Cloud console > Gemini Enterprise > Data stores > Custom MCP Server; needs Discovery Engine Editor; enable tools under Actions; Doc says leave PKCE unchecked. |
-| Codex | **Not in the Doc** (section 4 covers the CLI and IDE extension only). Instructions exist separately and are **not referenceable** (see below). |
-| Claude Code | **Not in the Doc** (section 3b covers the CLI only). Instructions exist separately, not referenceable. |
-| Antigravity | **Not in the Doc.** Instructions exist separately, not referenceable. |
-| ChatGPT | New curated client, see 4.G. Personal and enterprise instructions to be supplied. |
-| Superhuman Go | New curated client added alongside ChatGPT, see 4.G. Supported install modes and any enterprise surface require source-backed confirmation. |
+| Client              | Enterprise surface (from the Google Doc unless noted)                                                                                                                                                                                                                                               |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Claude.ai / Desktop | **From the Doc (section 3a).** Team and Enterprise: an organization Owner adds a custom connector under Organization settings > Connectors; members then connect from their own settings.                                                                                                           |
+| Copilot Studio      | **From the Doc (section 5).** Enterprise by nature: agent Tools > Add a tool > New tool > Model Context Protocol; OAuth 2.0 manual discovery; redirect URL generated on save; the Accept header policy workaround (Doc marks it temporary, so keep it behind a "verify this is still needed" note). |
+| Gemini Enterprise   | **From the Doc (section 6).** Enterprise by nature: Google Cloud console > Gemini Enterprise > Data stores > Custom MCP Server; needs Discovery Engine Editor; enable tools under Actions; Doc says leave PKCE unchecked.                                                                           |
+| Codex               | **Not in the Doc** (section 4 covers the CLI and IDE extension only). Instructions exist separately and are **not referenceable** (see below).                                                                                                                                                      |
+| Claude Code         | **Not in the Doc** (section 3b covers the CLI only). Instructions exist separately, not referenceable.                                                                                                                                                                                              |
+| Antigravity         | **Not in the Doc.** Instructions exist separately, not referenceable.                                                                                                                                                                                                                               |
+| ChatGPT             | New curated client, see 4.G. Personal and enterprise instructions to be supplied.                                                                                                                                                                                                                   |
+| Superhuman Go       | New curated client added alongside ChatGPT, see 4.G. Supported install modes and any enterprise surface require source-backed confirmation.                                                                                                                                                         |
 
 **Non-referenceable sources.** The enterprise instructions for Codex, Claude Code, Antigravity and ChatGPT exist but cannot be cited or linked. Rules for them:
+
 - The maintainer supplies the text (pasted into the session or a file outside the repo); we port it as our own content, in the same `Guide` shape as the Doc-sourced ones.
 - Evidence is `method: "instructure-internal"` with no `url`. The page shows "Instructure setup guidance" and a date, never a link or a document title.
 - Nothing from those sources that reads like an internal reference is copied: no internal URLs, ticket IDs, names or Slack links. Product or Legal confirms the content is cleared for a public page before release.
@@ -288,7 +289,6 @@ ChatGPT is not a rulesync target, so it is a hand-defined curated client, like C
 - Add source-backed guides in the same guide workstream as ChatGPT. Until evidence is available, include the client with explicit unverified facts and pending guidance. Unknown key types may remain selectable with the existing warning; once both are confirmed supported, prefer public by default and preserve explicit valid private selections.
 - Tests: selector includes Superhuman Go, `?client=superhuman-go` round trips, facts disclose unknowns, and mode normalization/guide visibility follow its evidenced support.
 
-
 ### E. Connect a Client tab (personal vs enterprise)
 
 - Where both install modes are supported, show a Personal/Enterprise segmented control using the existing Pantoken `instui-button-set -toggle` pattern with accessible pressed states and keyboard behavior. Hide it for a single supported mode. Canvas/Provider navigation is a separate guide-presentation choice described above; an interleaved client such as Copilot Studio uses a continuous guide.
@@ -297,29 +297,29 @@ ChatGPT is not a rulesync target, so it is a hand-defined curated client, like C
 
 ```ts
 type Guide = {
-  prerequisites: string[];
-  flow: GuideFlow; // shared Canvas blocks + structured provider/verify steps; approved tokens
-  verify: string;
-  troubleshooting: { symptom: string; cause: string; fix: string }[];
-  sources: Evidence[];     // public links or approved internal guidance with label/date and no URL
-  lastVerified: string;
+	prerequisites: string[];
+	flow: GuideFlow; // shared Canvas blocks + structured provider/verify steps; approved tokens
+	verify: string;
+	troubleshooting: { symptom: string; cause: string; fix: string }[];
+	sources: Evidence[]; // public links or approved internal guidance with label/date and no URL
+	lastVerified: string;
 };
 type ClientGuides = { personal?: Guide; enterprise?: Guide };
 ```
 
 - Content comes from the Google Doc (the Sept 11, 2026 version), ported once after its body is available and checked, per client. Its date alone does not count as a fresh verification date. Mapping:
 
-| Doc section | Guide |
-| --- | --- |
-| 3a Claude.ai and Claude Desktop | Claude.ai: personal (Pro and Max steps) and enterprise (Team and Enterprise steps) |
-| 3b Claude Code | Claude Code: personal (the `claude mcp add-json` flow, with `/mcp` verify) |
-| 4 OpenAI Codex | Codex: personal (`config.toml` settings, `codex mcp add`, `codex mcp login`) |
-| 5 Copilot Studio | Copilot Studio: enterprise only |
-| 6 Gemini Enterprise | Gemini Enterprise: enterprise only |
-| 7 Other MCP clients | Generic: field table |
-| (supplied separately) | Codex, Claude Code, Antigravity and ChatGPT enterprise and ChatGPT personal guides |
+| Doc section                                             | Guide                                                                               |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| 3a Claude.ai and Claude Desktop                         | Claude.ai: personal (Pro and Max steps) and enterprise (Team and Enterprise steps)  |
+| 3b Claude Code                                          | Claude Code: personal (the `claude mcp add-json` flow, with `/mcp` verify)          |
+| 4 OpenAI Codex                                          | Codex: personal (`config.toml` settings, `codex mcp add`, `codex mcp login`)        |
+| 5 Copilot Studio                                        | Copilot Studio: enterprise only                                                     |
+| 6 Gemini Enterprise                                     | Gemini Enterprise: enterprise only                                                  |
+| 7 Other MCP clients                                     | Generic: field table                                                                |
+| (supplied separately)                                   | Codex, Claude Code, Antigravity and ChatGPT enterprise and ChatGPT personal guides  |
 | (supplied instructions or checked vendor documentation) | Superhuman Go guides for its confirmed install modes, implemented alongside ChatGPT |
-| 9 and 10 | Shared troubleshooting and FAQ, linked from every guide |
+| 9 and 10                                                | Shared troubleshooting and FAQ, linked from every guide                             |
 
 - Rulesync-sourced clients: no bespoke guides in this phase. They show the Generic field table and their OAuth facts (verified or not). To include snippets, first run the missing parent-plan Phase 0 spike for representative pinned targets and record which HTTP/OAuth fields survive generation. If this is not done, omit snippets and keep field-table guidance; do not install Rulesync as an app runtime dependency.
 - Render guide prose as escaped text with explicit structured paragraphs/links/code, not interpolated raw HTML or an implicit Markdown engine. Validate known tokens, required derived values and `https:` evidence URLs. Never expose `{clientSecret}` as a value/parameter/input; instructions direct users to the vendor's secret field. Unresolved computed/client-generated callbacks use explanatory steps, never copyable placeholder strings.
@@ -351,13 +351,13 @@ Implementation of steps 1–6 on `canvas-mcp` was approved on October 17, 2026. 
 
 ### External inputs and acceptance criteria
 
-| Input | Needed for | Safe progress while pending |
-| --- | --- | --- |
-| Sept 11 setup guide body and allowed public citation | Documented facts, Claude key correction, core curated guides | Typed model, unverified facts and Generic rendering |
-| Publishable separate instructions for Codex/Claude Code/Antigravity/ChatGPT, plus supplied instructions or checked vendor documentation for Superhuman Go | Those guide modes and any new OAuth facts | Pending guide notice; no invented enterprise steps |
-| Pinned Codex source plus real callback/mode check | Copyable computed Codex callback | Redirect renderer with computed output disabled |
-| Reviewed Maple manifest with commit/date | Production-ready scope block and release | Mark current list unreviewed, exclude `mcp-limited`, enforce release gate |
-| Available local clients/test tenants | Probe and end-to-end claims | Harness fixtures and source/documented evidence without claiming a real run |
+| Input                                                                                                                                                     | Needed for                                                   | Safe progress while pending                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| Sept 11 setup guide body and allowed public citation                                                                                                      | Documented facts, Claude key correction, core curated guides | Typed model, unverified facts and Generic rendering                         |
+| Publishable separate instructions for Codex/Claude Code/Antigravity/ChatGPT, plus supplied instructions or checked vendor documentation for Superhuman Go | Those guide modes and any new OAuth facts                    | Pending guide notice; no invented enterprise steps                          |
+| Pinned Codex source plus real callback/mode check                                                                                                         | Copyable computed Codex callback                             | Redirect renderer with computed output disabled                             |
+| Reviewed Maple manifest with commit/date                                                                                                                  | Production-ready scope block and release                     | Mark current list unreviewed, exclude `mcp-limited`, enforce release gate   |
+| Available local clients/test tenants                                                                                                                      | Probe and end-to-end claims                                  | Harness fixtures and source/documented evidence without claiming a real run |
 
 ## 6. Data handling and review
 
@@ -400,16 +400,16 @@ The harness uses synthetic inputs and records normalized OAuth observations. Raw
 
 Core implementation was completed in incremental conventional commits beginning at `c0e7de4`, on top of `253a298`. Product release remains subject to the checks below.
 
-| Workstream | Implemented | Remaining |
-| --- | --- | --- |
-| Components | Shared `page`, `admin/config`, `admin/server-details`, `admin/key-settings`, pure key-settings resolver and UI helpers; curated client modules with shared contracts. | Further decomposition only when a concrete maintenance need appears. |
-| Facts/state | Per-fact evidence and unknown values, explicit aliases, public preferred when both types work, explicit private selections preserved, enterprise normalization, validated `install`/`surface`, shared readiness, blocked-client notices. | More source/probe evidence for unverified clients. |
-| Guides | Source-backed Claude personal/Code, Codex, Copilot, Gemini Enterprise, Antigravity CLI and Generic content. Shared Canvas/Provider sections and one continuous Copilot flow. Corrected October instructions incorporated; Bash/Zsh and PowerShell commands provided for Claude Code. | Claude organization instructions are explicitly unavailable in the updated source, so that mode is pending. Superhuman Go is included with unknown facts/pending guidance, as the maintainer has no guide. Antigravity IDE remains separate from CLI. Gemini CLI guidance stays provisional because its key-type and secret details conflict. |
-| ChatGPT | Included in the selector and query state. Updated guidance's Canvas MCP authentication bug is shown as an explicit connection blocker, without inventing a DCR limitation. | Upstream bug fix and confirmed setup instructions. |
-| Redirects | Typed fixed/computed/generated/configurable/unknown rendering, confirmed blank-URI Copilot bootstrap, pinned Codex derivation helper, asynchronous cache and stale-result/error handling. | A real Canvas/Codex mode check and known-good callback URI are still needed before changing Codex's mode from unknown; computed copying remains disabled. Independent test vectors are not represented as real runs. |
-| Scope manifest | Regenerated 121 lines using the supplied clean Maple checkout at `6368cd5b58b7a3f9d4c004c46f8779712cdb0d14`. Generator and provenance committed; `mcp-limited` excluded. | Product/Security release review; copying remains disabled while unreviewed. |
-| Probe/evidence | Loopback-only synthetic public/private/DCR server; discovery, PKCE, single-use expiring codes, refresh and MCP initialization; sanitized observations, fixture instructions, evidence-age report and correction issue template. Pure request tests and a real local HTTP discovery smoke check passed. | No vendor-client probe runs or beta-tenant end-to-end runs are recorded. Tier 2 clients retain explicit unverified fallbacks until research batches occur. Optional Rulesync snippets remain omitted pending the configuration spike. |
-| Hardening | Keyboard tab navigation, focus restoration, live Client ID/configuration updates, safe guide interpolation/links, copy controls, print surface expansion and pagination fixes, app tests required before Pages deployment. | Real screen-reader and Letter/A4 print checks; full embed support remains deferred. |
+| Workstream     | Implemented                                                                                                                                                                                                                                                                                            | Remaining                                                                                                                                                                                                                                                                                                                                     |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Components     | Shared `page`, `admin/config`, `admin/server-details`, `admin/key-settings`, pure key-settings resolver and UI helpers; curated client modules with shared contracts.                                                                                                                                  | Further decomposition only when a concrete maintenance need appears.                                                                                                                                                                                                                                                                          |
+| Facts/state    | Per-fact evidence and unknown values, explicit aliases, public preferred when both types work, explicit private selections preserved, enterprise normalization, validated `install`/`surface`, shared readiness, blocked-client notices.                                                               | More source/probe evidence for unverified clients.                                                                                                                                                                                                                                                                                            |
+| Guides         | Source-backed Claude personal/Code, Codex, Copilot, Gemini Enterprise, Antigravity CLI and Generic content. Shared Canvas/Provider sections and one continuous Copilot flow. Corrected October instructions incorporated; Bash/Zsh and PowerShell commands provided for Claude Code.                   | Claude organization instructions are explicitly unavailable in the updated source, so that mode is pending. Superhuman Go is included with unknown facts/pending guidance, as the maintainer has no guide. Antigravity IDE remains separate from CLI. Gemini CLI guidance stays provisional because its key-type and secret details conflict. |
+| ChatGPT        | Included in the selector and query state. Updated guidance's Canvas MCP authentication bug is shown as an explicit connection blocker, without inventing a DCR limitation.                                                                                                                             | Upstream bug fix and confirmed setup instructions.                                                                                                                                                                                                                                                                                            |
+| Redirects      | Typed fixed/computed/generated/configurable/unknown rendering, confirmed blank-URI Copilot bootstrap, pinned Codex derivation helper, asynchronous cache and stale-result/error handling.                                                                                                              | A real Canvas/Codex mode check and known-good callback URI are still needed before changing Codex's mode from unknown; computed copying remains disabled. Independent test vectors are not represented as real runs.                                                                                                                          |
+| Scope manifest | Regenerated 121 lines using the supplied clean Maple checkout at `6368cd5b58b7a3f9d4c004c46f8779712cdb0d14`. Generator and provenance committed; `mcp-limited` excluded.                                                                                                                               | Product/Security release review; copying remains disabled while unreviewed.                                                                                                                                                                                                                                                                   |
+| Probe/evidence | Loopback-only synthetic public/private/DCR server; discovery, PKCE, single-use expiring codes, refresh and MCP initialization; sanitized observations, fixture instructions, evidence-age report and correction issue template. Pure request tests and a real local HTTP discovery smoke check passed. | No vendor-client probe runs or beta-tenant end-to-end runs are recorded. Tier 2 clients retain explicit unverified fallbacks until research batches occur. Optional Rulesync snippets remain omitted pending the configuration spike.                                                                                                         |
+| Hardening      | Keyboard tab navigation, focus restoration, live Client ID/configuration updates, safe guide interpolation/links, copy controls, print surface expansion and pagination fixes, app tests required before Pages deployment.                                                                             | Real screen-reader and Letter/A4 print checks; full embed support remains deferred.                                                                                                                                                                                                                                                           |
 
 Evidence inputs were the supplied setup DOCX, corrected October Markdown guides, local Maple source and the pinned upstream Codex callback file. Private source files/paths and internal links were not added to the public app. The newer Microsoft authorization-URL typo was corrected against Maple and the original setup guide; source editor UI debris was omitted.
 

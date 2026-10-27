@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import postcss from "postcss";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 
 const stylesheet = postcss.parse(
 	await readFile(new URL("../src/main.css", import.meta.url), "utf8"),
@@ -15,14 +15,15 @@ function declarations(selector: string): Map<string, string> {
 			.replace(/\s*>\s*/gu, ">")
 			.replace(/\s+/gu, " ")
 			.trim();
-	const rule = printStyles?.nodes?.find(
+	const rule = (printStyles?.type === "atrule" ? printStyles.nodes : [])?.find(
 		(node) =>
 			node.type === "rule" &&
 			node.selector.split(",").some((part) => normalize(part) === normalize(selector)),
 	);
 	return new Map(
-		rule?.nodes?.filter((node) => node.type === "decl").map((node) => [node.prop, node.value]) ??
-			[],
+		(rule?.type === "rule" ? rule.nodes : [])
+			?.filter((node) => node.type === "decl")
+			.map((node) => [node.prop, node.value]) ?? [],
 	);
 }
 

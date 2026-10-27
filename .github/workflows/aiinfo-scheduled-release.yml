@@ -31,7 +31,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
-          node-version: "24"
+          node-version: "26"
           check-latest: true
           cache: "pnpm"
 
@@ -58,8 +58,8 @@ jobs:
         run: |
           set -euo pipefail
           pnpm -F aiinfo cache:update
-          pnpm test package aiinfo
-          pnpm build package aiinfo
+          pnpm exec vp run @instructure.ai/aiinfo#test
+          pnpm exec vp run @instructure.ai/aiinfo#build
 
       - name: Commit only ./node, ./cache, ./src, Changelog.md (if any)
         id: maybe_commit
@@ -81,7 +81,7 @@ jobs:
         run: |
           set -euo pipefail
           # As requested:
-          pnpm release package aiinfo
+          pnpm exec vp run @instructure.ai/aiinfo#release
 
       - name: Push branch
         if: steps.maybe_commit.outputs.no_changes == 'false'

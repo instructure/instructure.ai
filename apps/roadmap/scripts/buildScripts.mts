@@ -13,43 +13,35 @@ const outJsFromTsdown = path.join(outRoot, `${bundleBaseName}.iife.js`);
 const EXIT_SUCCESS = 0;
 
 const run = (cmd: string, args: string[]): Promise<void> =>
-  new Promise((resolve, reject) => {
-    const child = spawn(cmd, args, { shell: process.platform === "win32", stdio: "inherit" });
-    child.on("error", reject);
-    child.on("exit", (code) => {
-      if (code === EXIT_SUCCESS) {
-        resolve();
-      } else {
-        reject(new Error(`${cmd} exited with code ${code}`));
-      }
-    });
-  });
+	new Promise((resolve, reject) => {
+		const child = spawn(cmd, args, { shell: process.platform === "win32", stdio: "inherit" });
+		child.on("error", reject);
+		child.on("exit", (code) => {
+			if (code === EXIT_SUCCESS) {
+				resolve();
+			} else {
+				reject(new Error(`${cmd} exited with code ${code}`));
+			}
+		});
+	});
 
 const renameIfExists = async (from: string, to: string) => {
-  try {
-    await fs.mkdir(path.dirname(to), { recursive: true });
-    await fs.rename(from, to);
-  } catch (error: any) {
-    if (error?.code === "ENOENT") {
-      return;
-    }
-    throw error;
-  }
+	await fs.mkdir(path.dirname(to), { recursive: true });
+	await fs.rename(from, to);
 };
 
 const main = async () => {
-  // Run tsdown (uses tsdown.config.mts automatically)
-  await run("tsdown", []);
+	await run("vp", ["pack"]);
 
-  // Rename output to the stable filename your consumer expects
-  await renameIfExists(outJsFromTsdown, outJsFinal);
+	// Rename output to the stable filename your consumer expects
+	await renameIfExists(outJsFromTsdown, outJsFinal);
 
-  // eslint-disable-next-line no-console
-  console.log(`✅ Built ${path.relative(projectRoot, outJsFinal)}`);
+	// eslint-disable-next-line no-console
+	console.log(`✅ Built ${path.relative(projectRoot, outJsFinal)}`);
 };
 
 main().catch((error) => {
-  // eslint-disable-next-line no-console
-  console.error(error);
-  process.exitCode = 1;
+	// eslint-disable-next-line no-console
+	console.error(error);
+	process.exitCode = 1;
 });

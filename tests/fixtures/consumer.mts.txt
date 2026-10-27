@@ -1,0 +1,11 @@
+import AiInfo, {
+	nutritionFacts,
+	dataPermissionLevels,
+	aiInformation,
+} from "@instructure.ai/aiinfo";
+
+const uid: keyof typeof AiInfo = "smartsearch";
+const name: string = nutritionFacts[uid].featureName;
+const permission: string = dataPermissionLevels[uid].currentFeature;
+const data: typeof AiInfo.smartsearch.aiInformation = aiInformation[uid];
+console.log(name, permission, data);

@@ -6,6 +6,6 @@
 type BrowserVersionString = `${string} ${string}`;
 
 declare module "@instructure/browserslist-config-instui" {
-  const config: BrowserVersionString[];
-  export default config;
+	const config: BrowserVersionString[];
+	export default config;
 }

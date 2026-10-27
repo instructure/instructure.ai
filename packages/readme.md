@@ -1,8 +1,11 @@
 # @instructure.ai packages
 
 > [!WARNING]
-> Don't manually add a package here.  Use the monorepo utils to create a new workspace entry and track it.
+> Use the registered Vite+ ESM starter to create a new workspace entry.
 
 ```shell
-pnpm new <packageName> --template=esm
+pnpm exec vp create esm -- <packageName>
+pnpm install
 ```
+
+New libraries target Node 26. aiinfo independently supports consumers on Node >=20.0.0.

@@ -4,7 +4,7 @@ import { join, resolve } from "node:path";
 import { parseSync, types as t } from "@babel/core";
 
 const mapleRoot = resolve(process.argv[2] ?? "");
-if (!process.argv[2]) throw new Error("Usage: vite-node scripts/updateTools.mts /path/to/maple");
+if (!process.argv[2]) throw new Error("Usage: vpx scripts/updateTools.mts /path/to/maple");
 const dirty = execFileSync(
 	"git",
 	["status", "--porcelain", "--untracked-files=all", "--", "src/tools", "tool-catalogs"],

@@ -1,16 +1,46 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf8" />
-    <link rel="icon" type="image/svg+xml" href="/IgniteAI.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="application-version" content="%VITE_PACKAGE_VERSION%" />
-    <meta name="application-name" content="%VITE_PACKAGE_NAME%" />
-    <title>IgniteAI Nutrition Facts</title>
-  </head>
+	<head>
+		<meta charset="utf8" />
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="/IgniteAI.svg"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<meta
+			name="application-version"
+			content="%VITE_PACKAGE_VERSION%"
+		/>
+		<meta
+			name="application-name"
+			content="%VITE_PACKAGE_NAME%"
+		/>
+		<title>IgniteAI Nutrition Facts</title>
+		<script>
+			// Applies the resolved color scheme before first paint; kept in sync with src/components/colorScheme.
+			(() => {
+				let scheme = "light";
+				try {
+					if (window.self === window.top) {
+						const stored = localStorage.getItem("nutritionfacts:color-scheme");
+						const system = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+						scheme = stored === "light" || stored === "dark" ? stored : system;
+					}
+				} catch {}
+				document.documentElement.dataset.colorScheme = scheme;
+			})();
+		</script>
+	</head>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+	<body>
+		<div id="root"></div>
+		<script
+			type="module"
+			src="/src/main.tsx"
+		></script>
+	</body>
 </html>

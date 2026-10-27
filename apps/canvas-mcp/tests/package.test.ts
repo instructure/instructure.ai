@@ -1,6 +1,6 @@
 // @vitest-environment node
 
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { readFile } from "node:fs/promises";
 import { name } from "../package.json" with { type: "json" };
 import { name as workspaceName } from "../../../package.json" with { type: "json" };
@@ -32,9 +32,13 @@ describe("Canvas MCP URL unfurling metadata", () => {
 		expect(html).toContain('property="og:title"');
 		expect(html).toContain('property="og:description"');
 		expect(html).toContain('property="og:url"');
-		expect(html).toContain('property="og:image"\n\t\t\tcontent="https://instructure.ai/canvas-mcp/og.png"');
+		expect(html).toContain(
+			'property="og:image"\n\t\t\tcontent="https://instructure.ai/canvas-mcp/og.png"',
+		);
 		expect(html).toContain('name="twitter:card"\n\t\t\tcontent="summary_large_image"');
-		expect(html).toContain('name="twitter:image"\n\t\t\tcontent="https://instructure.ai/canvas-mcp/og.png"');
+		expect(html).toContain(
+			'name="twitter:image"\n\t\t\tcontent="https://instructure.ai/canvas-mcp/og.png"',
+		);
 
 		const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/u)?.[1];
 		expect(jsonLd).toBeDefined();
@@ -52,8 +56,12 @@ describe("Canvas MCP URL unfurling metadata", () => {
 			readFile(new URL("../public/og.png", import.meta.url)),
 			readFile(new URL("../public/og.svg", import.meta.url), "utf8"),
 		]);
-		const logo = getLogoSvg("canvas", "horizontal", "reversed")?.replace(/^<svg\b[^>]*>/u, "").replace(/<\/svg>\s*$/u, "");
-		const embeddedLogo = svg.match(/<g transform="translate\(300 [\d.]+\) scale\([\d.]+\)">([\s\S]*?)<\/g>\n\t<rect y="540"/u)?.[1];
+		const logo = getLogoSvg("canvas", "horizontal", "reversed")
+			?.replace(/^<svg\b[^>]*>/u, "")
+			.replace(/<\/svg>\s*$/u, "");
+		const embeddedLogo = svg.match(
+			/<g transform="translate\(300 [\d.]+\) scale\([\d.]+\)">([\s\S]*?)<\/g>\n\t<rect y="540"/u,
+		)?.[1];
 
 		expect(image.subarray(0, 8)).toEqual(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
 		expect(image.readUInt32BE(16)).toBe(1200);

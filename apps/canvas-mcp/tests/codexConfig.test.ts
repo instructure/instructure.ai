@@ -5,7 +5,7 @@ import { once } from "node:events";
 import { mkdtempSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { codex } from "../src/clients/curated/codex";
 import { clientSetup } from "../src/guides/shared";
 import { codexCallbackOptions } from "../src/clients/curated/codex-commands";
@@ -18,12 +18,13 @@ describe.each(["personal", "enterprise"] as const)("Codex %s scoped configuratio
 		"offers simple registration and scoped login for %s keys",
 		(key) => {
 			const steps = clientSetup(codex, install).steps.filter(
-				(step) => !step.key || step.key === key,
+				(step) => !("key" in step) || !step.key || step.key === key,
 			);
 			const registration = steps.find(
 				(step) =>
 					step.id === (key === "public" ? "provider-register" : "provider-register-private"),
 			)!;
+			if (!("content" in registration)) throw new Error("Expected registration content");
 			const config = registration.content.find(
 				(block) => block.kind === "code" && block.language === "toml",
 			);
@@ -47,6 +48,7 @@ describe.each(["personal", "enterprise"] as const)("Codex %s scoped configuratio
 				if (key === "public") expect(variant.text.split("\n")).toHaveLength(1);
 			}
 			const login = steps.find((step) => step.id === "provider-login")!;
+			if (!("content" in login)) throw new Error("Expected login content");
 			const guidance = login.content
 				.filter((block) => block.kind === "paragraph")
 				.map((block) => block.text)

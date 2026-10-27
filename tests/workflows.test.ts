@@ -1,5 +1,5 @@
 import { readFileSync, readdirSync } from "node:fs";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { parseDocument } from "yaml";
 
 interface Step {
@@ -41,7 +41,9 @@ describe("GitHub workflows", () => {
 
 			if (action === "actions/setup-node") {
 				const nodeVersion = step.with?.["node-version"];
-				expect(nodeVersion).toBe(root.engines.node.match(/^>=(\d+)\./)?.[1]);
+				expect([root.engines.node.match(/^>=(\d+)\./)?.[1], "${{ matrix.node }}"]).toContain(
+					nodeVersion,
+				);
 				expect(step.with?.["check-latest"]).toBe(true);
 			}
 

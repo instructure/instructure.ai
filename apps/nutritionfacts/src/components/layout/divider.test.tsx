@@ -1,7 +1,7 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vite-plus/test";
 
 // Set up the mock before importing Divider
-vi.mock("@instructure/ui", () => {
+vi.mock("@instructure/ui/latest", () => {
 	const ViewMock = vi.fn(({ children, ...props }) => {
 		const { borderColor, borderWidth, ...rest } = props;
 		return (
@@ -24,7 +24,8 @@ describe("divider", () => {
 
 	beforeEach(async () => {
 		// Dynamically import the mock after vi.mock is set up
-		const mocked = await vi.importMock<typeof import("@instructure/ui")>("@instructure/ui");
+		const mocked =
+			await vi.importMock<typeof import("@instructure/ui/latest")>("@instructure/ui/latest");
 		ViewMock = mocked.View as unknown as ReturnType<typeof vi.fn>;
 		ViewMock.mockClear();
 	});

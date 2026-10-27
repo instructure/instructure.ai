@@ -1,14 +1,14 @@
 coverage:
   totals:
-    statements: 7.9%
-    branches: 2.99%
-    functions: 8.33%
-    lines: 8.18%
-    total: 6.85%
+    statements: 6.06%
+    branches: 2.11%
+    functions: 10%
+    lines: 7.14%
+    total: 6.33%
   src:
     totals:
       statements: 30.63%
-      branches: 35.83%
+      branches: 34.58%
       functions: 40%
       lines: 30.63%
     "app.tsx":
@@ -16,7 +16,7 @@ coverage:
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "11-57"
+      uncovered_line_numbers: "11-163"
     assets:
       "colors.ts":
         statements: 0%
@@ -40,7 +40,7 @@ coverage:
         branches: 0%
         functions: 0%
         lines: 0%
-        uncovered_line_numbers: "21-230"
+        uncovered_line_numbers: "21-285"
     components:
       export:
         "controlButton.tsx":
@@ -54,17 +54,17 @@ coverage:
           branches: 0%
           functions: 0%
           lines: 0%
-          uncovered_line_numbers: "8-67"
+          uncovered_line_numbers: "8-68"
         "link.tsx":
           statements: 0%
           branches: 0%
           functions: 0%
           lines: 0%
-          uncovered_line_numbers: "7-40"
+          uncovered_line_numbers: "7-42"
       layout:
         "divider.tsx":
           statements: 100%
-          branches: 100%
+          branches: 50%
           functions: 100%
           lines: 100%
         "extendedNutritionFacts.tsx":
@@ -84,13 +84,13 @@ coverage:
           branches: 0%
           functions: 0%
           lines: 0%
-          uncovered_line_numbers: "21-86"
+          uncovered_line_numbers: "21-202"
         "presets.tsx":
           statements: 0%
           branches: 0%
           functions: 0%
           lines: 0%
-          uncovered_line_numbers: "13-94"
+          uncovered_line_numbers: "8-100"
     "main.tsx":
       statements: 87.5%
       branches: 83.33%

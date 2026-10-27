@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { execSync } from "node:child_process";
 import { type WriteEntries as WriteEntriesType } from "./writeEntries.mts";
 
@@ -31,7 +31,7 @@ describe("writeEntries.mts", () => {
 		const { WriteEntries } = await vi.importActual("./writeEntries.mts");
 		const typedWriteEntries = WriteEntries as typeof WriteEntriesType;
 		await typedWriteEntries();
-		expect(execSync).toHaveBeenCalledWith("pnpm oxfmt ./node", { stdio: "ignore" });
+		expect(execSync).toHaveBeenCalledWith("pnpm exec vp fmt ./node", { stdio: "inherit" });
 		expect(mockWriteEntry).toHaveBeenCalledTimes(2);
 		expect(mockWriteBarrel).toHaveBeenCalledTimes(1);
 		expect(mockLog).toHaveBeenCalledWith({

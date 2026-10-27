@@ -1,7 +1,7 @@
 // @vitest-environment node
 
 import { spawnSync } from "node:child_process";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import faqs from "../src/help/faqs.json";
 
 const commands = faqs.flatMap((group) => group.entries).find((entry) => entry.commands)!.commands!;

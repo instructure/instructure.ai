@@ -1,6 +1,6 @@
 ---
 name: update-nutrition-facts
-description: 'Update the nutritionfacts site to a published aiinfo version, create or reuse its release branch and PR, merge after validation, and verify GitHub Pages deployment. Use when asked to update or publish nutritionfacts, sync its aiinfo dependency, or complete the update-aiinfo release handoff.'
+description: "Update the nutritionfacts site to a published aiinfo version, create or reuse its release branch and PR, merge after validation, and verify GitHub Pages deployment. Use when asked to update or publish nutritionfacts, sync its aiinfo dependency, or complete the update-aiinfo release handoff."
 ---
 
 # Update Nutrition Facts
@@ -51,7 +51,7 @@ This app is private: publishing means deploying GitHub Pages, not npm publishing
    A remaining `link:../../packages/aiinfo` resolution is normal for this monorepo;
    confirm the linked package version matches the intended release. Do not claim
    registry-tarball validation when testing the workspace link.
-4. Run `pnpm test app nutritionfacts` and `pnpm build app nutritionfacts`.
+4. Run `pnpm exec vp run @instructure.ai/nutritionfacts#test` and `pnpm exec vp run @instructure.ai/nutritionfacts#build`.
    Run `pnpm -F nutritionfacts typecheck` and distinguish newly introduced
    failures from pre-existing test typing errors. Report existing issues rather
    than fixing unrelated code or describing typecheck as passing.
@@ -63,7 +63,7 @@ This app is private: publishing means deploying GitHub Pages, not npm publishing
 1. If the automated branch already bumped the app version, keep that bump; do
    not increment it twice. Otherwise commit the dependency/lockfile changes with
    explicit paths, check the index is empty, then run
-   `pnpm release app nutritionfacts` for the standard patch bump.
+   `pnpm exec vp run @instructure.ai/nutritionfacts#release` for the standard patch bump.
    That command creates a commit containing everything staged, so never run it
    over unrelated staged work.
 2. Commit any automated-PR corrections with explicit app/lockfile pathspecs and

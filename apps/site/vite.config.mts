@@ -1,11 +1,24 @@
-import baseConfig from "@instructure.ai/shared-configs/vanilla";
-import { defineConfig, mergeConfig } from "vite";
+import { defineConfig, mergeConfig } from "vite-plus";
+import app from "@instructure.ai/shared-configs/vanilla";
+import tests from "@instructure.ai/shared-configs/vitest";
 
 export default mergeConfig(
-  baseConfig,
-  defineConfig({
-    build: {
-      chunkSizeWarningLimit: 1024,
-    },
-  }),
+	mergeConfig(app(import.meta.dirname), tests),
+	defineConfig({
+		root: import.meta.dirname,
+
+		test: {
+			coverage: { reportsDirectory: `${import.meta.dirname}/coverage` },
+		},
+
+		run: {
+			tasks: {
+				build: {
+					command: "vp build",
+					dependsOn: ["@instructure.ai/shared-configs#prepare:site"],
+					cache: false,
+				},
+			},
+		},
+	}),
 );

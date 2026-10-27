@@ -1,7 +1,7 @@
 // @vitest-environment node
 
 import { readFile } from "node:fs/promises";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { name } from "../package.json" with { type: "json" };
 
 const pkgRoot = new URL("..", import.meta.url);

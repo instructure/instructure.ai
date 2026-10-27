@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import postcss, { type Container } from "postcss";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 
 const stylesheet = postcss.parse(
 	await readFile(new URL("../src/main.css", import.meta.url), "utf8"),

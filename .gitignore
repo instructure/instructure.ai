@@ -22,3 +22,5 @@ coverage/*
 *.sln
 *.sw?
 .turbo
+.vitest/
+a11y-report

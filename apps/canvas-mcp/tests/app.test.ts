@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import { readFile } from "node:fs/promises";
 import { mountApp } from "../src/app";
 import { SCOPE_MANIFEST } from "../src/scopes";

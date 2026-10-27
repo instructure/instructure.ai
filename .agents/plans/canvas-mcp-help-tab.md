@@ -66,9 +66,9 @@ Avoid claiming an OAuth root cause that has not been established. Do not expose 
 
 Use a semantic table with two-level column headers:
 
-| Client | Enterprise: Public | Enterprise: Private | Personal: Public | Personal: Private |
-| --- | --- | --- | --- | --- |
-| Each curated client | Status | Status | Status | Status |
+| Client              | Enterprise: Public | Enterprise: Private | Personal: Public | Personal: Private |
+| ------------------- | ------------------ | ------------------- | ---------------- | ----------------- |
+| Each curated client | Status             | Status              | Status           | Status            |
 
 - Group Enterprise and Personal above their Public/Private subcolumns using explicit header associations.
 - Derive rows from the existing registry's `group === "Curated"` entries, using `clientLabel` and existing order. Exclude Generic MCP and Rulesync-only entries, which are in the Other group, and avoid alias duplicates.

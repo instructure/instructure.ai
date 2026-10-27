@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import { renderConfig } from "../src/admin/config";
 import { mountApp } from "../src/app";
 import { clientDefinition } from "../src/clients";

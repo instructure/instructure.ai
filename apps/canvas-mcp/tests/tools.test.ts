@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import catalog from "../src/help/tools.generated.json";
 import { renderHelp } from "../src/help/render";
 import { bindToolFilters, renderTool, toolFilterQuery } from "../src/help/tools";

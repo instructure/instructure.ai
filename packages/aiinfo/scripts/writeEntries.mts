@@ -1,11 +1,11 @@
 import { execSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import { parse } from "papaparse";
+import Papa from "papaparse";
 import { Log, entryToObj, writeBarrel, writeEntry } from "../utils";
 
 const parseCSV = (data: string) => {
-	const parsed = parse<string[]>(data, {
+	const parsed = Papa.parse<string[]>(data, {
 		delimiter: ",",
 		skipEmptyLines: true,
 	});
@@ -19,7 +19,7 @@ const parseCSV = (data: string) => {
 const main = async (entries?: string[][]) => {
 	let parsed = entries;
 	if (!parsed) {
-		const cachePath = path.resolve(__dirname, "../cache/cache.csv");
+		const cachePath = path.resolve(import.meta.dirname, "../cache/cache.csv");
 		if (!fs.existsSync(cachePath)) {
 			Log({ color: "redBright", message: ["No cache.csv found."] });
 			return;
@@ -40,9 +40,10 @@ const main = async (entries?: string[][]) => {
 	await writeBarrel();
 
 	try {
-		execSync("pnpm oxfmt ./node", { stdio: "ignore" });
+		execSync("pnpm exec vp fmt ./node", { stdio: "inherit" });
 	} catch (error) {
 		Log({ color: "redBright", message: ["OxC formatting failed:", error] });
+		throw error;
 	}
 	Log({ color: "green", message: ["Entries and barrel written."] });
 };

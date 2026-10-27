@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vite-plus/test";
 import { CLIENTS } from "../src/clients";
 import { clientStatus } from "../src/clients/status";
 import { COMMON_ISSUES, FAQS, helpSectionFromQuery } from "../src/help/content";

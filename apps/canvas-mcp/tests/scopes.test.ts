@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { SCOPE_MANIFEST, scopeManifestReady } from "../src/scopes";
 
 describe("customer key scopes", () => {

@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vite-plus/test";
 
 const mocks = vi.hoisted(() => ({
 	execFileSync: vi.fn(),
@@ -36,7 +36,7 @@ describe("tool catalog updater", () => {
 	beforeEach(() => {
 		vi.resetModules();
 		vi.resetAllMocks();
-		process.argv = ["vite-node", "updateTools.mts", "/fixture/maple"];
+		process.argv = ["vpx", "updateTools.mts", "/fixture/maple"];
 		vi.spyOn(process.stdout, "write").mockReturnValue(true);
 		mocks.execFileSync.mockImplementation((_command, args: string[]) =>
 			args[0] === "rev-parse" ? "revision\n" : "",

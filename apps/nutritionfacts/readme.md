@@ -10,8 +10,8 @@ An interactive web application for viewing, and exporting Nutrition Facts for [I
 
 - **Customizable Layouts**: Change the appearance of the Nutrition Facts, including revision, permissions, disclaimer, and copyright.
 - **Export**: Export Nutrition Facts via iFrame or Print.
-- **Modern UI**: Uses [@instructure/ui](https://github.com/instructure/instructure-ui) for a responsive and accessible interface.
-- **Dark Mode Support**: Automatically adapts to your system's color scheme.
+- **Modern UI**: Uses the latest [@instructure/ui](https://github.com/instructure/instructure-ui) v2 components (`@instructure/ui/latest`) for a responsive and accessible interface.
+- **Color Scheme Toggle**: Choose light, system, or dark from the toggle at the top-right of the page.
 
 ### Usage
 
@@ -33,6 +33,10 @@ The page layout already includes mobile responsiveness, print styles, iFrame sty
 &disclaimer=false  // Marketing copy about IgniteAI
 &revision=false    // Nutrition Facts revision version
 ```
+
+#### Color Scheme
+
+The light | system | dark toggle sets `data-color-scheme="light"` or `data-color-scheme="dark"` on `:root`. In system mode the attribute reflects the resolved `prefers-color-scheme` value and updates when it changes. The selection is persisted in `localStorage` under `nutritionfacts:color-scheme`, and an inline script in `index.html` applies it before first paint. Embedded (iFrame) views hide the toggle and always render in light, and printing always uses light.
 
 #### Exporting
 

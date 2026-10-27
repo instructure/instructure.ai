@@ -15,22 +15,39 @@ jobs:
       - uses: pnpm/action-setup@v6.1.0
       - uses: actions/setup-node@v7
         with:
-          node-version: "24"
+          node-version: "26"
           check-latest: true
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm typecheck
-      - name: Report root lint findings
-        continue-on-error: true
-        run: pnpm exec oxlint --type-aware --config .oxlintrc.json --disable-nested-config
-      - name: Report workspace lint findings
-        continue-on-error: true
-        run: pnpm -r --no-bail exec oxlint --type-aware
+      - run: pnpm exec vp run typecheck:all
+      - name: Check formatting, lint, and types
+        run: pnpm exec vp check
       - name: Test root and all workspaces
-        run: pnpm test all
+        run: pnpm exec vp run test:all
       - name: Build library without refreshing remote data
-        run: pnpm --filter @instructure.ai/aiinfo build:lib
+        run: pnpm exec vp run @instructure.ai/aiinfo#build:lib
       - name: Build apps
-        env:
-          NODE_OPTIONS: --import=${{ github.workspace }}/plugins/vite-node.plugin.loader.mjs
-        run: pnpm build apps
+        run: pnpm exec vp run build:apps
+  aiinfo-consumer:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ["20.0.0", "20", "26"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6.1.0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "26"
+          check-latest: true
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec vp run @instructure.ai/aiinfo#build:lib
+      - name: Prepare packed consumer under Node 26
+        run: pnpm exec vpx scripts/prepareConsumer.mts "$RUNNER_TEMP/aiinfo-consumer"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+      - name: Execute published exports without development tooling
+        run: node "$RUNNER_TEMP/aiinfo-consumer/consumer.mjs"

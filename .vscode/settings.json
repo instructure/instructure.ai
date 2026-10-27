@@ -24,6 +24,7 @@
 	"oxc.lint.run": "onType",
 	"oxc.requireConfig": true,
 	"oxc.typeAware": true,
+	"oxc.fmt.disableNestedConfig": true,
 	"js/ts.experimental.useTsgo": true,
 	"vitest.disableWorkspaceWarning": true,
 	"oxc.enable": true

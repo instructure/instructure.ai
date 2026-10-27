@@ -17,18 +17,18 @@ One file per client group. Each has ordered steps with real UI labels, roles, re
 
 Treat the research as an evidence ledger, not as blanket approval to publish every claim: use vendor documentation or source code for documented behavior, and preserve qualifiers for search snippets, inaccessible pages, internal guidance, and maintainer tests. Keep items marked "Not documented" out of guide instructions. Recheck a cited source when its supplied claim conflicts with another source or the live product; record any change in the relevant research file before updating guide text.
 
-| Client | Research file | Modes |
-| --- | --- | --- |
-| Claude.ai / Claude Desktop | [research/claude.md](canvas-mcp-phase3/research/claude.md) section A | personal, enterprise |
-| Claude Code | [research/claude.md](canvas-mcp-phase3/research/claude.md) section B | personal, enterprise |
-| Codex | [research/codex-chatgpt.md](canvas-mcp-phase3/research/codex-chatgpt.md) | personal, enterprise |
-| ChatGPT | [research/codex-chatgpt.md](canvas-mcp-phase3/research/codex-chatgpt.md) | personal, enterprise |
-| Gemini CLI | [research/gemini.md](canvas-mcp-phase3/research/gemini.md) | personal, enterprise |
-| Gemini Enterprise | [research/gemini.md](canvas-mcp-phase3/research/gemini.md) | enterprise |
-| Antigravity IDE | [research/antigravity.md](canvas-mcp-phase3/research/antigravity.md) | personal, enterprise |
-| Antigravity CLI | [research/antigravity.md](canvas-mcp-phase3/research/antigravity.md) | personal, enterprise |
-| Copilot Studio | [research/copilot-superhuman.md](canvas-mcp-phase3/research/copilot-superhuman.md) | enterprise |
-| Superhuman Go | [research/copilot-superhuman.md](canvas-mcp-phase3/research/copilot-superhuman.md) | blocked on vendor answers |
+| Client                     | Research file                                                                      | Modes                     |
+| -------------------------- | ---------------------------------------------------------------------------------- | ------------------------- |
+| Claude.ai / Claude Desktop | [research/claude.md](canvas-mcp-phase3/research/claude.md) section A               | personal, enterprise      |
+| Claude Code                | [research/claude.md](canvas-mcp-phase3/research/claude.md) section B               | personal, enterprise      |
+| Codex                      | [research/codex-chatgpt.md](canvas-mcp-phase3/research/codex-chatgpt.md)           | personal, enterprise      |
+| ChatGPT                    | [research/codex-chatgpt.md](canvas-mcp-phase3/research/codex-chatgpt.md)           | personal, enterprise      |
+| Gemini CLI                 | [research/gemini.md](canvas-mcp-phase3/research/gemini.md)                         | personal, enterprise      |
+| Gemini Enterprise          | [research/gemini.md](canvas-mcp-phase3/research/gemini.md)                         | enterprise                |
+| Antigravity IDE            | [research/antigravity.md](canvas-mcp-phase3/research/antigravity.md)               | personal, enterprise      |
+| Antigravity CLI            | [research/antigravity.md](canvas-mcp-phase3/research/antigravity.md)               | personal, enterprise      |
+| Copilot Studio             | [research/copilot-superhuman.md](canvas-mcp-phase3/research/copilot-superhuman.md) | enterprise                |
+| Superhuman Go              | [research/copilot-superhuman.md](canvas-mcp-phase3/research/copilot-superhuman.md) | blocked on vendor answers |
 
 83 screenshot-marker lines across the five files form the screenshot manifest (section 4). Grep them with `grep -h "SCREENSHOT:" research/*.md`.
 
@@ -45,17 +45,17 @@ Treat the research as an evidence ledger, not as blanket approval to publish eve
 
 ### Corrections to existing guides (from the research conflict lists)
 
-| Client | Fix |
-| --- | --- |
-| Claude.ai | Free plans work (one custom connector); not only Pro/Max. Team admin role is Owner or Primary Owner; Enterprise also allows a custom role with "Manage access to Libraries". Members still click Connect. Auth settings can't be edited; remove and re-add. Add the single-screen "Advanced settings" variant. |
-| Claude Code | Add the admin console path and role. Note server-managed settings are skipped for Console API keys, third-party providers and Cowork. `managed-mcp.json` suppresses claude.ai connectors unless `allowAllClaudeAiMcps` is set. v2.1.229 sent a 127.0.0.1 redirect (fixed in v2.1.231). Add the org-added claude.ai connector path (uses the claude.ai callback, not localhost). |
-| Codex | Secret is stored in plaintext in `config.toml`. Add the desktop and IDE "MCP servers > Add server > Authenticate" path. No documented version requirement. |
-| ChatGPT | Path is Plugins (chatgpt.com/plugins > plus > Add custom MCP server > Create as a plugin), not Settings > Apps > Create. Remove "Scan Tools" (in no vendor doc). Add the install step and callback URL step. Workspace publish steps (Workspace settings > Apps > Drafts > Publish, Configure Actions / Access, "Create plugins with MCPs" permission) come from search snippets only. |
-| Gemini CLI | Enterprise console labels and admin roles are undocumented; keep the allowlist step and flag it. |
-| Gemini Enterprise | Add org-policy override (Organization Policy Administrator), egress FQDN allowlist, `custom_mcp` data source, second Continue, Actions > Reload custom actions > Enable actions. Fix the PKCE claim. |
-| Antigravity | IDE verify uses `…` > `MCP Servers`, not the app/2.0 flow. CLI verify needs the pasted auth code. CLI `registration` is "static"; the app is "both". Add `~/.gemini/config/mcp_config.json`. Enterprise needs the admin allow-list (Gemini Enterprise > Settings > AI developer tools > Security > MCP Servers > Allowed server configuration), or Canvas shows "Blocked by Admin Policy". Only a Google codelab documents it. |
-| Copilot Studio | Drop the unsourced "classic experience" claim. Labels are "Manual", "Token URL template", "Server name", "callback URL". The Accept-header policy has no official source; keep it labeled as an Instructure workaround. Add Teams / M365 publishing (agent-level "Authenticate with Microsoft") and the Power Platform data policy notes. |
-| Superhuman Go | No install mode is confirmed: use an empty `installModes` list and do not label its print context or share link as personal. Replace the false "MCP server connection fields" note with the verified developer-Pack limitation. Keep facts unknown and guides pending. |
+| Client            | Fix                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Claude.ai         | Free plans work (one custom connector); not only Pro/Max. Team admin role is Owner or Primary Owner; Enterprise also allows a custom role with "Manage access to Libraries". Members still click Connect. Auth settings can't be edited; remove and re-add. Add the single-screen "Advanced settings" variant.                                                                                                                 |
+| Claude Code       | Add the admin console path and role. Note server-managed settings are skipped for Console API keys, third-party providers and Cowork. `managed-mcp.json` suppresses claude.ai connectors unless `allowAllClaudeAiMcps` is set. v2.1.229 sent a 127.0.0.1 redirect (fixed in v2.1.231). Add the org-added claude.ai connector path (uses the claude.ai callback, not localhost).                                                |
+| Codex             | Secret is stored in plaintext in `config.toml`. Add the desktop and IDE "MCP servers > Add server > Authenticate" path. No documented version requirement.                                                                                                                                                                                                                                                                     |
+| ChatGPT           | Path is Plugins (chatgpt.com/plugins > plus > Add custom MCP server > Create as a plugin), not Settings > Apps > Create. Remove "Scan Tools" (in no vendor doc). Add the install step and callback URL step. Workspace publish steps (Workspace settings > Apps > Drafts > Publish, Configure Actions / Access, "Create plugins with MCPs" permission) come from search snippets only.                                         |
+| Gemini CLI        | Enterprise console labels and admin roles are undocumented; keep the allowlist step and flag it.                                                                                                                                                                                                                                                                                                                               |
+| Gemini Enterprise | Add org-policy override (Organization Policy Administrator), egress FQDN allowlist, `custom_mcp` data source, second Continue, Actions > Reload custom actions > Enable actions. Fix the PKCE claim.                                                                                                                                                                                                                           |
+| Antigravity       | IDE verify uses `…` > `MCP Servers`, not the app/2.0 flow. CLI verify needs the pasted auth code. CLI `registration` is "static"; the app is "both". Add `~/.gemini/config/mcp_config.json`. Enterprise needs the admin allow-list (Gemini Enterprise > Settings > AI developer tools > Security > MCP Servers > Allowed server configuration), or Canvas shows "Blocked by Admin Policy". Only a Google codelab documents it. |
+| Copilot Studio    | Drop the unsourced "classic experience" claim. Labels are "Manual", "Token URL template", "Server name", "callback URL". The Accept-header policy has no official source; keep it labeled as an Instructure workaround. Add Teams / M365 publishing (agent-level "Authenticate with Microsoft") and the Power Platform data policy notes.                                                                                      |
+| Superhuman Go     | No install mode is confirmed: use an empty `installModes` list and do not label its print context or share link as personal. Replace the false "MCP server connection fields" note with the verified developer-Pack limitation. Keep facts unknown and guides pending.                                                                                                                                                         |
 
 ## 3. Code design (not monolithic)
 
@@ -116,17 +116,17 @@ Screenshot counts from research: Claude 19, Codex/ChatGPT 12, Gemini 22, Antigra
 
 Each row is one commit and one reviewable change. Rows 2 to 6 are independent once row 1 lands and can be done in parallel by separate sessions (each touches only its own client folder).
 
-| # | Task | Files |
-| --- | --- | --- |
-| 0 | Add the evidence-based client status pill and known-issue alerts on admin and client pages. | `clients/types.ts`, `clients/status.ts`, admin/page rendering, tests |
-| 1 | Add `image` content kind, `screenshot()` helper, manifest, renderer and print support, tests. Convert one small client (Generic or Copilot Studio) to the folder layout as the reference. | `guides/types.ts`, `guides/render.ts`, `guides/screenshots.ts`, `guides/screenshot-manifest.ts`, tests |
-| 2 | Claude.ai / Desktop and Claude Code (personal and enterprise). | `clients/curated/claude-ai/`, `claude-code/` |
-| 3 | Codex and ChatGPT (personal and enterprise). Keep the ChatGPT connection blocker. | `codex/`, `chatgpt/` |
-| 4 | Gemini CLI and Gemini Enterprise. Keep the Gemini CLI deprecation notice. | `gemini-cli/`, `gemini-enterprise/` |
-| 5 | Antigravity IDE and CLI (separate evidence). | `antigravity/`, `antigravity-cli/` |
-| 6 | Copilot Studio (enterprise only, add Teams/M365 and data-policy steps). Superhuman Go: facts and install modes only, guides stay pending. | `copilot-studio/`, `superhuman-go/` |
-| 7 | Update `facts` from the confirmed list in section 2; run `evidence:check`. | each client `facts.ts` |
-| 8 | README and test updates; screenshot placeholder report. | `readme.md`, `tests/` |
+| #   | Task                                                                                                                                                                                      | Files                                                                                                  |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| 0   | Add the evidence-based client status pill and known-issue alerts on admin and client pages.                                                                                               | `clients/types.ts`, `clients/status.ts`, admin/page rendering, tests                                   |
+| 1   | Add `image` content kind, `screenshot()` helper, manifest, renderer and print support, tests. Convert one small client (Generic or Copilot Studio) to the folder layout as the reference. | `guides/types.ts`, `guides/render.ts`, `guides/screenshots.ts`, `guides/screenshot-manifest.ts`, tests |
+| 2   | Claude.ai / Desktop and Claude Code (personal and enterprise).                                                                                                                            | `clients/curated/claude-ai/`, `claude-code/`                                                           |
+| 3   | Codex and ChatGPT (personal and enterprise). Keep the ChatGPT connection blocker.                                                                                                         | `codex/`, `chatgpt/`                                                                                   |
+| 4   | Gemini CLI and Gemini Enterprise. Keep the Gemini CLI deprecation notice.                                                                                                                 | `gemini-cli/`, `gemini-enterprise/`                                                                    |
+| 5   | Antigravity IDE and CLI (separate evidence).                                                                                                                                              | `antigravity/`, `antigravity-cli/`                                                                     |
+| 6   | Copilot Studio (enterprise only, add Teams/M365 and data-policy steps). Superhuman Go: facts and install modes only, guides stay pending.                                                 | `copilot-studio/`, `superhuman-go/`                                                                    |
+| 7   | Update `facts` from the confirmed list in section 2; run `evidence:check`.                                                                                                                | each client `facts.ts`                                                                                 |
+| 8   | README and test updates; screenshot placeholder report.                                                                                                                                   | `readme.md`, `tests/`                                                                                  |
 
 Acceptance criteria:
 
@@ -160,13 +160,13 @@ When a client is selected in the admin Configuration panel, show the Pantoken `i
 
 Initial classifications from the evidence currently in this plan:
 
-| Client / mode | Status | Basis |
-| --- | --- | --- |
-| Claude Code / personal | Validated | Internal log records a successful end-to-end test; version and key type were not recorded. |
-| ChatGPT / personal or enterprise | Known issue | Canvas MCP authentication bug; setup remains blocked pending a successful retest. |
-| Gemini CLI / personal | Known issue | Deprecated for non-Enterprise use; direct users to Antigravity CLI. |
-| Gemini CLI / enterprise | Untested | Research says Enterprise is expected to continue working; it is not a validation result. |
-| All other clients and modes | Untested | No end-to-end result is recorded. |
+| Client / mode                    | Status      | Basis                                                                                      |
+| -------------------------------- | ----------- | ------------------------------------------------------------------------------------------ |
+| Claude Code / personal           | Validated   | Internal log records a successful end-to-end test; version and key type were not recorded. |
+| ChatGPT / personal or enterprise | Known issue | Canvas MCP authentication bug; setup remains blocked pending a successful retest.          |
+| Gemini CLI / personal            | Known issue | Deprecated for non-Enterprise use; direct users to Antigravity CLI.                        |
+| Gemini CLI / enterprise          | Untested    | Research says Enterprise is expected to continue working; it is not a validation result.   |
+| All other clients and modes      | Untested    | No end-to-end result is recorded.                                                          |
 
 Do not infer validation from `Fact.status === "documented"` or from a guide's `status === "documented"`. Keep status data separate from guide evidence and keep the internal test log out of public guide copy.
 
@@ -178,6 +178,6 @@ Guides contain no customer data. Screenshots and live tests must use a synthetic
 
 Do not copy these entries into guide text, `sources`, `Evidence` labels or the README. The public site keeps its vendor-doc evidence. Use this log only to decide confidence and to prioritize retests.
 
-| Date | Client / mode | Result | Notes |
-| --- | --- | --- | --- |
-| 2026-10-17 | Claude Code, personal | Works | Maintainer verified end to end: server added, `/mcp` authentication, Canvas sign-in, connection confirmed. Callback was the fixed `http://localhost:8081/callback`. Key type (public or private) and Claude Code version not recorded; ask when retesting. |
+| Date       | Client / mode         | Result | Notes                                                                                                                                                                                                                                                      |
+| ---------- | --------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-10-17 | Claude Code, personal | Works  | Maintainer verified end to end: server added, `/mcp` authentication, Canvas sign-in, connection confirmed. Callback was the fixed `http://localhost:8081/callback`. Key type (public or private) and Claude Code version not recorded; ask when retesting. |

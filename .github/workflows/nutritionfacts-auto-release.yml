@@ -26,7 +26,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
-          node-version: "24"
+          node-version: "26"
           check-latest: true
 
       - name: Install pnpm
@@ -87,7 +87,7 @@ jobs:
         run: |
           set -euo pipefail
           # Your custom command
-          pnpm release app nutritionfacts
+          pnpm exec vp run @instructure.ai/nutritionfacts#release
 
       - name: Push branch
         if: steps.commit.outputs.no_changes == 'false'

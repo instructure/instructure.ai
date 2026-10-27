@@ -6,7 +6,7 @@ A TypeScript package providing [IgniteAI](https://www.instructure.com/igniteai) 
 
 ## Runtime Requirements
 
-The next release requires Node.js 24.15.0 or newer. Raising the Node.js minimum from 20 is a breaking change and must be released as a new major version. This migration does not publish or bump the package version.
+Published artifacts support Node.js 20.0.0 or newer, including Canvas LMS consumers. Development and maintenance scripts use the workspace's pinned Node 26 and pnpm versions. Builds target Node 20; CI tests the packed ESM and CommonJS exports independently of the development toolchain.
 
 Development uses TypeScript 7. Both ESM imports and CommonJS requires are supported, with matching `.d.mts` and `.d.cts` declarations selected through package exports.
 

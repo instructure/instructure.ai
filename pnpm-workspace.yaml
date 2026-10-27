@@ -20,3 +20,19 @@ minimumReleaseAgeExclude:
   - "@pantoken/utils@1.4.0"
   - "@pantoken/css@0.4.5"
   - "@pantoken/plugin-custom-components@0.7.2"
+catalog:
+  vite: npm:@voidzero-dev/vite-plus-core@1.4.0
+  vitest: 5.0.5
+  vite-plus: 1.4.0
+  "@vitest/coverage-istanbul": 5.0.5
+  "@vitest/coverage-v8": 5.0.5
+overrides:
+  vite@*: "catalog:"
+  vitest@*: "catalog:"
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: "*"
+    vitest: "*"
