@@ -70,16 +70,14 @@ const updateCache = async (data: CSVFetchResult): Promise<void> => {
           color: "yellow",
           message: [`Checksum updated for entry uid: ${EntryObj.uid}`],
         });
-        let oldEntryObj: Entry | undefined;
         const oldEntryArr = oldEntries.parsed.find(
           (e) =>
             Array.isArray(e) &&
             typeof e[0] === "string" &&
             e[0].toLowerCase() === EntryObj.uid.toLowerCase(),
         );
-        if (oldEntryArr && oldEntryArr.length > 0) {
-          oldEntryObj = entryToObj(oldEntryArr);
-        }
+        const oldEntryObj =
+          oldEntryArr && oldEntryArr.length > 0 ? entryToObj(oldEntryArr) : undefined;
 
         changedEntries.push({
           newChecksum: entryChecksum,
@@ -167,7 +165,7 @@ const main = async () => {
   Log({ color, message: "Updating Cache", start });
   let cacheUpdated = false;
   try {
-    let data: CSVFetchResult | undefined;
+    let data: CSVFetchResult;
     try {
       data = await fetchCSVFromURL();
     } catch (error) {
