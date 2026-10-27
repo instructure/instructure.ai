@@ -28,6 +28,8 @@ const App: FC = () => {
 	}, []);
 
 	const isNarrow = width <= 448; // (56rem / 2)
+	// The full-size logo crowds the export controls on small screens that still use a single row.
+	const logoHeight = width < 600 ? "2rem" : "2.5rem";
 
 	useEffect(() => {
 		if (product?.uid) {
@@ -37,20 +39,6 @@ const App: FC = () => {
 
 	const { layout } = getLayoutFromParams(DefaultLayout);
 
-	const exportControls = product?.uid ? (
-		<>
-			<View margin="0 x-small 0 0">
-				<EmbedControl
-					layout={layout}
-					product={product}
-				/>
-			</View>
-			<View margin="0 x-small 0 0">
-				<LinkControl product={product} />
-			</View>
-		</>
-	) : undefined;
-
 	return (
 		<View
 			as="div"
@@ -58,21 +46,32 @@ const App: FC = () => {
 			data-print="no-padding, no-background"
 			minHeight="100vh"
 			padding={isInIframe ? "0" : isNarrow ? "medium" : "large"}
+			position="relative"
 			themeOverride={{ backgroundSecondary: background.pageColor }}
 		>
 			{!isInIframe && (
 				<View
 					as="div"
-					data-print="no-background, max-height, no padding"
-					margin="0 auto"
+					data-print="hidden"
+					insetBlockStart={isNarrow ? "1.5rem" : "2.25rem"}
+					insetInlineEnd={isNarrow ? "1.5rem" : "2.25rem"}
+					position="absolute"
+				>
+					<ColorSchemeToggle />
+				</View>
+			)}
+			{!isInIframe && (
+				<View
+					as="div"
+					data-print="no-background, max-height, no padding, no-margin"
+					margin="5rem auto 0"
 					maxWidth="56rem"
 					padding={isNarrow ? "0 0 small" : "0 0 medium"}
 				>
 					<Flex
-						alignItems="center"
 						data-print="hidden"
-						gap="x-small"
-						wrap="wrap"
+						direction={isNarrow ? "column" : "row"}
+						gap="small"
 					>
 						<Flex.Item
 							shouldGrow
@@ -84,7 +83,7 @@ const App: FC = () => {
 							>
 								<Link href="/nutritionfacts">
 									<InlineSVG
-										height={isNarrow ? "2rem" : "2.5rem"}
+										height={logoHeight}
 										inline={false}
 										src={isDark ? LogoDark : Logo}
 										title="Instructure"
@@ -93,11 +92,17 @@ const App: FC = () => {
 								</Link>
 							</View>
 						</Flex.Item>
-						{exportControls && !isNarrow && <Flex.Item>{exportControls}</Flex.Item>}
-						<Flex.Item>
-							<ColorSchemeToggle />
-						</Flex.Item>
-						{exportControls && isNarrow && <Flex.Item size="100%">{exportControls}</Flex.Item>}
+						{product?.uid && (
+							<Flex.Item align="end">
+								<View margin="0 small 0 0">
+									<EmbedControl
+										layout={layout}
+										product={product}
+									/>
+								</View>
+								<LinkControl product={product} />
+							</Flex.Item>
+						)}
 					</Flex>
 				</View>
 			)}
