@@ -1,4 +1,4 @@
-import { cp, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
+import { cp, glob, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -12,9 +12,21 @@ export async function generate(
 	}
 	const type = template === "esm" ? "packages" : "apps";
 	const directory = resolve(root, type, name);
+	const packageName = `@instructure.ai/${name}`;
+	for await (const manifest of glob(
+		["package.json", "apps/*/package.json", "packages/*/package.json"],
+		{
+			cwd: root,
+		},
+	)) {
+		const existing = JSON.parse(await readFile(resolve(root, manifest), "utf8"));
+		if (existing.name === packageName) {
+			throw new Error(`Workspace package ${packageName} already exists in ${manifest}`);
+		}
+	}
 	const templates = fileURLToPath(new URL(".", import.meta.url));
 	const replacements = {
-		"<<packagename>>": `@instructure.ai/${name}`,
+		"<<packagename>>": packageName,
 		"<<cliname>>": name,
 		"<<pkgtype>>": type,
 	};

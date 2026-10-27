@@ -87,6 +87,8 @@ pnpm install
 Apps are created under `apps/`, ESM libraries under `packages/`, with scoped
 `@instructure.ai/<name>` manifests. The local generators only compose and render
 project-specific templates; Vite+ owns template selection and invocation.
+Names must be unique across the root package, all apps, and all libraries;
+collisions are rejected before creating files or fetching guidance.
 Generated apps depend on the root site build and are automatically selected by
 `build:apps` for validation and deployment.
 Run pnpm installation after generation. InstUI generation fetches the current

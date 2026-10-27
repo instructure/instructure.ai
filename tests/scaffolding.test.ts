@@ -94,6 +94,45 @@ describe("native Vite+ starter entry points", () => {
 		await expect(generate("vanilla", "fixture-vanilla", fixture)).rejects.toThrow();
 	});
 
+	it("rejects workspace-wide package name collisions before creating files or fetching guidance", async () => {
+		const collisionRoot = mkdtempSync(join(tmpdir(), "vite-plus-names-"));
+		const fetch = vi.fn();
+		vi.stubGlobal("fetch", fetch);
+		try {
+			for (const [directory, name] of [
+				[".", "shared-configs"],
+				["apps/different-app-directory", "existing-app"],
+				["packages/different-library-directory", "aiinfo"],
+			]) {
+				mkdirSync(join(collisionRoot, directory), { recursive: true });
+				writeFileSync(
+					join(collisionRoot, directory, "package.json"),
+					JSON.stringify({ name: `@instructure.ai/${name}` }),
+				);
+			}
+			for (const template of templates) {
+				for (const name of ["shared-configs", "existing-app", "aiinfo"]) {
+					await expect(generate(template, name, collisionRoot)).rejects.toThrow(
+						`Workspace package @instructure.ai/${name} already exists`,
+					);
+					expect(
+						existsSync(join(collisionRoot, template === "esm" ? "packages" : "apps", name)),
+					).toBe(false);
+				}
+			}
+			await expect(generate("esm", "fixture-vanilla", fixture)).rejects.toThrow(
+				"Workspace package @instructure.ai/fixture-vanilla already exists",
+			);
+			await expect(generate("vanilla", "fixture-esm", fixture)).rejects.toThrow(
+				"Workspace package @instructure.ai/fixture-esm already exists",
+			);
+			expect(fetch).not.toHaveBeenCalled();
+		} finally {
+			vi.unstubAllGlobals();
+			rmSync(collisionRoot, { recursive: true, force: true });
+		}
+	});
+
 	it("installs, typechecks, tests, and builds all four generated starters", () => {
 		for (const file of [
 			"package.json",
