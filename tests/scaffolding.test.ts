@@ -109,15 +109,22 @@ describe("native Vite+ starter entry points", () => {
 			cwd: root,
 			encoding: "utf8",
 		}).trim();
-		// Generated workspace names need new importers; temporary filesystems must reuse the warm store.
+		// New importers may need registry metadata missing after CI's frozen workspace install.
 		execFileSync(
 			"pnpm",
-			["install", "--offline", "--ignore-scripts", "--no-frozen-lockfile", "--store-dir", store],
+			[
+				"install",
+				"--prefer-offline",
+				"--ignore-scripts",
+				"--no-frozen-lockfile",
+				"--store-dir",
+				store,
+			],
 			{
 				cwd: fixture,
 				env: { ...process.env, CI: "1" },
 				encoding: "utf8",
-				timeout: 60000,
+				timeout: 120000,
 			},
 		);
 		for (const command of ["typecheck", "test", "build"]) {
@@ -131,5 +138,5 @@ describe("native Vite+ starter entry points", () => {
 				},
 			);
 		}
-	}, 180000);
+	}, 240000);
 });
