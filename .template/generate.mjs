@@ -10,6 +10,13 @@ export async function generate(
 	if (!/^[a-z0-9][a-z0-9._-]*$/.test(name ?? "")) {
 		throw new Error("Provide an unscoped lowercase package name after --");
 	}
+	const templates = fileURLToPath(new URL(".", import.meta.url));
+	if (template === "esm") {
+		const manifest = JSON.parse(await readFile(resolve(templates, "esm/package.json"), "utf8"));
+		if (Object.hasOwn(manifest.scripts, name)) {
+			throw new Error(`ESM package name "${name}" conflicts with a reserved script`);
+		}
+	}
 	const type = template === "esm" ? "packages" : "apps";
 	const directory = resolve(root, type, name);
 	const packageName = `@instructure.ai/${name}`;
@@ -24,7 +31,6 @@ export async function generate(
 			throw new Error(`Workspace package ${packageName} already exists in ${manifest}`);
 		}
 	}
-	const templates = fileURLToPath(new URL(".", import.meta.url));
 	const replacements = {
 		"<<packagename>>": packageName,
 		"<<cliname>>": name,

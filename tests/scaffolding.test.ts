@@ -94,6 +94,17 @@ describe("native Vite+ starter entry points", () => {
 		await expect(generate("vanilla", "fixture-vanilla", fixture)).rejects.toThrow();
 	});
 
+	it.each(
+		Object.keys(
+			JSON.parse(readFileSync(join(root, ".template/esm/package.json"), "utf8")).scripts,
+		).filter((name) => name !== "<<cliname>>"),
+	)("rejects the reserved ESM script name %s before creating a directory", async (name) => {
+		await expect(generate("esm", name, fixture)).rejects.toThrow(
+			`ESM package name "${name}" conflicts with a reserved script`,
+		);
+		expect(existsSync(join(fixture, "packages", name))).toBe(false);
+	});
+
 	it("rejects workspace-wide package name collisions before creating files or fetching guidance", async () => {
 		const collisionRoot = mkdtempSync(join(tmpdir(), "vite-plus-names-"));
 		const fetch = vi.fn();

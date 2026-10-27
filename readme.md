@@ -92,6 +92,8 @@ Apps are created under `apps/`, ESM libraries under `packages/`, with scoped
 project-specific templates; Vite+ owns template selection and invocation.
 Names must be unique across the root package, all apps, and all libraries;
 collisions are rejected before creating files or fetching guidance.
+ESM library names must also avoid reserved script keys such as `build`, `test`,
+and `typecheck`, because the library name is used for its executable script.
 Generated apps depend on the root site build and are automatically selected by
 `build:apps` for validation and deployment.
 Run pnpm installation after generation. InstUI generation fetches the current
