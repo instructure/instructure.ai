@@ -8,13 +8,13 @@ import { type ExtendedNutritionFactsProps, type PageLayout } from "../../types";
 import {
 	Flex,
 	Heading,
-	IconAiLine,
-	IconExternalLinkLine,
+	ExternalLinkInstUIIcon,
+	IgniteaiLogoInstUIIcon,
 	Link,
 	type NutritionFactsProps,
 	Text,
 	View,
-} from "@instructure/ui";
+} from "@instructure/ui/latest";
 import { type AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { extendedNutritionFacts } from "./extendedNutritionFacts";
 
@@ -92,7 +92,7 @@ const NutritionFactsForm: FC<{
 										variant="contentSmall"
 									>
 										<Link
-											renderIcon={IconExternalLinkLine}
+											renderIcon={<ExternalLinkInstUIIcon />}
 											href={Feature.linkUrl}
 											target="_blank"
 											rel="noopener noreferrer"
@@ -184,9 +184,9 @@ const NutritionFactsForm: FC<{
 							margin="0 0 medium"
 							textAlign="center"
 						>
-							<IconAiLine
-								color="secondary"
-								size="x-large"
+							<IgniteaiLogoInstUIIcon
+								color="mutedColor"
+								size="xl"
 							/>
 						</View>
 						<Heading

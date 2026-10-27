@@ -2,7 +2,7 @@
 /// <reference types="vite/client" />
 
 import { type Dispatch, type SetStateAction } from "react";
-import { type NutritionFactsProps } from "@instructure/ui";
+import { type NutritionFactsProps } from "@instructure/ui/latest";
 
 type StateProp<Type, Key extends string> = Record<Key, Type> &
 	Record<`set${Capitalize<Key>}`, Dispatch<SetStateAction<Type>>>;

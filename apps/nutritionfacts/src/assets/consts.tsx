@@ -1,5 +1,5 @@
-import { Link } from "@instructure/ui";
-import { type LinkProps } from "@instructure/ui";
+import { Link } from "@instructure/ui/latest";
+import { type LinkProps } from "@instructure/ui/latest";
 import { type AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { colors } from "./colors";
 import { CanvasBug, IgniteBug, InstructureBug, MasteryBug, ParchmentBug } from "./logos";

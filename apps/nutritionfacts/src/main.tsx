@@ -1,4 +1,4 @@
-import { InstUISettingsProvider } from "@instructure/ui";
+import { InstUISettingsProvider } from "@instructure/ui/latest";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { type Root } from "react-dom/client";

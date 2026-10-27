@@ -1,4 +1,4 @@
-import { View } from "@instructure/ui";
+import { View } from "@instructure/ui/latest";
 
 const Divider = () => (
 	<View

@@ -1,5 +1,5 @@
 import "./app.css";
-import { Flex, InlineSVG, Link, Text, View } from "@instructure/ui";
+import { Flex, InlineSVG, Link, Text, View } from "@instructure/ui/latest";
 import AiInfo from "@instructure.ai/aiinfo";
 import { type AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { useEffect, useState } from "react";

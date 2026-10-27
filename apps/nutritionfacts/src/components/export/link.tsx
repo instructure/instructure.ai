@@ -1,5 +1,4 @@
-import { IconLinkLine } from "@instructure/ui";
-import { type SVGIconProps } from "@instructure/ui";
+import { LinkInstUIIcon } from "@instructure/ui/latest";
 import { type AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { baseUrl } from "../../assets";
 import { ControlButton } from "./";
@@ -33,7 +32,7 @@ const LinkControl = ({
 		background={background}
 		border={border}
 		color={color}
-		Icon={IconLinkLine as React.ElementType<SVGIconProps>}
+		Icon={LinkInstUIIcon}
 		key="link"
 		label="Copy permalink"
 		onClick={() => {

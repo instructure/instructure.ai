@@ -1,5 +1,4 @@
-import { IconExternalLinkLine } from "@instructure/ui";
-import { type SVGIconProps } from "@instructure/ui";
+import { ExternalLinkInstUIIcon } from "@instructure/ui/latest";
 import { type AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { baseUrl } from "../../assets";
 import { type PageLayout } from "../../types.ts";
@@ -62,7 +61,7 @@ const EmbedControl: React.FC<{
 		background={background}
 		border={border}
 		color={color}
-		Icon={IconExternalLinkLine as React.ElementType<SVGIconProps>}
+		Icon={ExternalLinkInstUIIcon}
 		label="Copy embed code"
 		onClick={() => Embed(product, layout)}
 	/>

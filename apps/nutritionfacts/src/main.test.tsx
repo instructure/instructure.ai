@@ -9,7 +9,7 @@ vi.mock("react-dom/client", () => ({
 }));
 
 // Mock InstUISettingsProvider and App
-vi.mock("@instructure/ui", () => ({
+vi.mock("@instructure/ui/latest", () => ({
 	InstUISettingsProvider: ({ children }: { children: React.ReactNode }) => (
 		<div data-testid="instui-provider">{children}</div>
 	),

@@ -1,9 +1,9 @@
-import { IconButton, Tooltip } from "@instructure/ui";
-import { type SVGIconProps } from "@instructure/ui";
+import { IconButton, Tooltip } from "@instructure/ui/latest";
+import { type InstUIIconProps } from "@instructure/ui/latest";
 
 interface ControlButtonProps {
 	label: string;
-	Icon: React.ElementType<SVGIconProps>;
+	Icon: React.ElementType<InstUIIconProps>;
 	onClick: () => void;
 	background?: boolean;
 	disabled?: boolean;
