@@ -1,57 +1,57 @@
 {
-  "name": "@instructure.ai/aiinfo",
-  "version": "2.11.21",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/instructure/instructure.ai",
-    "directory": "packages/aiinfo"
-  },
-  "files": [
-    "src"
-  ],
-  "type": "module",
-  "sideEffects": false,
-  "main": "./src/index.mjs",
-  "module": "./src/index.mjs",
-  "types": "./src/index.d.mts",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./src/index.d.mts",
-        "default": "./src/index.mjs"
-      },
-      "require": {
-        "types": "./src/index.d.cts",
-        "default": "./src/index.cjs"
-      },
-      "default": "./src/index.mjs"
-    }
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "scripts": {
-    "build": "pnpm cache:update && pnpm typecheck && pnpm build:lib && pnpm lint && pnpm package",
-    "build:lib": "tsdown",
-    "cache:clear": "CLEAR=1 vite-node ./scripts/clearCache.mts",
-    "cache:update": "vite-node ./scripts/updateCache.mts",
-    "lint": "oxfmt && oxlint --quiet --type-aware --fix --fix-suggestions",
-    "package": "pnpm pack --pack-destination ./src",
-    "test": "pnpm vitest run",
-    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.types.json",
-    "write:all": "WRITE=1 vite-node ./scripts/writeEntries.mts",
-    "write:entries": "WRITE=1 vite-node ./scripts/writeEntries.mts --entries",
-    "write:barrel": "WRITE=1 vite-node ./scripts/writeEntries.mts --barrel"
-  },
-  "devDependencies": {
-    "@instructure.ai/shared-configs": "workspace:^",
-    "@instructure/ui-instructure": "^11.7.10",
-    "@types/papaparse": "^5.5.2",
-    "ansis": "5.0.0-beta.0",
-    "papaparse": "^5.7.0",
-    "typescript": "^7.0.2"
-  },
-  "engines": {
-    "node": ">=24.15.0"
-  }
+	"name": "@instructure.ai/aiinfo",
+	"version": "2.11.21",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/instructure/instructure.ai",
+		"directory": "packages/aiinfo"
+	},
+	"files": [
+		"src"
+	],
+	"type": "module",
+	"sideEffects": false,
+	"main": "./src/index.mjs",
+	"module": "./src/index.mjs",
+	"types": "./src/index.d.mts",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./src/index.d.mts",
+				"default": "./src/index.mjs"
+			},
+			"require": {
+				"types": "./src/index.d.cts",
+				"default": "./src/index.cjs"
+			},
+			"default": "./src/index.mjs"
+		}
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"build": "pnpm cache:update && pnpm typecheck && pnpm build:lib && pnpm lint && pnpm package",
+		"build:lib": "tsdown",
+		"cache:clear": "CLEAR=1 vite-node ./scripts/clearCache.mts",
+		"cache:update": "vite-node ./scripts/updateCache.mts",
+		"lint": "oxfmt && oxlint --quiet --type-aware --fix --fix-suggestions",
+		"package": "pnpm pack --pack-destination ./src",
+		"test": "pnpm vitest run",
+		"typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.types.json",
+		"write:all": "WRITE=1 vite-node ./scripts/writeEntries.mts",
+		"write:entries": "WRITE=1 vite-node ./scripts/writeEntries.mts --entries",
+		"write:barrel": "WRITE=1 vite-node ./scripts/writeEntries.mts --barrel"
+	},
+	"devDependencies": {
+		"@instructure.ai/shared-configs": "workspace:^",
+		"@instructure/ui-instructure": "^11.7.10",
+		"@types/papaparse": "^5.5.2",
+		"ansis": "5.0.0-beta.0",
+		"papaparse": "^5.7.0",
+		"typescript": "^7.0.2"
+	},
+	"engines": {
+		"node": ">=24.15.0"
+	}
 }
