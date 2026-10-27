@@ -1,14 +1,14 @@
-import type {
-	AiInformationProps,
-	DataPermissionLevelsProps,
-	NutritionFactsProps,
-	AiInfoFeatureProps,
+import  {
+	type AiInformationProps,
+	type DataPermissionLevelsProps,
+	type NutritionFactsProps,
+	type AiInfoFeatureProps,
 } from "../../types";
 
-const FEATURE_NAME = "Panda Bot";
-const UID = "supportpandabot";
+const FEATURE_NAME = "Panda Bot",
+ UID = "supportpandabot",
 
-const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
+ DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
 		description:
 			"We leverage anonymized aggregate data for detailed analytics to inform model development and product improvements. No AI models are used at this level.",
@@ -37,8 +37,8 @@ const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 		level: "LEVEL 4",
 		title: "Collaborative AI Consortium",
 	},
-];
-const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
+],
+ NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 	{
 		blockTitle: "Model & Data",
 		segmentData: [
@@ -128,9 +128,9 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			},
 		],
 	},
-];
+],
 
-const nutritionFacts: NutritionFactsProps = {
+ nutritionFacts: NutritionFactsProps = {
 	closeButtonText: "Close",
 	closeIconButtonScreenReaderLabel: "Close",
 	data: NUTRITION_FACTS_DATA,
@@ -138,9 +138,9 @@ const nutritionFacts: NutritionFactsProps = {
 	modalLabel: "This is a modal for AI facts",
 	title: "AI Nutrition Facts",
 	triggerText: "Nutrition Facts",
-};
+},
 
-const dataPermissionLevels: DataPermissionLevelsProps = {
+ dataPermissionLevels: DataPermissionLevelsProps = {
 	closeButtonText: "Close",
 	closeIconButtonScreenReaderLabel: "Close dialog",
 	currentFeature: FEATURE_NAME,
@@ -149,9 +149,9 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	modalLabel: "Data Permission Levels modal",
 	title: "Data Permission Levels",
 	triggerText: "Data Permission Levels",
-};
+},
 
-const aiInformation: AiInformationProps = {
+ aiInformation: AiInformationProps = {
 	data: [
 		{
 			description:
@@ -161,8 +161,8 @@ const aiInformation: AiInformationProps = {
 			modelNameText: "Base Model",
 			nutritionFactsModalTriggerText: "AI Nutrition Facts",
 			permissionLevel: "LEVEL 2",
-			permissionLevelsModalTriggerText: "Data Permission Levels",
 			permissionLevelText: "Permission Level:",
+			permissionLevelsModalTriggerText: "Data Permission Levels",
 			privacyNoticeText: "",
 			privacyNoticeUrl: "",
 		},
@@ -182,9 +182,9 @@ const aiInformation: AiInformationProps = {
 	nutritionFactsTitle: "AI Nutrition Facts",
 	title: "Features",
 	trigger: undefined,
-};
+},
 
-const supportpandabot: AiInfoFeatureProps = {
+ supportpandabot: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
 	description:

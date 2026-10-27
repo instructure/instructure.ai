@@ -6,6 +6,7 @@ import {
 } from "./types";
 
 import aiexperiences from "./components/aiexperiences";
+export { default as aiexperiences } from "./components/aiexperiences";
 import askyourdata from "./components/askyourdata";
 import assessmentauthoringassistance from "./components/assessmentauthoringassistance";
 import canvasa11ycheckeralttextgenerator from "./components/canvasa11ycheckeralttextgenerator";
@@ -84,41 +85,7 @@ const dataPermissionLevels: AiInfoDataPermissionLevelsProps = pluck(AiInfo, "dat
 
 const aiInformation: AiInfoAiInformationProps = pluck(AiInfo, "aiInformation");
 
-export {
-	AiInfo,
-	nutritionFacts,
-	dataPermissionLevels,
-	aiInformation,
-	aiexperiences,
-	askyourdata,
-	assessmentauthoringassistance,
-	canvasa11ycheckeralttextgenerator,
-	canvasa11ycheckertablecaptions,
-	canvascoursetranslation,
-	canvasdiscussionsummaries,
-	canvasgradingassistance,
-	canvasinboxtranslation,
-	careeragent,
-	careerassistant,
-	careercontentgeneration,
-	careerflashcards,
-	careerkeytakeaways,
-	careerlearnerchat,
-	careerquizzes,
-	careerskillsextraction,
-	careersummarization,
-	conversionalignment,
-	discussioninsights,
-	igniteagent,
-	itemauthoringassistance,
-	pdbsmartskillextractor,
-	portfolios,
-	quickreassess,
-	rubricgenerator,
-	smartsearch,
-	studytools,
-	supportpandabot,
-};
+
 
 export type * from "./types";
 export default AiInfo;
