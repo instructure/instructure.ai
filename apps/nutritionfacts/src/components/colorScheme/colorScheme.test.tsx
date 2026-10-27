@@ -1,4 +1,4 @@
-import { act, render, renderHook, screen } from "@testing-library/react";
+import { act, cleanup, render, renderHook, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import {
 	ColorSchemeProvider,
@@ -41,6 +41,8 @@ describe("color scheme", () => {
 	});
 
 	afterEach(() => {
+		cleanup();
+		vi.restoreAllMocks();
 		vi.unstubAllGlobals();
 	});
 

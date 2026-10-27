@@ -5,7 +5,7 @@ import { type AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { useEffect, useState } from "react";
 import { type FC } from "react";
 import { DefaultLayout, Logo, LogoDark, colors, copyright, disclaimer } from "./assets";
-import { useColorSchemeContext } from "./components/colorScheme";
+import { ColorSchemeToggle, useColorSchemeContext } from "./components/colorScheme";
 import { EmbedControl, LinkControl } from "./components/export";
 import { NutritionFactsForm, getLayoutFromParams } from "./components/layout";
 
@@ -54,8 +54,10 @@ const App: FC = () => {
 					padding={isNarrow ? "0 0 small" : "0 0 medium"}
 				>
 					<Flex
+						alignItems="center"
 						data-print="hidden"
-						direction={isNarrow ? "column" : "row"}
+						gap="x-small"
+						wrap="wrap"
 					>
 						<Flex.Item
 							shouldGrow
@@ -64,7 +66,6 @@ const App: FC = () => {
 							<View
 								as="div"
 								display="inline-block"
-								margin={isNarrow ? "0 0 small" : "0"}
 							>
 								<Link href="/nutritionfacts">
 									<InlineSVG
@@ -79,14 +80,14 @@ const App: FC = () => {
 						</Flex.Item>
 						{product?.uid && (
 							<Flex.Item>
-								<View margin={isNarrow ? "0" : "0 x-small 0"}>
+								<View margin="0 x-small 0 0">
 									<EmbedControl
 										color={isDark ? "primary-inverse" : "primary"}
 										layout={layout}
 										product={product}
 									/>
 								</View>
-								<View margin="0 x-small 0">
+								<View margin="0 x-small 0 0">
 									<LinkControl
 										color={isDark ? "primary-inverse" : "primary"}
 										product={product}
@@ -94,6 +95,9 @@ const App: FC = () => {
 								</View>
 							</Flex.Item>
 						)}
+						<Flex.Item>
+							<ColorSchemeToggle />
+						</Flex.Item>
 					</Flex>
 				</View>
 			)}
