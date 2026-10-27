@@ -12,7 +12,7 @@ export default mergeConfig(
 		},
 
 		pack: {
-			clean: false,
+			clean: true,
 			dts: false,
 			entry: { themeEditor: "src/assets/scripts/index.ts" },
 			format: "iife",

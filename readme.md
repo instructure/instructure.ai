@@ -65,6 +65,9 @@ it prepares root public files, builds the root site first, then builds the other
 apps (including newly generated apps) into their existing subdirectories, and synchronizes the issue-template
 package list. Roadmap asset generation and Canvas MCP style optimization remain
 part of their build tasks.
+Roadmap's asset pipeline cleans generated `public/` output before bundling scripts,
+then regenerates styles, static assets, and API definitions so removed assets are
+not carried into later deployments.
 
 Tasks are uncached initially because builds share `dist/` and maintenance
 operations have side effects. Remote refresh, release/version, and publication
