@@ -52,7 +52,11 @@ function execute(
 					"-Command",
 					`function Read-Host { ConvertTo-SecureString '${emptySecret ? "" : secret}' -AsPlainText -Force }\n${command(key, platform)}`,
 				],
-				{ cwd: directory, encoding: "utf8" },
+				{
+					cwd: directory,
+					encoding: "utf8",
+					timeout: platform === "windows" ? 15_000 : undefined,
+				},
 			);
 }
 
@@ -60,26 +64,34 @@ for (const platform of ["mac", "windows"] as const) {
 	describe.skipIf(platform === "mac" ? !bashAvailable : !powershellAvailable)(
 		`${platform} configuration command`,
 		() => {
-			it.each(["public", "private"] as const)("creates a missing %s configuration", (key) => {
-				const directory = fixture();
-				const result = execute(platform, key, directory);
-				expect(result.status, result.stderr).toBe(0);
-				const config = JSON.parse(readFileSync(join(directory, ".agents/mcp_config.json"), "utf8"));
-				expect(config).toEqual({
-					mcpServers: {
-						"canvas-mcp": {
-							serverUrl: "https://example.test/mcp",
-							oauth: {
-								clientId: "12345000000000001",
-								...(key === "private" ? { clientSecret: secret } : {}),
+			const testTimeout = platform === "windows" ? 20_000 : 5_000;
+
+			it.each(["public", "private"] as const)(
+				"creates a missing %s configuration",
+				(key) => {
+					const directory = fixture();
+					const result = execute(platform, key, directory);
+					expect(result.status, result.stderr).toBe(0);
+					const config = JSON.parse(
+						readFileSync(join(directory, ".agents/mcp_config.json"), "utf8"),
+					);
+					expect(config).toEqual({
+						mcpServers: {
+							"canvas-mcp": {
+								serverUrl: "https://example.test/mcp",
+								oauth: {
+									clientId: "12345000000000001",
+									...(key === "private" ? { clientSecret: secret } : {}),
+								},
 							},
 						},
-					},
-				});
-				expect(result.stdout).not.toContain(secret);
-				expect(result.stderr).not.toContain(secret);
-				expect(readdirSync(join(directory, ".agents"))).toEqual(["mcp_config.json"]);
-			});
+					});
+					expect(result.stdout).not.toContain(secret);
+					expect(result.stderr).not.toContain(secret);
+					expect(readdirSync(join(directory, ".agents"))).toEqual(["mcp_config.json"]);
+				},
+				testTimeout,
+			);
 			it.each(["public", "private"] as const)(
 				"merges and reruns %s configuration without losing settings",
 				(key) => {
@@ -112,14 +124,19 @@ for (const platform of ["mac", "windows"] as const) {
 						},
 					});
 				},
+				testTimeout,
 			);
-			it("adds missing mcpServers to an existing configuration", () => {
-				const directory = fixture('{"keep":true}');
-				expect(execute(platform, "public", directory).status).toBe(0);
-				expect(
-					JSON.parse(readFileSync(join(directory, ".agents/mcp_config.json"), "utf8")).keep,
-				).toBe(true);
-			});
+			it(
+				"adds missing mcpServers to an existing configuration",
+				() => {
+					const directory = fixture('{"keep":true}');
+					expect(execute(platform, "public", directory).status).toBe(0);
+					expect(
+						JSON.parse(readFileSync(join(directory, ".agents/mcp_config.json"), "utf8")).keep,
+					).toBe(true);
+				},
+				testTimeout,
+			);
 			it.each([
 				"",
 				"{broken",
@@ -129,20 +146,28 @@ for (const platform of ["mac", "windows"] as const) {
 				'{"mcpServers":[]}',
 				'{"mcpServers":{"canvas-mcp":false}}',
 				'{"mcpServers":{"canvas-mcp":{"oauth":"bad"}}}',
-			])("rejects invalid configuration without overwriting it: %s", (initial) => {
-				const directory = fixture(initial);
-				const result = execute(platform, "public", directory);
-				expect(result.status).not.toBe(0);
-				expect(result.stderr).not.toBe("");
-				expect(readFileSync(join(directory, ".agents/mcp_config.json"), "utf8")).toBe(initial);
-				expect(readdirSync(join(directory, ".agents"))).toEqual(["mcp_config.json"]);
-			});
-			it("rejects an empty private secret without overwriting the file", () => {
-				const directory = fixture("{}");
-				expect(execute(platform, "private", directory, true).status).not.toBe(0);
-				expect(readFileSync(join(directory, ".agents/mcp_config.json"), "utf8")).toBe("{}");
-				expect(readdirSync(join(directory, ".agents"))).toEqual(["mcp_config.json"]);
-			});
+			])(
+				"rejects invalid configuration without overwriting it: %s",
+				(initial) => {
+					const directory = fixture(initial);
+					const result = execute(platform, "public", directory);
+					expect(result.status).not.toBe(0);
+					expect(result.stderr).not.toBe("");
+					expect(readFileSync(join(directory, ".agents/mcp_config.json"), "utf8")).toBe(initial);
+					expect(readdirSync(join(directory, ".agents"))).toEqual(["mcp_config.json"]);
+				},
+				testTimeout,
+			);
+			it(
+				"rejects an empty private secret without overwriting the file",
+				() => {
+					const directory = fixture("{}");
+					expect(execute(platform, "private", directory, true).status).not.toBe(0);
+					expect(readFileSync(join(directory, ".agents/mcp_config.json"), "utf8")).toBe("{}");
+					expect(readdirSync(join(directory, ".agents"))).toEqual(["mcp_config.json"]);
+				},
+				testTimeout,
+			);
 		},
 	);
 }
