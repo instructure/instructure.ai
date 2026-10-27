@@ -1,9 +1,10 @@
 import {
-  type AiInfoAiInformationProps,
-  type AiInfoDataPermissionLevelsProps,
-  type AiInfoNutritionFactsProps,
-  type AiInfoProps,
+	type AiInfoAiInformationProps,
+	type AiInfoDataPermissionLevelsProps,
+	type AiInfoNutritionFactsProps,
+	type AiInfoProps,
 } from "./types";
+
 import aiexperiences from "./components/aiexperiences";
 import askyourdata from "./components/askyourdata";
 import assessmentauthoringassistance from "./components/assessmentauthoringassistance";
@@ -26,92 +27,98 @@ import conversionalignment from "./components/conversionalignment";
 import discussioninsights from "./components/discussioninsights";
 import igniteagent from "./components/igniteagent";
 import itemauthoringassistance from "./components/itemauthoringassistance";
+import pdbsmartskillextractor from "./components/pdbsmartskillextractor";
 import portfolios from "./components/portfolios";
 import quickreassess from "./components/quickreassess";
 import rubricgenerator from "./components/rubricgenerator";
 import smartsearch from "./components/smartsearch";
 import studytools from "./components/studytools";
 import supportpandabot from "./components/supportpandabot";
+
 const pluck = <TRecord extends Record<string, object>, K extends keyof TRecord[keyof TRecord]>(
-  obj: TRecord,
-  key: K,
-): {
-  [P in keyof TRecord]: TRecord[P][K];
-} => {
-  const out = {} as {
-    [P in keyof TRecord]: TRecord[P][K];
-  };
-  for (const k in obj) {
-    out[k] = obj[k][key];
-  }
-  return out;
+	obj: TRecord,
+	key: K,
+): { [P in keyof TRecord]: TRecord[P][K] } => {
+	const out = {} as { [P in keyof TRecord]: TRecord[P][K] };
+	for (const k in obj) {
+		out[k] = obj[k][key];
+	}
+	return out;
 };
+
 const AiInfo: AiInfoProps = {
-  aiexperiences,
-  askyourdata,
-  assessmentauthoringassistance,
-  canvasa11ycheckeralttextgenerator,
-  canvasa11ycheckertablecaptions,
-  canvascoursetranslation,
-  canvasdiscussionsummaries,
-  canvasgradingassistance,
-  canvasinboxtranslation,
-  careeragent,
-  careerassistant,
-  careercontentgeneration,
-  careerflashcards,
-  careerkeytakeaways,
-  careerlearnerchat,
-  careerquizzes,
-  careerskillsextraction,
-  careersummarization,
-  conversionalignment,
-  discussioninsights,
-  igniteagent,
-  itemauthoringassistance,
-  portfolios,
-  quickreassess,
-  rubricgenerator,
-  smartsearch,
-  studytools,
-  supportpandabot,
+	aiexperiences,
+	askyourdata,
+	assessmentauthoringassistance,
+	canvasa11ycheckeralttextgenerator,
+	canvasa11ycheckertablecaptions,
+	canvascoursetranslation,
+	canvasdiscussionsummaries,
+	canvasgradingassistance,
+	canvasinboxtranslation,
+	careeragent,
+	careerassistant,
+	careercontentgeneration,
+	careerflashcards,
+	careerkeytakeaways,
+	careerlearnerchat,
+	careerquizzes,
+	careerskillsextraction,
+	careersummarization,
+	conversionalignment,
+	discussioninsights,
+	igniteagent,
+	itemauthoringassistance,
+	pdbsmartskillextractor,
+	portfolios,
+	quickreassess,
+	rubricgenerator,
+	smartsearch,
+	studytools,
+	supportpandabot,
 };
+
 const nutritionFacts: AiInfoNutritionFactsProps = pluck(AiInfo, "nutritionFacts");
+
 const dataPermissionLevels: AiInfoDataPermissionLevelsProps = pluck(AiInfo, "dataPermissionLevels");
+
 const aiInformation: AiInfoAiInformationProps = pluck(AiInfo, "aiInformation");
+
 export {
-  AiInfo,
-  nutritionFacts,
-  dataPermissionLevels,
-  aiInformation,
-  aiexperiences,
-  askyourdata,
-  assessmentauthoringassistance,
-  canvasa11ycheckeralttextgenerator,
-  canvasa11ycheckertablecaptions,
-  canvascoursetranslation,
-  canvasdiscussionsummaries,
-  canvasgradingassistance,
-  canvasinboxtranslation,
-  careeragent,
-  careerassistant,
-  careercontentgeneration,
-  careerflashcards,
-  careerkeytakeaways,
-  careerlearnerchat,
-  careerquizzes,
-  careerskillsextraction,
-  careersummarization,
-  conversionalignment,
-  discussioninsights,
-  igniteagent,
-  itemauthoringassistance,
-  portfolios,
-  quickreassess,
-  rubricgenerator,
-  smartsearch,
-  studytools,
-  supportpandabot,
+	AiInfo,
+	nutritionFacts,
+	dataPermissionLevels,
+	aiInformation,
+	aiexperiences,
+	askyourdata,
+	assessmentauthoringassistance,
+	canvasa11ycheckeralttextgenerator,
+	canvasa11ycheckertablecaptions,
+	canvascoursetranslation,
+	canvasdiscussionsummaries,
+	canvasgradingassistance,
+	canvasinboxtranslation,
+	careeragent,
+	careerassistant,
+	careercontentgeneration,
+	careerflashcards,
+	careerkeytakeaways,
+	careerlearnerchat,
+	careerquizzes,
+	careerskillsextraction,
+	careersummarization,
+	conversionalignment,
+	discussioninsights,
+	igniteagent,
+	itemauthoringassistance,
+	pdbsmartskillextractor,
+	portfolios,
+	quickreassess,
+	rubricgenerator,
+	smartsearch,
+	studytools,
+	supportpandabot,
 };
+
 export type * from "./types";
 export default AiInfo;

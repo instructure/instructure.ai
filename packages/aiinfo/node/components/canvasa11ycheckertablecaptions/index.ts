@@ -1,11 +1,13 @@
-import {
-	type AiInformationProps,
-	type DataPermissionLevelsProps,
-	type NutritionFactsProps,
-	type AiInfoFeatureProps,
+import type {
+	AiInformationProps,
+	DataPermissionLevelsProps,
+	NutritionFactsProps,
+	AiInfoFeatureProps,
 } from "../../types";
+
 const FEATURE_NAME = "Course Accessibility Checker: Table caption generation";
 const UID = "canvasa11ycheckertablecaptions";
+
 const DATA_PERMISSION_LEVELS: DataPermissionLevelsProps["data"] = [
 	{
 		description:
@@ -123,6 +125,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 		],
 	},
 ];
+
 const nutritionFacts: NutritionFactsProps = {
 	closeButtonText: "Close",
 	closeIconButtonScreenReaderLabel: "Close",
@@ -132,6 +135,7 @@ const nutritionFacts: NutritionFactsProps = {
 	title: "AI Nutrition Facts",
 	triggerText: "Nutrition Facts",
 };
+
 const dataPermissionLevels: DataPermissionLevelsProps = {
 	closeButtonText: "Close",
 	closeIconButtonScreenReaderLabel: "Close dialog",
@@ -142,6 +146,7 @@ const dataPermissionLevels: DataPermissionLevelsProps = {
 	title: "Data Permission Levels",
 	triggerText: "Data Permission Levels",
 };
+
 const aiInformation: AiInformationProps = {
 	data: [
 		{
@@ -152,8 +157,8 @@ const aiInformation: AiInformationProps = {
 			modelNameText: "Base Model",
 			nutritionFactsModalTriggerText: "AI Nutrition Facts",
 			permissionLevel: "LEVEL 2",
-			permissionLevelText: "Permission Level:",
 			permissionLevelsModalTriggerText: "Data Permission Levels",
+			permissionLevelText: "Permission Level:",
 			privacyNoticeText: "",
 			privacyNoticeUrl: "",
 		},
@@ -174,6 +179,7 @@ const aiInformation: AiInformationProps = {
 	title: "Features",
 	trigger: undefined,
 };
+
 const canvasa11ycheckertablecaptions: AiInfoFeatureProps = {
 	aiInformation,
 	dataPermissionLevels,
@@ -185,4 +191,5 @@ const canvasa11ycheckertablecaptions: AiInfoFeatureProps = {
 	revision: "2026.10.16",
 	uid: UID,
 };
+
 export default canvasa11ycheckertablecaptions;
