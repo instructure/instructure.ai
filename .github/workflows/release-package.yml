@@ -58,7 +58,7 @@ jobs:
       - uses: actions/setup-node@v7
         if: steps.find_tags.outputs.tags != ''
         with:
-          node-version: "24"
+          node-version: "26"
           check-latest: true
           registry-url: "https://registry.npmjs.org"
           cache: "pnpm"
@@ -96,17 +96,13 @@ jobs:
 
             # Install deps
             pnpm install --frozen-lockfile
-            pnpm typecheck
-
-            # Enable vite-node loader using the register() API
-            export NODE_OPTIONS="--import=${{ github.workspace }}/plugins/vite-node.plugin.loader.mjs"
-
+            pnpm exec vp run typecheck:all
 
             # Only build & test if package is in /packages (skip apps and shared-configs)
             if [ -d "packages/$PKG_NAME" ] && [ "$PKG_NAME" != "shared-configs" ]; then
               echo "Building package: $PKG_NAME (in /packages)"
-              pnpm test package "$PKG_NAME"
-              pnpm build package "$PKG_NAME"
+              pnpm exec vp run "@instructure.ai/$PKG_NAME#test"
+              pnpm exec vp run "@instructure.ai/$PKG_NAME#build"
             else
               echo "Skipping build/test for $PKG_NAME (not in /packages or is shared-configs)."
             fi

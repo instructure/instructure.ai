@@ -1,0 +1,7 @@
+import aiinfo = require("@instructure.ai/aiinfo");
+
+const uid: keyof typeof aiinfo.default = "smartsearch";
+const name: string = aiinfo.nutritionFacts[uid].featureName;
+const permission: string = aiinfo.dataPermissionLevels[uid].currentFeature;
+const data: typeof aiinfo.default.smartsearch.aiInformation = aiinfo.aiInformation[uid];
+console.log(name, permission, data);
