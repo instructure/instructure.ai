@@ -28,16 +28,19 @@
 		}
 	},
 	"scripts": {
-		"build": "tsdown && pnpm pack --pack-destination ./src",
+		"build": "vp pack && pnpm pack --pack-destination ./src",
 		"typecheck": "tsc --noEmit",
-		"lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
-		"test": "pnpm vitest run",
-		"<<cliname>>": "vite-node ./src/index.mjs"
+		"lint": "vp lint",
+		"test": "vp test run",
+		"<<cliname>>": "node ./src/index.mjs",
+		"check": "vp check",
+		"release": "vpx ../../scripts/release.mts"
 	},
 	"devDependencies": {
-		"@instructure.ai/shared-configs": "workspace:^"
+		"@instructure.ai/shared-configs": "workspace:^",
+		"vite-plus": "catalog:"
 	},
 	"engines": {
-		"node": ">=24.15.0"
+		"node": ">=26.12.1"
 	}
 }

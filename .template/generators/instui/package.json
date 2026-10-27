@@ -1,0 +1,6 @@
+{
+	"name": "@instructure.ai/create-instui",
+	"private": true,
+	"bin": "./generate.mjs",
+	"type": "module"
+}

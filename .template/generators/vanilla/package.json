@@ -1,0 +1,6 @@
+{
+	"name": "@instructure.ai/create-vanilla",
+	"private": true,
+	"bin": "./generate.mjs",
+	"type": "module"
+}

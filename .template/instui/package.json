@@ -9,12 +9,14 @@
 	},
 	"type": "module",
 	"scripts": {
-		"build": "vite build",
-		"dev": "vite",
-		"preview": "vite preview",
+		"build": "vp build",
+		"dev": "vp dev",
+		"preview": "vp preview",
 		"typecheck": "tsc --noEmit",
-		"test": "pnpm vitest run",
-		"lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions"
+		"test": "vp test run",
+		"lint": "vp lint",
+		"check": "vp check",
+		"release": "vpx ../../scripts/release.mts"
 	},
 	"dependencies": {
 		"@instructure/ui": "^11.7.10",
@@ -22,9 +24,10 @@
 		"react-dom": "^19.3.1"
 	},
 	"devDependencies": {
-		"@instructure.ai/shared-configs": "workspace:^"
+		"@instructure.ai/shared-configs": "workspace:^",
+		"vite-plus": "catalog:"
 	},
 	"engines": {
-		"node": ">=24.15.0"
+		"node": ">=26.12.1"
 	}
 }
