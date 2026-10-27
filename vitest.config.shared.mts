@@ -1,9 +1,10 @@
-import { defineConfig } from "vitest/config";
-import { fileURLToPath } from "node:url";
+import { defineConfig } from "vite-plus";
 import path from "node:path";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const coveragePlugin = path.resolve(__dirname, "plugins/vitest.plugin.coverageReporter.cjs");
+const coveragePlugin = path.resolve(
+	import.meta.dirname,
+	"plugins/vitest.plugin.coverageReporter.cjs",
+);
 
 export default defineConfig({
 	test: {
@@ -24,7 +25,7 @@ export default defineConfig({
 			reporter: [
 				"text",
 				"json",
-				[coveragePlugin, { file: path.resolve(__dirname, "coverage.yml") }],
+				[coveragePlugin, { file: path.resolve(import.meta.dirname, "coverage.yml") }],
 			],
 		},
 		include: ["{src,scripts,utils,tests}/**/*.{test,spec}.{ts,tsx,js,cjs,mjs,mts}"],
