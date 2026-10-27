@@ -291,7 +291,7 @@ importers:
   apps/nutritionfacts:
     dependencies:
       '@instructure.ai/aiinfo':
-        specifier: workspace:^
+        specifier: ^2.11.22
         version: link:../../packages/aiinfo
       '@instructure/ui':
         specifier: ^11.7.10
