@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { createHash } from "node:crypto";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { createProbe } from "../scripts/probe/server.mts";
 
 const origin = "http://127.0.0.1:8765",
@@ -117,7 +117,7 @@ describe("loopback OAuth probe", () => {
 				code_verifier: verifier,
 				...(method === "client_secret_post" ? { client_secret: "probe-secret" } : {}),
 			};
-			const headers =
+			const headers: Record<string, string> =
 				method === "client_secret_basic"
 					? {
 							Authorization: "Basic " + Buffer.from("probe-client:probe-secret").toString("base64"),

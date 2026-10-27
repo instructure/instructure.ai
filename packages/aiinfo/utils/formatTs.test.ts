@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vite-plus/test";
 
 const importSubject = async () => {
 	const mod = await import("./formatTs.ts");
@@ -75,14 +75,14 @@ const v=1`;
 		].join("\n");
 		const out = await formatTs(lines);
 		expect(out).toContain("export type Id = string;");
-		expect(out).toContain("const nums = [1, 2, 3].map(n => n * n);");
+		expect(out).toContain("const nums = [1, 2, 3].map((n) => n * n);");
 		expect(out).toContain("function add(a: number, b: number) {");
 		expect(out).toContain("class Box<T> {");
 		expect(out.split("\n").length).toBeGreaterThanOrEqual(4);
 	});
 
 	it("wraps and rethrows formatter errors", async () => {
-		vi.doMock("oxfmt", () => ({
+		vi.doMock("vite-plus/fmt", () => ({
 			format: vi.fn().mockRejectedValue(new Error("Boom")),
 		}));
 		const formatTs = await importSubject();

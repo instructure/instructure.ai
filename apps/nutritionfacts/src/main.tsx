@@ -5,26 +5,26 @@ import { type Root } from "react-dom/client";
 import App from "./app";
 
 const mountApp = () => {
-  const foundRoot = document.getElementById("root");
-  const root: HTMLElement =
-    foundRoot ||
-    (() => {
-      throw new Error("Root element not found");
-    })();
+	const foundRoot = document.getElementById("root");
+	const root: HTMLElement =
+		foundRoot ||
+		(() => {
+			throw new Error("Root element not found");
+		})();
 
-  const appRoot: Root = createRoot(root);
+	const appRoot: Root = createRoot(root);
 
-  appRoot.render(
-    <StrictMode>
-      <InstUISettingsProvider>
-        <App />
-      </InstUISettingsProvider>
-    </StrictMode>,
-  );
+	appRoot.render(
+		<StrictMode>
+			<InstUISettingsProvider>
+				<App />
+			</InstUISettingsProvider>
+		</StrictMode>,
+	);
 };
 
 if (typeof globalThis.window !== "undefined" && import.meta.env?.MODE !== "test") {
-  mountApp();
+	mountApp();
 }
 
 export { mountApp };

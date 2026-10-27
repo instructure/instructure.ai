@@ -5,19 +5,19 @@ import { type Dispatch, type SetStateAction } from "react";
 import { type NutritionFactsProps } from "@instructure/ui";
 
 type StateProp<Type, Key extends string> = Record<Key, Type> &
-  Record<`set${Capitalize<Key>}`, Dispatch<SetStateAction<Type>>>;
+	Record<`set${Capitalize<Key>}`, Dispatch<SetStateAction<Type>>>;
 
 interface PageLayout {
-  disclaimer: boolean;
-  copyright: boolean;
-  revision: boolean;
-  permissions: boolean;
+	disclaimer: boolean;
+	copyright: boolean;
+	revision: boolean;
+	permissions: boolean;
 }
 
 type ExtendedNutritionFactsProps = NutritionFactsProps & {
-  description: string;
-  linkText?: string;
-  linkUrl?: string;
+	description: string;
+	linkText?: string;
+	linkUrl?: string;
 };
 
 export type { StateProp, PageLayout, ExtendedNutritionFactsProps };

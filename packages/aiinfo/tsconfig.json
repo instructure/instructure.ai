@@ -7,5 +7,5 @@
 	},
 	"exclude": ["src"],
 	"extends": "../../tsconfig.json",
-	"include": ["node", "utils", "scripts", "vite.config.mts"]
+	"include": ["node", "utils", "scripts", "strings", "tests", "vite.config.mts"]
 }

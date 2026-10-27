@@ -9,17 +9,18 @@
 	},
 	"type": "module",
 	"scripts": {
-		"build": "vite build && vite-node scripts/optimizeStyles.mts",
-		"dev": "vite",
-		"preview": "vite preview",
+		"dev": "vp dev",
+		"preview": "vp preview",
 		"typecheck": "tsc --noEmit",
-		"test": "pnpm vitest run",
-		"lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
+		"test": "vp test run",
+		"lint": "vp lint",
 		"probe": "node scripts/probe/server.mts",
-		"evidence:check": "vite-node scripts/checkEvidence.mts",
+		"evidence:check": "vpx scripts/checkEvidence.mts",
 		"scopes:update": "node scripts/updateScopes.mts",
-		"labels:sync": "vite-node scripts/syncLabels.mts",
-		"tools:update": "vite-node scripts/updateTools.mts"
+		"labels:sync": "vpx scripts/syncLabels.mts",
+		"tools:update": "vpx scripts/updateTools.mts",
+		"check": "vp check",
+		"release": "vpx ../../scripts/release.mts"
 	},
 	"dependencies": {
 		"@pantoken/components": "2.1.1",
@@ -33,9 +34,10 @@
 	"devDependencies": {
 		"@instructure.ai/shared-configs": "workspace:^",
 		"@pantoken/plugin-props-minify": "0.1.4",
-		"postcss": "8.5.30"
+		"postcss": "8.5.31",
+		"vite-plus": "catalog:"
 	},
 	"engines": {
-		"node": ">=24.15.0"
+		"node": ">=26.12.1"
 	}
 }

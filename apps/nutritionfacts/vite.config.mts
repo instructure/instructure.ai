@@ -1,13 +1,26 @@
-import { defineConfig, mergeConfig } from "vite";
-import baseConfig from "@instructure.ai/shared-configs/react";
+import { defineConfig, mergeConfig } from "vite-plus";
+import app from "@instructure.ai/shared-configs/react";
+import tests from "@instructure.ai/shared-configs/vitest";
 
 export default mergeConfig(
-  baseConfig,
-  defineConfig({
-    define: {
-      "import.meta.env.VITE_PACKAGE_VERSION": JSON.stringify(
-        String(process.env.npm_package_version),
-      ),
-    },
-  }),
+	mergeConfig(app(import.meta.dirname), tests),
+	defineConfig({
+		root: import.meta.dirname,
+
+		test: {
+			environment: "jsdom",
+			include: ["index.test.{ts,tsx}"],
+			coverage: { reportsDirectory: `${import.meta.dirname}/coverage` },
+		},
+
+		run: {
+			tasks: {
+				build: {
+					command: "vp build",
+					dependsOn: ["@instructure.ai/site#build", "@instructure.ai/aiinfo#build:lib"],
+					cache: false,
+				},
+			},
+		},
+	}),
 );

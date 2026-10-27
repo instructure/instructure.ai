@@ -1,51 +1,292 @@
 coverage:
   totals:
-    statements: 84.18%
-    branches: 85.12%
-    functions: 91.66%
-    lines: 84.08%
-    total: 86.26%
+    statements: 88.72%
+    branches: 86.38%
+    functions: 96.63%
+    lines: 89.73%
+    total: 90.37%
   scripts:
     totals:
+      statements: 24.4%
+      branches: 23.65%
+      functions: 46.67%
+      lines: 26.47%
+    "checkEvidence.mts":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
+      uncovered_line_numbers: "5-55"
     "optimizeStyles.mts":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
       uncovered_line_numbers: "6-21"
-  src:
-    totals:
-      statements: 68.94%
-      branches: 66.09%
-      functions: 97.62%
-      lines: 68.86%
-    "admin.ts":
+    probe:
+      "server.mts":
+        statements: 66.66%
+        branches: 69.59%
+        functions: 80%
+        lines: 67.62%
+        uncovered_line_numbers: "74-291"
+    "syncLabels.mts":
       statements: 0%
       branches: 0%
       functions: 100%
       lines: 0%
-      uncovered_line_numbers: "3-4"
-    "app.ts":
-      statements: 86.06%
-      branches: 83.43%
-      functions: 92.45%
-      lines: 85.53%
-      uncovered_line_numbers: "26-447"
-    "clients.ts":
-      statements: 100%
-      branches: 83.33%
+      uncovered_line_numbers: "4-11"
+    "updateScopes.mts":
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
+      uncovered_line_numbers: "6-57"
+    "updateTools.mts":
+      statements: 79.71%
+      branches: 72.3%
       functions: 100%
-      lines: 100%
+      lines: 91.22%
+      uncovered_line_numbers: "28-98"
+  src:
+    totals:
+      statements: 90.45%
+      branches: 80.06%
+      functions: 100%
+      lines: 90.55%
+    admin:
+      "config.ts":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+      "key-settings-model.ts":
+        statements: 95.34%
+        branches: 92.85%
+        functions: 100%
+        lines: 100%
+      "key-settings.ts":
+        statements: 100%
+        branches: 87.8%
+        functions: 100%
+        lines: 100%
+      "server-details.ts":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+    "app.ts":
+      statements: 98.03%
+      branches: 89.39%
+      functions: 100%
+      lines: 99.28%
+      uncovered_line_numbers: "42-532"
+    clients:
+      curated:
+        "antigravity-cli-commands.ts":
+          statements: 100%
+          branches: 100%
+          functions: 100%
+          lines: 100%
+        "antigravity-cli.ts":
+          statements: 100%
+          branches: 100%
+          functions: 100%
+          lines: 100%
+        "antigravity-guides.ts":
+          statements: 100%
+          branches: 100%
+          functions: 100%
+          lines: 100%
+        "antigravity.ts":
+          statements: 100%
+          branches: 100%
+          functions: 100%
+          lines: 100%
+        "chatgpt.ts":
+          statements: 100%
+          branches: 100%
+          functions: 100%
+          lines: 100%
+        "claude-ai.ts":
+          statements: 100%
+          branches: 100%
+          functions: 100%
+          lines: 100%
+        "claude-code.ts":
+          statements: 100%
+          branches: 100%
+          functions: 100%
+          lines: 100%
+        "codex-commands.ts":
+          statements: 100%
+          branches: 100%
+          functions: 100%
+          lines: 100%
+        "codex.ts":
+          statements: 100%
+          branches: 100%
+          functions: 100%
+          lines: 100%
+        "copilot-studio.ts":
+          statements: 100%
+          branches: 100%
+          functions: 100%
+          lines: 100%
+        "gemini-cli.ts":
+          statements: 100%
+          branches: 100%
+          functions: 100%
+          lines: 100%
+        "gemini-enterprise.ts":
+          statements: 100%
+          branches: 100%
+          functions: 100%
+          lines: 100%
+        generic:
+          "facts.ts":
+            statements: 100%
+            branches: 100%
+            functions: 100%
+            lines: 100%
+          "index.ts":
+            statements: 100%
+            branches: 100%
+            functions: 100%
+            lines: 100%
+          "personal.ts":
+            statements: 100%
+            branches: 100%
+            functions: 100%
+            lines: 100%
+          "sources.ts":
+            statements: 100%
+            branches: 100%
+            functions: 100%
+            lines: 100%
+        "superhuman-go.ts":
+          statements: 100%
+          branches: 100%
+          functions: 100%
+          lines: 100%
+      "evidence.ts":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+      "facts.ts":
+        statements: 100%
+        branches: 80%
+        functions: 100%
+        lines: 100%
+      "ids.ts":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+      "index.ts":
+        statements: 100%
+        branches: 94.11%
+        functions: 100%
+        lines: 100%
+      "rulesync-research.ts":
+        statements: 99.03%
+        branches: 91.76%
+        functions: 100%
+        lines: 100%
+      "rulesync.ts":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+      "status.ts":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+    guides:
+      "highlight.ts":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+      "render.ts":
+        statements: 94.73%
+        branches: 96.04%
+        functions: 100%
+        lines: 95.23%
+        uncovered_line_numbers: "116-141"
+      "screenshot-manifest.ts":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+      "screenshots.ts":
+        statements: 94.44%
+        branches: 93.75%
+        functions: 100%
+        lines: 100%
+      "shared.ts":
+        statements: 100%
+        branches: 83.33%
+        functions: 100%
+        lines: 100%
+    help:
+      "content.ts":
+        statements: 86.66%
+        branches: 82.35%
+        functions: 100%
+        lines: 85.71%
+        uncovered_line_numbers: "43-51"
+      "disclosures.ts":
+        statements: 80%
+        branches: 80%
+        functions: 100%
+        lines: 83.33%
+        uncovered_line_numbers: "15-38"
+      "inline.ts":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+      "labels.ts":
+        statements: 100%
+        branches: 100%
+        functions: 100%
+        lines: 100%
+      "render.ts":
+        statements: 100%
+        branches: 90.51%
+        functions: 100%
+        lines: 100%
+      "tools.ts":
+        statements: 100%
+        branches: 98%
+        functions: 100%
+        lines: 100%
     "main.ts":
       statements: 0%
       branches: 0%
       functions: 100%
       lines: 0%
       uncovered_line_numbers: "3-4"
+    oauth:
+      "codex-callback.ts":
+        statements: 91.66%
+        branches: 88.23%
+        functions: 100%
+        lines: 90.9%
+        uncovered_line_numbers: "16-21"
+    "page.ts":
+      statements: 100%
+      branches: 97.91%
+      functions: 100%
+      lines: 100%
+    "platform.ts":
+      statements: 100%
+      branches: 100%
+      functions: 100%
+      lines: 100%
     "rulesyncTargets.ts":
       statements: 100%
       branches: 100%
@@ -53,12 +294,39 @@ coverage:
       lines: 100%
     "scopes.ts":
       statements: 100%
-      branches: 100%
+      branches: 16.66%
       functions: 100%
       lines: 100%
+    "setup.ts":
+      statements: 88.88%
+      branches: 88%
+      functions: 100%
+      lines: 86.95%
+      uncovered_line_numbers: "21-39"
     "state.ts":
-      statements: 96.49%
-      branches: 95.89%
-      functions: 90.9%
-      lines: 96.49%
-      uncovered_line_numbers: "127-176"
+      statements: 100%
+      branches: 99%
+      functions: 100%
+      lines: 100%
+    ui:
+      "copy.ts":
+        statements: 100%
+        branches: 50%
+        functions: 100%
+        lines: 100%
+      "html.ts":
+        statements: 100%
+        branches: 50%
+        functions: 100%
+        lines: 100%
+      "segmented-controls.ts":
+        statements: 100%
+        branches: 83.33%
+        functions: 100%
+        lines: 100%
+      "theme.ts":
+        statements: 86.66%
+        branches: 74.07%
+        functions: 100%
+        lines: 86.66%
+        uncovered_line_numbers: "9-50"

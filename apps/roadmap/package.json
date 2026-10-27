@@ -10,17 +10,18 @@
 	},
 	"type": "module",
 	"scripts": {
-		"build": "pnpm build:assets && vite build",
-		"build:apis": "vite-node ./scripts/buildApis.mts",
+		"build:apis": "vpx ./scripts/buildApis.mts",
 		"build:assets": "pnpm build:scripts && pnpm build:styles && pnpm build:static && pnpm build:apis",
-		"build:scripts": "vite-node ./scripts/buildScripts.mts",
-		"build:static": "vite-node ./scripts/buildStatic.mts",
-		"build:styles": "vite-node ./scripts/buildStyles.mts",
-		"dev": "vite",
-		"lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
-		"preview": "vite preview",
-		"test": "pnpm vitest run",
-		"typecheck": "tsc --noEmit"
+		"build:scripts": "vpx ./scripts/buildScripts.mts",
+		"build:static": "vpx ./scripts/buildStatic.mts",
+		"build:styles": "vpx ./scripts/buildStyles.mts",
+		"dev": "vp dev",
+		"lint": "vp lint",
+		"preview": "vp preview",
+		"test": "vp test run",
+		"typecheck": "tsc --noEmit",
+		"check": "vp check",
+		"release": "vpx ../../scripts/release.mts"
 	},
 	"dependencies": {
 		"@instructure/ui": "^11.7.10",
@@ -29,6 +30,10 @@
 		"react-dom": "^19.3.1"
 	},
 	"devDependencies": {
-		"@instructure.ai/shared-configs": "workspace:^"
+		"@instructure.ai/shared-configs": "workspace:^",
+		"vite-plus": "catalog:"
+	},
+	"engines": {
+		"node": ">=26.12.1"
 	}
 }

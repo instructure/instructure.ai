@@ -1,5 +1,5 @@
 // @vitest-environment node
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { clientDefinition } from "../src/clients";
 import { CallbackCache, codexCallbackUri } from "../src/oauth/codex-callback";
 

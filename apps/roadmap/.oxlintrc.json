@@ -1,6 +1,0 @@
-{
-  "$schema": "../../node_modules/oxlint/configuration_schema.json",
-  "extends": ["../../.oxlintrc.json"],
-  "ignorePatterns": ["**/public/**"],
-  "plugins": ["react", "react-perf"]
-}

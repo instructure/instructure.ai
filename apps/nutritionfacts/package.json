@@ -1,32 +1,37 @@
 {
-  "name": "@instructure.ai/nutritionfacts",
-  "version": "2.11.10",
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/instructure/instructure.ai",
-    "directory": "apps/nutritionfacts"
-  },
-  "type": "module",
-  "scripts": {
-    "build": "vite build",
-    "dev": "vite",
-    "lint": "oxfmt && oxlint --type-aware --fix --fix-suggestions",
-    "preview": "vite preview",
-    "test": "pnpm vitest run",
-    "typecheck": "tsc --noEmit",
-    "update-cache": "vite-node ./scripts/updateCache.mts"
-  },
-  "dependencies": {
-    "@instructure.ai/aiinfo": "^2.11.22",
-    "@instructure/ui": "^11.7.10",
-    "react": "^19.3.1",
-    "react-dom": "^19.3.1"
-  },
-  "devDependencies": {
-    "@instructure.ai/shared-configs": "workspace:^"
-  },
-  "browserslist": [
-    "extends @instructure/browserslist-config-instui"
-  ]
+	"name": "@instructure.ai/nutritionfacts",
+	"version": "2.11.10",
+	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/instructure/instructure.ai",
+		"directory": "apps/nutritionfacts"
+	},
+	"type": "module",
+	"scripts": {
+		"dev": "vp dev",
+		"lint": "vp lint",
+		"preview": "vp preview",
+		"test": "vp test run",
+		"typecheck": "tsc --noEmit",
+		"update-cache": "vpx ./scripts/updateCache.mts",
+		"check": "vp check",
+		"release": "vpx ../../scripts/release.mts"
+	},
+	"dependencies": {
+		"@instructure.ai/aiinfo": "^2.11.22",
+		"@instructure/ui": "^11.7.10",
+		"react": "^19.3.1",
+		"react-dom": "^19.3.1"
+	},
+	"devDependencies": {
+		"@instructure.ai/shared-configs": "workspace:^",
+		"vite-plus": "catalog:"
+	},
+	"browserslist": [
+		"extends @instructure/browserslist-config-instui"
+	],
+	"engines": {
+		"node": ">=26.12.1"
+	}
 }

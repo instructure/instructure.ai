@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { renderHelpInlineText } from "../src/help/inline";
 
 describe("Help inline icons", () => {
