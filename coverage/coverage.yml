@@ -1,21 +1,16 @@
 coverage:
   totals:
-    statements: 2.88%
-    branches: 0.99%
-    functions: 2.96%
-    lines: 2.95%
-    total: 2.45%
+    statements: 6.37%
+    branches: 8.27%
+    functions: 5.71%
+    lines: 5.69%
+    total: 6.51%
   plugins:
     totals:
-      statements: 33.33%
-      branches: 27.78%
-      functions: 33.33%
-      lines: 33.33%
-    "vite-node.plugin.loader.mjs":
-      statements: 100%
-      branches: 83.33%
-      functions: 100%
-      lines: 100%
+      statements: 0%
+      branches: 0%
+      functions: 0%
+      lines: 0%
     "vite.plugin.multiPreview.mts":
       statements: 0%
       branches: 0%
@@ -27,69 +22,34 @@ coverage:
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "2-219"
+      uncovered_line_numbers: "2-210"
   scripts:
     totals:
-      statements: 8.33%
-      branches: 10%
-      functions: 6.67%
-      lines: 10%
-    "build.mts":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "20-166"
-    "dev.mts":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "16-52"
-    "info.mts":
-      statements: 83.33%
-      branches: 100%
-      functions: 66.66%
-      lines: 100%
+      statements: 13%
+      branches: 40%
+      functions: 62.5%
+      lines: 13.75%
     "issues.mts":
       statements: 0%
       branches: 0%
       functions: 0%
       lines: 0%
-      uncovered_line_numbers: "12-88"
-    "lint.mts":
+      uncovered_line_numbers: "7-30"
+    "prepareConsumer.mts":
       statements: 0%
       branches: 0%
-      functions: 0%
+      functions: 100%
       lines: 0%
-      uncovered_line_numbers: "16-110"
-    "new.mts":
+      uncovered_line_numbers: "5-30"
+    "prepareSite.mts":
       statements: 0%
-      branches: 0%
-      functions: 0%
+      branches: 100%
+      functions: 100%
       lines: 0%
-      uncovered_line_numbers: "12-191"
-    "preview.mts":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "19-80"
+      uncovered_line_numbers: "4-8"
     "release.mts":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "19-239"
-    "test.mts":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "17-119"
-    "workspace.mts":
-      statements: 0%
-      branches: 0%
-      functions: 0%
-      lines: 0%
-      uncovered_line_numbers: "23-520"
+      statements: 52%
+      branches: 60%
+      functions: 50%
+      lines: 55%
+      uncovered_line_numbers: "21-29"

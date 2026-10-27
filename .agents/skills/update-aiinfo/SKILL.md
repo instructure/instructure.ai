@@ -1,6 +1,6 @@
 ---
 name: update-aiinfo
-description: 'Refresh aiinfo from the upstream Google Sheet, cut a package release, open and merge its PR, verify npm publication, and invoke update-nutrition-facts to deploy the site. Use when asked to update aiinfo, refresh its source data, or run the package and nutritionfacts release workflow.'
+description: "Refresh aiinfo from the upstream Google Sheet, cut a package release, open and merge its PR, verify npm publication, and invoke update-nutrition-facts to deploy the site. Use when asked to update aiinfo, refresh its source data, or run the package and nutritionfacts release workflow."
 ---
 
 # Update AiInfo
@@ -46,11 +46,11 @@ the [update-nutrition-facts skill](../update-nutrition-facts/SKILL.md).
 4. If there are no upstream differences, report that. Continue a specifically
    requested version-only release, but do not manufacture a data changelog.
 5. After generation, run the focused updater tests first:
-   `pnpm -F aiinfo exec vitest run scripts/updateCache.test.ts --pool=threads --maxWorkers=1 --testTimeout=60000`.
+   `pnpm -F aiinfo exec vp test run scripts/updateCache.test.ts --pool=threads --maxWorkers=1 --testTimeout=60000`.
 6. Run the full aiinfo suite with
-   `pnpm -F aiinfo exec vitest run --pool=threads --maxWorkers=1 --testTimeout=60000`,
-   then `UPDATE=1 CI=1 pnpm build package aiinfo`.
-   Run `pnpm test app nutritionfacts` and `pnpm build app nutritionfacts` against
+   `pnpm -F aiinfo exec vp test run --pool=threads --maxWorkers=1 --testTimeout=60000`,
+   then `UPDATE=1 CI=1 pnpm exec vp run @instructure.ai/aiinfo#build`.
+   Run `pnpm exec vp run @instructure.ai/nutritionfacts#test` and `pnpm exec vp run @instructure.ai/nutritionfacts#build` against
    the refreshed workspace data. Report failures and do not bypass release gates.
 
 ## 3. Version And Open The PR
@@ -59,7 +59,7 @@ the [update-nutrition-facts skill](../update-nutrition-facts/SKILL.md).
    may modify generated files. Stage only intended aiinfo cache, changelog,
    generated modules/exports, and built outputs; never stage an entire dirty tree.
 2. Commit those paths with an explicit pathspec, then check the index is empty
-   before `pnpm release package aiinfo`. This command bumps the patch version and
+   before `pnpm exec vp run @instructure.ai/aiinfo#release`. This command bumps the patch version and
    commits the manifest, but commits everything staged; it does not publish npm.
    Use `--version=X.Y.Z` only when the user requests a specific valid version.
 3. Push the branch and open a PR targeting main. Include the actual changes,

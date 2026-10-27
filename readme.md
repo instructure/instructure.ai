@@ -1,244 +1,138 @@
 # instructure.ai
 
-This is a monorepo of apps and packages. Apps are served on the [instructure.ai](https://instructure.ai) website and packages are released to the [instructure.ai](https://www.npmjs.com/org/instructure.ai) NPM organization.
+This pnpm monorepo contains apps deployed to [instructure.ai](https://instructure.ai)
+and packages published to the [instructure.ai npm organization](https://www.npmjs.com/org/instructure.ai).
 
-Configs and dev dependencies are shared from the root package `@instructure.ai/shared-configs` and extended in workspace packages in `/apps` and `/packages`.
+## Development requirements
 
-## Development Requirements
+Use Node **26.12.1** (pinned in [.node-version](./.node-version)) and pnpm
+**12.15.0** (pinned in [package.json](./package.json)). Vite+ **1.4.0** provides
+Vite, Vitest, Oxc, library packaging, script execution, and workspace tasks.
+The [pnpm workspace catalog](./pnpm-workspace.yaml) keeps the bundled tools and
+coverage providers aligned. Upgrade Vite+ as a unit rather than updating its
+bundled components independently.
+The direct Vitest declaration and coverage-provider versions stay aligned with
+the bundled runner for peer resolution and editor integration.
 
-Use Node.js 24.15.0 or newer and pnpm 12.14.0 (pinned in `package.json`). Run `pnpm install --frozen-lockfile`, `pnpm typecheck`, and `pnpm test all` from the workspace root. `pnpm build apps` builds the deployed site; `pnpm build:root` builds its root page.
+The published `@instructure.ai/aiinfo` package supports **Node >=20.0.0**.
+Its builds target Node 20; maintenance scripts and all other workspace packages
+use Node 26. CI tests the packed ESM and CommonJS exports on Node 20.0.0,
+current Node 20, and Node 26 without loading the development toolchain.
+`vp migrate` may flag aiinfo's public Node 20 engine range for review: do not
+raise that consumer requirement to satisfy the test runner. Test/CI execution
+uses the separately pinned Node 26 runtime.
 
-The workspace uses TypeScript 7 through `tsc`, including root scripts and shared build configurations. Library declarations are generated separately from maintenance scripts. Validate the library with `pnpm --filter @instructure.ai/aiinfo build:lib`; its full build also refreshes remote feature data.
-
-TypeScript 7.0.2 and YAML 2 are retained for build-tool peer compatibility; Node type declarations follow the supported Node 24 runtime. Ansis 5 is an explicitly pinned beta. CI lint reporting is advisory while existing source findings are addressed separately; compiler, test, and build checks are blocking.
-
-## @instructure.ai/shared-configs
-
-![Version](https://img.shields.io/github/package-json/version/instructure/instructure.ai?labelColor=%230E1721&color=%234279B6) ![NPM Builds](https://img.shields.io/github/actions/workflow/status/instructure/instructure.ai/release-package.yml?logo=npm&logoColor=%23CB3837&label=package%20builds&labelColor=%230E1721) ![Web Builds](https://img.shields.io/github/actions/workflow/status/instructure/instructure.ai/deploy-apps.yml?logo=javascript&logoColor=%23F7DF1E&label=web%20builds&labelColor=%230E1721) ![Code Coverage](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Finstructure%2Finstructure.ai%2Frefs%2Fheads%2Fmain%2Fcoverage%2Fcoverage.yml&query=coverage.totals.total&logo=vitest&logoColor=%236E9F18&label=coverage&labelColor=%230E1721&color=%234279B6)
-
-`@instructure.ai/shared-configs` is the root package of this monorepo and provides package templates, workspace utilities, and base configurations.
-
-### Package Templates
-
-Package templates are provided for apps and packages and can be instantiated with the Workspace script `new`.
-
-```shell
-pnpm new <packageName> [--template (default: vanilla | react | instui | esm)]
+```sh
+pnpm install --frozen-lockfile
+pnpm exec vp check
+pnpm exec vp run typecheck:all
+pnpm exec vp run test:all
+pnpm exec vp run build:apps
+pnpm exec vp run @instructure.ai/aiinfo#build:lib
 ```
 
-### Workspace Utilities
+Formatting, lint, compiler checks, tests, and builds are blocking in CI.
+Existing warning-level lint rules remain warnings. `vp check` includes
+type-aware checks; explicit TypeScript 7 compiler checks also validate every
+workspace and aiinfo's declaration project.
 
-In addition to pnpm builtins, the `workspace` script provides an interface for interacting with multiple packages at once.
+## Native workspace commands
 
-```shell
-pnpm build <option> [args]
-pnpm dev <packagename> [args]
-pnpm preview <packagename> [args]
-pnpm release <option> [args]
-pnpm lint <option> [args]
-pnpm test <option> [args]
-pnpm workspace [info]
+Use Vite+'s builtin commands and task filtering, not custom workspace dispatchers.
+The local CLI works without a global Vite+ installation:
+
+```sh
+# Select a package task and forward arguments
+pnpm exec vp run @instructure.ai/canvas-mcp#test --coverage
+pnpm exec vp run --filter './apps/*' typecheck
+
+# Start or preview one app, preserving its package-local config
+pnpm exec vp -C apps/nutritionfacts dev
+pnpm exec vp -C apps/nutritionfacts preview
+
+# Inspect tasks and workspace packages
+pnpm exec vp run
+pnpm list -r --depth -1
+
+# Apply formatting or lint fixes explicitly
+pnpm exec vp fmt
+pnpm exec vp lint --fix
 ```
 
-Global `option`s provided by `workspace` are:
+`vp build` and `vp test` invoke builtin tools; `vp run <task>` executes the
+configured task and its dependencies. Use `build:apps` for the deployed site:
+it prepares root public files, builds the root site first, then builds the other
+apps into their existing subdirectories, and synchronizes the issue-template
+package list. Roadmap asset generation and Canvas MCP style optimization remain
+part of their build tasks.
 
-- all
-- apps
-- packages
-- root
-- app `<name>`
-- package `<name>`
-- `<name>`
+Tasks are uncached initially because builds share `dist/` and maintenance
+operations have side effects. Remote refresh, release/version, and publication
+operations are never part of ordinary validation. `aiinfo#build:lib` uses checked-in
+data; the full `aiinfo#build` intentionally refreshes data and creates a pnpm tarball.
+`vp pack` builds library artifacts; `pnpm pack` creates the npm release archive.
 
-Though individual scripts may only support a subset of options, and will throw an error when an unsupported option is passed. Any args can be passed and will be used against each package in the options list.
+## Creating apps and packages
 
-```shell
-# Example: lint & build all apps
-# and pass the `jsx-a11y-plugin` flag to `oxclint`
+Four local starters are registered with `vp create`:
 
-pnpm lint apps --jsx-a11y-plugin && pnpm build apps
+```sh
+pnpm exec vp create vanilla -- my-app
+pnpm exec vp create react -- my-react-app
+pnpm exec vp create instui -- my-instui-app
+pnpm exec vp create esm -- my-library
+pnpm install
 ```
 
-Package names can be passed with or without the workspace prefix. `pnpm release @instructure.ai/aiinfo` is the same as `pnpm release aiinfo`.
+Apps are created under `apps/`, ESM libraries under `packages/`, with scoped
+`@instructure.ai/<name>` manifests. The local generators only compose and render
+project-specific templates; Vite+ owns template selection and invocation.
+Run pnpm installation after generation. InstUI generation fetches the current
+Instructure UI guidance and reports failures rather than silently omitting it.
 
-### Base Configurations
+## Shared configuration
 
-Configuration files are provided and where possible use inheritance. There are also some devex hints provided.
+The private root package, `@instructure.ai/shared-configs`, exports:
 
-#### Dev Experience
+- `./vanilla`: shared app build paths, Lightning CSS, and package metadata.
+- `./react`: app configuration plus React and the React compiler.
+- `./vitest`: shared test discovery, Istanbul coverage, and the custom YAML reporter.
+- `./types`: shared external type declarations.
 
-- Recommended vscode plugins will be prompted when this repo is opened `./vscode/extensions.json`
-- VScode project settings for things like lint-on-save `./vscode/settings.json`
-- Github copilot instructions when using an [instui](https://instructure.design/) package `./template/instui/.github/copilot-instructions.md`
+[vite.config.mts](./vite.config.mts) owns root tasks and centralized lint/format
+settings. Package-specific lint differences use root path overrides. Each
+package's `vite.config.mts` composes app/test settings, with a `pack` block for
+library or Roadmap asset builds. Shared app baselines do not inherit root tasks.
+Each workspace declares `vite-plus` through the catalog for pnpm resolution.
+App config factories receive `import.meta.dirname` so metadata comes from the
+selected app's manifest even when a command starts at the workspace root.
 
-#### Vite
+Coverage remains package-local and the custom reporter writes summary YAML.
+VS Code uses Oxc's root configuration for formatting and type-aware lint.
 
-Vite is only used for Apps and uses shared configs to provide a baseline setup for each package. Settings can be overwritten using [mergeConfig](https://vite.dev/guide/api-javascript.html#mergeconfig).
-`mergeConfig(baseconfig, {...opts})`
+## Release preparation
 
-```shell
-📁 /
-    ├── 📄 vite.config.mts # Base config for apps
-    ├── 📄 vite.config.react.mts # Merges ./vite.config.mts
-    ├── 📂 apps/
-    │   └── 📂 roadmap/
-    │       └── vite.config.mts # Merges ./vite.config.react.mts (INSTUI)
-    │   └── 📂 site/
-    │       └── vite.config.mts # Merges ./vite.config.mts (Vanilla)
-    └── 📂 /packages
-        └── 📂 aiinfo/
-            └── ❌ # Packages do not use Vite (ESM)
+Release preparation remains project-specific:
+
+```sh
+pnpm exec vp run @instructure.ai/aiinfo#release
+pnpm exec vp run @instructure.ai/nutritionfacts#release --version=2.12.0
 ```
 
-#### Typescript
-
-> [!NOTE]
-> This project uses [TypeScript 7](https://www.npmjs.com/package/typescript), including its native compiler, through `tsc`.
-
-Typescript uses shared configs to provide a baseline setup for each package. Settings can be overwritten by re-declaring them in the package's `tsconfig.json`. See [tsconfig extends](https://www.typescriptlang.org/tsconfig/#extends).
-
-```shell
-📁 /
-    ├── 📄 tsconfig.json # Base config for apps
-    ├── 📄 tsconfig.node.json # Extends ./tsconfig.json
-    ├── 📂 apps/
-    │   └── 📂 roadmap/
-    │       └── tsconfig.json # Extends ./tsconfig.node.json (INSTUI)
-    │   └── 📂 site/
-    │       └── tsconfig.json # Extends ./tsconfig.json (Vanilla)
-    └── 📂 /packages
-        └── 📂 aiinfo/
-            └── tsconfig.json # Extends ./tsconfig.json (ESM)
-```
-
-#### TSDown
-
-tsdown is used for type-aware rolldown builds of ESM modules. It is not used for apps. tsdown does not currently provide a merge/extend functionality in its config so a fresh copy is created for each package.
-
-```shell
-📁 /
-    ├── 📂 .template/
-    │   └── 📂 esm/
-    │       └── tsdown.config.mts # Base config for packages (ESM)
-    ├── 📂 apps/
-    │   └── 📂 site/
-    │       └── ❌ # Apps do not use tsdown
-    └── 📂 /packages
-        └── 📂 aiinfo/
-            └── tsdown.config.mts # Copies ./.template/esm/tsdown.config.mts (ESM)
-```
-
-#### Vitest
-
-Vitest uses shared configs to provide a baseline setup for each package. Settings can be overwritten using [mergeConfig](https://vitest.dev/config/).
-`mergeConfig(baseconfig, {...opts})`
-
-```shell
-📁 /
-    ├── 📄 vitest.config.shared.mts # Base config
-    ├── 📄 vitest.config.mts # Merges ./vitest.config.shared.mts (workspace root config)
-    ├── 📂 apps/
-    │   └── 📂 roadmap/
-    │       └── vitest.config.mts # Merges ./vitest.config.shared.mts
-    └── 📂 /packages
-        └── 📂 aiinfo/
-            └── vite.config.mts # Merges ./vitest.config.shared.mts
-```
-
-Vitest uses istanbul to provide coverage for non-v8 (hi firefox 👋) testing. A custom reporter is included that outputs basic rollup stats in `./coverage/coverage.yml`.
-
-#### OxC
-
-OxC is configured to use a root config, each package's config is an extended copy from its template folder.
-
-```shell
-📁 /
-    ├── 📄 .oxfmtrc.jsonc # Base formatter config
-    ├── 📄 .oxlintrc.json # Base lint config
-    └── 📂 /apps
-    │   └── 📂 roadmap/
-    │       └── .oxfmtrc.jsonc # Extends ./.oxfmtrc.jsonc
-    │       └── .oxlintrc.json # Extends ./.oxlintrc.json
-    └── 📂 /packages
-        └── 📂 aiinfo/
-    │       └── .oxfmtrc.jsonc # Extends ./.oxfmtrc.jsonc
-    │       └── .oxlintrc.json # Extends ./.oxlintrc.json
-```
-
-#### Package.json
-
-The root workspace package.json defines workspace exports and shares workspace `devDependencies`.
-
-```shell
-📁 /
-    ├── 📄 package.json # Base config (workspace root config)
-    └── 📂 /apps
-    │   └── 📂 roadmap/
-    │       └── package.json # Imports ./package.json exports
-    └── 📂 /packages
-        └── 📂 aiinfo/
-            └── package.json # Imports ./package.json exports
-```
-
-##### devDependencies
-
-The following `devDependencies` are provided. No `dependencies` are included.
-
-```json
-  "devDependencies": {
-    "@instructure/browserslist-config-instui": "latest",
-    "@testing-library/react": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "typescript": "^7.0.2",
-    "@vitejs/plugin-react": "latest",
-    "@vitest/coverage-istanbul": "latest",
-    "@vitest/coverage-v8": "latest",
-    "babel-plugin-react-compiler": "latest",
-    "browserslist": "latest",
-    "istanbul-lib-report": "latest",
-    "istanbul-reports": "latest",
-    "jsdom": "latest",
-    "lightningcss": "latest",
-    "oxfmt": "latest",
-    "oxlint": "latest",
-    "oxlint-tsgolint": "latest",
-    "react-compiler-runtime": "latest",
-    "vite": "^8.3.4",
-    "vite-node": "latest",
-    "vitest": "latest",
-    "yaml": "latest"
-  },
-```
-
-In workspace packages they are imported with:
-
-```json
-  "devDependencies": {
-    "@instructure.ai/shared-configs": "workspace:^"
-  }
-```
-
-This import is included in the template when using the workspace script `new`.
+These commands bump the selected package's version and create a commit; they do
+not publish. Ensure the index contains no unrelated staged work first.
+GitHub workflows retain tag-based release automation, npm OIDC/provenance
+publication, and Pages deployment. Dependency installation and tarball creation
+continue to use pnpm.
 
 ## Contributing
 
-This repo uses github rules to protect the `main` branch. Requirements:
+The protected `main` branch requires a PR and squash merge. Branch names must
+match the [branch policy](./.github/policies/branch-naming.yml), for example:
 
-- Must be a PR
-- Must be a squash merge
-- Branch name must start with a valid App or Package path or `shared-configs` followed by branch purpose
+- `shared-configs/vite-plus-migration`
+- `apps/site/simplify`
+- `packages/widget/create`
 
-### Valid
-
-- shared-configs/refactorTypes
-- apps/site/simplify
-- packages/widget/create
-
-### Invalid
-
-- site/simplify
-- widget/create
-- refactorWidget
-
-In general, try to only touch files in the app or package your PR is associated with. Don't add a dependency to the root `./package.json` when it will only be used by your package. Don't update root configs, etc. If there's a rationale for changing a root setup which will affect multiple packages, then each package needs to be released in your PR.
+Keep package-only dependencies and changes scoped to that package. Shared
+configuration changes must validate every affected workspace.
