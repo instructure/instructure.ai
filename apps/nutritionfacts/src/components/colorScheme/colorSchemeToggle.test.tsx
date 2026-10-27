@@ -1,6 +1,8 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vite-plus/test";
+import { dark, light } from "@instructure/ui/latest";
 import { ColorSchemeProvider, ColorSchemeToggle, STORAGE_KEY } from "./";
+import { brandToggleTheme } from "./colorSchemeToggle";
 
 const renderToggle = () =>
 	render(
@@ -63,4 +65,21 @@ describe("ColorSchemeToggle", () => {
 		expect(document.documentElement.dataset.colorScheme).toBe("light");
 		expect(localStorage.getItem(STORAGE_KEY)).toBe("light");
 	});
+
+	it.each([
+		["light", light, "#1D354F", "#ffffff"],
+		["dark", dark, "#EEF4FD", "#1D354F"],
+	] as const)(
+		"uses the primary brand colors instead of green in %s",
+		(_name, theme, background, text) => {
+			const override =
+				typeof brandToggleTheme === "function"
+					? brandToggleTheme({} as never, theme as never)
+					: brandToggleTheme;
+			expect(override).toEqual({
+				toggleBackgroundSuccess: background,
+				toggleHandleText: text,
+			});
+		},
+	);
 });

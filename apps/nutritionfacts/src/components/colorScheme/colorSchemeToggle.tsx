@@ -37,6 +37,15 @@ const TooltipRadioInput: FC<RadioInputProps & { tip: string }> = ({ tip, ...prop
 );
 TooltipRadioInput.displayName = "RadioInput";
 
+/** Match the primary Button's brand colors instead of the default success (green) toggle. */
+const brandToggleTheme: RadioInputProps["themeOverride"] = (_componentTheme, { newTheme }) => {
+	const { institutional } = newTheme.semantics(newTheme.primitives).color;
+	return {
+		toggleBackgroundSuccess: institutional.brandButtonPrimaryBgd,
+		toggleHandleText: institutional.brandButtonPrimaryText,
+	};
+};
+
 const ColorSchemeToggle: FC = () => {
 	const { preference, setPreference } = useColorSchemeContext();
 
@@ -70,6 +79,7 @@ const ColorSchemeToggle: FC = () => {
 								<ScreenReaderContent>{label}</ScreenReaderContent>
 							</>
 						}
+						themeOverride={brandToggleTheme}
 						tip={label}
 						value={value}
 					/>
@@ -79,4 +89,4 @@ const ColorSchemeToggle: FC = () => {
 	);
 };
 
-export { ColorSchemeToggle };
+export { ColorSchemeToggle, brandToggleTheme };
