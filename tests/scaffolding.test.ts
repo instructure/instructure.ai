@@ -105,11 +105,21 @@ describe("native Vite+ starter entry points", () => {
 			mkdirSync(dirname(target), { recursive: true });
 			cpSync(join(root, file), target, { recursive: true });
 		}
-		execFileSync("pnpm", ["install", "--offline", "--ignore-scripts"], {
-			cwd: fixture,
+		const store = execFileSync("pnpm", ["store", "path"], {
+			cwd: root,
 			encoding: "utf8",
-			timeout: 60000,
-		});
+		}).trim();
+		// Generated workspace names need new importers; temporary filesystems must reuse the warm store.
+		execFileSync(
+			"pnpm",
+			["install", "--offline", "--ignore-scripts", "--no-frozen-lockfile", "--store-dir", store],
+			{
+				cwd: fixture,
+				env: { ...process.env, CI: "1" },
+				encoding: "utf8",
+				timeout: 60000,
+			},
+		);
 		for (const command of ["typecheck", "test", "build"]) {
 			execFileSync(
 				"pnpm",
