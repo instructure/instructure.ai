@@ -10,7 +10,7 @@ export default defineConfig({
 			"**/dist/**",
 			"**/coverage/**",
 			"**/public/**",
-			"packages/aiinfo/src/**",
+			"packages/*/src/**",
 			"packages/aiinfo/cache/*.{csv,json}",
 		],
 		useTabs: true,

@@ -191,6 +191,7 @@ writeFileSync("dist/issues-complete", "ok");`,
 		writeFileSync(
 			join(fixture, "vite.config.mts"),
 			`export default ${JSON.stringify({
+				fmt: config.fmt,
 				run: {
 					cache: false,
 					tasks: {
@@ -233,6 +234,13 @@ writeFileSync("dist/issues-complete", "ok");`,
 				},
 			);
 		}
+		expect(existsSync(join(fixture, "packages/fixture-esm/src/index.mjs"))).toBe(true);
+		const formatting = execFileSync(
+			"pnpm",
+			["exec", "vp", "fmt", "--check", "packages/fixture-esm/src", "packages/fixture-esm/node"],
+			{ cwd: fixture, encoding: "utf8", timeout: 30000 },
+		);
+		expect(formatting).toContain("1 files");
 		execFileSync("pnpm", ["exec", "vp", "run", "build:apps"], {
 			cwd: fixture,
 			encoding: "utf8",

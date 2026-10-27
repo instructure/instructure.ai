@@ -107,6 +107,8 @@ The private root package, `@instructure.ai/shared-configs`, exports:
 settings. Package-specific lint differences use root path overrides. Each
 package's `vite.config.mts` composes app/test settings, with a `pack` block for
 library or Roadmap asset builds. Shared app baselines do not inherit root tasks.
+Generated library bundles and declarations under `packages/*/src/` are excluded
+from formatting; authored library code under `node/` and tests remain checked.
 Each workspace declares `vite-plus` through the catalog for pnpm resolution.
 App config factories receive `import.meta.dirname` so metadata comes from the
 selected app's manifest even when a command starts at the workspace root.

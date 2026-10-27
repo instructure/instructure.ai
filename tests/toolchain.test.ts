@@ -72,6 +72,13 @@ describe("Vite+ workspace", () => {
 		expect(config.lint?.options).toMatchObject({ typeAware: true, typeCheck: true });
 	});
 
+	it("excludes generated library bundles without excluding authored library code", () => {
+		expect(read(".template/esm/vite.config.mts")).toContain('outDir: "src"');
+		expect(config.fmt?.ignorePatterns).toContain("packages/*/src/**");
+		expect(config.fmt?.ignorePatterns).not.toContain("packages/*/node/**");
+		expect(config.fmt?.ignorePatterns).not.toContain("packages/*/tests/**");
+	});
+
 	it("resolves app metadata from its directory rather than the caller's environment", () => {
 		const app = appConfig(new URL("../apps/nutritionfacts", import.meta.url).pathname);
 		expect(app.base).toBe("/nutritionfacts");
