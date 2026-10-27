@@ -82,7 +82,8 @@ This app is private: publishing means deploying GitHub Pages, not npm publishing
 1. Record the merge SHA and follow its `Deploy Apps` run in
    `.github/workflows/deploy-apps.yml`. Confirm build, upload, and the actual
    `Deploy to GitHub Pages` step succeed; a successful skipped workflow is not
-   a deployment. This workflow normally runs only when the push changes `apps/`.
+   a deployment. The change filter allows deployment for pushes affecting `apps/`,
+   `packages/`, or shared build inputs; manual dispatch bypasses this filter.
 2. If an Actions-token merge did not trigger deployment, inspect the current
    workflow and dispatch `gh workflow run deploy-apps.yml --ref main` after
    confirming main is still the expected commit. Check the app-change detection
