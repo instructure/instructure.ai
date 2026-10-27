@@ -73,7 +73,7 @@ const NutritionFactsForm: FC<{
 			</Flex>
 			<Divider />
 			<Flex
-				alignItems="center"
+				alignItems="stretch"
 				direction="column"
 			>
 				{Feature ? (
@@ -163,7 +163,7 @@ const NutritionFactsForm: FC<{
 							))}
 						</Flex.Item>
 						{layout.revision && product?.revision && (
-							<Flex.Item>
+							<Flex.Item align="center">
 								<Text
 									color="secondary"
 									variant="contentSmall"
@@ -175,6 +175,7 @@ const NutritionFactsForm: FC<{
 					</>
 				) : (
 					<Flex.Item
+						align="center"
 						shouldGrow
 						shouldShrink
 					>
