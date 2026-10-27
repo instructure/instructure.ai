@@ -56,13 +56,11 @@ describe("Vite+ workspace", () => {
 		for (const app of ["canvas-mcp", "nutritionfacts", "roadmap"]) {
 			expect(read(`apps/${app}/vite.config.mts`)).toContain("@instructure.ai/site#build");
 		}
+		for (const template of ["vanilla", "react", "instui"]) {
+			expect(read(`.template/${template}/vite.config.mts`)).toContain("@instructure.ai/site#build");
+		}
 		expect(config.run?.tasks?.["build:apps"]).toMatchObject({
-			command: "vpx scripts/issues.mts",
-			dependsOn: [
-				"@instructure.ai/canvas-mcp#build",
-				"@instructure.ai/nutritionfacts#build",
-				"@instructure.ai/roadmap#build",
-			],
+			command: "vp run --filter './apps/*' build && vpx scripts/issues.mts",
 		});
 	});
 

@@ -62,7 +62,7 @@ pnpm exec vp lint --fix
 `vp build` and `vp test` invoke builtin tools; `vp run <task>` executes the
 configured task and its dependencies. Use `build:apps` for the deployed site:
 it prepares root public files, builds the root site first, then builds the other
-apps into their existing subdirectories, and synchronizes the issue-template
+apps (including newly generated apps) into their existing subdirectories, and synchronizes the issue-template
 package list. Roadmap asset generation and Canvas MCP style optimization remain
 part of their build tasks.
 
@@ -87,6 +87,8 @@ pnpm install
 Apps are created under `apps/`, ESM libraries under `packages/`, with scoped
 `@instructure.ai/<name>` manifests. The local generators only compose and render
 project-specific templates; Vite+ owns template selection and invocation.
+Generated apps depend on the root site build and are automatically selected by
+`build:apps` for validation and deployment.
 Run pnpm installation after generation. InstUI generation fetches the current
 Instructure UI guidance and reports failures rather than silently omitting it.
 

@@ -6,5 +6,10 @@ export default mergeConfig(
 	mergeConfig(app(import.meta.dirname), tests),
 	defineConfig({
 		root: import.meta.dirname,
+		run: {
+			tasks: {
+				build: { command: "vp build", dependsOn: ["@instructure.ai/site#build"] },
+			},
+		},
 	}),
 );

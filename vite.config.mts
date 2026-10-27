@@ -69,12 +69,7 @@ export default defineConfig({
 		cache: false,
 		tasks: {
 			"build:apps": {
-				command: "vpx scripts/issues.mts",
-				dependsOn: [
-					"@instructure.ai/canvas-mcp#build",
-					"@instructure.ai/nutritionfacts#build",
-					"@instructure.ai/roadmap#build",
-				],
+				command: "vp run --filter './apps/*' build && vpx scripts/issues.mts",
 			},
 			"prepare:site": { command: "vpx scripts/prepareSite.mts" },
 			"test:all": {

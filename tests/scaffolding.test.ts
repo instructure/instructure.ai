@@ -13,6 +13,7 @@ import { dirname, join, resolve } from "node:path";
 import { createRequire } from "node:module";
 import { afterAll, describe, expect, it, vi } from "vite-plus/test";
 import { generate } from "../.template/generate.mjs";
+import config from "../vite.config.mts";
 
 const require = createRequire(import.meta.url);
 const root = resolve(import.meta.dirname, "..");
@@ -48,28 +49,33 @@ const vp = join(dirname(require.resolve("vite-plus/package.json")), "bin/vp");
 afterAll(() => rmSync(fixture, { recursive: true, force: true }), 60000);
 
 describe("native Vite+ starter entry points", () => {
-	it.each(["vanilla", "react", "esm"])("creates the %s starter using vp create", (template) => {
-		execFileSync(
-			process.execPath,
-			[vp, "create", template, "--no-interactive", "--", `fixture-${template}`],
-			{
-				cwd: fixture,
-				encoding: "utf8",
-				timeout: 30000,
-			},
-		);
-		const directory = join(
-			fixture,
-			template === "esm" ? "packages" : "apps",
-			`fixture-${template}`,
-		);
-		const pkg = JSON.parse(readFileSync(join(directory, "package.json"), "utf8"));
-		expect(pkg.name).toBe(`@instructure.ai/fixture-${template}`);
-		expect(pkg.engines.node).toBe(">=26.12.1");
-		expect(pkg.devDependencies["vite-plus"]).toBe("catalog:");
-		expect(existsSync(join(directory, "vite.config.mts"))).toBe(true);
-		if (template !== "esm") expect(existsSync(join(directory, "tests/package.test.ts"))).toBe(true);
-	});
+	it.each(["vanilla", "react", "esm"])(
+		"creates the %s starter using vp create",
+		(template) => {
+			execFileSync(
+				process.execPath,
+				[vp, "create", template, "--no-interactive", "--", `fixture-${template}`],
+				{
+					cwd: fixture,
+					encoding: "utf8",
+					timeout: 30000,
+				},
+			);
+			const directory = join(
+				fixture,
+				template === "esm" ? "packages" : "apps",
+				`fixture-${template}`,
+			);
+			const pkg = JSON.parse(readFileSync(join(directory, "package.json"), "utf8"));
+			expect(pkg.name).toBe(`@instructure.ai/fixture-${template}`);
+			expect(pkg.engines.node).toBe(">=26.12.1");
+			expect(pkg.devDependencies["vite-plus"]).toBe("catalog:");
+			expect(existsSync(join(directory, "vite.config.mts"))).toBe(true);
+			if (template !== "esm")
+				expect(existsSync(join(directory, "tests/package.test.ts"))).toBe(true);
+		},
+		30000,
+	);
 
 	it("renders InstUI-specific guidelines without making test network requests", async () => {
 		vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response("Fixture InstUI guidance")));
@@ -105,6 +111,56 @@ describe("native Vite+ starter entry points", () => {
 			mkdirSync(dirname(target), { recursive: true });
 			cpSync(join(root, file), target, { recursive: true });
 		}
+		mkdirSync(join(fixture, "apps/site"));
+		writeFileSync(
+			join(fixture, "apps/site/package.json"),
+			JSON.stringify({ name: "@instructure.ai/site", private: true, type: "module" }),
+		);
+		writeFileSync(
+			join(fixture, "apps/site/vite.config.mts"),
+			`export default ${JSON.stringify({
+				run: {
+					tasks: {
+						build: {
+							command: "vpx ../../scripts/site.mts",
+							dependsOn: ["@instructure.ai/shared-configs#prepare:site"],
+						},
+					},
+				},
+			})};`,
+		);
+		mkdirSync(join(fixture, "scripts"));
+		writeFileSync(
+			join(fixture, "scripts/prepareSite.mts"),
+			`import { rmSync, mkdirSync } from "node:fs";
+rmSync("dist", { recursive: true, force: true });
+mkdirSync("dist");`,
+		);
+		writeFileSync(
+			join(fixture, "scripts/site.mts"),
+			`import { writeFileSync } from "node:fs";
+writeFileSync("../../dist/index.html", "site");`,
+		);
+		writeFileSync(
+			join(fixture, "scripts/issues.mts"),
+			`import { existsSync, writeFileSync } from "node:fs";
+for (const name of ["index.html", "fixture-vanilla/index.html", "fixture-react/index.html", "fixture-instui/index.html"]) {
+  if (!existsSync("dist/" + name)) throw new Error("Missing deployed output: " + name);
+}
+writeFileSync("dist/issues-complete", "ok");`,
+		);
+		writeFileSync(
+			join(fixture, "vite.config.mts"),
+			`export default ${JSON.stringify({
+				run: {
+					cache: false,
+					tasks: {
+						"build:apps": config.run?.tasks?.["build:apps"],
+						"prepare:site": config.run?.tasks?.["prepare:site"],
+					},
+				},
+			})};`,
+		);
 		const store = execFileSync("pnpm", ["store", "path"], {
 			cwd: root,
 			encoding: "utf8",
@@ -138,5 +194,11 @@ describe("native Vite+ starter entry points", () => {
 				},
 			);
 		}
+		execFileSync("pnpm", ["exec", "vp", "run", "build:apps"], {
+			cwd: fixture,
+			encoding: "utf8",
+			timeout: 60000,
+		});
+		expect(existsSync(join(fixture, "dist/issues-complete"))).toBe(true);
 	}, 240000);
 });

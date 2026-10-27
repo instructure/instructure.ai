@@ -9,7 +9,6 @@
 	},
 	"type": "module",
 	"scripts": {
-		"build": "vp build",
 		"dev": "vp dev",
 		"preview": "vp preview",
 		"typecheck": "tsc --noEmit",
