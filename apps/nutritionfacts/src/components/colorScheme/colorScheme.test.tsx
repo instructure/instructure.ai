@@ -106,6 +106,23 @@ describe("color scheme", () => {
 			expect(document.documentElement.dataset.colorScheme).toBe("dark");
 		});
 
+		it("uses light while printing and restores afterwards", () => {
+			mockMatchMedia(true);
+			const { result } = renderHook(() => useColorScheme());
+			expect(result.current.resolved).toBe("dark");
+
+			act(() => {
+				globalThis.dispatchEvent(new Event("beforeprint"));
+			});
+			expect(result.current.resolved).toBe("light");
+			expect(document.documentElement.dataset.colorScheme).toBe("light");
+
+			act(() => {
+				globalThis.dispatchEvent(new Event("afterprint"));
+			});
+			expect(result.current.resolved).toBe("dark");
+		});
+
 		it("ignores stored and system values when forced", () => {
 			mockMatchMedia(true);
 			localStorage.setItem(STORAGE_KEY, "dark");

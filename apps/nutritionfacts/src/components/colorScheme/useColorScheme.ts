@@ -1,4 +1,5 @@
-import { useCallback, useLayoutEffect, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState, useSyncExternalStore } from "react";
+import { flushSync } from "react-dom";
 import {
 	DARK_QUERY,
 	applyColorScheme,
@@ -34,7 +35,20 @@ const useColorScheme = ({ forced }: UseColorSchemeOptions = {}): UseColorSchemeR
 		forced ? forced : readPreference(),
 	);
 	const system = useSyncExternalStore(subscribeToSystem, getSystemScheme, getServerScheme);
-	const resolved = forced ?? resolveScheme(preference, system);
+	const [isPrinting, setIsPrinting] = useState(false);
+	const resolved = isPrinting ? "light" : (forced ?? resolveScheme(preference, system));
+
+	// Print always uses the light theme; flushSync applies it before the browser snapshots the page.
+	useEffect(() => {
+		const before = () => flushSync(() => setIsPrinting(true));
+		const after = () => setIsPrinting(false);
+		globalThis.addEventListener("beforeprint", before);
+		globalThis.addEventListener("afterprint", after);
+		return () => {
+			globalThis.removeEventListener("beforeprint", before);
+			globalThis.removeEventListener("afterprint", after);
+		};
+	}, []);
 
 	const setPreference = useCallback(
 		(next: ColorSchemePreference) => {

@@ -1,10 +1,10 @@
 import "./app.css";
-import { Flex, InlineSVG, Link, Text, View } from "@instructure/ui/latest";
+import { Card, Flex, InlineSVG, Link, Text, View, useComputedTheme } from "@instructure/ui/latest";
 import AiInfo from "@instructure.ai/aiinfo";
 import { type AiInfoFeatureProps } from "@instructure.ai/aiinfo";
 import { useEffect, useState } from "react";
 import { type FC } from "react";
-import { DefaultLayout, Logo, LogoDark, colors, copyright, disclaimer } from "./assets";
+import { DefaultLayout, Logo, LogoDark, copyright, disclaimer } from "./assets";
 import { ColorSchemeToggle, useColorSchemeContext } from "./components/colorScheme";
 import { EmbedControl, LinkControl } from "./components/export";
 import { NutritionFactsForm, getLayoutFromParams } from "./components/layout";
@@ -19,6 +19,7 @@ const App: FC = () => {
 	const [width, setWidth] = useState(() => window.innerWidth);
 	const isInIframe = globalThis.self !== window.top;
 	const isDark = useColorSchemeContext().resolved === "dark";
+	const { background } = useComputedTheme();
 
 	useEffect(() => {
 		const handleResize = () => setWidth(window.innerWidth);
@@ -36,14 +37,28 @@ const App: FC = () => {
 
 	const { layout } = getLayoutFromParams(DefaultLayout);
 
+	const exportControls = product?.uid ? (
+		<>
+			<View margin="0 x-small 0 0">
+				<EmbedControl
+					layout={layout}
+					product={product}
+				/>
+			</View>
+			<View margin="0 x-small 0 0">
+				<LinkControl product={product} />
+			</View>
+		</>
+	) : undefined;
+
 	return (
 		<View
 			as="div"
-			background={isInIframe ? "primary" : isDark ? "brand" : "secondary"}
+			background={isInIframe ? "transparent" : "secondary"}
 			data-print="no-padding, no-background"
 			minHeight="100vh"
 			padding={isInIframe ? "0" : isNarrow ? "medium" : "large"}
-			themeOverride={{ backgroundBrand: colors.instructure }}
+			themeOverride={{ backgroundSecondary: background.pageColor }}
 		>
 			{!isInIframe && (
 				<View
@@ -78,50 +93,33 @@ const App: FC = () => {
 								</Link>
 							</View>
 						</Flex.Item>
-						{product?.uid && (
-							<Flex.Item>
-								<View margin="0 x-small 0 0">
-									<EmbedControl
-										color={isDark ? "primary-inverse" : "primary"}
-										layout={layout}
-										product={product}
-									/>
-								</View>
-								<View margin="0 x-small 0 0">
-									<LinkControl
-										color={isDark ? "primary-inverse" : "primary"}
-										product={product}
-									/>
-								</View>
-							</Flex.Item>
-						)}
+						{exportControls && !isNarrow && <Flex.Item>{exportControls}</Flex.Item>}
 						<Flex.Item>
 							<ColorSchemeToggle />
 						</Flex.Item>
+						{exportControls && isNarrow && <Flex.Item size="100%">{exportControls}</Flex.Item>}
 					</Flex>
 				</View>
 			)}
 			<View
 				as="div"
-				background="primary"
-				borderRadius={isInIframe ? "0" : "large"}
-				data-print="no-margin, no-border, no-padding, max-height"
+				data-print="no-margin, max-height, max-width"
 				id="embed"
 				margin={isInIframe ? "0" : "0 auto"}
 				maxWidth={isInIframe ? "670px" : "56rem"}
-				overflowX="hidden"
-				overflowY="auto"
-				padding={isNarrow ? "medium" : "large"}
-				shadow={isInIframe ? "none" : "above"}
-				withFocusOutline={false}
 			>
-				<NutritionFactsForm
-					isNarrow={isNarrow}
-					layout={layout}
-					product={product}
-					setProduct={setProduct}
-					isInIframe={isInIframe}
-				/>
+				<Card
+					data-card={isInIframe ? "flat" : undefined}
+					data-print="card-flat"
+				>
+					<NutritionFactsForm
+						isNarrow={isNarrow}
+						layout={layout}
+						product={product}
+						setProduct={setProduct}
+						isInIframe={isInIframe}
+					/>
+				</Card>
 			</View>
 			{!isInIframe && (
 				<View
@@ -142,7 +140,7 @@ const App: FC = () => {
 							data-print={layout.disclaimer ? "" : "hidden"}
 							variant="contentSmall"
 						>
-							{layout.disclaimer && disclaimer(isDark ? "link-inverse" : "link")}
+							{layout.disclaimer && disclaimer()}
 						</Text>
 						<Text
 							as="p"

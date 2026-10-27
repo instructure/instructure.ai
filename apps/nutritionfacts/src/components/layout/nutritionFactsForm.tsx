@@ -6,6 +6,7 @@ import { type Dispatch, type FC, type SetStateAction } from "react";
 import { Divider, Presets } from "./";
 import { type ExtendedNutritionFactsProps, type PageLayout } from "../../types";
 import {
+	Card,
 	Flex,
 	Heading,
 	ExternalLinkInstUIIcon,
@@ -114,19 +115,17 @@ const NutritionFactsForm: FC<{
 									>
 										{blockTitle}
 									</Heading>
-									<View
+									<Flex
 										as="div"
+										direction="column"
+										gap="modalElements"
 										margin="sectionElements 0 0"
 									>
 										{segmentData.map(({ segmentTitle, description, value, valueDescription }) => (
-											<View
-												as="div"
-												borderColor="primary"
-												borderRadius="medium"
-												borderWidth="small"
+											<Card
+												data-print="no-break"
 												key={segmentTitle}
-												margin="0 0 modalElements"
-												padding="space12"
+												variant="nested"
 											>
 												<View
 													as="div"
@@ -157,9 +156,9 @@ const NutritionFactsForm: FC<{
 														</Text>
 													</>
 												)}
-											</View>
+											</Card>
 										))}
-									</View>
+									</Flex>
 								</View>
 							))}
 						</Flex.Item>
