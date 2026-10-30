@@ -23,7 +23,9 @@ body:
     id: description
     attributes:
       label: Description
-      description: Provide a clear and concise description of the bug.
+      description: |
+        Provide a clear and concise description of the bug.
+        For Canvas MCP login issues, optionally include the login attempt date, time, and timezone or UTC offset. If the MCP server returns an error, look for URL(s) containing `error=` or `error_details=` and paste those error URL(s) here to help engineering investigate. Provide the returned error URL(s), not a full authorization URL or raw OAuth capture. If a URL contains credentials, tokens, authorization codes, or private data, do not paste it publicly; note that it was withheld.
       placeholder: Describe the bug here...
       validations:
         required: true

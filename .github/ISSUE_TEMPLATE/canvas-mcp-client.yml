@@ -94,6 +94,21 @@ body:
     validations:
       required: true
   - type: textarea
+    id: error-urls
+    attributes:
+      label: MCP error URL(s) (optional)
+      description: If the MCP server returns an error during login, look for URL(s) containing `error=` or `error_details=` and paste those error URL(s) here. These help engineering investigate the failure. Provide the returned error URL(s), not a full authorization URL or raw OAuth capture. If a URL contains credentials, tokens, authorization codes, or private data, do not paste it publicly; note that it was withheld.
+    validations:
+      required: false
+  - type: input
+    id: login-time
+    attributes:
+      label: Login attempt date and time (optional)
+      description: Include the date, time, and timezone or UTC offset of the failed login attempt so engineering can locate the corresponding server logs.
+      placeholder: "2026-10-30 08:39:00 UTC-06:00"
+    validations:
+      required: false
+  - type: textarea
     id: context
     attributes:
       label: Additional context, logs, or screenshots
