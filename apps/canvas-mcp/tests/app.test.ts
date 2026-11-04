@@ -944,7 +944,7 @@ describe("Canvas MCP pages", () => {
 	});
 
 	it("shows known client issues on both admin and client pages", () => {
-		globalThis.history.replaceState(null, "", "/canvas-mcp/?client=chatgpt&page=admin");
+		globalThis.history.replaceState(null, "", "/canvas-mcp/?client=codex&page=admin");
 		mountApp("admin");
 		const issuePill = document.querySelector(".client-status-pill");
 		expect(issuePill?.classList.contains("instui-pill")).toBe(true);
@@ -955,7 +955,7 @@ describe("Canvas MCP pages", () => {
 		expect(adminAlert?.classList.contains("-color-danger")).toBe(true);
 		expect(adminAlert?.getAttribute("role")).toBe("alert");
 
-		globalThis.history.replaceState(null, "", "/canvas-mcp/?client=chatgpt&page=connect");
+		globalThis.history.replaceState(null, "", "/canvas-mcp/?client=codex&page=connect");
 		mountApp("user");
 		expect(document.querySelector('.known-issue-alert[role="alert"]')).not.toBeNull();
 		expect(document.querySelector(".details-panel .known-issue-alert")).toBeNull();

@@ -358,8 +358,10 @@ describe("Help rendering", () => {
 		for (const cell of [...gemini.querySelectorAll("td")].slice(0, 2))
 			expect(cell.textContent).toContain("Untested");
 		const chatgpt = document.querySelector('[data-matrix-client="chatgpt"]')!;
-		for (const cell of chatgpt.querySelectorAll("td"))
-			expect(cell.textContent).toContain("Known issue");
+		for (const cell of [...chatgpt.querySelectorAll("td")].slice(0, 2))
+			expect(cell.textContent).toContain("Verified");
+		for (const cell of [...chatgpt.querySelectorAll("td")].slice(2))
+			expect(cell.textContent).toContain("Untested");
 	});
 
 	it.each([
