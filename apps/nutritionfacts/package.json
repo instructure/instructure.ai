@@ -1,6 +1,6 @@
 {
 	"name": "@instructure.ai/nutritionfacts",
-	"version": "2.11.10",
+	"version": "2.11.11",
 	"private": true,
 	"repository": {
 		"type": "git",
@@ -19,7 +19,7 @@
 		"release": "vpx ../../scripts/release.mts"
 	},
 	"dependencies": {
-		"@instructure.ai/aiinfo": "^2.11.22",
+		"@instructure.ai/aiinfo": "^2.11.24",
 		"@instructure/ui": "^11.7.10",
 		"react": "^19.3.1",
 		"react-dom": "^19.3.1"
