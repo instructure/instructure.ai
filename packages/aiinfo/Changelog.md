@@ -1,5 +1,60 @@
 # Changelog
 
+## 2026-11-04T17:29:14.752Z
+
+### CSV
+
+#### SHA
+
+```diff
+ac0ef2a5a7ccaee306242641b042d9ea5903a2d3796712050314cae9ec8a2542
+```
+
+### canvasa11ycheckertablecaptions
+
+#### model.name
+
+```diff
+- "Haiku 3, Haiku 4.5, Sonnet 5"
++ "Haiku 4.5, Sonnet 5"
+```
+
+### canvasa11ycheckeralttextgenerator
+
+#### model.name
+
+```diff
+- "Haiku 3, Haiku 4.5, Sonnet 5"
++ "Haiku 4.5, Sonnet 5"
+```
+
+### rubricgenerator
+
+#### model.name
+
+```diff
+- "Haiku 3, Haiku 4.5, Sonnet 5"
++ "Haiku 4.5, Sonnet 5"
+```
+
+### discussioninsights
+
+#### model.name
+
+```diff
+- "Haiku 3, Haiku 4.5, Sonnet 5"
++ "Haiku 4.5, Sonnet 5"
+```
+
+### canvasdiscussionsummaries
+
+#### model.name
+
+```diff
+- "Haiku 3, Haiku 4.5, Sonnet 5"
++ "Haiku 4.5, Sonnet 5"
+```
+
 ## 2026-10-27T16:29:51.373Z
 
 ### CSV
