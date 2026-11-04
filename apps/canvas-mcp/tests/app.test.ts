@@ -456,7 +456,10 @@ describe("Canvas MCP pages", () => {
 			"ap-southeast-1",
 			"ap-southeast-2",
 		]);
-		expect(audiencesRow?.querySelector(".audience-tenant-note")).not.toBeNull();
+		expect(audiencesRow?.querySelector(".audience-input-note")?.textContent).toBe(
+			"Enter this URL in the Allowed Audiences text area.",
+		);
+		expect(audiencesRow?.querySelector("img")).toBeNull();
 		const redirectRow = rowForSetting("Redirect URIs");
 		expect(redirectRow?.querySelector("pre code")?.textContent).toContain(
 			"http://localhost:8081/callback",
@@ -819,10 +822,10 @@ describe("Canvas MCP pages", () => {
 			"https://{{tenant_name}}.maple.us-east-1.core.inseng.io/",
 		);
 		expect(audiencesRow?.querySelector(".audience-region-lead, .audience-regions")).toBeNull();
-		expect(audiencesRow?.querySelector(".audience-tenant-note")).not.toBeNull();
-		expect(audiencesRow?.querySelector(".audience-tenant-note")?.nextElementSibling?.tagName).toBe(
-			"IMG",
+		expect(audiencesRow?.querySelector(".audience-input-note")?.textContent).toBe(
+			"Enter this URL in the Allowed Audiences text area.",
 		);
+		expect(audiencesRow?.querySelector("img")).toBeNull();
 		expect(document.querySelector<HTMLInputElement>("#generated-mcp-url")?.readOnly).toBe(true);
 		expect(document.querySelector<HTMLInputElement>("#generated-auth-url")?.readOnly).toBe(true);
 		expect(document.querySelector<HTMLInputElement>("#generated-auth-url")?.value).toBe(
@@ -1193,7 +1196,6 @@ describe("Canvas MCP pages", () => {
 			),
 		).toEqual([
 			"/images/server-canvas-open_developer_keys.png",
-			"/images/server-canvas-allowed_audiences.png",
 			"/images/server-canvas-enable_public_key.png",
 		]);
 		expect(document.querySelector<HTMLImageElement>(".eyebrow-logo")?.src).toContain(

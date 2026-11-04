@@ -44,7 +44,7 @@ function allowedAudiencesRow(region: AppState["region"]): string {
 	const audienceUrl = region
 		? `https://{{tenant_name}}.maple.${escapeHtml(region)}.core.inseng.io/`
 		: "https://{{tenant_name}}.maple.&lt;region&gt;.core.inseng.io/";
-	return `<tr><th scope="row">Allowed Audiences</th><td><pre><code>${audienceUrl}</code></pre>${region ? "" : `<p class="setting-helper audience-region-lead"><code>&lt;region&gt;</code> will be one of:</p><ul class="instui-list audience-regions">${regions}</ul>`}<p class="setting-helper audience-tenant-note"><code>{{tenant_name}}</code> is a literal string in the Audiences list.</p>${canvasStepImage("allowed_audiences", "Canvas Allowed Audiences dropdown with the https://{{tenant_name}}.maple.us-east-1.core.inseng.io/ option selected.", 320, 231)}</td></tr>`;
+	return `<tr><th scope="row">Allowed Audiences</th><td><pre><code>${audienceUrl}</code></pre>${region ? "" : `<p class="setting-helper audience-region-lead"><code>&lt;region&gt;</code> will be one of:</p><ul class="instui-list audience-regions">${regions}</ul>`}<p class="setting-helper audience-input-note">Enter this URL in the Allowed Audiences text area.</p></td></tr>`;
 }
 
 function settingCheckboxRow(label: string, checked: boolean, toggle = true, alert = ""): string {
