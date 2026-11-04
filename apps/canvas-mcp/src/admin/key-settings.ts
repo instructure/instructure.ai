@@ -2,7 +2,7 @@
 import { resolveKeySettings } from "./key-settings-model";
 import { clientDefinition } from "../clients";
 import { SCOPE_MANIFEST, scopeManifestReady } from "../scopes";
-import { type AppState, REGIONS } from "../state";
+import { type AppState, isBetaDomain, REGIONS } from "../state";
 import { escapeHtml } from "../ui/html";
 export function renderKeyCreation(
 	client: ReturnType<typeof clientDefinition>,
@@ -20,7 +20,7 @@ export function renderKeyCreation(
 	return `
 		<div class="admin-steps">
 			<section class="guide-section"><div><h3 class="instui-heading -level-h3">Open Developer Keys</h3><ol class="instui-list -ordered"><li>In the Canvas root account, open Account → Developer Keys.</li><li>Select <b>+ Developer Key</b>, open its menu, then choose <b>+ API Key</b>.</li></ol>${canvasStepImage("open_developer_keys", "Canvas Developer Key menu open with API Key highlighted.", 207, 216)}</div></section>
-			<section class="guide-section"><div><h3 class="instui-heading -level-h3">Key Settings</h3>${model.keyRedirect.note ? `<p class="setting-helper">${escapeHtml(model.keyRedirect.note)}</p>` : ""}${model.redirect.note ? `<p class="setting-helper">${escapeHtml(model.redirect.note)}</p>` : ""}${settingsTable("Setting", `${settingRow("Key name", model.name)}${settingRow("Owner Email", "An administrator or team mailbox")}${settingCodeRow("Redirect URIs", redirects, model.keyRedirect.copyable)}${settingRow("Linked Partner App", "Leave blank")}${settingRow("Vendor Code (LTI 2):", "Leave blank")}${settingRow("Icon URL:", "Leave blank")}${settingRow("Notes", "Leave blank")}${settingCheckboxRow("Test Cluster Only", model.beta, false, model.beta ? betaAvailabilityAlert() : "")}${settingRow("Client Credentials Audience", "Canvas")}${allowedAudiencesRow(state.region)}${settingRow("Authorized Flows", model.authorizedFlows)}${settingRow("Client Type", model.clientType)}`)}</div></section>
+			<section class="guide-section"><div><h3 class="instui-heading -level-h3">Key Settings</h3>${model.keyRedirect.note ? `<p class="setting-helper">${escapeHtml(model.keyRedirect.note)}</p>` : ""}${model.redirect.note ? `<p class="setting-helper">${escapeHtml(model.redirect.note)}</p>` : ""}${settingsTable("Setting", `${settingRow("Key name", model.name)}${settingRow("Owner Email", "An administrator or team mailbox")}${settingCodeRow("Redirect URIs", redirects, model.keyRedirect.copyable)}${settingRow("Linked Partner App", "Leave blank")}${settingRow("Vendor Code (LTI 2):", "Leave blank")}${settingRow("Icon URL:", "Leave blank")}${settingRow("Notes", "Leave blank")}${settingCheckboxRow("Test Cluster Only", model.beta, false, model.beta ? betaAvailabilityAlert() : "")}${settingRow("Client Credentials Audience", "Canvas")}${allowedAudiencesRow(state)}${settingRow("Authorized Flows", model.authorizedFlows)}${settingRow("Client Type", model.clientType)}`)}</div></section>
 			<section class="guide-section"><div><h3 class="instui-heading -level-h3">Scopes</h3>${settingsTable("Option", `${settingCheckboxRow("Enforce Scopes", true)}${settingRow("Method", "Paste scopes")}${settingCheckboxRow("Allow Include Parameters", true, false)}`)}<h4 class="instui-heading -level-h4 scope-manifest-title">Paste Scopes</h4>${editable ? "" : `<p>${scopeManifestReady() ? "Paste the reviewed per-tool scope list, one scope per line." : "Scope list awaiting Maple review. Do not use this list to create a production key."}</p>`}<div class="instui-card -variant-nested scope-card"><div class="content"><div class="scope-card-header"><h4 class="instui-heading -variant-title-card-regular">Per-tool scope manifest</h4><button class="instui-button -color-tertiary -shape-square -icon-copy -size-sm" type="button" aria-label="Copy scope manifest" title="Copy scope manifest" data-copy="${escapeHtml(SCOPE_MANIFEST)}" data-label="Scope manifest"></button></div><pre class="scope-manifest" tabindex="0" role="region" aria-label="Full Canvas scope manifest"><code>${escapeHtml(SCOPE_MANIFEST)}</code></pre></div></div></div></section>
 			<section class="guide-section"><div><h3 class="instui-heading -level-h3">Save</h3>${state.key === "private" ? `<ol class="instui-list -ordered private-key-save-step"><li>Click <b>Save</b>.</li></ol>` : ""}${keyTypeSaveSteps}${sharedKeySaveSteps}${canvasStepImage(`enable_${state.key}_key`, `Canvas Developer Keys table showing an enabled ${state.key} MCP key, its Client ID in Details, and the green State toggle switched on.`, 1055, 156)}${editable && client.facts.staticClientId.value !== "no" ? `<label class="field-label" for="client-id-input">Client ID</label><input id="client-id-input" class="instui-text-input text-input${clientIdInvalid ? " -invalid" : ""}" inputmode="numeric" autocomplete="off" maxlength="18" pattern="[0-9]{17,18}" placeholder="12345000000000001" value="${escapeHtml(state.clientId)}" required aria-invalid="${clientIdInvalid}" aria-describedby="client-id-hint" /><p class="field-hint" id="client-id-hint">Required by the Canvas OAuth flow. Enter the Client ID from the Canvas Developer Keys page.</p>` : ""}</div></section>
 		</div>`;
@@ -39,12 +39,13 @@ function settingCodeRow(label: string, value: string, canCopy: boolean): string 
 	return `<tr><th scope="row">${escapeHtml(label)}</th><td><div class="table-copy-cell"><pre tabindex="0" role="region" aria-label="${escapeHtml(label)}"><code>${escapeHtml(value)}</code></pre><button class="instui-button -color-tertiary -shape-square -icon-copy -size-sm" type="button" aria-label="Copy ${escapeHtml(label)}" title="Copy ${escapeHtml(label)}" data-copy="${escapeHtml(value)}" data-label="${escapeHtml(label)}" ${canCopy ? "" : "disabled"}></button></div></td></tr>`;
 }
 
-function allowedAudiencesRow(region: AppState["region"]): string {
+function allowedAudiencesRow(state: Pick<AppState, "domain" | "region">): string {
 	const regions = REGIONS.map((region) => `<li><code>${escapeHtml(region)}</code></li>`).join("");
-	const audienceUrl = region
-		? `https://{{tenant_name}}.maple.${escapeHtml(region)}.core.inseng.io/`
-		: "https://{{tenant_name}}.maple.&lt;region&gt;.core.inseng.io/";
-	return `<tr><th scope="row">Allowed Audiences</th><td><pre><code>${audienceUrl}</code></pre>${region ? "" : `<p class="setting-helper audience-region-lead"><code>&lt;region&gt;</code> will be one of:</p><ul class="instui-list audience-regions">${regions}</ul>`}<p class="setting-helper audience-input-note">Enter this URL in the Allowed Audiences text area.</p></td></tr>`;
+	const environment = isBetaDomain(state.domain) ? "maple-beta" : "maple";
+	const audienceUrl = state.region
+		? `https://{{tenant_name}}.${environment}.${escapeHtml(state.region)}.core.inseng.io/`
+		: `https://{{tenant_name}}.${environment}.&lt;region&gt;.core.inseng.io/`;
+	return `<tr><th scope="row">Allowed Audiences</th><td><pre><code>${audienceUrl}</code></pre>${state.region ? "" : `<p class="setting-helper audience-region-lead"><code>&lt;region&gt;</code> will be one of:</p><ul class="instui-list audience-regions">${regions}</ul>`}<p class="setting-helper audience-input-note">Enter this URL in the Allowed Audiences text area.</p></td></tr>`;
 }
 
 function settingCheckboxRow(label: string, checked: boolean, toggle = true, alert = ""): string {

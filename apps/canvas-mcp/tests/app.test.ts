@@ -927,6 +927,12 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector<HTMLInputElement>("#generated-mcp-url")?.value).toBe(
 			"https://canvas-beta.maple-beta.us-east-1.core.inseng.io/mcp",
 		);
+		const audiencesRow = [
+			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
+		].find((row) => row.querySelector('th[scope="row"]')?.textContent === "Allowed Audiences");
+		expect(audiencesRow?.querySelector("pre code")?.textContent).toBe(
+			"https://{{tenant_name}}.maple-beta.us-east-1.core.inseng.io/",
+		);
 
 		const testClusterCheckbox = [
 			...document.querySelectorAll<HTMLElement>(".settings-table tbody tr"),
