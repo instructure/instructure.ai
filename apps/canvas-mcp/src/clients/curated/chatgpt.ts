@@ -1,5 +1,4 @@
 import { type Guide } from "../../guides/types";
-import { updatedGuidance } from "../evidence";
 import { type Evidence, type ClientDefinition } from "../types";
 import { unknownFacts } from "../facts";
 import { canvasAuthorizationScreenshot, screenshot } from "../../guides/screenshots";
@@ -126,23 +125,13 @@ function chatgptGuide(enterprise: boolean): Guide {
 		],
 	};
 }
-// Workspace app administration is documented independently of Canvas interoperability.
-// The supplied Instructure guidance records a Canvas authentication bug; keep the
-// connection action blocked until a successful retest, while showing admin setup.
-// Exact redirect URI and key compatibility remain unknown, not inferred from Codex.
-const canvasAuthBlocker =
-	"ChatGPT cannot currently complete Canvas MCP authentication because of a Canvas MCP bug. Setup instructions are pending a fix.";
 export const chatgpt = {
 	id: "chatgpt",
 	name: "ChatGPT",
 	provider: "OpenAI",
 	group: "Curated",
 	facts: unknownFacts(),
-	status: { kind: "known-issue", reason: canvasAuthBlocker },
-	blocker: {
-		reason: canvasAuthBlocker,
-		evidence: [updatedGuidance],
-	},
+	status: { kind: "validated", testedAt: "2026-10-30", installModes: ["enterprise"] },
 	guides: { personal: chatgptGuide(false), enterprise: chatgptGuide(true) },
 	installModes: ["personal", "enterprise"],
 	enterpriseSurface: "ChatGPT workspace settings",

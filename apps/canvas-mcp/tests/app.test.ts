@@ -456,7 +456,10 @@ describe("Canvas MCP pages", () => {
 			"ap-southeast-1",
 			"ap-southeast-2",
 		]);
-		expect(audiencesRow?.querySelector(".audience-tenant-note")).not.toBeNull();
+		expect(audiencesRow?.querySelector(".audience-input-note")?.textContent).toBe(
+			"Enter this URL in the Allowed Audiences text area.",
+		);
+		expect(audiencesRow?.querySelector("img")).toBeNull();
 		const redirectRow = rowForSetting("Redirect URIs");
 		expect(redirectRow?.querySelector("pre code")?.textContent).toContain(
 			"http://localhost:8081/callback",
@@ -819,10 +822,10 @@ describe("Canvas MCP pages", () => {
 			"https://{{tenant_name}}.maple.us-east-1.core.inseng.io/",
 		);
 		expect(audiencesRow?.querySelector(".audience-region-lead, .audience-regions")).toBeNull();
-		expect(audiencesRow?.querySelector(".audience-tenant-note")).not.toBeNull();
-		expect(audiencesRow?.querySelector(".audience-tenant-note")?.nextElementSibling?.tagName).toBe(
-			"IMG",
+		expect(audiencesRow?.querySelector(".audience-input-note")?.textContent).toBe(
+			"Enter this URL in the Allowed Audiences text area.",
 		);
+		expect(audiencesRow?.querySelector("img")).toBeNull();
 		expect(document.querySelector<HTMLInputElement>("#generated-mcp-url")?.readOnly).toBe(true);
 		expect(document.querySelector<HTMLInputElement>("#generated-auth-url")?.readOnly).toBe(true);
 		expect(document.querySelector<HTMLInputElement>("#generated-auth-url")?.value).toBe(
@@ -924,6 +927,12 @@ describe("Canvas MCP pages", () => {
 		expect(document.querySelector<HTMLInputElement>("#generated-mcp-url")?.value).toBe(
 			"https://canvas-beta.maple-beta.us-east-1.core.inseng.io/mcp",
 		);
+		const audiencesRow = [
+			...document.querySelectorAll<HTMLTableRowElement>(".settings-table tbody tr"),
+		].find((row) => row.querySelector('th[scope="row"]')?.textContent === "Allowed Audiences");
+		expect(audiencesRow?.querySelector("pre code")?.textContent).toBe(
+			"https://{{tenant_name}}.maple-beta.us-east-1.core.inseng.io/",
+		);
 
 		const testClusterCheckbox = [
 			...document.querySelectorAll<HTMLElement>(".settings-table tbody tr"),
@@ -944,7 +953,7 @@ describe("Canvas MCP pages", () => {
 	});
 
 	it("shows known client issues on both admin and client pages", () => {
-		globalThis.history.replaceState(null, "", "/canvas-mcp/?client=chatgpt&page=admin");
+		globalThis.history.replaceState(null, "", "/canvas-mcp/?client=codex&page=admin");
 		mountApp("admin");
 		const issuePill = document.querySelector(".client-status-pill");
 		expect(issuePill?.classList.contains("instui-pill")).toBe(true);
@@ -955,7 +964,7 @@ describe("Canvas MCP pages", () => {
 		expect(adminAlert?.classList.contains("-color-danger")).toBe(true);
 		expect(adminAlert?.getAttribute("role")).toBe("alert");
 
-		globalThis.history.replaceState(null, "", "/canvas-mcp/?client=chatgpt&page=connect");
+		globalThis.history.replaceState(null, "", "/canvas-mcp/?client=codex&page=connect");
 		mountApp("user");
 		expect(document.querySelector('.known-issue-alert[role="alert"]')).not.toBeNull();
 		expect(document.querySelector(".details-panel .known-issue-alert")).toBeNull();
@@ -1193,7 +1202,6 @@ describe("Canvas MCP pages", () => {
 			),
 		).toEqual([
 			"/images/server-canvas-open_developer_keys.png",
-			"/images/server-canvas-allowed_audiences.png",
 			"/images/server-canvas-enable_public_key.png",
 		]);
 		expect(document.querySelector<HTMLImageElement>(".eyebrow-logo")?.src).toContain(

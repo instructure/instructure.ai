@@ -2,6 +2,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import { mountApp } from "../src/app";
 import { CLIENTS, clientDefinition } from "../src/clients";
+import { clientStatus } from "../src/clients/status";
 import { guideValues, resolveCodeBlock, renderGuide } from "../src/guides/render";
 import { readState } from "../src/state";
 
@@ -472,16 +473,22 @@ describe("curated guide structure and behavior", () => {
 		expect(notice()).toBeNull();
 	});
 
-	it("blocks ChatGPT authentication and retains the setup fields", () => {
+	it("validates ChatGPT enterprise without implying personal validation", () => {
 		history.replaceState(
 			null,
 			"",
-			"/canvas-mcp/?client=chatgpt&domain=example.instructure.com&region=us-east-1&clientId=12345&page=connect",
+			"/canvas-mcp/?client=chatgpt&install=enterprise&domain=example.instructure.com&region=us-east-1&clientId=12345&page=admin",
 		);
-		mountApp("user");
-		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(true);
-		expect(document.querySelector("#client-id-input")).not.toBeNull();
+		mountApp("admin");
+		expect(document.querySelector(".client-status-pill")?.textContent).toBe("Validated");
+		expect(document.querySelector<HTMLButtonElement>("#tab-connect")?.disabled).toBe(false);
+		expect(document.querySelector(".known-issue-alert")).toBeNull();
 		expect(clientDefinition("chatgpt").facts.registration.value).toBe("unknown");
+		expect(clientStatus(clientDefinition("chatgpt"), "enterprise")).toMatchObject({
+			kind: "validated",
+			testedAt: "2026-10-30",
+		});
+		expect(clientStatus(clientDefinition("chatgpt"), "personal")).toEqual({ kind: "untested" });
 	});
 	it("keeps CLI and IDE facts distinct and defaults to a documented key type", () => {
 		expect(clientDefinition("antigravity-cli").facts.redirectUri).toMatchObject({

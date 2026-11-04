@@ -589,7 +589,7 @@
 			"title": "Get Detailed Course Information",
 			"roles": ["teacher", "student", "ta", "designer", "observer"],
 			"resource": "course",
-			"description": "Returns detailed information about a specific course including syllabus, course settings, grading schemes, and metadata.",
+			"description": "Returns detailed information about a specific course including syllabus, course settings, grading schemes, metadata, and the number of students.",
 			"readOnly": true,
 			"example": "Show me the details and syllabus of course 123."
 		},
