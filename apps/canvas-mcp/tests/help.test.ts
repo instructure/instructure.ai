@@ -118,6 +118,22 @@ describe("Help rendering", () => {
 		);
 	});
 
+	it("explains how to fix an invalid beta audience on an older test-cluster key", () => {
+		COMMON_ISSUES.splice(0, COMMON_ISSUES.length, ...originalIssues);
+		document.body.innerHTML = renderHelp("issues");
+		const admins = document.querySelector('[aria-labelledby="issue-admins"]')!;
+		const entry = [...admins.querySelectorAll("details")].find(
+			(details) =>
+				details.querySelector("summary")?.textContent ===
+				"Invalid audience when connecting to a beta instance",
+		);
+		expect(entry?.textContent).toContain("before November 4, 2026");
+		expect(entry?.textContent).toContain(
+			"change the MCP audience subdomain from maple to maple-beta",
+		);
+		expect(entry?.textContent).toContain("at the next beta refresh");
+	});
+
 	it("lists Generic MCP then all other Rulesync clients alphabetically in a collapsed toggle group below the table", () => {
 		document.body.innerHTML = renderHelp("clients");
 		const matrix = document.querySelector(".help-matrix-scroll")!;

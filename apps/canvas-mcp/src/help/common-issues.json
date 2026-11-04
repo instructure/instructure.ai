@@ -7,6 +7,10 @@
 		"title": "Admins",
 		"entries": [
 			{
+				"title": "Invalid audience when connecting to a beta instance",
+				"text": "**Why:** A Test Cluster Only key created before November 4, 2026 may still have the production `maple` audience. Beta MCP requests use `maple-beta`, so Canvas can reject the requested audience.\n**Try:** In the production Canvas instance, open Account → Developer Keys and edit the Test Cluster Only key. In Allowed Audiences, change the MCP audience subdomain from `maple` to `maple-beta`, preserving the tenant name, region, and rest of the URL. Save the key. The change will copy to beta at the next beta refresh; it is not immediate.\n**Note:** This applies to the Test Cluster Only key. Do not change the audience on an unrelated production key."
+			},
+			{
 				"title": "The organization blocks the connection",
 				"text": "Ask an administrator to follow the selected client's enterprise guide and check server allowlists, connector permissions, and publication requirements. Personal setup does not bypass organization policy."
 			},
