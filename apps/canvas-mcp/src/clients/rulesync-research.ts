@@ -107,6 +107,19 @@ const openClaw = source(
 	"OpenClaw MCP transports, operator configuration, and per-requester OAuth (v2026.10.4)",
 	"https://github.com/openclaw/openclaw/blob/v2026.10.4/docs/cli/mcp/transports.md",
 );
+const openClawValidation: Evidence = {
+	method: "probe",
+	label: "OpenClaw personal private-key validation with externally managed bearer token",
+	url: "https://github.com/instructure/instructure.ai/issues/255",
+	version: "2026.11.1",
+	verifiedAt: "2026-11-10",
+};
+const kiroIdeValidation: Evidence = {
+	method: "probe",
+	label: "Kiro IDE personal public-key validation; client version not reported",
+	url: "https://github.com/instructure/instructure.ai/issues/254",
+	verifiedAt: "2026-11-10",
+};
 const cursor = source(
 	"Cursor static MCP OAuth credentials and callbacks",
 	"https://cursor.com/docs/mcp",
@@ -699,6 +712,14 @@ const research: Partial<Record<RulesyncTargetId, Research>> = {
 	},
 	"kiro-ide": {
 		source: kiro,
+		additionalSources: [kiroIdeValidation],
+		status: {
+			kind: "validated",
+			testedAt: "2026-11-10",
+			installModes: ["personal"],
+			platform: "Windows",
+			note: "Production, public key; Kiro IDE version not reported.",
+		},
 		personal: true,
 		enterprise: kiro,
 		enterpriseSurface: "Kiro enterprise MCP registry",
@@ -711,7 +732,7 @@ const research: Partial<Record<RulesyncTargetId, Research>> = {
 			"http://localhost:7778/oauth/callback",
 			"Set oauth.redirectUri to this exact full URL; without an override Kiro selects a random localhost port.",
 		),
-		note: "Kiro documents clientSecret as CLI-only. Use a public Canvas key for the IDE.",
+		note: "Kiro documents clientSecret as CLI-only. Use a public Canvas key for the IDE. A production personal connection and tool call succeeded on Windows; the IDE version was not reported. Enterprise and beta were not reported as tested.",
 	},
 	aiassistant: {
 		source: assistant,
@@ -790,6 +811,7 @@ const research: Partial<Record<RulesyncTargetId, Research>> = {
 	},
 	openclaw: {
 		source: openClaw,
+		additionalSources: [openClawValidation],
 		configurationUrl: "https://docs.openclaw.ai/tools/mcp",
 		personal: true,
 		remote: true,
@@ -797,13 +819,13 @@ const research: Partial<Record<RulesyncTargetId, Research>> = {
 		enterpriseSurface: "Operator-managed Gateway MCP registry with per-requester OAuth accounts",
 		redirect: runtime(
 			openClaw,
-			"Shared OAuth login uses a loopback callback printed by OpenClaw. The reviewed reference does not establish an exact default URI; do not register a guessed callback. Per-requester accounts instead use the Gateway callback.",
+			"An external OAuth client needs its own registered callback URI. OpenClaw shared OAuth login uses a separate loopback callback; its exact default URI is unverified. Do not register a guessed callback.",
 		),
 		enterpriseRedirect: runtime(
 			openClaw,
 			"For per-requester OAuth, set gateway.publicOrigin to the externally reachable Gateway HTTPS origin and register <gateway.publicOrigin>/oauth/mcp/callback, substituting the actual origin. Shared operator credentials use the separate CLI loopback callback.",
 		),
-		note: "Rulesync writes global-only ~/.openclaw/openclaw.json under mcp.servers. OpenClaw supports operator-managed shared credentials and separate per-requester accounts. Its documented OAuth settings include redirectUrl and clientMetadataUrl, but do not establish a static Canvas Client ID/secret configuration. Public/private key compatibility remains unverified; clientCert/clientKey are mTLS settings, not Canvas developer keys.",
+		note: "OpenClaw 2026.11.1 on Debian succeeded in production with a personal private key and an externally obtained, refreshed bearer token in a static header. Native OAuth, public keys, enterprise, beta, per-requester accounts, and writes were not validated. The report found native login unable to register the pre-existing Canvas client; clientCert/clientKey are mTLS settings, not Canvas developer keys.",
 	},
 	zcode: {
 		source: zcode,

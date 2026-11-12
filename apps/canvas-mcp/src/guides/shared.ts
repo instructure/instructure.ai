@@ -3,6 +3,58 @@ import { type Guide } from "./types";
 import { canvasAuthorizationScreenshot } from "./screenshots";
 
 export function clientGuide(client: ClientDefinition, install: "personal" | "enterprise"): Guide {
+	if (client.id === "openclaw" && install === "personal") {
+		return {
+			presentation: "by-surface",
+			status: "pending",
+			prerequisites: [],
+			sources: [],
+			steps: [
+				{ id: "canvas-create", kind: "canvas-key", action: "create" },
+				{
+					id: "provider-configure",
+					kind: "provider",
+					audience: "client",
+					title: "Configure OpenClaw",
+					content: [
+						{
+							kind: "paragraph",
+							text: "The reported production test used OpenClaw 2026.11.1 with a private Canvas key and a bearer token obtained and refreshed by a separate OAuth client. OpenClaw's native login was not validated for a pre-registered Canvas key.",
+						},
+						{
+							kind: "paragraph",
+							text: "Register the external OAuth client's exact callback URI on the Canvas key. Configure it for authorization code with PKCE and securely manage token refresh. Use the connection fields above in that OAuth client, not as OpenClaw OAuth settings.",
+						},
+						{
+							kind: "paragraph",
+							text: "Authorize the external OAuth client in Canvas when prompted.",
+						},
+						canvasAuthorizationScreenshot(),
+						{
+							kind: "paragraph",
+							text: "The test configured OpenClaw's Streamable HTTP server with an Authorization: Bearer header and no auth field. Treat access and refresh tokens as secrets; never paste them into this guide or a setup link. Follow your organization's policy for securely storing and refreshing credentials.",
+						},
+						{
+							kind: "link",
+							label: "Open OpenClaw MCP configuration documentation",
+							url: "https://docs.openclaw.ai/tools/mcp",
+						},
+					],
+				},
+				{
+					id: "verify",
+					kind: "verify",
+					title: "Verify the connection",
+					content: [
+						{
+							kind: "paragraph",
+							text: "Confirm the server lists its tools and make a safe, permitted read-only tool call. Public keys, enterprise and beta installs, and write operations were not tested in this report.",
+						},
+					],
+				},
+			],
+		};
+	}
 	return (
 		client.guides?.[install] ?? {
 			presentation: "by-surface",

@@ -162,7 +162,7 @@ describe("researched Rulesync clients", () => {
 		expect(xum.setupNote).toContain("over stdio");
 		expect(xum.setupNote).toContain("OAuth sign-in");
 	});
-	it("distinguishes OpenClaw Gateway callbacks from shared login and unknown Canvas key support", () => {
+	it("records the OpenClaw bearer-token test without validating native OAuth", () => {
 		const client = clientDefinition("openclaw");
 		expect(client.installModes).toEqual(["personal", "enterprise"]);
 		expect(client.facts.remoteHttp.value).toBe("yes");
@@ -171,24 +171,35 @@ describe("researched Rulesync clients", () => {
 		expect(client.facts.keyTypes.private.value).toBe("unknown");
 		const personal = resolveKeySettings(client, readState("?client=openclaw", null));
 		expect(personal.redirect.copyable).toBe(false);
-		expect(personal.redirect.text).toContain("loopback");
+		expect(personal.redirect.text).toContain("external OAuth client");
 		const enterprise = resolveKeySettings(
 			client,
 			readState("?client=openclaw&install=enterprise", null),
 		);
 		expect(enterprise.redirect.copyable).toBe(false);
 		expect(enterprise.redirect.text).toContain("<gateway.publicOrigin>/oauth/mcp/callback");
-		const state = readState(`?client=openclaw&${configured}`, null);
+		const state = readState(`?client=openclaw&key=private&${configured}`, null);
 		document.body.innerHTML = renderPage(state, "user", state.domain, true);
 		expect(
 			document.querySelector('[data-guide-step="provider-configure"] a')?.getAttribute("href"),
 		).toBe(client.configurationUrl);
+		expect(document.body.textContent).toContain("bearer token obtained and refreshed");
+		expect(document.body.textContent).toContain("external OAuth client");
+		expect(document.body.textContent).not.toContain("Start authentication in your MCP client");
+		expect(client.research?.sources).toContainEqual(
+			expect.objectContaining({
+				method: "probe",
+				url: "https://github.com/instructure/instructure.ai/issues/255",
+				version: "2026.11.1",
+				verifiedAt: "2026-11-10",
+			}),
+		);
 		document.body.innerHTML = renderHelp("clients");
 		expect(document.querySelector('[data-other-client="openclaw"]')?.textContent).toBe(
 			"OpenClaw Untested",
 		);
 	});
-	it("covers every Other target with dated sources without adding bespoke guides or validation", () => {
+	it("covers every Other target with dated sources and scopes validation to reported clients", () => {
 		const clients = CLIENTS.filter(({ group, id }) => group === "Other" && id !== "generic");
 		expect(clients).toHaveLength(58);
 		for (const client of clients) {
@@ -197,7 +208,7 @@ describe("researched Rulesync clients", () => {
 			);
 			expect(client.research?.sources.length, client.id).toBeGreaterThan(0);
 			expect(client.guides, client.id).toBeUndefined();
-			expect(client.status?.kind, client.id).not.toBe("validated");
+			expect(client.status?.kind === "validated", client.id).toBe(client.id === "kiro-ide");
 			for (const mode of client.installModes) {
 				expect(client.research?.installSupport[mode].value, client.id).toBe("yes");
 			}
@@ -247,6 +258,28 @@ describe("researched Rulesync clients", () => {
 				(row) => row.querySelector("th")?.textContent === "Client Type",
 			)?.textContent,
 		).toBe("Client TypePublic");
+	});
+	it("records Kiro IDE's personal public-key result without validating enterprise or other clients", () => {
+		const client = clientDefinition("kiro-ide");
+		expect(client.status).toMatchObject({
+			kind: "validated",
+			testedAt: "2026-11-10",
+			installModes: ["personal"],
+			platform: "Windows",
+		});
+		expect(client.research?.sources).toContainEqual(
+			expect.objectContaining({
+				method: "probe",
+				url: "https://github.com/instructure/instructure.ai/issues/254",
+				verifiedAt: "2026-11-10",
+			}),
+		);
+		const personal = readState(`?client=kiro-ide&${configured}`, null);
+		const enterprise = readState(`?client=kiro-ide&install=enterprise&${configured}`, null);
+		expect(renderPage(personal, "admin", personal.domain, true)).toContain(">Validated</span>");
+		expect(renderPage(enterprise, "admin", enterprise.domain, true)).toContain(">Untested</span>");
+		expect(clientDefinition("kiro-cli").status?.kind).not.toBe("validated");
+		expect(clientDefinition("generic").status?.kind).not.toBe("validated");
 	});
 	it("shows pinning requirements next to configurable callbacks and does not invent unknown URIs", () => {
 		const goose = readState(`?client=goose&${configured}`, null);

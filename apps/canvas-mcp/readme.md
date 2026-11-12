@@ -26,6 +26,8 @@ The current target snapshot uses Rulesync **v38.0.0**. See the [upgrade review](
 
 A successful configuration or sign-in alone does not prove that tools work: include the result of a safe, permitted tool call. Do not mark untested configurations as validated or generalize one result to other versions, install modes, or key types. For failures, provide sanitized reproduction steps and distinguish observations from suspected causes.
 
+OpenClaw's reported personal private-key test used an externally managed bearer token, not OpenClaw's native OAuth flow. Its status remains Untested for the native setup; the personal instructions describe the tested distinction without claiming other configurations work.
+
 ### FAQs
 
 [Suggest an FAQ](https://github.com/instructure/instructure.ai/issues/new?template=canvas-mcp-faq.yml).
