@@ -155,7 +155,9 @@ describe("Help rendering", () => {
 			expect(item.querySelector(".instui-pill")?.textContent).toBe(
 				client.blocker || clientStatus(client, "personal").kind === "known-issue"
 					? "Known issue"
-					: "Untested",
+					: clientStatus(client, "personal").kind === "validated"
+						? "Verified"
+						: "Untested",
 			);
 		}
 		const copilot = group.querySelector('[data-other-client="copilot"]')!;

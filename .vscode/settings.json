@@ -27,5 +27,6 @@
 	"oxc.fmt.disableNestedConfig": true,
 	"js/ts.experimental.useTsgo": true,
 	"vitest.disableWorkspaceWarning": true,
-	"oxc.enable": true
+	"oxc.enable": true,
+	"js/ts.tsdk.path": "node_modules/typescript"
 }

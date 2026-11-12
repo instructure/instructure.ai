@@ -146,7 +146,8 @@ function renderFields(
 	model: KeySettingsModel,
 	editable: boolean,
 ): string {
-	const values = guideValues(client, state, model),
+	const externalOAuth = client.id === "openclaw" && state.install === "personal",
+		values = guideValues(client, state, model),
 		fields = [
 			["MCP server URL", values.mcpUrl],
 			["Authorization URL", values.authUrl],
@@ -160,7 +161,9 @@ function renderFields(
 						[
 							"Client secret",
 							state.key === "private"
-								? "Enter the Canvas key secret directly in the client"
+								? externalOAuth
+									? "Enter the Canvas key secret securely in the external OAuth client"
+									: "Enter the Canvas key secret directly in the client"
 								: "Omit (public key)",
 						],
 					]
@@ -174,7 +177,7 @@ function renderFields(
 						: "Optional for a Canvas private key",
 			],
 		];
-	return `<section class="guide-fields"><h3 class="instui-heading -level-h3">Connection fields</h3><table class="instui-table"><thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody>${fields.map(([name, value]) => `<tr><th scope="row">${escapeHtml(name)}</th><td><code${name === "Client ID" ? ' data-guide-token="clientId"' : ""}>${escapeHtml(value)}</code></td></tr>`).join("")}</tbody></table>${model.redirect.note ? `<p>${escapeHtml(model.redirect.note)}</p>` : ""}${editable ? "" : state.key === "private" ? "<p>Enter the key secret directly in the provider's secret field. Never paste it into this guide or a setup link.</p>" : "<p>A public key uses the Client ID without a client secret. Public is preferred when the client supports both key types.</p>"}</section>`;
+	return `<section class="guide-fields"><h3 class="instui-heading -level-h3">Connection fields</h3><table class="instui-table"><thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody>${fields.map(([name, value]) => `<tr><th scope="row">${escapeHtml(name)}</th><td><code${name === "Client ID" ? ' data-guide-token="clientId"' : ""}>${escapeHtml(value)}</code></td></tr>`).join("")}</tbody></table>${model.redirect.note ? `<p>${escapeHtml(model.redirect.note)}</p>` : ""}${editable ? "" : state.key === "private" ? `<p>Enter the key secret securely in ${externalOAuth ? "the external OAuth client" : "the provider's secret field"}. Never paste it into this guide or a setup link.</p>` : "<p>A public key uses the Client ID without a client secret. Public is preferred when the client supports both key types.</p>"}</section>`;
 }
 function renderStep(
 	step: GuideStep,
