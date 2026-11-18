@@ -1,57 +1,77 @@
 # Changelog
+
 ## 2026-11-18T14:41:00.643Z
+
 ### CSV
+
 #### SHA
+
 ```diff
 6e5fd4932154b6ded927893099b0cd7ea84db0c26e929f706d2ea181d67972b7
 ```
+
 ### Removed
+
 - `portfolios` (no longer present in the upstream feed)
 
 ### canvasa11ycheckertablecaptions
+
 #### model.name
+
 ```diff
 - "Haiku 4.5, Sonnet 5"
 + "Sonnet 5 (Singapore region only), Haiku 4.5 (all other regions)"
 ```
 
 ### canvasa11ycheckeralttextgenerator
+
 #### model.name
+
 ```diff
 - "Haiku 4.5, Sonnet 5"
 + "Sonnet 5 (Singapore region only), Haiku 4.5 (all other regions)"
 ```
 
 ### canvascoursetranslation
+
 #### model.name
+
 ```diff
 - "Haiku 4.5, Sonnet 5"
 + "Sonnet 5 (Singapore region only), Haiku 4.5 (all other regions)"
 ```
 
 ### rubricgenerator
+
 #### model.name
+
 ```diff
 - "Haiku 4.5, Sonnet 5"
 + "Sonnet 5 (Singapore region only), Haiku 4.5 (all other regions)"
 ```
 
 ### discussioninsights
+
 #### model.name
+
 ```diff
 - "Haiku 4.5, Sonnet 5"
 + "Sonnet 5 (Singapore region only), Haiku 4.5 (all other regions)"
 ```
 
 ### canvasdiscussionsummaries
+
 #### model.name
+
 ```diff
 - "Haiku 4.5, Sonnet 5"
 + "Sonnet 5 (Singapore region only), Haiku 4.5 (all other regions)"
 ```
 
 ### itemauthoringassistance
+
 #### model.name
+
 ```diff
 - "Haiku 4.5, Sonnet 5"
 + "Sonnet 5 (Singapore region only), Haiku 4.5 (all other regions)"
