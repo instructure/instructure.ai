@@ -28,7 +28,6 @@ import discussioninsights from "./components/discussioninsights";
 import igniteagent from "./components/igniteagent";
 import itemauthoringassistance from "./components/itemauthoringassistance";
 import pdbsmartskillextractor from "./components/pdbsmartskillextractor";
-import portfolios from "./components/portfolios";
 import quickreassess from "./components/quickreassess";
 import rubricgenerator from "./components/rubricgenerator";
 import smartsearch from "./components/smartsearch";
@@ -70,7 +69,6 @@ const AiInfo: AiInfoProps = {
 	igniteagent,
 	itemauthoringassistance,
 	pdbsmartskillextractor,
-	portfolios,
 	quickreassess,
 	rubricgenerator,
 	smartsearch,
@@ -112,7 +110,6 @@ export {
 	igniteagent,
 	itemauthoringassistance,
 	pdbsmartskillextractor,
-	portfolios,
 	quickreassess,
 	rubricgenerator,
 	smartsearch,

@@ -45,7 +45,7 @@ const NUTRITION_FACTS_DATA: NutritionFactsProps["data"] = [
 			{
 				description: "The foundational AI on which further training and customizations are built.",
 				segmentTitle: "Base Model",
-				value: "Haiku 4.5, Sonnet 5",
+				value: "Sonnet 5 (Singapore region only), Haiku 4.5 (all other regions)",
 				valueDescription:
 					"Anthropic Claude models are provided via Instructure's in-house AI Platform.",
 			},
@@ -153,7 +153,7 @@ const aiInformation: AiInformationProps = {
 			description:
 				"We utilize off-the-shelf AI models and customer data as input to provide AI-powered features. No data is used for training this model.",
 			featureName: "Summaries for Discussions",
-			modelName: "Haiku 4.5, Sonnet 5",
+			modelName: "Sonnet 5 (Singapore region only), Haiku 4.5 (all other regions)",
 			modelNameText: "Base Model",
 			nutritionFactsModalTriggerText: "AI Nutrition Facts",
 			permissionLevel: "LEVEL 2",
